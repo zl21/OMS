@@ -56,7 +56,7 @@ export default {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_SHOP_TITLE',
-          label: $i18n.t('table_label.shopName') + ':', // 店铺名称
+          label: $i18n.t('other.shop') + ':', // 店铺名称
         },
         {
           flag: false,
@@ -68,7 +68,7 @@ export default {
           flag: false,
           width: '6',
           column: 'PLATFORM_STATUS',
-          label: $i18n.t('form_label.ag') + ':' //平台状态
+          label: $i18n.t('form_label.e8') + ':' //平台状态
         },
         {
           flag: false, // 需要加*
@@ -126,7 +126,7 @@ export default {
           flag: false,
           width: '12',
           column: 'RECEIVER_PHONE',
-          label: $i18n.t('form_label.consignee_tel') + ':', // 收货人电话
+          label: $i18n.t('form_label.e6') + ':', // 收货人电话
         },
         {
           flag: false,
@@ -138,7 +138,7 @@ export default {
           flag: false,
           width: '12',
           column: 'RECEIVER_ZIP',
-          label: $i18n.t('form_label.consignee_postcode') + ':', // 收货人邮编
+          label: $i18n.t('form_label.e7') + ':', // 收货人邮编
         },
         {
           flag: false,
