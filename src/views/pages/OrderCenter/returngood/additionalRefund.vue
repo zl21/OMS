@@ -39,6 +39,14 @@
               />
             </div>
           </Panel>
+          <Panel
+            name="4"
+          >
+            单据回传及支付信息回传
+            <div slot="content">
+              <reForm :form-config="payInfo" />
+            </div>
+          </Panel>
         </Collapse>
       </div>
       <div class="tab-content">
