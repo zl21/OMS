@@ -15,7 +15,8 @@ const form = {
         value: this.defaultValue(ele),
         inputname: ele.inputname,
         props: {
-          clearable: true
+          clearable: true,
+          AutoData:[]
         },
         event: {}
       };
@@ -137,8 +138,8 @@ const form = {
           },
           'on-input-value-change': (value, $this) => {
             // 下拉多选模糊搜索事件
-            console.log(value, $this);
-
+            obj.item.value = undefined;
+            obj.item.props.AutoData = []
             fkQueryList({
               searchObject: {
                 isdroplistsearch: true,
@@ -152,7 +153,7 @@ const form = {
                   if (ele.colid == 182332) {
                     if (item.SHOP_NICK.val.indexOf(value) != '-1') {
                       this.nobj = {};
-                      obj.item.props.AutoData = [];
+                     
                       res.data.data.tabth.forEach(em => {
                         this.nobj[em.name] = item[em.colname].val;
                         this.nobj.value = item[em.colname].val;
@@ -162,12 +163,12 @@ const form = {
                   }else{
                     if (item.ENAME.val.indexOf(value) != '-1') {
                       this.nobj = {};
-                      obj.item.props.AutoData = [];
+                     
                       res.data.data.tabth.forEach(em => {
                         this.nobj[em.name] = item[em.colname].val;
                         this.nobj.value = item[em.colname].val;
                       });
-                      obj.item.props.AutoData.push(this.nobj);
+                     obj.item.props.AutoData.push(this.nobj);
                     }
                   }
                   
@@ -181,7 +182,9 @@ const form = {
             obj.item.value = value[0].ID;
           },
           'on-clear': () => {
+         
             obj.item.value = undefined;
+         
           }
         };
       // } else if (ele.display == 'OBJ_SELECT') {
