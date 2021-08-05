@@ -182,3 +182,4 @@ console.log($i18n.t(common.all));
 | v1.0.89 | add modalTips.kv |
 | v1.0.91 | add modalTips.kw |
 | v1.0.92 | add table_label.a4 |
+| v1.0.93 | add e6~e8 |
