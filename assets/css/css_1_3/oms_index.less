@@ -1462,10 +1462,10 @@ a:hover,
 }
 .r3-vertical-content{
   &>div:last-child{
-    div[style="margin: 10px; background-color: rgb(255, 255, 255); overflow: hidden; flex: 1 1 1px;"]{
-      background-color: #fff!important;
-      border-top: 1px solid #f2f2f2;
-    }
+    // div[style="margin: 10px; background-color: rgb(255, 255, 255); overflow: hidden; flex: 1 1 1px;"]{
+    //   background-color: #fff!important;
+    //   border-top: 1px solid #f2f2f2;
+    // }
   }
 }
 
@@ -1558,21 +1558,5 @@ a:hover,
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-}
-// ag样式暂时覆盖
-.ag-grid-table{
-  .ag-cell-label-container{
-    .ag-header-cell-menu-button {
-      float: inherit;
-      position: absolute;
-      right: 1px;
-    }
-    .ag-header-cell-label{
-      width: 100%;
-      span {
-        vertical-align: 0 !important;
-      }
-    }
   }
 }

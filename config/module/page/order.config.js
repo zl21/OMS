@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-08 20:32:29
- * @LastEditTime: 2021-07-14 19:38:50
+ * @LastEditTime: 2021-08-05 15:43:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/order.config.js
@@ -101,4 +101,15 @@ export default {
     // labelName: '退换货新增',
     labelName: i18n.t('menu.az'),
   },
+  // 额外退款单
+  E_PRODUCT_DETAILS:{
+    component: () => import('allpages/orderCenter/extraRefund/productDetails.vue'),
+  },
+  // 发货前退款单
+  OC_B_REFUND_ORDER_SENT:{
+    component: () => import('allpages/orderCenter/returngood/returnGoods.vue'),
+  },
+  OC_B_REFUND_ORDER:{
+    component: () => import('allpages/orderCenter/returngood/returnGoods.vue'),
+  }
 };

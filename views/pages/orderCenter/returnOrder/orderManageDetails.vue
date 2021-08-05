@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-08-03 18:35:32
+ * @LastEditTime: 2021-08-05 14:59:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
@@ -241,9 +241,7 @@
       BtnConfig.target = this;
       BtnConfig.singleType = 1;
       await this.getDetailsData();
-      console.log(980808);
     },
-
   };
 </script>
 <style lang="less" scoped>

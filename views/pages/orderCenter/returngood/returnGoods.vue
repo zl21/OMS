@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-07-22 10:40:23
+ * @LastEditTime: 2021-08-05 15:59:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -55,11 +55,11 @@
     },
     methods:{
       // 切换商品展示类型
-      onSitch(){
+      async onSitch(){
         // 切换为sku商品展示 切换为平台商品展示
         this.isSku ? this.switchText = $i18n.t('form_label.b0') : this.switchText = $i18n.t('form_label.b1');
         this.isSku = !this.isSku;
-        this.getData(this.isSku);
+        this.getData()
       },
       // 获取表头
       async getColumData(){
@@ -100,13 +100,14 @@
 
 <style lang="less">
 @import "~@burgeon/oms-theme/skin/public.less";
-.ItemComponentRoot {
+.returnGoods {
   position: relative;
   overflow: inherit;
-  .returnGoods .switch {
+  padding: 40px 0 0;
+  .switch {
     position: absolute;
     right: 0;
-    top: -54px;
+    top: 15px;
     color: @base-color;
     cursor: pointer;
   }
