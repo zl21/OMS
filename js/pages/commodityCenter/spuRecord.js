@@ -733,11 +733,15 @@ export default {
     async getCustomAttr() {
       const self = this;
       if (!self.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) return;
-      await self.service.commodityCenter.queryAttributeSku({
+      const param = {
         proCode: self.formConfig.formValue.ECODE, // spu编码
         tableName: 'ps_c_pro', // 表名
         classId: self.formConfig.formValue.PS_C_PRO_CLASSIFY_ID // 分类id
-      }).then(res => {
+      }
+      if (self.spuid == '-1') {
+        delete param.proCode
+      }
+      await self.service.commodityCenter.queryAttributeSku(param).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           if (JSON.stringify(res.data.data) == '{}') {
