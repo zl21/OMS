@@ -1,8 +1,9 @@
 <template>
   <!-- promactiqueryList -->
   <div class="customized-list" v-loading="loading">
-    <div class="customized-list-form">
+    <div class="" :class="['customized-list-form','promotionForm',Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '']">
       <businessForm :form-config="formConfig" />
+      <businessButton :btn-config="formBtn" class="formBtn" />
     </div>
     <!-- 按钮 head_botton-->
     <div class="customized-list-btn">

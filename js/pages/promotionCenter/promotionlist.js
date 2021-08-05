@@ -32,6 +32,7 @@ export default {
       setGroupTableData: [], // 设置分组列表
       STATUS: [1, 2, 3], // 状态 1.草稿，2.已发布，3.下线
       formConfig: {
+        gridBar:true,
         formValue: {
           acti_no: '',
           acti_date: [`${this.setData(0, true)}`, `${this.setData(7)}`],
@@ -407,26 +408,32 @@ export default {
           valuedata: ''
         }
       },
+      formBtn:{
+        typeAll: 'default', // 按钮统一风格样式
+        loading: false, // 按钮加载
+        buttons: [
+          {
+            text: $i18n.t('btn.find'), // 查找,
+            webname: 'lookup_cuxiaohuodomg',
+            btnclick: () => {
+              this.getData();
+            }
+          },
+          {
+            text: $i18n.t('btn.reset'), // 重置,
+            webname: 'chongzhicux_cuxiaohuodomg',
+            btnclick: () => {
+              this.Reset();
+            }
+          },
+        ],
+      },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
-        buttons: [],
+        buttons:[]
       },
       extendBtn:[
-        {
-          // text: $i18n.t('btn.find'), // 查找,
-          webname: 'lookup_cuxiaohuodomg',
-          btnclick: () => {
-            this.getData();
-          }
-        },
-        {
-          // text: $i18n.t('btn.reset'), // 重置,
-          webname: 'chongzhicux_cuxiaohuodomg',
-          btnclick: () => {
-            this.Reset();
-          }
-        },
         {
           // text: $i18n.t('btn.add'), // 新增,
           webname: 'xinzengcux_cuxiaohuodomg',
@@ -526,6 +533,9 @@ export default {
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
+    },
+    colRowNum(){
+      return $store.state.customize.colRowNum;
     }
   },
   async mounted() {
@@ -541,7 +551,7 @@ export default {
     await this.getData();
     // 检测屏幕变化 设置高度 重新渲染agTabe
     $omsUtils.onresizes(this, 650);
-    const buttons = self.$OMS2.BtnConfig.config();
+    const buttons = await self.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...buttons.buttons , ...this.extendBtn];
     $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});
   },
