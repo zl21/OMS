@@ -252,14 +252,14 @@ export default {
     /**
      * >> 仅新增页面会走，通过watch监听'物流单号'触发，仅用于新增时初始化原单带出的明细
      * >> 调整一下，详情也走这，不走（/p/cs/objectTableItem）了，因为拿不到数据的唯一key
+     * >> 再调整一下，详情初始化明细还是走标准接口，接口返回数据唯一标识，前端隐藏掉该列
      * 入参说明：
      * 1. 新增时根据原单带出明细（页面新增 且 有原单）
         expressCode: "9998975701" // 没有就传'-1'(clear的情况)
         mainId: "-1"
         pageNum: 1
         pageSize: 10
-     * 2. （废弃）新增页面初始化表头没走这个：在mounted里走的框架标准子表接口
-     * 2. 详情也走这初始化明细，表头走objectTableItem，数据走定制接口
+     * 2. 新增页面初始化表头没走这个：在mounted里走的框架标准子表接口
      */
     async initTable(page = 1, pageSize = 10, isInit, oriId) {
       const _this = this;
@@ -279,7 +279,7 @@ export default {
       param.web = 'payDetail';
       // 新增/详情-表头
       const subData = await _this.$OMS2.omsUtils.initSubtable('OC_B_COMPENSATE_ORDER_ITEM', _this.ID, '181120')
-      const columns = subData.columns.filter(it => it.key != 'ID');
+      const columns = subData.columns.filter(it => !['ID', 'OC_B_ORDER_DELIVERY_ID'].includes(it.key));
       _this.tableConfig.columns = columns;
 
       if (this.ID != '-1') { // 详情拿不到key，要改
