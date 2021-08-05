@@ -728,6 +728,7 @@ class commonUtils {
     let fD = formConfig.formData
     fromdata.append('table', table)
     fromdata.append('objid', -1)
+    fromdata.append('omsT', new Date())
     const res = await service.common.getObject(fromdata)
     res.data.data.addcolums.forEach((item) => {
       if (item.parentdesc == foldingName) {
@@ -809,6 +810,7 @@ class commonUtils {
     const fromdata = new FormData()
     fromdata.append('table', table)
     fromdata.append('objid', id)
+    fromdata.append('omsT', new Date())
     const {
       data: { code, data, message },
     } = await service.common.getObject(fromdata)
@@ -994,6 +996,7 @@ class commonUtils {
     formdata.append('table', table)
     formdata.append('searchdata', JSON.stringify(searchdatas))
     formdata.append('refcolid', refcolid)
+    formdata.append('omsT', new Date())
     const res = await service.common.objectTableItem(formdata)
     if (res.data.code === 0) {
       let rowData = [];
