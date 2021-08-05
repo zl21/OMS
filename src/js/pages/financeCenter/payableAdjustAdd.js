@@ -216,7 +216,7 @@ export default {
                   {
                     type: 'input',
                     queryName: 'SOURCE_CODE',
-                    value: val
+                    value: self.formConfig.formValue.TID // 用val模糊查询时会有问题
                   }
                 ]
               };
