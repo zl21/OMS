@@ -641,6 +641,9 @@ export default {
         skuCode, // 该条明细的skuCode，新增时没有，传空字符串
         skuId,
       };
+      if (this.ID == '2201' && this.$route.query.spuid) { // spu过来的新增，不传skuId
+        delete param.skuId;
+      }
       this.loading = true;
       const {
         data: {
