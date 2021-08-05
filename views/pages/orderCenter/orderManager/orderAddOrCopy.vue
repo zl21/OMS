@@ -335,7 +335,7 @@ export default {
               colname: "CP_C_PHY_WAREHOUSE_ID",
               fkdisplay: "drp",
               isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
+              isnotnull: false, // 是否必填
               name: "发货仓库",
               readonly: false,
               valuedata: "",
