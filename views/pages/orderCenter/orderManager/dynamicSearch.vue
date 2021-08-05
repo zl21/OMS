@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-27 11:04:51
- * @LastEditTime: 2021-06-16 15:40:36
+ * @LastEditTime: 2021-08-05 18:15:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/orderCenter/orderManager/dynamicSearch.vue
@@ -316,7 +316,7 @@
       }
     }
     .obj-label {
-      width: 120px;
+      width: 95px;
       height: @base-height + 10px;
       line-height: @base-height + 10px;
       text-align: right;

@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-02 13:11:24
+ * @LastEditTime: 2021-08-05 18:50:34
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -336,7 +336,7 @@ export default {
         this.renderColumn = this.tableHead.huan;
         // 手工新增
         setTimeout(() => {
-            this.renderHandle([ "DISPUTE_ID","QTY_EXCHANGE","PRICE_ACTUAL"]) //render方法
+            this.renderHandle([ "DISPUTE_ID","QTY_EXCHANGE","AMT_EXCHANGE"]) //render方法
           }, 100);
         this.businessActionTable.data = this.toMainData.huan;
         // 退货明细
@@ -724,10 +724,10 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.QTY_EXCHANGE = e;
-                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
-                  Number(e) * Number(params.row.PRICE_ACTUAL),
-                  2
-                );
+                // params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+                //   Number(e) * Number(params.row.PRICE_ACTUAL),
+                //   2
+                // );
                 if (this.$route.params.customizedModuleId !== "New") {
                   this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
                   R3.store.commit(
@@ -740,17 +740,39 @@ export default {
             },
           });
         }, //换货数量
-        PRICE_ACTUAL: (h, params) => {
+        // PRICE_ACTUAL: (h, params) => {
+        //   return h("Input", {
+        //     props: {
+        //       value: params.row.PRICE_ACTUAL,
+        //       regx: /^\+?\d+\.{0,1}\d{0,2}$/, // 还有 0后面紧跟数字的情况没兼容
+        //       min: 1,
+        //     },
+        //     on: {
+        //       "on-change": (e) => {
+        //         params.row.PRICE_ACTUAL = e.target.value;
+        //         params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(Number(e.target.value) * Number(params.row.QTY_EXCHANGE || 0));
+        //         this.businessActionTable.data[params.index] = params.row;
+        //         // 退货明细
+        //         this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
+        //         R3.store.commit(
+        //           "customize/returnOrderChangeItem",
+        //           JSON.parse(JSON.stringify(this.toMainData))
+        //         );
+        //         this.totalNum();
+                
+        //       },
+        //     },
+        //   });
+        // }, //成交单价
+        AMT_EXCHANGE: (h, params) => {
           return h("Input", {
             props: {
-              value: params.row.PRICE_ACTUAL,
+              value: params.row.AMT_EXCHANGE,
               regx: /^\+?\d+\.{0,1}\d{0,2}$/, // 还有 0后面紧跟数字的情况没兼容
-              min: 1,
             },
             on: {
               "on-change": (e) => {
-                params.row.PRICE_ACTUAL = e.target.value;
-                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(Number(e.target.value) * Number(params.row.QTY_EXCHANGE || 0));
+                params.row.AMT_EXCHANGE = e.target.value;
                 this.businessActionTable.data[params.index] = params.row;
                 // 退货明细
                 this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
@@ -763,7 +785,7 @@ export default {
               },
             },
           });
-        }, //成交单价
+        }, //换货金额
       };
       // 查找对应的key添加render
       this.renderColumn.forEach((k, i) => {

@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-07-28 14:10:51
+ * @LastEditTime: 2021-08-05 18:53:50
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-新增-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -350,7 +350,7 @@ export default {
           this.actionTableCon.data = this.toMainData.tui;
         } else if (newData === "1") {
           // tableName = 'OC_B_RETURN_ORDER_EXCHANGE';
-          renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
+          renderKeys = ["QTY_EXCHANGE", "AMT_EXCHANGE"];
           // this.getBtn();
           this.actionTableCon.businessButtonConfig.buttons[0].isShow = false;
           this.actionTableCon.businessButtonConfig.buttons[1].isShow = true;
@@ -563,7 +563,7 @@ export default {
           // 退货明细
           this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
             ? ["REFUND_ID", "QTY_REFUND"]
-            : ["QTY_EXCHANGE", "PRICE_ACTUAL"]; // render
+            : ["QTY_EXCHANGE", "AMT_EXCHANGE"]; // render
         // 手工新增
         if (this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')) {
           renderArr = [];
@@ -745,31 +745,47 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.QTY_EXCHANGE = e;
-                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
-                  Number(e) * Number(params.row.PRICE_ACTUAL),
-                  2
-                );
+                // params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+                //   Number(e) * Number(params.row.PRICE_ACTUAL),
+                //   2
+                // );
                 this.actionTableCon.data[params.index] = params.row;
                 this.totalNum();
               },
             },
           });
         },
-        PRICE_ACTUAL: (h, params) => {
-          // 成交单价 -- 换
+        // PRICE_ACTUAL: (h, params) => {
+        //   // 成交单价 -- 换
+        //   return h("Input", {
+        //     props: {
+        //       value: params.row.PRICE_ACTUAL,
+        //       regx: /^\+?\d+\.{0,1}\d{0,2}$/, // 还有 0后面紧跟数字的情况没兼容
+        //     },
+        //     on: {
+        //       "on-change": (v) => {
+        //         const e = v.target.value;
+        //         params.row.PRICE_ACTUAL = e;
+        //         params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+        //           Number(e) * Number(params.row.QTY_EXCHANGE),
+        //           2
+        //         );
+        //         this.actionTableCon.data[params.index] = params.row;
+        //         this.totalNum();
+        //       },
+        //     },
+        //   });
+        // },
+        AMT_EXCHANGE: (h, params) => {
           return h("Input", {
             props: {
-              value: params.row.PRICE_ACTUAL,
+              value: params.row.AMT_EXCHANGE,
               regx: /^\+?\d+\.{0,1}\d{0,2}$/, // 还有 0后面紧跟数字的情况没兼容
             },
             on: {
               "on-change": (v) => {
                 const e = v.target.value;
-                params.row.PRICE_ACTUAL = e;
-                params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
-                  Number(e) * Number(params.row.QTY_EXCHANGE),
-                  2
-                );
+                params.row.AMT_EXCHANGE = e;
                 this.actionTableCon.data[params.index] = params.row;
                 this.totalNum();
               },
