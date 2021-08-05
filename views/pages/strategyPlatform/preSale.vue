@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-22 15:47:49
- * @LastEditTime: 2021-07-28 13:52:48
+ * @LastEditTime: 2021-08-05 14:37:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/preSale.vue
@@ -29,14 +29,15 @@
         <Input
           v-model="li.PRESELL_DISCERN_CENTENT"
           :placeholder="li.placeholder"
-          style="width: 300px"
+          style="width: 250px"
         />
 
         <div class="preSale-lable">
           <span>*</span>
+          预计发货时间：
         </div>
         <RadioGroup v-model="li.value" @on-change="radiochange($event, li)">
-          <Radio label="预计发货时间"></Radio>
+          <Radio label="固定时间"></Radio>
           <DatePicker
             type="datetime"
             placeholder="固定时间"
@@ -50,8 +51,12 @@
             天
           </div>
         </RadioGroup>
+        <div class="preSale-text" v-show="index != 0">
+           或
+        </div>
         <div class="preSale-add" v-show="index == indexlenth">
-          <Icon type="md-add" color="#19be6b" @click="add" />
+          <Icon type="md-add" color="#ed4014" @click="add"  size="24" />
+          <Icon type="md-close" color="#19be6b" @click="fndel(index)" size="24"  v-if="index != 0"/>
         </div>
       </div>
     </div>
@@ -119,6 +124,10 @@ export default {
     }
   },
   methods: {
+    fndel(i){
+        this.datalist.splice(i,1)
+        this.indexlenth = this.datalist.length - 1;
+    },
     Save(data) {
       if (data.detail.type == 'save') {
         let reqdata = [];
@@ -203,6 +212,9 @@ export default {
     .preSale-center {
       display: flex;
       align-items: center;
+      .ark-input-wrapper{
+        margin-left: 10px;
+      }
     }
     .preSale-lable {
       padding: 0 5px;
@@ -216,6 +228,10 @@ export default {
     .ark-radio-group {
       display: flex;
       align-items: center;
+    }
+    .preSale-text{
+      position: relative;
+      top: -30px;
     }
   }
 }
