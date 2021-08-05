@@ -22,45 +22,124 @@
     <div ref="container" class="container">
       <div class="login-content">
         <!-- logo -->
+        <div class="login-type-bg" @click="cutLoginType">
+          <img :src="loginType == 2? require('../assets/img/login-pc-icon.png'): require('../assets/img/login-mobile-icon.png')" alt="">
+        </div>
         <div class="logo-img">
           <img src="../assets/img/form-logo.png" />
         </div>
         <!-- 欢迎登录 -->
         <div class="title">{{ vmI18n.t("welcome") }}</div>
         <!-- form -->
-        <div class="form-input">
-          <label>
-            <i class="iconfont icon-yonghu"></i>
-          </label>
-          <div class="input-box">
-            <input
-              ref="username"
-              type="text"
-              value=""
-              class="username"
-              :placeholder="vmI18n.t('pHolder.a2')"
-            />
+        <div class="login-type" v-show="loginType == 1">
+          <div class="form-input">
+            <label>
+              <i class="iconfont icon-yonghu"></i>
+            </label>
+            <div class="input-box">
+              <input
+                ref="username"
+                type="text"
+                value=""
+                class="username"
+                :placeholder="vmI18n.t('pHolder.a2')"
+              />
+            </div>
+          </div>
+          <div class="form-input">
+            <label>
+              <i class="iconfont icon-mima"></i>
+            </label>
+            <div class="input-box">
+              <input
+                ref="password"
+                type="password"
+                value=""
+                class="pwd"
+                :placeholder="vmI18n.t('pHolder.a3')"
+              />
+            </div>
+          </div>
+          <!-- button -->
+          <div id="btn" class="btn" @click="login">
+            <!-- 登录 -->
+            {{ vmI18n.t("login") }}
+            <img src="../assets/img/arrow-right.png" />
           </div>
         </div>
-        <div class="form-input">
-          <label>
-            <i class="iconfont icon-mima"></i>
-          </label>
-          <div class="input-box">
-            <input
-              ref="password"
-              type="password"
-              value=""
-              class="pwd"
-              :placeholder="vmI18n.t('pHolder.a3')"
+        <div class="login-type" v-if="loginType == 2">
+          <div>
+            <div class="form-input">
+              <label>
+                <i class="iconfont icon-yonghu"></i>
+              </label>
+              <div class="input-box">
+                <input
+                  type="text"
+                  maxlength="11"
+                  class="username"
+                  placeholder="手机号"
+                  v-model="receiver"
+                  autofocus
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="form-input" style="width: 216px">
+              <label>
+                <i class="iconfont icon-mima"></i>
+              </label>
+              <div class="input-box">
+                <input
+                  type="text"
+                  class="kaptcha"
+                  placeholder="输入图形验证码"
+                  maxlength="4"
+                  v-model="captchaText"
+                />
+              </div>
+            </div>
+            <img
+              :src="captchaImag"
+              alt=""
+              class="kaptchaImg"
+              @click="getIdaasKaptcha"
             />
           </div>
-        </div>
-        <!-- button -->
-        <div id="btn" class="btn" @click="login">
-          <!-- 登录 -->
-          {{ vmI18n.t("login") }}
-          <img src="../assets/img/arrow-right.png" />
+          <div>
+            <div class="form-input">
+              <label>
+                <i class="iconfont icon-mima"></i>
+              </label>
+              <div class="input-box">
+                <input
+                  type="text"
+                  class="username"
+                  placeholder="短信验证码"
+                  maxlength="8"
+                  v-model="smscode"
+                  autofocus
+                />
+                <span v-if="codeShow">
+                  <span class="getSmscode" @click="sendsms" v-if="receiver && receiver.length==11 && captchaText && captchaText.length>0"
+                  >发送验证码</span
+                  >
+                  <span class="getSmscode" style="color:#ccc;" v-else
+                  >发送验证码</span
+                  >
+                </span>
+                <span class="getSmscode" v-else
+                >{{ timeLoading }}s重新发送</span
+                >
+              </div>
+            </div>
+          </div>
+          <div id="btn" class="btn" @click="login">
+            <!-- 登录 -->
+            {{ vmI18n.t("login") }}
+            <img src="../assets/img/arrow-right.png" />
+          </div>
         </div>
         <!-- <p class="fargetPws">
           <a>忘记密码了？</a>
@@ -101,6 +180,15 @@ export default {
       vmI18n: i18n,
       langConfig,
       curLang: '', // 当前语言
+      loginType: 1,  //登录类型 1：普通登录 2：短信登录
+      captcha: "", //图片校验码
+      captchaImag: null, //图片
+      captchaCode: "",//idaas返回验证码code
+      captchaText: "",//用户输入idaas图片验证码
+      receiver: null, //手机号
+      smscode: null, //短信验证嘛
+      codeShow: true, //控制短信验证码的发送
+      timeLoading: 0 //倒计时
     };
   },
   created() {
@@ -197,6 +285,190 @@ export default {
         });
       }
     },
+    // 切换tab时清空数据
+    clearInfo(value) {
+      if (value === "name1") {
+        this.getIdaasKaptcha();
+      }
+      (this.uname = ""), //账户名
+        (this.pwd = ""), //密码
+        (this.captcha = ""), //图片校验码
+        (this.receiver = null), //手机号
+        (this.smscode = null); //短信验证嘛
+      this.codeShow = true;
+      this.timeLoading = 0;
+    },
+    // 获取图片验证码
+    getKaptcha() {
+      this.captchaImag = `/p/c/kaptcha?v=${this.getNum()}`;
+    },
+    // 获取图片验证码
+    getIdaasKaptcha() {
+      let _that = this;
+      let _url = "/p/c/kaptchaidaas";
+      $.ajax({
+        url: _url,
+        type: "post",
+        dataType: "json",
+        success: function (_res) {
+          _that.captchaCode = _res.data.code;
+          _that.captchaImag = "data:image/png;base64," + _res.data.captcha;
+        }
+      });
+    },
+    cutLoginType() {
+      //切换登录方式
+      this.loginType = this.loginType == 1 ? 2 : 1;
+      this.captchaText = "";
+      if(this.loginType == 2){
+        this.getIdaasKaptcha();
+      }
+    },
+    getNum() {
+      //获取32位随机数
+      var chars = [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z"
+      ];
+      var nums = "";
+      for (var i = 0; i < 32; i++) {
+        var id = parseInt(Math.random() * 61);
+        nums += chars[id];
+      }
+      return nums;
+    },
+
+    // 获取短信校验码
+    sendsms() {
+      let _that = this;
+      if (!this.receiver) {
+        // this.errorMessage({
+        //   action: "confirm",
+        //   title: "警告",
+        //   type: "error",
+        //   list: [],
+        //   isAction: true,
+        //   desc: "请输入手机号"
+        // });
+        return;
+      }
+      if(!(/^1\d{10}$/.test(this.receiver))){
+        this.errorMessage({
+          action: "confirm",
+          title: "警告",
+          type: "error",
+          list: [],
+          isAction: true,
+          desc: "手机格式不正确，请重新输入；"
+        });
+        return false;
+      }
+      if (!this.captchaText) {
+        this.errorMessage({
+          action: "confirm",
+          title: "警告",
+          type: "error",
+          list: [],
+          isAction: true,
+          desc: "请输入图形验证码"
+        });
+        return;
+      }
+
+      $.ajax({
+        url: "/p/c/sendidaassms",
+        method: "post",
+        dataType: "json",
+        data: {
+          phone: this.receiver,
+          captchaText: this.captchaText,
+          captchaCode: this.captchaCode
+        },
+        success: function (res) {
+          if (res.code != 200) {
+            _that.errorMessage({
+              action: "confirm",
+              title: "警告",
+              type: "error",
+              list: [],
+              isAction: true,
+              desc: res.message || res.msg
+            });
+            return;
+          }
+          _that.sToken = res.data.sToken;
+          _that.timeLoading = 60;
+          _that.codeShow = false;
+          let timer = setInterval(() => {
+            _that.timeLoading--;
+            if (_that.timeLoading === 0) {
+              clearInterval(timer);
+              _that.codeShow = true;
+            }
+          }, 1000);
+        }
+      });
+    }
   },
 };
 </script>
@@ -367,6 +639,35 @@ export default {
     img {
       width: 100%;
     }
+  }
+  .login-type-bg {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #0E8EE9;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .login-type-bg img {
+    width: 100px;
+    height: 100px;
+    opacity: .65;
+  }
+  .kaptchaImg {
+    width: 100px;
+    position: relative;
+    top: 15px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .getSmscode {
+    position: absolute;
+    right: 16px;
+    top: 0;
+    font-size: 14px;
+    cursor: pointer;
+    color: #0068b7;
   }
 }
 </style>
