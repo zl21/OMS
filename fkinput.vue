@@ -1,9 +1,9 @@
 <template>
   <div class="item-input item-col" :class="{ hidden: getHideColumn(itemdata) }">
-    <label v-if="itemdata.name" class="title">
+    <!-- <label v-if="itemdata.name" class="title">
       <i v-if="itemdata.isnotnull">*</i>
       {{ itemdata.name }}:
-    </label>
+    </label> -->
 
     <Icon
       v-if="!itemdata.readonly && (itemdata.fkdisplay === 'mrp' || itemdata.fkdisplay === 'drp') && itemdata.valuedata"
@@ -109,7 +109,7 @@
             slot="reference"
             class="iconfont"
             @click.stop="filterInputName(itemdata)"
-            >&#xe622;</i
+            >&#xe6b9;</i
           >
           <fk-table
             v-if="popoverShow[itemdata.colname]"

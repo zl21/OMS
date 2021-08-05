@@ -2,6 +2,12 @@
 
 .ark-form-item-content {
   position: relative;
+  .popLabel{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 95px;
+  }
   .ark-checkbox-group {
     input{
       vertical-align: middle;
@@ -39,15 +45,10 @@
 
     // 类型为popInput的 input
     .popInput {
+      .ark-form-item-content{
+        position: inherit;
+      }
       .item-input {
-        .title {
-          width: 120px;
-          padding: 10px 12px 10px 0;
-          box-sizing: border-box;
-          line-height: 1 !important;
-          text-align: right;
-        }
-
         .add-input {
           width: 100%;
           background-color: transparent;

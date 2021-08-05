@@ -132,17 +132,24 @@
 
           <!-- 输入框弹框单多选 -->
           <FormItem v-if="item.style === 'popInput'"
-                    :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
-            <my-input :version='item.version'
-                      :isActive='true'
-                      :isDisabled='false'
-                      :inputList="item.inputList?item.inputList:[]"
-                      :objList="item.objList?item.objList:[]"
-                      :itemdata="item.itemdata"
-                      @inputBlur="(row)=>runMethods(typeof item.InputBlur == 'function' && item.InputBlur(item.itemdata.isBackRowItem ? row : item.itemdata))"
-                      @getFkChooseItem="(row)=>runMethods(typeof item.oneObj == 'function' && item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata))"
-                      @itemInputEnter="(row)=>runMethods(typeof item.InputEnter == 'function' && item.InputEnter(item.itemdata.isBackRowItem ? row : item.itemdata))">
-            </my-input>
+                    :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'" >
+            <label class="ark-form-item-label popLabel" style="">
+               <i style="color:#f00" v-if="item.itemdata.isnotnull">*</i>
+              {{ item.itemdata.name }}:
+            </label>
+            <div class="ark-form-item-content">
+              <my-input :version='item.version'
+                        :isActive='true'
+                        :isDisabled='false'
+                        :inputList="item.inputList?item.inputList:[]"
+                        :objList="item.objList?item.objList:[]"
+                        :itemdata="item.itemdata"
+                        @inputBlur="(row)=>runMethods(typeof item.InputBlur == 'function' && item.InputBlur(item.itemdata.isBackRowItem ? row : item.itemdata))"
+                        @getFkChooseItem="(row)=>runMethods(typeof item.oneObj == 'function' && item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata))"
+                        @itemInputEnter="(row)=>runMethods(typeof item.InputEnter == 'function' && item.InputEnter(item.itemdata.isBackRowItem ? row : item.itemdata))">
+              </my-input>
+            </div>
+            
           </FormItem>
 
           <!-- 输入框弹框单多选-arkUi -->
