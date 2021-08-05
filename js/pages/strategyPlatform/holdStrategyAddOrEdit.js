@@ -310,7 +310,7 @@ export default {
             options: [
               {
                 label: '直播HOLD单',
-                value: 1
+                value: '1'
               }
             ]
           },
@@ -414,7 +414,7 @@ export default {
 
         ],
         formValue: {
-          HOLD_ORDER_REASON: 1, //hold单原因
+          HOLD_ORDER_REASON: '1', //hold单原因
           IS_AUTO_RELEASE: false, //是否自动释放
           RELEASE_TIME_TYPE: null,// 释放时点 1-指定时间点 2-固定时长
           RELEASE_TIME: null, //释放指定时间
@@ -440,7 +440,7 @@ export default {
             options: [
               {
                 label: '预售HOLD单',
-                value: 2
+                value: '2'
               }
             ]
           },
@@ -536,7 +536,7 @@ export default {
           }
         ],
         formValue: {
-          HOLD_ORDER_REASON: 2, //hold单原因
+          HOLD_ORDER_REASON: '2', //hold单原因
           IS_AUTO_RELEASE: false, //是否自动释放
           RELEASE_TIME_TYPE: null,// 释放时点 1-指定时间点 2-固定时长
           RELEASE_TIME: null, //释放指定时间
@@ -660,7 +660,7 @@ export default {
           },
         ],
         formValue: {
-          HOLD_ORDER_REASON: 10, //hold单原因
+          HOLD_ORDER_REASON: '10', //hold单原因
           HOLD_ORDER_IS:false,
           IS_AUTO_RELEASE: false, //是否自动释放
           RELEASE_TIME_TYPE: null,// 释放时点 1-指定时间点 2-固定时长
@@ -805,7 +805,7 @@ export default {
         formValue3.FIXED_DURATION = data.FIXED_DURATION;
         formValue3.TIME_UNIT = data.TIME_UNIT;
         formValue3.ORDER_FROM_TAB = data.ORDER_FROM_TAB;
-        data.ORDER_FLAG_TYPE.split(",").forEach(item => {
+        data.ORDER_FLAG_TYPE && data.ORDER_FLAG_TYPE.split(",").forEach(item => {
           switch (item) {
             case '1':
               this.formConfig2.formValue.ORDER_FLAG = true
@@ -829,10 +829,19 @@ export default {
             for (const k in this.formConfig3.formValue) {
               this.formConfig3.formValue[k] = item[k]
             }
-          }else if (item.HOLD_ORDER_REASON == "2") {
+          }else if (item.HOLD_ORDER_REASON == "2") { //
             for (const k in this.formConfig4.formValue) {
               this.formConfig4.formValue[k] = item[k]
             }
+  
+            if (this.formConfig4.formValue.IS_AUTO_RELEASE) {
+              this.formConfig4.formData[2].style = 'select';
+            }
+            if (this.formConfig4.formValue.RELEASE_TIME_TYPE) {
+              this.formConfig4.formData[3].style = 'formCompile';
+            }
+            
+           
           }else{
             for (const k in this.formConfig5.formValue) {
               this.formConfig5.formValue[k] = item[k]

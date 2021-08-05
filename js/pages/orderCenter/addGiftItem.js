@@ -148,7 +148,7 @@ export default {
     },
 
     fnrow(v, index, en) {
-      if (this.componentData.type == 2) {
+      if (this.componentData.type == 2 && !v._disableExpand) {
         this.data9 = this.data9.map(item => {
           if (item.ID == v.ID) {
             item._expanded =  !item._expanded
@@ -205,8 +205,14 @@ export default {
           return item
         }
       })
+ 
+
       this.data9 = data.RETURN_ORDER_LIST.map((item, index) => {
         item.index = index + 1
+        if (!item.RETURN_ORDER_ITEM_LIST) {
+          item._disableExpand = true
+        }
+       
         return item
       })
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-03 19:24:42
- * @LastEditTime: 2021-06-21 16:53:11
+ * @LastEditTime: 2021-08-05 11:43:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/auditOrderStrategy.vue
@@ -217,6 +217,18 @@
                       type="md-add"
                       @click="mdAdd"
                     />
+
+                    <Icon
+                      type="md-close"
+                      color="#19be6b"
+                      @click="fndel(index)"
+                      size="28"
+                      v-if="
+                        resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT
+                          .TOTAL_AMT_ITEM.length ==
+                          index + 1 && !disabledAll
+                      "
+                    />
                   </div>
                 </div>
               </div>
@@ -334,10 +346,10 @@
 </template>
 
 <script>
-import auditOrderStrategy from "@/js/pages/strategyPlatform/auditOrderStrategy";
+import auditOrderStrategy from '@/js/pages/strategyPlatform/auditOrderStrategy';
 export default auditOrderStrategy;
 </script>
 
 <style scoped lang="less">
-@import "~@/css/pages/strategyPlatform/auditOrderStrategy.less";
+@import '~@/css/pages/strategyPlatform/auditOrderStrategy.less';
 </style>
