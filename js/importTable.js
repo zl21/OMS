@@ -2,6 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import loading from 'professionalComponents/loading';
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
+import { throttle } from 'lodash'
 
 export default {
   name: 'importTable',
@@ -117,12 +118,12 @@ export default {
     },
 
     // 确认导入的操作
-    importDialog() {
+    importDialog: throttle(function () {
       if (this.handleBefore(this.files)) return;
       const okApi = this.currentConfig.okApi;
       const okParm = this.currentConfig.okParm;
       this.getImportDialog(okApi, okParm);
-    },
+    }, 3000),
     // 导入请求
     getImportDialog(url, paramsObj) {
       const _this = this;
@@ -144,7 +145,7 @@ export default {
       }
       $network.post(url, param).then((res) => {
         document.getElementById("xFile").value = ""
-        if ([0,1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
+        if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
           if (res.data.message) _this.$Message.success(res.data.message);
           _this.$emit('returnData', res.data.data);
           _this.closeModal();
@@ -174,7 +175,7 @@ export default {
         }
         if (_this.currentConfig.cusDiscretion) {
           _this.$emit('returnData', res);
-        } 
+        }
         if (_this.currentConfig.buttonPermission) {
           _this.btnConfig.buttons.map((btn) => {
             btn.disabled = false;

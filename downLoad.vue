@@ -47,6 +47,7 @@ import businessForm from "professionalComponents/businessForm";
 import businessButton from "professionalComponents/businessButton";
 import businessDialog from "professionalComponents/businessDialog";
 import i18n from "@burgeon/internationalization/i18n";
+import { throttle } from 'lodash'
 
 // import CustomConfig from "@/config/customized.config.js";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
@@ -107,7 +108,8 @@ export default {
             size: "", // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.modalConfig[this.tableName].determine(this);
+              // this.modalConfig[this.tableName].determine(this);
+              this.okHandel();
             }, // 按钮点击事件
           },
         ],
@@ -151,6 +153,10 @@ export default {
     }
   },
   methods: {
+    okHandel: throttle(function () {
+      const self = this;
+      self.modalConfig[self.tableName].determine(self);
+    }, 3000),
     downLoadOk() {
       const self = this;
       self.$emit("confirmImport");
