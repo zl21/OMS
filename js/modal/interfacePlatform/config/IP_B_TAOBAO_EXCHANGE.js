@@ -109,8 +109,6 @@ export default {
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);
-    } else {
-      // _this.$Message.error(message);
     }
   }
 };

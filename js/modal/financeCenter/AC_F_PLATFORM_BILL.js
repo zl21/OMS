@@ -42,9 +42,10 @@
           oneObj: (e) => {
             console.log(e);
             const { rowItem } = e
-            window.custSelf.downLoadFormConfig.formValue.accountCode = rowItem 
-            ? typeof rowItem.ALIPAY_ACCOUNT == 'object' ? rowItem.ALIPAY_ACCOUNT.val : rowItem.ALIPAY_ACCOUNT
+            let accountCode = rowItem 
+            ? typeof rowItem.ALIPAY_ACCOUNT == 'object' ? rowItem.ALIPAY_ACCOUNT.val : rowItem.value
             : ''
+            window.custSelf.downLoadFormConfig.formValue.accountCode = accountCode
           }
         },
         {
