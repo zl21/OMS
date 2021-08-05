@@ -940,6 +940,7 @@ export default {
       },
       PAYMENT_STATUS: '', // 单据状态
       copyId: '',
+      strike: false
     };
   },
   async mounted() {
@@ -966,6 +967,8 @@ export default {
     // 保存
     save(flag) {
       const self = this;
+      // 防暴击
+      if (self.strike) return
       if (!this.information.formValue.RESERVE_VARCHAR01) return this.$Message.warning('R3单据编号必填!');
       if (!this.information.formValue.RESERVE_BIGINT04) return this.$Message.warning('紧急程度必填!');
       if (!this.returnInfo.formValue.RESERVE_BIGINT01) return this.$Message.warning('额外退款申请类型必填!');
@@ -985,6 +988,7 @@ export default {
 
 
 
+      self.strike = true
       const data = {};
       data.objId = self.$route.params.customizedModuleId === 'New' || self.copyId ? -1 : self.$route.params.customizedModuleId;
       const AfSend = Object.assign(self.information.formValue, this.returnInfo.formValue);
@@ -1022,7 +1026,10 @@ export default {
         } else {
           self.$Message.error(res.data.message || '保存出错');
         }
-      });
+        self.strike = false
+      }).catch(() => {
+        self.strike = false
+      })
     },
 
     // 日志明细请求
