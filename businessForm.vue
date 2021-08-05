@@ -12,7 +12,7 @@
     </div>
 
     <Form class="businessForm_a"
-          :label-width="120"
+          :label-width="95"
           style="width:100%"
           :model="formConfig.formValue"
           :rules="formConfig.ruleValidate"
@@ -23,7 +23,7 @@
              :key=index
              :xs="formConfig.gridBar ? 8 : formConfig.colSpan"
              :sm="formConfig.gridBar ? 8 : formConfig.colSpan"
-             :md="formConfig.gridBar ? 8 : formConfig.colSpan" 
+             :md="formConfig.gridBar ? 6 : formConfig.colSpan" 
              :lg="formConfig.gridBar ? 6 : formConfig.colSpan"
              :span='item.width || formConfig.colSpan || "6"'
              v-if="item.style">
