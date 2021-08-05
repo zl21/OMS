@@ -494,6 +494,44 @@ export default {
             width: '24'
           },
       ]}, // 退款信息
+      payInfo: {
+        formValue: {
+          RETURN_STATUS: '',
+          MODIFIERENAME: '',
+          PAYMENT_FAIL_REASON: '',
+          PAYMENT_FAIL_REASON1: ''
+        },
+        formData: [
+          {
+            style: 'input',
+            label: '单据状态',
+            disabled: true,
+            value: 'RETURN_STATUS',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: '财务打款人',
+            disabled: true,
+            value: 'MODIFIERENAME',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: '支付宝交易流水号', // 打款成功 显示
+            disabled: true,
+            value: 'PAYMENT_FAIL_REASON',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: '打款失败/拒绝打款原因', // 打款失败/拒绝打款 显示
+            disabled: true,
+            value: 'PAYMENT_FAIL_REASON1',
+            width: '6'
+          },
+        ]
+      }, // 单据回传及支付信息回传
       addItem: {
         // 新增明细弹框数据
         modal: false,
@@ -1184,6 +1222,9 @@ export default {
       this.information.formValue.RESERVE_VARCHAR01 = listData.ORIG_ORDER_NO
       this.information.formValue.TID = listData.SOURCE_CODE
 
+      this.onSelectData.ID = listData.ID
+
+
       const arr = []
       listData.QUERYORDERITEMRESULTLIST.map(item => {
         item.FREIGHT = 0
@@ -1426,6 +1467,7 @@ export default {
       });
     },
     setDetailForm(Afsend) {
+      // 非复制
       if(!this.copyId) {
         this.PAYMENT_STATUS = Afsend.PAYMENT_STATUS; // 打款状态
         this.btnConfig.buttons.forEach(item => {
@@ -1447,6 +1489,13 @@ export default {
             if(item.style === 'popInput') item.itemdata.readonly = true
             if (item.value !== 'RECEIVER_NAME'&& item.value !== 'PAY_ACCOUNT') item.disabled = true
           })
+        }
+
+        this.payInfo.formValue = {
+          RETURN_STATUS: Afsend.RETURN_STATUS == 0 ? '未退款' : Afsend.RETURN_STATUS == 1 ? '退款中' :  Afsend.RETURN_STATUS == 2 ? '退款完成' : Afsend.RETURN_STATUS == 3 ? '取消' : Afsend.RETURN_STATUS == 4 ? '待审核' : ' ', // 0.未退款  1.退款中 2.退款完成 3.取消  4.待审核
+          MODIFIERENAME: Afsend.MODIFIERENAME,
+          PAYMENT_FAIL_REASON: Afsend.PAYMENT_STATUS == 2 ? Afsend.PAYMENT_FAIL_REASON : '', // 打款成功 显示
+          PAYMENT_FAIL_REASON1: Afsend.PAYMENT_STATUS == 3 || Afsend.PAYMENT_STATUS == 4 ? Afsend.PAYMENT_FAIL_REASON : '' // 打款失败/拒绝打款 显示
         }
       }
       // 申请单据信息
