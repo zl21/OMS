@@ -282,3 +282,4 @@
 | v1.2.44 | 导入/下载组件 确认-节流优化 |
 | v1.2.45 | businessForm-label调整宽度和框架保持一致|
 | v1.2.46 | businessForm-下拉多选，下拉多选iconfont和布局调整|
+| v1.2.47 | fk高度修改|
