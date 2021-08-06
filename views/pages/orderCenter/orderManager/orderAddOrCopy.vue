@@ -1144,13 +1144,17 @@ export default {
                       // 成交金额 = 成交单价 * 数量 （取这个
                       // 6.24变更：成交单价 = 成交金额 / 数量
                       // params.row.REAL_AMT = $omsUtils.floatNumber(pa * inputQTY, 2);
-                      params.row.PRICE_ACTUAL = $omsUtils.floatNumber(ra / inputQTY, 2);
+                      const _pa = ra / inputQTY;
+                      params.row.PRICE_ACTUAL = $omsUtils.floatNumber(_pa, 2);
                       // ra = Number(params.row.REAL_AMT);
                       // pa = Number(params.row.PRICE_ACTUAL);
                       console.log(ra, ad, osa, price, inputQTY);
-                      const aaa = ra + ad + osa - price * inputQTY;
-                      console.log('四舍五入前：', aaa);
-                      params.row.ADJUST_AMT = $omsUtils.floatNumber(ra + ad + osa - price * inputQTY, 2);
+                      const _aa = ra + ad + osa - price * inputQTY;
+                      console.log('输入数量：计算成交单价、调整金额');
+                      console.log('成交单价 = 成交金额 / 数量');
+                      console.log("调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE' * 数量)");
+                      console.log('四舍五入前：', _aa);
+                      params.row.ADJUST_AMT = $omsUtils.floatNumber(_aa, 2);
                       console.log('params.row.ADJUST_AMT', params.row.ADJUST_AMT);
                     } else {
                       params.row.REAL_AMT = '0.00';
@@ -1743,11 +1747,13 @@ export default {
         amt = Util.accAdd(parseFloat(item.REAL_AMT || 0).toFixed(2), amt);
       });
       setTimeout(() => {
-        self.jordanTableConfig.totalData.push({
-          selection: `${$i18n.t("other.total")}:`, // 合计
-          REAL_AMT: $omsUtils.floatNumber(amt, 2), // 精确到两位小数
-          QTY: qty,
-        });
+        if (!self.jordanTableConfig.totalData.length) {
+          self.jordanTableConfig.totalData.push({
+            selection: `${$i18n.t("other.total")}:`, // 合计
+            REAL_AMT: $omsUtils.floatNumber(amt, 2), // 精确到两位小数
+            QTY: qty,
+          });
+        }
       }, 10);
     },
     // 智能匹配地址-获取省市区id填充form表单
