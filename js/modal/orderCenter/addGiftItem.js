@@ -32,7 +32,9 @@ export default {
               //模糊查询的方法
               // this.fuzzyquerybyak(search)
             },
-            dimEnter: (val) => {},
+            dimEnter: (val) => {
+              this.searchGift()
+            },
             dimSelect: (obj) => {},
             dimblur: () => {},
           },
@@ -44,7 +46,9 @@ export default {
             columns: ['ECODE'],
             AuotData: [], //匹配的选项
             dimChange: (search) => {},
-            dimEnter: (val) => {},
+            dimEnter: (val) => {
+              this.searchGift()
+            },
             dimSelect: (obj) => {},
             dimblur: () => {},
           },
@@ -56,7 +60,9 @@ export default {
             width: '7',
             AuotData: [], //匹配的选项
             dimChange: (search) => {},
-            dimEnter: (val) => {},
+            dimEnter: (val) => {
+              this.searchGift()
+            },
             dimSelect: (obj) => {},
             dimblur: () => {},
           },
@@ -82,7 +88,7 @@ export default {
       },
       tableConfig: {
         indexColumn: true,
-        isShowSelection: false,
+        isShowSelection: true,
         columns: [
           {
             key: 'skuEcode',
@@ -119,6 +125,7 @@ export default {
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
+        highlightRow:true,
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -193,7 +200,7 @@ export default {
         },1000)
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
+          this.$parent.$parent.$parent.$parent.getDetailsData()
         } else if(res.data.code ===  -1){
           this.$Modal.confirm({
             title: "message",
@@ -410,9 +417,9 @@ export default {
         self.$Message.success(message);
         self.$parent.$parent.$parent.$parent.autoRefresh();
         self.$parent.$parent.closeConfirm()
-        this.btnConfig.buttons[0].loading = false
+        this.btnConfig.buttons[0].loading = false;
       } else {
-        this.btnConfig.buttons[0].loading = false
+        this.btnConfig.buttons[0].loading = false;
         if (code === -1) {
           self.$Modal.confirm({
             title: message,
