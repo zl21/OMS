@@ -155,6 +155,10 @@
           <!-- 输入框弹框单多选-arkUi -->
           <FormItem v-if="item.style === 'popInputPlus'"
                     :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
+            <label v-if="item.itemdata.name" class="ark-form-item-label popLabel">
+              <i style="color:#f00" v-if="item.itemdata.isnotnull">*</i>
+              {{ item.itemdata.name }}：
+            </label>
             <fkinputPlus :isActive='true'
                       :isDisabled='false'
                       :inputList="item.inputList?item.inputList:[]"

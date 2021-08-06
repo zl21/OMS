@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="item-input item-col">
-    <label v-if="itemdata.name" class="title">
+    <label v-if="itemdata.name && itemdata.notForm" class="title">
       <i v-if="itemdata.isnotnull">*</i>
       {{ itemdata.name }}：
     </label>
