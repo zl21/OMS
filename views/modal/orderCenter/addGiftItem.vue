@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-07 15:56:09
+ * @LastEditTime: 2021-08-06 11:25:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/orderCenter/addGiftItem.vue
+-->
 <!--增加赠品-->
 <template>
   <div class="customized-modal">
@@ -40,7 +48,7 @@
     .businessForm_a{
       .ark-row{
         .ark-col{
-          margin-top: 0;
+          // margin-top: 0;
         }
       }
     }

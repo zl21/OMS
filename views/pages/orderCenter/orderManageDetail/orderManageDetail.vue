@@ -1,5 +1,5 @@
 <template>
-  <div class="customized-detail" v-loading="loading">
+  <div class="customized-detail orderMangeDetails" v-loading="loading">
     <div class="customized-detail-btn">
       <businessButton :btn-config="returnBtn" />
     </div>
@@ -275,7 +275,7 @@
 </script>
 <style lang="less">
   @import '~omsTheme/public.less';
-  .returnBtn{
-    margin: 0 @base-mr;
+  .orderMangeDetails{
+    background: #fff;
   }
 </style>

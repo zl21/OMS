@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 16:19:54
- * @LastEditTime: 2021-08-05 14:59:10
+ * @LastEditTime: 2021-08-06 15:19:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
 -->
 <template>
-  <div class="customized-detail" v-loading="loading">
+  <div class="customized-detail orderManageDetails" v-loading="loading">
     <div class="customized-detail-btn">
       <businessButton :btn-config="returnBtn" />
     </div>
@@ -246,6 +246,9 @@
 </script>
 <style lang="less" scoped>
   @import '~omsTheme/public.less';
+  .orderManageDetails{
+    background: #fff;
+  }
   .Step-Box{
     margin: @base-mr @base-mr 0;
     /deep/ .steps-content.ark-steps .ark-steps-item .ark-steps-head .ark-steps-head-inner {

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-08-04 13:38:30
+ * @LastEditTime: 2021-08-06 13:59:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -137,6 +137,9 @@ export default {
 }
 // 搜索
 .NaVertical {
+  .ark-badge-count{
+
+  }
   .NaVertical-box {
     width: 100%;
     .timeTips {
