@@ -21,13 +21,13 @@ export default {
   loginLog: (params, serviceId = { serviceId: "r3-ipcs" }) => $network.post("/ip/v1/yuchenghe/loginLog", params, serviceId),
   // 框架国际化切换接口
   langSwitcher: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/langswitcher", params, serviceId),
+  getObject: (params) => $network.post(`/p/cs/getObject?hash=${+new Date()}`, params),
+  objectTableItem: (params) => $network.post(`/p/cs/objectTableItem?hash=${+new Date()}`, params),
 
 
   // 详情页数据查询接口。共用于：inventoryCenter、orderCenter
-  getObject: (params) => $network.post("/p/cs/getObject", params),
   queryPhyWareHouseList: (params) =>
     $network.post("/p/cs/queryPhyWareHouseList", params),
-  objectTableItem: (params) => $network.post("/p/cs/objectTableItem", params),
   getWarehouseLogisticsTree: (params) =>
     $network.post("/p/cs/getWarehouseLogisticsTree", params),
   getLogisticsRankResultTable: (params) =>
