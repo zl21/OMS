@@ -125,8 +125,32 @@
         vertical-align: middle;
         margin-top: -3px;
       }
-    }
+      input[type=checkbox]::after {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        position: relative;
+        top: -1px;
+        left: -1px;
+        // border: 1px solid @base-color;
+        border-radius: 2px;
+        background-color: #fff;
+        transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
 
+      input[type=checkbox]:checked::after {
+        font-family: "iconfont" !important;
+        content: "\e715";
+        font-size: 14px;
+        color: @base-color;
+        font-weight: normal;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
     p {
       text-align: center;
       font-weight: normal;
