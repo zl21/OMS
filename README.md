@@ -283,3 +283,4 @@
 | v1.2.45 | businessForm-label调整宽度和框架保持一致|
 | v1.2.46 | businessForm-下拉多选，下拉多选iconfont和布局调整|
 | v1.2.47 | fk高度修改|
+| v1.2.48 | fktablePlus 样式修改|
