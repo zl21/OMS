@@ -1931,7 +1931,8 @@ export default {
           pryKeyArr = $omsUtils.sonList(allDa, "pryKey");
           if (!it.OOID && item.pryKey == it.pryKey) {
             // 1.非复制的且已存在该条明细(已经存在的明细都是刚刚新增的，不是复制带出来的，且，即将新增的是已经存在的，累加)
-            item.QTY += it.QTY;
+            const preQty = Number(item.QTY)
+            item.QTY = preQty + Number(it.QTY);
             item.REAL_AMT = $omsUtils.floatNumber(Util.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
           } else if (!it.OOID && !pryKeyArr.includes(it.pryKey)) {
             // 2.非复制的且不存在该条明细
