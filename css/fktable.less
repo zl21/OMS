@@ -1,4 +1,4 @@
-
+@import '~omsTheme/public.less';
 .fktable {
   width: 300px;
   min-width: 150px;
@@ -133,24 +133,41 @@
       color: #575757;
     }
   }
-
   .page {
     height: 20px;
     margin-top: 10px;
     .el-pagination{
+      padding: 0;
       text-align: center;
       margin-left: -5px;
-    }
-    button {
-      height: 14px;
-      width: 14px;
-      line-height: 14px;
-      padding: 0;
-      min-width: 14px;
-      border-width: 0;
-
-      &:hover {
-        color: #d4dade;
+      /deep/ button{
+        min-width: 19px;
+        height: 19px;
+        line-height: 19px;
+        margin-left: 5px;
+        &:hover {
+          color: #d4dade;
+        }
+      }
+      /deep/ .el-pager{
+        .more{
+          height: 19px;
+          line-height: 19px;
+          &:hover{
+            color: @base-color;
+          }
+        }
+        .number{
+          min-width: 19px;
+          height: 19px;
+          line-height: 19px;
+          margin-left: 5px;
+            &.active,&:hover{
+              color: @button-bg-font;
+              background-color: @base-color;
+              border-radius: 2px;
+          }
+        }
       }
     }
 
