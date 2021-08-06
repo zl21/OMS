@@ -123,7 +123,7 @@ export default {
       const okApi = this.currentConfig.okApi;
       const okParm = this.currentConfig.okParm;
       this.getImportDialog(okApi, okParm);
-    }, 3000),
+    }, 3000, { 'trailing': false }),
     // 导入请求
     getImportDialog(url, paramsObj) {
       const _this = this;

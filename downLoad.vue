@@ -109,6 +109,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.modalConfig[this.tableName].determine(this);
+              console.log('click::',new Date());
               this.okHandel();
             }, // 按钮点击事件
           },
@@ -155,8 +156,9 @@ export default {
   methods: {
     okHandel: throttle(function () {
       const self = this;
+      console.log('determine::',new Date());
       self.modalConfig[self.tableName].determine(self);
-    }, 3000),
+    }, 3000, { 'trailing': false }),
     downLoadOk() {
       const self = this;
       self.$emit("confirmImport");
