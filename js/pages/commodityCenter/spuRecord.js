@@ -45,10 +45,12 @@ export default {
         formData: [{
           version: '1.4',
           colname: 'cpCSupplierName',
-          style: 'popInput', // 输入框弹框单多选
+          style: 'popInputPlus', // 输入框弹框单多选
           width: '6',
           itemdata: {
             col: 1,
+            serviceId: 'r3-cp',
+            version: '1.4',
             colid: 169325, // 当前字段的ID
             colname: 'QUERY_SUPPLIER_ID', // 当前字段的名称
             datelimit: 'all',
@@ -67,13 +69,20 @@ export default {
             statsize: -1,
             type: 'STRING', // 这个是后台用的
             valuedata: '', // 这个是选择的值
-            pid: '', // 啥 ？？？
+            pid: '',
+            // columnsKey: ['ECODE'],
+            // hidecolumns: ['id', 'value', 'ENAME'],
           },
           oneObj: e => {
             console.log(e);
             this.tableFormConfig.formValue.cpCSupplierName = e.valuedata;
             this.tableFormConfig.formValue.cpCSupplierId = e.pid;
           },
+          inputEnter: (e) => {
+            if (!e.pid && !e.valuedata) return;
+            this.tableFormConfig.formValue.cpCSupplierName = e.valuedata;
+            this.tableFormConfig.formValue.cpCSupplierId = e.pid;
+          }
         }],
         formValue: {
           cpCSupplierName: '', // 供应商名称
@@ -395,7 +404,7 @@ export default {
             statsize: -1,
             type: 'STRING', // 这个是后台用的
             valuedata: '', // 这个是选择的值
-            pid: '', // 啥 ？？？
+            pid: '',
           },
           oneObj: e => {
             console.log(e);
@@ -429,7 +438,7 @@ export default {
             statsize: -1,
             type: 'STRING', // 这个是后台用的
             valuedata: '', // 这个是选择的值
-            pid: '', // 啥 ？？？
+            pid: '',
           },
           oneObj: e => {
             this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID = e.pid;
