@@ -4,8 +4,8 @@ import importApiArr from "@/config/config/importApiArr";
 
 export default {
   /* 框架标准公共接口： */
-  fuzzyquerybyak: (params, obj) => $network.post("/p/cs/fuzzyquerybyak", params, obj ? obj : { serviceId: "r3-cp" }),
-  QueryList: (params, obj) => $network.post("/p/cs/QueryList", params, obj ? obj : { serviceId: "r3-cp" }),
+  fuzzyquerybyak: (params, obj) => $network.post(`/p/cs/fuzzyquerybyak?hash=${+new Date()}`, params, obj ? obj : { serviceId: "r3-cp" }),
+  QueryList: (params, obj) => $network.post(`/p/cs/QueryList?hash=${+new Date()}`, params, obj ? obj : { serviceId: "r3-cp" }),
   getTableQuery: (params, obj) => $network.post("/p/cs/getTableQuery", params, obj ? obj : { serviceId: "r3-cp" }),
   skuQuery: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/skuQuery", params, serviceId),
   selSku: (params, serviceId = { serviceId: "r3-ps" }) => $network.post('/p/cs/ps/sku/v1/selSku' , params , serviceId), //根据sku编码查询sku商品信息
