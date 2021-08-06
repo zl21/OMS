@@ -249,7 +249,7 @@ export default {
       supplierBtnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
-        btnsite: 'right', // 按钮位置 (right , center , left)
+        btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: []
       },
       extendSupplierBtn: [{
@@ -581,7 +581,8 @@ export default {
       this.skuInfoBtnConfig.buttons = [...this.extendSkuInfoBtn];
       this.supplierBtnConfig.buttons = [...this.extendSupplierBtn];
       if (self.spuid > 0) {
-        $omsUtils.getBtnPermission(this, ['btnConfig', 'skuInfoBtnConfig', 'supplierBtnConfig'], { table: 'PS_C_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
+        // $omsUtils.getBtnPermission(this, ['btnConfig', 'skuInfoBtnConfig', 'supplierBtnConfig'], { table: 'PS_C_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
+        $omsUtils.getBtnPermission(this, ['btnConfig', 'skuInfoBtnConfig'], { table: 'PS_C_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
         this.formConfig.formData.find(i => i.colname == 'isactive').style = 'input';
         self.formConfig.formData.forEach(item => {
           if (item.value == 'ECODE') {
