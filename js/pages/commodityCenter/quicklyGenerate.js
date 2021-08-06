@@ -23,6 +23,7 @@ export default {
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
             text: '快速生成',
             btnclick: () => {

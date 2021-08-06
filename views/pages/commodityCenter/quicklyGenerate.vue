@@ -1,9 +1,9 @@
 <template>
-  <div class="quicklyGenerate">
-    <div class="quick_header">
+  <div class="quicklyGenerate customized-detail">
+    <div class="quick_header customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="quick_body">
+    <div class="quick_body customized-detail-main">
       <Tabs value="name1">
         <TabPane label="规格维度信息" name="name1">
           <div>
