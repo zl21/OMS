@@ -1172,7 +1172,8 @@ class commonUtils {
         b += '0'
         num = b
       } else if (b[1].length > 2) {
-        let num_length = b[0].length + 2;
+        let isZero = b[0].charAt(0) == '0';
+        let num_length = isZero ? 2 : b[0].length + 2;
         if(b[0].includes('-')) num_length = num_length - 1;
         b = Number(b.join('.')).toPrecision(num_length)
         num = b;
