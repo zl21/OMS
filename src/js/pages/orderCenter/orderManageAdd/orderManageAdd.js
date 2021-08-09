@@ -1308,6 +1308,19 @@ export default {
         });
       });
     this.relationShip();
+    // 复制订单不允许编辑平台单号&收货人信息 尚少峰 20210809 平台安全改造
+    if(self.$route.query.orderCopy || self.$route.query.copyOrder) {
+      self.formConfig.formData.forEach(item => {
+        if (item.value == 'SOURCE_CODE') item.disabled = true
+      })
+      self.formConfig1.formData.forEach(item => {
+        if (item.style == 'popInput') {
+          item.itemdata.readonly = true
+        } else {
+          item.disabled = true
+        }
+      })
+    }
   }, // 获取支付方式下拉选项值
   methods: {
     // 发货仓库
