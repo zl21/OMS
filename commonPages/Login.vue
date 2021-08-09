@@ -19,52 +19,32 @@
         </DropdownMenu>
       </Dropdown>
     </div>
-    <div ref="container" class="container">
+    <div ref="container" class="login-container">
       <div class="login-content">
         <!-- logo -->
-        <div class="login-type-bg" @click="cutLoginType">
+        <!-- <div class="login-type-bg" @click="cutLoginType">
           <img :src="loginType == 2? require('../assets/img/login-pc-icon.png'): require('../assets/img/login-mobile-icon.png')" alt="">
-        </div>
+        </div> -->
         <div class="logo-img">
           <img src="../assets/img/form-logo.png" />
         </div>
         <!-- 欢迎登录 -->
         <div class="title">{{ vmI18n.t("welcome") }}</div>
+
+        <R3Login />
         <!-- form -->
-        <div class="login-type" v-show="loginType == 1">
-          <div class="form-input">
-            <label>
-              <i class="iconfont icon-yonghu"></i>
-            </label>
-            <div class="input-box">
-              <input
-                ref="username"
-                type="text"
-                value=""
-                class="username"
-                :placeholder="vmI18n.t('pHolder.a2')"
-              />
-            </div>
-          </div>
-          <div class="form-input">
-            <label>
-              <i class="iconfont icon-mima"></i>
-            </label>
-            <div class="input-box">
-              <input
-                ref="password"
-                type="password"
-                value=""
-                class="pwd"
-                :placeholder="vmI18n.t('pHolder.a3')"
-              />
-            </div>
-          </div>
-          <!-- button -->
-          <div id="btn" class="btn" @click="login">
-            <!-- 登录 -->
-            {{ vmI18n.t("login") }}
-            <img src="../assets/img/arrow-right.png" />
+        <!-- <div class="form-input">
+          <label>
+            <i class="iconfont icon-yonghu"></i>
+          </label>
+          <div class="input-box">
+            <input
+              ref="username"
+              type="text"
+              value=""
+              class="username"
+              :placeholder="vmI18n.t('pHolder.a2')"
+            />
           </div>
         </div>
         <div class="login-type" v-if="loginType == 2">
@@ -107,40 +87,12 @@
               @click="getIdaasKaptcha"
             />
           </div>
-          <div>
-            <div class="form-input">
-              <label>
-                <i class="iconfont icon-mima"></i>
-              </label>
-              <div class="input-box">
-                <input
-                  type="text"
-                  class="username"
-                  placeholder="短信验证码"
-                  maxlength="8"
-                  v-model="smscode"
-                  autofocus
-                />
-                <span v-if="codeShow">
-                  <span class="getSmscode" @click="sendsms" v-if="receiver && receiver.length==11 && captchaText && captchaText.length>0"
-                  >发送验证码</span
-                  >
-                  <span class="getSmscode" style="color:#ccc;" v-else
-                  >发送验证码</span
-                  >
-                </span>
-                <span class="getSmscode" v-else
-                >{{ timeLoading }}s重新发送</span
-                >
-              </div>
-            </div>
-          </div>
-          <div id="btn" class="btn" @click="login">
-            <!-- 登录 -->
-            {{ vmI18n.t("login") }}
-            <img src="../assets/img/arrow-right.png" />
-          </div>
-        </div>
+        </div> -->
+        <!-- button -->
+        <!-- <div id="btn" class="btn" @click="login">
+          {{ vmI18n.t("login") }}
+          <img src="../assets/img/arrow-right.png" />
+        </div> -->
         <!-- <p class="fargetPws">
           <a>忘记密码了？</a>
         </p> -->
@@ -175,6 +127,9 @@ const langConfig = [
 ];
 export default {
   name: "Login",
+  components: {
+    R3Login: R3.components.Login
+  },
   data() {
     return {
       vmI18n: i18n,
@@ -196,6 +151,10 @@ export default {
     const browseLan = localStorage.getItem('locale') || 'zh';
     _this.vmI18n.locale = browseLan;
     this.curLang = langConfig.find(it => it.type == browseLan).text;
+  },
+  mounted() {
+    let loginBtn = document.getElementById('btn')
+    loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`
   },
   methods: {
     toggleLang(lang) {
@@ -523,7 +482,7 @@ export default {
     height: 680px;
   }
   /*整块内容*/
-  .container {
+  .login-container {
     width: 1024px;
     height: 480px;
     position: absolute;
@@ -538,6 +497,113 @@ export default {
     width: 50%;
     text-align: center;
     min-width: 400px;
+    height: 100%;
+    position: relative;
+    /deep/.login {
+      // background: transparent;
+      // .container {
+
+      // }
+      /* 覆盖框架登录样式 */
+      background: none;
+      position: relative !important;
+      right: 14.5% !important;
+      top: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      .container {
+        width: 440px !important;
+        &.loginPro {
+          height: 285px !important;
+        }
+        &.loginPro, &.divErCode {
+          background: transparent !important;
+          .titleTOP {
+            display: none;
+          }
+          .logo {
+            display: none;
+          }
+        }
+      }
+      input:-webkit-autofill {
+        -webkit-text-fill-color: #292f43;
+        box-shadow: 0 0 0px 1000px transparent inset !important;
+        background-color: transparent;
+        background-image: none;
+        transition: background-color 50000s ease-in-out 0s;
+      }
+      .divAccount {
+        top: 25px !important;
+      } 
+      .divMima, .divErCode .divCode {
+        top: 88px !important;
+      }
+      .loginPro .divCode, .btn {
+        top: 151px !important;
+      }
+      .divAccount img, .divMima img, .divCode img{
+        display: none;
+      }
+      .divAccount:before,.divCode:before,.divMima:before {
+        content: '\e64b';
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        font-family: 'iconfont';
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        font-size: 20px;
+        color: #b3b4bd;
+      }
+      .divCode:before{
+        content: '\e60c';
+        top: 0;
+      }
+      .divMima:before {
+        content: '\e60c';
+      }
+      .pwd, .username {
+        width: 320px !important;
+        background: #fff !important;
+        border: 1px solid #dbdde8 !important;
+      }
+      .pwd::-webkit-input-placeholder,.pwd.code::-webkit-input-placeholder, .username::-webkit-input-placeholder{
+        color:#97a8be;
+      }
+      .divErCode .code, .loginPro .code {
+        width: 200px !important;
+      }
+      .divErCode .code {
+        width: 213px !important;
+      }
+      .divErCode .codeimg, .loginPro .codeimg {
+        top: 151px !important;
+      }
+      .container.loginPro .btn, .container.divErCode .btn {
+        display: inline-block;
+        width: 320px;
+        height: 40px;
+        line-height: 40px;
+        opacity: 1;
+        background: #5461b8;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        box-shadow: 0px 6px 20px 0px rgba(69, 96, 171, 0.31);
+        cursor: pointer;
+      }
+      .container.loginPro .btn img, .container.divErCode .btn img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+      .loginPro .btn {
+        top: 214px !important;
+      }
+    }
   }
   /*头部区域*/
   .logo-img {
