@@ -165,7 +165,7 @@ export default {
       replace_proName: '',
       tableConfig: {
         indexColumn: true,
-        isShowSelection: false,
+        isShowSelection: true,
         columns: [
           // {
           //   key: 'index',
@@ -207,11 +207,12 @@ export default {
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         current: 1,
         pageSize: 10, // 每页条数
+        highlightRow:true,
       },
       tableConfig2: {
         current: 1,
         indexColumn: true,
-        isShowSelection: false,
+        isShowSelection: true,
         columns: [
           // {
           //   key: 'index',
@@ -252,16 +253,17 @@ export default {
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
+        highlightRow:true,
       },
       replaceTableLoad: false,
       tableLoad: false,
-
       data: [],
       replace_data: [],
       onRowClickReplaceData: {},
       onRowClickData: {},
       onRowClickText: '',
       onRowClickReplaceText: '',
+
     }
   },
   props: {
