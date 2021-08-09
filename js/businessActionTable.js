@@ -278,13 +278,12 @@ export default {
     },
     noGridBar(){
       let widths = 0
-      if(this.jordanTableConfig.businessFormConfig){
+      if(this.jordanTableConfig.businessFormConfig && this.jordanTableConfig.businessFormConfig.formData){
         this.jordanTableConfig.businessFormConfig.formData.forEach(i=>{
           widths += Number(i.width)
         })
       }
       return Number.isInteger(widths / 24)
-      // const column = 
     },
     // 按钮配置文件
     businessButtonConfig() {

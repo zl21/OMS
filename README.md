@@ -290,3 +290,4 @@
 | v1.2.52 | businessForm-fktable-checkbox修改 |
 | v1.2.53 | fkinputPlus 赋值修复 |
 | v1.2.54 | fkinput 单独使用时label展示问题修复 |
+| v1.2.55 | businessActionTable修复 |
