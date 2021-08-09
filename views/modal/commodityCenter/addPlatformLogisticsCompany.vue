@@ -257,12 +257,12 @@ export default {
       }
     }
     .businessButtons-box {
-      position: absolute;
-      top: 0;
-      left: 520px;
-      .one_button {
-        padding: 6px 0 2px;
-      }
+      // position: absolute;
+      // top: 0;
+      // left: 520px;
+      // .one_button {
+      //   padding: 6px 0 2px;
+      // }
 
       .one_button .buttonBox button > i.iconfont + span {
         display: initial;
