@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-05 18:50:34
+ * @LastEditTime: 2021-08-09 14:13:26
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -702,12 +702,17 @@ export default {
                  *   退货单价 = 成交单价
                  *   退货金额 = 退货单价 * 申请退货数量
                  */
+                console.log('QTY_REFUND:',e);
                 params.row.QTY_REFUND = e;
                 params.row.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
                   Number(e) * Number(params.row.AMT_REFUND_SINGLE),
                   2
                 );
                 this.businessActionTable.data[params.index] = params.row;
+                R3.store.commit(
+                  "customize/returnOrderChangeItem",
+                  JSON.parse(JSON.stringify(this.toMainData))
+                );
                 this.totalNum();
               },
             },
