@@ -1,12 +1,24 @@
 <template>
   <div class="jordan-table-box">
-    <!-- businessForm -->
-    <div class="businessForm-box" v-if="businessFormConfig !== undefined">
-      <businessForm :formConfig="businessFormConfig"></businessForm>
-    </div>
-    <!-- businessButtons -->
-    <div class="businessButtons-box" v-if="businessButtonConfig !== undefined">
-      <businessButton :btnConfig="businessButtonConfig"></businessButton>
+    <!-- businessForm 按钮定位
+    *colRowNum:获取当前展示几列；
+    *formData.length:form的个数；
+    1.如果存在businessFormConfig添加fromBtn 添加相对定位，并且给按钮添加绝对定位；
+    2.判断是否启用gridBar（栅格栏），如果启用判断formData的长度是否可以被colRowNum（当前枪）整除，是则添加FormPadding；（公式：Number.isInteger(formData.length / colRowNum)）
+    -->
+    <div :class="[
+      businessFormConfig !== undefined ? 'fromBtn' :'',
+      gridBar && Number.isInteger(formDataLength / colRowNum) ? 'FormPadding' : '',
+      !gridBar && noGridBar ? 'FormPadding' : ''
+      ]">
+      <div class="businessForm-box" 
+        v-if="businessFormConfig !== undefined">
+        <businessForm :formConfig="businessFormConfig"></businessForm>
+      </div>
+      <!-- businessButtons -->
+      <div class="businessButton" v-if="businessButtonConfig !== undefined">
+        <businessButton :btnConfig="businessButtonConfig"></businessButton>
+      </div>
     </div>
     <!-- button -->
     <div class="detailButtons" v-show="isShowRefreshBtn || isShowAddDetailBtn || isShowDeleteDetailBtn || isShowImportBtn || isShowExportBtn">

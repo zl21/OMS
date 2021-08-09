@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      FormPadding:'',
       vmI18n: i18n,
       // 输入框文字
       searchInputValue: '',
@@ -70,6 +71,10 @@ export default {
     }
   },
   computed: {
+     // 获取当前展示几列
+     colRowNum(){
+      return $store.state.customize.colRowNum;
+    },
     // 展示表头否
     showHeader() {
       return this.jordanTableConfig.showHeader ?? true;
@@ -264,6 +269,22 @@ export default {
     // 表单配置文件
     businessFormConfig() {
       return this.jordanTableConfig.businessFormConfig
+    },
+    gridBar(){
+      return (this.jordanTableConfig.businessFormConfig && this.jordanTableConfig.businessFormConfig.gridBar) || false
+    },
+    formDataLength(){
+      return (this.jordanTableConfig.businessFormConfig && this.jordanTableConfig.businessFormConfig.formData.length) || 0
+    },
+    noGridBar(){
+      let widths = 0
+      if(this.jordanTableConfig.businessFormConfig){
+        this.jordanTableConfig.businessFormConfig.formData.forEach(i=>{
+          widths += Number(i.width)
+        })
+      }
+      return Number.isInteger(widths / 24)
+      // const column = 
     },
     // 按钮配置文件
     businessButtonConfig() {
