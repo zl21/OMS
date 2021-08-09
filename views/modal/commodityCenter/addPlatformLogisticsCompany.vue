@@ -1,5 +1,5 @@
 <template>
-  <div class="customized-modal">
+  <div class="customized-modal" style="width: 800px">
     <div class="subtablePart">
       <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
     </div>
