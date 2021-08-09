@@ -241,7 +241,7 @@ export default {
 
 <style lang="less" scoped>
 // @import '~professionalComponents/common/css/theme.less';
-.addPlatformLogisticsCompany {
+/* .addPlatformLogisticsCompany {
   /deep/ .subtablePart {
     position: relative;
     .ark-form-item {
@@ -286,5 +286,5 @@ export default {
       width: 6px;
     }
   }
-}
+} */
 </style>
