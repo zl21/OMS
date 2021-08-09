@@ -47,7 +47,13 @@ export default {
   },
   methods: {
     determine() {
-      // if (!this.reason) return this.$Message.warning('拒绝打款原因不能为空!');
+      if (!this.reason) {
+        if (this.reasonType == 2) {
+          return this.$Message.warning('支付宝流水号不能为空!');
+        } else {
+          return this.$Message.warning('打款失败/拒绝打款原因（财务备注说明）不能为空!');
+        }
+      }
       // 2 打款成功 3 打款失败
       this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason, paymentStatus: this.reasonType }).then(res=>{
         console.log(res);
