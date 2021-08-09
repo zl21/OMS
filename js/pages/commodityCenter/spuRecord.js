@@ -214,6 +214,7 @@ export default {
 
       ],
       supplier: {
+        webData: [], // 暂存在前端的数据,ID='-1,解决详情时切换明细tab表格的数据会丢失的问题
         resData: [],
         columns: [{
           type: 'selection',
@@ -622,6 +623,7 @@ export default {
       obj.PS_C_PRO_ID = this.spuid; // spuid
       obj.IS_DEFAULT = 'N'; // 默认供应商
       obj.ID = '-1';
+      self.supplier.webData.push(obj);
       self.supplier.resData.push(obj);
       self.isModify = true;
       self.tableFormConfig.formValue.cpCSupplierId = '';
@@ -933,6 +935,8 @@ export default {
           arr.push(item);
         }
       });
+      // 删除webData中的数据
+      self.supplier.webData = self.supplier.webData.filter(it => it.ID == '-1' && !delarr.includes(it.cpCSupplierId));
       self.supplier.resData = arr;
       self.isModify = true;
     },
@@ -946,7 +950,7 @@ export default {
       this.service.commodityCenter.listSpu(formdata).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          this.supplier.resData = res.data.data;
+          this.supplier.resData = res.data.data.concat(this.supplier.webData);
           this.old.supplier = JSON.stringify(this.supplier.resData); // 存储初始化供应商数据
         } else { }
       });
@@ -981,7 +985,8 @@ export default {
       obj.PsSpu = self.modify.master; // 主表信息
       obj.PsSpu.ID = this.spuid;
       obj.PsCSkuList = self.modify.skuInfo; // sku字表修改信息
-      obj.PsCProSupItemDTOList = self.labelValue == 'supplier' ? self.diffSupplier(self.supplier.resData, JSON.parse(self.old.supplier)) : []; // 供应商字表修改信息
+      // obj.PsCProSupItemDTOList = self.labelValue == 'supplier' ? self.diffSupplier(self.supplier.resData, JSON.parse(self.old.supplier)) : []; // 供应商字表修改信息
+      obj.PsCProSupItemDTOList = self.diffSupplier(self.supplier.resData, JSON.parse(self.old.supplier)) || []; // 供应商字表修改信息
       // 根据标记区分固定属性还是自定义属性进行分类
       const EXTRA = []; // 自定义属性
       const FIXED = []; // 固定属性
@@ -1021,6 +1026,7 @@ export default {
       const arr = [];
       oldData.forEach(oldItem => {
         if (!newData.some(ele => oldItem.cpCSupplierId == ele.cpCSupplierId)) {
+          if (oldItem.ID == '-1') return
           arr.push({
             actionName: 'DELETE',
             id: oldItem.ID
@@ -1048,6 +1054,11 @@ export default {
           }
         });
       });
+      arr.forEach((it,index) => {
+        if (it.id == '-1' && it.actionName == 'UPDATE') {
+          it.actionName = 'SAVE';
+        }
+      })
       return arr;
     },
     // 时间戳格式化
