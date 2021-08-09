@@ -33,137 +33,87 @@ export default {
           },
         ],
       },
-      formConfig: {
-        formValue: {
-          searchValue: '',
-          psCProEcode: '',
-          proName:"",
-        },
-        formData: [
-          {
-            label: $i18n.t('table_label.code_SKU'), // '商品SKU',
-            style: 'dimSearch',
-            width: '12',
-            value: 'searchValue',
-            columns: ['ECODE'],
-            AuotData: [], // 匹配的选项
-            dimChange: async (val) => {
-            
-            },
-            dimEnter: () => {
-              this.search('one')
-            },
-            dimSelect: (val) => {
-              this.formConfig.formValue.searchValue = val.label
-            },
-          },
-          {
-            label: $i18n.t('table_label.itemNo01'), // '商品款号',
-            style: 'dimSearch',
-            width: '12',
-            value: 'psCProEcode',
-            columns: ['ECODE'],
-            AuotData: [], // 匹配的选项
-            dimChange: async (val) => {
-             
-            },
-            dimEnter: () => {
-              this.tableConfig.current = 1
-              this.search('one')
-            },
-            dimSelect: (val) => {
-              this.formConfig.formValue.psCProEcode = val.label
-              // this.psCProEcode = val.label;
-            },
-          },
-          {
-            label: $i18n.t("table_label.itemNo02"), 
-            style: 'dimSearch',
-            width: '12',
-            value: 'proName',
-            columns: ['ECODE'],
-            AuotData: [], // 匹配的选项
-            dimChange: async (val) => {
-             
-            },
-            dimEnter: () => {
-              this.tableConfig.current = 1
-              this.search('one')
-            },
-            dimSelect: (val) => {
-              this.formConfig.formValue.proName = val.label
-              // this.psCProEcode = val.label;
-            },
-          },
-        ],
-      },
-      replaceFormConfig: {
-        formValue: {
-          searchValue: '',
-          psCProEcode: '',
-          proName:""
-        },
-        formData: [
-          {
-            label: $i18n.t('table_label.code_SKU'), // '商品SKU',
-            style: 'dimSearch',
-            width: '12',
-            value: 'searchValue',
-            columns: ['ECODE'],
-            AuotData: [], // 匹配的选项
-            dimChange: async (val) => {
-              
-            },
-            dimEnter: () => {
-              this.tableConfig.current2 = 1
-              this.search('two')
-            },
-            dimSelect: (val) => {
-              this.replaceFormConfig.formValue.searchValue = val.label
-            },
-          },
-          {
-            label: $i18n.t('table_label.itemNo01'), // '商品款号',
-            style: 'dimSearch',
-            width: '12',
-            value: 'psCProEcode',
-            columns: ['ECODE'],
-            AuotData: [], // 匹配的选项
-            dimChange: async (val) => {
-              
-            },
-            dimEnter: () => {
-              this.search('two')
-            },
-            dimSelect: (val) => {
-              this.replaceFormConfig.formValue.psCProEcode = val.label
-              // this.psCProEcode = val.label;
-            },
-          },
-          {
-            label: $i18n.t("table_label.itemNo02"), 
-            style: 'dimSearch',
-            width: '12',
-            value: 'proName',
-            columns: ['ECODE'],
-            AuotData: [], // 匹配的选项
-            dimChange: async (val) => {
-             
-            },
-            dimEnter: () => {
-              this.tableConfig.current = 1
-              this.search('one')
-            },
-            dimSelect: (val) => {
-              this.formConfig.formValue.proName = val.label
-              // this.psCProEcode = val.label;
-            },
-          },
-        ],
-      },
       proName: '',
       replace_proName: '',
       tableConfig: {
+        businessFormConfig: {
+          formValue: {
+            searchValue: '',
+            psCProEcode: '',
+            proName:"",
+          },
+          formData: [
+            {
+              label: $i18n.t('table_label.code_SKU'), // '商品SKU',
+              style: 'dimSearch',
+              width: '12',
+              value: 'searchValue',
+              columns: ['ECODE'],
+              AuotData: [], // 匹配的选项
+              dimChange: async (val) => {
+              
+              },
+              dimEnter: () => {
+                this.search('one')
+              },
+              dimSelect: (val) => {
+                this.tableConfig.businessFormConfig.formValue.searchValue = val.label
+              },
+            },
+            {
+              label: $i18n.t('table_label.itemNo01'), // '商品款号',
+              style: 'dimSearch',
+              width: '12',
+              value: 'psCProEcode',
+              columns: ['ECODE'],
+              AuotData: [], // 匹配的选项
+              dimChange: async (val) => {
+               
+              },
+              dimEnter: () => {
+                this.tableConfig.current = 1
+                this.search('one')
+              },
+              dimSelect: (val) => {
+                this.tableConfig.businessFormConfig.formValue.psCProEcode = val.label
+                // this.psCProEcode = val.label;
+              },
+            },
+            {
+              label: $i18n.t("table_label.itemNo02"), 
+              style: 'dimSearch',
+              width: '12',
+              value: 'proName',
+              columns: ['ECODE'],
+              AuotData: [], // 匹配的选项
+              dimChange: async (val) => {
+               
+              },
+              dimEnter: () => {
+                this.tableConfig.current = 1
+                this.search('one')
+              },
+              dimSelect: (val) => {
+                this.tableConfig.businessFormConfig.formValue.proName = val.label
+                // this.psCProEcode = val.label;
+              },
+            },
+          ],
+        },
+        // searchBtn
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: 'right', // 按钮位置 (right , center , left)
+          buttons: [
+            {
+              text: $i18n.t("btn.search"),
+              type:"primary",
+              btnclick: () => {
+                this.fnsearch('one')
+              }, // 按钮点击事件
+            },
+          ],
+        },
         indexColumn: true,
         isShowSelection: true,
         columns: [
@@ -210,6 +160,84 @@ export default {
         highlightRow:true,
       },
       tableConfig2: {
+        businessFormConfig: {
+          formValue: {
+            searchValue: '',
+            psCProEcode: '',
+            proName:""
+          },
+          formData: [
+            {
+              label: $i18n.t('table_label.code_SKU'), // '商品SKU',
+              style: 'dimSearch',
+              width: '12',
+              value: 'searchValue',
+              columns: ['ECODE'],
+              AuotData: [], // 匹配的选项
+              dimChange: async (val) => {
+                
+              },
+              dimEnter: () => {
+                this.tableConfig.current2 = 1
+                this.search('two')
+              },
+              dimSelect: (val) => {
+                this.tableConfig2.businessFormConfig.formValue.searchValue = val.label
+              },
+            },
+            {
+              label: $i18n.t('table_label.itemNo01'), // '商品款号',
+              style: 'dimSearch',
+              width: '12',
+              value: 'psCProEcode',
+              columns: ['ECODE'],
+              AuotData: [], // 匹配的选项
+              dimChange: async (val) => {
+                
+              },
+              dimEnter: () => {
+                this.search('two')
+              },
+              dimSelect: (val) => {
+                this.tableConfig2.businessFormConfig.formValue.psCProEcode = val.label
+                // this.psCProEcode = val.label;
+              },
+            },
+            {
+              label: $i18n.t("table_label.itemNo02"), 
+              style: 'dimSearch',
+              width: '12',
+              value: 'proName',
+              columns: ['ECODE'],
+              AuotData: [], // 匹配的选项
+              dimChange: async (val) => {
+               
+              },
+              dimEnter: () => {
+                this.tableConfig.current = 1
+                this.search('one')
+              },
+              dimSelect: (val) => {
+                this.tableConfig.businessFormConfig.formValue.proName = val.label
+                // this.psCProEcode = val.label;
+              },
+            },
+          ],
+        },
+        // searchBtn
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: 'right', // 按钮位置 (right , center , left)
+          buttons: [
+            {
+              text: $i18n.t("btn.search"),
+              type:"primary",
+              btnclick: () => {
+                this.fnsearch('two')
+              }, // 按钮点击事件
+            },
+          ],
+        },
         current: 1,
         indexColumn: true,
         isShowSelection: true,
@@ -358,15 +386,15 @@ export default {
       const self = this
       let data = {}
       if (value == 'one') {
-        data.skuEcode = self.formConfig.formValue.searchValue.trim()
-        data.spuEcode = self.formConfig.formValue.psCProEcode.trim()
-        data.spuEname = self.formConfig.formValue.proName.trim()
+        data.skuEcode = self.tableConfig.businessFormConfig.formValue.searchValue.trim()
+        data.spuEcode = self.tableConfig.businessFormConfig.formValue.psCProEcode.trim()
+        data.spuEname = self.tableConfig.businessFormConfig.formValue.proName.trim()
         data.size = this.tableConfig.pageSize
         data.current = this.tableConfig.current
       } else {
-        data.skuEcode = self.replaceFormConfig.formValue.searchValue.trim()
-        data.spuEcode = self.replaceFormConfig.formValue.psCProEcode.trim()
-        data.spuEname = self.replaceFormConfig.formValue.proName.trim()
+        data.skuEcode = self.replacetableConfig.businessFormConfig.formValue.searchValue.trim()
+        data.spuEcode = self.replacetableConfig.businessFormConfig.formValue.psCProEcode.trim()
+        data.spuEname = self.replacetableConfig.businessFormConfig.formValue.proName.trim()
         data.size = this.tableConfig2.pageSize
         data.current = this.tableConfig2.current
       }

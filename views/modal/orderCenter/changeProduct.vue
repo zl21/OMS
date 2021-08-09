@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-02 18:40:35
+ * @LastEditTime: 2021-08-09 17:34:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/orderCenter/changeProduct.vue
+-->
 <template>
   <!-- 替换商品 -->
   <div class="changeProduct customized-modal">
@@ -5,25 +13,16 @@
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
         <p>{{ vmI18n.t("modalTitle.th1") }}</p>
-        <div class="search">
+        <!-- <div class="search">
           <div class="skuBox">
             <re-form :form-config="formConfig" />
           </div>
           <div class="search_child">
-            <!-- <span class="lable">商品名称:</span> -->
-            <!-- <span class="lable">{{ vmI18n.t("table_label.itemNo02") }}:</span>
-            <Input v-model="proName" @on-enter="fnsearch('one')"  class="inp"/>
-           -->
-          </div>
-
-
-          <div class="search_child">
-            <!-- 搜索 -->
             <Button type="primary" @click="fnsearch('one')">
               {{ vmI18n.t("btn.search") }}
             </Button>
           </div>
-        </div>
+        </div> -->
         <businessActionTable
           :jordan-table-config="tableConfig"
           @on-select="onSelect1"
@@ -48,23 +47,16 @@
       <div class="i_body1">
         <!-- <p>替换后商品SKU</p> -->
         <p>{{ vmI18n.t("modalTitle.th2") }}</p>
-        <div class="search">
+        <!-- <div class="search">
           <div class="skuBox">
             <re-form :form-config="replaceFormConfig" />
           </div>
           <div class="search_child">
-            <!-- <span class="lable">商品名称:</span> -->
-            <!-- <span class="lable">{{ vmI18n.t("table_label.itemNo02") }}:</span>
-            <Input v-model="replace_proName" @on-enter="fnsearch('two')" class="inp" />
-           -->
-          </div>
-          <div class="search_child">
-            <!-- 搜索 -->
             <Button type="primary" @click="fnsearch('two')">
               {{ vmI18n.t("btn.search") }}
             </Button>
           </div>
-        </div>
+        </div> -->
         <businessActionTable
           :jordan-table-config="tableConfig2"
           @on-select="onSelect2"

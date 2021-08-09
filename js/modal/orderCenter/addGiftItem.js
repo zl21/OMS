@@ -13,80 +13,80 @@ export default {
       url: '',
       loading: false,
       onRowData: '', // 选中数据
-      formConfig: {
-        formValue: {
-          SKU_CODE: '',
-          SPU_CODE: '',
-          SPU_NAE: '',
-          number: 1,
-        },
-        formData: [
-          {
-            label: $i18n.t('table_label.code_SKU'), // SKU编码
-            style: 'dimSearch',
-            width: '7',
-            value: 'SKU_CODE',
-            columns: ['value'],
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {
-              //模糊查询的方法
-              // this.fuzzyquerybyak(search)
-            },
-            dimEnter: (val) => {
-              this.searchGift()
-            },
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
-          {
-            label: $i18n.t('table_label.itemNo01'), // SPU编码
-            style: 'dimSearch',
-            width: '7',
-            value: 'SPU_CODE',
-            columns: ['ECODE'],
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {},
-            dimEnter: (val) => {
-              this.searchGift()
-            },
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
-          {
-            style: 'dimSearch', //输入框类型
-            label: $i18n.t("table_label.itemNo02"), // SPU名称 输入框前文字
-            value: 'SPU_NAE', //输入框的值
-            columns: ['ENAME'],
-            width: '7',
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {},
-            dimEnter: (val) => {
-              this.searchGift()
-            },
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
-         
-        ],
-      },
-      // searchBtn
-      searchBtn: {
-        typeAll: 'default', // 按钮统一风格样式
-        btnsite: 'right', // 按钮位置 (right , center , left)
-        buttons: [
-          {
-            text: '搜索',
-            type:"primary",
-            btnclick: () => {
-              this.tableConfig.current = 1
-              this.skuEcodes = ""
-              this.onRowData = ""
-              this.searchGift()
-            }, // 按钮点击事件
-          },
-        ],
-      },
       tableConfig: {
+        businessFormConfig: {
+          formValue: {
+            SKU_CODE: '',
+            SPU_CODE: '',
+            SPU_NAE: '',
+            number: 1,
+          },
+          formData: [
+            {
+              label: $i18n.t('table_label.code_SKU'), // SKU编码
+              style: 'dimSearch',
+              width: '8',
+              value: 'SKU_CODE',
+              columns: ['value'],
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {
+                //模糊查询的方法
+                // this.fuzzyquerybyak(search)
+              },
+              dimEnter: (val) => {
+                this.searchGift()
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            },
+            {
+              label: $i18n.t('table_label.itemNo01'), // SPU编码
+              style: 'dimSearch',
+              width: '8',
+              value: 'SPU_CODE',
+              columns: ['ECODE'],
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {},
+              dimEnter: (val) => {
+                this.searchGift()
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            },
+            {
+              style: 'dimSearch', //输入框类型
+              label: $i18n.t("table_label.itemNo02"), // SPU名称 输入框前文字
+              value: 'SPU_NAE', //输入框的值
+              columns: ['ENAME'],
+              width: '8',
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {},
+              dimEnter: (val) => {
+                this.searchGift()
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            },
+           
+          ],
+        },
+        // searchBtn
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: 'right', // 按钮位置 (right , center , left)
+          buttons: [
+            {
+              text: '搜索',
+              type:"primary",
+              btnclick: () => {
+                this.tableConfig.current = 1
+                this.skuEcodes = ""
+                this.onRowData = ""
+                this.searchGift()
+              }, // 按钮点击事件
+            },
+          ],
+        },
         indexColumn: true,
         isShowSelection: true,
         columns: [
@@ -189,7 +189,7 @@ export default {
       let data = {
         skuEcodes: [this.skuEcodes],
         orderList,
-        initNumber: this.formConfig.formValue.number,
+        initNumber: this.tableConfig.businessFormConfig.formValue.number,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
         setTimeout(() => {
@@ -372,7 +372,7 @@ export default {
         const {
           data: { data },
         } = await this.service.common.fuzzyquerybyak(formData)
-        this.formConfig.formData[0].AuotData = data
+        this.tableConfig.businessFormConfig.formData[0].AuotData = data
       }
     },
     // 添加赠品
@@ -461,9 +461,9 @@ export default {
     },
     selectSkuProBySkuEcodeList() {
       let data = {
-        skuEcode: this.formConfig.formValue.SKU_CODE,
-        spuEcode: this.formConfig.formValue.SPU_CODE,
-        spuEname: this.formConfig.formValue.SPU_NAE,
+        skuEcode: this.tableConfig.businessFormConfig.formValue.SKU_CODE,
+        spuEcode: this.tableConfig.businessFormConfig.formValue.SPU_CODE,
+        spuEname: this.tableConfig.businessFormConfig.formValue.SPU_NAE,
         size: this.tableConfig.pageSize,
         current: this.tableConfig.current,
       }
@@ -542,16 +542,16 @@ export default {
         label: '数量', //输入框前文字
         value: 'number', //输入框的值
         regx: /^[1-9]\d*(\.\d+)?$/,
-        maxlength:7,
+        maxlength:8,
         columns: ['number'],
-        width: '7',
+        width: '8',
         AuotData: [], //匹配的选项
         dimChange: (search) => {},
         dimEnter: (val) => {},
         dimSelect: (obj) => {},
         dimblur: () => {},
       }
-      self.formConfig.formData.push(obj)
+      self.tableConfig.businessFormConfig.formData.push(obj)
     }
 
 

@@ -164,6 +164,7 @@ export default {
           ]
         },
         businessFormConfig: {
+          gridBar:true, //开启栅格栏
           formData: [
             {
               version: '1.4',
@@ -363,9 +364,20 @@ export default {
   computed: {
     id() {
       return this.$route.params.customizedModuleId == 'New' ? '-1' : this.$route.params.customizedModuleId;
+    },
+    // 获取当前展示几列
+    colRowNum(){
+      return $store.state.customize.colRowNum;
     }
   },
-
+  watch:{
+    // 获取当前展示几列
+    colRowNum:{
+      handler(newVal) {
+        this.jordanTableConfig.businessFormConfig.colRowNum = newVal;
+      },
+    }
+  },
   mounted() {
     this.init();
     this.query();
