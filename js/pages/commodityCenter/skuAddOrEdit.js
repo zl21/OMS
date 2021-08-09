@@ -515,7 +515,7 @@ export default {
       }).then(async (data) => {
         console.log(data);
         // 展示Form：启用状态
-        if (self.ID > 0) {
+        if (self.ID > 0 && !self.$route.query.spuid) {
           self.formConfig.formData.forEach(item => {
             if (item.colname == 'ISACTIVE') {
               item.style = 'select'
@@ -541,7 +541,7 @@ export default {
         self.subTableConfig = {
           centerName: 'commodityCenter',
           tablename: self.labelDefaultValue,
-          objid: self.ID,
+          objid: (this.$route.query.spuid || this.ID == '-1') ? '-1' : this.ID,
           pageShow: true,
         }
         setTimeout(() => {
@@ -640,6 +640,7 @@ export default {
         proCode,
         skuCode, // 该条明细的skuCode，新增时没有，传空字符串
         skuId,
+        objid: (this.$route.query.spuid || this.ID == '-1') ? '-1' : this.ID,
       };
       if (this.ID == '2201' && this.$route.query.spuid) { // spu过来的新增，不传skuId
         delete param.skuId;
@@ -743,7 +744,7 @@ export default {
       PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
       PsSku.PS_C_PRO_ID = self.spuID; // 特别地，后端要的是ID不是ECODE (即'coffee对应的id')
       const param = {
-        objid: this.ID,
+        objid: (this.$route.query.spuid || this.ID == '-1') ? '-1' : this.ID,
         table: 'PS_C_SKU',
         PsSku, // 主表修改信息
         EXTRA, // 子表修改信息
