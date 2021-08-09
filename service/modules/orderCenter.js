@@ -347,9 +347,9 @@ export default {
     $network.post('/p/cs/vip/v2/distribution/get/delivery', params), // 手动匹配入库单初始化
   matchStockInSave: (params) =>
     $network.post('/p/cs/vip/v2/distribution/match/delivery', params), // 手动匹配入库单保存
-  queryList: (params) => $network.post('/p/cs/oc/oms/v1/queryList', params), // 查询列表
+  queryList: (params) => $network.post(`/p/cs/oc/oms/v1/queryList?hash=${+new Date()}`, params), // 查询列表
   queryStatistics: (params) =>
-    $network.post('/p/cs/oc/oms/v1/queryStatistics', params), // 查询异常数量(tabs标头显示数量)
+    $network.post(`/p/cs/oc/oms/v1/queryStatistics?hash=${+new Date()}`, params), // 查询异常数量(tabs标头显示数量)
   getOcBOrderExceptions: (params) =>
     $network.post('/p/cs/oc/oms/v1/ocborder/getOcBOrderExceptions', params), // 异常数据列表查询
   batchSaveOcBOrderException: (params) =>
