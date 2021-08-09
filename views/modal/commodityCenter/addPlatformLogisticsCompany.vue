@@ -1,8 +1,6 @@
 <template>
   <div class="customized-modal" style="width: 800px">
-    <div class="subtablePart">
-      <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
-    </div>
+    <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
     <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
@@ -50,7 +48,7 @@ export default {
         searchSelectList: [], // isSearchText为false的情况下使用 搜索框list
         pageShow: true, // 控制分页是否显示
         searchInputShow: false, // 控制搜索框是否显示
-        width: '', // 表格宽度
+        // width: '700', // 表格宽度
         height: '332', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数

@@ -22,7 +22,7 @@
           </p>
         </Panel>
       </Collapse>
-      <Modal v-model="showAddPlatformLogisticsCompany" footer-hide width="830px" mask>
+      <Modal v-model="showAddPlatformLogisticsCompany" footer-hide width="830" mask>
         <addPlatformLogisticsCompany @getData="getTableData"></addPlatformLogisticsCompany>
       </Modal>
       <div class="customized-detail-table">
