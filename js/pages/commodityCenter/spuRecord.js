@@ -938,6 +938,7 @@ export default {
       // 删除webData中的数据
       self.supplier.webData = self.supplier.webData.filter(it => it.ID == '-1' && !delarr.includes(it.cpCSupplierId));
       self.supplier.resData = arr;
+      self.supplier.selectionData = [];
       self.isModify = true;
     },
     getSupplierData() { // 供应商列表查询
