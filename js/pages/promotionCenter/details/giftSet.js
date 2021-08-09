@@ -132,6 +132,7 @@ export default {
         type: 'STRING',
         valuedata: '',
         isOneData: true,
+        notForm: true,
         isObject: true
       },
       productslistView: {

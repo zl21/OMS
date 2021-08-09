@@ -44,6 +44,7 @@ export default () => ({
             isOneData: true,
             valuedata: '', // 这个是选择的值
             isObject: true,
+            notForm: true,
             version: '1.4'
           }
         }, // 多选店仓信息
@@ -67,6 +68,7 @@ export default () => ({
             name: $i18n.t('common.exclude_province'),
             readonly: false,
             valuedata: '',
+            notForm: true,
             version: '1.4'
           }
         }, // 排除省份

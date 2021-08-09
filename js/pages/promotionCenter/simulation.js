@@ -53,6 +53,7 @@ export default {
             name: $i18n.t('form_label.receiving_province'),
             readonly: false,
             valuedata: '',
+            notForm: true,
             version:'1.4'
           }
         }, // 收货省份
@@ -70,6 +71,7 @@ export default {
             readonly: false,
             refobjid: '',
             valuedata: '',
+            notForm: true,
             version:'1.4'
           }
         } // 店铺名称
@@ -89,6 +91,7 @@ export default {
         valuedata: '',
         isObject: true,
         isSimulation: true,
+        notForm: true,
         isGetValue: true
       },
       products_columns: tabList.products_columns,

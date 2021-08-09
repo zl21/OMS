@@ -40,6 +40,7 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING', // 这个是后台用的
+          notForm: true,
           valuedata: '', // 这个是选择的值
         }
       },
@@ -65,6 +66,7 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING',
+          notForm: true,
           valuedata: ''
         }
       },
