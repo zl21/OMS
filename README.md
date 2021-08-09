@@ -1012,6 +1012,7 @@
 | v1.11.67 | 零售/退换列表-取消查询接口防爆 |
 | v1.11.68 | businessActionTable 组件兼容form表单查询 |
 | v1.11.69 | 物流单号兼修改 |
+| v1.11.70 | businessActionTable兼容 |
 
 
 
