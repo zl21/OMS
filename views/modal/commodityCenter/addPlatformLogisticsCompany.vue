@@ -245,7 +245,8 @@ export default {
   /deep/ .subtablePart {
     position: relative;
     .ark-form-item {
-      margin-bottom: 0;
+      // margin-bottom: 0;
+      // margin-top: 0;
     }
     .businessForm-box {
       width: 500px;
