@@ -288,3 +288,4 @@
 | v1.2.50 | businessForm-fkInputPlus 必填布局调整 |
 | v1.2.51 | businessForm-fktable样式修改 |
 | v1.2.52 | businessForm-fktable-checkbox修改 |
+| v1.2.53 | fkinputPlus 赋值修复 |

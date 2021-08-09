@@ -155,11 +155,11 @@ export default {
   watch: {
     itemdata: {
       handler(val, oldVal) {
-        if (val.pid || val.valuedata) {
+        // if (val.pid || val.valuedata) { // 存在赋空值的情况
           if (this.itemdata.fkdisplay == 'drp') {
             this.defaultSelected = [{ ID: val.pid, Label: val.valuedata }];
           }
-        }
+        // }
         if (val.isuppercase && val.valuedata) {
           val.valuedata = val.valuedata.toString().toUpperCase();
         }
