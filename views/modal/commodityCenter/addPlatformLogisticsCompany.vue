@@ -86,14 +86,14 @@ export default {
               label: '平台物流名称',
               value: 'CP_C_LOGISTICS_ENAME',
               colname: 'CP_C_LOGISTICS_ENAME',
-              width: '12',
+              width: '8',
               disabled: false,
             },
             {
               version: '1.4',
               colname: 'CP_C_PLATFORM_ID',
               style: 'popInput', // 输入框弹框单多选
-              width: '12',
+              width: '8',
               itemdata: {
                 col: 1,
                 colid: 168316, // 当前字段的ID
@@ -249,7 +249,7 @@ export default {
       margin-top: 0;
     }
     .businessForm-box {
-      width: 500px;
+      // width: 500px;
     }
     .orderManageEdit .businessForm_a {
       padding-bottom: 6px;
