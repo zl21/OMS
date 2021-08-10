@@ -8,6 +8,8 @@
       @input="fkDimSearch()"
     /> -->
     <Select
+        ref="SelectAutoFocus"
+        id="fkDim"
         v-if="inputBox == true"
         v-model="fkDimVal"
         filterable

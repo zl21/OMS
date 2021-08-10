@@ -416,7 +416,8 @@ export default {
     this.searchTable()
   },
   mounted() {
-    $('#fkDim').focus();
+    let nodeRef = document.getElementById('fkDim');
+    nodeRef.getElementsByClassName('ark-select-input')[0].focus();
     this.defaultSelectedIds.forEach((id) => {
       if (this.fkobj.idArr.indexOf(id) === -1) {
         this.fkobj.idArr.push(id);
