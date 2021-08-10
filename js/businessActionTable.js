@@ -90,7 +90,7 @@ export default {
     // 是否单选
     multiple(){
       let multiple = Boolean
-      return multiple = this.jordanTableConfig.multiple === undefined ? false : this.jordanTableConfig.multiple;
+      return multiple = this.jordanTableConfig.multiple === undefined ? true : this.jordanTableConfig.multiple;
     },
     // 搜索框前文字
     isSearchText() {
