@@ -730,7 +730,7 @@ export default {
         // const columns = self.agTableConfig.columnDefs;
         const columns = JSON.parse(JSON.stringify(baseColumnDefs));
         columns.forEach(item => {
-          item['displayName'] = item.headerName;
+          // item['displayName'] = item.headerName;
           item.thAlign = 'center';
         });
         self.agTableConfig.columnDefs = columns;
