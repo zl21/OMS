@@ -32,6 +32,7 @@ feature : 订单中心-零售发货单详情
           v-show="labelDefaultValue === 'OC_B_ORDER'"
           :component-data="tab1"
           @freshLoad="freshLoad"
+          @freshLoad1="freshLoad1"
         />
         <OrderItem
           v-show="labelDefaultValue !== 'OC_B_ORDER'"
