@@ -4,9 +4,11 @@ body {
 	}
 }
 
+
 .monitoringPlatform {
 	background-color: rgb(241, 241, 241);
 
+	// ---------------- 公共样式 start ----------------
 	.btn {
 		position: absolute;
 
@@ -23,50 +25,6 @@ body {
 		/deep/ .ark-btn-primary {
 			background-color: rgb(86, 98, 178);
 		}
-	}
-
-	.header {
-		position: relative;
-		padding-bottom: 10px;
-
-		/* .btn {
-			padding: 0;
-
-			/deep/ .button-group {
-				margin: 0;
-
-				button.ark-btn {
-					height: 26px;
-					line-height: 1;
-					padding: 0 6px;
-					border: none;
-					border-radius: 2px;
-				}
-			}
-		} */
-		.btn {
-			position: relative;
-
-			/deep/ .ark-btn-text,
-			.ark-btn-primary {
-				margin-right: 4px;
-			}
-
-			/deep/ .ark-btn-text {
-				background-color: #fff;
-			}
-		}
-
-		.time {
-			position: absolute;
-			right: 6px;
-			top: 10px;
-		}
-	}
-
-	.main {
-		display: flex;
-		flex-direction: column;
 	}
 
 	.mainContent {
@@ -95,6 +53,37 @@ body {
 				margin-left: 4px;
 			}
 		}
+	}
+
+	// ---------------- 公共样式 end ----------------
+
+	.header {
+		position: relative;
+		padding-bottom: 10px;
+
+		.btn {
+			position: relative;
+
+			/deep/ .ark-btn-text,
+			.ark-btn-primary {
+				margin-right: 4px;
+			}
+
+			/deep/ .ark-btn-text {
+				background-color: #fff;
+			}
+		}
+
+		.time {
+			position: absolute;
+			right: 6px;
+			top: 10px;
+		}
+	}
+
+	.main {
+		display: flex;
+		flex-direction: column;
 	}
 
 	.main01 {
@@ -160,12 +149,58 @@ body {
 		}
 	}
 
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+			background-color: rgb(114, 96, 96);
+		}
+
+		40% {
+			opacity: 0.5;
+			background-color: rgb(161, 156, 156);
+		}
+
+		100% {
+			opacity: 1;
+			background-color: #fff;
+		}
+
+	}
+
+	@-webkit-keyframes fade-in {
+
+		/*针对webkit内核*/
+		0% {
+			opacity: 0;
+			background-color: rgb(114, 96, 96);
+		}
+
+		40% {
+			opacity: 0;
+			background-color: rgb(161, 156, 156);
+		}
+
+		100% {
+			opacity: 1;
+			background-color: #fff;
+		}
+	}
+
 	.main02 {
 		.main02body {
 			display: grid;
 			grid-template-columns: repeat(5, auto);
 			grid-template-rows: repeat(auto-fit, 120px);
 			grid-gap: 16px;
+
+			&.fadeIn {
+				animation: fade-in;
+				/*动画名称*/
+				animation-duration: 1.5s;
+				/*动画持续时间*/
+				-webkit-animation: fade-in 1.5s;
+				/*针对webkit内核*/
+			}
 
 			.m2Item {
 				border: 1px solid #ccc;
@@ -205,6 +240,15 @@ body {
 			// grid-auto-flow: row;
 			grid-auto-rows: 150px;
 
+			&.fadeIn {
+				animation: fade-in;
+				/*动画名称*/
+				animation-duration: 1.5s;
+				/*动画持续时间*/
+				-webkit-animation: fade-in 1.5s;
+				/*针对webkit内核*/
+			}
+
 			.m3Item {
 				border: 1px solid #ccc;
 				border-radius: 4px;
@@ -233,5 +277,3 @@ body {
 
 	}
 }
-
-.monitoringPlatform {}

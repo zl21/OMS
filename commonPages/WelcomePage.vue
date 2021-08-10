@@ -45,12 +45,12 @@
           </div>
         </div>
       </div>
-      <div class="mainContent main02">
+      <div :class="['mainContent', 'main02', up]">
         <h2>{{ data.main02.title }}</h2>
         <div class="btn">
           <Button type="primary">全部</Button>
           <Button type="text">异常</Button>
-          <Button type="text" icon="ios-arrow-down" @click="upDown"></Button>
+          <Button type="text" :icon="m2BtnIcon" @click="upDown"></Button>
         </div>
         <div class="main02body">
           <div
@@ -76,12 +76,12 @@
           </div>
         </div>
       </div>
-      <div class="mainContent main03">
+      <div :class="['mainContent', 'main03', up]">
         <h2>{{ data.main03.title }}</h2>
         <div class="btn">
           <Button type="primary">全部</Button>
           <Button type="text">异常</Button>
-          <Button type="text" icon="ios-arrow-down"></Button>
+          <Button type="text" :icon="m3BtnIcon"></Button>
         </div>
         <div class="main03body">
           <div
@@ -121,6 +121,9 @@ export default {
   },
   data() {
     return {
+      up: '',
+      m2BtnIcon: 'ios-arrow-down',
+      m3BtnIcon: 'ios-arrow-down',
       data: {
         header: {
           time: new Date(),
@@ -380,7 +383,8 @@ export default {
   },
   methods: {
     upDown() {
-
+      this.up = this.up ? '' : 'fadeIn';
+      this.m2BtnIcon = this.m2BtnIcon == 'ios-arrow-down' ? 'ios-arrow-up' : 'ios-arrow-down';
     },
   },
   mounted() {
