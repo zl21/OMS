@@ -28,7 +28,7 @@
         <h2>{{ data.main01.title }}</h2>
         <div class="main01body">
           <div class="left">
-            <div id="main" style="width: 600px; height: 400px"></div>
+            <div id="main" style="width: 200px; height: 200px"></div>
           </div>
           <div class="right">
             <div
