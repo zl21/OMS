@@ -536,7 +536,7 @@ export default {
                 self.$Message.warning(window.vmI18n.t('modalTips.g9')); // "订单状态非未确认、缺货、已审核、配货中，不允许修改地址"
                 return;
               }
-              this.service.orderCenter.getDetail({ ID: this.objId, isShowPii: true }).then(res => {
+              this.service.orderCenter.getDecryptDetail({ ID: this.objId, isShowPii: true }).then(res => {
                 if (res.data && res.data.code === 0) {
                   const order = res.data.data;
                   self.dialogs.address.data = {
@@ -918,6 +918,9 @@ export default {
     freshLoad(val) {
       this.load(val);
     },
+    freshLoad1(val) {
+      this.load1(val);
+    },
     load(val) {
       const data = { ID: this.objId };
       if (val) {
@@ -926,6 +929,40 @@ export default {
       this.pageLoad = true;
       this.service.orderCenter
         .getDetail(data)
+        .then(res => {
+          this.pageLoad = false;
+          if (res.data && res.data.code === 0) {
+            const resData = res.data.data;
+            resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null ? this.vmI18n.t('common.no') : this.vmI18n.t('common.yes');
+            const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
+            resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
+            this.tab1.order = resData;
+            this.orderStatus = resData.ORDER_STATUS;
+            // const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'];
+            const statusList = [1, 2, 3, 4, 5, 6, 7, 8, 12];
+            if (statusList.includes(res.data.data.ORDER_STATUS)) {
+              this.statusName = res.data.data.ORDER_STATUS_NAME;
+            } else {
+              this.statusName = '';
+            }
+          } else {
+            this.tab1 = this.tab1_default;
+            // 订单详情获取失败
+            this.$message.error(this.vmI18n.t('modalTips.h3'));
+          }
+        })
+        .catch(() => {
+          this.pageLoad = false;
+        });
+    },
+    load1(val) {
+      const data = { ID: this.objId };
+      if (val) {
+        data.isShowPii = val;
+      }
+      this.pageLoad = true;
+      this.service.orderCenter
+        .getDecryptDetail(data)
         .then(res => {
           this.pageLoad = false;
           if (res.data && res.data.code === 0) {
