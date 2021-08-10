@@ -47,14 +47,14 @@
           </div>
         </div>
       </div>
-      <div :class="['mainContent', 'main02', up]">
+      <div :class="['mainContent', 'main02']">
         <h2>{{ data.main02.title }}</h2>
         <div class="btn">
           <Button type="primary">全部</Button>
           <Button type="text">异常</Button>
           <Button type="text" :icon="m2BtnIcon" @click="upDown"></Button>
         </div>
-        <div class="main02body">
+        <div :class="['main02body', up]">
           <div
             class="m2Item"
             v-for="(it, index) in data.main02.data"
@@ -78,14 +78,14 @@
           </div>
         </div>
       </div>
-      <div :class="['mainContent', 'main03', up]">
+      <div :class="['mainContent', 'main03']">
         <h2>{{ data.main03.title }}</h2>
         <div class="btn">
           <Button type="primary">全部</Button>
           <Button type="text">异常</Button>
           <Button type="text" :icon="m3BtnIcon"></Button>
         </div>
-        <div class="main03body">
+        <div :class="['main03body', up]">
           <div
             class="m3Item"
             v-for="(it, index) in data.main03.data"
@@ -386,7 +386,7 @@ export default {
   },
   methods: {
     upDown() {
-      this.up = this.up ? '' : 'fadeIn';
+      this.up = this.up ? '' : 'fadeInDom';
       this.m2BtnIcon = this.m2BtnIcon == 'ios-arrow-down' ? 'ios-arrow-up' : 'ios-arrow-down';
     },
   },
