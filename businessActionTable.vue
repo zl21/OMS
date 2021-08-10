@@ -9,7 +9,7 @@
     <div :class="[
       businessFormConfig !== undefined ? 'fromBtn' :'',
       gridBar && Number.isInteger(formDataLength / colRowNum) ? 'FormPadding' : '',
-      !gridBar && noGridBar ? 'FormPadding' : ''
+      noGridBar ? 'FormPadding' : ''
       ]">
       <div class="businessForm-box" 
         v-if="businessFormConfig !== undefined">
