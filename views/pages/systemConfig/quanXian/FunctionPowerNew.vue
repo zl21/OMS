@@ -1830,7 +1830,7 @@ export default {
 .functionPower {
   position: relative;
   height: 100%;
-  padding: 10px 10px 0 0 !important;
+  // padding: 10px 10px 0 0 !important;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -1849,7 +1849,7 @@ export default {
   }
   .buttonGroup {
     display: flex;
-
+    padding-bottom: 12px;
     .Button {
       min-width: 0;
       padding: 0 12px !important;
@@ -1874,12 +1874,13 @@ export default {
     .contentLeft {
       width: 240px;
       height: 100%;
-      padding: 10px;
+      // padding: 10px;
       border: solid 1px #d8d8d8;
       border-radius: 6px;
       margin-right: 10px;
       display: flex;
       flex-direction: column;
+      background: #fff;
       .menuContainer {
         flex: 1;
         margin-top: 10px;
@@ -1912,6 +1913,7 @@ export default {
       border-radius: 6px;
       display: flex;
       width: 100%;
+      background: #fff;
       .left-tree {
         width: 200px;
         padding: 10px;
