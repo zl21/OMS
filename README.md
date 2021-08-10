@@ -293,3 +293,4 @@
 | v1.2.55 | businessActionTable修复 |
 | v1.2.56 | businessForm兼容处理 |
 | v1.2.57 | 还原businessForm兼容处理 |
+| v1.2.58 | businessForm兼容处理 |
