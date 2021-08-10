@@ -27,7 +27,9 @@
       <div class="mainContent main01">
         <h2>{{ data.main01.title }}</h2>
         <div class="main01body">
-          <div class="left"></div>
+          <div class="left">
+            <div id="main" style="width: 600px; height: 400px"></div>
+          </div>
           <div class="right">
             <div
               class="rightItem"
@@ -113,6 +115,7 @@
 <script>
 import businessButton from 'professionalComponents/businessButton';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import * as echarts from 'echarts';
 
 export default {
   name: 'WelcomePage',
@@ -391,6 +394,29 @@ export default {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
     this.data.header.time = dateUtil.getFormatDate(this.data.header.time, 'yyyy-MM-dd HH:mm:ss');
+
+    let myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    let option = {
+      title: {
+        text: 'ECharts 入门示例'
+      },
+      tooltip: {},
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
   },
   destroyed() {
     if (document.getElementById('content')) {

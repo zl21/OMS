@@ -186,6 +186,18 @@ body {
 		}
 	}
 
+	@keyframes example {
+		from {
+			background-color: red;
+			height: 100px;
+		}
+
+		to {
+			background-color: yellow;
+			height: 10px;
+		}
+	}
+
 	.main02 {
 		.main02body {
 			display: grid;
@@ -194,17 +206,25 @@ body {
 			grid-gap: 16px;
 
 			&.fadeIn {
-				animation: fade-in;
+				animation: example;
 				/*动画名称*/
 				animation-duration: 1.5s;
 				/*动画持续时间*/
-				-webkit-animation: fade-in 1.5s;
+				-webkit-animation: example 1.5s;
 				/*针对webkit内核*/
 			}
 
 			.m2Item {
 				border: 1px solid #ccc;
 				border-radius: 4px;
+
+				&:hover {
+					animation: example;
+					/*动画名称*/
+					animation-duration: 1.5s;
+					/*动画持续时间*/
+					-webkit-animation: example 1.5s;
+				}
 
 				.title {
 					position: relative;
