@@ -215,6 +215,7 @@ export default {
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
+        multiple: false
       },
     };
   },

@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-08-02 11:40:07
+ * @LastEditTime: 2021-08-10 16:37:57
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -257,7 +257,9 @@ export default {
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
-        highlightRow:true,
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 高亮单选必须结合它
+        multiple: false //false 单选
       },
     };
   },

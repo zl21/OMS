@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-09 10:54:37
+ * @LastEditTime: 2021-08-10 16:40:31
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增-查询原订单编号-formItem
 -->
@@ -218,8 +218,6 @@ export default {
         indexColumn: true, // 是否显示序号
         height: '270',
         loading: false,
-        isShowSelection: true, // 是否显示checkedbox
-        highlightRow: true, // 展示单选radio，结合isShowSelection使用
         pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
@@ -227,6 +225,9 @@ export default {
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 高亮单选必须结合它
+        multiple: false //false 单选
       },
       other: {},
     };

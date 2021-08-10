@@ -1015,6 +1015,7 @@
 | v1.11.70 | businessActionTable兼容 |
 | v1.11.71 | 修改页面引用businessActionTable组件配置 |
 | v1.11.73 | bug:44939/44945 |
+| v1.11.74 | 框架更新-table单选配置修改 |
 
 
 
