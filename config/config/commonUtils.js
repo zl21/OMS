@@ -1412,15 +1412,15 @@ class commonUtils {
         option = () => {
           if (tableName == 'ORDERMANAGER' && _self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
             // 判断 如果不是高级搜索 自适应高度
-            setTableHeight(_self, defaultHeight);
+            this.setTableHeight(_self, defaultHeight);
           } else if (tableName != 'ORDERMANAGER') {
-            setTableHeight(_self, defaultHeight);
+            this.setTableHeight(_self, defaultHeight);
           }
         };
         break;
       case 'PROMACTIQUERYLIST':// 促销活动
         option = () => {
-          setTableHeight(_self, 100);
+          this.setTableHeight(_self, 100);
           const agGridChild = `agGridChild${Number(_self.activeName) + 1}`;
           _self.$refs[`${agGridChild}`][0].agGridTable(_self.tabConfig[_self.activeName].agTableConfig.columnDefs, _self.tabConfig[_self.activeName].agTableConfig.rowData);
         };
