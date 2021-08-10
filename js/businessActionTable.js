@@ -87,6 +87,11 @@ export default {
       let highlightRow = Boolean
       return highlightRow = this.jordanTableConfig.highlightRow === undefined ? false : this.jordanTableConfig.highlightRow;
     },
+    // 是否单选
+    multiple(){
+      let multiple = Boolean
+      return multiple = this.jordanTableConfig.multiple === undefined ? false : this.jordanTableConfig.multiple;
+    },
     // 搜索框前文字
     isSearchText() {
       return this.jordanTableConfig.isSearchText

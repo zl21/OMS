@@ -49,6 +49,7 @@
       :width="width"
       :loading="loading"
       :highlight-row="highlightRow"
+      :multiple="multiple"
       :row-class-name="rowClassName"
       :no-data-text="noDataText"
       :show-header="showHeader"
