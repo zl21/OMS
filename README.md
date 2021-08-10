@@ -292,3 +292,4 @@
 | v1.2.54 | fkinput 单独使用时label展示问题修复 |
 | v1.2.55 | businessActionTable修复 |
 | v1.2.56 | businessForm兼容处理 |
+| v1.2.57 | 还原businessForm兼容处理 |
