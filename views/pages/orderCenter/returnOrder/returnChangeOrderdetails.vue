@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-10 10:09:55
+ * @LastEditTime: 2021-08-10 14:16:56
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-新增-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -889,6 +889,8 @@ export default {
               item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             } else {
               item.QTY_REFUND = Number(it.RETURNABLE_QTY);
+              const sum = Number(item.PRICE_ACTUAL) * Number(item.QTY_REFUND)
+              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             }
           } else if (it[pryKey] && !pryKeyArr.includes(it[pryKey])) {
             // 2.不存在该条明细（则直接push）

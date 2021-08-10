@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-10 10:10:55
+ * @LastEditTime: 2021-08-10 14:37:02
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -702,7 +702,6 @@ export default {
                  *   退货单价 = 成交单价
                  *   退货金额 = 退货单价 * 申请退货数量
                  */
-                console.log('QTY_REFUND:',e);
                 params.row.QTY_REFUND = e;
                 params.row.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
                   Number(e) * Number(params.row.AMT_REFUND_SINGLE),
@@ -836,6 +835,7 @@ export default {
       });
       setTimeout(() => {
         // 退货明细
+        if(self.businessActionTable.totalData.length) return;
         if (this.panelReturn) {
           self.businessActionTable.totalData.push({
             index: `${$i18n.t("other.total")}`, // 合计
@@ -901,8 +901,7 @@ export default {
       const self = this;
       const data = dataArr;
       const allDa = self.businessActionTable.data;
-      const pryKey =
-        this.returnProduct == "0" ? "REFUND_ITEM_UNIQUE_KEY" : "PS_C_SKU_ECODE";
+      const pryKey = this.panelReturn ? "REFUND_ITEM_UNIQUE_KEY" : "PS_C_SKU_ECODE";
       let pryKeyArr = [];
       if (!allDa.length) {
         // 当前为空，则直接新增
@@ -926,13 +925,14 @@ export default {
           if (it[pryKey] == item[pryKey]) {
             // 1.已经存在（数量累加起来，没超则累加，反之保持数量是最大值即可）
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
-            if (item.RETURNABLE_QTY > sumQ) {
+            if (Number(item.RETURNABLE_QTY) > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
-              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
-                (Util.accAdd(item.REFUND_FEE, it.REFUND_FEE), 2)
-              );
+              const sum = Util.accAdd(item.REFUND_FEE, it.REFUND_FEE)
+              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             } else {
-              item.QTY_REFUND = it.RETURNABLE_QTY;
+              item.QTY_REFUND = Number(it.RETURNABLE_QTY);
+              const sum = Number(item.PRICE_ACTUAL) * Number(item.QTY_REFUND)
+              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             }
           } else if (it[pryKey] && !pryKeyArr.includes(it[pryKey])) {
             // 2.不存在该条明细（则直接push）
@@ -980,6 +980,7 @@ export default {
           "customize/returnOrderChangeItem",
           JSON.parse(JSON.stringify(self.toMainData))
         );
+         self.totalNum();
         return
       }
       self.haveGift = "";
