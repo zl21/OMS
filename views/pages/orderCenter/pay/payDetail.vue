@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-07-29 19:14:22
+ * @LastEditTime: 2021-08-10 10:08:33
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增/编辑-商品明细
  * @FilePath: /burgeon-project-logic/js/pages/orderCenter/payDetail.vue
@@ -114,7 +114,7 @@ export default {
             },
           ],
         }, // 按钮配置
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         columns: [], // 表头
         data: [], // 数据配置
         // data: [{ "COMPENSATE_AMT": '0.00', "COMPENSATE_QTY": 0, "OC_B_ORDER_DELIVERY_ID": null, "OC_B_ORDER_ID": null, "PRICE": 23, "PRICE_ACTUAL": 23, "PS_C_PRO_ECODE": "0011", "PS_C_PRO_ENAME": "轩妈中秋大礼包", "PS_C_SKU_ECODE": "12343214432", "PS_C_SKU_ENAME": "12343214432", "PS_C_SPEC1_ENAME": null, "PS_C_SPEC2_ENAME": null, "PS_C_SPEC3_ENAME": null, "QTY": 0, "REAL_AMT": '0.00', "ID": "-1" }],

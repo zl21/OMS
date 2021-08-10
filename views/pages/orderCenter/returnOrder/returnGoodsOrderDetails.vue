@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-09 19:36:51
+ * @LastEditTime: 2021-08-10 10:10:55
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -181,7 +181,7 @@ export default {
       }, // 退货明细配置
       tableConfig: {
         modal: false,
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         columns: addDetailModalTableColumns, // 表头
         data: [], // 数据配置
         pageShow: false, // 控制分页是否显示

@@ -1013,6 +1013,7 @@
 | v1.11.68 | businessActionTable 组件兼容form表单查询 |
 | v1.11.69 | 物流单号兼修改 |
 | v1.11.70 | businessActionTable兼容 |
+| v1.11.71 | 修改页面引用businessActionTable组件配置 |
 
 
 

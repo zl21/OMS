@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-07-30 13:16:05
+ * @LastEditTime: 2021-08-10 10:08:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -75,7 +75,7 @@ export default {
             }
           ]
         }, // 按钮配置
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         columns: [], // 表头
         data: [], // 数据配置
         pageShow: true, // 控制分页是否显示

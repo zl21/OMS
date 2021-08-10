@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-05 18:53:50
+ * @LastEditTime: 2021-08-10 10:09:55
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-新增-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -149,7 +149,7 @@ export default {
         huan: [],
       }, // 传给主表的数据(用于保存)(监听时机:删除明细/新增确认)
       actionTableCon: {
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         businessButtonConfig: {
           typeAll: "default", // 按钮统一风格样式
           btnsite: "left", // 按钮位置 (right , center , left)
@@ -218,7 +218,7 @@ export default {
       }, // 退货明细配置
       tableConfig: {
         modal: false,
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         columns: [], // 表头
         data: [], // 数据配置
         pageShow: false, // 控制分页是否显示
