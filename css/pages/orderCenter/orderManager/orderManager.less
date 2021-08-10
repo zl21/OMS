@@ -1,6 +1,28 @@
 @import '~omsTheme/public.less';
 
 .customized-list-form {
+  padding-right: 30px;
+  // 箭头
+  .orderManageEdit .flodBtn{
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    top: auto;
+    right: auto;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 13px;
+    background: url(../../../../assets/img/aroowDown.png) right no-repeat;
+    background-size: 100%;
+    z-index: 999;
+    &::before {
+      content: "";
+    }
+    &.el-icon-arrow-down{
+      background: url(../../../../assets/img/aroowUp.png) right no-repeat;
+      background-size: 100%;
+    }
+  }
   position: relative;
   &.formBottomPd{
     padding-bottom: 65px !important;
@@ -17,7 +39,6 @@
     }
   }
 }
-
   // 退换货单展开 不需要
 .customized-list-form.returnChangeOrder{
     .dynamicSearch-content{
