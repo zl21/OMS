@@ -1,16 +1,23 @@
-
 .monitoringPlatform {
 	background-color: rgb(241, 241, 241);
 	height: calc(100vh - 90px);
 	display: flex;
 	flex-direction: column;
+
 	// ---------------- 公共样式 start ----------------
+	.comItem {
+		border: 1px solid #E6EAF0;
+		border-radius: 4px;
+	}
+
 	.btn {
-		position: absolute;
+
+		// position: absolute;
 		/deep/ .ark-btn-text,
 		.ark-btn-primary {
 			padding: 4px 8px;
 			border: none;
+			margin-left: 4px;
 		}
 
 		/deep/ .ark-btn-text {
@@ -19,6 +26,19 @@
 
 		/deep/ .ark-btn-primary {
 			background-color: rgb(86, 98, 178);
+		}
+	}
+
+	.mainHeader {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 0 10px 0;
+
+		&>span {
+			font-size: 18px;
+			font-weight: bold;
+			color: #3B4859;
 		}
 	}
 
@@ -41,15 +61,15 @@
 			margin-bottom: 10px;
 		}
 
-		.btn {
-			top: 25px;
-			right: 16px;
+		/* .btn {
+			// top: 25px;
+			// right: 16px;
 
 			/deep/ .ark-btn-text,
 			.ark-btn-primary {
 				margin-left: 4px;
 			}
-		}
+		} */
 	}
 
 	// ---------------- 公共样式 end ----------------
@@ -58,23 +78,8 @@
 		position: relative;
 		padding-bottom: 10px;
 
-		.btn {
-			position: relative;
-
-			/deep/ .ark-btn-text,
-			.ark-btn-primary {
-				margin-right: 4px;
-			}
-
-			/deep/ .ark-btn-text {
-				background-color: #fff;
-			}
-		}
-
 		.time {
-			position: absolute;
-			right: 6px;
-			top: 10px;
+			float: right;
 		}
 	}
 
@@ -90,14 +95,26 @@
 	}
 
 	.main01 {
+		position: relative;
+		padding-bottom: 32px;
+
+		&::after {
+			content: '';
+			height: 1px;
+			width: 80vw;
+			background-color: #F2F2F2;
+			position: absolute;
+			bottom: 0px;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
 		.main01body {
 			display: flex;
 
 			.left {
 				flex: .4;
 				height: 200px;
-				border: 1px solid #ccc;
-				border-radius: 4px;
 				margin-right: 16px;
 			}
 
@@ -115,8 +132,6 @@
 
 			.rightItem {
 				position: relative;
-				border: 1px solid #ccc;
-				border-radius: 4px;
 				padding: 16px;
 
 				.info {
@@ -190,6 +205,9 @@
 	}
 
 	.main02 {
+		position: relative;
+		padding-top: 16px;
+
 		.main02body {
 			display: grid;
 			grid-template-columns: repeat(5, auto);
@@ -203,8 +221,6 @@
 			}
 
 			.m2Item {
-				border: 1px solid #ccc;
-				border-radius: 4px;
 
 				.title {
 					position: relative;
@@ -247,8 +263,6 @@
 			}
 
 			.m3Item {
-				border: 1px solid #ccc;
-				border-radius: 4px;
 				padding: 16px;
 				position: relative;
 

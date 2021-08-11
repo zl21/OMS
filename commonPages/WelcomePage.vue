@@ -13,81 +13,94 @@
       <span>22</span>
       <span>33</span> -->
       <!-- <businessButton :btn-config="data.header.btn" class="btn" /> -->
-      <div class="btn">
+      <!-- <div class="btn">
         <Button type="primary">近三天</Button>
         <Button type="text">昨天</Button>
         <Button type="text">当天</Button>
-      </div>
+      </div> -->
       <div class="time">
         <span>更新时间：{{ data.header.time }}</span>
         <Icon type="ios-refresh" />
       </div>
     </div>
     <div class="main">
-      <div class="mainContent main01">
-        <h2>{{ data.main01.title }}</h2>
-        <div class="main01body">
-          <div class="left">
-            <div id="main" style="width: 200px; height: 200px"></div>
+      <div class="mainContent mainTop">
+        <div class="main01">
+          <div class="mainHeader">
+            <span>{{ data.main01.title }}</span>
+            <div class="btn">
+              <Button type="primary">近三天</Button>
+              <Button type="text">昨天</Button>
+              <Button type="text">当天</Button>
+            </div>
           </div>
-          <div class="right">
+          <div class="main01body">
+            <div class="left comItem">
+              <div id="main" style="width: 200px; height: 200px"></div>
+            </div>
+            <div class="right">
+              <div
+                class="rightItem comItem"
+                v-for="(it, index) in data.main01.data"
+                :key="index"
+                :class="it.status == 0 ? 'abnormal' : 'normal'"
+              >
+                <Icon type="ios-alert-outline" />
+                <span>{{ it.title }}</span>
+                <div class="info">
+                  <span>{{ it.message }}</span>
+                  <span>{{ it.sum }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div :class="['', 'main02']">
+          <div class="mainHeader">
+            <span>{{ data.main02.title }}</span>
+            <div class="btn">
+              <Button type="primary">全部</Button>
+              <Button type="text">异常</Button>
+              <Button type="text" :icon="m2BtnIcon" @click="upDown"></Button>
+            </div>
+          </div>
+          <div :class="['main02body', up]">
             <div
-              class="rightItem"
-              v-for="(it, index) in data.main01.data"
+              class="m2Item comItem"
+              v-for="(it, index) in data.main02.data"
               :key="index"
               :class="it.status == 0 ? 'abnormal' : 'normal'"
             >
-              <Icon type="ios-alert-outline" />
-              <span>{{ it.title }}</span>
-              <div class="info">
-                <span>{{ it.message }}</span>
-                <span>{{ it.sum }}</span>
+              <div class="title">
+                <Icon :type="it.titleIcon" />
+                <span>{{ it.title }}</span>
+                <Icon :type="it.statusIcon" class="warnIcon" />
+              </div>
+              <div
+                for=""
+                v-for="(i, j) in it.data"
+                :key="'m2' + j"
+                class="itemData"
+              >
+                <span>{{ i.A_name }}</span>
+                <span>{{ i.A_sum }}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div :class="['mainContent', 'main02']">
-        <h2>{{ data.main02.title }}</h2>
-        <div class="btn">
-          <Button type="primary">全部</Button>
-          <Button type="text">异常</Button>
-          <Button type="text" :icon="m2BtnIcon" @click="upDown"></Button>
-        </div>
-        <div :class="['main02body', up]">
-          <div
-            class="m2Item"
-            v-for="(it, index) in data.main02.data"
-            :key="index"
-            :class="it.status == 0 ? 'abnormal' : 'normal'"
-          >
-            <div class="title">
-              <Icon :type="it.titleIcon" />
-              <span>{{ it.title }}</span>
-              <Icon :type="it.statusIcon" class="warnIcon" />
-            </div>
-            <div
-              for=""
-              v-for="(i, j) in it.data"
-              :key="'m2' + j"
-              class="itemData"
-            >
-              <span>{{ i.A_name }}</span>
-              <span>{{ i.A_sum }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
       <div :class="['mainContent', 'main03']">
-        <h2>{{ data.main03.title }}</h2>
-        <div class="btn">
-          <Button type="primary">全部</Button>
-          <Button type="text">异常</Button>
-          <Button type="text" :icon="m3BtnIcon"></Button>
+        <div class="mainHeader">
+          <span>{{ data.main03.title }}</span>
+          <div class="btn">
+            <Button type="primary">全部</Button>
+            <Button type="text">异常</Button>
+            <Button type="text" :icon="m3BtnIcon"></Button>
+          </div>
         </div>
         <div :class="['main03body', up]">
           <div
-            class="m3Item"
+            class="m3Item comItem"
             v-for="(it, index) in data.main03.data"
             :key="index"
             :class="it.status == 0 ? 'abnormal' : 'normal'"
@@ -101,11 +114,13 @@
         </div>
       </div>
       <div class="mainContent main04">
-        <h2>{{ data.main04.title }}</h2>
-        <div class="btn">
-          <Button type="primary">近三天</Button>
-          <Button type="text">昨天</Button>
-          <Button type="text">当天</Button>
+        <div class="mainHeader">
+          <span>{{ data.main04.title }}</span>
+          <div class="btn">
+            <Button type="primary">近三天</Button>
+            <Button type="text">昨天</Button>
+            <Button type="text">当天</Button>
+          </div>
         </div>
         <div id="mainCurve" style="widht:100%;height:500px"></div>
       </div>
