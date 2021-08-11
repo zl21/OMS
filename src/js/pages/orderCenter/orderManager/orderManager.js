@@ -2509,7 +2509,7 @@ export default {
     getCurrentTime() {
       const self = this;
       const timestamp = Date.parse(new Date());
-      const SevenDaysTimestamp = Date.parse(new Date()) - 7 * 24 * 3600 * 1000;
+      const SevenDaysTimestamp = Date.parse(new Date()) - 6 * 24 * 3600 * 1000;
       const defaultTimeArr = [];
       defaultTimeArr[0] = `${self.dateLong2String(SevenDaysTimestamp)} 00:00:00`;
       defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
