@@ -1,8 +1,6 @@
 <template>
   <!-- 退换货订单-查询原始订单编号 -->
   <div class="searchOOID" v-loading="loading">
-    <businessForm :form-config="formConfig" />
-    <businessButton :btn-config="btn" />
     <business-action-table
       :jordan-table-config="table"
       @on-row-click="onRowClick"
@@ -16,7 +14,6 @@
 <script>
 // 退换货单详情
 import businessButton from 'professionalComponents/businessButton';
-import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import { setTimeout } from 'timers';
 import dateUtil from '@/assets/js/__utils__/date.js';
@@ -25,7 +22,6 @@ export default {
   name: 'searchOOID',
   components: {
     businessButton,
-    businessForm,
     businessActionTable,
   },
   data() {
@@ -36,170 +32,6 @@ export default {
       backable: false,
       modal: false,
       getCurrenData: {},
-      btn: {
-        typeAll: 'default', // 按钮统一风格样式
-        btnsite: "right",
-        buttons: [
-          {
-            text: $i18n.t('btn.reset'),//'重置'
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
-              this.queryEnter(0, this.table.pageSize, true);
-            }, // 按钮点击事件
-          },
-          {
-            text: $i18n.t('btn.find'), // 查找 按钮文本
-            disabled: false, // 按钮禁用控制
-            type: 'primary',
-            btnclick: () => {
-              this.queryEnter(0, this.table.pageSize, true);
-            }, // 按钮点击事件
-          },
-        ],
-      },
-      formConfig: {
-        formValue: {
-          CP_C_SHOP_ID: "",
-          SOURCE_CODE: '',
-          PLATFORM_STATUS: '',
-          ORDER_STATUS: ['1', '2'],
-          BUYER_NICK: '',
-          RECEIVER_NAME: '',
-          RECEIVER_MOBILE: '',
-          ORDER_DATE: [`${this.getData(7, true)}`, `${this.getData(7)}`],
-          PAY_TIME: [`${this.getData(7, true)}`, `${this.getData(7)}`],
-          BILL_NO: '',
-        },
-        formData: [
-          {
-            version: '1.4',
-            style: 'popInput',
-            width: '8',
-            colname: 'CP_C_SHOP_ID',
-            itemdata: {
-              // serviceId: 'r3-cp',
-              colid: 171929,
-              colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              /* precolnameslist: [
-                {
-                  premtype: 'CP_C_SHOP_PERMISSION_ID',
-                  refcol: 'ID',
-                  iswrite: 'true',
-                },
-              ], */
-              fkdisplay: 'mrp', // 外键关联类型
-              isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
-              name: '店铺', // 店铺名称
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'CP_C_SHOP', // 对应的表
-              reftableid: 10348, // 对应的表ID
-              valuedata: '', // 这个是选择的值
-            },
-            oneObj: (e) => {
-              console.log('店铺：', e);
-              this.formConfig.formValue.CP_C_SHOP_ID = e.pid;
-              // this.threeObjs();
-            },
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.platform_billNo'), // 平台单号
-            colname: 'SOURCE_CODE',
-            width: '8',
-            // inputenter: () => this.queryBounced(),
-          },
-          /* {
-            style: 'select',
-            label: '平台状态',
-            colname: 'PLATFORM_STATUS',
-            width: '8',
-            options: [],
-          }, */
-          {
-            style: '',
-            label: '单据状态',
-            colname: 'ORDER_STATUS',
-            width: '8',
-            multiple: true,
-            options: [],
-            selectChange: (val) => {
-              this.formConfig.formValue.ORDER_STATUS = val.value;
-            },
-          },
-          {
-            style: 'input',
-            label: $i18n.t('table_label.buyerNickname'), // 买家昵称
-            colname: 'BUYER_NICK',
-            width: '8',
-            // inputenter: () => this.queryBounced(),
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.consignee'), // 收货人
-            colname: 'RECEIVER_NAME',
-            width: '8',
-            // inputenter: () => this.queryBounced(),
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.consignee_phone'), // 收货人手机
-            colname: 'RECEIVER_MOBILE',
-            width: '8',
-            // inputenter: () => this.queryBounced(),
-          },
-          {
-            style: "date",
-            type: "datetimerange",
-            label: "下单时间",
-            colname: "ORDER_DATE",
-            format: "yyyy/MM/dd HH:mm:ss",
-            width: "8",
-            icon: "md-alarm",
-            placeholder: "",
-            transfer: true,
-            ghost: false, // 是否关闭幽灵按钮，默认开启
-            onChange: () => {
-              let time = this.formConfig.formValue.ORDER_DATE;
-              if (time[0]) {
-                // this.formConfig.formValue.ORDER_DATE = this.formatDate(time);
-              } else {
-                this.formConfig.formValue.ORDER_DATE = '';
-              }
-            },
-            clearable: true,
-          },
-          {
-            style: "date",
-            type: "datetimerange",
-            label: "支付时间",
-            colname: "PAY_TIME",
-            format: "yyyy/MM/dd HH:mm:ss",
-            width: "8",
-            icon: "md-alarm",
-            placeholder: "",
-            transfer: true,
-            ghost: false, // 是否关闭幽灵按钮，默认开启
-            onChange: () => {
-              let time = this.formConfig.formValue.PAY_TIME;
-              if (time[0]) {
-                // this.formConfig.formValue.PAY_TIME = this.formatDate(time);
-              } else {
-                this.formConfig.formValue.PAY_TIME = '';
-              }
-            },
-            clearable: true,
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.billNo'), // 订单编号
-            colname: 'BILL_NO',
-            width: '8',
-            // inputenter: () => this.queryBounced(),
-          },
-        ],
-      },
       table: {
         columns: [], // 表头
         data: [], // 数据配置
@@ -215,7 +47,171 @@ export default {
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
-        multiple: false
+        multiple: false,
+        businessFormConfig: {
+          formValue: {
+            CP_C_SHOP_ID: "",
+            SOURCE_CODE: '',
+            PLATFORM_STATUS: '',
+            ORDER_STATUS: ['1', '2'],
+            BUYER_NICK: '',
+            RECEIVER_NAME: '',
+            RECEIVER_MOBILE: '',
+            ORDER_DATE: [`${this.getData(7, true)}`, `${this.getData(7)}`],
+            PAY_TIME: [`${this.getData(7, true)}`, `${this.getData(7)}`],
+            BILL_NO: '',
+          },
+          formData: [
+            {
+              version: '1.4',
+              style: 'popInput',
+              width: '8',
+              colname: 'CP_C_SHOP_ID',
+              itemdata: {
+                // serviceId: 'r3-cp',
+                colid: 171929,
+                colname: 'CP_C_SHOP_ID', // 当前字段的名称
+                /* precolnameslist: [
+                  {
+                    premtype: 'CP_C_SHOP_PERMISSION_ID',
+                    refcol: 'ID',
+                    iswrite: 'true',
+                  },
+                ], */
+                fkdisplay: 'mrp', // 外键关联类型
+                isfk: true, // 是否有fk键
+                isnotnull: false, // 是否必填
+                name: '店铺', // 店铺名称
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                reftable: 'CP_C_SHOP', // 对应的表
+                reftableid: 10348, // 对应的表ID
+                valuedata: '', // 这个是选择的值
+              },
+              oneObj: (e) => {
+                console.log('店铺：', e);
+                this.table.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
+                // this.threeObjs();
+              },
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.platform_billNo'), // 平台单号
+              colname: 'SOURCE_CODE',
+              width: '8',
+              // inputenter: () => this.queryBounced(),
+            },
+            /* {
+              style: 'select',
+              label: '平台状态',
+              colname: 'PLATFORM_STATUS',
+              width: '8',
+              options: [],
+            }, */
+            {
+              style: '',
+              label: '单据状态',
+              colname: 'ORDER_STATUS',
+              width: '8',
+              multiple: true,
+              options: [],
+              selectChange: (val) => {
+                this.table.businessFormConfig.formValue.ORDER_STATUS = val.value;
+              },
+            },
+            {
+              style: 'input',
+              label: $i18n.t('table_label.buyerNickname'), // 买家昵称
+              colname: 'BUYER_NICK',
+              width: '8',
+              // inputenter: () => this.queryBounced(),
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.consignee'), // 收货人
+              colname: 'RECEIVER_NAME',
+              width: '8',
+              // inputenter: () => this.queryBounced(),
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.consignee_phone'), // 收货人手机
+              colname: 'RECEIVER_MOBILE',
+              width: '8',
+              // inputenter: () => this.queryBounced(),
+            },
+            {
+              style: "date",
+              type: "datetimerange",
+              label: "下单时间",
+              colname: "ORDER_DATE",
+              format: "yyyy/MM/dd HH:mm:ss",
+              width: "8",
+              icon: "md-alarm",
+              placeholder: "",
+              transfer: true,
+              ghost: false, // 是否关闭幽灵按钮，默认开启
+              onChange: () => {
+                let time = this.table.businessFormConfig.formValue.ORDER_DATE;
+                if (time[0]) {
+                  // this.table.businessFormConfig.formValue.ORDER_DATE = this.formatDate(time);
+                } else {
+                  this.table.businessFormConfig.formValue.ORDER_DATE = '';
+                }
+              },
+              clearable: true,
+            },
+            {
+              style: "date",
+              type: "datetimerange",
+              label: "支付时间",
+              colname: "PAY_TIME",
+              format: "yyyy/MM/dd HH:mm:ss",
+              width: "8",
+              icon: "md-alarm",
+              placeholder: "",
+              transfer: true,
+              ghost: false, // 是否关闭幽灵按钮，默认开启
+              onChange: () => {
+                let time = this.table.businessFormConfig.formValue.PAY_TIME;
+                if (time[0]) {
+                  // this.table.businessFormConfig.formValue.PAY_TIME = this.formatDate(time);
+                } else {
+                  this.table.businessFormConfig.formValue.PAY_TIME = '';
+                }
+              },
+              clearable: true,
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.billNo'), // 订单编号
+              colname: 'BILL_NO',
+              width: '8',
+              // inputenter: () => this.queryBounced(),
+            },
+          ],
+        },
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: "right",
+          buttons: [
+            {
+              text: $i18n.t('btn.reset'),//'重置'
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
+                this.queryEnter(0, this.table.pageSize, true);
+              }, // 按钮点击事件
+            },
+            {
+              text: $i18n.t('btn.find'), // 查找 按钮文本
+              disabled: false, // 按钮禁用控制
+              type: 'primary',
+              btnclick: () => {
+                this.queryEnter(0, this.table.pageSize, true);
+              }, // 按钮点击事件
+            },
+          ],
+        }
       },
     };
   },
@@ -229,8 +225,8 @@ export default {
     this.$nextTick(async () => {
       await this.initObjItem(-1);
       // 初始化form后给时间赋值
-      this.formConfig.formValue.ORDER_DATE = [`${this.getData(7, true)}`, `${this.getData(0)}`];
-      this.formConfig.formValue.PAY_TIME = [`${this.getData(7, true)}`, `${this.getData(0)}`];
+      this.table.businessFormConfig.formValue.ORDER_DATE = [`${this.getData(7, true)}`, `${this.getData(0)}`];
+      this.table.businessFormConfig.formValue.PAY_TIME = [`${this.getData(7, true)}`, `${this.getData(0)}`];
       // 获取
       this.queryEnter();
     });
@@ -285,9 +281,9 @@ export default {
         it.name = it.coldesc;
         it.display = it.display == 'OBJ_SELECT' ? 'select' : it.display;
       })
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(
+      self.table.businessFormConfig = this.$OMS2.omsUtils.initFormConfig(
         base,
-        self.formConfig
+        self.table.businessFormConfig
       );
       setTimeout(() => {
         this.loading = false;
@@ -302,7 +298,7 @@ export default {
       this.table.loading = true,
         this.table.data = [];
       // 获取查询条件
-      let { CP_C_SHOP_ID, SOURCE_CODE, PLATFORM_STATUS, ORDER_STATUS, BUYER_NICK, RECEIVER_NAME, RECEIVER_MOBILE, ORDER_DATE, PAY_TIME, BILL_NO } = self.formConfig.formValue;
+      let { CP_C_SHOP_ID, SOURCE_CODE, PLATFORM_STATUS, ORDER_STATUS, BUYER_NICK, RECEIVER_NAME, RECEIVER_MOBILE, ORDER_DATE, PAY_TIME, BILL_NO } = self.table.businessFormConfig.formValue;
       // 处理时间格式
       if (ORDER_DATE[0]) {
         ORDER_DATE = `${this.formatDate(ORDER_DATE[0])}~${this.formatDate(ORDER_DATE[1])}`
