@@ -13,7 +13,7 @@ const baseColumnDefs = [
 		// headerName: vmI18n.t("table_label.serialNo"),
 		field: 'SERIAL_NO',
 		pinned: 'left',
-		width: 80,
+		width: 90,
 		headerCheckboxSelection: true,
 		checkboxSelection: true,
 		sort: '10',
