@@ -392,9 +392,9 @@ export default {
         data.size = this.tableConfig.pageSize
         data.current = this.tableConfig.current
       } else {
-        data.skuEcode = self.replacetableConfig.businessFormConfig.formValue.searchValue.trim()
-        data.spuEcode = self.replacetableConfig.businessFormConfig.formValue.psCProEcode.trim()
-        data.spuEname = self.replacetableConfig.businessFormConfig.formValue.proName.trim()
+        data.skuEcode = self.tableConfig2.businessFormConfig.formValue.searchValue.trim()
+        data.spuEcode = self.tableConfig2.businessFormConfig.formValue.psCProEcode.trim()
+        data.spuEname = self.tableConfig2.businessFormConfig.formValue.proName.trim()
         data.size = this.tableConfig2.pageSize
         data.current = this.tableConfig2.current
       }

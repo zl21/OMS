@@ -661,10 +661,10 @@
               self.agTableConfig.pagenation.pageSize = data.PAGE_INFO.DEFAULT_SIZE;
               if(self.vueAgTable){
                 columns.forEach(item => {
-                  item['displayName'] = item.headerName;
+                  // item['displayName'] = item.headerName;
                   item.thAlign = 'center';
                 });
-                columns.unshift({"headerName":"序号","width":80,"field":"index","sort":10,"displayName":"序号",checkboxSelection:true , pinned: 'left'})
+                columns.unshift({"headerName":"序号","width":90,"field":"index","sort":10,checkboxSelection:true , pinned: 'left', headerClass: 'aG_index'})
               }
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;

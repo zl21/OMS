@@ -17,7 +17,8 @@ const baseColumnDefs = [
 		headerCheckboxSelection: true,
 		checkboxSelection: true,
 		sort: '10',
-		suppressMovable: true
+		suppressMovable: true,
+		headerClass: 'aG_index',
 	},
 	{
 		headerName: '促销编号',

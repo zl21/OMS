@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-29 10:50:56
+ * @LastEditTime: 2021-08-10 16:39:47
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增/编辑-新增明细-按钮
 -->
@@ -50,7 +50,6 @@ export default {
       tableConfig: {
         height: 300,
         indexColumn: true, // 是否显示序号
-        isShowSelection: true, // 是否显示checkedbox
         modal: false,
         businessButtonConfig: {
           typeAll: 'default', // 按钮统一风格样式
@@ -136,7 +135,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
-        pageSize: 10 // 每页条数
+        pageSize: 10, // 每页条数
       },
       btnConfigMo: {
         typeAll: "default",

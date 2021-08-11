@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-10 14:37:02
+ * @LastEditTime: 2021-08-10 16:32:40
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -291,6 +291,9 @@ export default {
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 展示单选radio，结合isShowSelection使用
+        multiple: false
       }, // 弹框 - 添加/替换商品
       btnPermission: {},
     };

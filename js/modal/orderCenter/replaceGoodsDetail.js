@@ -14,7 +14,6 @@ export default {
       searchValue: '',
       tableConfig: {
         indexColumn: true,
-        isShowSelection: true,
         columns: [{
           key: 'skuEcode',
           title: $i18n.t('table_label.code_SKU'), // SKU编码
@@ -49,7 +48,9 @@ export default {
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
-        highlightRow:true,
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 高亮单选必须结合它
+        multiple: false //false 单选
       },
       data: [],
       currentSkuEcode:'',

@@ -7,7 +7,7 @@
  * @FilePath: /project-logic/config/config/routeGuardConfig.js
  */
 import CustomizedConfig from 'burgeonConfig/customized.config';
-import cusAllPageConfig from '_/config/page/page.config.js';
+import cusAllPageConfig from './customized.page.config.js';
 
 /**
  * 路由守卫 - 全局前置守卫

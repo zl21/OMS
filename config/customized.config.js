@@ -78,8 +78,8 @@ class CustomizedConfig {
 		// this.initConfig = new InitAppConfig();
 		// console.log('hello CustomizedConfig');
 	}
-	static get custommizeMain() {
-		return this.#custommizeMain;
+	static get formDefined() {
+		return this.#custommizeMain; // defined组件的配置项
 	}
 	// subTable组件的配置项(有用到，不准删！！！)
 	static get subTableConfig() {

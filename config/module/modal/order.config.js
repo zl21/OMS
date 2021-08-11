@@ -8,6 +8,17 @@
  */
 // 订单中心
 export default {
+  PAYDETAIL: { 
+    component: () => import('@/views/pages/orderCenter/pay/payDetail.vue'),
+  },
+  ORDERRETURN: { 
+    component: () => import('@/views/pages/orderCenter/returnOrder/orderReturnchange.vue'),
+    labelName: '返回'
+  },
+  SAVE: { 
+    component: () => import('@/views/pages/orderCenter/returnOrder/save.vue'),
+    labelName: '保存'
+  },
   // JIT配货单修改仓库测试弹框
   MODIFYWAREHOUSE: {
     component: () => import('@/views/modal/orderCenter/modifyWarehouse.vue'),
