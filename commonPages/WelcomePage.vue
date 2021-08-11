@@ -66,7 +66,7 @@
               <Button type="text" :icon="m2BtnIcon" @click="upDown"></Button>
             </div>
           </div>
-          <div :class="['main02body', up]">
+          <div :class="['main02body', up]" id="main02body">
             <div
               class="m2Item comItem"
               v-for="(it, index) in data.main02.data"
@@ -100,7 +100,7 @@
             <Button type="text" :icon="m3BtnIcon"></Button>
           </div>
         </div>
-        <div :class="['main03body', up]">
+        <div :class="['main03body', up]" id="main03body">
           <div
             class="m3Item comItem"
             v-for="(it, index) in data.main03.data"
