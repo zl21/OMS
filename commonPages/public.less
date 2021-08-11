@@ -1,11 +1,12 @@
 
 .monitoringPlatform {
 	background-color: rgb(241, 241, 241);
-
+	height: calc(100vh - 90px);
+	display: flex;
+	flex-direction: column;
 	// ---------------- 公共样式 start ----------------
 	.btn {
 		position: absolute;
-
 		/deep/ .ark-btn-text,
 		.ark-btn-primary {
 			padding: 4px 8px;
@@ -22,7 +23,7 @@
 	}
 
 	.mainContent {
-		min-height: 200px;
+		// min-height: 200px;
 		border-radius: 4px;
 		background-color: rgb(255, 255, 255);
 		margin-bottom: 10px;
@@ -78,7 +79,7 @@
 	.main {
 		display: flex;
 		flex-direction: column;
-		height: calc(100vh - 107px);
+		flex: 1;
 		overflow: auto;
 
 		&::-webkit-scrollbar {
