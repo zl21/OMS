@@ -16,7 +16,9 @@ export default () => ({
 				// item.isorder = false // 关闭列的过滤功能
 				// item.thAlign = 'center'
 				if (item.colname == 'ID') {
-					item.headerClass = 'aG_index'
+					// item.headerClass = 'aG_index'
+					item.thAlign = 'center'
+					item.tdAlign = 'center'
 				}
 			})
 

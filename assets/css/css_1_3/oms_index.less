@@ -1494,9 +1494,13 @@ a:hover,
 }
 
 // ag样式覆盖
-.ag-grid-table-wrap {
+.ag-grid-table-wrap { // 标准页面
+  .ag-grid-table.ag-theme-balham .ag-header-cell, .ag-theme-balham .ag-header-group-cell {
+    padding: 0 12px;
+  }
   .ag-theme-balham .ag-header-select-all {
-    margin-right: 0;
+    margin-right: -3px;
+    margin-top: 1px;
   }
   .ag-header-index {
     color: rgb(142, 145, 160);
@@ -1504,5 +1508,15 @@ a:hover,
   .aG_index {
     display: flex;
     justify-content: space-between;
+  }
+}
+.agTable { // 定制页面
+  .ag-grid-table-wrap {
+    .ag-grid-table.ag-theme-balham .ag-header-cell, .ag-theme-balham .ag-header-group-cell {
+      padding: 0 14px;
+    }
+    .ag-theme-balham .ag-header-select-all {
+      margin-right: 3px;
+    }
   }
 }

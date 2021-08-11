@@ -664,7 +664,7 @@
                   // item['displayName'] = item.headerName;
                   item.thAlign = 'center';
                 });
-                columns.unshift({"headerName":"序号","width":90,"field":"index","sort":10,checkboxSelection:true , pinned: 'left', headerClass: 'aG_index'})
+                columns.unshift({"headerName":"序号","width":90,"field":"index","sort":10,checkboxSelection:true , pinned: 'left', headerClass: '', thAlign: 'center', tdAlign: 'center'})
               }
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;
