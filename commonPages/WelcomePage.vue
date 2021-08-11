@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-06 16:36:58
+ * @LastEditTime: 2021-08-11 10:45:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -107,321 +107,334 @@
           <Button type="text">昨天</Button>
           <Button type="text">当天</Button>
         </div>
+        <div id="mainCurve" style="widht:100%;height:500px"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import businessButton from 'professionalComponents/businessButton';
-import dateUtil from '@/assets/js/__utils__/date.js';
-import * as echarts from 'echarts';
+import businessButton from "professionalComponents/businessButton";
+import dateUtil from "@/assets/js/__utils__/date.js";
+// 按需引入
+import * as echarts from "echarts/core";
+import { GridComponent } from "echarts/components";
+import { LineChart } from "echarts/charts";
+import { CanvasRenderer } from "echarts/renderers";
+
+echarts.use([GridComponent, LineChart, CanvasRenderer]);
 
 export default {
-  name: 'WelcomePage',
+  name: "WelcomePage",
   components: {
-    businessButton,
+    businessButton
   },
   data() {
     return {
-      up: '',
-      m2BtnIcon: 'ios-arrow-down',
-      m3BtnIcon: 'ios-arrow-down',
+      up: "",
+      m2BtnIcon: "ios-arrow-down",
+      m3BtnIcon: "ios-arrow-down",
       data: {
         header: {
           time: new Date(),
           btn: {
-            btnsite: 'left', // 按钮对齐方式
-            typeAll: 'default',
+            btnsite: "left", // 按钮对齐方式
+            typeAll: "default",
             buttons: [
               {
-                webname: 'threeDays',
-                text: '近三天',
-                type: 'primary',
-                btnclick: () => {
-                },
+                webname: "threeDays",
+                text: "近三天",
+                type: "primary",
+                btnclick: () => {}
               },
               {
-                webname: 'yesterday',
-                text: '昨天',
-                btnclick: () => {
-                },
+                webname: "yesterday",
+                text: "昨天",
+                btnclick: () => {}
               },
               {
-                webname: 'today',
-                text: '当天',
-                btnclick: () => {
-                },
+                webname: "today",
+                text: "当天",
+                btnclick: () => {}
               }
             ]
-          },
+          }
         },
         main01: {
-          title: '第三方监控',
+          title: "第三方监控",
           sum: 10,
           ex_sum: 2,
           normal_sum: 8,
           status: 0,
-          status_name: '异常',
+          status_name: "异常",
           data: [
             {
               status: 0,
-              title: 'AG项目1',
-              message: '异常单据',
-              sum: 288,
+              title: "AG项目1",
+              message: "异常单据",
+              sum: 288
             },
             {
               status: 1,
-              title: 'AG项目2',
-              message: '异常单据',
-              sum: 288,
+              title: "AG项目2",
+              message: "异常单据",
+              sum: 288
             },
             {
               status: 1,
-              title: 'AG项目3',
-              message: '异常单据',
-              sum: 288,
+              title: "AG项目3",
+              message: "异常单据",
+              sum: 288
             },
             {
               status: 0,
-              title: 'AG项目4',
-              message: '异常单据',
-              sum: 288,
+              title: "AG项目4",
+              message: "异常单据",
+              sum: 288
             }
           ]
         },
         main02: {
-          title: '对外接口监控项目详细数据',
+          title: "对外接口监控项目详细数据",
           data: [
             {
-              titleIcon: 'ios-home',
-              title: 'WMS(AG项目1)',
-              statusIcon: 'ios-alert-outline',
+              titleIcon: "ios-home",
+              title: "WMS(AG项目1)",
+              statusIcon: "ios-alert-outline",
               data: [
                 {
                   status: 0,
-                  A_name: '推送总数',
-                  A_sum: 3880,
+                  A_name: "推送总数",
+                  A_sum: 3880
                 },
                 {
                   status: 1,
-                  A_name: '推送成功',
-                  A_sum: 345,
+                  A_name: "推送成功",
+                  A_sum: 345
                 },
                 {
                   status: 0,
-                  A_name: '推送失败率',
-                  A_sum: '20%',
-                },
-              ],
+                  A_name: "推送失败率",
+                  A_sum: "20%"
+                }
+              ]
             },
             {
-              titleIcon: 'ios-home',
-              title: 'WMS(AG项目1)',
-              statusIcon: 'ios-alert-outline',
+              titleIcon: "ios-home",
+              title: "WMS(AG项目1)",
+              statusIcon: "ios-alert-outline",
               data: [
                 {
                   status: 0,
-                  A_name: '推送总数',
-                  A_sum: 3880,
+                  A_name: "推送总数",
+                  A_sum: 3880
                 },
                 {
                   status: 1,
-                  A_name: '推送成功',
-                  A_sum: 345,
+                  A_name: "推送成功",
+                  A_sum: 345
                 },
                 {
                   status: 0,
-                  A_name: '推送失败率',
-                  A_sum: '20%',
-                },
-              ],
+                  A_name: "推送失败率",
+                  A_sum: "20%"
+                }
+              ]
             },
             {
-              titleIcon: 'ios-home',
-              title: 'WMS(AG项目1)',
-              statusIcon: 'ios-alert-outline',
+              titleIcon: "ios-home",
+              title: "WMS(AG项目1)",
+              statusIcon: "ios-alert-outline",
               data: [
                 {
                   status: 0,
-                  A_name: '推送总数',
-                  A_sum: 3880,
+                  A_name: "推送总数",
+                  A_sum: 3880
                 },
                 {
                   status: 1,
-                  A_name: '推送成功',
-                  A_sum: 345,
+                  A_name: "推送成功",
+                  A_sum: 345
                 },
                 {
                   status: 0,
-                  A_name: '推送失败率',
-                  A_sum: '20%',
-                },
-              ],
+                  A_name: "推送失败率",
+                  A_sum: "20%"
+                }
+              ]
             },
             {
-              titleIcon: 'ios-home',
-              title: 'WMS(AG项目1)',
-              statusIcon: 'ios-alert-outline',
+              titleIcon: "ios-home",
+              title: "WMS(AG项目1)",
+              statusIcon: "ios-alert-outline",
               data: [
                 {
                   status: 0,
-                  A_name: '推送总数',
-                  A_sum: 3880,
+                  A_name: "推送总数",
+                  A_sum: 3880
                 },
                 {
                   status: 1,
-                  A_name: '推送成功',
-                  A_sum: 345,
+                  A_name: "推送成功",
+                  A_sum: 345
                 },
                 {
                   status: 0,
-                  A_name: '推送失败率',
-                  A_sum: '20%',
-                },
-              ],
+                  A_name: "推送失败率",
+                  A_sum: "20%"
+                }
+              ]
             },
             {
-              titleIcon: 'ios-home',
-              title: 'WMS(AG项目1)',
-              statusIcon: 'ios-alert-outline',
+              titleIcon: "ios-home",
+              title: "WMS(AG项目1)",
+              statusIcon: "ios-alert-outline",
               data: [
                 {
                   status: 0,
-                  A_name: '推送总数',
-                  A_sum: 3880,
+                  A_name: "推送总数",
+                  A_sum: 3880
                 },
                 {
                   status: 1,
-                  A_name: '推送成功',
-                  A_sum: 345,
+                  A_name: "推送成功",
+                  A_sum: 345
                 },
                 {
                   status: 0,
-                  A_name: '推送失败率',
-                  A_sum: '20%',
-                },
-              ],
+                  A_name: "推送失败率",
+                  A_sum: "20%"
+                }
+              ]
             },
             {
-              titleIcon: 'ios-home',
-              title: 'WMS(AG项目1)',
-              statusIcon: 'ios-alert-outline',
+              titleIcon: "ios-home",
+              title: "WMS(AG项目1)",
+              statusIcon: "ios-alert-outline",
               data: [
                 {
                   status: 0,
-                  A_name: '推送总数',
-                  A_sum: 3880,
+                  A_name: "推送总数",
+                  A_sum: 3880
                 },
                 {
                   status: 1,
-                  A_name: '推送成功',
-                  A_sum: 345,
+                  A_name: "推送成功",
+                  A_sum: 345
                 },
                 {
                   status: 0,
-                  A_name: '推送失败率',
-                  A_sum: '20%',
-                },
-              ],
-            },
+                  A_name: "推送失败率",
+                  A_sum: "20%"
+                }
+              ]
+            }
           ]
         },
         main03: {
-          title: '服务异常监控详细数据（AG项目1）',
+          title: "服务异常监控详细数据（AG项目1）",
           data: [
             {
-              title: '转单服务',
-              time: '2h',
+              title: "转单服务",
+              time: "2h",
               status: 0,
               min: 10,
               max: 10000,
-              desc: '积压单量',
-              tips: '',
+              desc: "积压单量",
+              tips: ""
             },
             {
-              title: '转单服务',
-              time: '2h',
+              title: "转单服务",
+              time: "2h",
               status: 0,
               min: 10,
               max: 10000,
-              desc: '积压单量',
-              tips: '',
+              desc: "积压单量",
+              tips: ""
             },
             {
-              title: '转单服务',
-              time: '2h',
+              title: "转单服务",
+              time: "2h",
               status: 0,
               min: 10,
               max: 10000,
-              desc: '积压单量',
-              tips: '',
+              desc: "积压单量",
+              tips: ""
             },
             {
-              title: '转单服务',
-              time: '2h',
+              title: "转单服务",
+              time: "2h",
               status: 0,
               min: 10,
               max: 10000,
-              desc: '积压单量',
-              tips: '',
+              desc: "积压单量",
+              tips: ""
             },
             {
-              title: '转单服务',
-              time: '2h',
+              title: "转单服务",
+              time: "2h",
               status: 0,
               min: 10,
               max: 10000,
-              desc: '积压单量',
-              tips: '',
-            },
+              desc: "积压单量",
+              tips: ""
+            }
           ]
         },
         main04: {
-          title: '接口异常趋势图',
-        },
+          title: "接口异常趋势图"
+        }
       },
       vmI18n: window.vmI18n
     };
   },
   methods: {
     upDown() {
-      this.up = this.up ? '' : 'fadeInDom';
-      this.m2BtnIcon = this.m2BtnIcon == 'ios-arrow-down' ? 'ios-arrow-up' : 'ios-arrow-down';
-    },
+      this.up = this.up ? "" : "fadeInDom";
+      this.m2BtnIcon =
+        this.m2BtnIcon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
+    }
   },
   mounted() {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
-    this.data.header.time = dateUtil.getFormatDate(this.data.header.time, 'yyyy-MM-dd HH:mm:ss');
-
-    let myChart = echarts.init(document.getElementById('main'));
-    // 指定图表的配置项和数据
-    let option = {
-      title: {
-        text: 'ECharts 入门示例'
-      },
-      tooltip: {},
-      legend: {
-        data: ['销量']
-      },
-      xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-      },
-      yAxis: {},
-      series: [{
-        name: '销量',
-        type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
-      }]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    this.data.header.time = dateUtil.getFormatDate(
+      this.data.header.time,
+      "yyyy-MM-dd HH:mm:ss"
+    );
+    this.curveChart();
   },
   destroyed() {
-    if (document.getElementById('content')) {
-      const domContent = document.getElementById('content');
-      domContent.style.padding = '0 15px';
+    if (document.getElementById("content")) {
+      const domContent = document.getElementById("content");
+      domContent.style.padding = "0 15px";
+    }
+  },
+  methods: {
+    curveChart() {
+      // 获取chart节点
+      const chartDom = document.getElementById("mainCurve");
+      // 初始化
+      const myChart = echarts.init(chartDom);
+      // 配置选项
+      const option = {
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        },
+        yAxis: {
+          type: "value"
+        },
+        series: [
+          {
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: "line",
+            smooth: true
+          }
+        ]
+      };
+      // 设置选项
+      option && myChart.setOption(option);
     }
   }
 };
