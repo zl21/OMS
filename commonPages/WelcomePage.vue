@@ -388,13 +388,6 @@ export default {
       vmI18n: window.vmI18n
     };
   },
-  methods: {
-    upDown() {
-      this.up = this.up ? "" : "fadeInDom";
-      this.m2BtnIcon =
-        this.m2BtnIcon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
-    }
-  },
   mounted() {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
@@ -411,6 +404,11 @@ export default {
     }
   },
   methods: {
+    upDown() {
+      this.up = this.up ? "" : "fadeInDom";
+      this.m2BtnIcon =
+        this.m2BtnIcon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
+    },
     curveChart() {
       // 获取chart节点
       const chartDom = document.getElementById("mainCurve");
