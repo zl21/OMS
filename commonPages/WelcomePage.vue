@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-11 19:28:00
+ * @LastEditTime: 2021-08-11 19:50:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -517,6 +517,7 @@ export default {
         this.m2BtnIcon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
     },
     /** ----------------- 配置方法 -------------------- **/
+    // 折线图
     curveChart() {
       const chartDom = document.getElementById("mainCurve");
       const myChart = echarts.init(chartDom);
@@ -631,7 +632,10 @@ export default {
       // 设置选项
       option && myChart.setOption(option);
     },
-
+    // 仪表盘
+    dashboardChart(){
+      
+    },
     /** ------------------ 事件方法 ------------------- **/
     geTabnormal(index) {
       // 设置按钮样式
@@ -658,8 +662,12 @@ export default {
 @import "~@burgeon/oms-theme/skin/public.less";
 @import "./public.less";
 .selectBox {
+  margin-top: 20px;
   display: grid;
   grid-template-columns: calc(100% - 200px) 200px;
+  .ark-form-item{
+    margin-bottom: 0;
+  }
   .btn{
     text-align:right;
   }
