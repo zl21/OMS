@@ -45,12 +45,15 @@
                 :key="index"
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
-                <Icon type="ios-alert-outline" />
-                <span>{{ it.title }}</span>
-                <div class="info">
-                  <span>{{ it.message }}</span>
-                  <span>{{ it.sum }}</span>
+                <div class="title">
+                  <Icon type="ios-alert-outline" />
+                  <span>{{ it.title }}</span>
                 </div>
+                <div class="status">{{ it.status_name }}</div>
+                <div v-if="it.status == 0" class="detail">{{ it.message }} <i class="sum">{{ it.sum }}</i></div>
+                <!-- <div class="info"> -->
+                  <!-- <span>{{ it.sum }}</span> -->
+                <!-- </div> -->
               </div>
             </div>
           </div>
@@ -179,24 +182,28 @@ export default {
           data: [
             {
               status: 0,
+              status_name: '异常',
               title: "AG项目1",
               message: "异常单据",
               sum: 288
             },
             {
               status: 1,
+              status_name: '正常',
               title: "AG项目2",
               message: "异常单据",
               sum: 288
             },
             {
               status: 1,
+              status_name: '正常',
               title: "AG项目3",
               message: "异常单据",
               sum: 288
             },
             {
               status: 0,
+              status_name: '异常',
               title: "AG项目4",
               message: "异常单据",
               sum: 288
