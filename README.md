@@ -1027,6 +1027,7 @@
 | v1.11.85 | 页面businessActionTable组件配置 |
 | v1.11.86 | 功能权限-复制权限弹窗businessDialog重构 |
 | v1.11.87 | ag checkBox样式再调整 |
+| v1.11.88 | ag td垂直居中 |
 
 
 
