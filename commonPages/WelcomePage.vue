@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-11 15:53:49
+ * @LastEditTime: 2021-08-11 15:55:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -422,6 +422,9 @@ export default {
         tooltip: {
           trigger: 'item' ,
           alwaysShowContent:true, //始终保留最后一个经过的提示框
+          axisPointer: {
+            type: 'cross'
+          },
           formatter: (params, ticket, callback)=>{
             console.log('1:',params, '2:',ticket);
             let HTMLElement = ''
