@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-11 17:42:05
+ * @LastEditTime: 2021-08-11 19:28:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -50,7 +50,9 @@
                   <span>{{ it.title }}</span>
                 </div>
                 <div class="status">{{ it.status_name }}</div>
-                <div v-if="it.status == 0" class="detail">{{ it.message }} <i class="sum">{{ it.sum }}</i></div>
+                <div v-if="it.status == 0" class="detail">
+                  {{ it.message }} <i class="sum">{{ it.sum }}</i>
+                </div>
               </div>
             </div>
           </div>
@@ -115,11 +117,47 @@
       </div>
       <div class="mainContent main04">
         <div class="mainHeader">
-          <span>{{ data.main04.title }}</span>
+          <span>{{ main04.title }}</span>
+        </div>
+        <div class="selectBox">
+          <Form :label-width="80">
+            <Row>
+              <Col span="6">
+                <FormItem label="项目：">
+                  <Select v-model="main04.projectV">
+                    <Option
+                      v-for="item in main04.projectOption"
+                      :value="item.value"
+                      :key="item.value"
+                      >{{ item.label }}</Option
+                    >
+                  </Select>
+                </FormItem>
+              </Col>
+              <Col span="6">
+                <FormItem label="接口：">
+                  <Select v-model="main04.apiV">
+                    <Option
+                      v-for="item in main04.apiOption"
+                      :value="item.value"
+                      :key="item.value"
+                      >{{ item.label }}</Option
+                    >
+                  </Select>
+                </FormItem>
+              </Col>
+            </Row>
+          </Form>
           <div class="btn">
-            <Button type="primary">近三天</Button>
-            <Button type="text">昨天</Button>
-            <Button type="text">当天</Button>
+            <div
+              style="display:inline-block"
+              v-for="(it, index) in main04.btnArr"
+              :key="index"
+            >
+              <Button :type="it.type" @click="geTabnormal(index)">{{
+                it.text
+              }}</Button>
+            </div>
           </div>
         </div>
         <div id="mainCurve" style="widht:100%;height:500px"></div>
@@ -179,28 +217,28 @@ export default {
           data: [
             {
               status: 0,
-              status_name: '异常',
+              status_name: "异常",
               title: "AG项目1",
               message: "异常单据",
               sum: 288
             },
             {
               status: 1,
-              status_name: '正常',
+              status_name: "正常",
               title: "AG项目2",
               message: "异常单据",
               sum: 288
             },
             {
               status: 1,
-              status_name: '正常',
+              status_name: "正常",
               title: "AG项目3",
               message: "异常单据",
               sum: 288
             },
             {
               status: 0,
-              status_name: '异常',
+              status_name: "异常",
               title: "AG项目4",
               message: "异常单据",
               sum: 288
@@ -393,9 +431,64 @@ export default {
               tips: ""
             }
           ]
+        }
+      },
+      // 模块4 --- 接口异常趋势图
+      main04: {
+        title: "接口异常趋势图",
+        // 按钮配置项
+        btnArr: [
+          {
+            text: "近三天",
+            type: "primary"
+          },
+          {
+            text: "昨日",
+            type: "text"
+          },
+          {
+            text: "当天",
+            type: "text"
+          }
+        ],
+        // 项目和接口枚举项
+        projectOption: [
+          {
+            value: "1",
+            label: "New York"
+          },
+          {
+            value: "2",
+            label: "London"
+          }
+        ],
+        apiOption: [
+          {
+            value: "1",
+            label: "New York"
+          },
+          {
+            value: "2",
+            label: "London"
+          }
+        ],
+        projectV: "1",
+        apiV: "2",
+        // 数据
+        currentDay:{
+          type:'category',
+          key:['1点','2点','3点','4点','5点','6点','7点','8点','9点','10点','11点','12点','12点','14点','15点','16点','17点','18点','19点','20点','21点','22点','23点','24点'],
+          data:[19,23,45,68,90,13,54,20,35,24,78,1,57,24,90,13,54,20,35,24,78,1,57,24]
         },
-        main04: {
-          title: "接口异常趋势图"
+        threeDay:{
+          type:'category',
+          key:["One", "Two", "Three"],
+          data:[100,200,50]
+        },
+        setData:{
+          type:'category',
+          key:["One", "Two", "Three"],
+          data:[100,200,50]
         }
       },
       vmI18n: window.vmI18n
@@ -423,6 +516,7 @@ export default {
       this.m2BtnIcon =
         this.m2BtnIcon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
     },
+    /** ----------------- 配置方法 -------------------- **/
     curveChart() {
       const chartDom = document.getElementById("mainCurve");
       const myChart = echarts.init(chartDom);
@@ -441,8 +535,8 @@ export default {
           alwaysShowContent: true, //始终保留最后一个经过的提示框
           // 自定义显示位置
           position: (point, params, dom, rect, size) => {
-              // 跟着鼠标走
-              return [point[0] - 60, point[1] - 80];
+            // 跟着鼠标走
+            return [point[0] - 60, point[1] - 80];
           },
           // 自定义显示内容
           formatter: params => {
@@ -476,7 +570,7 @@ export default {
           }
         },
         xAxis: {
-          type: "category",
+          type: this.main04.setData.type,
           axisLine: {
             lineStyle: {
               color: "#F2F2F2"
@@ -490,7 +584,7 @@ export default {
             fontSize: "12",
             color: "#8D91A1"
           },
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+          data: this.main04.setData.key
         },
         yAxis: {
           type: "value",
@@ -506,9 +600,9 @@ export default {
         series: [
           {
             type: "line",
-            symbol:'circle',
+            symbol: "circle",
             smooth: true, //平滑折线  = 曲线
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: this.main04.setData.data,
             symbolSize: 10, // 设定折线点的大小
             // 折线条的样式
             lineStyle: {
@@ -518,17 +612,17 @@ export default {
             // 折线拐点的样式
             itemStyle: {
               normal: {
-                color: "#FF6951",
-              },
+                color: "#FF6951"
+              }
             },
             // 鼠标经过时
             emphasis: {
-               itemStyle: {
-                  color: '#FF6951', //颜色
-                  borderColor: '#fff', //图形的描边颜色
-                  borderWidth: 2, // 描边的线宽
-                  shadowBlur: 4, // 图形的阴影大小
-                  shadowColor: '#FF6951', // 图形的阴影颜色
+              itemStyle: {
+                color: "#FF6951", //颜色
+                borderColor: "#fff", //图形的描边颜色
+                borderWidth: 2, // 描边的线宽
+                shadowBlur: 4, // 图形的阴影大小
+                shadowColor: "#FF6951" // 图形的阴影颜色
               }
             }
           }
@@ -536,7 +630,26 @@ export default {
       };
       // 设置选项
       option && myChart.setOption(option);
+    },
+
+    /** ------------------ 事件方法 ------------------- **/
+    geTabnormal(index) {
+      // 设置按钮样式
+      let btnArr = this.main04.btnArr;
+      btnArr.forEach((it, i) => {
+        if (i == index) btnArr[i].type = "primary";
+        else btnArr[i].type = "text";
+      });
+      if(index == 2){
+        this.main04.setData = this.main04.currentDay 
+      }else{
+        this.main04.setData = this.main04.threeDay 
+      }
+      this.curveChart();
     }
+    // 
+  
+    /** ------------------ 获取数据方法 ------------------- **/
   }
 };
 </script>
@@ -544,4 +657,20 @@ export default {
 <style scoped lang="less">
 @import "~@burgeon/oms-theme/skin/public.less";
 @import "./public.less";
+.selectBox {
+  display: grid;
+  grid-template-columns: calc(100% - 200px) 200px;
+  .btn{
+    text-align:right;
+  }
+  /deep/ .ark-select-single .ark-select-selection {
+    height: 32px;
+    line-height: 32px;
+    .ark-select-placeholder,
+    .ark-select-selected-value {
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+}
 </style>
