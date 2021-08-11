@@ -210,83 +210,24 @@
         </div>
       </div>
     </div>
-    <Modal
-      v-model="copyPermission"
-      closable
-      :width="420"
-      mask
-      footer-hide
-      title="复制权限"
-    >
-      <div class="modalContent">
-        <div class="itemContent">
-          <div class="labelContent">
-            <div class="labelTip">*</div>
-            <div>原角色:</div>
-          </div>
-          <DropDownSelectFilter
-            class="itemCom"
-            :total-row-count="totalRowCount"
-            :page-size="dropPageSize"
-            :auto-data="singleAutoData"
-            :columns-key="['NAME']"
-            :hidecolumns="['ID']"
-            :default-selected="singleDefaultSelected"
-            :data="singleDropDownSelectFilterData"
-            @on-fkrp-selected="singleDropSelected"
-            @on-page-change="singleDropPageChange"
-            @on-popper-hide="singlePopperHide"
-            @on-clear="singleDropClear"
-            @on-input-value-change="singleInputChange"
-          />
-        </div>
-        <div class="itemContent">
-          <div class="labelContent">
-            <div class="labelTip">*</div>
-            <div>目的角色:</div>
-          </div>
-          <DropDownSelectFilter
-            :single="false"
-            class="itemCom"
-            :total-row-count="totalRowCount"
-            :page-size="dropPageSize"
-            :columns-key="['NAME']"
-            :hidecolumns="['ID']"
-            :default-selected="multipleDefaultSelected"
-            :auto-data="multipleAutoData"
-            :data="multipleDropDownSelectFilterData"
-            :disabled="filterDisabled"
-            @on-fkrp-selected="multipleDropSelected"
-            @on-page-change="multipleDropPageChange"
-            @on-popper-hide="multiplePopperHide"
-            @on-clear="multipleDropClear"
-            @on-input-value-change="multipleInputChange"
-          />
-        </div>
-        <div class="itemContent">
-          <div class="labelContent">
-            <div class="labelTip">*</div>
-            <div>复制方式:</div>
-          </div>
-          <Select
-            v-model="copyType"
-            class="itemCom"
-            placeholder="请选择复制方式"
-          >
-            <Option value="cover"> 覆盖原有权限 </Option>
-            <Option value="copy"> 保留原有权限 </Option>
-          </Select>
-        </div>
-        <div class="modalButton">
-          <Button type="fcdefault" class="Button" @click="modalConfirm">
-            确定
-          </Button>
-          <Button type="fcdefault" class="Button" @click="modalCancel">
-            取消
-          </Button>
-        </div>
-      </div>
-    </Modal>
+    <businessDialog
+      :batch-closed="publicBouncedConfig.batchClosed"
+      :closable="publicBouncedConfig.closable"
+      :component-data="publicBouncedConfig.componentData"
+      :draggable="publicBouncedConfig.draggable"
+      :exclude-string="publicBouncedConfig.excludeString"
+      :keep-alive="publicBouncedConfig.keepAlive"
+      :mask="publicBouncedConfig.mask"
+      :mask-closable="publicBouncedConfig.maskClosable"
+      :name="publicBouncedConfig.name"
+      :quit="publicBouncedConfig.quit"
+      :scrollable="publicBouncedConfig.scrollable"
+      :title="publicBouncedConfig.title"
+      :title-align="publicBouncedConfig.titleAlign"
+      :transfer="publicBouncedConfig.transfer"
+      :url="publicBouncedConfig.url"
+      :width="publicBouncedConfig.width"
+    />
   </div>
 </template>
 
@@ -296,27 +237,20 @@
 // const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
 const store = vm.$store
 import service from '@/service/index';
-
+import businessDialog from 'professionalComponents/businessDialog';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 export default {
+  components: {
+    businessDialog
+  },
   data() {
     return {
+      dialogs: DialogConfig.config(),
+      publicBouncedConfig: {}, // 公共弹框
       isSaveError: false, // 是否保存失败
       spinShow: false, // loading是否显示
-      filterDisabled:true,//控制目标角色是否禁用
       copyPermission: false, // 复制权限弹框
-      copyType: '', // 复制权限弹框  复制方式
-      singlePermissionId: null, // 复制权限外键单选id
-      multiplePermissionId: null, // 复制权限外键多选id
-      backupsDropData: [], // 备份复制权限外键数据
-      singleDropDownSelectFilterData: {}, // 复制权限外键单选数据
-      singleAutoData: [], // 复制权限外键单选模糊搜索数据
-      singleDefaultSelected: [], // 复制权限单选默认数据
-      multipleDefaultSelected: [], // 复制权限多选默认数据
-      multipleDropDownSelectFilterData: {}, // 复制权限外键多选数据
-      multipleAutoData: [], // 复制权限外键多选模糊搜索数据
-      totalRowCount: 0, // 复制权限外键数据的totalRowCount
-      dropPageSize: 10, // 复制权限外键数据的pageSize
 
       buttonsData: [], // 按钮数据
       menuHighlightIndex: 0, // 菜单高亮的index
@@ -480,19 +414,6 @@ export default {
       // quanXianType: this.$route.query.type,//判断权限类型
       treeDataCenter: []
     };
-  },
-  watch: {
-    copyPermission(val) {
-      if (val) {
-        this.getCopyPermissionData();
-      } else {
-        this.singleDefaultSelected = [];
-        this.multipleDefaultSelected = [];
-        this.singleAutoData = [];
-        this.multipleAutoData = [];
-        this.copyType = '';
-      }
-    }
   },
   computed: {
   },
@@ -954,8 +875,11 @@ export default {
       if (item.webdesc === '刷新') {
         this.refreshButtonClick();
       } else if (item.webdesc === '复制权限') {
-        this.filterDisabled = true
-        this.copyPerm();
+        const self = this;
+        self.publicBouncedConfig = this.dialogs.copyPermissionConfig;
+        setTimeout(() => {
+          self.$children.find((item) => item.name === 'copyPermission').openConfirm();
+        }, 100);
       } else if (item.webdesc === '保存') {
         this.savePermission();
       }
@@ -1017,9 +941,6 @@ export default {
       };
       store.commit('global/tabOpen', param);
     },
-    copyPerm() {
-      this.copyPermission = true;
-    }, // 复制权限
     tableRowClick(row, index) {
       this.tableDefaultSelectedRowIndex = index;
       this.getExtendTableData(this.tableData[index], index);
@@ -1052,72 +973,6 @@ export default {
       }
       return '0';
     }, // 十进制转二进制
-    modalCancel() {
-      this.copyPermission = false;
-    }, // 复制权限弹框取消按钮
-    modalConfirm() {
-      if (this.singlePermissionId === null) {
-        this.$Message.warning({
-          content: '请选择原角色！'
-        });
-        return;
-      }
-      if (this.multiplePermissionId === null) {
-        this.$Message.warning({
-          content: '请选择目的角色！'
-        });
-        return;
-      }
-      if (this.multiplePermissionId.indexOf(this.singlePermissionId.toString()) !== -1) {
-        this.$Message.warning({
-          content: '目的角色不能包含原角色，请重新选择！'
-        });
-        return;
-      }
-      if (this.copyType === '') {
-        this.$Message.warning({
-          content: '请选择复制方式！'
-        });
-        return;
-      }
-      this.copyPermission = false;
-      const obj = {
-        sourceid: this.singlePermissionId,
-        targetids: this.multiplePermissionId,
-        type: this.copyType
-      };
-      this.spinShow = true;
-      service.systemConfig.copyPermission({
-        params: obj,
-        success: (res) => {
-          this.spinShow = false;
-          if (res.data.code === 0) {
-            this.singlePermissionId = null;
-            this.multiplePermissionId = null;
-            this.copyType = '';
-            this.getTableData();
-            this.$Message.success({
-              content: res.data.message
-            });
-          }
-        }
-      });
-      // network.post('/p/cs/copyPermission', obj)
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       this.singlePermissionId = null;
-      //       this.multiplePermissionId = null;
-      //       this.copyType = '';
-      //       this.getTableData();
-      //       this.$Message.success({
-      //         content: res.data.message
-      //       });
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     throw err;
-      //   });
-    }, // 复制权限弹框确定按钮
     rowCheckboxChange(currentValue, params) {
       if (params.column.key === 'extend') {
         this.extendRowCheckboxChange(currentValue, params);
@@ -1657,153 +1512,7 @@ export default {
         return acc;
       }, []);
     }, // 获得保存的数据
-    getCopyPermissionData() {
-      service.systemConfig.cgroupsquery({
-        params: { NAME: '' },
-        success: (res) => {
-          if (res.data.code === 0) {
-            this.backupsDropData = res.data.data;
-            this.totalRowCount = res.data.data.length;
-            this.getSingleDropSelectData(1, res.data.data);
-            this.getMultipleDropSelectData(1, res.data.data);
-          }
-        }
-      });
-      // network.post('/p/cs/cgroupsquery', { NAME: '' })
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       this.backupsDropData = res.data.data;
-      //       this.totalRowCount = res.data.data.length;
-      //       this.getSingleDropSelectData(1, res.data.data);
-      //       this.getMultipleDropSelectData(1, res.data.data);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     throw err;
-      //   });
-    }, // 获取复制权限外键的数据
-    getSingleDropSelectData(pageValue, data) {
-      const start = (pageValue - 1) * this.dropPageSize;
-      const tabth = [
-        {
-          colname: 'ID',
-          name: 'ID',
-          isak: false
-        },
-        {
-          colname: 'NAME',
-          name: '角色',
-          isak: true
-        }
-      ];
-      const row = data.slice(start, start + this.dropPageSize)
-        .reduce((acc, cur) => {
-          const obj = {
-            ID: {
-              val: cur.ID,
-            },
-            NAME: {
-              val: cur.NAME
-            }
-          };
-          acc.push(obj);
-          return acc;
-        }, []);
-      this.singleDropDownSelectFilterData = {
-        start,
-        tabth,
-        row
-      };
-    }, // 整合复制权限外键单选数据
-    getMultipleDropSelectData(pageValue, data) {
-      const start = (pageValue - 1) * this.dropPageSize;
-      const tabth = [
-        {
-          colname: 'ID',
-          name: 'ID',
-          isak: false
-        },
-        {
-          colname: 'NAME',
-          name: '角色',
-          isak: true
-        }
-      ];
-      const row = data.slice(start, start + this.dropPageSize)
-        .reduce((acc, cur) => {
-          const obj = {
-            ID: {
-              val: cur.ID,
-            },
-            NAME: {
-              val: cur.NAME
-            }
-          };
-          acc.push(obj);
-          return acc;
-        }, []);
-      this.multipleDropDownSelectFilterData = {
-        start,
-        tabth,
-        row
-      };
-    }, // 整合复制权限外键多选数据
-    singleDropSelected(val) {
-      this.singlePermissionId = val[0].ID;
-      this.filterDisabled = false
-    }, // 外键单选，选中触发
-    singleDropPageChange(val) {
-      this.getSingleDropSelectData(val, this.backupsDropData);
-    }, // 外键单选分页改变触发
-    singlePopperHide() {
-      this.getSingleDropSelectData(1, this.backupsDropData);
-    }, // 外键单选popper隐藏时触发
-    singleDropClear() {
-      this.singlePermissionId = null;
-       this.multiplePermissionId = null;
-       this.multipleDefaultSelected = []
-       this.filterDisabled = true
-       
-    }, // 单选清空时触发
-    singleInputChange(val) {
-      if (val) {
-        this.singleAutoData = this.backupsDropData.reduce((acc, cur) => {
-          if (cur.NAME && cur.NAME.indexOf(val) !== -1) {
-            acc.push({ ID: cur.ID, NAME: cur.NAME });
-          }
-          return acc;
-        }, []);
-      } else {
-        this.singleAutoData = [];
-      }
-    }, // 外键单选输入框值改变时触发
-    multipleDropSelected(val) {
-      this.multiplePermissionId = val.reduce((acc, cur) => {
-        acc.push(cur.ID);
-        return acc;
-      }, []).join(',');
-    }, // 外键多选，选中触发
-    multipleDropPageChange(val) {
-      this.getMultipleDropSelectData(val, this.backupsDropData);
-    }, // 外键多选分页改变触发
-    multiplePopperHide() {
-      this.getMultipleDropSelectData(1, this.backupsDropData);
-    }, // 外键多选popper隐藏时触发
-    multipleDropClear() {
-      this.multiplePermissionId = null;
-    }, // 多选清空时触发
-    multipleInputChange(val) {
-      if (val) {
-        this.multipleAutoData = this.backupsDropData.reduce((acc, cur) => {
-          if (cur.NAME && cur.NAME.indexOf(val) !== -1) {
-            acc.push({ ID: cur.ID, NAME: cur.NAME });
-          }
-          return acc;
-        }, []);
-      } else {
-        this.multipleAutoData = [];
-      }
-    }, // 复制权限外键多选输入时触发
+    
   }
 };
 </script>
@@ -2084,7 +1793,7 @@ export default {
       }
     }
     .itemCom {
-      width: 220px;
+      width: 230px;
     }
   }
   .modalButton {
