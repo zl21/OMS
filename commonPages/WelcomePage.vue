@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-11 15:55:42
+ * @LastEditTime: 2021-08-11 17:42:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -131,7 +131,7 @@
 <script>
 import businessButton from "professionalComponents/businessButton";
 import dateUtil from "@/assets/js/__utils__/date.js";
-import * as echarts from 'echarts';
+import * as echarts from "echarts";
 
 export default {
   name: "WelcomePage",
@@ -420,91 +420,120 @@ export default {
         this.m2BtnIcon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
     },
     curveChart() {
-      // 获取chart节点
       const chartDom = document.getElementById("mainCurve");
-      // 初始化
       const myChart = echarts.init(chartDom);
       // 配置选项
       const option = {
-        color:'#FF6951',
-        grid:{
-          top:50,
-          left:50,
-          right:0,
-          bottom:50,
+        // 位置
+        grid: {
+          top: 50,
+          left: 50,
+          right: 0,
+          bottom: 50
         },
         // 鼠标经过展示tips
         tooltip: {
-          trigger: 'item' ,
-          alwaysShowContent:true, //始终保留最后一个经过的提示框
-          axisPointer: {
-            type: 'cross'
+          trigger: "axis",
+          alwaysShowContent: true, //始终保留最后一个经过的提示框
+          // 自定义显示位置
+          position: (point, params, dom, rect, size) => {
+              // 跟着鼠标走
+              return [point[0] - 60, point[1] - 80];
           },
-          formatter: (params, ticket, callback)=>{
-            console.log('1:',params, '2:',ticket);
-            let HTMLElement = ''
-            HTMLElement = 
-            `<div style="font-size:12px;color:#8D91A1;line-height:20px">
-            ${params.name}
-            </div>
-            <div style="fontSize:12px;color:#8D91A1;line-height:20px">
-              <span style="
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                border-radius: 10px;
-                background: #F76D59;">
-              </span>
-              异常数：
-              <span style="font-size:12px;color:#F76D59;line-height:20px">
-               ${params.value}
-              </span>
-            </div>`;
+          // 自定义显示内容
+          formatter: params => {
+            let HTMLElement = "";
+            HTMLElement = `<div>
+              <div style="font-size:12px;color:#8D91A1;line-height:20px">
+              ${params[0].axisValue}
+              </div>
+              <div style="fontSize:12px;color:#8D91A1;line-height:20px">
+                <span style="
+                  display: inline-block;
+                  width: 10px;
+                  height: 10px;
+                  border-radius: 10px;
+                  background: #F76D59;">
+                </span>
+                异常数：
+                <span style="font-size:12px;color:#F76D59;line-height:20px">
+                ${params[0].data}
+                </span>
+              </div>
+             </div>`;
             return HTMLElement;
-          },
+          }
         },
-        // X轴
+        // 坐标轴指示器 必须搭配tooltip的type:'axis'
+        axisPointer: {
+          type: "line",
+          lineStyle: {
+            color: "#F2F2F2"
+          }
+        },
         xAxis: {
           type: "category",
-          axisLine:{
-            lineStyle:{
-              color:'#F2F2F2',
+          axisLine: {
+            lineStyle: {
+              color: "#F2F2F2"
             }
           },
           // 刻度尺
-          axisTick:{
-            show:false,
+          axisTick: {
+            show: false
           },
-          axisLabel:{
-            fontSize:'12',
-            color:'#8D91A1',
+          axisLabel: {
+            fontSize: "12",
+            color: "#8D91A1"
           },
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         },
-        // Y轴
         yAxis: {
           type: "value",
           // 分割线
           splitLine: {
-              show: true,
-              lineStyle:{
-                color:'#F2F2F2'
-              }
-          },
+            show: true,
+            lineStyle: {
+              color: "#F2F2F2"
+            }
+          }
         },
         // 数据设置项
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
             type: "line",
-            smooth: true, //平滑折线  = 曲线 
+            symbol:'circle',
+            smooth: true, //平滑折线  = 曲线
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            symbolSize: 10, // 设定折线点的大小
+            // 折线条的样式
+            lineStyle: {
+              color: "#FF6951",
+              width: 2
+            },
+            // 折线拐点的样式
+            itemStyle: {
+              normal: {
+                color: "#FF6951",
+              },
+            },
+            // 鼠标经过时
+            emphasis: {
+               itemStyle: {
+                  color: '#FF6951', //颜色
+                  borderColor: '#fff', //图形的描边颜色
+                  borderWidth: 2, // 描边的线宽
+                  shadowBlur: 4, // 图形的阴影大小
+                  shadowColor: '#FF6951', // 图形的阴影颜色
+              }
+            }
           }
         ]
       };
       // 设置选项
       option && myChart.setOption(option);
     }
-  },
+  }
 };
 </script>
 
