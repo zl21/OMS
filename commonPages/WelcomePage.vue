@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-11 10:45:14
+ * @LastEditTime: 2021-08-11 15:53:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -116,13 +116,7 @@
 <script>
 import businessButton from "professionalComponents/businessButton";
 import dateUtil from "@/assets/js/__utils__/date.js";
-// 按需引入
-import * as echarts from "echarts/core";
-import { GridComponent } from "echarts/components";
-import { LineChart } from "echarts/charts";
-import { CanvasRenderer } from "echarts/renderers";
-
-echarts.use([GridComponent, LineChart, CanvasRenderer]);
+import * as echarts from 'echarts';
 
 export default {
   name: "WelcomePage",
@@ -403,6 +397,7 @@ export default {
       domContent.style.padding = "0 15px";
     }
   },
+
   methods: {
     upDown() {
       this.up = this.up ? "" : "fadeInDom";
@@ -416,25 +411,82 @@ export default {
       const myChart = echarts.init(chartDom);
       // 配置选项
       const option = {
+        color:'#FF6951',
+        grid:{
+          top:50,
+          left:50,
+          right:0,
+          bottom:50,
+        },
+        // 鼠标经过展示tips
+        tooltip: {
+          trigger: 'item' ,
+          alwaysShowContent:true, //始终保留最后一个经过的提示框
+          formatter: (params, ticket, callback)=>{
+            console.log('1:',params, '2:',ticket);
+            let HTMLElement = ''
+            HTMLElement = 
+            `<div style="font-size:12px;color:#8D91A1;line-height:20px">
+            ${params.name}
+            </div>
+            <div style="fontSize:12px;color:#8D91A1;line-height:20px">
+              <span style="
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 10px;
+                background: #F76D59;">
+              </span>
+              异常数：
+              <span style="font-size:12px;color:#F76D59;line-height:20px">
+               ${params.value}
+              </span>
+            </div>`;
+            return HTMLElement;
+          },
+        },
+        // X轴
         xAxis: {
           type: "category",
+          axisLine:{
+            lineStyle:{
+              color:'#F2F2F2',
+            }
+          },
+          // 刻度尺
+          axisTick:{
+            show:false,
+          },
+          axisLabel:{
+            fontSize:'12',
+            color:'#8D91A1',
+          },
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         },
+        // Y轴
         yAxis: {
-          type: "value"
+          type: "value",
+          // 分割线
+          splitLine: {
+              show: true,
+              lineStyle:{
+                color:'#F2F2F2'
+              }
+          },
         },
+        // 数据设置项
         series: [
           {
             data: [820, 932, 901, 934, 1290, 1330, 1320],
             type: "line",
-            smooth: true
+            smooth: true, //平滑折线  = 曲线 
           }
         ]
       };
       // 设置选项
       option && myChart.setOption(option);
     }
-  }
+  },
 };
 </script>
 
