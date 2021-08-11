@@ -1009,6 +1009,11 @@ export default {
           self.$Message.success(res.data.message);
 
           comUtils.tabCloseAppoint(self);
+          R3.store.commit('global/tabOpen', {
+            type: 'S',
+            tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
+            tableId: 249230545
+          });
           self.$nextTick(()=>{
              self.$store.commit('customize/TabOpen', {
               id: res.data.data,
