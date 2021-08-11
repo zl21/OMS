@@ -2251,9 +2251,10 @@ export default {
         );
         return false;
       }
-      if (isNaN(masterTable.RECEIVER_MOBILE)) {
-        this.$Message.warning('手机号码必须为数字,请修改');
-      } else if (masterTable.RECEIVER_MOBILE.length !== 11) {
+      // if (isNaN(masterTable.RECEIVER_MOBILE)) {
+      //   this.$Message.warning('手机号码必须为数字,请修改');
+      // } else 
+      if (masterTable.RECEIVER_MOBILE.length !== 11) {
         this.$Message.warning('手机位数不正确,请修改');
       } else {
         return true;
