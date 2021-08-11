@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-06-21 10:17:52
- * @LastEditTime: 2021-08-11 11:32:25
+ * @LastEditTime: 2021-06-29 16:08:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
  */
-import commonTableByAgGrid from 'arkui_BCL/CommonTableByAgGrid';
+import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid';
 import { debounce } from 'lodash'
 import i18n from "@burgeon/internationalization/i18n";
 
