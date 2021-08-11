@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="main01body">
-            <div class="left comItem">
+            <div class="left">
               <div id="main" style="width: 200px; height: 200px"></div>
             </div>
             <div class="right">
