@@ -51,9 +51,6 @@
                 </div>
                 <div class="status">{{ it.status_name }}</div>
                 <div v-if="it.status == 0" class="detail">{{ it.message }} <i class="sum">{{ it.sum }}</i></div>
-                <!-- <div class="info"> -->
-                  <!-- <span>{{ it.sum }}</span> -->
-                <!-- </div> -->
               </div>
             </div>
           </div>
