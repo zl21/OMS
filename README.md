@@ -1027,6 +1027,7 @@
 | v1.11.85 | 页面businessActionTable组件配置 |
 | v1.11.86 | 功能权限-复制权限弹窗businessDialog重构 |
 | v1.11.89 | style:登录 |
+| v1.11.90 | ag列样式设置,促销序号列样式调整 |
 
 
 

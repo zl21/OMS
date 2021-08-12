@@ -18,8 +18,10 @@ const baseColumnDefs = [
 		checkboxSelection: true,
 		sort: '10',
 		suppressMovable: true,
-		headerClass: 'aG_index',
+		// headerClass: 'aG_index',
 		cellStyle: {color: 'rgb(15, 142, 233)'},
+		thAlign: 'center',
+		tdAlign: 'center',
 	},
 	{
 		headerName: '促销编号',
