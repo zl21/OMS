@@ -63,7 +63,7 @@
             <div class="btn">
               <Button type="primary">全部</Button>
               <Button type="text">异常</Button>
-              <Button type="text" :icon="m2BtnIcon" @click="upDown"></Button>
+              <Button type="text" :icon="m2BtnIcon" @click="upDown" class="iconBtn"></Button>
             </div>
           </div>
           <div :class="['main02body', up]" id="main02body">
@@ -94,10 +94,14 @@
       <div :class="['mainContent', 'main03']">
         <div class="mainHeader">
           <span>{{ data.main03.title }}</span>
-          <div class="btn">
+          <div class="btn btnEx">
+            <Button type="primary">近三天</Button>
+            <Button type="text">昨天</Button>
+            <Button type="text">当天</Button>
+            <i></i>
             <Button type="primary">全部</Button>
             <Button type="text">异常</Button>
-            <Button type="text" :icon="m3BtnIcon"></Button>
+            <Button type="text" :icon="m3BtnIcon" class="iconBtn"></Button>
           </div>
         </div>
         <div :class="['main03body', up]" id="main03body">

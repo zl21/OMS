@@ -30,6 +30,10 @@ i {
 		/deep/ .ark-btn-primary {
 			background-color: rgb(86, 98, 178);
 		}
+
+		.iconBtn {
+			padding: 2px 8px;
+		}
 	}
 
 	.mainHeader {
@@ -257,6 +261,19 @@ i {
 	}
 
 	.main03 {
+		.btnEx {
+			display: flex;
+			align-items: center;
+
+			&>i {
+				display: inline-block;
+				width: 1px;
+				height: 26px;
+				background-color: #F2F2F2;
+				margin: 0 16px 0 20px;
+			}
+		}
+
 		.main03body {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
