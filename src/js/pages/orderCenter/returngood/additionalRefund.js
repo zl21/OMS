@@ -736,7 +736,7 @@ export default {
           },
           {
             title: window.vmI18n.t('form_label.transactionAmount'), // 成交金额
-            key: 'price'
+            key: 'realAmt'
           },
           {
             title: window.vmI18n.t('form_label.returnQuantity'), // 退货数量

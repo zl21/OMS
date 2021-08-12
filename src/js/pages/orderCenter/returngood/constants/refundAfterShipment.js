@@ -30,7 +30,7 @@ const addItemTableColumns = [{
 // },
 {
   title: '成交金额',
-  key: 'price'
+  key: 'realAmt'
 },
 {
   title: '可退金额',
