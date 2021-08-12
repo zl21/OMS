@@ -95,9 +95,18 @@
         <div class="mainHeader">
           <span>{{ data.main03.title }}</span>
           <div class="btn btnEx">
-            <Button type="primary">近三天</Button>
+            <div
+              style="display:inline-block"
+              v-for="(it, index) in dayBtnConifg"
+              :key="index"
+            >
+              <Button :type="it.type" @click="dayBtnHandel(it,'main03')">{{
+                it.text
+              }}</Button>
+            </div>
+            <!-- <Button type="primary">近三天</Button>
             <Button type="text">昨天</Button>
-            <Button type="text">当天</Button>
+            <Button type="text">当天</Button> -->
             <i></i>
             <Button type="primary">全部</Button>
             <Button type="text">异常</Button>
@@ -122,6 +131,17 @@
       <div class="mainContent main04">
         <div class="mainHeader">
           <span>{{ main04.title }}</span>
+          <div class="btn">
+            <div
+              style="display:inline-block"
+              v-for="(it, index) in main04.btnArr"
+              :key="index"
+            >
+              <Button :type="it.type" @click="geTabnormal(index)">{{
+                it.text
+              }}</Button>
+            </div>
+          </div>
         </div>
         <div class="selectBox">
           <Form :label-width="80">
@@ -152,17 +172,6 @@
               </Col>
             </Row>
           </Form>
-          <div class="btn">
-            <div
-              style="display:inline-block"
-              v-for="(it, index) in main04.btnArr"
-              :key="index"
-            >
-              <Button :type="it.type" @click="geTabnormal(index)">{{
-                it.text
-              }}</Button>
-            </div>
-          </div>
         </div>
         <div id="mainCurve" style="widht:100%;height:500px"></div>
       </div>
@@ -185,6 +194,41 @@ export default {
       up: "",
       m2BtnIcon: "ios-arrow-down",
       m3BtnIcon: "ios-arrow-down",
+      dayBtnConifg: [
+        {
+          text: "近三天",
+          type: "primary",
+          webname: "threeDays",
+        },
+        {
+          text: "昨日",
+          type: "text",
+          webname: "yesterday",
+        },
+        {
+          text: "当天",
+          type: "text",
+          webname: "today",
+        }
+      ],
+      statusBtnConifg: [
+        {
+          text: "全部",
+          type: "primary",
+          webname: "all",
+        },
+        {
+          text: "异常",
+          type: "text",
+          webname: "abort",
+        },
+        {
+          text: "",
+          type: "text",
+          icon: "ios-arrow-down",
+          webname: "upDownIcon",
+        }
+      ],
       data: {
         header: {
           time: new Date(),
@@ -654,9 +698,14 @@ export default {
         this.main04.setData = this.main04.threeDay 
       }
       this.curveChart();
-    }
+    },
     // 
   
+    dayBtnHandel(item, panel) {
+      let btnArr = this.dayBtnConifg;
+      let nowBtn = item.webname;
+      btnArr.forEach(it => it.type = it.webname == nowBtn ? 'primary' : 'text');
+    }
     /** ------------------ 获取数据方法 ------------------- **/
   }
 };
