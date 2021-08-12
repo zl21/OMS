@@ -19,6 +19,7 @@ const baseColumnDefs = [
 		sort: '10',
 		suppressMovable: true,
 		headerClass: 'aG_index',
+		cellStyle: {color: 'rgb(15, 142, 233)'},
 	},
 	{
 		headerName: '促销编号',
