@@ -666,6 +666,12 @@ export default {
           render: (h, params) => h('span', {}, params.row.AMT_DISCOUNT)
         },
         {
+          key: 'RESERVE_DECIMAL04',
+          title: '平台优惠金额',
+          dataAcessKey: 'RESERVE_DECIMAL04',
+          render: (h, params) => h('span', {}, params.row.RESERVE_DECIMAL04)
+        },
+        {
           key: 'ADJUST_AMT',
           title: '调整金额',
           dataAcessKey: 'ADJUST_AMT',
