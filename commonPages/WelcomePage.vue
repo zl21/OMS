@@ -76,32 +76,39 @@
               </div>
             </div>
           </div>
-          <div :class="['main02body', up]" id="main02body">
-            <div
-              class="m2Item comItem"
-              v-for="(it, index) in  main02.data"
-              :key="index"
-              :class="it.status == 0 ? 'abnormal' : 'normal'"
-            >
-              <div class="title">
-                <Icon :type="it.titleIcon" />
-                <!-- <i :class="it.titleIcon"></i> -->
-                <span>{{ it.title }}</span>
-                <Icon :type="it.statusIcon" class="warnIcon" />
-                <!-- <i :class="['warnIcon', it.statusIcon]"></i> -->
+          <div :class="['main02body', up, noData]" id="main02body">
+            <picture v-if="noData">
+              <source srcset="./img/la.png" media="(min-width: 1600px)"/>
+              <img src="./img/medium-car-image.jpg" alt="Car">
+              <span>暂无异常数据</span>
+            </picture>
+            <template v-else>
+              <div
+                class="m2Item comItem"
+                v-for="(it, index) in  main02.data"
+                :key="index"
+                :class="it.status == 0 ? 'abnormal' : 'normal'"
+              >
+                <div class="title">
+                  <Icon :type="it.titleIcon" />
+                  <!-- <i :class="it.titleIcon"></i> -->
+                  <span>{{ it.title }}</span>
+                  <Icon :type="it.statusIcon" class="warnIcon" />
+                  <!-- <i :class="['warnIcon', it.statusIcon]"></i> -->
+                </div>
+                <div class="content">
+                  <template v-for="(i) in it.data">
+                    <div
+                      :key="i.A_sum + +new Date()"
+                      :class="['itemData', i.color || '']"
+                    >
+                      <span>{{ i.A_name }}</span>
+                      <span>{{ i.A_sum }}</span>
+                    </div>
+                  </template>
+                </div>
               </div>
-              <div class="content">
-                <template v-for="(i) in it.data">
-                  <div
-                    :key="i.A_sum + +new Date()"
-                    :class="['itemData', i.color || '']"
-                  >
-                    <span>{{ i.A_name }}</span>
-                    <span>{{ i.A_sum }}</span>
-                  </div>
-                </template>
-              </div>
-            </div>
+            </template>
           </div>
         </div>
       </div>
@@ -128,19 +135,26 @@
             </div>
           </div>
         </div>
-        <div :class="['main03body', m3Up]" id="main03body">
-          <div
-            class="m3Item comItem"
-            v-for="(it, index) in  main03.data"
-            :key="index"
-            :class="it.status == 0 ? 'abnormal' : 'normal'"
-          >
-            <div class="title">
-              <span>{{ it.title }}</span>
-              <span>{{ it.time }}</span>
+        <div :class="['main03body', m3Up, m3noData]" id="main03body">
+          <picture v-if="m3noData">
+            <source srcset="./img/la.png" media="(min-width: 1600px)"/>
+            <img src="./img/medium-car-image.jpg" alt="Car">
+            <span>暂无异常数据</span>
+          </picture>
+          <template v-else>
+            <div
+              class="m3Item comItem"
+              v-for="(it, index) in  main03.data"
+              :key="index"
+              :class="it.status == 0 ? 'abnormal' : 'normal'"
+            >
+              <div class="title">
+                <span>{{ it.title }}</span>
+                <span>{{ it.time }}</span>
+              </div>
+              <div class="itemData"></div>
             </div>
-            <div class="itemData"></div>
-          </div>
+          </template>
         </div>
       </div>
       <div class="mainContent main04">
@@ -239,6 +253,8 @@ export default {
   },
   data() {
     return {
+      noData: "",
+      m3noData: "",
       up: "",
       m3Up: "",
       m2BtnIcon: "ios-arrow-down",
@@ -716,13 +732,16 @@ export default {
     maxHeight(body, itemName) {
       const mBody = document.getElementById(body);
       // let m2Heigh = m2Body.clientHeight;
-      let nodeHeight = 0 ,nodeSum = mBody.childNodes.length;
+      let nodeHeight = 0, flag = false, nodeSum = mBody.childNodes.length;
       for (const node of mBody.childNodes) {
         if (node.className.includes(itemName)) {
           nodeHeight = node.clientHeight;
           break
+        } else {
+          flag = true;
         }
       }
+      if(flag) return
       mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
       console.log(mBody);
     },
@@ -732,7 +751,7 @@ export default {
     statusBtnHandel(item, panel) {
       this.btnStyleChange(item, 0, panel)
     },
-    // 按钮样式变换处理
+    // 按钮样式变换、无数据时展示图片样式处理
     btnStyleChange(item, order, panel) {
       let nowBtn = item.webname;
       const btnArr = order ? this[panel].btn : this[panel].btnSta;
@@ -749,6 +768,16 @@ export default {
             break;
         }
         return
+      }
+      switch (panel) {
+        case 'main02':
+          this.noData = item.webname == 'abort' ? 'noData' : '';
+          break;
+        case 'main03':
+          this.m3noData = item.webname == 'abort' ? 'noData' : '';
+          break;
+        default:
+          break;
       }
       btnArr.forEach(it => it.type = it.webname == nowBtn ? 'primary' : 'text');
     }

@@ -260,12 +260,15 @@ i {
 					margin: 16px;
 					display: flex;
 					justify-content: space-between;
+
 					&.gray {
 						color: #8D91A1;
 					}
+
 					&.green {
 						color: #90BB57;
 					}
+
 					&.red {
 						color: #FF6951;
 					}
@@ -336,5 +339,32 @@ i {
 			}
 		}
 
+	}
+
+	.main02body,
+	.main03body {
+		position: relative;
+
+		&.noData {
+			height: 220px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			img {
+				width: 150px;
+				height: 158px;
+				margin-bottom: 32px;
+			}
+
+			span {
+				display: inline-block;
+				position: absolute;
+				bottom: 5%;
+				left: 50%;
+				transform: translateX(-50%);
+				color: #8D91A1;
+			}
+		}
 	}
 }
