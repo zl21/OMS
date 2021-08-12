@@ -20,7 +20,7 @@
       </div> -->
       <div class="time">
         <span>更新时间：{{ header.time }}</span>
-        <Icon type="ios-refresh" />
+        <Icon type="icon-OMS-fonticon-015" style="color:#5461B8;"/>
       </div>
     </div>
     <div class="main">
