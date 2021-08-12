@@ -85,8 +85,10 @@
             >
               <div class="title">
                 <Icon :type="it.titleIcon" />
+                <!-- <i :class="it.titleIcon"></i> -->
                 <span>{{ it.title }}</span>
                 <Icon :type="it.statusIcon" class="warnIcon" />
+                <!-- <i :class="['warnIcon', it.statusIcon]"></i> -->
               </div>
               <div class="content">
                 <template v-for="(i) in it.data">
@@ -288,7 +290,7 @@ export default {
         btnSta: JSON.parse(JSON.stringify(statusBtnConifg)),
         data: [
           {
-            titleIcon: "ios-home",
+            titleIcon: "icon-fahuo",
             title: "WMS(AG项目1)",
             statusIcon: "ios-alert-outline",
             data: [
@@ -313,7 +315,7 @@ export default {
             ]
           },
           {
-            titleIcon: "ios-home",
+            titleIcon: "icon-chuku",
             title: "WMS(AG项目1)",
             statusIcon: "ios-alert-outline",
             data: [
