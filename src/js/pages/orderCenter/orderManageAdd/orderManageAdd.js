@@ -172,6 +172,10 @@ export default {
         },
       },
 
+      // 复制新加参数
+      OAID: '',
+      IS_ENCRYPTED: '',
+
       isActive: true, // 商品编码搜索框是否显示 true为显示,false隐藏
       value1: ['1', '2', '3'],
       btnConfig: {
@@ -253,12 +257,16 @@ export default {
                   ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
                 }
               });
-
+              const copyID = self.$route.query;
+              // 复制订单新加字段（安全改造）
+              if (copyID.orderCopy || copyID.copyOrder) {
+                ocBorderDto.OAID = self.OAID
+                ocBorderDto.IS_ENCRYPTED = self.IS_ENCRYPTED
+              }
               const data = {
                 ocBorderDto,
                 ocBorderItemDto,
               };
-              const copyID = self.$route.query;
               // 新增订单走新保存（去掉草稿模式）
 
               if (self.$route.params.customizedModuleId === '-1' && !(copyID.orderCopy || copyID.copyOrder)) {
@@ -1308,6 +1316,19 @@ export default {
         });
       });
     this.relationShip();
+    // 复制订单不允许编辑平台单号&收货人信息 尚少峰 20210809 平台安全改造
+    if(self.$route.query.orderCopy || self.$route.query.copyOrder) {
+      self.formConfig.formData.forEach(item => {
+        if (item.value == 'SOURCE_CODE') item.disabled = true
+      })
+      self.formConfig1.formData.forEach(item => {
+        if (item.style == 'popInput') {
+          item.itemdata.readonly = true
+        } else {
+          item.disabled = true
+        }
+      })
+    }
   }, // 获取支付方式下拉选项值
   methods: {
     // 发货仓库
@@ -2237,9 +2258,10 @@ export default {
         );
         return false;
       }
-      if (isNaN(masterTable.RECEIVER_MOBILE)) {
-        this.$Message.warning('手机号码必须为数字,请修改');
-      } else if (masterTable.RECEIVER_MOBILE.length !== 11) {
+      // if (isNaN(masterTable.RECEIVER_MOBILE)) {
+      //   this.$Message.warning('手机号码必须为数字,请修改');
+      // } else 
+      if (masterTable.RECEIVER_MOBILE.length !== 11) {
         this.$Message.warning('手机位数不正确,请修改');
       } else {
         return true;
@@ -2324,6 +2346,10 @@ export default {
       // 备注信息赋值
       self.formConfig2.formValue.BUYER_MESSAGE = data.BUYER_MESSAGE; // 买家备注
       self.formConfig2.formValue.SELLER_MEMO = data.SELLER_MEMO; // 卖家备注
+
+      // 复制需要参数 
+      self.OAID = data.OAID
+      self.IS_ENCRYPTED = data.IS_ENCRYPTED
       self.watch_paytype();
     },
     // 过滤条件
