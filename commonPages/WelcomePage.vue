@@ -12,14 +12,14 @@
       <!-- <span>11</span>
       <span>22</span>
       <span>33</span> -->
-      <!-- <businessButton :btn-config="data.header.btn" class="btn" /> -->
+      <!-- <businessButton :btn-config=" header.btn" class="btn" /> -->
       <!-- <div class="btn">
         <Button type="primary">近三天</Button>
         <Button type="text">昨天</Button>
         <Button type="text">当天</Button>
       </div> -->
       <div class="time">
-        <span>更新时间：{{ data.header.time }}</span>
+        <span>更新时间：{{ header.time }}</span>
         <Icon type="ios-refresh" />
       </div>
     </div>
@@ -27,11 +27,16 @@
       <div class="mainContent mainTop">
         <div class="main01">
           <div class="mainHeader">
-            <span>{{ data.main01.title }}</span>
+            <span>{{  main01.title }}</span>
             <div class="btn">
-              <Button type="primary">近三天</Button>
-              <Button type="text">昨天</Button>
-              <Button type="text">当天</Button>
+              <div
+                v-for="(it, index) in  main01.btn"
+                :key="'m1Time' + index"
+              >
+                <Button :type="it.type" @click="dayBtnHandel(it,'main01')">{{
+                  it.text
+                }}</Button>
+              </div>
             </div>
           </div>
           <div class="main01body">
@@ -41,7 +46,7 @@
             <div class="right">
               <div
                 class="rightItem comItem"
-                v-for="(it, index) in data.main01.data"
+                v-for="(it, index) in  main01.data"
                 :key="index"
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
@@ -59,17 +64,22 @@
         </div>
         <div :class="['', 'main02']">
           <div class="mainHeader">
-            <span>{{ data.main02.title }}</span>
+            <span>{{  main02.title }}</span>
             <div class="btn">
-              <Button type="primary">全部</Button>
-              <Button type="text">异常</Button>
-              <Button type="text" :icon="m2BtnIcon" @click="upDown" class="iconBtn"></Button>
+              <div
+                v-for="(it, index) in main02.btnSta"
+                :key="'m2Status' + index"
+              >
+                <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="it.icon ? upDown('main02') : statusBtnHandel(it,'main02')">{{
+                  it.text
+                }}</Button>
+              </div>
             </div>
           </div>
           <div :class="['main02body', up]" id="main02body">
             <div
               class="m2Item comItem"
-              v-for="(it, index) in data.main02.data"
+              v-for="(it, index) in  main02.data"
               :key="index"
               :class="it.status == 0 ? 'abnormal' : 'normal'"
             >
@@ -93,30 +103,31 @@
       </div>
       <div :class="['mainContent', 'main03']">
         <div class="mainHeader">
-          <span>{{ data.main03.title }}</span>
+          <span>{{  main03.title }}</span>
           <div class="btn btnEx">
             <div
-              style="display:inline-block"
-              v-for="(it, index) in dayBtnConifg"
-              :key="index"
+              v-for="(it, index) in main03.btn"
+              :key="'m3Time' + index"
             >
               <Button :type="it.type" @click="dayBtnHandel(it,'main03')">{{
                 it.text
               }}</Button>
             </div>
-            <!-- <Button type="primary">近三天</Button>
-            <Button type="text">昨天</Button>
-            <Button type="text">当天</Button> -->
             <i></i>
-            <Button type="primary">全部</Button>
-            <Button type="text">异常</Button>
-            <Button type="text" :icon="m3BtnIcon" class="iconBtn"></Button>
+            <div
+              v-for="(it, index) in main03.btnSta"
+              :key="'m3Status' + index"
+            >
+              <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="it.icon ? upDown('main03') : statusBtnHandel(it,'main03')">{{
+                it.text
+              }}</Button>
+            </div>
           </div>
         </div>
         <div :class="['main03body', up]" id="main03body">
           <div
             class="m3Item comItem"
-            v-for="(it, index) in data.main03.data"
+            v-for="(it, index) in  main03.data"
             :key="index"
             :class="it.status == 0 ? 'abnormal' : 'normal'"
           >
@@ -133,7 +144,6 @@
           <span>{{ main04.title }}</span>
           <div class="btn">
             <div
-              style="display:inline-block"
               v-for="(it, index) in main04.btnArr"
               :key="index"
             >
@@ -183,7 +193,41 @@
 import businessButton from "professionalComponents/businessButton";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import * as echarts from "echarts";
-
+let dayBtnConifg = [
+  {
+    text: "近三天",
+    type: "primary",
+    webname: "threeDays",
+  },
+  {
+    text: "昨日",
+    type: "text",
+    webname: "yesterday",
+  },
+  {
+    text: "当天",
+    type: "text",
+    webname: "today",
+  }
+]
+let statusBtnConifg = [
+  {
+    text: "全部",
+    type: "primary",
+    webname: "all",
+  },
+  {
+    text: "异常",
+    type: "text",
+    webname: "abort",
+  },
+  {
+    text: "",
+    type: "text",
+    icon: "ios-arrow-down",
+    webname: "upDownIcon",
+  }
+]
 export default {
   name: "WelcomePage",
   components: {
@@ -229,257 +273,237 @@ export default {
           webname: "upDownIcon",
         }
       ],
-      data: {
-        header: {
-          time: new Date(),
-          btn: {
-            btnsite: "left", // 按钮对齐方式
-            typeAll: "default",
-            buttons: [
+      header: {
+        time: new Date(),
+      },
+      main01: {
+        title: "第三方监控",
+        sum: 10,
+        ex_sum: 2,
+        normal_sum: 8,
+        status: 0,
+        status_name: "异常",
+        btn: JSON.parse(JSON.stringify(dayBtnConifg)),
+        data: [
+          {
+            status: 0,
+            status_name: "异常",
+            title: "AG项目1",
+            message: "异常单据",
+            sum: 288
+          },
+          {
+            status: 1,
+            status_name: "正常",
+            title: "AG项目2",
+            message: "异常单据",
+            sum: 288
+          },
+          {
+            status: 1,
+            status_name: "正常",
+            title: "AG项目3",
+            message: "异常单据",
+            sum: 288
+          },
+          {
+            status: 0,
+            status_name: "异常",
+            title: "AG项目4",
+            message: "异常单据",
+            sum: 288
+          }
+        ]
+      },
+      main02: {
+        title: "对外接口监控项目详细数据",
+        btnSta: JSON.parse(JSON.stringify(statusBtnConifg)),
+        data: [
+          {
+            titleIcon: "ios-home",
+            title: "WMS(AG项目1)",
+            statusIcon: "ios-alert-outline",
+            data: [
               {
-                webname: "threeDays",
-                text: "近三天",
-                type: "primary",
-                btnclick: () => {}
+                status: 0,
+                A_name: "推送总数",
+                A_sum: 3880
               },
               {
-                webname: "yesterday",
-                text: "昨天",
-                btnclick: () => {}
+                status: 1,
+                A_name: "推送成功",
+                A_sum: 345
               },
               {
-                webname: "today",
-                text: "当天",
-                btnclick: () => {}
+                status: 0,
+                A_name: "推送失败率",
+                A_sum: "20%"
+              }
+            ]
+          },
+          {
+            titleIcon: "ios-home",
+            title: "WMS(AG项目1)",
+            statusIcon: "ios-alert-outline",
+            data: [
+              {
+                status: 0,
+                A_name: "推送总数",
+                A_sum: 3880
+              },
+              {
+                status: 1,
+                A_name: "推送成功",
+                A_sum: 345
+              },
+              {
+                status: 0,
+                A_name: "推送失败率",
+                A_sum: "20%"
+              }
+            ]
+          },
+          {
+            titleIcon: "ios-home",
+            title: "WMS(AG项目1)",
+            statusIcon: "ios-alert-outline",
+            data: [
+              {
+                status: 0,
+                A_name: "推送总数",
+                A_sum: 3880
+              },
+              {
+                status: 1,
+                A_name: "推送成功",
+                A_sum: 345
+              },
+              {
+                status: 0,
+                A_name: "推送失败率",
+                A_sum: "20%"
+              }
+            ]
+          },
+          {
+            titleIcon: "ios-home",
+            title: "WMS(AG项目1)",
+            statusIcon: "ios-alert-outline",
+            data: [
+              {
+                status: 0,
+                A_name: "推送总数",
+                A_sum: 3880
+              },
+              {
+                status: 1,
+                A_name: "推送成功",
+                A_sum: 345
+              },
+              {
+                status: 0,
+                A_name: "推送失败率",
+                A_sum: "20%"
+              }
+            ]
+          },
+          {
+            titleIcon: "ios-home",
+            title: "WMS(AG项目1)",
+            statusIcon: "ios-alert-outline",
+            data: [
+              {
+                status: 0,
+                A_name: "推送总数",
+                A_sum: 3880
+              },
+              {
+                status: 1,
+                A_name: "推送成功",
+                A_sum: 345
+              },
+              {
+                status: 0,
+                A_name: "推送失败率",
+                A_sum: "20%"
+              }
+            ]
+          },
+          {
+            titleIcon: "ios-home",
+            title: "WMS(AG项目1)",
+            statusIcon: "ios-alert-outline",
+            data: [
+              {
+                status: 0,
+                A_name: "推送总数",
+                A_sum: 3880
+              },
+              {
+                status: 1,
+                A_name: "推送成功",
+                A_sum: 345
+              },
+              {
+                status: 0,
+                A_name: "推送失败率",
+                A_sum: "20%"
               }
             ]
           }
-        },
-        main01: {
-          title: "第三方监控",
-          sum: 10,
-          ex_sum: 2,
-          normal_sum: 8,
-          status: 0,
-          status_name: "异常",
-          data: [
-            {
-              status: 0,
-              status_name: "异常",
-              title: "AG项目1",
-              message: "异常单据",
-              sum: 288
-            },
-            {
-              status: 1,
-              status_name: "正常",
-              title: "AG项目2",
-              message: "异常单据",
-              sum: 288
-            },
-            {
-              status: 1,
-              status_name: "正常",
-              title: "AG项目3",
-              message: "异常单据",
-              sum: 288
-            },
-            {
-              status: 0,
-              status_name: "异常",
-              title: "AG项目4",
-              message: "异常单据",
-              sum: 288
-            }
-          ]
-        },
-        main02: {
-          title: "对外接口监控项目详细数据",
-          data: [
-            {
-              titleIcon: "ios-home",
-              title: "WMS(AG项目1)",
-              statusIcon: "ios-alert-outline",
-              data: [
-                {
-                  status: 0,
-                  A_name: "推送总数",
-                  A_sum: 3880
-                },
-                {
-                  status: 1,
-                  A_name: "推送成功",
-                  A_sum: 345
-                },
-                {
-                  status: 0,
-                  A_name: "推送失败率",
-                  A_sum: "20%"
-                }
-              ]
-            },
-            {
-              titleIcon: "ios-home",
-              title: "WMS(AG项目1)",
-              statusIcon: "ios-alert-outline",
-              data: [
-                {
-                  status: 0,
-                  A_name: "推送总数",
-                  A_sum: 3880
-                },
-                {
-                  status: 1,
-                  A_name: "推送成功",
-                  A_sum: 345
-                },
-                {
-                  status: 0,
-                  A_name: "推送失败率",
-                  A_sum: "20%"
-                }
-              ]
-            },
-            {
-              titleIcon: "ios-home",
-              title: "WMS(AG项目1)",
-              statusIcon: "ios-alert-outline",
-              data: [
-                {
-                  status: 0,
-                  A_name: "推送总数",
-                  A_sum: 3880
-                },
-                {
-                  status: 1,
-                  A_name: "推送成功",
-                  A_sum: 345
-                },
-                {
-                  status: 0,
-                  A_name: "推送失败率",
-                  A_sum: "20%"
-                }
-              ]
-            },
-            {
-              titleIcon: "ios-home",
-              title: "WMS(AG项目1)",
-              statusIcon: "ios-alert-outline",
-              data: [
-                {
-                  status: 0,
-                  A_name: "推送总数",
-                  A_sum: 3880
-                },
-                {
-                  status: 1,
-                  A_name: "推送成功",
-                  A_sum: 345
-                },
-                {
-                  status: 0,
-                  A_name: "推送失败率",
-                  A_sum: "20%"
-                }
-              ]
-            },
-            {
-              titleIcon: "ios-home",
-              title: "WMS(AG项目1)",
-              statusIcon: "ios-alert-outline",
-              data: [
-                {
-                  status: 0,
-                  A_name: "推送总数",
-                  A_sum: 3880
-                },
-                {
-                  status: 1,
-                  A_name: "推送成功",
-                  A_sum: 345
-                },
-                {
-                  status: 0,
-                  A_name: "推送失败率",
-                  A_sum: "20%"
-                }
-              ]
-            },
-            {
-              titleIcon: "ios-home",
-              title: "WMS(AG项目1)",
-              statusIcon: "ios-alert-outline",
-              data: [
-                {
-                  status: 0,
-                  A_name: "推送总数",
-                  A_sum: 3880
-                },
-                {
-                  status: 1,
-                  A_name: "推送成功",
-                  A_sum: 345
-                },
-                {
-                  status: 0,
-                  A_name: "推送失败率",
-                  A_sum: "20%"
-                }
-              ]
-            }
-          ]
-        },
-        main03: {
-          title: "服务异常监控详细数据（AG项目1）",
-          data: [
-            {
-              title: "转单服务",
-              time: "2h",
-              status: 0,
-              min: 10,
-              max: 10000,
-              desc: "积压单量",
-              tips: ""
-            },
-            {
-              title: "转单服务",
-              time: "2h",
-              status: 0,
-              min: 10,
-              max: 10000,
-              desc: "积压单量",
-              tips: ""
-            },
-            {
-              title: "转单服务",
-              time: "2h",
-              status: 0,
-              min: 10,
-              max: 10000,
-              desc: "积压单量",
-              tips: ""
-            },
-            {
-              title: "转单服务",
-              time: "2h",
-              status: 0,
-              min: 10,
-              max: 10000,
-              desc: "积压单量",
-              tips: ""
-            },
-            {
-              title: "转单服务",
-              time: "2h",
-              status: 0,
-              min: 10,
-              max: 10000,
-              desc: "积压单量",
-              tips: ""
-            }
-          ]
-        }
+        ]
+      },
+      main03: {
+        title: "服务异常监控详细数据（AG项目1）",
+        btn: JSON.parse(JSON.stringify(dayBtnConifg)),
+        btnSta: JSON.parse(JSON.stringify(statusBtnConifg)),
+        data: [
+          {
+            title: "转单服务",
+            time: "2h",
+            status: 0,
+            min: 10,
+            max: 10000,
+            desc: "积压单量",
+            tips: ""
+          },
+          {
+            title: "转单服务",
+            time: "2h",
+            status: 0,
+            min: 10,
+            max: 10000,
+            desc: "积压单量",
+            tips: ""
+          },
+          {
+            title: "转单服务",
+            time: "2h",
+            status: 0,
+            min: 10,
+            max: 10000,
+            desc: "积压单量",
+            tips: ""
+          },
+          {
+            title: "转单服务",
+            time: "2h",
+            status: 0,
+            min: 10,
+            max: 10000,
+            desc: "积压单量",
+            tips: ""
+          },
+          {
+            title: "转单服务",
+            time: "2h",
+            status: 0,
+            min: 10,
+            max: 10000,
+            desc: "积压单量",
+            tips: ""
+          }
+        ]
       },
       // 模块4 --- 接口异常趋势图
       main04: {
@@ -545,8 +569,8 @@ export default {
   mounted() {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
-    this.data.header.time = dateUtil.getFormatDate(
-      this.data.header.time,
+    this.header.time = dateUtil.getFormatDate(
+      this.header.time,
       "yyyy-MM-dd HH:mm:ss"
     );
     this.curveChart();
@@ -702,9 +726,17 @@ export default {
     // 
   
     dayBtnHandel(item, panel) {
-      let btnArr = this.dayBtnConifg;
       let nowBtn = item.webname;
-      btnArr.forEach(it => it.type = it.webname == nowBtn ? 'primary' : 'text');
+      this.btnStyleChange(nowBtn, 1, panel)
+    },
+    statusBtnHandel(item, panel) {
+      let nowBtn = item.webname;
+      this.btnStyleChange(nowBtn, 0, panel)
+    },
+    // 按钮样式变换处理
+    btnStyleChange(name, order, panel) {
+      const btnArr = order ? this[panel].btn : this[panel].btnSta;
+      btnArr.forEach(it => it.type = it.webname == name ? 'primary' : 'text');
     }
     /** ------------------ 获取数据方法 ------------------- **/
   }
