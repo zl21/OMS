@@ -70,6 +70,10 @@
             <p>订单优惠金额</p>
             <p>{{ componentData.order.ORDER_DISCOUNT_AMT==null || componentData.order.ORDER_DISCOUNT_AMT == 0 ?componentData.order.ORDER_DISCOUNT_AMT:componentData.order.ORDER_DISCOUNT_AMT }}</p>
           </li>
+          <li>
+            <p>(平台优惠金额)</p>
+            <p>{{ componentData.order.AMT_PLAT_DISCOUNT==null || componentData.order.AMT_PLAT_DISCOUNT == 0 ?componentData.order.AMT_PLAT_DISCOUNT:componentData.order.AMT_PLAT_DISCOUNT }}</p>
+          </li>
           <li>-</li>
           <li>
             <p>商品优惠金额</p>
