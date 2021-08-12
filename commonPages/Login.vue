@@ -25,8 +25,12 @@
         <div class="logo-img">
           <img src="../assets/img/form-logo.png" />
         </div>
+        <div class="loginTabs" v-if="isEnableLoginPro">
+          <div class="tab" @click="toggleTab('pwd')">验证码登录</div>
+          <div class="tab" @click="toggleTab('phone')">密码登录</div>
+        </div>
         <!-- 欢迎登录 -->
-        <div class="title">{{ vmI18n.t("welcome") }}</div>
+        <div class="title" v-else>{{ vmI18n.t("welcome") }}</div>
         <!-- 表单 -->
         <R3Login />
         <!-- bg -->
@@ -66,7 +70,8 @@ export default {
     return {
       vmI18n: i18n,
       langConfig,
-      curLang: '' // 当前语言
+      curLang: '', // 当前语言
+      isEnableLoginPro: false // 是否开启手机验证码登录
     };
   },
   created() {
@@ -77,9 +82,31 @@ export default {
   },
   mounted() {
     let loginBtn = document.getElementById('btn')
-    loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`
+    loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
+    this.isEnableLogin()
   },
   methods: {
+    // 是否开启手机验证码登录
+    isEnableLogin() {
+      let node = document.querySelector('.loginPro') || document.querySelector('.divErCode')
+      this.isEnableLoginPro = node
+      this.$nextTick(() => {
+        node && this.initTab(true)
+      })
+    },
+    initTab(isPhone) {
+      let nodes = document.querySelectorAll('.tab')
+      nodes[Number(isPhone)].classList.add('active')
+      nodes[Number(!isPhone)].classList.remove('active')
+    },
+    toggleTab(type) {
+      // 由于tab tile与框架默认展示的登录方式相反，故特殊处理
+      if (type == 'phone' && document.querySelector('.loginPro') 
+        || type == 'pwd' && document.querySelector('.divErCode')
+      ) return
+      document.getElementsByClassName("toggle")[0].click();
+      this.initTab(type == 'phone')
+    },
     toggleLang(lang) {
       const _this = this;
       let message = ['zh', 'en'].includes(lang) ? _this.vmI18n.messages[lang].tip_info : lang;
@@ -171,6 +198,40 @@ export default {
     background: url(../assets/img/login-form-bg.png) right no-repeat #fff;
     background-size: auto 100%;
   }
+  .loginTabs {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    width: 243px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #c3c6d2;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 26px;
+    div {
+      position: relative;
+      width: 50%;
+      &:last-child {
+        border-left: 1px solid #c3c6d2;
+      }
+      &.active {
+        color: #292f43;
+        &::before {
+        position: absolute;
+        content: '';
+        width: 24px;
+        height: 3px;
+        background: #5461b8;
+        border-radius: 2px;
+        top: 21px;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+      }
+      }
+    }
+  }
   .login-content {
     width: 50%;
     text-align: center;
@@ -188,56 +249,80 @@ export default {
       .container {
         width: 440px !important;
         background: transparent !important;
-        .logo {
+        .titleTOP, .divToggle, .logo {
           display: none;
         }
-        input:-webkit-autofill {
-          -webkit-text-fill-color: #292f43;
-          box-shadow: 0 0 0px 1000px transparent inset !important;
-          background-color: transparent;
-          background-image: none;
-          transition: background-color 50000s ease-in-out 0s;
+        input {
+          height: 40px;
+          text-align: right;
+          &:-webkit-placeholder {
+            color: #c3c6d2;
+          }
+          &:-webkit-autofill {
+            -webkit-text-fill-color: #292f43;
+            -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+            background-color: transparent;
+            background-image: none;
+            transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间
+          }
         }
         .pwd, .username {
           width: 320px !important;
-          background: #fff !important;
+          background: transparent !important;
           border: 1px solid #dbdde8 !important;
-        }
-        .pwd, .username {
+          margin-bottom: 24px !important;
           &::-webkit-input-placeholder {
             color:#97a8be;
           }
         }
+        .codeimg {
+          position: relative;
+          display: inline-block;
+          right: 0;
+          top: 0;
+          width: 96px;
+          height: 40px;
+          border: 1px solid #dbdde8;
+          margin-left: 8px;
+        }
         .divAccount, .divMima, .divCode {
+          position: relative !important;
+          top: 0 !important;
+          left: 0 !important;
+          
           img {
             display: none;
           }
           &:before {
-            content: '\e64b';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            font-family: 'iconfont';
             position: absolute;
-            top: 9px;
-            left: 10px;
-            font-size: 20px;
-            color: #b3b4bd;
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            text-align: left;
+            margin-left: 16px;
+            font-size: 14px;
           }
         }
-        .divCode:before {
-          content: '\e60c';
-          top: 0;
+        .divAccount:before {
+          content: '账号';
         }
-        .divMima {
-          top: 88px !important;
+        .divCode {
           &:before {
-            content: '\e60c';
+            content: '验证码';
           }
+          display: inline-block;
+          vertical-align: top;
+        }
+        .divMima:before {
+          content: '密码';
         }
         .btn {
-          top: 151px !important;
           display: inline-block;
+          position: relative;
+          top: 0;
+          right: 0;
+          margin-top: 0;
+          margin-left: 0;
           width: 320px;
           height: 40px;
           line-height: 40px;
@@ -256,45 +341,27 @@ export default {
           }
         }
         &.loginPro, &.divErCode {
-          .titleTOP, .logo {
-            display: none;
+          font-size: 0;
+          .pwd.code {
+            width: 216px !important;
           }
-          .code {
-            width: 200px !important;
-          }
-          .codeimg {
-            top: 151px !important;
-          }
-          
-          // .pwd.code {
-          //   &::-webkit-input-placeholder {
-          //     color:#97a8be;
-          //   }
-          // }
         }
         &.loginPro {
-          height: 285px !important;
-          .divCode {
-            top: 151px !important;
-            .pwd.code {
-              width: 200px !important;
-            }
-          }
-          .btn {
-            top: 214px !important;
-          }
+          height: 255px !important;
         }
         &.divErCode {
-          .divCode {
-            top: 88px !important;
+          .divAccount:before {
+            content: '手机号';
           }
           .code {
             width: 213px !important;
           }
         }
       }
-      .divAccount {
-        top: 25px !important;
+      .divErCode .erCodeBtn {
+        height: 40px !important;
+        margin-left: 8px !important;
+        vertical-align: top;
       }
     }
   }
@@ -315,81 +382,64 @@ export default {
     text-align: center;
     font-size: 14px;
     color: #6d6e71;
+    margin: 10px 0 24px 0;
   }
-  .form-input {
-    height: 40px;
-    line-height: 40px;
-    position: relative;
-    background: #ffffff;
-    border: 1px solid #dbdde8;
-    border-radius: 5px;
-    width: 320px;
-    padding-left: 40px;
-    margin-top: 24px;
-    display: inline-block;
-    font-size: 14px;
-    label {
-      position: absolute;
-      left: 10px;
-      top: 0;
-      height: 38px;
-      line-height: 38px;
-      width: 40px;
-      text-align: left;
-      color: #292f43;
-      i {
-        font-size: 20px;
-        color: #b3b4bd;
-      }
-    }
-    input {
-      width: 100%;
-      height: 38px;
-      line-height: 1;
-      display: block;
-      border: none;
-      background: transparent;
-      padding-right: 16px;
-      &:-webkit-placeholder {
-        color: #c3c6d2;
-      }
-      &:-webkit-autofill {
-        -webkit-text-fill-color: #292f43;
-        -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-        background-color: transparent;
-        background-image: none;
-        transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间
-      }
-    }
-  }
-  .btn {
-    display: inline-block;
-    margin-top: 24px;
-    width: 320px;
-    height: 40px;
-    line-height: 40px;
-    opacity: 1;
-    background: #5461b8;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    box-shadow: 0px 6px 20px 0px rgba(69, 96, 171, 0.31);
-    cursor: pointer;
-    img {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-    }
-  }
-  .fargetPws {
-    height: 45px;
-    line-height: 45px;
-    a {
-      color: #5461b8;
-      text-decoration: underline;
-    }
-  }
+  
+  // .form-input {
+  //   height: 40px;
+  //   line-height: 40px;
+  //   position: relative;
+  //   background: #ffffff;
+  //   border: 1px solid #dbdde8;
+  //   border-radius: 5px;
+  //   width: 320px;
+  //   padding-left: 40px;
+  //   margin-top: 24px;
+  //   display: inline-block;
+  //   font-size: 14px;
+  //   label {
+  //     position: absolute;
+  //     left: 10px;
+  //     top: 0;
+  //     height: 38px;
+  //     line-height: 38px;
+  //     width: 40px;
+  //     text-align: left;
+  //     color: #292f43;
+  //     i {
+  //       font-size: 20px;
+  //       color: #b3b4bd;
+  //     }
+  //   }
+  // }
+  // .btn {
+  //   display: inline-block;
+  //   margin-top: 24px;
+  //   width: 320px;
+  //   height: 40px;
+  //   line-height: 40px;
+  //   opacity: 1;
+  //   background: #5461b8;
+  //   border-radius: 4px;
+  //   font-size: 16px;
+  //   font-weight: bold;
+  //   color: #fff;
+  //   box-shadow: 0px 6px 20px 0px rgba(69, 96, 171, 0.31);
+  //   cursor: pointer;
+  //   img {
+  //     width: 20px;
+  //     height: 20px;
+  //     vertical-align: middle;
+  //   }
+  // }
+  // .fargetPws {
+  //   height: 45px;
+  //   line-height: 45px;
+  //   a {
+  //     color: #5461b8;
+  //     text-decoration: underline;
+  //   }
+  // }
   .login-bg-img {
     width: 137px;
     position: absolute;
