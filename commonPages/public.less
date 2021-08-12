@@ -44,7 +44,7 @@ i {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 0 10px 0;
+		padding: 0 0 16px 0;
 
 		&>span {
 			font-size: 18px;
@@ -223,12 +223,12 @@ i {
 		.main02body {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
-			grid-template-rows: repeat(auto-fit, 140px);
-			grid-auto-rows: 140px;
+			grid-template-rows: repeat(auto-fit, auto);
+			grid-auto-rows: auto;
 			grid-gap: 16px;
 			grid-auto-flow: row dense;
-			min-height: 200px;
-			max-height: 296px;
+			min-height: 156px;
+			// max-height: 296px;
 			overflow: hidden;
 
 			&.fadeInDom {
@@ -250,14 +250,16 @@ i {
 					}
 				}
 
-				.itemData {
-					position: relative;
-					margin: 10px;
+				.content {
+					display: flex;
+					flex-direction: column;
+					justify-content: space-evenly;
+				}
 
-					& span:last-child {
-						position: absolute;
-						right: 10px;
-					}
+				.itemData {
+					margin: 16px;
+					display: flex;
+					justify-content: space-between;
 				}
 			}
 		}

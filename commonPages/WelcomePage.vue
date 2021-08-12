@@ -88,14 +88,16 @@
                 <span>{{ it.title }}</span>
                 <Icon :type="it.statusIcon" class="warnIcon" />
               </div>
-              <div
-                for=""
-                v-for="(i, j) in it.data"
-                :key="'m2' + j"
-                class="itemData"
-              >
-                <span>{{ i.A_name }}</span>
-                <span>{{ i.A_sum }}</span>
+              <div class="content">
+                <div
+                  for=""
+                  v-for="(i, j) in it.data"
+                  :key="'m2' + j"
+                  class="itemData"
+                >
+                  <span>{{ i.A_name }}</span>
+                  <span>{{ i.A_sum }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -532,6 +534,10 @@ export default {
       vmI18n: window.vmI18n
     };
   },
+  updated() {
+    this.maxHeight('main02body', 'm2Item');
+    this.maxHeight('main03body', 'm3Item');
+  },
   mounted() {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
@@ -686,6 +692,20 @@ export default {
     },
     // 
   
+    // 计算maxHeight
+    maxHeight(body, itemName) {
+      const mBody = document.getElementById(body);
+      // let m2Heigh = m2Body.clientHeight;
+      let nodeHeight = 0 ,nodeSum = mBody.childNodes.length;
+      for (const node of mBody.childNodes) {
+        if (node.className.includes(itemName)) {
+          nodeHeight = node.clientHeight;
+          break
+        }
+      }
+      mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
+      console.log(mBody);
+    },
     dayBtnHandel(item, panel) {
       this.btnStyleChange(item, 1, panel)
     },
