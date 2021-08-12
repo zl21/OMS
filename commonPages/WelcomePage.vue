@@ -70,7 +70,7 @@
                 v-for="(it, index) in main02.btnSta"
                 :key="'m2Status' + index"
               >
-                <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="it.icon ? upDown('main02') : statusBtnHandel(it,'main02')">{{
+                <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="statusBtnHandel(it,'main02')">{{
                   it.text
                 }}</Button>
               </div>
@@ -118,13 +118,13 @@
               v-for="(it, index) in main03.btnSta"
               :key="'m3Status' + index"
             >
-              <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="it.icon ? upDown('main03') : statusBtnHandel(it,'main03')">{{
+              <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="statusBtnHandel(it,'main03')">{{
                 it.text
               }}</Button>
             </div>
           </div>
         </div>
-        <div :class="['main03body', up]" id="main03body">
+        <div :class="['main03body', m3Up]" id="main03body">
           <div
             class="m3Item comItem"
             v-for="(it, index) in  main03.data"
@@ -236,43 +236,9 @@ export default {
   data() {
     return {
       up: "",
+      m3Up: "",
       m2BtnIcon: "ios-arrow-down",
       m3BtnIcon: "ios-arrow-down",
-      dayBtnConifg: [
-        {
-          text: "近三天",
-          type: "primary",
-          webname: "threeDays",
-        },
-        {
-          text: "昨日",
-          type: "text",
-          webname: "yesterday",
-        },
-        {
-          text: "当天",
-          type: "text",
-          webname: "today",
-        }
-      ],
-      statusBtnConifg: [
-        {
-          text: "全部",
-          type: "primary",
-          webname: "all",
-        },
-        {
-          text: "异常",
-          type: "text",
-          webname: "abort",
-        },
-        {
-          text: "",
-          type: "text",
-          icon: "ios-arrow-down",
-          webname: "upDownIcon",
-        }
-      ],
       header: {
         time: new Date(),
       },
@@ -583,11 +549,6 @@ export default {
   },
 
   methods: {
-    upDown() {
-      this.up = this.up ? "" : "fadeInDom";
-      this.m2BtnIcon =
-        this.m2BtnIcon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
-    },
     /** ----------------- 配置方法 -------------------- **/
     // 折线图
     curveChart() {
@@ -726,17 +687,30 @@ export default {
     // 
   
     dayBtnHandel(item, panel) {
-      let nowBtn = item.webname;
-      this.btnStyleChange(nowBtn, 1, panel)
+      this.btnStyleChange(item, 1, panel)
     },
     statusBtnHandel(item, panel) {
-      let nowBtn = item.webname;
-      this.btnStyleChange(nowBtn, 0, panel)
+      this.btnStyleChange(item, 0, panel)
     },
     // 按钮样式变换处理
-    btnStyleChange(name, order, panel) {
+    btnStyleChange(item, order, panel) {
+      let nowBtn = item.webname;
       const btnArr = order ? this[panel].btn : this[panel].btnSta;
-      btnArr.forEach(it => it.type = it.webname == name ? 'primary' : 'text');
+      if (item.icon) {
+        btnArr.find(it => it.webname == nowBtn).icon = item.icon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
+        switch (panel) {
+          case 'main02':
+            this.up = this.up ? "" : "fadeInDom";
+            break;
+          case 'main03':
+            this.m3Up = this.m3Up ? "" : "m3fadeInDom";
+            break;
+          default:
+            break;
+        }
+        return
+      }
+      btnArr.forEach(it => it.type = it.webname == nowBtn ? 'primary' : 'text');
     }
     /** ------------------ 获取数据方法 ------------------- **/
   }
