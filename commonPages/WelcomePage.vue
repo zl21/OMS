@@ -89,15 +89,15 @@
                 <Icon :type="it.statusIcon" class="warnIcon" />
               </div>
               <div class="content">
-                <div
-                  for=""
-                  v-for="(i, j) in it.data"
-                  :key="'m2' + j"
-                  class="itemData"
-                >
-                  <span>{{ i.A_name }}</span>
-                  <span>{{ i.A_sum }}</span>
-                </div>
+                <template v-for="(i) in it.data">
+                  <div
+                    :key="i.A_sum + +new Date()"
+                    :class="['itemData', i.color || '']"
+                  >
+                    <span>{{ i.A_name }}</span>
+                    <span>{{ i.A_sum }}</span>
+                  </div>
+                </template>
               </div>
             </div>
           </div>
@@ -294,16 +294,19 @@ export default {
             data: [
               {
                 status: 0,
+                color: 'gray',
                 A_name: "推送总数",
                 A_sum: 3880
               },
               {
                 status: 1,
+                color: 'green',
                 A_name: "推送成功",
                 A_sum: 345
               },
               {
                 status: 0,
+                color: 'red',
                 A_name: "推送失败率",
                 A_sum: "20%"
               }
@@ -316,16 +319,19 @@ export default {
             data: [
               {
                 status: 0,
+                color: 'gray',
                 A_name: "推送总数",
                 A_sum: 3880
               },
               {
                 status: 1,
+                color: 'green',
                 A_name: "推送成功",
                 A_sum: 345
               },
               {
                 status: 0,
+                color: 'red',
                 A_name: "推送失败率",
                 A_sum: "20%"
               }
@@ -338,16 +344,19 @@ export default {
             data: [
               {
                 status: 0,
+                color: 'gray',
                 A_name: "推送总数",
                 A_sum: 3880
               },
               {
                 status: 1,
+                color: 'green',
                 A_name: "推送成功",
                 A_sum: 345
               },
               {
                 status: 0,
+                color: 'red',
                 A_name: "推送失败率",
                 A_sum: "20%"
               }
@@ -360,16 +369,19 @@ export default {
             data: [
               {
                 status: 0,
+                color: 'gray',
                 A_name: "推送总数",
                 A_sum: 3880
               },
               {
                 status: 1,
+                color: 'green',
                 A_name: "推送成功",
                 A_sum: 345
               },
               {
                 status: 0,
+                color: 'red',
                 A_name: "推送失败率",
                 A_sum: "20%"
               }
@@ -382,16 +394,19 @@ export default {
             data: [
               {
                 status: 0,
+                color: 'gray',
                 A_name: "推送总数",
                 A_sum: 3880
               },
               {
                 status: 1,
+                color: 'green',
                 A_name: "推送成功",
                 A_sum: 345
               },
               {
                 status: 0,
+                color: 'red',
                 A_name: "推送失败率",
                 A_sum: "20%"
               }
@@ -404,16 +419,19 @@ export default {
             data: [
               {
                 status: 0,
+                color: 'gray',
                 A_name: "推送总数",
                 A_sum: 3880
               },
               {
                 status: 1,
+                color: 'green',
                 A_name: "推送成功",
                 A_sum: 345
               },
               {
                 status: 0,
+                color: 'red',
                 A_name: "推送失败率",
                 A_sum: "20%"
               }
