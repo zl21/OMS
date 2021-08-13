@@ -38,7 +38,12 @@
           </div>
           <div class="main01body">
             <div class="left">
-              <div id="main" style="width: 200px; height: 200px"></div>
+              <div id="main01Left" style=" min-width: 200px; min-height: 200px"></div>
+              <div class="legend" >
+                <template v-for="(it,index) in main01.pieData">
+                  <div :key="'pieLegend' + index"> {{it.name}} <i>{{it.value}}</i></div>
+                </template>
+              </div>
             </div>
             <div class="right">
               <div
@@ -311,6 +316,11 @@ export default {
             message: "异常单据",
             sum: 288,
           },
+        ],
+        pieData: [
+          {value: 1048, name: '总数'},
+          {value: 1048, name: '异常数'},
+          {value: 1048, name: '正常数'},
         ],
       },
       main02: {
@@ -634,6 +644,7 @@ export default {
     );
     this.curveChart();
     this.getGauge();
+    this.pieChart();
   },
   destroyed() {
     if (document.getElementById("content")) {
@@ -644,6 +655,50 @@ export default {
 
   methods: {
     /** ----------------- 配置方法 -------------------- **/
+    // 饼图
+    pieChart() {
+      const chartDom = document.getElementById('main01Left');
+      const myChart = echarts.init(chartDom);
+      const option = {
+        series: [
+          {
+            color: ['#5470c6'],
+            name: '访问来源',
+            type: 'pie',
+            radius: ['55%', '75%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              scale: true, // 扇形区域hover上去放大效果
+              label: {
+                show: true,
+                fontSize: '28',
+                fontWeight: 'bold'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: this.main01.pieData,
+          }
+        ]
+      };
+      let index;
+      myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 0});//设置默认选中高亮部分
+      myChart.on('mouseover',function(e){
+        if(e.dataIndex != index){
+          myChart.dispatchAction({type: 'downplay', seriesIndex: 0, dataIndex: index });
+        }
+      });
+      myChart.on('mouseout',function(e){
+        index = e.dataIndex;
+        myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: e.dataIndex});
+      });
+      option && myChart.setOption(option);
+    },
     // 折线图
     curveChart() {
       const chartDom = document.getElementById("mainCurve");
