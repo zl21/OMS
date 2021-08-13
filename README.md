@@ -298,5 +298,5 @@
 | v1.2.60 | businessActionTable-添加是否单选 |引用回滚修复 |
 | v1.2.62 | importTable兼容处理 |
 | v1.2.63 | businessActionTable修复 |
-| v1.2.61 | businessActionTable-兼容modal样式 |
+| v1.2.64 | businessActionTable-兼容modal样式 |
 
