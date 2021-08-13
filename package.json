@@ -24,6 +24,7 @@
   "dependencies": {
     "@burgeon/internationalization": "^1.0.91",
     "@syman/ark-ui": "^1.1.39",
+    "echarts": "^5.1.2",
     "lodash": "^4.17.21",
     "mddir": "^1.1.1",
     "qs": "^6.9.4"
