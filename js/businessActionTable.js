@@ -288,6 +288,7 @@ export default {
           widths += Number(i.width)
         })
       }
+      console.log('widths:',widths);
       return Number.isInteger(widths / 24)
     },
     // 按钮配置文件
