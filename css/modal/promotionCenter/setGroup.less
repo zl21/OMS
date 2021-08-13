@@ -1,6 +1,16 @@
 @import '~@burgeon/oms-theme/skin/public.less';
 
 .setGroup {
+    .el-dialog { 
+        border-radius: 6px;
+        .el-dialog__header {
+            height: 33px;
+            line-height: 33px;
+            .el-dialog__headerbtn {
+                top: 7px;
+            }
+        }
+    }
     .setGroupEdit {
         .el-radio {
             margin-right: 20px;
@@ -40,6 +50,7 @@
     .table {
 
         padding-top: 10px;
+        padding-bottom: 16px;
 
         .el-table__header-wrapper {
             font-size: 13px;
@@ -67,6 +78,10 @@
                 text-align: center;
             }
         }
+    }
+
+    .modal-foote {
+        margin-bottom: -16px;
     }
 
     .footer {
