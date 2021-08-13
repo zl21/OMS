@@ -748,7 +748,8 @@ export default {
       const param = {
         proCode: self.formConfig.formValue.ECODE, // spu编码
         tableName: 'ps_c_pro', // 表名
-        classId: self.formConfig.formValue.PS_C_PRO_CLASSIFY_ID // 分类id
+        classId: self.formConfig.formValue.PS_C_PRO_CLASSIFY_ID, // 分类id
+        objid: self.spuid != '-1' && !['Y', '启用'].includes(self.formConfig.formValue.isactive) ? '-1' : self.spuid,
       }
       if (self.spuid == '-1') {
         delete param.proCode

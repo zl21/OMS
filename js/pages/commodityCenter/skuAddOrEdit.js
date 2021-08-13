@@ -24,7 +24,7 @@ export default {
       vmI18n: $i18n,
       subTableConfig: {},
       forceFresh: 0,
-      ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
+      // ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       showSubtablePart: false,
       watchChange: false, // 监听修改变化
       modify: {
@@ -433,12 +433,18 @@ export default {
   },
   watch: {},
   computed: {
+    ID() {
+      const spu = this.$route.query.spuid || this.$route.query.spucode;
+      let id = this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1'; // 记录主界面传入的ID
+      if (spu) { id = '-1'; }
+      return id
+    },
     customizedModuleName() {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
   activated() {
-    if (this.ID > 0 && !this.$route.query.spuid) {
+    if (this.ID > 0) {
       this.getBtn();
     }
   },
@@ -449,7 +455,7 @@ export default {
       // 详情
       this.getBtn();
       self.initObjItem(self.ID);
-    } else if (self.ID == '2201' && self.$route.query.spuid) {
+    } else if (self.$route.query.spuid) {
       // 是SPU新增/详情 跳转过来的新增
       self.labelList.splice(1, 2);
       self.initObjItem('-1');
@@ -541,7 +547,7 @@ export default {
         self.subTableConfig = {
           centerName: 'commodityCenter',
           tablename: self.labelDefaultValue,
-          objid: (this.$route.query.spuid || this.ID == '-1') ? '-1' : this.ID,
+          objid: this.ID,
           pageShow: true,
         }
         setTimeout(() => {
@@ -640,9 +646,10 @@ export default {
         proCode,
         skuCode, // 该条明细的skuCode，新增时没有，传空字符串
         skuId,
-        objid: (this.$route.query.spuid || this.ID == '-1') ? '-1' : this.ID,
+        objid: this.formConfig.formValue.ISACTIVE == 'N' ? '-1' : this.ID, // 用于控制是否可编辑
+        objid_info: '用于控制‘自定义属性’和‘固定属性’是否可编辑,-1可编辑,其它则不可编辑',
       };
-      if (this.ID == '2201' && this.$route.query.spuid) { // spu过来的新增，不传skuId
+      if (this.$route.query.spuid) { // spu过来的新增，不传skuId
         delete param.skuId;
       }
       this.loading = true;
@@ -735,7 +742,7 @@ export default {
           attributeItem: afterExPro[key] ? afterExPro[key] : ''
         });
       }
-      if (self.$route.query.spuid && self.ID == '2201') {
+      if (self.$route.query.spuid) {
         // spu跳过来的新增，默认入参
         this.ID = '-1';
         PsSku.ISACTIVE = 'Y';
@@ -744,7 +751,7 @@ export default {
       PsSku.SALES_STATUS = PsSku.SALES_STATUS ? PsSku.SALES_STATUS : self.formConfig.formValue.SALES_STATUS;
       PsSku.PS_C_PRO_ID = self.spuID; // 特别地，后端要的是ID不是ECODE (即'coffee对应的id')
       const param = {
-        objid: (this.$route.query.spuid || this.ID == '-1') ? '-1' : this.ID,
+        objid: this.ID,
         table: 'PS_C_SKU',
         PsSku, // 主表修改信息
         EXTRA, // 子表修改信息
