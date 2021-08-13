@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-10 16:32:40
+ * @LastEditTime: 2021-08-13 14:11:03
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -29,6 +29,7 @@
       :mask="true"
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
+      class-name="ark-dialog"
     >
       <businessActionTable
         :jordan-table-config="tableConfig"
@@ -46,6 +47,7 @@
       :title="vmI18n.t('btn.replaceDetail')"
       :mask="true"
       @on-ok="replaceOk"
+      class-name="ark-dialog"
     >
       <businessActionTable
         :jordan-table-config="replaceProductTable"
