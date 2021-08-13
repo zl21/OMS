@@ -1,3 +1,5 @@
+@import "~@burgeon/oms-theme/skin/public.less";
+
 i {
 	font-style: normal;
 }
@@ -333,18 +335,21 @@ i {
 				}
 				.gaugeTitle{
 					position: absolute;
-					bottom: 10px;
-					left: 50%;
-					transform: translateX(-50);
-				}
-
-				.itemData {
-					// padding: 16px;
-					// background-color: #ccc;
-					// position: absolute;
-					// top: 50%;
-					// left: 50%;
-					// transform: translate(-50%, -50%);
+					bottom: 45px;
+					left: 0;
+					color: rgba(0,0,0,.45);
+					width: 100%;
+					text-align: center;
+					.ark-tooltip{
+						color: @base-color;
+						vertical-align: text-bottom;
+					}
+					.gaugeTips{
+						font-size: 12px;
+						color: #8D91A1;
+						width: 100px;
+						white-space: pre-wrap;
+					}
 				}
 			}
 		}

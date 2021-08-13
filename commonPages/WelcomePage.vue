@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-12 18:44:37
+ * @LastEditTime: 2021-08-13 10:39:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -161,10 +161,10 @@
                 <span>
                   {{it.desc}}
                 </span>
-                <Tooltip placement="top-start" max-width="800" theme="light">
-                    <Icon type="ios-alert-outline" />
+                <Tooltip placement="top-start" theme="light">
+                    <Icon type="ios-help-circle-outline" />
                     <div slot="content">
-                        skldalkfnalkfnalkdfnalkdn
+                        <div class="gaugeTips">积压单量说明积压单量说明积压单量说明</div>
                     </div>
                 </Tooltip>
               </div>
@@ -479,7 +479,7 @@ export default {
             title: "转单服务",
             time: "2h",
             status: 0,
-            min: 10,
+            min: 0,
             max: 10000,
             value: 9002,
             desc: "积压单量",
@@ -490,7 +490,7 @@ export default {
             title: "转单服务",
             time: "2h",
             status: 0,
-            min: 10,
+            min: 0,
             max: 10000,
             value: 3002,
             desc: "积压单量",
@@ -501,7 +501,7 @@ export default {
             title: "转单服务",
             time: "2h",
             status: 0,
-            min: 10,
+            min: 0,
             max: 10000,
             value: 5002,
             color: "#90BB57",
@@ -512,7 +512,7 @@ export default {
             title: "转单服务",
             time: "2h",
             status: 0,
-            min: 10,
+            min: 0,
             max: 10000,
             value: 8672,
             color: "#FF6951",
@@ -523,7 +523,7 @@ export default {
             title: "转单服务",
             time: "2h",
             status: 0,
-            min: 10,
+            min: 0,
             max: 10000,
             value: 5670,
             color: "#90BB57",
@@ -814,6 +814,7 @@ export default {
                 value: params.value,
                 name: params.desc,
                 title: {
+                  show:false,
                   offsetCenter: [0, 0],
                   fontSize: 12,
                   color: "#8C8C8C",
