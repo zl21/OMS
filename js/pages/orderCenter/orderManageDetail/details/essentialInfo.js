@@ -4,6 +4,7 @@ import businessDialog from 'professionalComponents/businessDialog';
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import goodsTotalAmount from '@/views/pages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
+import { throttle } from 'lodash'
 export default {
   name: 'EssentialInfo',
   props: {
@@ -215,11 +216,11 @@ export default {
     }
   },
   methods: {
-    eyeClick() {
+    eyeClick:throttle(function () {
       this.eyeText = this.eyeStatus ? $i18n.t('btn.show') : $i18n.t('btn.hide'); //隐藏 显示
       this.eyeStatus = !this.eyeStatus;
       this.$emit('freshLoad', { DECRYPT: this.eyeStatus });
-    },
+    },2000),
     isQhMethod(data) {
       this.isQhChild = data;
     },

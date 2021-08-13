@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 18:45:07
- * @LastEditTime: 2021-07-22 14:27:30
+ * @LastEditTime: 2021-08-13 16:18:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/OWNERNAME.vue
@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import { throttle } from 'lodash'
 export default {
   data(){
     return {
@@ -36,22 +37,22 @@ export default {
     }, 500);
   },
   methods:{
-    onClickEye(val){
-     let obj = {
-       Label:'Label',
-       name:'name',
-       OWNERNAME:this.$route.params.itemId
-     }
-     if(val){
+    onClickEye:throttle(function (val){
+      let obj = {
+        Label:'Label',
+        name:'name',
+        OWNERNAME:this.$route.params.itemId
+      }
+      if(val){
         obj.ID = this.$route.params.itemId
         this.$emit('change',[obj])
         this.$refs.iconfont.classList.replace('iconios-eye-off','iconios-eye');
-     }else{
+      }else{
         this.$emit('change','')
         this.$refs.iconfont.classList.replace('iconios-eye','iconios-eye-off')
-     }
-     this.isShow = !val
-    }
+      }
+      this.isShow = !val
+    },2000)
   }
 }
 </script>
