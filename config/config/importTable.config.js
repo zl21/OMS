@@ -9,7 +9,7 @@ const importConfig = {
     isAction: true,
     tableName: 'SG_B_GOOD_DISTRIBUTION',
     webname: 'SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT',
-    tempApi: '/p/cs/oc/oms/v1/refundExtra/remitResultDownLoad',
+    tempApi: '/p/cs/sg/v1/sgBGoodDistribution/exportTemplate',
     okApi: '/p/cs/sg/v1/sgBGoodDistribution/itemImport',
     downErrorInfo: true
   },
@@ -18,7 +18,7 @@ const importConfig = {
     isAction: true,
     tableName: 'SG_B_GOOD_DISTRIBUTION',
     webname: 'SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT',
-    tempApi: '/p/cs/oc/oms/v1/refundExtra/remitResultDownLoad',
+    tempApi: '/p/cs/sg/v1/sgBGoodDistribution/exportTemplate',
     okApi: '/p/cs/sg/v1/sgBGoodDistribution/import',
     downErrorInfo: true
   },

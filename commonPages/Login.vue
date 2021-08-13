@@ -248,6 +248,7 @@ export default {
       height: 0 !important;
       .container {
         width: 440px !important;
+        height: 250px !important;
         background: transparent !important;
         .titleTOP, .divToggle, .logo {
           display: none;
