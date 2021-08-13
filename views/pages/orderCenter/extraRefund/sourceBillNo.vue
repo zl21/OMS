@@ -35,12 +35,6 @@
       title="关联原单"
     >
       <div class="customized-modal">
-        <div class="customized-detail-main">
-          <businessForm :form-config="formConfig" />
-        </div>
-        <div class="customized-detail-btn">
-          <businessButton :btn-config="btn" />
-        </div>
         <div class="customized-detail-table">
           <business-action-table
             :jordan-table-config="table"
@@ -61,7 +55,6 @@
 <script>
 // 退换货单详情
 import businessButton from 'professionalComponents/businessButton';
-import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
@@ -75,7 +68,6 @@ export default {
   name: 'sourceBillNo',
   components: {
     businessButton,
-    businessForm,
     businessActionTable,
     businessDialog,
     businessLabel,
@@ -105,35 +97,6 @@ export default {
       backable: false,
       modal: false,
       getCurrenData: {},
-      btn: {
-        typeAll: 'default', // 按钮统一风格样式
-        btnsite: "right",
-        buttons: [
-          {
-            text: $i18n.t('btn.reset'), //重置
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.formConfig.formValue.BILL_NO = '';
-              this.formConfig.formValue.SOURCE_CODE = '';
-              this.formConfig.formValue.EXPRESS_CODE = '';
-              this.formConfig.formValue.RECEIVER_NAME = '';
-              this.formConfig.formValue.BUYER_NICK = '';
-              this.formConfig.formValue.RECEIVER_MOBILE = '';
-              console.log('this.formConfig.formValue:',this.formConfig.formValue);
-              // this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
-              this.queryEnter(1, this.table.pageSize);
-            }, // 按钮点击事件
-          },
-          {
-            text: $i18n.t('btn.find'), // 查找 按钮文本
-            disabled: false, // 按钮禁用控制
-            type: 'primary',
-            btnclick: () => {
-              this.queryEnter(1, this.table.pageSize);
-            }, // 按钮点击事件
-          },
-        ],
-      },
       btnConfigMo: {
         typeAll: "default",
         btnsite: "right",
@@ -159,60 +122,6 @@ export default {
               this.orderModal = false;
               this.table.selectionArr = [];
             },
-          },
-        ],
-      },
-      formConfig: {
-        formValue: {
-          BILL_NO: "",
-          SOURCE_CODE: '',
-          EXPRESS_CODE: '',
-          RECEIVER_NAME:'',
-          BUYER_NICK: '',
-          RECEIVER_MOBILE: '',
-        },
-        formData: [
-          {
-            style: 'input',
-            label: '原定单编号', // 原定单编号
-            colname: 'BILL_NO',
-            width: '8',
-            inputenter: () => this.queryEnter(1, this.table.pageSize),
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.platform_billNo'), // 平台单号
-            colname: 'SOURCE_CODE',
-            width: '8',
-            inputenter: () => this.queryEnter(1, this.table.pageSize),
-          },
-          {
-            style: 'input',
-            label: '物流单号', // 物流单号
-            colname: 'EXPRESS_CODE',
-            width: '8',
-            inputenter: () => this.queryEnter(1, this.table.pageSize),
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.consignee'), // 收货人
-            colname: 'RECEIVER_NAME',
-            width: '8',
-            inputenter: () => this.queryEnter(1, this.table.pageSize),
-          },
-          {
-            style: 'input',
-            label: $i18n.t('table_label.buyerNickname'), // 买家昵称
-            colname: 'BUYER_NICK',
-            width: '8',
-            inputenter: () => this.queryEnter(1, this.table.pageSize),
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.consignee_phone'), // 收货人手机
-            colname: 'RECEIVER_MOBILE',
-            width: '8',
-            inputenter: () => this.queryEnter(1, this.table.pageSize),
           },
         ],
       },
@@ -259,7 +168,90 @@ export default {
         pageIndex: 1, // 页码
         isShowSelection: true, // 是否显示checkedbox
         highlightRow: true, // 高亮单选必须结合它
-        multiple: false //false 单选
+        multiple: false, //false 单选
+        businessFormConfig: {
+          formValue: {
+            BILL_NO: "",
+            SOURCE_CODE: '',
+            EXPRESS_CODE: '',
+            RECEIVER_NAME:'',
+            BUYER_NICK: '',
+            RECEIVER_MOBILE: '',
+          },
+          formData: [
+            {
+              style: 'input',
+              label: '原定单编号', // 原定单编号
+              colname: 'BILL_NO',
+              width: '8',
+              inputenter: () => this.queryEnter(1, this.table.pageSize),
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.platform_billNo'), // 平台单号
+              colname: 'SOURCE_CODE',
+              width: '8',
+              inputenter: () => this.queryEnter(1, this.table.pageSize),
+            },
+            {
+              style: 'input',
+              label: '物流单号', // 物流单号
+              colname: 'EXPRESS_CODE',
+              width: '8',
+              inputenter: () => this.queryEnter(1, this.table.pageSize),
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.consignee'), // 收货人
+              colname: 'RECEIVER_NAME',
+              width: '8',
+              inputenter: () => this.queryEnter(1, this.table.pageSize),
+            },
+            {
+              style: 'input',
+              label: $i18n.t('table_label.buyerNickname'), // 买家昵称
+              colname: 'BUYER_NICK',
+              width: '8',
+              inputenter: () => this.queryEnter(1, this.table.pageSize),
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.consignee_phone'), // 收货人手机
+              colname: 'RECEIVER_MOBILE',
+              width: '8',
+              inputenter: () => this.queryEnter(1, this.table.pageSize),
+            },
+          ],
+        },
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: "right",
+          buttons: [
+            {
+              text: $i18n.t('btn.reset'), //重置
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.table.businessFormConfig.formValue.BILL_NO = '';
+                this.table.businessFormConfig.formValue.SOURCE_CODE = '';
+                this.table.businessFormConfig.formValue.EXPRESS_CODE = '';
+                this.table.businessFormConfig.formValue.RECEIVER_NAME = '';
+                this.table.businessFormConfig.formValue.BUYER_NICK = '';
+                this.table.businessFormConfig.formValue.RECEIVER_MOBILE = '';
+                console.log('this.table.businessFormConfig.formValue:',this.table.businessFormConfig.formValue);
+                // this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
+                this.queryEnter(1, this.table.pageSize);
+              }, // 按钮点击事件
+            },
+            {
+              text: $i18n.t('btn.find'), // 查找 按钮文本
+              disabled: false, // 按钮禁用控制
+              type: 'primary',
+              btnclick: () => {
+                this.queryEnter(1, this.table.pageSize);
+              }, // 按钮点击事件
+            },
+          ],
+        }
       },
     };
   },
@@ -295,12 +287,12 @@ export default {
       R3.store.commit('customize/clear', true);
     },
     iconclick() {
-      this.formConfig.formValue.BILL_NO = '';
-      this.formConfig.formValue.SOURCE_CODE = '';
-      this.formConfig.formValue.EXPRESS_CODE = '';
-      this.formConfig.formValue.RECEIVER_NAME = '';
-      this.formConfig.formValue.BUYER_NICK = '';
-      this.formConfig.formValue.RECEIVER_MOBILE = '';
+      this.table.businessFormConfig.formValue.BILL_NO = '';
+      this.table.businessFormConfig.formValue.SOURCE_CODE = '';
+      this.table.businessFormConfig.formValue.EXPRESS_CODE = '';
+      this.table.businessFormConfig.formValue.RECEIVER_NAME = '';
+      this.table.businessFormConfig.formValue.BUYER_NICK = '';
+      this.table.businessFormConfig.formValue.RECEIVER_MOBILE = '';
       // 获取
       this.queryEnter();
       this.orderModal = true;
@@ -320,7 +312,7 @@ export default {
     async queryEnter(pageNum = 1, pageSize = 10,enter) {
       const self = this;
       this.table.loading = true;
-      let formValue = this.formConfig.formValue;
+      let formValue = this.table.businessFormConfig.formValue;
       let paramsNull
       let params = {
         pageNum:pageNum,

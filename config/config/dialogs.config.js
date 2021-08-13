@@ -169,6 +169,13 @@ class DialogConfig {
       name: 'scheduleFormDialog',
       url: 'modal/strategyPlatform/scheduleFormDialog',
       excludeString: 'scheduleFormDialog',
+    },
+    copyPermissionConfig: {
+      title: '复制权限', // 复制权限
+      width: 400,
+      name: 'copyPermission',
+      url: 'modal/systemConfig/copyPermission',
+      excludeString: 'copyPermission',
     }
   }
   static config() {

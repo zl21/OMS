@@ -19,52 +19,20 @@
         </DropdownMenu>
       </Dropdown>
     </div>
-    <div ref="container" class="container">
+    <div ref="container" class="login-container">
       <div class="login-content">
         <!-- logo -->
         <div class="logo-img">
           <img src="../assets/img/form-logo.png" />
         </div>
+        <div class="loginTabs" v-if="isEnableLoginPro">
+          <div class="tab" @click="toggleTab('pwd')">验证码登录</div>
+          <div class="tab" @click="toggleTab('phone')">密码登录</div>
+        </div>
         <!-- 欢迎登录 -->
-        <div class="title">{{ vmI18n.t("welcome") }}</div>
-        <!-- form -->
-        <div class="form-input">
-          <label>
-            <i class="iconfont icon-yonghu"></i>
-          </label>
-          <div class="input-box">
-            <input
-              ref="username"
-              type="text"
-              value=""
-              class="username"
-              :placeholder="vmI18n.t('pHolder.a2')"
-            />
-          </div>
-        </div>
-        <div class="form-input">
-          <label>
-            <i class="iconfont icon-mima"></i>
-          </label>
-          <div class="input-box">
-            <input
-              ref="password"
-              type="password"
-              value=""
-              class="pwd"
-              :placeholder="vmI18n.t('pHolder.a3')"
-            />
-          </div>
-        </div>
-        <!-- button -->
-        <div id="btn" class="btn" @click="login">
-          <!-- 登录 -->
-          {{ vmI18n.t("login") }}
-          <img src="../assets/img/arrow-right.png" />
-        </div>
-        <!-- <p class="fargetPws">
-          <a>忘记密码了？</a>
-        </p> -->
+        <div class="title" v-else>{{ vmI18n.t("welcome") }}</div>
+        <!-- 表单 -->
+        <R3Login />
         <!-- bg -->
         <span class="login-bg-img">
           <img src="../assets/img/login-bg-img.png" />
@@ -76,7 +44,6 @@
 
 <script>
 import R3 from "@syman/burgeon-r3";
-import service from '@/service/index';
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 window.$i18n = i18n;
 
@@ -96,11 +63,15 @@ const langConfig = [
 ];
 export default {
   name: "Login",
+  components: {
+    R3Login: R3.components.Login
+  },
   data() {
     return {
       vmI18n: i18n,
       langConfig,
       curLang: '', // 当前语言
+      isEnableLoginPro: false // 是否开启手机验证码登录
     };
   },
   created() {
@@ -109,7 +80,33 @@ export default {
     _this.vmI18n.locale = browseLan;
     this.curLang = langConfig.find(it => it.type == browseLan).text;
   },
+  mounted() {
+    let loginBtn = document.getElementById('btn')
+    loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
+    this.isEnableLogin()
+  },
   methods: {
+    // 是否开启手机验证码登录
+    isEnableLogin() {
+      let node = document.querySelector('.loginPro') || document.querySelector('.divErCode')
+      this.isEnableLoginPro = node
+      this.$nextTick(() => {
+        node && this.initTab(true)
+      })
+    },
+    initTab(isPhone) {
+      let nodes = document.querySelectorAll('.tab')
+      nodes[Number(isPhone)].classList.add('active')
+      nodes[Number(!isPhone)].classList.remove('active')
+    },
+    toggleTab(type) {
+      // 由于tab tile与框架默认展示的登录方式相反，故特殊处理
+      if (type == 'phone' && document.querySelector('.loginPro') 
+        || type == 'pwd' && document.querySelector('.divErCode')
+      ) return
+      document.getElementsByClassName("toggle")[0].click();
+      this.initTab(type == 'phone')
+    },
     toggleLang(lang) {
       const _this = this;
       let message = ['zh', 'en'].includes(lang) ? _this.vmI18n.messages[lang].tip_info : lang;
@@ -135,68 +132,7 @@ export default {
         // type: _this.vmI18n.messages[lang].tip_type,
         type: 'success',
       });
-    },
-    login() {
-      let message = {};
-      if (this.$refs.username.value === "") {
-        message = {
-          title: $i18n.t('modalTitle.error'), // 错误
-          content: $i18n.t('username'), // 请输入用户名
-        };
-        this.$Modal.fcError(message);
-      } else if (this.$refs.password.value === "") {
-        message = {
-          title: $i18n.t('modalTitle.error'), // 错误
-          content: $i18n.t('password'), // 请输入密码
-        };
-        this.$Modal.fcError(message);
-      } else if (
-        this.$refs.username.value !== "" &&
-        this.$refs.password.value !== ""
-      ) {
-        service.common.getCaptcha().then((res) => {
-          let params = {
-            username: this.$refs.username.value,
-            password: this.$refs.password.value,
-            captcha: res.data.captcha,
-            rememberMe: false,
-            lang: 'zh_CN',
-          }
-          service.common.globalLogin(R3.urlSearchParams(params)).then((r) => {
-            localStorage.setItem("name", this.$refs.username.value)
-            if (r.status === 200 && r.data.code === 0) {
-              let obj = {
-                TID: this.$refs.username.value,
-                LOGIN_RESULT: "success",
-                LOGIN_MESSAGE: "success"
-              }
-              // 切换语言
-              const pa = new FormData();
-              pa.append('language', localStorage.getItem("locale") || 'zh');
-              service.common.langSwitcher(pa).then((r) => {
-                if (r.status === 200 && r.data.code === 0) {
-                  console.log('langSwitcher success!');
-                }
-              })
-              // 御城河
-              service.common.loginLog(obj).then(res=>{
-                console.log(res);
-              })
-              window.location.href = window.location.origin;
-            }else{
-               let obj = {
-                TID: this.$refs.username.value,
-                LOGIN_RESULT: "fail",
-                LOGIN_MESSAGE: r.data.message
-              }
-              service.common.loginLog(obj).then(res=>{
-                console.log(res);
-              })
-            }
-          })
-        });
-      }
-    },
+    }
   },
 };
 </script>
@@ -251,7 +187,7 @@ export default {
     height: 680px;
   }
   /*整块内容*/
-  .container {
+  .login-container {
     width: 1024px;
     height: 480px;
     position: absolute;
@@ -262,10 +198,172 @@ export default {
     background: url(../assets/img/login-form-bg.png) right no-repeat #fff;
     background-size: auto 100%;
   }
+  .loginTabs {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    width: 243px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #c3c6d2;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 26px;
+    div {
+      position: relative;
+      width: 50%;
+      &:last-child {
+        border-left: 1px solid #c3c6d2;
+      }
+      &.active {
+        color: #292f43;
+        &::before {
+        position: absolute;
+        content: '';
+        width: 24px;
+        height: 3px;
+        background: #5461b8;
+        border-radius: 2px;
+        top: 21px;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+      }
+      }
+    }
+  }
   .login-content {
     width: 50%;
     text-align: center;
     min-width: 400px;
+    height: 100%;
+    position: relative;
+    /deep/.login {
+      /* 覆盖框架登录样式 */
+      background: transparent;
+      position: relative !important;
+      right: 14.5% !important;
+      top: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      .container {
+        width: 440px !important;
+        background: transparent !important;
+        .titleTOP, .divToggle, .logo {
+          display: none;
+        }
+        input {
+          height: 40px;
+          text-align: right;
+          &:-webkit-placeholder {
+            color: #c3c6d2;
+          }
+          &:-webkit-autofill {
+            -webkit-text-fill-color: #292f43;
+            -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+            background-color: transparent;
+            background-image: none;
+            transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间
+          }
+        }
+        .pwd, .username {
+          width: 320px !important;
+          background: transparent !important;
+          border: 1px solid #dbdde8 !important;
+          margin-bottom: 24px !important;
+          &::-webkit-input-placeholder {
+            color:#97a8be;
+          }
+        }
+        .codeimg {
+          position: relative;
+          display: inline-block;
+          right: 0;
+          top: 0;
+          width: 96px;
+          height: 40px;
+          border: 1px solid #dbdde8;
+          margin-left: 8px;
+        }
+        .divAccount, .divMima, .divCode {
+          position: relative !important;
+          top: 0 !important;
+          left: 0 !important;
+          
+          img {
+            display: none;
+          }
+          &:before {
+            position: absolute;
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            text-align: left;
+            margin-left: 16px;
+            font-size: 14px;
+          }
+        }
+        .divAccount:before {
+          content: '账号';
+        }
+        .divCode {
+          &:before {
+            content: '验证码';
+          }
+          display: inline-block;
+          vertical-align: top;
+        }
+        .divMima:before {
+          content: '密码';
+        }
+        .btn {
+          display: inline-block;
+          position: relative;
+          top: 0;
+          right: 0;
+          margin-top: 0;
+          margin-left: 0;
+          width: 320px;
+          height: 40px;
+          line-height: 40px;
+          opacity: 1;
+          background: #5461b8;
+          border-radius: 4px;
+          font-size: 16px;
+          font-weight: bold;
+          color: #fff;
+          box-shadow: 0px 6px 20px 0px rgba(69, 96, 171, 0.31);
+          cursor: pointer;
+          img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+          }
+        }
+        &.loginPro, &.divErCode {
+          font-size: 0;
+          .pwd.code {
+            width: 216px !important;
+          }
+        }
+        &.loginPro {
+          height: 255px !important;
+        }
+        &.divErCode {
+          .divAccount:before {
+            content: '手机号';
+          }
+          .code {
+            width: 213px !important;
+          }
+        }
+      }
+      .divErCode .erCodeBtn {
+        height: 40px !important;
+        margin-left: 8px !important;
+        vertical-align: top;
+      }
+    }
   }
   /*头部区域*/
   .logo-img {
@@ -284,81 +382,64 @@ export default {
     text-align: center;
     font-size: 14px;
     color: #6d6e71;
+    margin: 10px 0 24px 0;
   }
-  .form-input {
-    height: 40px;
-    line-height: 40px;
-    position: relative;
-    background: #ffffff;
-    border: 1px solid #dbdde8;
-    border-radius: 5px;
-    width: 320px;
-    padding-left: 40px;
-    margin-top: 24px;
-    display: inline-block;
-    font-size: 14px;
-    label {
-      position: absolute;
-      left: 10px;
-      top: 0;
-      height: 38px;
-      line-height: 38px;
-      width: 40px;
-      text-align: left;
-      color: #292f43;
-      i {
-        font-size: 20px;
-        color: #b3b4bd;
-      }
-    }
-    input {
-      width: 100%;
-      height: 38px;
-      line-height: 1;
-      display: block;
-      border: none;
-      background: transparent;
-      padding-right: 16px;
-      &:-webkit-placeholder {
-        color: #c3c6d2;
-      }
-      &:-webkit-autofill {
-        -webkit-text-fill-color: #292f43;
-        -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-        background-color: transparent;
-        background-image: none;
-        transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间
-      }
-    }
-  }
-  .btn {
-    display: inline-block;
-    margin-top: 24px;
-    width: 320px;
-    height: 40px;
-    line-height: 40px;
-    opacity: 1;
-    background: #5461b8;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    box-shadow: 0px 6px 20px 0px rgba(69, 96, 171, 0.31);
-    cursor: pointer;
-    img {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-    }
-  }
-  .fargetPws {
-    height: 45px;
-    line-height: 45px;
-    a {
-      color: #5461b8;
-      text-decoration: underline;
-    }
-  }
+  
+  // .form-input {
+  //   height: 40px;
+  //   line-height: 40px;
+  //   position: relative;
+  //   background: #ffffff;
+  //   border: 1px solid #dbdde8;
+  //   border-radius: 5px;
+  //   width: 320px;
+  //   padding-left: 40px;
+  //   margin-top: 24px;
+  //   display: inline-block;
+  //   font-size: 14px;
+  //   label {
+  //     position: absolute;
+  //     left: 10px;
+  //     top: 0;
+  //     height: 38px;
+  //     line-height: 38px;
+  //     width: 40px;
+  //     text-align: left;
+  //     color: #292f43;
+  //     i {
+  //       font-size: 20px;
+  //       color: #b3b4bd;
+  //     }
+  //   }
+  // }
+  // .btn {
+  //   display: inline-block;
+  //   margin-top: 24px;
+  //   width: 320px;
+  //   height: 40px;
+  //   line-height: 40px;
+  //   opacity: 1;
+  //   background: #5461b8;
+  //   border-radius: 4px;
+  //   font-size: 16px;
+  //   font-weight: bold;
+  //   color: #fff;
+  //   box-shadow: 0px 6px 20px 0px rgba(69, 96, 171, 0.31);
+  //   cursor: pointer;
+  //   img {
+  //     width: 20px;
+  //     height: 20px;
+  //     vertical-align: middle;
+  //   }
+  // }
+  // .fargetPws {
+  //   height: 45px;
+  //   line-height: 45px;
+  //   a {
+  //     color: #5461b8;
+  //     text-decoration: underline;
+  //   }
+  // }
   .login-bg-img {
     width: 137px;
     position: absolute;

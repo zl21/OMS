@@ -62,6 +62,12 @@ const common = {
   ZFBACCOUNTIMPORT: {
     component: importCom,
   },
+  GOODDISTRIBUTIONIMPORT: {
+    component: importCom,
+  },
+  SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT: {
+    component: importCom,
+  }
 }
 
 const allCenterModal = Object.assign(

@@ -23,6 +23,7 @@
       titleAlign="left"
       title="新增明细"
       :mask="true"
+      class-name="ark-dialog"
     >
       <div class="dialog-footer" slot="footer">
         <businessButton :btn-config="btnConfigMo" />

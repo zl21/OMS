@@ -16,12 +16,10 @@
 </template>
 
 <script> 
-  import businessForm from 'professionalComponents/businessForm';
   import businessActionTable from 'professionalComponents/businessActionTable';
   export default {
     name:'returnGodds',
     components:{
-      businessForm,
       businessActionTable
     },
     data(){

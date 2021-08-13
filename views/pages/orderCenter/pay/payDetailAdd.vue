@@ -50,6 +50,7 @@ export default {
       tableConfig: {
         height: 300,
         indexColumn: true, // 是否显示序号
+        isShowSelection: true, // 是否显示checkedbox
         modal: false,
         businessButtonConfig: {
           typeAll: 'default', // 按钮统一风格样式

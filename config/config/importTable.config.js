@@ -4,6 +4,24 @@
  */
 
 const importConfig = {
+  SG_B_GOOD_DISTRIBUTION__SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT: {
+    // 分货单单对象-导入
+    isAction: true,
+    tableName: 'SG_B_GOOD_DISTRIBUTION',
+    webname: 'SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT',
+    tempApi: '/p/cs/oc/oms/v1/refundExtra/remitResultDownLoad',
+    okApi: '/p/cs/sg/v1/sgBGoodDistribution/itemImport',
+    downErrorInfo: true
+  },
+  SG_B_GOOD_DISTRIBUTION__SG_B_GOOD_DISTRIBUTION_IMPORT: {
+    // 分货单-导入
+    isAction: true,
+    tableName: 'SG_B_GOOD_DISTRIBUTION',
+    webname: 'SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT',
+    tempApi: '/p/cs/oc/oms/v1/refundExtra/remitResultDownLoad',
+    okApi: '/p/cs/sg/v1/sgBGoodDistribution/import',
+    downErrorInfo: true
+  },
   PS_C_PRO_CLASSIFY__ps_c_pro_classify_import: {
     // 商品分类-导入
     isAction: true,

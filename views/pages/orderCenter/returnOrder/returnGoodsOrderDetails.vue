@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-13 16:00:57
+ * @LastEditTime: 2021-08-13 16:24:54
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -23,13 +23,13 @@
     <!-- 退/添加明细弹框 -->
     <Modal
       v-model="tableConfig.modal"
-      class-name="ark-dialog"
       width="900"
       titleAlign="left"
       :title="`${vmI18n.t('modalTitle.ac')}（${selectLen}）`"
       :mask="true"
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
+      class-name="ark-dialog"
     >
       <businessActionTable
         :jordan-table-config="tableConfig"
