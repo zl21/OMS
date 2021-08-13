@@ -26,8 +26,12 @@
           <img src="../assets/img/form-logo.png" />
         </div>
         <div class="loginTabs" v-if="isEnableLoginPro">
-          <div class="tab" @click="toggleTab('pwd')">验证码登录</div>
-          <div class="tab" @click="toggleTab('phone')">密码登录</div>
+          <div class="tab" @click="toggleTab('pwd')">
+            <span>验证码登录</span>
+          </div>
+          <div class="tab" @click="toggleTab('phone')">
+            <span>密码登录</span>
+          </div>
         </div>
         <!-- 欢迎登录 -->
         <div class="title" v-else>{{ vmI18n.t("welcome") }}</div>
@@ -217,18 +221,33 @@ export default {
       }
       &.active {
         color: #292f43;
-        &::before {
-        position: absolute;
-        content: '';
-        width: 24px;
-        height: 3px;
-        background: #5461b8;
-        border-radius: 2px;
-        top: 21px;
-        left: 50%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
+        span {
+          position: relative;
+          &::before {
+            position: absolute;
+            content: '';
+            width: 24px;
+            height: 3px;
+            background: #5461b8;
+            border-radius: 2px;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            -webkit-animation: 1s changeWidth;
+            animation: 1s changeWidth;  
+          }
+        }
       }
+      @-webkit-keyframes changeWidth {
+        0% { width: 0; }
+        50% { width: 100%; }
+        100% { width: 24px; }
+      }
+      @keyframes changeWidth {
+        0% { width: 0; }
+        50% { width: 100%; }
+        100% { width: 24px; }
       }
     }
   }
