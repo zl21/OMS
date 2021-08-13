@@ -285,7 +285,7 @@ export default {
       let widths = 0
       if(this.jordanTableConfig.businessFormConfig && this.jordanTableConfig.businessFormConfig.formData){
         this.jordanTableConfig.businessFormConfig.formData.forEach(i=>{
-          widths += Number(i.width)
+          i.style && (widths += Number(i.width))
         })
       }
       return Number.isInteger(widths / 24)

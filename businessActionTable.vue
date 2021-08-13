@@ -11,6 +11,7 @@
       gridBar && Number.isInteger(formDataLength / colRowNum) ? 'FormPadding' : '',
       noGridBar ? 'FormPadding' : ''
       ]">
+      {{gridBar && Number.isInteger(formDataLength / colRowNum)}}| {{formDataLength}} |{{colRowNum}} |{{noGridBar}}
       <div class="businessForm-box" 
         v-if="businessFormConfig !== undefined">
         <businessForm :formConfig="businessFormConfig"></businessForm>
