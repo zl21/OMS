@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-13 14:11:03
+ * @LastEditTime: 2021-08-13 16:24:54
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -60,6 +60,7 @@
 </template>
 <script>
 import businessActionTable from "professionalComponents/businessActionTable";
+
 import {
   addDetailModalTableColumns,
   tuiColumns,
