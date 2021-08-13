@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-11 19:50:18
+ * @LastEditTime: 2021-08-12 18:44:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -20,20 +20,17 @@
       </div> -->
       <div class="time">
         <span>更新时间：{{ header.time }}</span>
-        <Icon type="icon-OMS-fonticon-015" style="color:#5461B8;"/>
+        <Icon type="icon-OMS-fonticon-015" style="color: #5461b8" />
       </div>
     </div>
     <div class="main">
       <div class="mainContent mainTop">
         <div class="main01">
           <div class="mainHeader">
-            <span>{{  main01.title }}</span>
+            <span>{{ main01.title }}</span>
             <div class="btn">
-              <div
-                v-for="(it, index) in  main01.btn"
-                :key="'m1Time' + index"
-              >
-                <Button :type="it.type" @click="dayBtnHandel(it,'main01')">{{
+              <div v-for="(it, index) in main01.btn" :key="'m1Time' + index">
+                <Button :type="it.type" @click="dayBtnHandel(it, 'main01')">{{
                   it.text
                 }}</Button>
               </div>
@@ -46,7 +43,7 @@
             <div class="right">
               <div
                 class="rightItem comItem"
-                v-for="(it, index) in  main01.data"
+                v-for="(it, index) in main01.data"
                 :key="index"
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
@@ -64,28 +61,32 @@
         </div>
         <div :class="['', 'main02']">
           <div class="mainHeader">
-            <span>{{  main02.title }}</span>
+            <span>{{ main02.title }}</span>
             <div class="btn">
               <div
                 v-for="(it, index) in main02.btnSta"
                 :key="'m2Status' + index"
               >
-                <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="statusBtnHandel(it,'main02')">{{
-                  it.text
-                }}</Button>
+                <Button
+                  :type="it.type"
+                  :class="it.icon ? 'iconBtn' : ''"
+                  :icon="it.icon || ''"
+                  @click="statusBtnHandel(it, 'main02')"
+                  >{{ it.text }}</Button
+                >
               </div>
             </div>
           </div>
           <div :class="['main02body', up, noData]" id="main02body">
             <picture v-if="noData">
-              <source srcset="./img/la.png" media="(min-width: 1600px)"/>
-              <img src="./img/medium-car-image.jpg" alt="Car">
+              <source srcset="./img/la.png" media="(min-width: 1600px)" />
+              <img src="./img/medium-car-image.jpg" alt="Car" />
               <span>暂无异常数据</span>
             </picture>
             <template v-else>
               <div
                 class="m2Item comItem"
-                v-for="(it, index) in  main02.data"
+                v-for="(it, index) in main02.data"
                 :key="index"
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
@@ -97,7 +98,7 @@
                   <!-- <i :class="['warnIcon', it.statusIcon]"></i> -->
                 </div>
                 <div class="content">
-                  <template v-for="(i) in it.data">
+                  <template v-for="i in it.data">
                     <div
                       :key="i.A_sum + +new Date()"
                       :class="['itemData', i.color || '']"
@@ -114,37 +115,35 @@
       </div>
       <div :class="['mainContent', 'main03']">
         <div class="mainHeader">
-          <span>{{  main03.title }}</span>
+          <span>{{ main03.title }}</span>
           <div class="btn btnEx">
-            <div
-              v-for="(it, index) in main03.btn"
-              :key="'m3Time' + index"
-            >
-              <Button :type="it.type" @click="dayBtnHandel(it,'main03')">{{
+            <div v-for="(it, index) in main03.btn" :key="'m3Time' + index">
+              <Button :type="it.type" @click="dayBtnHandel(it, 'main03')">{{
                 it.text
               }}</Button>
             </div>
             <i></i>
-            <div
-              v-for="(it, index) in main03.btnSta"
-              :key="'m3Status' + index"
-            >
-              <Button :type="it.type" :class="it.icon ? 'iconBtn' : ''" :icon="it.icon || ''" @click="statusBtnHandel(it,'main03')">{{
-                it.text
-              }}</Button>
+            <div v-for="(it, index) in main03.btnSta" :key="'m3Status' + index">
+              <Button
+                :type="it.type"
+                :class="it.icon ? 'iconBtn' : ''"
+                :icon="it.icon || ''"
+                @click="statusBtnHandel(it, 'main03')"
+                >{{ it.text }}</Button
+              >
             </div>
           </div>
         </div>
         <div :class="['main03body', m3Up, m3noData]" id="main03body">
           <picture v-if="m3noData">
-            <source srcset="./img/la.png" media="(min-width: 1600px)"/>
-            <img src="./img/medium-car-image.jpg" alt="Car">
+            <source srcset="./img/la.png" media="(min-width: 1600px)" />
+            <img src="./img/medium-car-image.jpg" alt="Car" />
             <span>暂无异常数据</span>
           </picture>
           <template v-else>
             <div
               class="m3Item comItem"
-              v-for="(it, index) in  main03.data"
+              v-for="(it, index) in main03.data"
               :key="index"
               :class="it.status == 0 ? 'abnormal' : 'normal'"
             >
@@ -152,7 +151,23 @@
                 <span>{{ it.title }}</span>
                 <span>{{ it.time }}</span>
               </div>
-              <div class="itemData"></div>
+              <div
+                class="itemData"
+                :id="`gaugeChart${index}`"
+                style="width: 100%; height: 180px"
+              ></div>
+              <!-- 标题 -->
+              <div class="gaugeTitle">
+                <span>
+                  {{it.desc}}
+                </span>
+                <Tooltip placement="top-start" max-width="800" theme="light">
+                    <Icon type="ios-alert-outline" />
+                    <div slot="content">
+                        skldalkfnalkfnalkdfnalkdn
+                    </div>
+                </Tooltip>
+              </div>
             </div>
           </template>
         </div>
@@ -161,10 +176,7 @@
         <div class="mainHeader">
           <span>{{ main04.title }}</span>
           <div class="btn">
-            <div
-              v-for="(it, index) in main04.btnArr"
-              :key="index"
-            >
+            <div v-for="(it, index) in main04.btnArr" :key="index">
               <Button :type="it.type" @click="geTabnormal(index)">{{
                 it.text
               }}</Button>
@@ -201,7 +213,7 @@
             </Row>
           </Form>
         </div>
-        <div id="mainCurve" style="widht:100%;height:500px"></div>
+        <div id="mainCurve" style="widht: 100%; height: 500px"></div>
       </div>
     </div>
   </div>
@@ -226,8 +238,8 @@ let dayBtnConifg = [
     text: "当天",
     type: "text",
     webname: "today",
-  }
-]
+  },
+];
 let statusBtnConifg = [
   {
     text: "全部",
@@ -244,12 +256,12 @@ let statusBtnConifg = [
     type: "text",
     icon: "ios-arrow-down",
     webname: "upDownIcon",
-  }
-]
+  },
+];
 export default {
   name: "WelcomePage",
   components: {
-    businessButton
+    businessButton,
   },
   data() {
     return {
@@ -276,30 +288,30 @@ export default {
             status_name: "异常",
             title: "AG项目1",
             message: "异常单据",
-            sum: 288
+            sum: 288,
           },
           {
             status: 1,
             status_name: "正常",
             title: "AG项目2",
             message: "异常单据",
-            sum: 288
+            sum: 288,
           },
           {
             status: 1,
             status_name: "正常",
             title: "AG项目3",
             message: "异常单据",
-            sum: 288
+            sum: 288,
           },
           {
             status: 0,
             status_name: "异常",
             title: "AG项目4",
             message: "异常单据",
-            sum: 288
-          }
-        ]
+            sum: 288,
+          },
+        ],
       },
       main02: {
         title: "对外接口监控项目详细数据",
@@ -312,23 +324,23 @@ export default {
             data: [
               {
                 status: 0,
-                color: 'gray',
+                color: "gray",
                 A_name: "推送总数",
-                A_sum: 3880
+                A_sum: 3880,
               },
               {
                 status: 1,
-                color: 'green',
+                color: "green",
                 A_name: "推送成功",
-                A_sum: 345
+                A_sum: 345,
               },
               {
                 status: 0,
-                color: 'red',
+                color: "red",
                 A_name: "推送失败率",
-                A_sum: "20%"
-              }
-            ]
+                A_sum: "20%",
+              },
+            ],
           },
           {
             titleIcon: "icon-chuku",
@@ -337,23 +349,23 @@ export default {
             data: [
               {
                 status: 0,
-                color: 'gray',
+                color: "gray",
                 A_name: "推送总数",
-                A_sum: 3880
+                A_sum: 3880,
               },
               {
                 status: 1,
-                color: 'green',
+                color: "green",
                 A_name: "推送成功",
-                A_sum: 345
+                A_sum: 345,
               },
               {
                 status: 0,
-                color: 'red',
+                color: "red",
                 A_name: "推送失败率",
-                A_sum: "20%"
-              }
-            ]
+                A_sum: "20%",
+              },
+            ],
           },
           {
             titleIcon: "ios-home",
@@ -362,23 +374,23 @@ export default {
             data: [
               {
                 status: 0,
-                color: 'gray',
+                color: "gray",
                 A_name: "推送总数",
-                A_sum: 3880
+                A_sum: 3880,
               },
               {
                 status: 1,
-                color: 'green',
+                color: "green",
                 A_name: "推送成功",
-                A_sum: 345
+                A_sum: 345,
               },
               {
                 status: 0,
-                color: 'red',
+                color: "red",
                 A_name: "推送失败率",
-                A_sum: "20%"
-              }
-            ]
+                A_sum: "20%",
+              },
+            ],
           },
           {
             titleIcon: "ios-home",
@@ -387,23 +399,23 @@ export default {
             data: [
               {
                 status: 0,
-                color: 'gray',
+                color: "gray",
                 A_name: "推送总数",
-                A_sum: 3880
+                A_sum: 3880,
               },
               {
                 status: 1,
-                color: 'green',
+                color: "green",
                 A_name: "推送成功",
-                A_sum: 345
+                A_sum: 345,
               },
               {
                 status: 0,
-                color: 'red',
+                color: "red",
                 A_name: "推送失败率",
-                A_sum: "20%"
-              }
-            ]
+                A_sum: "20%",
+              },
+            ],
           },
           {
             titleIcon: "ios-home",
@@ -412,23 +424,23 @@ export default {
             data: [
               {
                 status: 0,
-                color: 'gray',
+                color: "gray",
                 A_name: "推送总数",
-                A_sum: 3880
+                A_sum: 3880,
               },
               {
                 status: 1,
-                color: 'green',
+                color: "green",
                 A_name: "推送成功",
-                A_sum: 345
+                A_sum: 345,
               },
               {
                 status: 0,
-                color: 'red',
+                color: "red",
                 A_name: "推送失败率",
-                A_sum: "20%"
-              }
-            ]
+                A_sum: "20%",
+              },
+            ],
           },
           {
             titleIcon: "ios-home",
@@ -437,26 +449,27 @@ export default {
             data: [
               {
                 status: 0,
-                color: 'gray',
+                color: "gray",
                 A_name: "推送总数",
-                A_sum: 3880
+                A_sum: 3880,
               },
               {
                 status: 1,
-                color: 'green',
+                color: "green",
                 A_name: "推送成功",
-                A_sum: 345
+                A_sum: 345,
               },
               {
                 status: 0,
-                color: 'red',
+                color: "red",
                 A_name: "推送失败率",
-                A_sum: "20%"
-              }
-            ]
-          }
-        ]
+                A_sum: "20%",
+              },
+            ],
+          },
+        ],
       },
+      // 模块3
       main03: {
         title: "服务异常监控详细数据（AG项目1）",
         btn: JSON.parse(JSON.stringify(dayBtnConifg)),
@@ -468,8 +481,10 @@ export default {
             status: 0,
             min: 10,
             max: 10000,
+            value: 9002,
             desc: "积压单量",
-            tips: ""
+            color: "#FF6951",
+            tips: "",
           },
           {
             title: "转单服务",
@@ -477,8 +492,10 @@ export default {
             status: 0,
             min: 10,
             max: 10000,
+            value: 3002,
             desc: "积压单量",
-            tips: ""
+            color: "#90BB57",
+            tips: "",
           },
           {
             title: "转单服务",
@@ -486,8 +503,10 @@ export default {
             status: 0,
             min: 10,
             max: 10000,
+            value: 5002,
+            color: "#90BB57",
             desc: "积压单量",
-            tips: ""
+            tips: "",
           },
           {
             title: "转单服务",
@@ -495,8 +514,10 @@ export default {
             status: 0,
             min: 10,
             max: 10000,
+            value: 8672,
+            color: "#FF6951",
             desc: "积压单量",
-            tips: ""
+            tips: "",
           },
           {
             title: "转单服务",
@@ -504,10 +525,12 @@ export default {
             status: 0,
             min: 10,
             max: 10000,
+            value: 5670,
+            color: "#90BB57",
             desc: "积压单量",
-            tips: ""
-          }
-        ]
+            tips: "",
+          },
+        ],
       },
       // 模块4 --- 接口异常趋势图
       main04: {
@@ -516,63 +539,91 @@ export default {
         btnArr: [
           {
             text: "近三天",
-            type: "primary"
+            type: "primary",
           },
           {
             text: "昨日",
-            type: "text"
+            type: "text",
           },
           {
             text: "当天",
-            type: "text"
-          }
+            type: "text",
+          },
         ],
         // 项目和接口枚举项
         projectOption: [
           {
             value: "1",
-            label: "New York"
+            label: "New York",
           },
           {
             value: "2",
-            label: "London"
-          }
+            label: "London",
+          },
         ],
         apiOption: [
           {
             value: "1",
-            label: "New York"
+            label: "New York",
           },
           {
             value: "2",
-            label: "London"
-          }
+            label: "London",
+          },
         ],
         projectV: "1",
         apiV: "2",
         // 数据
-        currentDay:{
-          type:'category',
-          key:['1点','2点','3点','4点','5点','6点','7点','8点','9点','10点','11点','12点','12点','14点','15点','16点','17点','18点','19点','20点','21点','22点','23点','24点'],
-          data:[19,23,45,68,90,13,54,20,35,24,78,1,57,24,90,13,54,20,35,24,78,1,57,24]
+        currentDay: {
+          type: "category",
+          key: [
+            "1点",
+            "2点",
+            "3点",
+            "4点",
+            "5点",
+            "6点",
+            "7点",
+            "8点",
+            "9点",
+            "10点",
+            "11点",
+            "12点",
+            "12点",
+            "14点",
+            "15点",
+            "16点",
+            "17点",
+            "18点",
+            "19点",
+            "20点",
+            "21点",
+            "22点",
+            "23点",
+            "24点",
+          ],
+          data: [
+            19, 23, 45, 68, 90, 13, 54, 20, 35, 24, 78, 1, 57, 24, 90, 13, 54,
+            20, 35, 24, 78, 1, 57, 24,
+          ],
         },
-        threeDay:{
-          type:'category',
-          key:["One", "Two", "Three"],
-          data:[100,200,50]
+        threeDay: {
+          type: "category",
+          key: ["One", "Two", "Three"],
+          data: [100, 200, 50],
         },
-        setData:{
-          type:'category',
-          key:["One", "Two", "Three"],
-          data:[100,200,50]
-        }
+        setData: {
+          type: "category",
+          key: ["One", "Two", "Three"],
+          data: [100, 200, 50],
+        },
       },
-      vmI18n: window.vmI18n
+      vmI18n: window.vmI18n,
     };
   },
   updated() {
-    this.maxHeight('main02body', 'm2Item');
-    this.maxHeight('main03body', 'm3Item');
+    this.maxHeight("main02body", "m2Item");
+    this.maxHeight("main03body", "m3Item");
   },
   mounted() {
     // const domContent = document.getElementById('content');
@@ -582,6 +633,7 @@ export default {
       "yyyy-MM-dd HH:mm:ss"
     );
     this.curveChart();
+    this.getGauge();
   },
   destroyed() {
     if (document.getElementById("content")) {
@@ -603,7 +655,7 @@ export default {
           top: 50,
           left: 50,
           right: 0,
-          bottom: 50
+          bottom: 50,
         },
         // 鼠标经过展示tips
         tooltip: {
@@ -615,7 +667,7 @@ export default {
             return [point[0] - 60, point[1] - 80];
           },
           // 自定义显示内容
-          formatter: params => {
+          formatter: (params) => {
             let HTMLElement = "";
             HTMLElement = `<div>
               <div style="font-size:12px;color:#8D91A1;line-height:20px">
@@ -636,31 +688,31 @@ export default {
               </div>
              </div>`;
             return HTMLElement;
-          }
+          },
         },
         // 坐标轴指示器 必须搭配tooltip的type:'axis'
         axisPointer: {
           type: "line",
           lineStyle: {
-            color: "#F2F2F2"
-          }
+            color: "#F2F2F2",
+          },
         },
         xAxis: {
           type: this.main04.setData.type,
           axisLine: {
             lineStyle: {
-              color: "#F2F2F2"
-            }
+              color: "#F2F2F2",
+            },
           },
           // 刻度尺
           axisTick: {
-            show: false
+            show: false,
           },
           axisLabel: {
             fontSize: "12",
-            color: "#8D91A1"
+            color: "#8D91A1",
           },
-          data: this.main04.setData.key
+          data: this.main04.setData.key,
         },
         yAxis: {
           type: "value",
@@ -668,9 +720,9 @@ export default {
           splitLine: {
             show: true,
             lineStyle: {
-              color: "#F2F2F2"
-            }
-          }
+              color: "#F2F2F2",
+            },
+          },
         },
         // 数据设置项
         series: [
@@ -683,13 +735,13 @@ export default {
             // 折线条的样式
             lineStyle: {
               color: "#FF6951",
-              width: 2
+              width: 2,
             },
             // 折线拐点的样式
             itemStyle: {
               normal: {
-                color: "#FF6951"
-              }
+                color: "#FF6951",
+              },
             },
             // 鼠标经过时
             emphasis: {
@@ -698,91 +750,187 @@ export default {
                 borderColor: "#fff", //图形的描边颜色
                 borderWidth: 2, // 描边的线宽
                 shadowBlur: 4, // 图形的阴影大小
-                shadowColor: "#FF6951" // 图形的阴影颜色
-              }
-            }
-          }
-        ]
+                shadowColor: "#FF6951", // 图形的阴影颜色
+              },
+            },
+          },
+        ],
       };
       // 设置选项
       option && myChart.setOption(option);
     },
     // 仪表盘
-    dashboardChart(){
-      
+    gaugeChart(params) {
+      const chartDom = document.getElementById(`gaugeChart${params.index}`);
+      const myChart = echarts.init(chartDom);
+      // 配置选项
+      let option = {
+        series: [
+          {
+            type: "gauge",
+            startAngle: 180, //弧度
+            endAngle: 0,
+            min: params.min, //数据最小
+            max: params.max, // 数据最大
+            splitNumber: 1, //刻度显示个数
+            radius: "120%", // 大小
+            center: ["50%", "70%"], //显示位置
+            itemStyle: {
+              color: params.color, //"#FF6951",
+            },
+            //进度
+            progress: {
+              show: true,
+              roundCap: true,
+              width: 10,
+            },
+            // 指针
+            pointer: {
+              show: false,
+            },
+            // 背景
+            axisLine: {
+              roundCap: true,
+              lineStyle: {
+                width: 10,
+                opacity: 0.5,
+              },
+            },
+            // 刻度尺
+            axisTick: {
+              show: false,
+            },
+            // 分割线 ，刻度尺
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              distance: 0,
+              color: "#999",
+              fontSize: 12,
+            },
+            data: [
+              {
+                value: params.value,
+                name: params.desc,
+                title: {
+                  offsetCenter: [0, 0],
+                  fontSize: 12,
+                  color: "#8C8C8C",
+                },
+                detail: {
+                  offsetCenter: [0, " -30%"],
+                  formatter: function (value) {
+                    // 积压单量
+                    return `{value|${value}}`;
+                  },
+                  rich: {
+                    value: {
+                      fontSize: 24,
+                      color: "#FA8A78",
+                    },
+                  },
+                },
+              },
+            ],
+            silent: true,
+            animation: true,
+          },
+        ],
+      };
+      // 设置选项
+      option && myChart.setOption(option);
+      myChart.on("click", function (params) {
+        console.log(params);
+        window.open(
+          "https://www.baidu.com/s?wd=" + encodeURIComponent(params.name)
+        );
+      });
     },
+
     /** ------------------ 事件方法 ------------------- **/
     geTabnormal(index) {
       // 设置按钮样式
       let btnArr = this.main04.btnArr;
       btnArr.forEach((it, i) => {
-        if (i == index) btnArr[i].type = "primary";
-        else btnArr[i].type = "text";
+        i == index ? (btnArr[i].type = "primary") : (btnArr[i].type = "text");
       });
-      if(index == 2){
-        this.main04.setData = this.main04.currentDay 
-      }else{
-        this.main04.setData = this.main04.threeDay 
+      if (index == 2) {
+        this.main04.setData = this.main04.currentDay;
+      } else {
+        this.main04.setData = this.main04.threeDay;
       }
       this.curveChart();
     },
-    // 
-  
+    //
+    getGauge(params) {
+      let gauageData = this.main03.data;
+      gauageData.forEach((item, i) => {
+        item.index = i;
+        this.gaugeChart(item);
+      });
+    },
     // 计算maxHeight
     maxHeight(body, itemName) {
       const mBody = document.getElementById(body);
       // let m2Heigh = m2Body.clientHeight;
-      let nodeHeight = 0, flag = false, nodeSum = mBody.childNodes.length;
+      let nodeHeight = 0,
+        flag = false,
+        nodeSum = mBody.childNodes.length;
       for (const node of mBody.childNodes) {
         if (node.className.includes(itemName)) {
           nodeHeight = node.clientHeight;
-          break
+          break;
         } else {
           flag = true;
         }
       }
-      if(flag) return
+      if (flag) return;
       mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
       console.log(mBody);
     },
+    //
     dayBtnHandel(item, panel) {
-      this.btnStyleChange(item, 1, panel)
+      this.btnStyleChange(item, 1, panel);
     },
     statusBtnHandel(item, panel) {
-      this.btnStyleChange(item, 0, panel)
+      this.btnStyleChange(item, 0, panel);
     },
     // 按钮样式变换、无数据时展示图片样式处理
     btnStyleChange(item, order, panel) {
       let nowBtn = item.webname;
       const btnArr = order ? this[panel].btn : this[panel].btnSta;
       if (item.icon) {
-        btnArr.find(it => it.webname == nowBtn).icon = item.icon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
+        btnArr.find((it) => it.webname == nowBtn).icon =
+          item.icon == "ios-arrow-down" ? "ios-arrow-up" : "ios-arrow-down";
         switch (panel) {
-          case 'main02':
+          case "main02":
             this.up = this.up ? "" : "fadeInDom";
             break;
-          case 'main03':
+          case "main03":
             this.m3Up = this.m3Up ? "" : "m3fadeInDom";
             break;
           default:
             break;
         }
-        return
+        return;
       }
       switch (panel) {
-        case 'main02':
-          this.noData = item.webname == 'abort' ? 'noData' : '';
+        case "main02":
+          this.noData = item.webname == "abort" ? "noData" : "";
           break;
-        case 'main03':
-          this.m3noData = item.webname == 'abort' ? 'noData' : '';
+        case "main03":
+          this.m3noData = item.webname == "abort" ? "noData" : "";
           break;
         default:
           break;
       }
-      btnArr.forEach(it => it.type = it.webname == nowBtn ? 'primary' : 'text');
-    }
+      btnArr.forEach(
+        (it) => (it.type = it.webname == nowBtn ? "primary" : "text")
+      );
+    },
     /** ------------------ 获取数据方法 ------------------- **/
-  }
+  },
 };
 </script>
 
@@ -793,11 +941,11 @@ export default {
   margin-top: 20px;
   display: grid;
   grid-template-columns: calc(100% - 200px) 200px;
-  .ark-form-item{
+  .ark-form-item {
     margin-bottom: 0;
   }
-  .btn{
-    text-align:right;
+  .btn {
+    text-align: right;
   }
   /deep/ .ark-select-single .ark-select-selection {
     height: 32px;
