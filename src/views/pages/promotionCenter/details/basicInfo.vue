@@ -60,7 +60,7 @@
         />
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="form_label">
         <i class="red" />{{ vmI18n.t("form_label.platform_marking") }}：
       </div>
@@ -71,7 +71,7 @@
           @changeOptions="checkPlatformTabsChange"
         />
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="form_label">
         <i class="red">*</i>{{ vmI18n.t("form_label.timeType") }}：
