@@ -57,8 +57,11 @@ export default {
   },
   computed: {
     webname() {
-      if (this.$parent?.$parent?.objTabActionDialogConfig || this.$parent?.$parent?.$parent?.objTabActionDialogConfig) {
-        return this.$parent.$parent.objTabActionDialogConfig.webname || this.$parent.$parent.$parent.objTabActionDialogConfig.webname || '';
+      const { objTabActionDialogConfig, dialogComponentName } = this.$parent?.$parent || this.$parent?.$parent?.$parent
+      if (objTabActionDialogConfig) {
+        return objTabActionDialogConfig.webname || objTabActionDialogConfig.webname || '';
+      } else if (dialogComponentName) { // 单对象定制导入，由于取的是组件名 CUSTOMIZED/xxx 中的xxx，需要求后端组件名与webname一致
+        return dialogComponentName
       } else if (this.componentData) {
         return this.componentData.webname || '';
       } else {

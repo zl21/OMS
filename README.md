@@ -295,6 +295,8 @@
 | v1.2.57 | 还原businessForm兼容处理 |
 | v1.2.58 | businessForm兼容处理 |
 | v1.2.59 | fktable-模糊搜索框添加focus焦点 |
-| v1.2.60 | businessActionTable-添加是否单选 |
+| v1.2.60 | businessActionTable-添加是否单选 |引用回滚修复 |
+| v1.2.62 | importTable兼容处理 |
+| v1.2.63 | businessActionTable修复 |
 | v1.2.61 | businessActionTable-兼容modal样式 |
 
