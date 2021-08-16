@@ -496,7 +496,7 @@ export default {
       ]}, // 退款信息
       payInfo: {
         formValue: {
-          RETURN_STATUS: '',
+          PAYMENT_STATUS: '',
           MODIFIERENAME: '',
           PAYMENT_FAIL_REASON: '',
           PAYMENT_FAIL_REASON1: ''
@@ -506,7 +506,7 @@ export default {
             style: 'input',
             label: '单据状态',
             disabled: true,
-            value: 'RETURN_STATUS',
+            value: 'PAYMENT_STATUS',
             width: '6'
           },
           {
@@ -1504,7 +1504,7 @@ export default {
         }
 
         this.payInfo.formValue = {
-          RETURN_STATUS: Afsend.RETURN_STATUS == 0 ? '未退款' : Afsend.RETURN_STATUS == 1 ? '退款中' :  Afsend.RETURN_STATUS == 2 ? '退款完成' : Afsend.RETURN_STATUS == 3 ? '取消' : Afsend.RETURN_STATUS == 4 ? '待审核' : ' ', // 0.未退款  1.退款中 2.退款完成 3.取消  4.待审核
+          PAYMENT_STATUS: Afsend.PAYMENT_STATUS == 0 ? '待打款' : Afsend.PAYMENT_STATUS == 1 ? '打款中' :  Afsend.PAYMENT_STATUS == 2 ? '打款成功' : Afsend.PAYMENT_STATUS == 3 ? '打款失败' : Afsend.PAYMENT_STATUS == 4 ? '拒绝打款' : Afsend.PAYMENT_STATUS == 5 ? '待审核' : Afsend.PAYMENT_STATUS == 6 ? '待审批' : '取消',
           MODIFIERENAME: Afsend.MODIFIERENAME,
           PAYMENT_FAIL_REASON: Afsend.PAYMENT_STATUS == 2 ? Afsend.PAYMENT_FAIL_REASON : '', // 打款成功 显示
           PAYMENT_FAIL_REASON1: Afsend.PAYMENT_STATUS == 3 || Afsend.PAYMENT_STATUS == 4 ? Afsend.PAYMENT_FAIL_REASON : '' // 打款失败/拒绝打款 显示
@@ -1585,6 +1585,7 @@ export default {
         item.qty = item.PURCHASE_QTY; // 购买数量
         item.BILL_NO = item.RELATION_BILL_NO; // 单据编号
         item.BILL_TYPE = item.BILL_TYPE == 0 ? '退货单' : '发货单';
+        item.realAmt = item.AMT_ACTUAL; // 成交金额
         if (self.$route.query.cid) {
           // 如果为复制状态订单,修改明细id为原订单id
           item.ID = item.RELATION_BILL_ITEM_ID;
