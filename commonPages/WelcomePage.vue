@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-16 13:37:54
+ * @LastEditTime: 2021-08-16 17:06:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -38,10 +38,15 @@
           </div>
           <div class="main01body">
             <div class="left">
-              <div id="main01Left" style=" min-width: 200px; min-height: 200px"></div>
-              <div class="legend" >
-                <template v-for="(it,index) in main01.pieData">
-                  <div :key="'pieLegend' + index"> {{it.name}} <i>{{it.value}}</i></div>
+              <div
+                id="main01Left"
+                style="min-width: 200px; min-height: 200px"
+              ></div>
+              <div class="legend">
+                <template v-for="(it, index) in main01.pieData">
+                  <div :key="'pieLegend' + index">
+                    {{ it.name }} <i>{{ it.value }}</i>
+                  </div>
                 </template>
               </div>
             </div>
@@ -165,13 +170,15 @@
               <!-- 标题 -->
               <div class="gaugeTitle">
                 <span>
-                  {{it.desc}}
+                  {{ it.desc }}
                 </span>
                 <Tooltip placement="top-start" theme="light">
-                    <Icon type="ios-help-circle-outline" />
-                    <div slot="content">
-                        <div class="gaugeTips">积压单量说明积压单量说明积压单量说明</div>
+                  <Icon type="ios-help-circle-outline" />
+                  <div slot="content">
+                    <div class="gaugeTips">
+                      积压单量说明积压单量说明积压单量说明
                     </div>
+                  </div>
                 </Tooltip>
               </div>
             </div>
@@ -206,11 +213,17 @@
               </Col>
               <Col span="6">
                 <FormItem label="接口：">
-                  <Select v-model="main04.apiV" filterable multiple>
+                  <Select
+                    v-model="main04.apiV"
+                    filterable
+                    multiple
+                    @on-change="selectCheck"
+                  >
                     <Option
                       v-for="item in main04.apiOption"
                       :value="item.value"
                       :key="item.value"
+                      @on-change="selectCheck"
                       >{{ item.label }}</Option
                     >
                   </Select>
@@ -324,9 +337,9 @@ export default {
           },
         ],
         pieData: [
-          {value: 1048, name: '总数'},
-          {value: 1048, name: '异常数'},
-          {value: 1048, name: '正常数'},
+          { value: 1048, name: "总数" },
+          { value: 1048, name: "异常数" },
+          { value: 1048, name: "正常数" },
         ],
       },
       main02: {
@@ -550,11 +563,11 @@ export default {
         btnArr: [
           {
             text: "近三天",
-            type: "primary",
+            type: "text",
           },
           {
             text: "昨日",
-            type: "text",
+            type: "primary",
           },
           {
             text: "当天",
@@ -584,13 +597,13 @@ export default {
           {
             value: "3",
             label: "接口3",
-          }
+          },
         ],
         projectV: "1",
         apiV: "2",
         // 数据
         currentData: {
-          // type: "category",
+          type: "category",
           key: [
             "1点",
             "2点",
@@ -617,17 +630,17 @@ export default {
             "23点",
             "24点",
           ],
-          datas:[{
-            type:'line',
-            name:'接口1',
-            color:'#FF6951',
-            data: [19, 23, 45, 68, 90, 13, 54, 20, 35, 24, 78, 1, 57, 24, 90, 13, 54,20, 35, 24, 78, 1, 57, 24]
-          },{
-            type:'line',
-            name:'接口2',
-            color:'#FF6951',
-            data: [29, 33, 55, 78, 100, 23, 64, 30, 45, 34, 88, 10, 67, 34, 100, 23, 64,30, 45, 34, 88, 10, 67, 34]
-          }],
+          datas: [
+            {
+              type: "line",
+              name: "接口1",
+              color: "#FF6951",
+              data: [
+                19, 23, 45, 68, 90, 13, 54, 20, 35, 24, 78, 1, 57, 24, 90, 13,
+                54, 20, 35, 24, 78, 1, 57, 24,
+              ],
+            },
+          ],
         },
       },
       vmI18n: window.vmI18n,
@@ -661,45 +674,57 @@ export default {
     /** ----------------- 配置方法 -------------------- **/
     // 饼图
     pieChart() {
-      const chartDom = document.getElementById('main01Left');
+      const chartDom = document.getElementById("main01Left");
       const myChart = echarts.init(chartDom);
       const option = {
         series: [
           {
-            color: ['#5470c6'],
-            name: '访问来源',
-            type: 'pie',
-            radius: ['55%', '75%'],
+            color: ["#5470c6"],
+            name: "访问来源",
+            type: "pie",
+            radius: ["55%", "75%"],
             avoidLabelOverlap: false,
             label: {
               show: false,
-              position: 'center'
+              position: "center",
             },
             emphasis: {
               scale: true, // 扇形区域hover上去放大效果
               label: {
                 show: true,
-                fontSize: '28',
-                fontWeight: 'bold'
-              }
+                fontSize: "28",
+                fontWeight: "bold",
+              },
             },
             labelLine: {
-              show: false
+              show: false,
             },
             data: this.main01.pieData,
-          }
-        ]
+          },
+        ],
       };
       let index;
-      myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 0});//设置默认选中高亮部分
-      myChart.on('mouseover',function(e){
-        if(e.dataIndex != index){
-          myChart.dispatchAction({type: 'downplay', seriesIndex: 0, dataIndex: index });
+      myChart.dispatchAction({
+        type: "highlight",
+        seriesIndex: 0,
+        dataIndex: 0,
+      }); //设置默认选中高亮部分
+      myChart.on("mouseover", function (e) {
+        if (e.dataIndex != index) {
+          myChart.dispatchAction({
+            type: "downplay",
+            seriesIndex: 0,
+            dataIndex: index,
+          });
         }
       });
-      myChart.on('mouseout',function(e){
+      myChart.on("mouseout", function (e) {
         index = e.dataIndex;
-        myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: e.dataIndex});
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 0,
+          dataIndex: e.dataIndex,
+        });
       });
       option && myChart.setOption(option);
     },
@@ -709,38 +734,38 @@ export default {
       const myChart = echarts.init(chartDom);
       // 处理折线
       let LineArr = [];
-      this.main04.currentData.datas.forEach(i=>{
+      this.main04.currentData.datas.forEach((i) => {
         let lineConfig = {
-            type: "line",
-            name:i.name,
-            symbol: "circle",
-            smooth: true, //平滑折线  = 曲线
-            data: i.data,
-            symbolSize: 10, // 设定折线点的大小
-            // 折线条的样式
-            lineStyle: {
+          type: "line",
+          name: i.name,
+          symbol: "circle",
+          smooth: true, //平滑折线  = 曲线
+          data: i.data,
+          symbolSize: 10, // 设定折线点的大小
+          // 折线条的样式
+          lineStyle: {
+            color: i.color,
+            width: 2,
+          },
+          // 折线拐点的样式
+          itemStyle: {
+            normal: {
               color: i.color,
-              width: 2,
             },
-            // 折线拐点的样式
+          },
+          // 鼠标经过时
+          emphasis: {
             itemStyle: {
-              normal: {
-                color: i.color,
-              },
+              color: i.color, //颜色
+              borderColor: "#fff", //图形的描边颜色
+              borderWidth: 2, // 描边的线宽
+              shadowBlur: 4, // 图形的阴影大小
+              shadowColor: i.color, // 图形的阴影颜色
             },
-            // 鼠标经过时
-            emphasis: {
-              itemStyle: {
-                color: i.color, //颜色
-                borderColor: "#fff", //图形的描边颜色
-                borderWidth: 2, // 描边的线宽
-                shadowBlur: 4, // 图形的阴影大小
-                shadowColor:  i.color, // 图形的阴影颜色
-              },
-            },
-          }
-        LineArr.push(lineConfig)
-      })
+          },
+        };
+        LineArr.push(lineConfig);
+      });
       // 配置选项
       const option = {
         // 位置
@@ -755,37 +780,17 @@ export default {
           trigger: "axis",
           alwaysShowContent: true, //始终保留最后一个经过的提示框
           axisPointer: {
-            type: 'cross'
+            type: "cross",
           },
           // 自定义显示位置
           // position: (point, params, dom, rect, size) => {
           //   // 跟着鼠标走
           //   return [point[0] - 60, point[1] - 80];
           // },
-          formatter: '{b0}: {c0}<br />{b1}: {c1}',
           // 自定义显示内容
-          // formatter: (params) => {
-          //   let HTMLElement = "";
-          //   HTMLElement = `<div>
-          //     <div style="font-size:12px;color:#8D91A1;line-height:20px">
-          //     ${params[0].axisValue}
-          //     </div>
-          //     <div style="fontSize:12px;color:#8D91A1;line-height:20px">
-          //       <span style="
-          //         display: inline-block;
-          //         width: 10px;
-          //         height: 10px;
-          //         border-radius: 10px;
-          //         background: #F76D59;">
-          //       </span>
-          //       异常数：
-          //       <span style="font-size:12px;color:#F76D59;line-height:20px">
-          //       ${params[0].data}
-          //       </span>
-          //     </div>
-          //    </div>`;
-          //   return HTMLElement;
-          // },
+          formatter: (params) => {
+            return this.formatterFun(params);
+          },
         },
         xAxis: {
           type: this.main04.currentData.type,
@@ -818,14 +823,38 @@ export default {
         series: LineArr,
       };
       // 设置选项
-      option && myChart.setOption(option);
+      setTimeout(() => {
+        document
+          .getElementById("mainCurve")
+          .setAttribute("_echarts_instance_", "");
+        option && myChart.setOption(option);
+      }, 10);
+    },
+    formatterFun(params) {
+      let liNode = `<h6>${params[0].axisValue}</h6>`;
+      params.forEach((e) => {
+        liNode += `<div style="fontSize:12px;color:#8D91A1;line-height:20px">
+                      <span style="
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 10px;
+                        background: #F76D59;">
+                      </span>
+                      异常数：
+                      <span style="font-size:12px;color:#F76D59;line-height:20px">
+                      ${e.data}
+                      </span>
+                    </div>`;
+      });
+      return liNode;
     },
     // 仪表盘
     gaugeChart(params) {
       const chartDom = document.getElementById(`gaugeChart${params.index}`);
       const myChart = echarts.init(chartDom);
       // 配置选项
-      console.log(params.status,);
+      console.log(params.status);
       let option = {
         series: [
           {
@@ -838,7 +867,7 @@ export default {
             radius: "120%", // 大小
             center: ["50%", "70%"], //显示位置
             itemStyle: {
-              color: params.status ? '#90BB57' : '#FF6951',
+              color: params.status ? "#90BB57" : "#FF6951",
             },
             //进度
             progress: {
@@ -876,19 +905,19 @@ export default {
                 value: params.status ? params.max : params.value,
                 name: params.desc,
                 title: {
-                  show:false,
+                  show: false,
                 },
                 detail: {
                   offsetCenter: [0, " -30%"],
                   formatter: function (value) {
                     // 积压单量
-                    let returnV = params.status ? '正常' : value
+                    let returnV = params.status ? "正常" : value;
                     return `{value|${returnV}}`;
                   },
                   rich: {
                     value: {
                       fontSize: 24,
-                      color: params.status ? "#90BB57" : '#FA8A78',
+                      color: params.status ? "#90BB57" : "#FA8A78",
                     },
                   },
                 },
@@ -916,6 +945,11 @@ export default {
       btnArr.forEach((it, i) => {
         i == index ? (btnArr[i].type = "primary") : (btnArr[i].type = "text");
       });
+      if (index) {
+        this.main04.currentData.key = ["1点","2点","3点","4点","5点","6点","7点","8点","9点","10点","11点","12点","12点","14点","15点","16点","17点","18点","19点","20点","21点","22点","23点","24点"];
+      } else {
+        this.main04.currentData.key = ["8-16", "8-17", "8-18"];
+      }
       this.curveChart();
     },
     //
@@ -1036,6 +1070,53 @@ export default {
         (it) => (it.type = it.webname == nowBtn ? "primary" : "text")
       );
     },
+    // 异常趋势图 接口选择
+    selectCheck(item) {
+      this.main04.currentData.datas = [
+        {
+          type: "line",
+          name: "接口1",
+          color: "#FF6951",
+          data: [
+            19, 23, 45, 68, 90, 13, 54, 20, 35, 24, 78, 1, 57, 24, 90, 13, 54,
+            20, 35, 24, 78, 1, 57, 24,
+          ],
+        },
+      ];
+      if (item.length === 2) {
+        this.main04.currentData.datas.push({
+          type: "line",
+          name: "接口2",
+          color: "#FF6951",
+          data: [
+            39, 43, 65, 88, 110, 33, 74, 40, 55, 44, 98, 20, 77, 44, 110, 33,
+            74, 40, 55, 44, 98, 20, 77, 44,
+          ],
+        });
+      } else {
+        this.main04.currentData.datas.push(
+          {
+            type: "line",
+            name: "接口2",
+            color: "#FF6951",
+            data: [
+              29, 33, 55, 78, 100, 23, 64, 30, 45, 34, 88, 10, 67, 34, 100, 23,
+              64, 30, 45, 34, 88, 10, 67, 34,
+            ],
+          },
+          {
+            type: "line",
+            name: "接口2",
+            color: "#FF6951",
+            data: [
+              39, 43, 65, 88, 110, 33, 74, 40, 55, 44, 98, 20, 77, 44, 110, 33,
+              74, 40, 55, 44, 98, 20, 77, 44,
+            ],
+          }
+        );
+      }
+      this.curveChart();
+    },
     /** ------------------ 获取数据方法 ------------------- **/
   },
 };
@@ -1054,7 +1135,7 @@ export default {
   .btn {
     text-align: right;
   }
-  /deep/ .ark-select .ark-select-selection{
+  /deep/ .ark-select .ark-select-selection {
     height: 30px;
     line-height: 30px;
     box-sizing: content-box;
