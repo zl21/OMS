@@ -355,11 +355,17 @@ export default {
               if (data.valuedata == '退货') {
                 this.returnInfo.formData.forEach(item => {
                   if (item.value == 'RESERVE_BIGINT02') item.disabled = false
+                  if (item.value == 'PRO_RETURN_STATUS') item.disabled = false
+                  if (item.value == 'RESERVE_VARCHAR02') item.disabled = false
                 })
               } else {
                 this.returnInfo.formValue.RESERVE_BIGINT02 = ''
+                this.returnInfo.formValue.PRO_RETURN_STATUS = ''
+                this.returnInfo.formValue.RESERVE_VARCHAR02 = ''
                 this.returnInfo.formData.forEach(item => {
                   if (item.value == 'RESERVE_BIGINT02') item.disabled = true
+                  if (item.value == 'PRO_RETURN_STATUS') item.disabled = true
+                  if (item.value == 'RESERVE_VARCHAR02') item.disabled = true
                 })
               }
               if (data.pid) {
@@ -1205,7 +1211,8 @@ export default {
         if (item.RETURNABLE_AMOUNT == 0) {
           arr.splice(i, 1);
         }
-        if (item.QTY_IN === undefined || item.QTY_IN === null) item.QTY_IN = this.BILL_TYPE === '1' ? 0 : Number(item.qty || 1);
+        item.QTY_IN = 0
+        // if (item.QTY_IN === undefined || item.QTY_IN === null) item.QTY_IN = this.BILL_TYPE === '1' ? 0 : Number(item.qty || 1);
       });
       return arr;
     },
@@ -1244,7 +1251,8 @@ export default {
         item.ID = item.proId;
         item.IS_GIFT = item.GIFT_TYPE;
         item.BILL_NO = this.selectData.BILL_NO;
-        item.QTY_IN = this.BILL_TYPE === '1' ? 1 : Number(item.qty || 1);
+        // item.QTY_IN = this.BILL_TYPE === '1' ? 1 : Number(item.qty || 1);
+        item.QTY_IN = 0;
         arr.push(item)
       });
       this.tableConfig.data = arr;
@@ -1271,7 +1279,8 @@ export default {
             item.ID = item.proId;
             item.IS_GIFT = item.GIFT_TYPE;
             item.BILL_NO = self.selectData.BILL_NO;
-            item.QTY_IN = self.BILL_TYPE === '1' ? 1 : Number(item.qty || 1);
+            // item.QTY_IN = self.BILL_TYPE === '1' ? 1 : Number(item.qty || 1);
+            item.QTY_IN = 0;
           });
           self.tableConfig.data = self.addItem.addList;
         } else {
@@ -1548,11 +1557,17 @@ export default {
       if (Afsend.OC_B_RETURN_TYPE_ENAME == '退货') {
         this.returnInfo.formData.forEach(item => {
           if (item.value == 'RESERVE_BIGINT02') item.disabled = false
+          if (item.value == 'PRO_RETURN_STATUS') item.disabled = false
+          if (item.value == 'RESERVE_VARCHAR02') item.disabled = false
         })
       } else {
         this.returnInfo.formValue.RESERVE_BIGINT02 = ''
+        this.returnInfo.formValue.PRO_RETURN_STATUS = ''
+        this.returnInfo.formValue.RESERVE_VARCHAR02 = ''
         this.returnInfo.formData.forEach(item => {
           if (item.value == 'RESERVE_BIGINT02') item.disabled = true
+          if (item.value == 'PRO_RETURN_STATUS') item.disabled = true
+          if (item.value == 'RESERVE_VARCHAR02') item.disabled = true
         })
       }
       if (Afsend.OC_B_RETURN_TYPE_ENAME && Afsend.OC_B_RETURN_TYPE_ID) {
