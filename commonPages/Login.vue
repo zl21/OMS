@@ -92,23 +92,25 @@ export default {
     initDom() {
       let isPhone = document.querySelector('.divErCode')
       let account = document.querySelector('.divAccount')
-      let accountInput = document.querySelector('.divAccount input')
-      let pwd = document.querySelector('.divMima')
-      let code = document.querySelector('.divCode')
-      let codeInput = document.querySelector('.divCode input')
+      let inputNodes = document.querySelectorAll('.login .container input')
       if (isPhone) {
+        // 验证码登录
         account.setAttribute('data-phone', this.vmI18n.t("form_label.cellPhone_number"))
-        accountInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a6"))
-        codeInput && codeInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a8"))
+        inputNodes[0].setAttribute('placeholder', this.vmI18n.t("pHolder.a6")) // 请输入手机号
+        inputNodes[1].setAttribute('placeholder', this.vmI18n.t("pHolder.a8")) // 请输入短信验证码
       } else {
-        let pwdInput = document.querySelector('.divMima input')
+        // 密码登录
+        let pwd = document.querySelector('.divMima')
         account.setAttribute('data-account', this.vmI18n.t("other.user"))
-        accountInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a2"))
         pwd.setAttribute('data-pwd', this.vmI18n.t("other.pwd"))
-        pwdInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a3"))
-        codeInput && codeInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a7"))
+        inputNodes[0].setAttribute('placeholder', this.vmI18n.t("pHolder.a2")) // 请输入用户名
+        inputNodes[1].setAttribute('placeholder', this.vmI18n.t("pHolder.a3")) // 请输入密码
+        if (this.isEnableLoginPro) {
+          let code = document.querySelector('.divCode')
+          code.setAttribute('data-code', this.vmI18n.t("other.verticalCode"))
+          inputNodes[2].setAttribute('placeholder', this.vmI18n.t("pHolder.a7")) // 请输入验证码
+        }
       }
-      code && code.setAttribute('data-code', this.vmI18n.t("other.verticalCode"))
       let loginBtn = document.getElementById('btn')
       loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
     },
