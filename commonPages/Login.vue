@@ -27,10 +27,10 @@
         </div>
         <div class="loginTabs" v-if="isEnableLoginPro">
           <div class="tab" @click="toggleTab('pwd')">
-            <span>验证码登录</span>
+            <span>{{ vmI18n.t('other.vCodeLogin')}}</span>
           </div>
           <div class="tab" @click="toggleTab('phone')">
-            <span>密码登录</span>
+            <span>{{ vmI18n.t('other.pwdLogin')}}</span>
           </div>
         </div>
         <!-- 欢迎登录 -->
@@ -85,11 +85,33 @@ export default {
     this.curLang = langConfig.find(it => it.type == browseLan).text;
   },
   mounted() {
-    let loginBtn = document.getElementById('btn')
-    loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
+    this.initDom()
     this.isEnableLogin()
   },
   methods: {
+    initDom() {
+      let isPhone = document.querySelector('.divErCode')
+      let account = document.querySelector('.divAccount')
+      let accountInput = document.querySelector('.divAccount input')
+      let pwd = document.querySelector('.divMima')
+      let code = document.querySelector('.divCode')
+      let codeInput = document.querySelector('.divCode input')
+      if (isPhone) {
+        account.setAttribute('data-phone', this.vmI18n.t("form_label.cellPhone_number"))
+        accountInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a6"))
+        codeInput && codeInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a8"))
+      } else {
+        let pwdInput = document.querySelector('.divMima input')
+        account.setAttribute('data-account', this.vmI18n.t("other.user"))
+        accountInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a2"))
+        pwd.setAttribute('data-pwd', this.vmI18n.t("other.pwd"))
+        pwdInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a3"))
+        codeInput && codeInput.setAttribute('placeholder', this.vmI18n.t("pHolder.a7"))
+      }
+      code && code.setAttribute('data-code', this.vmI18n.t("other.verticalCode"))
+      let loginBtn = document.getElementById('btn')
+      loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
+    },
     // 是否开启手机验证码登录
     isEnableLogin() {
       let node = document.querySelector('.loginPro') || document.querySelector('.divErCode')
@@ -109,6 +131,9 @@ export default {
         || type == 'pwd' && document.querySelector('.divErCode')
       ) return
       document.getElementsByClassName("toggle")[0].click();
+      this.$nextTick(() => {
+        this.initDom()
+      })
       this.initTab(type == 'phone')
     },
     toggleLang(lang) {
@@ -129,6 +154,7 @@ export default {
       _this.vmI18n.locale = lang;
       this.curLang = langConfig.find(it => it.type == lang).text;
       R3.store.commit(`customize/language`, lang || 'zh');
+      this.initDom()
 
       this.$message({
         // message: _this.vmI18n.messages[lang].tip_info,
@@ -324,17 +350,17 @@ export default {
           }
         }
         .divAccount:before {
-          content: '账号';
+          content: attr(data-account); // 账号
         }
         .divCode {
           &:before {
-            content: '验证码';
+            content: attr(data-code); // 验证码
           }
           display: inline-block;
           vertical-align: top;
         }
         .divMima:before {
-          content: '密码';
+          content: attr(data-pwd); // 密码
         }
         .btn {
           display: inline-block;
@@ -371,7 +397,7 @@ export default {
         }
         &.divErCode {
           .divAccount:before {
-            content: '手机号';
+            content: attr(data-phone); // 手机号
           }
           .code {
             width: 213px !important;
