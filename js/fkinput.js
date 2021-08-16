@@ -12,6 +12,12 @@ window.$i18n = i18n
 
 export default {
   props: {
+    /* autoRequest: {
+      typeof: Object
+    },
+    tableRequest: {
+      typeof: Object
+    }, */
     itemdata: {
       type: Object
     },
@@ -236,7 +242,12 @@ export default {
       searchParam.append('ak', queryString);
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
-
+      const autoRequest = self.itemdata.autoRequest || {};
+      if (autoRequest && Object.keys(autoRequest).length) {
+        for (const key in autoRequest) {
+          searchParam.append(key, JSON.stringify(autoRequest[key]));
+        }
+      }
       this.service.common.fuzzyquerybyak(searchParam, itemdata.serviceId ? { serviceId: itemdata.serviceId } : 0).then((res) => {
         console.log('fuzzyquerybyak:',res);
         for (let i = 0; i < res.data.data.length; i++) {
@@ -366,6 +377,12 @@ export default {
       searchParam.append('ak', queryString);
       searchParam.append('colid', id);
       searchParam.append('fixedcolumns', query.fixedcolumns);
+      const autoRequest = self.itemdata.autoRequest || {};
+      if (autoRequest && Object.keys(autoRequest).length) {
+        for (const key in autoRequest) {
+          searchParam.append(key, JSON.stringify(autoRequest[key]));
+        }
+      }
       this.service.common.fuzzyquerybyak(searchParam, self.itemdata.serviceId ? { serviceId: self.itemdata.serviceId } : 0).then((res) => {
         console.log('fuzzyquerybyak',res);
         self.queryList = res.data.data;
@@ -474,6 +491,12 @@ export default {
         getcmd: 'n',
         table: item.reftable
       }
+      /* const tableRequest = self.itemdata.tableRequest || {};
+      if (tableRequest && Object.keys(tableRequest).length) {
+        for (const key in tableRequest) {
+          searchParam.append(key, JSON.stringify(tableRequest[key]));
+        }
+      } */
       this.service.common.getTableQuery(params, self.itemdata.serviceId ? { serviceId: self.itemdata.serviceId } : 0).then((res) => {
         for (let i = 0; i < res.data.datas.dataarry.length; i++) {
           const element = res.data.datas.dataarry[i];
@@ -490,12 +513,16 @@ export default {
       const self = this;
       const item = self.SelectionData.item;
       self.SelectionData.row = [];
-      const searchdata = {
+      let searchdata = {
         refcolid: item.colid,
         isdroplistsearch: true,
         startindex: self.selectOperation.startindex,
         range: self.selectOperation.pageSize
       };
+      const tableRequest = self.itemdata.tableRequest || {};
+      if (tableRequest && Object.keys(tableRequest).length) {
+        searchdata = Object.assign(searchdata, tableRequest);
+      }
       if (self.hasQuery) {
         searchdata.fixedcolumns = self.selectConfigChanged;
       }

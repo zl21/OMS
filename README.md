@@ -299,4 +299,5 @@
 | v1.2.62 | importTable兼容处理 |
 | v1.2.63 | businessActionTable修复 |
 | v1.2.64 | businessActionTable-兼容modal样式 |
+| v1.2.65 | fkinput 支持queryList/fuzzyquerybyak接口自定义入参 for skc |
 
