@@ -11,8 +11,8 @@ export default {
   tip_info: "Switch to English !",
   tip_type: "success",
   welcome: "Welcome To R3-OMS",
-  username: "Please input Username!",
-  password: "Please input Password!",
+  username: "Username",
+  password: "Password",
   login: "Sign in",
   logout: "Sign out",
   message: {
@@ -82,6 +82,15 @@ export default {
   },
 
   other: {
+    user: '账号',
+    pwd: '密码',
+    verticalCode: '验证码',
+    pwdLogin: '密码登陆',
+    vCodeLogin: '验证码登录',
+    live: '直播',
+    fixedBudget: '定预',
+    allAdvance: '全预',
+    selfPrediction: '自预',
     queryResults: 'Query Results',
     fullPayment: 'Full Payment',
     activity_overview: 'Activity overview',
@@ -445,6 +454,35 @@ export default {
     b4: 'Fixed attributes',
     b5: 'Custom properties',
     b6: 'Commodity dimension',
+    b7: '',
+    b8: '',
+    b9: '',
+    ba: '',
+    bb: '',
+    bc: '',
+    bd: '',
+    be: '',
+    bf: '',
+    bg: '',
+    bh: '',
+    bi: '',
+    bj: '',
+    bk: '',
+    bl: '',
+    bm: '',
+    bn: '',
+    bo: '',
+    bp: '',
+    bq: '',
+    br: '',
+    bs: '',
+    bt: '',
+    bu: '',
+    bv: '',
+    bw: '',
+    bx: '',
+    by: '',
+    bz: '',
     edit_order_dispatch_rule: 'Edit order delivery rules',
     add_claimForm: 'Add Claim Form', // 赔付单新增,Add ClaimForm
     add_retail_shipping_order: 'Add retail shipping order', //零售发货单新增
@@ -510,13 +548,13 @@ export default {
     // e------------------------------------------------------------------------
     e0: 'Fail Reason',
     e1: 'detailed info',
-    e2: '',
-    e3: '',
-    e4: '',
-    e5: '',
-    e6: '',
-    e7: '',
-    e8: '',
+    e2: '预计发货时间',
+    e3: '自动同意换货',
+    e4: '自动拒绝换货',
+    e5: '退款申请时间',
+    e6: '电话',
+    e7: '邮编',
+    e8: '平台交易状态',
     e9: '',
     // a------------------------------------------------------------------------
     a0: 'Receiving address is nearby',
@@ -931,6 +969,7 @@ export default {
     a1: 'Number Of Change', //变化数量
     a2: 'Ending Amount Available For Sale', //期末可售数
     a3: 'Schedule Ownership Name', //日程归属名称
+    a4: '实体可用数量',
     internationalCode: 'International Code', //国际码
     abbreviation: 'Abbreviation', //简称
     abnormalInfo: 'Abnormal Info', //异常信息

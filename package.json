@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/internationalization",
-  "version": "1.0.94",
+  "version": "1.0.95",
   "description": "burgeon company's internationalization lib for private npm",
   "main": "index.js",
   "scripts": {

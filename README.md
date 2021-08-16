@@ -184,3 +184,4 @@ console.log($i18n.t(common.all));
 | v1.0.92 | add table_label.a4 |
 | v1.0.93 | add e6~e8 |
 | v1.0.94 | add for 登录 |
+| v1.0.95 | 翻译 |
