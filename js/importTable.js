@@ -137,7 +137,11 @@ export default {
       _this.loading = true;
       const param = new FormData();
       for (const key in paramsObj) {
-        param.append(key, paramsObj[key]);
+        if (key == 'id' && this.currentConfig.isStandardSingleObject) {
+          param.append(key, _this.$route.params.itemId);
+        } else {
+          param.append(key, paramsObj[key]);
+        }
       }
       param.append('file', _this.files, _this.text);
 

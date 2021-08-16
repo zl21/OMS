@@ -301,4 +301,5 @@
 | v1.2.64 | businessActionTable-兼容modal样式 |
 | v1.2.65 | fkinput 支持queryList/fuzzyquerybyak接口自定义入参 for skc |
 | v1.2.66 | fktable 支持queryList/fuzzyquerybyak接口自定义入参 for skc |
+| v1.2.67 | importTable-标准单对象导入拓展 |
 
