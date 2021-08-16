@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-08-13 16:24:54
+ * @LastEditTime: 2021-08-16 14:35:53
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-详情-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -931,12 +931,12 @@ export default {
           if (it[pryKey] == item[pryKey]) {
             // 1.已经存在（数量累加起来，没超则累加，反之保持数量是最大值即可）
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
-            if (Number(item.RETURNABLE_QTY) > sumQ) {
+            if (Number(item.REAL_RETURNABLE_QTY) > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
               const sum = Util.accAdd(item.REFUND_FEE, it.REFUND_FEE)
               item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             } else {
-              item.QTY_REFUND = Number(it.RETURNABLE_QTY);
+              item.QTY_REFUND = Number(item.REAL_RETURNABLE_QTY);
               const sum = Number(item.PRICE_ACTUAL) * Number(item.QTY_REFUND)
               item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
             }
