@@ -275,6 +275,12 @@ export default {
       params.append('ak',val)
       params.append('colid',this.fkid)
       params.append('fixedcolumns',JSON.stringify({}))
+      const autoRequest = _self.itemdata.autoRequest || {};
+      if (autoRequest && Object.keys(autoRequest).length) {
+        for (const key in autoRequest) {
+          params.append(key, JSON.stringify(autoRequest[key]));
+        }
+      }
       const serviceId = _self.itemdata.serviceId;
       _self.service.common.fuzzyquerybyak(params, serviceId ? { serviceId } : 0)
         // $network.post('/p/cs/fuzzyquerybyak',params,serviceId ? { serviceId } : 0)
@@ -303,6 +309,10 @@ export default {
       this.formObj.startindex = (this.visible - 1) * this.range
       this.formObj.range = this.range
       this.formObj.refcolid = this.fkid;
+      const tableRequest = _self.itemdata.tableRequest || {};
+      if (tableRequest && Object.keys(tableRequest).length) {
+        this.formObj = Object.assign(this.formObj, tableRequest);
+      }
       params.append('searchdata', JSON.stringify(this.formObj));
       const serviceId = _self.itemdata.serviceId;
       // $network.post(url,params,serviceId ? { serviceId } : 0)
