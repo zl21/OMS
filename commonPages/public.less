@@ -188,46 +188,63 @@ i {
 
 	@keyframes fade-in {
 		0% {
-			opacity: 0;
-			background-color: rgb(114, 96, 96);
-			max-height: 60%;
+			// opacity: 0;
+			// background-color: rgb(114, 96, 96);
+			// max-height: 60%;
+			height: 370px;
 		}
 
-		40% {
-			opacity: 0.5;
-			background-color: rgb(161, 156, 156);
-			max-height: 80%;
+		/* 30% {
+			// opacity: 0.5;
+			// background-color: rgb(161, 156, 156);
+			// max-height: 70%;
+			height: 360px;
+		} */
+
+		50% {
+			// opacity: 0.5;
+			// background-color: rgb(161, 156, 156);
+			// max-height: 80%;
+			height: 450px; // 不设不行，不设的话没有过渡效果；设置的话不知道具体要设置多少，因为未展开的高度未知
 		}
+
+		/* 70% {
+			// opacity: 0.5;
+			// background-color: rgb(161, 156, 156);
+			// max-height: 80%;
+			height: 380px;
+		} */
 
 		100% {
-			opacity: 1;
-			background-color: #fff;
+			// opacity: 1;
+			// background-color: #fff;
 			max-height: 100%;
+			height: 100%;
 		}
 
 	}
 
-	@-webkit-keyframes fade-in {
+	// @-webkit-keyframes fade-in {
 
-		/*针对webkit内核*/
-		0% {
-			opacity: 0;
-			background-color: rgb(114, 96, 96);
-			max-height: 60%;
-		}
+	// 	/*针对webkit内核*/
+	// 	0% {
+	// 		opacity: 0;
+	// 		background-color: rgb(114, 96, 96);
+	// 		max-height: 60%;
+	// 	}
 
-		40% {
-			opacity: 0;
-			background-color: rgb(161, 156, 156);
-			max-height: 80%;
-		}
+	// 	40% {
+	// 		opacity: 0;
+	// 		background-color: rgb(161, 156, 156);
+	// 		max-height: 80%;
+	// 	}
 
-		100% {
-			opacity: 1;
-			background-color: #fff;
-			max-height: 100%;
-		}
-	}
+	// 	100% {
+	// 		opacity: 1;
+	// 		background-color: #fff;
+	// 		max-height: 100%;
+	// 	}
+	// }
 
 	.main02 {
 		position: relative;
@@ -245,9 +262,15 @@ i {
 			overflow: hidden;
 
 			&.fadeInDom {
-				animation: fade-in;
-				animation-duration: 1.5s;
-				-webkit-animation: fade-in 1.5s;
+				// animation: fade-in;
+				// animation-duration: 1.5s;
+				// -webkit-animation: fade-in 1.5s;
+				// animation-fill-mode: forwards;
+				// height: auto;
+				// max-height: 100%;
+				// max-height: 600px;
+				// height: 600px;
+				// transition: 2s;
 			}
 
 			.m2Item {
@@ -309,23 +332,17 @@ i {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 			grid-template-rows: repeat(auto-fit, minmax(180px, auto));
-			grid-auto-rows: 180px;
+			grid-auto-rows: auto;
 			grid-gap: 16px;
 			grid-auto-flow: row dense;
 			min-height: 180px;
-			max-height: 356px;
+			// max-height: 356px;
 			overflow: hidden;
 
 			&.m3fadeInDom {
-				animation: fade-in;
-				animation-duration: 1.5s;
-				-webkit-animation: fade-in 1.5s;
-			}
-
-			&.fadeIn {
-				animation: fade-in;
-				animation-duration: 1.5s;
-				-webkit-animation: fade-in 1.5s;
+				// animation: fade-in;
+				// animation-duration: 1.5s;
+				// -webkit-animation: fade-in 1.5s;
 			}
 
 			.m3Item {

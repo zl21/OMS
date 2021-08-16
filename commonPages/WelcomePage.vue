@@ -73,6 +73,7 @@
                 :key="'m2Status' + index"
               >
                 <Button
+                  :disabled="it.disabled"
                   :type="it.type"
                   :class="it.icon ? 'iconBtn' : ''"
                   :icon="it.icon || ''"
@@ -82,7 +83,7 @@
               </div>
             </div>
           </div>
-          <div :class="['main02body', up, noData]" id="main02body">
+          <div :class="['main02body', up, noData]" id="main02body" :style="{ height : m2Heigh + 'px'}">
             <picture v-if="noData">
               <source srcset="./img/la.png" media="(min-width: 1600px)" />
               <img src="./img/medium-car-image.jpg" alt="Car" />
@@ -228,6 +229,8 @@
 import businessButton from "professionalComponents/businessButton";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import * as echarts from "echarts";
+import { throttle } from 'lodash'
+
 let dayBtnConifg = [
   {
     text: "近三天",
@@ -261,6 +264,7 @@ let statusBtnConifg = [
     type: "text",
     icon: "ios-arrow-down",
     webname: "upDownIcon",
+    disabled: true,
   },
 ];
 export default {
@@ -270,6 +274,8 @@ export default {
   },
   data() {
     return {
+      m2Heigh: 0,
+      m3Heigh: 0,
       noData: "",
       m3noData: "",
       up: "",
@@ -627,13 +633,15 @@ export default {
       vmI18n: window.vmI18n,
     };
   },
-  updated() {
-    this.maxHeight("main02body", "m2Item");
-    this.maxHeight("main03body", "m3Item");
-  },
   mounted() {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
+    this.maxHeight("main02body", "m2Item", 1);
+    window.onresize = () => {
+      console.log(11);
+      this.maxHeight("main02body", "m2Item");
+    };
+
     this.header.time = dateUtil.getFormatDate(
       this.header.time,
       "yyyy-MM-dd HH:mm:ss"
@@ -919,25 +927,74 @@ export default {
       });
     },
     // 计算maxHeight
-    maxHeight(body, itemName) {
+    maxHeight: throttle(function(body, itemName, isInit) {
+      const self = this;
       const mBody = document.getElementById(body);
       // let m2Heigh = m2Body.clientHeight;
       let nodeHeight = 0,
-        flag = false,
-        nodeSum = mBody.childNodes.length;
+        firstLeft = 0, // 第一个元素的横坐标
+        rowSum = 0, // 行数
+        flag = false;
       for (const node of mBody.childNodes) {
         if (node.className.includes(itemName)) {
+          firstLeft = mBody.childNodes[0].getClientRects()[0].x;
           nodeHeight = node.clientHeight;
-          break;
+          const itPosition = node.getClientRects()[0].x;
+          if (itPosition == firstLeft) {
+            rowSum += 1;
+          }
+          console.log(itPosition,rowSum);
+          // break;
         } else {
           flag = true;
         }
       }
       if (flag) return;
-      mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
-      console.log(mBody);
-    },
+      self[body.includes('2') ? 'main02' : 'main03'].btnSta.find(i => i.webname == 'upDownIcon').disabled = rowSum <= 2;
+      // mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
+      // mBody.style.height = `${nodeHeight * 2 + 32}px`;
+      // self.m2Heigh = nodeHeight * 2 + 32;
+      if (isInit) {
+        self.m2Heigh = nodeHeight * (rowSum >= 2 ? 2 : 1) + 32;
+        return
+      }
+      if (self.up == 'fadeInDom') {
+        self.m2Heigh = mBody.scrollHeight;
+          mBody.style.transition = '2s'
+      } else {
+        self.m2Heigh = nodeHeight * (rowSum >= 2 ? 2 : 1) + 32;
+        mBody.style.transition = '2s'
+      }
+      // { 'trailing': false }
+    }, 1000),
     //
+    initHeight(body, itemName) {
+      const mBody = document.getElementById(body);
+      // let m2Heigh = m2Body.clientHeight;
+      let nodeHeight = 0,
+        firstLeft = 0, // 第一个元素的横坐标
+        rowSum = 0, // 行数
+        flag = false;
+      for (const node of mBody.childNodes) {
+        if (node.className.includes(itemName)) {
+          firstLeft = mBody.childNodes[0].getClientRects()[0].x;
+          nodeHeight = node.clientHeight;
+          const itPosition = node.getClientRects()[0].x;
+          if (itPosition == firstLeft) {
+            rowSum += 1;
+          }
+          console.log(itPosition,rowSum);
+          // break;
+        } else {
+          flag = true;
+        }
+      }
+      if (flag) return;
+      this[body.includes('2') ? 'main02' : 'main03'].btnSta.find(i => i.webname == 'upDownIcon').disabled = rowSum >= 2;
+      // mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
+      // mBody.style.height = `${nodeHeight * 2 + 32}px`;
+      this.m2Heigh = nodeHeight * (rowSum >= 2 ? 2 : 1) + 32;
+    },
     dayBtnHandel(item, panel) {
       this.btnStyleChange(item, 1, panel);
     },
@@ -954,9 +1011,11 @@ export default {
         switch (panel) {
           case "main02":
             this.up = this.up ? "" : "fadeInDom";
+            this.maxHeight("main02body", "m2Item");
             break;
           case "main03":
             this.m3Up = this.m3Up ? "" : "m3fadeInDom";
+            this.maxHeight("main02body", "m2Item");
             break;
           default:
             break;
