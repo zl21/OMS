@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-13 19:00:38
+ * @LastEditTime: 2021-08-16 13:37:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -205,7 +205,7 @@
               </Col>
               <Col span="6">
                 <FormItem label="接口：">
-                  <Select v-model="main04.apiV">
+                  <Select v-model="main04.apiV" filterable multiple>
                     <Option
                       v-for="item in main04.apiOption"
                       :value="item.value"
@@ -569,18 +569,22 @@ export default {
         apiOption: [
           {
             value: "1",
-            label: "New York",
+            label: "接口1",
           },
           {
             value: "2",
-            label: "London",
+            label: "接口2",
           },
+          {
+            value: "3",
+            label: "接口3",
+          }
         ],
         projectV: "1",
         apiV: "2",
         // 数据
-        currentDay: {
-          type: "category",
+        currentData: {
+          // type: "category",
           key: [
             "1点",
             "2点",
@@ -607,20 +611,17 @@ export default {
             "23点",
             "24点",
           ],
-          data: [
-            19, 23, 45, 68, 90, 13, 54, 20, 35, 24, 78, 1, 57, 24, 90, 13, 54,
-            20, 35, 24, 78, 1, 57, 24,
-          ],
-        },
-        threeDay: {
-          type: "category",
-          key: ["One", "Two", "Three"],
-          data: [100, 200, 50],
-        },
-        setData: {
-          type: "category",
-          key: ["One", "Two", "Three"],
-          data: [100, 200, 50],
+          datas:[{
+            type:'line',
+            name:'接口1',
+            color:'#FF6951',
+            data: [19, 23, 45, 68, 90, 13, 54, 20, 35, 24, 78, 1, 57, 24, 90, 13, 54,20, 35, 24, 78, 1, 57, 24]
+          },{
+            type:'line',
+            name:'接口2',
+            color:'#FF6951',
+            data: [29, 33, 55, 78, 100, 23, 64, 30, 45, 34, 88, 10, 67, 34, 100, 23, 64,30, 45, 34, 88, 10, 67, 34]
+          }],
         },
       },
       vmI18n: window.vmI18n,
@@ -698,6 +699,40 @@ export default {
     curveChart() {
       const chartDom = document.getElementById("mainCurve");
       const myChart = echarts.init(chartDom);
+      // 处理折线
+      let LineArr = [];
+      this.main04.currentData.datas.forEach(i=>{
+        let lineConfig = {
+            type: "line",
+            name:i.name,
+            symbol: "circle",
+            smooth: true, //平滑折线  = 曲线
+            data: i.data,
+            symbolSize: 10, // 设定折线点的大小
+            // 折线条的样式
+            lineStyle: {
+              color: i.color,
+              width: 2,
+            },
+            // 折线拐点的样式
+            itemStyle: {
+              normal: {
+                color: i.color,
+              },
+            },
+            // 鼠标经过时
+            emphasis: {
+              itemStyle: {
+                color: i.color, //颜色
+                borderColor: "#fff", //图形的描边颜色
+                borderWidth: 2, // 描边的线宽
+                shadowBlur: 4, // 图形的阴影大小
+                shadowColor:  i.color, // 图形的阴影颜色
+              },
+            },
+          }
+        LineArr.push(lineConfig)
+      })
       // 配置选项
       const option = {
         // 位置
@@ -711,44 +746,41 @@ export default {
         tooltip: {
           trigger: "axis",
           alwaysShowContent: true, //始终保留最后一个经过的提示框
+          axisPointer: {
+            type: 'cross'
+          },
           // 自定义显示位置
-          position: (point, params, dom, rect, size) => {
-            // 跟着鼠标走
-            return [point[0] - 60, point[1] - 80];
-          },
+          // position: (point, params, dom, rect, size) => {
+          //   // 跟着鼠标走
+          //   return [point[0] - 60, point[1] - 80];
+          // },
+          formatter: '{b0}: {c0}<br />{b1}: {c1}',
           // 自定义显示内容
-          formatter: (params) => {
-            let HTMLElement = "";
-            HTMLElement = `<div>
-              <div style="font-size:12px;color:#8D91A1;line-height:20px">
-              ${params[0].axisValue}
-              </div>
-              <div style="fontSize:12px;color:#8D91A1;line-height:20px">
-                <span style="
-                  display: inline-block;
-                  width: 10px;
-                  height: 10px;
-                  border-radius: 10px;
-                  background: #F76D59;">
-                </span>
-                异常数：
-                <span style="font-size:12px;color:#F76D59;line-height:20px">
-                ${params[0].data}
-                </span>
-              </div>
-             </div>`;
-            return HTMLElement;
-          },
-        },
-        // 坐标轴指示器 必须搭配tooltip的type:'axis'
-        axisPointer: {
-          type: "line",
-          lineStyle: {
-            color: "#F2F2F2",
-          },
+          // formatter: (params) => {
+          //   let HTMLElement = "";
+          //   HTMLElement = `<div>
+          //     <div style="font-size:12px;color:#8D91A1;line-height:20px">
+          //     ${params[0].axisValue}
+          //     </div>
+          //     <div style="fontSize:12px;color:#8D91A1;line-height:20px">
+          //       <span style="
+          //         display: inline-block;
+          //         width: 10px;
+          //         height: 10px;
+          //         border-radius: 10px;
+          //         background: #F76D59;">
+          //       </span>
+          //       异常数：
+          //       <span style="font-size:12px;color:#F76D59;line-height:20px">
+          //       ${params[0].data}
+          //       </span>
+          //     </div>
+          //    </div>`;
+          //   return HTMLElement;
+          // },
         },
         xAxis: {
-          type: this.main04.setData.type,
+          type: this.main04.currentData.type,
           axisLine: {
             lineStyle: {
               color: "#F2F2F2",
@@ -762,7 +794,7 @@ export default {
             fontSize: "12",
             color: "#8D91A1",
           },
-          data: this.main04.setData.key,
+          data: this.main04.currentData.key,
         },
         yAxis: {
           type: "value",
@@ -775,36 +807,7 @@ export default {
           },
         },
         // 数据设置项
-        series: [
-          {
-            type: "line",
-            symbol: "circle",
-            smooth: true, //平滑折线  = 曲线
-            data: this.main04.setData.data,
-            symbolSize: 10, // 设定折线点的大小
-            // 折线条的样式
-            lineStyle: {
-              color: "#FF6951",
-              width: 2,
-            },
-            // 折线拐点的样式
-            itemStyle: {
-              normal: {
-                color: "#FF6951",
-              },
-            },
-            // 鼠标经过时
-            emphasis: {
-              itemStyle: {
-                color: "#FF6951", //颜色
-                borderColor: "#fff", //图形的描边颜色
-                borderWidth: 2, // 描边的线宽
-                shadowBlur: 4, // 图形的阴影大小
-                shadowColor: "#FF6951", // 图形的阴影颜色
-              },
-            },
-          },
-        ],
+        series: LineArr,
       };
       // 设置选项
       option && myChart.setOption(option);
@@ -905,11 +908,6 @@ export default {
       btnArr.forEach((it, i) => {
         i == index ? (btnArr[i].type = "primary") : (btnArr[i].type = "text");
       });
-      if (index == 2) {
-        this.main04.setData = this.main04.currentDay;
-      } else {
-        this.main04.setData = this.main04.threeDay;
-      }
       this.curveChart();
     },
     //
@@ -997,9 +995,10 @@ export default {
   .btn {
     text-align: right;
   }
-  /deep/ .ark-select-single .ark-select-selection {
-    height: 32px;
-    line-height: 32px;
+  /deep/ .ark-select .ark-select-selection{
+    height: 30px;
+    line-height: 30px;
+    box-sizing: content-box;
     .ark-select-placeholder,
     .ark-select-selected-value {
       height: 32px;
