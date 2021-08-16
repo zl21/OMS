@@ -1505,7 +1505,7 @@ export default {
 
         this.payInfo.formValue = {
           PAYMENT_STATUS: Afsend.PAYMENT_STATUS == 0 ? '待打款' : Afsend.PAYMENT_STATUS == 1 ? '打款中' :  Afsend.PAYMENT_STATUS == 2 ? '打款成功' : Afsend.PAYMENT_STATUS == 3 ? '打款失败' : Afsend.PAYMENT_STATUS == 4 ? '拒绝打款' : Afsend.PAYMENT_STATUS == 5 ? '待审核' : Afsend.PAYMENT_STATUS == 6 ? '待审批' : '取消',
-          MODIFIERENAME: Afsend.MODIFIERENAME,
+          MODIFIERENAME: Afsend.PAYMENT_STATUS == 2 || Afsend.PAYMENT_STATUS == 3 || Afsend.PAYMENT_STATUS == 4 ? Afsend.MODIFIERENAME : '',
           PAYMENT_FAIL_REASON: Afsend.PAYMENT_STATUS == 2 ? Afsend.PAYMENT_FAIL_REASON : '', // 打款成功 显示
           PAYMENT_FAIL_REASON1: Afsend.PAYMENT_STATUS == 3 || Afsend.PAYMENT_STATUS == 4 ? Afsend.PAYMENT_FAIL_REASON : '' // 打款失败/拒绝打款 显示
         }
