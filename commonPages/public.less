@@ -12,6 +12,7 @@ i {
 
 	// ---------------- 公共样式 start ----------------
 	.comItem {
+		box-sizing: border-box;
 		border: 1px solid #E6EAF0;
 		border-radius: 4px;
 	}
@@ -121,15 +122,50 @@ i {
 			.left {
 				flex: .4;
 				// height: 200px;
+				padding: 0 16px;
 				margin-right: 16px;
 				display: flex;
-				justify-content: space-around;
+				justify-content: space-evenly;
+				align-items: center;
+
+				#main01Left {
+					position: relative;
+					width: 170px;
+					height: 170px;
+					background-color:#fff;
+					border-radius: 50%;
+					border: 18px solid #FF6951;
+					i {
+						color: #F86D59;
+						font-size: 28px;
+						font-weight: bold;
+						position: absolute;
+						display: inline-block;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+					}
+				}
 
 				.legend {
 					display: flex;
 					flex-direction: column;
 					justify-content: space-evenly;
 					padding: 70px 0;
+					div {
+						height: 26px;
+						line-height: 26px;
+						span {
+							display: inline-block;
+							min-width: 36px;
+							margin-right: 16px;
+							color: #8D91A1;
+						}
+						i {
+							color: #2F364C;
+							font-weight: bold;
+						}
+					}
 				}
 			}
 
@@ -154,7 +190,7 @@ i {
 				.title {}
 
 				.status {
-					height: calc(100% - 26px);
+					height: calc(100% - 32px);
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -225,25 +261,7 @@ i {
 	}
 
 	// @-webkit-keyframes fade-in {
-
 	// 	/*针对webkit内核*/
-	// 	0% {
-	// 		opacity: 0;
-	// 		background-color: rgb(114, 96, 96);
-	// 		max-height: 60%;
-	// 	}
-
-	// 	40% {
-	// 		opacity: 0;
-	// 		background-color: rgb(161, 156, 156);
-	// 		max-height: 80%;
-	// 	}
-
-	// 	100% {
-	// 		opacity: 1;
-	// 		background-color: #fff;
-	// 		max-height: 100%;
-	// 	}
 	// }
 
 	.main02 {
@@ -254,10 +272,10 @@ i {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
 			grid-template-rows: repeat(auto-fit, auto);
-			grid-auto-rows: auto;
+			grid-auto-rows: 176px;
 			grid-gap: 16px;
 			grid-auto-flow: row dense;
-			min-height: 156px;
+			min-height: 176px;
 			// max-height: 296px;
 			overflow: hidden;
 

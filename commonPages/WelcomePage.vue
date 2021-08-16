@@ -38,15 +38,10 @@
           </div>
           <div class="main01body">
             <div class="left">
-              <div
-                id="main01Left"
-                style="min-width: 200px; min-height: 200px"
-              ></div>
-              <div class="legend">
-                <template v-for="(it, index) in main01.pieData">
-                  <div :key="'pieLegend' + index">
-                    {{ it.name }} <i>{{ it.value }}</i>
-                  </div>
+              <div id="main01Left"><i>{{main01.status_name}}</i></div>
+              <div class="legend" >
+                <template v-for="(it,index) in main01.pieData">
+                  <div :key="'pieLegend' + index"> <span>{{it.name}}</span> <i>{{it.value}}</i></div>
                 </template>
               </div>
             </div>
@@ -661,7 +656,7 @@ export default {
     );
     this.curveChart();
     this.getGauge();
-    this.pieChart();
+    // this.pieChart();
   },
   destroyed() {
     if (document.getElementById("content")) {
@@ -673,8 +668,8 @@ export default {
   methods: {
     /** ----------------- 配置方法 -------------------- **/
     // 饼图
-    pieChart() {
-      const chartDom = document.getElementById("main01Left");
+    /* pieChart() {
+      const chartDom = document.getElementById('main01Left');
       const myChart = echarts.init(chartDom);
       const option = {
         series: [
@@ -727,7 +722,7 @@ export default {
         });
       });
       option && myChart.setOption(option);
-    },
+    }, */
     // 折线图
     curveChart() {
       const chartDom = document.getElementById("mainCurve");
@@ -988,47 +983,20 @@ export default {
       // mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
       // mBody.style.height = `${nodeHeight * 2 + 32}px`;
       // self.m2Heigh = nodeHeight * 2 + 32;
-      if (isInit) {
+      /* if (isInit) {
         self.m2Heigh = nodeHeight * (rowSum >= 2 ? 2 : 1) + 32;
         return
-      }
+      } */
       if (self.up == 'fadeInDom') {
         self.m2Heigh = mBody.scrollHeight;
           mBody.style.transition = '2s'
       } else {
-        self.m2Heigh = nodeHeight * (rowSum >= 2 ? 2 : 1) + 32;
+        self.m2Heigh = nodeHeight * (rowSum == 1 ? 1 : rowSum >= 2 ? 2 : 1) + (rowSum == 1 ? 2 : rowSum >= 2 ? 20 : 2);
         mBody.style.transition = '2s'
       }
       // { 'trailing': false }
     }, 1000),
-    //
-    initHeight(body, itemName) {
-      const mBody = document.getElementById(body);
-      // let m2Heigh = m2Body.clientHeight;
-      let nodeHeight = 0,
-        firstLeft = 0, // 第一个元素的横坐标
-        rowSum = 0, // 行数
-        flag = false;
-      for (const node of mBody.childNodes) {
-        if (node.className.includes(itemName)) {
-          firstLeft = mBody.childNodes[0].getClientRects()[0].x;
-          nodeHeight = node.clientHeight;
-          const itPosition = node.getClientRects()[0].x;
-          if (itPosition == firstLeft) {
-            rowSum += 1;
-          }
-          console.log(itPosition,rowSum);
-          // break;
-        } else {
-          flag = true;
-        }
-      }
-      if (flag) return;
-      this[body.includes('2') ? 'main02' : 'main03'].btnSta.find(i => i.webname == 'upDownIcon').disabled = rowSum >= 2;
-      // mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
-      // mBody.style.height = `${nodeHeight * 2 + 32}px`;
-      this.m2Heigh = nodeHeight * (rowSum >= 2 ? 2 : 1) + 32;
-    },
+
     dayBtnHandel(item, panel) {
       this.btnStyleChange(item, 1, panel);
     },
