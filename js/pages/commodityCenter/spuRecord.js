@@ -988,7 +988,7 @@ export default {
       obj.PsSpu.ID = this.spuid;
       obj.PsCSkuList = self.modify.skuInfo; // sku字表修改信息
       // obj.PsCProSupItemDTOList = self.labelValue == 'supplier' ? self.diffSupplier(self.supplier.resData, JSON.parse(self.old.supplier)) : []; // 供应商字表修改信息
-      obj.PsCProSupItemDTOList = self.diffSupplier(self.supplier.resData, JSON.parse(self.old.supplier)) || []; // 供应商字表修改信息
+      obj.PsCProSupItemDTOList = self.diffSupplier(self.supplier.resData, typeof self.old.supplier == 'string' ? JSON.parse(self.old.supplier) : []) || []; // 供应商字表修改信息
       // 根据标记区分固定属性还是自定义属性进行分类
       const EXTRA = []; // 自定义属性
       const FIXED = []; // 固定属性
