@@ -223,7 +223,9 @@ export default {
                         TABLE:this.$route.params.customizedModuleName == 'ORDERMANAGER' ? 'OC_B_ORDER' : this.$route.params.customizedModuleName,
                         TYPE:'L_TAB_HEAD'
                       }
-                      R3.network.post('/p/cs/oc/oms/v1/customSettings' , data)
+                      let url = this.agTableConfig.url?this.agTableConfig.url :'/p/cs/oc/oms/v1/customSettings'
+                      
+                      R3.network.post( url, data)
                       .then((res) => {
                         if (res.data.code == 0) {
                           self.columnState = res.data.data
