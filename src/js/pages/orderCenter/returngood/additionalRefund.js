@@ -543,6 +543,7 @@ export default {
         modal: false,
         table: {
           indexColumn: true,
+          totalData: [],
           columns: refundAfterShipment.addItemTableColumns,
           data: []
         },
@@ -1223,6 +1224,21 @@ export default {
       self.addItem.modal = true;
       self.isOne = false;
       self.addItem.table.data = self.filter(data.QUERYORDERITEMRESULTLIST);
+      if (self.addItem.table.data.length) {
+        let RETURNABLE_AMOUNT = 0
+        let realAmt = 0
+        self.addItem.table.data.forEach(item => {
+          RETURNABLE_AMOUNT += item.RETURNABLE_AMOUNT
+          realAmt += item.realAmt
+        })
+        self.addItem.table.totalData = [
+          {
+            selection: '合计:',
+            realAmt: realAmt,
+            RETURNABLE_AMOUNT_total: RETURNABLE_AMOUNT
+          }
+        ];
+      }
     },
     // 取消
     querycancel() {},
@@ -1381,6 +1397,21 @@ export default {
             item.returnQTY = item.qty - (item.QTY_RETURN_APPLY ? item.QTY_RETURN_APPLY : 0);
             item.IS_GIFT = item.GIFT_TYPE;
           });
+          if (self.addItem.table.data.length) {
+            let RETURNABLE_AMOUNT = 0
+            let realAmt = 0
+            self.addItem.table.data.forEach(item => {
+              RETURNABLE_AMOUNT += item.RETURNABLE_AMOUNT
+              realAmt += item.realAmt
+            })
+            self.addItem.table.totalData = [
+              {
+                selection: '合计:',
+                realAmt: realAmt,
+                RETURNABLE_AMOUNT_total: RETURNABLE_AMOUNT
+              }
+            ];
+          }
           self.addItem.modal = true;
         } else {
           self.$Message.error(res.data.message);
