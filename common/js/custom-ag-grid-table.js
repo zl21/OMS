@@ -5,7 +5,7 @@ import {
   import 'libs/ag-grid/dist/styles/ag-theme-balham.css';  //该依赖在标品项目中
   import {
     LicenseManager
-  } from 'ag-grid-enterprise/main'; //该依赖在标品项目中
+  } from 'libs/ag-grid-enterprise/main'; //该依赖在标品项目中
   
   import {
     agGridEnterpriseLicenseKey

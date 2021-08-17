@@ -306,4 +306,4 @@
 | v1.2.69 | fktable 兼容无搜索框 |
 | v1.2.70 | 扩展agtable老定入参  |
 | v1.2.71 | importTableb扩展-标准单对象成功后刷新  |
-
+| v1.2.72 | ag-grid-enterprise 引用包体修正  |
