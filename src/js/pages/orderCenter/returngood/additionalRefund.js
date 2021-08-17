@@ -1310,12 +1310,14 @@ export default {
         const data = {};
         const OcBReturnAfSendItem = [];
         data.id = self.$route.params.customizedModuleId == 'New' ? -1 : self.$route.params.customizedModuleId;
+        data.orderId = self.onSelectData.ID;
         self.addItem.addList.forEach(item => {
           const obj = {};
           obj.id = item.proId;
-          obj.AMT_RETURN = item.RETURNABLE_AMOUNT;
+          obj.AMT_RETURN = 0;
           obj.FREIGHT = 0; // 默认运费为零 夏继超要求;
           OcBReturnAfSendItem.push(obj);
+          obj.QTY_IN = 0;
         });
         data.OcBReturnAfSendItem = OcBReturnAfSendItem;
         this.service.orderCenter.saveAfterDeliverItem(data).then(res => {
