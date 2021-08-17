@@ -892,7 +892,7 @@ export default {
     this.handleAuditBtnDisplay();
     const customizeMessage = sessionStorage.getItem('customizeMessage');
     if (customizeMessage) {
-      this.sessionStorageData = JSON.parse(customizeMessage).EXTRAREFUND;
+      this.sessionStorageData = JSON.parse(customizeMessage).REFUNDAFTERSHIPMENT;
     }
     // if (this.$route.query.id && !this.$route.query.new) {
     // eslint-disable-next-line no-mixed-operators
