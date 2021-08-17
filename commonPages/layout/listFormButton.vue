@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-30 11:24:27
- * @LastEditTime: 2021-08-17 11:10:23
+ * @LastEditTime: 2021-08-17 14:27:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/listFormButton.vue
@@ -103,7 +103,7 @@ export default {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(../../assets/img/aroowDown.png) right no-repeat;
+    background: url('~@/assets/img/aroowDown.png') right no-repeat;
     background-size: 100%;
     transform:rotate(0);
     &::before {
@@ -111,7 +111,7 @@ export default {
     }
   }
   .icon-xiadown {
-    background: url(../../assets/img/aroowUp.png) right no-repeat;
+    background: url('~@/assets/img/aroowUp.png') right no-repeat;
     background-size: 100%;
   }
 }

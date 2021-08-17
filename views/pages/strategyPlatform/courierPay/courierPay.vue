@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-13 15:29:38
+ * @LastEditTime: 2021-08-17 14:37:49
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/courierPay/courierPay.vue
+-->
 <template>
   <div class="courierPay public-main">
     <div
@@ -5,12 +13,6 @@
       class="img"
     >
       <businessStatusFlag :status-name="statusName" />
-    <!-- 
-      <img
-        :src="'/static/img/void.png'"
-        alt=""
-      > 
-    -->
     </div>
     <div class="buttons">
       <business-button :btn-config="btnConfig" />

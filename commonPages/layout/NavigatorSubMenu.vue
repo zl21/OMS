@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-08-03 18:01:37
+ * @LastEditTime: 2021-08-17 14:30:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -72,7 +72,7 @@
     overflow: inherit;
     transition: inherit !important;
     .left{
-      background: url(../../assets/img/mini-logo.png) right no-repeat #4855AF;
+      background: url('~@/assets/img/mini-logo.png') right no-repeat #4855AF;
       background-size:100% auto ;
     }
     .middle{
@@ -105,7 +105,7 @@
     transition: inherit !important;
     .left{
       display: block;
-      background: url(../../assets/img/menuLogo.png) right no-repeat #4855AF;
+      background: url('~@/assets/img/menuLogo.png') right no-repeat #4855AF;
       background-size:100% auto;
     }
     .ark-tooltip, .ark-tooltip-rel{

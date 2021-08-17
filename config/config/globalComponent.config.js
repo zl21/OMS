@@ -1,7 +1,15 @@
-import Login from '../../commonPages/Login.vue';
-import WelcomePage from '../../commonPages/WelcomePage.vue';
-import enterpriseBanner from '../../assets/img/banner.png';
-import enterpriseLogo from '../../assets/img/logo.png';
+/*
+ * @Author: your name
+ * @Date: 2021-08-10 09:55:17
+ * @LastEditTime: 2021-08-17 14:31:30
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/config/globalComponent.config.js
+ */
+import Login from '@/commonPages/Login.vue';
+import WelcomePage from '@/commonPages/WelcomePage.vue';
+import enterpriseBanner from '@/assets/img/banner.png';
+import enterpriseLogo from '@/assets/img/logo.png';
 
 const oldConfig = {
   cusGlobalComponent: {

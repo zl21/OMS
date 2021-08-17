@@ -826,16 +826,13 @@ export default {
       if (res.BILL_STATUS == 1) {
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '未审核';
         self.setItemTableOperation('on');
-        // self.watermark_src = '../../../../static/img/watermark/uncheck.png'
       } else if (res.BILL_STATUS == 2) {
         self.setItemTableOperation('off');
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已审核';
-        // self.watermark_src = '../../../../static/img/watermark/checked.png';
         self.statusName = $i18n.t('common.reviewed'); // '已审核';
       } else if (res.BILL_STATUS == 3) {
         self.setItemTableOperation('off');
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已作废';
-        // self.watermark_src = '../../../../static/img/watermark/void.png';
         self.statusName = $i18n.t('common.voided'); // '已作废';
       }
       self.pickOrder.logFormConfig.formValue.STATUS_NAME = res.STATUS_NAME; // 审核人

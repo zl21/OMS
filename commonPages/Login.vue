@@ -23,7 +23,7 @@
       <div class="login-content">
         <!-- logo -->
         <div class="logo-img">
-          <img src="../assets/img/form-logo.png" />
+          <img :src="require('@/assets/img/form-logo.png')" />
         </div>
         <div class="loginTabs" v-if="isEnableLoginPro">
           <div class="tab" @click="toggleTab('pwd')">
@@ -39,7 +39,7 @@
         <R3Login />
         <!-- bg -->
         <span class="login-bg-img">
-          <img src="../assets/img/login-bg-img.png" />
+          <img :src="require('@/assets/img/login-bg-img.png')" />
         </span>
       </div>
     </div>
@@ -112,7 +112,7 @@ export default {
         }
       }
       let loginBtn = document.getElementById('btn')
-      loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
+      loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('@/assets/img/arrow-right.png')}" />`;
     },
     // 是否开启手机验证码登录
     isEnableLogin() {
@@ -172,7 +172,7 @@ export default {
 <style lang="less" scoped>
 @import "~@burgeon/oms-theme/skin/public.less";
 .loginBG {
-  background: url(../assets/img/login-bg.jpg) no-repeat;
+  background: url('~@/assets/img/login-bg.jpg') no-repeat;
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -227,7 +227,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 17px;
-    background: url(../assets/img/login-form-bg.png) right no-repeat #fff;
+    background: url('~@/assets/img/login-form-bg.png') right no-repeat #fff;
     background-size: auto 100%;
   }
   .loginTabs {

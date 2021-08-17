@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-08-06 13:59:36
+ * @LastEditTime: 2021-08-17 14:48:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -125,13 +125,13 @@ export default {
     display: inline-block;
     width: 10px;
     height: 40px;
-    background:  url(../../assets/img/icon_fold.png) right no-repeat;
+    background:  url('~@/assets/img/icon_fold.png') right no-repeat;
     background-size: 100% auto;
     z-index: 99;
   }
   .iconbj-fold{
     left: 180px;
-    background:  url(../../assets/img/icon_unfold.png) right no-repeat;
+    background:  url('~@/assets/img/icon_unfold.png') right no-repeat;
     background-size: 100% auto;
   }
 }
@@ -172,7 +172,7 @@ export default {
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url(../../assets/img/arrowTop.png) top no-repeat;
+    background: url('~@/assets/img/arrowTop.png') top no-repeat;
   }
 }
 .favorite {
@@ -215,7 +215,7 @@ export default {
     }
     .no-message {
       padding-top: 180px;
-      background: url(../../assets/img/message.png) top no-repeat #ffffff;
+      background: url('~@/assets/img/message.png') top no-repeat #ffffff;
       background-size: 160px 160px;
     }
   }
