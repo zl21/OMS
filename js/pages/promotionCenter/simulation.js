@@ -1,4 +1,3 @@
-// import myInput from 'framework/components/element/input';
 import myInput from 'professionalComponents/fkinputPlus.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 // import MultipleBox from 'professionalComponents/multipleBox.vue';

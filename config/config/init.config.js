@@ -1,7 +1,7 @@
 /*
  * @Author: flybird
  * @Date: 2021-06-04 13:20:21
- * @LastEditTime: 2021-06-10 14:17:13
+ * @LastEditTime: 2021-08-17 11:00:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
@@ -50,6 +50,16 @@ class InitAppConfig {
         commonUtils.removeOnresize();
       }
     });
+
+    // 存储可视化宽度
+    let clientWidthsFun = () => {
+      let clientWidths = document.body.clientWidth;
+      if (clientWidths < 990) { $store.commit('customize/colRowNum', 3); } else { $store.commit('customize/colRowNum', 4); }
+      console.log(clientWidths, this);
+    };
+    clientWidthsFun();
+    // 屏幕变化
+    window.onresize = () => clientWidthsFun();
   }
 
 }

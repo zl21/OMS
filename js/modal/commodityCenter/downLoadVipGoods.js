@@ -1,4 +1,3 @@
-// import httpServer from 'framework/__utils__/request';
 import businessForm from 'professionalComponents/businessForm';
 
 export default {
