@@ -774,13 +774,18 @@ export default {
         self.modify.master = {};
         self.modify.exAttr = {};
         // 数据回显
-        if (data) self.ID = data;
+        if (!data) {
+          self.$Message.error('没有返回新的数据ID！');
+          return
+        }
+        let newId = data;
+        // if (data) self.ID = data; 
         setTimeout(() => {
           if (this.$route.query.spuid) {
             //$omsUtils.tabCloseAppoint(this);
             // this.$destroy(true);
             $store.commit('customize/TabOpen', {
-              id: self.ID,
+              id: newId,
               type: 'action',
               name: 'PS_C_SKU',
               label: $i18n.t('menu.b1'), // SKU编辑
@@ -793,7 +798,7 @@ export default {
           } else {
             // this.initObjItem(self.ID);
             $store.commit('customize/TabOpen', {
-              id: self.ID,
+              id: newId,
               type: 'action',
               name: 'PS_C_SKU',
               label: $i18n.t('menu.b1'), // SKU编辑
