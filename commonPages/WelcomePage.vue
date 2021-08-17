@@ -20,7 +20,7 @@
       </div> -->
       <div class="time">
         <span>更新时间：{{ header.time }}</span>
-        <Icon type="icon-OMS-fonticon-015" style="color: #5461b8" />
+        <Icon type="icon-monitorPlat-fresh" />
       </div>
     </div>
     <div class="main">
@@ -53,7 +53,7 @@
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
                 <div class="title">
-                  <Icon type="ios-alert-outline" />
+                  <Icon :type="it.icon" :style="{}"/>
                   <span>{{ it.title }}</span>
                 </div>
                 <div class="status">{{ it.status_name }}</div>
@@ -305,6 +305,7 @@ export default {
           {
             status: 0,
             status_name: "异常",
+            icon: 'icon-monitorPlat-warn',
             title: "AG项目1",
             message: "异常单据",
             sum: 288,
@@ -312,6 +313,7 @@ export default {
           {
             status: 1,
             status_name: "正常",
+            icon: 'icon-monitorPlat-right',
             title: "AG项目2",
             message: "异常单据",
             sum: 288,
@@ -319,6 +321,7 @@ export default {
           {
             status: 1,
             status_name: "正常",
+            icon: 'icon-monitorPlat-right',
             title: "AG项目3",
             message: "异常单据",
             sum: 288,
@@ -326,6 +329,7 @@ export default {
           {
             status: 0,
             status_name: "异常",
+            icon: 'icon-monitorPlat-warn',
             title: "AG项目4",
             message: "异常单据",
             sum: 288,

@@ -5,12 +5,28 @@ i {
 }
 
 .monitoringPlatform {
-	background-color: rgb(241, 241, 241);
+	background-color: rgb(247, 248, 252);
 	height: calc(100vh - 90px);
 	display: flex;
 	flex-direction: column;
 
 	// ---------------- 公共样式 start ----------------
+	.title {
+		i.iconfont {
+			background-color: #5461B8;
+			color: #fff;
+			height: 18px;
+			width: 18px;
+			text-align: center;
+			border-radius: 2px;
+
+			&::before {
+				opacity: 1;
+				font-size: 12px;
+			}
+		}
+	}
+
 	.comItem {
 		box-sizing: border-box;
 		border: 1px solid #E6EAF0;
@@ -83,10 +99,25 @@ i {
 		position: relative;
 		padding-bottom: 16px;
 		padding-top: 6px;
+		// background-color: ;
 
 		.time {
+			position: relative;
 			float: right;
 			padding-right: 5px;
+
+			span {
+				margin-right: 26px;
+			}
+
+			i.iconfont {
+				position: absolute;
+				color: #5461B8;
+				font-size: 23px;
+				right: 2px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
 		}
 	}
 
@@ -132,9 +163,10 @@ i {
 					position: relative;
 					width: 170px;
 					height: 170px;
-					background-color:#fff;
+					background-color: #fff;
 					border-radius: 50%;
 					border: 18px solid #FF6951;
+
 					i {
 						color: #F86D59;
 						font-size: 28px;
@@ -152,15 +184,18 @@ i {
 					flex-direction: column;
 					justify-content: space-evenly;
 					padding: 70px 0;
+
 					div {
 						height: 26px;
 						line-height: 26px;
+
 						span {
 							display: inline-block;
 							min-width: 36px;
 							margin-right: 16px;
 							color: #8D91A1;
 						}
+
 						i {
 							color: #2F364C;
 							font-weight: bold;
@@ -173,7 +208,7 @@ i {
 				flex: .6;
 				display: grid;
 				// width: 500px;
-				min-height: 200px;
+				min-height: 180px;
 				max-height: 276px;
 				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 				grid-template-rows: repeat(auto-fit, minmax(130px, 1fr));
@@ -187,7 +222,13 @@ i {
 				position: relative;
 				padding: 10px;
 
-				.title {}
+				.title {
+					i.iconfont {
+						&::before {
+							font-size: 16px;
+						}
+					}
+				}
 
 				.status {
 					height: calc(100% - 32px);
@@ -208,6 +249,10 @@ i {
 					.sum {
 						color: #FF6951;
 					}
+
+					.iconfont {
+						background: rgba(255, 105, 81, 0.1);
+					}
 				}
 
 				&.normal {
@@ -216,6 +261,10 @@ i {
 					.status,
 					.sum {
 						color: #90BB57;
+					}
+
+					.iconfont {
+						background: rgba(144, 187, 87, 0.1);
 					}
 				}
 			}
@@ -266,7 +315,7 @@ i {
 
 	.main02 {
 		position: relative;
-		padding-top: 16px;
+		padding-top: 26px;
 
 		.main02body {
 			display: grid;
@@ -365,30 +414,35 @@ i {
 
 			.m3Item {
 				position: relative;
+
 				.title {
 					height: 40px;
 					line-height: 40px;
 					padding: 0 12px;
 					font-size: 12px;
-					color: rgba(0,0,0,0.85);
+					color: rgba(0, 0, 0, 0.85);
 					display: flex;
 					justify-content: space-between;
-					span:first{
+
+					span:first {
 						color: #8D91A1;
 					}
 				}
-				.gaugeTitle{
+
+				.gaugeTitle {
 					position: absolute;
 					bottom: 45px;
 					left: 0;
-					color: rgba(0,0,0,.45);
+					color: rgba(0, 0, 0, .45);
 					width: 100%;
 					text-align: center;
-					.ark-tooltip{
+
+					.ark-tooltip {
 						color: @base-color;
 						vertical-align: text-bottom;
 					}
-					.gaugeTips{
+
+					.gaugeTips {
 						font-size: 12px;
 						color: #8D91A1;
 						width: 100px;
