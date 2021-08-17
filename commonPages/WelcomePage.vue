@@ -133,6 +133,7 @@
             <i></i>
             <div v-for="(it, index) in main03.btnSta" :key="'m3Status' + index">
               <Button
+                :disabled="it.disabled"
                 :type="it.type"
                 :class="it.icon ? 'iconBtn' : ''"
                 :icon="it.icon || ''"
@@ -142,7 +143,7 @@
             </div>
           </div>
         </div>
-        <div :class="['main03body', m3Up, m3noData]" id="main03body">
+        <div :class="['main03body', m3Up, m3noData]" id="main03body" :style="{ height : m3Heigh + 'px'}">
           <picture v-if="m3noData">
             <source srcset="./img/la.png" media="(min-width: 1600px)" />
             <img src="./img/medium-car-image.jpg" alt="Car" />
@@ -671,6 +672,7 @@ export default {
     window.onresize = () => {
       console.log(11);
       this.maxHeight("main02body", "m2Item");
+      this.maxHeight("main03body", "m3Item");
     };
 
     this.header.time = dateUtil.getFormatDate(
@@ -978,11 +980,10 @@ export default {
         this.gaugeChart(item);
       });
     },
-    // 计算maxHeight
+    // 计算max-Height
     maxHeight: throttle(function(body, itemName, isInit) {
       const self = this;
       const mBody = document.getElementById(body);
-      // let m2Heigh = m2Body.clientHeight;
       let nodeHeight = 0,
         firstLeft = 0, // 第一个元素的横坐标
         rowSum = 0, // 行数
@@ -1003,19 +1004,22 @@ export default {
       }
       if (flag) return;
       self[body.includes('2') ? 'main02' : 'main03'].btnSta.find(i => i.webname == 'upDownIcon').disabled = rowSum <= 2;
-      // mBody.style.maxHeight = `${nodeHeight * 2 + 32}px`;
-      // mBody.style.height = `${nodeHeight * 2 + 32}px`;
-      // self.m2Heigh = nodeHeight * 2 + 32;
-      /* if (isInit) {
-        self.m2Heigh = nodeHeight * (rowSum >= 2 ? 2 : 1) + 32;
-        return
-      } */
-      if (self.up == 'fadeInDom') {
-        self.m2Heigh = mBody.scrollHeight;
+      if (body.includes('2')) {
+        if (self.up == 'fadeInDom') {
+          self.m2Heigh = mBody.scrollHeight;
+            mBody.style.transition = '2s'
+        } else {
+          self.m2Heigh = nodeHeight * (rowSum == 1 ? 1 : rowSum >= 2 ? 2 : 1) + (rowSum == 1 ? 2 : rowSum >= 2 ? 20 : 2);
           mBody.style.transition = '2s'
+        }
       } else {
-        self.m2Heigh = nodeHeight * (rowSum == 1 ? 1 : rowSum >= 2 ? 2 : 1) + (rowSum == 1 ? 2 : rowSum >= 2 ? 20 : 2);
-        mBody.style.transition = '2s'
+        if (self.m3Up == 'm3fadeInDom') {
+          self.m3Heigh = mBody.scrollHeight;
+          mBody.style.transition = '2s'
+        } else {
+          self.m3Heigh = nodeHeight * (rowSum == 1 ? 1 : rowSum >= 2 ? 2 : 1) + (rowSum == 1 ? 2 : rowSum >= 2 ? 20 : 2);
+          mBody.style.transition = '2s'
+        }
       }
       // { 'trailing': false }
     }, 1000),
@@ -1040,7 +1044,7 @@ export default {
             break;
           case "main03":
             this.m3Up = this.m3Up ? "" : "m3fadeInDom";
-            this.maxHeight("main02body", "m2Item");
+            this.maxHeight("main03body", "m3Item");
             break;
           default:
             break;
