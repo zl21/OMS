@@ -1395,7 +1395,8 @@ export default {
         return self.$Message.warning(self.vmI18n.t('modalTips.j4')); // 至少保留一条明细,不允许全部删除
       }
 
-      if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid) {
+      if (self.$route.params.customizedModuleId === 'New' || self.copyId) {
+
         // 新增的请求方式
         if (self.tableConfig.data.length == self.delTableData.length) self.tableConfig.data = [];
         // 删除明细
