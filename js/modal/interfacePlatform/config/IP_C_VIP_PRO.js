@@ -1,4 +1,3 @@
-// import httpServer from 'framework/__utils__/request';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 唯品会 - 淘宝商品（下载商品）

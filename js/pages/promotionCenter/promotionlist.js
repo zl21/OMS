@@ -1,7 +1,5 @@
 import businessLabel from 'professionalComponents/businessLabel';
 import businessButton from 'professionalComponents/businessButton';
-// import errorMessage from 'framework/components/tablelist/error.vue';
-// import Mydialog from 'framework/components/dialog/mydialog.vue';
 import aTable from 'professionalComponents/agGridTable.vue';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
