@@ -1261,7 +1261,7 @@ export default {
     onAddItem() {
       const self = this;
       // 新增界面逻辑
-      if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.new === 'true') {
+      if (self.$route.params.customizedModuleId === 'New' || self.copyId) {
         if (!self.isOne) {
           const data = self.onSelectData;
           this.information.formValue.SOURCE_BILL_TIME = data.CREATIONDATE && commonUtil.dateFormat(new Date(data.CREATIONDATE), 'yyyy-MM-dd hh:mm:ss')
