@@ -379,7 +379,6 @@ export default {
   created() {
     let _self = this
     _self.ChineseDictionary = ChineseDictionary
-    console.log(_self.itemdata);
     // 判断是否是外键关联
     if (_self.fkid) {
       _self.formObj.refcolid = _self.fkid
@@ -427,7 +426,7 @@ export default {
   },
   mounted() {
     let nodeRef = document.getElementById('fkDim');
-    nodeRef.getElementsByClassName('ark-select-input')[0].focus();
+    if(nodeRef) nodeRef.getElementsByClassName('ark-select-input')[0].focus();
     this.defaultSelectedIds.forEach((id) => {
       if (this.fkobj.idArr.indexOf(id) === -1) {
         this.fkobj.idArr.push(id);
