@@ -142,113 +142,108 @@ export default {
 
       self.$nextTick(() => {
         self.AGTABLE = agTable(
-            this.$refs.agGridTable, {
-              headerHeight: 40, //设置表头的高度 ******************
-              rowHeight: 40, //设置行高
-              localeText: self.localeText,
-              columnDefs: th ? th : [], // 列定义
-              rowData: row ? row : [], // 行数据
-              rowSelection: 'multiple', //设置多行选中
-              enableSorting: true, //排序
-              enableFilter: true, //过滤
-              suppressDragLeaveHidesColumns: true, //如果为true，则将列拖出网格（例如，拖到组区域）时，不会隐藏该列。
-              enableColResize: true, //列宽是否可拖动
-              suppressRowClickSelection: true, //单击行不会触发勾选
-              suppressCopyRowsToClipboard: true, //只复制当前聚焦td的数据
-              getRowStyle: function (params) {
-                //设置行样式
-                if (params.node.rowPinned === 'bottom') {
-                  //置底行
-                  // console.log(params.node.rowPinned);
-                  return {
-                    'font-weight': 'bold',
-                    color: 'red'
-                  }
-                } else {
-                  //普通行
-                  return {
-                    color: '#323233'
-                  }
-                }
-              },
-              onCellDoubleClicked: (event) => {
-                self.$emit('on-row-dblclick', event.data, event.rowIndex)
-              },
-              onColumnMoved: (columnState) => {
-                //拖拽表头,更新表头顺序
-                const {
-                  columnApi
-                } = columnState
-                let a = columnApi
-                  .getColumnState()
-                  .map((d) => d.colId)
-                  .toString()
-                //表头拖拽存储
-                // let self = this
-                let formdata = new FormData()
-                formdata.append('tableid', self.$route.params.customizedModuleId)
-                formdata.append('colposition', a)
-                R3.network.post('/p/cs/setColPosition' , formdata)
-                .then((res) => {
-                  if (res.data.code == 0) {
-                    self.columnState = res.data.data
-                    //更新表头
-                    let col = self.setColumn(
-                      res.data.data,
-                      self.agTableConfig.columnDefs
-                    )
-                    self.AGTABLE.setCols(col)
-                  }
-                })
-              },
-              getContextMenuItems(param) {
-                return ['copy', 'copyWithHeaders', 'paste']
-              },
-              getMainMenuItems: (params) => {
-                return [
-                  // 'pinSubMenu',
-                  'separator',
-                  'autoSizeThis',
-                  'autoSizeAll',
-                  'separator',
-                  {
-                    name: '重置所有列位置信息',
-                    action: () => {
-                      // let a = columnApi.getColumnState().map(d => d.colId).toString();
-                      //表头拖拽存储
-                      // let self = this
-                      const columnApi = params.columnApi
-                      const data = {
-                        ACTION:'RELOAD',
-                        TABLE:this.$route.params.customizedModuleName == 'ORDERMANAGER' ? 'OC_B_ORDER' : this.$route.params.customizedModuleName,
-                        TYPE:'L_TAB_HEAD'
-                      }
-                      let url = this.agTableConfig.url?this.agTableConfig.url :'/p/cs/oc/oms/v1/customSettings'
-                      
-                      R3.network.post( url, data)
-                      .then((res) => {
-                        if (res.data.code == 0) {
-                          self.columnState = res.data.data
-                          //更新表头
-                          self.column.forEach((d,i)=>{
-                            params.columnApi.moveColumn(d, i);
-                          })
-                        }
-                      })
-                    },
-                  },
-                ]
-              }, // 设置每列的general menu item
-              onSortChanged: (e) => {
-                //表格排序事件
-                // console.log(e);
-                this.$emit('on-sort-changed', e.api.getSortModel())
-              },
-              ...extendObj, //注意：对象里的属性或方法会覆盖 前面的属性或方法
-            }, {
-              tableHeight: self.agTableConfig.tableHeight
+          this.$refs.agGridTable, {
+          headerHeight: 40, //设置表头的高度 ******************
+          rowHeight: 40, //设置行高
+          localeText: self.localeText,
+          columnDefs: th ? th : [], // 列定义
+          rowData: row ? row : [], // 行数据
+          rowSelection: 'multiple', //设置多行选中
+          enableSorting: true, //排序
+          enableFilter: true, //过滤
+          suppressDragLeaveHidesColumns: true, //如果为true，则将列拖出网格（例如，拖到组区域）时，不会隐藏该列。
+          enableColResize: true, //列宽是否可拖动
+          suppressRowClickSelection: true, //单击行不会触发勾选
+          suppressCopyRowsToClipboard: true, //只复制当前聚焦td的数据
+          getRowStyle: function (params) {
+            //设置行样式
+            if (params.node.rowPinned === 'bottom') {
+              //置底行
+              // console.log(params.node.rowPinned);
+              return {
+                'font-weight': 'bold',
+                color: 'red'
+              }
+            } else {
+              //普通行
+              return {
+                color: '#323233'
+              }
             }
-          )
+          },
+          onCellDoubleClicked: (event) => {
+            self.$emit('on-row-dblclick', event.data, event.rowIndex)
+          },
+          onColumnMoved: (columnState) => {
+            //拖拽表头,更新表头顺序
+            const {
+              columnApi
+            } = columnState
+            let a = columnApi
+              .getColumnState()
+              .map((d) => d.colId)
+              .toString()
+            //表头拖拽存储
+            // let self = this
+            let formdata = new FormData()
+            formdata.append('tableid', self.$route.params.customizedModuleId)
+            formdata.append('colposition', a)
+            R3.network.post('/p/cs/setColPosition', formdata)
+              .then((res) => {
+                if (res.data.code == 0) {
+                  self.columnState = res.data.data
+                  //更新表头
+                  let col = self.setColumn(
+                    res.data.data,
+                    self.agTableConfig.columnDefs
+                  )
+                  self.AGTABLE.setCols(col)
+                }
+              })
+          },
+          getContextMenuItems(param) {
+            return ['copy', 'copyWithHeaders', 'paste']
+          },
+          getMainMenuItems: (params) => {
+            return [
+              // 'pinSubMenu',
+              'separator',
+              'autoSizeThis',
+              'autoSizeAll',
+              'separator',
+              {
+                name: '重置所有列位置信息',
+                action: () => {
+                  // let a = columnApi.getColumnState().map(d => d.colId).toString();
+                  //表头拖拽存储
+                  // let self = this
+               
+                  let formdata = new FormData()
+                  formdata.append('tableid', self.$route.params.customizedModuleId)
+                  formdata.append('colposition', '')
+                  R3.network.post('/p/cs/setColPosition', formdata).then((res) => {
+                    if (res.data.code == 0) {
+                      self.columnState = res.data.data
+                      //更新表头
+                      self.column.forEach((d, i) => {
+                        params.columnApi.moveColumn(d, i);
+                      })
+                    }
+                  })
+                },
+              },
+            ]
+          }, // 设置每列的general menu item
+          onSortChanged: (e) => {
+            //表格排序事件
+            // console.log(e);
+            this.$emit('on-sort-changed', e.api.getSortModel())
+          },
+          ...extendObj, //注意：对象里的属性或方法会覆盖 前面的属性或方法
+        }, {
+          tableHeight: self.agTableConfig.tableHeight
+        }
+        )
           .setCols(th)
           .setRows(row)
           .setPinnedBottomRowData(bottomRowList) // 设置置底的行
@@ -281,13 +276,13 @@ export default {
       let formdata = new FormData()
       formdata.append('id', this.$route.params.customizedModuleId)
       formdata.append('type', 'action')
-      R3.network.post('/p/cs/getUserConfig' , formdata)
-      .then((res) => {
-        // console.log(res);
-        if (res.data.code == 0) {
-          self.columnState = res.data.data.colPosition
-        }
-      })
+      R3.network.post('/p/cs/getUserConfig', formdata)
+        .then((res) => {
+          // console.log(res);
+          if (res.data.code == 0) {
+            self.columnState = res.data.data.colPosition
+          }
+        })
     },
   },
 }
