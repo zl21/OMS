@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-30 11:24:27
- * @LastEditTime: 2021-08-10 23:31:40
+ * @LastEditTime: 2021-08-17 11:10:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/listFormButton.vue
@@ -120,6 +120,9 @@ export default {
   right: 43px;
   button {
     #bundle > .defalutBtn;
+    &:hover{
+      background: transparent;
+    }
     &:first-child {
       #bundle > .primaryBtn;
     }
