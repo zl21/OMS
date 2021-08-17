@@ -13,6 +13,8 @@ const importConfig = {
     okApi: '/p/cs/sg/v1/sgBGoodDistribution/itemImport',
     // okParm: { id: R3.store.state.customize._this.$route.params.itemId },
     isStandardSingleObject: true,
+    prefix: 'SYSTEM',
+    dontRefreshTable: false,
     okParm: { id: null },
     downErrorInfo: true
   },
@@ -23,6 +25,8 @@ const importConfig = {
     webname: 'SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT',
     tempApi: '/p/cs/sg/v1/sgBGoodDistribution/exportTemplate',
     okApi: '/p/cs/sg/v1/sgBGoodDistribution/import',
+    prefix: 'SYSTEM',
+    dontRefreshTable: false,
     downErrorInfo: true
   },
   PS_C_PRO_CLASSIFY__ps_c_pro_classify_import: {
