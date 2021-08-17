@@ -464,6 +464,7 @@ export default {
           colname: 'isactive',
           width: '8',
           class: 'statusInput',
+          disabled: true,
         },
         ],
         formValue: {

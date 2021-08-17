@@ -219,6 +219,7 @@ export default {
           colname: 'ISACTIVE',
           width: '8',
           class: 'statusInput',
+          disabled: true,
         },
         {
           // colname: 'PS_C_SPECOBJ1_ID',
@@ -790,7 +791,13 @@ export default {
               })
             });
           } else {
-            this.initObjItem(self.ID);
+            // this.initObjItem(self.ID);
+            $store.commit('customize/TabOpen', {
+              id: self.ID,
+              type: 'action',
+              name: 'PS_C_SKU',
+              label: $i18n.t('menu.b1'), // SKU编辑
+            });
           }
         }, 20);
       } else {
