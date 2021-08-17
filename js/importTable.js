@@ -206,8 +206,13 @@ export default {
     customizeInvoke() {
       const _this = this;
       if (_this.currentConfig.prefix == 'SYSTEM' && !_this.currentConfig.dontRefreshTable) {
-        // 标准列表的刷新
-        _this.$parent.$parent.$parent.getQueryList();
+        if (_this.currentConfig.isStandardSingleObject) {
+          // 标准单对象的刷新
+          document.getElementById("refresh").click();
+        } else {
+          // 标准列表的刷新
+          _this.$parent.$parent.$parent.getQueryList();
+        }
       } else {
         // 定制页面的刷新
         if (_this.currentConfig.freshPage && typeof _this.currentConfig.freshPage === "function") {
