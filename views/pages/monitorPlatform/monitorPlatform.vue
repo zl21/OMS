@@ -304,7 +304,7 @@ export default {
             title: "AG项目1",
             message: "异常单据",
             sum: 288,
-            clickCss: '',
+            clickCss: 'clickCss',
           },
           {
             status: 1,
