@@ -1348,15 +1348,15 @@ export default {
     // 新增明细按钮调用
     tableAddDetail() {
       const self = this;
-      if (!self.information.formValue.TID) return self.$Message.warning('R3单据编号不能为空！');
+      if (!self.onSelectData.ID) return self.$Message.warning('R3单据编号不能为空！');
       const formData = new FormData();
       const requestData = {
         page: { pageSize: '500', pageNum: '1' },
         highSearch: [
           {
             type: 'Select',
-            queryName: 'SOURCE_CODE',
-            value: self.information.formValue.TID
+            queryName: 'ID',
+            value: self.onSelectData.ID
           }
         ]
       };
