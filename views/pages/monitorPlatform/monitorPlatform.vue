@@ -147,7 +147,7 @@
               :key="index"
               :class="it.status == 0 ? 'abnormal' : 'normal'"
             >
-              <div class="title">
+              <div class="title3">
                 <span>{{ it.title }}</span>
                 <span>{{ it.time }}</span>
               </div>
