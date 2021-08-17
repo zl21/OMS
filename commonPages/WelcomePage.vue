@@ -46,21 +46,23 @@
               </div>
             </div>
             <div class="right">
-              <div
-                class="rightItem comItem"
-                v-for="(it, index) in main01.data"
-                :key="index"
-                :class="it.status == 0 ? 'abnormal' : 'normal'"
-              >
-                <div class="title">
-                  <Icon :type="it.icon" :style="{}"/>
-                  <span>{{ it.title }}</span>
+              <template v-for="(it, index) in main01.data">
+                <div
+                  @click="m1DomClick(it, index)"
+                  class="rightItem comItem"
+                  :key="'rightItem' + index"
+                  :class="[it.status == 0 ? 'abnormal' : 'normal', it.clickCss]"
+                >
+                  <div class="title">
+                    <Icon :type="it.icon" :style="{}"/>
+                    <span>{{ it.title }}</span>
+                  </div>
+                  <div class="status">{{ it.status_name }}</div>
+                  <div v-if="it.status == 0" class="detail">
+                    {{ it.message }} <i class="sum">{{ it.sum }}</i>
+                  </div>
                 </div>
-                <div class="status">{{ it.status_name }}</div>
-                <div v-if="it.status == 0" class="detail">
-                  {{ it.message }} <i class="sum">{{ it.sum }}</i>
-                </div>
-              </div>
+              </template>
             </div>
           </div>
         </div>
@@ -282,6 +284,7 @@ export default {
   },
   data() {
     return {
+      clickCss: '',
       m2Heigh: 0,
       m3Heigh: 0,
       noData: "",
@@ -309,6 +312,7 @@ export default {
             title: "AG项目1",
             message: "异常单据",
             sum: 288,
+            clickCss: '',
           },
           {
             status: 1,
@@ -317,6 +321,7 @@ export default {
             title: "AG项目2",
             message: "异常单据",
             sum: 288,
+            clickCss: '',
           },
           {
             status: 1,
@@ -325,6 +330,7 @@ export default {
             title: "AG项目3",
             message: "异常单据",
             sum: 288,
+            clickCss: '',
           },
           {
             status: 0,
@@ -333,6 +339,7 @@ export default {
             title: "AG项目4",
             message: "异常单据",
             sum: 288,
+            clickCss: '',
           },
         ],
         pieData: [
@@ -1053,6 +1060,11 @@ export default {
       btnArr.forEach(
         (it) => (it.type = it.webname == nowBtn ? "primary" : "text")
       );
+    },
+    m1DomClick(it, index) {
+      this.main01.data.forEach((i,n) => {
+        i.clickCss = n == index ? 'clickCss' : '';
+      });
     },
     // 异常趋势图 接口选择
     selectCheck(item) {
