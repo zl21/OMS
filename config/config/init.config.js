@@ -1,7 +1,7 @@
 /*
  * @Author: flybird
  * @Date: 2021-06-04 13:20:21
- * @LastEditTime: 2021-08-17 11:00:46
+ * @LastEditTime: 2021-08-17 15:39:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
@@ -55,7 +55,6 @@ class InitAppConfig {
     let clientWidthsFun = () => {
       let clientWidths = document.body.clientWidth;
       if (clientWidths < 990) { $store.commit('customize/colRowNum', 3); } else { $store.commit('customize/colRowNum', 4); }
-      console.log(clientWidths, this);
     };
     clientWidthsFun();
     // 屏幕变化

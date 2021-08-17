@@ -1042,6 +1042,7 @@
 | v1.12.4 | 分货单导入配置 |
 | v1.12.5 | sku、spu保存成功跳转调整 |
 | v1.12.6 | standardTableListdefind自定义组件测试 |
+| v1.12.8 | oms_index删除冗余样式 |
 
 
 

@@ -1,16 +1,37 @@
 @import '~@burgeon/oms-theme/skin/public.less';
 
 .setGroup {
-    .el-dialog { 
+    .el-dialog {
         border-radius: 6px;
+
         .el-dialog__header {
-            height: 33px;
-            line-height: 33px;
+            padding: 0;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #f8f8f8;
+            border-bottom: solid 1px #ddd;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            cursor: move;
+
+            .el-dialog__title {
+                font-size: 13px;
+            }
+
             .el-dialog__headerbtn {
-                top: 7px;
+                top: 2px;
+                right: 7px;
+                margin: 0;
+            }
+
+            .el-dialog__close {
+                font-size: 20px;
+                top: 4px;
             }
         }
     }
+
     .setGroupEdit {
         .el-radio {
             margin-right: 20px;

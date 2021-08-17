@@ -1,5 +1,5 @@
 <template>
-  <div class="semiCustomModal customized-modal" v-loading="loading">
+  <div class="customized-modal" v-loading="loading">
     <loading :loading="loading" />
     <businessForm :form-config="formConfig" />
     <businessButton :btn-config="btnConfig" class="modal-footer" />
