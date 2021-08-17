@@ -21,8 +21,7 @@ i {
 			border-radius: 2px;
 
 			&::before {
-				opacity: 1;
-				font-size: 12px;
+				font-size: 18px;
 			}
 		}
 	}
@@ -47,7 +46,7 @@ i {
 		}
 
 		/deep/ .ark-btn-primary {
-			background-color: rgb(86, 98, 178);
+			background-color: #5461B8;
 		}
 
 		.iconBtn {
@@ -222,14 +221,6 @@ i {
 				position: relative;
 				padding: 10px;
 
-				.title {
-					i.iconfont {
-						&::before {
-							font-size: 16px;
-						}
-					}
-				}
-
 				.status {
 					height: calc(100% - 32px);
 					display: flex;
@@ -347,9 +338,25 @@ i {
 					background-color: rgb(247, 248, 251);
 					padding: 10px;
 
-					.warnIcon {
+					.statusIcon {
 						position: absolute;
 						right: 10px;
+					}
+				}
+
+				&.abnormal {
+
+					/deep/ .iconfont.statusIcon {
+						color: #FF6951;
+						background: rgba(255, 105, 81, 0.1);
+					}
+				}
+
+				&.normal {
+
+					/deep/ .iconfont.statusIcon {
+						color: #90BB57;
+						background: rgba(144, 187, 87, 0.1);
 					}
 				}
 

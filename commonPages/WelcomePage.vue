@@ -97,10 +97,10 @@
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
                 <div class="title">
-                  <Icon :type="it.titleIcon" />
+                  <Icon :type="it.titleIcon" :style="{'background-color': it.color}"/>
                   <!-- <i :class="it.titleIcon"></i> -->
                   <span>{{ it.title }}</span>
-                  <Icon :type="it.statusIcon" class="warnIcon" />
+                  <Icon :type="it.statusIcon" class="statusIcon" />
                   <!-- <i :class="['warnIcon', it.statusIcon]"></i> -->
                 </div>
                 <div class="content">
@@ -346,9 +346,11 @@ export default {
         btnSta: JSON.parse(JSON.stringify(statusBtnConifg)),
         data: [
           {
-            titleIcon: "icon-fahuo",
+            titleIcon: "icon-monitorPlat-home",
+            color: '#4560AB',
             title: "WMS(AG项目1)",
-            statusIcon: "ios-alert-outline",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
             data: [
               {
                 status: 0,
@@ -371,9 +373,11 @@ export default {
             ],
           },
           {
-            titleIcon: "icon-chuku",
+            titleIcon: "icon-monitorPlat-out",
+            color: '#FFAE34',
             title: "WMS(AG项目1)",
-            statusIcon: "ios-alert-outline",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
             data: [
               {
                 status: 0,
@@ -396,9 +400,11 @@ export default {
             ],
           },
           {
-            titleIcon: "ios-home",
+            titleIcon: "icon-monitorPlat-cancel",
+            color: '#D656A7',
             title: "WMS(AG项目1)",
-            statusIcon: "ios-alert-outline",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
             data: [
               {
                 status: 0,
@@ -421,9 +427,11 @@ export default {
             ],
           },
           {
-            titleIcon: "ios-home",
+            titleIcon: "icon-monitorPlat-in",
+            color: '#FF6951',
             title: "WMS(AG项目1)",
-            statusIcon: "ios-alert-outline",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
             data: [
               {
                 status: 0,
@@ -446,9 +454,11 @@ export default {
             ],
           },
           {
-            titleIcon: "ios-home",
+            titleIcon: "icon-monitorPlat-modify",
+            color: '#A375C1',
             title: "WMS(AG项目1)",
-            statusIcon: "ios-alert-outline",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
             data: [
               {
                 status: 0,
@@ -471,9 +481,11 @@ export default {
             ],
           },
           {
-            titleIcon: "ios-home",
+            titleIcon: "icon-monitorPlat-synchro",
+            color: '#FB79A1',
             title: "WMS(AG项目1)",
-            statusIcon: "ios-alert-outline",
+            statusIcon: "icon-monitorPlat-right",
+            status: 1,
             data: [
               {
                 status: 0,
