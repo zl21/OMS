@@ -579,7 +579,7 @@ export default {
           formData: [
             {
               style: 'input',
-              label: window.vmI18n.t('table_label.orderNo'), // 订单编号
+              label: 'R3单据编号',
               value: 'bill_no',
               width: '8',
               inputenter: () => this.queryBounced()
@@ -658,8 +658,8 @@ export default {
               title: window.vmI18n.t('table_label.platformInfo') // 平台信息
             },
             {
-              key: 'ID',
-              title: window.vmI18n.t('table_label.orderNo') // 订单编号
+              key: 'BILL_NO',
+              title: 'R3单据编号'
             },
             {
               key: 'USER_NICK',
@@ -1117,7 +1117,7 @@ export default {
         highSearch: [
           {
             type: 'Select',
-            queryName: 'ID',
+            queryName: 'BILL_NO',
             value: lists.bill_no
           },
           {
