@@ -26,8 +26,12 @@
           <img src="../assets/img/form-logo.png" />
         </div>
         <div class="loginTabs" v-if="isEnableLoginPro">
-          <div class="tab" @click="toggleTab('pwd')">验证码登录</div>
-          <div class="tab" @click="toggleTab('phone')">密码登录</div>
+          <div class="tab" @click="toggleTab('pwd')">
+            <span>{{ vmI18n.t('other.vCodeLogin')}}</span>
+          </div>
+          <div class="tab" @click="toggleTab('phone')">
+            <span>{{ vmI18n.t('other.pwdLogin')}}</span>
+          </div>
         </div>
         <!-- 欢迎登录 -->
         <div class="title" v-else>{{ vmI18n.t("welcome") }}</div>
@@ -81,11 +85,35 @@ export default {
     this.curLang = langConfig.find(it => it.type == browseLan).text;
   },
   mounted() {
-    let loginBtn = document.getElementById('btn')
-    loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
+    this.initDom()
     this.isEnableLogin()
   },
   methods: {
+    initDom() {
+      let isPhone = document.querySelector('.divErCode')
+      let account = document.querySelector('.divAccount')
+      let inputNodes = document.querySelectorAll('.login .container input')
+      if (isPhone) {
+        // 验证码登录
+        account.setAttribute('data-phone', this.vmI18n.t("form_label.cellPhone_number"))
+        inputNodes[0].setAttribute('placeholder', this.vmI18n.t("pHolder.a6")) // 请输入手机号
+        inputNodes[1].setAttribute('placeholder', this.vmI18n.t("pHolder.a8")) // 请输入短信验证码
+      } else {
+        // 密码登录
+        let pwd = document.querySelector('.divMima')
+        account.setAttribute('data-account', this.vmI18n.t("other.user"))
+        pwd.setAttribute('data-pwd', this.vmI18n.t("other.pwd"))
+        inputNodes[0].setAttribute('placeholder', this.vmI18n.t("pHolder.a2")) // 请输入用户名
+        inputNodes[1].setAttribute('placeholder', this.vmI18n.t("pHolder.a3")) // 请输入密码
+        if (this.isEnableLoginPro) {
+          let code = document.querySelector('.divCode')
+          code.setAttribute('data-code', this.vmI18n.t("other.verticalCode"))
+          inputNodes[2].setAttribute('placeholder', this.vmI18n.t("pHolder.a7")) // 请输入验证码
+        }
+      }
+      let loginBtn = document.getElementById('btn')
+      loginBtn.innerHTML = `${this.vmI18n.t("login")} <img src="${require('../assets/img/arrow-right.png')}" />`;
+    },
     // 是否开启手机验证码登录
     isEnableLogin() {
       let node = document.querySelector('.loginPro') || document.querySelector('.divErCode')
@@ -105,6 +133,9 @@ export default {
         || type == 'pwd' && document.querySelector('.divErCode')
       ) return
       document.getElementsByClassName("toggle")[0].click();
+      this.$nextTick(() => {
+        this.initDom()
+      })
       this.initTab(type == 'phone')
     },
     toggleLang(lang) {
@@ -125,6 +156,7 @@ export default {
       _this.vmI18n.locale = lang;
       this.curLang = langConfig.find(it => it.type == lang).text;
       R3.store.commit(`customize/language`, lang || 'zh');
+      this.initDom()
 
       this.$message({
         // message: _this.vmI18n.messages[lang].tip_info,
@@ -217,18 +249,33 @@ export default {
       }
       &.active {
         color: #292f43;
-        &::before {
-        position: absolute;
-        content: '';
-        width: 24px;
-        height: 3px;
-        background: #5461b8;
-        border-radius: 2px;
-        top: 21px;
-        left: 50%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
+        span {
+          position: relative;
+          &::before {
+            position: absolute;
+            content: '';
+            width: 24px;
+            height: 3px;
+            background: #5461b8;
+            border-radius: 2px;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            -webkit-animation: 1s changeWidth;
+            animation: 1s changeWidth;  
+          }
+        }
       }
+      @-webkit-keyframes changeWidth {
+        0% { width: 0; }
+        50% { width: 100%; }
+        100% { width: 24px; }
+      }
+      @keyframes changeWidth {
+        0% { width: 0; }
+        50% { width: 100%; }
+        100% { width: 24px; }
       }
     }
   }
@@ -248,6 +295,7 @@ export default {
       height: 0 !important;
       .container {
         width: 440px !important;
+        height: 250px !important;
         background: transparent !important;
         .titleTOP, .divToggle, .logo {
           display: none;
@@ -304,17 +352,17 @@ export default {
           }
         }
         .divAccount:before {
-          content: '账号';
+          content: attr(data-account); // 账号
         }
         .divCode {
           &:before {
-            content: '验证码';
+            content: attr(data-code); // 验证码
           }
           display: inline-block;
           vertical-align: top;
         }
         .divMima:before {
-          content: '密码';
+          content: attr(data-pwd); // 密码
         }
         .btn {
           display: inline-block;
@@ -351,7 +399,7 @@ export default {
         }
         &.divErCode {
           .divAccount:before {
-            content: '手机号';
+            content: attr(data-phone); // 手机号
           }
           .code {
             width: 213px !important;
