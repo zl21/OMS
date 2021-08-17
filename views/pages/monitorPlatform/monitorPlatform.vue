@@ -147,7 +147,7 @@
               :key="index"
               :class="it.status == 0 ? 'abnormal' : 'normal'"
             >
-              <div class="title">
+              <div class="title3">
                 <span>{{ it.title }}</span>
                 <span>{{ it.time }}</span>
               </div>
@@ -304,7 +304,7 @@ export default {
             title: "AG项目1",
             message: "异常单据",
             sum: 288,
-            clickCss: '',
+            clickCss: 'clickCss',
           },
           {
             status: 1,

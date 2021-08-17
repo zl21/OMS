@@ -23,8 +23,12 @@ import standardTableListsCustomize from './minxin/standardTableListsCustomize';
 import verticalTableDetailCustomize from './minxin/verticalTableDetailCustomize';
 import tableDetailCollectionMixin from './minxin/standardTable/mixin.js';
 import cusValidate from './config/validate.config.js';
+import standardTableListdefindVue from '../commonPages/layout/standardTableListdefind.vue';
 
 class CustomizedConfig {
+	static #STLD = {
+		defined: standardTableListdefindVue,
+	};
 	static #STLC = standardTableListsCustomize;
 	static #VTDC = verticalTableDetailCustomize;
 	static #TDCM = tableDetailCollectionMixin;
@@ -51,6 +55,9 @@ class CustomizedConfig {
 	static #dropDownBtn = dropDownBtn;
 	static #cusValidate = cusValidate;
 	/* ------------ 挂载项 start ------------- */
+	static get STLD() {
+		return this.#STLD;
+	}
 	static get Rule() {
 		return this.#cusValidate;
 	}

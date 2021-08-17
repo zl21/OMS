@@ -85,14 +85,16 @@ export default {
     this.curLang = langConfig.find(it => it.type == browseLan).text;
   },
   mounted() {
-    this.initDom()
     this.isEnableLogin()
+    this.initDom()
   },
   methods: {
     initDom() {
       let isPhone = document.querySelector('.divErCode')
       let account = document.querySelector('.divAccount')
+      let code = document.querySelector('.divCode')
       let inputNodes = document.querySelectorAll('.login .container input')
+      code && code.setAttribute('data-code', this.vmI18n.t("other.verticalCode"))
       if (isPhone) {
         // 验证码登录
         account.setAttribute('data-phone', this.vmI18n.t("form_label.cellPhone_number"))
@@ -106,8 +108,6 @@ export default {
         inputNodes[0].setAttribute('placeholder', this.vmI18n.t("pHolder.a2")) // 请输入用户名
         inputNodes[1].setAttribute('placeholder', this.vmI18n.t("pHolder.a3")) // 请输入密码
         if (this.isEnableLoginPro) {
-          let code = document.querySelector('.divCode')
-          code.setAttribute('data-code', this.vmI18n.t("other.verticalCode"))
           inputNodes[2].setAttribute('placeholder', this.vmI18n.t("pHolder.a7")) // 请输入验证码
         }
       }
@@ -117,7 +117,7 @@ export default {
     // 是否开启手机验证码登录
     isEnableLogin() {
       let node = document.querySelector('.loginPro') || document.querySelector('.divErCode')
-      this.isEnableLoginPro = node
+      this.isEnableLoginPro = !!node
       this.$nextTick(() => {
         node && this.initTab(true)
       })
