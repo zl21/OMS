@@ -268,7 +268,7 @@ export default {
         formValue: {
           // 存储表单得所有值
           RESERVE_BIGINT01: '', // 额外退款申请类型
-          BILL_TYPE: '1', // 退款类型
+          BILL_TYPE: '', // 退款类型
           OC_B_RETURN_TYPE_ID: '', // 退货大类id
           OC_B_RETURN_TYPE_ENAME: '', // 退货大类name
           OC_B_RETURN_TYPE_ITEM_ID: '', // 退款小类
@@ -376,7 +376,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: '退款小类', // 单据类型 下拉框前的值
+            label: '退款细类', // 单据类型 下拉框前的值
             dataAcessKey: 'OC_B_RETURN_TYPE_ITEM_ID',
             width: '6', // 所占宽度宽度
             disabled: false, // 按钮禁用控制
