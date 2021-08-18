@@ -1302,19 +1302,21 @@ export default {
         } else {
           self.addItem.addList.forEach(item => {
             let flag = false;
+            item.QTY_IN = 0;
             self.tableConfig.data.forEach(item1 => {
-              price += item1.returnPrice || 0;
+              item1.AMT_RETURN = 0;
+              // price += item1.returnPrice || 0;
               if (item.proId == item1.proId) {
                 flag = true;
               }
             });
             if (!flag) {
-              item.returnPrice = item.price > item.RETURNABLE_AMOUNT ? item.RETURNABLE_AMOUNT : item.price;
+              item.returnPrice = 0;
               self.tableConfig.data.push(item);
             }
-            if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid) {
+            if (self.$route.params.customizedModuleId === 'New' || self.copyId) {
               self.tableConfig.data.forEach(item => {
-                item.returnPrice = item.price > item.RETURNABLE_AMOUNT ? item.RETURNABLE_AMOUNT : item.price;
+                item.returnPrice = 0;
                 item.ID = item.proId;
                 item.BILL_NO = self.selectData.BILL_NO;
               });
