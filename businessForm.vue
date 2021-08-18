@@ -14,6 +14,7 @@
     <Form class="businessForm_a"
           :label-width="95"
           style="width:100%"
+          ref="businessForm_a"
           :model="formConfig.formValue"
           :rules="formConfig.ruleValidate"
           onsubmit="return false;">
@@ -131,12 +132,15 @@
           </FormItem>
 
           <!-- 输入框弹框单多选 -->
+          <!-- :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}`+ ':'" -->
           <FormItem v-if="item.style === 'popInput'"
-                    :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'" >
-            <label class="ark-form-item-label popLabel" style="">
+                     ref="popLabel"
+                    :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}`+ ':'"
+                    :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
+            <!-- <label class="ark-form-item-label popLabel" style="">
                <i style="color:#f00" v-if="item.itemdata.isnotnull">*</i>
               {{ item.itemdata.name }}:
-            </label>
+            </label> -->
             <div class="ark-form-item-content">
               <my-input :version='item.version'
                         :isActive='true'
@@ -154,11 +158,13 @@
 
           <!-- 输入框弹框单多选-arkUi -->
           <FormItem v-if="item.style === 'popInputPlus'"
+            ref="popLabel"
+                    :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}`+ ':'"
                     :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
-            <label v-if="item.itemdata.name" class="ark-form-item-label popLabel">
+            <!-- <label v-if="item.itemdata.name" class="ark-form-item-label popLabel">
               <i style="color:#f00" v-if="item.itemdata.isnotnull">*</i>
               {{ item.itemdata.name }}：
-            </label>
+            </label> -->
             <fkinputPlus :isActive='true'
                       :isDisabled='false'
                       :inputList="item.inputList?item.inputList:[]"

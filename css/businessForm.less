@@ -49,6 +49,14 @@
     .popInput {
       .ark-form-item-content{
         position: inherit;
+        .ark-tooltip-rel{
+          & > div{
+            font-size: 0;
+            .add-input{
+              vertical-align: middle;
+            }
+          }
+        }
       }
       .item-input {
         .add-input {
@@ -145,14 +153,14 @@
 }
 
 /* 必选标识字体样式调整为框架相同 */
-.ark-form-item-required .ark-form-item-label:before {
-  vertical-align: -webkit-baseline-middle;
-  display: inline-block;
-  font-style: italic !important;
-  font-family: auto !important;
-  font-size: 18px !important;
-  line-height: 10px !important;
-}
+// .ark-form-item-required .ark-form-item-label:before {
+//   vertical-align: -webkit-baseline-middle;
+//   display: inline-block;
+//   font-style: italic !important;
+//   font-family: auto !important;
+//   font-size: 18px !important;
+//   line-height: 10px !important;
+// }
 
 /* 插槽字段的必填标识 */
 .req-star .ark-form-item-label::before {

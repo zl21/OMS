@@ -182,7 +182,8 @@ export default {
           // this.formConfig.formValue.search = '';
           // this.formConfig.formValue.qty = 1;
           if (lists.length === 0) {
-            this.$message.error($i18n.t('modalTips.hm')); // 不存在该商品
+            this.$Message.error($i18n.t('modalTips.q2'));
+            // this.$message.error($i18n.t('modalTips.hm')); // 不存在该商品
             return;
           }
           let obj = lists.length > 0 ? lists[0] : {};

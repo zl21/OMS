@@ -702,12 +702,7 @@ export default {
               id_list: [val.ID], // ID集合
             });// 把筛选的值放入数组
           } else { // 找到弹出提示已存在
-            this.$message({
-              // message: '该记录已在已选中列表中',
-              message: $i18n.t('modalTips.go'),
-              center: true,
-              type: 'warning'
-            });
+            this.$Message.warning($i18n.t('modalTips.go')) // message: '该记录已在已选中列表中'
           }
         }
         this.$refs.screen_ck.val_arr = [];// 清空选中的
@@ -727,12 +722,13 @@ export default {
             id_list: [val.ID], // ID集合
           });// 把筛选的值放入数组
         } else { // 找到提示已存在
-          this.$message({
-            // message: '该记录已在已选中列表中',
-            message: $i18n.t('modalTips.go'),
-            center: true,
-            type: 'warning'
-          });
+          this.$Message.warning($i18n.t('modalTips.go'))
+          // this.$message({
+          //   // message: '该记录已在已选中列表中',
+          //   message: $i18n.t('modalTips.go'),
+          //   center: true,
+          //   type: 'warning'
+          // });
         }
         this.onSearchResult();// 显示查询结果的数据
         this.request_total();// 查询查询条件的总数
@@ -949,7 +945,7 @@ export default {
       // 判断是否只能选中一条数据
       if (this.isOneData && this.r_result.length > 1) {
         // this.$message.warning('只能选取一条数据!');
-        this.$message.warning($i18n.t('modalTips.q2'));
+        this.$Message.warning($i18n.t('modalTips.q2'));
         return;
       }
       if (true) {
@@ -964,12 +960,13 @@ export default {
             return;
           }
           if (response.ids.length > 8000) {
-            return this.$message({
-              // message: '查询数量已超过上限，请修改查询条件!',
-              message: $i18n.t('modalTips.gq'),
-              center: true,
-              type: 'warning'
-            });
+            return this.$Message.warning($i18n.t('modalTips.q2'));
+            // this.$message({
+            //   // message: '查询数量已超过上限，请修改查询条件!',
+            //   message: $i18n.t('modalTips.gq'),
+            //   center: true,
+            //   type: 'warning'
+            // });
           }
           this.$emit('easyData', JSON.stringify({
             value: this.request_param, // 传向后台的数据

@@ -135,10 +135,11 @@ export default {
       serachParams.append('param', JSON.stringify(params));
       const res = await this.service.promotionCenter.selectProInfo(serachParams);
       if (res.data.code !== 0) {
-        this.$message({
-          type: 'error',
-          message: res.data.message
-        });
+        this.$Message.error(res.data.message);
+        // this.$message({
+        //   type: 'error',
+        //   message: res.data.message
+        // });
       }
     },
     /**
