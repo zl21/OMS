@@ -1007,14 +1007,14 @@ export default {
         }
       }
       // { 'trailing': false }
-    }, 1000),
+    }, 500),
 
     dayBtnHandel(item, panel) {
       this.btnStyleChange(item, 1, panel);
     },
-    statusBtnHandel(item, panel) {
+    statusBtnHandel: throttle(function(item, panel) {
       this.btnStyleChange(item, 0, panel);
-    },
+    }, 1000, { 'trailing': false }),
     // 按钮样式变换、无数据时展示图片样式处理
     btnStyleChange(item, order, panel) {
       let nowBtn = item.webname;
