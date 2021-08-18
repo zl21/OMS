@@ -1009,6 +1009,7 @@ export default {
         QTY_IN: item.QTY_IN
       }));
 
+
       data.AfSend = AfSend;
       data.AfSendItem = AfSendItem;
       this.service.orderCenter.saveAfterDeliver(data).then(res => {
@@ -1303,22 +1304,22 @@ export default {
           self.addItem.addList.forEach(item => {
             let flag = false;
             item.QTY_IN = 0;
+            item.AMT_RETURN = 0;
             self.tableConfig.data.forEach(item1 => {
-              item1.AMT_RETURN = 0;
-              // price += item1.returnPrice || 0;
-              if (item.proId == item1.proId) {
+              item1.price += item1.returnPrice || 0;
+              if (item.proId == item1.RELATION_BILL_ITEM_ID) {
                 flag = true;
               }
             });
             if (!flag) {
-              item.returnPrice = 0;
+              item.returnPrice = item.price > item.RETURNABLE_AMOUNT ? item.RETURNABLE_AMOUNT : item.price;
               self.tableConfig.data.push(item);
             }
             if (self.$route.params.customizedModuleId === 'New' || self.copyId) {
               self.tableConfig.data.forEach(item => {
                 item.returnPrice = 0;
-                item.ID = item.proId;
-                item.BILL_NO = self.selectData.BILL_NO;
+                item.RELATION_BILL_ITEM_ID = item.ID ? item.ID : item.proId;
+                // item.BILL_NO = self.selectData.BILL_NO;
               });
             }
           });
@@ -1637,7 +1638,7 @@ export default {
         item.BILL_NO = item.RELATION_BILL_NO; // 单据编号
         item.BILL_TYPE = item.BILL_TYPE == 0 ? '退货单' : '发货单';
         item.realAmt = item.AMT_ACTUAL; // 成交金额
-        if (self.$route.query.cid) {
+        if (self.copyId) {
           // 如果为复制状态订单,修改明细id为原订单id
           item.ID = item.RELATION_BILL_ITEM_ID;
         }
