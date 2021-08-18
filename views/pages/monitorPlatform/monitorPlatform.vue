@@ -230,8 +230,25 @@
 <script>
 import businessButton from "professionalComponents/businessButton";
 import dateUtil from "@/assets/js/__utils__/date.js";
-import * as echarts from "echarts";
+// import * as echarts from "echarts";
 import { throttle } from 'lodash'
+// echarts-按需引入：
+import * as echarts from 'echarts/core';
+import {
+    TooltipComponent,
+    GridComponent
+} from 'echarts/components';
+import {
+    GaugeChart,
+    LineChart
+} from 'echarts/charts';
+import {
+    CanvasRenderer
+} from 'echarts/renderers';
+
+echarts.use(
+    [GaugeChart, CanvasRenderer, TooltipComponent, GridComponent, LineChart, CanvasRenderer]
+);
 
 let dayBtnConifg = [
   {

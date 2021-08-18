@@ -1044,6 +1044,7 @@
 | v1.12.6 | standardTableListdefind自定义组件测试 |
 | v1.12.8 | oms_index删除冗余样式 |
 | v1.12.9 | 优化编译引用 |
+| v1.12.10 | Echarts-按需引入 |
 
 
 
