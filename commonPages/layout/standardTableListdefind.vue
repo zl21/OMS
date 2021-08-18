@@ -25,7 +25,7 @@ export default {
           desc: '总数',
         },
         {
-          img: "https://avatars1.githubusercontent.com/u/31434913?s=460&v=4",
+          img: "https://qywechat.s3.cn-northwest-1.amazonaws.com.cn/07ei77-%E7%BB%84%203225%402x.png",
           sum: 888,
           desc: '总数',
         },

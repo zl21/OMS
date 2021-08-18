@@ -276,35 +276,29 @@ export default {
   },
   data() {
     return {
-      clickCss: '',
       m2Heigh: 0,
       m3Heigh: 0,
       noData: "",
       m3noData: "",
       up: "",
       m3Up: "",
-      m2BtnIcon: "ios-arrow-down",
-      m3BtnIcon: "ios-arrow-down",
       header: {
         time: new Date(),
       },
       main01: {
-        title: "第三方监控",
-        sum: 10,
-        ex_sum: 2,
-        normal_sum: 8,
-        status: 0,
-        status_name: "异常",
+        title: "第三方监控", // 标题
+        status: 0, // 状态
+        status_name: "异常", // 状态文字
         btn: JSON.parse(JSON.stringify(dayBtnConifg)),
         data: [
           {
             status: 0,
             status_name: "异常",
-            icon: 'icon-monitorPlat-warn',
-            title: "AG项目1",
-            message: "异常单据",
-            sum: 288,
-            clickCss: 'clickCss',
+            icon: 'icon-monitorPlat-warn', // 状态图标
+            title: "AG项目1", // 标题
+            message: "异常单据", // 右下角展示的文字
+            sum: 288, // 右下角展示的数量
+            clickCss: 'clickCss', // 点击样式
           },
           {
             status: 1,
@@ -335,9 +329,9 @@ export default {
           },
         ],
         pieData: [
-          { value: 1048, name: "总数" },
-          { value: 1048, name: "异常数" },
-          { value: 1048, name: "正常数" },
+          { value: 8, name: "总数" },
+          { value: 2, name: "异常数" },
+          { value: 6, name: "正常数" },
         ],
       },
       main02: {
