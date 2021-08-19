@@ -82,9 +82,10 @@ export default {
   },
 
   other: {
+    phoneNumber: 'Phone',
     user: 'Username',
     pwd: 'Password',
-    verticalCode: 'Validate Code',
+    verticalCode: 'SMS Code',
     pwdLogin: 'Password login',
     vCodeLogin: 'SMS login', // 验证码登录
     live: 'Live',
