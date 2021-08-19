@@ -86,7 +86,7 @@ export default {
     pwd: 'Password',
     verticalCode: 'Validate Code',
     pwdLogin: 'Password login',
-    vCodeLogin: 'ValidateCode login',
+    vCodeLogin: 'SMS login', // 验证码登录
     live: 'Live',
     fixedBudget: 'Predetermined',
     allAdvance: 'Full-pre',

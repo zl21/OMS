@@ -188,3 +188,4 @@ console.log($i18n.t(common.all));
 | v1.0.96 | add for 登录 |
 | v1.0.97 | add for 登陆->登录 |
 | v1.0.98 | 翻译 |
+| v1.0.99 | SMS login |
