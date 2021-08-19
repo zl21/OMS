@@ -1596,7 +1596,7 @@ export default {
         REASON: Afsend.REASON, // 退款原因备注说明
         SELLER_REMARK: !this.copyId ? Afsend.SELLER_REMARK : '', // 卖家备注
       }
-      if (Afsend.OC_B_RETURN_TYPE_ENAME == '退货') {
+      if (Afsend.OC_B_RETURN_TYPE_ENAME == '退货' && Afsend.PAYMENT_STATUS == 5) {
         this.returnInfo.formData.forEach(item => {
           if (item.value == 'RESERVE_BIGINT02') item.disabled = false
           if (item.value == 'PRO_RETURN_STATUS') item.disabled = false
