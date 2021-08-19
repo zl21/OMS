@@ -2,34 +2,31 @@
 
 .ark-form-item-content {
   position: relative;
+
   // 处理兼容
-  .ark-input-wrapper,.ark-select{
+  .ark-input-wrapper,
+  .ark-select {
     display: block;
   }
-  .popLabel{
+
+  .popLabel {
     position: absolute;
     left: 0;
     top: 0;
     width: 95px;
   }
+
   .ark-checkbox-group {
-    input{
+    input {
       vertical-align: middle;
     }
   }
 }
+
 .orderManageEdit {
   display: flex;
+
   .businessForm_a {
-    box-sizing: border-box;
-
-    &.burgeon-col-span-6,
-    &.burgeon-col-span-8,
-    &.burgeon-col-span-12,
-    &.burgeon-col-span-24 {
-      height: 30px;
-    }
-
     .ark-form-item {
       margin-bottom: 0;
 
@@ -37,43 +34,59 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
 
-        // &:hover {
-        //   overflow: inherit;
-        //   white-space: normal;
-        // }
+      .ark-form-item-content {
+
+        .ark-input,
+        .ark-select-selection,
+        .add-input {
+          height: 32px;
+          line-height: 30px;
+          color: #292F43;
+          padding-right: 32px;
+        }
       }
     }
 
     // 类型为popInput的 input
     .popInput {
-      .ark-form-item-content{
+      .ark-form-item-content {
         position: inherit;
-        .ark-tooltip-rel{
-          & > div{
+
+        .ark-tooltip-rel {
+          &>div {
             font-size: 0;
-            .add-input{
+
+            .add-input {
               vertical-align: middle;
             }
           }
         }
       }
+
       .item-input {
         .add-input {
           width: 100%;
           background-color: transparent;
-          &.disabled{
+
+          &.disabled {
             background-color: #fafafa;
           }
+
           .el-input.is-disabled .el-input__inner {
+            color: #292F43;
+            font-size: 12px;
             border-color: transparent;
             background-color: transparent;
           }
         }
-        .table-input{
+
+        .table-input {
           margin: 0px;
           padding: 0 10px;
-          .el-input__inner{
+
+          .el-input__inner {
             border: 0;
           }
         }
@@ -109,10 +122,12 @@
     }
 
     // clear
-    .ark-fkrp-select .ark-icon-ios-close-circle{
+    .ark-fkrp-select .ark-icon-ios-close-circle {
       width: 12px !important;
-      height: 12px !important;;
-      line-height: 12px !important;;
+      height: 12px !important;
+      ;
+      line-height: 12px !important;
+      ;
       vertical-align: middle;
       position: absolute;
       top: 10px !important;
@@ -120,17 +135,20 @@
       opacity: .9;
       font-size: 14px;
     }
-    .ark-fkrp-select-icon{
+
+    .ark-fkrp-select-icon {
       top: 1px;
-      & > i{
+
+      &>i {
         font-size: 12px;
         color: #808695;
         font-weight: bold;
-        
+
       }
     }
 
   }
+
   /* 折叠按钮 */
   .flodBtn {
     width: 28px;
@@ -146,6 +164,7 @@
     border-top-right-radius: 5px;
   }
 }
+
 /* 未折叠情况下的样式 */
 .unFlodStyle {
   padding-right: 28px;
