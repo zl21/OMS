@@ -825,7 +825,7 @@ export default {
                             params.row.returnPrice = 0
                             let total = 0;
                             self.tableConfig.data.forEach(item => {
-                              total = total + (item.returnPrice || 0) + item.FREIGHT;
+                              total = publicMethodsUtil.accAdd(total, publicMethodsUtil.accAdd((item.returnPrice || 0), item.FREIGHT));
                             });
                             self.returnInfo.formValue.AMT_RETURN_APPLY = total;
                           })
@@ -834,7 +834,7 @@ export default {
                         self.tableConfig.data[params.index] = params.row;
                         let total = 0;
                         self.tableConfig.data.forEach(item => {
-                          total = total + (item.returnPrice || 0) + item.FREIGHT;
+                          total = publicMethodsUtil.accAdd(total, publicMethodsUtil.accAdd((item.returnPrice || 0), item.FREIGHT));
                         });
                         self.returnInfo.formValue.AMT_RETURN_APPLY = total;
                       },
@@ -845,7 +845,7 @@ export default {
 
                           let total = 0;
                           self.tableConfig.data.forEach(item => {
-                            total = total + (item.returnPrice || 0) + item.FREIGHT;
+                            total = publicMethodsUtil.accAdd(total, publicMethodsUtil.accAdd((item.returnPrice || 0), item.FREIGHT));
                           });
                           self.returnInfo.formValue.AMT_RETURN_APPLY = total;
                         }
@@ -894,7 +894,7 @@ export default {
                             params.row.FREIGHT = 0
                             let total = 0;
                             self.tableConfig.data.forEach(item => {
-                              total = total + item.FREIGHT + (item.returnPrice || 0);
+                              total = publicMethodsUtil.accAdd(total, publicMethodsUtil.accAdd((item.returnPrice || 0), item.FREIGHT));
                             });
                             self.returnInfo.formValue.AMT_RETURN_APPLY = total;
                           })
@@ -903,7 +903,7 @@ export default {
                         self.tableConfig.data[params.index] = params.row;
                         let total = 0;
                         self.tableConfig.data.forEach(item => {
-                          total = total + item.FREIGHT + (item.returnPrice || 0);
+                          total = publicMethodsUtil.accAdd(total, publicMethodsUtil.accAdd((item.returnPrice || 0), item.FREIGHT));
                         });
                         self.returnInfo.formValue.AMT_RETURN_APPLY = total;
                       }
@@ -1229,8 +1229,8 @@ export default {
         let RETURNABLE_AMOUNT = 0
         let realAmt = 0
         self.addItem.table.data.forEach(item => {
-          RETURNABLE_AMOUNT += item.RETURNABLE_AMOUNT
-          realAmt += item.realAmt
+          RETURNABLE_AMOUNT = publicMethodsUtil.accAdd(item.RETURNABLE_AMOUNT, RETURNABLE_AMOUNT)
+          realAmt = publicMethodsUtil.accAdd(item.realAmt, realAmt)
         })
         self.addItem.table.totalData = [
           {
@@ -1404,8 +1404,8 @@ export default {
             let RETURNABLE_AMOUNT = 0
             let realAmt = 0
             self.addItem.table.data.forEach(item => {
-              RETURNABLE_AMOUNT += item.RETURNABLE_AMOUNT
-              realAmt += item.realAmt
+              RETURNABLE_AMOUNT = publicMethodsUtil.accAdd(item.RETURNABLE_AMOUNT, RETURNABLE_AMOUNT)
+              realAmt = publicMethodsUtil.accAdd(item.realAmt, realAmt)
             })
             self.addItem.table.totalData = [
               {
@@ -1532,12 +1532,13 @@ export default {
           item.disabled = false
           // 打款状态:0 未打款 1 打款中 2 打款成功 3 打款失败
           // 单据状态：未退款", 0 "退款中", 1 "退款完成", 2 "取消", 3 "待审核", 4
+          // ("待打款", 0),("打款中", 1),("打款成功", 2),("打款失败", 3),("拒绝打款", 4),("待审核", 5),("待审批", 6),("取消", 7);
           if ((Afsend.PAYMENT_STATUS == 3) && (item.text === '保存' || item.text === '审核' || item.text === '复制')) item.disabled = true
-          if ((Afsend.PAYMENT_STATUS == 0 && Afsend.RETURN_STATUS == 4) && (item.text === '打款失败复审')) item.disabled = true
-          if ((Afsend.PAYMENT_STATUS == 1 || Afsend.PAYMENT_STATUS == 2 || (Afsend.PAYMENT_STATUS == 0 && Afsend.RETURN_STATUS == 1)) && (item.text !== '返回')) item.disabled = true
+          if ((Afsend.PAYMENT_STATUS == 5) && (item.text === '打款失败复审')) item.disabled = true
+          if ((Afsend.PAYMENT_STATUS != 3 && Afsend.PAYMENT_STATUS != 5) && (item.text !== '返回')) item.disabled = true
         })
         // 打款失败只允许修改收款人姓名&账号
-        if (Afsend.PAYMENT_STATUS == 3) {
+        if (Afsend.PAYMENT_STATUS == 3 || Afsend.PAYMENT_STATUS != 5) {
           this.isDisabled = true
           this.imageUploadConfig.readonly = true
           this.information.formData.forEach(item => {
@@ -1545,7 +1546,11 @@ export default {
           })
           this.returnInfo.formData.forEach(item => {
             if(item.style === 'popInput') item.itemdata.readonly = true
-            if (item.value !== 'RECEIVER_NAME'&& item.value !== 'PAY_ACCOUNT') item.disabled = true
+            if(Afsend.PAYMENT_STATUS == 3) {
+              if (item.value !== 'RECEIVER_NAME'&& item.value !== 'PAY_ACCOUNT') item.disabled = true
+            } else {
+              item.disabled = true
+            }
           })
         }
 
