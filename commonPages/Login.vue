@@ -37,7 +37,7 @@
         <!-- 欢迎登录 -->
         <div class="title" v-else>{{ vmI18n.t("welcome") }}</div>
         <!-- 表单 -->
-        <R3Login />
+        <R3Login :loginSucCbk="loginSucCbk" />
         <!-- bg -->
         <span class="login-bg-img">
           <img :src="require('@/assets/img/login-bg-img.png')" />
@@ -49,6 +49,7 @@
 
 <script>
 import R3 from "@syman/burgeon-r3";
+import service from '@/service/index';
 import i18n from "@burgeon/internationalization/i18n"; // 国际化
 window.$i18n = i18n;
 
@@ -181,6 +182,16 @@ export default {
         type: "success",
       });
     },
+    /**
+     * 切换语言
+     * 走框架登录成功前的回调loginSucCbk，返回true就继续走，false就拦截
+     */
+    async loginSucCbk() {
+      const pa = new FormData();
+      pa.append('language', localStorage.getItem("locale") || 'zh');
+      const { status, data } = await service.common.langSwitcher(pa)
+      return status === 200 && data.code === 0
+    }
   },
 };
 </script>
