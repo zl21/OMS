@@ -85,7 +85,7 @@ export default {
     user: '账号',
     pwd: '密码',
     verticalCode: '验证码',
-    pwdLogin: '密码登陆',
+    pwdLogin: '密码登录',
     vCodeLogin: '验证码登录',
     live: '直播',
     fixedBudget: '定预',
