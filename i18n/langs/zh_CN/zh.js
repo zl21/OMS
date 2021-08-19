@@ -82,6 +82,7 @@ export default {
   },
 
   other: {
+    phoneNumber: '手机号',
     user: '账号',
     pwd: '密码',
     verticalCode: '验证码',
