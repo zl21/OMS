@@ -8,6 +8,10 @@ export default {
   CUSTOMSTANDSETTLEACCOUNTEXPORT: {
     component: () => import('@/views/modal/financeCenter/customstandsettleaccountexport.vue'),
   },
+  // 轻供结算 对账单导出
+  CUSTOMSTANDQGSETTLEACCOUNTEXPORT: {
+    component: () => import('@/views/modal/financeCenter/customstandqgsettleaccountexport.vue'),
+  },
   // 唯品会进度账单聚合表列表 唯品会月结账单聚合表列表 (生成销售单)
   GENERATESALESORDER: {
     component: () => import('@/views/modal/financeCenter/generateSalesOrder.vue'),
