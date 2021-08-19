@@ -103,7 +103,7 @@ export default {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url('~@/assets/img/aroowDown.png') right no-repeat;
+    background: url('~@/assets/img/arrowDown.png') right no-repeat;
     background-size: 100%;
     transform:rotate(0);
     &::before {
@@ -111,7 +111,7 @@ export default {
     }
   }
   .icon-xiadown {
-    background: url('~@/assets/img/aroowUp.png') right no-repeat;
+    background: url('~@/assets/img/arrowUp.png') right no-repeat;
     background-size: 100%;
   }
 }
