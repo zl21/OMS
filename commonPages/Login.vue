@@ -93,7 +93,7 @@ export default {
       let isPhone = document.querySelector('.divErCode')
       let account = document.querySelector('.divAccount')
       let code = document.querySelector('.divCode')
-      let inputNodes = document.querySelectorAll('.login .container input')
+      let inputNodes = document.querySelectorAll('.loginCore .container input')
       code && code.setAttribute('data-code', this.vmI18n.t("other.verticalCode"))
       if (isPhone) {
         // 验证码登录
@@ -211,7 +211,7 @@ export default {
       line-height: 20px;
     }
   }
-  .login {
+  .loginCore {
     position: absolute;
     top: 33%;
     right: 0;
@@ -285,11 +285,11 @@ export default {
     min-width: 400px;
     height: 100%;
     position: relative;
-    /deep/.login {
+    /deep/.loginCore {
       /* 覆盖框架登录样式 */
       background: transparent;
       position: relative !important;
-      right: 14.5% !important;
+      right: -7.5% !important;
       top: 0 !important;
       width: 0 !important;
       height: 0 !important;
