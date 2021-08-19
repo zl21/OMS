@@ -35,6 +35,7 @@ export default {
   generateVipSalesOrder: params => network.get('/p/cs/ac/v1/generateVipSalesOrder', params),
   // 对账单导出
   settleAccountExport: params => network.post('/p/cs/ac/v1/settleAccountExport', params),
+  qgsettleAccountExport: params => network.post('/p/cs/ac/v1/qgSettleAccountExport', params),
   // 支付宝账单原始数据
   triggerAlipayBill: params => network.post(' /p/cs/ac/v1/triggerAlipayBill', params),
 
