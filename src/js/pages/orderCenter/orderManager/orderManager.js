@@ -1221,8 +1221,7 @@ export default {
           {
             webname: 'OcBOrderStatusQueryCmd',
             btnclick: () => {
-              this.statusSelectModal = true;
-              // this.exportClick();
+              this.statusSelectClick();
             } // 按钮点击事件
           },
           {
@@ -3221,6 +3220,28 @@ export default {
           _this.warningOk();
         }
       }
+    },
+    statusSelectClick() {
+      this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
+      if (this.selection.length !== 1) {
+        return this.$Message.warning({
+          content: '请选择需要状态查询的记录！',
+          duration: 5,
+          top: 80
+        });
+      }
+      const param = {ids : this.selection[0].ID}
+      const fromdata = new FormData();
+      fromdata.append('param', JSON.stringify(param));
+
+      this.service.common
+        .getOrderStatus(fromdata)
+        .then(res => {
+          this.statusSelectModal = true;
+          if (res.data.code === 0) {
+            debugger
+          }
+        })
     },
     // 导出
     exportChange(list = [], isNoPhone) {
