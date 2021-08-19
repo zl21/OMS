@@ -203,7 +203,7 @@ export default {
           }
         },
         tableHeight: '480px',
-        pagenation: this.$comUtils.pageConfig
+        pagenation: $omsUtils.pageConfig
       },
       jordanTableConfig: {
         columns: [], // 表头
@@ -368,7 +368,7 @@ export default {
   },
   activated() {
     // 计算高度 通过设置节点 'totalHeight'
-    this.$comUtils.setTableHeight(this, 115);
+    $omsUtils.setTableHeight(this, 115);
   },
   created() {
     // 获取默认数据

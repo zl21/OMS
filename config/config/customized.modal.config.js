@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-05-17 14:48:57
- * @LastEditTime: 2021-05-20 14:23:51
- * @LastEditors: your name
+ * @LastEditTime: 2021-06-24 10:42:21
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/customized.modal.config.js
  */
@@ -19,13 +19,55 @@ import ReportCenter from '../module/modal/report.config.js'; // ----------报表
 import basicDataConfig from '../module/modal/basicData.config'; // -----------基础数据
 
 import importCom from 'professionalComponents/importTable';
+import downLoad from 'professionalComponents/downLoad.vue'
 const common = {
+  DOWNLOADCOMMODITY: {
+    component: downLoad,
+    labelName: '下载商品',
+  },
+  DOWNLOADCOMMON: {
+    component: downLoad,
+    labelName: '下载PO单',
+  },
+  SKUADDOREDIT: {
+    component: importCom,
+  },
+  SKUIMPORT: {
+    component: importCom,
+  },
+  SPUIMPORT: {
+    component: importCom,
+  },
+  REGIONIMPORT: {
+    component: importCom,
+  },
+  SYNCSTOCKSTRATEGYIMPORT: {
+    component: importCom,
+  },
+  IMPORTCOM: {
+    component: importCom,
+  },
+  EXTRAIMPORT: {
+    component: importCom,
+  },
+  IMPORTPAYRESULT: {
+    component: importCom
+  },
   LOGISTICSIMPORT: {
     component: importCom,
   },
   WAREHOUSEIMPORT: {
     component: importCom,
   },
+  ZFBACCOUNTIMPORT: {
+    component: importCom,
+  },
+  GOODDISTRIBUTIONIMPORT: {
+    component: importCom,
+  },
+  SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT: {
+    component: importCom,
+  }
 }
 
 const allCenterModal = Object.assign(

@@ -20,69 +20,59 @@ export default {
         },
         formData: [
           {
-            label: '物流单号',
-            style: 'input',
-            width: '7',
-            value: 'EXPRESS_CODE',
-            columns: ['EXPRESS_CODE'],
-            AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
-          },
-          {
-            label: '退货单号',
+            label: $i18n.t('form_label.returnOrder_no'),
+            //'退换货单号',
             style: 'input',
             width: '7',
             value: 'OC_B_RETURN_BILL_NO',
             columns: ['OC_B_RETURN_BILL_NO'],
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            // regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
           {
             style: 'input', //输入框类型
-            label: '平台单号', //输入框前文字
+            label: $i18n.t('form_label.platform_billNo'), // 平台单号 输入框前文字
             value: 'SOURCE_CODE', //输入框的值
             columns: ['SOURCE_CODE'],
             width: '7',
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            //regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
           {
-            style: 'input', //输入框类型
-            label: '收货人', //输入框前文字
-            value: 'RECEIVER_NAME', //输入框的值
-            columns: ['RECEIVER_NAME'],
+            label: $i18n.t('form_label.logisticsOrder_No'),
+            //'物流单号',
+            style: 'input',
             width: '7',
+            value: 'EXPRESS_CODE',
+            columns: ['EXPRESS_CODE'],
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            //regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
+
+
+
+
           {
             style: 'input', //输入框类型
-            label: '买家昵称', //输入框前文字
+            label: $i18n.t('table_label.buyerNickname'),
+            // '买家昵称', //输入框前文字
             value: 'BUYER_NICK', //输入框的值
             columns: ['BUYER_NICK'],
             width: '7',
             AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
+            // regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
-          {
-            style: 'input', //输入框类型
-            label: '收货人手机', //输入框前文字
-            value: 'RECEIVER_MOBILE', //输入框的值
-            columns: ['RECEIVER_MOBILE'],
-            width: '7',
-            maxlength: 11,
-            AuotData: [], //匹配的选项
-            regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
-          },
+
         ],
       },
       // searchBtn
       searchBtn: {
         typeAll: 'default', // 按钮统一风格样式
-        btnsite: 'right', // 按钮位置 (right , center , left)
+        // btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '查找',
+            text: $i18n.t('btn.search'),
+            type: "primary",
             btnclick: () => {
               this.init(1)
 
@@ -100,17 +90,26 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: ' 取消',
+            text: $i18n.t('common.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm()
             }, // 按钮点击事件
           },
           {
-            text: '确认',
+            text: $i18n.t('CONFIRM'),
             btnclick: () => {
               let reqdata = JSON.parse(JSON.stringify(this.tabdata))
               if (this.componentData.type == 2) {
+                if (!this.rowlist) {
+                  this.$Message.error($i18n.t('modalTips.gr'));
+                  return
+                }
                 reqdata.RETURN_ORDER_ITEM_LIST = this.rowlist
+              }
+
+              if (reqdata.length == 0) {
+                this.$Message.error($i18n.t('modalTips.gr'));
+                return
               }
 
               this.$parent.$parent.closeConfirm(reqdata, this.componentData.type)
@@ -121,7 +120,7 @@ export default {
       columns10: [],
       data9: [],
       tabdata: [],
-      rowlist: {},
+      rowlist: null,
       page: 1,
       total: 10,
       size: 10,
@@ -147,10 +146,19 @@ export default {
       this.page = v
       this.init()
     },
-    expand(e, s) {
-     // console.log(e);
-    },
-    fnrow(v) {
+
+    fnrow(v, index, en) {
+      if (this.componentData.type == 2 && !v._disableExpand) {
+        this.data9 = this.data9.map(item => {
+          if (item.ID == v.ID) {
+            item._expanded =  !item._expanded
+          } else {
+            item._expanded = false
+          }
+          return item
+        })
+      }
+
       this.tabdata = v
     },
     tntable(data) {
@@ -174,29 +182,39 @@ export default {
               },
               on: {
                 "on-row-click": (val) => {
-                  console.log(val);
                   this.rowlist = val
-
                   this.data9.forEach((em, index) => {
                     if (index != params.index) {
                       this.$refs['currentRowTable' + index] && this.$refs['currentRowTable' + index].clearCurrentRow();
                     }
                   });
-
                 }
               }
             })
           }
         },
+        {
+          title: $i18n.t('table_label.serialNo'), // 序号
+          width: 50,
+          key: "index"
+        }
       ]
-
 
       this.columns10 = typeArr.concat(data.TABTH).filter((item, index) => {
         if (item.key != "ID") {
           return item
         }
       })
-      this.data9 = data.RETURN_ORDER_LIST
+ 
+
+      this.data9 = data.RETURN_ORDER_LIST.map((item, index) => {
+        item.index = index + 1
+        if (!item.RETURN_ORDER_ITEM_LIST) {
+          item._disableExpand = true
+        }
+       
+        return item
+      })
 
     },
     init(index) {
@@ -221,7 +239,7 @@ export default {
           } else {
             let typeArr = [{
               type: 'index',
-              title: '序号',
+              title: $i18n.t('table_label.serialNo'), // 序号
               width: 60,
               align: 'center'
             }]

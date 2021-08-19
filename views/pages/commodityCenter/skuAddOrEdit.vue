@@ -1,13 +1,14 @@
 <template>
   <div class="skuAddOrEdit customized-detail" :id="this.customizedModuleName">
     <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          SKU基本信息
+          <!-- SKU基本信息 -->
+          {{vmI18n.t('panel_label.at')}}
           <div slot="content" class="customized_Info_img">
             <ImageUpload
               v-model="imageValue"
@@ -93,14 +94,24 @@
           </div>
           <div slot="content" class="clear"></div>
         </Panel>
-        <Panel name="panel_cusAttr">
-          自定义属性
-          <div slot="content" class="customProperties">
-            <div class="panel-title">固定属性：</div>     
+        <Panel name="panel_wuli">
+          <!-- 物理属性 -->
+          {{vmI18n.t('panel_label.aw')}}
+          <div slot="content">
+            <businessForm :form-config="formConfigWuLi" @keyDown="keyDown" :key="formConfigWuLi.key"/>
+          </div>
+        </Panel>
+        <Panel name="panel_fixAttr">
+          <!-- 固定属性 -->
+          {{vmI18n.t('panel_label.b4')}}
+          <div slot="content">
             <businessForm :form-config="fixAttrFormConfig" @keyDown="keyDown" />
           </div>
-          <div slot="content" class="customProperties">
-            <div class="panel-title">自定义属性：</div>
+        </Panel>
+        <Panel name="panel_cusAttr">
+          <!-- 自定义属性 -->
+          {{vmI18n.t('panel_label.b5')}}
+          <div slot="content">
             <businessForm :form-config="cusAttrFormConfig" @keyDown="keyDown" />
           </div>
         </Panel>
@@ -108,6 +119,7 @@
       <div class="customized-detail-table">
         <!-- tab切换 -->
         <businessLabel
+          class="jordanLabel"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"
@@ -128,11 +140,4 @@ export default skuAddOrEdit;
 </script>
 <style lang="less" scoped>
 @import '~@burgeon/oms-theme/skin/public.less';
-.customProperties{
-    display: grid;
-    grid-template-columns: 80px auto;
-    .panel-title{
-      margin-top: @base-mr;
-    }
-}
 </style>

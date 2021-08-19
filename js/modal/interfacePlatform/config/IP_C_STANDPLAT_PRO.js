@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/interfacePlatform/config/IP_C_STANDPLAT_PRO.js
  */
-// 通用商品下载
+// 通用订单（下载单据）
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   formConfig: {
@@ -19,9 +19,11 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         itemdata: {
+          serviceId: 'r3-cp',
           colid: 167023,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           display: 'OBJ_FK', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
@@ -62,6 +64,9 @@ export default {
       }
     ]
   },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async (self) => {
     const _this = self;
@@ -86,8 +91,6 @@ export default {
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);
-    } else {
-      // _this.$Message.error(message);
     }
   }
 };

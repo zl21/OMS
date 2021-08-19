@@ -1,10 +1,18 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-07 16:19:54
+ * @LastEditTime: 2021-08-06 15:19:43
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
+-->
 <template>
-  <div class="customized-detail" v-loading="loading">
-    <div class="returnBtn">
+  <div class="customized-detail orderManageDetails" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="returnBtn" />
     </div>
     <div class="customized-detail-main">
-      <div style="padding:12px;width:100%;margin:0 auto">
+      <div class="Step-Box">
         <Steps class="steps-content">
           <Step
             v-for="(item,index) in steps"
@@ -53,41 +61,6 @@
     >
       <p>error_tip</p>
     </Modal>
-    <!-- v-for="(list, index) in dialogs"
-    :key="index" -->
-    <!-- <businessDialog
-      :ref="list.name"
-      :component-data="list.data"
-      :confirm="list.confirm"
-      :exclude-string="list.excludeString"
-      :footer-hide="list.footerHide"
-      :keep-alive="list.keepAlive || true"
-      :name="list.name"
-      :quit="list.quit"
-      :maskClosable="list.maskClosable"
-      :title="list.title"
-      :url="list.url"
-      :width="list.width || ''"
-    ></businessDialog> -->
-    <!-- 公共弹框 -->
-    <!-- <businessDialog
-      :batch-closed="publicBouncedConfig.batchClosed"
-      :closable="publicBouncedConfig.closable"
-      :component-data="publicBouncedConfig.componentData"
-      :draggable="publicBouncedConfig.draggable"
-      :exclude-string="publicBouncedConfig.excludeString"
-      :keep-alive="publicBouncedConfig.keepAlive"
-      :mask="publicBouncedConfig.mask"
-      :mask-closable="publicBouncedConfig.maskClosable"
-      :name="publicBouncedConfig.name"
-      :quit="publicBouncedConfig.quit"
-      :scrollable="publicBouncedConfig.scrollable"
-      :title="publicBouncedConfig.confirmTitle"
-      :title-align="publicBouncedConfig.titleAlign"
-      :transfer="publicBouncedConfig.transfer"
-      :url="publicBouncedConfig.url"
-      :width="publicBouncedConfig.width"
-    /> -->
   </div>
 </template>
 <script>
@@ -101,7 +74,6 @@
   import DropDownConfig from 'burgeonConfig/config/dropDown.config';
   import BtnConfig from 'burgeonConfig/config/funBtn.config';
   import BurgeonEvent from 'burgeonConfig/config/event.config';
-  // import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
   export default {
     name: 'OrderManageDetail',
@@ -135,55 +107,17 @@
             value: 'OC_B_ORDER_PROMOTION'
           },
           {
-            label: '发货信息', // 发货信息
+            label: $i18n.t('form_label.shipping_info'), // 发货信息
             value: 'OC_B_ORDER_DELIVERY'
           },
           {
-            label: '操作日志', // 操作日志
+            label: $i18n.t('panel_label.operationLog'), // 操作日志
             value: 'OC_B_ORDER_LOG'
           }
         ],
         baseInfoTab: {
           order: {},
           sub_item: {}
-        },
-        baseInfo_default: {
-          order: {
-            ADJUST_AMT: '',
-            BILL_NO: '', // 单据编号
-            COLLECT_AMT: '', // 代收金额
-            CONSIGN_AMT: 0, // 代销结算金额
-            CONSIGN_SHIP_AMT: '', // 收货人邮费
-            CP_C_LOGISTICS_ENAME: '', // 快递公司
-            CP_C_PHY_WAREHOUSE_ID: '', // 发货仓库ID
-            CP_C_REGION_AREA_ENAME: '', // 区
-            CP_C_REGION_CITY_ENAME: '', // 市
-            CP_C_REGION_PROVINCE_ENAME: '', // 省
-            CP_C_SHOP_TITLE: '', // 店铺名称
-            EXPRESS_CODE: '', // 快递编码
-            INTERNAL_MEMO: '', // 内部备注
-            LOGISTICS_COST: '', // 运费
-            OPERATE_AMT: '', // 操作费
-            ORDER_AMT: '', // 订单总金额
-            ORDER_DATE: '', // 下单时间
-            ORDER_DISCOUNT_AMT: '', // 订单优惠金额
-            ORIG_RETURN_ORDER_ID: '', // 退换货单
-            PAY_TYPE: '', // 支付类型
-            PLATFORM: '', // 平台
-            PRODUCT_AMT: 0, // 商品总额
-            PRODUCT_DISCOUNT_AMT: '',
-            RECEIVED_AMT: '', // 已收金额
-            RECEIVER_ADDRESS: '', // 收货人地址 买家收货详细地址
-            RECEIVER_MOBILE: '', // 收货人手机号
-            RECEIVER_NAME: '', // 收货人姓名
-            RECEIVER_PHONE: '', // 电弧
-            RECEIVER_ZIP: '', // 邮编
-            SYS_REMARK: '', // 系统备注
-            SHIP_AMT: '', // 服务运费
-            MERGE_SOURCE_CODE: '', // 平台编号
-            USER_NICK: '', // 买家昵称
-            CP_C_PHY_WAREHOUSE_ENAME: '' // 发货仓库名称
-          }
         },
         otherInfoTab: {
           tablename: '',
@@ -198,25 +132,31 @@
         btnConfig: BtnConfig.config(),
         // 
         returnBtn: {
+          btnsite:'right', // 按钮对齐方式
           typeAll: 'default',
           buttons: [
             {
-              text: '返回',
+              text: $i18n.t('common.return'), // 返回
               btnclick: () => {
-                this.$comUtils.tabCloseAppoint(this);
+                $omsUtils.tabCloseAppoint(this);
                 this.$store.commit('customize/TabOpen', {
                   id: '2307',
                   type: 'action',
                   name: 'ORDERMANAGER',
-                  label: '零售发货单',
+                  label:  $i18n.t('panel_label.retail_shipping_order'),//'零售发货单',
                   back: true,
                 });
               }
             },
             {
-              text: '刷新',
+              text: $i18n.t('btn.refresh'),
               btnclick: async() => {
-               await this.getDetailsData();
+                // 区分子表
+                if(this.labelDefaultValue === 'OC_B_ORDER_ITEM'){
+                  await this.getDetailsData();
+                }else{
+                  this.otherInfoTab = { objid: this.objId, tabValue: this.labelDefaultValue };
+                }
               }
             }
           ]
@@ -252,7 +192,8 @@
       labelClick(item) {
         this.labelDefaultValue = item.value;
         if (item.value === 'OC_B_ORDER_ITEM') return;
-        this.otherInfoTab = { tablename: this.labelDefaultValue, objid: this.objId, tabValue: item.value };
+        this.otherInfoTab = { objid: this.objId, tabValue: item.value };
+        // this.otherInfoTab = { tablename: this.labelDefaultValue, objid: this.objId, tabValue: item.value };
       },
       freshLoad(val) {
         this.getDetailsData(val);
@@ -275,6 +216,9 @@
           this.baseInfoTab.order = data.DATA.ITEM;
           this.baseInfoTab.sub_item = data.DATA.SUB_ITEM;
           this.loading = false;
+          console.log('1111',data.DATA.ITEM);
+          // const statusList = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'];
+          this.statusName = ['未确认', '已审核', '配货中', '仓库发货', '平台发货', '已确认收货', '已取消', '系统作废', '交易完成', '预售待发货', '预售缺货', '缺货', '待审核'].includes(data.DATA.ITEM.ORDER_STATUS) ? data.DATA.ITEM.ORDER_STATUS : '';
         } catch (error) {
           console.log(error);
         }
@@ -298,12 +242,43 @@
       BtnConfig.singleType = 1;
       await this.getDetailsData();
     },
-
   };
 </script>
-<style lang="less">
+<style lang="less" scoped>
   @import '~omsTheme/public.less';
-  .returnBtn{
-    margin: 0 @base-mr;
+  .orderManageDetails{
+    background: #fff;
+  }
+  .Step-Box{
+    margin: @base-mr @base-mr 0;
+    /deep/ .steps-content.ark-steps .ark-steps-item .ark-steps-head .ark-steps-head-inner {
+      height: 21px;
+      line-height: 1;
+      & > .ark-steps-icon.ark-icon{
+        font-size: 24px;
+      }
+    }
+  }
+  .customized-detail-label{
+    border-bottom: 1px solid #f4f5f9;
+    .jordan-label-box{
+      // margin: 0 @base-mr;
+      /deep/ .jordan-label{
+        height: 48px;
+        line-height: 48px;
+        border: none;
+        color: #292f43;
+        &.colorStyle{
+          color: #4855AF;
+          border-bottom: 2px solid #4855AF;
+        }
+      }
+      /deep/ .underline-flex{
+        border: none;
+      }
+    }
+  }
+  .order-item{
+    padding: 0;
   }
 </style>

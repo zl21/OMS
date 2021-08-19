@@ -1,26 +1,26 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-09 10:54:37
+ * @LastEditTime: 2021-08-10 16:40:31
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增-查询原订单编号-formItem
 -->
 <template>
   <div class="OC_B_ORDER_ID">
-    <label class="itemLabel"> 原定单编号： </label>
+    <!-- <label class="itemLabel"> 零售发货单单号: </label> -->
     <Input
       class="oriCode"
       :autocomplete="'new-password'"
       disabled
       @on-click="iconclick"
       :icon="searchIcon"
-      v-model="REDUNDANT_ORDER_ID"
+      v-model="orderId"
       :placeholder="''"
       @on-blur="inputblur"
       @on-change="inputChange"
     ></Input>
     <Icon
-      v-if="REDUNDANT_ORDER_ID && REDUNDANT_ORDER_ID != '-1' && ID == '-1'"
+      v-if="orderId && orderId != '-1' && ID == '-1'"
       class="oriCodeclear"
       type="ios-close-circle"
       @click="clear"
@@ -38,12 +38,6 @@
       <div class="dialog-footer" slot="footer">
         <businessButton :btn-config="btnConfigMo" />
       </div>
-      <div class="customized-detail-main">
-        <businessForm :form-config="formConfig" />
-      </div>
-      <div class="customized-detail-btn">
-        <businessButton :btn-config="btn" />
-      </div>
       <div class="customized-detail-table">
         <business-action-table
           :jordan-table-config="table"
@@ -60,14 +54,12 @@
 <script>
 // 退换货单详情
 import businessButton from 'professionalComponents/businessButton';
-import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 
 export default {
   name: 'searchOOID',
   components: {
     businessButton,
-    businessForm,
     businessActionTable,
   },
   model: {
@@ -86,45 +78,24 @@ export default {
       orderModal: false,
       loading: false,
       ID: this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1',
-      REDUNDANT_ORDER_ID: '',
+      orderId: '',
+      exCode: '',
       backable: false,
       modal: false,
       getCurrenData: [],
       isChecked: false,
-      btn: {
-        typeAll: 'default', // 按钮统一风格样式
-        btnsite: "right",
-        buttons: [
-          /* {
-            text: '重置',
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.formEmpty(this, 'formConfig');
-              this.queryEnter(1, this.table.pageSize, true);
-            }, // 按钮点击事件
-          }, */
-          {
-            text: $i18n.t('btn.find'), // 查找 按钮文本
-            disabled: false, // 按钮禁用控制
-            type: 'primary',
-            btnclick: () => {
-              this.queryEnter(1, this.table.pageSize);
-            }, // 按钮点击事件
-          },
-        ],
-      },
       btnConfigMo: {
         typeAll: "default",
         btnsite: "right",
         buttons: [
           {
-            text: "取消",
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.destroyVm();
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               if (!this.isChecked) {
@@ -133,68 +104,18 @@ export default {
               }
               this.$emit('change', this.getCurrenData, this);
               // this.$emit('change', 'SF000000002', this);
-              this.REDUNDANT_ORDER_ID = this.getCurrenData[0].billNo;
-              this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID;
-              this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+              const orderId = this.getCurrenData[0].billNo;
+              const exCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+              this.orderId = orderId;
+              this.exCode = exCode;
+              // this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID;
+              // this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
               const aa = this.getCurrenData[0].psCSkuEcode;
-              R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
-              R3.store.commit('customize/REDUNDANT_ORDER_ID', JSON.parse(JSON.stringify(this.other.expressCode)));
+              R3.store.commit('customize/COMPENSATE', { orderId });
+              R3.store.commit('customize/COMPENSATE', { exCode });
+              // R3.store.commit('customize/REDUNDANT_ORDER_ID', JSON.parse(JSON.stringify(this.other.expressCode)));
               this.destroyVm();
             },
-          },
-        ],
-      },
-      formConfig: {
-        formValue: {
-          billNo: "",
-          sourceCode: '',
-          expressCode: '',
-          receiverName: '',
-          buyerNick: '',
-          receiverMobile: '',
-        },
-        formData: [
-          {
-            style: 'input',
-            label: '原定单编号', // 原定单编号
-            colname: 'billNo',
-            width: '8',
-            inputenter: () => this.queryEnter(1, 10)
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.platform_billNo'), // 平台单号
-            colname: 'sourceCode',
-            width: '8',
-            inputenter: () => this.queryEnter(1, 10)
-          },
-          {
-            style: 'input',
-            label: '物流单号', // 物流单号
-            colname: 'expressCode',
-            width: '8',
-            inputenter: () => this.queryEnter(1, 10)
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.consignee'), // 收货人
-            colname: 'receiverName',
-            width: '8',
-            inputenter: () => this.queryEnter(1, 10)
-          },
-          {
-            style: 'input',
-            label: $i18n.t('table_label.buyerNickname'), // 买家昵称
-            colname: 'buyerNick',
-            width: '8',
-            inputenter: () => this.queryEnter(1, 10)
-          },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.consignee_phone'), // 收货人手机
-            colname: 'receiverMobile',
-            width: '8',
-            inputenter: () => this.queryEnter(1, 10)
           },
         ],
       },
@@ -204,14 +125,101 @@ export default {
         indexColumn: true, // 是否显示序号
         height: '270',
         loading: false,
-        isShowSelection: false, // 是否显示checkedbox
         pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 高亮单选必须结合它
+        multiple: false, //false 单选
+        businessFormConfig: {
+          formValue: {
+            billNo: "",
+            sourceCode: '',
+            expressCode: '',
+            // receiverName: '',
+            buyerNick: '',
+            // receiverMobile: '',
+          },
+          formData: [
+            {
+              style: 'input',
+              label: '零售发货单单号', // 原定单编号
+              colname: 'billNo',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.platform_billNo'), // 平台单号
+              colname: 'sourceCode',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            {
+              style: 'input',
+              label: '物流单号', // 物流单号
+              colname: 'expressCode',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            /* {
+              style: 'input',
+              label: $i18n.t('form_label.consignee'), // 收货人
+              colname: 'receiverName',
+              width: '8',
+              inputenter: () => this.queryEnter(1, 10)
+            }, */
+            {
+              style: 'input',
+              label: $i18n.t('table_label.buyerNickname'), // 买家昵称
+              colname: 'buyerNick',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_@#$%^&*+=-><~“”‘’。.，,：；/、\\`\|!！……\(\)\（\）《》?？·]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            /* {
+              style: 'input',
+              label: $i18n.t('form_label.consignee_phone'), // 收货人手机
+              colname: 'receiverMobile',
+              width: '8',
+              // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+              // regx: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+              // regx: /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+              // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              // regx: /^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\d{8}$/,
+              inputenter: () => this.queryEnter(1, 10)
+            }, */
+          ],
+        },
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: "right",
+          buttons: [
+            /* {
+              text: '重置',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.formEmpty(this, 'formConfig');
+                this.queryEnter(1, this.table.pageSize, true);
+              }, // 按钮点击事件
+            }, */
+            {
+              text: $i18n.t('btn.find'), // 查找 按钮文本
+              disabled: false, // 按钮禁用控制
+              type: 'primary',
+              btnclick: () => {
+                this.queryEnter(1, this.table.pageSize);
+              }, // 按钮点击事件
+            },
+          ],
+        }
       },
       other: {},
     };
@@ -225,14 +233,15 @@ export default {
     orderModal(val) {
       !val && this.destroyVm();
     },
-    REDUNDANT_ORDER_ID: {
+    /* orderId: { ？？为什么要watch
       handler(newValue, oldVal) {
-        this.other.REDUNDANT_ORDER_ID = newValue
-        this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+        // this.other.REDUNDANT_ORDER_ID = newValue
+        this.orderId = newValue;
+        // this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
         R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
         R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
       },
-    },
+    }, */
   },
 
   created() { },
@@ -241,13 +250,15 @@ export default {
     const val = this.$parent.$props.value;
     if (val) {
       if (val instanceof Array && val.length) {
-        this.REDUNDANT_ORDER_ID = val[0].billNo || '';
+        this.orderId = val[0].billNo || '';
       } else {
-        this.REDUNDANT_ORDER_ID = val;
+        this.orderId = val;
       }
-      this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID
-      R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
-      R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
+      // this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID
+      R3.store.commit('customize/COMPENSATE', { orderId: this.orderId });
+
+      // R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
+      // R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
     }
     this.$nextTick(async () => {
       this.queryEnter(1, 10, true);
@@ -256,7 +267,7 @@ export default {
   methods: {
     destroyVm() {
       this.orderModal = false;
-      this.formEmpty(this, 'formConfig');
+      this.formEmpty(this, 'table.businessFormConfig');
       this.table.data = [];
     },
     iconclick() {
@@ -264,14 +275,14 @@ export default {
       this.orderModal = true;
     },
     clear() {
-      this.REDUNDANT_ORDER_ID = '';
-      // this.$emit('change', [{ ID: '-1', Label: '-1' }], this);
+      this.orderId = '';
       this.$emit('change', '', this);
-      // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
       // 联动清空子表
       this.getCurrenData[0] = {};
       setTimeout(() => {
-        R3.store.commit('customize/REDUNDANT_ORDER_ID', 'clear');
+        // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'clear');
+        R3.store.commit('customize/COMPENSATE', { orderId: '' });
+        R3.store.commit('customize/COMPENSATE', { exCode: '' });
       }, 10);
     },
     inputenter() { },
@@ -298,15 +309,22 @@ export default {
     async queryEnter(page = 1, pageSize = 10, isMounted) {
       console.log(page, pageSize);
       const self = this;
+      const ph = this.table.businessFormConfig.formValue.receiverMobile;
+      const regx = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
+      if (ph && !regx.test(ph)) {
+        self.$Message.warning('收货人手机格式不正确！');
+        return;
+      }
       // 清空数据
       this.table.loading = true;
       this.table.data = [];
-      let fixedcolumns = JSON.parse(JSON.stringify(this.formConfig.formValue))
+      let fixedcolumns = JSON.parse(JSON.stringify(this.table.businessFormConfig.formValue))
       for (const key in fixedcolumns) {
         if (!fixedcolumns[key]) delete fixedcolumns[key];
       }
       const pageInfo = { pageNum: page, pageSize }
       let param = { ...fixedcolumns, ...pageInfo }
+      param.web = 'paySearchOriginCode';
       if (isMounted) param.expressCode = '-1';
       const { data: { code, data } } = await self.service.orderCenter.ocBCompensateOrder(param).catch(e => {
         this.table.loading = false;

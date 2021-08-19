@@ -2,6 +2,8 @@ import businessActionTable from 'professionalComponents/businessActionTable';
   import businessButton from 'professionalComponents/businessButton';
   import loading from 'professionalComponents/loading.vue';
   import drpInput from 'professionalComponents/fkinput.vue';
+  Vue.component('drpInputPro', drpInput)
+
   export default {
     components: {
       businessActionTable,
@@ -43,22 +45,23 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           pageShow: true, // 控制分页是否显示
           searchInputShow: false, // 控制搜索框是否显示
           width: '', // 表格宽度
+          height: '452',
           border: true, // 是否显示纵向边框
           total: 0, // 设置总条数
-          pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+          pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
           pageSize: 10, // 默认每页条数100条，产品要求
           pageIndex: 1, // 页码
           totalData: [],
           selectionData: [], // 勾选数据
           data: [],
           columns: [
-            {
-              key: 'ID',
-              title: '序号'
-            },
+            // {
+            //   key: 'ID',
+            //   title: '序号'
+            // },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: '店铺名称'
+              title: $i18n.t('table_label.shopName') // 店铺名称
             },
             {
               key: 'SKU_NUMIID',
@@ -82,7 +85,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
                     width: '150px'
                   }
                 }, [
-                  h('drpInput', {
+                  h('drpInputPro', {
                     props: {
                       style: 'popInput',
                       version: '1.4',
@@ -201,6 +204,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
           if (res.data.code == 0) {
             res.data.data.OC_B_ORDER_EXCEPTION.forEach(item=>{
               self.itemdata_list.push({
+                serviceId: 'r3-cp',
                 colid: 171591,
                 colname: 'CP_C_REGION_PROVINCE_ID',
                 fkdisplay: 'drp',
@@ -227,10 +231,10 @@ import businessActionTable from 'professionalComponents/businessActionTable';
         self.service.orderCenter.batchSaveOcBOrderException(self.resultArr).then(res=>{
           console.log(res);
           if (res.data.code == 0) {
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $omsUtils.msgTips(self, 'success', res.data.message, 0);
             this.$parent.$parent.closeConfirm();
           } else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+            $omsUtils.msgTips(self, 'error', res.data.message, 0);
           }
           self.loading = false;
         });

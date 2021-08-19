@@ -93,8 +93,8 @@ export default {
   methods: {
     confirm(){
       let self = this;
-      if(!self.formConfig.formData[0].itemdata.pid){
-        self.$OMS2.omsUtils.msgTips(self, 'warning', '物流公司不能为空!', 0)
+        if(!self.formConfig.formData[0].itemdata.pid){
+        $omsUtils.msgTips(self, 'warning', '请选择仓库!', 0)
         return;
       }
       let ids = self.componentData.row.map(item=>{
@@ -109,9 +109,10 @@ export default {
       }).then(res=>{
         console.log(res);
         if(res.data.code == 0){
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $omsUtils.msgTips(self, 'success', res.data.message, 0);
         }else {
           this.$Modal.confirm({
+            className: 'ark-dialog',
             title: res.data.message,
             width: 400,
             mask: true,
@@ -124,15 +125,15 @@ export default {
                   props: {
                     columns: [
                       {
-                        title:'序号',
+                        title: $i18n.t('table_label.serialNo'), // 序号
                         key:'index'
                       },
                       {
-                        title: '单据编号', // '提示信息',
+                        title: $i18n.t('form_label.billNo'), // 单据编号
                         key: 'objno',
                       },
                       {
-                        title:'失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'message'
                       }
                     ],

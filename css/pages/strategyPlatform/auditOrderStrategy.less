@@ -1,52 +1,91 @@
+@import '~@burgeon/oms-theme/skin/public.less';
 .auditOrderStrategy {
-    .audit_form {
+    .customized-detail-main {
         .conditions {
-            p {
-                display: flex;
-                margin-bottom: 20px;
-                .popInput {
-                    height: 24px;
-                    /deep/ .item-input {
-                         .clear {
-                            bottom: 3px;
-                        }
-                        .popover-icon {
-                            top: 11px;
-                            right: 12px;
-                            i{
-                                color: #8A8A8A;
-                               font-size: 12px; 
-                            }
-                            
-                        }
-                         .CP_C_SHOP_ID {
-                        padding: 0;
-                        margin: 0;
-                        input {
-                            height: 100%;
-                            background-color: #fff;
-                            border: 0 solid #fff;
-
-                        }
-                    }
-                    }
+            .label{
+                height: 32px;
+                line-height: 32px;
+                text-align: right;
+                padding-right: 12px;
             }
-            .label {
-                    width: 90px;
-                    margin-right: 60px;
-                    text-align: right;
-                    i{
-                        color: red;
-                        width: 20px;
-                        display: inline-block;
-                        text-align: left;
-                    }
-                    line-height: 28px;
+            .chackbox-content{
+                display: grid;
+                grid-template-columns: 130px auto;
+                margin-bottom: 10px;
+                .ark-checkbox-group{
+                    display: inline-block;
+                    line-height: 32px;
                 }
-            .switch{
-                width:30px;
-                margin-right: 8px;
+                /deep/.ark-checkbox-indeterminate .ark-checkbox-inner{
+                    background-color:@base-color;
+                    border-color: @base-color;
+                }
             }
+            .switch-content{
+                display: grid;
+                align-items: center;
+                grid-template-columns: 30px 100px auto;
+                margin-bottom: 10px;
+                .condition-input1 > div:not(:first-child){
+                    margin-top: 12px;
+                }
+               .popInput {
+                   width: 250px;
+                   /deep/ .item-input .table-input{
+                        margin: 0;
+                        padding: 0;
+                        background: #fff;
+                        width: 250px;
+                        font-size: 12px;
+                        .is-disabled .el-input__inner{
+                            background-color: #fff;
+                            font-size: 12px;
+                        }
+                    }
+                }
+                /deep/ .ark-date-picker{
+                    width: 250px !important
+                }
+                /deep/ .ark-input{
+                    #bundle > .defalutInput;
+                }
+                /deep/ .ark-input-icon{
+                    width: @base-height;
+                    height: @base-height;
+                    line-height: @base-height;
+                }
+            }
+        }
+        .createdTime{
+            width: 24.5%;
+            display: grid;
+            grid-template-columns: 120px auto 100px;
+            font-size: 0;
+            margin-top: @base-mr;
+            label,input,span{
+                display: inline-block;
+                font-size: 12px;
+                vertical-align: middle;
+            }
+            label{
+                display: inline-block;
+                text-align: right;
+                font-size: 12px;
+                color: #575757;
+                height: 32px;
+                line-height: 32px;
+                padding-right: 12px;
+                box-sizing: border-box;
+            }
+            .ark-input-wrapper{
+                & /deep/ .ark-input.ark-input-default{
+                    #bundle > .defalutInput;
+                }
+            }
+            span{
+                text-align: right;
+                height: 32px;
+                line-height: 32px;
             }
         }
     }

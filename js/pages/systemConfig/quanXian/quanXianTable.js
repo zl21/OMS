@@ -35,7 +35,8 @@ export default {
       const contentHeight = document.getElementsByClassName(
         'SearchForm_Table'
       )[0].clientHeight;
-      const scrollTableHeight = contentHeight - 200;
+      const scrollTableHeight = contentHeight - 128;
+      console.log(scrollTableHeight);
       this.scrollTableHeight.height = `${scrollTableHeight}px`;
     },
     theadCheckboxChange(val, column) {
@@ -80,6 +81,7 @@ export default {
       }, 0);
     },
     rowCheckboxChange(val, rowIndex, column) {
+      console.log(val);
       this.$emit('isChangeFun', true);
       // if (column.key === 'IS_WRITE') {
       //   this.rows[rowIndex].IS_WRITE = val;

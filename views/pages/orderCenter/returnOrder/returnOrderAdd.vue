@@ -12,24 +12,26 @@
             <!-- 基本信息 -->
             {{ vmI18n.t('common.baseInformation') }}
             <p slot="content">
-              <businessForm :form-config="formConfig" />
+              <businessForm :form-config="formConfig" :key="formConfig.key"/>
             </p>
           </Panel>
           <Panel v-show="showEx" name="2">
-            换货人信息
+            <!-- 换货人信息 -->
+            {{ vmI18n.t('panel_label.exchangeInfo') }}
             <p slot="content">
               <businessForm :form-config="formConfigEx" :key="exFormKey"/>
             </p>
           </Panel>
           <Panel name="3">
             <!-- 退款金额 -->
-            退款金额
+            {{ vmI18n.t('form_label.refundAmount') }}
             <p slot="content">
               <ul class="calculation-main">
                 <li>
                   <div class="calculation-item">
                     <!-- 根据所有退货商品明细的应退金额合计自动算出，只读展示，正数 -->
-                    <span>商品应退金额</span>
+                    <!-- <span>商品应退金额</span> -->
+                    <span :title=" vmI18n.t('other.refundAmountGoods')">{{ vmI18n.t('other.refundAmountGoods') }}</span>
                     <label>{{PRO_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -37,33 +39,40 @@
                 <li>
                   <div class="calculation-item">
                     <!-- 正数，选填项 -->
-                    <span>应退运费</span>
+                    <!-- <span>应退运费</span> -->
+                    <span :title="vmI18n.t('form_label.ad')">{{ vmI18n.t('form_label.ad') }}</span>
                     <Input
                       v-model="SHIP_AMT"
                       type="text"
-                      :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/"
+                      :regx="/^\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
+                      @on-blur="e => {if(!e.target.value){this.SHIP_AMT = 0}}"
                     />
+                    <!-- :regx="/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/" -->
                   </div>
                 </li>
                 <li class="symbol">+</li>
                 <li>
                   <div class="calculation-item">
                     <!-- 可正可负，选填项 -->
-                    <span>调整金额</span>
+                    <!-- <span>调整金额</span> -->
+                    <span :title="vmI18n.t('table_label.adjustment_amount')">{{ vmI18n.t('table_label.adjustment_amount') }}</span>
                     <Input
                       v-model="ADJUST_AMT"
                       type="text"
-                      :regx="/^-?\d*\.{0,1}\d{0,4}$/"
+                      :regx="/^-?\d*\.{0,1}\d{0,2}$/"
                       placeholder="0.00"
+                      @on-blur="e => {if(!e.target.value || e.target.value == '-'){this.ADJUST_AMT = 0}}"
                     />
+                    <!-- 要做失焦处理，仅输入符号时，计算出的是NaN -->
                   </div>
                 </li>
                 <li v-show="showEx" class="symbol">-</li>
                 <li v-show="showEx">
                   <div class="calculation-item">
                     <!-- sum所有换货商品“成交金额“，只读，正数 -->
-                    <span>换货金额</span>
+                    <!-- <span>换货金额</span> -->
+                    <span :title="vmI18n.t('other.exchangeAmounts')">{{ vmI18n.t('other.exchangeAmounts') }}</span>
                     <label>{{EX_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -71,7 +80,8 @@
                 <li>
                   <div class="calculation-item">
                     <!-- 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，只读展示 -->
-                    <span class="black">最终应退总金额</span>
+                    <!-- <span class="black">最终应退总金额</span> -->
+                    <span class="black" :title="vmI18n.t('form_label.ae')">{{ vmI18n.t('form_label.ae') }}</span>
                     <label>{{FINAL_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -91,12 +101,10 @@
               @subTableData="subTableData"></returnChangeOrderdetails>
         </div>
       </div>
-      <!--单据状态图片展示 -->
-      <businessStatusFlag :status-name="statusName" />
     </div>
     <!-- 查询原始订单编号 -->
-    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" title="查询原平台单号">
-        <div class="dialog-footer" slot="footer">
+    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="vmI18n.t('form_label.cv')">
+        <div class="modal-footer" slot="footer">
             <businessButton :btn-config="btnConfigMo" />
         </div>
         <searchOOID :orderData="orderData" @getRowData="getRowData"></searchOOID>
@@ -111,31 +119,22 @@ import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
-import businessDialog from 'professionalComponents/businessDialog';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import commonUtils from 'burgeonConfig/config/commonUtils'
 import searchOOID from './searchOOID.vue'
 import returnChangeOrderdetails from './returnChangeOrderdetails.vue'
 import { valiObj, waterMarkMap } from './returnConfig.js'
 
 export default {
-  name: 'returngoodmanagement',
+  // name: 'returnOrderAdd',
   components: {
     returnChangeOrderdetails,
     searchOOID,
     businessButton,
     businessForm,
     businessActionTable,
-    businessDialog,
     businessLabel,
-    businessStatusFlag
   },
-  mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     const validatePhoneNumber = BurgeonValidate.validatePhoneNumber;
     return {
@@ -172,34 +171,41 @@ export default {
       // btnConfig: BtnConfig.config(),
       btnConfig: {
         typeAll: "default",
+        btnsite: "right",
         buttons: [
           {
-            text: "保存",
-            disabled: false, // 按钮禁用控制
+            text: $i18n.t("btn.save"),
+            webname: 'RETURNSAVE1',
+            isShow: true,
             btnclick: () => {
               this.save();
             },
           },
           {
+            webname: 'fix_back',
+            isShow: true,
             text: $i18n.t("btn.back"),
             btnclick: () => {
               this.back();
             },
-          },
+          }
         ],
       },
+      extendBtn: [],
       btnConfigMo: {
         typeAll: "default",
         btnsite: "right",
         buttons: [
           {
-            text: "取消",
+            // text: "取消",
+            text: $i18n.t("common.cancel"),
             btnclick: () => {
               this.orderModal = false;
             },
           },
           {
-            text: '确定',
+            // text: '确定',
+            text: $i18n.t("common.determine"),
             type: 'primary',
             btnclick: () => {
               this.queryorder();
@@ -209,6 +215,7 @@ export default {
       },
       // 基本信息
       formConfig: {
+        key: 'form1',
         formValue: {
           BILL_TYPE: '',
           SOURCE_CODE: '',
@@ -224,7 +231,7 @@ export default {
           CP_C_LOGISTICS_ID: '',
           EXPRESS_CODE: '',
           SYS_REMARK: '',
-          IS_RESERVED: '1',
+          IS_RESERVED: true,
         },
         ruleValidate: {
           BILL_TYPE: [{ required: true, message: ' ', trigger: 'blur' }],
@@ -268,7 +275,7 @@ export default {
             width: '6', // 所占宽度宽度
             rules: true,
             selectChange: (val) => {
-              this.modifyData("ORDER_TYPE", "master");
+              this.modifyData("BILL_TYPE", "master");
             },
           },
           {
@@ -277,7 +284,8 @@ export default {
             // label: $i18n.t('form_label.originalOrderNo'), // 原始订单编号输入框前文字
             width: '6',
             icon: 'ios-search',
-            placeholder: '输入后请按Enter',
+            // placeholder: '输入后请按Enter',
+            placeholder: $i18n.t("pHolder.a4"),
             rules: true,
             ghost: false, // 是否关闭幽灵按钮，默认开启
             inputenter: () => {
@@ -303,7 +311,8 @@ export default {
               fkdisplay: 'mrp',
               isfk: true,
               isnotnull: false,
-              name: '店铺名称', // 店铺名称
+              // name: '店铺名称', // 店铺名称
+              name: $i18n.t('table_label.shopName'),
               readonly: false,
               reftable: 'CP_C_SHOP',
               reftableid: 10348,
@@ -328,13 +337,13 @@ export default {
             colname: 'IS_RESERVED', // '0'/'1'
             onlyBox: true,
             width: '6',
-            inputChange: () => {
+            checkboxChange: () => {
               this.modifyData("IS_RESERVED", "master");
             },
           },
           {
             style: 'select',
-            // label: '退货类型', // 单据类型 
+            // label: '退货类型', 
             colname: 'RETURN_TYPE',
             width: '6', // 所占宽度宽度
             rules: true,
@@ -344,7 +353,7 @@ export default {
             options: [],
           },
           {
-            style: 'select',
+            style: 'input',
             // label: $i18n.t('form_label.reasonRefund'), // 退货原因
             colname: 'REFUND_REASON',
             width: '6',
@@ -369,6 +378,7 @@ export default {
             width: '6',
             inputChange: () => {
               this.modifyData("RETURNEE_MOBILE", "master");
+              this.formConfig.formValue.RECEIVER_MOBILE = this.formConfig.formValue.RETURNEE_MOBILE;
             },
           },
           {
@@ -376,12 +386,13 @@ export default {
             colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
             width: '6',
             itemdata: {
+              serviceId: "r3-cp",
               colid: 179536,
               colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
               fkdisplay: 'drp',
               isfk: true,
-              // name: $i18n.t('form_label.warehousingEntity'), // 入库实体仓
-              name: '入库实体仓',
+              name: $i18n.t('form_label.warehousingEntity'), // 入库实体仓
+              // name: '入库实体仓',
               pid: '',
               valuedata: '',
             },
@@ -391,22 +402,35 @@ export default {
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = e.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ENAME = e.valuedata;
             },
+            InputBlur: (e) => {
+              // this.oneObjs(e);
+              this.modifyData("CP_C_PHY_WAREHOUSE_IN_ID", "master");
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ID = e.pid;
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_IN_ENAME = e.valuedata;
+            },
           },
           {
-            style: 'popInput',
+            style: '',
             colname: 'CP_C_PHY_WAREHOUSE_ID',
             width: '6',
             itemdata: {
+              serviceId: "r3-cp",
               colid: 179536,
               colname: 'CP_C_PHY_WAREHOUSE_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '发货实体仓', // 发货实体仓
+              // name: '发货实体仓', // 发货实体仓
+              name: $i18n.t('form_label.af'),
               pid: '',
               valuedata: '',
             },
             oneObj: (e) => {
               // this.oneObjs(e);
+              this.modifyData("CP_C_PHY_WAREHOUSE_ID", "master");
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = e.pid;
+              this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = e.valuedata;
+            },
+            InputBlur: (e) => {
               this.modifyData("CP_C_PHY_WAREHOUSE_ID", "master");
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = e.pid;
               this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = e.valuedata;
@@ -417,6 +441,7 @@ export default {
             width: '6',
             colname: 'CP_C_LOGISTICS_ID',
             itemdata: {
+              serviceId: "r3-cp",
               colid: 179538,
               colname: 'CP_C_LOGISTICS_ID',
               fkdisplay: 'drp',
@@ -426,6 +451,11 @@ export default {
             },
             oneObj: (e) => {
               // this.oneObjs(e);
+              this.modifyData("CP_C_LOGISTICS_ID", "master");
+              this.formConfig.formValue.CP_C_LOGISTICS_ID = e.pid;
+              this.formConfig.formValue.CP_C_LOGISTICS_ENAME = e.valuedata;
+            },
+            InputBlur: (e) => {
               this.modifyData("CP_C_LOGISTICS_ID", "master");
               this.formConfig.formValue.CP_C_LOGISTICS_ID = e.pid;
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = e.valuedata;
@@ -522,10 +552,23 @@ export default {
               colname: 'CP_C_REGION_PROVINCE_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '收货人省份',
+              // name: '收货人省份',
+              name: $i18n.t('form_label.consignee_province'),
               valuedata: '',
             },
             oneObj: (val) => {
+              this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
+              this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
+              this.formConfigEx = this.emptyData(
+                this.formConfigEx,
+                "CP_C_REGION_PROVINCE_ID",
+                this.modify,
+                val,
+                ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]
+              );
+              this.modifyData("CP_C_REGION_PROVINCE_ID", "master", 1);
+            },
+            InputBlur: (val) => {
               this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
               this.formConfigEx.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
               this.formConfigEx = this.emptyData(
@@ -550,7 +593,8 @@ export default {
               colname: 'CP_C_REGION_CITY_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '收货人市',
+              // name: '收货人市',
+              name: $i18n.t('form_label.consignee_city'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -559,6 +603,18 @@ export default {
               },
             },
             oneObj: (val) => {
+              this.formConfigEx.formValue.CP_C_REGION_CITY_ID = val.pid;
+              this.formConfigEx.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
+              this.formConfigEx = this.emptyData(
+                this.formConfigEx,
+                "CP_C_REGION_CITY_ID",
+                this.modify,
+                val,
+                ["CP_C_REGION_AREA_ID"]
+              );
+              this.modifyData("CP_C_REGION_CITY_ID", "master", 1);
+            },
+            InputBlur: (val) => {
               this.formConfigEx.formValue.CP_C_REGION_CITY_ID = val.pid;
               this.formConfigEx.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
               this.formConfigEx = this.emptyData(
@@ -583,7 +639,8 @@ export default {
               colname: 'CP_C_REGION_AREA_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: '收货人区',
+              // name: '收货人区',
+              name: $i18n.t('form_label.aconsignee_area'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -596,10 +653,16 @@ export default {
               this.formConfigEx.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", 1);
             },
+            InputBlur: (val) => {
+              this.formConfigEx.formValue.CP_C_REGION_AREA_ID = val.pid;
+              this.formConfigEx.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
+              this.modifyData("CP_C_REGION_AREA_ID", "master", 1);
+            },
           },
           {
             style: 'input',
             // label: $i18n.t('form_label.platformType'), // 换货邮费
+            regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
             colname: 'EXCHANGE_SHIP_AMT',
             width: '6',
             inputChange: () => {
@@ -625,7 +688,8 @@ export default {
           isShow: true,
         },
         {
-          label: '换货明细', // 换货明细
+          // label: '换货明细',
+          label: $i18n.t('form_label.exchangeDetails'), // 换货明细
           value: '1',
           isShow: false,
         },
@@ -639,23 +703,25 @@ export default {
     'SHIP_AMT': {
       handler(newV, oldV) {
         const pa = Number(this.PRO_ACTUAL_AMT || 0);
-        const aa = Number(this.ADJUST_AMT);
+        const aa = Number(this.ADJUST_AMT == '-' ? 0 : this.ADJUST_AMT);
         const ea = Number(this.EX_ACTUAL_AMT || 0);
         this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(newV) + aa - ea, 2);
       }
     },
     'ADJUST_AMT': {
       handler(newV, oldV) {
+        const aa = newV == '-' ? 0 : newV;
         const pa = Number(this.PRO_ACTUAL_AMT || 0);
         const sa = Number(this.SHIP_AMT);
         const ea = Number(this.EX_ACTUAL_AMT || 0);
-        this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(newV) + sa - ea, 2);
+        this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(aa) + sa - ea, 2);
       }
     },
     "formConfig.formValue.BILL_TYPE": {
       handler(newV, oldV) {
         this.bT = newV;
         this.changeBillType(newV, oldV);
+        this.mainData.billType = newV;
       }
     },
     "formConfig.formValue.SOURCE_CODE": {
@@ -668,6 +734,9 @@ export default {
     console.log();
     this.relationShip();
   },
+  activated() {
+    // this.getBtn();
+  },
   destroyed() {
 
   },
@@ -676,23 +745,46 @@ export default {
     // BtnConfig.singleType = 1;
     this.$nextTick(() => {
       // this.getPermissions('btnConfig', 'orderManager');
+      // $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
+      this.loading = true;
       this.initObjItem(-1);
       setTimeout(() => {
         this.loading = false;
-      }, 110);
+      }, 1100);
     });
   },
   methods: {
+    // 获取按钮权限
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
+        console.log(res);
+        const { ACTIONS, SUB_ACTIONS } = res
+        console.log('buttons::', this.btnConfig.buttons);
+        /* this.btnConfig.buttons.forEach(item => {
+          ACTIONS.forEach(it => {
+            if (item.webname == it.webname) {
+              item.isShow = true;
+              item.text = it.webdesc;
+            } else {
+              item.isShow = false;
+            }
+          })
+        }) */
+      });
+    },
+
     // 单据类型变更
     changeBillType(nV, oV) {
       if (this.isCancel) return;
       const type = nV;
       const beType = oV;
       if (oV && type != beType) {
-        const msg = `当前单据为${beType == '0' ? '退货单' : '退换货单'}，是否进行换单！`
+        const panel = beType == '0' ? $i18n.t('panel_label.a0') : $i18n.t('panel_label.a1');
+        const msg = `${$i18n.t('modalTips.ge')}${panel}，${$i18n.t('modalTips.gf')}`
         this.$Modal.info({
           title: $i18n.t('modalTitle.tips'), // 提示
           content: msg,
+          className: 'ark-dialog',
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -708,7 +800,8 @@ export default {
                 this.exFormKey += 1;
                 this.labelList.find(it => it.value == '1').isShow = true;
                 this.formEmpty(this, 'formConfig', ['BILL_TYPE']);
-                this.formConfig.formValue.IS_RESERVED = '1'; // 默认值
+                this.formConfig.formValue.IS_RESERVED = true; // 默认值
+                this.modify.master.IS_RESERVED = true;
               });
             } else {
               this.showEx = false;
@@ -719,7 +812,16 @@ export default {
               this.DefaultValue = '0';
               this.formEmpty(this, 'formConfig', ['BILL_TYPE']);
               this.formEmpty(this, 'formConfigEx');
+              if (Object.keys(this.modify.master).includes('IS_RESERVED')) {
+                delete this.modify.master.IS_RESERVED
+              }
             }
+            // 特别地：清空'退款金额'Panel
+            this.SHIP_AMT = '0.00';
+            this.ADJUST_AMT = '0.00';
+            this.FINAL_ACTUAL_AMT = '0.00';
+            this.PRO_ACTUAL_AMT = '0.00';
+            this.EX_ACTUAL_AMT = '0.00';
             this.clearDetail += 1; // 清空明细
           },
           onCancel: () => {
@@ -762,14 +864,19 @@ export default {
           this.modify[key] = data[key] || [];
         }
       }
-      this.PRO_ACTUAL_AMT = data.PRO_ACTUAL_AMT || 0.00;
-      this.EX_ACTUAL_AMT = data.EX_ACTUAL_AMT || 0.00;
+      this.PRO_ACTUAL_AMT = data.PRO_ACTUAL_AMT || 0.00; // 商品应退金额
+      this.EX_ACTUAL_AMT = data.EX_ACTUAL_AMT || 0.00; // 换货金额
       const pa = Number(this.PRO_ACTUAL_AMT);
       const sa = Number(this.SHIP_AMT);
       const aa = Number(this.ADJUST_AMT);
       const ea = Number(this.EX_ACTUAL_AMT);
-      this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + sa + aa - ea, 2);
+      this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + sa + aa - ea, 2); // 最终应退总金额
       // this.FINAL_ACTUAL_AMT = data.PRO_ACTUAL_AMT;
+      /* if (data.length) {
+        this.PRO_ACTUAL_AMT = 0.00;
+        this.EX_ACTUAL_AMT = 0.00;
+        this.FINAL_ACTUAL_AMT = 0.00;
+      } */
     },
     labelClick(item) {
       this.labelDefaultValue = item.value;
@@ -777,20 +884,34 @@ export default {
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
-      let base = data.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_VIRTUAL_TABLE.ID+10)").childs;
-      setTimeout(async () => {
-        const dataEx = await this.$OMS2.omsUtils.getObject('OC_B_RETURN_ORDER_ECXCHANGE_TABLE', id)
-        this.baseEx = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+101)").childs;
-        this.reInfo = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+100)").childs;
-      }, 1);
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
-      setTimeout(() => {
-        this.loading = false;
-        this.watchChange = true;
-        this.modify.master.BILL_TYPE = '0'
-      }, 100);
-      this.mainData.fV = this.formConfig.formValue;
+      /* const step1 = new Promise(async (resolve) => {
+        const data = await self.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
+        let base = data.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_VIRTUAL_TABLE.ID+10)").childs;
+        resolve(base);
+      }); */
+      await $omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id).then(data => {
+        let base = data.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_VIRTUAL_TABLE.ID+10)").childs;
+        self.formConfig = $omsUtils.initFormConfig(base, self.formConfig);
+      }).then(async () => {
+        // self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
+        const dataEx = await $omsUtils.getObject('OC_B_RETURN_ORDER_ECXCHANGE_TABLE', id)
+        self.baseEx = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+101)").childs;
+        self.reInfo = dataEx.addcolums.find(it => it.parentname == "(OC_B_RETURN_ORDER_ECXCHANGE_TABLE.ID+100)").childs;
+      }).then(() => {
+        // $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true);
+        this.formConfig.key += 1;
+        console.log('buttons::', this.btnConfig.buttons);
+        this.mainData.fV = this.formConfig.formValue;
+        setTimeout(() => {
+          this.loading = false;
+          this.watchChange = true;
+          this.modify.master.BILL_TYPE = '0'
+        }, 100);
+      })
+      // const data = await this.$OMS2.omsUtils.getObject("OC_B_RETURN_ORDER_VIRTUAL_TABLE", id);
+      // setTimeout(async () => {
+      // }, 1);
+      // self.formConfig = this.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
     },
     // input回车查原单信息
     async queryEnter() {
@@ -798,14 +919,14 @@ export default {
       const ooId = self.formConfig.formValue.SOURCE_CODE;
       if (!ooId) return
       self.loading = true;
-      let searchdata = { "table": "OC_B_ORIG_ORDER", "startindex": 0, "range": 10, "fixedcolumns": { "SOURCE_CODE": ooId }, "column_include_uicontroller": true, "isolr": false }
+      let searchdata = { "table": "OC_B_ORIG_ORDER_TABLE", "startindex": 0, "range": 10, "fixedcolumns": { "SOURCE_CODE": ooId }, "column_include_uicontroller": true, "isolr": false }
       let formData = new FormData();
       formData.append("searchdata", JSON.stringify(searchdata));
       const res = await self.service.common.QueryList(formData, { serviceId: "r3-oc-oms" }).catch(() => {
         self.$Message.warning('p/cs/QueryList catch !');
       });
       if (!res.data.data.row.length) {
-        self.$Message.error('没有查询到当前平台单号！');
+        self.$Message.error($i18n.t('modalTips.gh')); // 没有查询到当前平台单号！
         self.loading = false;
         return
       }
@@ -837,12 +958,18 @@ export default {
           self.formConfig.formValue[key] = data[key].val
           if (!drpEx.includes(key)) self.formConfigEx.formValue[key] = data[key].val
           // 特别地
-          self.formConfig.formValue.RETURNEE_NAME = data.RECEIVER_NAME.val || '';
-          self.formConfig.formValue.RETURNEE_MOBILE = data.RECEIVER_MOBILE.val || '';
+          self.formConfig.formValue.RETURNEE_NAME = data.RECEIVER_NAME ? data.RECEIVER_NAME.val : '';
+          self.formConfig.formValue.RETURNEE_MOBILE = data.RECEIVER_MOBILE ? data.RECEIVER_MOBILE.val : '';
         }
       }
       // 单号改变，清空明细
       this.clearDetail += 1;
+      // 特别地：清空'退款金额'Panel
+      this.SHIP_AMT = '0.00';
+      this.ADJUST_AMT = '0.00';
+      this.FINAL_ACTUAL_AMT = '0.00';
+      this.PRO_ACTUAL_AMT = '0.00';
+      this.EX_ACTUAL_AMT = '0.00';
     },
     // 保存
     async save() {
@@ -885,20 +1012,20 @@ export default {
       const over = self.overLength(self.formConfig.formValue);
       if (over) return
       if (this.bT == '1') {
-        if (!tui.length) return this.$message.error("退货明细不能为空！");
-        if (!huan.length) return this.$message.error("换货明细不能为空！");
+        if (!tui.length) return this.$message.error($i18n.t('modalTips.gg')); // "退货明细不能为空！"
+        if (!huan.length) return this.$message.error($i18n.t('modalTips.gi')); // "换货明细不能为空！"
       } else if (this.bT == '0' && !tui.length) {
-        this.$message.error("退货明细不能为空！");
+        this.$message.error($i18n.t('modalTips.gg'));
         return false;
       }
       // 校验最终应退总金额不能小于0
       if (this.FINAL_ACTUAL_AMT < 0) {
-        this.$message.error("最终应退总金额不能小于0！");
+        this.$message.error($i18n.t('modalTips.gj')); // 最终应退总金额不能小于0！
         return
       }
       // 校验换货金额是否等于退货金额；一致则保存成功，不一致则提示“换货金额与退货金额不一致请重新确认”
       if (this.bT == '1' && this.EX_ACTUAL_AMT != this.PRO_ACTUAL_AMT) {
-        this.$message.error("换货金额与退货金额不一致请重新确认！");
+        this.$message.error($i18n.t('modalTips.gk')); // 换货金额与退货金额不一致请重新确认！
         return
       }
       /* =========== 保存校验 end =========== */
@@ -908,7 +1035,8 @@ export default {
         FINAL_ACTUAL_AMT: this.FINAL_ACTUAL_AMT,
         PRO_ACTUAL_AMT: this.PRO_ACTUAL_AMT,
         EX_ACTUAL_AMT: this.EX_ACTUAL_AMT,
-        info: bT == '0' ? '退货金额' : '换货金额',
+        // info: bT == '0' ? '退货金额' : '换货金额',
+        info: bT == '0' ? $i18n.t('panel_label.returnAmount') : $i18n.t('other.exchangeAmounts'),
       }
       if (bT == '0') delete EXCHANGE_PRICE.EX_ACTUAL_AMT;
       mainTable.ID = '-1';
@@ -937,14 +1065,15 @@ export default {
         // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           this.$destroy(true);
           this.$store.commit('global/tabOpen', {
             type: 'V',
             tableName: bT == 0 ? 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' : 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
-            label: '退换货单详情',
+            // label: '退换货单详情',
+            label: $i18n.t('panel_label.a2'),
             tableId: bT == 0 ? 10728 : 10754,
-            id: `${self.ID}?RETURN_SOURCE='手工新增'&SOURCE_CODE=${mainTable.SOURCE_CODE}`,
+            id: `${self.ID}?RETURN_SOURCE=手工新增&SOURCE_CODE=${mainTable.SOURCE_CODE}`,
           });
         }, 10);
       } else {
@@ -1065,7 +1194,7 @@ export default {
     // 原始订单编号 - 确定
     queryorder() {
       if (!Object.keys(this.platformData).length) {
-        this.$Message.warning('请选中一条单据！');
+        this.$Message.warning($i18n.t('modalTips.gl')); // 请选中一条单据！
         return false
       }
       this.renderForm(this.platformData);
@@ -1082,10 +1211,13 @@ export default {
         return;
       }
       const masterArr = Object.keys(self.modify.master);
-      if (masterArr.length) {
+      console.log('self.modify.master::', self.modify.master);
+      if (masterArr.length > 1) {
         this.$Modal.info({
           title: $i18n.t("modalTitle.tips"), // 提示
-          content: "当前修改未保存，确定返回？",
+          // content: "当前修改未保存，确定返回？",
+          content: $i18n.t('modalTips.gm'),
+          className: 'ark-dialog',
           mask: true,
           showCancel: true,
           okText: $i18n.t("common.determine"), // 确定
@@ -1099,13 +1231,14 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit("customize/TabOpen", {
         id: "2624",
         type: "action",
         name: "OC_B_RETURN_ORDER",
-        label: "退换货单",
+        // label: "退换货单",
+        label: $i18n.t('panel_label.a1'),
         back: true,
       });
     },

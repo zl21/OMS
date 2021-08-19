@@ -12,23 +12,24 @@ export default {
     return {
       vmI18n:$i18n,
       modal1: false,
+      shopTitle:$i18n.t('modalTitle.af'),
       shopModal: true,
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
       plantName: '', // 用户输入的
       active: 0, // 步骤进度
       steps: [
         {
-          name: '店铺授权',
+          name:  $i18n.t('form_label.ap'), //'店铺授权',
           icon: 'iconfont icon-qian',
           status: 'finish', // wait、process、finish、error
         },
         {
-          name: '店铺昵称',
+          name:  $i18n.t('form_label.aq'), //'店铺昵称',
           icon: 'iconfont icon-dingdan',
           status: 'wait',
         },
         {
-          name: '完善信息',
+          name:  $i18n.t('form_label.ar'),//'完善信息',
           icon: 'iconfont icon-weibiaoti-4',
           status: 'wait',
         },
@@ -40,12 +41,12 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
           {
-            text: '下一步',
+            text: $i18n.t('btn.next'), //'下一步',
             btnclick: () => {
               this.fnauth()
             },
@@ -57,18 +58,18 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
           {
-            text: '上一步',
+            text: $i18n.t('btn.previous'),//'上一步',
             btnclick: () => {
               this.fnSteps(1)
             },
           },
           {
-            text: '下一步',
+            text: $i18n.t('btn.next'),
             btnclick: () => {
               this.fnSteps(3)
               this.relationShip()
@@ -83,18 +84,18 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '上一步',
+            text: $i18n.t('btn.previous'),//'上一步',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.fnSteps(2)
             },
           },
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             btnclick: this.fnclose,
           },
           {
-            text: '保存',
+            text: $i18n.t('btn.save'),
             btnclick: this.fnSave,
           },
         ],
@@ -104,11 +105,11 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'),
             btnclick: this.fnclose,
           },
           {
-            text: '保存',
+            text: $i18n.t('btn.save'),
             btnclick: this.fnSave,
           },
         ],
@@ -118,12 +119,12 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '授权成功',
+            text: $i18n.t('btn.authorityYes'), //'授权成功',
             type: 'default',
             btnclick: this.fnSucceed,
           },
           {
-            text: '授权失败',
+            text: $i18n.t('btn.authorityNo'),//'授权失败',
             btnclick: this.fnFail,
           },
         ],
@@ -135,7 +136,7 @@ export default {
             type: 'Input', // 组件类型
             required: true, // 是否必填
             field: 'CP_C_PLATFORM_NAME',
-            label: '平台类型',
+            label: $i18n.t('form_label.platformType'),
             props: {
               placeholder: '',
               value: '',
@@ -192,11 +193,30 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '店铺名称',
+            label: $i18n.t('table_label.shopName'), // 店铺名称
             value: 'CP_C_SHOP_TITLE',
             colname: 'CP_C_SHOP_TITLE',
             width: '12',
             disabled: false,
+          },
+          {
+            style: 'input',
+            label: '卖家姓名',
+            value: 'SELLER_NAME',
+            colname: 'SELLER_NAME',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
+          },
+          {
+            style: 'input',
+            label: '手机号',
+            value: 'SELLER_PHONE',
+            colname: 'SELLER_PHONE',
+            class: 'beizu',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
           },
           {
             version: '1.4',
@@ -336,15 +356,7 @@ export default {
               this.masterModifyData('CP_C_REGION_AREA_id', 'master')
             },
           },
-          {
-            style: 'input',
-            label: '卖家姓名',
-            value: 'SELLER_NAME',
-            colname: 'SELLER_NAME',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+          
           {
             style: 'input',
             label: '卖家地址',
@@ -355,16 +367,7 @@ export default {
             disabled: false,
             inputChange: () => {},
           },
-          {
-            style: 'input',
-            label: '手机号',
-            value: 'SELLER_PHONE',
-            colname: 'SELLER_PHONE',
-            class: 'beizu',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+          
         ],
         // 存储表单得所有值
         formValue: {
@@ -443,11 +446,30 @@ export default {
           },
           {
             style: 'input',
-            label: '店铺名称',
+            label: $i18n.t('table_label.shopName'),
             value: 'CP_C_SHOP_TITLE',
             colname: 'CP_C_SHOP_TITLE',
             width: '12',
             disabled: false,
+          },
+          {
+            style: 'input',
+            label: '卖家姓名',
+            value: 'SELLER_NAME',
+            colname: 'SELLER_NAME',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
+          },
+          {
+            style: 'input',
+            label: $i18n.t('form_label.cellPhone_number'),
+            value: 'SELLER_PHONE',
+            colname: 'SELLER_PHONE',
+            class: 'beizu',
+            width: '12',
+            disabled: false,
+            inputChange: () => {},
           },
           {
             version: '1.4',
@@ -588,15 +610,7 @@ export default {
             },
           },
 
-          {
-            style: 'input',
-            label: '卖家姓名',
-            value: 'SELLER_NAME',
-            colname: 'SELLER_NAME',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+         
           {
             style: 'input',
             label: '卖家地址',
@@ -607,16 +621,7 @@ export default {
             disabled: false,
             inputChange: () => {},
           },
-          {
-            style: 'input',
-            label: '手机号',
-            value: 'SELLER_PHONE',
-            colname: 'SELLER_PHONE',
-            class: 'beizu',
-            width: '12',
-            disabled: false,
-            inputChange: () => {},
-          },
+         
         ],
         // 存储表单得所有值
         formValue: {
@@ -744,7 +749,7 @@ export default {
       this.REQUEST_ID = ''
     },
     fnMessage(msg) {
-      this.$Message.error(`请输入${msg}!`)
+      this.$Message.error($i18n.t('pHolder.enter')+`${msg}!`)
     },
     fnSave() {
       let str = ''
@@ -822,7 +827,7 @@ export default {
       console.log('retrurnNick:>>>', this.shopdata.retrurnNick)
       if (this.shopdata.retrurnNick != 'Y') {
         if (!item.item.props.value) {
-          this.$Message.error('请填写店铺昵称！')
+          this.$Message.error($i18n.t('modalTips.gz') )
           return
         }
       }
@@ -854,7 +859,7 @@ export default {
       } else if (res.type == 'otherPlatform') {
         this.fnSteps(4)
         this.formconfig.formValue.CP_C_PLATFORM_ECODE = 'otherPlatform'
-        this.formconfig.formValue.CP_C_PLATFORM_NAME = '其他平台'
+        this.formconfig.formValue.CP_C_PLATFORM_NAME = $i18n.t('modalTitle.ai') //'其他平台'
       } else {
         let data = {
           params: {
@@ -871,7 +876,7 @@ export default {
             if (this.shopdata.authTips) {
               let obj = {
                 style: 'formCompile',
-                label: '授权指引',
+                label:  $i18n.t('form_label.ay') ,//'授权指引',
                 colname: 'authTips',
                 slotName: 'formCompile',
                 class: 'beizu',
@@ -966,7 +971,7 @@ export default {
             type: 'tapOpen',
             plantLogo: [
               {
-                URL: '/static/img/u1105.png',
+                URL: require('@/assets/img/u1105.png') ,
               },
             ],
           },
@@ -975,7 +980,7 @@ export default {
             type: 'otherPlatform',
             plantLogo: [
               {
-                URL: '/static/img/u48690.png',
+                URL:  require('@/assets/img/u48690.png') ,
               },
             ],
           },
@@ -1024,7 +1029,7 @@ export default {
     },
     // 返回
     back() {
-      this.$comUtils.tabCloseAppoint(this)
+      $omsUtils.tabCloseAppoint(this)
       this.$destroy(true)
       this.$store.commit('global/tabOpen', {
         tableId: 10348,

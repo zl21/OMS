@@ -26,7 +26,8 @@ export default {
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
-          name: '店铺', // 店铺 input前面显示的lable值
+          serviceId: 'r3-cp',
+          name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           pid: '',
           valuedata: '', // 这个是选择的值
@@ -44,7 +45,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: '平台退款单号', // 平台商品ID 输入框前文字
+        label: $i18n.t('form_label.platformRefundNo'), // 平台退款单号 输入框前文字
         value: 'sp_ids', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -55,6 +56,9 @@ export default {
         // setRequired: "required" //必选标识,值不为required时无标识
       },
     ]
+  },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {
@@ -83,8 +87,6 @@ export default {
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);
-    } else {
-      // _this.$Message.error(message);
     }
   }
 };

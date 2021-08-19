@@ -1,5 +1,4 @@
 // import dateUtil from "@/assets/js/__utils__/date";
-// import myInputLd from 'framework/components/element/input.vue';
 import MultipleBox from 'professionalComponents/multipleBox';
 import SingleBox from 'professionalComponents/singleBox';
 import BurgeonDate from '@/assets/js/__utils__/date';
@@ -40,7 +39,8 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING', // 这个是后台用的
-          valuedata: '' // 这个是选择的值
+          notForm: true,
+          valuedata: '', // 这个是选择的值
         }
       },
       prov_data: {
@@ -65,6 +65,7 @@ export default {
           row: 1,
           statsize: -1,
           type: 'STRING',
+          notForm: true,
           valuedata: ''
         }
       },
@@ -193,7 +194,7 @@ export default {
       endTime = Number(endTime) > 0 ? Number(endTime) : 0;
       this.offlineTime = 0;
       if (BurgeonDate.isDate(this.basicData.offline_time)) {
-        this.offlineTime = this.$comUtils.dateFormat(this.basicData.offline_time , 'yyyyMMddhhmmss');
+        this.offlineTime = $omsUtils.dateFormat(this.basicData.offline_time , 'yyyyMMddhhmmss');
       } else {
         this.offlineTime = this.basicData.offline_time.replace(/\/|\s|\:/g, '');
       }
@@ -202,7 +203,7 @@ export default {
         // && (Number(endTime) + diff > offline_time)
         if (endTime !== 0) {
           this.offlineTime = BurgeonDate.addDays(new Date(this.basicData.time_limit[1]), 2);
-          this.basicData.offline_time = this.$comUtils.dateFormat(this.offlineTime , 'yyyy/MM/dd hh:mm:ss')
+          this.basicData.offline_time = $omsUtils.dateFormat(this.offlineTime , 'yyyy/MM/dd hh:mm:ss')
         }
       } catch (e) {
         throw new Error(e);

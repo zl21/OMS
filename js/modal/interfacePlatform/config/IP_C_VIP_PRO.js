@@ -1,4 +1,3 @@
-// import httpServer from 'framework/__utils__/request';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 唯品会 - 淘宝商品（下载商品）
@@ -8,6 +7,7 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         isActive: true,
@@ -20,6 +20,7 @@ export default {
           }
         ],
         itemdata: {
+          serviceId: 'r3-cp',
           col: 1,
           colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称

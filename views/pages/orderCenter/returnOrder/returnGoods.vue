@@ -1,7 +1,7 @@
 <!--
  * @Author:xx
  * @Date: 2021-05-22 15:24:50
- * @LastEditTime: 2021-05-25 14:57:44
+ * @LastEditTime: 2021-08-10 10:10:50
  * @LastEditors: Please set LastEditors
  * @Description: 退换货订单-退货单明细
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/returnGoods.vue
@@ -36,7 +36,7 @@ export default {
       haveGift: '', // 挂靠赠品-商品编码
       haveGroup: '', // 组合/福袋下挂的其他关联商品-商品编码
       businessActionTable: {
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         columns: [
           {
             key: 'PS_C_PRO_ECODE',
@@ -139,7 +139,7 @@ export default {
         value: ''
       }, // 弹框配置
       tableConfig: {
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         selectLength: 0,
         columns: addDetailModalTableColumns, // 表头
         data: [], // 数据配置
@@ -284,7 +284,8 @@ export default {
     // 退货明细 - 添加明细按钮
     returnAddDetail() {
       if (!this.mainData.SOURCE_CODE) {
-        this.$Message.warning('原平台单号不能为空！');
+        // this.$Message.warning('原平台单号不能为空！');
+        this.$Message.warning($i18n.t('modalTips.ho'));
         return
       }
       this.returnDetailAddTable.modal = true;

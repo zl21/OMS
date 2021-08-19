@@ -10,7 +10,8 @@
     <div class="TreasuryDefault">
       <Collapse v-model="openDefault">
         <Panel name="1">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm
               :form-config="information"

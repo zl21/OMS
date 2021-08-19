@@ -1,7 +1,7 @@
 <!--
  * @Author: zhou.l
  * @Date: 2021-06-01 11:26:07
- * @LastEditTime: 2021-06-03 20:33:06
+ * @LastEditTime: 2021-08-10 10:08:33
  * @LastEditors: Please set LastEditors
  * @Description: 赔付单-新增/编辑-商品明细
  * @FilePath: /burgeon-project-logic/js/pages/orderCenter/payDetail.vue
@@ -23,11 +23,15 @@
       titleAlign="left"
       title="新增明细"
       :mask="true"
+      class-name="ark-dialog"
     >
       <div class="dialog-footer" slot="footer">
         <businessButton :btn-config="btnConfigMo" />
       </div>
-      <payDetailAdd @detailAddData="detailAddDataHandel"></payDetailAdd>
+      <payDetailAdd
+        @detailAddData="detailAddDataHandel"
+        :subData="tableConfig.data"
+      ></payDetailAdd>
     </Modal>
   </div>
 </template>
@@ -38,7 +42,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import payDetailAdd from './payDetailAdd.vue';
 
 export default {
-  name: 'payDetail',
+  // name: 'payDetail',
   components: {
     payDetailAdd,
     businessButton,
@@ -63,6 +67,7 @@ export default {
     return {
       vmI18n: $i18n,
       loading: false,
+      status: '', // 根据单据状态渲染
       tableConfig: {
         height: 300,
         indexColumn: true, // 是否显示序号
@@ -86,40 +91,40 @@ export default {
               isShow: true,
               btnclick: (e) => {
                 console.log('删除明细');
-                if (!this.tableConfig.selectData) {
+                if (!this.tableConfig.selectData.length) {
                   this.$Message.warning('请选中一条单据！');
                   return false
                 }
                 const allDa = this.tableConfig.data;
                 const selDa = this.tableConfig.selectData;
-                this.tableConfig.data = this.$OMS2.omsUtils.getDifferentArr(
+                const key = this.exCode ? 'OC_B_ORDER_DELIVERY_ID' : 'PS_C_SKU_ECODE';
+                this.tableConfig.data = $omsUtils.getDifferentArr(
                   allDa,
                   selDa,
-                  "PS_C_SKU_ECODE"
+                  key
                 );
                 // this.totalNum();
                 this.tableConfig.total = this.tableConfig.data.length;
-                let deleteIds = this.$OMS2.omsUtils.sonList(selDa, 'ID')
+                let deleteIds = $omsUtils.sonList(selDa, 'ID')
                 deleteIds = deleteIds.filter(id => id != '-1');
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ deleteIds })));
                 const detail = this.tableConfig.data;
                 R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail })));
                 this.tableConfig.selectData = [];
-                R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
               }
             },
           ],
         }, // 按钮配置
-        businessFormConfig: {}, // 表单配置
+        // businessFormConfig: {}, // 表单配置
         columns: [], // 表头
         data: [], // 数据配置
+        // data: [{ "COMPENSATE_AMT": '0.00', "COMPENSATE_QTY": 0, "OC_B_ORDER_DELIVERY_ID": null, "OC_B_ORDER_ID": null, "PRICE": 23, "PRICE_ACTUAL": 23, "PS_C_PRO_ECODE": "0011", "PS_C_PRO_ENAME": "轩妈中秋大礼包", "PS_C_SKU_ECODE": "12343214432", "PS_C_SKU_ENAME": "12343214432", "PS_C_SPEC1_ENAME": null, "PS_C_SPEC2_ENAME": null, "PS_C_SPEC3_ENAME": null, "QTY": 0, "REAL_AMT": '0.00', "ID": "-1" }],
         selectData: [],
         pageShow: true, // 控制分页是否显示
         loading: false,
-        indexColumn: true, // 是否显示序号
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10 // 每页条数
       },
       btnConfigMo: {
@@ -127,13 +132,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: "取消",
+            text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.tableConfig.modal = false;
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               const self = this;
@@ -141,6 +146,14 @@ export default {
                 this.$Message.warning('请选中一条单据！');
                 return false
               } else {
+                if (!this.exCode || this.exCode == '-1') {
+                  // 未关联原单-展示0.00
+                  this.addData.forEach(it => {
+                    it.COMPENSATE_AMT = it.COMPENSATE_AMT === 0 ? '0.00' : it.COMPENSATE_AMT;
+                    it.REAL_AMT = it.REAL_AMT === 0 ? '0.00' : it.REAL_AMT;
+                    it.COMPENSATE_QTY = it.COMPENSATE_QTY === 0 ? 1 : it.COMPENSATE_QTY;
+                  })
+                }
                 this.tableConfig.data = this.tableConfig.data.concat(this.addData);
                 this.tableConfig.total += this.addData.length;
                 const detail = this.tableConfig.data;
@@ -158,103 +171,149 @@ export default {
     };
   },
   computed: {
+    exCode() {
+      // clear时监听不到store上的值的变化（因为存的是对象），在store中调整修改对象值的方式
+      return R3.store.state.customize.COMPENSATE.exCode
+    },
     ID() {
       return this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1';
     },
     isEdit() {
-      return R3.store.state.customize.REDUNDANT_ORDER_ID; // store.REDUNDANT_ORDER_ID 存的是物流单号
+      // return R3.store.state.customize.REDUNDANT_ORDER_ID; // store.REDUNDANT_ORDER_ID 存的是物流单号
+      return R3.store.state.customize.COMPENSATE.orderId
     }
   },
   watch: {
-    isEdit(newVal) {
+    /* isEdit(newVal) {
       setTimeout(() => {
         if (newVal == 'zhoulan') return
         if (newVal == 'clear') {
-          this.initTable(1, 10, true, '-1'); // 清空明细
+          this.initTable(1, 10, true, ''); // 清空明细
         } else {
-          this.initTable(1, 10, newVal ? false : true, newVal ? newVal : '-1');
+          this.initTable(1, 10, newVal ? false : true, newVal ? newVal : '');
         }
+      }, 10);
+    } */
+    exCode(newVal, oldVal) {
+      setTimeout(() => {
+        /* if (newVal == oldVal) {
+          return
+        } */
+        this.initTable(1, 10, newVal ? false : true, newVal);
       }, 10);
     }
   },
+  activated() {
+    const data = R3.store.state.customize.COMPENSATE.detail;
+    this.tableConfig.data = data;
+  },
   created() { },
-  destroyed() { },
+  destroyed() {
+    R3.store.commit('customize/COMPENSATE', { orderId: '' });
+    R3.store.commit('customize/COMPENSATE', { exCode: '' });
+    this.initTable(1, 10, true, ''); // 清空明细
+  },
   mounted() {
-    this.$nextTick(async () => {
-      const _this = this;
-      const step1 = new Promise(async function (resolve, reject) {
-        _this.tableConfig.loading = true;
-        const subData = await _this.$OMS2.omsUtils.initSubtable('OC_B_COMPENSATE_ORDER_ITEM', _this.ID, '181120').catch(() => {
-          _this.tableConfig.loading = false; _this.$Message.error('查询子表接口（/p/cs/objectTableItem）报错！')
-          reject()
-        });
-        const columns = subData.columns.filter(it => it.key != 'ID');
-        console.log('columns::', columns);
-        _this.tableConfig.columns = columns;
-        if (_this.ID != '-1') {
-          _this.tableConfig.data = subData.rowData;
-          const detail = _this.tableConfig.data
-          _this.tableConfig.total = subData.otherData.totalRowCount;
-          R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail })));
+    this.getData();
+    // 刷新
+    window.addEventListener('customizeClick', e => {
+      if (e.detail.type == 'refresh') {
+        if (this.ID != '-1') {
+          this.getData();
         } else {
-          _this.renderHandle(['COMPENSATE_QTY', 'COMPENSATE_AMT']);
+          this.initTable(1, 10, 1, this.exCode)
         }
-        resolve();
-      });
-      step1.then(async () => {
-        if (_this.ID != '-1') {
-          // 详情-单据状态=0时，才展示新增/删除明细
-          // 详情-单据状态=0时，商品明细才可编辑
-          const fromdata = new FormData();
-          fromdata.append('table', 'OC_B_COMPENSATE_ORDER');
-          fromdata.append('objid', _this.ID);
-          const {
-            data: { code, data, message },
-          } = await _this.service.common.getObject(fromdata).catch(e => {
-            _this.tableConfig.loading = false;
-            if (code != '-1') return _this.$Message.error('查询详情接口（/p/cs/getObject）报错！')
-          })
-          const status = data.addcolums[1].childs[3].valuedata;
-          let storeOther = JSON.parse(JSON.stringify(R3.store.state.customize.COMPENSATE.other))
-          storeOther.exCode = data.addcolums[1].childs[4].valuedata;
-          R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: storeOther })));
+      }
+    })
+  },
+  methods: {
+    async getData() {
+      const _this = this;
+      if (_this.ID != '-1') {
+        // 详情-单据状态=0（未客审）时，才展示新增/删除明细，商品明细才可编辑
+        _this.tableConfig.loading = true;
+        const fromdata = new FormData();
+        fromdata.append('table', 'OC_B_COMPENSATE_ORDER');
+        fromdata.append('objid', _this.ID);
+        const {
+          data: { code, data, message },
+        } = await _this.service.common.getObject(fromdata).catch(e => {
+          _this.tableConfig.loading = false;
+          if (code != '-1') return _this.$Message.error('查询详情接口（/p/cs/getObject）报错！')
+        })
+        _this.status = data.addcolums[1].childs.find(i => i.colname == "ORDER_STATUS").valuedata;
+        const exCode = data.addcolums[1].childs.find(i => i.colname == "EXPRESS_CODE").valuedata;
+        R3.store.commit('customize/COMPENSATE', { exCode });
+        await _this.initTable(1, 10, 1, exCode);
+        _this.tableConfig.loading = false;
+      } else {
+        await _this.initTable(1, 10, 0, '');
+      }
+    },
+    /**
+     * >> 仅新增页面会走，通过watch监听'物流单号'触发，仅用于新增时初始化原单带出的明细
+     * >> 调整一下，详情也走这，不走（/p/cs/objectTableItem）了，因为拿不到数据的唯一key
+     * >> 再调整一下，详情初始化明细还是走标准接口，接口返回数据唯一标识，前端隐藏掉该列
+     * 入参说明：
+     * 1. 新增时根据原单带出明细（页面新增 且 有原单）
+        expressCode: "9998975701" // 没有就传'-1'(clear的情况)
+        mainId: "-1"
+        pageNum: 1
+        pageSize: 10
+     * 2. 新增页面初始化表头没走这个：在mounted里走的框架标准子表接口
+     */
+    async initTable(page = 1, pageSize = 10, isInit, oriId) {
+      const _this = this;
+      console.log('payDetailAdd::initTable::');
+      // if (this.ID != '-1') return
+      this.loading = true;
+      if (isInit) {
+        this.tableConfig.data = []
+        this.tableConfig.total = 0;
+        if (this.ID == '-1') oriId = oriId ? oriId : '-1';
+      }
+      // store上取不到刚刚通过defined自定义表单组件设置的值，好像没有触发框架去保存在store上
+      const pageInfo = { pageNum: page, pageSize }
+      let param = { ...pageInfo }
+      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.exCode || '-1'; // 待商议，详情没单号时，不传-1，接口报错
+      param.mainId = this.ID;
+      param.web = 'payDetail';
+      // 新增/详情-表头
+      const subData = await _this.$OMS2.omsUtils.initSubtable('OC_B_COMPENSATE_ORDER_ITEM', _this.ID, '181120')
+      const columns = subData.columns.filter(it => !['ID', 'OC_B_ORDER_DELIVERY_ID'].includes(it.key));
+      _this.tableConfig.columns = columns;
+
+      if (this.ID != '-1') { // 详情拿不到key，要改
+        _this.tableConfig.data = subData.rowData;
+        const detail = _this.tableConfig.data
+        _this.tableConfig.total = subData.otherData.totalRowCount;
+        R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail })));
+      } else {
+        // if (!param.expressCode) delete param.expressCode
+        const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(() => {
+          this.loading = false;
+        });
+        // this.tableConfig.data = param.expressCode != '-1' ? this.tableConfig.data.concat(data.data) : this.tableConfig.data.concat([]);
+        data.data.map(it => it.ID = '-1')
+        this.tableConfig.data = data.data;
+        this.tableConfig.total = data.pageInfo.total;
+        R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+      }
+
+      setTimeout(() => {
+        if (this.ID == '-1') {
+          _this.renderHandle(['COMPENSATE_QTY', 'COMPENSATE_AMT']);
+        } else {
           const buttonList = _this.tableConfig.businessButtonConfig.buttons;
-          if (status == '0') {
+          if (_this.status == '0') {
             _this.renderHandle(['COMPENSATE_QTY', 'COMPENSATE_AMT']);
             _this.tableConfig.businessButtonConfig.buttons = buttonList;
           } else {
             _this.tableConfig.businessButtonConfig.buttons = [];
           }
         }
-        _this.tableConfig.loading = false;
-      });
-    });
-  },
-  methods: {
-    // 新增时带出明细
-    async initTable(page = 1, pageSize = 10, isInit, oriId) {
-      if (this.ID != '-1') return
-      this.loading = true;
-      if (isInit) {
-        this.tableConfig.data = []
-        this.tableConfig.total = 0;
-      }
-      // store上取不到刚刚通过defined自定义表单组件设置的值，好像没有触发框架去保存在store上
-      const pageInfo = { pageNum: page, pageSize }
-      let param = { ...pageInfo }
-      param.expressCode = oriId ? oriId : R3.store.state.customize.COMPENSATE.other.expressCode || '';
-      if (!param.expressCode) delete param.expressCode;
-      param.mainId = this.ID;
-      const { data: { code, data } } = await this.service.orderCenter.payQueryProList(param).catch(() => {
         this.loading = false;
-      });
-      if (this.ID == '-1') {
-        data.data.map(it => it.ID = '-1')
-      }
-      this.tableConfig.data = param.expressCode != '-1' ? this.tableConfig.data.concat(data.data) : this.tableConfig.data.concat([]);
-      this.tableConfig.total += param.expressCode != '-1' ? data.pageInfo.total : 0;
-      R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
-      this.loading = false;
+      }, 100);
     },
     renderHandle(arr) {
       let obj = {
@@ -263,11 +322,14 @@ export default {
           // 赔付数量
           return h('InputNumber', {
             props: {
-              value: Number(params.row.COMPENSATE_QTY || 0),
-              regx: /^[1-9]\d*$/,
-              max: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? Number(params.row.QTY || 0) : Infinity,
-              min: 0,
+              value: Number(params.row.COMPENSATE_QTY || 1),
+              // regx: /^[1-9]\d*$/, // 此组件正则不管用
+              max: self.exCode ? Number(params.row.QTY || 0) : Infinity,
+              // min: (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0, // 关联了原单最小1，反之最小0
+              min: 1,
               editable: true,
+              formatter: value => `${value}`.replace(/\./g, ''),
+              parser: value => value.replace(/\./g, ''),
             },
             on: {
               'on-change': e => {
@@ -276,14 +338,28 @@ export default {
                     注：若主表未关联原订单，则赔付数量默认为0；
                  * 2.赔付金额：默认为 赔付数量*成交单价（ PRICE_ACTUAL ），可手动修改，但不能超过“赔付数量*成交单价”，保留两位小数；
                  */
+                // params.row.COMPENSATE_QTY = null;
                 params.row.COMPENSATE_QTY = e;
-                params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(e * Number(params.row.PRICE_ACTUAL || 0), 2);
-                this.tableConfig.data[params.index] = params.row;
-                R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+                if (e) {
+                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(e * Number(params.row.PRICE_ACTUAL || 0), 2);
+                  this.tableConfig.data[params.index] = params.row;
+                  R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+                }
+                // params.row._rowKey = $omsUtils.generateKey(); // 写上就删不掉输入框里面的0
+              },
+              'on-blur': e => {
+                const cq = params.row.COMPENSATE_QTY;
+                if (!cq && cq !== 0) {
+                  // params.row.COMPENSATE_QTY = (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
+                  params.row.COMPENSATE_QTY = 1;
+                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(params.row.COMPENSATE_QTY * Number(params.row.PRICE_ACTUAL || 0), 2);
+                  params.row._rowKey = $omsUtils.generateKey();
+                  this.tableConfig.data[params.index] = params.row;
+                  R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
+                }
               }
             }
           });
-
         },
         COMPENSATE_AMT: (h, params) => {
           const self = this;
@@ -302,9 +378,9 @@ export default {
                 //   // const ca = Number(e);
                 //   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL || 0);
                 //   if (ca > relCa) {
-                //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
+                //     params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
                 //   } else {
-                //     params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                //     params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
                 //   }
                 //   this.tableConfig.data[params.index] = JSON.parse(JSON.stringify(params.row));
                 //   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
@@ -316,12 +392,13 @@ export default {
                   console.log(e.target._value);
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
-                  if (ca > relCa) {
-                    params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(relCa, 2);
-                    ++params.row._rowKey;
-                  } else {
-                    params.row.COMPENSATE_AMT = this.$OMS2.omsUtils.floatNumber(ca, 2);
+                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
+                  if (self.exCode) {
+                    if (ca > relCa) {
+                      params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
+                    }
                   }
+                  params.row._rowKey = $omsUtils.generateKey();
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 });

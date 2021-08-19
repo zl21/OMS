@@ -209,20 +209,20 @@ export default {
           row.RESULT_MSG = row.message;
           return row
         });
-        this.$OMS2.omsUtils.tipShow('confirm', this, res, res.data.message, function (h) {
+        $omsUtils.tipShow('confirm', this, res, res.data.message, function (h) {
           return h('Table', {
             props: {
               columns: [
                 {
-                  title: '序号',
+                  title: $i18n.t('table_label.serialNo'), // 序号
                   key: 'INDEX'
                 },
                 {
-                  title: '单据编号',
+                  title: $i18n.t('form_label.billNo'), // 单据编号
                   key: 'BILL_NO'
                 },
                 {
-                  title: '失败原因',
+                  title: $i18n.t('form_label.e0'), // 失败原因
                   key: 'RESULT_MSG'
                 }
               ],

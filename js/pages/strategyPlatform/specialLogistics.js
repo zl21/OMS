@@ -21,7 +21,7 @@ export default {
     businessActionTable,
     subTable
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   watch: {
     'formConfig.formValue': {
       //监听主表
@@ -44,15 +44,15 @@ export default {
       //监听包裹属性
       handler(val) {
         val && this.changeCount++;
-        console.log(this.changeCount);
+        // console.log(this.changeCount);
       },
       deep: true
     },
-    data3: {
+    "tableConfig3.data": {
       //监听指定商品
       handler(val) {
         val && this.changeCount++;
-        console.log(this.changeCount);
+        // console.log(this.changeCount);
       },
       deep: true
     },
@@ -60,7 +60,7 @@ export default {
       //监听仓库物流
       handler(val) {
         val && this.changeCount++;
-        console.log(this.changeCount);
+        // console.log(this.changeCount);
       },
       deep: true
     }
@@ -73,14 +73,18 @@ export default {
         tablename: '',
         objid: '',
       },
+      baseInformation:$i18n.t('common.baseInformation'),
+      meet_conditions:$i18n.t('form_label.meet_conditions'),
+      increase:$i18n.t('btn.increase'),
+      cancel:$i18n.t('common.cancel'),
       // tab切换配置
       labelList: [
         {
-          label: '执行动作',
+          label: $i18n.t("panel_label.ae"), // 执行动作
           value: 'PROPERTY'
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_SPECIAL_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -99,45 +103,38 @@ export default {
       panelDefaultValue1: 'panel_baseInfo1', // 设置默认打开'基本信息'
       labelDefaultValue: 'PROPERTY', // 设置tab默认值，默认展示'自定义属性'
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
+            isShow: false,
+            webname: this.$route.params.customizedModuleName + "_save",
             disabled: false, // 按钮禁用控制
             btnclick: this.fnSave
           },
           {
+            isShow: false,
+            webname: this.$route.params.customizedModuleName + "_back",
             text: $i18n.t('btn.back'),
             btnclick: this.back
-          },
-          // {
-          //   text: '启用',
-          //   isShow: false,
-          //   disabled: false,
-          //   btnclick: () => {
-          //     this.fnSetIsActive('Y');
-          //   }
-          // },
-          // {
-          //   text: '停用',
-          //   isShow: false,
-          //   disabled: false,
-          //   btnclick: () => {
-          //     this.fnSetIsActive('N');
-          //   }
-          // }
+          }
         ]
       },
       btnConfig1: {
         typeAll: 'default',
         buttons: [
           {
-            text: '添加',
+            type: 'primary',
+            text: $i18n.t('btn.increase'),//'添加',
+            disabled: false,
             btnclick: this.foottable
           },
           {
-            text: '删除',
+            type: 'warning',
+            text: $i18n.t('btn.delete'), // 删除
+            disabled: false,
             btnclick: this.deleteLogistics
           }
         ]
@@ -149,7 +146,7 @@ export default {
             version: '1.4',
             colname: 'cpCShopTitle',
             style: 'popInput', // 输入框弹框单多选
-            label: '店铺名称',
+            label: $i18n.t('table_label.shopName'), // 店铺名称
             width: '12',
             itemdata: {
               col: 1,
@@ -162,7 +159,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
               reftableid: 10285, // 对应的表ID
@@ -237,6 +234,16 @@ export default {
               this.formConfig.formValue.Time[1] && (this.formConfig.formValue.endTime = dateUtil.getFormatDate(this.formConfig.formValue.Time[1], 'yyyy-MM-dd') + " 23:59:59")
             }
           },
+          {
+            style: 'input',
+            label: '优先级',
+            colname: 'priority',
+            width: '12',
+            regx: /^[0-9]*$/,
+            disabled: false,
+            maxlength: 11,
+            inputChange: () => { }
+          },
 
           {
             style: 'radio',
@@ -253,13 +260,6 @@ export default {
                 value: 2
               }
             ],
-            inputChange: () => { }
-          }, {
-            style: 'input',
-            label: '优先级',
-            colname: 'priority',
-            width: '12',
-            disabled: false,
             inputChange: () => { }
           },
 
@@ -286,7 +286,7 @@ export default {
         formData: [
           {
             style: null,
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             colname: 'ecode',
             width: '6',
             disabled: true,
@@ -294,17 +294,18 @@ export default {
           },
           {
             style: 'input',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             value: 'ename',
             colname: 'ename',
             width: '6',
+            maxlength: 200,
             disabled: false,
             inputChange: () => { }
           },
           {
             style: 'date',
             type: 'datetime',
-            label: '生效开始时间',
+            label: $i18n.t('form_label.be'), // 生效开始时间
             colname: 'validTime',
             width: '6',
             disabled: false,
@@ -316,14 +317,15 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: '生效结束时间',
+            label: $i18n.t('form_label.bf'), // 生效结束时间
             colname: 'invalidTime',
             value: '',
             width: '6',
             disabled: false,
             onChange: () => {
-              this.formConfighead.formValue.invalidTime = dateUtil.getFormatDate(this.formConfighead.formValue.invalidTime, 'yyyy-MM-dd') + " 23:59:59"
-              console.log(this.formConfighead.formValue.invalidTime);
+
+              this.formConfighead.formValue.invalidTime = $omsUtils.defaultEndTime(this.formConfighead.formValue.invalidTime, this.formConfighead.formValue.invalidTime)
+
             }
           },
         ],
@@ -356,7 +358,7 @@ export default {
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
               isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
+              isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               name: '仓库名称', // 赔付类型
@@ -390,7 +392,7 @@ export default {
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
               isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
+              isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               name: '物流公司', // 赔付类型
@@ -450,6 +452,9 @@ export default {
             oneObj: val => {
               this.formConfig2.formValue.cpCRegionProvinceEname = val.valuedata;
               this.formConfig2.formValue.cpCRegionProvinceId = val.pid;
+              this.formConfig2.formValue.cpCRegionCityEname = ""
+              this.formConfig2.formValue.cpCRegionCityId = ""
+
             }
           },
           {
@@ -509,11 +514,11 @@ export default {
       },
       columns2: [
         {
-          title: '序号',
+          title: $i18n.t('table_label.serialNo'), // 序号
           key: 'index'
         },
         {
-          title: 'SPU编码',
+          title: $i18n.t('table_label.itemNo01'), // SPU编码
           key: 'psCProEcode'
         },
         {
@@ -521,15 +526,15 @@ export default {
           key: 'psCSkuEcode'
         },
         {
-          title: 'SPU名称',
+          title: $i18n.t("table_label.itemNo02"), // SPU名称
           key: 'psCProEname'
         },
         {
-          title: 'SKU名称',
+          title: $i18n.t('form_label.skuName'), // SKU名称
           key: 'psCSkuEname'
         },
         {
-          title: '操作',
+          title: $i18n.t('table_label.operation'), // 操作
           key: 'action',
           fixed: 'right',
           render: (h, params) => {
@@ -554,26 +559,6 @@ export default {
         }
       ],
       data3: [],
-      columns4: [
-        {
-          type: 'selection',
-          width: 60,
-          align: 'center'
-        },
-        {
-          title: '序号',
-          key: 'index'
-        },
-        {
-          title: '仓库公司',
-          key: 'cpCPhyWarehouseEname'
-        },
-        {
-          title: '物流名称',
-          key: 'cpCLogisticsEname'
-        }
-      ],
-      data1: [],
       switchListdata: {
         label: '包裹属性',
         list: [
@@ -590,8 +575,9 @@ export default {
             name: '商品数量',
             symbol: '至',
             pkgAttributeType: 1,
-            regx: /^[+]{0,1}(\d+)$/g,
-            regx2: /^[+]{0,1}(\d+)$/g,
+            regx: /^[1-9]\d*$/,
+            regx2: /^[1-9]\d*$/,
+            maxlength: 18,
             type: '件'
           },
           {
@@ -607,8 +593,9 @@ export default {
             name: '单据金额',
             pkgAttributeType: 2,
             symbol: '至',
-            regx: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
-            regx2: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
+            regx: /^\d+(\.\d{0,2})?$/,
+            regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength: 18,
             type: '元'
           },
           {
@@ -624,8 +611,9 @@ export default {
             pkgAttributeType: 3,
             name: '包裹重量',
             symbol: '至',
-            regx: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
-            regx2: /^((0{1}\.\d{1,2})|([1-9]\d*\.{1}\d{1,2})|([1-9]+\d*)|0)$/g,
+            regx: /^\d+(\.\d{0,2})?$/,
+            regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength: 18,
             type: 'kg'
           }
         ]
@@ -643,6 +631,101 @@ export default {
         columns: [],
         data: []
       },
+      tableConfig2: {
+        indexColumn: false,
+        isShowSelection: false,
+        columns: [
+          {
+            type: 'selection',
+            width: 60,
+            align: 'center'
+          },
+          {
+            title: $i18n.t('table_label.serialNo'), // 序号
+            key: 'index'
+          },
+          {
+            title: '仓库名称',
+            key: 'cpCPhyWarehouseEname'
+          },
+          {
+            title: '物流公司',
+            key: 'cpCLogisticsEname'
+          }
+        ],
+        data: [],
+        pageShow: true, // 控制分页是否显示
+        btnsShow: false, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        current: 1,
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
+      },
+      tableConfig3: {
+        indexColumn: false,
+        isShowSelection: false,
+        columns: [
+          {
+            title: $i18n.t('table_label.serialNo'), // 序号
+            key: 'index'
+          },
+          {
+            title: $i18n.t('table_label.itemNo01'), // SPU编码
+            key: 'psCProEcode'
+          },
+          {
+            title: 'SKU编码',
+            key: 'psCSkuEcode'
+          },
+          {
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
+            key: 'psCProEname'
+          },
+          {
+            title: $i18n.t('form_label.skuName'), // SKU名称
+            key: 'psCSkuEname'
+          },
+          {
+            title: $i18n.t('table_label.operation'), // 操作
+            key: 'action',
+            fixed: 'right',
+            render: (h, params) => {
+              return h('div', [
+                h(
+                  'Button',
+                  {
+                    props: {
+                      type: 'text',
+                      size: 'small'
+                    },
+                    on: {
+                      click: () => {
+                        this.deleteSku(params.row.id);
+                      }
+                    }
+                  },
+                  '删除'
+                )
+              ]);
+            }
+          }
+        ],
+        data: [],
+        pageShow: true, // 控制分页是否显示
+        btnsShow: false, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        current: 1,
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
+      },
       columnsCity: [
         {
           title: '省',
@@ -653,7 +736,7 @@ export default {
           key: 'cpCRegionCityEname'
         },
         {
-          title: '操作',
+          title: $i18n.t('table_label.operation'), // 操作
           key: 'action',
           fixed: 'right',
           render: (h, params) => {
@@ -671,7 +754,7 @@ export default {
                     }
                   }
                 },
-                '删除'
+                $i18n.t('btn.delete')//'删除'
               )
             ]);
           }
@@ -690,8 +773,8 @@ export default {
       customizedModuleName: '',
       tableCURRENT: 1,
       tableSIZE: 10,
-      tableCURRENT2: 1,
-      tableSIZE2: 10,
+      // tableCURRENT2: 1,
+      // tableSIZE2: 10,
       total1: 10,
       total2: 10,
       isactive: '',
@@ -702,41 +785,38 @@ export default {
     };
   },
   mounted() {
-    this.relationShip();
-    let { customizedModuleId, customizedModuleName } = this.$route.params;
-    this.customizedModuleName = customizedModuleName;
-    if (customizedModuleId == 'New') {
-      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: '特殊物流方案新增', name:keepAliveModuleName}; //当前界面模块名称 
-      this.$store.commit('global/modifycurrentLabel' , data)
-
-
-      this.id = '-1';
-    } else {
-
-      const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      const data = { label: '特殊物流方案编辑', name:keepAliveModuleName}; //当前界面模块名称 
-      this.$store.commit('global/modifycurrentLabel' , data)
-
-      this.id = customizedModuleId;
-
-      this.querfrom(this.formConfighead.formData, 'ecode').style = 'input';
-      this.queryById();
-      this.queryAddressPages();
-      this.queryProPages();
-      this.queryLogisticsWarehousePages();
-      // this.btnConfig.buttons.forEach(em => {
-      //   if (em.text == '启用' || em.text == '停用') {
-      //     em.isShow = true;
-      //   }
-      // });
-    }
+    this.init()
+    this.getBtns()
   },
   methods: {
+    getBtns() {
+      $OMS2.omsUtils.getPermissions(this, '', { table: this.$route.params.customizedModuleName, type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res
+        this.btnConfig.buttons.forEach(x => {
+          ACTIONS.some(y => y.webname == x.webname) && (x.isShow = true)
+        })
+
+      })
+    },
+    init() {
+      this.relationShip();
+      let { customizedModuleId, customizedModuleName } = this.$route.params;
+      this.customizedModuleName = customizedModuleName;
+      if (customizedModuleId == 'New') {
+        this.id = '-1';
+      } else {
+        this.id = customizedModuleId;
+
+        this.querfrom(this.formConfighead.formData, 'ecode').style = 'input';
+        this.queryById();
+        this.queryAddressPages();
+        this.queryProPages();
+        this.queryLogisticsWarehousePages();
+
+      }
+    },
     fnreadonly(type) {
       if (type == 'Y') {
-        // this.querbtn(this.btnConfig.buttons, '启用').disabled = true
-
         //禁用主表数据
         this.formConfig.formData.forEach(item => {
           if (item.itemdata) {
@@ -750,15 +830,32 @@ export default {
           }
         });
 
+        this.formConfighead.formData.forEach(item => {
+          if (item.itemdata) {
+            item.itemdata.readonly = true;
+          } else if (item.options) {
+            item.options.forEach(em => {
+              em.disabled = true;
+            });
+          } else {
+            item.disabled = true;
+          }
+        });
+
+
         //禁用包裹属性
         this.switchListdata.list.forEach(em => {
           em.disabled = true;
         });
-        //禁用仓库物流
+        //禁用仓库物流 
         this.formConfig1.formData.forEach(item => {
           if (item.itemdata) {
             item.itemdata.readonly = true;
           }
+        });
+
+        this.btnConfig1.buttons.forEach(item => {
+          item.disabled = true
         });
       } else {
         // this.querbtn(this.btnConfig.buttons, '停用').disabled = true
@@ -790,28 +887,15 @@ export default {
             item.itemdata.readonly = false;
           }
         });
+        this.btnConfig1.buttons.forEach(item => {
+          item.disabled = false
+        });
       }
     },
-    // fnSetIsActive(type) {
-    //   this.querbtn(this.btnConfig.buttons, '启用').disabled = false
-    //   this.querbtn(this.btnConfig.buttons, '停用').disabled = false
-    //   var formdata = new FormData();
-    //   formdata.append('isActive', type);
-    //   formdata.append('tableName', vm.$route.params.customizedModuleName);
-    //   formdata.append('objId', this.id);
 
-    //   service.strategyPlatform.tableDetailswitchById(formdata).then(res => {
-    //     if (res.data.code == 0) {
-    //       this.queryById();
-    //       this.queryAddressPages();
-    //       this.queryProPages();
-    //       this.queryLogisticsWarehousePages();
-    //       this.$Message.success(res.data.message);
-    //     }
-    //   });
-    // },
     //仓库物流明细删除
     deleteLogistics() {
+
       if (this.table4Data.length > 0) {
         let arrid = [];
         this.table4Data.forEach(em => {
@@ -826,15 +910,19 @@ export default {
           this.queryLogisticsWarehousePages();
         });
       } else {
-        this.$Message.warning('请选择要删除的仓库物流公司！');
+        this.$Message.warning( $i18n.t('modalTips.ja'));
       }
     },
     //商品属性删除
     deleteSku(id) {
+      if (this.isactive == 'Y') {
+        this.$Message.warning($i18n.t('modalTips.jb'));
+        return;
+      }
       if (this.id == "-1") {
-        for (var i = 0; i < this.data3.length; i++) {
-          if (this.data3[i].id == id) {
-            this.data3.splice(i, 1);
+        for (var i = 0; i < this.tableConfig3.data.length; i++) {
+          if (this.tableConfig3.data[i].id == id) {
+            this.tableConfig3.data.splice(i, 1);
           }
         }
         return
@@ -850,6 +938,10 @@ export default {
     },
     //删除省市
     deleteAddress(id) {
+      if (this.isactive == 'Y') {
+        this.$Message.warning($i18n.t('modalTips.jb'));
+        return;
+      }
       let data = {
         ID: this.id,
         PROVINCE_IDS: id
@@ -862,22 +954,27 @@ export default {
     data1select(v) {
       this.table4Data = v;
     },
-    tablepage2(v) {
-      this.tableCURRENT = v;
+    tablepageA(v) {
+      console.log(v);
+      this.tableConfig3.current = v;
       this.queryProPages();
     },
-    tablesize2(v) {
-      this.tableSIZE = v;
+    tablesizeA(v) {
+      console.log(v);
+      this.tableConfig3.pageSize = v;
       this.queryProPages();
     },
-    tablepage(v) {
-      this.tableCURRENT = v;
-      this.queryProPages();
+    tablepageB(v) {
+      console.log(v);
+      this.tableConfig2.current = v;
+      this.queryLogisticsWarehousePages();
     },
-    tablesize(v) {
-      this.tableSIZE = v;
-      this.queryProPages();
+    tablesizeB(v) {
+      console.log(v);
+      this.tableConfig2.pageSize = v;
+      this.queryLogisticsWarehousePages();
     },
+
     queryById() {
       //物流策略-特殊物流方案-主表信息查询
       let data = {
@@ -938,7 +1035,6 @@ export default {
             }
           }
 
-
           //遍历包裹属性的数据
           specialAssignLogisticsPkgItemList.forEach(em => {
             this.switchListdata.list.forEach(item => {
@@ -956,17 +1052,17 @@ export default {
     queryProPages() {
       let data = {
         ID: this.id,
-        CURRENT: this.tableCURRENT,
-        SIZE: this.tableSIZE
+        CURRENT: this.tableConfig3.current,
+        SIZE: this.tableConfig3.pageSize
       };
       //物流策略-特殊物流方案-商品属性明细分页查询
       service.strategyPlatform.queryProPages(data).then(res => {
         if (res.data.code == 0) {
-          this.data3 = res.data.data.records.map((em, index) => {
-            em.index = index + 1;
+          this.tableConfig3.data = res.data.data.records.map((em, index) => {
+            em.index = index + 1 + (this.tableConfig3.current - 1) * this.tableConfig3.pageSize;
             return em;
           });
-          this.total1 = res.data.data.total;
+          this.tableConfig3.total = res.data.data.total;
         }
       });
     },
@@ -974,17 +1070,17 @@ export default {
       //物流策略-特殊物流方案-仓库物流明细分页查询
       let data = {
         ID: this.id,
-        CURRENT: this.tableCURRENT2,
-        SIZE: this.tableSIZE2
+        CURRENT: this.tableConfig2.current,
+        SIZE: this.tableConfig2.pageSize
       };
 
       service.strategyPlatform.queryLogisticsWarehousePages(data).then(res => {
         if (res.data.code == 0) {
-          this.data1 = res.data.data.records.map((em, index) => {
+          this.tableConfig2.data = res.data.data.records.map((em, index) => {
             em.index = index + 1;
             return em;
           });
-          this.total2 = res.data.data.total;
+          this.tableConfig2.total = res.data.data.total;
         }
       });
     },
@@ -1024,6 +1120,14 @@ export default {
           }
         });
       });
+      if (CityID == "") {
+        this.specialAssignLogisticsAddressItemList.push({
+          id: "-1",
+          cpCRegionProvinceEname: this.formConfig2.formValue.cpCRegionProvinceEname,
+          cpCRegionProvinceId: this.formConfig2.formValue.cpCRegionProvinceId
+        });
+      }
+
       if (this.id != '-1') {
         this.fnSave(1);
       } else {
@@ -1043,7 +1147,7 @@ export default {
         for (let y in this.formConfig.formValue) {
           if (key == y) {
             if (!this.formConfig.formValue[key] && this.querfrom(this.formConfig.formData, key).style != null) {
-              this.$Message.warning('请填写' + this.querfrom(this.formConfig.formData, key).label + '!');
+              this.$Message.warning($i18n.t('modalTips.hg') + this.querfrom(this.formConfig.formData, key).label + '!');
               return;
             }
           }
@@ -1055,7 +1159,7 @@ export default {
         for (let y in this.formConfighead.formValue) {
           if (key == y) {
             if (!this.formConfighead.formValue[key] && this.querfrom(this.formConfighead.formData, key).style != null) {
-              this.$Message.warning('请填写' + this.querfrom(this.formConfighead.formData, key).label + '!');
+              this.$Message.warning( $i18n.t('modalTips.hg') + this.querfrom(this.formConfighead.formData, key).label + '!');
               return;
             }
           }
@@ -1063,23 +1167,25 @@ export default {
       }
 
       if (this.formConfig.formValue.billType.length == 0) {
-        this.$Message.warning('请选择单据类型!');
+        this.$Message.warning( $i18n.t('modalTips.jc'));
         return;
       }
+
       if (!this.formConfig.formValue.Time[0]) {
-        this.$Message.warning('请填写时间范围!');
+        this.$Message.warning($i18n.t('modalTips.jd'));
         return;
       }
+      
       //校验包裹属性
       let listdata = this.switchListdata.list;
       for (let v of listdata) {
         if (v.val) {
           if (!v.value || !v.value2) {
-            this.$Message.warning('请填写您选中的开始值和结束值!');
+            this.$Message.warning($i18n.t('modalTips.je'));
             return;
           }
           if (v.value2 < v.value) {
-            this.$Message.warning('结束值需大于等于开始值!');
+            this.$Message.warning( $i18n.t('modalTips.jf'));
             return;
           }
         }
@@ -1108,6 +1214,8 @@ export default {
           this.specialAssignLogisticsProItemList.push(obj);
         });
         data.specialAssignLogisticsProItemList = this.specialAssignLogisticsProItemList;
+        this.tableConfig.selectionData = []
+
       } else if (type == 3) {
         data.specialAssignLogistics = { id: this.id };
         data.specialAssignLogisticsWarehouseItemList = this.specialAssignLogisticsWarehouseItemList;
@@ -1151,7 +1259,7 @@ export default {
         //包裹属性
         this.switchListdata.list.forEach(item => {
           let obj = {
-            id: item.id,
+            id: item.id || "-1",
             pkgAttributeType: item.pkgAttributeType,
             isEnable: item.val ? 1 : 0,
             beginVal: item.value,
@@ -1177,23 +1285,27 @@ export default {
           } else if (type == 2) {
             this.queryProPages();
           } else if (type == 3) {
+            this.WarehouseItemListobj = {
+              cpCLogisticsEname: '',
+              cpCPhyWarehouseEname: ''
+            }
             this.queryLogisticsWarehousePages();
           } else {
             if (this.id == '-1') {
-              this.$store.commit('customize/TabOpen', {
-                id: res.data.data.objId,
-                type: 'action',
-                name: this.customizedModuleName
-              });
+              this.init()
+              this.$store.commit('global/tabOpen', {
+                type: 'C',
+                url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}`,
+                label:$i18n.t('panel_label.an'), //"特殊物流方案新增",
+                customizedModuleName: this.customizedModuleName,
+                customizedModuleId: res.data.data.objId
+              })
+
             } else {
-              // this.changeCount = 4; //重置编辑状态
-              // this.queryById();
-              // this.queryAddressPages();
-              // this.queryProPages();
-              // this.queryLogisticsWarehousePages();
               this.pageback();
             }
           }
+
         }
       });
     },
@@ -1201,17 +1313,19 @@ export default {
       //添加仓库物流
       for (const key in this.WarehouseItemListobj) {
         if (this.WarehouseItemListobj[key] == '') {
-          this.$Message.warning('请选择要添加仓库物流！');
+          this.$Message.warning($i18n.t('modalTips.jg'));
           return;
         }
       }
       this.WarehouseItemListobj.id = '-1';
-      this.specialAssignLogisticsWarehouseItemList.push(this.WarehouseItemListobj);
+      this.specialAssignLogisticsWarehouseItemList = this.WarehouseItemListobj
+
+
       if (this.id != '-1') {
         this.fnSave(3);
       } else {
         let ckArr = [];
-        this.data1 = [];
+        this.tableConfig2.data = [];
         if (this.cpCPhyWarehousedata.length > 0) {
           this.cpCPhyWarehousedata.forEach((em, index) => {
             let wareidarr = this.WarehouseItemListobj.cpCPhyWarehouseEname.split(',');
@@ -1229,7 +1343,7 @@ export default {
             });
           });
         }
-        this.data1 = ckArr;
+        this.tableConfig2.data = ckArr;
       }
 
       this.formConfig1.formData[0].itemdata.pid = '';
@@ -1258,20 +1372,31 @@ export default {
         if (this.id != '-1') {
           this.fnSave(2);
         } else {
-          let arr = this.data3.concat(this.tableConfig.selectionData)
+          let arr = this.tableConfig3.data.concat(this.tableConfig.selectionData)
           var obj = {}
           var newArr = arr.reduce((cur, next) => {
             obj[next.id] ? "" : obj[next.id] = true && cur.push(next);
             return cur;
           }, [])
-          this.data3 = newArr.map((em, index) => {
+          this.tableConfig3.data = newArr.map((em, index) => {
             em.index = index + 1
             return em
           })
         }
+        this.modal3 = false;
+      } else {
+        this.$Message.warning($i18n.t('modalTips.jh') );
       }
 
-      this.modal3 = false;
+
+
+    },
+    onSelectAllA(e) {
+      console.log(e);
+      this.table4Data = e;
+    },
+    onSelectAllCancelA() {
+      this.table4Data = [];
     },
     onSelect(e) {
       // e为选中的数组对象RowArr
@@ -1281,6 +1406,7 @@ export default {
       this.tableConfig.selectionData = e;
     },
     onSelectAll(e) {
+      console.log(e);
       this.tableConfig.selectionData = e;
     },
     onSelectAllCancel() {
@@ -1311,11 +1437,13 @@ export default {
     fnseek() {
       this.tableConfig.ECODE = '' // 编码查询条件
       this.tableConfig.ENAME = ''// 名称查询条件
+      this.tableConfig.pageIndex = 1
+      this.tableConfig.pageSize = 10
       this.fntable();
     },
     fntable() {
       if (this.isactive == 'Y') {
-        this.$Message.warning('启用状态，不可编辑！');
+        this.$Message.warning($i18n.t('modalTips.ji'));
         return;
       }
       this.modal3 = true;
@@ -1336,9 +1464,11 @@ export default {
     },
     fnselect() {
       if (this.isactive == 'Y') {
-        this.$Message.warning('启用状态，不可编辑！');
+        this.$Message.warning( $i18n.t('modalTips.ji'))
+          //'启用状态，不可编辑！');
         return;
       }
+      this.specialAssignLogisticsAddressItemList = []
       this.modal2 = true;
     },
     // 切换Label & 实时渲染subTable
@@ -1348,7 +1478,7 @@ export default {
       this.subTableConfig = {
         centerName: 'strategyPlatform',
         tablename: this.labelDefaultValue,
-        pageShow:true,
+        pageShow: true,
         objid: this.id
       };
     },
@@ -1360,8 +1490,9 @@ export default {
       if (this.id == '-1') {
         if (this.changeCount > 1) {
           this.$Modal.info({
+            className: 'ark-dialog',
             title: $i18n.t('modalTitle.tips'), // 提示
-            content: '当前修改未保存，确定返回？',
+            content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $i18n.t('common.determine'), // 确定
@@ -1376,8 +1507,9 @@ export default {
       } else {
         if (this.changeCount > 8) {
           this.$Modal.info({
+            className: 'ark-dialog',
             title: $i18n.t('modalTitle.tips'), // 提示
-            content: '当前修改未保存，确定返回？',
+            content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $i18n.t('common.determine'), // 确定
@@ -1392,7 +1524,7 @@ export default {
       }
     },
     pageback() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 10672,

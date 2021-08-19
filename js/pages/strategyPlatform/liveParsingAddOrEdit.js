@@ -14,7 +14,7 @@ export default {
     businessStatusFlag,
     subTable
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n:$i18n,
@@ -31,10 +31,11 @@ export default {
         pageShow: true
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [{
             webname: 'lookup_save', // 保存
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -54,7 +55,7 @@ export default {
       formConfig1: {
         formData: [{
             style: '',
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             colname: 'PLAN_ID',
             width: '6',
             disabled: false,
@@ -64,7 +65,7 @@ export default {
           },
           {
             style: 'input',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             colname: 'PLAN_NAME',
             width: '6',
             disabled: false,
@@ -74,7 +75,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效开始时间', // 输入框前文字
+            label: $i18n.t('form_label.be'), // 生效开始时间 输入框前文字
             colname: 'EFFECTIVE_BEGIN_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -91,7 +92,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效结束时间', // 输入框前文字
+            label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
             colname: 'EFFECTIVE_END_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -108,15 +109,15 @@ export default {
           },
           {
             style: '',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), // 启用状态
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master', 'formConfig1');
-              this.isEnable = this.formConfig1.formValue.ISACTIVE;
-              this.setEnable();
-            }
+            // inputChange: () => {
+            //   this.masterModifyData('ISACTIVE', 'master', 'formConfig1');
+            //   this.isEnable = this.formConfig1.formValue.ISACTIVE;
+            //   this.setEnable();
+            // }
           },
         ],
         formValue: {
@@ -140,28 +141,17 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              col: 1,
               colid: 171534, // 当前字段的ID
               colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '店铺',
-              inputname: 'CP_C_SHOP_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
               istooltip: true,
-              length: 65535, // 最大长度是多少
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
+              valuedata: '' // 这个是选择的值
             },
             oneObj: e => {
               console.log(e);
@@ -173,7 +163,7 @@ export default {
           },
           {
             style: 'formCompile',
-            label: '时间类型',
+            label: $i18n.t('form_label.timeType'), // 时间类型
             colname: 'BILL_TIME_TYPE',
             width: '24',
             disabled: false,
@@ -182,11 +172,11 @@ export default {
             options: [
               {
                 value: 1,
-                label: '下单时间'
+                label: $i18n.t('form_label.orderTime'), // 下单时间
               },
               {
                 value: 2,
-                label: '支付时间'
+                label: $i18n.t('form_label.bj'), // 支付时间
               }
             ],
             radioChange: () => {
@@ -197,8 +187,8 @@ export default {
             }
           },
           {
-            label: '直播商品识别',
-            subLabel: '识别规则',
+            label: $i18n.t('form_label.cd'), // 直播商品识别
+            subLabel: $i18n.t('form_label.bi'), // 识别规则
             style: 'formCompile',
             slotName: 'rule',
             reqStar: true, // 插槽必填标识
@@ -209,15 +199,15 @@ export default {
             options: [
               {
                 value: 1,
-                label: '商品标题'
+                label: $i18n.t('table_label.product_title'), // 商品标题
               },
               {
                 value: 2,
-                label: '平台商品ID'
+                label: $i18n.t('form_label.platformCommodityID'), // 平台商品ID
               },
               {
                 value: 3,
-                label: '买家留言'
+                label: $i18n.t('form_label.buyer_message'), // 买家留言
               }
             ],
             radioChange: (item) => {
@@ -276,11 +266,11 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '主播ID',
+            label: $i18n.t('form_label.bk'), // 主播ID
             colname: 'LIVE_ANCHOR_ID',
             width: '24',
             class: 'custom-width',
-            placeholder: '请录入主播ID',
+            placeholder: $i18n.t('modalTips.hq'), // 请录入主播ID
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_ID', 'master', 'formConfig3');
@@ -288,11 +278,11 @@ export default {
           },
           {
             style: 'input',
-            label: '主播昵称',
+            label: $i18n.t('form_label.bl'), // 主播昵称
             colname: 'LIVE_ANCHOR_NAME',
             width: '24',
             class: 'custom-width',
-            placeholder: '请录入主播昵称',
+            placeholder: $i18n.t('modalTips.hr'), // 请录入主播昵称
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_NAME', 'master', 'formConfig3');
@@ -300,14 +290,14 @@ export default {
           },
           {
             style: 'radio',
-            label: '订单标签',
+            label: $i18n.t('form_label.bm'), // 订单标签
             colname: 'ORDER_TAG',
             width: '24',
             disabled: false,
             options: [
               {
                 value: 1,
-                label: '“播”标'
+                label: $i18n.t('form_label.bn'), // “播”标
               }
             ],
             radioChange: () => {
@@ -330,7 +320,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_C_LIVE_CAST_STRATEGY_LOG'
         }
       ],
@@ -362,8 +352,9 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -377,12 +368,12 @@ export default {
       }
     },
     onOk(id) {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       if (id) {
         this.$store.commit('global/tabOpen', {
           type: 'C',
-          label: '直播解析编辑',
+          label: this.getCustomLabel(false), // 直播解析编辑
           customizedModuleId: id,
           customizedModuleName: 'ST_C_LIVE_CAST_STRATEGY'
         });
@@ -437,7 +428,7 @@ export default {
           let newTime = this.formatDate(value)
           let oldTime = self.modify[obj][ecode]
           if (ecode == 'EFFECTIVE_END_TIME') {
-            newTime = this.$OMS2.omsUtils.defaultEndTime(newTime, oldTime)
+            newTime = $omsUtils.defaultEndTime(newTime, oldTime)
             self[formName].formValue[ecode] = newTime
           }
           // self[formName].formValue[ecode] = newTime  // TODO END_TIME 复制失败
@@ -461,10 +452,10 @@ export default {
     // 表单赋值
     initForm(data) {
       ['formConfig1', 'formConfig2', 'formConfig3'].forEach(formName => {
-        this.$OMS2.omsUtils.intersectFormValue(this[formName].formValue, data)
+        $omsUtils.intersectFormValue(this[formName].formValue, data)
       })
       this.queryForm(this.formConfig1, 'PLAN_ID').style = 'input'
-      this.queryForm(this.formConfig1, 'ISACTIVE').style = 'switch'
+      this.queryForm(this.formConfig1, 'ISACTIVE').style = 'input'
   
       const { CP_C_SHOP_ID, CP_C_SHOP_ENAME, ISACTIVE, BEGIN_TIME, END_TIME } = data
       const obj = this.queryForm(this.formConfig2, 'CP_C_SHOP_ID')
@@ -472,7 +463,7 @@ export default {
       obj.itemdata.valuedata = CP_C_SHOP_ENAME
 
       this.isEnable = ISACTIVE == 'Y'
-      this.formConfig1.formValue.ISACTIVE = this.isEnable
+      this.formConfig1.formValue.ISACTIVE = this.isEnable ? '启用' : '停用'
       this.formConfig2.formValue.TIME_RANGE = [BEGIN_TIME, END_TIME]
       this.formConfig1.ruleValidate.PLAN_ID[0].required = true
     },
@@ -519,15 +510,15 @@ export default {
           ...this.formConfig3.formValue
         },
       }
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
   
       const [startTime] = formConfig.formValue.TIME_RANGE
       let msg
       if (mes) {
         let msgArr = mes.replace(/ 不能为空!/, '').split('，')
-        msg = !startTime && !msgArr.includes('时间类型') ? [...msgArr, '时间类型'] : msgArr
+        msg = !startTime && !msgArr.includes($i18n.t('form_label.timeType')) ? [...msgArr, $i18n.t('form_label.timeType')] : msgArr
       }
-      msg = !mes ? startTime ? '' : ['时间类型'] : msg
+      msg = !mes ? startTime ? '' : [$i18n.t('form_label.timeType')] : msg
       
       // 直播商品识别校验
       const hasNoValid = this.formConfig2.formValue.RULES
@@ -535,18 +526,18 @@ export default {
 
       if (msg || hasNoValid) {
         let tip = msg && hasNoValid 
-          ? `${msg.join('，')}，直播商品识别 不能为空!` 
-          : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `直播商品识别 不能为空!`
+          ? `${msg.join('，')}，${$i18n.t('form_label.cd')} 不能为空!` 
+          : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `${$i18n.t('form_label.cd')} 不能为空!`
         self.$message.error(tip);
         return false;
       }
-
+      
       // 校验识别规则是否重复
       let allRow = this.formConfig2.formValue.RULES
       .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
       let uniqRow = Array.from(new Set(allRow))
       if (allRow.length != uniqRow.length) {
-        self.$message.error('请勿重复添加直播商品识别规则!')
+        self.$message.error($i18n.t('modalTips.hp')) // 请勿重复添加直播商品识别规则!
         return
       }
       

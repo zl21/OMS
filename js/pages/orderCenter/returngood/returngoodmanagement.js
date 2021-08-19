@@ -3341,7 +3341,7 @@ export default {
         this.$R3loading.hide(customizedModuleName);
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
-          this.$comUtils.tabCloseAppoint(_this);
+          $omsUtils.tabCloseAppoint(_this);
           commonUtils.navigateMain('-1', 'TabHref', 'RETURNGOOD', 'panel_label.ReturnOrderDetails')
           _this.$nextTick(() => {
             commonUtils.navigateMain(res.data.objid, 'TabOpen', 'RETURNGOOD', 'panel_label.ReturnOrderDetails', { statusName: res.data.RETURN_STATUS_NAME })

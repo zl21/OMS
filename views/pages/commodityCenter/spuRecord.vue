@@ -1,24 +1,22 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-19 17:55:24
- * @LastEditTime: 2021-06-18 13:43:25
+ * @LastEditTime: 2021-06-24 11:20:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/spuRecord.vue
 -->
 <template>
-  <div class="spuRecord cusArkCollapse customized-detail">
-    <div class="buttons customized-detail-btn">
+  <div class="spuRecord customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          SPU基本信息
-          <div
-            slot="content"
-            class="customized_Info_img"
-          >
+          <!-- SPU基本信息 -->
+          SPU {{ vmI18n.t("common.baseInformation") }}
+          <div slot="content" class="customized_Info_img">
             <ImageUpload
               v-model="imageValue"
               :http="http"
@@ -32,7 +30,21 @@
           </div>
           <div slot="content" class="clear"></div>
         </Panel>
-        <Panel name="attr">
+        <Panel name="panel_fixAttr">
+          <!-- 固定属性 -->
+          {{ vmI18n.t("panel_label.b4") }}
+          <div slot="content">
+            <businessForm :form-config="customAttr.fixFormConfig" />
+          </div>
+        </Panel>
+        <Panel name="panel_cusAttr">
+          <!-- 自定义属性 -->
+          {{ vmI18n.t("panel_label.b5") }}
+          <div slot="content">
+            <businessForm :form-config="customAttr.customFormConfig" />
+          </div>
+        </Panel>
+        <!-- <Panel name="attr">
           自定义属性
           <div slot="content" class="customProperties">
             <div class="panel-title">固定属性：</div>     
@@ -42,7 +54,7 @@
             <div class="panel-title">自定义属性：</div>     
             <businessForm :form-config="customAttr.customFormConfig" />
           </div>
-        </Panel>
+        </Panel> -->
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
@@ -52,12 +64,9 @@
           @labelClick="labelClick"
         />
         <!-- 子表Part -->
-        <div
-          v-show="labelValue == 'skuInfo'"
-          class="skuInfo"
-        >
+        <div v-show="labelValue == 'skuInfo'" class="skuInfo">
           <div class="productSpecification_button">
-            <businessButton :btn-config="skuInfo.btnConfig" />
+            <businessButton :btn-config="skuInfoBtnConfig" />
           </div>
           <div class="productSpecification_table">
             <Table
@@ -70,13 +79,10 @@
             />
           </div>
         </div>
-        <div
-          v-show="labelValue == 'supplier'"
-          class="supplier"
-        >
+        <div v-show="labelValue == 'supplier'" class="supplier">
           <div class="supplier_header">
             <businessForm :form-config="tableFormConfig" />
-            <businessButton :btn-config="supplier.btnConfig" />
+            <businessButton :btn-config="supplierBtnConfig" />
           </div>
           <div class="supplier_body">
             <Table
@@ -86,11 +92,8 @@
             />
           </div>
         </div>
-        <div
-          v-show="labelValue == 'logTable'"
-          class="lgoTable"
-        >
-          <subTable :component-data="subTableConfig" ></subTable>
+        <div v-show="labelValue == 'logTable'" class="lgoTable">
+          <subTable :component-data="subTableConfig"></subTable>
         </div>
       </div>
     </div>
@@ -98,10 +101,10 @@
 </template>
 
 <script>
-  import spuRecord from '@/js/pages/commodityCenter/spuRecord.js';
+import spuRecord from '@/js/pages/commodityCenter/spuRecord.js';
 
-  export default spuRecord;
+export default spuRecord;
 </script>
 <style lang="less" scoped>
-@import '~@/css/pages/commodityCenter/spuRecord.less';
+@import "~@/css/pages/commodityCenter/spuRecord.less";
 </style>

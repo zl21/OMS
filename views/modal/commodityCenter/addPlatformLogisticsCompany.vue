@@ -1,8 +1,6 @@
 <template>
-  <div class="addPlatformLogisticsCompany customized-modal">
-    <div class="subtablePart">
-      <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
-    </div>
+  <div class="customized-modal" style="width: 800px">
+    <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
     <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
@@ -24,15 +22,16 @@ export default {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       btnConfig: {
         typeAll: 'default',
+        btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消,
             btnclick: () => {
               this.$parent.close();
             },
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -49,11 +48,11 @@ export default {
         searchSelectList: [], // isSearchText为false的情况下使用 搜索框list
         pageShow: true, // 控制分页是否显示
         searchInputShow: false, // 控制搜索框是否显示
-        width: '', // 表格宽度
+        // width: '700', // 表格宽度
         height: '332', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30, 40, 50, 100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 100, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -85,14 +84,14 @@ export default {
               label: '平台物流名称',
               value: 'CP_C_LOGISTICS_ENAME',
               colname: 'CP_C_LOGISTICS_ENAME',
-              width: '12',
+              width: '8',
               disabled: false,
             },
             {
               version: '1.4',
               colname: 'CP_C_PLATFORM_ID',
               style: 'popInput', // 输入框弹框单多选
-              width: '12',
+              width: '8',
               itemdata: {
                 col: 1,
                 colid: 168316, // 当前字段的ID
@@ -143,7 +142,7 @@ export default {
               },
             },
             {
-              text: '重置',
+              text: $i18n.t('btn.reset'), //重置
               icon: 'ios-refresh',
               btnclick: () => {
                 this.resetHandel();
@@ -175,13 +174,13 @@ export default {
         PAGE_SIZE: self.tableConfig.pageSize,
         ITEM,
       };
-      this.$comUtils.setLoading(true);
+      $omsUtils.setLoading(true);
       const {
         data: { code, data, message },
       } = await self.service.basicData.platformQueryItems(param).catch(() => {
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
       });
-      this.$comUtils.setLoading();
+      $omsUtils.setLoading();
       if (code === 0) {
         self.tableConfig.data = data.ITEMS || [];
         self.tableConfig.total = data.TOTAL_COUNT;
@@ -240,28 +239,29 @@ export default {
 
 <style lang="less" scoped>
 // @import '~professionalComponents/common/css/theme.less';
-.addPlatformLogisticsCompany {
+/* .addPlatformLogisticsCompany {
   /deep/ .subtablePart {
     position: relative;
     .ark-form-item {
       margin-bottom: 0;
+      margin-top: 0;
     }
     .businessForm-box {
-      width: 500px;
+      // width: 500px;
     }
     .orderManageEdit .businessForm_a {
       padding-bottom: 6px;
       .ark-col {
-        margin-top: 0;
+        // margin-top: 0;
       }
     }
     .businessButtons-box {
-      position: absolute;
-      top: 0;
-      left: 520px;
-      .one_button {
-        padding: 6px 0 2px;
-      }
+      // position: absolute;
+      // top: 0;
+      // left: 520px;
+      // .one_button {
+      //   padding: 6px 0 2px;
+      // }
 
       .one_button .buttonBox button > i.iconfont + span {
         display: initial;
@@ -284,5 +284,5 @@ export default {
       width: 6px;
     }
   }
-}
+} */
 </style>

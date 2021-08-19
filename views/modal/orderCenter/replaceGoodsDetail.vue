@@ -1,8 +1,14 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-08 17:33:29
+ * @LastEditTime: 2021-07-20 18:09:02
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/orderCenter/replaceGoodsDetail.vue
+-->
 <template>
   <!-- 订单详情 - 订单明细 - 替换商品 -->
-  <div
-    class="replaceGoodsDetail"
-  >
+  <div class="customized-modal">
     <div class="i_head">
       <div>
         商品SKU:
@@ -18,12 +24,6 @@
       </div>
     </div>
     <div class="i_body">
-      <!-- <Table
-        highlight-row
-        @on-current-change="currentChange"
-        :columns="columns"
-        :data="data"
-      /> -->
       <businessActionTable
         :jordan-table-config="tableConfig"
         @on-select="onSelect"
@@ -37,9 +37,7 @@
         @on-page-size-change="pageSizeChange"
       />
     </div>
-    <div class="i_food">
-      <businessButton :btn-config="btnConfig" />
-    </div>
+    <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 

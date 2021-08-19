@@ -1,5 +1,6 @@
 import service from '@/service/index'
 import BurgeonDate from '@/assets/js/__utils__/date';
+import publicMethodsUtil from '@/assets/js/public/publicMethods'; 
 class commonUtils {
   static gateWayPrefix = {
     basicData: '/r3-cp',
@@ -9,6 +10,177 @@ class commonUtils {
   constructor() { }
 
   //--------------工具方法区--------------------------
+
+  static initForm(self, param, myForm) {
+    // const self = this;
+    // console.log(data);
+    /* const param = {
+      TABLE: self.tablename,
+      FOLD: fold,
+    }; */
+    let da, fD = [], fV = {}, fR = {};
+    return service.orderCenter.initList(param).then(res => {
+      const { data: { code, data } } = res;
+      if (code === 0) {
+        if (data.ZIP) {
+          console.error("当前数据格式为'ZIP',不支持!")
+          return Promise.reject(data)
+        } else {
+          da = data.DATA;
+          return da
+        }
+      }
+    }).then(form => {
+      /**
+       * 1. style
+       * 2. width
+       * 3. regx
+       */
+      const ordinary = []; // 普通控件
+      const fkStylt = ['drp', 'mrp', 'FK_TABLE']; // 外键等复杂控件
+      form.forEach((ele, i) => {
+        let item;
+        const key = ele.NAME;
+        const myEle = myForm.find(it => it.colname == key);
+        if (ordinary.includes(ele.DISPLAY)) {
+          item = {
+            colname: key, // 控件key
+            style: 'input', // 控件类型
+            label: ele.DESC, // 控件label名称
+          }
+          Object.assign(item, myEle);
+          fV[key] = ele.defval || ''; // 生成formValue
+          if (ele.isnotnull) { // 生成必填ruleValidate
+            fR[item.colname] = [
+              {
+                required: true,
+                message: ' ',
+              },
+            ]
+          }
+        } else {
+          Object.assign(ele, myEle);
+          item = {
+            colname: key,
+            itemdata: ele,
+          }
+        }
+        fD.push(item); // 生成formData结构
+        /* switch (ele.DISPLAY) {
+          case 'TEXT':
+            fD.push({
+              colname: key, // 控件key
+              style: 'input', // 控件类型
+              label: ele.DESC, // 控件label名称
+              width: '6', // 控件宽度
+              disabled: false, // 是否禁用
+              maxlength: ele.LENGTH, // 输入长度
+              regx: /^[^']*$/,
+              inputChange: () => {
+                console.log(ele.DESC);
+              },
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'SELECT':
+            fD.push({
+              colname: ele.NAME,
+              style: 'select', // 下拉框类型
+              label: ele.DESC,
+              width: '6', // 所占宽度宽度
+              value: ele.NAME, // 输入框的值
+              clearable: true,
+              selectChange: () => { },
+              disabled: false,
+              options: ele.COMBOBOX,
+              multiple: true,
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'FK_TABLE':
+            fD.push({
+              version: '1.4',
+              colname: ele.NAME, // 控件key
+              style: 'popInput', // 输入框弹框单多选
+              width: '6',
+              itemdata: {
+                colid: ele.ID, // 当前字段的ID
+                colname: ele.NAME, // 当前字段的名称
+                fkdisplay: 'drp', // 外键关联类型
+                isfk: true, // 是否有fk键
+                isnotnull: false, // 是否必填
+                name: ele.DESC, // 展示的label
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                reftable: ele.REF_TB_NAME, // 对应的表
+                reftableid: ele.REF_TB_ID, // 对应的表ID
+                valuedata: '', // 这个是选择的值
+                pid: '',
+                serviceId: ele.CENTER
+              },
+              oneObj: (e) => {
+                console.log(e);
+                fV[ele.NAME] = e.pid;
+              },
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'OBJ_DATE':
+            fD.push({
+              style: 'date',
+              type: 'daterange',
+              colname: ele.NAME,
+              // type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
+              value: ele.NAME,
+              label: ele.DESC, // 平台修改时间
+              width: '6',
+              format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
+              placeholder: '',
+              onChange: (val) => {
+                console.log(val);
+              },
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'RANGE':
+            fD.push({
+              style: 'bothInput', // 双input框控件
+              colname: ele.NAME,
+              label: ele.DESC,
+              value: ele.NAME,
+              regx: /^\d/,
+            });
+            fV[ele.NAME] = '';
+            break;
+          case 'RADIOGROUP':
+            fD.push({
+              style: 'radio',
+              colname: ele.NAME,
+              value: ele.NAME,
+              label: ele.DESC,
+              width: '6',
+              options: ele.COMBOBOX,
+            });
+            fV[ele.NAME] = '';
+            break;
+        } */
+      });
+      const formCon = {
+        fD,
+        fV,
+        fR
+      }
+      const res = {
+        res: da,
+        formCon,
+      }
+      return Promise.resolve(res)
+    })
+    // return formCon
+    // 配置必填**************************************************
+    // self.formConfig.ruleValidate = {
+    //   ORDER_TAG: [{ required: true, message: ' ', trigger: 'blur' }],
+    // };
+  }
 
   //请求主体处理
   /* 
@@ -56,15 +228,15 @@ class commonUtils {
                   props: {
                     columns: [
                       {
-                        title: '序号',
+                        title: $i18n.t('table_label.serialNo'), // 序号
                         key: 'INDEX',
                       },
                       {
-                        title: '单据编号',
+                        title: $i18n.t('form_label.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: '失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],
@@ -322,60 +494,192 @@ class commonUtils {
    * @self {object} 指向当前实例
    * @arrry {string} 当前按钮配置的name，eg: 'btnConfig'
    * @param {string} 用于请求接口的传参，目前是String类型。待扩展成对象类型，便于支持同名不同按钮配置的页面，如新增和详情同一页面时
-   * @param {*} isIndependent
+   * @param {Boolean} isIndependent 单对象页面必传true
    * @returns
    */
   static getPermissions(self, array, params, isIndependent) {
-    let independent = []
-    // const show_iconbj_setup = ['ORDERMANAGER']; //储存允许设置按钮展示的页面集;
     const query = {
-      TABLE: params.table,
-      TYPE: params.type,
+      TABLE: params.table || params.TABLE,
+      TYPE: params.type || params.TYPE,
     }
-    // console.log('this[arrry].buttons===', this[arrry].buttons)
-    if (self[array] == undefined) return
-    self.service.common.fetchActionsInCustomizePage(query).then((res) => {
+    const serviceId = params.serviceId || params.SERVICEID || '';
+    let data, btnArr = [];
+    if (!isIndependent && self[array] == undefined) return
+    if (self[array] != undefined) btnArr = self[array].buttons || [];
+    const show_iconbj_setup = ['ORDERMANAGER' , 'OC_B_RETURN_ORDER']; //储存允许设置按钮展示的页面集;
+    return new Promise(async (resolve) => {
+      const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
-      independent = result
-      const a = []
-      self[array].buttons.forEach((item) => {
-        // 设置、收藏等图标按钮的配置
-        if (!item.text && item.icon) {
-          a.push(item);
-          // if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){ //暂时不过滤任何图标按钮
-          //   a.push(item)
-          // }else if(item.icon !== 'iconfont iconbj_setup'){
-          //   a.push(item);
-          // }
-
+      data = JSON.parse(JSON.stringify(result))
+      if (res.data.code === 0) {
+        const a = [], c = [];
+        if (!btnArr.length) {
+          resolve(data);
+          return
         }
-      })
-
-      const c = []
-      result.forEach((element) => {
-        // 有下拉项的处理
-        if (element.child) {
-          this.buttonChild(element, self[array].buttons, c)
-        }
-        // 普通btn（无child）的处理
-        self[array].buttons.forEach((btn) => {
-          if (
-            btn.webname == element.webname ||
-            btn.webname.includes(element.webname)
-          ) {
-            btn.webid = element.webid
-            btn.text = element.webdesc
-            c.push(btn)
+        self[array].buttons.forEach((item) => {
+          // 设置、收藏等图标按钮的配置
+          if (!item.text && item.icon ) {
+            if(item.icon !== 'iconfont iconbj_setup'){
+              a.push(item);
+            }else if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){
+              a.push(item)
+            }
           }
         })
-      })
-      self[array].loading = false
-      if (isIndependent) {
-        return independent
+        if (isIndependent) {
+          result = result.ACTIONS;
+        }
+        result.forEach((element) => {
+          // 有下拉项的处理
+          if (element.child) {
+            this.buttonChild(element, self[array].buttons, c)
+          }
+          // 普通btn（无child）的处理
+          self[array].buttons.forEach((btn) => {
+            if (!btn.webname) {
+              console.log('btnConfig no webname !', btn);
+              return
+            }
+            if (btn.webname == element.webname) {
+              btn.webid = element.webid
+              btn.text = element.webdesc
+              c.push(btn)
+            }
+          })
+        })
+        self[array].buttons.forEach((btn) => {
+          if (btn.webname == 'fix_back') {
+            btn.text = $i18n.t("btn.back");
+            if (!c.some(it => it.webname == 'fix_back')) {
+              c.push(btn)
+            }
+          }
+        })
+        if (btnArr.length) {
+          self[array].buttons = [...c, ...a]
+          self[array].loading = false;
+        }
+        resolve(data);
       }
-      self[array].buttons = [...c, ...a]
-    })
+    }).finally(e => {
+      console.log('butConfig::', self[array]);
+    });
+    /*  self.service.common.fetchActionsInCustomizePage(query).then((res) => {
+       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
+       independent = result
+       if (isIndependent) {
+ 
+         self[array] = JSON.parse(JSON.stringify(result));
+         return independent
+       } else {
+         const a = []
+         self[array].buttons.forEach((item) => {
+           // 设置、收藏等图标按钮的配置
+           if (!item.text && item.icon) {
+             a.push(item);
+             // if(show_iconbj_setup.includes(self.$route.params.customizedModuleName)){ //暂时不过滤任何图标按钮
+             //   a.push(item)
+             // }else if(item.icon !== 'iconfont iconbj_setup'){
+             //   a.push(item);
+             // }
+ 
+           }
+         })
+         const c = []
+         result.forEach((element) => {
+           // 有下拉项的处理
+           if (element.child) {
+             this.buttonChild(element, self[array].buttons, c)
+           }
+           // 普通btn（无child）的处理
+           self[array].buttons.forEach((btn) => {
+             if (
+               btn.webname == element.webname ||
+               btn.webname.includes(element.webname)
+             ) {
+               btn.webid = element.webid
+               btn.text = element.webdesc
+               c.push(btn)
+             }
+           })
+         })
+         self[array].buttons = [...c, ...a]
+       }
+       self[array].loading = false
+     }).catch(e => {
+       if (self[array] != undefined) self[array].loading = false;
+     }) */
   }
+
+  /**
+   * 版本2:按钮权限请求方法getBtnPermission：
+   * @self {object} 指向当前实例
+   * @cBtn {Array} 当前按钮配置的name，buttons数组的上一级。eg: 'btnConfig'
+   * @param {string} 用于请求接口的传参，目前是String类型。待扩展成对象类型，便于支持同名不同按钮配置的页面，如新增和详情同一页面时
+   * @param {Boolean} isIndependent 默认为单对象
+   * @returns
+   */
+  static getBtnPermission(self, cBtn, params, isIndependent=true) {
+    const query = {
+      TABLE: params.table || params.TABLE,
+      TYPE: params.type || params.TYPE,
+    }
+    const serviceId = params.serviceId || params.SERVICEID || '';
+    let data, btnArr = [];
+    if (!isIndependent && self[array] == undefined) return
+    return new Promise(async (resolve) => {
+      const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
+      let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
+      if (isIndependent) {
+        result = result.ACTIONS;
+      }
+      data = JSON.parse(JSON.stringify(result))
+      if (res.data.code === 0) {
+        cBtn.forEach(item=>{
+          let key = item.split('.');
+          let btnArr = self
+          for (const i of key) {
+            btnArr = btnArr[i]
+          };
+          const a = [], c = [];
+        result.forEach((element) => {
+          // 有下拉项的处理
+          if (element.child) {
+            this.buttonChild(element, btnArr.buttons, c)
+          }
+          // 普通btn（无child）的处理
+          btnArr.buttons.forEach((btn) => {
+            if (!btn.webname) {
+              console.log('btnConfig no webname !', btn);
+              return
+            }
+            if (btn.webname == element.webname) {
+              btn.webid = element.webid
+              btn.text = element.webdesc
+              c.push(btn)
+            }
+            // if (btn.webname == 'fix_back') {
+            //   btn.text = $i18n.t("btn.back");
+            //   if (!c.some(it => it.webname == 'fix_back')) {
+            //     c.push(btn)
+            //   }
+            // }
+          })
+        })
+        if (btnArr.buttons.length) {
+          btnArr.buttons = [...c, ...a]
+          btnArr.loading = false;
+        }
+
+        })
+        resolve(data);
+      }
+    }).finally(e => {
+      // console.log('butConfig::', self[array]);
+    });
+  }
+
   static buttonChild(ele, btns, arr) {
     const obj = {}
     const ar = []
@@ -424,6 +728,7 @@ class commonUtils {
     let fD = formConfig.formData
     fromdata.append('table', table)
     fromdata.append('objid', -1)
+    fromdata.append('omsT', +new Date())
     const res = await service.common.getObject(fromdata)
     res.data.data.addcolums.forEach((item) => {
       if (item.parentdesc == foldingName) {
@@ -505,15 +810,35 @@ class commonUtils {
     const fromdata = new FormData()
     fromdata.append('table', table)
     fromdata.append('objid', id)
+    fromdata.append('omsT', +new Date())
     const {
       data: { code, data, message },
     } = await service.common.getObject(fromdata)
     if (code != 0) {
-      console.log('p/cs/getObject no data!')
+      console.error('p/cs/getObject no data!')
       return false
     } else {
-      return data
+      // return data
+      return new Promise(resolve => {
+        resolve(data)
+      })
     }
+  }
+
+  // 清空表单
+  static formEmpty(_this, form, notvalueArr = [], notdrpArr = []) {
+    _this[form].formData.forEach((it) => {
+      if (it.itemdata && !notdrpArr.includes(it.colname)) {
+        it.itemdata.pid = '';
+        it.itemdata.valuedata = '';
+      }
+    })
+    for (const key in _this[form].formValue) {
+      if (!notvalueArr.includes(key)) {
+        _this[form].formValue[key] = ''
+      }
+    }
+    return _this[form]
   }
 
   /**
@@ -562,6 +887,7 @@ class commonUtils {
           } else if (item.fkdisplay && fDitem.itemdata) {
             // 复杂类型--方法绑定、formDataItem的itemdata子对象赋值
             // fDitem.itemdata = item;
+            fDitem.serviceId = fDitem.serviceId || 'r3-cp' // 不配置则框架根据路由上的表名默认拼接该中心的网关
             fDitem.version = fDitem.version || '1.4' // // 必须
             fDitem.itemdata.display = item.colid || 'No-colid' // 必须，用于查询表数据
             fDitem.itemdata.display = item.colname || 'No-colname' // 必须
@@ -670,6 +996,7 @@ class commonUtils {
     formdata.append('table', table)
     formdata.append('searchdata', JSON.stringify(searchdatas))
     formdata.append('refcolid', refcolid)
+    formdata.append('omsT', +new Date())
     const res = await service.common.objectTableItem(formdata)
     if (res.data.code === 0) {
       let rowData = [];
@@ -837,7 +1164,7 @@ class commonUtils {
    *  @param {Number\String}
    */
   static floatNumber(num) {
-    num = typeof num === 'number' ? num.toString() : num
+    num = typeof num === 'number' ? num.toString() : num;
     if (num.includes('.')) {
       let b = num.split('.')
       if (b[1].length == 1) {
@@ -845,8 +1172,11 @@ class commonUtils {
         b += '0'
         num = b
       } else if (b[1].length > 2) {
-        b = Number(b.join('.')).toFixed(2)
-        num = b
+        let isZero = b[0].charAt(0) == '0';
+        let num_length = isZero ? 2 : b[0].length + 2;
+        if(b[0].includes('-')) num_length = num_length - 1;
+        b = Number(b.join('.')).toPrecision(num_length)
+        num = b;
       }
     } else {
       num += '.00'
@@ -1011,8 +1341,10 @@ class commonUtils {
    */
   static tabHref = (_self, params, extendObj = {}) => {
     // 返回--要传固定id
-    console.log(_self.$refs.agGridChild.AGTABLE.getSelect());
-    const selection = _self.$refs.agGridChild.AGTABLE.getSelect(); // 获取勾行数据;
+    const selection = [];
+    if (!_self.vueAgTable) {
+      selection = _self.$refs.agGridChild.AGTABLE.getSelect();
+    } // 获取勾行数据;
     let id = params.id;
     if (params.id === 'id') {
       id = selection[0].ID;
@@ -1045,6 +1377,7 @@ class commonUtils {
     const contentHeight = document.getElementById('content').clientHeight;
     // 获取需要除了agTable之外的节点
     const arr = document.getElementsByClassName('totalHeight');
+    if (!arr.length) return // 解决促销换ag后报错
     let sumHeight = 34 + defaultHeight;
     Object.getOwnPropertyNames(arr).forEach(item => {
       sumHeight += parseInt(arr[item].clientHeight);
@@ -1079,15 +1412,15 @@ class commonUtils {
         option = () => {
           if (tableName == 'ORDERMANAGER' && _self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
             // 判断 如果不是高级搜索 自适应高度
-            setTableHeight(_self, defaultHeight);
+            this.setTableHeight(_self, defaultHeight);
           } else if (tableName != 'ORDERMANAGER') {
-            setTableHeight(_self, defaultHeight);
+            this.setTableHeight(_self, defaultHeight);
           }
         };
         break;
       case 'PROMACTIQUERYLIST':// 促销活动
         option = () => {
-          setTableHeight(_self, 100);
+          this.setTableHeight(_self, 100);
           const agGridChild = `agGridChild${Number(_self.activeName) + 1}`;
           _self.$refs[`${agGridChild}`][0].agGridTable(_self.tabConfig[_self.activeName].agTableConfig.columnDefs, _self.tabConfig[_self.activeName].agTableConfig.rowData);
         };
@@ -1126,7 +1459,419 @@ class commonUtils {
     }
   };
 
+  /* ============================================== @/assets/js/public/publicMethods.js ============================================== */
+
+
+  // 标准时间转时间格式
+  static FromDates(time) {
+    const date = new Date(time);
+    const Y = `${date.getFullYear()}-`;
+    const M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-`;
+    const D = `${date.getDate()} `;
+    // const h = `${date.getHours()}:`;
+    // const m = `${date.getMinutes()}:`;
+    // const s = date.getSeconds();
+    return Y + M + D;
+  }
+
+  // 字符串转时间格式
+  static DatesTime(time) {
+    const date = new Date(time);
+    const Y = `${date.getFullYear()}-`;
+    const M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-`;
+    const D = `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()} `;
+    const h = `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}:`;
+    const m = `${date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}:`;
+    const s = (date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds());
+    return Y + M + D + h + m + s;
+  }
+
+  // 加法函数
+  static accAdd(arg1, arg2) {
+    let r1; let r2; let m; let
+      c;
+    try {
+      r1 = arg1.toString().split('.')[1].length;
+    } catch (e) {
+      r1 = 0;
+    }
+    try {
+      r2 = arg2.toString().split('.')[1].length;
+    } catch (e) {
+      r2 = 0;
+    }
+    c = Math.abs(r1 - r2);
+    m = Math.pow(10, Math.max(r1, r2));
+    if (c > 0) {
+      const cm = 10 ** c;
+      if (r1 > r2) {
+        arg1 = Number(arg1.toString().replace('.', ''));
+        arg2 = Number(arg2.toString().replace('.', '')) * cm;
+      } else {
+        arg1 = Number(arg1.toString().replace('.', '')) * cm;
+        arg2 = Number(arg2.toString().replace('.', ''));
+      }
+    } else {
+      arg1 = Number(arg1.toString().replace('.', ''));
+      arg2 = Number(arg2.toString().replace('.', ''));
+    }
+    return (arg1 + arg2) / m;
+  }
+
+  // 減法函數
+  static accSub(arg1, arg2) {
+    let r1; let r2;
+    try {
+      r1 = arg1.toString().split('.')[1].length;
+    } catch (e) {
+      r1 = 0;
+    }
+    try {
+      r2 = arg2.toString().split('.')[1].length;
+    } catch (e) {
+      r2 = 0;
+    }
+    const m = 10 ** Math.max(r1, r2); // last modify by deeka //动态控制精度长度
+    // const n = (r1 >= r2) ? r1 : r2;
+    return ((arg1 * m - arg2 * m) / m).toFixed(2);
+  }
+
+  // 乘法
+  static accMul(arg1, arg2) {
+    let m = 0; const s1 = arg1.toString();
+    const s2 = arg2.toString();
+    try {
+      m += s1.split('.')[1].length;
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      m += s2.split('.')[1].length;
+    } catch (e) {
+      console.log(e);
+    }
+    return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / (10 ** m);
+  }
+
+  // 除法
+  static accDiv(arg1, arg2) {
+    let t1 = 0; let t2 = 0;
+    arg1 = arg1 || 0;
+    arg2 = arg2 || 0;
+    try {
+      t1 = arg1.toString().split('.')[1].length;
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      t2 = arg2.toString().split('.')[1].length;
+    } catch (e) {
+      console.log(e);
+    }
+    const r1 = Number(arg1.toString().replace('.', ''));
+    const r2 = Number(arg2.toString().replace('.', ''));
+    // return (r1 / r2) * Math.pow(10, t2 - t1);
+    return (r1 / r2) * (10 ** (t2 - t1));
+  }
+
+  /**
+   * 获取字段选项组值
+   *  @table 'PS_C_SKU' 表名
+   *  @colArr ["PAY_TYPE"] select类型的字段 的colname/英文名 的集合
+   *  @foldingName "基础信息" 折叠名称
+   *  @formConfig this.formConfig 待修改的formConfig
+   *  @return 返回this.formConfig.formData
+   * */
+  static async getTypeList(table, colArr, foldingName, formConfig) {
+    const fromdata = new FormData();
+    let fD = formConfig.formData;
+    fromdata.append('table', table);
+    fromdata.append('objid', -1);
+    const res = await service.common.getObject(fromdata);
+    res.data.data.addcolums.forEach((item) => {
+      if (item.parentdesc == foldingName) {
+        item.childs.forEach((it) => {
+          // it为接口返回的类似formData.Item的数据
+          colArr.forEach(colArrItem => {
+            if (it.colname == colArrItem) { // 用colname来匹配需要的select类型的item
+              fD.forEach((fDitem) => {
+                // 赋值给options
+                if (fDitem.colname === colArrItem) {
+                  fDitem.options = it.combobox.map((i) => ({
+                    label: i.limitdesc,
+                    value: i.limitval,
+                  }));
+                }
+              });
+            }
+          })
+        });
+      }
+    });
+    return fD;
+  }
+
+  /**
+   * 获取n天后的日期
+   */
+  static getDate(index) {
+    const date = new Date(); // 当前日期
+    const newDate = new Date();
+    newDate.setDate(date.getDate() + index);
+    const time = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`;
+    return time;
+  }
+
+  /**
+   * 获取n天前的日期
+   */
+  static getDateOld(index) {
+    const date = new Date(); // 当前日期
+    const newDate = new Date();
+    newDate.setDate(date.getDate() - index);
+    const mon = newDate.getMonth() + 1;
+    const day = newDate.getDate();
+    const time = `${newDate.getFullYear()}-${mon < 10 ? `0${mon}` : mon}-${day < 10 ? `0${day}` : day}`;
+    return time;
+  }
+
+  /**
+   * 获取两个字符串日期相差天数
+   */
+  static dateDiff(startDate, endDate) {
+    let aDate;
+    aDate = startDate.split('-');
+    const oDate1 = new Date(`${aDate[1]}-${aDate[2]}-${aDate[0]}`);
+    aDate = endDate.split('-');
+    const oDate2 = new Date(`${aDate[1]}-${aDate[2]}-${aDate[0]}`);
+    const iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24);
+    return iDays;
+  }
+
+  /**
+   * 数组去重 ps:工作台专用
+   */
+  static workArrHeavy(arr1, arr2) {
+    if (arr1 && arr2) {
+      for (let i = 0; i < arr1.length; i++) {
+        for (let j = 0; j < arr2.length; j++) {
+          if (arr1[i].key === arr2[j].key) {
+            arr1[i].value = arr2[j].value;
+            break;
+          }
+        }
+      }
+      return arr1;
+    }
+    return [];
+  }
+
+  /**
+   * 四舍五入改进
+   * num表示需要四舍五入的小数
+   * s表示需要保留几位小数
+   */
+  static toFixed(num, s) {
+    const times = 10 ** s;
+    let des = num * times + 0.5;
+    des = parseInt(des, 10) / times;
+    return `${des}`;
+  }
+
+  /**
+   * 导出
+   * src 导出路径
+   */
+  static downloadUrlFile(url) {
+    const self = this;
+    const domFrame = window.parent.document.getElementById('downLoadListFrame');
+    if (domFrame != null) {
+      window.parent.document.body.removeChild(domFrame);
+    }
+    const downloadFile = {};
+    if (typeof downloadFile.iframe === 'undefined') {
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('id', 'downLoadListFrame');
+      self.addEvent('load', iframe, () => {
+        self.iframeLoad(iframe);
+      });
+      iframe.src = url;
+      iframe.style.display = 'none';
+      downloadFile.iframe = iframe;
+      document.body.appendChild(downloadFile.iframe);
+      setTimeout(() => {
+        iframe.src = '';
+      }, 1000);
+    }
+
+    // const eleLink = document.createElement('a');
+    // eleLink.setAttribute('href', src);
+    // eleLink.style.display = 'none';
+    // document.body.appendChild(eleLink);
+    // eleLink.click();
+    // document.body.removeChild(eleLink);
+
+    // const download_file = {};
+    // if (typeof (download_file.iframe) === 'undefined') {
+    //   const iframe = document.createElement('iframe');
+    //   download_file.iframe = iframe;
+    //   document.body.appendChild(download_file.iframe);
+    // }
+    // download_file.iframe.src = src;
+    // download_file.iframe.style.display = 'none';
+  }
+
+  // 判断iframe的src
+  static iframeLoad(iframe) {
+    const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
+    console.log('src::', src);
+  }
+
+  // 调用方法时绑定iframe的load事件
+  static addEvent(eventName, element, fn) {
+    if (element.attachEvent) element.attachEvent(`on${eventName}`, fn);
+    else element.addEventListener(eventName, fn, false);
+  }
+
+  static timestampToTime(timestamp) {
+    const a = (`${timestamp}`).length;
+    const date = a == 13 ? new Date(timestamp) : new Date(timestamp * 1000); // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    const Y = `${date.getFullYear()}-`;
+    const M = `${date.getMonth() + 1 < 10
+      ? `0${date.getMonth() + 1}`
+      : date.getMonth() + 1}-`;
+    const D = `${date.getDate()} `;
+    const h = `${date.getHours()}:`;
+    const m = `${date.getMinutes()}:`;
+    const s = date.getSeconds();
+    return Y + M + D + h + m + s;
+  }
+
+  /**
+   * 公共接口获取表头
+   * @param {*} length 
+   */
+  static getCommonColumn(self,tableName){
+    return new Promise(async (resolve)=>{
+      let data = await self.service.orderCenter.initObject({"TABLE":tableName});
+      let obj = {}
+      if (data.data.code !== -1) {
+        let handleTh = data.data.data.DATA.map(element => ({title:`${element.headerName}`,key:`${element.field}`,dataAcessKey:`${element.field}`}));
+        obj = {
+          'sourceData':data.data,
+          'handleTh':handleTh
+        }
+      }
+      resolve(obj)
+    })
+  }
+  /**
+   * 公共接口获取数据
+   * @param {*
+   *  ID // 明细id
+   *  TABLE // 主表名
+   *  SUB_TABLE // 明细表名
+   *  PT_SKU // true平台 false商品
+   *  REFRESH //是否加密
+   *  index  //当前页
+   * } 
+   */
+   static getTableData(self,params){
+    return new Promise(async (resolve)=>{
+      const data = await self.service.orderCenter.queryObject(params);
+      let obj = {}
+      if (data.data.code !== -1) {
+        obj = {
+          'sourceData':data.data,
+          'SUB_ITEM':data.data.data.DATA.SUB_ITEM
+        }
+      }
+      resolve(obj)
+    })
+  }
+  /**
+   * ark table 添加合计行
+   */
+  static totalColumn(totalKey,resData){
+      // 生成map对象
+      let mapObj = new Map();
+      totalKey.forEach(e => { mapObj.set(e,0) });
+      // 编辑查询
+      resData.forEach(e => {
+        totalKey.forEach(v => {
+          if(e[v] !== undefined) mapObj.set(v,this.floatNumber(publicMethodsUtil.accAdd(Number(mapObj.get(v)), Number(e[v]))))
+        });
+      });
+      return Object.fromEntries([...mapObj])
+  }
+  /**
+   * key：value，Map对象生成,并查询相应的key值
+   */
+  static generateMap(keyArr,valueArr,serachV){
+    let mapObj = new Map();
+    let serachValue
+    keyArr.forEach((e, i) => { mapObj.set(e, valueArr[i]) });
+    mapObj.forEach((v, k) => {
+      if (k === serachV) serachValue = v;
+    });
+    return serachValue;
+  }
 }
 
 
 export default commonUtils
+
+// 给Number类型增加一个mul方法，调用起来更加方便。
+Number.prototype.mul = function (arg) {
+  return commonUtils.accMul(arg, this);
+};
+// 给Number类型增加一个div方法，调用起来更加方便。
+Number.prototype.div = function (arg) {
+  return commonUtils.accDiv(this, arg);
+};
+
+//
+// Number.prototype.toFixed = function(fractionDigits) {
+//   return ( parseInt((this * Math.pow( 10, fractionDigits ) + 0.5).toString())/ Math.pow( 10, fractionDigits )).toString();
+// }
+
+/**
+ * 修改了原型上的toFixed方法
+ * @param {*} length 
+ * @returns 
+ * 效果：1.6800000000000068.toFixed(2) = 1.69
+ */
+Number.prototype.toFixed = function (length) {
+  let carry = 0; // 存放进位标志
+  // let num; // num为原浮点数放大multiple倍后的数，multiple为10的length次方
+  const str = `${this}`; // 将调用该方法的数字转为字符串
+  let dot = str.indexOf('.'); // 找到小数点的位置
+  if (dot != -1) {
+    if (str.slice(dot + length + 1, dot + length + 2) >= 5) carry = 1; /* 找到要进行舍入的数的位置，手动判断是否大于等于5，满足条件进位标志置为1,这里原作者用的是str.substr(dot + length + 1, 1) */
+  }
+  // 需要舍入的数字如果小数位小于等于length，则不处理；
+  if (this.toString().length - dot - 1 <= length) {
+    return this;
+  }
+  const multiple = 10 ** length; // 设置浮点数要扩大的倍数
+  const num = Math.floor(this * multiple) + carry; // 去掉舍入位后的所有数，然后加上我们的手动进位数
+  let result = `${num / multiple}`; // 将进位后的整数再缩小为原浮点数
+  /*
+  * 处理进位后无小数
+  */
+  dot = result.indexOf('.');
+  if (dot === -1) {
+    result += '.';
+    dot = result.indexOf('.');
+  }
+  /*
+  * 处理多次进位
+  */
+  const len = result.length - (dot + 1);
+  if (len < length) {
+    for (let i = 0; i < length - len; i++) {
+      result += 0;
+    }
+  }
+  return result;
+}

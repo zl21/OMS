@@ -28,6 +28,7 @@ export default {
         itemdata.isOneData = false;
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
+        itemdata.version = '1.4';
         return itemdata;
       } catch (e) {
         throw new Error(e);
@@ -72,7 +73,7 @@ export default {
         refFuns: 'confirmFun',
         confirmTitle: '条件信息导入',
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '540',
+        width: '572',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
@@ -132,9 +133,11 @@ export default {
         isAction: false,
         tempApi: '/p/cs/pm/v1/getModuleUrl',
         okApi: '/p/cs/pm/v1/parseExcel',
+        okParm: { table: 'PS_C_SKU', mode: 'info' },
         tempParm: { 'mode': this.moduleMode },
         downErrorInfo: true,
         showErrorInfo: false,
+        returnData: this.returnData,
       }
       this.importTable.componentData = componentData;
       this.$children.find(item => item.name === 'importTable').openConfirm();

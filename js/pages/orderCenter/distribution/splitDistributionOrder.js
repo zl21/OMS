@@ -20,15 +20,15 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             btnclick: () => {
               this.pageSave();
             }
           },
           {
-            text: '返回',
+            text: $i18n.t('common.return'), // 返回
             btnclick: () => {
-              this.$comUtils.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 tableId: 24733,
                 type: 'S',
@@ -44,7 +44,7 @@ export default {
         columns: [
           {
             type: 'index',
-            title: '序号',
+            title: $i18n.t('table_label.serialNo'), // 序号
             width: 60,
             align: 'center'
           },
@@ -69,7 +69,7 @@ export default {
             key: 'TOT_QTY_OUT'
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
                 h(
@@ -159,7 +159,7 @@ export default {
         columns: [
           {
             type: 'index',
-            title: '序号',
+            title: $i18n.t('table_label.serialNo'), // 序号
             width: 60,
             align: 'center'
           },
@@ -182,7 +182,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消
             ghost: true,
             btnclick: () => {
               this.dialogConfig.visible = false;
@@ -190,7 +190,7 @@ export default {
           },
           {
             type: 'error',
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             ghost: true,
             btnclick: () => {
               // 校验

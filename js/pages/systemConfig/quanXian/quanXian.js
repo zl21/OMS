@@ -6,7 +6,6 @@ import form from '@/assets/js/__utils__/form';
 import qxBtnData from './qxBtnData';
 import loading from 'professionalComponents/loading';
 
-console.log('R3::', R3);
 const { FilterTree, SelectTree, SearchForm } = R3.components;
 const { network, urlSearchParams } = R3;
 export default {
@@ -22,6 +21,7 @@ export default {
   mixins: [qxBtnData],
   data() {
     return {
+      spinShow: false,
       vmI18n: $i18n,
       loading: false,
       saveModal: false,
@@ -37,9 +37,9 @@ export default {
 
       searchFormConfig: {
         setHeight: 34,
-        rowAll: 3,
-        searchFoldnum: 3,
-        defaultColumn: 3,
+        rowAll: 2,
+        searchFoldnum: 2,
+        defaultColumn: 2,
         defaultconfig: []
       },
 
@@ -64,6 +64,51 @@ export default {
         placeholder: ''
       },
 
+      treeData: [
+        {
+          "description": "全部",
+          "id": -1,
+          "name": "全部",
+          "nodeType": "ROOT",
+          "expand": true,
+          "selected": true,
+          "title": "数据权限项",
+          children: [
+            {
+              "description": "品牌权限",
+              "id": 186,
+              "mask": "10000000",
+              "name": "品牌权限",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "brand",
+              "title": "品牌权限"
+            },
+            {
+              "description": "实体仓权限",
+              "id": 186,
+              "mask": "10000000",
+              "name": "实体仓权限",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "warehouse",
+              "title": "实体仓权限"
+            },
+            {
+              "description": "平台店铺权限 ",
+              "id": 186,
+              "mask": "10000000",
+              "name": "平台店铺权限 ",
+              "nodeType": "TABLE_CATEGORY",
+              "orderno": -1,
+              "type": "saleschannel",
+              "title": "平台店铺权限 "
+            }
+
+          ]
+        }
+      ],
+
       oldTableArr: [],
       saveTableArr: [],
 
@@ -87,15 +132,17 @@ export default {
 
   created() {
     // const { customizedModuleName, customizedModuleId } = this.$route.params;
-    this.permissionType = "warehouse"
-    //this.$route.query.type;
-    alert("ok")
+    this.permissionType = "brand"
+
+
     // 获取角色
-   //this.getRoleData();
-      this.getSearchForm();
+    this.getRoleData();
+    this.getSearchForm();
+    this.getTableData();//获取表格
+
     this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
-    ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
-    : this.normal.buttons;
+      ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
+      : this.normal.buttons;
     // businessButton组件中定义的点击事件是'btnclick'
     this.buttonConfig.buttons.forEach(item => {
       item.btnclick = item.btnClick;
@@ -120,7 +167,7 @@ export default {
         key: 'IS_WRITE'
       }
     ];
-   
+
     const btnSearchObj = {
       text: $i18n.t('btn.search'),
       icon: '',
@@ -140,8 +187,35 @@ export default {
     this.filterTreeConfig.placeholder = $i18n.t('pHolder.enter');
   },
   methods: {
+    treeChange(val, obj) {
+
+      if (obj.id == "-1") {
+        obj.expand = !obj.expand
+        return
+      } else {
+        this.spinShow = true
+        if (this.isChange) {
+          this.saveModal = true;
+          this.newpermissionType = obj.type
+        } else {
+          this.permissionType = obj.type
+          this.getSearchForm();
+          this.getTableData();//获取表格
+        }
+      }
+
+
+    }, // 树选中改变触发
     saveOk() {
       this.saveQuanXian();
+      if (this.newpermissionType) {
+        setTimeout(()=>{
+          this.permissionType = this.newpermissionType
+          this.getSearchForm();
+          this.getTableData();//获取表格
+          this.newpermissionType = ""
+        },500)
+      }
     },
     saveCancel() {
       if (this.newGroupId !== this.groupId) {
@@ -150,9 +224,11 @@ export default {
       }
     },
     isChangeFun(val) {
+
       this.isChange = val;
     },
     filterTreeChange(val, item) {
+
       this.newGroupId = item.ID;
       if (this.isChange) {
         this.saveModal = true;
@@ -173,38 +249,40 @@ export default {
       });
     }, // 重构树数据
 
-    // 获取角色id
-    async getRoleData() {
-      console.log("-------------");
-      //const res = await this.service.common.groupTreeload({});
-      const res = await  network.post(
-        '/mock/734/p/cs/groupTreeload',
-      )
 
+    async getRoleData() {
+      const res = await this.service.common.groupTreeload({});
+      this.spinShow = false
       if (res.data.code === 0) {
         this.groupId = res.data.data[0].ID;
         this.newGroupId = res.data.data[0].ID;
         this.filterTreeConfig.treeAttribute.data = this.restructureMenuTreeData(res.data.data, true);
-
-        this.getTableData();
       }
     },
     // 获取搜索框
     async getSearchForm() {
-      network
+      $network
         .post(
-          '/mock/734/p/cs/permission/v1/selectPermissionColumn',
-          //'/p/cs/permission/v1/selectPermissionColumn',
+          '/p/cs/permission/v1/selectPermissionSearchColumns',
           urlSearchParams({ permissionType: this.permissionType })
         )
         .then(res => {
+          this.spinShow = false
           if (res.data.code === 0) {
-            const dataArray = form.refactoringData(res.data.datas.dataarry);
+            res.data.data.map(item => {
+              item.coldesc = item.colname
+              item.colname = item.key
+              item.inputname = `${item.key}:${item.fk_dk_show_filed}`
+              return item
+            })
+
+            const dataArray = form.refactoringData(res.data.data);
             dataArray.forEach(item => {
               if (item.item.value) {
                 item.item.props.value = item.item.value;
               }
             });
+
             this.searchFormConfig.defaultconfig = dataArray;
           }
         });
@@ -212,25 +290,16 @@ export default {
 
     // 获取表格
     async getTableData(searchCondition = {}, refresh = false) {
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       this.groupId = this.newGroupId;
       let url;
       let params;
-      if (this.permissionType === 'sensitive') {
-        url = '/p/cs/cgroupcolumnquery';
-        params = {
-          GROUPS_ID: this.groupId,
-          QUERY: ''
-        };
-      } else {
-        url ='/mock/734/p/cs/permission/v1/selectDataPermission',
-       // url = '/p/cs/permission/v1/selectDataPermission';
-        params = {
-          permissionType: this.permissionType || 'sensitivecol',
-          groupId: this.groupId || 32,
-          searchCondition
-        };
-      }
+      url = '/p/cs/permission/v1/selectDataPermission';
+      params = {
+        permissionType: this.permissionType || 'brand',
+        groupId: this.groupId || 46,
+        searchCondition
+      };
       this.loading = true;
       // this.$R3loading.show(customizedModuleName);
       const { data: { data, code } } = await this.service.systemConfig.selectDataPermission(url, urlSearchParams(params));
@@ -276,7 +345,7 @@ export default {
               }
             }
           });
-          
+
           this.tableArr.columns = dt.columns;
           this.tableArr.rows = dt.rows;
           this.tableArr.isChild = dt.isChild;
@@ -337,6 +406,7 @@ export default {
           content: message,
           cancelType: true,
           titleAlign: 'left',
+          className: 'ark-dialog',
           mask: true,
           draggable: true,
           keyDown: event => {
@@ -345,7 +415,7 @@ export default {
             }
           }
         });
-      } 
+      }
     },
     cancelBtn() {
       this.copyModal = false;

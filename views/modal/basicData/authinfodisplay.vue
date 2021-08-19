@@ -39,7 +39,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             type: 'default',
             btnclick: () => {
               this.save()
@@ -71,16 +71,15 @@ export default {
         for (const key in row) {
           let obj = {
             style: 'input',
-            label: key,
-            value: row[key],
-            colname: row[key],
+            label: row[key],
+            colname: key,
             width: '24',
             disabled: false,
           }
-          this.formconfig.formValue[row[key]] = resdata[row[key]]
-          this.formconfig.ruleValidate[row[key]] = [{ required: true, message: '' }]
+          this.formconfig.formValue[key] = resdata[key]
+          this.formconfig.ruleValidate[key] = [{ required: true, message: '' }]
           this.formconfig.formData.push(obj)
-          this.reqkey[row[key]] = ""
+          this.reqkey[key] = ""
         }
       })
     },

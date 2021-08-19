@@ -1,8 +1,9 @@
 <template>
   <!-- promactiqueryList -->
-  <div class="customized-list" v-loading='loading'>
-    <div class="customized-list-form">
+  <div class="customized-list" v-loading="loading">
+    <div class="" :class="['customized-list-form','promotionForm',Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '']">
       <businessForm :form-config="formConfig" />
+      <businessButton :btn-config="formBtn" class="formBtn" />
     </div>
     <!-- 按钮 head_botton-->
     <div class="customized-list-btn">
@@ -14,16 +15,25 @@
         <TabPane
           v-for="(user, index) in tabConfig"
           :key="index"
-          :label="`${user.label} ${user.agTableConfig.pagenation.total}`"
+          :label="`${user.label} ${user.total}`"
           :name="`${index}`"
         >
           <!-- hasNation 是否自动计算序号 -->
-          <aTable
+          <!-- <aTable
             :ref="`agGridChild${index + 1}`"
             :ag-table-config="user.agTableConfig"
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
             @on-row-dblclick="handDblClick"
+          /> -->
+          <businessAgTable
+            :ref="`agGridChild${index + 1}`"
+            :ag-table-config="agTableConfig"
+            :options="options"
+            @on-row-dblclick="handDblClick"
+            @on-page-change="pageChange"
+            @on-page-size-change="pageSizeChange"
+            @on-selection-change="onSelectionChange"
           />
         </TabPane>
       </Tabs>
@@ -69,11 +79,18 @@
       @closeDialog="closeDialog"
     />
     <!-- 查看日志弹框 -->
-    <Modal v-model="modal">
-      <Table :columns="logData.columns" :data="logData.data" :height="300" />
+    <Modal
+      v-model="modal"
+      class="ark-dialog"
+      mask
+      draggable
+      title="查看日志"
+      :mask-closable="false"
+      closable
+    >
+      <Table :columns="logData.columns" :data="logData.data" :height="250" />
       <div slot="footer">
-        <!-- 关闭 -->
-        <Button type="error" @click="closeModal">
+        <Button ghost @click="closeModal">
           {{ vmI18n.t("common.close") }}
         </Button>
       </div>
@@ -87,4 +104,13 @@ export default promotionlist;
 </script>
 <style lang="less">
 @import "~@/css/pages/promotionCenter/promotionlist.less";
+.colorBlack {
+  color: #323233;
+}
+.colorBlue {
+  color: blue;
+}
+.colorGray {
+  color: gray;
+}
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-27 11:05:42
- * @LastEditTime: 2021-05-27 11:05:42
+ * @LastEditTime: 2021-07-16 14:08:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/orderCenter/orderManager/proDetail.vue
@@ -15,14 +15,18 @@
         class="isQh"
         @click="qhClick"
       >
-        <Icon type="ios-repeat" />切换为sku商品显示
+        <Icon type="ios-repeat" />
+        <!-- 切换为sku商品显示 -->
+         {{Vmi18n.t('form_label.b0')}}
       </div>
       <div
         v-show="!isQh"
         class="isQh"
         @click="qhClick"
       >
-        <Icon type="ios-repeat" />切换平台商品明细
+        <Icon type="ios-repeat" />
+        <!-- 切换平台商品明细 -->
+         {{Vmi18n.t('form_label.b1')}}
       </div>
     </div>
     <businessActionTable
@@ -51,10 +55,11 @@
       return {
         loading: false,
         isQh: true,
+        Vmi18n:$i18n,
         tableConfig: {
           columns: [
             {
-              title: '操作',
+              title: $i18n.t('table_label.operation'), // 操作
               key: 'OPARATE_BUTTON',
               render: (h, params)=> h('a', {
                 on: {
@@ -70,7 +75,7 @@
                         props: {
                           columns: [
                             {
-                              title: '序号',
+                              title: $i18n.t('table_label.serialNo'), // 序号
                               key: 'Index',
                               type: 'index',
                             },
@@ -101,7 +106,7 @@
           height: 300, // 表格高度
           border: true, // 是否显示纵向边框
           total: 0, // 设置总条数
-          pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+          pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
           pageSize: 10, // 每页条数
           current: '', // 当前页
         },

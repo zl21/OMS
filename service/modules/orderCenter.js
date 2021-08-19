@@ -140,6 +140,8 @@ export default {
     $network.post('/api/cs/oc/oms/v1/deleteAfterDeliverItem', params), // 编辑状态,删除明细
   copyAfterDeliver: (params) =>
     $network.post('/api/cs/oc/oms/v1/copyAfterDeliver', params), // 详情 复制查询方法
+  queryExtraDelItem: (params) => $network.post('/p/cs/oc/oms/v1/refundExtra/delItem', params), // 额外退款单-明细删除
+
   /**
    * 额外退款、已发货退款列表
    */
@@ -345,9 +347,9 @@ export default {
     $network.post('/p/cs/vip/v2/distribution/get/delivery', params), // 手动匹配入库单初始化
   matchStockInSave: (params) =>
     $network.post('/p/cs/vip/v2/distribution/match/delivery', params), // 手动匹配入库单保存
-  queryList: (params) => $network.post('/p/cs/oc/oms/v1/queryList', params), // 查询列表
+  queryList: (params) => $network.post(`/p/cs/oc/oms/v1/queryList?hash=${+new Date()}`, params), // 查询列表
   queryStatistics: (params) =>
-    $network.post('/p/cs/oc/oms/v1/queryStatistics', params), // 查询异常数量(tabs标头显示数量)
+    $network.post(`/p/cs/oc/oms/v1/queryStatistics?hash=${+new Date()}`, params), // 查询异常数量(tabs标头显示数量)
   getOcBOrderExceptions: (params) =>
     $network.post('/p/cs/oc/oms/v1/ocborder/getOcBOrderExceptions', params), // 异常数据列表查询
   batchSaveOcBOrderException: (params) =>
@@ -396,4 +398,5 @@ export default {
     addOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/addOrderLable', params), //添加标记
     cancelOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/cancelOrderLable' , params),  //取消标记
     orderExport:(params) => $network.post('/p/cs/oc/oms/v1/export' , params), //订单列表里的导入功能
+    updateDeliveryTime:(params) => $network.post('/p/cs/oc/b/oms/v1/ocborder/updateDeliveryTime' , params), // 零售列表-修改预计发货时间
 }

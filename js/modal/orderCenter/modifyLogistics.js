@@ -92,6 +92,7 @@ export default {
         this.getListData();
       }
     },
+  
     // 防抖
     debounce(fun, time) {
       if (this.isClice) {
@@ -124,7 +125,7 @@ export default {
         });
         return false;
       }
-      this.$comUtils.setLoading(true);
+      $omsUtils.setLoading(true);
       const fromdata = new FormData();
       fromdata.append('ids', self.componentData.ids);
       fromdata.append('cLogisticsId', self.pid);
@@ -197,7 +198,7 @@ export default {
           });
           this.btnConfig.buttons[1].disabled = false;
         }
-        this.$comUtils.setLoading();
+        $omsUtils.setLoading();
       });
     },
     getListData() {

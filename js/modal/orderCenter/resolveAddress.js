@@ -37,6 +37,7 @@ export default {
           width: "8",
           itemdata: {
             col: 1,
+            serviceId: 'r3-cp',
             colid: 166974, // 当前字段的ID
             colname: "CP_C_REGION_PROVINCE_ID", // 当前字段的名称
             datelimit: "all",
@@ -87,6 +88,7 @@ export default {
           inputList: [],
           itemdata: {
             col: 1,
+            serviceId: 'r3-cp',
             colid: 167077, // 当前字段的ID
             colname: "CP_C_REGION_CITY_ID", // 当前字段的名称
             datelimit: "all",
@@ -111,12 +113,19 @@ export default {
               srccol: "CP_C_REGION_PROVINCE_ID",
             },
           },
+          InputBlur:(val) => {
+            this.formConfig.formData[2].itemdata.pid = '';
+            this.formConfig.formData[2].itemdata.valuedata = '';
+            this.data.cp_c_region_city_id = val.pid;
+            this.data.cp_c_region_area_id = ''
+          },
           oneObj: (val) => {
             // 选中触发事件
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
             this.data.cp_c_region_city_id = val.pid;
             this.data.cp_c_region_area_id = ''
+            console.log('valval:',val);
           },
           InputEnter: (val)=> {
             this.formConfig.formData[2].itemdata.pid = '';
@@ -133,6 +142,7 @@ export default {
           inputList: [],
           itemdata: {
             col: 1,
+            serviceId: 'r3-cp',
             colid: 167091, // 当前字段的ID
             colname: "CP_C_REGION_AREA_ID", // 当前字段的名称
             datelimit: "all",
@@ -156,6 +166,9 @@ export default {
               expre: "equal",
               srccol: "CP_C_REGION_CITY_ID",
             },
+          },
+          InputBlur:(val) => {
+            this.data.cp_c_region_area_id = val.pid
           },
           oneObj: (val) => {
             // 选中触发事件
@@ -332,7 +345,8 @@ export default {
             self.componentData.CALLBACK();
           } else {
             try {
-              self.$parent.$parent.$parent.autoRefresh();
+              console.log('2');
+              self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
             } catch (e) {
               console.log(e);
             }
@@ -390,7 +404,6 @@ export default {
       this.formConfig.formData[2].itemdata.pid = areaInfo ?.id;
       this.data.cp_c_region_area_id = areaInfo ?.id;
       if(provinceName.id || cityName.id){
-        console.log('111',provinceName,cityName); 
         // 地址解析状态
         this.dataAysis = true;
       }

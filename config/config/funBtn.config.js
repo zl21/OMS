@@ -14,6 +14,9 @@ class BtnConfig {
     loading: false, // 按钮加载
     buttons: [
       {
+        webname: 'OC_ORDER_SEND_TIME',
+      },
+      {
         webname: 'informWMSToCreateNew', // 退货单-通知WMS新建
         btnclick: () => this.btnMainHandler('wmsCreate'),
       },
@@ -120,7 +123,7 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('returnGoodsCancel'),
       },
       {
-        webname: 'updateOrderVirtual', // 退货换单 - 虚拟入库
+        webname: 'updateOrderVirtual', // 退货换单 - 换货先发
         btnclick: () => this.btnMainHandler('virtualStorage'),
       },
       {
@@ -435,7 +438,6 @@ class BtnConfig {
       case 'regenerateTheOrder':
       case 'manualMatch':
       case 'forceMatch':
-      case 'returnGoodsCancel':
       case 'modifyRemark':
       case 'modifySellerRemark':
       case 'againWMS':
@@ -443,6 +445,11 @@ class BtnConfig {
       case 'batchOriginalReturn':
         funName = `${type}Handler`
         tips = 'l0'
+        paramsType = 7
+        break
+      case 'returnGoodsCancel':
+        funName = `${type}Handler`
+        tips = 'd8'
         paramsType = 7
         break
       case 'holdOrder':
@@ -518,7 +525,7 @@ class BtnConfig {
         break
       case 'splitOrder':
         funName = 'splitOrderHandler'
-        tips = 'b4'
+        tips = 'i7'
         paramsType = 5
         break
       case 'exportClick':
@@ -556,10 +563,12 @@ class BtnConfig {
       this[funName](self, ids)
     } else {
       // 非单对象界面
-      self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+      if(!self.vueAgTable){
+        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+      }
       if (self.selection.length > 0) {
         if (isSingle && self.selection.length > 1) {
-          commonUtils.msgTips(self, 'warning', '不支持批量操作！', 2)
+          commonUtils.msgTips(self, 'warning', 'kg', 2) // 不支持批量操作！
           return
         }
         self.btnConfig.loading = true
@@ -910,10 +919,10 @@ class BtnConfig {
     if (BtnConfig.singleType) {
       if (self.$route.query.id == '-1') return;
       if (self.status !== 20) {
-        commonUtils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许虚拟入库!
+        commonUtils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许换货先发!
         return;
       }
-      commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', { ID: id, }, 'part',
+      commonUtils.modalShow(self, 'kw', 'common.updateVirtualLibrary', { ID: id, }, 'part',
         function (res) {
           if (res.data.code === 0) {
             self.$Message.success(res.data.message)
@@ -932,7 +941,7 @@ class BtnConfig {
       if (id) {
         let formdata = new FormData();
         formdata.append('id' , id[0]);
-        commonUtils.modalShow(self, 'l7', 'common.updateVirtualLibrary', formdata)
+        commonUtils.modalShow(self, 'kw', 'common.updateVirtualLibrary', formdata)
       }
     }
   }
@@ -966,6 +975,7 @@ class BtnConfig {
       const callbackFun = (res)=>{
         console.log(res);
         if(res.data.code == 0){
+          self.query()
           commonUtils.msgTips(self ,'success', '取消成功', 0)
         }else {
           commonUtils.tipShow(
@@ -975,17 +985,39 @@ class BtnConfig {
             res.data.message,
             function (h) {
               //因为后端复用列列表详情界面的取消接口,需要区分
-              return h('Table', {
-                props: {
-                  columns: [
-                    {
-                      title: '失败原因',
-                      key: 'message',
-                    },
-                  ],
-                  data: res.data.data,
-                },
-              })
+              if (self.$route.params.customizedModuleName == "OC_B_RETURN_ORDER") {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: $i18n.t('table_label.serialNo'), // 序号
+                        key: 'index',
+                      },
+                      {
+                        title: $i18n.t('form_label.billNo'), // 单据编号
+                        key: 'billNo',
+                      },
+                      {
+                        title: $i18n.t('form_label.e0'), // 失败原因
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              } else {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: $i18n.t('form_label.e0'), // 失败原因
+                        key: 'message',
+                      },
+                    ],
+                    data: res.data.data,
+                  },
+                })
+              }
             }
           )
         }
@@ -1200,7 +1232,7 @@ class BtnConfig {
         function (res) {
           if (res.data.code === 0) {
             commonUtils.msgTips(self, 'sucess', res.data.message)
-            self.load()
+            self.query()
           }
         }
       )
@@ -1283,16 +1315,16 @@ class BtnConfig {
   // 合并订单  (不要动！！！)
   mergeOrderHandler(self, selection) {
     // 判断勾选订单信息是否一致
-    const selectionOne = selection[0];
-    const agreement = selection.every(item => item.CP_C_PHY_WAREHOUSE_ENAME === selectionOne.CP_C_PHY_WAREHOUSE_ENAME
-      && item.ORDER_TYPE === selectionOne.ORDER_TYPE // 订单类型
-      && item.CP_C_SHOP_TITLE === selectionOne.CP_C_SHOP_TITLE //店铺
-      && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
-      && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
-    if (!agreement) {
-      commonUtils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
-      return;
-    }
+    // const selectionOne = selection[0];
+    // const agreement = selection.every(item => item.CP_C_PHY_WAREHOUSE_ENAME === selectionOne.CP_C_PHY_WAREHOUSE_ENAME
+    //   && item.ORDER_TYPE === selectionOne.ORDER_TYPE // 订单类型
+    //   && item.CP_C_SHOP_TITLE === selectionOne.CP_C_SHOP_TITLE //店铺
+    //   && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
+    //   && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
+    // if (!agreement) {
+    //   commonUtils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
+    //   return;
+    // }
     // 状态判断提示
     let tips;
     for (let index = 0; index < selection.length; index++) {
@@ -1309,7 +1341,7 @@ class BtnConfig {
         tips = 'fu';
         break;
       }
-      if (item.RESERVE_VARCHAR03_NAME !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
+      if (item.ORDER_TYPE !== '预售订单' && item.PAY_STATUS !== '全部付款') {  // '非预售' && '预售尾款已付'
         tips = 'fw';
         break;
       }
@@ -1328,27 +1360,32 @@ class BtnConfig {
     commonUtils.modalShow(self, 'fz', 'orderCenter.mergeOrderOne', param, 'all', function (res) {
       let { data } = res;
       if (data.code === 0) {
-        console.log('成功！');
-        self.$Message.success(data.message || '成功！')
+        self.$Message.success(data.message || '成功！');
+        self.query();
       }
     })
   }
   // 取消合并订单 (不要动！！！)
   cancelMergeOrderHandler(self, selection) {
-    for (const item of self.selection) {
-      //判断合单状态
-      if (!item.IS_MERGE) {
-        // 未合并的订单不允许进行取消合并!
-        commonUtils.msgTips(self, 'warning', 'fx');
-        self.btnConfig.loading = false
-        return
-      }
-      // ['缺货', '待审核', '已审核']
-      if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
-        // 当前状态异常，不允许操作！
-        commonUtils.msgTips(self, 'warning', 'd9')
-        self.btnConfig.loading = false
-        return
+    if(selection.length === 1){
+      for (const item of self.selection) {
+        //判断合单状态
+        if (!item.IS_MERGE) {
+          // 未合并的订单不允许进行取消合并!
+          commonUtils.msgTips(self, 'warning', 'fx');
+          self.btnConfig.loading = false
+          return
+        }
+        // ['缺货', '待审核', '已审核']
+        // 待审核：1；PRD上：仅限制非'待审核'的单据
+        // if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
+        if (![1].includes(item.ORDER_STATUS)) {
+          // 当前状态异常，不允许操作！
+          // commonUtils.msgTips(self, 'warning', 'd9')
+          self.$Message.warning($i18n.t('modalTips.kh')) // 只允许待审核的订单进行取消合并！
+          self.btnConfig.loading = false
+          return
+        }
       }
     }
     const param = {
@@ -1359,8 +1396,8 @@ class BtnConfig {
       let { data } = res;
       console.log(data);
       if(data.code === 0){
-        console.log('成功！');
-        self.$Message.success(data.message || '成功！')
+        self.$Message.success(data.message || '成功！');
+        self.query();
       }else{
         commonUtils.tipShow('confirm' , self , res ,data.message, function(h){
           return h('Table' , {
@@ -1370,10 +1407,10 @@ class BtnConfig {
                   title: 'ID',
                   key: 'objid',
                 },{
-                  title: '单据编号',
+                  title: $i18n.t('form_label.billNo'), // 单据编号
                   key: 'objno',
                 },{
-                  title: '详细信息',
+                  title: '详细信息', // TODO!
                   key: 'message',
                 }
               ],
@@ -1504,7 +1541,7 @@ class BtnConfig {
                   key: 'objid',
                 },
                 {
-                  title: '报错信息',
+                  title: $i18n.t('modalTitle.du'), // 报错信息
                   key: 'message',
                 },
               ],
@@ -1512,7 +1549,9 @@ class BtnConfig {
             },
           }
           this.$Modal.confirm({
+            className: 'ark-dialog',
             title: err,
+            mask: true,
             render: (h) => h('Table', renderInfo),
           })
         }
@@ -1762,7 +1801,7 @@ class BtnConfig {
   // 返回
   back(moduleName, id, labelName) {
     const self = BtnConfig.target
-    self.$comUtils.tabCloseAppoint(self)
+    $omsUtils.tabCloseAppoint(self)
     commonUtils.navigateMain(id, 'TabHref', moduleName, labelName)
   }
 
@@ -1805,15 +1844,15 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: '序号',
+                        title: $i18n.t('table_label.serialNo'), // 序号
                         key: 'INDEX',
                       },
                       {
-                        title: '单据编号',
+                        title: $i18n.t('form_label.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: '失败原因',
+                        title: $i18n.t('form_label.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],
@@ -1830,7 +1869,7 @@ class BtnConfig {
   // 手工 WMS撤回重做
   wmsWithdrawHandler(self, id) {
     if (id.length > 1) {
-      commonUtils.msgTips(self, 'warning', '只支持单个退货单做WMS撤回重做操作！', 2)
+      commonUtils.msgTips(self, 'warning', 'ki', 2) // 只支持单个退货单做WMS撤回重做操作！
       return
     }
     self.service.orderCenter.cancelReturnOrderFromWms({ ID: id[0] }).then((res) => {

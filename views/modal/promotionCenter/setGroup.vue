@@ -2,7 +2,7 @@
 <template>
   <div
     v-if="dialogVisible"
-    class="setGroup"
+    class="setGroup customized-modal"
   >
     <el-dialog
       :visible.sync="dialogVisible"
@@ -90,7 +90,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <businessButton :btn-config="buttonConfig" />
+      <businessButton class="modal-footer" :btn-config="buttonConfig" />
     </el-dialog>
   </div>
 </template>

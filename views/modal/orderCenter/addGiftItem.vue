@@ -1,10 +1,18 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-07 15:56:09
+ * @LastEditTime: 2021-08-09 17:06:04
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/orderCenter/addGiftItem.vue
+-->
 <!--增加赠品-->
 <template>
   <div class="customized-modal">
     <!-- <EasyMatrix :component-data="matrixData" /> -->
-    <businessForm :form-config="formConfig"></businessForm>
+    <!-- <businessForm :form-config="formConfig"></businessForm> -->
     <!-- businessButton -->
-    <businessButton class="absolute" :btn-config="searchBtn"></businessButton>
+    <!-- <businessButton class="absolute" :btn-config="searchBtn"></businessButton> -->
     <businessActionTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
@@ -40,7 +48,7 @@
     .businessForm_a{
       .ark-row{
         .ark-col{
-          margin-top: 0;
+          // margin-top: 0;
         }
       }
     }

@@ -137,7 +137,7 @@ export default {
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: '店铺名称'
+              title: $i18n.t('table_label.shopName') // 店铺名称
             }
           ], // 表头
           data: [], // 数据配置
@@ -152,7 +152,7 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         buttons: [
           {
-            text: '保存', // 按钮文本
+            text: $i18n.t('btn.save'), // 保存 按钮文本
             webname: 'ManualMatching_save',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -160,7 +160,7 @@ export default {
               // console.log(this.returnPostage);
             } // 按钮点击事件
           }, {
-            text: '返回', // 按钮文本
+            text: $i18n.t('common.return'), // 返回 按钮文本
             webname: 'Mismatchingmandatorymatching_return',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -337,7 +337,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             value: 'REMARK',
             width: '12'
           },

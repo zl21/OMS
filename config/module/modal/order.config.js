@@ -1,13 +1,24 @@
 /*
  * @Author: your name
  * @Date: 2021-04-28 13:22:03
- * @LastEditTime: 2021-06-11 15:55:59
+ * @LastEditTime: 2021-07-14 19:27:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/modal/order.config.js
  */
 // 订单中心
 export default {
+  PAYDETAIL: { 
+    component: () => import('@/views/pages/orderCenter/pay/payDetail.vue'),
+  },
+  ORDERRETURN: { 
+    component: () => import('@/views/pages/orderCenter/returnOrder/orderReturnchange.vue'),
+    labelName: '返回'
+  },
+  SAVE: { 
+    component: () => import('@/views/pages/orderCenter/returnOrder/save.vue'),
+    labelName: '保存'
+  },
   // JIT配货单修改仓库测试弹框
   MODIFYWAREHOUSE: {
     component: () => import('@/views/modal/orderCenter/modifyWarehouse.vue'),
@@ -55,15 +66,18 @@ export default {
   EXCHANGETAG: {
     component: () => import('@/views/modal/orderCenter/exchangeTag.vue')
   },
+  CHANGETAG: {
+    component: () => import('@/views/modal/orderCenter/changeTag.vue'),
+    labelName: '换吊牌',
+    isList: false
+  },
   MANUAL: {
     component: () => import('@/views/modal/orderCenter/manual.vue')
   },
   FOURCE: {
     component: () => import('@/views/modal/orderCenter/force.vue')
   },
-  OC_B_REFUND_IN_SAVE: { //
-    component: () => import('@/views/modal/orderCenter/OC_B_REFUND_IN_save.vue') 
-  },
+
   REMITFAIL:{
     component: () => import('@/views/modal/orderCenter/remitFail.vue') //
   }

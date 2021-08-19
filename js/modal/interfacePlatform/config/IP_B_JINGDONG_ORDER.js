@@ -25,7 +25,7 @@ export default {
           fkdesc: $i18n.t('other.shop'), // 店铺
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
-          isnotnull: false, // 是否必填
+          isnotnull: true, // 是否必填
           length: 65535, // 最大长度是多少
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
@@ -52,7 +52,7 @@ export default {
             value: ''
           },
           {
-            label: $i18n.t('other.toBeDelivered'), // 待发货
+            label: $i18n.t('panel_label.a4'), // 等待出库
             value: 'WAIT_SELLER_STOCK_OUT'
           }
         ]
@@ -80,41 +80,35 @@ export default {
       }
     ]
   },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async (self) => {
+    const formValue = self.downLoadFormConfig.formValue;
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
       self.$Message.warning($i18n.t('modalTips.be'));// 请选择需要下载的店铺
       return false;
     }
-    if (
-      self.downLoadFormConfig.formValue.startEndTimes
-        .length === 0
-      && self.downLoadFormConfig.formValue.orderNum === ''
-    ) {
+    const [start, end] = formValue.startEndTimes
+    if (!(formValue.orderNum || start)) {
       self.$Message.warning($i18n.t('modalTips.bs'));// 请选择输入的日期或输入订单编号
       return false;
     }
     const param = {
-      shop_id:
-        parseInt(self.downLoadFormConfig.formData[0].itemdata.pid),
-      bill_no: self.downLoadFormConfig.formValue.orderNum, // 订单编号
-      start_time: BurgeonDate.standardTimeConversiondateToStr(
-        self.downLoadFormConfig.formValue.startEndTimes[0]
-      ), // 开始时间
-      end_time: BurgeonDate.standardTimeConversiondateToStr(
-        self.downLoadFormConfig.formValue.startEndTimes[1]
-      ), // 结束时间
-      status:
-        self.downLoadFormConfig.formValue.orderStatus, // 状态 必传 给默认值
+      shop_id: parseInt(self.downLoadFormConfig.formData[0].itemdata.pid),
+      bill_no: formValue.orderNum, // 订单编号
+      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '', // 开始时间
+      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '', // 结束时间
+      status: formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
   
 
     // 请求下载订单接口
     const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
-    console.log(code, message);
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
       self.downLoadModal = true;

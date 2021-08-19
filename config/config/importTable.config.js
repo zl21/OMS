@@ -4,6 +4,76 @@
  */
 
 const importConfig = {
+  SG_B_GOOD_DISTRIBUTION__SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT: {
+    // 分货单单对象-导入
+    isAction: true,
+    tableName: 'SG_B_GOOD_DISTRIBUTION',
+    webname: 'SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT',
+    tempApi: '/p/cs/sg/v1/sgBGoodDistribution/exportTemplate',
+    okApi: '/p/cs/sg/v1/sgBGoodDistribution/itemImport',
+    // okParm: { id: R3.store.state.customize._this.$route.params.itemId },
+    isStandardSingleObject: true,
+    prefix: 'SYSTEM',
+    dontRefreshTable: false,
+    okParm: { id: null },
+    downErrorInfo: true
+  },
+  SG_B_GOOD_DISTRIBUTION__SG_B_GOOD_DISTRIBUTION_IMPORT: {
+    // 分货单-导入
+    isAction: true,
+    tableName: 'SG_B_GOOD_DISTRIBUTION',
+    webname: 'SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT',
+    tempApi: '/p/cs/sg/v1/sgBGoodDistribution/exportTemplate',
+    okApi: '/p/cs/sg/v1/sgBGoodDistribution/import',
+    prefix: 'SYSTEM',
+    dontRefreshTable: false,
+    downErrorInfo: true
+  },
+  PS_C_PRO_CLASSIFY__ps_c_pro_classify_import: {
+    // 商品分类-导入
+    isAction: true,
+    tableName: 'PS_C_PRO_CLASSIFY',
+    webname: 'ps_c_pro_classify_import',
+    tempApi: '/p/cs/ps/pro/classify/v1/classSku/template',
+    okApi: '/p/cs/ps/pro/classify/v1/classSku/import',
+    downErrorInfo: true
+  },
+  V_CP_C_REGION_ALIAS__regionImport: {
+    // 国家省市区-导入
+    isAction: true,
+    tableName: 'V_CP_C_REGION_ALIAS',
+    webname: 'regionImport',
+    tempApi: '/p/cs/cp/import/v1/region/template',
+    okApi: '/p/cs/cp/import/v1/region/import',
+    downErrorInfo: true
+  },
+  ST_C_SHOP_STRATEGY__shopStrategyImport: {
+    // 店铺策略导入
+    isAction: true,
+    tableName: 'ST_C_SHOP_STRATEGY',
+    webname: 'shopStrategyImport',
+    tempApi: '/p/cs/st/v1/shopStrategy/downLoad',
+    okApi: '/p/cs/st/v1/shopStrategy/import',
+    downErrorInfo: true
+  },
+  ST_C_SYNC_STOCK_STRATEGY__syncStockStrategyImport: {
+    // 店铺策略导入
+    isAction: true,
+    tableName: 'ST_C_SYNC_STOCK_STRATEGY',
+    webname: 'syncStockStrategyImport',
+    tempApi: '/p/cs/st/v1/syncStockStrategy/downLoadSyncStockStrategyImportTemp',
+    okApi: '/p/cs/st/v1/syncStockStrategy/importSyncStockStrategy',
+    downErrorInfo: true
+  },
+  AC_F_ALIPAY_ACCOUNTMANAGE__zfbAccountImport: {
+    // 额外退款单-导入打款结果
+    isAction: true,
+    tableName: 'AC_F_ALIPAY_ACCOUNTMANAGE',
+    webname: 'zfbAccountImport',
+    tempApi: '/p/cs/ac/v1/alipayAccountManage/exportTemplate',
+    okApi: '/p/cs/ac/v1/alipayAccountManage/importData',
+    downErrorInfo: true,
+  },
   OC_B_REFUND_ORDER_EXTRA__IMPORT_PAY_RESULT: {
     // 额外退款单-导入打款结果
     isAction: true,
@@ -12,6 +82,7 @@ const importConfig = {
     tempApi: '/p/cs/oc/oms/v1/refundExtra/remitResultDownLoad',
     okApi: '/p/cs/oc/oms/v1/refundExtra/remitResultImport',
     downErrorInfo: true,
+    isErr1Succ1: true
   },
   OC_B_REFUND_ORDER_EXTRA__EXTRA_IMPORT: {
     // 额外退款单-导入
@@ -269,6 +340,7 @@ const importConfig = {
     tableName: 'ST_C_PRODUCT_STRATEGY',
     url: '/p/cs/productStrategy/import/multiShopItem',
     downloadUrl: '/p/cs/productStrategy/import/downloadMultiShopTemp'
-  } // 店铺商品特殊设置 - 多店铺比例-明细导入
+  }, // 店铺商品特殊设置 - 多店铺比例-明细导入
+
 };
 export default importConfig;

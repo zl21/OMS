@@ -22,6 +22,7 @@ export default {
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
+          serviceId: 'r3-cp',
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           pid: '',
@@ -42,7 +43,7 @@ export default {
           },
           {
             // label: $i18n.t('other.toBeDelivered'), // 待发货
-            label: '换货待发货', // 换货待发货
+            label: $i18n.t('panel_label.a5'), // 换货待发货
             value: 'WAIT_SELLER_STOCK_OUT'
           }
         ]
@@ -75,6 +76,9 @@ export default {
       // }
     ]
   },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async (self) => {
     const _this = self;
@@ -105,8 +109,6 @@ export default {
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);
-    } else {
-      // _this.$Message.error(message);
     }
   }
 };

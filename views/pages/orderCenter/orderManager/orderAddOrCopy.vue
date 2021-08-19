@@ -13,7 +13,7 @@
             <businessForm :form-config="formConfigBase" @keyDown="keyDown" />
           </p>
         </Panel>
-        <Panel name="2">
+        <Panel name="2" v-show="showRe">
           <!-- 收货人信息 -->
           {{ vmI18n.t("common.consigneeInformation") }}
           <p slot="content">
@@ -30,16 +30,13 @@
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
-        <div class="custom-label">
-          <businessLabel
-            :label-default-value="labelDefaultValue"
-            :label-list="labelList"
-          />
-        </div>
-        <div class="table custom-table">
-          <!-- 订单明细 -->
-          <div class="barcodeDetails">
-            <!-- 
+        <businessLabel
+          class="jordanLabel"
+          :label-default-value="labelDefaultValue"
+          :label-list="labelList"
+        />
+        <!-- 订单明细 -->
+        <!-- 
             <businessForm :form-config="formConfigDetail" @keyDown="keyDown">
               <template #spec01="{ rowData }">
                 <DropMultiSelectFilter
@@ -58,17 +55,15 @@
               </template>
             </businessForm>
              -->
-            <businessActionTable
-              :jordan-table-config="jordanTableConfig"
-              @on-select="onSelect"
-              @on-select-all="onSelectAll"
-              @on-select-all-cancel="onSelectAllCancel"
-              @on-select-cancel="onSelectCancel"
-              @table-delete-detail="tableDeleteDetail"
-              @table-import="tableImport"
-            />
-          </div>
-        </div>
+        <businessActionTable
+          :jordan-table-config="jordanTableConfig"
+          @on-select="onSelect"
+          @on-select-all="onSelectAll"
+          @on-select-all-cancel="onSelectAllCancel"
+          @on-select-cancel="onSelectCancel"
+          @table-delete-detail="tableDeleteDetail"
+          @table-import="tableImport"
+        />
       </div>
     </div>
 
@@ -116,7 +111,6 @@ import businessForm from "professionalComponents/businessForm";
 import businessActionTable from "professionalComponents/businessActionTable";
 import businessLabel from "professionalComponents/businessLabel";
 import businessDialog from "professionalComponents/businessDialog";
-// import loading from 'professionalComponents/loading';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
@@ -138,7 +132,6 @@ export default {
     businessActionTable,
     businessLabel,
     businessDialog,
-    // loading,
   },
   // mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
@@ -146,6 +139,7 @@ export default {
     const validateReceiveAddress = BurgeonValidate.validateReceiveAddress;
     return {
       vmI18n: $i18n,
+      showRe: true,
       inputArrBase: [
         "SELLER_MEMO",
         "BUYER_MESSAGE",
@@ -183,7 +177,7 @@ export default {
       importTable: {
         confirmTitle: "订单明细导入",
         titleAlign: "center", // 设置标题是否居中 center left
-        width: "540",
+        width: "572",
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: false, // 是否可以拖动
@@ -212,6 +206,7 @@ export default {
       // btnConfig: BtnConfig.config(),
       btnConfig: {
         typeAll: "default",
+        btnsite: "right",
         buttons: [
           {
             text: "保存",
@@ -221,6 +216,7 @@ export default {
             },
           },
           {
+            webname: 'fix_back',
             text: $i18n.t("btn.back"),
             btnclick: () => {
               this.back();
@@ -236,6 +232,7 @@ export default {
             width: "6",
             colname: "CP_C_SHOP_ID",
             itemdata: {
+              serviceId: "r3-cp",
               colid: 168864,
               colname: "CP_C_SHOP_ID",
               name: "店铺",
@@ -333,11 +330,12 @@ export default {
               },
             ],
             itemdata: {
+              serviceId: "r3-cp",
               colid: 171251,
               colname: "CP_C_PHY_WAREHOUSE_ID",
               fkdisplay: "drp",
               isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
+              isnotnull: false, // 是否必填
               name: "发货仓库",
               readonly: false,
               valuedata: "",
@@ -392,6 +390,7 @@ export default {
               },
             ],
             itemdata: {
+              serviceId: "r3-cp",
               colid: 171280,
               colname: "CP_C_LOGISTICS_ID",
               fkdisplay: "drp",
@@ -690,6 +689,7 @@ export default {
             width: "6",
             colname: "CP_C_REGION_PROVINCE_ID",
             itemdata: {
+              serviceId: 'r3-cp',
               colid: 166974,
               colname: "CP_C_REGION_PROVINCE_ID",
               fkdisplay: "drp",
@@ -703,13 +703,13 @@ export default {
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_PROVINCE_ID",this.modify,val,["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_PROVINCE_ID", this.modify, val, ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_PROVINCE_ID", "master", "r");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_PROVINCE_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_PROVINCE_ID",this.modify,val,["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_PROVINCE_ID", this.modify, val, ["CP_C_REGION_CITY_ID", "CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_PROVINCE_ID", "master", "r");
             }
           },
@@ -721,6 +721,7 @@ export default {
             inputList: [],
             objList: [],
             itemdata: {
+              serviceId: 'r3-cp',
               colid: 167077,
               colname: "CP_C_REGION_CITY_ID",
               fkdisplay: "drp",
@@ -739,14 +740,14 @@ export default {
             oneObj: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_CITY_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_CITY_ID",this.modify,val,["CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_CITY_ID", this.modify, val, ["CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_CITY_ID", "master", "r");
             },
-            InputEnter: (val)=> {
-              console.log('InputEnter::',val);
+            InputEnter: (val) => {
+              console.log('InputEnter::', val);
               this.formConfigRe.formValue.CP_C_REGION_CITY_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_CITY_ENAME = val.valuedata;
-              this.formConfigRe = this.emptyData(this.formConfigRe,"CP_C_REGION_CITY_ID",this.modify,val,["CP_C_REGION_AREA_ID"]);
+              this.formConfigRe = this.emptyData(this.formConfigRe, "CP_C_REGION_CITY_ID", this.modify, val, ["CP_C_REGION_AREA_ID"]);
               this.modifyData("CP_C_REGION_CITY_ID", "master", "r");
             }
           },
@@ -757,6 +758,7 @@ export default {
             colname: "CP_C_REGION_AREA_ID",
             inputList: [],
             itemdata: {
+              serviceId: 'r3-cp',
               colid: 167091,
               colname: "CP_C_REGION_AREA_ID",
               fkdisplay: "drp",
@@ -777,7 +779,7 @@ export default {
               this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", "r");
             },
-            InputEnter: (val)=> {
+            InputEnter: (val) => {
               this.formConfigRe.formValue.CP_C_REGION_AREA_ID = val.pid;
               this.formConfigRe.formValue.CP_C_REGION_AREA_ENAME = val.valuedata;
               this.modifyData("CP_C_REGION_AREA_ID", "master", "r");
@@ -863,6 +865,7 @@ export default {
             disabled: false,
             pageSize: 10, // 每页条数
             itemdata: {
+              serviceId: 'r3-cp',
               colid: "171332",
               colname: "PS_C_SKU",
               name: "SKU编码",
@@ -919,6 +922,8 @@ export default {
               width: "6",
               colname: "PS_C_SKU",
               itemdata: {
+                serviceId: 'r3-cp',
+                version: '1.4',
                 colid: "171332",
                 colname: "PS_C_SKU",
                 name: "SKU编码",
@@ -946,9 +951,31 @@ export default {
             },
           ],
         },
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: "left",
+          buttons: [
+            {
+              type: 'primary', // 按钮类型
+              text: '删除明细', // 按钮文本
+              isShow: true,
+              btnclick: (e) => {
+                this.tableDeleteDetail();
+              }
+            },
+            {
+              type: 'default', // 按钮类型
+              text: '导入', // 按钮文本
+              isShow: true,
+              btnclick: (e) => {
+                this.tableImport();
+              }
+            },
+          ],
+        },
         isSearchText: true,
-        isShowDeleteDetailBtn: true, // 控制是否显示删除明细
-        isShowImportBtn: true, // 控制是否显示导入
+        isShowDeleteDetailBtn: false, // 控制是否显示删除明细
+        isShowImportBtn: false, // 控制是否显示导入
         pageShow: false, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
@@ -973,40 +1000,40 @@ export default {
             align: 'center',
           },
           {
-            title: "序号",
+            title: $i18n.t("table_label.serialNo"), // "序号",
             key: "index",
             type: "index",
             align: 'center',
           },
           {
-            title: "SKU编码", // SKU编码
+            title: $i18n.t("table_label.code_SKU"), // SKU编码
             key: "PS_C_SKU_ECODE",
             dataAcessKey: "PS_C_SKU_ECODE",
           },
           {
-            title: "SKU名称", // SKU名称
+            title: $i18n.t("form_label.skuName"), // SKU名称
             key: "PS_C_SKU_ENAME",
             dataAcessKey: "PS_C_SKU_ENAME",
           },
           {
-            title: "SPU编码", // SPU编码
+            title: $i18n.t("table_label.itemNo01"), // SPU编码
             key: "PS_C_PRO_ECODE",
             dataAcessKey: "PS_C_PRO_ECODE",
           },
           {
-            title: "SPU名称", // SPU名称
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
             key: "PS_C_PRO_ENAME",
             dataAcessKey: "PS_C_PRO_ENAME",
           },
           {
-            title: "零售价", // 零售价
+            title: $i18n.t("form_label.cu"), // 零售价
             key: "PRICE",
             dataAcessKey: "PRICE",
           },
           {
             title: $i18n.t("table_label.unitPrice"), // 成交单价
             key: "PRICE_ACTUAL",
-            render: (h, params) => {
+            /* render: (h, params) => {
               const self = this;
               return h(
                 "div",
@@ -1039,15 +1066,18 @@ export default {
                           params.row.REAL_AMT = '0.00';
                           params.row.ADJUST_AMT = '0.00';
                           params.row.PRICE_ACTUAL = '0.00';
-                          self.jordanTableConfig.data[params.index] = params.row;
-                          self.totalNum();
+                        } else {
+                          params.row.PRICE_ACTUAL = self.$OMS2.omsUtils.floatNumber(inputRA, 2); // 成交单价 保留两位小数 赋值
                         }
+                        ++params.row._rowKey;
+                        self.jordanTableConfig.data[params.index] = params.row;
+                        self.totalNum();
                       },
                       'on-change': e => {
                         self.debounce(function () {
                           self.$nextTick(() => {
                             let inputPA = Number(e.target._value);
-                            params.row.PRICE_ACTUAL = self.$OMS2.omsUtils.floatNumber(inputPA, 2); // 成交单价赋值
+                            // params.row.PRICE_ACTUAL = self.$OMS2.omsUtils.floatNumber(inputPA, 2); // 成交单价赋值
                             params.row.ADJUST_AMT = 0;
                             const price = Number(params.row.PRICE);
                             const q = Number(params.row.QTY || 0);
@@ -1065,7 +1095,7 @@ export default {
                               // 成交金额 = 成交单价 * 数量 （取这个
                               // 调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE' * 数量)
                               params.row.REAL_AMT = self.$OMS2.omsUtils.floatNumber(inputPA * q, 2);
-                              ra = params.row.REAL_AMT;
+                              ra = Number(params.row.REAL_AMT);
                               params.row.ADJUST_AMT = self.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * q, 2);
                             } else {
                               params.row.REAL_AMT = 0;
@@ -1082,7 +1112,7 @@ export default {
                   }),
                 ]
               );
-            },
+            }, */
           },
           {
             title: $i18n.t("table_label.quantities"), // 数量
@@ -1092,28 +1122,40 @@ export default {
               const self = this;
               return h("InputNumber", {
                 props: {
-                  value: params.row.QTY,
+                  value: Number(params.row.QTY),
                   regx: /^[0-9]\d*$/,
-                  min: 0,
+                  min: 1,
                   editable: true,
                 },
                 on: {
                   "on-change": (e) => {
                     // 输入数量：修改成交金额、调整金额即可（计算成交金额时先将调整金额置为0
+                    // 6.24变更：输入数量，计算成交单价、调整金额，数量不能小于1
                     let inputQTY = Number(e);
                     params.row.QTY = inputQTY;
                     params.row.ADJUST_AMT = 0;
                     const price = Number(params.row.PRICE);
-                    const pa = Number(params.row.PRICE_ACTUAL || 0);
+                    let pa = Number(params.row.PRICE_ACTUAL || 0);
                     const aa = Number(params.row.ADJUST_AMT || 0);
                     let ra = Number(params.row.REAL_AMT || 0);
                     const ad = Number(params.row.AMT_DISCOUNT || 0);
                     const osa = Number(params.row.ORDER_SPLIT_AMT || 0);
                     if (pa && inputQTY) {
                       // 成交金额 = 成交单价 * 数量 （取这个
-                      params.row.REAL_AMT = this.$OMS2.omsUtils.floatNumber(pa * inputQTY, 2);
-                      ra = params.row.REAL_AMT;
-                      params.row.ADJUST_AMT = this.$OMS2.omsUtils.floatNumber(ra + ad + osa - price * inputQTY, 2);
+                      // 6.24变更：成交单价 = 成交金额 / 数量
+                      // params.row.REAL_AMT = $omsUtils.floatNumber(pa * inputQTY, 2);
+                      const _pa = ra / inputQTY;
+                      params.row.PRICE_ACTUAL = $omsUtils.floatNumber(_pa, 2);
+                      // ra = Number(params.row.REAL_AMT);
+                      // pa = Number(params.row.PRICE_ACTUAL);
+                      console.log(ra, ad, osa, price, inputQTY);
+                      const _aa = ra + ad + osa - price * inputQTY;
+                      console.log('输入数量：计算成交单价、调整金额');
+                      console.log('成交单价 = 成交金额 / 数量');
+                      console.log("调整金额 = (成交金额 + 订单优惠 + 商品优惠) - (零售价'PRICE' * 数量)");
+                      console.log('四舍五入前：', _aa);
+                      params.row.ADJUST_AMT = $omsUtils.floatNumber(_aa, 2);
+                      console.log('params.row.ADJUST_AMT', params.row.ADJUST_AMT);
                     } else {
                       params.row.REAL_AMT = '0.00';
                       params.row.ADJUST_AMT = '0.00';
@@ -1163,7 +1205,7 @@ export default {
                           self.$nextTick(() => {
                             // 输入成交金额：修改单价、调整金额即可
                             let inputRA = Number(e.target.value);
-                            params.row.REAL_AMT = self.$OMS2.omsUtils.floatNumber(inputRA, 2);
+                            // params.row.REAL_AMT = self.$OMS2.omsUtils.floatNumber(inputRA, 2);
                             const price = Number(params.row.PRICE);
                             const q = Number(params.row.QTY || 0);
                             const aa = Number(params.row.ADJUST_AMT || 0);
@@ -1191,9 +1233,12 @@ export default {
                           params.row.REAL_AMT = '0.00';
                           params.row.ADJUST_AMT = '0.00';
                           params.row.PRICE_ACTUAL = '0.00';
-                          self.jordanTableConfig.data[params.index] = params.row;
-                          self.totalNum();
+                        } else {
+                          params.row.REAL_AMT = self.$OMS2.omsUtils.floatNumber(inputRA, 2);
                         }
+                        ++params.row._rowKey;
+                        self.jordanTableConfig.data[params.index] = params.row;
+                        self.totalNum();
                       },
                     },
                   }),
@@ -1206,7 +1251,7 @@ export default {
             key: "ADJUST_AMT",
             dataAcessKey: "ADJUST_AMT",
             render: (h, params) =>
-              h("span", {}, this.$OMS2.omsUtils.floatNumber(params.row.ADJUST_AMT || 0, 2)),
+              h("span", {}, $omsUtils.floatNumber(params.row.ADJUST_AMT || 0, 2)),
           },
         ],
       },
@@ -1268,6 +1313,9 @@ export default {
   created() {
     this.relationShip();
   },
+  activated() {
+    // this.getBtn();
+  },
   async mounted() {
     this.querItem("PAY_TYPE").options = [
       {
@@ -1283,12 +1331,20 @@ export default {
       // this.getPermissions('btnConfig', 'orderManager');
       this.init(-1);
     });
+    // this.getBtn();
     this.initObjItem(self.ID);
   },
   methods: {
-    /* debo(fun) {
-      _.debounce(fun, 20)
-    }, */
+    // 获取按钮权限
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'OC_B_ORDER', type: 'OBJ' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res;
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        this.jordanTableConfig.businessButtonConfig.buttons[0].isShow = webArr.includes('删除');
+        this.jordanTableConfig.businessButtonConfig.buttons[1].isShow = webArr.includes('导入');
+      });
+    },
     debounce(fn, time) {
       let timer = null;
       return function debounced() {
@@ -1306,7 +1362,7 @@ export default {
       }
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject(
+      const data = await $omsUtils.getObject(
         "OC_B_ORDER_VIRTUAL_TABLE",
         id
       );
@@ -1318,11 +1374,11 @@ export default {
           base = it.childs;
         }
       }
-      self.formConfigBase = this.$OMS2.omsUtils.initFormConfig(
+      self.formConfigBase = $omsUtils.initFormConfig(
         base,
         self.formConfigBase
       );
-      self.formConfigRe = this.$OMS2.omsUtils.initFormConfig(
+      self.formConfigRe = $omsUtils.initFormConfig(
         re,
         self.formConfigRe
       );
@@ -1333,14 +1389,16 @@ export default {
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      // const data = await this.$OMS2.omsUtils.getObject('OC_B_ORDER_VIRTUAL_TABLE', id);
-      // self.formConfigBase = this.$OMS2.omsUtils.initFormConfig(data.addcolums[2].childs, self.formConfigBase);
-      // self.formConfigRe = this.$OMS2.omsUtils.initFormConfig(data.addcolums[1].childs, self.formConfigRe);
+      // const data = await $omsUtils.getObject('OC_B_ORDER_VIRTUAL_TABLE', id);
+      // self.formConfigBase = $omsUtils.initFormConfig(data.addcolums[2].childs, self.formConfigBase);
+      // self.formConfigRe = $omsUtils.initFormConfig(data.addcolums[1].childs, self.formConfigRe);
       if (self.sourceId) {
         // 复制不展示明细导入按钮
         self.jordanTableConfig.isShowImportBtn = false;
         await self.orderCopy();
         await self.getOrderDatail();
+        // 复制不展示'收货人信息'
+        self.showRe = false;
       }
       this.loading = false;
       setTimeout(() => {
@@ -1391,7 +1449,7 @@ export default {
         ]; */
         // self.querItem('CP_C_LOGISTICS_ID').itemdata.pid = data.CP_C_LOGISTICS_ID;
         // self.querItem('CP_C_LOGISTICS_ID').itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
-        self.formConfigBase = this.$OMS2.omsUtils.transformForm(
+        self.formConfigBase = $omsUtils.transformForm(
           data,
           self.formConfigBase,
           self.inputArrBase,
@@ -1443,7 +1501,7 @@ export default {
           "CP_C_REGION_CITY_ID",
           "CP_C_REGION_AREA_ID",
         ];
-        self.formConfigRe = this.$OMS2.omsUtils.transformForm(
+        self.formConfigRe = $omsUtils.transformForm(
           data,
           self.formConfigRe,
           inputArrRe,
@@ -1463,11 +1521,11 @@ export default {
         // 子表初始化（加两列
         if (self.copyType == '2') {
           const exCol = [{
-            title: "商品优惠", // 商品优惠
+            title: $i18n.t("form_label.b3"), // 商品优惠
             key: "AMT_DISCOUNT",
           },
           {
-            title: "订单优惠", // 订单优惠
+            title: $i18n.t("form_label.ct"), // 订单优惠
             key: "ORDER_SPLIT_AMT",
           },]
           self.jordanTableConfig.columns = self.jordanTableConfig.columns.concat(exCol);
@@ -1507,6 +1565,8 @@ export default {
       const self = this;
       /* =========== 保存校验 start =========== */
       if (self.sourceId) {
+        self.formConfigRe.formatDate = [];
+        self.formConfigRe.formValue = {};
         self.modify.master = Object.assign(
           self.formConfigBase.formValue,
           self.formConfigRe.formValue
@@ -1532,12 +1592,12 @@ export default {
           let no = valueArr.indexOf("COLLECT_AMT");
           valueArr.splice(no, 1);
         }
-        self.modify.master.PAY_TYPE = self.formConfigBase.formValue.PAY_TYPE; // 保存入参默认值
+        self.modify.master.PAY_TYPE = self.formConfigBase.formValue.PAY_TYPE; // 保存入参默认值，支付方式
       }
-      self.modify.master.PAY_TIME = self.formConfigBase.formValue.PAY_TIME; // 保存入参默认值
+      self.modify.master.PAY_TIME = self.formConfigBase.formValue.PAY_TIME; // 保存入参默认值，支付时间
       const drpArr = [
         "CP_C_SHOP_ID",
-        "CP_C_PHY_WAREHOUSE_ID",
+        // "CP_C_PHY_WAREHOUSE_ID",
         "CP_C_REGION_PROVINCE_ID",
         "CP_C_REGION_CITY_ID",
       ];
@@ -1549,7 +1609,7 @@ export default {
         self.formConfigBase.formValue,
         self.formConfigRe.formValue
       );
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(
+      const mes = $omsUtils.validatorNotEmpty(
         formBoth,
         valueArr,
         drpArr
@@ -1641,10 +1701,10 @@ export default {
         self.modify.master = {};
         self.jordanTableConfig.data = [];
         // 跳转详情
-        // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
+        // $omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
-          this.$comUtils.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           this.$destroy(true);
           this.$store.commit("global/tabOpen", {
             type: "C",
@@ -1687,11 +1747,13 @@ export default {
         amt = Util.accAdd(parseFloat(item.REAL_AMT || 0).toFixed(2), amt);
       });
       setTimeout(() => {
-        self.jordanTableConfig.totalData.push({
-          selection: `${$i18n.t("other.total")}:`, // 合计
-          REAL_AMT: this.$OMS2.omsUtils.floatNumber(amt, 2), // 精确到两位小数
-          QTY: qty,
-        });
+        if (!self.jordanTableConfig.totalData.length) {
+          self.jordanTableConfig.totalData.push({
+            selection: `${$i18n.t("other.total")}:`, // 合计
+            REAL_AMT: $omsUtils.floatNumber(amt, 2), // 精确到两位小数
+            QTY: qty,
+          });
+        }
       }, 10);
     },
     // 智能匹配地址-获取省市区id填充form表单
@@ -1866,11 +1928,12 @@ export default {
         it.pryKey && (it.pryKey = it.OOID || "" + "_" + it.PS_C_SKU_ECODE);
         allDa.forEach((item) => {
           !item.pryKey && (item.pryKey = item.OOID || "" + "_" + item.PS_C_SKU_ECODE);
-          pryKeyArr = this.$OMS2.omsUtils.sonList(allDa, "pryKey");
+          pryKeyArr = $omsUtils.sonList(allDa, "pryKey");
           if (!it.OOID && item.pryKey == it.pryKey) {
             // 1.非复制的且已存在该条明细(已经存在的明细都是刚刚新增的，不是复制带出来的，且，即将新增的是已经存在的，累加)
-            item.QTY += it.QTY;
-            item.REAL_AMT = this.$OMS2.omsUtils.floatNumber(Util.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
+            const preQty = Number(item.QTY)
+            item.QTY = preQty + Number(it.QTY);
+            item.REAL_AMT = $omsUtils.floatNumber(Util.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
           } else if (!it.OOID && !pryKeyArr.includes(it.pryKey)) {
             // 2.非复制的且不存在该条明细
             self.jordanTableConfig.data.push(it);
@@ -1911,17 +1974,17 @@ export default {
       const allDa = self.jordanTableConfig.data;
       const selDa = self.jordanTableConfig.selectData;
       if (!selDa.length) {
-        this.$OMS2.omsUtils.msgTips(self, "warning", "a8");
+        $omsUtils.msgTips(self, "warning", "a8");
         return;
       }
       // 取差集展示：
-      self.jordanTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(
+      self.jordanTableConfig.data = $omsUtils.getDifferentArr(
         allDa,
         selDa,
         "pryKey"
       );
       this.totalNum();
-      // const selectKey = this.$OMS2.omsUtils.sonList(selDa, 'pryKey');
+      // const selectKey = $omsUtils.sonList(selDa, 'pryKey');
       self.jordanTableConfig.selectData = [];
     },
     tableImport() {
@@ -1956,6 +2019,7 @@ export default {
         this.$Modal.info({
           title: $i18n.t("modalTitle.tips"), // 提示
           content: "当前修改未保存，确定返回？",
+          className: 'ark-dialog',
           mask: true,
           showCancel: true,
           okText: $i18n.t("common.determine"), // 确定
@@ -1969,7 +2033,7 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       if (this.$route.query.spuid) {
         // 保留，可能要返回退换货 ？
@@ -1977,7 +2041,7 @@ export default {
           id: "2307",
           type: "action",
           name: "ORDERMANAGER",
-          label: "零售发货单",
+          label: $i18n.t('panel_label.retail_shipping_order'),//"零售发货单",
           back: true,
         });
       } else {
@@ -1985,7 +2049,7 @@ export default {
           id: "2307",
           type: "action",
           name: "ORDERMANAGER",
-          label: "零售发货单",
+          label: $i18n.t('panel_label.retail_shipping_order'),// "零售发货单",
           back: true,
         });
       }

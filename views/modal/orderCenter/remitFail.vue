@@ -35,14 +35,14 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消,
             btnclick: () => {
               this.$emit('closeActionDialog', false)
 
             }, // 按钮点击事件
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
 
               this.determine()
@@ -55,8 +55,15 @@ export default {
   },
   created() {
     let IDS = this.$parent.$parent.idArray
-    if (IDS.length == 0) {
+    if (IDS.length != 1 ) {
       this.$Message.warning('请选中一条数据！');
+      this.$emit('closeActionDialog', false)
+      return
+    }
+    console.log(this.$parent.$parent.selectRowData);
+    let isValid = this.$parent.$parent.selectRowData.every(i => i.REFUND_STATUS.val == '退款失败')
+    if (!isValid) {
+      this.$Message.warning('只支持【退款失败】的额外退款单单据进行退款失败处理！');
       this.$emit('closeActionDialog', false)
       return
     }
@@ -72,6 +79,7 @@ export default {
           field: 'PAY_TYPE',
           label: '支付方式',
           props: {
+            value: '1',
             options: selectData[0].combobox.map(em => {
               em.value = em.limitval
               em.label = em.limitdesc

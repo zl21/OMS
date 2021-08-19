@@ -1,24 +1,25 @@
-// import myInput from 'framework/components/element/input';
 import myInput from 'professionalComponents/fkinputPlus.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 // import MultipleBox from 'professionalComponents/multipleBox.vue';
 import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
-import { tableCols as tabList } from './promotionConfig';
+import { tableCols as tabList } from './promotion.config';
 import businessButton from 'professionalComponents/businessButton';
 import groups from '@/assets/js/promotion/groups';
+import promotionMixin from './promotion.mixin';
 
 export default {
+	mixins: [promotionMixin()],
   data() {
     return {
-      vmI18n: $i18n,
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [
           {
             text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
-              this.cancel_simulation();
+              this.close();
             }
           },
           {
@@ -50,7 +51,9 @@ export default {
             // name: "收货省份",
             name: $i18n.t('form_label.receiving_province'),
             readonly: false,
-            valuedata: ''
+            valuedata: '',
+            notForm: true,
+            version:'1.4'
           }
         }, // 收货省份
         stores: {
@@ -66,25 +69,28 @@ export default {
             name: $i18n.t('table_label.shopName'),
             readonly: false,
             refobjid: '',
-            valuedata: ''
+            valuedata: '',
+            notForm: true,
+            version:'1.4'
           }
         } // 店铺名称
       },
       itemdata: {
         // 平台商品
         colid: 1700806533,
-        colname: `PS_C_SKU${Math.floor(Math.random() * 100)}`,
+        colname: `SG_B_CHANNEL_PRODUCT_ID${Math.floor(Math.random() * 100)}`,
         fkdesc: '门店档案',
         fkdisplay: 'drp',
         isfk: true,
         isnotnull: false,
         name: '',
         readonly: false,
-        reftable: 'PS_C_SKU',
+        reftable: 'SG_B_CHANNEL_PRODUCT',
         reftableid: 24801,
         valuedata: '',
         isObject: true,
         isSimulation: true,
+        notForm: true,
         isGetValue: true
       },
       products_columns: tabList.products_columns,
@@ -111,9 +117,6 @@ export default {
     ButtonFkDialog
   },
   computed: {
-    groups() {
-      return $store.state.customize.forginkeys.groups;
-    },
     itemdataFk() {
       try {
         const rs = this.itemdata;
@@ -121,6 +124,8 @@ export default {
         itemdata.isOneData = false;
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
+        itemdata.version = '1.4';
+        itemdata.serviceId = 'r3-sg';
         return itemdata;
       } catch (e) {
         throw new Error(e);
@@ -226,7 +231,7 @@ export default {
       }
       namelist.forEach(obj => {
         const row = {};
-        if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
+        if (['PS_C_SKU', 'SG_B_CHANNEL_PRODUCT'].includes(rs.reftable)) {
           row.ECODE = obj.PS_C_SKU_ECODE || '';
           row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.SUM = Number(obj.PRICE) || '';
@@ -262,28 +267,11 @@ export default {
         }
       });
     },
-    // 取消
-    cancel_simulation() {
-      this.$destroy(true);
-      $store.commit('customize/TabClose', {
-        id: 2895, // id
-        type: 'CUSTOMIZED', // 类型action
-        name: 'PROMACTIQUERYLIST', // 文件名
-        // label: "促销活动", // tab中文名
-        label: $i18n.t('panel_label.promotionList'),
-        query: Object.assign({
-          id: 2895
-        }) // 带的参数
-      });
-    },
     async execute_simulation() {
       const self = this;
       const checkSimulation = this.checkSimulation();
       if (checkSimulation.code == '-1') {
-        self.$message({
-          message: checkSimulation.message,
-          type: 'warning'
-        });
+        self.$Message.warning(checkSimulation.message);
         return;
       }
       //  仿真试算
@@ -301,11 +289,7 @@ export default {
         console.log('data', data);
         self.result_data = data.result;
         self.result_columns = data.cloumns;
-        self.$message({
-          type: 'success',
-          // message: "试算成功！",
-          message: $i18n.t('modalTips.t5')
-        });
+        self.$Message.success($i18n.t('modalTips.t5'));
       } else {
         self.result_data = [];
       }

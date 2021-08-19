@@ -4,9 +4,9 @@ import importApiArr from "@/config/config/importApiArr";
 
 export default {
   /* 框架标准公共接口： */
-  fuzzyquerybyak: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/fuzzyquerybyak", params, serviceId),
-  QueryList: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/QueryList", params, serviceId),
-  getTableQuery: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/getTableQuery", params, serviceId),
+  fuzzyquerybyak: (params, obj) => $network.post(`/p/cs/fuzzyquerybyak?hash=${+new Date()}`, params, obj ? obj : { serviceId: "r3-cp" }),
+  QueryList: (params, obj) => $network.post(`/p/cs/QueryList?hash=${+new Date()}`, params, obj ? obj : { serviceId: "r3-cp" }),
+  getTableQuery: (params, obj) => $network.post("/p/cs/getTableQuery", params, obj ? obj : { serviceId: "r3-cp" }),
   skuQuery: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/skuQuery", params, serviceId),
   selSku: (params, serviceId = { serviceId: "r3-ps" }) => $network.post('/p/cs/ps/sku/v1/selSku' , params , serviceId), //根据sku编码查询sku商品信息
   // 获取页面title
@@ -17,12 +17,17 @@ export default {
   // 矩阵
   queryCommonStorageByPro: (params) =>
     $network.post("/p/cs/sg/storage/queryCommonStorageByPro", params),
+  //调用御城河日志接口
+  loginLog: (params, serviceId = { serviceId: "r3-ipcs" }) => $network.post("/ip/v1/yuchenghe/loginLog", params, serviceId),
+  // 框架国际化切换接口
+  langSwitcher: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/langswitcher", params, serviceId),
+  getObject: (params) => $network.post(`/p/cs/getObject?hash=${+new Date()}`, params),
+  objectTableItem: (params) => $network.post(`/p/cs/objectTableItem?hash=${+new Date()}`, params),
+
 
   // 详情页数据查询接口。共用于：inventoryCenter、orderCenter
-  getObject: (params) => $network.post("/p/cs/getObject", params),
   queryPhyWareHouseList: (params) =>
     $network.post("/p/cs/queryPhyWareHouseList", params),
-  objectTableItem: (params) => $network.post("/p/cs/objectTableItem", params),
   getWarehouseLogisticsTree: (params) =>
     $network.post("/p/cs/getWarehouseLogisticsTree", params),
   getLogisticsRankResultTable: (params) =>
@@ -31,8 +36,7 @@ export default {
     $network.post("/p/cs/getWarehouseLogisticsInfo", params),
   delWarehouseLogistics: (params) =>
     $network.post("/p/cs/delWarehouseLogistics", params),
-  fetchActionsInCustomizePage: (params) =>
-    $network.post("/p/cs/oc/oms/v1/queryActions", params),
+  fetchActionsInCustomizePage: (params, serviceId) => $network.post("/p/cs/oc/oms/v1/queryActions", params, serviceId || {}),
   manualJdMatchingCheck: (params) =>
     $network.post("/p/cs/manualJdMatchingCheck", params),
   jdReturnStorageSave: (params) =>

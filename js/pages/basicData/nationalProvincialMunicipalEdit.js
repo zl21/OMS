@@ -2,7 +2,6 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import orderItem from 'professionalComponents/subTable';
 import businessLabel from 'professionalComponents/businessLabel';
-import loading from 'professionalComponents/loading';
 
 export default {
   name: 'NationalProvincialMunicipalEdit',
@@ -10,20 +9,19 @@ export default {
     businessButton,
     businessForm,
     orderItem,
-    businessLabel,
-    loading,
+    businessLabel
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
       backable: false,
       loading: false,
       labelList: [{
-        label: '操作日志',
+        label: $i18n.t('panel_label.operationLog'), // 操作日志
         value: 'LOG',
-      }, ],
+      },],
       labelDefaultValue: 'CP_REGION_ALIAS_LOG', // 设置tab默认值
       subTableConfig: {
         centerName: '',
@@ -36,27 +34,31 @@ export default {
         subTable: [], // 修改后的子表信息
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [{
-            text: '保存',
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.save();
-            },
+          webname: 'CpCRegionSaveBtn',
+          text: $i18n.t('btn.save'), // 保存
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.save();
           },
-          {
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              this.back();
-            },
+        },
+        {
+          webname: 'fix_back',
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            this.back();
           },
+        },
         ],
       },
       // 新增区域
       formConfig: {
-        formData: [{
+        formData: [
+          {
             style: 'input',
-            label: '区域编码',
+            label: $i18n.t('form_label.dc'), // 区域编码
             value: 'CP_C_REGION_AREA_ECODE',
             colname: 'CP_C_REGION_AREA_ECODE',
             width: '8',
@@ -68,7 +70,7 @@ export default {
           },
           {
             style: 'input',
-            label: '区域名称',
+            label: $i18n.t('form_label.dd'), // 区域名称
             value: 'CP_C_REGION_AREA_ENAME',
             colname: 'CP_C_REGION_AREA_ENAME',
             width: '8',
@@ -79,7 +81,7 @@ export default {
           },
           {
             style: 'input',
-            label: '别名名称',
+            label: $i18n.t('form_label.de'), // 别名名称
             value: 'CP_C_REGION_ALIAS',
             colname: 'CP_C_REGION_ALIAS',
             width: '8',
@@ -90,27 +92,28 @@ export default {
           },
           {
             style: 'radio',
-            label: '区域类型', // 输入框前文字
+            label: $i18n.t('form_label.df'), // 区域类型
             value: 'REGION_TYPE', // 输入框的值
             colname: 'REGION_TYPE', // 输入框的值
             width: '18', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            options: [{
-                label: '国家',
+            options: [
+              {
+                label: $i18n.t('form_label.dg'), // 国家
                 value: '0',
                 disabled: true,
               },
               {
-                label: '省份',
+                label: $i18n.t('form_label.dh'), // 省份
                 value: '1',
                 disabled: true,
               },
               {
-                label: '市级',
+                label: $i18n.t('form_label.di'), // 市级
                 value: '2',
                 disabled: true,
               },
               {
-                label: '区级',
+                label: $i18n.t('form_label.dj'), // 区级
                 value: '3',
                 disabled: true,
               },
@@ -155,25 +158,18 @@ export default {
             width: '8',
             inputList: [],
             itemdata: {
-              col: 1,
               colid: 168556, // 当前字段的ID
               colname: 'CP_C_REGION_COUNTRY_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: '国家', // 赔付类型
+              name: $i18n.t('form_label.dg'), // 国家
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_COUNTRY', // 对应的表
               reftableid: 10283, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
+              pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
@@ -190,25 +186,18 @@ export default {
             width: '8',
             inputList: [],
             itemdata: {
-              col: 1,
               colid: 166974, // 当前字段的ID
               colname: 'PS_C_PRO_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: '关联省', // 赔付类型
+              name: $i18n.t('form_label.dk'), // 关联省
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PROVINCE', // 对应的表
               reftableid: 10286, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
+              pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
@@ -230,25 +219,18 @@ export default {
               srccol: 'RECEIVER_PROVINCE',
             },
             itemdata: {
-              col: 1,
               colid: 167077, // 当前字段的ID
               colname: 'CP_C_REGION_CITY_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: '关联市', // 赔付类型
+              name: $i18n.t('form_label.dl'), // 关联市
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_CITY', // 对应的表
               reftableid: 10285, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
+              pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
@@ -260,7 +242,7 @@ export default {
           },
           {
             style: 'input',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), //  启用状态
             value: 'ISACTIVE',
             colname: 'ISACTIVE',
             width: '8',
@@ -302,16 +284,24 @@ export default {
   },
   async mounted() {
     const self = this;
+    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'V_CP_C_REGION_ALIAS', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+      console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+    });
     self.initObjItem(self.ID);
     // 子表初始化
     this.subTableConfig = {
-      centerName:"basicData",
+      centerName: "basicData",
       tablename: this.labelDefaultValue,
-      pageShow:true,
+      pageShow: true,
       objid: this.ID,
     };
   },
-  created() {},
+  created() { },
+  activated() {
+    $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'V_CP_C_REGION_ALIAS', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+      console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+    });
+  },
   methods: {
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
@@ -383,7 +373,7 @@ export default {
       // 未修改，不提示，不操作
       if (!masterArr.length) return false;
       const valueArr = ['CP_C_REGION_ALIAS'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr);
       if (mes) {
         this.$message.error(mes);
         return false;
@@ -444,8 +434,9 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -459,13 +450,13 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 10288,
         type: 'S',
         tableName: 'V_CP_C_REGION_ALIAS',
-        label: '国家省市区',
+        label: $i18n.t('menu.b4'), // 国家省市区
         back: true,
       });
     },

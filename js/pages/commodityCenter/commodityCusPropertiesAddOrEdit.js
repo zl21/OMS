@@ -1,3 +1,6 @@
+/**
+ * 商品自定义属性
+ */
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
@@ -18,7 +21,7 @@ export default {
     businessActionTable,
     loading,
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     /* -------------------- input校验器 start -------------------- */
     const ECODEValidator = (rule, value, callback) => {
@@ -47,9 +50,11 @@ export default {
       },
       watchChange: false, // 监听修改变化
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [{
-            text: '保存',
+            webname: 'ATTRIBUTE_SaveBtn',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -57,6 +62,7 @@ export default {
             },
           },
           {
+            webname: 'fix_back',
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -220,7 +226,7 @@ export default {
         height: '332', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30, 40, 50, 60], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         totalData: [],
         selectionData: [],
@@ -370,6 +376,7 @@ export default {
         businessButtonConfig: {
           typeAll: 'default',
           buttons: [{
+              type:'primary',
               text: '添加',
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -378,7 +385,8 @@ export default {
               },
             },
             {
-              text: '删除',
+              type:'warning',
+              text: $i18n.t('btn.delete'), // 删除
               btnclick: () => {
                 this.deleteAttrValue();
               },
@@ -392,7 +400,7 @@ export default {
           value: 'PROPERTYVALUES',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
         },
       ],
@@ -406,10 +414,16 @@ export default {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
+  activated() {
+    if (this.ID > 0) {
+      this.getBtn();
+    }
+  },
   mounted() {
     const self = this;
     if (self.ID > 0) {
       // 详情
+      this.getBtn();
       setTimeout(() => {
         self.initObjItem(self.ID);
       }, 10);
@@ -422,14 +436,19 @@ export default {
   },
   created() {},
   methods: {
+    getBtn(){
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'BS_C_EXTRA_ATTRIBUTE_DEF_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+      })
+    },
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject('BS_C_EXTRA_ATTRIBUTE_DEF_PRO', id);
+      const data = await $omsUtils.getObject('BS_C_EXTRA_ATTRIBUTE_DEF_PRO', id);
       self.watchChange = false;
-      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['TYPE', 'LOCATION', 'TABLE_NAME']);
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
+      // self.formConfig = $omsUtils.analysisForm(data, self.formConfig, '基础信息', ['TYPE', 'LOCATION', 'TABLE_NAME']);
+      self.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
       self.showSubtablePart = true;
       if (self.formConfig.formValue.TYPE != 'LIST') {
         // 非下拉型，只展示'操作日志'
@@ -443,7 +462,7 @@ export default {
         self.labelDefaultValue = 'PROPERTYVALUES';
       }
       /* 子表初始化： */
-      const subData = await this.$OMS2.omsUtils.initSubtable('BS_C_EXTRA_ATTRIBUTE_DEF_ITEM', self.ID, '165821');
+      const subData = await $omsUtils.initSubtable('BS_C_EXTRA_ATTRIBUTE_DEF_ITEM', self.ID, '165821');
       self.propertyValuesConfig.data = subData.rowData;
       self.propertyValuesConfig.total = subData.otherData.totalRowCount;
 
@@ -493,7 +512,7 @@ export default {
         rowData[key] = bFormV[key];
         rowData.actionName = 'SAVE';
         rowData.ID = '-1';
-        rowData.key = this.$OMS2.omsUtils.generateKey();
+        rowData.key = $omsUtils.generateKey();
       }
       self.propertyValuesConfig.addData.push(rowData);
       self.propertyValuesConfig.data.push(rowData);
@@ -506,12 +525,15 @@ export default {
       const self = this;
       let allArrs = self.propertyValuesConfig.data;
       let partArrs = self.propertyValuesConfig.selectionData;
+      if (!partArrs.length) {
+        return this.$Message.warning('请选择要删除的属性值！')
+      }
       partArrs.forEach((item) => {
         if (item.ID == '-1') {
           // 刚新增的被删除了则不push，且要从addData中移除
           let deArritem = [];
           deArritem.push(item);
-          self.propertyValuesConfig.addData = this.$OMS2.omsUtils.getDifferentArr(self.propertyValuesConfig.addData, deArritem, 'ID');
+          self.propertyValuesConfig.addData = $omsUtils.getDifferentArr(self.propertyValuesConfig.addData, deArritem, 'ID');
           return;
         } else {
           item.actionName = 'DELETE';
@@ -519,7 +541,7 @@ export default {
         }
       });
       // 筛选出差集作为展示
-      self.propertyValuesConfig.data = this.$OMS2.omsUtils.getDifferentArr(allArrs, partArrs, 'ECODE');
+      self.propertyValuesConfig.data = $omsUtils.getDifferentArr(allArrs, partArrs, 'ECODE');
     },
     /* -------------------- 子表Part end -------------------- */
 
@@ -538,7 +560,7 @@ export default {
         return false;
       }
       const valueArr = ['ECODE', 'ENAME', 'ALIAS_NAME', 'TYPE', 'LOCATION', 'TABLE_NAME'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr);
       if (mes) {
         this.$message.error(mes);
         return false;
@@ -591,8 +613,9 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -606,7 +629,7 @@ export default {
       }
     },
     onOk() {
-      // this.$comUtils.tabCloseAppoint(this);
+      //$omsUtils.tabCloseAppoint(this);
       // this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 10096,

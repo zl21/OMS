@@ -14,22 +14,21 @@ export default {
       searchValue: '',
       tableConfig: {
         indexColumn: true,
-        isShowSelection: false,
         columns: [{
           key: 'skuEcode',
-          title: 'SKU编码',
+          title: $i18n.t('table_label.code_SKU'), // SKU编码
         },
         {
           key: 'spuEcode',
-          title: 'SPU编码',
+          title: $i18n.t('table_label.itemNo01'), // SPU编码
         },
         {
           key: 'spuEname',
-          title: 'SPU名称',
+          title: $i18n.t("table_label.itemNo02"), // SPU名称
         },
         {
           key: 'skuEname',
-          title: 'SKU名称',
+          title: $i18n.t('form_label.skuName'), // SKU名称
         },
         {
           key: 'brandEname',
@@ -46,24 +45,28 @@ export default {
         width: '', // 表格宽度
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
-        total: 10, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        total: 0, // 设置总条数
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 高亮单选必须结合它
+        multiple: false //false 单选
       },
       data: [],
       currentSkuEcode:'',
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '取消', // 查找 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           },
           {
-            text: '确定', // 查找 按钮文本
+            text: $i18n.t('common.determine'), // 确定 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.confirm();
@@ -144,9 +147,11 @@ export default {
         self.$Message.warning($i18n.t('modalTips.d8'));
         return;
       }
+      console.log(this.componentData);
       let params = {
         orderList:this.componentData.orderList,
-        skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode]
+        skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode],
+        spuIds:this.componentData.spuIds
       }
       this.btnConfig.buttons[1].disabled = true;
       const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);

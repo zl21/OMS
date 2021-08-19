@@ -89,6 +89,9 @@ export default {
       }
     ]
   },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async self => {
     let formValue =  self.downLoadFormConfig.formValue;

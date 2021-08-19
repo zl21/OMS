@@ -1,91 +1,281 @@
-<!--
-date:2019-03-01
-author:wdq
-feature : 订单中心-零售发货单详情
--->
 <template>
-  <div class="order public-main custom-main" >
-    <loading :loading="loading" />
-    <!-- 弹框 -->
-    <div class="order-btn custom-btn">
-      <businessButton
-        :btn-config="btnConfig"
-        @dropDownClick="dropDownClickChange"
-      />
+  <div class="customized-detail orderMangeDetails" v-loading="loading">
+    <div class="customized-detail-btn">
+      <businessButton :btn-config="returnBtn" />
     </div>
-    <div class="public-content">
-      <div class="order-header custom-label">
+    <div class="customized-detail-main">
+      <div style="padding:12px;width:100%;margin:0 auto">
+        <Steps class="steps-content">
+          <Step
+            v-for="(item,index) in steps"
+            :key="index"
+            :title="item.name"
+            :icon="item.iconfont"
+            :content="item.data ? item.data : item.content"
+            :status="item.status"
+          />
+        </Steps>
+      </div>
+      <div class="customized-detail-label">
         <businessLabel
           :label-default-value="labelDefaultValue"
           :label-list="labelList"
           @labelClick="labelClick"
         />
       </div>
-      <div v-if="refresh" class="order-content">
-        <!-- 详情 -->
+      <template>
+        <!-- 主表界面 - 基本信息 -->
         <EssentialInfo
-          v-show="labelDefaultValue === 'OC_B_ORDER'"
-          :component-data="tab1"
+          v-show="labelDefaultValue === 'OC_B_ORDER_ITEM'"
+          :component-data="baseInfoTab"
           @freshLoad="freshLoad"
         />
-        <!-- 新增 -->
-        <OrderItem
-          class="custom-table"
-          v-show="labelDefaultValue !== 'OC_B_ORDER'"
-          :component-data="tab2"
-        />
-      </div>
+        <!-- 子表 -->
+        <div class="customized-detail-table">
+          <OrderItem
+            v-show="labelDefaultValue !== 'OC_B_ORDER_ITEM'"
+            class="custom-table"
+            :component-data="otherInfoTab"
+          />
+        </div>
+      </template>
       <!--单据状态图片展示 -->
-      <businessStatusFlag :status-name="statusName" class="statusFlag" />
+      <businessStatusFlag
+        :status-name="statusName"
+        class="statusFlag"
+      />
     </div>
     <!--错误弹框-->
-    <Modal v-model="modal" title="Title" @on-ok="asyncOK">
+    <Modal
+      v-model="modal"
+      title="Title"
+      @on-ok="asyncOK"
+    >
       <p>error_tip</p>
     </Modal>
-
-    <businessDialog
-      v-for="(list, index) in dialogs"
-      :key="index"
-      :ref="list.name"
-      :component-data="list.data"
-      :confirm="list.confirm"
-      :exclude-string="list.excludeString"
-      :footer-hide="list.footerHide"
-      :keep-alive="list.keepAlive || true"
-      :mask-closable="list.maskClosable === false ? false : true"
-      :name="list.name"
-      :quit="list.quit"
-      :title="list.title"
-      :url="list.url"
-      :width="list.width || ''"
-    />
-    <!-- 公共弹框 -->
-    <businessDialog
-      :batch-closed="publicBouncedConfig.batchClosed"
-      :closable="publicBouncedConfig.closable"
-      :component-data="publicBouncedConfig.componentData"
-      :draggable="publicBouncedConfig.draggable"
-      :exclude-string="publicBouncedConfig.excludeString"
-      :keep-alive="publicBouncedConfig.keepAlive"
-      :mask="publicBouncedConfig.mask"
-      :mask-closable="publicBouncedConfig.maskClosable"
-      :name="publicBouncedConfig.name"
-      :quit="publicBouncedConfig.quit"
-      :scrollable="publicBouncedConfig.scrollable"
-      :title="publicBouncedConfig.confirmTitle"
-      :title-align="publicBouncedConfig.titleAlign"
-      :transfer="publicBouncedConfig.transfer"
-      :url="publicBouncedConfig.url"
-      :width="publicBouncedConfig.width"
-    />
   </div>
 </template>
-
 <script>
-import orderManageDetail from "@/js/pages/orderCenter/orderManageDetail/orderManageDetail";
+  import businessButton from 'professionalComponents/businessButton';
+  import businessLabel from 'professionalComponents/businessLabel';
+  import businessStatusFlag from 'professionalComponents/businessStatusFlag';
+  import businessDialog from 'professionalComponents/businessDialog';
+  import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
+  import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo';
+  import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
+  import DropDownConfig from 'burgeonConfig/config/dropDown.config';
+  import BtnConfig from 'burgeonConfig/config/funBtn.config';
+  import BurgeonEvent from 'burgeonConfig/config/event.config';
 
-export default orderManageDetail;
+  export default {
+    name: 'OrderManageDetail',
+    components: {
+      businessButton,
+      businessLabel,
+      EssentialInfo,
+      OrderItem,
+      businessStatusFlag,
+      businessDialog
+    },
+    mixins: [buttonPermissionsMixin],
+    data() {
+      return {
+        vmI18n: $i18n,
+        pageLoad: false,
+        publicBouncedConfig: {},
+        statusName: '', // 水印标识
+        // 订单状态对应的状态码‘ORDER_STATUS’ => ['未确认', '已审核-3', '配货中-4', '仓库发货-5', '平台发货-6', '已确认收货', '已取消-7', '系统作废-8', '交易完成-12', '预售待发货', '预售缺货', '缺货-2', '待审核-1'];
+        // * 后端(孙继东)给的：1,待审核 2,缺货 3,已审核 4,配货中 5,仓库发货 6,平台发货 7,已取消 8,系统作废 9,预售 10,代发 11,物流已送达 12,交易完成 13,未付款 21,传wms中 50,待分配,0,新增订单暂存草稿状态
+        orderStatus: '', // 订单状态 - 水印标识码
+        objId: -1,
+        labelDefaultValue: 'OC_B_ORDER_ITEM',
+        labelList: [
+          {
+            label: $i18n.t('common.baseInformation'), // 基本信息
+            value: 'OC_B_ORDER_ITEM'
+          },
+          {
+            label: $i18n.t('form_label.preferential_info'), // 优惠信息
+            value: 'OC_B_ORDER_PROMOTION'
+          },
+          {
+            label: $i18n.t('form_label.shipping_info'), // 发货信息
+            value: 'OC_B_ORDER_DELIVERY'
+          },
+          {
+            label: $i18n.t('panel_label.operationLog'), // 操作日志
+            value: 'OC_B_ORDER_LOG'
+          }
+        ],
+        baseInfoTab: {
+          order: {},
+          sub_item: {}
+        },
+        baseInfo_default: {
+          order: {
+            ADJUST_AMT: '',
+            BILL_NO: '', // 单据编号
+            COLLECT_AMT: '', // 代收金额
+            CONSIGN_AMT: 0, // 代销结算金额
+            CONSIGN_SHIP_AMT: '', // 收货人邮费
+            CP_C_LOGISTICS_ENAME: '', // 快递公司
+            CP_C_PHY_WAREHOUSE_ID: '', // 发货仓库ID
+            CP_C_REGION_AREA_ENAME: '', // 区
+            CP_C_REGION_CITY_ENAME: '', // 市
+            CP_C_REGION_PROVINCE_ENAME: '', // 省
+            CP_C_SHOP_TITLE: '', // 店铺名称
+            EXPRESS_CODE: '', // 快递编码
+            INTERNAL_MEMO: '', // 内部备注
+            LOGISTICS_COST: '', // 运费
+            OPERATE_AMT: '', // 操作费
+            ORDER_AMT: '', // 订单总金额
+            ORDER_DATE: '', // 下单时间
+            ORDER_DISCOUNT_AMT: '', // 订单优惠金额
+            ORIG_RETURN_ORDER_ID: '', // 退换货单
+            PAY_TYPE: '', // 支付类型
+            PLATFORM: '', // 平台
+            PRODUCT_AMT: 0, // 商品总额
+            PRODUCT_DISCOUNT_AMT: '',
+            RECEIVED_AMT: '', // 已收金额
+            RECEIVER_ADDRESS: '', // 收货人地址 买家收货详细地址
+            RECEIVER_MOBILE: '', // 收货人手机号
+            RECEIVER_NAME: '', // 收货人姓名
+            RECEIVER_PHONE: '', // 电弧
+            RECEIVER_ZIP: '', // 邮编
+            SYS_REMARK: '', // 系统备注
+            SHIP_AMT: '', // 服务运费
+            MERGE_SOURCE_CODE: '', // 平台编号
+            USER_NICK: '', // 买家昵称
+            CP_C_PHY_WAREHOUSE_ENAME: '' // 发货仓库名称
+          }
+        },
+        otherInfoTab: {
+          tablename: '',
+          objid: ''
+        },
+        // 状态条数据
+        steps: [],
+        modal: false, // 模态框
+        error_type: '', // 错误类型【审核错误】
+        error_tip: '', // 错误提示
+        dialogs: {},
+        btnConfig: BtnConfig.config(),
+        // 
+        returnBtn: {
+          typeAll: 'default',
+          buttons: [
+            {
+              text: $i18n.t('common.return'), // 返回
+              btnclick: () => {
+                $omsUtils.tabCloseAppoint(this);
+                this.$store.commit('customize/TabOpen', {
+                  id: '2307',
+                  type: 'action',
+                  name: 'ORDERMANAGER',
+                  label:  $i18n.t('panel_label.retail_shipping_order'),//'零售发货单',
+                  back: true,
+                });
+              }
+            },
+            {
+              text: $i18n.t('common.refresh'), //刷新
+              btnclick: async() => {
+                // 区分子表
+                if(this.labelDefaultValue === 'OC_B_ORDER_ITEM'){
+                  await this.getDetailsData();
+                }else{
+                  this.otherInfoTab = { objid: this.objId, tabValue: this.labelDefaultValue };
+                }
+              }
+            }
+          ]
+        },
+        enumerationList: {}
+      };
+    },
+    watch: {
+      // 复制
+      // $route(to) {
+      //   if (to.path !== '/CUSTOMIZED/ORDERMANAGEDETAIL') {
+      //     return;
+      //   }
+      //   const id = this.$route.params ? this.$route.params.customizedModuleId : -1;
+      //   this.objId = id;
+      //   this.getDetailsData();
+      // }
+    },
+    activated(){
+      const self = this;
+      this.$OMS2.BtnConfig.target = self;
+      BurgeonEvent.target = self;
+    },
+    mounted(){
+      // 页面加载完在赋值 （取不到值就会赋默认值）
+      // this.dialogs = DialogConfig.config();
+    },
+    methods: {
+      dropDownClickChange(val) {
+        DropDownConfig.target = this;
+        DropDownConfig.configHandler(val, 1);
+      },
+      labelClick(item) {
+        this.labelDefaultValue = item.value;
+        if (item.value === 'OC_B_ORDER_ITEM') return;
+        this.otherInfoTab = { objid: this.objId, tabValue: item.value };
+        // this.otherInfoTab = { tablename: this.labelDefaultValue, objid: this.objId, tabValue: item.value };
+      },
+      freshLoad(val) {
+        this.getDetailsData(val);
+      },
+      async getDetailsData(val) {
+        this.loading = true;
+        let params = {
+          ID: this.objId,
+          TABLE: 'OC_B_ORDER',
+          SUB_TABLE: 'OC_B_ORDER_ITEM',
+          index: 1,
+          PT_SKU: true, //true平台 false商品
+          REFRESH: true
+        };
+        // 是否隐藏
+        if (val) params = Object.assign(params, val);
+        try {
+          const { data: { data } } = await this.service.orderCenter.queryObject(params);
+          this.steps = data.DATA.PROCESSING;
+          this.baseInfoTab.order = data.DATA.ITEM;
+          this.baseInfoTab.sub_item = data.DATA.SUB_ITEM;
+          this.loading = false;
+          console.log('data:',data);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      asyncOK() {
+        const self = this;
+        const ids = [];
+        ids.push(this.baseInfoTab.order.ID);
+        if (this.error_type === 'auditing') {
+          self.service.orderCenter.auditOrder({ ids, type: '2', isCheck: 1 }).then(res => {
+            self.$Message.info(res.data.message);
+            self.modal = false;
+          });
+        }
+      }
+    },
+    async created() {
+      console.log();
+      const id = this.$route.params.customizedModuleId ?? -1;
+      this.objId = id;
+      BtnConfig.target = this;
+      BtnConfig.singleType = 1;
+      await this.getDetailsData();
+    },
+
+  };
 </script>
-<style lang="less" scoped>
-@import "~@/css/pages/orderCenter/orderManageDetail/orderManageDetail.less";
+<style lang="less">
+  @import '~omsTheme/public.less';
+  .orderMangeDetails{
+    background: #fff;
+  }
 </style>

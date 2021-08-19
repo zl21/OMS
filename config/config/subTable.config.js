@@ -208,6 +208,11 @@ export const strategyPlatform = {
     refcolid: 181595,
     searchdata,
   },
+  ST_TMALL_EXCHANGE_LOG:  { // 天猫换货策略
+    table: 'ST_TMALL_EXCHANGE_LOG',
+    refcolid: 181046,
+    searchdata,
+  },
 }
 
 //基础数据

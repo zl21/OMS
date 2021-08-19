@@ -1,23 +1,33 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 15:03:42
- * @LastEditTime: 2021-06-15 14:22:57
+ * @LastEditTime: 2021-08-06 10:26:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit  
  * @FilePath: /云雀/src/views/pages/orderCenter/addGiftItem.vue
 -->
 
 <template>
-  <div class="customized-modal">
+  <div class="customized-modal matchingDetails">
     <!-- <EasyMatrix :component-data="matrixData" /> -->
     <businessForm :form-config="formConfig"></businessForm>
     <!-- businessButton -->
     <businessButton class="absolute" :btn-config="searchBtn"></businessButton>
     <div class="foot-table">
-      <Table :columns="columns10" :data="data9" :highlight-row="highlight" @on-row-click="fnrow" @on-expand="expand"></Table>
+      <Table
+        :columns="columns10"
+        :data="data9"
+        :highlight-row="highlight"
+        @on-row-click="fnrow"
+      ></Table>
     </div>
     <div class="foot-page">
-      <Page :total="total" show-sizer  @on-change="onChange" @on-page-size-change="onSizechange"/>
+      <Page
+        :total="total"
+        show-sizer
+        @on-change="onChange"
+        @on-page-size-change="onSizechange"
+      />
     </div>
 
     <businessButton class="absolute2" :btn-config="BtnConfig"></businessButton>
@@ -29,13 +39,20 @@ import addGiftItem from '@/js/pages/orderCenter/addGiftItem';
 export default addGiftItem;
 </script>
 <style lang="less">
-@import '~omsTheme/public.less';
+@import "~omsTheme/public.less";
+.matchingDetails {
+  padding-bottom: 0px !important;
+  .foot-table {
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+
+}
 .customized-modal {
   .absolute {
     position: absolute;
     right: 0;
     top: 3px;
-    margin-top: 43px;
   }
   .orderManageEdit {
     &.unFlodStyle {
@@ -44,7 +61,7 @@ export default addGiftItem;
     .businessForm_a {
       .ark-row {
         .ark-col {
-          margin-top: 0;
+          // margin-top: 0;
         }
       }
     }

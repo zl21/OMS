@@ -1,4 +1,4 @@
-import timestampToTime from '@/assets/js/__utils__/usual';
+// import timestampToTime from '@/assets/js/__utils__/usual';
 import logTable from 'professionalComponents/LogTable';
 import businessButton from 'professionalComponents/businessButton';
 import loading from 'professionalComponents/loading';
@@ -27,7 +27,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: '刷新',
+            text: $i18n.t('btn.refresh'), // '刷新',
             btnclick: async ()=>{
               this.loading = true;
               await this.queryLogisticsCompany();
@@ -37,7 +37,7 @@ export default {
             }
           },
           {
-            text: '返回', // 查找 按钮文本
+            text: $i18n.t('common.return'), // 返回 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               R3.store.commit('global/tabOpen', {
@@ -204,8 +204,8 @@ export default {
                   return tmpObj;
                 });
               }
-              this.info.beginTime = this.info.BEGIN_TIME ? timestampToTime(this.info.BEGIN_TIME) : '';
-              this.info.endTime = this.info.END_TIME ? timestampToTime(this.info.END_TIME) : '';
+              this.info.beginTime = this.info.BEGIN_TIME ? $omsUtils.timestampToTime(this.info.BEGIN_TIME) : '';
+              this.info.endTime = this.info.END_TIME ? $omsUtils.timestampToTime(this.info.END_TIME) : '';
               const arr = new Set(this.info.EFFECTIVE_CONDITION ? this.info.EFFECTIVE_CONDITION.split(',') : []);
 
               if (this.info.CP_C_REGION_PROVINCE_ENAME) {
@@ -219,8 +219,8 @@ export default {
                 }
               });
               this.EXCLUDE_SKU_TYPE = `${this.info.EXCLUDE_SKU_TYPE}`;
-              this.CREATIONDATE = this.info.CREATIONDATE ? timestampToTime(this.info.CREATIONDATE) : '';
-              this.MODIFIEDDATE = this.info.MODIFIEDDATE ? timestampToTime(this.info.MODIFIEDDATE) : '';
+              this.CREATIONDATE = this.info.CREATIONDATE ? $omsUtils.timestampToTime(this.info.CREATIONDATE) : '';
+              this.MODIFIEDDATE = this.info.MODIFIEDDATE ? $omsUtils.timestampToTime(this.info.MODIFIEDDATE) : '';
             }
             // this.$Message.error(data.data.message);
           })

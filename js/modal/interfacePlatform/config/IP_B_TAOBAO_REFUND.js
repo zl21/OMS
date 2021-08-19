@@ -10,11 +10,11 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         isActive: true,
         isdisabled: false,
-        version:'1.4',
         itemdata: {
           serviceId:'r3-cp',
           col: 1,
@@ -26,7 +26,7 @@ export default {
           fkdesc: $i18n.t('other.shop'), // 店铺 
           inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
-          isnotnull: false, // 是否必填
+          isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
@@ -79,6 +79,9 @@ export default {
         iconclick: () => {} // 点击icon图标事件
       }
     ]
+  },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {

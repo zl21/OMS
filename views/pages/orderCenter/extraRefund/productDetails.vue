@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-28 16:55:51
- * @LastEditTime: 2021-06-17 15:50:00
+ * @LastEditTime: 2021-08-10 10:08:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/productDetails.vue
@@ -35,6 +35,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 export default {
   data(){
     return {
+      refresh:true,
       tableConfig: {
         modal: false,
         businessButtonConfig: {
@@ -42,20 +43,25 @@ export default {
           btnsite: 'left', // 按钮位置 (right , center , left)
           buttons: [
             {
+              webname:'E_PRODUCT_PUSHDETAILS',
               type: 'primary',
               text: '新增明细', // 按钮文本
               isShow: true,
               btnclick: (e) => {
-                if(!R3.store.state.customize.originalOrder){
+                let billNo = R3.store.state.customize.originalOrder;
+                if((!billNo) && sessionStorage.getItem('billNo') === null){
                   this.$Message.error('原订单编号不能为空！');
                   return;
                 }
                 this.addDetailsConfig.modal = true;
-                let billNo = R3.store.state.customize.originalOrder;
+                if(!billNo){
+                  billNo = sessionStorage.getItem('billNo')
+                }
                 this.getTable(true,billNo);
               } // 按钮点击事件
             },
             {
+              webname:'E_PRODUCT_DETELEDETAILS',
               type: 'warning', // 按钮类型
               text: '删除明细', // 按钮文本
               isShow: true,
@@ -69,84 +75,8 @@ export default {
             }
           ]
         }, // 按钮配置
-        businessFormConfig: {}, // 表单配置
-        columns: [
-          {
-            key: 'PS_C_SKU_ECODE',
-            title: 'SKU编码'
-          },{
-            key: 'PS_C_PRO_ENAME',
-            title: 'SKU名称'
-          },{
-            key: 'PS_C_PRO_ECODE',
-            title: 'SPU编码'
-          },{
-            key: 'PS_C_PRO_ENAME',
-            title: 'SPU名称'
-          },{
-            key: 'PS_C_SPEC1_ENAME',
-            title: '规格1'
-          },{
-            key: 'PS_C_SPEC2_ENAME',
-            title: '规格2'
-          },{
-            key: 'PS_C_SPEC3_ENAME',
-            title: '规格3'
-          },{
-            key: 'qty',
-            title: '购买数量'
-          },{
-            key: 'REAL_AMT',
-            title: '成交金额'
-          },{
-            key: 'QTY_REFUND',
-            title: '申请数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
-            render:(h,params)=>{
-             return h('InputNumber', {
-                props: {
-                  value: params.row.QTY_REFUND,
-                  autosize: true,
-                  min:1,
-                  regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
-                },
-                on: {
-                  'on-change': e => {
-                      let num =  this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.AMT_REFUND), 2)
-                      params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
-                      params.row.QTY_REFUND = e;
-                      this.tableConfig.data[params.index] = params.row;
-                      R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
-                  }
-                }
-              });
-            }
-          },{
-            key: 'AMT_REFUND',
-            title: '申请退款金额' // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
-          },{
-            key: 'QTY_ACTUAL',
-            title: '实际退货数量' // 实际退货数量：默认为0；
-          },{
-            key: 'AMT_ACTUAL_REFUND',
-            title: '退款金额', // 退款金额：默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数
-            render:(h,params)=>{
-             return h('Input', {
-               props: {
-                  value: params.row.AMT_ACTUAL_REFUND,
-                  autosize: true,
-                  regx: /^\d*\.{0,1}\d{0,2}$/,
-                },
-                on: {
-                  'on-change': e => {
-                     params.row.AMT_ACTUAL_REFUND = e.target.value;
-                     this.tableConfig.data[params.index] = params.row;
-                     R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
-                  }
-                }
-              });
-            }
-          }
-        ], // 表头
+        // businessFormConfig: {}, // 表单配置
+        columns: [], // 表头
         data: [], // 数据配置
         pageShow: true, // 控制分页是否显示
         loading: false,
@@ -166,37 +96,71 @@ export default {
         businessButtonConfig: {}, // 按钮配置
         businessFormConfig: {}, // 表单配置
         isShowSelection: true, // 是否显示checkedbox
+        highlightRow:false,
         columns: [
            {
             key: 'PS_C_SKU_ECODE',
             title: 'SKU编码'
           },{
             key: 'PS_C_SKU_ENAME',
-            title: 'SKU名称'
+            title: $i18n.t('form_label.skuName'), // SKU名称
           },{
-            key: 'ORIG_ORDER_ID',
+            key: 'PS_C_PRO_ECODE',
             title: 'SPU编码'
           },{
-            key: 'ORIG_ORDER_ID',
+            key: 'PS_C_PRO_ENAME',
             title: 'SPU名称'
           },{
             key: 'GIFT_TYPE',
-            title: '赠品'
+            title: '赠品',
+            render:(h,params)=>{
+              let GIFT_TYPE = ''
+              if(params.row.GIFT_TYPE == 0){
+                  GIFT_TYPE = '非赠品'
+              }else if(params.row.GIFT_TYPE == 1){
+                  GIFT_TYPE = '系统赠品'
+              }else{
+                  GIFT_TYPE = '平台赠品'
+              }
+              return h('span', {}, GIFT_TYPE);
+            }
           },{
-            key: 'TOTAL_FEE',
+            key: 'REAL_AMT',
             title: '成交金额'
           },{
             key: 'AMT_REFUND',
-            title: '可退金额'
+            title: '可退金额',
+            render:(h,params)=>{
+              let QTY_RETURN_APPLY = params.row.QTY_RETURN_APPLY || 0;
+              // 数量 已退数量
+              let returnNum = Number(params.row.QTY || 0) - QTY_RETURN_APPLY;
+              // 成交单价
+              // let PRICE_ACTUAL = params.row.PRICE ? params.row.PRICE : params.row.PRICE_ACTUAL;
+              return h('span', {}, returnNum * Number(params.row.PRICE || 0));
+            }
           },{
             key: 'QTY',
             title: '购买数量'
           },{
             key: 'QTY_REFUND',
-            title: '可退数量'
+            title: '可退数量',
+            render:(h,params)=>{
+              let QTY_RETURN_APPLY = params.row.QTY_RETURN_APPLY || 0;
+              let returnNum = Number(params.row.QTY) - QTY_RETURN_APPLY;
+              return h('span', {}, returnNum);
+            }
           },{
-            key: 'GROUP_GOODS_MARK',
-            title: '组合商品'
+            key: 'PRO_TYPE',
+            title: '是否组合下挂',
+            render:(h,params)=>{
+              let PRO_TYPE = ''
+              if([1,2].includes(params.row.PRO_TYPE)){
+                  PRO_TYPE = '是'
+              }else{
+                  PRO_TYPE = '否'
+              }
+              return h('span', {}, PRO_TYPE);
+            }
           }
         ], // 表头
         data: [], // 数据配置
@@ -218,12 +182,24 @@ export default {
   computed: {
     isEdit () {
       return R3.store.state.customize.originalOrder;　　//需要监听的数据
+    },
+    isClear() {
+      return R3.store.state.customize.clear;　　//需要监听的数据
     }
   },
   watch: {
     async isEdit(newVal) {
-      await this.getTable(false,newVal);
-      // await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
+      if(newVal){
+       await this.getTable(false,newVal);
+       await sessionStorage.setItem('copyDetails',JSON.stringify(this.tableConfig.data))
+       R3.store.commit('customize/clear', false);
+      } 
+    },
+    isClear (newVal){
+      if (newVal) {
+        this.tableConfig.data = [],
+        this.tableConfig.total = 0
+      }
     },
     'tableConfig.data':{
       handler(newV, oldV) {
@@ -233,15 +209,141 @@ export default {
     }
   },
   async created(){
+    // 按钮权限
+    let { SUB_ACTIONS,ACTIONS } = await this.$OMS2.omsUtils.getPermissions(this, 'butArray', {table: this.$route.params.tableName, type: 'OBJ'},true);
+    let buttonArr = this.tableConfig.businessButtonConfig.buttons
+    let buttonArr1 = buttonArr.map((x)=>{ if(SUB_ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item);
+    this.tableConfig.businessButtonConfig.buttons = buttonArr1
+    let route = this.$route.params;
     if(!(this.$route.params.itemId == 'New')){
-       let route = this.$route.params;
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
+       subData.rowData.forEach(i => {
+         i.QTY_REFUND = Number(i.QTY_REFUND);
+         i.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(i.AMT_ACTUAL_REFUND);
+         i.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(i.AMT_REFUND);
+         i.QTY_ACTUAL = this.$OMS2.omsUtils.floatNumber(i.QTY_ACTUAL);
+        });
        this.tableConfig.data = subData.rowData;
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
+       let billNo = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata;
+       sessionStorage.setItem('billNo',billNo)
+      }else{
+        //  新增没有实际退款数量
+        setTimeout(() => {
+          let columns = this.tableConfig.columns.filter(item => item.title != '实际退货数量');
+          this.tableConfig.columns = columns
+        }, 100);
+      }
+    // 单据状态 0:未审核
+    this.orderStatus = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[6].valuedata;
+    this.tableConfig.columns = [
+          {
+            key: 'PS_C_SKU_ECODE',
+            title: 'SKU编码'
+          },{
+            key: 'PS_C_PRO_ENAME',
+            title: $i18n.t('form_label.skuName'), // SKU名称
+          },{
+            key: 'PS_C_PRO_ECODE',
+            title: 'SPU编码'
+          },{
+            key: 'PS_C_PRO_ENAME',
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
+          },{
+            key: 'GIFT_TYPE',
+            title: '赠品',
+            render:(h,params)=>{
+              let GIFT_TYPE = ''
+              if(params.row.GIFT_TYPE == 0){
+                  GIFT_TYPE = '非赠品'
+              }else if(params.row.GIFT_TYPE == 1){
+                  GIFT_TYPE = '系统赠品'
+              }else{
+                  GIFT_TYPE = '平台赠品'
+              }
+              return h('span', {}, GIFT_TYPE);
+            }
+          },
+          {
+            key: 'QTY',
+            title: '购买数量',
+            render:(h,params)=>{
+              return h('span', {}, Number(params.row.QTY || 0));
+            }
+          },{
+            key: 'REAL_AMT',
+            title: '成交金额',
+            render:(h,params)=>{
+              let num  = Number(params.row.REAL_AMT) ||  0
+              return h('span', {}, num);
+            }
+          },{
+            key: 'QTY_REFUND',
+            title: '申请退货数量', // 申请退货数量：默认取原零售发货单可退数量，可编辑，仅支持录入大于0的正整数，且需小于等于原零售发货单可退数量；
+            render:(h,params)=>{
+             return h('InputNumber', {
+                props: {
+                  value: params.row.QTY_REFUND,
+                  autosize: true,
+                  min:1, 
+                  max: Number(params.row.QTY || 0) - Number(params.row.QTY_RETURN_APPLY || 0),
+                  disabled: this.$route.params.itemId == 'New' || (this.orderStatus == 0 && this.$route.params.itemId != 'New') ? false : true,
+                  regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/
+                },
+                on: {
+                  'on-change': e => {
+                      // let PRICE_ACTUAL = this.$route.params.itemId != 'New' ? params.row.PRICE || 0 : params.row.PRICE_ACTUAL || 0
+                      let num = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE || 0))
+                      // 申请退货数量
+                      params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
+                      // 退货金额
+                      params.row.QTY_REFUND = e;
+                      this.tableConfig.data[params.index] = params.row;
+                      R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
+                  }
+                }
+              });
+            }
+          },{
+            key: 'AMT_REFUND',
+            title: '退货金额', // 申请退款金额：为 申请退货数量*成交单价（成交单价为原零售发货单中记录的），保留两位小数； 
+          },{
+            key: 'QTY_ACTUAL',
+            title: '实际退货数量' // 实际退货数量：默认为0；
+          },{
+            key: 'AMT_ACTUAL_REFUND',
+            title: '申请退款金额', // old：退款金额 (默认取“申请退款金额”，可编辑，仅支持录入正数，保留两位小数)  new 申请退款金额 ：
+            render:(h,params)=>{
+             return h('Input', {
+               props: {
+                  disabled: this.$route.params.itemId == 'New' || (this.orderStatus == 0 && this.$route.params.itemId != 'New') ? false : true,
+                  value: params.row.AMT_ACTUAL_REFUND,
+                  autosize: true,
+                  regx: /^\d*\.{0,1}\d{0,2}$/,
+                },
+                on: {
+                  'on-change': e => {
+                     params.row.AMT_ACTUAL_REFUND = e.target.value;
+                     this.tableConfig.data[params.index] = params.row;
+                     R3.store.commit('customize/extraoOrderDetails', JSON.parse(JSON.stringify([...this.tableConfig.data])));
+                  }
+                }
+              });
+            }
+          }
+        ];
+    if(this.orderStatus != 0 && this.$route.params.itemId != 'New'){
+      this.tableConfig.businessButtonConfig.buttons[0].isShow = false
+      this.tableConfig.businessButtonConfig.buttons[1].isShow = false
     }
   },
   mounted(){
-     
+    window.addEventListener('customizeClick',e=>{
+      if(e.detail.type == 'refresh' && this.refresh){
+        this.refresh  = true
+        R3.store.commit('customize/clear', true);
+      }
+    })
   },
   methods:{
     /****************** 工具方法 *************************/
@@ -250,20 +352,43 @@ export default {
     async getTable(isAdd,billNo,pageNum = 1,pageSize = 10){
       let self = this;
       // 筛选ids
-      let ids = this.tableConfig.data.map((item) => {return item.ID})
+      // console.log(R3.store.);
+      let ids
+      let route = this.$route.params;
+      let modifyRefundType = this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].updateData.OC_B_REFUND_ORDER_EXTRA.changeData.REFUND_TYPE
+      if(route.itemId ==='New'){
+        console.log(123,modifyRefundType,this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].defval);
+        this.refundType = modifyRefundType || this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].defval;
+      }else{
+        this.refundType = modifyRefundType || this.$store.state[`V.${route.tableName}.${route.tableId}.${route.itemId}`].mainFormInfo.formData.data.addcolums[0].childs[0].valuedata;
+      }
       let params = {
-        BILL_NO:billNo,
+        BILL_NO: billNo,
+        REFUND_TYPE: Number(this.refundType),
         pageNum: pageNum,
         pageSize: pageSize
       };
       // 是否是新增
       if (isAdd) {
-        params = Object.assign(params,{EXCLUDE_IDS:ids ? ids.join() : ''})
+        if(!(this.$route.params.itemId == 'New')){
+          ids = this.tableConfig.data.map((item) => {return item.OC_B_ORDER_ITEM_ID})
+        } else {
+          ids = this.tableConfig.data.map((item) => {return item.ID})
+        }
+        params = Object.assign(params,{EXCLUDE_IDS:ids ? ids.join() : ''});
       }
-
       // 调用查询接口
       const {data:{code,data}} = await self.service.orderCenter.queryExtraReturnOrderItem(params);
       if(code === 0){
+        if(!isAdd){
+          data.ORDER_ITEM.forEach((item)=>{
+            let QTY_REFUND = Number(item.QTY || 0) - Number(item.QTY_RETURN_APPLY || 0);
+            item.QTY_REFUND = QTY_REFUND;
+            let PRICE = QTY_REFUND * Number(item.PRICE || 0);
+            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+            item.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+          })
+        }
         isAdd ? this.addDetailsConfig.data = data.ORDER_ITEM : this.tableConfig.data = data.ORDER_ITEM,
         isAdd ? this.addDetailsConfig.total = data.TOTAL : this.tableConfig.total = data.TOTAL
       }
@@ -292,10 +417,46 @@ export default {
       this.tableConfig.pageSize = pageSize;
       this.getTable(false,billNo,this.tableConfig.pageIndex,pageSize)
     },
-    deleteData(row){
-      // 删除
-      this.tableConfig.data = [...this.tableConfig.data].filter(x => [...row].every(y => y.ID !== x.ID));
-      
+    async deleteData(row){
+      // if(this.tableConfig.data.length == row.length) {
+      //   this.$Message.error('至少保留一条明细！');
+      //   return
+      // }
+      let route = this.$route.params;
+      let IDS = JSON.parse(JSON.stringify(row)).map(i=> { if(i.ID !== '-1') return i.ID}); // 获取详情带进来的ids
+      //  筛选清空
+      IDS = IDS.filter(i => {return i!= undefined})
+      // 如果不是新增
+      if(route.itemId !== 'New'){
+        // 由于添加的时候把ID修改为-1，所以在删除的时候需要把选中的ID重新找回
+        let deleteRow = row.filter(i => {return i.ID = i.OC_B_ORDER_ITEM_ID})
+        deleteRow.forEach((x) => {
+          this.tableConfig.data.forEach((e)=>{
+            if(x.ID === e.OC_B_ORDER_ITEM_ID){
+              e.ID = x.OC_B_ORDER_ITEM_ID
+            }
+          })
+        })
+        // 如果编辑带过来的数据存在
+        if(IDS.length){
+          let params = {ID:route.itemId,OC_B_REFUND_ORDER_ITEM:IDS}
+          const {data:{code,message}} = await this.service.orderCenter.queryExtraDelItem(params);
+          if(code == 0){
+            this.refresh  = false
+            document.getElementById("refresh").click();
+            this.tableConfig.data = [...this.tableConfig.data].filter(x => [...deleteRow].every(y => y.ID !== x.ID));
+            this.$Message.success(message || '删除成功！');
+          }
+        }else{
+          this.tableConfig.data = [...this.tableConfig.data].filter(x => [...deleteRow].every(y => y.ID !== x.ID));
+          this.$Message.success('删除成功！');
+        }
+      }else{
+        // 数据删除   
+        this.tableConfig.data = [...this.tableConfig.data].filter(x => [...row].every(y => y.ID !== x.ID));
+        this.$Message.success('删除成功！')
+      }
+      this.tableConfig.selectData = [];
     },
     /******************  添加商品明细 -- 弹框 *************************/
     addOnSelect(row){
@@ -323,10 +484,21 @@ export default {
        this.getTable(true,billNo,pageNum,this.addDetailsConfig.pageSize)
     },
     addDetailsOk(){
+      console.log(!this.addDetailsConfig.selectData.length);
+      if(!this.addDetailsConfig.selectData.length){
+        this.$Message.error('请选择至少一条明细！');
+        return;
+      }
       // 新增明细
       let arr = JSON.parse(sessionStorage.getItem('copyDetails')) //详情
-      // 如果是编辑的话 
       this.addDetailsConfig.selectData.forEach(x =>{
+        // 初始化计算数据
+        let QTY_REFUND = Number(x.QTY || 0) - Number(x.QTY_RETURN_APPLY || 0)
+        x.QTY_REFUND = QTY_REFUND;
+        let PRICE = QTY_REFUND * Number(x.PRICE || 0);
+        x.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+        x.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+        // 如果是编辑的话 
         if(arr.every(y => y.ID !== x.ID)){
           // 不存在
           x.OC_B_ORDER_ITEM_ID = x.ID
@@ -334,10 +506,13 @@ export default {
         }
       })
       this.tableConfig.data = this.tableConfig.data.concat(this.addDetailsConfig.selectData);
+      this.addDetailsConfig.selectData = []
     },
   },
   destroyed(){
     sessionStorage.clear('copyDetails');
+    sessionStorage.clear('billNo');
+    
   }
 };
 </script>

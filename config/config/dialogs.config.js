@@ -4,14 +4,21 @@ class DialogConfig {
   static target;
   constructor() { }
   static baseObj = {
-    titleAlign: 'center',
+    titleAlign: 'left',
     data: {},
     keepAlive: true,
     footerHide: true,
     maskClosable: false,
   }
 
-  static customConfig = { //rturngoodModifyRemarks
+  static customConfig = {
+    OC_ORDER_SEND_TIME: {
+      title: '修改预计发货时间',
+      width: 400,
+      url: 'modal/orderCenter/modifyPreDate',
+      name: 'modifyPreDate',
+      excludeString: 'modifyPreDate',
+    },
     ModifyRemarks: {
       title: '修改单据备注', // 修改单据备注
       width: 650,
@@ -162,6 +169,13 @@ class DialogConfig {
       name: 'scheduleFormDialog',
       url: 'modal/strategyPlatform/scheduleFormDialog',
       excludeString: 'scheduleFormDialog',
+    },
+    copyPermissionConfig: {
+      title: '复制权限', // 复制权限
+      width: 400,
+      name: 'copyPermission',
+      url: 'modal/systemConfig/copyPermission',
+      excludeString: 'copyPermission',
     }
   }
   static config() {

@@ -2,9 +2,7 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-import dateUtil from '@/assets/js/__utils__/date.js';
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import comUtils from '@/assets/js/__utils__/common.js';
+// import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import logTable from 'professionalComponents/LogTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
@@ -23,7 +21,7 @@ export default {
     subTable,
     businessActionTable
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n:$i18n,
@@ -35,60 +33,63 @@ export default {
         objid: '',
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
-        buttons: [
-          {
-            webname: 'lookup_save', // 保存
-            text: '保存',
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              const self = this;
-              self.save();
-            }
-          },
-          {
-            webname: 'lookup_return', // 返回
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              if (this.isModify) {
-                this.$Modal.fcWarning({
-                  title: '提示', // 打印
-                  content: '该页面已经修改,是否继续返回?', // 正在打印中，请稍后。。。
-                  mask: true,
-                  showCancel: true,
-                  onOk: () => {
-                    comUtils.tabCloseAppoint(this);
-                    this.$destroy(true);
-                    this.$store.commit('global/tabOpen', {
-                      tableId: 10327,
-                      type: 'S',
-                      tableName: 'CP_C_ORG_CHANNEL',
-                      label: '渠道仓档案',
-                      back: true,
-                    });
-                  }
-                });
-              } else {
-                comUtils.tabCloseAppoint(this);
-                this.$destroy(true);
-                this.$store.commit('global/tabOpen', {
-                  tableId: 10327,
-                  type: 'S',
-                  tableName: 'CP_C_ORG_CHANNEL',
-                  label: '渠道仓档案',
-                  back: true,
-                });
-              }
+        buttons: []
+      },
+      extendBtn:[
+        {
+          webname: 'CP_C_ORG_CHANNEL_SAVE', // 保存
+          text: $i18n.t('btn.save'), // 保存
+          size: '', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            const self = this;
+            self.save();
+          }
+        },
+        {
+          webname: 'CP_C_ORG_CHANNEL_RETURN', // 返回
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            if (this.isModify) {
+              this.$Modal.fcWarning({
+                className: 'ark-dialog',
+                title: $i18n.t('modalTitle.tips'), // 提示
+                content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+                mask: true,
+                showCancel: true,
+                onOk: () => {
+                  $omsUtils.tabCloseAppoint(this);
+                  this.$destroy(true);
+                  this.$store.commit('global/tabOpen', {
+                    tableId: 10327,
+                    type: 'S',
+                    tableName: 'CP_C_ORG_CHANNEL',
+                    label:  $i18n.t('menu.a4'), //'渠道仓档案',
+                    back: true,
+                  });
+                }
+              });
+            } else {
+              $omsUtils.tabCloseAppoint(this);
+              this.$destroy(true);
+              this.$store.commit('global/tabOpen', {
+                tableId: 10327,
+                type: 'S',
+                tableName: 'CP_C_ORG_CHANNEL',
+                label:  $i18n.t('menu.a4'), //'渠道仓档案',
+                back: true,
+              });
             }
           }
-        ]
-      },
+        }
+      ],
       formConfig: {
         formData: [
           {
             style: 'input',
-            label: '渠道仓编码',
+            label: $i18n.t('form_label.d9'), // 渠道仓编码
             value: 'ECODE',
             width: '8',
             disabled: false,
@@ -99,7 +100,7 @@ export default {
           },
           {
             style: 'input',
-            label: '渠道仓名称',
+            label: $i18n.t('form_label.da'), // 渠道仓名称
             value: 'ENAME',
             width: '8',
             maxlength: 225,
@@ -128,6 +129,25 @@ export default {
           ]
         }
       },
+      jordanExtendBtn:[
+        {
+          type:'primary',
+          webname: 'CP_C_ORG_CHANNEL_ADD', // 返回
+          text: $i18n.t('btn.increase'), // 添加
+          btnclick: () => {
+            // 查询逻辑仓,实体仓
+            this.logicQuery();
+          }
+        },
+        {
+          type:'warning',
+          webname: 'CP_C_ORG_CHANNEL_DEL', // 删除
+          text: $i18n.t('btn.delete'), // 删除
+          btnclick: () => {
+            this.delete();
+          }
+        }
+      ],
       jordanTableConfig: {
         indexColumn: true,
         isShowSelection:true,
@@ -140,24 +160,11 @@ export default {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [
-            {
-              webname: 'order_fund', // 返回
-              text: '添加',
-              btnclick: () => {
-                // 查询逻辑仓,实体仓
-                this.logicQuery();
-              }
-            },
-            {
-              webname: 'order_fund', // 返回
-              text: '删除',
-              btnclick: () => {
-                this.delete();
-              }
-            }
+            
           ]
         },
         businessFormConfig: {
+          gridBar:true, //开启栅格栏
           formData: [
             {
               version: '1.4',
@@ -171,13 +178,12 @@ export default {
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: '商品SPU',
                 inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: '逻辑仓', // 赔付类型
+                name: $i18n.t("table_label.logicWarehouse"), // 逻辑仓
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
                 reftableid: 10091, // 对应的表ID
@@ -194,7 +200,7 @@ export default {
             },
             {
               style: 'input',
-              label: '供货比例',
+              label: $i18n.t('form_label.db'), // 供货比例
               value: 'RATE',
               disabled: false,
               dataAcessKey: '',
@@ -206,7 +212,7 @@ export default {
             },
             {
               style: 'input',
-              label: '优先级',
+              label: $i18n.t('table_label.priority'), // 优先级
               value: 'SUPPLY_PRIORITY',
               disabled: false,
               dataAcessKey: 'SUPPLY_PRIORITY',
@@ -217,14 +223,14 @@ export default {
                 this.logicQuery();
               }
             },
-            {
-              style: 'checkbox',
-              label: '自动分配',
-              value: 'IS_AUTO_ASSIGN',
-              disabled: false,
-              dataAcessKey: 'IS_AUTO_ASSIGN',
-              width: '6'
-            }
+            // {
+            //   style: 'checkbox',
+            //   label: $i18n.t('panel_label.ao'), // 自动分配
+            //   value: 'IS_AUTO_ASSIGN',
+            //   disabled: false,
+            //   dataAcessKey: 'IS_AUTO_ASSIGN',
+            //   width: '6'
+            // }
           ],
           formValue: {
             CP_C_STORE_ID: '', // 逻辑仓id
@@ -251,15 +257,15 @@ export default {
         },
         columns: [
           {
-            title: '逻辑仓',
+            title: $i18n.t("table_label.logicWarehouse"), // 逻辑仓
             key: 'CP_C_STORE_ENAME'
           },
           {
-            title: '实体仓',
+            title: $i18n.t('table_label.physicalWarehouse'), // 实体仓
             key: 'CP_C_PHY_WAREHOUSE_ENAME'
           },
           {
-            title: '供货比例',
+            title: $i18n.t('form_label.db'), // 供货比例
             key: 'RATE',
             render: (h, params) => h(
                 'div',
@@ -289,7 +295,7 @@ export default {
               )
           },
           {
-            title: '自动分配',
+            title: $i18n.t('panel_label.ao'), // 自动分配
             key: 'IS_AUTO_ASSIGN',
             render: (h, params) => h('Checkbox', {
                 props: {
@@ -307,7 +313,7 @@ export default {
               })
           },
           {
-            title: '优先级',
+            title: $i18n.t('table_label.priority'), // 优先级
             key: 'SUPPLY_PRIORITY',
             render: (h, params) => h(
               'div',
@@ -343,11 +349,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '供货逻辑仓',
+          label: $i18n.t('panel_label.b0'), // 供货逻辑仓
           value: 'supplyStore'
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'CP_ORG_CHANNEL_LOG'
         }
       ],
@@ -358,9 +364,20 @@ export default {
   computed: {
     id() {
       return this.$route.params.customizedModuleId == 'New' ? '-1' : this.$route.params.customizedModuleId;
+    },
+    // 获取当前展示几列
+    colRowNum(){
+      return $store.state.customize.colRowNum;
     }
   },
-
+  watch:{
+    // 获取当前展示几列
+    colRowNum:{
+      handler(newVal) {
+        this.jordanTableConfig.businessFormConfig.colRowNum = newVal;
+      },
+    }
+  },
   mounted() {
     this.init();
     this.query();
@@ -369,15 +386,24 @@ export default {
     // 设置默认值
   },
   methods: {
-    init() {
+    async init() {
       const self = this;
+      const buttons = self.$OMS2.BtnConfig.config();
+      this.btnConfig.buttons = [...this.extendBtn];
+      this.jordanTableConfig.businessButtonConfig.buttons = [...this.jordanExtendBtn];
       if (self.id == '-1') {
         self.labelList = [
           {
-            label: '供货逻辑仓',
+            label: $i18n.t('panel_label.b0'), // 供货逻辑仓
             value: 'supplyStore'
           }
         ];
+      }else {
+        // await $omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true).then(res=>{
+        //   console.log(res);
+        // });
+        // await $omsUtils.getPermissions(this.jordanTableConfig, 'businessButtonConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        $omsUtils.getBtnPermission(this , ['btnConfig' , 'jordanTableConfig.businessButtonConfig'] , { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
       }
     },
     pageSizeChange(val) {
@@ -394,15 +420,15 @@ export default {
       const self = this;
       const ids = [];
       if (!self.selecData.length) {
-        self.$Message.warning('请选择需要删除的内容!');
+        self.$Message.warning($i18n.t('modalTips.ka')); // 请选择需要删除的内容
         return;
       }
       if (self.jordanTableConfig.data.length == self.selecData.length) {
-        self.$Message.warning('不可全部删除逻辑仓数据，请至少保留一条！');
+        self.$Message.warning($i18n.t('modalTips.kb')); // 不可全部删除逻辑仓数据，请至少保留一条！
         return;
       }
       if (self.jordanTableConfig.data.length == 1) {
-        self.$Message.warning('明细不能为空!');
+        self.$Message.warning($i18n.t('modalTips.kc')); // 明细不能为空
         return;
       }
       self.selecData.forEach(item => {
@@ -474,18 +500,18 @@ export default {
       const id = self.jordanTableConfig.businessFormConfig.formValue.CP_C_STORE_ID;
       let str = '';
       if (!id) {
-        str += '逻辑仓 ';
+        str += `${$i18n.t("table_label.logicWarehouse")} `; // 逻辑仓
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.RATE) {
-        str += '供货比例 ';
+        str += `${$i18n.t("form_label.db")} `; // 供货比例
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY) {
-        str += '优先级 ';
+        str += `${$i18n.t('table_label.priority')} `; // 优先级
       }
       if (str) {
         self.$Message.warning(`${str}不能为空!`);
         return;
       }
       if (self.jordanTableConfig.data.some(item => item.CP_C_STORE_ID == id)) {
-        self.$Message.warning('请勿重复添加!');
+        self.$Message.warning($i18n.t('modalTips.ia')); // 请勿重复添加
         return;
       }
       self.service.basicData
@@ -502,7 +528,7 @@ export default {
             const theSameStore = self.jordanTableConfig.data.filter(item => item.CP_C_PHY_WAREHOUSE_ID == data.CP_C_PHY_WAREHOUSE_ID);
             // 判断该实体仓下是否已存在该优先级
             if (theSameStore.some(item => item.SUPPLY_PRIORITY == self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY)) {
-              self.$Message.warning('同一实体仓下优先级不能重复!');
+              self.$Message.warning($i18n.t('modalTips.ib')); // 同一实体仓下优先级不能重复
               return;
             }
             // end
@@ -553,20 +579,20 @@ export default {
       const self = this;
       let str = '';
       if (!self.formConfig.formValue.ECODE) {
-        str += '渠道仓编码 ';
+        str += `${$i18n.t('form_label.d9')} `; // 渠道仓编码
       } else if (!self.formConfig.formValue.ENAME) {
-        str += '渠道仓名称 ';
+        str += `${$i18n.t('form_label.da')} `; // 渠道仓名称
       }
       if (str) {
         self.$Message.warning(`${str}不能为空!`);
         return;
       }
       if (!self.jordanTableConfig.data.length) {
-        self.$Message.warning('请先添加明细!');
+        self.$Message.warning($i18n.t('modalTips.ic')); // 请先添加明细
         return;
       }
       if (self.jordanTableConfig.data.some(item => item.RATE == '')) {
-        self.$Message.warning('供货比例不能为空!');
+        self.$Message.warning($i18n.t('modalTips.id')); // 供货比例不能为空
         return;
       }
       const data = {

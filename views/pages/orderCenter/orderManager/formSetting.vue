@@ -8,10 +8,6 @@
 -->
 <template>
   <div class="formSetting">
-    <p class="hint">
-      *支持上下拖拽排序
-    </p>
-
     <Tabs
       :value="tabValue"
       @on-click="tabClick"
@@ -57,6 +53,9 @@
         </div>
       </li>
     </ul>
+    <p class="hint">
+        *支持上下拖拽排序
+    </p>
     <div class="footer-button">
       <!-- <businessButton
         :btn-config="btnConfig"
@@ -96,14 +95,14 @@
         list: [],
         extendBtn: [
           {
-            text: '取消',
+            text: $i18n.t('common.cancel'), // 取消,
             webname: 'query', // 退货换单 - 新增
             btnclick: () => {
               this.$emit('update:modal', false);
             }, // 按钮点击事件
           },
           {
-            text: '确定',
+            text: $i18n.t('common.determine'), // 确定
             webname: 'test_aaa', // 退货换单 - 新增
             btnclick: () => {
               this.save();
@@ -235,7 +234,7 @@
 .formSetting {
     .hint {
     color: #FF735D;
-    margin: 5px 0;
+    margin: 12px 0 -20px;
   }
 
    .icon-dingbu:before {

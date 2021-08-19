@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-19 17:55:24
- * @LastEditTime: 2021-06-18 13:43:06
+ * @LastEditTime: 2021-06-23 10:25:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/modifyGroup.vue
@@ -9,13 +9,14 @@
 <template>
   <!-- 组合商品编辑 -->
   <div class="modifyGroup customized-detail">
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基础资料
+          <!-- 基础资料 -->
+          {{ vmI18n.t('panel_label.basicData') }}
           <p
             slot="content"
             style="float: left; width: 250px; margin-top: 15px"

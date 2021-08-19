@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-19 17:55:24
+ * @LastEditTime: 2021-06-22 11:46:46
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/config/config/event.config.js
+ */
 //定制事件配置类
 import DropDownConfig from 'burgeonConfig/config/dropDown.config';
 class BurgeonEvent {
@@ -56,7 +64,9 @@ class BurgeonEvent {
         const self = BurgeonEvent.target;
         // val !== '新增'
         if (val !== 'Newly added') {
-            self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+            if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
         }
         DropDownConfig.target = BurgeonEvent.target;
         DropDownConfig.configHandler(val, 0, eventList);
@@ -78,7 +88,7 @@ class BurgeonEvent {
         self.isShowSeniorOrOrdinary = !self.isShowSeniorOrOrdinary;
         if (!arrayType) {
             setTimeout(() => {
-                self.$comUtils.setTableHeight(self, 30);
+                $omsUtils.setTableHeight(self, 30);
                 self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
             }, 500);
             // 设置普通搜索默认选项

@@ -7,7 +7,6 @@ import subTable from 'professionalComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
-  name: 'holdStrategyAddOrEdit',
   components: {
     subTable,
     businessActionTable,
@@ -16,7 +15,7 @@ export default {
     businessLabel,
     businessStatusFlag
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
@@ -24,21 +23,26 @@ export default {
       modify: {
         master: {}
       },
+      backup: {}, // 备份数据
       loading: false,
       isWatchChange: false, // 监听
       isModify: false,
       isEnable: false,
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {
-            text: '保存',
+            webname: 'ST_C_TMALL_EXCHANGE_MAIN_SAVE',
+            text: $i18n.t('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               this.save();
             }
           },
           {
+            webname: 'fix_back',
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -52,14 +56,14 @@ export default {
           {
             style: null,
             colname: 'ECODE',
-            label: '策略ID',
-            width: '12'
+            label: $i18n.t('form_label.bc'), // 策略ID
+            width: '6'
           },
           {
             style: 'input',
             colname: 'ENAME',
-            label: '策略名称',
-            width: '12',
+            label: $i18n.t('form_label.bd'), // 策略名称
+            width: '6',
             inputChange: () => {
               this.masterModifyData('ENAME', 'master', 'formConfig1');
             }
@@ -68,29 +72,18 @@ export default {
             version: '1.4',
             colname: 'CP_C_SHOP_ID',
             style: 'popInput', // 输入框弹框单多选
-            width: '12',
+            width: '6',
             itemdata: {
-              col: 1,
               colid: 179601, // 当前字段的ID
               colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '店铺',
-              inputname: 'CP_C_SHOP_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
+              valuedata: '' // 这个是选择的值
             },
             oneObj: (e) => { 
               this.formConfig1.formValue.CP_C_SHOP_ID = e.pid;
@@ -102,14 +95,14 @@ export default {
           },
           {
             style: 'select',
-            label: '换货地址',
+            label: $i18n.t('form_label.ce'), // 换货地址
             width: '12',
             colname: 'EXCHANGE_ADDR_ID',
             options: [],
             onOpenChange: (flag) => {
               const _this = this;
               if (flag && !_this.formConfig1.formValue.CP_C_SHOP_ID) {
-                _this.$Message.warning('请先选择店铺！');
+                _this.$Message.warning($i18n.t('modalTips.hz')); // 请先选择店铺
                 return;
               }
             },
@@ -151,8 +144,8 @@ export default {
       formConfig2: {
         formData: [
           {
-            label: '换货说明',
-            subLabel: '偏差N元同意换货<=',
+            label: $i18n.t('form_label.cf'), // 换货说明,
+            subLabel: $i18n.t('form_label.ch'), // 偏差N元同意换货<=,
             style: 'formCompile',
             colname: 'IS_AUTO_APPROVE',
             class: 'soltDom',
@@ -163,15 +156,15 @@ export default {
             disabled: false,
             options: [
               {
-                label: '全部',
+                label: $i18n.t('common.all'), // 全部
                 value: '2'
               },
               {
-                label: '有',
+                label: $i18n.t('form_label.ci'), // 有,
                 value: '1'
               },
               {
-                label: '没有',
+                label: $i18n.t('form_label.cj'), // 没有,
                 value: '0'
               }
             ],
@@ -182,7 +175,7 @@ export default {
             checkChange: val => {
               console.log(val);
               let newVal
-              let oldVal = this.modify.master.EXCHANGE_DESC || []
+              let oldVal = this.modify.master.EXCHANGE_DESC || this.backup.EXCHANGE_DESC
               if (
                 oldVal.length == 0 && val.includes(2) 
                 || !oldVal.includes('2') && val.includes('2') 
@@ -204,9 +197,9 @@ export default {
             }
           },
           {
-            label: '缺货自动拒绝',
-            subLabel1: '缺货自动拒绝换货原因',
-            subLabel2: '缺货自动拒绝文案',
+            label: $i18n.t('form_label.ck'), // 缺货自动拒绝,
+            subLabel1: $i18n.t('form_label.cl'), // 缺货自动拒绝换货原因
+            subLabel2: $i18n.t('form_label.cm'), // 缺货自动拒绝文案
             style: 'formCompile',
             slotName: 'stockout',
             reqStr: true,
@@ -231,15 +224,15 @@ export default {
             }
           },
           {
-            label: '偏差N元自动拒绝',
-            subLabel1: '偏差N元拒绝换货>',
-            subLabel2: '偏差N元自动拒绝换货原因',
-            subLabel3: '偏差N元自动拒绝文案',
+            label: $i18n.t('form_label.cn'), // 偏差N元自动拒绝
+            subLabel1: $i18n.t('form_label.co'), // 偏差N元拒绝换货>
+            subLabel2: $i18n.t('form_label.cp'), // 偏差N元自动拒绝换货原因
+            subLabel3: $i18n.t('form_label.cq'), // 偏差N元自动拒绝文案
             style: 'formCompile',
             slotName: 'bias',
             reqStr: true,
             colname: 'DEVIATION_AUTO_REJECT',
-            regx: '/^(-|\+)?\d{0,15}(\.[0-9]{0,2})?$/',
+            regx: /^-?\d{0,15}(\.[0-9]{0,2})?$/,
             class: 'soltDom',
             width: '24',
             disabled: false,
@@ -288,8 +281,8 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
-          value: 'ST_HOLD_ORDER_STRATEGY_LOG'
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          value: 'ST_TMALL_EXCHANGE_LOG'
         }
       ],
       subTableConfig: {
@@ -297,7 +290,7 @@ export default {
         tablename: '',
         objid: '',
       },
-      labelDefaultValue: 'ST_HOLD_ORDER_STRATEGY_LOG', // 设置tab默认值
+      labelDefaultValue: 'ST_TMALL_EXCHANGE_LOG', // 设置tab默认值
       panelDefaultValue: ['panel_baseInfo', 'panel_condition', 'panel_action'] // 设置默认打开'基础信息'
     };
   },
@@ -308,20 +301,36 @@ export default {
     }
   },
   async mounted() {
+    await this.getBtn()
     this.isWatchChange = true;
     this.tamallExchangeReasons();
     this.ID > 0 && this.queryOrder();
+    this.subTableConfig = {
+      centerName: 'strategyPlatform',
+      tablename: this.labelDefaultValue,
+      objid: this.ID,
+      pageShow: true
+    }
   },
   created() { },
   methods: {
+    // 获取按钮权限
+    async getBtn() {
+      let params = { table: 'ST_C_TMALL_EXCHANGE_ORDER', type: 'OBJ', serviceId: 'r3-oc-oms' }
+      const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
+      this.btnConfig.buttons.forEach(item => {
+        item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
+      })
+    },
     // 查询
     async queryOrder() {
       const { data: { code, data } } = await this.service.strategyPlatform.tamallExchangeOrder({ ID: this.ID });
       if (code == 0) {
         this.isWatchChange = false;
         this.isEnable = data.isactive == 'Y'
-        this.$OMS2.omsUtils.intersectFormValue(this.formConfig1.formValue, data)
-        this.$OMS2.omsUtils.intersectFormValue(this.formConfig2.formValue, data)
+        $omsUtils.intersectFormValue(this.formConfig1.formValue, data)
+        $omsUtils.intersectFormValue(this.formConfig2.formValue, data)
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.pid = data.CP_C_SHOP_ID
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.valuedata = data.CP_C_SHOP_TITLE
         this.queryForm(this.formConfig1, 'ECODE').style = 'input'
@@ -330,7 +339,8 @@ export default {
         this.formConfig2.formValue.IS_AUTO_APPROVE = !!data.IS_AUTO_APPROVE
         this.formConfig2.formValue.OOS_AUTO_REJECT = !!data.OOS_AUTO_REJECT
         this.formConfig2.formValue.DEVIATION_AUTO_REJECT = !!data.DEVIATION_AUTO_REJECT
-        this.formConfig2.formValue.EXCHANGE_DESC = data.EXCHANGE_DESC.split(',')
+        this.formConfig2.formValue.EXCHANGE_DESC = data.EXCHANGE_DESC ? data.EXCHANGE_DESC.split(',') : []
+        this.backup.EXCHANGE_DESC = this.formConfig2.formValue.EXCHANGE_DESC
         this.setEnable()
         this.setRequired('IS_AUTO_APPROVE')
         this.setRequired('OOS_AUTO_REJECT')
@@ -354,7 +364,7 @@ export default {
       }
       let valueArr = ['ENAME', 'EXCHANGE_ADDR_ID'];
       let drpArr = ['CP_C_SHOP_ID']
-      let msg = this.$OMS2.omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
+      let msg = $omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
       let novalid = this.isValid()
       msg = msg
         ? msg.replace(/ 不能为空!/, '').split('，').concat(novalid).join('，')
@@ -461,11 +471,11 @@ export default {
     isValid() {
       let msg = []
       let tip = {
-        EXCHANGE_DESC: '换货说明',
-        AOTU_APPROVE_DEVIATION_PRICE: '偏差N元同意换货',
-        OOS_AUTO_REJECT_REASON_ID: '缺货自动拒绝换货原因',
-        AUTO_REJECT_DEVIATION_PRICE: '偏差N元拒绝换货',
-        DEVIATION_AUTO_REJECT_REASON_ID: '偏差N元自动拒绝换货原因'
+        EXCHANGE_DESC: $i18n.t('form_label.cf'), // 换货说明,
+        AOTU_APPROVE_DEVIATION_PRICE: $i18n.t('form_label.ch'), // 偏差N元同意换货
+        OOS_AUTO_REJECT_REASON_ID: $i18n.t('form_label.cl'), // 缺货自动拒绝换货原因
+        AUTO_REJECT_DEVIATION_PRICE: $i18n.t('form_label.co'), // 偏差N元拒绝换货
+        DEVIATION_AUTO_REJECT_REASON_ID: $i18n.t('form_label.cp'), // 偏差N元自动拒绝换货原因
       }
       for (let key in this.formConfig2.ruleValidate) {
         let val = this.formConfig2.formValue[key]
@@ -499,8 +509,9 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -514,12 +525,13 @@ export default {
       }
     },
     onOk(id) {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       if (id) {
+        console.log(this.curLabel);
         this.$store.commit('global/tabOpen', {
           type: 'C',
-          label: '天猫换货策略编辑',
+          label: this.getCustomLabel(false), // 天猫换货策略编辑
           customizedModuleId: id,
           customizedModuleName: this.customizedModuleName
         });

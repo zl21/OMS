@@ -14,22 +14,25 @@ export default {
           btnsite: 'left', // 按钮位置 (right , center , left)
           buttons: [
             {
+              webname:'orderItemAddGift',
               type: 'primary', // 按钮类型
-              text: '添加赠品', // 按钮文本
+              text: $i18n.t('btn.addGift'), // 按钮文本 添加赠品
               isShow: true,
               btnclick: () => {
                 // 判断条件是否符合
                 const self = this;
-                if(!['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)) {
-                  self.$Message.error('只有状态为待审核和缺货才能添加赠品！');
+                // '缺货','待审核'
+                if(![$i18n.t('common.toBeReviewed'),$i18n.t('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
+                  self.$Message.error($i18n.t('modalTips.gd')); //只有状态为待审核和缺货才能添加赠品！
                   return;
                 };
                 this.$emit('addGiftHandler')
               } // 按钮点击事件
             },
             {
+              webname:'Delete_Merchandise',
               type: 'warning', // 按钮类型
-              text: '删除赠品', // 按钮文本
+              text: $i18n.t('btn.deleteGift'), // 按钮文本 删除赠品
               disabled: true,
               isShow: true,
               btnclick: () => {
@@ -37,25 +40,27 @@ export default {
               } // 按钮点击事件
             },
             {
-              text: '标记退款完成', // 按钮文本
+              webname:'aa',
+              text: $i18n.t('btn.rark_refundComplete'), // 按钮文本 标记退款完成
               disabled: true,
-              isShow: false,
+              isShow: true,
               btnclick: () => {
                 this.returnAccount();
               } // 按钮点击事件
             },
             {
-              text: '替换商品', // 按钮文本
+              webname:'orderItemReplaceProduct',
+              text: $i18n.t('btn.replaceGoods') , // 按钮文本 替换商品
               disabled: true,
               isShow: true,
               btnclick: () => {
                 // 是否可以更换商品
-                // this.modifyGoodsCheck();
                 this.replaceGoodsDetail();
               } // 按钮点击事件
             },
             {
-              text: '标记取消',
+              webname:'orderMarkupCancel',
+              text: $i18n.t('btn.markCancel'), //标记取消
               disabled: true,
               isShow: true,
               btnclick: () => {
@@ -76,22 +81,26 @@ export default {
         height: '300', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 1000, // 每页条数
-        totalData: [] // 总计
+        totalData: [{
+          index:$i18n.t("other.total")
+        }] // 总计
       },
-      textArr:['删除赠品','替换商品','标记取消'], // 需要控制的按钮text
+      // textArr:['删除赠品','替换商品','标记取消'], // 需要控制的按钮text
+      textArr:[$i18n.t('btn.deleteGift'),$i18n.t('btn.replaceGoods'),$i18n.t('btn.btn.markCancel')], // 需要控制的按钮text
+      butArray:[],
       selection: [],
       checkSelection: [],
       objid: '',
       options: {}, // 自定义属性（选填）
       islackstock: [
         {
-          label: '是',
+          label: $i18n.t('common.yes'), //是
           value: '1'
         },
         {
-          label: '否',
+          label: $i18n.t('common.no'), //否
           value: '0'
         }
       ],
@@ -113,9 +122,6 @@ export default {
     componentData: {
       handler(newVal) {
         this.request(newVal);
-        // if(newVal.order.IS_COMBINATION){
-        //   this.tableConfig.businessButtonConfig = {}
-        // }
       },
       deep: true
     },
@@ -124,11 +130,6 @@ export default {
         item.isShow = this.isQh;
       });
     }
-  },
-  async created() {
-    // this.$nextTick(()=>{
-    //   this.getPermissions('tableConfig.businessButtonConfig', 'orderManager');
-    // });
   },
   methods: {
     // 获取表头
@@ -146,21 +147,28 @@ export default {
       this.tableConfig.loading = true;
       if(newVal.subItem){
         let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-        this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
+        $omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
         this.tableConfig.data = newVal.subItem;
         this.tableConfig.loading = false;
+        // 合计
+        let totalNumArr =  ['QTY','QTY_LACK','REAL_AMT','AMT_DISCOUNT','ORDER_SPLIT_AMT','ADJUST_AMT'];
+        Object.assign(this.tableConfig.totalData[0],$omsUtils.totalColumn(totalNumArr,newVal.subItem))
       }
     },
     // 删除赠品
     async deleteItem() {
       const self = this;
       const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
-      if(GIFT_TYPES.includes('非赠品') && !['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)){
-        self.$Message.error('勾选明细含有非赠品禁止删除！');
+      // 非赠品 缺货 待审核
+      if(GIFT_TYPES.includes($i18n.t('form_label.ac')) && ![$i18n.t('common.toBeReviewed'),$i18n.t('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
+        self.$Message.error($i18n.t('modalTips.fr')); //勾选明细含有非赠品禁止删除！
         return;
       }
       const PS_C_SKU_CODES = this.checkSelection.map(row => row.PS_C_SKU_ECODE);
+     let spuIds =  this.checkSelection.map(row => row.ID);
+
       let data = {
+        spuIds,
         skuEcodes: PS_C_SKU_CODES,
         orderList:[{ 
           orderId: this.componentData.order.ID, //订单id
@@ -190,33 +198,32 @@ export default {
     },
     // 标记取消
     async flagCalcel(){
-      console.log(this.checkSelection);
-      console.log(this.checkSelection.map(row => row.ID));
+      const self = this;
       const { data: { data, code, message } } = await this.service.orderCenter.markCancel({ 
         id: Number(this.$route.params.customizedModuleId), 
         itemIds: this.checkSelection.map(row => row.ID), 
       });
       if (code === 0) {
-        self.$Message.success(message || '成功！');
+        self.$Message.success(message || $i18n.t('modalTips.er')); //成功！
       }
     },
     // 标记退款
-    async returnAccount() {
-      const self = this;
-      const ids = this.checkSelection.map(row => row.ID);
-      if (ids.length === 0) {
-        // 至少选择一条订单明细
-        self.$Message.error($i18n.t('modalTips.zk'));
-        return;
-      }
-      const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
-      if (code === 0) {
-        self.$parent.$parent.load();
-        self.$Message.success(message);
-      } else {
-        self.$Message.error($i18n.t('modalTips.z3'));
-      }
-    },
+    // async returnAccount() {
+    //   const self = this;
+    //   const ids = this.checkSelection.map(row => row.ID);
+    //   if (ids.length === 0) {
+    //     // 至少选择一条订单明细
+    //     self.$Message.error($i18n.t('modalTips.zk'));
+    //     return;
+    //   }
+    //   const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
+    //   if (code === 0) {
+    //     self.$parent.$parent.load();
+    //     self.$Message.success(message);
+    //   } else {
+    //     self.$Message.error($i18n.t('modalTips.z3'));
+    //   }
+    // },
     // 标记取消退款
     async flagCalcelRefund() {
       const self = this;
@@ -241,8 +248,9 @@ export default {
         this.$Message.warning($i18n.t('modalTips.dv'));
         return;
       }
-      if(!['缺货','待审核'].includes(this.componentData.order.ORDER_STATUS)){
-        this.$Message.error('只允许缺货或待审核状态的订单进行替换！');
+      // 缺货 待审核
+      if(![$i18n.t('other.outOfStock'),$i18n.t('common.toBeReviewed')].includes(this.componentData.order.ORDER_STATUS)){
+        this.$Message.error($i18n.t('modalTips.gc')); //只允许缺货或待审核状态的订单进行替换！
         return;
       }
       this.$emit('replaceGoodsDetail', this.checkSelection);
@@ -251,7 +259,7 @@ export default {
     onSelect(selection) {
       this.checkSelection = selection;
       let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
+      $omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
     },
     // 取消选中某一项时触发
     onSelectCancel(selection) {
@@ -259,20 +267,20 @@ export default {
       this.checkSelection = selection;
       if(selection.length === 0){
         let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-        this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
+        $omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
       }
     },
     // 点击全选时触发
     onSelectAll(selection) {
       this.checkSelection = selection;
       let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
+      $omsUtils.buttonHasDisable(this.textArr,buttonArr,false);
     },
     // 点击取消全选时触发
     onSelectAllCancel(selection) {
       this.checkSelection = selection;
       let buttonArr = this.tableConfig.businessButtonConfig.buttons;
-      this.$OMS2.omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
+      $omsUtils.buttonHasDisable(this.textArr,buttonArr,true);
     },
     // 单击某一行时触发
     onRowClick(row) {
@@ -294,26 +302,26 @@ export default {
     },
     showTable(obj) {
       const tbody = obj;
-      let totalData = [];
+      // let totalData = [];
       // 明细合计
-      let amt = 0;
-      let qty = 0;
-      obj.forEach((item) => {
-        if (item.REAL_AMT !== null) {
-          amt = publicMethodsUtil.accAdd(
-            parseFloat(item.REAL_AMT).toFixed(2),
-            amt
-          );
-          qty += Number(item.QTY);
-        }
-      });
-      totalData = [
-        {
-          index: '总计',
-          REAL_AMT: amt,
-          QTY: qty
-        }
-      ];
+      // let amt = 0;
+      // let qty = 0;
+      // obj.forEach((item) => {
+      //   if (item.REAL_AMT !== null) {
+      //     amt = publicMethodsUtil.accAdd(
+      //       parseFloat(item.REAL_AMT).toFixed(2),
+      //       amt
+      //     );
+      //     qty += Number(item.QTY);
+      //   }
+      // });
+      // totalData = [
+      //   {
+      //     index: '总计',
+      //     REAL_AMT: amt,
+      //     QTY: qty
+      //   }
+      // ];
       this.tableConfig = Object.assign(this.tableConfig, {
         columns: this.columns,
         isShowSelection: true,
@@ -332,7 +340,13 @@ export default {
       });
     }
   },
-  created(){
+  async created(){
+    // 按钮权限配置
+    let { SUB_ACTIONS,ACTIONS } = await $omsUtils.getPermissions(this, 'butArray', {table: this.$route.params.customizedModuleName, type: 'OBJ'},true);
+    let buttonArr = this.tableConfig.businessButtonConfig.buttons
+    sessionStorage.setItem("ACTIONS", JSON.stringify(ACTIONS));
+    let buttonArr1 = buttonArr.map((x)=>{ if(SUB_ACTIONS.some(y => y.webname === x.webname)) return x}).filter(item => item)
+    this.tableConfig.businessButtonConfig.buttons = buttonArr1
     // 获取表头
     this.getColumn();
   }

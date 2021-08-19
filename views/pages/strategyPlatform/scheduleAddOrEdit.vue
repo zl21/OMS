@@ -1,13 +1,14 @@
 <template>
   <!-- 档期日程规划 -->
-  <div class="wphAddOrEdit public-main customized-detail" v-loading="loading">
-    <div class="buttons customized-detail-btn">
+  <div class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfig" />
           </p>
@@ -16,7 +17,8 @@
           v-show="ID != -1 || isMasterRequired"
           name="panel_pickInfo"
         >
-          创建拣货单
+          <!-- 创建拣货单 -->
+          {{ vmI18n.t('panel_label.au') }}
           <p slot="content">
             <businessActionTable
               :jordan-table-config="pickingTableConfig"
@@ -27,7 +29,8 @@
           v-show="ID != -1 || isMasterRequired"
           name="panel_warehouseInfo"
         >
-          创建入库单
+          <!-- 创建入库单 -->
+          {{ vmI18n.t('panel_label.av') }}
           <p slot="content">
             <businessActionTable
               :jordan-table-config="warehouseWarrantConfig"
@@ -51,36 +54,23 @@
           />
         </div>
       </div>
-
-      <!-- <Modal
-        v-model="dialog[curDialog]"
-        :title="dialogInfo.title"
-        footer-hide
-        :width="dialogInfo.width"
-        mask
-      >
-        <scheduleFormDialog 
-          ref="dialogForm"
-          :dialog-config="dialogConfig"
-          :detail="initDetail"
-          :loading="dialogLoading"
-          @getData="getDetail"
-          @clearModify="initModify"
-        />
-      </Modal> -->
       <businessDialog
-        :ref="scheduleFormConfig.name"
-        :url="scheduleFormConfig.url"
-        :title="scheduleFormConfig.title"
-        :name="scheduleFormConfig.name"
-        :keep-alive="scheduleFormConfig.keepAlive||true"
-        :width="scheduleFormConfig.width||''"
+        :batch-closed="scheduleFormConfig.batchClosed"
+        :closable="scheduleFormConfig.closable"
+        :component-data="scheduleFormConfig.componentData"
+        :draggable="scheduleFormConfig.draggable"
         :exclude-string="scheduleFormConfig.excludeString"
-        :component-data="scheduleFormConfig.data"
-        :footer-hide="scheduleFormConfig.footerHide"
-        :quit="scheduleFormConfig.quit"
+        :keep-alive="scheduleFormConfig.keepAlive"
+        :mask="scheduleFormConfig.mask"
         :mask-closable="scheduleFormConfig.maskClosable"
-        :confirm="scheduleFormConfig.confirm"
+        :name="scheduleFormConfig.name"
+        :quit="scheduleFormConfig.quit"
+        :scrollable="scheduleFormConfig.scrollable"
+        :title="scheduleFormConfig.title"
+        :title-align="scheduleFormConfig.titleAlign"
+        :transfer="scheduleFormConfig.transfer"
+        :url="scheduleFormConfig.url"
+        :width="scheduleFormConfig.width"
       />
     </div>
   </div>

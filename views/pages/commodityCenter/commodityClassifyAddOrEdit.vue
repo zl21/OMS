@@ -1,22 +1,33 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-15 19:01:59
+ * @LastEditTime: 2021-07-16 13:17:04
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/commodityClassifyAddOrEdit.vue
+-->
 <template>
+<!-- 商品分类 - 新增/编辑 -->
   <div
     :id="this.customizedModuleName"
     class="commodityClassifyAddOrEdit customized-detail"
   >
     <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="panel_commodityDimension">
-          商品维度
+          <!-- 商品维度 -->
+        {{vmI18n.t('panel_label.b6')}}
           <p slot="content">
             <businessForm :form-config="formConfig2" @keyDown="keyDown" :key="fresh2"/>
           </p>
@@ -32,6 +43,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <businessActionTable
+            :key="cusAttrConfig.key"
             v-show="labelDefaultValue === 'PROPERTY'"
             :jordan-table-config="cusAttrConfig"
             @on-select="onSelect"

@@ -1606,7 +1606,7 @@ export default {
             self.$Message.success(res.data.message);
             self.btnConfig.buttons[0].disabled = false;
             if (self.$route.query.orderCopy || self.$route.query.copyOrder) {
-              this.$comUtils.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
             }
             self.$store.commit('customize/TabHref', {
               id: res.data.data,

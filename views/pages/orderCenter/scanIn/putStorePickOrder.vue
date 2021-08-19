@@ -227,7 +227,8 @@
         </div>
         <Collapse v-model="pickOrder.value1">
           <Panel name="1">
-            基本信息
+            <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
             <p slot="content">
               <Aform :form-config="pickOrder.formConfig" />
             </p>

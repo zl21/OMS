@@ -7,6 +7,7 @@ export const globalStore = {
   // 1.3框架全局状态管理
   namespaced: true,
   state: {
+    language: 'zh', // 国际化
     mainContentLoading: false,
     pwTips: false,
     activeTabAddr: [],
@@ -19,10 +20,6 @@ export const globalStore = {
       hiddenButton: true
     },
     excludedComponents: [], // 针对性缓存相应的组件
-    // 促销策略数据
-    dataTwoNew: {
-      scheme_arr: []
-    },
     scheme_dataNew: {
       // 大类方案 商品活动(GA)，全场活动 (PA)
       program_code: 'GA',
@@ -60,9 +57,7 @@ export const globalStore = {
         }
       ]
     },
-    dataTwo: {
-      scheme_arr: []
-    },
+
     scheme_data: {
       // 大类方案 商品活动(GA)，全场活动 (PA)
       program_code: 'GA',
@@ -112,13 +107,13 @@ export const globalStore = {
     /* --------- oms --------- */
     //订单中心 - 退货金额
     returnAmount:{
-      PRO_ACTUAL_AMT:0,
-      PRO_REAL_AMT:0,
-      SHIP_AMT:0,
-      ADJUST_AMT:0,
-      EXCHANGE_AMT:0,
-      FINAL_ACTUAL_AMT:0,
-      FINAL_REAL_AMT:0,
+      PRO_ACTUAL_AMT:0, // 商品应退金额
+      PRO_REAL_AMT:0, // 商品实退金额
+      SHIP_AMT:0, //应退运费
+      ADJUST_AMT:0, //调整金额
+      EXCHANGE_AMT:0, //换货金额
+      FINAL_ACTUAL_AMT:0, //最终应退总金额
+      FINAL_REAL_AMT:0, //最终实退总金额
     },
     // 订单中心 - 退换货明细
     returnOrderChangeItem:[],
@@ -127,12 +122,19 @@ export const globalStore = {
       detail: [],
       deleteIds: [],
       other: {},
+      exCode: '',
+      orderId: '',
     },
-    REDUNDANT_ORDER_ID: '',
     originalOrder:'',
     extraoOrderDetails:[],
+    clear:false,
+    colRowNum:4 // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
   },
   mutations: {
+    language(state, x) {
+      state.language = x;
+      // console.log('state.language::', x);
+    },
     REDUNDANT_ORDER_ID(state, n) {
       state.REDUNDANT_ORDER_ID = n;
     },
@@ -147,15 +149,11 @@ export const globalStore = {
     stateChange(state, data) {
       state = Object.assign(state, data);
     },
-    // 清空赋值dataTWO
-    clearType(state, n) {
-      state.dataTwoNew.scheme_arr = n;
-    },
     // 接收切换促销策略的值
     switchDetail(state, switchTo) {
       // 促销模块
       if (switchTo.id > 0) {
-        // state.dataTwo = switchTo.scheme_struct
+   
         state.scheme_data = switchTo.scheme_struct;
       } else {
         state.scheme_dataNew = switchTo.scheme_struct;
@@ -333,24 +331,34 @@ export const globalStore = {
      /* --------- oms --------- */
     //订单中心
     returnAmount(state, n){
+      // console.log(state.returnAmount,n);
       let ks = Object.keys(state.returnAmount);
       ks.forEach((k) => n[k] && (state.returnAmount[k] = n[k]));
     },
     // 编辑 退换货
     returnOrderChangeItem(state,n){
       state.returnOrderChangeItem = n;
-      console.log(state.returnOrderChangeItem);
+      // console.log(state.returnOrderChangeItem,n);
     },
     COMPENSATE(state, n) {
-      let ks = Object.keys(state.COMPENSATE);
-      ks.forEach((k) => n[k] && (state.COMPENSATE[k] = n[k]));
+      // console.log('state::',n);
+      let obj = JSON.parse(JSON.stringify(state.COMPENSATE));
+      let ks = Object.keys(n);
+      ks.forEach((k) => obj[k] = n[k]);
+      state.COMPENSATE = obj; // 改变引用
     },
     originalOrder(state,n){
-      console.log(state,n);
+      // console.log(state,n);
       state.originalOrder = n
     },
     extraoOrderDetails(state,n){
       state.extraoOrderDetails = n;
+    },
+    clear(state,n){
+      state.clear = n;
+    },
+    colRowNum(state,n){
+      state.colRowNum = n
     }
   },
   modules: {

@@ -7,13 +7,12 @@
   // import loading from 'professionalComponents/loading.vue';
   import dateUtil from '@/assets/js/__utils__/date.js';
   import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-  import commonTableByAgGrid from 'arkui_BCL/CommonTableByAgGrid';
   import dynamicSearch from '@/views/pages/orderCenter/orderManager/dynamicSearch.vue';
   import formSetting from '@/views/pages/orderCenter/orderManager/formSetting.vue';
   import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
-
+  import businessAgTable from 'professionalComponents/businessAgTable';
+  import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
   export default {
-    name: 'OrderManage',
     components: {
       businessButton,
       businessForm,
@@ -23,15 +22,17 @@
       businessDialog,
       // loading,
       proDetail,
-      commonTableByAgGrid
+      businessAgTable
     },
-    mixins: [isFavoriteMixin],
+    mixins: [isFavoriteMixin, new modifycurrentLabel(true)],
     data() {
       return {
         vmI18n: $i18n,
+        vueAgTable:true, //是否切换为vue-ag-table
         modal: false,
         buttonInit: true,
         loading: false,
+        agLoaing: false,
         selectKey: [],
         proDetailConfig: {
           // 列表商品明细弹窗配置
@@ -43,7 +44,7 @@
           refFuns: 'confirmFun',
           confirmTitle: '导入',
           titleAlign: 'center', // 设置标题是否居中 center left
-          width: '540',
+          width: '572',
           scrollable: false, // 是否可以滚动
           closable: true, // 是否可以按esc关闭
           draggable: true, // 是否可以拖动
@@ -104,17 +105,17 @@
             webname: 'ORDER_DE_AUDIT_ORDER', // 反审核
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
-              console.log(self.selection);
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if (self.selection.length) {
                 let arr = self.selection.map((item) => ({ id: item.ID, bill_no: item.BILL_NO }));
                 self.service.orderCenter.backAudit(arr).then((res) => {
-                  console.log(res);
                   if (res.data.code == 0) {
-                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+                    $omsUtils.msgTips(self, 'success', res.data.message, 0);
                     self.query();
                   } else {
-                    // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+                    // $omsUtils.msgTips(self, 'error', res.data.message, 0);
                     self.$Modal.confirm({
                       title: res.data.message,
                       width: 500,
@@ -126,11 +127,11 @@
                             props: {
                               columns: [
                                 {
-                                  title:'序号',
+                                  title: $i18n.t('table_label.serialNo'), // 序号
                                   key: 'index'
                                 },
                                 {
-                                  title:'单据编号',
+                                  title: $i18n.t('form_label.billNo'), // 单据编号
                                   key:'billNo'
                                 },
                                 {
@@ -148,7 +149,7 @@
                   }
                 });
               } else {
-                self.$OMS2.omsUtils.msgTips(self, 'success', 'a8');
+                $omsUtils.msgTips(self, 'success', 'a8');
               }
             },
           },
@@ -156,17 +157,17 @@
             webname: 'ORDER_AUDIT', // 审核
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
-              console.log(self.selection);
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if (self.selection.length) {
                 let arr = self.selection.map((item) => ({ id: item.ID, bill_no: item.BILL_NO }));
                 self.service.orderCenter.audit(arr).then((res) => {
-                  console.log(res);
                   if (res.data.code == 0) {
-                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+                    $omsUtils.msgTips(self, 'success', res.data.message, 0);
                     self.query();
                   } else {
-                    // self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+                    // $omsUtils.msgTips(self, 'error', res.data.message, 0);
                     self.$Modal.confirm({
                       title: res.data.message,
                       width: 500,
@@ -178,11 +179,11 @@
                             props: {
                               columns: [
                                 {
-                                  title:'序号',
+                                  title: $i18n.t('table_label.serialNo'), // 序号
                                   key: 'index'
                                 },
                                 {
-                                  title:'单据编号',
+                                  title: $i18n.t('form_label.billNo'), // 单据编号
                                   key:'billNo'
                                 },
                                 {
@@ -200,7 +201,7 @@
                   }
                 });
               } else {
-                self.$OMS2.omsUtils.msgTips(self, 'success', 'a8');
+                $omsUtils.msgTips(self, 'success', 'a8');
               }
             },
           },
@@ -233,9 +234,11 @@
             webname: 'returnModifyWarehouse', // 改退回仓库
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
+                $omsUtils.msgTips(self, 'warning', 'l0');
                 return;
               }
               //前置条件判断
@@ -248,12 +251,12 @@
               self.service.orderCenter.checkReturnOrderBeforeWarehouse({
                 ID_AND_BILL_NO_LIST:arr
               }).then(res=>{
-                console.log(res);
                 if(res.data.code == 0){
                   self.publicBouncedConfig.name = 'modifyWarehouse';
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
                   self.publicBouncedConfig.confirmTitle = '改退回仓库';
                   self.publicBouncedConfig.width = 500;
+                  self.publicBouncedConfig.maskClosable = false;
                   self.publicBouncedConfig.componentData = {
                     row : self.selection
                   }
@@ -261,7 +264,7 @@
                     self.$children.find((item) => item.name === 'modifyWarehouse').openConfirm();
                   }, 100);
                 }else {
-                  self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                  $omsUtils.msgTips(self, 'warning', res.data.message, 0);
                 }
               });
             },
@@ -270,13 +273,15 @@
             webname: 'returnModifyLogistics', // 改退回物流
             btnclick: () => {
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', 'l0');
+                $omsUtils.msgTips(self, 'warning', 'l0');
                 return;
               }
               if(self.selection.length > 1){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', 'dr');
+                $omsUtils.msgTips(self, 'warning', 'dr');
                 return;
               }
               //前置条件判断
@@ -291,18 +296,18 @@
                 MOCK_TYPE:1
               }).then(res=>{
                 if(res.data.code == 0){
-                  console.log(res);
                   self.publicBouncedConfig.name = 'returnModifyLogistics';
                   self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
                   self.publicBouncedConfig.confirmTitle = '改退回物流';
                   self.publicBouncedConfig.width = 500;
+                  self.publicBouncedConfig.maskClosable = false;
                   self.$set(self.publicBouncedConfig.componentData , 'row' , self.selection);
                   self.$set(self.publicBouncedConfig.componentData , 'data' , res.data.data);
                   setTimeout(() => {
                     self.$children.find((item) => item.name === 'returnModifyLogistics').openConfirm();
                   }, 100);
                 }else {
-                  self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+                  $omsUtils.msgTips(self, 'warning', res.data.message, 0);
                 }
               });
             },
@@ -311,9 +316,11 @@
             webname: 'OC_ORDER_ADD_LABEL',  //添加标记
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
+                $omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
                 return;
               }
               const ids = self.selection.map(item=>item.ID);
@@ -334,9 +341,11 @@
             webname: 'OC_ORDER_CANCEL_LABEL',  //取消标记
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               if(!self.selection.length){
-                self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
+                $omsUtils.msgTips(self, 'warning', '请选择需要标记的单据' , 0);
                 return;
               }
               const ids = self.selection.map(item=>item.ID);
@@ -357,20 +366,20 @@
             webname: 'orderExport', //导出
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               const ids = self.selection.map(item=>item.ID);
               if(self.selection.length){
-                console.log('导出');
                 self.exportDate(self.tablename , ids)
               }else {
                 this.$Modal.warning({
                   title:'警告',
-                    className: 'ark-dialog',
+                  className: 'ark-dialog',
                   content:'该操作为全量导出,导出数据较大,建议在服务器空闲时候导出,如需继续,请点击确定按钮!',
                   showCancel:true,
                   mask:true,
                   onOk:()=>{
-                    console.log('全量导出')
                     self.exportDate(self.tablename , ids)
                   }
                 })
@@ -381,10 +390,11 @@
             webname: 'returnOrderExport', //导出
             btnclick:()=>{
               const self = this;
-              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if(!self.vueAgTable){
+                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              }
               const ids = self.selection.map(item=>item.ID);
               if(self.selection.length){
-                console.log('导出');
                 self.exportDate(self.tablename , ids)
               }else {
                 this.$Modal.warning({
@@ -394,7 +404,6 @@
                   showCancel:true,
                   mask:true,
                   onOk:()=>{
-                    console.log('全量导出')
                     self.exportDate(self.tablename , ids)
                   }
                 })
@@ -413,10 +422,11 @@
           btnsite: 'right',
           buttonsRight: [
             {
-              text: '搜索', // 按钮文本
+              text: $i18n.t('btn.find'), // 查找 按钮文本
+              // text: $i18n.t('btn.search'), // 搜索
               size: 'large',
               shape: 'circle',
-              icon: 'ios-search',
+              // icon: 'ios-search',
               webname: 'search',
               btnclick: () => {
                 this.agTableConfig.pagenation.current = 1;
@@ -424,10 +434,10 @@
               }, // 按钮点击事件
             },
             {
-              text: '重置', // 按钮文本
+              text: $i18n.t('btn.reset'), // 按钮文本 重置
               size: 'large',
               shape: 'circle',
-              icon: 'ios-refresh',
+              // icon: 'ios-refresh',
               webname: 'reset',
               btnclick: () => {
                 this.reset();
@@ -440,21 +450,15 @@
           flodClick: () => {
             this.shutDownOrbounceOff();
           },
+          gridBar:true,
           formData: [],
           formValue: {},
           ruleValidate: {},
         },
         tabList: [],
-        options: {
-          datas: {
-          // tabth:[],
-          // row:[]
-          }
-        },
-        tabth: [],
-        row: [],
         agTableConfig: {
-          tableHeight: '480px',
+          pageShow: true,
+          tableHeight: '412px',
           columnDefs: [],
           rowData: [],
           renderArr: {
@@ -504,11 +508,74 @@
             current: 1,
             pageSizeOpts: [],
           },
+          renderParams:(cellData)=> {
+            if (cellData.field == 'ORDER_TAG') {
+                return {
+                    renderContainer: 'CellRenderByFunction',
+                    renderComponent: (h, params) => {
+                        return h('div', {
+                            domProps: {
+  
+                            }
+                        },
+                            params.row.ORDER_TAG.map(item => h('span', {
+                                domProps: {
+                                    innerText: item.text
+                                },
+                                style: {
+                                    border: `1px solid${item.clr}`,
+                                    color: item.clr,
+                                    margin: '0 2px',
+                                    borderRadius: '6px',
+                                    padding: '2px'
+                                }
+                            }))
+                        )
+                    }
+                }
+            }else if(cellData.field == 'PRODUCT_DETAILS'){
+              return {
+                renderContainer: 'CellRenderByFunction',
+                renderComponent: (h , params) => {
+                  return h('a' , {
+                    on:{
+                      click:()=>{
+                        this.proDetailConfig.modal_proDetail = true;
+                        this.proDetailConfig.title = params.row.PRODUCT_DETAILS;
+                        this.proDetailConfig.ID = params.row.ID;
+                      }
+                    }
+                  }, params.row.PRODUCT_DETAILS)
+                }
+              }
+            }else if(cellData.field == 'PACKAGE_DETAILS'){
+              return {
+                renderContainer: 'CellRenderByFunction',
+                renderComponent: (h , params) => {
+                  return h('a' , {
+                    on:{
+                      click:()=>{
+                        this.proDetailConfig.modal_proDetail = true;
+                        this.proDetailConfig.title = params.row.PACKAGE_DETAILS;
+                        this.proDetailConfig.ID = params.row.ID;
+                      }
+                    }
+                  }, params.row.PACKAGE_DETAILS)
+                }
+              }
+            }
+          },
+        },
+        options:{
+          rowHeight: 40,
+          getMainMenuItems: this.getMainMenuItems,
+          datas:{},
+          floatingFilter:false
         },
         dynamicData: {},
         modifyWarehouse:{
           componentData:{}
-        }
+        },
       };
     },
     watch: {},
@@ -516,42 +583,45 @@
       tablename() {
         const self = this;
         return self.$route.params.customizedModuleName == 'ORDERMANAGER' ? 'OC_B_ORDER' : self.$route.params.customizedModuleName;
+      },
+      colRowNum(){
+        return $store.state.customize.colRowNum;
       }
     },
     activated(){
       const self = this;
       this.$OMS2.BtnConfig.target = self;
       BurgeonEvent.target = self;
+      this.$OMS2.BtnConfig.singleType = 0;
+    
     },
     mounted() {
       const self = this;
       self.initList();
+      /* setTimeout(() => {
+        let ZH = localStorage.getItem("locale") == "zh"
+        if(!ZH) {
+          const p1 = document.getElementsByClassName('ark-page-options-elevator')[0];
+          p1.children[0].innerHTML = 'Page:'
+          p1.children[2].innerText = ''
+          const p2 = document.getElementsByClassName('ark-page-options-sizer')[0];
+          p2.childNodes[0].innerText = '  10 items / page';
+        }
+      }, 10); */
     },
     methods: {
       gridReady() {
-        console.log('grid');
-        // this.options.datas.tabth = [
-        //       {
-        //         field:'name',
-        //         displayName:'名称'
-        //       }
-        //     ],
-        //     this.options.datas.row = [
-        //       {
-        //         name:'测试'
-        //       }
-        //     ]
-        // this.tabth = [
-        //   {
-        //     field: 'name',
-        //     displayName: '名称'
-        //   }
-        // ];
-        // this.row = [
-        //   {
-        //     name: '测试'
-        //   }
-        // ];
+        this.tabth = [
+          {
+            field: 'name',
+            displayName: '名称'
+          }
+        ];
+        this.row = [
+          {
+            name: '测试'
+          }
+        ];
       },
       shutDownOrbounceOff() {
         const self = this;
@@ -565,48 +635,67 @@
       },
       labelClick(val) {
         this.agTableConfig.pagenation.current = 1;
-        console.log(val);
         this.labelValue = val;
         this.query();
       },
-      initList(fold = true) {
+      initList(fold = true, aG = false) {
         const self = this;
         const data = {
           TABLE: self.tablename,
           FOLD: fold,
         };
         self.service.orderCenter.initList(data).then((res) => {
-          console.log(res);
           if (res.data.code === 0) {
             if (res.data.data.ZIP) {
             } else {
               const data = res.data.data.DATA;
-              self.initForm(data.ADVANCE); // 高级搜索赋值
-              self.dynamicData = data.DYNAMIC; // 动态搜索赋值
+              if (!aG) {
+                self.initForm(data.ADVANCE); // 高级搜索赋值
+                self.dynamicData = data.DYNAMIC; // 动态搜索赋值
+              }
               // 列表初始化
               const columns = data.TAB_HEADER; // 表头赋值
               const rowData = [];
               // 存储表格数据
               self.agTableConfig.pagenation.pageSizeOpts = data.PAGE_INFO.SIZE_GROUP;
               self.agTableConfig.pagenation.pageSize = data.PAGE_INFO.DEFAULT_SIZE;
+              if(self.vueAgTable){
+                columns.forEach(item => {
+                  // item['displayName'] = item.headerName;
+                  item.thAlign = 'center';
+                });
+                columns.unshift({
+                  "headerName":"序号",
+                  "width":90,
+                  "field":"index",
+                  "sort":10,
+                  checkboxSelection:true ,
+                  pinned: 'left',
+                  headerClass: '',
+                  thAlign: 'center',
+                  tdAlign: 'center',
+                  cellStyle: {color: 'rgb(15, 142, 233)'},
+                })
+              }
               self.agTableConfig.columnDefs = columns;
               self.agTableConfig.rowData = rowData;
-              self.$refs.agGridChild.agGridTable(columns, rowData);
+              if(!self.vueAgTable){
+                self.$refs.agGridChild.agGridTable(columns, rowData);
+              }
               self.tabList = data.TAB_LABEL; // tabs赋值
               self.labelValue = data.TAB_LABEL[0].value;
-              self.query();
+              self.query(aG);
             }
           }
         });
-        console.log('singleType===', self.$OMS2.BtnConfig.singleType);
+        if (aG) return
         self.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
         const buttons = self.$OMS2.BtnConfig.config();
         self.btnConfig.buttons = [...buttons.buttons, ...self.extendBtn];
-        self.$OMS2.omsUtils.getPermissions(self, 'btnConfig', { table: self.tablename, type: 'LIST' });
+        $omsUtils.getPermissions(self, 'btnConfig', { table: self.tablename, type: 'LIST' });
       },
       initForm(data) {
         const self = this;
-        console.log(data);
         const formdata = [];
         self.selectKey = [];
         data.forEach((ele, i) => {
@@ -622,7 +711,10 @@
               maxlength: ele.LENGTH, // 输入长度
               regx: /^[^']*$/,
               inputChange: () => {
-                console.log(ele.DESC);
+              },
+              inputenter: () => {
+                this.agTableConfig.pagenation.current = 1;
+                this.query();
               },
             });
             self.$set(self.formConfig.formValue, ele.NAME, '');
@@ -655,7 +747,8 @@
                 colname: ele.NAME, // 当前字段的名称
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-                fkdisplay: 'drp', // 外键关联类型
+                // fkdisplay: 'drp', // 外键关联类型
+                fkdisplay: ele.REF_DISPLAY, // 外键关联类型
                 fkdesc: '商品SPU',
                 inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
@@ -674,7 +767,6 @@
                 serviceId: ele.CENTER
               },
               oneObj: (e) => {
-                console.log(e);
                 self.$set(self.formConfig.formValue, ele.NAME, e.pid);
               },
             });
@@ -692,7 +784,6 @@
               format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
               placeholder: '',
               onChange: (val) => {
-                console.log(val);
               },
             });
             self.$set(self.formConfig.formValue, ele.NAME, ['', '']);
@@ -720,7 +811,6 @@
             break;
           }
         });
-        console.log(formdata);
         self.formConfig.formData = formdata;
       // 配置必填**************************************************
       // self.formConfig.ruleValidate = {
@@ -766,7 +856,6 @@
               ADVANCE.push(obj);
             }
           } else if (formValue[key]) {
-            console.log(formValue[key]);
             if (!formValue[key]) return;
             const obj = {
               NAME: key,
@@ -777,7 +866,28 @@
         }
         obj.ADVANCE = ADVANCE; // 高级搜索
         if (self.$refs.dynamicSearch && self.$route.params.customizedModuleName == 'ORDERMANAGER') {
-          obj.DYNAMIC = self.$refs.dynamicSearch.dynamicStructure; // 动态搜索
+          const pa = JSON.parse(JSON.stringify(self.$refs.dynamicSearch.dynamicStructure));
+          obj.DYNAMIC = pa.filter(i => typeof i.VAL != 'undefined' && i.VAL); // 动态搜索
+          obj.DYNAMIC.forEach(it => {
+            // 日期类型入参处理
+            if (it.DISPLAY == 'OBJ_DATE') {
+              if (it.VAL instanceof Array) {
+                // 日期范围类型
+                it.VAL = typeof it.VAL[0] == 'string' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
+              } else {
+                it.VAL = dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss');
+              }
+            }
+            if (it.DISPLAY == 'RANGE') {
+              it.VAL = `${it.VAL[0]}~${it.VAL[1]}`
+            }
+            // 删除后端不要的字段
+            delete it.DISPLAY;
+            delete it.TYPE;
+            delete it.index;
+            delete it.COMBOBOX;
+          })
+          if(obj.DYNAMIC.length) obj.DYNAMIC[0].RLT = "AND";
         }
 
         // 分页数据
@@ -810,12 +920,12 @@
         obj.SORT = SORT;
         return obj;
       },
-      query() {
+      query(aG = false) {
         const self = this;
         const data = self.queryData();
-        self.loading = true;
+        // self.loading = true;
+        self[aG ? 'loading' : 'agLoaing'] = true;
         self.service.orderCenter.queryList(data).then((res) => {
-          console.log(res);
           if (res.data.code == 0) {
             let data;
             if (!res.data.data.ZIP) {
@@ -824,13 +934,18 @@
             }
             // 分页赋值
             self.agTableConfig.pagenation.total = data.COUNT;
+            data.ITEMS.forEach((item , index)=> {
+              item['index'] = index+1
+            })
             self.agTableConfig.rowData = data.ITEMS;
-            self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+            if(!self.vueAgTable){
+              self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+            }
           }
-          self.loading = false;
+          self[aG ? 'loading' : 'agLoaing'] = false;
+          // self.loading = false;
         });
         self.service.orderCenter.queryStatistics(data).then((res) => {
-          console.log(res);
           if (res.data.code == 0) {
             if (!res.data.data.ZIP) {
               const data = res.data.data.DATA;
@@ -842,10 +957,11 @@
               });
             }
           }
-          self.loading = false;
+          self[aG ? 'loading' : 'agLoaing'] = false;
+          // self.loading = false;
         });
+        this.selection = []; // 解决弹窗关闭后刷新页面没有刷掉选中项目的问题
       // self.service.orderCenter.queryStatistics(data).then((res) => {
-      //   console.log(res);
       //   if (res.data.code == 0) {
       //     if (!res.data.data.ZIP) {
       //       const data = res.data.data.DATA;
@@ -866,26 +982,24 @@
             this.$store.commit('global/tabOpen', {
             type: 'C',
             customizedModuleName: this.tablename,
-            label: '零售发货单详情',
+            label: $i18n.t('panel_label.retailInvoice_details'), //零售发货单详情
             customizedModuleId: val.ID,
           });
           break;
           case 'OC_B_RETURN_ORDER':
             if(val.BILL_TYPE == 0){
-              console.log('退货单');
               this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
-              label: '退货单详情',
+              label: $i18n.t('menu.b7'), //退货单详情
               tableId: 10728,
               id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&SOURCE_CODE=${val.SOURCE_CODE}`
             });
             }else if(val.BILL_TYPE == 1) {
-              console.log('换货单');
               this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
-              label: '换货单详情',
+              label: $i18n.t('menu.b8'), //换货单详情
               tableId: 10754,
               id:`${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&SOURCE_CODE=${val.SOURCE_CODE}`
             });
@@ -894,7 +1008,6 @@
         }
       },
       pageSizeChange(val) {
-        console.log(val);
         const self = this;
         self.agTableConfig.pagenation.pageSize = val;
       },
@@ -902,9 +1015,6 @@
         const self = this;
         self.agTableConfig.pagenation.current = val;
         self.query();
-      },
-      onSortChanged(val) {
-        console.log(val);
       },
       reset() {
         const self = this;
@@ -929,10 +1039,12 @@
       },
       urgentShipment() {
         const self = this;
-        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        if(!self.vueAgTable){
+          self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        }
         const IDS = self.selection.map((item) => item.ID);
         if (!IDS.length) {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要打标的单据!', 0);
+          $omsUtils.msgTips(self, 'warning', '请选择需要打标的单据!', 0);
           return;
         }
         self.$Modal.fcWarning({
@@ -943,7 +1055,6 @@
             if (IDS.length == 1) {
               // 单条数据效验状态是否符合
               self.service.orderCenter.checkOrderDeliveryUrgent({ IDS }).then((res) => {
-                console.log(res);
                 if (res.data.code == 0) {
                   this.urgentShipmentRqu(IDS);
                 }
@@ -958,37 +1069,47 @@
         const self = this;
         self.service.orderCenter.orderDeliveryUrgent({ IDS }).then((res) => {
           if (res.data.code == 0) {
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $omsUtils.msgTips(self, 'success', res.data.message, 0);
             self.query();
           }
         });
       },
       returnConfirm(){  //退货确认
         let self = this;
-        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        if(!self.vueAgTable){
+          self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        }
+        if(!self.selection.length){
+          $omsUtils.msgTips(self, 'warning', 'ju');
+          return;
+        }
+        if(self.selection.length > 1){
+          $omsUtils.msgTips(self, 'warning', 'kg');
+          return;
+        }
         self.service.orderCenter.returnConfirmCheck({ID:self.selection[0].ID}).then(res=>{
-          console.log(res);
           if(res.data.code == 0){
             this.$Modal.confirm({
-              title:'提示',
+              className: 'ark-dialog',
+              title: $i18n.t('modalTitle.tips'),
               content:res.data.message,
               showCancel:true,
+              mask: true,
               onOk:()=>{
-                console.log('123');
                 self.service.orderCenter.returnConfirm({
                   ID:self.selection[0].ID
                 }).then(res=>{
                   if(res.data.code == 0){
-                    self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0)
+                    $omsUtils.msgTips(self, 'success', res.data.message, 0)
                     self.query();
                   }else {
-                    self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+                    // $omsUtils.msgTips(self, 'error', res.data.message, 0)
                   }
                 })
               }
             })
-          }else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+          } else {
+            // $omsUtils.msgTips(self, 'error', res.data.message, 0)
           };
         })
       },
@@ -1018,11 +1139,9 @@
           obj = self.queryData();
         }
         obj.TABLE = tablename;
-        console.log(obj);
         self.service.orderCenter.orderExport(obj).then(res=>{
-          console.log(res);
           if(res.data.code == 0){
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0)
+            $omsUtils.msgTips(self, 'success', res.data.message, 0)
             let a = document.createElement("a");
             a.download = tablename + ".xls";
             a.href = res.data.data;
@@ -1030,9 +1149,72 @@
             a.click();
             $(a).remove();
           }else {
-            self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0)
+            $omsUtils.msgTips(self, 'error', res.data.message, 0)
           }
         })
+      },
+      colPinned(data) { },
+      colMoved(columns) {
+        let newCol = [], obj = {};
+        columns.forEach((x,y) => {
+          if (x.colId == 'index') {
+            return
+          } else {
+            obj = {
+              NO: (y + 1) * 10,
+              NAME: x.colId,
+              // ID: parentNode[i].getAttribute('ID'),
+              DISPLAY: x.visible,
+              DESC: x.colDef.displayName,
+            };
+            newCol.push(obj);
+          }
+        });
+        const data = {
+          TABLE: this.tablename,
+          TYPE: 'L_TAB_HEAD',
+          ACTION: 'SAVE',
+          DATA: newCol
+        };
+        this.service.orderCenter.customSettings(data).then(res => {
+        }).catch(e => {
+        });
+      },
+      getMainMenuItems() {
+        return [
+          'pinSubMenu',
+          'separator',
+          'autoSizeThis',
+          'autoSizeAll',
+          'separator',
+          {
+            name: '重置所有列位置信息',
+            action: () => {
+             this.handelColnumn('L_TAB_HEAD', 'RELOAD', {});
+            },
+          },
+        ];
+      },
+      handelColnumn (type, action, obj) {
+        const self = this;
+        const data = {
+          TABLE: self.tablename,
+          TYPE: type,
+          ACTION: action,
+          DATA: obj
+        };
+        self.service.orderCenter.customSettings(data).then(res => {
+          if (res.data.code == 0) {
+            self.$Message.success(res.data.message);
+            self.initList(0,1);
+          } else {
+            // self.$Message.error(res.data.message);
+          }
+        });
+      },
+      colSortChange(data) { },
+      onSelectionChange(data){
+        this.selection = data;
       }
     },
   };

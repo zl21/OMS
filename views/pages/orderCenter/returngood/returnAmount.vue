@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-21 18:08:56
- * @LastEditTime: 2021-06-08 10:51:36
+ * @LastEditTime: 2021-07-29 15:24:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/views/pages/orderCenter/returnOrder/return.vue
@@ -10,21 +10,24 @@
   <div>
     <ul class="calculation-main">
       <li>
-        <div class="calculation-item">
-          <span>商品应退金额</span>
-          <label>{{ data.PRO_ACTUAL_AMT }}</label>
-        </div>
         <div class="calculation-item bg">
-          <span>商品实退金额</span>
+          <!-- 商品实退金额 -->
+          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.cr') }}</span>
           <label>{{ data.PRO_REAL_AMT }}</label>
+        </div>
+        <div class="calculation-item">
+          <!-- 商品应退金额 -->
+          <span :title="vmI18n.t('other.refundAmountGoods')">{{ vmI18n.t('other.refundAmountGoods') }}</span>
+          <label>{{ data.PRO_ACTUAL_AMT }}</label>
         </div>
       </li>
       <li class="symbol">+</li>
       <li>
         <div class="calculation-item">
-          <span>应退运费</span>
+          <!-- 应退运费 -->
+          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.ad') }}</span>
           <label>
-            <Input v-if="type" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange"></Input>
+            <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange()"/>
             <span v-else>
               {{ data.SHIP_AMT }}
             </span>
@@ -34,9 +37,10 @@
       <li class="symbol">+</li>
       <li>
         <div class="calculation-item">
-          <span>调整金额</span>
+          <!-- 调整金额 -->
+          <span :title="vmI18n.t('table_label.adjustment_amount')">{{vmI18n.t('table_label.adjustment_amount')}}</span>
           <label>
-            <Input v-if="type" v-model="editData.ADJUST_AMT" :regx=" /(^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?$)/" @on-change="inputChange"></Input>
+            <Input v-if="type && status" v-model="editData.ADJUST_AMT"  :regx="/^-?\d*\.{0,1}\d{0,2}$/"  @on-change="inputChange()" @on-blur="inputBlur"/>
             <span v-else>
               {{ editData.ADJUST_AMT }}
             </span>
@@ -46,18 +50,21 @@
       <li v-if="tableName" class="symbol">-</li>
       <li v-if="tableName" >
         <div class="calculation-item">
-          <span>换货金额</span>
+          <!-- 换货金额 -->
+          <span :title="vmI18n.t('other.exchangeAmounts')">{{ vmI18n.t('other.exchangeAmounts') }}</span>
           <label>{{ data.EXCHANGE_AMT }}</label>
         </div>
       </li>
       <li class="symbol">=</li>
       <li>
         <div class="calculation-item">
-          <span class="black">最终应退总金额</span>
+          <!-- 最终应退总金额 -->
+          <span class="black" :title="vmI18n.t('form_label.ae')">{{ vmI18n.t('form_label.ae') }}</span>
           <label>{{ data.FINAL_ACTUAL_AMT }}</label>
         </div>
         <div class="calculation-item bg">
-          <span class="black">最终实退总金额</span>
+          <!-- 最终实退总金额 -->
+          <span class="black" :title="vmI18n.t('form_label.cs')">{{ vmI18n.t('form_label.cs') }}</span>
           <label>{{ data.FINAL_REAL_AMT }}</label>
         </div>
       </li>
@@ -68,44 +75,55 @@
 export default {
   data() {
     return {
+      vmI18n:$i18n,
+      regx:/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
       data: R3.store.state.customize.returnAmount,
       editData:JSON.parse(JSON.stringify(R3.store.state.customize.returnAmount)),
       tableName:this.$route.params.tableName === 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' ? 0 : 1,
-      type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0
+      // 手工新增
+      type:this.$route.query.RETURN_SOURCE === '手工新增' ? 1 : 0,
+      status:true
     };
   },
-  created(){
-    
-  },
   mounted(){
+    console.log('link');
     // 应退运费，正数，选填项
     // 调整金额，可正可负，选填项
     // 换货金额，sum所有换货商品“成交金额“，只读，正数
-    // 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，
-
+    // 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出
+    //  下发WMS状态 0：未下发 1: 下发中 2:下发成功 3:下发失败 4:撤回成功
+    let orderStatus = sessionStorage.getItem("RETURN_STATUS");
+    let wmsIssueStatus = sessionStorage.getItem("WMS_ISSUE_STATUS");
+    this.status = orderStatus == 0  && ['0','3'].includes(wmsIssueStatus.toString()) ? true : false
   },
   methods:{
-    inputChange(e){
+    inputChange(){
       let FINAL_ACTUAL_AMT
-      console.log(e.target.value);
       if(this.tableName){
-        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);
+        FINAL_ACTUAL_AMT =  Number(this.data.PRO_ACTUAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT) - Number(this.data.EXCHANGE_AMT);
       }else{
-        FINAL_ACTUAL_AMT =  Number(this.data.PRO_REAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT);
+        FINAL_ACTUAL_AMT =  Number(this.data.PRO_ACTUAL_AMT) + Number(this.editData.SHIP_AMT) + Number(this.editData.ADJUST_AMT);
       }
       this.editData.FINAL_ACTUAL_AMT = FINAL_ACTUAL_AMT;
-      this.editData.FINAL_REAL_AMT = FINAL_ACTUAL_AMT;
+      // this.editData.FINAL_REAL_AMT = FINAL_ACTUAL_AMT;
       R3.store.commit(`customize/returnAmount`, JSON.parse(JSON.stringify({
-        SHIP_AMT:Number(this.editData.SHIP_AMT),
-        ADJUST_AMT:Number(this.editData.ADJUST_AMT),
-        FINAL_ACTUAL_AMT:Number(this.editData.FINAL_ACTUAL_AMT),
-        FINAL_REAL_AMT:Number(this.editData.FINAL_REAL_AMT),
+        SHIP_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.SHIP_AMT),
+        ADJUST_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.ADJUST_AMT),
+        FINAL_ACTUAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_ACTUAL_AMT),
+        // FINAL_REAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_REAL_AMT),
       })));
+    },
+    inputBlur(e){
+      if(!e.target.value || e.target.value == '-'){
+        this.editData.ADJUST_AMT = 0
+        this.inputChange()
+      }
     }
   },
 };
 </script>
 <style lang="less">
+@import '~@burgeon/oms-theme/skin/public.less';
 .calculation-main {
   display: flex;
   padding: 8px;
@@ -128,7 +146,7 @@ export default {
         border-radius: 4px;
         height: 28px;
         text-align: center;
-        z-index: 9;
+        z-index: 5;
       }
       span,
       label {
@@ -139,6 +157,8 @@ export default {
         color: #8d91a1;
         width: 100%;
         text-align: center;
+        max-width: 150px;
+        #bundle > .points;
         input{
           width: 50%;
           padding: 0 10px;

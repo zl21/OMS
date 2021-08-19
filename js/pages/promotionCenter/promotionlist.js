@@ -1,7 +1,5 @@
 import businessLabel from 'professionalComponents/businessLabel';
 import businessButton from 'professionalComponents/businessButton';
-// import errorMessage from 'framework/components/tablelist/error.vue';
-// import Mydialog from 'framework/components/dialog/mydialog.vue';
 import aTable from 'professionalComponents/agGridTable.vue';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
@@ -9,13 +7,16 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import groups from '@/assets/js/promotion/groups';
 import businessForm from 'professionalComponents/businessForm';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import { baseColumnDefs, logDataCol, diStatusArr } from './promotionConfig.js'
+import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
+import businessAgTable from 'professionalComponents/businessAgTable';
+import { debounce } from 'lodash'
 
 export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
       vmI18n: $i18n,
+      vueAgTable: true,
       loading: false,
       modal: false, // 查看日志弹框
       release_name: '', // 操作人
@@ -29,6 +30,7 @@ export default {
       setGroupTableData: [], // 设置分组列表
       STATUS: [1, 2, 3], // 状态 1.草稿，2.已发布，3.下线
       formConfig: {
+        gridBar:true,
         formValue: {
           acti_no: '',
           acti_date: [`${this.setData(0, true)}`, `${this.setData(7)}`],
@@ -37,7 +39,7 @@ export default {
           product: '',
           acti_group: '',
           release_name: '',
-          STATUS: [1, 2, 3],
+          STATUS: [1, 2],
         },
         ruleValidate: {},
         formData: [
@@ -62,7 +64,6 @@ export default {
             transfer: true,
             ghost: false, // 是否关闭幽灵按钮，默认开启
             onChange: () => {
-              this.handleChange();
             },
             clearable: true,
           },
@@ -130,7 +131,7 @@ export default {
           fkdisplay: 'mrp',
           isfk: true,
           isnotnull: false,
-          name: '店铺名称', // 店铺名称
+          name: $i18n.t('table_label.shopName'), // 店铺名称
           readonly: false,
           reftable: 'CP_C_SHOP',
           reftableid: 10348,
@@ -187,12 +188,72 @@ export default {
           valuedata: ''
         }
       ],
+      options: {
+        rowHeight: 40,
+        getRowClass: this.getRowClass,
+        onColumnResized: this.onColumnResized,
+        datas: {},
+        floatingFilter: false
+      },
+      selection: [],
+      agTableConfig: {
+        pageShow: true,
+        isIndex: true,
+        tableHeight: '480px',
+        columnDefs: baseColumnDefs,
+        rowData: [],
+        pagenation: {
+          total: 0,
+          current: 1,
+          pageSize: 20,
+          pageSizeOpts: [20,50,100,200,500,2000],
+        },
+        renderArr: {
+          ACTION_LOG: params => {
+            if (!params.data.ACTION_LOG) return;
+            const resultElement = document.createElement('div');
+            const iTag = document.createElement('div');
+            iTag.style.color = '#0f8ee9';
+            iTag.style.textDecoration = 'underline';
+            iTag.innerText = params.data.ACTION_LOG;
+            iTag.style.cursor = 'pointer';
+            iTag.onclick = () => {
+              this.viewLog(params.data);
+            };
+            resultElement.appendChild(iTag);
+          }
+        },
+        renderParams:(cellData)=> {
+          if (cellData.field == 'ACTION_LOG') {
+            return {
+              renderContainer: 'CellRenderByFunction',
+              renderComponent: (h, params) => {
+                if (!params.row.ACTION_LOG) return;
+                return h('div', {
+                  on:{
+                    click:()=> {
+                      this.viewLog(params.row);
+                    }
+                  },
+                  domProps: { },
+                  style: {
+                    color: '#0f8ee9 ',
+                    textDecoration: 'underline ',
+                    cursor: 'pointer ',
+                  }
+                }, params.row.ACTION_LOG)
+              }
+            }
+          }
+        },
+      },
       tabConfig: [
         {
           label: $i18n.t('common.all'), // 全部
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
-            tableHeight: '100px',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -210,14 +271,15 @@ export default {
                 resultElement.appendChild(iTag);
               }
             },
-            pagenation: this.$comUtils.pageConfig,
-          }
+            pagenation: $omsUtils.pageConfig,
+          } */
         },
         {
           label: $i18n.t('btn.published'), // 已发布
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
-            tableHeight: '',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -245,13 +307,14 @@ export default {
               current: 1,
               pageSizeOpts: [20, 50, 150, 1000]
             }
-          }
+          } */
         },
         {
           label: $i18n.t('btn.draft'), // 草稿
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
-            tableHeight: '',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -279,13 +342,14 @@ export default {
               current: 1,
               pageSizeOpts: [20, 50, 150, 1000]
             }
-          }
+          } */
         },
         {
           label: $i18n.t('other.offline_expired'), // 下线/过期
-          agTableConfig: {
+          total: 0,
+          /* agTableConfig: {
             isIndex: true,
-            tableHeight: '',
+            tableHeight: '480px',
             columnDefs: baseColumnDefs,
             rowData: [],
             renderArr: {
@@ -313,7 +377,7 @@ export default {
               current: 1,
               pageSizeOpts: [20, 50, 150, 1000]
             }
-          }
+          } */
         }
       ],
       product: {
@@ -342,8 +406,9 @@ export default {
           valuedata: ''
         }
       },
-      btnConfig: {
+      formBtn:{
         typeAll: 'default', // 按钮统一风格样式
+        loading: false, // 按钮加载
         buttons: [
           {
             text: $i18n.t('btn.find'), // 查找,
@@ -359,83 +424,93 @@ export default {
               this.Reset();
             }
           },
-          {
-            text: $i18n.t('btn.add'), // 新增,
-            webname: 'xinzengcux_cuxiaohuodomg',
-            btnclick: () => {
-              this.promotionClick();
-            }
-          },
-          {
-            text: $i18n.t('btn.batch_add'), // 批量新增,
-            webname: 'piliangxinzengcux_cuxiaohuodomg',
-            btnclick: () => {
-              this.promotionBlukClick();
-            }
-          },
-          {
-            text: $i18n.t('btn.publish'), // 发布,
-            webname: 'fabucux_cuxiaohuodomg',
-            btnclick: () => {
-              this.publish();
-            }
-          },
-          {
-            text: $i18n.t('btn.offline'), // 下线,
-            webname: 'xiaxiancux_cuxiaohuodomg',
-            btnclick: () => {
-              this.actOffline();
-            }
-          },
-          {
-            text: $i18n.t('common.copy'), // 复制,
-            webname: 'copy_cuxiaohuodomg',
-            btnclick: () => {
-              this.copy();
-            }
-          },
-          {
-            text: $i18n.t('btn.delete'), // 删除,
-            webname: 'deletecux_cuxiaohuodomg',
-            btnclick: () => {
-              this.deleteActi();
-            }
-          },
-          {
-            text: $i18n.t('btn.set_groups'), // 设置分组,
-            webname: 'shezhifenzucux_cuxiaohuodomg',
-            btnclick: () => {
-              this.setGroup();
-            }
-          },
-          {
-            text: $i18n.t('btn.simulation'), // 模拟仿真,
-            webname: 'fangzhencux_cuxiaohuodomg',
-            btnclick: () => {
-              this.simulation();
-            }
-          },
-          {
-            icon: 'iconfont iconbj_col', // 按钮图标
-            webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
-            name: $i18n.t('btn.collection'), // 收藏
-            btnclick: () => {
-              const self = this;
-              self.setFavorite();
-            } // 按钮点击事件
-          }
-        ]
+        ],
       },
+      btnConfig: {
+        typeAll: 'default', // 按钮统一风格样式
+        loading: false, // 按钮加载
+        buttons:[]
+      },
+      extendBtn:[
+        {
+          // text: $i18n.t('btn.add'), // 新增,
+          webname: 'xinzengcux_cuxiaohuodomg',
+          btnclick: () => {
+            this.promotionClick();
+          }
+        },
+        {
+          // text: $i18n.t('btn.batch_add'), // 批量新增,
+          webname: 'piliangxinzengcux_cuxiaohuodomg',
+          btnclick: () => {
+            this.promotionBlukClick();
+          }
+        },
+        {
+          // text: $i18n.t('btn.publish'), // 发布,
+          webname: 'fabucux_cuxiaohuodomg',
+          btnclick: () => {
+            this.publish();
+          }
+        },
+        {
+          // text: $i18n.t('btn.offline'), // 下线,
+          webname: 'xiaxiancux_cuxiaohuodomg',
+          btnclick: () => {
+            this.actOffline();
+          }
+        },
+        {
+          // text: $i18n.t('common.copy'), // 复制,
+          webname: 'copy_cuxiaohuodomg',
+          btnclick: () => {
+            this.copy();
+          }
+        },
+        {
+          // text: $i18n.t('btn.delete'), // 删除,
+          webname: 'deletecux_cuxiaohuodomg',
+          btnclick: () => {
+            this.deleteActi();
+          }
+        },
+        {
+          // text: $i18n.t('btn.set_groups'), // 设置分组,
+          webname: 'shezhifenzucux_cuxiaohuodomg',
+          btnclick: () => {
+            this.setGroup();
+          }
+        },
+        {
+          // text: $i18n.t('btn.simulation'), // 模拟仿真,
+          webname: 'fangzhencux_cuxiaohuodomg',
+          btnclick: () => {
+            this.simulation();
+          }
+        },
+        // {
+        //   icon: 'iconfont iconbj_col', // 按钮图标
+        //   webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
+        //   name: $i18n.t('btn.collection'), // 收藏
+        //   btnclick: () => {
+        //     const self = this;
+        //     self.setFavorite();
+        //   } // 按钮点击事件
+        // }
+      ],
       newList: [], // 选中行
       newIds: [], // 选中行的ID集
     };
   },
   watch: {
-    activeName() {
-      this.getData();
+    activeName(x) {
+      this.agTableConfig.pagenation.current = 1;
+      this.agTableConfig.pagenation.pageSize = 20;
+      this.getData(x);
     }
   },
   components: {
+    businessAgTable,
     businessForm,
     businessButton,
     businessLabel,
@@ -444,6 +519,11 @@ export default {
     // errorMessage,
     dialogVisible,
   },
+  activated(){
+    const self = this;
+    self.$OMS2.BtnConfig.target = self;
+    this.$OMS2.BtnConfig.singleType = 0;
+  },
   created() {
     groups.load();
     this.formConfig.formData.filter(item => item.colname == 'my_input_sh')[0].itemdata = this.my_input_sh.itemdata;
@@ -451,6 +531,9 @@ export default {
   computed: {
     commodity() {
       return this.inputList[0].valuedata;
+    },
+    colRowNum(){
+      return $store.state.customize.colRowNum;
     }
   },
   async mounted() {
@@ -459,15 +542,32 @@ export default {
     // });
     this.loading = true;
     // 计算高度 通过设置节点 'totalHeight'
-    await this.$comUtils.setTableHeight(this, 165);
+    await $omsUtils.setTableHeight(this, 230);
 
     await this.times(); // 默认时间
 
     await this.getData();
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    this.$comUtils.onresizes(this, 650);
+    $omsUtils.onresizes(this, 650);
+    const buttons = await self.$OMS2.BtnConfig.config();
+    this.btnConfig.buttons = [...buttons.buttons , ...this.extendBtn];
+    $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});
   },
   methods: {
+    getRowClass(params) {
+      const { rowIndex, data: { STATUS } } = params; // 获取行索引
+      switch (STATUS) {
+        case 1:
+          return 'colorBlack';
+          break;
+        case 2:
+          return 'colorBlue';
+          break;
+        default:
+          return 'colorGray';
+          break;
+      }
+    },
     // 获取7天后时间
     setData(day, startTime) {
       let date = startTime ? this.formatDate(new Date().setHours(0, 0, 0, 0) + 86400 * day * 1000) : this.formatDate(new Date().setHours(23, 59, 59, 0) + 86400 * day * 1000)
@@ -476,9 +576,9 @@ export default {
     // 日期格式转换
     formatDate(time) {
       if (time instanceof Array && time[0]) {
-        const start = dateUtil.getFormatDate(time[0], 'yyyy-MM-dd HH:mm:ss');
-        const end = dateUtil.getFormatDate(time[1], 'yyyy-MM-dd HH:mm:ss');
-        return start + '~' + end
+        const start = dateUtil.getFormatDate(time[0], 'yyyyMMdd');
+        const end = dateUtil.getFormatDate(time[1], 'yyyyMMddHH');
+        return start + '-' + end
       } else {
         const date = new Date(time);
         const resTime = dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
@@ -495,12 +595,18 @@ export default {
     },
     // 分页change 事件
     pageChange(val) {
-      this.tabConfig[this.activeName].agTableConfig.pagenation.current = val;
+      // this.tabConfig[this.activeName].agTableConfig.pagenation.current = val;
+      this.agTableConfig.pagenation.current = val;
       this.getData();
+    },
+    onSelectionChange(data) {
+      this.selection = data;
     },
     // 切换分页条数
     pageSizeChange(val) {
-      this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize = val;
+      // this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize = val;
+      this.agTableConfig.pagenation.current = 1;
+      this.agTableConfig.pagenation.pageSize = val;
       this.getData();
     },
     getExtendObj() {
@@ -521,20 +627,26 @@ export default {
       };
     },
     // 查找
-    async getData() {
-      const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
-      const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
+    async getData(x = 0) {
+      let currentPage,pageSize;
+      if (this.vueAgTable) {
+        currentPage = this.agTableConfig.pagenation.current;
+        pageSize = this.agTableConfig.pagenation.pageSize;
+      } else {
+        currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
+        pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
+      }
       const { customizedModuleName } = this.$router.currentRoute.params;
       this.loading = true;
       const params = {
-        ACTISTATUS: this.STATUS.join(',').replace('bSelect-all', 0), // 活动状态
+        ACTISTATUS: this.formConfig.formValue.STATUS.join(',').replace('bSelect-all', 0), // 活动状态
         SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
         ACTI_PRO: this.product.itemdata_xitong, // 款号0
-        ACTI_DATE: this.acti_date ? this.acti_date.join('-') : '', // 活动日期0
-        ACTI_NAME: this.acti_name, // 活动名称
-        GROUP_NAME: this.acti_group, // 活动分组
-        RELEASE_NAME: this.release_name, // 发布人
-        ACTI_NO: this.acti_no,
+        ACTI_DATE: this.formConfig.formValue.acti_date[0] ? this.formatDate(this.formConfig.formValue.acti_date) : '', // 活动日期0
+        ACTI_NAME: this.formConfig.formValue.acti_name, // 活动名称
+        GROUP_NAME: this.formConfig.formValue.acti_group, // 活动分组
+        RELEASE_NAME: this.formConfig.formValue.release_name, // 发布人
+        ACTI_NO: this.formConfig.formValue.acti_no,
         PAGE: {
           CURRENT_PAGE: currentPage, // 当前页码
           PAGE_SIZE: pageSize // 分页单位
@@ -546,12 +658,37 @@ export default {
       const {
         data: { code, data }
       } = await this.service.promotionCenter.selectPmList(formData);
-      if (code === 0) {
-        if (data && data.ACTI_ALL_INFO) {
-          // 全部
-          this.getAgTableData(data.ACTI_ALL_INFO, data.ACTI_ALL_NUM, 0);
+      if (code === 0 && data) {
+        let info,num;
+        this.tabConfig[0].total = data.ACTI_ALL_NUM;
+        this.tabConfig[1].total = data.ACTI_RELEASE_NUM;
+        this.tabConfig[2].total = data.ACTI_DRAFT_NUM;
+        this.tabConfig[3].total = data.ACTI_OVER_NUM;
+        switch (Number(x)) {
+          case 1:
+            info = data.ACTI_RELEASE_INFO;
+            num = data.ACTI_RELEASE_NUM;
+            break;
+          case 2:
+            info = data.ACTI_DRAFT_INFO;
+            num = data.ACTI_DRAFT_NUM;
+            break;
+          case 3:
+            info = data.ACTI_OVER_INFO;
+            num = data.ACTI_OVER_NUM;
+            break;
+          default:
+            info = data.ACTI_ALL_INFO;
+            num = data.ACTI_ALL_NUM;
+            break;
         }
-        if (data && data.ACTI_RELEASE_INFO) {
+        this.getAgTableData(info, num, x);
+        
+        /* if (data && data.ACTI_ALL_INFO) {
+          // 全部
+          this.getAgTableData(data.ACTI_ALL_INFO, data.ACTI_ALL_NUM, x || 0);
+        } */
+        /* if (data && data.ACTI_RELEASE_INFO) {
           // 1 已发布
           this.getAgTableData(data.ACTI_RELEASE_INFO, data.ACTI_RELEASE_NUM, 1);
         }
@@ -562,24 +699,58 @@ export default {
         if (data && data.ACTI_OVER_INFO) {
           // 3 下线过期
           this.getAgTableData(data.ACTI_OVER_INFO, data.ACTI_OVER_NUM, 3);
-        }
+        } */
       }
       setTimeout(() => {
         this.loading = false;
       }, 10);
     },
+    // aG列宽改变回调
+    onColumnResized(e) {
+      return
+      if (e.columns.length > 1 && e.finished) {
+        return // 页面初始化
+      }
+      console.log(e);
+      this.saveCol(e.columns)
+    },
+    // 保存列信息
+    saveCol: debounce(function(data) {
+      console.log(data);
+      debugger // 取不到，用了防抖的原因吗？
+    },1000),
     // 获取agTable数据
     getAgTableData(info, num, index) {
-      const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
-      const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
-      info.forEach((item, index) => {
-        item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
-        item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
-      });
-      const agGridChild = `agGridChild${index + 1}`;
-      this.tabConfig[index].agTableConfig.rowData = info || [];
-      this.tabConfig[index].agTableConfig.pagenation.total = num;
-      this.$refs[`${agGridChild}`][0].agGridTable(this.tabConfig[index].agTableConfig.columnDefs, this.tabConfig[index].agTableConfig.rowData, this.getExtendObj());
+      const self = this;
+      if(self.vueAgTable) {
+        const currentPage = this.agTableConfig.pagenation.current;
+        const pageSize = this.agTableConfig.pagenation.pageSize;
+        // const columns = self.agTableConfig.columnDefs;
+        const columns = JSON.parse(JSON.stringify(baseColumnDefs));
+        columns.forEach(item => {
+          // item['displayName'] = item.headerName;
+          item.thAlign = 'center';
+        });
+        self.agTableConfig.columnDefs = columns;
+        info.forEach((item, index) => {
+          item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
+          item.ID = item.ACTI_NO; // 解决框架ag组件取不到数据ID的bug（暂时
+        });
+        self.agTableConfig.rowData = info;
+        self.agTableConfig.pagenation.total = num;
+      } else {
+        const currentPage = this.tabConfig[this.activeName].agTableConfig.pagenation.current;
+        const pageSize = this.tabConfig[this.activeName].agTableConfig.pagenation.pageSize;
+        info.forEach((item, index) => {
+          item.SERIAL_NO = (currentPage - 1) * pageSize + index + 1;
+          item.ACTION_LOG = $i18n.t('other.view_log'); // 查看日志
+        });
+        const agGridChild = `agGridChild${index + 1}`;
+        this.tabConfig[index].agTableConfig.rowData = info || [];
+        this.tabConfig[index].agTableConfig.pagenation.total = num;
+        this.$refs[`${agGridChild}`][0].agGridTable(this.tabConfig[index].agTableConfig.columnDefs, this.tabConfig[index].agTableConfig.rowData, this.getExtendObj());
+      }
     },
     // 关闭弹框
     closeModal() {
@@ -612,13 +783,18 @@ export default {
     chargeSelectRow() {
       this.newList = [];
       this.newIds = [];
-      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
-      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
-      if (agGridTable.getSelect().length) {
-        agGridTable.getSelect().forEach(item => {
-          this.newList.push(item);
-          this.newIds.push(item.ACTI_ID);
-        });
+      if (this.vueAgTable) {
+        this.newList = JSON.parse(JSON.stringify(this.selection));
+        this.newIds = $OMS2.omsUtils.sonList(this.newList, 'ACTI_ID');
+      } else {
+        const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
+        const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
+        if (agGridTable.getSelect().length) {
+          agGridTable.getSelect().forEach(item => {
+            this.newList.push(item);
+            this.newIds.push(item.ACTI_ID);
+          });
+        }
       }
       if (this.newList.length < 1) {
         this.$Message.warning($i18n.t('modalTips.r9'));
@@ -635,6 +811,7 @@ export default {
         return;
       }
       this.$Modal.info({
+        className: 'ark-dialog',
         title: $i18n.t('modalTitle.tips'), // 提示
         content: '确定执行下线操作？',
         mask: true,
@@ -651,23 +828,42 @@ export default {
       })
     },
     copy() {
-      const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
-      const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
-      if (agGridTable.getSelect().length) {
-        const selectedData = agGridTable.getSelect();
-        if (selectedData.length > 1) {
-          this.$Message.warning($i18n.t('modalTips.q2')); // 只能选取一条数据
-          return;
-        }
-        const ACTI_ID = selectedData[0].ACTI_ID;
-        const IS_BATCH = selectedData[0].IS_BATCH;
-        if (IS_BATCH) {
-          $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+      if (this.vueAgTable) {
+        const selAr = JSON.parse(JSON.stringify(this.selection));
+        if (selAr.length) {
+          if (selAr.length > 1) {
+            this.$Message.warning($i18n.t('modalTips.q2')); // 只能选取一条数据
+            return;
+          }
+          const ACTI_ID = selAr[0].ACTI_ID;
+          const IS_BATCH = selAr[0].IS_BATCH;
+          if (IS_BATCH) {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+          } else {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          }
         } else {
-          $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
         }
       } else {
-        this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
+        const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
+        const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;
+        if (agGridTable.getSelect().length) {
+          const selectedData = agGridTable.getSelect();
+          if (selectedData.length > 1) {
+            this.$Message.warning($i18n.t('modalTips.q2')); // 只能选取一条数据
+            return;
+          }
+          const ACTI_ID = selectedData[0].ACTI_ID;
+          const IS_BATCH = selectedData[0].IS_BATCH;
+          if (IS_BATCH) {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+          } else {
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+          }
+        } else {
+          this.$Message.warning($i18n.t('modalTips.r9')); // 请至少选择一条
+        }
       }
     },
     promotionClick() {
@@ -769,19 +965,20 @@ export default {
       }
     },
     Reset() {
-      this.acti_no = ''; // 活动编号
-      this.times(); // 活动日期:
-      this.acti_name = ''; // 活动名称
-      this.actiTypes = ['bSelect-all']; // 活动类型:
-      this.orderTypes = ['bSelect-all']; // 订单类型:
+      this.formConfig.formValue.acti_no = ''; // 活动编号
+      // this.times(); // 活动日期:
+      this.formConfig.formValue.acti_date = [`${this.setData(0, true)}`, `${this.setData(7)}`];
+      this.formConfig.formValue.acti_name = ''; // 活动名称
+      // this.actiTypes = ['bSelect-all']; // 活动类型:
+      // this.orderTypes = ['bSelect-all']; // 订单类型:
       this.my_input_sh.itemdata.valuedata = ''; // 线上店铺
       this.my_input_sh.itemdata.pid = ''; // 线上店铺
-      this.product.itemdata_xitong.valuedata = ''; // 参与商品
-      this.product.itemdata_xitong.pid = ''; // 参与商品
-      this.product.itemdata_xitong.channelList = ''; // 参与商品
-      this.acti_group = ''; // 分组
-      this.release_name = ''; // 操作人
-      this.STATUS = [1, 2]; // 状态
+      // this.product.itemdata_xitong.valuedata = ''; // 参与商品
+      // this.product.itemdata_xitong.pid = ''; // 参与商品
+      // this.product.itemdata_xitong.channelList = ''; // 参与商品
+      this.formConfig.formValue.acti_group = ''; // 分组
+      this.formConfig.formValue.release_name = ''; // 操作人
+      this.formConfig.formValue.STATUS = [1, 2]; // 状态
     }, // 重置
     async handDblClick(row) {
       // 双击事件

@@ -3,19 +3,20 @@
  * @Date: 2021-04-27 11:20:18
  * @LastEditTime: 2021-06-11 11:31:42
  * @LastEditors: your name
- * @Description: In User Settings Edit
+ * @Description: 商品自定义属性
  * @FilePath: /project-logic/views/pages/commodityCenter/commodityCusPropertiesAddOrEdit.vue
 -->
 <template>
   <div class="commodityCusPropertiesAddOrEdit customized-detail" :id="this.customizedModuleName">
     <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfig" @keyDown="keyDown" />
           </p>

@@ -9,6 +9,7 @@ export default {
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         inputList: [
@@ -19,13 +20,14 @@ export default {
         isActive: true,
         isdisabled: false,
         itemdata: {
+          serviceId: 'r3-cp',
           refcolval: {
             fixcolumn: 'CP_C_PLATFORM_ID',
             expre: 'equal',
             srccol: 'CP_C_SHOP_ID'
           },
           col: 1,
-          colid: 167606,
+          colid: 168806,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
@@ -95,6 +97,9 @@ export default {
       orderNum: [{ required: true, message: ' ', trigger: 'blur' }]
     }
   },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async (self) => {
     const formValue = self.downLoadFormConfig.formValue;
@@ -119,11 +124,8 @@ export default {
       status: formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
 
-    // 请求下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
     if (code === 0) {
       self.downLoadModal = true;
       const orderNum = self.downLoadFormConfig.formValue.orderNum;

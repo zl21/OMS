@@ -8,8 +8,10 @@ import StrategyPlatform from '../module/page/strategy.config'; // -----------策
 import SystemConfig from '../module/page/system.config'; // -----------系统配置
 import InventoryConfig from '../module/page/inventory.config'; // -----------库存中心
 import basicDataConfig from '../module/page/basicData.config'; // -----------基础数据
+import monitorPlatform from '../module/page/monitor.config'; // -----------监控平台
 
 const allCenterPage = Object.assign(
+  monitorPlatform,
   OrderCenter,
   MarketCenter,
   FinanceCenter,

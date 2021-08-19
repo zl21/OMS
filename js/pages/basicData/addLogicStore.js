@@ -1,8 +1,7 @@
-import businessButton from 'professionalComponents/businessButton';
+  import businessButton from 'professionalComponents/businessButton';
   import businessForm from 'professionalComponents/businessForm';
-  import businessActionTable from 'professionalComponents/businessActionTable';
   import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-  import comUtils from '@/assets/js/__utils__/common.js';
+  // import comUtils from '@/assets/js/__utils__/common.js';
 
   export default {
     components: {
@@ -14,11 +13,12 @@ import businessButton from 'professionalComponents/businessButton';
         vmI18n:$i18n,
         collapse: ['panel_baseInfo', 'panel_businessInfo'],
         btnConfig: {
+          btnsite: 'right', // 按钮对齐方式
           typeAll: 'default',
           buttons: [
             {
               webname: 'lookup_save', // 保存
-              text: '保存',
+              text: $i18n.t('btn.save'), // 保存
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -29,7 +29,7 @@ import businessButton from 'professionalComponents/businessButton';
               webname: 'lookup_return', // 返回
               text: $i18n.t('btn.back'),
               btnclick: () => {
-                comUtils.tabCloseAppoint(this);
+                $omsUtils.tabCloseAppoint(this);
                 this.$destroy(true);
                 this.$store.commit('global/tabOpen', {
                   tableId: 10107,
@@ -46,7 +46,7 @@ import businessButton from 'professionalComponents/businessButton';
           formData: [
             {
               style: 'input',
-              label: '逻辑仓编码',
+              label: $i18n.t('form_label.du'), // 逻辑仓编码
               value: 'ECODE',
               width: '6',
               disabled: false,
@@ -55,7 +55,7 @@ import businessButton from 'professionalComponents/businessButton';
             },
             {
               style: 'input',
-              label: '逻辑仓名称',
+              label: $i18n.t('form_label.dv'), // 逻辑仓名称
               value: 'ENAME',
               width: '6',
               disabled: false,
@@ -68,25 +68,16 @@ import businessButton from 'professionalComponents/businessButton';
               style: 'popInput', // 输入框弹框单多选
               width: '6',
               itemdata: {
-                col: 1,
                 colid: 166035, // 当前字段的ID
                 colname: 'PS_C_BRAND_ID', // 当前字段的名称
-                datelimit: 'all',
-                display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: '商品SPU',
-                inputname: 'PS_C_PRO_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
-                length: 65535, // 最大长度是多少
-                name: '所属实体仓', // 赔付类型
+                name: $i18n.t('form_label.dw'), // 所属实体仓 // 赔付类型
                 readonly: true, // 是否可编辑，对应input   readonly属性
                 reftable: 'PS_C_BRAND', // 对应的表
                 reftableid: 166035, // 对应的表ID
-                row: 1,
-                statsize: -1,
-                type: 'STRING', // 这个是后台用的
                 valuedata: '', // 这个是选择的值
                 pid: '', // 啥 ？？？
               },
@@ -98,7 +89,7 @@ import businessButton from 'professionalComponents/businessButton';
             {
               colname: 'group_type',
               style: 'select', // 下拉框类型
-              label: '仓库类型',
+              label: $i18n.t('form_label.dx'), // 仓库类型
               width: '6', // 所占宽度宽度
               value: 'STORETYPE', // 输入框的值
               clearable: true,
@@ -108,18 +99,18 @@ import businessButton from 'professionalComponents/businessButton';
               options: [
                 // 下拉框选项值
                 {
-                  label: '正品',
+                  label: $i18n.t('form_label.qualityGoods'), // 正品
                   value: '1'
                 },
                 {
-                  label: '次品',
+                  label: $i18n.t('form_label.ungraded'), // 次品
                   value: '2'
                 }
               ]
             },
             {
               style: 'textarea',
-              label: '备注',
+              label: $i18n.t('table_label.remarks'), // 备注
               value: 'REMARK',
               width: '24',
               disabled: false,
@@ -159,14 +150,14 @@ import businessButton from 'professionalComponents/businessButton';
           formData: [
             {
               style: 'checkbox',
-              label: '主仓',
+              label: $i18n.t('form_label.dy'), // 主仓
               value: 'IS_MAIN_WAREHOUSE',
               width: '6',
               disabled: false,
             },
             {
               style: 'checkbox',
-              label: '负库存控制',
+              label: $i18n.t('form_label.dz'), // 负库存控制
               value: 'ISNEGATIVE',
               width: '6',
               disabled: false,
@@ -215,13 +206,13 @@ import businessButton from 'professionalComponents/businessButton';
         data = Object.assign(self.formConfig.formValue, self.businessFormConfig.formValue);
         let str = '';
         if (!data.ECODE) {
-          str += '逻辑仓编码 ';
+          str += `${$i18n.t('form_label.du')} `; // 逻辑仓编码
         } else if (!data.ENAME) {
-          str += '逻辑仓名称 ';
+          str += `${$i18n.t('form_label.dv')} `; // 逻辑仓名称
         } else if (!data.CP_C_PHY_WAREHOUSE_ID) {
-          str += '所属实体仓 ';
+          str += `${$i18n.t('form_label.dw')} `; // 所属实体仓
         } else if(!data.STORETYPE){
-          str += '仓库类型'
+          str += `${$i18n.t('form_label.dx')} `; // 仓库类型
         }
         if (str) {
           self.$Message.warning(`${str}不能为空!`);
@@ -234,7 +225,7 @@ import businessButton from 'professionalComponents/businessButton';
           console.log(res);
           if (res.data.code == 0) {
             self.$Message.success(res.data.message);
-            comUtils.tabCloseAppoint(this);
+            $omsUtils.tabCloseAppoint(this);
               this.$destroy(true);
             // self.$store.commit('global/tabOpen', {
             //   type: 'V',
@@ -242,7 +233,7 @@ import businessButton from 'professionalComponents/businessButton';
             //   tableId: '10326',
             //   id: res.data.data.ID
             // });
-            comUtils.tabCloseAppoint(this);
+            $omsUtils.tabCloseAppoint(this);
                 this.$destroy(true);
                 this.$store.commit('global/tabOpen', {
                   tableId: 10107,

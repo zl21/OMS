@@ -8,13 +8,14 @@
  */
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
-  // 京东订单接口列表界面(下载订单)
+  // 唯品会失效订单(下载订单)
   formConfig: {
     formValue: {
       numNumber: ''
     },
     formData: [
       {
+        version: '1.4',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         isActive: true,
@@ -26,7 +27,7 @@ export default {
         ],
         itemdata: {
           col: 1,
-          colid: 167606,
+          colid: 168378,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           refcolval: {
@@ -41,6 +42,7 @@ export default {
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
+          serviceId: 'r3-cp',
           length: 65535, // 最大长度是多少
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
@@ -68,6 +70,9 @@ export default {
       query_date: [{ required: true }]
     }
   },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async self => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
@@ -87,17 +92,16 @@ export default {
       endTime = BurgeonDate.standardTimeConversiondateToStr(endTime);
     }
     const param = {
+      table: self.$route.params.tableName, // 当前表名 必传
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       start_time: startTime,
       end_time: endTime
     };
-    const fromdata = new FormData();
-    fromdata.append('param', JSON.stringify(param));
 
     // 实效订单下载
     const {
       data: { code, message }
-    } = await self.service.interfacePlatform.downLoadVipTimeOrder(fromdata);
+    } = await self.service.interfacePlatform.orderDownload(param);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');

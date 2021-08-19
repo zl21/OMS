@@ -1,4 +1,4 @@
-import Buttonmap from 'framework/assets/js/buttonmap';
+import Buttonmap from 'framework/assets/js/buttonmap'; // 实际上没用到
 import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 import FkDialog from 'framework/components/tablelist/fkdialog';
 import GroupTree from 'framework/components/tree/groupTree';
@@ -22,14 +22,14 @@ export default {
         btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '删除', // 按钮文本
+            text: $i18n.t('btn.delete'), // 删除 按钮文本
             webname: '',
             btnclick: () => {
               this.deleteAuthority();
             } // 按钮点击事件
           },
           {
-            text: '刷新', // 按钮文本
+            text: $i18n.t('btn.refresh'), // 按钮文本
             webname: '',
             btnclick: () => {
               this.refresh();

@@ -1,10 +1,10 @@
 <!--  一商模拟仿真   -->
 <template>
-  <div class="simulation">
-    <div class="operation_btn">
+  <div class="simulation customized-detail">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="content">
+    <div class="customized-detail-main">
       <div class="orderSet">
         <div class="header_title">
           <span class="header_name">
@@ -15,6 +15,7 @@
         <div class="formList">
           <div class="row storeName">
             <my-input
+            version='1.4'
               :is-active="basicData.stores.isActive"
               :is-disabled="basicData.stores.isdisabled"
               :itemdata="basicData.stores.itemdata"
@@ -121,6 +122,7 @@
           </div>
           <div class="row storeName">
             <my-input
+            version="1.4"
               :is-active="basicData.receiving_porvince.isActive"
               :is-disabled="basicData.receiving_porvince.isdisabled"
               :itemdata="basicData.receiving_porvince.itemdata"

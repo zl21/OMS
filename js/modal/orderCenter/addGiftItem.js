@@ -13,100 +13,98 @@ export default {
       url: '',
       loading: false,
       onRowData: '', // 选中数据
-      formConfig: {
-        formValue: {
-          SKU_CODE: '',
-          SPU_CODE: '',
-          SPU_NAE: '',
-          number: 1,
-        },
-        formData: [
-          {
-            label: 'SKU编码',
-            style: 'dimSearch',
-            width: '7',
-            value: 'SKU_CODE',
-            columns: ['value'],
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {
-              //模糊查询的方法
-              // this.fuzzyquerybyak(search)
-            },
-            dimEnter: (val) => {},
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
-          {
-            label: 'SPU编码',
-            style: 'dimSearch',
-            width: '7',
-            value: 'SPU_CODE',
-            columns: ['ECODE'],
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {},
-            dimEnter: (val) => {},
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
-          {
-            style: 'dimSearch', //输入框类型
-            label: 'SPU名称', //输入框前文字
-            value: 'SPU_NAE', //输入框的值
-            columns: ['ENAME'],
-            width: '7',
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {},
-            dimEnter: (val) => {},
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
-          {
-            style: 'input', //输入框类型
-            label: '数量', //输入框前文字
-            value: 'number', //输入框的值
-            columns: ['number'],
-            width: '7',
-            AuotData: [], //匹配的选项
-            dimChange: (search) => {},
-            dimEnter: (val) => {},
-            dimSelect: (obj) => {},
-            dimblur: () => {},
-          },
-        ],
-      },
-      // searchBtn
-      searchBtn: {
-        typeAll: 'default', // 按钮统一风格样式
-        btnsite: 'right', // 按钮位置 (right , center , left)
-        buttons: [
-          {
-            text: '搜索',
-            btnclick: () => {
-              this.tableConfig.current = 1
-              this.searchGift()
-            }, // 按钮点击事件
-          },
-        ],
-      },
       tableConfig: {
+        businessFormConfig: {
+          formValue: {
+            SKU_CODE: '',
+            SPU_CODE: '',
+            SPU_NAE: '',
+            number: 1,
+          },
+          formData: [
+            {
+              label: $i18n.t('table_label.code_SKU'), // SKU编码
+              style: 'dimSearch',
+              width: '8',
+              value: 'SKU_CODE',
+              columns: ['value'],
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {
+                //模糊查询的方法
+                // this.fuzzyquerybyak(search)
+              },
+              dimEnter: (val) => {
+                this.searchGift()
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            },
+            {
+              label: $i18n.t('table_label.itemNo01'), // SPU编码
+              style: 'dimSearch',
+              width: '8',
+              value: 'SPU_CODE',
+              columns: ['ECODE'],
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {},
+              dimEnter: (val) => {
+                this.searchGift()
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            },
+            {
+              style: 'dimSearch', //输入框类型
+              label: $i18n.t("table_label.itemNo02"), // SPU名称 输入框前文字
+              value: 'SPU_NAE', //输入框的值
+              columns: ['ENAME'],
+              width: '8',
+              AuotData: [], //匹配的选项
+              dimChange: (search) => {},
+              dimEnter: (val) => {
+                this.searchGift()
+              },
+              dimSelect: (obj) => {},
+              dimblur: () => {},
+            },
+           
+          ],
+        },
+        // searchBtn
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: 'right', // 按钮位置 (right , center , left)
+          buttons: [
+            {
+              text: '搜索',
+              type:"primary",
+              btnclick: () => {
+                this.tableConfig.current = 1
+                this.skuEcodes = ""
+                this.onRowData = ""
+                this.searchGift()
+              }, // 按钮点击事件
+            },
+          ],
+        },
         indexColumn: true,
-        isShowSelection: false,
+        isShowSelection: true,
         columns: [
           {
             key: 'skuEcode',
-            title: 'SKU编码',
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: 'SPU编码',
+            title: $i18n.t('table_label.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: 'SPU名称',
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
@@ -122,11 +120,13 @@ export default {
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
-        height: '', // 表格高度
+        height: '300', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
+        highlightRow:true,
+        multiple: false
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -190,7 +190,7 @@ export default {
       let data = {
         skuEcodes: [this.skuEcodes],
         orderList,
-        initNumber: this.formConfig.formValue.number,
+        initNumber: this.tableConfig.businessFormConfig.formValue.number,
       }
       this.service.orderCenter.saveOrderByPro(data).then((res) => {
         setTimeout(() => {
@@ -201,7 +201,7 @@ export default {
         },1000)
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-          this.$parent.$parent.$parent.$parent.$parent.getDetailsData()
+          this.$parent.$parent.$parent.$parent.getDetailsData()
         } else if(res.data.code ===  -1){
           this.$Modal.confirm({
             title: "message",
@@ -253,6 +253,10 @@ export default {
                 return h('Table', {
                   props: {
                     columns: [
+                      {
+                        title: "单据编号", // '提示信息',
+                        key: 'billNo',
+                      },
                       {
                         title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
@@ -306,6 +310,10 @@ export default {
                 return h('Table', {
                   props: {
                     columns: [
+                      {
+                        title: "单据编号", // '提示信息',
+                        key: 'billNo',
+                      },
                       {
                         title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
@@ -365,7 +373,7 @@ export default {
         const {
           data: { data },
         } = await this.service.common.fuzzyquerybyak(formData)
-        this.formConfig.formData[0].AuotData = data
+        this.tableConfig.businessFormConfig.formData[0].AuotData = data
       }
     },
     // 添加赠品
@@ -398,7 +406,7 @@ export default {
       }
       const ids = []
       ids.push(self.objid)
-      this.$comUtils.setLoading(true)
+      $omsUtils.setLoading(true)
       const param = {
         ids,
       }
@@ -410,9 +418,9 @@ export default {
         self.$Message.success(message);
         self.$parent.$parent.$parent.$parent.autoRefresh();
         self.$parent.$parent.closeConfirm()
-        this.btnConfig.buttons[0].loading = false
+        this.btnConfig.buttons[0].loading = false;
       } else {
-        this.btnConfig.buttons[0].loading = false
+        this.btnConfig.buttons[0].loading = false;
         if (code === -1) {
           self.$Modal.confirm({
             title: message,
@@ -423,6 +431,10 @@ export default {
                 return h('Table', {
                   props: {
                     columns: [
+                      {
+                        title: "单据编号", // '提示信息',
+                        key: 'billNo',
+                      },
                       {
                         title: $i18n.t('modalTitle.a6'), // '提示信息',
                         key: 'message',
@@ -440,7 +452,7 @@ export default {
       setTimeout(() => {
         this.btnConfig.buttons[1].disabled = false;
       }, 5000);
-      this.$comUtils.setLoading()
+      $omsUtils.setLoading()
     },
     // 回车
     onKeyDown(e) {
@@ -450,9 +462,9 @@ export default {
     },
     selectSkuProBySkuEcodeList() {
       let data = {
-        skuEcode: this.formConfig.formValue.SKU_CODE,
-        spuEcode: this.formConfig.formValue.SPU_CODE,
-        spuEname: this.formConfig.formValue.SPU_NAE,
+        skuEcode: this.tableConfig.businessFormConfig.formValue.SKU_CODE,
+        spuEcode: this.tableConfig.businessFormConfig.formValue.SPU_CODE,
+        spuEname: this.tableConfig.businessFormConfig.formValue.SPU_NAE,
         size: this.tableConfig.pageSize,
         current: this.tableConfig.current,
       }
@@ -469,7 +481,7 @@ export default {
         data,
       }).then((res) => {
         this.tableConfig.total = res.data.data.total
-
+        this.tableConfig.height = '458';
         this.tableConfig.columns = [
           // {
           //   title: '操作',
@@ -490,19 +502,19 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: 'SKU编码',
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: 'SPU编码',
+            title: $i18n.t('table_label.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: 'SPU名称',
+            title: $i18n.t("table_label.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: 'SKU名称',
+            title: $i18n.t('form_label.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
@@ -525,6 +537,25 @@ export default {
     const self = this
     console.log(this.componentData)
     this.type = this.componentData.type
+    if (this.type == "add") {
+      let obj = {
+        style: 'input', //输入框类型
+        label: '数量', //输入框前文字
+        value: 'number', //输入框的值
+        regx: /^[1-9]\d*(\.\d+)?$/,
+        maxlength:8,
+        columns: ['number'],
+        width: '8',
+        AuotData: [], //匹配的选项
+        dimChange: (search) => {},
+        dimEnter: (val) => {},
+        dimSelect: (obj) => {},
+        dimblur: () => {},
+      }
+      self.tableConfig.businessFormConfig.formData.push(obj)
+    }
+
+
     if (this.componentData && this.componentData.ID) {
       self.objid = this.componentData.ID
     }

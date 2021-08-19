@@ -1,7 +1,7 @@
 /*
  * @Author: flybird
  * @Date: 2021-06-04 13:20:21
- * @LastEditTime: 2021-06-10 14:17:13
+ * @LastEditTime: 2021-08-17 15:39:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
@@ -10,7 +10,7 @@ import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import R3 from '@syman/burgeon-r3';
 import Vue from 'vue';
-import comUtils from '@/assets/js/__utils__/common';
+// import comUtils from '@/assets/js/__utils__/common';
 import commonUtils from '@/config/config/commonUtils.js'
 import pageNote from 'burgeonConfig/config/pageNote'
 // import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
@@ -33,10 +33,12 @@ class InitAppConfig {
     window.$i18n = i18n; // 挂载国际化
     window.wangEditor = wangEditor;
     Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
-    Vue.prototype.$comUtils = comUtils;
+    // Vue.prototype.$comUtils = comUtils;
     Vue.prototype.$omsUtils = commonUtils;
     Vue.prototype.$lodash = lodash;
     Vue.prototype.service = service;
+    Vue.prototype.vmI18n = i18n;
+
 
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {
@@ -45,9 +47,18 @@ class InitAppConfig {
       if (!tableNameArr.includes(currentTable)) {
         // window.onresize = null;
         // 销毁resize方法
-        comUtils.removeOnresize();
+        commonUtils.removeOnresize();
       }
     });
+
+    // 存储可视化宽度
+    let clientWidthsFun = () => {
+      let clientWidths = document.body.clientWidth;
+      if (clientWidths < 990) { $store.commit('customize/colRowNum', 3); } else { $store.commit('customize/colRowNum', 4); }
+    };
+    clientWidthsFun();
+    // 屏幕变化
+    window.onresize = () => clientWidthsFun();
   }
 
 }

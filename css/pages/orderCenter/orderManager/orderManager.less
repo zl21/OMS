@@ -1,27 +1,63 @@
 @import '~omsTheme/public.less';
+
 .customized-list-form {
-  &.position {
-    padding-bottom: @base-mr;
-    position: relative;
-    .form-search {
-      position: absolute;
-      bottom: 0;
-      right: -8px;
+  padding-right: 30px;
+  // 箭头
+  .orderManageEdit .flodBtn{
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    top: auto;
+    right: auto;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 13px;
+    background: url('~@/assets/img/arrowUp.png') right no-repeat;
+    background-size: 100%;
+    z-index: 999;
+    &::before {
+      content: "";
+    }
+    &.el-icon-arrow-down{
+      background: url('~@/assets/img/arrowDown.png') right no-repeat;
+      background-size: 100%;
     }
   }
-  .form-search {
-    margin-right: 30px;
+  position: relative;
+  &.formBottomPd{
+    padding-bottom: 65px !important;
+     // 退换货单展开 不需要
+    &.returnChangeOrder{
+      padding-bottom: 0 !important;
+    }
   }
-  .dynamicSearch-content {
-    display: grid;
-    grid-template-columns: calc(100% - 200px) 180px;
-    align-items: end;
-    .button-combina {
-      padding: 0;
+  .form-search,.dynamicSearch-content {
+    .button-combina{
+      position: absolute;
+      right: 21px;
+      bottom: 6px;
     }
   }
 }
+  // 退换货单展开 不需要
+.customized-list-form.returnChangeOrder{
+    .dynamicSearch-content{
+      .button-combina{
+        position: relative;
+        right: 18px;
+        bottom: auto;
+      }
+    }
+  }
 .ag-theme-balham .ag-header-cell-label .ag-header-icon {
   //隐藏agGrid排序顺序指示器
   display: none;
+}
+.button-combina .button-content button.ark-btn{
+  .iconbj_setup,.iconbj_col{
+    font-size: 12px;
+    & + span{
+      display: none !important;
+    }
+  }
 }

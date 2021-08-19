@@ -13,12 +13,16 @@ class DropDownConfig {
     let self = DropDownConfig.target
     this.singleType = singleType
     switch (val) {
+      case 'OC_ORDER_SEND_TIME': { // 修改预计发货时间
+        this.dropDownMainHandler('OC_ORDER_SEND_TIME')
+        break
+      }
       case 'manualReturnCreation': {
-        // commonUtils.navigateMain(-1, 'TabOpen', 'RETURNORDERADD', 'panel_label.addReturnOrder')
+        // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'panel_label.addReturnOrder')
         R3.store.commit('global/tabOpen', {
           type: 'C',
-          label: '退货单新增',
-          customizedModuleName: 'RETURNORDERADD',
+          label: $i18n.t('menu.b0'), // 退货单新增
+          customizedModuleName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
           customizedModuleId: 'New',
         })
         break
@@ -129,12 +133,32 @@ class DropDownConfig {
     }
   }
 
+  static modifyPreDate(selectData, type) {
+    let self = DropDownConfig.target
+    let flag = false;
+    for (const it of selectData) {
+      if (![1,2].includes(it.ORDER_STATUS)) {
+        flag = true;
+        break
+      }
+    }
+    if (flag) {
+      self.$Message.warning('非缺货、待审核订单不允许修改预计发货时间！');
+      self.btnConfig.loading = false
+      return
+    } else {
+      const IDS = selectData.map((item) => item.ID);
+      this.successHandler(IDS, type, '', 'modifyPreDate')
+    }
+  }
+
   static async canceledOrderCopyHander() {
     let self = DropDownConfig.target
-    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if(!self.vueAgTable){
+      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    }
     if (self.selection.length != 1) {
-      // self.$OMS2.omsUtils.msgTips(self, 'warning', 'a8')
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要复制的单据', 2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw'); // 请选择需要复制的单据
       return
     }
     const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
@@ -148,7 +172,7 @@ class DropDownConfig {
         id: 2307,
         type: 'action',
         name: 'OC_B_ORDER_VIRTUAL_TABLE',
-        label: '零售发货单新增',
+        label: $i18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
         query: Object.assign({
           copyType: 1,
           sourceId: self.selection[0].ID,
@@ -160,21 +184,23 @@ class DropDownConfig {
   }
 
   static ORDER_REPLACE_BELONGS_GOODS() {
-    //批量删除
+    // 替换下挂赠品
     let self = DropDownConfig.target
     self.publicBouncedConfig = JSON.parse(
       JSON.stringify(DialogConfig.config().pushProduceConfig)
     )
-    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if(!self.vueAgTable){
+      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    }
     if (self.selection.length < 1) {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
 
-    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { 
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-      self.publicBouncedConfig.confirmTitle = '批量替换下挂商品'
+      self.publicBouncedConfig.confirmTitle = $i18n.t('modalTitle.ah') // 批量替换下挂商品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
         type: 'replace',
@@ -185,7 +211,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
       return
     }
   
@@ -197,16 +223,18 @@ class DropDownConfig {
     self.publicBouncedConfig = JSON.parse(
       JSON.stringify(DialogConfig.config().pushProduceConfig)
     )
-    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if(!self.vueAgTable){
+      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    }
     if (self.selection.length < 1) {
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
 
-    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { 
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-      self.publicBouncedConfig.confirmTitle = '删除赠品'
+      self.publicBouncedConfig.confirmTitle = $i18n.t('btn.deleteGift') // 删除赠品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
         type: 'del',
@@ -217,7 +245,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jx'); // 只允许缺货或待审核状态的订单进行添加！
       return
     }
    
@@ -230,15 +258,17 @@ class DropDownConfig {
       JSON.stringify(DialogConfig.config().pushProduceConfig)
     )
 
-    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if(!self.vueAgTable){
+      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    }
     if (self.selection.length < 1) { //
       self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
       return
     }
-    if (self.selection.ORDER_STATUS == 2 || self.selection.ORDER_STATUS == 1) { //
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { //
       self.publicBouncedConfig.name = 'addGiftDialog'
     self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-    self.publicBouncedConfig.confirmTitle = '添加赠品'
+    self.publicBouncedConfig.confirmTitle = $i18n.t('btn.addGift') // 添加赠品
 
     self.publicBouncedConfig.componentData = {
       data: self.selection,
@@ -250,16 +280,18 @@ class DropDownConfig {
       self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
       return
     }
   }
 
   static async afterSaleCopyHander() {
     let self = DropDownConfig.target
-    self.selection = self.$refs.agGridChild.AGTABLE.getSelect()
+    if(!self.vueAgTable){
+      self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+    }
     if (self.selection.length != 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '请选择需要复制的单据', 2)
+      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw')
       return
     }
     const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
@@ -272,7 +304,7 @@ class DropDownConfig {
     if (code == 0) {
       self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE'
       self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
-      self.publicBouncedConfig.confirmTitle = '售后复制'
+      self.publicBouncedConfig.confirmTitle = $i18n.t('modalTitle.ag') // 售后复制
       self.publicBouncedConfig.componentData = { id: self.selection[0].ID }
       self.publicBouncedConfig.width = 400
       setTimeout(() => {
@@ -290,7 +322,7 @@ class DropDownConfig {
     self.$store.commit('global/tabOpen', {
       type: 'C',
       customizedModuleName: 'OC_B_ORDER_VIRTUAL_TABLE',
-      label: '零售发货单新增',
+      label: $i18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
       customizedModuleId: 'New',
     })
   }
@@ -322,6 +354,11 @@ class DropDownConfig {
      */
     let funName, tips, paramsType
     switch (type) {
+      case 'OC_ORDER_SEND_TIME':
+        funName = 'modifyPreDate'
+        tips = 'd8'
+        paramsType = 4
+        break
       case 'modifyLogistics':
         funName = 'modifyLogisticsHandler'
         tips = 'c6'
@@ -465,7 +502,7 @@ class DropDownConfig {
   /**
    * 打开弹窗处理（主要是处理一下要传给弹窗的数据）
    * @param {Array } ids 
-   * @param {String} objName burgeon-business-components/common/js/publicDialog.js下对应的key
+   * @param {String} objName （burgeon-business-components/common/js/publicDialog.js）dialogs.config.js下对应的key
    * @param {String} componentDataType 用于判断要填充给什么子组件（弹窗里的哪个组件）的componentData
    * @param {String} tableType 组件名
    */
@@ -579,7 +616,7 @@ class DropDownConfig {
     if (ids[0].ORDER_STATUS == 1||ids[0].ORDER_STATUS == 2) {
       this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', '只允许缺货或待审核状态的订单进行添加!',2)
+     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
       self.btnConfig.loading = false
       return
     }
@@ -657,15 +694,15 @@ class DropDownConfig {
                 props: {
                   columns: [
                     {
-                      title: '序号',
+                      title: $i18n.t('table_label.serialNo'), // 序号
                       key: 'INDEX',
                     },
                     {
-                      title: '单据编号',
+                      title: $i18n.t('form_label.billNo'), // 单据编号
                       key: 'BILL_NO',
                     },
                     {
-                      title: '失败原因',
+                      title: $i18n.t('form_label.e0'), // 失败原因
                       key: 'RESULT_MSG',
                     },
                   ],

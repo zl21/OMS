@@ -25,7 +25,7 @@ export default {
   mixins: [customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       loading: false,
       address: '', // 存储解析后的地址
       delTableList: [], // 删除明细中记录选中的标识
@@ -59,6 +59,7 @@ export default {
         buttons: [
           {
             webname: 'lookup_save', // 保存
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -106,7 +107,7 @@ export default {
             webname: 'lookup_return', // 返回
             text: $i18n.t('btn.back'),
             btnclick: () => {
-              this.$comUtils.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
               this.$destroy(true);
               this.$store.commit('customize/TabHref', {
                 id: 2986,
@@ -246,7 +247,7 @@ export default {
               const self = this;
               self.getSourceCodeDetail(obj);
             },
-            dimEnter: () => {}
+            dimEnter: () => { }
           },
           {
             style: 'input',
@@ -328,7 +329,6 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '店铺',
               inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
@@ -577,7 +577,7 @@ export default {
         height: '300', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30, 40, 50, 60], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         totalData: [],
         columns: [
@@ -1006,7 +1006,7 @@ export default {
       this.labelDefaultValue = item.value;
     },
     async getPayableAdjustment() {
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       const self = this;
       const param = {
         objid: self.ID
@@ -1034,7 +1034,7 @@ export default {
         self.setPayableAdjustData(mainData, itemData, logData);
       }
       // this.$R3loading.hide(customizedModuleName);
-      this.loading  = false;
+      this.loading = false;
     },
     // 分页change 事件
     pageChange(val) {
@@ -1361,7 +1361,7 @@ export default {
         }
       });
       // 添加水印
-      const showFlag = [2,3,4];
+      const showFlag = [2, 3, 4];
       if (showFlag.includes(billStatus)) {
         self.showStatusFlag = true;
       }
@@ -1648,7 +1648,7 @@ export default {
       this.customPagingFun(mainTableArr, this.jordanTableConfig.pageSize, this.jordanTableConfig, 'jordanTableConfig');
       this.calTableTable(this.jordanTableConfig.data);
     },
-    detailAddCancel() {},
+    detailAddCancel() { },
     tableObjs(e, params) {
       const _this = this;
       _this.jordanTableConfig.data.forEach((item, index) => {

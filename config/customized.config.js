@@ -19,8 +19,19 @@ import commonUtils from './config/commonUtils.js'
 import funBtn from './config/funBtn.config.js'
 import dropDownBtn from './config/dropDown.config.js'
 import Vue from 'vue';
+import standardTableListsCustomize from './minxin/standardTableListsCustomize';
+import verticalTableDetailCustomize from './minxin/verticalTableDetailCustomize';
+import tableDetailCollectionMixin from './minxin/standardTable/mixin.js';
+import cusValidate from './config/validate.config.js';
+import standardTableListdefindVue from '../commonPages/layout/standardTableListdefind.vue';
 
 class CustomizedConfig {
+	static #STLD = {
+		defined: standardTableListdefindVue,
+	};
+	static #STLC = standardTableListsCustomize;
+	static #VTDC = verticalTableDetailCustomize;
+	static #TDCM = tableDetailCollectionMixin;
 	static #custommizeMain = custommizeMain;
 	static #subTableConfig = subTableConfig;
 	static #customizedModal = customizedModal;
@@ -42,7 +53,23 @@ class CustomizedConfig {
 	static #commonUtils = commonUtils;
 	static #funBtn = funBtn;
 	static #dropDownBtn = dropDownBtn;
+	static #cusValidate = cusValidate;
 	/* ------------ 挂载项 start ------------- */
+	static get STLD() {
+		return this.#STLD;
+	}
+	static get Rule() {
+		return this.#cusValidate;
+	}
+	static get STLC() {
+		return this.#STLC;
+	}
+	static get VTDC() {
+		return this.#VTDC;
+	}
+	static get TDCM() {
+		return this.#TDCM;
+	}
 	static get omsUtils() {
 		return this.#commonUtils;
 	}
@@ -58,8 +85,8 @@ class CustomizedConfig {
 		// this.initConfig = new InitAppConfig();
 		// console.log('hello CustomizedConfig');
 	}
-	static get custommizeMain() {
-		return this.#custommizeMain;
+	static get formDefined() {
+		return this.#custommizeMain; // defined组件的配置项
 	}
 	// subTable组件的配置项(有用到，不准删！！！)
 	static get subTableConfig() {
@@ -140,11 +167,15 @@ class CustomizedConfig {
 	static get cusExternalTreeDatas() {
 		return this.#customizedExternalTreeDatas;
 	}
-	static editCusExternalTreeDatas(configItem = {}) {
-		for (const key in configItem) {
+	static editCusExternalTreeDatas(config = []) {
+		/* for (const key in configItem) {
 			this.#customizedExternalTreeDatas[key] = configItem[key];
+		} */
+		let res = JSON.parse(JSON.stringify(this.#customizedExternalTreeDatas));
+		if (config.length) {
+			res = res.concat(config);
 		}
-		return this.#customizedExternalTreeDatas
+		return res
 	}
 
 	// 接口配置项

@@ -1,24 +1,25 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-06-08 10:02:10
+ * @LastEditTime: 2021-07-14 11:50:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
 -->
 <template>
   <div
-    class="specialLogistics otherClass customized-detail"
+    class="customized-detail"
     v-loading="loading"
   >
     <!-- <loading :loading="loading" /> -->
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+        
+          {{baseInformation}}
           <div slot="content">
             <businessForm
               :form-config="formConfighead"
@@ -31,7 +32,8 @@
 
       <Collapse v-model="panelDefaultValue1">
         <Panel name="panel_baseInfo1">
-          满足条件
+          <!-- 满足条件 -->
+          {{ vmI18n.t('form_label.meet_conditions') }}
           <div slot="content">
             <businessForm
               :form-config="formConfig"
@@ -55,16 +57,18 @@
             <switchList :switchList="switchListdata"></switchList>
 
             <div class="content-li-item">
-              <label style="width: 70px">指定商品:</label>
+              <!-- 指定商品 -->
+              <label style="width: 70px">{{ vmI18n.t('btn.designGoods')}}:</label> 
               <div class="content-li-item-left">
                 <Button type="info" @click="fnseek">添加商品</Button>
                 <div class="content-li-item-left-a">
-                  <Table
-                    width="550"
-                    border
-                    :columns="columns2"
-                    :data="data3"
-                  ></Table>
+           
+
+                  <businessActionTable
+                    :jordan-table-config="tableConfig3"
+                    @on-page-change="tablepageA"
+                    @on-page-size-change="tablesizeA"
+                  />
                 </div>
               </div>
             </div>
@@ -72,44 +76,28 @@
         </Panel>
       </Collapse>
 
-      <!-- <Collapse v-model="panelDefaultValue2">
-        
-        <Panel name="panel_baseInfo2" >
-          
-        </Panel>
 
-          <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
-          <subTable :component-data="subTableConfig"></subTable>
-          </div>
-      </Collapse> -->
-    </div>
-
-    <div class="customized-detail-table">
-      <businessLabel
-        :label-list="labelList"
-        :label-default-value="labelDefaultValue"
-        @labelClick="labelClick"
-      />
-      <div slot="content" v-show="labelDefaultValue == 'PROPERTY'">
-        <businessForm :form-config="formConfig1" @keyDown="keyDown" />
-        <businessButton :btn-config="btnConfig1" />
-        <Table
-          border
-          ref="selection"
-          :columns="columns4"
-          :data="data1"
-          @on-select="data1select"
-        ></Table>
-        <Page
-          :total="total2"
-          show-sizer
-          class-name="tablestyle"
-          @on-change="tablepage2"
-          @on-page-size-change="tablesize2"
+      <div class="customized-detail-table">
+        <businessLabel
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+          @labelClick="labelClick"
         />
-      </div>
-      <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
-        <subTable :component-data="subTableConfig"></subTable>
+        <div slot="content" v-show="labelDefaultValue == 'PROPERTY'">
+          <businessForm :form-config="formConfig1" @keyDown="keyDown" />
+          <businessButton :btn-config="btnConfig1" />
+          <businessActionTable
+            :jordan-table-config="tableConfig2"
+            @on-page-change="tablepageB"
+            @on-page-size-change="tablesizeB"
+            @on-select="data1select"
+            @on-select-all="onSelectAllA"
+            @on-select-all-cancel="onSelectAllCancelA"
+          />
+        </div>
+        <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
+          <subTable :component-data="subTableConfig"></subTable>
+        </div>
       </div>
     </div>
 
@@ -144,8 +132,8 @@
           </Input>
         </div>
         <div class="specialLogistics-model-head-right">
-          <Button type="error" ghost @click="fntableAdd">添加</Button>
-          <Button type="error" ghost @click="fncancel">取消</Button>
+          <Button type="error" ghost @click="fntableAdd"> {{increase}} </Button>
+          <Button type="error" ghost @click="fncancel">{{cancel}}</Button>
         </div>
       </div>
       <businessActionTable

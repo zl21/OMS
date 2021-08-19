@@ -2,7 +2,7 @@
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
-import commonUtil from '@/assets/js/__utils__/common';
+// import commonUtil from '@/assets/js/__utils__/common';
 import refundAfterShipment from './constants/refundAfterShipment';
 
 export default {
@@ -59,7 +59,7 @@ export default {
                     ) {
                       this.reForm.config[
                         index
-                      ].item.props.value = commonUtil.dateFormat(
+                      ].item.props.value = $omsUtils.dateFormat(
                         new Date(),
                         'yyyy-MM-dd'
                       );
@@ -551,7 +551,7 @@ export default {
             // class: 'cancel',
             // icon: 'md-arrow-round-back',
             btnclick: () => {
-              commonUtil.tabCloseAppoint(this);
+              $omsUtils.tabCloseAppoint(this);
               if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
                 R3.store.commit('global/tabOpen', {
                   type: 'S',
@@ -863,7 +863,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         current: '', // 当前页
       },
@@ -915,7 +915,7 @@ export default {
           } else if (
             val.item.label === $i18n.t('form_label.documentDate')
           ) {
-            this.reForm.config[index].item.props.value = commonUtil.dateFormat(
+            this.reForm.config[index].item.props.value = $omsUtils.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -932,7 +932,7 @@ export default {
           } else if (
             val.item.label === $i18n.t('form_label.documentDate')
           ) {
-            this.reForm.config[index].item.props.value = commonUtil.dateFormat(
+            this.reForm.config[index].item.props.value = $omsUtils.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -971,7 +971,7 @@ export default {
       this.returnLogTableLoad = false;
       if (res.data.code === 0) {
         const resData = res.data.data;
-        const dateFormat = this.$commonUtil.dateFormat;
+        const dateFormat = $omsUtils.dateFormat;
         resData.forEach((val) => {
           val.CREATIONDATE = dateFormat(
             new Date(val.CREATIONDATE || ''),
@@ -1314,7 +1314,7 @@ export default {
       this.service.orderCenter.saveAfterDeliver(data).then((res) => {
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
-          commonUtil.tabCloseAppoint(this);
+          $omsUtils.tabCloseAppoint(this);
           if (this.$route.params.customizedModuleName === 'EXTRAREFUND') {
             // this.$store.commit('customize/TabHref', {
             //   id: 249230545,
@@ -1361,6 +1361,8 @@ export default {
             this.$Message.success(res.data.data.message);
           } else {
             this.$Modal.confirm({
+              className: 'ark-dialog',
+              mask: true,
               title: res.data.data.message,
               render: (h) =>
                 h('Table', {
@@ -1371,7 +1373,7 @@ export default {
                         key: 'objid',
                       },
                       {
-                        title: '报错信息',
+                        title: $i18n.t('modalTitle.du'), // 报错信息
                         key: 'message',
                       },
                     ],
@@ -1737,6 +1739,7 @@ export default {
       } else {
         // 编辑状态,删除明细
         this.$Modal.fcError({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.deleteDetails'), // 删除明细
           content: $i18n.t('modalTips.j5'), // 确定删除所选明细?
           onOk: () => {
@@ -1801,14 +1804,14 @@ export default {
             OWNERENAME: AfSend.OWNERNAME,
             CREATIONDATE:
               AfSend.CREATIONDATE &&
-              commonUtil.dateFormat(
+              $omsUtils.dateFormat(
                 new Date(AfSend.CREATIONDATE),
                 'yyyy-MM-dd hh:mm:ss'
               ),
             MODIFIERENAME: AfSend.MODIFIERENAME || AfSend.MODIFIERNAME,
             MODIFIEDDATE:
               AfSend.MODIFIEDDATE &&
-              commonUtil.dateFormat(
+              $omsUtils.dateFormat(
                 new Date(AfSend.MODIFIEDDATE),
                 'yyyy-MM-dd hh:mm:ss'
               ),
@@ -1863,7 +1866,7 @@ export default {
             data[dataConfig[itemLabel]] == 1 ? '手动' : '自动';
         } else if (itemLabel === $i18n.t('form_label.documentDate')) {
           // 单据日期
-          item.item.props.value = commonUtil.dateFormat(
+          item.item.props.value = $omsUtils.dateFormat(
             new Date(data[dataConfig[itemLabel]]),
             'yyyy-MM-dd hh:mm:ss'
           );

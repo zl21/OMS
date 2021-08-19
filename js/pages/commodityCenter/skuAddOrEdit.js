@@ -18,13 +18,13 @@ export default {
     loading,
     ImageUpload
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n: $i18n,
       subTableConfig: {},
       forceFresh: 0,
-      ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
+      // ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       showSubtablePart: false,
       watchChange: false, // 监听修改变化
       modify: {
@@ -75,9 +75,11 @@ export default {
         "row": []
       },
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [{
-          text: '保存',
+          webname: 'SKU_SaveBtn',
+          text: $i18n.t('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -85,6 +87,7 @@ export default {
           },
         },
         {
+          webname: 'fix_back',
           text: $i18n.t('btn.back'),
           btnclick: () => {
             this.back()
@@ -113,7 +116,7 @@ export default {
           itemdata: {
             colid: '165990',
             colname: 'PS_C_PRO_ID',
-            name: "SPU编码",
+            name: $i18n.t('table_label.itemNo01'), // SPU编码
             valuedata: '',
             pid: '',
             fkdisplay: 'drp',
@@ -124,7 +127,7 @@ export default {
           oneObj: (val) => {
             // 选中触发事件
             console.log('val::', val);
-            if (!val.pid) return;
+            // if (!val.pid) return;
             this.spuID = val.pid;
             this.formConfig.formValue.PS_C_PRO_ID = val.valuedata;
             this.masterModifyData('PS_C_PRO_ID', 'master');
@@ -135,7 +138,8 @@ export default {
           colname: 'ECODE',
           width: '8',
           style: 'input',
-          regx: /^(\s*|[A-Za-z0-9]+)$/,
+          // regx: /^(\s*|[A-Za-z0-9]+)$/,
+          // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
           // placeholder: 'Only numbers and letters',
           inputChange: () => {
             this.masterModifyData('ECODE', 'master');
@@ -145,7 +149,7 @@ export default {
           colname: 'ENAME',
           width: '8',
           style: 'input',
-          regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+          // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
           inputChange: () => {
             this.masterModifyData('ENAME', 'master');
           },
@@ -172,20 +176,6 @@ export default {
           style: 'input',
           inputChange: () => {
             this.masterModifyData('UNIT', 'master');
-          },
-        },
-        {
-          style: 'dynamic',
-          colname: 'ISACTIVE',
-          width: '8',
-          class: 'statusInput',
-        },
-        {
-          style: 'textarea',
-          colname: 'SPEC_REMARK',
-          width: '24',
-          inputChange: () => {
-            this.masterModifyData('SPEC_REMARK', 'master');
           },
         },
         {
@@ -216,55 +206,27 @@ export default {
           },
         },
         {
-          colname: 'LENGTH',
-          width: '8',
-          style: 'input',
-          regx: /^(\s*|\d+(\.\d{0,2})?)$/,
+          style: 'textarea',
+          colname: 'SPEC_REMARK',
+          width: '24',
+          maxlength: 255,
           inputChange: () => {
-            this.masterModifyData('LENGTH', 'master');
+            this.masterModifyData('SPEC_REMARK', 'master');
           },
         },
         {
-          colname: 'HEIGHT',
+          style: '',
+          colname: 'ISACTIVE',
           width: '8',
-          style: 'input',
-          regx: /^(\s*|\d+(\.\d{0,2})?$)/,
-          inputChange: () => {
-            this.masterModifyData('HEIGHT', 'master');
-          },
+          class: 'statusInput',
+          disabled: true,
         },
         {
-          colname: 'WIDTH',
-          width: '8',
-          style: 'input',
-          regx: /^(\s*|\d+(\.\d{0,2})?$)/,
-          inputChange: () => {
-            this.masterModifyData('WIDTH', 'master');
-          },
-        },
-        {
-          colname: 'GROSS_WEIGHT',
-          width: '8',
-          style: 'input',
-          regx: /^(\s*|\d+(\.\d{0,2})?$)/,
-          inputChange: () => {
-            this.masterModifyData('GROSS_WEIGHT', 'master');
-          },
-        },
-        {
-          colname: 'NET_WEIGHT',
-          width: '8',
-          style: 'input',
-          regx: /^(\s*|\d+(\.\d{0,2})?$)/,
-          inputChange: () => {
-            this.masterModifyData('NET_WEIGHT', 'master');
-          },
-        },
-        {
-          colname: 'PS_C_SPECOBJ1_ID',
+          // colname: 'PS_C_SPECOBJ1_ID',
           defVal: 'PS_C_SPECGROUP_ID1',
-          style: 'dynamic',
-          slotName: 'spec01',
+          // style: 'dynamic',
+          style: '',
+          // slotName: 'spec01',
           width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],// 展现的组
@@ -288,10 +250,10 @@ export default {
           },
         },
         {
-          colname: 'PS_C_SPECOBJ2_ID',
+          // colname: 'PS_C_SPECOBJ2_ID',
           defVal: 'PS_C_SPECGROUP_ID2',
-          style: 'dynamic',
-          slotName: 'spec02',
+          style: '',
+          // slotName: 'spec02',
           width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],
@@ -315,10 +277,10 @@ export default {
           },
         },
         {
-          colname: 'PS_C_SPECOBJ3_ID',
+          // colname: 'PS_C_SPECOBJ3_ID',
           defVal: 'PS_C_SPECGROUP_ID3',
-          style: 'dynamic',
-          slotName: 'spec03',
+          style: '',
+          // slotName: 'spec03',
           width: '8',
           pageSize: 10, // 每页条数
           columns: ['name', 'value'],// 展现的组
@@ -354,11 +316,6 @@ export default {
           PRICE_RETAIL: '',
           PRICE_COST: '',
           PRICE_PURCHASE: '',
-          LENGTH: '',
-          HEIGHT: '',
-          WIDTH: '',
-          GROSS_WEIGHT: '',
-          NET_WEIGHT: '',
           PS_C_SPECOBJ1_ID: '',
           PS_C_SPECOBJ2_ID: '',
           PS_C_SPECOBJ3_ID: '',
@@ -384,6 +341,65 @@ export default {
           PRICE_RETAIL: [{ required: true, message: " " }],
         },
       },
+      formConfigWuLi: {
+        key: 'wuli',
+        formData: [
+          {
+            colname: 'LENGTH',
+            width: '8',
+            style: 'input',
+            disabled: false,
+            // regx: /^(\s*|\d+(\.\d{0,2})?)$/,
+            inputChange: () => {
+              this.masterModifyData('LENGTH', 'master', 'wuLi');
+            },
+          },
+          {
+            colname: 'HEIGHT',
+            width: '8',
+            style: 'input',
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            inputChange: () => {
+              this.masterModifyData('HEIGHT', 'master', 'wuLi');
+            },
+          },
+          {
+            colname: 'WIDTH',
+            width: '8',
+            style: 'input',
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            inputChange: () => {
+              this.masterModifyData('WIDTH', 'master', 'wuLi');
+            },
+          },
+          {
+            colname: 'GROSS_WEIGHT', // 毛重
+            width: '8',
+            style: 'input',
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            inputChange: () => {
+              this.masterModifyData('GROSS_WEIGHT', 'master', 'wuLi');
+            },
+          },
+          {
+            colname: 'NET_WEIGHT', // 净重
+            width: '8',
+            style: 'input',
+            // regx: /^(\s*|\d+(\.\d{0,2})?$)/,
+            inputChange: () => {
+              this.masterModifyData('NET_WEIGHT', 'master', 'wuLi');
+            },
+          },
+        ],
+        formValue: {
+          LENGTH: '',
+          HEIGHT: '',
+          WIDTH: '',
+          GROSS_WEIGHT: '',
+          NET_WEIGHT: '',
+        },
+        ruleValidate: {},
+      },
       specGroupArrP: ['PS_C_SPECGROUP_ID1', 'PS_C_SPECGROUP_ID2', 'PS_C_SPECGROUP_ID3'],
       // 固定属性Part-formConfig
       fixAttrFormConfig: {
@@ -400,35 +416,47 @@ export default {
       // tab切换配置
       labelList: [
         /* {
-                  label: '自定义属性',
-                  value: 'PROPERTY',
-                }, */
+              label: '自定义属性',
+              value: 'PROPERTY',
+            }, */
         {
-          label: '备用条码',
+          label: $i18n.t('panel_label.as'), // 备用条码
           value: 'PS_C_ALTERNATE_SKU',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'PS_C_SKU_LOG',
         },
       ],
       labelDefaultValue: 'PS_C_ALTERNATE_SKU', // 设置tab默认值，默认展示'备用条码'
-      panelDefaultValue: ['panel_baseInfo', 'panel_cusAttr'], // 设置默认打开'基础信息'
+      panelDefaultValue: ['panel_baseInfo', 'panel_wuli', 'panel_fixAttr', 'panel_cusAttr'], // 设置默认打开'基础信息'
     };
   },
   watch: {},
   computed: {
+    ID() {
+      const spu = this.$route.query.spuid || this.$route.query.spucode;
+      let id = this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1'; // 记录主界面传入的ID
+      if (spu) { id = '-1'; }
+      return id
+    },
     customizedModuleName() {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
+  activated() {
+    if (this.ID > 0) {
+      this.getBtn();
+    }
+  },
   mounted() {
     const self = this;
-    self.dataitem.url = self.$OMS2.omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
+    self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
+      this.getBtn();
       self.initObjItem(self.ID);
-    } else if (self.ID == '2201' && self.$route.query.spuid) {
+    } else if (self.$route.query.spuid) {
       // 是SPU新增/详情 跳转过来的新增
       self.labelList.splice(1, 2);
       self.initObjItem('-1');
@@ -445,61 +473,90 @@ export default {
     this.$route.query.spuid && (this.spuID = this.$route.query.spuid)
   },
   methods: {
-    /* -------------------- 详情初始化 start -------------------- */
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_SKU', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+      })
+    },
+    /* -------------------- 详情/SPU新增SKU 初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
       this.loading = true;
-      const data = await this.$OMS2.omsUtils.getObject('PS_C_SKU', id);
-      // this.watchChange = false;
-      self.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, self.formConfig);
-      // self.formConfig = this.$OMS2.omsUtils.analysisForm(data, self.formConfig, '基础信息', ['SALES_STATUS', 'PURCHASE_STATUS']);
-      if (self.ID > 0 && self.$route.query.spuid) {
-        self.formConfig.formData[0].itemdata.valuedata = self.$route.query.spucode;
-        self.spuID = self.$route.query.spucode;
-      } else {
-        self.spuID = self.formConfig.formValue.PS_C_PRO_ID.pid || '';
-      }
-      // 详情页-规格名称默认值赋值：
-      const defValArr = ['PS_C_SPECOBJ1_ID', 'PS_C_SPECOBJ2_ID', 'PS_C_SPECOBJ3_ID'];
-      this.formConfig.formData.forEach(item => {
-        if (defValArr.includes(item.colname)) {
-          let itemV = this.formConfig.formValue[item.colname] ? JSON.parse(JSON.stringify(this.formConfig.formValue[item.colname])) : '';
-          // itemV = { pid: 38, valuedata: 'B1' };
-          let itemDefV = [];
-          itemDefV.push(itemV);
-          itemDefV = itemDefV.map(it => ({ "ID": it.pid * 1, "Label": it.valuedata }))
-          this.formConfig.formValue[item.defVal].defaultSelected = itemDefV;
+      await $omsUtils.getObject("PS_C_SKU", id).then(data => {
+        // 初始化《基础信息》
+        let base = data.addcolums.find(it => it.parentname == "(PS_C_SKU.ID+10)").childs;
+        self.formConfig = self.$OMS2.omsUtils.initFormConfig(base, self.formConfig);
+        if (base[0].valuedata) { // 渲染图片
+          const imgData = JSON.parse(data.addcolums[0].childs[0].valuedata)
+          self.dataitem.valuedata.push(...imgData);
         }
-      })
-      // 渲染图片
-      if (data.addcolums[0].childs[0].valuedata) {
-        const imgData = JSON.parse(data.addcolums[0].childs[0].valuedata)
-        self.dataitem.valuedata.push(...imgData);
-      }
-      // 展示Form：启用状态
-      if (self.ID > 0) {
+        return data
+      }).then((data) => {
+        // 初始化《物理属性》
+        let wuli = data.addcolums.find(it => it.parentname == "(PS_C_SKU.ID+20)").childs;
+        self.formConfigWuLi = self.$OMS2.omsUtils.initFormConfig(wuli, self.formConfigWuLi);
+        self.formConfigWuLi.key += 1;
+        return data
+      }).then((data) => {
+        /* 详情页信息渲染 */
+        // 1. SPU编码默认值赋值：
+        if (self.ID > 0 && self.$route.query.spuid && !self.$route.query.isSpuSave) {
+          self.formConfig.formData[0].itemdata.valuedata = self.$route.query.spucode;
+          self.formConfig.formData[0].itemdata.readonly = true;
+          self.spuID = self.$route.query.spucode;
+        } else {
+          self.spuID = self.formConfig.formValue.PS_C_PRO_ID.pid || '';
+        }
+        // 2. 规格名称默认值赋值：
+        /* const defValArr = ['PS_C_SPECOBJ1_ID', 'PS_C_SPECOBJ2_ID', 'PS_C_SPECOBJ3_ID'];
         self.formConfig.formData.forEach(item => {
-          if (item.colname == 'ISACTIVE') {
-            item.style = 'select'
+          if (defValArr.includes(item.colname)) {
+            let itemV = self.formConfig.formValue[item.colname] ? JSON.parse(JSON.stringify(this.formConfig.formValue[item.colname])) : '';
+            let itemDefV = [];
+            itemDefV.push(itemV);
+            itemDefV = itemDefV.map(it => ({ "ID": it.pid * 1, "Label": it.valuedata }))
+            self.formConfig.formValue[item.defVal].defaultSelected = itemDefV;
           }
-        });
-      }
-      // 动态渲染'自定义属性' / 新增需求:渲染'规格维度一、二、三'
-      if (self.formConfig.formValue.PS_C_PRO_ID) {
-        const val = self.formConfig.formValue.PS_C_PRO_ID;
-        await self.renderProperties(val);
-      }
-      self.subTableConfig = {
-        centerName: 'commodityCenter',
-        tablename: this.labelDefaultValue,
-        objid: this.ID,
-        pageShow: true,
-      }
-      this.forceFresh += 1;
-      this.loading = false;
-      setTimeout(() => {
-        this.watchChange = true;
-      }, 10);
+        }) */
+        return data
+      }).then(async (data) => {
+        console.log(data);
+        // 展示Form：启用状态
+        if (self.ID > 0 && !self.$route.query.spuid) {
+          self.formConfig.formData.forEach(item => {
+            if (item.colname == 'ISACTIVE') {
+              item.style = 'select'
+            }
+            if (self.formConfig.formValue.ISACTIVE == 'Y') { // "启用"状态时，都不可以编辑
+              if (!item.itemdata) {
+                item.disabled = true;
+              }
+              if (item.itemdata) {
+                item.itemdata.readonly = true;
+              }
+            }
+          });
+          if (self.formConfig.formValue.ISACTIVE == 'Y') { // '物理属性'不可编辑
+            self.formConfigWuLi.formData.map(item => item.disabled = true)
+          }
+        }
+        // 动态渲染'自定义属性' / 新增需求:渲染'规格维度一、二、三'
+        if (self.formConfig.formValue.PS_C_PRO_ID) {
+          const val = self.formConfig.formValue.PS_C_PRO_ID;
+          await self.renderProperties(val);
+        }
+        self.subTableConfig = {
+          centerName: 'commodityCenter',
+          tablename: self.labelDefaultValue,
+          objid: this.ID,
+          pageShow: true,
+        }
+        setTimeout(() => {
+          self.watchChange = true;
+          self.forceFresh += 1;
+          self.loading = false;
+        }, 100);
+      })
     },
     /* -------------------- 详情初始化 end -------------------- */
 
@@ -545,8 +602,9 @@ export default {
     async renderSpecificationDimension(pageIndex = 1, pageSize = 10, DIMENSION = 1, NAME = '') {
       const self = this;
       const key = `PS_C_SPECGROUP_ID${DIMENSION}`;
+      let spu = this.$route.query.spuid ? this.$route.query.spuid : self.spuID;
       const param = {
-        PS_C_PRO_ID: self.spuID,
+        PS_C_PRO_ID: spu,
         pageNumber: pageIndex,
         pageSize: pageSize,
         DIMENSION: DIMENSION, // 规格值文本框（规格维度一传1，规格维度二传2，规格维度三传3）
@@ -576,7 +634,7 @@ export default {
      *  4. 动态渲染规格维度(展示在主表位置)
      * */
     async renderProperties(val) {
-      if (!val.valuedata) return false;
+      // if (!val.valuedata) return false;
       const proCode = val.valuedata; // 选中行的spuCode {'coffee'}
       const classId = '10'; // sku页面不传（商品分类ID）{'10'}
       const skuCode = this.formConfig.formValue.ECODE || ''; // 定义成全局的 新增时没有，可传空
@@ -589,7 +647,12 @@ export default {
         proCode,
         skuCode, // 该条明细的skuCode，新增时没有，传空字符串
         skuId,
+        objid: this.formConfig.formValue.ISACTIVE == 'N' ? '-1' : this.ID, // 用于控制是否可编辑
+        objid_info: '用于控制‘自定义属性’和‘固定属性’是否可编辑,-1可编辑,其它则不可编辑',
       };
+      if (this.$route.query.spuid) { // spu过来的新增，不传skuId
+        delete param.skuId;
+      }
       this.loading = true;
       const {
         data: {
@@ -611,15 +674,15 @@ export default {
         this.dealForm(this, data.FIXED, 'fixAttrFormConfig'); // 固定属性
         this.dealForm(this, data.EXTRA, 'cusAttrFormConfig'); // 自定义属性
         this.formConfig.formData.forEach(it => {
-          if (data.DIMENSION.includes(it.defVal)) {
-            // it.style = 'DropDownSelectFilter';
+          /* if (data.DIMENSION.includes(it.defVal)) {
+            it.style = 'DropDownSelectFilter';
             it.style = 'formCompile';
             // 动态渲染规格维度
             const dimension = it.defVal.slice(-1, 18) * 1;
             if (this.ID == '-1' || this.$route.query.spuid) {
               this.renderSpecificationDimension(1, 10, dimension); // 需要初始化
             }
-          }
+          } */
         })
         this.watchChange = true;
       } else {
@@ -654,7 +717,7 @@ export default {
       if (!masterArr.length && !exAttr.length) return false;
       const valueArr = ['ECODE', 'ENAME', 'PRICE_RETAIL'];
       const drpArr = ['PS_C_PRO_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         this.$message.error(mes);
         return false;
@@ -680,7 +743,7 @@ export default {
           attributeItem: afterExPro[key] ? afterExPro[key] : ''
         });
       }
-      if (self.$route.query.spuid && self.ID == '2201') {
+      if (self.$route.query.spuid) {
         // spu跳过来的新增，默认入参
         this.ID = '-1';
         PsSku.ISACTIVE = 'Y';
@@ -711,23 +774,35 @@ export default {
         self.modify.master = {};
         self.modify.exAttr = {};
         // 数据回显
-        if (data) self.ID = data;
+        if (!data) {
+          self.$Message.error('没有返回新的数据ID！');
+          return
+        }
+        let newId = data;
+        // if (data) self.ID = data; 
         setTimeout(() => {
           if (this.$route.query.spuid) {
-            // this.$comUtils.tabCloseAppoint(this);
+            //$omsUtils.tabCloseAppoint(this);
             // this.$destroy(true);
             $store.commit('customize/TabOpen', {
-              id: self.ID,
+              id: newId,
               type: 'action',
               name: 'PS_C_SKU',
-              label: 'SKU编辑',
+              label: $i18n.t('menu.b1'), // SKU编辑
               query: Object.assign({
                 spuid: this.spuID,
-                spucode: this.formConfig.formValue.ECODE || ''
+                spucode: this.formConfig.formValue.ECODE || '',
+                isSpuSave: true,
               })
             });
           } else {
-            this.initObjItem(self.ID);
+            // this.initObjItem(self.ID);
+            $store.commit('customize/TabOpen', {
+              id: newId,
+              type: 'action',
+              name: 'PS_C_SKU',
+              label: $i18n.t('menu.b1'), // SKU编辑
+            });
           }
         }, 20);
       } else {
@@ -745,8 +820,9 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -762,28 +838,28 @@ export default {
     onOk() {
       const spuID = this.$route.query.spuid;
       if (spuID) {
-      // this.$comUtils.tabCloseAppoint(this);
-      // this.$destroy(true);
+        //$omsUtils.tabCloseAppoint(this);
+        // this.$destroy(true);
         this.$store.commit('global/tabOpen', {
           // 回到SPU的详情，同时SKU要回到列表
           tableId: 10105,
           type: 'S',
           tableName: 'PS_C_SKU',
-          label: '商品SKU',
+          label: $i18n.t('menu.a8'), // 商品SKU
           back: true,
         });
         this.$store.commit('customize/TabOpen', {
           id: spuID,
           type: 'action',
           name: 'PS_C_PRO',
-          label: 'SPU编辑',
+          label: $i18n.t('menu.b2'), // SPU编辑
         });
       } else {
         this.$store.commit('global/tabOpen', {
           tableId: 10105,
           type: 'S',
           tableName: 'PS_C_SKU',
-          label: '商品SKU',
+          label: $i18n.t('menu.a8'), // 商品SKU
           back: true,
         });
       }
@@ -810,6 +886,9 @@ export default {
       const self = this;
       if (!self.watchChange) return;
       switch (type) {
+        case "wuLi":
+          self.modify[obj][ecode] = self.formConfigWuLi.formValue[ecode];
+          break;
         case "EX":
           self.modify[obj][ecode] = self.cusAttrFormConfig.formValue[ecode];
           break;

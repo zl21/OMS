@@ -1,3 +1,6 @@
+/**
+ * 组合商品 - 老组件
+ */
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
@@ -25,6 +28,7 @@ export default {
       // isReadOnly: false, //判断是否可以编辑
       // 按钮配置
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: []
       },
@@ -1110,7 +1114,7 @@ export default {
           {
             text: $i18n.t('btn.back'), // 返回
             btnclick: () => {
-              // this.$comUtils.tabCloseAppoint(this);
+              //$omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
@@ -1187,7 +1191,7 @@ export default {
           {
             text: $i18n.t('btn.back'), // 返回
             btnclick: () => {
-              // this.$comUtils.tabCloseAppoint(this);
+              //$omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 back: true,
                 tableId: 24525,
@@ -1628,7 +1632,7 @@ export default {
               tableId: '24525',
               back: true,
             });
-            // this.$comUtils.tabCloseAppoint(this);
+            //$omsUtils.tabCloseAppoint(this);
           } else {
             this.IniData();
           }

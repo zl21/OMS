@@ -1,7 +1,7 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import batchTables from 'allpages/promotionCenter/details/batchTables';
 import SingleBox from 'professionalComponents/singleBox';
-import { tableCols } from '../promotionConfig';
+import { tableCols } from '../promotion.config';
 
 export default {
   name: 'InfoSet',
@@ -134,14 +134,19 @@ export default {
     itemdata() {
       // this.clearPdts();
       let rs;
-      if (this.infoData.products_origin === '1') {
-        rs = this.itemdata_xitong;
-      } else if (this.infoData.products_origin === '2') {
-        rs = this.itemdata_channel;
-      } else if (this.infoData.products_origin === '3') {
-        rs = this.itemdata_xitong_pro;
-      } else {
-        rs = this.itemdata_channel_pro;
+      switch (this.infoData.products_origin) {
+        case '1':
+          rs = this.itemdata_xitong;
+          break;
+        case '2':
+          rs = this.itemdata_channel;
+          break;
+        case '3':
+          rs = this.itemdata_xitong_pro;
+          break;
+        default:
+          rs = this.itemdata_channel_pro;
+          break;
       }
       const itemdata = JSON.parse(JSON.stringify(rs));
       return itemdata;
@@ -273,19 +278,13 @@ export default {
       const rowIndex = row._index;
       if (from === 'gift') {
         if (self.infoData.list[index].gift_products.length <= 1) {
-          this.$message({
-            type: 'warning',
-            message: '至少保留一条赠品信息',
-          });
+          this.$Message.warning('至少保留一条赠品信息')
           return;
         }
         self.infoData.list[index].gift_products.splice(rowIndex, 1);
       } else {
         if (self.infoData.list[index].products.length <= 1) {
-          this.$message({
-            type: 'warning',
-            message: '至少保留一条条件信息',
-          });
+          this.$Message.warning('至少保留一条条件信息')
           return;
         }
         self.infoData.list[index].products.splice(rowIndex, 1);

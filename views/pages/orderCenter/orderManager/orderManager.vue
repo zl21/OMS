@@ -1,31 +1,22 @@
 <template>
-  <div
-    v-loading="loading"
-    class="customized-list"
-  >
-    <div
-      class="customized-list-form"
-      :class="[Number.isInteger(formConfig.formData.length / 4) ? '' : 'position']"
-    >
+  <div v-loading="loading" class="customized-list">
+    <div class="customized-list-form"  :class="[Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '',tablename == 'OC_B_ORDER' && !isFolding ? 'returnChangeOrder' :'']">
       <!-- form组件 -->
-      <businessForm
-        v-if="buttonInit"
-        :form-config="formConfig"
-      />
+      <businessForm v-if="buttonInit" :form-config="formConfig" />
       <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
         <dynamicSearch
           v-if="!isFolding && tablename == 'OC_B_ORDER'"
           ref="dynamicSearch"
           :dynamic-data="dynamicData"
         />
-        <div></div>
-        <businessButton :btn-config="searchBtn" />
+        <div v-if="tablename !== 'OC_B_ORDER'"></div>
+        <businessButton class="searchBtn" :btn-config="searchBtn" />
       </div>
     </div>
     <div class="custom-btn customized-list-btn">
       <businessButton
         :btn-config="btnConfig"
-        @dropDownClick="(val) => eventGather.dropDownClickChange(val, extendBtn)"
+        @dropDownClick="val => eventGather.dropDownClickChange(val, extendBtn)"
       />
     </div>
     <div class="customized-list-table">
@@ -44,13 +35,25 @@
           :name="item.value"
         />
       </Tabs>
-      <agTable
+      <!-- <agTable
         ref="agGridChild"
         :ag-table-config="agTableConfig"
         @on-row-dblclick="onRowDblclick"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
         @on-sort-changed="onSortChanged"
+      /> -->
+      <businessAgTable
+        v-loading="agLoaing"
+        :ag-table-config="agTableConfig"
+        :options="options"
+        @on-row-dblclick="onRowDblclick"
+        @on-page-change="pageChange"
+        @on-page-size-change="pageSizeChange"
+        @on-selection-change="onSelectionChange"
+        @on-column-pinned="colPinned"
+        @on-column-moved="colMoved"
+        @on-sort-change="colSortChange"
       />
       <!-- <loading :loading="loading" /> -->
     </div>
@@ -114,25 +117,14 @@
       :width="800"
       mask
     >
-      <proDetail
-        :title="proDetailConfig.title"
-        :itemid="proDetailConfig.ID"
-      />
+      <proDetail :title="proDetailConfig.title" :itemid="proDetailConfig.ID" />
     </Modal>
-    <!-- <commonTableByAgGrid
-      ref="agGrid"
-      height="300px"
-      :options="options"
-      :data="row"
-      :columns="tabth"
-      @grid-ready="gridReady"
-    /> -->
   </div>
 </template>
 
 <script>
-  import orderManager from '@/js/pages/orderCenter/orderManager/orderManager';
-  export default orderManager;
+import orderManager from "@/js/pages/orderCenter/orderManager/orderManager";
+export default orderManager;
 </script>
 
 <style lang="less">

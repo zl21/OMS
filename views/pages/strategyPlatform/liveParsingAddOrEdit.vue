@@ -1,25 +1,27 @@
 <template>
-  <div class="live-parsing customized-detail" v-loading="loading">
-    <div class="buttons customized-detail-btn">
+  <div class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfig1" />
           </p>
         </Panel>
         <Panel name="panel_conds">
-          满足条件（满足以下条件的单据打“播”标）
+          <!-- 满足条件（满足以下条件的单据打“播”标） -->
+          {{ vmI18n.t('form_label.meet_conditions') }}（{{ vmI18n.t('modalTitle.ae') }}）
           <p slot="content">
             <businessForm :form-config="formConfig2">
               <template #timeType="{ rowData }">
                 <RadioGroup
                   v-model="rowData.value.BILL_TIME_TYPE"
                   @on-change="rowData.item.radioChange"
-                  style="width: 180px;">
+                  >
                   <Radio
                     v-for="(option , index) in rowData.item.options"
                     :key="index"
@@ -42,7 +44,7 @@
                   <RadioGroup
                     v-model="ruleItem.RULE_TYPE"
                     @on-change="rowData.item.radioChange(ruleItem)"
-                    style="width: 250px;">
+                    >
                     <Radio
                       v-for="(option, index) in rowData.item.options"
                       :key="index"
@@ -53,11 +55,11 @@
                   <Input v-model="ruleItem.RULE_CONTEXT"
                     :disabled="ruleItem.RULE_TYPE == '' || isEnable"
                     :autosize="{minRows: 2,maxRows: 5}"
-                    placeholder="请输入识别内容"
+                    :placeholder="vmI18n.t('modalTips.jy')"
                     @on-change="rowData.item.inputChange(ruleItem)"
                     style="width: 250px;"
                   />
-                  <span class="condition">或</span>
+                  <span class="condition">{{ vmI18n.t('form_label.cg') }}</span>
                   <Icon
                     v-if="!isEnable"
                     :type="index == 0 ? 'md-add' : 'md-close'"
@@ -71,7 +73,8 @@
           </p>
         </Panel>
         <Panel name="panel_action">
-          执行动作
+          <!-- 执行动作 -->
+          {{ vmI18n.t("panel_label.ae") }}
           <p slot="content">
             <businessForm :form-config="formConfig3" />
           </p>

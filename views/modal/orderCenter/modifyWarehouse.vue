@@ -7,17 +7,13 @@
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/modifyWarehouse.vue
 -->
 <template>
+  <!-- 修改仓库 -->
   <div
-    class="semiCustomModal"
+    class="customized-modal"
     style="width: 400px;"
   >
-    <div class="Modal-Form">
-      <div class="Modal-Form-Item">
-        <!-- 修改仓库 -->
-        <businessForm :form-config="formConfig"></businessForm>
-      </div>
-    </div>
-    <businessButton :btn-config="btnConfig" />
+    <businessForm :form-config="formConfig"></businessForm>
+    <businessButton :btn-config="btnConfig" class="modal-footer"/>
   </div>
 </template>
 <script>
@@ -26,5 +22,5 @@
   export default modifyWarehouse;
 </script>
 <style  lang='less'>
-  @import "~@/css/modal/orderCenter/modifyWarehouse.less";
+  // @import "~@/css/modal/orderCenter/modifyWarehouse.less";
 </style>

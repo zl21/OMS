@@ -60,6 +60,7 @@ import businessButton from 'professionalComponents/businessButton';
             this.$emit('closeActionDialog');
           } else if (res.data.data.code == -2) {
             this.$Modal.confirm({
+              className: 'ark-dialog',
               title: '',
               content: res.data.data.message,
               mask: true,

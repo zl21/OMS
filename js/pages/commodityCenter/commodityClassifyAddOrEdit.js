@@ -1,3 +1,6 @@
+/**
+ * 商品分类
+ */
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
@@ -16,7 +19,7 @@ export default {
     businessActionTable,
     loading,
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n:$i18n,
@@ -34,9 +37,11 @@ export default {
       backable: false, // 可返回否
       saveable: false, // 可保存否
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'default',
         buttons: [{
-          text: '保存',
+          webname: 'CLASSIFY_SaveBtn',
+          text: $i18n.t('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -44,6 +49,7 @@ export default {
           },
         },
         {
+          webname: 'fix_back',
           text: $i18n.t('btn.back'),
           btnclick: () => {
             this.back();
@@ -107,14 +113,14 @@ export default {
           oneObj: (val) => {
             // 选中触发事件
             console.log('val::', val);
-            if (!val.pid) return;
+            // if (!val.pid) return;
             this.formConfig.formValue.PARENT_ID = val.pid;
             this.masterModifyData('PARENT_ID', 'master');
           },
         },
         {
           style: null,
-          label: '启用状态',
+          label: $i18n.t('form_label.bg'), //  启用状态
           value: 'STATUS',
           colname: 'STATUS',
           width: '8',
@@ -283,6 +289,7 @@ export default {
       },
       // 子表Part
       cusAttrConfig: {
+        key: 0,
         isSearchText: true, // 是否修改搜索框为select
         isShowDeleteDetailBtn: false, // 控制是否显示删除明细
         isShowAddDetailBtn: false, // 控制是否显示新增明细
@@ -293,7 +300,7 @@ export default {
         height: '300', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30, 40, 50, 60], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         totalData: [],
         selectionData: [], // 选中的数据
@@ -322,31 +329,20 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              col: 1,
               colid: 165798, // 当前字段的ID
               colname: 'BS_C_EXTRA_ATTRIBUTE_DEF_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              inputname: 'BS_C_EXTRA_ATTRIBUTE_DEF_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
               name: '自定义属性', // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
-              reftableid: 10091, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
               valuedata: '', // 这个是选择的值
               pid: '',
             },
             oneObj: (val) => {
               // 选中触发事件
               console.log('val1::', val);
-              if (!val.pid) return;
+              // if (!val.pid) return;
               this.IDS = val.pid.split(',');
             },
           },],
@@ -356,14 +352,18 @@ export default {
         businessButtonConfig: {
           typeAll: 'default',
           buttons: [{
-            text: '添加',
+            webname: 'CLASSIFY_AddDetailBtn',
+            type:'primary',
+            text: $i18n.t('btn.increase'), //'添加',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.addAttrValue();
             },
           },
           {
-            text: '删除',
+            webname: 'CLASSIFY_DeleteDetailBtn',
+            type:'warning',
+            text: $i18n.t('btn.delete'), // 删除
             btnclick: () => {
               this.deleteAttrValue();
             },
@@ -378,7 +378,7 @@ export default {
         value: 'PROPERTY',
       },
       {
-        label: '操作日志',
+        label: $i18n.t('panel_label.operationLog'), // 操作日志
         value: 'PS_C_CLASSIFY_LOG',
       },
       ],
@@ -392,10 +392,16 @@ export default {
       return this.$router.currentRoute.params.customizedModuleName;
     },
   },
+  activated() {
+    if (this.ID > 0) {
+      this.getBtn();
+    }
+  },
   async mounted() {
     const self = this;
     if (self.ID > 0) {
       // 详情
+      this.getBtn();
       await self.initObjItem(self.ID);
     } else {
       // 新增
@@ -405,6 +411,23 @@ export default {
   },
   created() { },
   methods: {
+    getBtn() {
+      $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_CLASSIFY', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const { ACTIONS, SUB_ACTIONS } = res;
+        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        this.cusAttrConfig.businessButtonConfig.buttons.forEach(item => {
+          item.isShow = webArr.includes(item.webname);
+          SUB_ACTIONS.forEach(it => {
+            if (item.webname == it.webname) {
+              item.text = it.webdesc;
+            }
+          });
+        });
+        this.cusAttrConfig.key += 1;
+        console.log('this.cusAttrConfig.businessButtonConfig.buttons::',this.cusAttrConfig.businessButtonConfig.buttons);
+      });
+    },
     /* -------------------- 详情初始化 start -------------------- */
     async initObjItem(id) {
       const self = this;
@@ -424,8 +447,8 @@ export default {
       } = await self.service.commodityCenter.queryClassifyInit(formdata);
       this.loading = false;
       if (code == 0) {
-        self.formConfig = this.$OMS2.omsUtils.transformForm(data.PsCProClassify, self.formConfig, inputArr, drpArr);
-        self.formConfig2 = this.$OMS2.omsUtils.transformForm(data.PsCProClassify, self.formConfig2, inputArr2, drpArr2);
+        self.formConfig = $omsUtils.transformForm(data.PsCProClassify, self.formConfig, inputArr, drpArr);
+        self.formConfig2 = $omsUtils.transformForm(data.PsCProClassify, self.formConfig2, inputArr2, drpArr2);
         self.cusAttrConfig.data = data.PsCProClassifyItems;
         // 特别地（规格名称赋值）
         const specialObj = {'PS_C_SPEC_GROUP_ENAME1':'PS_C_SPEC_GROUP_ID1', 'PS_C_SPEC_GROUP_ENAME2':'PS_C_SPEC_GROUP_ID2', 'PS_C_SPEC_GROUP_ENAME3':'PS_C_SPEC_GROUP_ID2'};
@@ -461,7 +484,7 @@ export default {
     async addAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.businessFormConfig.formData[0].itemdata.valuedata.length) {
-        self.$Message.warning('请选择需要添加的内容！');
+        self.$Message.warning( $i18n.t('modalTips.kk') );
         return false;
       }
       this.loading = true;
@@ -489,7 +512,7 @@ export default {
     async deleteAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.selectionData.length) {
-        self.$Message.warning('请选择需要删除的内容！');
+        self.$Message.warning( $i18n.t('modalTips.ka')  );
         return false;
       }
       const delIDS = [];
@@ -526,7 +549,7 @@ export default {
       if (!masterArr.length && !self.saveable) return false;
       const valueArr = ['ECODE', 'ENAME'];
       const drpArr = [];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         this.$message.error(mes);
         return false;
@@ -581,8 +604,9 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -596,13 +620,13 @@ export default {
       }
     },
     onOk() {
-      // this.$comUtils.tabCloseAppoint(this);
+      //$omsUtils.tabCloseAppoint(this);
       // this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 10091,
         type: 'S',
         tableName: 'PS_C_PRO_CLASSIFY',
-        label: '商品分类',
+        label:   $i18n.t('menu.ac'), //'商品分类',
         back: true,
       });
     },

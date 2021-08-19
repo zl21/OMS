@@ -15,7 +15,7 @@ export default {
     businessActionTable,
     subTable
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n:$i18n,
@@ -34,19 +34,21 @@ export default {
         pageShow: true
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [
           {
-            webname: 'lookup_save', // 保存
-            text: '保存',
+            webname: 'ST_C_WAREHOUSE_LOGISTICS_MAIN_SAVE', // 保存
+            text: $i18n.t('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               const self = this;
               self.save(true);
             },
           },
           {
-            webname: 'lookup_return', // 返回
+            webname: 'fix_back', // 返回
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
@@ -68,13 +70,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_PHY_WAREHOUSE_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '仓库名称', // 赔付类型
+              name: $i18n.t('table_label.warehouseName'), // 仓库名称 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 169092, // 对应的表ID
@@ -101,7 +102,7 @@ export default {
           },
           {
             style: 'radio',
-            label: '物流分配',
+            label: $i18n.t('panel_label.ar'), // 物流分配
             value: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             colname: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             width: '6',
@@ -113,11 +114,11 @@ export default {
             options: [ // radio选项
               {
                 value: 1,
-                label: '自动分配'
+                label: $i18n.t('panel_label.ao'), // 自动分配
               },
               {
                 value: 2,
-                label: '默认物流'
+                label: $i18n.t('panel_label.aj'), // 默认物流
               }
             ]
           },
@@ -133,13 +134,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '物流公司', // 赔付类型
+              name: $i18n.t('form_label.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 171650, // 对应的表ID
@@ -159,7 +159,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             colname: 'REMARK',
             value: 'REMARK',
             width: '6',
@@ -171,15 +171,15 @@ export default {
           },
           {
             style: '',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), // 启用状态
             colname: 'ISACTIVE',
             value: 'ISACTIVE',
             width: '6',
             disabled: true,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master');
-              this.setEnable(this.formConfig.formValue.ISACTIVE);
-            }
+            // inputChange: () => {
+            //   this.masterModifyData('ISACTIVE', 'master');
+            //   this.setEnable(this.formConfig.formValue.ISACTIVE);
+            // }
           }
         ],
         formValue: {
@@ -204,7 +204,7 @@ export default {
       logisticsTableFormConfig: {
         formData: [
           {
-            label: '物流公司',
+            label: $i18n.t('form_label.logisticsCompany'), // 物流公司
             colname: 'CP_C_LOGISTICS_ID',
             defVal: 'CP_C_LOGISTICS_ID1',
             style: 'formCompile',
@@ -220,13 +220,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_LOGISTICS_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: '物流公司', // 赔付类型
+              name: $i18n.t('form_label.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 171650, // 对应的表ID
@@ -273,16 +272,22 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: '添加',
+            webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_ADD',
+            type:'primary',
+            text: $i18n.t('btn.increase'), // 添加
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               this.save();
             }
           },
           {
-            text: '删除',
+            webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_DELETE',
+            type:'warning',
+            text: $i18n.t('btn.delete'), // 删除
             disabled: false, // 按钮禁用控制
+            isShow: false,
             btnclick: () => {
               this.handleDelete();
             }
@@ -299,7 +304,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -312,7 +317,7 @@ export default {
         indexColumn: true, // 是否展示序号列
         columns: [
           {
-            title: '物流公司',
+            title: $i18n.t('form_label.logisticsCompany'), // 物流公司
             key: 'CP_C_LOGISTICS_ENAME'
           }
         ]
@@ -320,17 +325,17 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '启用物流',
+          label: $i18n.t('panel_label.aq'), // 启用物流
           value: 'logistics',
           isShow: true
         },
         {
-          label: '物流信息',
+          label: $i18n.t('panel_label.al'), // 物流信息
           value: 'logistics',
           isShow: false
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_WAREHOUSE_LOGISTICS_LOG',
           isShow: false
         }
@@ -344,6 +349,7 @@ export default {
     };
   },
   async mounted() {
+    await this.getBtn()
     this.initPanel();
     this.isWatchChange = true
     this.ID != -1 && (await this.queryLogistics());
@@ -351,6 +357,19 @@ export default {
   },
   created() {},
   methods: {
+    // 获取按钮权限
+    async getBtn() {
+      let params = { table: 'ST_C_WAREHOUSE_LOGISTICS_SET', type: 'OBJ', serviceId: 'r3-oc-oms' }
+      const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
+      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      this.logisticsTableButtonConfig.buttons.forEach(item => {
+        item.isShow = subWebArr.includes(item.webname)
+      })
+      this.btnConfig.buttons.forEach(item => {
+        item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
+      })
+    },
     onSelect(e) {
       // e为选中的数组对象RowArr
       this.logisticsTableConfig.selectionData = e;
@@ -394,8 +413,9 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -409,12 +429,12 @@ export default {
       }
     },
     onOk(id) {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       if (id) {
         this.$store.commit('global/tabOpen', {
           type: 'C',
-          label: '仓库物流编辑',
+          label: this.getCustomLabel(false), // 仓库物流编辑
           customizedModuleId: id,
           customizedModuleName: 'ST_C_WAREHOUSE_LOGISTICS_SET'
         });
@@ -471,7 +491,7 @@ export default {
           // 刚新增的被删除了则不push，且要从addData中移除
           let deArritem = [];
           deArritem.push(item);
-          self.logisticsTableConfig.addData = this.$OMS2.omsUtils.getDifferentArr(self.logisticsTableConfig.addData, deArritem, 'ID');
+          self.logisticsTableConfig.addData = $omsUtils.getDifferentArr(self.logisticsTableConfig.addData, deArritem, 'ID');
           return;
         }
         item.actionName = 'DELETE';
@@ -508,16 +528,16 @@ export default {
         i.colname == 'CP_C_PHY_WAREHOUSE_ID' && (i.itemdata.readonly = true)
         i.disabled = isEnable ? true : i.colname == 'ISACTIVE' ? true : false
       })
-      this.logisticsTableButtonConfig.buttons.forEach(item => item.disabled = isEnable)
+      this.logisticsTableButtonConfig.buttons.forEach(item => item.disabled = item.isShow && isEnable)
       this.logisticsTableFormConfig.formData[0].disabled = isEnable
       this.logisticsTableFormConfig.formData[0].style = isEnable ? 'input' : 'formCompile'
     },
     // 查询
     async queryLogistics() {
       this.loading = true;
-      // const obj = await this.$OMS2.omsUtils.getObject('ST_C_EXPRESS_ALLOCATION', this.ID);
+      // const obj = await $omsUtils.getObject('ST_C_EXPRESS_ALLOCATION', this.ID);
       this.isWatchChange = false;
-      // this.formConfig = this.$OMS2.omsUtils.initFormConfig(obj.addcolums[0].childs, this.formConfig);
+      // this.formConfig = $omsUtils.initFormConfig(obj.addcolums[0].childs, this.formConfig);
 
       const params = {
         ID: this.ID,
@@ -536,7 +556,7 @@ export default {
           this.queryForm(this.formConfig, 'CP_C_LOGISTICS_ID').style = this.isAuto ? '' : 'popInput';
           this.setEnable(isEnable);
 
-          this.$OMS2.omsUtils.intersectFormValue(this.formConfig.formValue, ST_C_EXPRESS_ALLOCATION);
+          $omsUtils.intersectFormValue(this.formConfig.formValue, ST_C_EXPRESS_ALLOCATION);
           let fieldNames = ['CP_C_PHY_WAREHOUSE', 'CP_C_LOGISTICS']
           fieldNames.forEach(i => {
             this.setFormValue(this.formConfig, i, {
@@ -545,8 +565,8 @@ export default {
             })
           })
           this.isMasterRequired = true;
-          this.queryForm(this.formConfig, 'ISACTIVE').style = 'switch';
-          this.formConfig.formValue.ISACTIVE = isEnable;
+          this.queryForm(this.formConfig, 'ISACTIVE').style = 'input';
+          this.formConfig.formValue.ISACTIVE = isEnable ? '启用' : '停用';
           this.formConfig.formValue.REMARK = ST_C_EXPRESS_ALLOCATION.remark;
           this.initPanel();
         }
@@ -567,7 +587,7 @@ export default {
       /* =========== 保存校验 start =========== */
       const valueArr = ['IS_AUTO_LOGISTICS_DISTRIBUTION'];
       const drpArr = this.isAuto ? ['CP_C_PHY_WAREHOUSE_ID'] : ['CP_C_PHY_WAREHOUSE_ID', 'CP_C_LOGISTICS_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         self.$message.error(mes);
         return false;
@@ -617,7 +637,7 @@ export default {
       if (code == 0) {
         // 筛选出差集作为展示
         this.logisticsTableConfig.selectionData = []
-        this.logisticsTableConfig.data = this.$OMS2.omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
+        this.logisticsTableConfig.data = $omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
         code == 0 ? this.$message.success(message) : this.$message.error(message);
       }
     },

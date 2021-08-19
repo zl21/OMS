@@ -3,25 +3,26 @@
  * @Date: 2021-04-28 13:22:03
  * @LastEditTime: 2021-06-02 20:05:38
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 物流公司档案
  * @FilePath: /burgeon-project-logic/views/pages/basicData/logisticsCompanyFilesAddOrEdit.vue
 -->
 <template>
-  <div class="logisticsCompanyFilesAddOrEdit cusArkCollapse customized-detail" >
+  <div class="customized-detail" >
     <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
         </Panel>
       </Collapse>
-      <Modal v-model="showAddPlatformLogisticsCompany" footer-hide width="800px" mask>
+      <Modal v-model="showAddPlatformLogisticsCompany" footer-hide width="830" mask>
         <addPlatformLogisticsCompany @getData="getTableData"></addPlatformLogisticsCompany>
       </Modal>
       <div class="customized-detail-table">
@@ -30,6 +31,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <businessActionTable
+            :key="subTableConfig.key"
             v-show="labelDefaultValue === 'PROPERTYVALUES'"
             :jordan-table-config="subTableConfig"
             @on-select="onSelect"
@@ -40,6 +42,7 @@
             @on-page-size-change="pageSizeChange"
           />
           <businessActionTable
+            :key="subTableConfig1.key"
             v-show="labelDefaultValue == 'CP_C_LOGISTICS_FIX'"
             :jordan-table-config="subTableConfig1"
             @on-select="onSelect1"

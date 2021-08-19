@@ -21,7 +21,7 @@ export default {
     scheduleFormDialog,
     businessDialog
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n:$i18n,
@@ -44,9 +44,9 @@ export default {
       // 公共弹框
       // 弹框配置
       scheduleFormConfig: {
-        title: '入库单', // 修改备注
+        // title: '入库单', // 修改备注
         titleAlign: 'center', // 设置标题是否居中 center left
-        width: '800',
+        // width: '800',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
         draggable: true, // 是否可以拖动
@@ -66,10 +66,11 @@ export default {
       // },
       curDialog: '', // 当前弹窗
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [{
           webname: 'lookup_save', // 保存
-            text: '保存',
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -94,27 +95,16 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              col: 1,
               colid: 169130, // 当前字段的ID
               colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '店铺',
-              inputname: 'CP_C_SHOP_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: '店铺', // 赔付类型
+              name: $i18n.t('other.shop'), // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 169130, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
+              valuedata: '' // 这个是选择的值
             },
             oneObj: e => {
               console.log(e);
@@ -124,7 +114,7 @@ export default {
           },
           {
             style: 'input',
-            label: '日程规划名称',
+            label: $i18n.t('form_label.bo'), // 日程规划名称
             colname: 'NAME',
             value: 'NAME',
             width: '6',
@@ -135,7 +125,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '规划开始时间', // 输入框前文字
+            label: $i18n.t('form_label.bp'), // 规划开始时间 输入框前文字
             colname: 'BEGIN_TIME',
             type: 'datetime',
             value: 'BEGIN_TIME', // 输入框的值
@@ -153,7 +143,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '规划结束时间', // 输入框前文字
+            label: $i18n.t('form_label.bq'), // 规划结束时间 输入框前文字
             colname: 'END_TIME',
             type: 'datetime',
             value: 'END_TIME', // 输入框的值
@@ -171,7 +161,7 @@ export default {
           },
           {
             style: 'input',
-            label: '优先级',
+            label: $i18n.t('table_label.priority'), // 优先级
             colname: 'RANK',
             value: 'RANK',
             width: '6',
@@ -184,13 +174,14 @@ export default {
           {
             style: 'checkbox',
             onlyBox: true,
-            label: '补货独立入库',
+            label: $i18n.t('form_label.br'), // 补货独立入库
             colname: 'IS_OUTWAREHOUSE_ALONE',
             value: 'IS_OUTWAREHOUSE_ALONE',
             width: '6',
             dataAcessKey: 'IS_OUTWAREHOUSE_ALONE',
             disabled: false,
-            checkboxChange: (e) => {
+            checkboxChange: (val) => {
+              this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = val
               this.masterModifyData('IS_OUTWAREHOUSE_ALONE', 'master');
             }
           }
@@ -215,7 +206,7 @@ export default {
       pickingForDate: {
         formData: [{
             style: 'time', // 输入框类型
-            label: '创建时间', // 输入框前文字
+            label: $i18n.t('table_label.creationTime'), // 创建时间 // 输入框前文字
             colname: 'PICK_CREATE_DATE',
             type: 'time',
             placement: 'bottom',
@@ -239,14 +230,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_ORIG_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               istooltip: true,
               length: 65535, // 最大长度是多少
-              name: '唯品会仓库', // 赔付类型
+              name: $i18n.t('form_label.bs'), // 唯品会仓库 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_ORIG', // 对应的表
               reftableid: 169347, // 对应的表ID
@@ -263,7 +253,7 @@ export default {
           },
           {
             style: 'select',
-            label: '拣货单类型',
+            label: $i18n.t('form_label.bt'), // 拣货单类型
             value: 'PICK_FLAG',
             width: '24',
             disabled: false,
@@ -274,15 +264,15 @@ export default {
             options: [ // radio选项
               {
                 value: '1',
-                label: '普通',
+                label: $i18n.t('other.common'), // 普通
               },
               {
                 value: '2',
-                label: '补货单', 
+                label: $i18n.t('form_label.bx'), // 补货单 
               },
               {
                 value: '3',
-                label: '预调拨',
+                label: $i18n.t('form_label.by'), // 预调拨
               }
             ]
           }
@@ -311,7 +301,7 @@ export default {
         formData: [
           {
             style: 'select',
-            label: '未拣货数维度',
+            label: $i18n.t('form_label.bu'), // 未拣货数维度
             value: 'NOT_PICK_NUM_LATITUDE',
             width: '24',
             disabled: false,
@@ -322,17 +312,17 @@ export default {
             options: [ // radio选项
               {
                 value: '1',
-                label: 'PO维度',
+                label: $i18n.t('form_label.c9'), // PO维度
               },
               {
                 value: '2',
-                label: '单PO下唯品会仓库维度',
+                label: $i18n.t('form_label.c8'), // 单PO下唯品会仓库维度
               }
             ]
           },
           {
             style: 'input',
-            label: '创建峰值',
+            label: $i18n.t('form_label.bv'), // 创建峰值
             colname: 'PEAK_VALUE',
             value: 'PEAK_VALUE',
             width: '24',
@@ -344,7 +334,7 @@ export default {
           },
           {
             style: 'select',
-            label: '自动拣货间隔时间',
+            label: $i18n.t('form_label.bw'), // 自动拣货间隔时间
             value: 'AUTO_PICK_TIME_INTERVAL',
             width: '24',
             disabled: false,
@@ -395,14 +385,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '商品SPU',
               inputname: 'CP_C_ORIG_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               istooltip: true,
               length: 65535, // 最大长度是多少
-              name: '唯品会仓库', // 赔付类型
+              name: $i18n.t('form_label.bs'), // 唯品会仓库 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_ORIG', // 对应的表
               reftableid: 169347, // 对应的表ID
@@ -420,7 +409,7 @@ export default {
           },
           {
             style: 'select',
-            label: '拣货单类型',
+            label: $i18n.t('form_label.bt'), // 拣货单类型
             value: 'PICK_FLAG',
             width: '24',
             disabled: false,
@@ -431,15 +420,15 @@ export default {
             options: [ // radio选项
               {
                 value: '1',
-                label: '普通',
+                label: $i18n.t('other.common'), // 普通
               },
               {
                 value: '2',
-                label: '补货单',
+                label: $i18n.t('form_label.bx'), // 补货单
               },
               {
                 value: '3',
-                label: '预调拨',
+                label: $i18n.t('form_label.by'), // 预调拨
               }
             ]
           }
@@ -476,18 +465,18 @@ export default {
       }, // 拣货单表单-按未拣货数创建
       warehouseWarrant: [
         { 
-          title: '创建条件',
+          title: $i18n.t('panel_label.aa'), // 创建条件
           formConfig: {
             formData: [{
               style: 'input',
-              label: '创建峰值',
+              label: $i18n.t('form_label.bv'), // 创建峰值
               colname: 'PEAK_VALUE',
               value: 'PEAK_VALUE',
               width: '12',
               regx: /^[0-9]*$/,
               disabled: false,
               tips: {
-                content: '当“店铺+唯品会仓库+发货实体仓”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单'
+                content:  $i18n.t('modalTips.hw') // 当“店铺+唯品会仓库+发货仓库”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单
               },
               inputChange: () => {
                 this.masterModifyData('PEAK_VALUE', 'warehouseWarrant', 0);
@@ -505,7 +494,7 @@ export default {
           },
         },
         {
-          title: '创建内容',
+          title: $i18n.t('panel_label.a8'), // 创建内容
           formConfig: {
             formData: [
               {
@@ -520,14 +509,13 @@ export default {
                   datelimit: 'all',
                   display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                   fkdisplay: 'mrp', // 外键关联类型
-                  fkdesc: '商品SPU',
                   inputname: 'CP_C_PHY_WAREHOUSE_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                   isfk: true, // 是否有fk键
                   isnotnull: true, // 是否必填
                   isuppercase: false, // 是否转大写
                   istooltip: true,
                   length: 65535, // 最大长度是多少
-                  name: '发货实体仓', // 赔付类型
+                  name: $i18n.t('form_label.delivery_warehouse'), // 发货仓库 // 赔付类型
                   readonly: false, // 是否可编辑，对应input   readonly属性
                   reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
                   reftableid: 169375, // 对应的表ID
@@ -545,7 +533,7 @@ export default {
               },
               {
                 style: 'select',
-                label: '承运商',
+                label: $i18n.t('form_label.bz'), // 承运商
                 value: 'CARRIER_CODE',
                 width: '12',
                 disabled: false,
@@ -567,7 +555,7 @@ export default {
               },
               {
                 style: 'checkbox', // 输入框类型
-                label: '航空禁运', // 输入框前文字
+                label: $i18n.t('form_label.c0'), // 航空禁运 // 输入框前文字
                 colname: 'IS_AIR_EMBARGO',
                 value: 'IS_AIR_EMBARGO', // 输入框的值
                 width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -578,7 +566,7 @@ export default {
               },
               {
                 style: 'select',
-                label: '发货间隔',
+                label: $i18n.t('form_label.c1'), // 发货间隔
                 value: 'EXP_SEND_INTERVAL',
                 width: '12',
                 disabled: false,
@@ -589,17 +577,17 @@ export default {
                 options: [ // radio选项
                   {
                     value: '0',
-                    label: '当日',
+                    label: $i18n.t('form_label.c2'), // 当日
                   },
                   {
                     value: '1',
-                    label: '次日',
+                    label: $i18n.t('form_label.c3'), // 次日
                   }
                 ]
               },
               {
                 style: 'time', // 输入框类型
-                label: '发货时间', // 输入框前文字
+                label: $i18n.t('form_label.c4'), // 发货时间 // 输入框前文字
                 colname: 'EXP_SENDTIME',
                 type: 'time',
                 value: 'EXP_SENDTIME', // 输入框的值
@@ -612,7 +600,7 @@ export default {
               },
               {
                 style: 'select',
-                label: '到货间隔',
+                label: $i18n.t('form_label.c5'), // 到货间隔
                 value: 'ARRIVAL_INTERVAL',
                 width: '12',
                 disabled: false,
@@ -623,17 +611,17 @@ export default {
                 options: [ // radio选项
                   {
                     value: '0',
-                    label: '当日',
+                    label: $i18n.t('form_label.c2'), // 当日
                   },
                   {
                     value: '1',
-                    label: '次日',
+                    label: $i18n.t('form_label.c3'), // 次日
                   }
                 ]
               },
               {
                 style: 'select', // 输入框类型
-                label: '到货时间', // 输入框前文字
+                label: $i18n.t('form_label.c6'), // 到货时间 输入框前文字
                 colname: 'EXP_ARRIVETIME',
                 value: 'EXP_ARRIVETIME', // 输入框的值
                 width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -686,11 +674,11 @@ export default {
           },
         },
         {
-          title: '入库单结单',
+          title: $i18n.t('panel_label.a9'), // 入库单结单
           formConfig: {
             formData: [{
               style: 'time', // 输入框类型
-              label: '入库单结单时间', // 输入框前文字
+              label: $i18n.t('form_label.c7'), // 入库单结单时间 输入框前文字
               colname: 'STATEMENT_TIME',
               type: 'time',
               value: 'STATEMENT_TIME', // 输入框的值
@@ -698,7 +686,7 @@ export default {
               format: 'HH:mm:ss',
               disabled: false,
               tips: {
-                content: '每天在该时间点自动对创建的入库单结单'
+                content: $i18n.t('modalTips.hv') // 每天在该时间点自动对创建的入库单结单
               },
               onChange: () => {
                 this.masterModifyData('STATEMENT_TIME', 'warehouseWarrant', 2);
@@ -719,7 +707,7 @@ export default {
       formConfigData: [
         {
           style: 'checkbox', // 输入框类型
-          label: '航空禁运', // 输入框前文字
+          label: $i18n.t('form_label.c0'), // 航空禁运 输入框前文字
           colname: 'IS_AIR_EMBARGO',
           value: 'IS_AIR_EMBARGO', // 输入框的值
           width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -730,7 +718,7 @@ export default {
         },
         {
           style: 'select',
-          label: '配送方式',
+          label: $i18n.t('form_label.distributionMode'), // 配送方式
           value: 'DELIVERY_METHOD',
           width: '24',
           disabled: false,
@@ -742,11 +730,11 @@ export default {
           options: [ // radio选项
             {
               value: '2',
-              label: '空运',
+              label: $i18n.t('form_label.ca'), // 空运
             },
             {
               value: '1',
-              label: '汽运',
+              label: $i18n.t('form_label.cb'), // 汽运
             }
           ]
         }
@@ -761,7 +749,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -780,10 +768,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -804,7 +792,7 @@ export default {
                     }
                   }
                 },
-                '编辑'
+                $i18n.t('table_label.edit') // 编辑
               ),
               h(
                 'Button',
@@ -819,8 +807,9 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
+                        className: 'ark-dialog',
                         title: $i18n.t('modalTitle.tips'), // 提示
-                        content: '确定删除？',
+                        content: $i18n.t('modalTitle.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
                         okText: $i18n.t('common.determine'), // 确定
@@ -832,7 +821,7 @@ export default {
                     }
                   }
                 },
-                '删除'
+                $i18n.t('btn.delete') // 删除
               )
             ])
           }
@@ -841,7 +830,7 @@ export default {
           formData: [
             {
               style: 'radio',
-              label: '拣货单创建方式',
+              label: $i18n.t('form_label.cc'), // 拣货单创建方式
               value: 'PICK_CREATE_TYPE',
               colname: 'PICK_CREATE_TYPE',
               width: '24',
@@ -850,8 +839,9 @@ export default {
               radioChange: ()=>{
                 if (!this.pickingTableConfig.data.length) return;
                 this.$Modal.info({
+                  className: 'ark-dialog',
                   title: $i18n.t('modalTitle.tips'), // 提示
-                  content: '当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？',
+                  content: $i18n.t('modalTitle.hx'), // 当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？
                   mask: true,
                   showCancel: true,
                   okText: $i18n.t('common.determine'), // 确定
@@ -869,11 +859,11 @@ export default {
               options: [ // radio选项
                 {
                   value: 1,
-                  label: '按时间点创建',
+                  label: $i18n.t('panel_label.ap'), // 按时间点创建
                 },
                 {
                   value: 2,
-                  label: '按未拣货数创建',
+                  label: $i18n.t('panel_label.ab'), // 按未拣货数创建
                 }
               ]
             }
@@ -892,7 +882,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '新增',
+              text: $i18n.t('btn.add'), // 新增
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -905,35 +895,35 @@ export default {
       },
       pickTableHeaders: [
         [{
-          title: '创建时间',
+          title: $i18n.t('table_label.creationTime'), // 创建时间
           key: 'PICK_CREATE_DATE',
         },
         {
-          title: '唯品会仓库',
+          title: $i18n.t('form_label.bs'), // 唯品会仓库
           key: 'CP_C_ORIG_ENAME',
         },
         {
-          title: '拣货单类型',
+          title: $i18n.t('form_label.bt'), // 拣货单类型
           key: 'PICK_FLAG_STR'
         }],
         [{
-          title: '未拣货数维度',
+          title: $i18n.t('form_label.bu'), // 未拣货数维度
           key: 'NOT_PICK_NUM_LATITUDE_STR'
         },
         {
-          title: '创建峰值',
+          title: $i18n.t('form_label.bv'), // 创建峰值
           key: 'PEAK_VALUE',
         },
         {
-          title: '自动拣货间隔时间',
+          title: $i18n.t('form_label.bw'), // 自动拣货间隔时间
           key: 'AUTO_PICK_TIME_INTERVAL_STR',
         },
         {
-          title: '唯品会仓库',
+          title: $i18n.t('form_label.bs'), // 唯品会仓库
           key: 'CP_C_ORIG_ENAME',
         },
         {
-          title: '拣货单类型',
+          title: $i18n.t('form_label.bt'), // 拣货单类型
           key: 'PICK_FLAG_STR',
         }]
       ],
@@ -943,7 +933,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -962,10 +952,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: '操作',
+            title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -984,7 +974,7 @@ export default {
                     }
                   }
                 },
-                '编辑'
+                $i18n.t('table_label.edit') // 编辑
               ),
               h(
                 'Button',
@@ -999,8 +989,9 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
+                        className: 'ark-dialog',
                         title: $i18n.t('modalTitle.tips'), // 提示
-                        content: '确定删除？',
+                        content: $i18n.t('modalTitle.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
                         okText: $i18n.t('common.determine'), // 确定
@@ -1012,48 +1003,48 @@ export default {
                     }
                   }
                 },
-                '删除'
+                $i18n.t('btn.delete') // 删除
               )
             ])
           },
           {
-            title: '创建峰值',
+            title: $i18n.t('form_label.bv'), // 创建峰值
             key: 'PEAK_VALUE',
           },
           {
-            title: '发货实体仓',
+            title: $i18n.t('form_label.delivery_warehouse'), // 发货仓库
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
           },
           {
-            title: '承运商',
+            title: $i18n.t('form_label.bz'), // 承运商
             key: 'CARRIER_CODE_STR',
           },
           {
-            title: '发货间隔',
+            title: $i18n.t('form_label.c1'), // 发货间隔
             key: 'EXP_SEND_INTERVAL_STR',
           },
           {
-            title: '发货时间',
+            title: $i18n.t('form_label.c4'), // 发货时间
             key: 'EXP_SENDTIME',
           },
           {
-            title: '到货间隔',
+            title: $i18n.t('form_label.c5'), // 到货间隔
             key: 'ARRIVAL_INTERVAL_STR',
           },
           {
-            title: '到货时间',
+            title: $i18n.t('form_label.c6'), // 到货时间
             key: 'EXP_ARRIVETIME',
           },
           {
-            title: '入库单结单时间',
+            title: $i18n.t('form_label.c7'), // 入库单结单时间
             key: 'STATEMENT_TIME',
           },
           {
-            title: '配送方式',
+            title: $i18n.t('form_label.distributionMode'), // 配送方式
             key: 'DELIVERY_METHOD_STR',
           },
           {
-            title: '航空禁运',
+            title: $i18n.t('form_label.c0'), // 航空禁运
             key: 'IS_AIR_EMBARGO',
             render: (h, params) => h('span', params.row.IS_AIR_EMBARGO == '0' ? '否' : '是')
           }
@@ -1062,7 +1053,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '新增',
+              text: $i18n.t('btn.add'), // 新增
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -1072,51 +1063,10 @@ export default {
           ]
         }
       },
-      logConfig: {
-        // 是否修改搜索框为select
-        isSearchText: true,
-        isShowDeleteDetailBtn: false, // 控制是否显示删除明细
-        isShowAddDetailBtn: false, // 控制是否显示新增明细
-        // isSearchText为false的情况下使用 搜索框list
-        searchSelectList: [],
-        pageShow: true, // 控制分页是否显示
-        btnsShow: true, // 控制操作按钮是否显示*
-        searchInputShow: false, // 控制搜索框是否显示
-        width: '', // 表格宽度
-        border: true, // 是否显示纵向边框
-        total: 0, // 设置总条数
-        pageSizeOpts: [5, 15, 30, 45, 60], // 每页条数切换的配置
-        pageSize: 5, // 每页条数
-        isShowSelection: true, // 是否展示select框
-        indexColumn: true, // 是否展示序号列
-        columns: [
-          {
-            title: '用户名',
-            key: 'CP_C_PLATFORM_ID',
-          },
-          {
-            title: '日志类型',
-            key: 'CP_C_LOGISTICS_ECODE',
-          },
-          {
-            title: '修改前',
-            key: 'CP_C_LOGISTICS_ENAME',
-          },
-          {
-            title: '修改后',
-            key: 'CP_C_LOGISTICS_ENAME',
-          },
-          {
-            title: '修改人名称',
-            key: 'CP_C_LOGISTICS_ENAME',
-          }
-        ],
-        data: []
-      },
       // tab切换配置
       labelList: [
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_C_VIPCOM_PROJECT_LOG',
         }
       ],
@@ -1132,6 +1082,7 @@ export default {
     };
   },
   async mounted() {
+    // this.getBtn()
     await this.carrierDropList(); // 承运商下拉项
     this.querySchedule();
     this.subTableConfig = {
@@ -1144,11 +1095,21 @@ export default {
   computed: {
     dialogInfo() {
       return this.curDialog == 'warehouseWarrant'
-        ? { title: '入库单', width: '800px' }
-        : { title: '拣货单', width: '400px' };
+        ? { title: $i18n.t('panel_label.ac'), width: '800' }
+        : { title: $i18n.t('panel_label.ad'), width: '400' };
     }
   },
   methods: {
+    // 获取按钮权限
+    getBtn() {
+      $omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_VIPCOM_PROJECT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res;
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes($i18n.t('btn.delete')); // 删除
+        this.jordanTableConfig.isShowImportBtn = webArr.includes($i18n.t('btn.import')); // 导入
+      });
+    },
     // 时间戳格式化
     formatDate(time, format) {
       const date = new Date(time);
@@ -1158,8 +1119,9 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -1173,7 +1135,7 @@ export default {
       }
     },
     onOk() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 10406,
@@ -1190,16 +1152,23 @@ export default {
       this.initDetail = detail || {};
       this.initForm(detail, isEdit);
       
+      console.log(this.dialogConfig);
       this.scheduleFormConfig.componentData = {
-        objid: '-1',
+        ID: this.ID,
         tableName: 'ST_C_VIPCOM_PROJECT',
-        data: this.dialogConfig,
-        detail: detail || {}
+        dialogConfig: this.dialogConfig,
+        detail: detail || {},
+        type: key
       };
-      this.scheduleFormConfig.title = this.dialogInfo.title;
+      this.scheduleFormConfig = {
+        ...this.scheduleFormConfig,
+        title: this.dialogInfo.title,
+        width: this.dialogInfo.width
+      };
       setTimeout(() => {
         this.$children.find(item => item.name === 'scheduleFormDialog').openConfirm();
       }, 800);
+     
     },
     /**
      * 记录主/子表修改信息方法
@@ -1216,32 +1185,16 @@ export default {
         : self.formConfig.formValue[ecode];
       let type = Object.prototype.toString.call(value);
 
-      let checkboxVal;
-      if (ecode == 'IS_OUTWAREHOUSE_ALONE') {
-        switch (typeof value) {
-          case 'string':
-            checkboxVal = value == 'true' ? 0 : 1;
-            break;
-          case 'number':
-            checkboxVal = value ? 0 : 1;
-            break;
-          case 'boolean':
-            checkboxVal = Number(!value);
-            break;
-          default:
-            break;
-        }
-      }
       if (type == '[object Date]') {
         let newTime = this.formatDate(value)
         let oldTime = self.modify[obj][ecode]
         if (ecode == 'END_TIME') {
-          newTime = this.$OMS2.omsUtils.defaultEndTime(newTime, oldTime)
+          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
           self.formConfig.formValue[ecode] = newTime
         }
         self.modify[obj][ecode] = newTime
       } else {
-        self.modify[obj][ecode] = ecode == 'IS_OUTWAREHOUSE_ALONE' ? checkboxVal : value;
+        self.modify[obj][ecode] = ecode == 'IS_OUTWAREHOUSE_ALONE' ? Number(value) : value;
       }
     },
     // 是否专配
@@ -1335,7 +1288,7 @@ export default {
       const isStockIn = this.curDialog == 'warehouseWarrant';
       this.dialogLoading = true;
       const subTable = isStockIn ? 'ST_C_VIPCOM_PROJECT_STOCK_IN_ITEM' : 'ST_C_VIPCOM_PROJECT_PICK_ITEM';
-      const data = await this.$OMS2.omsUtils.getObject(subTable, isEdit ? this.ID : -1);
+      const data = await $omsUtils.getObject(subTable, isEdit ? this.ID : -1);
 
       /** 获取入库单到货时间下拉选项 */
       data.addcolums[0].childs.forEach(item => {
@@ -1348,8 +1301,10 @@ export default {
           this.fillSelectOptions(this.dialogConfig[0].formConfig, item, 'AUTO_PICK_TIME_INTERVAL');
         }
       });
+      let childs = data.addcolums[0].childs.filter(i => i.colname != 'IS_AIR_EMBARGO')
       this.dialogConfig.forEach((item, index) => {
-        item.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, item.formConfig);
+        item.formConfig = $omsUtils.initFormConfig(childs, item.formConfig);
+        console.log(item.formConfig)
         /** 由于方法返回的外键字段值是对象，形如：{ pid: '', valuedata: ''} */
         if (index == 1) { 
           const obj = item.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID;
@@ -1390,30 +1345,7 @@ export default {
       this.dialogLoading = false;
       this.isWatchChange = true;
     },
-    // 确认弹窗数据
-    getDetail(data) {
-      const { ID } = data;
-      let params;
-      let PICK_CREATE_TYPE;
-      switch (this.curDialog) {
-        case 'pickingForDate':
-        case 'pickingForStatus':
-          PICK_CREATE_TYPE = this.curDialog == 'pickingForDate' ? 1 : 2;
-          params = ID != -1 ? { ID, ...this.modify.picking } : { ...data, PICK_CREATE_TYPE };
-          this.subTableSave(params, 'picking');
-          break;
-        case 'warehouseWarrant':
-          params = ID != -1 ? { ID, ...this.modify.warehouseWarrant } : data;
-          if (params.hasOwnProperty('IS_AIR_EMBARGO')) {
-            const { IS_AIR_EMBARGO } = data;
-            params.IS_AIR_EMBARGO = IS_AIR_EMBARGO ? Number(IS_AIR_EMBARGO) : 0;
-          }
-          this.subTableSave(params, 'warehouseWarrant');
-          break;
-        default:
-          break;
-      }
-    },
+    
     // 承运商下拉项
     carrierDropList() {
       this.service.strategyPlatform.carrierDropList().then(({ data: { code, data } }) => {
@@ -1425,9 +1357,9 @@ export default {
     },
     // 查询
     async querySchedule() {
-      const data = await this.$OMS2.omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
+      const data = await $omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
       this.isWatchChange = false;
-      this.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
+      this.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
       this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid;
       this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = false;
 
@@ -1447,7 +1379,7 @@ export default {
             this.pickingTableConfig.data = VIPCOM_PROJECT_PICK_LIST || [];
             this.warehouseWarrantConfig.data = VIPCOM_PROJECT_STORE_IN_LIST || [];
             this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE;
-            this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE;
+            this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE != '0';
             this.initPickTable();
           } else {
             this.$message.error(message);
@@ -1464,7 +1396,7 @@ export default {
       /* =========== 保存校验 start =========== */
       const valueArr = ['NAME', 'BEGIN_TIME', 'END_TIME', 'RANK'];
       const drpArr = ['CP_C_SHOP_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
         self.$message.error(mes);
         return false;
@@ -1482,6 +1414,10 @@ export default {
       this.service.strategyPlatform.wphScheduleSave({ ID: this.ID, ...params })
       .then(({ data: { code, data, message } }) => {
         if (code == 0) {
+          if (this.ID > 0) {
+            this.onOk()
+            return
+          }
           this.isMasterRequired = true;
           this.initModify();
           this.isModify = false
@@ -1494,26 +1430,6 @@ export default {
       });
     },
     
-    /**
-     * 拣货单/入库单保存
-     * @param {*} params 表单数据
-     * @param {*} type 拣货单/入库单
-     */
-     subTableSave(params, type) {
-      let payload = { ...params, ST_C_VIPCOM_PROJECT_ID: this.ID };
-      this.dialogLoading = true;
-      const api = type == 'picking' ? 'pickSave' : 'warehouseInSave';
-      this.service.strategyPlatform[api](payload)
-      .then(({ data: { code, message } }) => {
-        this.dialogLoading = false;
-        if (code == 0) {
-          this.$message.success(message);
-          this.$refs.dialogForm.$parent.close();
-          this.querySchedule();
-          this.initModify();
-        }
-      }).catch(() => this.dialogLoading = false);
-    },
     /**
      * 拣货单/入库单删除
      * @param {*} ID 明细ID, -1则清空所有数据

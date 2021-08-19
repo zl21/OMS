@@ -14,8 +14,9 @@ export default {
           {
             text: $i18n.t('btn.refresh'), // text: '刷新',
             btnclick: () => {
-              if (this.canFresh) {
+              if (this.canFresh && this.data.length > 1) {
                 this.$Modal.confirm({
+                  className: 'ark-dialog',
                   title: $i18n.t('modalTitle.tips'), // title:'提示',
                   content: $i18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
                   titleAlign: 'center',
@@ -90,7 +91,10 @@ export default {
           key: 'advise_phy_warehouse_id',
           draggable:true,
           render: (h, params) => {
-            const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
+            let temp_max_total_qty_available = 0
+            const options = params.row.sgBPhyInStorageItemExt.map(item => {
+              temp_max_total_qty_available = item.total_qty_available > temp_max_total_qty_available ? item.total_qty_available : temp_max_total_qty_available
+              return h('Option', {
                 style: {
                   'font-style': item.total_qty_available === 0 ? 'italic' : 'normal'
                 },
@@ -98,33 +102,48 @@ export default {
                   value: item.advise_phy_warehouse_id,
                   label: item.advise_phy_warehouse_ename
                 }
-              }));
+              })
+            });
+            /**
+             * 场景：
+             * 1. 建议发货仓库options没有原发货仓库，取可售数量最大的
+             * 2. 建议发货仓库options有原发货仓库，取原发货仓库
+             * 3. 建议发货仓库是空，取原发货仓库
+             */
+            let advise_phy_warehouse_id
+            let isExit = params.row.sgBPhyInStorageItemExt.find(item => params.row.cp_c_phy_warehouse_id == item.advise_phy_warehouse_id)
+            if (isExit) {
+              advise_phy_warehouse_id = params.row.cp_c_phy_warehouse_id
+            } else {
+              let maxQtyWarehouse = params.row.sgBPhyInStorageItemExt.find(item => item.total_qty_available == temp_max_total_qty_available)
+              advise_phy_warehouse_id = maxQtyWarehouse.advise_phy_warehouse_id
+            }
             return h('div', [
               h(
                 'Select',
                 {
                   props: {
-                    value: params.row.cp_c_phy_warehouse_id,
+                    value: advise_phy_warehouse_id,
                     disabled: this.dataIndex !== 0
                   },
                   on: {
                     'on-change': value => {
                       const opt = params.row.sgBPhyInStorageItemExt.filter(item => item.advise_phy_warehouse_id == value)[0];
-                      params.row.cp_c_phy_warehouse_id = value;
-                      params.row.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
-                      params.row.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
+                      // params.row.cp_c_phy_warehouse_id = value;
+                      // params.row.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
+                      // params.row.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
                       params.row.total_qty_available = opt.total_qty_available;
                       // params.row.total_qty_available = params.row.sgBPhyInStorageItemExt.filter(item => { return item.advise_phy_warehouse_id == value })[0].total_qty_available;
                       // 如果勾选了,同时更新勾选数据
-                      if (this.onSelectData.length !== 0) {
-                        this.onSelectData.forEach(item => {
-                          if (params.row.orig_order_item_id == item.orig_order_item_id) {
-                            item.cp_c_phy_warehouse_id = value;
-                            item.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
-                            item.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
-                          }
-                        });
-                      }
+                      // if (this.onSelectData.length !== 0) {
+                      //   this.onSelectData.forEach(item => {
+                      //     if (params.row.orig_order_item_id == item.orig_order_item_id) {
+                      //       item.cp_c_phy_warehouse_id = value;
+                      //       item.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
+                      //       item.cp_c_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
+                      //     }
+                      //   });
+                      // }
                       this.data[0][params.index] = params.row;
                     }
                   }
@@ -140,9 +159,20 @@ export default {
           draggable:true
         },
         {
-          title: $i18n.t('table_label.quantity_availableSale'), // 可售数量
+          title:$i18n.t('table_label.a4'),  // 实体可用数量
           key: 'total_qty_available',
-          draggable:true
+          draggable:true,
+          render:(h , params) => {
+            if(params.row.total_qty_available < params.row.waiting_split_num){
+              return h('div' , {
+                style:{
+                  color:'red'
+                }
+              },params.row.total_qty_available)
+            }else {
+              return h('div' , {},params.row.total_qty_available)
+            }
+          }
         },
         {
           title: $i18n.t('table_label.quantity_demolished'), // 待拆数量
@@ -214,7 +244,7 @@ export default {
   },
   methods: {
     back() {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$store.commit('customize/TabHref', {
         id: 2307,
         type: 'action',
@@ -243,6 +273,18 @@ export default {
           total += item.waiting_split_num;
           item.total_qty_available = item.sgBPhyInStorageItemExt[0].total_qty_available; // 获取默认仓库可售数量
           item.is_gift_name = item.gift_type == 0 ? '否' : '是';
+          
+          // 建议发货仓库为空，默认原发货仓库
+          if (item.sgBPhyInStorageItemExt[0].advise_phy_warehouse_id == null) {
+            item.sgBPhyInStorageItemExt[0] = {
+              ...item.sgBPhyInStorageItemExt[0],
+              advise_phy_warehouse_ecode: item.cp_c_phy_warehouse_ecode,
+              advise_phy_warehouse_ename: item.cp_c_phy_warehouse_ename,
+              advise_phy_warehouse_id: item.cp_c_phy_warehouse_id,
+              // ps_c_sku_id: ps_c_sku_id,
+              // total_qty_available: qty
+            }
+          }
         });
         res.data.data[0].total = total;
         self.data.push(res.data.data);
@@ -274,6 +316,14 @@ export default {
       }
       if ((self.data[0].length == 1 && self.data[0][0].split_num >= self.data[0][0].waiting_split_num) || self.data[0][0].total <= 1) {
         self.$Message.warning($i18n.t('modalTips.cm')); // 没有可拆分的订单
+        return;
+      }
+      if(self.onSelectData.length == self.data[0].length && self.data[0].every(item => item.waiting_split_num == item.split_num)){
+        self.$Message.warning('不能一次将所有的数据添加至待拆单区!'); // 没有可拆分的订单
+        return;
+      }
+      if(!(self.onSelectData.every(item=>item.cp_c_phy_warehouse_id == self.onSelectData[0].cp_c_phy_warehouse_id))){
+        self.$Message.warning('建议仓库不是同一个，不允许拆成一单!'); // 没有可拆分的订单
         return;
       }
       self.onSelectData.forEach(item => {
@@ -328,6 +378,10 @@ export default {
       const self = this;
       if (self.data.length <= 1) {
         self.$Message.warning($i18n.t('modalTips.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
+        return;
+      }
+      if(self.data[0].some(item=>item.waiting_split_num!=item.split_num)){
+        self.$Message.warning('请将需要拆分的单据添加到待拆单里!'); // 请先选择拆单明细添加到待拆单，再进行拆单
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.saveSplitOrderInfo({ data: self.data });

@@ -4,13 +4,19 @@
     v-if="dialog_visible"
     class="setCommodity"
   >
-    <my-dialog
+    <!-- <my-dialog
       :visible.sync="dialog_visible"
       title="商品池设置"
       class="setCommodityModal"
       width="70%"
       @MyDialogClose="closeDialogs"
-    >
+    > -->
+    <Modal
+        v-model="dialog_visible"
+        title="商品池设置"
+        mask
+        class-name='setCommodityModal'
+        width="70%">
       <div class="tableBox">
         <detailtable
           :t-columns="columns"
@@ -23,10 +29,11 @@
           @alertRowData="alertRowData"
         />
       </div>
-      <div class="modal_footer">
+      <div slot="footer" class="modal_footer">
         <businessButton :btn-config="btnConfig" />
       </div>
-    </my-dialog>
+    </Modal>
+    <!-- </my-dialog> -->
   </div>
 </template>
 <script>

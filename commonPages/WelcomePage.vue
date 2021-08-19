@@ -1,64 +1,27 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-27 11:20:18
+ * @LastEditTime: 2021-08-17 19:50:18
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/commonPages/WelcomePage.vue
+-->
 <template>
   <div class="welcomepage">
-    <!--     
-    <div class="container">
-      <Dropdown>
-        <a href="javascript:void(0)">
-          中/En
-          <Icon type="ios-arrow-down"></Icon>
-        </a>
-        <DropdownMenu slot="list">
-          <DropdownItem
-            v-for="item in langConfig"
-            :key="item.type"
-            @click.native="toggleLang(item.type)"
-            :disabled="vmI18n.locale == item.type"
-            >{{ item.text }}</DropdownItem
-          >
-        </DropdownMenu>
-      </Dropdown>
-      <br />
-      <button>{{ vmI18n.t("btn.text") }}</button>
-      <span>{{ vmI18n.t("message.hello") }}</span>
-    </div> 
-    -->
+    
   </div>
 </template>
 
 <script>
-  const langConfig = [
-    {
-      type: 'zh',
-      text: '中文',
-    },
-    {
-      type: 'en',
-      text: 'English',
-    },
-    {
-      type: 'ja',
-      text: '日语',
-    },
-  ];
-
   export default {
     name: 'WelcomePage',
     data() {
       return {
-        vmI18n: window.vmI18n,
-        langConfig,
+        vmI18n: window.vmI18n
       };
     },
     methods: {
-      toggleLang(lang) {
-        const _this = this;
-        localStorage.setItem('locale', lang);
-        _this.vmI18n.locale = localStorage.getItem('locale');
-        this.$message({
-          message: _this.vmI18n.messages[lang].tip_info,
-          type: _this.vmI18n.messages[lang].tip_type,
-        });
-      },
+
     },
     mounted() {
       const domContent = document.getElementById('content');
@@ -78,7 +41,9 @@
 .welcomepage {
   width: 100%;
   height: 100%;
-  background: url("../assets/img/loginBg.jpg") center / 100% no-repeat;
+  background: url("~@/assets/img/loginBg.png") center / 100% no-repeat #fff;
+  // background-size: contain;
+  background-size:auto 100%;
   /deep/ .ark-dropdown {
     margin: 10px 10px 20px;
   }
@@ -101,10 +66,4 @@
     }
   }
 }
-</style>
-
-<style >
-  .navigator .left #navBrandImg img.banner {
-    left: 30% !important;
-  }
 </style>

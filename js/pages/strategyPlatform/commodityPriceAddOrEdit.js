@@ -21,7 +21,7 @@ export default {
     businessDialog,
     myInput
   },
-  mixins: [modifycurrentLabel],
+  mixins: [new modifycurrentLabel()],
   data() {
     return {
       vmI18n:$i18n,
@@ -40,10 +40,12 @@ export default {
         pageShow: true
       },
       btnConfig: {
+        btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
-        buttons: [{
-          webname: 'lookup_save', // 保存
-            text: '保存',
+        buttons: [
+          {
+            webname: 'ST_C_PRICE_MAIN_SAVE', // 保存
+            text: $i18n.t('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -52,15 +54,15 @@ export default {
             },
           },
           {
-            webname: 'lookup_return', // 返回
+            webname: 'fix_back', // 返回
             text: $i18n.t('btn.back'),
             btnclick: () => {
               this.back();
             },
           },
           {
-            webname: 'lookup_return', // 返回
-            text: '复制',
+            webname: 'ST_C_PRICE_MAIN_COPY', // 返回
+            text: $i18n.t('common.copy'), // 复制
             isShow: false,
             btnclick: () => {
               this.onOk(this.ID, true)
@@ -72,7 +74,7 @@ export default {
         formData: [
           {
             style: '',
-            label: '策略ID',
+            label: $i18n.t('form_label.bc'), // 策略ID
             colname: 'PLAN_ID',
             width: '6',
             disabled: false,
@@ -82,7 +84,7 @@ export default {
           },
           {
             style: 'input',
-            label: '策略名称',
+            label: $i18n.t('form_label.bd'), // 策略名称
             colname: 'PLAN_NAME',
             width: '6',
             disabled: false,
@@ -96,28 +98,17 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              col: 1,
               colid: 171534, // 当前字段的ID
               colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '店铺',
-              inputname: 'CP_C_SHOP_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
               istooltip: true,
-              length: 65535, // 最大长度是多少
-              name: '店铺名称', // 赔付类型
+              name: $i18n.t('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
+              valuedata: '' // 这个是选择的值
             },
             oneObj: e => {
               console.log(e);
@@ -129,11 +120,11 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效开始时间', // 输入框前文字
+            label: $i18n.t('form_label.be'), // 生效开始时间 // 输入框前文字
             colname: 'BEGIN_TIME',
-            type: 'date',
+            type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd',
+            format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
               disabledDate (date) {
@@ -146,11 +137,11 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: '生效结束时间', // 输入框前文字
+            label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
             colname: 'END_TIME',
-            type: 'date',
+            type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd',
+            format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
               disabledDate (date) {
@@ -163,7 +154,7 @@ export default {
           },
           {
             style: 'input',
-            label: '优先级',
+            label: $i18n.t('table_label.priority'), // 优先级
             colname: 'PRIORITY',
             width: '6',
             disabled: false,
@@ -174,7 +165,7 @@ export default {
           },
           {
             style: 'input',
-            label: '备注',
+            label: $i18n.t('table_label.remarks'), // 备注
             colname: 'REMARK',
             width: '6',
             disabled: false,
@@ -184,15 +175,15 @@ export default {
           },
           {
             style: '',
-            label: '启用状态',
+            label: $i18n.t('form_label.bg'), //  启用状态
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
-            switchChange: () => {
-              this.masterModifyData('ISACTIVE', 'master');
-              this.isEnable = this.formConfig.formValue.ISACTIVE;
-              this.reloadForm()
-            }
+            // inputChange: () => {
+            //   this.masterModifyData('ISACTIVE', 'master');
+            //   this.isEnable = this.formConfig.formValue.ISACTIVE;
+            //   this.reloadForm()
+            // }
           }
         ],
         formValue: {
@@ -221,7 +212,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -240,16 +231,16 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: '序号'
+            title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: "SKU编码",
+            title: $i18n.t('table_label.code_SKU'), // SKU编码
             key: "PS_C_SKU_ID",
             align: "center",
             required: false,
             render: (h, params) => {
               // this.isEnable
-              if (!this.formConfig.formValue.ISACTIVE && !this.isCopy) {
+              if (this.formConfig.formValue.ISACTIVE != '启用' && !this.isCopy) {
                 return h("div", [
                   h("myInput", {
                     style: {
@@ -288,12 +279,12 @@ export default {
             },
           },
           {
-            title: '最低成交价格',
+            title: $i18n.t('form_label.cw'), // 最低成交价格
             key: 'PEAK_VALUE',
             align: "center",
             render: (h, params) => {
               // this.isActive
-              if (!this.formConfig.formValue.ISACTIVE && !this.isCopy) {
+              if (this.formConfig.formValue.ISACTIVE != '启用' && !this.isCopy) {
                 return h('Input', {
                   style: {
                     width: '150',
@@ -332,13 +323,12 @@ export default {
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: '店铺',
                 inputname: 'PS_C_SPU_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: 'SPU编码', // 赔付类型
+                name: $i18n.t('table_label.itemNo01'), // SPU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171667, // 对应的表ID
@@ -366,13 +356,12 @@ export default {
                 datelimit: 'all',
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: '店铺',
                 inputname: 'PS_C_SKU_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: 'SKU编码', // 赔付类型
+                name: $i18n.t('table_label.code_SKU'), // SKU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171666, // 对应的表ID
@@ -389,7 +378,7 @@ export default {
             },
             {
               style: 'input',
-              label: '最低成交单价',
+              label: $i18n.t('form_label.bh'), // 最低成交单价
               colname: 'MIN_REAL_AMT',
               width: '6',
               disabled: false,
@@ -417,7 +406,8 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '删除明细',
+              webname: 'ST_C_PRICE_SUB_DELETE',
+              text: $i18n.t('modalTitle.deleteDetails'), // 删除明细
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -425,7 +415,8 @@ export default {
               }
             },
             {
-              text: '导入',
+              webname: 'ST_C_PRICE_SUB_IMPORT',
+              text: $i18n.t('modalTitle.import'), // 导入
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -433,7 +424,9 @@ export default {
               }
             },
             {
-              text: '导出',
+              webname: 'ST_C_PRICE_SUB_EXPORT',
+              text: $i18n.t('btn.export'), // 导出
+              isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.handleExport();
@@ -444,7 +437,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: '导入',
+        confirmTitle: $i18n.t('modalTitle.import'), // 导入
         titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -463,11 +456,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: '商品明细',
+          label: $i18n.t('panel_label.a7'), // 商品明细
           value: 'goods',
         },
         {
-          label: '操作日志',
+          label: $i18n.t('panel_label.operationLog'), // 操作日志
           value: 'ST_C_PRICE_LOG',
         }
       ],
@@ -482,12 +475,26 @@ export default {
     this.isCopy = copyId != undefined
     this.isWatchChange = true
     if (this.ID == -1 && !this.isCopy) return
+    await this.getBtn()
     this.isWatchChange = false
     this.setEnable(false)
     await this.queryPrice(copyId)
     await this.queryPriceItem(copyId)
   },
   methods: {
+    // 获取按钮权限
+    async getBtn() {
+      let params = { table: 'ST_C_PRICE', type: 'OBJ', serviceId: 'r3-oc-oms' }
+      const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
+      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
+      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      this.goodsTableConfig.businessButtonConfig.buttons.forEach(item => {
+        item.isShow = subWebArr.includes(item.webname)
+      })
+      this.btnConfig.buttons.forEach(item => {
+        item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
+      })
+    },
     onSelect(e) {
       // e为选中的数组对象RowArr
       this.goodsTableConfig.selectionData = e;
@@ -511,7 +518,7 @@ export default {
     // 删除明细
     deleteDetail() {
       const selectArr = this.goodsTableConfig.selectionData
-      if (!selectArr.length) return this.$message.warning('请先选择需要删除的记录！')
+      if (!selectArr.length) return this.$message.warning($i18n.t('modalTips.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message }}) => {
         if (code == 0) {
@@ -572,7 +579,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd');
+      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     labelClick(e) { // tab明细切换
       this.labelDefaultValue = e.value;
@@ -587,8 +594,9 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
+          className: 'ark-dialog',
           title: $i18n.t('modalTitle.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $i18n.t('common.determine'), // 确定
@@ -603,7 +611,7 @@ export default {
     },
     // 复制、返回
     onOk(id, isCopy) {
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$forceUpdate()
       if (isCopy) {
         this.isCopy = true
@@ -612,7 +620,7 @@ export default {
           this.$store.commit('global/tabOpen', {
             type: 'C',
             url: `/CUSTOMIZED/ST_C_PRICE/New?copy=${id}`,
-            label: '商品价格策略新增',
+            label: this.getCustomLabel(true), // 商品价格策略新增
             customizedModuleName: 'ST_C_PRICE',
             customizedModuleId: 'New',
           })
@@ -622,7 +630,7 @@ export default {
         this.$nextTick(() => {
           this.$store.commit('global/tabOpen', {
             type: 'C',
-            label: '商品价格策略编辑',
+            label: this.getCustomLabel(false), // 商品价格策略编辑
             customizedModuleName: 'ST_C_PRICE',
             customizedModuleId: id,
           })
@@ -648,7 +656,17 @@ export default {
       self.isModify = true;
       let value = self.formConfig.formValue[ecode]
       let isDate = Object.prototype.toString.call(value) == '[object Date]' 
-      self.modify[obj][ecode] = isDate ? this.formatDate(value) : value;
+      if (isDate) {
+        let newTime = this.formatDate(value)
+        let oldTime = self.modify[obj][ecode]
+        if (ecode == 'END_TIME') {
+          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
+          self.formConfig.formValue[ecode] = newTime
+        }
+        self.modify[obj][ecode] = newTime
+      } else {
+        self.modify[obj][ecode] = value;
+      }
     },
     getFkChooseItem(row) {
       let itemIndex;
@@ -685,15 +703,18 @@ export default {
       let isEdit = this.ID != -1
       let tableBtnConfig = this.goodsTableConfig.businessButtonConfig
       let isShowTableBtn = this.isEnable ? false : !this.isCopy
-      this.queryBtn(this.btnConfig, '复制').isShow = isEdit
-      this.queryBtn(tableBtnConfig, '删除明细').isShow = isShowTableBtn
-      this.queryBtn(tableBtnConfig, '导入').isShow = isShowTableBtn
+      let addBtn = this.queryBtn(this.btnConfig, $i18n.t('common.copy'))
+      let delBtn = this.queryBtn(tableBtnConfig, $i18n.t('btn.deleteDetail'))
+      let importBtn = this.queryBtn(tableBtnConfig, $i18n.t('modalTitle.import'))
+      addBtn && (addBtn.isShow = isEdit) // 复制
+      delBtn && (delBtn.isShow = isShowTableBtn) // 删除明细
+      importBtn && (importBtn.isShow = isShowTableBtn) // 导入
     },
     // 设置主表表单字段
     setMainTableFormConfig() {
       /**填充字段 */
       this.queryForm(this.formConfig, 'PLAN_ID').style = this.isMasterRequired ? 'input' : '' 
-      this.queryForm(this.formConfig, 'ISACTIVE').style = this.isMasterRequired ? 'switch' : ''
+      this.queryForm(this.formConfig, 'ISACTIVE').style = this.isMasterRequired ? 'input' : ''
       this.isMasterRequired && this.setEnable()
       /**校验字段 */
       this.formConfig.ruleValidate = {
@@ -722,7 +743,8 @@ export default {
       let valid = true;
       for (let key of validFields) {
         if (!obj[key]) {
-          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`)
+          // TODO! `明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`
+          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $i18n.t('table_label.itemNo01')}不能为空`)
           valid = false;
           break;
         }
@@ -743,9 +765,9 @@ export default {
     // 主表查询
     async queryPrice(ID) {
       this.loading = true
-      // const data = await this.$OMS2.omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
+      // const data = await $omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
       this.isWatchChange = false
-      // this.formConfig = this.$OMS2.omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
+      // this.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
       // this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid
       // this.formConfig.formValue.ISACTIVE = this.formConfig.formValue.ISACTIVE == 'true'
       this.service.strategyPlatform.queryPrice({ id: ID || this.ID })
@@ -756,13 +778,13 @@ export default {
           if (data) {
             this.isEnable = data.ISACTIVE == 'Y'
             this.isMasterRequired = true
-            this.reloadForm(this.isEnable)
-            this.$OMS2.omsUtils.intersectFormValue(this.formConfig.formValue, data)
+            this.reloadForm()
+            $omsUtils.intersectFormValue(this.formConfig.formValue, data)
             this.setFormValue(this.formConfig, 'CP_C_SHOP', { 
               pid: data.CP_C_SHOP_ID,
               valuedata: data.CP_C_SHOP_ENAME
             })
-            this.formConfig.formValue.ISACTIVE = this.isEnable
+            this.formConfig.formValue.ISACTIVE = this.isEnable ? '启用' : '停用'
           }
         } else {
           this.$message.error(message)
@@ -792,22 +814,22 @@ export default {
       const self = this;
       const valueArr = ['PLAN_NAME', 'BEGIN_TIME', 'END_TIME', 'PRIORITY'];
       const drpArr = ['CP_C_SHOP_ID'];
-      const mes = this.$OMS2.omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) return self.$message.error(mes);
       
       const formConfig = this.goodsTableConfig.businessFormConfig
       /**子表新增校验 */
       // const valueArr2 = ['MIN_REAL_AMT'];
-      // let mes2 = this.$OMS2.omsUtils.validatorNotEmpty(formConfig, valueArr2);
+      // let mes2 = $omsUtils.validatorNotEmpty(formConfig, valueArr2);
       const { PS_C_SPU_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
       let mes2 = ''
       if (!MIN_REAL_AMT) {
-        mes2 += '最低成交单价'
+        mes2 += $i18n.t('form_label.bh') // 最低成交单价
       }
       if (!(PS_C_SPU_ID || PS_C_SKU_ID)) {
-        mes2 += ' SPU/SKU编码'
+        mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
       }
-      mes2 = !mes2 ? '' : `${mes2} 不能为空`
+      mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
       if ((!(PS_C_SPU_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {
         return this.$message.error(mes2);
       } // 非回车保存就不提示子表表单校验提示
@@ -856,7 +878,7 @@ export default {
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SKU')
             this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SPU')
           }
-          this.reloadForm(params.ISACTIVE == 'Y')
+          this.reloadForm()
           data && (this.ID = data.objId)
           if (isSaveAll) {
             this.modify = { master: {} }

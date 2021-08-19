@@ -1,6 +1,5 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
-import { tableCols } from '../promotionConfig';
-import MyDialog from 'framework/components/dialog/mydialog';
+import { tableCols } from '../promotion.config';
 import businessButton from 'professionalComponents/businessButton';
 
 export default {
@@ -9,16 +8,17 @@ export default {
 		return {
 			btnConfig: {
 				typeAll: 'default',
+				btnsite: "right",
 				buttons: [
 					{
-						text: '取消', // 取消
+						text: $i18n.t('common.cancel'), // 取消
 						class:"white",
 						isShow: false,
 						disabled: false,
 						btnclick: () => this.closeDialogs()
 					},
 					{
-						text: '保存', // 保存
+						text: $i18n.t('btn.save'), // 保存
 						class:"active",
 						disabled: false,
 						btnclick: () => this.confirm()
@@ -57,7 +57,6 @@ export default {
 	components: {
 		businessButton,
 		detailtable,
-		MyDialog
 	},
 	computed: {
 		columns() {

@@ -21,7 +21,8 @@ export default {
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
-          name: '店铺', // 店铺 input前面显示的lable值
+          serviceId: 'r3-cp',
+          name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           pid: '',
           valuedata: '', // 这个是选择的值
@@ -30,9 +31,9 @@ export default {
       },
       {
         style: 'date', // 输入框类型
-        label: '退单修改时间', // 输入框前文字
+        label: $i18n.t('form_label.chargebackModifyTime'), // 退单修改时间 输入框前文字
         colname: 'startEndTimes',
-        type: 'daterange',
+        type: 'datetimerange',
         value: 'startEndTimes', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         format: 'yyyy-MM-dd HH:mm:ss',
@@ -40,7 +41,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: '平台单号',
+        label: $i18n.t('form_label.platform_billNo'), // 平台单号
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         ghost: false, // 是否关闭幽灵按钮，默认开启
@@ -48,7 +49,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: '服务单号',
+        label: $i18n.t('form_label.ao'), // 服务单号
         value: 'service_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         ghost: false, // 是否关闭幽灵按钮，默认开启
@@ -62,6 +63,9 @@ export default {
       }]
     }
   },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
+  },
   // 确定按钮
   determine: async (self) => {
     const formValue = self.downLoadFormConfig.formValue;
@@ -72,8 +76,12 @@ export default {
       return false;
     }
     const [start, end] = formValue.startEndTimes
-    if (!(formValue.bill_no || start)) {
-      self.$Message.warning('请输入退单修改时间或平台单号');
+    if (!start && !(formValue.bill_no && formValue.service_no)) {
+      self.$Message.warning($i18n.t('modalTips.js')); // 退单修改时间不存在时, 平台单号、服务单号必须同时有！
+      return false;
+    }
+    if (start && (formValue.bill_no || formValue.service_no)) {
+      self.$Message.warning($i18n.t('modalTips.ku')); // 退单修改时间存在时,平台单号、服务单号必须为空!
       return false;
     }
     const param = {

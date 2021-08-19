@@ -3,23 +3,20 @@
  * @Date: 2021-04-27 13:44:58
  * @LastEditTime: 2021-05-20 11:34:16
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 国家省市区-编辑
  * @FilePath: /burgeon-project-logic/views/pages/basicData/nationalProvincialMunicipalEdit.vue
 -->
 <template>
   <!-- 基础信息-国家省市区-编辑 -->
-  <div
-    :id="this.customizedModuleName"
-    class="nationalProvincialMunicipalEdit customized-detail"
-  >
-    <loading :loading="loading" />
-    <div class="buttons customized-detail-btn">
+  <div :id="this.customizedModuleName" class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
             <businessForm
               :form-config="formConfig"

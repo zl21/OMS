@@ -1,7 +1,48 @@
-//公用校验配置类
+/**
+ * 全局校验类
+ * 1.使用文档：
+ * 
+ * 
+ 1.formConfig的formData中：
+             regx: $OMS2.Rule.a1,
+ 2.formConfig的ruleValidate中：
+ 3.
+ * 
+ */
+const RuleList = {
+  a1: {
+    val: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+    desc: '两位小数（非负）',
+  },
+  a2: {
+    val: /^-?\d*\.{0,1}\d{0,2}$/,
+    desc: '两位小数（可负）',
+  },
+  a3: {
+    val: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+    desc: '数字字母下划线中文',
+  },
+  a4: {
+    val: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_@#$%^&*+=-><~“”‘’。.，,：；/、\\`\|!！……\(\)\（\）《》?？·]+)$/,
+    desc: '禁止英文的单双引号',
+  },
+}
 class BurgeonValidate {
   static target;
   constructor() { }
+  /* ------------ 正则 start ------------- */
+  static get All() {
+    return RuleList
+  }
+  static get a1() {
+    return RuleList.a1.val
+  }
+  static get a2() {
+    return RuleList.a2.val
+  }
+  /* ------------ 正则 end ------------- */
+  
+  /* ------------ ruleValidate使输入框变色 start ------------- */
   // 电话号码校验
   static validatePhoneNumber(rule, value, callback) {
     const pNumver = value;
@@ -31,6 +72,66 @@ class BurgeonValidate {
     }
     return callback(new Error($i18n.t('modalTips.fd'))); // '收货人地址格式不正确!'
   };
+  /* ------------ ruleValidate使输入框变色 end ------------- */
+
+  /**
+   * 保存前校验
+   * @param {*} myForm 页面的表单配置formConfig
+   * @param {*} exArr 不需要校验的colname的集合
+   * @returns 
+   */
+  static saveValidator(myForm, exArr) {
+    const fD = myForm.formData;
+    const fV = myForm.formValue;
+    let msg = '', emptyMsg = '', ruleMsg = '', longMsg = '';
+    for (const it of fD) {
+      if (exArr.includes(it.colname)) {
+        break
+      }
+      if (it.itemdata) { // 复杂类型
+        it.isnotnull = it.itemdata.isnotnull;
+        it.regx = it.regx ? it.regx : it.itemdata.regx;
+        it.length = it.itemdata.length;
+        it.label = it.itemdata.name;
+        fV[it.colname] = it.itemdata.valuedata;
+      }
+      if (it.isnotnull) {
+        if (!fV[it.colname]) {
+          emptyMsg += `${it.label}`
+        }
+      }
+      if (it.regx) {
+        if (!it.regx.test(fV[it.colname])) {
+          ruleMsg += `${it.label}`
+        }
+      }
+      if (it.length) {
+        let len;
+        len = fV[it.colname].length;
+        if (it.style == 'number') {
+          len = Number(fV[it.colname]).toExponential.toString().length
+        }
+        if (len > it.length) {
+          longMsg += `${it.label}`
+        }
+      }
+    }
+    if (emptyMsg) {
+      msg = emptyMsg.replace(/，$/, ' ')
+      msg = `${msg}不能为空！`
+      return msg
+    } else if (ruleMsg) {
+      msg = ruleMsg.replace(/，$/, ' ')
+      msg = `${msg}格式不正确！`
+      return msg
+    } else if (longMsg) {
+      msg = longMsg.replace(/，$/, ' ')
+      msg = `${msg}超长！`
+      return msg
+    } else {
+      return ''
+    }
+  }
 
   // 非空验证方法
   static isEmpty(masterTable) {

@@ -40,7 +40,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: '确定', // 按钮文本
+            text: $i18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
               this.submit();
             }
@@ -54,7 +54,7 @@ export default {
           //   }
           // },
           {
-            text: '取消', // 按钮文本
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
@@ -149,7 +149,7 @@ export default {
         height: '350', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 10 // 每页条数
       },
       selection: {}

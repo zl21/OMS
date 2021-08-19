@@ -1,22 +1,22 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:33:28
- * @LastEditTime: 2021-05-22 11:28:44
+ * @LastEditTime: 2021-07-14 10:12:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/storehouseRule.vue
 -->
 <template>
-  <div class="storehouseRule otherClass customized-detail" v-loading="loading">
+  <div class="customized-detail" v-loading="loading">
     <!-- <loading :loading="loading" /> -->
-    <div class="buttons customized-detail-btn">
+    <div class="customized-detail-btn">
       <businessButton :btn-config="btnConfig" />
     </div>
 
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          基本信息
+          {{baseInformation }}
           <p slot="content">
             <businessForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
@@ -24,47 +24,35 @@
       </Collapse>
 
       <div v-if="pageShow" class="customized-detail-table">
-           <businessLabel
-            :label-list="labelList"
-            :label-default-value="labelDefaultValue"
-            @labelClick="labelClick"
-          />
-          
+        <businessLabel
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+          @labelClick="labelClick"
+        />
+
         <div class="subtablePart" v-show="labelDefaultValue == 'PROPERTY'">
           <div class="subtablePart-labelList">
             <Input
               v-model="seachVal"
-              placeholder="省市搜索"
+              :placeholder="placeholder"
               style="width: 250px; margin-top: 20px"
-              @input="fninput"
+              @on-keydown="fninput"
             />
             <div class="buttons customized-detail-btn">
               <businessButton :btn-config="btnConfig2" />
             </div>
 
-            <Table
-              ref="currentRowTable"
-              border
-              stripe
-              highlight-row
-              :columns="columns3"
-              :data="data1"
+            <businessActionTable
+              :jordan-table-config="tableConfig"
+              @on-page-change="fnchange"
+              @on-page-size-change="fnSize"
             />
-            <div class="foot-page">
-              <Page
-                :total="totalpage"
-                show-elevator
-                show-sizer
-                @on-change="fnchange"
-                @on-page-size-change="fnSize"
-              />
-            </div>
           </div>
         </div>
 
-         <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
+        <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
           <subTable :component-data="subTableConfig"></subTable>
-          </div>
+        </div>
       </div>
     </div>
 

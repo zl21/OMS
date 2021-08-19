@@ -11,7 +11,7 @@
 // //组织中心-门店档案
 // import wareHouseRecord from 'branchComponent/page/OrganizationCenter/cp_c_warehouse';
 
-
+import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   // 组织中心-员工档案
   CP_C_EMP: {

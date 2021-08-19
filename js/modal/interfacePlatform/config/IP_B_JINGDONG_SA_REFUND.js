@@ -1,6 +1,6 @@
 import BurgeonDate from '@/assets/js/__utils__/date';
 export default {
-  // 下载取消订单
+  // 京东取消订单(下载订单)
   formConfig: {
     formValue: {
       startEndTimes: []
@@ -19,7 +19,8 @@ export default {
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
-          name: '店铺', // 店铺 input前面显示的lable值
+          serviceId: 'r3-cp',
+          name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           pid: '',
           valuedata: '', // 这个是选择的值
@@ -28,9 +29,9 @@ export default {
       },
       {
         style: 'date', // 输入框类型
-        label: '申请时间', // 输入框前文字
+        label: $i18n.t('form_label.e5'), // 退款申请时间 输入框前文字
         colname: 'startEndTimes',
-        type: 'daterange',
+        type: 'datetimerange',
         value: 'startEndTimes', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         format: 'yyyy-MM-dd HH:mm:ss',
@@ -41,8 +42,15 @@ export default {
       CP_C_SHOP_ID: [{
         required: true,
         message: ' '
+      }],
+      startEndTimes: [{
+        required: true,
+        message: ' '
       }]
     }
+  },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {
@@ -55,7 +63,7 @@ export default {
     }
     const [start, end] = formValue.startEndTimes
     if (!start) {
-      self.$Message.warning('请输入申请时间'); // 请输入申请时间
+      self.$Message.warning($i18n.t('modalTips.kv')); // 请输入退款申请时间
       return false;
     }
     const param = {

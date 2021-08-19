@@ -27,6 +27,7 @@ export default {
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
+          serviceId: 'r3-cp',
           length: 65535, // 最大长度是多少
           name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
@@ -41,7 +42,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: 'PO编号',
+        label: $i18n.t('form_label.cx'), // PO编号
         value: 'PO_NO', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         ghost: false, // 是否关闭幽灵按钮，默认开启
@@ -52,6 +53,9 @@ export default {
       PO_NO: ''
     },
     ruleValidate: {}
+  },
+  init: (self) => {
+    self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
   // 确定按钮
   determine: async (self) => {
@@ -78,15 +82,7 @@ export default {
     } = await self.service.orderCenter.downloadPO(fromdata);
     if (code === 0) {
       self.$Message.success(message);
-      // self.downLoadModal = true;
-      // const orderNum = self.downLoadFormConfig.formValue.orderNum;
-      /* if (orderNum) {
-        self.$Message.success(message);
-        self.$emit('closeActionDialog', true);
-      } else {
-        self.taskId = message.match(/\d+/)[0];
-        self.downLoadModal = true;
-      } */
+      self.$emit('closeActionDialog', true);
     }
   }
 };

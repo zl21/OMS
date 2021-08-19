@@ -137,13 +137,13 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '刷新',
+              text: $i18n.t('btn.refresh'), // '刷新',
               btnclick: () => {
                 // this.reload();
               }
             },
             {
-              text: '保存',
+              text: $i18n.t('btn.save'), // 保存
               btnclick: () => {
                 const self = this;
                 self.save();
@@ -185,7 +185,7 @@ export default {
             //     }
             // },
             {
-              text: '返回',
+              text: $i18n.t('common.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -300,19 +300,19 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '保存',
+              text: $i18n.t('btn.save'), // 保存
               btnclick: () => {
                 console.log('保存');
               }
             },
             {
-              text: '刷新',
+              text: $i18n.t('btn.refresh'), // '刷新',
               btnclick: () => {
                 // this.reload();
               }
             },
             {
-              text: '返回',
+              text: $i18n.t('common.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -530,7 +530,7 @@ export default {
             },
             {
               style: 'input',
-              label: '备注',
+              label: $i18n.t('table_label.remarks'), // 备注
               value: 'REMARK',
               dataAcessKey: 'SHIP_AMT',
               disabled: false,
@@ -826,16 +826,13 @@ export default {
       if (res.BILL_STATUS == 1) {
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '未审核';
         self.setItemTableOperation('on');
-        // self.watermark_src = '../../../../static/img/watermark/uncheck.png'
       } else if (res.BILL_STATUS == 2) {
         self.setItemTableOperation('off');
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已审核';
-        // self.watermark_src = '../../../../static/img/watermark/checked.png';
         self.statusName = $i18n.t('common.reviewed'); // '已审核';
       } else if (res.BILL_STATUS == 3) {
         self.setItemTableOperation('off');
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已作废';
-        // self.watermark_src = '../../../../static/img/watermark/void.png';
         self.statusName = $i18n.t('common.voided'); // '已作废';
       }
       self.pickOrder.logFormConfig.formValue.STATUS_NAME = res.STATUS_NAME; // 审核人

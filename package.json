@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/project-logic",
-  "version": "1.7.30",
+  "version": "1.12.12",
   "description": "burgeon company's project-logic for private npm",
   "main": "index.js",
   "scripts": {
@@ -13,9 +13,8 @@
   "author": "flybird <duan.ry@burgeon.cn>",
   "license": "ISC",
   "devDependencies": {
-    "@burgeon/internationalization": "^1.0.45",
-    "@burgeon/oms-theme": "1.6.6",
-    "@syman/burgeon-r3": "1.4.75",
+    "@burgeon/oms-theme": "^1.8.34",
+    "@syman/burgeon-r3": "2.1.0",
     "babel-cli": "6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "burgeon-ui": "^1.0.56",
@@ -23,8 +22,11 @@
     "wangeditor": "^4.6.16"
   },
   "dependencies": {
-    "@syman/ark-ui": "^1.1.33",
+    "@burgeon/internationalization": "^1.0.91",
+    "@syman/ark-ui": "^1.1.39",
+    "echarts": "^5.1.2",
     "lodash": "^4.17.21",
+    "mddir": "^1.1.1",
     "qs": "^6.9.4"
   }
 }

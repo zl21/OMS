@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-07 19:05:11
+ * @LastEditTime: 2021-07-20 17:39:17
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/orderCenter/holdOrderDialog.vue
+-->
 <template>
   <!-- 订单管理/订单详情 - 批量Hold单/Hold单 -->
   <div class="hold-dialog customized-modal">
@@ -55,39 +63,5 @@ export default holdOrderDialog;
 </script>
 
 <style lang="less" scoped>
-// @import "~@/css/modal/orderCenter/holdOrderDialog.less";
-.hold-dialog {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding-bottom: 45px;
-  .holdBtnClass {
-    bottom: -14px !important;
-  }
-  .hold-form {
-    /deep/ .ark-form-item {
-      // margin-top: 0;
-      &.releaseClass {
-        .ark-form-item-label {
-          color: transparent;
-        }
-      }
-    }
-    .form-compile {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      // margin-top: 6px;
-      > .form-compile-item {
-        width: 100px;
-      }
-      > .compile-item-input {
-        line-height: 26px;
-        /deep/ input {
-          height: 26px;
-        }
-      }
-    }
-  }
-}
+
 </style>

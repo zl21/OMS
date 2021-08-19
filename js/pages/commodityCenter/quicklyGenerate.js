@@ -1,6 +1,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import axios from 'axios';
-import comUtils from '@/assets/js/__utils__/common.js';
+// import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   components: {
@@ -23,6 +23,7 @@ export default {
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
             text: '快速生成',
             btnclick: () => {
@@ -30,15 +31,15 @@ export default {
             }
           },
           {
-            text: '返回',
+            text: $i18n.t('common.return'), // 返回
             btnclick: () => {
-              // comUtils.tabCloseAppoint(this);
+              // $omsUtils.tabCloseAppoint(this);
               //   this.$destroy(true);
               $store.commit('customize/TabOpen', {
                 id: this.spuid,
                 type: 'action',
                 name: 'PS_C_PRO',
-                label: '快速生成', // 额外退款编辑
+                label: '商品SPU编辑', // 额外退款编辑
               });
             }
           }
@@ -158,7 +159,7 @@ export default {
       // --------------------生成后端需要的数据-------------
       const self = this;
       if (!self.table.data.length) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', 'fi');
+        $omsUtils.msgTips(self, 'warning', 'fi');
         return;
       }
       const dataArry = self.table.data;
@@ -191,7 +192,7 @@ export default {
       .then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $omsUtils.msgTips(self, 'success', res.data.message, 0);
           // 重新查询组织树
           this.getTree();
           this.table.data = [];

@@ -483,7 +483,7 @@ export default {
             return resultElement;
           }
         },
-        pagenation: this.$OMS2.omsUtils.pageConfig
+        pagenation: $omsUtils.pageConfig
       }, // 全部
       // returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
@@ -496,9 +496,9 @@ export default {
     this.getList();
 
     // 计算高度 通过设置节点 'totalHeight'
-    this.$OMS2.omsUtils.setTableHeight(this, 50);
+    $omsUtils.setTableHeight(this, 50);
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    this.$OMS2.omsUtils.onresizes(this, 10);
+    $omsUtils.onresizes(this, 10);
   },
   created() {
     const self = this;

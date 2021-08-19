@@ -64,6 +64,7 @@ export default {
             width: "18",
             colname: "stores",
             itemdata: {
+              version: '1.4',
               colid: 168864,
               colname: "CP_C_SHOP_ID",
               name: "店铺名称",
@@ -231,6 +232,7 @@ export default {
             width: "18",
             colname: "except_provinces",
             itemdata: {
+              version: '1.4',
               colid: 180257,
               colname: "CP_C_PROVINCE_IDS",
               name: $i18n.t('common.exclude_province'),
