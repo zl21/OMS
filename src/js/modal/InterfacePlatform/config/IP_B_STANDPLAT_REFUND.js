@@ -1,15 +1,12 @@
 import formatData from '@/assets/js/__utils__/date.js';
 
 export default {
-  // 淘宝订单接口列表界面(下载订单)
+  // 通用退单下载
   formConfig: {
     formValue: {
       startEndTimes: [],
       orderNum: '',
       dta: '1'
-    },
-    ruleValidate: {
-      sp_id: [{ required: true, message: ' ', trigger: 'blur' }]
     },
     formData: [
       {
@@ -57,7 +54,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: window.vmI18n.t('table_label.platform_orderNo'), // 平台单号 输入框前文字
+        label: '平台退款单号', // 平台退款单号 输入框前文字
         value: 'orderNum', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -76,7 +73,7 @@ export default {
       return;
     }
     if (self.downLoadFormConfig.formValue.startEndTimes[0] === '' && !self.downLoadFormConfig.formValue.sp_ids && !self.downLoadFormConfig.formValue.orderNum) {
-      self.$Message.warning(self.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
+      self.$Message.warning('请选择输入日期或输入平台退款单号'); // 请选择输入日期或输入订单编号
       return;
     }
     const param = {
@@ -91,7 +88,7 @@ export default {
     // 请求下载订单接口
     const {
       data: { code, message }
-    } = await self.service.interfacePlatform.stdpOrderGet(fromdata);
+    } = await self.service.interfacePlatform.refundDownload(fromdata);
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
       self.downLoadModal = true;
