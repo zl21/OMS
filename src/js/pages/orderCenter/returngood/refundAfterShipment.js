@@ -1,4 +1,4 @@
-// 额外退款新增/编辑、已发货退款编辑  共用此组件
+// 已发货退款编辑
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';

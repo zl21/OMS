@@ -2,7 +2,8 @@
 const addItemTableColumns = [{
   type: 'selection',
   width: 50,
-  align: 'center'
+  align: 'center',
+  key: 'selection'
 },
 {
   title: '商品名称',
@@ -30,11 +31,11 @@ const addItemTableColumns = [{
 // },
 {
   title: '成交金额',
-  key: 'price'
+  key: 'realAmt'
 },
 {
-  title: '可退金额',
-  key: 'RETURNABLE_AMOUNT'
+  title: '可退金额（单笔订单退款金额上限=（可退金额+30））',
+  key: 'RETURNABLE_AMOUNT_total'
 },
 {
   title: '购买数量',

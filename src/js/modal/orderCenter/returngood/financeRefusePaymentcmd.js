@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       reason: '',
-      reasonType: '拒绝打款',
+      reasonType: '2',
       ruleValidate: {
         reason: [
           { required: true, message: ' ', trigger: 'blur' }
@@ -47,8 +47,15 @@ export default {
   },
   methods: {
     determine() {
-      if (!this.reason) return this.$Message.warning('拒绝打款原因不能为空!');
-      this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason, paymentStatus: 4 }).then(res=>{
+      if (!this.reason) {
+        if (this.reasonType == 2) {
+          return this.$Message.warning('支付宝流水号不能为空!');
+        } else {
+          return this.$Message.warning('打款失败/拒绝打款原因（财务备注说明）不能为空!');
+        }
+      }
+      // 2 打款成功 3 打款失败
+      this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason, paymentStatus: this.reasonType }).then(res=>{
         console.log(res);
         if (res.data.data.code == 0) {
           this.$Message.success(res.data.data.message);
@@ -75,6 +82,9 @@ export default {
           this.$emit('closeActionDialog');
         }
       });
+    },
+    reasonTypeChage() {
+      this.reason = ''
     }
   }
 };
