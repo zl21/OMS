@@ -110,6 +110,7 @@ export default {
       distributeWarehouseModal: false, // 警告弹框
       batchReturnOrderModal: false, // 警告弹框
       batchAntiAuditModal: false, // 批量撤回弹框
+      statusSelectModal: false, // 状态查询弹框
       // 清除高级搜索中的数据
       clearFromListValue: false,
       // 状态json
@@ -1218,6 +1219,13 @@ export default {
             webid: 3025
           },
           {
+            webname: 'OcBOrderStatusQueryCmd',
+            btnclick: () => {
+              this.statusSelectModal = true;
+              // this.exportClick();
+            } // 按钮点击事件
+          },
+          {
             webname: 'OcBOrderExportCmd', // 导出
             btnclick: () => {
               this.exportClick();
@@ -1312,6 +1320,68 @@ export default {
             value: 'noticeNos',
             dataAcessKey: 'noticeNos',
             disabled: false,
+            width: '24',
+          }
+        ]
+      },
+      statusSelectBtnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: '', // 按钮类型
+            text: '取消', // 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.statusSelectModal = false;
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: '确认', // 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: async () => {
+              // this.doBatchAntiAudit();
+            } // 按钮点击事件
+          }
+        ]
+      },
+      statusSelectFormConfig: {
+        formValue: {
+          deliveryOrderCode: '',
+          status: '',
+          operateTime: ''
+        },
+        formData: [
+          {
+            style: 'input',
+            label: '发货单号', // 配送费用
+            placeholder: '', // 占位文本，默认为请输入
+            value: 'deliveryOrderCode',
+            dataAcessKey: 'deliveryOrderCode',
+            disabled: true,
+            width: '24',
+          },
+          {
+            style: 'input',
+            label: '最新发货单状态', // 配送费用
+            placeholder: '', // 占位文本，默认为请输入
+            value: 'status',
+            dataAcessKey: 'status',
+            disabled: true,
+            width: '24',
+          },
+          {
+            style: 'input',
+            label: '最新状态时间', // 配送费用
+            placeholder: '', // 占位文本，默认为请输入
+            value: 'operateTime',
+            dataAcessKey: 'operateTime',
+            disabled: true,
             width: '24',
           }
         ]
