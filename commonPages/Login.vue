@@ -101,7 +101,7 @@ export default {
         // 验证码登录
         account.setAttribute(
           "data-phone",
-          this.vmI18n.t("form_label.cellPhone_number")
+          this.vmI18n.t("other.phoneNumber")
         );
         inputNodes[0].setAttribute("placeholder", this.vmI18n.t("pHolder.a6")); // 请输入手机号
         inputNodes[1].setAttribute("placeholder", this.vmI18n.t("pHolder.a8")); // 请输入短信验证码
@@ -371,10 +371,11 @@ export default {
             border: 1px solid #dbdde8 !important;
             background: transparent;
             text-align: right;
-            padding-left: 100px;
+            padding-left: 80px;
             margin-bottom: 24px;
-            &:-webkit-placeholder {
+            &::-webkit-input-placeholder,&::-webkit-input-placeholder,&::-moz-input-placeholder,&::-ms-input-placeholder {
               color: #c3c6d2;
+              font-size: 12px;
             }
             &:-webkit-autofill {
               -webkit-text-fill-color: #292f43;
@@ -413,7 +414,7 @@ export default {
             left: 0;
             top: 0;
             display: inline-block;
-            width: 100px;
+            width: 80px;
             height: 38px;
             line-height: 38px;
             font-size: 12px;
