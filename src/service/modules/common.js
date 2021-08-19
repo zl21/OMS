@@ -261,7 +261,7 @@ export default {
         tableName: 'AC_F_RECONCILIATION_SETTLE_STRATEGY',
         url: '/p/cs/ac/v1/settleStrategyImport',
         downloadUrl: '/p/cs/ac/v1/settleStrategyImportTemp'
-      } // O2O对账结算策略 - 导入
+      }, // O2O对账结算策略 - 导入
     ];
     return arr;
   },
