@@ -125,13 +125,13 @@ export default {
     display: inline-block;
     width: 10px;
     height: 40px;
-    background:  url('~@/assets/img/icon_fold.png') right no-repeat;
+    background:  url('~assetsImg/icon_fold.png') right no-repeat;
     background-size: 100% auto;
     z-index: 99;
   }
   .iconbj-fold{
     left: 180px;
-    background:  url('~@/assets/img/icon_unfold.png') right no-repeat;
+    background:  url('~assetsImg/icon_unfold.png') right no-repeat;
     background-size: 100% auto;
   }
 }
@@ -172,7 +172,7 @@ export default {
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('~@/assets/img/arrowTop.png') top no-repeat;
+    background: url('~assetsImg/arrowTop.png') top no-repeat;
   }
 }
 .favorite {
@@ -215,7 +215,7 @@ export default {
     }
     .no-message {
       padding-top: 180px;
-      background: url('~@/assets/img/message.png') top no-repeat #ffffff;
+      background: url('~assetsImg/message.png') top no-repeat #ffffff;
       background-size: 160px 160px;
     }
   }

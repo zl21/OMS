@@ -50,7 +50,7 @@
     overflow: inherit;
     transition: inherit !important;
     .left{
-      background: url('~@/assets/img/mini-logo.png') right no-repeat #4855AF;
+      background: url('~assetsImg/mini-logo.png') right no-repeat #4855AF;
       background-size:100% auto ;
     }
     .middle{
@@ -83,7 +83,7 @@
     transition: inherit !important;
     .left{
       display: block;
-      background: url('~@/assets/img/menuLogo.png') right no-repeat #4855AF;
+      background: url('~assetsImg/menuLogo.png') right no-repeat #4855AF;
       background-size:100% auto;
     }
     .ark-tooltip, .ark-tooltip-rel{

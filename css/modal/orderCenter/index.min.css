@@ -92,7 +92,7 @@
   vertical-align: middle;
 }
 .qd-matrix--table .qd-matrix--table-content table .qd-matrix-th-head {
-  background: url("~@/assets/img/matrix.jpg") no-repeat;
+  background: url("~assetsImg/matrix.jpg") no-repeat;
   background-size: 100% 100%;
 }
 .qd-matrix--table .qd-matrix--table-content table .qd-matrix-th-head .qd-matrix-th-head-box {

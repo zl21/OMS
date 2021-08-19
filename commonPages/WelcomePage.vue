@@ -41,7 +41,7 @@
 .welcomepage {
   width: 100%;
   height: 100%;
-  background: url("~@/assets/img/loginBg.png") center / 100% no-repeat #fff;
+  background: url("~assetsImg/loginBg.png") center / 100% no-repeat #fff;
   // background-size: contain;
   background-size:auto 100%;
   /deep/ .ark-dropdown {

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 18:40:35
- * @LastEditTime: 2021-08-17 14:36:27
+ * @LastEditTime: 2021-08-19 17:18:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/modal/orderCenter/changeProduct.vue
@@ -70,7 +70,7 @@
           @on-page-size-change="pageSizeChange2"
         />
       </div>
-      <img class="icon_switch" :src="require('@/assets/img/switch.png')" />
+      <img class="icon_switch" :src="require('assetsImg/switch.png')" />
     </div>
     <div class="i_food">
       <span class="title">

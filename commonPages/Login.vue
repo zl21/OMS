@@ -23,7 +23,7 @@
       <div class="login-content">
         <!-- logo -->
         <div class="logo-img">
-          <img :src="require('@/assets/img/form-logo.png')" />
+          <img src="~assetsImg/form-logo.png" />
         </div>
         <!-- tabs -->
         <div class="loginTabs" v-if="isEnableLoginPro">
@@ -40,7 +40,7 @@
         <R3Login />
         <!-- bg -->
         <span class="login-bg-img">
-          <img :src="require('@/assets/img/login-bg-img.png')" />
+          <img :src="require('assetsImg/login-bg-img.png')" />
         </span>
       </div>
     </div>
@@ -122,7 +122,7 @@ export default {
       let loginBtn = document.getElementById("btn");
       loginBtn.innerHTML = `${this.vmI18n.t(
         "login"
-      )} <img src="${require("@/assets/img/arrow-right.png")}" />`;
+      )} <img src="${require("assetsImg/arrow-right.png")}" />`;
     },
     // 是否开启手机验证码登录
     isEnableLogin() {
@@ -188,7 +188,7 @@ export default {
 <style lang="less" scoped>
 @import "~@burgeon/oms-theme/skin/public.less";
 .loginBG {
-  background: url("~@/assets/img/login-bg.jpg") no-repeat;
+  background: url("~assetsImg/login-bg.jpg") no-repeat;
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -237,7 +237,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 17px;
-    background: url("~@/assets/img/login-form-bg.png") right no-repeat #fff;
+    background: url("~assetsImg/login-form-bg.png") right no-repeat #fff;
     background-size: auto 100%;
   }
   .loginTabs {
@@ -444,12 +444,13 @@ export default {
             line-height: 38px;
             background: #5461b8;
             border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
             box-shadow: 0px 6px 20px 0px rgba(69, 96, 171, 0.31);
             img {
-              // display: none;
               width: 20px;
               height: 20px;
-              vertical-align: middle;
+              vertical-align: text-bottom;
             }
           }
         }

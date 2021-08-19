@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-28 15:12:49
+ * @LastEditTime: 2021-08-19 16:52:58
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/views/modal/orderCenter/changeRemark.vue
+-->
 <template>
   <div class="jordanModal-- customized-modal">
     <Spin
@@ -21,7 +29,7 @@
             :label="index"
           >
             <img
-              :src="require(`@/assets/img/flagImgs/${index}.png`)"
+              :src="require(`assetsImg/flagImgs/${index}.png`)"
               alt
             >
           </Radio>

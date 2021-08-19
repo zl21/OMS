@@ -312,7 +312,7 @@ export default {
             key: 'ORDERFLAG',
             render: (h, params) => {
               const img = params.row.BACK_MESSAGE == null || params.row.BACK_MESSAGE == '' ? 0 : 1;
-              const imgSrc = require(`@/assets/img/flagImgs/${img}.png`);
+              const imgSrc = require(`assetsImg/flagImgs/${img}.png`);
               return h(
                 'Poptip',
                 {
