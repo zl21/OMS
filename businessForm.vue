@@ -1,6 +1,7 @@
 <!-- 开发文档：http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749649/1/2061 -->
 <template>
-  <div class="orderManageEdit"
+<!-- orderManagEdit -->
+  <div class="business-form-main"
        :ref="formConfig.flodClick">
 
     <div class="imgRight"
@@ -10,8 +11,8 @@
            :src="formConfig.img.url"
            alt="">
     </div>
-
-    <Form class="businessForm_a"
+  <!-- businessForm_a -->
+    <Form class="businessForm"
           :label-width="95"
           style="width:100%"
           ref="businessForm_a"
@@ -137,12 +138,7 @@
                      ref="popLabel"
                     :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}`+ ':'"
                     :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
-            <!-- <label class="ark-form-item-label popLabel" style="">
-               <i style="color:#f00" v-if="item.itemdata.isnotnull">*</i>
-              {{ item.itemdata.name }}:
-            </label> -->
-            <div class="ark-form-item-content">
-              <my-input :version='item.version'
+            <my-input :version='item.version'
                         :isActive='true'
                         :isDisabled='false'
                         :inputList="item.inputList?item.inputList:[]"
@@ -152,7 +148,6 @@
                         @getFkChooseItem="(row)=>runMethods(typeof item.oneObj == 'function' && item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata))"
                         @itemInputEnter="(row)=>runMethods(typeof item.InputEnter == 'function' && item.InputEnter(item.itemdata.isBackRowItem ? row : item.itemdata))">
               </my-input>
-            </div>
             
           </FormItem>
 
@@ -161,10 +156,6 @@
             ref="popLabel"
                     :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}`+ ':'"
                     :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
-            <!-- <label v-if="item.itemdata.name" class="ark-form-item-label popLabel">
-              <i style="color:#f00" v-if="item.itemdata.isnotnull">*</i>
-              {{ item.itemdata.name }}：
-            </label> -->
             <fkinputPlus :isActive='true'
                       :isDisabled='false'
                       :inputList="item.inputList?item.inputList:[]"
