@@ -425,6 +425,7 @@ export default {
             content: attr(data-account); // 账号
           }
           .divCode {
+            font-size: 0;
             &:before {
               content: attr(data-code); // 验证码
             }

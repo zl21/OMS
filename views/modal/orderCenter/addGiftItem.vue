@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-07 15:56:09
- * @LastEditTime: 2021-08-20 14:18:31
+ * @LastEditTime: 2021-08-20 15:30:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/modal/orderCenter/addGiftItem.vue
@@ -52,9 +52,6 @@
         }
       }
     }
-  }
-  .jordan-table-box{
-    margin-top: @base-mr;
   }
 }
 </style>
