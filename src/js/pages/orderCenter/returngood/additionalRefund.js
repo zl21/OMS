@@ -981,6 +981,7 @@ export default {
       if (!this.returnInfo.formValue.RESERVE_BIGINT01) return this.$Message.warning('额外退款申请类型必填!');
       if (!this.returnInfo.formValue.BILL_TYPE) return this.$Message.warning('退款类型必填!');
       if (!this.returnInfo.formValue.OC_B_RETURN_TYPE_ID) return this.$Message.warning('退款大类必填!');
+      if (!this.returnInfo.formValue.OC_B_RETURN_TYPE_ITEM_ID) return this.$Message.warning('退款细类必填!');
       if (!this.returnInfo.formValue.PAY_MODE) return this.$Message.warning('支付方式必填!');
       if (!this.returnInfo.formValue.RECEIVER_NAME) return this.$Message.warning('收款人姓名必填!');
       if (!this.returnInfo.formValue.PAY_ACCOUNT) return this.$Message.warning('收款人账号必填!');
