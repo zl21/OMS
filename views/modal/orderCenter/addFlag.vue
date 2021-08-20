@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-08 14:29:58
- * @LastEditTime: 2021-06-22 14:34:45
+ * @LastEditTime: 2021-08-20 10:03:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/addFlag.vue
@@ -487,26 +487,12 @@ export default {
     justify-content: space-between;
     padding: 5px;
   }
-  .modalModule {
-    .customBtn {
-      font-size: 12px;
+}
+/deep/ .secModal {
+    .jordan-table-box .ark-table-border td,
+    .jordan-table-box .ark-table-border th {
       height: 32px;
-      line-height: 30px;
-      padding: 0 12px;
-      border-radius: 5px;
-      color: #292f43;
-      border-color: #dbdde8;
-      background-color: #fff;
+      line-height: 32px;
     }
   }
-}
-</style>
-<style lang='less'>
-.secModal {
-  .jordan-table-box .ark-table-border td,
-  .jordan-table-box .ark-table-border th {
-    height: 32px;
-    line-height: 32px;
-  }
-}
 </style>
