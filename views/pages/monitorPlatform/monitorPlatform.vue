@@ -667,12 +667,21 @@ export default {
       vmI18n: window.vmI18n,
     };
   },
+  computed: {
+    tableName() {
+      const { keepAliveModuleName, tableName } = this.$store.state.global.activeTab;
+      return tableName
+    }
+  },
   mounted() {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
     this.maxHeight("main02body", "m2Item", 1);
     window.onresize = () => {
-      console.log(11);
+      console.log(11, this.tableName);
+      if (this.tableName != 'MONITORINGPLATFORM') {
+        return
+      }
       this.maxHeight("main02body", "m2Item");
       this.maxHeight("main03body", "m3Item");
     };
@@ -998,7 +1007,7 @@ export default {
           if (itPosition == firstLeft) {
             rowSum += 1;
           }
-          console.log(itPosition,rowSum);
+          // console.log(itPosition,rowSum);
           // break;
         } else {
           flag = true;
