@@ -23,7 +23,7 @@
       <div class="login-content">
         <!-- logo -->
         <div class="logo-img">
-          <img src="~assetsImg/form-logo.png" />
+          <img :src="require('assetsImg/form-logo.png')" />
         </div>
         <!-- tabs -->
         <div class="loginTabs" v-if="isEnableLoginPro">
