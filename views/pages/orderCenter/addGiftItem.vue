@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 15:03:42
- * @LastEditTime: 2021-08-06 10:26:49
+ * @LastEditTime: 2021-08-20 14:18:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit  
  * @FilePath: /云雀/src/views/pages/orderCenter/addGiftItem.vue
@@ -54,7 +54,7 @@ export default addGiftItem;
     right: 0;
     top: 3px;
   }
-  .orderManageEdit {
+  .business-form-main {
     &.unFlodStyle {
       padding-right: 0;
     }

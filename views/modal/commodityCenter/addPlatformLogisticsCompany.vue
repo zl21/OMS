@@ -249,7 +249,7 @@ export default {
     .businessForm-box {
       // width: 500px;
     }
-    .orderManageEdit .businessForm_a {
+    .business-form-main .businessForm_a {
       padding-bottom: 6px;
       .ark-col {
         // margin-top: 0;

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-07 15:56:09
- * @LastEditTime: 2021-08-09 17:06:04
+ * @LastEditTime: 2021-08-20 14:18:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/modal/orderCenter/addGiftItem.vue
@@ -41,7 +41,7 @@
     right: 0;
     top: 3px;
   }
-  .orderManageEdit{
+  .business-form-main{
     &.unFlodStyle{
       padding-right:0;
     }

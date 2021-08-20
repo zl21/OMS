@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-15 19:01:59
- * @LastEditTime: 2021-07-16 13:17:04
+ * @LastEditTime: 2021-08-20 14:18:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/commodityCenter/commodityClassifyAddOrEdit.vue
@@ -74,7 +74,7 @@ export default commodityClassifyAddOrEdit;
     position: relative;
     /deep/ .businessForm-box {
       width: 500px;
-      .orderManageEdit .businessForm_a {
+      .business-form-main .businessForm_a {
         padding-bottom: 6px;
       }
     }
