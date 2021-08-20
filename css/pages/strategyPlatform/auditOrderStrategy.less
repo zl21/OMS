@@ -1,5 +1,16 @@
 @import '~@burgeon/oms-theme/skin/public.less';
 .auditOrderStrategy {
+    /deep/ .orderManageEdit .ark-form-item.IS_OPEN {
+        display: flex;
+        justify-content: center;
+        .ark-form-item-label {
+            float: none;
+            display: inline-block;
+        }
+        .ark-form-item-content {
+            margin-left: 0 !important;
+        }
+    }
     .customized-detail-main {
         .conditions {
             .label{
@@ -57,11 +68,12 @@
             }
         }
         .createdTime{
-            width: 24.5%;
+            width: 25.5%;
             display: grid;
             grid-template-columns: 120px auto 100px;
             font-size: 0;
             margin-top: @base-mr;
+            margin-left: @base-mr;
             label,input,span{
                 display: inline-block;
                 font-size: 12px;

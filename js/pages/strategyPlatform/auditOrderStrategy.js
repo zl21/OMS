@@ -166,6 +166,7 @@ export default {
             label: '启动自动审核',
             value: 'IS_OPEN',
             width: '6',
+            class: 'IS_OPEN',
             switchChange: () => {
               this.modify();
               if (this.id != '-1') {
