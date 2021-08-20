@@ -10,6 +10,15 @@ export default () => ({
 	updated() { },
 	mounted() { },
 	methods: {
+		R3_searchBefore(obj) {
+			// 列表界面查询按钮前置事件，可通过该事件改变查询接口参数
+			// this.searchData.isfresh = true;
+			// debugger
+			obj.callBack().then(() => {
+				// delete this.searchData.isfresh; // 执行完要删除
+				// debugger
+			});
+		},
 		R3_processColumns(columns) {
 			columns.forEach(item => {
 				// item.tdAlign = 'center' // 列的表体内容居中
