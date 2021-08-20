@@ -173,13 +173,7 @@ export default {
       this.curLang = langConfig.find((it) => it.type == lang).text;
       R3.store.commit(`customize/language`, lang || "zh");
       this.initDom();
-
-      this.$message({
-        // message: _this.vmI18n.messages[lang].tip_info,
-        message,
-        // type: _this.vmI18n.messages[lang].tip_type,
-        type: "success",
-      });
+      this.$Message.success(message);
     },
   },
 };
