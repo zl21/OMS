@@ -208,7 +208,7 @@
                       :disabled="disabledAll"
                     />
                     <Icon
-                      style="font-size: 28px; color: red"
+                      style="font-size: 26px; color: red"
                       type="ios-add"
                       @click="mdAdd"
                       v-if="
@@ -219,7 +219,7 @@
                     />
 
                     <Icon
-                      style="font-size: 28px; color: red"
+                      style="font-size: 26px; color: red"
                       type="ios-remove"
                       @click="fndel(index)"
                       v-if="
