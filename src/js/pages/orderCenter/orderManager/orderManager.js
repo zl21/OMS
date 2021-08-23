@@ -3237,9 +3237,13 @@ export default {
       this.service.common
         .getOrderStatus(fromdata)
         .then(res => {
-          this.statusSelectModal = true;
           if (res.data.code === 0) {
-            debugger
+            this.statusSelectModal = true;
+            this.statusSelectFormConfig.formValue.deliveryOrderCode = res.data.data.deliveryOrderCode;
+            this.statusSelectFormConfig.formValue.status = res.data.data.status;
+            this.statusSelectFormConfig.formValue.operateTime = res.data.data.operateTime;
+          } else {
+            this.$Message.error(res.data.message);
           }
         })
     },
