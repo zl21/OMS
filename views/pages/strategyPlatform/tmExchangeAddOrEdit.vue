@@ -23,8 +23,17 @@
               <template #exchangeDesc="{ rowData }">
                 <div class="changeForm">
                   <div class="preLable">
-                    <i-switch size="small" v-model="rowData.value.IS_AUTO_APPROVE" :disabled="isEnable" @on-change="rowData.item.switchChange" />
-                    <label :title="rowData.item.label" :class="['cust-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
+                    <i-switch
+                      size="small"
+                      v-model="rowData.value.IS_AUTO_APPROVE"
+                      :disabled="isEnable"
+                      @on-change="rowData.item.switchChange"
+                      class="switch"
+                    />
+                    <label
+                      :title="rowData.item.label"
+                      :class="['cust-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]"
+                    >
                       <i>*</i>{{ rowData.item.label }}：
                     </label>
                   </div>
@@ -42,7 +51,10 @@
                     </CheckboxGroup>
                   </div>
                   <div class="changeFormInput">
-                    <label :title="rowData.item.subLabel" :class="['cust-form-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]">
+                    <label
+                      :title="rowData.item.subLabel"
+                      :class="['cust-form-label', 'required', { hidden: !rowData.value.IS_AUTO_APPROVE }]"
+                    >
                       <i>*</i><span>{{ rowData.item.subLabel }}：</span>
                     </label>
                     <Input
@@ -64,15 +76,23 @@
               <template #stockout="{ rowData }">
                 <div class="changeForm">
                   <div class="preLable">
-                    <i-switch size="small"
+                    <i-switch
+                      size="small"
                       v-model="rowData.value.OOS_AUTO_REJECT"
                       :disabled="isEnable"
                       @on-change="rowData.item.switchChange" 
+                      class="switch"
                     />
-                    <label :title="rowData.item.label" class="cust-label">{{ rowData.item.label }}：</label>
+                    <label
+                      :title="rowData.item.label"
+                      class="cust-label"
+                    >{{ rowData.item.label }}：</label>
                   </div>
                   <div class="changeFormInput">
-                    <label :title="rowData.item.subLabel1" :class="['cust-form-label', 'required', { hidden: !rowData.value.OOS_AUTO_REJECT }]">
+                    <label
+                      :title="rowData.item.subLabel1"
+                      :class="['cust-form-label', 'required', { hidden: !rowData.value.OOS_AUTO_REJECT }]"
+                    >
                       <i>*</i>{{ rowData.item.subLabel1 }}：
                     </label>
                     <Select
@@ -89,7 +109,10 @@
                     </Select>
                   </div>
                   <div class="changeFormInput">
-                    <label :title="rowData.item.subLabel2" class="cust-form-label">{{ rowData.item.subLabel2 }}：</label>
+                    <label
+                      :title="rowData.item.subLabel2"
+                      class="cust-form-label"
+                    >{{ rowData.item.subLabel2 }}：</label>
                     <Input
                       v-model="rowData.value.OOS_AUTO_REJECT_DESC"
                       :maxlength="250"
@@ -105,17 +128,23 @@
               <template #bias="{ rowData }">
                 <div class="changeForm">
                   <div class="preLable">
-                    <i-switch size="small"
+                    <i-switch
+                      size="small"
                       v-model="rowData.value.DEVIATION_AUTO_REJECT"
                       :disabled="isEnable"
                       @on-change="rowData.item.switchChange"
+                      class="switch"
                     />
-                    <label :title="rowData.item.label" class="cust-label">{{ rowData.item.label }}：</label>
+                    <label
+                      :title="rowData.item.label"
+                      class="cust-label"
+                    >{{ rowData.item.label }}：</label>
                   </div>
                   <div class="changeFormInput">
                     <label
                       :title="rowData.item.subLabel1"
-                      :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
+                      :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]"
+                    >
                       <i>*</i>{{ rowData.item.subLabel1 }}：
                     </label>
                     <Input
@@ -129,7 +158,10 @@
                     />
                   </div>
                   <div class="changeFormInput">
-                    <label :title="rowData.item.subLabel2" :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]">
+                    <label
+                      :title="rowData.item.subLabel2"
+                      :class="['cust-form-label', 'required', { hidden: !rowData.value.DEVIATION_AUTO_REJECT }]"
+                    >
                       <i>*</i>{{ rowData.item.subLabel2 }}：
                     </label>
                     <Select
@@ -146,7 +178,10 @@
                     </Select>
                   </div>
                   <div class="changeFormInput last">
-                    <label :title="rowData.item.subLabel3" class="cust-form-label">{{ rowData.item.subLabel3 }}：</label>
+                    <label
+                      :title="rowData.item.subLabel3"
+                      class="cust-form-label"
+                    >{{ rowData.item.subLabel3 }}：</label>
                     <Input v-model="rowData.value.DEVIATION_AUTO_REJECT_DESC"
                       :maxlength="250"
                       :disabled="isEnable"
