@@ -97,6 +97,7 @@ export default {
           },
           {
             text: $i18n.t('CONFIRM'),
+            type:"primary",
             btnclick: () => {
               let reqdata = JSON.parse(JSON.stringify(this.tabdata))
               if (this.componentData.type == 2) {

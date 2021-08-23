@@ -56,7 +56,7 @@ export default {
       },
       deep: true
     },
-    'formConfig1.formValue': {
+    'this.tableConfig2.businessFormConfig.formValue': {
       //监听仓库物流
       handler(val) {
         val && this.changeCount++;
@@ -122,23 +122,7 @@ export default {
           }
         ]
       },
-      btnConfig1: {
-        typeAll: 'default',
-        buttons: [
-          {
-            type: 'primary',
-            text: $i18n.t('btn.increase'),//'添加',
-            disabled: false,
-            btnclick: this.foottable
-          },
-          {
-            type: 'warning',
-            text: $i18n.t('btn.delete'), // 删除
-            disabled: false,
-            btnclick: this.deleteLogistics
-          }
-        ]
-      },
+     
       formConfig: {
         formData: [
 
@@ -147,7 +131,7 @@ export default {
             colname: 'cpCShopTitle',
             style: 'popInput', // 输入框弹框单多选
             label: $i18n.t('table_label.shopName'), // 店铺名称
-            width: '12',
+            width: '10',
             itemdata: {
               col: 1,
               colid: 172126, // 当前字段的ID
@@ -227,7 +211,7 @@ export default {
             label: '时间范围',
             colname: 'Time',
             value: '',
-            width: '18',
+            width: '12',
             disabled: false,
             onChange: () => {
               this.formConfig.formValue.Time[0] && (this.formConfig.formValue.beginTime = dateUtil.getFormatDate(this.formConfig.formValue.Time[0], 'yyyy-MM-dd HH:mm:ss'))
@@ -238,7 +222,7 @@ export default {
             style: 'input',
             label: '优先级',
             colname: 'priority',
-            width: '12',
+            width: '10',
             regx: /^[0-9]*$/,
             disabled: false,
             maxlength: 11,
@@ -343,81 +327,81 @@ export default {
           ename: [{ required: true, message: '' }],
         }
       },
-      formConfig1: {
-        formData: [
-          {
-            version: '1.4',
-            colname: 'cpCPhyWarehouseEname',
-            style: 'popInput', // 输入框弹框单多选
-            width: '12',
-            itemdata: {
-              col: 1,
-              colid: 172127, // 当前字段的ID
-              colname: 'cpCPhyWarehouseEname', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'mrp', // 外键关联类型
-              isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: '仓库名称', // 赔付类型
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
-              reftableid: 10285, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              isBackRowItem: true,
-              pid: '' // 啥 ？？？
-            },
-            oneObj: val => {
-              val[0] && this.cpCPhyWarehousedata.push(val[0]);
-              this.WarehouseItemListobj.cpCPhyWarehouseEname = this.formConfig1.formData[0].itemdata.pid;
+      // formConfig1: {
+      //   formData: [
+      //     {
+      //       version: '1.4',
+      //       colname: 'cpCPhyWarehouseEname',
+      //       style: 'popInput', // 输入框弹框单多选
+      //       width: '10',
+      //       itemdata: {
+      //         col: 1,
+      //         colid: 172127, // 当前字段的ID
+      //         colname: 'cpCPhyWarehouseEname', // 当前字段的名称
+      //         datelimit: 'all',
+      //         display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+      //         fkdisplay: 'mrp', // 外键关联类型
+      //         isfk: true, // 是否有fk键
+      //         isnotnull: false, // 是否必填
+      //         isuppercase: false, // 是否转大写
+      //         length: 65535, // 最大长度是多少
+      //         name: '仓库名称', // 赔付类型
+      //         readonly: false, // 是否可编辑，对应input   readonly属性
+      //         reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
+      //         reftableid: 10285, // 对应的表ID
+      //         row: 1,
+      //         statsize: -1,
+      //         type: 'STRING', // 这个是后台用的
+      //         valuedata: '', // 这个是选择的值
+      //         isBackRowItem: true,
+      //         pid: '' // 啥 ？？？
+      //       },
+      //       oneObj: val => {
+      //         val[0] && this.cpCPhyWarehousedata.push(val[0]);
+      //         this.WarehouseItemListobj.cpCPhyWarehouseEname = this.tableConfig2.businessFormConfig.formData[0].itemdata.pid;
 
-              // 选中触发事件
-            }
-          },
-          {
-            version: '1.4',
-            colname: 'cpCPhyWarehouseEname',
-            style: 'popInput', // 输入框弹框单多选
-            width: '12',
-            itemdata: {
-              col: 1,
-              colid: 172128, // 当前字段的ID
-              colname: 'cpCPhyWarehouseEname', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'mrp', // 外键关联类型
-              isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
-              name: '物流公司', // 赔付类型
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
-              reftableid: 10285, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              isBackRowItem: true,
-              pid: '' // 啥 ？？？
-            },
-            oneObj: val => {
+      //         // 选中触发事件
+      //       }
+      //     },
+      //     {
+      //       version: '1.4',
+      //       colname: 'cpCPhyWarehouseEname',
+      //       style: 'popInput', // 输入框弹框单多选
+      //       width: '10',
+      //       itemdata: {
+      //         col: 1,
+      //         colid: 172128, // 当前字段的ID
+      //         colname: 'cpCPhyWarehouseEname', // 当前字段的名称
+      //         datelimit: 'all',
+      //         display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+      //         fkdisplay: 'mrp', // 外键关联类型
+      //         isfk: true, // 是否有fk键
+      //         isnotnull: false, // 是否必填
+      //         isuppercase: false, // 是否转大写
+      //         length: 65535, // 最大长度是多少
+      //         name: '物流公司', // 赔付类型
+      //         readonly: false, // 是否可编辑，对应input   readonly属性
+      //         reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
+      //         reftableid: 10285, // 对应的表ID
+      //         row: 1,
+      //         statsize: -1,
+      //         type: 'STRING', // 这个是后台用的
+      //         valuedata: '', // 这个是选择的值
+      //         isBackRowItem: true,
+      //         pid: '' // 啥 ？？？
+      //       },
+      //       oneObj: val => {
 
-              val[0] && this.cpCLogisticsdata.push(val[0]);
-              // 选中触发事件
-              this.WarehouseItemListobj.cpCLogisticsEname = this.formConfig1.formData[1].itemdata.pid;
-              this.cpCLogisticsdataname = this.formConfig1.formData[1].itemdata.valuedata;
-            }
-          }
-        ],
-        formValue: {},
-        ruleValidate: {}
-      },
+      //         val[0] && this.cpCLogisticsdata.push(val[0]);
+      //         // 选中触发事件
+      //         this.WarehouseItemListobj.cpCLogisticsEname = this.tableConfig2.businessFormConfig.formData[1].itemdata.pid;
+      //         this.cpCLogisticsdataname = this.tableConfig2.businessFormConfig.formData[1].itemdata.valuedata;
+      //       }
+      //     }
+      //   ],
+      //   formValue: {},
+      //   ruleValidate: {}
+      // },
       cpCPhyWarehousedata: [],
       cpCLogisticsdata: [],
       cpCLogisticsdataname: '',
@@ -632,6 +616,98 @@ export default {
         data: []
       },
       tableConfig2: {
+        businessFormConfig: {
+          formData: [
+            {
+              version: '1.4',
+              colname: 'cpCPhyWarehouseEname',
+              style: 'popInput', // 输入框弹框单多选
+              width: '10',
+              itemdata: {
+                col: 1,
+                colid: 172127, // 当前字段的ID
+                colname: 'cpCPhyWarehouseEname', // 当前字段的名称
+                datelimit: 'all',
+                display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                fkdisplay: 'mrp', // 外键关联类型
+                isfk: true, // 是否有fk键
+                isnotnull: false, // 是否必填
+                isuppercase: false, // 是否转大写
+                length: 65535, // 最大长度是多少
+                name: '仓库名称', // 赔付类型
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
+                reftableid: 10285, // 对应的表ID
+                row: 1,
+                statsize: -1,
+                type: 'STRING', // 这个是后台用的
+                valuedata: '', // 这个是选择的值
+                isBackRowItem: true,
+                pid: '' // 啥 ？？？
+              },
+              oneObj: val => {
+                val[0] && this.cpCPhyWarehousedata.push(val[0]);
+                this.WarehouseItemListobj.cpCPhyWarehouseEname = this.tableConfig2.businessFormConfig.formData[0].itemdata.pid;
+  
+                // 选中触发事件
+              }
+            },
+            {
+              version: '1.4',
+              colname: 'cpCPhyWarehouseEname',
+              style: 'popInput', // 输入框弹框单多选
+              width: '10',
+              itemdata: {
+                col: 1,
+                colid: 172128, // 当前字段的ID
+                colname: 'cpCPhyWarehouseEname', // 当前字段的名称
+                datelimit: 'all',
+                display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                fkdisplay: 'mrp', // 外键关联类型
+                isfk: true, // 是否有fk键
+                isnotnull: false, // 是否必填
+                isuppercase: false, // 是否转大写
+                length: 65535, // 最大长度是多少
+                name: '物流公司', // 赔付类型
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
+                reftableid: 10285, // 对应的表ID
+                row: 1,
+                statsize: -1,
+                type: 'STRING', // 这个是后台用的
+                valuedata: '', // 这个是选择的值
+                isBackRowItem: true,
+                pid: '' // 啥 ？？？
+              },
+              oneObj: val => {
+  
+                val[0] && this.cpCLogisticsdata.push(val[0]);
+                // 选中触发事件
+                this.WarehouseItemListobj.cpCLogisticsEname = this.tableConfig2.businessFormConfig.formData[1].itemdata.pid;
+                this.cpCLogisticsdataname = this.tableConfig2.businessFormConfig.formData[1].itemdata.valuedata;
+              }
+            }
+          ],
+          formValue: {},
+          ruleValidate: {}
+        },
+        businessButtonConfig:{
+            typeAll: 'default',
+            buttons: [
+              {
+                type: 'primary',
+                text: $i18n.t('btn.increase'),//'添加',
+                disabled: false,
+                btnclick: this.foottable
+              },
+              {
+                type: 'warning',
+                text: $i18n.t('btn.delete'), // 删除
+                disabled: false,
+                btnclick: this.deleteLogistics
+              }
+            ]
+        },
         indexColumn: false,
         isShowSelection: false,
         columns: [
@@ -848,13 +924,13 @@ export default {
           em.disabled = true;
         });
         //禁用仓库物流 
-        this.formConfig1.formData.forEach(item => {
+        this.tableConfig2.businessFormConfig.formData.forEach(item => {
           if (item.itemdata) {
             item.itemdata.readonly = true;
           }
         });
 
-        this.btnConfig1.buttons.forEach(item => {
+        this.tableConfig2.businessButtonConfig.buttons.forEach(item => {
           item.disabled = true
         });
       } else {
@@ -882,12 +958,12 @@ export default {
           em.disabled = false;
         });
         //禁用仓库物流
-        this.formConfig1.formData.forEach(item => {
+        this.tableConfig2.businessFormConfig.formData.forEach(item => {
           if (item.itemdata) {
             item.itemdata.readonly = false;
           }
         });
-        this.btnConfig1.buttons.forEach(item => {
+        this.tableConfig2.businessButtonConfig.buttons.forEach(item => {
           item.disabled = false
         });
       }
@@ -1346,10 +1422,10 @@ export default {
         this.tableConfig2.data = ckArr;
       }
 
-      this.formConfig1.formData[0].itemdata.pid = '';
-      this.formConfig1.formData[0].itemdata.valuedata = '';
-      this.formConfig1.formData[1].itemdata.pid = '';
-      this.formConfig1.formData[1].itemdata.valuedata = '';
+      this.tableConfig2.businessFormConfig.formData[0].itemdata.pid = '';
+      this.tableConfig2.businessFormConfig.formData[0].itemdata.valuedata = '';
+      this.tableConfig2.businessFormConfig.formData[1].itemdata.pid = '';
+      this.tableConfig2.businessFormConfig.formData[1].itemdata.valuedata = '';
     },
     // 过滤条件
     relationShip() {

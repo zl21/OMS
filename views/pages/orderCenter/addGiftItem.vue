@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-22 15:03:42
- * @LastEditTime: 2021-08-20 14:18:39
+ * @LastEditTime: 2021-08-23 17:59:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit  
  * @FilePath: /云雀/src/views/pages/orderCenter/addGiftItem.vue
@@ -39,14 +39,22 @@ import addGiftItem from '@/js/pages/orderCenter/addGiftItem';
 export default addGiftItem;
 </script>
 <style lang="less">
-@import "~omsTheme/public.less";
+@import '~omsTheme/public.less';
 .matchingDetails {
   padding-bottom: 0px !important;
   .foot-table {
     max-height: 500px;
     overflow-y: scroll;
   }
-
+  .foot-page {
+    .ark-page {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .absolute {
+    top: 22px !important;
+  }
 }
 .customized-modal {
   .absolute {

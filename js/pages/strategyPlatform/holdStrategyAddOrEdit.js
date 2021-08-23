@@ -555,7 +555,6 @@ export default {
             label: 'Hold单原因',
             colname: 'HOLD_ORDER_IS',
             width: '5',
-            circle:true,
             radioChange: e => {
               this.masterModifyData('HOLD_ORDER_REASON', 'formConfig3')
             },

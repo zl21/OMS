@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-07-14 11:50:57
+ * @LastEditTime: 2021-08-23 13:48:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
@@ -84,8 +84,8 @@
           @labelClick="labelClick"
         />
         <div slot="content" v-show="labelDefaultValue == 'PROPERTY'">
-          <businessForm :form-config="formConfig1" @keyDown="keyDown" />
-          <businessButton :btn-config="btnConfig1" />
+          <!-- <businessForm :form-config="formConfig1" @keyDown="keyDown" />
+          <businessButton :btn-config="btnConfig1" /> -->
           <businessActionTable
             :jordan-table-config="tableConfig2"
             @on-page-change="tablepageB"
@@ -105,13 +105,15 @@
     <Modal
       v-model="modal2"
       width="460"
+      title="请选择省市区"
       mask
       @on-ok="fnok"
       @on-cancel="fncancelcity"
+      class-name="customized-detail-modal2"
     >
       <businessForm :form-config="formConfig2" @keyDown="keyDown" />
     </Modal>
-    <Modal v-model="modal3" width="660" mask footer-hide>
+    <Modal v-model="modal3" width="660" mask footer-hide  title="添加商品" >
       <div class="specialLogistics-model-head">
         <div class="specialLogistics-model-head-left">
           <Input

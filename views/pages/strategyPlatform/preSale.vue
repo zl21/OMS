@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-22 15:47:49
- * @LastEditTime: 2021-08-05 14:37:19
+ * @LastEditTime: 2021-08-23 16:25:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/preSale.vue
@@ -56,7 +56,7 @@
         </div>
         <div class="preSale-add" v-show="index == indexlenth">
           <Icon type="md-add" color="#ed4014" @click="add"  size="24" />
-          <Icon type="md-close" color="#19be6b" @click="fndel(index)" size="24"  v-if="index != 0"/>
+          <Icon type="md-remove" color="#ed4014" @click="fndel(index)" size="24"  v-if="index != 0"/>
         </div>
       </div>
     </div>

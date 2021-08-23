@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:33:28
- * @LastEditTime: 2021-07-14 10:12:59
+ * @LastEditTime: 2021-08-23 15:40:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/storehouseRule.vue
@@ -16,7 +16,7 @@
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
-          {{baseInformation }}
+          {{ baseInformation }}
           <p slot="content">
             <businessForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
@@ -32,14 +32,16 @@
 
         <div class="subtablePart" v-show="labelDefaultValue == 'PROPERTY'">
           <div class="subtablePart-labelList">
-            <Input
-              v-model="seachVal"
-              :placeholder="placeholder"
-              style="width: 250px; margin-top: 20px"
-              @on-keydown="fninput"
-            />
-            <div class="buttons customized-detail-btn">
-              <businessButton :btn-config="btnConfig2" />
+            <div class="subtablePart-labelList-header">
+              <Input
+                v-model="seachVal"
+                :placeholder="placeholder"
+                style="width: 250px; margin-top: 20px"
+                @on-keydown="fninput"
+              />
+              <div class="buttons customized-detail-btn">
+                <businessButton :btn-config="btnConfig2" />
+              </div>
             </div>
 
             <businessActionTable
@@ -84,5 +86,5 @@ export default logisticsNoun;
 </script>
 
 <style lang="less" scoped>
-@import "~@/css/pages/strategyPlatform/storehouseRule.less";
+@import '~@/css/pages/strategyPlatform/storehouseRule.less';
 </style>
