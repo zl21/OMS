@@ -175,7 +175,7 @@ export default {
             checkChange: val => {
               console.log(val);
               let newVal
-              let oldVal = this.modify.master.EXCHANGE_DESC || this.backup.EXCHANGE_DESC
+              let oldVal = this.modify.master.EXCHANGE_DESC || this.backup.EXCHANGE_DESC || []
               if (
                 oldVal.length == 0 && val.includes(2) 
                 || !oldVal.includes('2') && val.includes('2') 
