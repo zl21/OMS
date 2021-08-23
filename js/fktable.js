@@ -251,11 +251,16 @@ export default {
       this.visible = index
       this.searchTable(this.fkDimVal ? true : false)
     },
-    colorChange(item, rowindex) {
+    colorChange(item, rowindex, e) {
+      // debugger
       let _self = this
       // _self.active = index
       if (!_self.single) {
-
+        // e.path[1].childNodes[0].childNodes[0].childNodes[0].checked
+        const mrpDom = e.path[1].childNodes[0].childNodes[0].childNodes[0];
+        mrpDom.target = {};
+        mrpDom.target.checked = !mrpDom.checked;
+        _self.checkBoxChange(mrpDom, rowindex, item);
       } else {
         _self.fkobj.desc = []
         _self.fkobj.idArr = []

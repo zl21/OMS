@@ -311,3 +311,4 @@
 | v1.2.74 | fktable -  businessForm样式修改  |
 | v1.2.75 | businessForm样式重写  |
 | v1.2.76 | 修复switchList组件的样式  |
+| v1.2.77 | fkinput-mrp行选中优化处理  |
