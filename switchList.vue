@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-18 11:28:58
- * @LastEditTime: 2021-06-23 11:29:51
+ * @LastEditTime: 2021-08-23 10:36:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/switchList.vue
 -->
 <template>
   <div class="content-li-item switchList">
-    <label style="width: 130px;">{{switchList.label}}:</label>
+    <label style="width: 85px;">{{switchList.label}}:</label>
     <div class="content-li-item-left">
       <div class="content-li-item-left-a" v-for="em,index in switchList.list" :key="index">
         <span class="left-a">
