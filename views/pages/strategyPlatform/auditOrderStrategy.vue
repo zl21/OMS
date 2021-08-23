@@ -193,7 +193,7 @@
                   >
                     <Input
                       v-model="item.GREATER"
-                      style="width: 80px"
+                      style="width: 95px"
                       @on-change="modify"
                       placeholder="大于等于"
                       :disabled="disabledAll"
@@ -201,7 +201,7 @@
                     -
                     <Input
                       v-model="item.LESS"
-                      style="width: 80px"
+                      style="width: 95px"
                       @on-blur="bothChange(index)"
                       @on-change="modify"
                       placeholder="小于"
@@ -209,20 +209,19 @@
                     />
                     <Icon
                       style="font-size: 28px; color: red"
+                      type="ios-add"
+                      @click="mdAdd"
                       v-if="
                         resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT
                           .TOTAL_AMT_ITEM.length ==
                           index + 1 && !disabledAll
                       "
-                      type="md-add"
-                      @click="mdAdd"
                     />
 
                     <Icon
-                      type="md-close"
-                      color="#19be6b"
+                      style="font-size: 28px; color: red"
+                      type="ios-remove"
                       @click="fndel(index)"
-                      size="28"
                       v-if="
                         resultData.ST_C_AUTO_AUDIT_ITEM.TOTAL_AMOUNT
                           .TOTAL_AMT_ITEM.length ==
