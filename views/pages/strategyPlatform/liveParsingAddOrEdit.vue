@@ -39,8 +39,15 @@
                   @on-change="rowData.item.datePickerChange" />
               </template>
               <template #rule="{ rowData }">
-                <div class="identification-rules" v-for="ruleItem, index in rowData.value.RULES" :key="`rule${index}`">
-                  <label class="title" style="margin-right: 10px; vertical-align: middle;"><i style="color: red; margin-right: 7px;">*</i>{{ rowData.item.subLabel }}:</label>
+                <div
+                  class="identification-rules"
+                  v-for="ruleItem, index in rowData.value.RULES"
+                  :key="`rule${index}`"
+                >
+                  <label class="title">
+                    <i>*</i>
+                    {{ rowData.item.subLabel }}:
+                  </label>
                   <RadioGroup
                     v-model="ruleItem.RULE_TYPE"
                     @on-change="rowData.item.radioChange(ruleItem)"
@@ -62,10 +69,10 @@
                   <span class="condition">{{ vmI18n.t('form_label.cg') }}</span>
                   <Icon
                     v-if="!isEnable"
-                    :type="index == 0 ? 'md-add' : 'md-close'"
+                    :type="index == 0 ? 'ios-add' : 'ios-remove'"
                     @click="rowData.item.handleRuleFields(ruleItem, index)"
                     color="red"
-                    style="margin-left: 20px;"
+                    class="operation-btn"
                   />
                 </div>
               </template>
