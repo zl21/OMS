@@ -13,7 +13,8 @@
       ]">
       <div class="businessForm-box" 
         v-if="businessFormConfig !== undefined">
-        <businessForm :formConfig="businessFormConfig"></businessForm>
+        <businessForm :formConfig="businessFormConfig">
+        </businessForm>
       </div>
       <!-- businessButtons -->
       <div class="businessButton" v-if="businessButtonConfig !== undefined">
