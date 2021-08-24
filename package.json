@@ -13,8 +13,8 @@
   "author": "flybird <duan.ry@burgeon.cn>",
   "license": "ISC",
   "devDependencies": {
-    "@burgeon/oms-theme": "^1.8.37",
-    "@syman/burgeon-r3": "2.1.2",
+    "@burgeon/oms-theme": "^1.8.39",
+    "@syman/burgeon-r3": "2.1.3",
     "babel-cli": "6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "burgeon-ui": "^1.0.56",
@@ -22,7 +22,7 @@
     "wangeditor": "^4.6.16"
   },
   "dependencies": {
-    "@burgeon/internationalization": "^1.1.0",
+    "@burgeon/internationalization": "^1.1.1",
     "@syman/ark-ui": "^1.1.39",
     "echarts": "^5.1.2",
     "lodash": "^4.17.21",
