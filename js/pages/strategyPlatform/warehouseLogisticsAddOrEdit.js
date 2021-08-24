@@ -18,6 +18,7 @@ export default {
   mixins: [new modifycurrentLabel()],
   data() {
     return {
+      colRowNum:4, // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
       vmI18n:$i18n,
       collapse: 'panel_baseInfo',
       loading: false,
@@ -202,6 +203,7 @@ export default {
         row: []
       },
       logisticsTableFormConfig: {
+        gridBar:true,
         formData: [
           {
             label: $i18n.t('form_label.logisticsCompany'), // 物流公司

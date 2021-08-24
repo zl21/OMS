@@ -152,8 +152,8 @@ export default authorize
         display: grid;
         justify-content: center;
         align-items: center;
-        height: 29px;
-        line-height: 29px;
+        height: 32px;
+        line-height: 32px;
         border-radius: 5px !important;
         text-align: center;
         background: @base-color !important;

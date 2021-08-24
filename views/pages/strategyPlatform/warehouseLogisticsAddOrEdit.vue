@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-21 19:46:25
- * @LastEditTime: 2021-05-28 16:08:22
- * @LastEditors: liu.sl
+ * @LastEditTime: 2021-08-24 11:53:33
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \burgeon-project-logic\views\pages\strategyPlatform\warehouseLogisticsAddOrEdit.vue
 -->
@@ -18,10 +18,7 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm
-              :key="forceReload"
-              :form-config="formConfig"
-            />
+            <businessForm :key="forceReload" :form-config="formConfig" />
           </p>
         </Panel>
       </Collapse>
@@ -36,27 +33,40 @@
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <businessForm 
-            v-if="labelDefaultValue == 'logistics'"
-            :form-config="logisticsTableFormConfig">
-            <template #logistics="{ rowData }">
-               <DropMultiSelectFilter
-                :data="filterData || rowData.value[rowData.item.defVal].data"
-                :totalRowCount="rowData.value[rowData.item.defVal].totalRowCount"
-                :AutoData="rowData.value[rowData.item.defVal].autoData"
-                :pageSize="rowData.item.pageSize"
-                @on-popper-show="rowData.item.popShow"
-                @on-page-change="rowData.item.changePage"
-                @on-fkrp-selected="rowData.item.fkrpSelected"
-                @on-input-value-change="rowData.item.inputValueChange"
-                @on-clear="rowData.item.clearInput">
-              </DropMultiSelectFilter>
-            </template>
-          </businessForm>
-          <businessButton
-            v-if="labelDefaultValue == 'logistics'"
-            :btn-config="logisticsTableButtonConfig"
-          />
+          <div
+            :class="[
+              'detail-table-form',
+              Number.isInteger(logisticsTableFormConfig.length / this.colRowNum)
+                ? 'formBottomPd'
+                : '',
+            ]"
+          >
+            <businessForm
+              v-if="labelDefaultValue == 'logistics'"
+              :form-config="logisticsTableFormConfig"
+            >
+              <template #logistics="{ rowData }">
+                <DropMultiSelectFilter
+                  :data="filterData || rowData.value[rowData.item.defVal].data"
+                  :totalRowCount="
+                    rowData.value[rowData.item.defVal].totalRowCount
+                  "
+                  :AutoData="rowData.value[rowData.item.defVal].autoData"
+                  :pageSize="rowData.item.pageSize"
+                  @on-popper-show="rowData.item.popShow"
+                  @on-page-change="rowData.item.changePage"
+                  @on-fkrp-selected="rowData.item.fkrpSelected"
+                  @on-input-value-change="rowData.item.inputValueChange"
+                  @on-clear="rowData.item.clearInput"
+                >
+                </DropMultiSelectFilter>
+              </template>
+            </businessForm>
+            <businessButton
+              v-if="labelDefaultValue == 'logistics'"
+              :btn-config="logisticsTableButtonConfig"
+            />
+          </div>
 
           <businessActionTable
             v-show="labelDefaultValue == 'logistics'"
@@ -73,17 +83,16 @@
             :component-data="subTableConfig"
           />
         </div>
-        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import warehouseLogisticsAddOrEdit from '@/js/pages/strategyPlatform/warehouseLogisticsAddOrEdit';
+import warehouseLogisticsAddOrEdit from "@/js/pages/strategyPlatform/warehouseLogisticsAddOrEdit";
 
-  export default warehouseLogisticsAddOrEdit;
+export default warehouseLogisticsAddOrEdit;
 </script>
 <style lang="less" scoped>
-@import '~@/css/pages/strategyPlatform/warehouseLogisticsAddOrEdit.less';
+@import "~@/css/pages/strategyPlatform/warehouseLogisticsAddOrEdit.less";
 </style>

@@ -397,6 +397,7 @@ export default {
             border-radius: 4px;
             vertical-align: top;
             margin-left: 16px;
+            width: 100px;
             &:hover{
               border-color: @base-color;
               color: @base-color;
