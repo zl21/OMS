@@ -310,6 +310,7 @@ export default {
           }
         ],
         businessFormConfig: {
+          gridBar: true,
           formData: [
             {
               version: '1.4',
@@ -409,6 +410,7 @@ export default {
               webname: 'ST_C_PRICE_SUB_DELETE',
               text: $i18n.t('modalTitle.deleteDetails'), // 删除明细
               isShow: true,
+              type: 'warning',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.deleteDetail();

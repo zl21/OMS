@@ -1,4 +1,5 @@
 @import '~professionalComponents/common/css/theme.less';
+@import "~@burgeon/oms-theme/skin/public.less";
 .customized-detail {
   /deep/ .ark-form-item.soltDom {
     .ark-form-item-label {
@@ -9,6 +10,9 @@
       display: flex;
       .ark-input-wrapper, .ark-select {
         display: inline-block;
+        &.ark-select-single .ark-select-selection{
+          #bundle > .defalutInput;
+        }
       }
       .preLable {
         display: flex;

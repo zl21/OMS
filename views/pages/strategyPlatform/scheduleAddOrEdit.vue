@@ -42,14 +42,14 @@
       <div class="customized-detail-table">
         <!-- tab切换 -->
         <businessLabel
-          v-show="ID != -1 || isMasterRequired"
+          v-show="$route.params.customizedModuleId != 'New'"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
         />
         <!-- 子表Part -->
         <div class="subtablePart">
           <subTable
-            v-show="ID != -1 || isMasterRequired"
+            v-show="$route.params.customizedModuleId != 'New'"
             :component-data="subTableConfig"
           />
         </div>
