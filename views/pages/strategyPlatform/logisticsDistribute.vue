@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-20 13:39:45
- * @LastEditTime: 2021-07-13 20:48:23
+ * @LastEditTime: 2021-08-24 15:55:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/logisticsDistribute.vue
@@ -17,8 +17,7 @@
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-        
-          {{baseInformation }}
+          {{ baseInformation }}
           <div slot="content" class="logistics-top-form">
             <businessForm :form-config="FormConfig" @keyDown="keyDown" />
           </div>
@@ -35,19 +34,20 @@
         />
         <div class="subtablePart" v-if="labelDefaultValue == 'jiben'">
           <div slot="content">
-            <div slot="content" class="logistics-top-form">
-              <businessForm :form-config="formConfig" @keyDown="keyDown" />
+            <div slot="content" class="logistics-top-form formlout">
+              <div class="customized-detail-footfrom">
+                <businessForm :form-config="formConfig" @keyDown="keyDown" />
+              </div>
+
+              <div class="customized-detail-footbtn">
+                <businessButton :btn-config="btnConfig2" />
+              </div>
             </div>
 
             <div
               class="logistics-foot-table customized-detail-table"
               v-if="tableshow"
             >
-              <!-- tab切换 -->
-              <div class="customized-detail-footbtn">
-                <businessButton :btn-config="btnConfig2" />
-              </div>
-
               <businessActionTable
                 :jordan-table-config="tableConfig"
                 @on-select="fnselect"
@@ -89,11 +89,12 @@
           type="primary"
           style="margin-right: 10px"
           @click="getCheckedNodes"
-          >   {{btnSave}}</Button
         >
-        <Button type="primary" @click="fnCancel" class="btn-quxiao"
-          >  {{btnBack}} </Button
+          {{ btnSave }}</Button
         >
+        <Button type="primary" @click="fnCancel" class="btn-quxiao">
+          {{ btnBack }}
+        </Button>
       </div>
     </Modal>
   </div>
@@ -106,5 +107,5 @@ export default logisticsdistribute;
 </script>
 
 <style lang="less" scoped>
-@import "~@/css/pages/strategyPlatform/logisticsDistribute.less";
+@import '~@/css/pages/strategyPlatform/logisticsDistribute.less';
 </style>

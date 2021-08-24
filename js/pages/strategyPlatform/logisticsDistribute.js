@@ -107,6 +107,7 @@ export default {
             }
           }, {
             text: '删除区域',
+            type:"warning",
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_deleteArea",
             disabled: false, // 按钮禁用控制
@@ -516,7 +517,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label:  $i18n.t('common.baseInformation'),//'基本信息',
+          label: $i18n.t('form_label.e9'),//'基本信息',
           value: 'jiben'
         },
         {
@@ -556,7 +557,7 @@ export default {
       this.id = '-1';
       this.tableshow = true;
       this.labelList = [{
-        label: $i18n.t('common.baseInformation'),//'基本信息',
+        label: $i18n.t('form_label.e9'),//'基本信息',
         value: 'jiben'
       },]
     } else {
@@ -584,7 +585,7 @@ export default {
     },
     queryAllCheckedProvince() {
       let data = {
-        ID: this.$route.params.customizedModuleId,
+        ID: this.$route.params.customizedModuleId == "New" ? "-1":this.$route.params.customizedModuleId ,
         AREA_RANGE_TYPE: this.AliasFormConfig.formValue.REGION_TYPE
       }
       service.strategyPlatform.queryAllCheckedProvince(data).then(res => {
@@ -695,6 +696,10 @@ export default {
       this.tableSelectArr.forEach(em => {
         idArr.push(em.cpCRegionProvinceId);
       });
+      if (idArr.length == 0) {
+        this.$Message.error("请选择要删除的明细！");
+        return
+      }
       let data = {
         ID: this.id,
         PROVINCE_IDS: idArr.join(',')
