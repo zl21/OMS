@@ -190,3 +190,4 @@ console.log($i18n.t(common.all));
 | v1.0.98 | 翻译 |
 | v1.0.99 | SMS login |
 | v1.1.0 | 登录翻译优化 |
+| v1.1.1 | form_label.e9 |
