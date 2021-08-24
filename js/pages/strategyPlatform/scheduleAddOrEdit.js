@@ -833,7 +833,7 @@ export default {
               label: $i18n.t('form_label.cc'), // 拣货单创建方式
               value: 'PICK_CREATE_TYPE',
               colname: 'PICK_CREATE_TYPE',
-              width: '24',
+              width: '8',
               disabled: false,
               setRequired: '', // 必选标识,值不为required时无标识
               radioChange: ()=>{
@@ -1051,6 +1051,7 @@ export default {
         ],
         businessButtonConfig: {
           typeAll: 'default',
+          btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [
             {
               text: $i18n.t('btn.add'), // 新增
