@@ -102,6 +102,11 @@ export default {
         },
         {
           flag: false, // 需要加*
+          column: 'IS_VIP_LEVEL',
+          label: '会员等级:'
+        },
+        {
+          flag: false, // 需要加*
           column: 'ORIG_RETURN_ORDER_ID',
           label: '退换货单:'
         },
