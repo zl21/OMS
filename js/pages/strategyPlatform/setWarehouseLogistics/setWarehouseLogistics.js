@@ -29,7 +29,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         confirmTitle: '',
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
@@ -49,7 +49,7 @@ export default {
         refFuns: 'confirmFun',
         // confirmTitle: "请选择物流公司",
         confirmTitle: '',
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '760',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭

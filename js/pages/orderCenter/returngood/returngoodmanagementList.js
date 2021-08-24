@@ -48,7 +48,7 @@ export default {
       changeRemarkConfig: {
         refFuns: 'confirmFun',
         confirmTitle: $i18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
@@ -66,7 +66,7 @@ export default {
       modifyWarehouse: {
         refFuns: 'confirmFun',
         confirmTitle: $i18n.t('modalTitle.modify_returnWarehouse'), // 修改退货仓库
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
@@ -83,7 +83,7 @@ export default {
       modifyReturnOrderLogistics: {
         refFuns: 'confirmFun',
         confirmTitle: $i18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
@@ -101,7 +101,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         confirmTitle: $i18n.t('btn.import'), // 导入
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭

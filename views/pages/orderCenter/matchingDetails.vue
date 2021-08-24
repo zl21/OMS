@@ -478,7 +478,7 @@ export default {
       this.$Modal.confirm({
         title,
         width: 500,
-        titleAlign: 'center',
+        titleAlign: 'left',
         mask: true,
         className: 'ark-dialog',
         render: (h) => {

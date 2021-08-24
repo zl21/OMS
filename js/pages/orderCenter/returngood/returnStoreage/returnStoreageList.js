@@ -48,7 +48,7 @@ export default {
         refFuns: 'confirmFun',
         // confirmTitle: "导入",
         confirmTitle: $i18n.t('modalTitle.import'),
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭

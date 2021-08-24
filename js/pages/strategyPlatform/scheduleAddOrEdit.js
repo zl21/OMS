@@ -45,7 +45,7 @@ export default {
       // 弹框配置
       scheduleFormConfig: {
         // title: '入库单', // 修改备注
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         // width: '800',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭

@@ -68,7 +68,7 @@
                     this.querySgStorage(params.row);
                     this.$Modal.confirm({
                       title: '查库存',
-                      titleAlign: 'center',
+                      titleAlign: 'left',
                       mask: true,
                       className: 'ark-dialog',
                       render: (h) => h('Table', {

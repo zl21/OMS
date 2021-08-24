@@ -19,7 +19,7 @@ export default {
                   className: 'ark-dialog',
                   title: $i18n.t('modalTitle.tips'), // title:'提示',
                   content: $i18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
-                  titleAlign: 'center',
+                  titleAlign: 'left',
                   mask: true, // 显示蒙层
                   draggable: true, // 拖拽
                   closable: true, // 右上角小叉

@@ -29,7 +29,7 @@ export default {
       matrixBox: {
         refFuns: 'confirmFun',
         confirmTitle: $i18n.t('modalTitle.matrixEntry'), // 矩阵录入
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '860',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
@@ -1122,7 +1122,7 @@ export default {
       orderNo: {
         refFuns: 'confirmFun',
         confirmTitle: $i18n.t('modalTitle.matrixEntry'), // 矩阵录入
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '800',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭

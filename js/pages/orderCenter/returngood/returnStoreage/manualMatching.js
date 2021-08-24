@@ -24,7 +24,7 @@ export default {
       returnNumber: {
         refFuns: 'confirmFun',
         confirmTitle: '退单编号查询',
-        titleAlign: 'center', // 设置标题是否居中 center left
+        titleAlign: 'left', // 设置标题是否居中 center left
         width: '900',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
