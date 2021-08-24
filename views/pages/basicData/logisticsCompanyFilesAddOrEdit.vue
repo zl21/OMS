@@ -31,6 +31,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <businessActionTable
+            :class="'PROPERTYVALUES'"
             :key="subTableConfig.key"
             v-show="labelDefaultValue === 'PROPERTYVALUES'"
             :jordan-table-config="subTableConfig"
@@ -64,4 +65,9 @@ export default logisticsCompanyFilesAddOrEdit;
 <style lang="less" scoped>
 @import '~@/css/pages/basicData/channelStore.less';
 // @import '~@/css/pages/basicData/logisticsCompanyFilesAddOrEdit.less';
+.PROPERTYVALUES {
+ /deep/ .businessButton {
+    padding-top: 11px;
+  }
+}
 </style>
