@@ -9,5 +9,41 @@
       color: #fd6442;
       border-radius: 2px;
       margin-right: 5px;
+      border: 1px solid #dbdde8 !important;
+    }
+    // 弹框
+    /deep/ .el-dialog{
+      margin: 0 !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px;
+      overflow: hidden;
+      .el-dialog__header{
+        font-size: 14px;
+        padding: 0;
+        height: 33px;
+        line-height: 33px;
+        text-align: left;
+        color: #000;
+        background: #f8f7f7;
+        border-bottom: 1px solid #bcbcbc;
+      }
+      .el-dialog__body{
+        padding: 16px;
+        .left-tree{
+          height:440px ;
+          overflow-y: auto;
+        }
+        .dislogtree .node{
+          .title{
+            text-align: left;
+          }
+           ul li{
+            text-align: left;
+          }
+        }
+      }
     }
 }
