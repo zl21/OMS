@@ -102,7 +102,7 @@ export default {
         },
         {
           flag: false, // 需要加*
-          column: 'IS_VIP_LEVEL',
+          column: 'VIP_LEVEL',
           label: '会员等级:'
         },
         {
