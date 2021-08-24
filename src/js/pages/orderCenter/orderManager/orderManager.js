@@ -2013,7 +2013,7 @@ export default {
         },
         PS_C_PRO_ECODE: '', // 商品款号
         IS_EXCHANGE_NO_IN: ['0'],
-        PAY_TIME: [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]],
+        PAY_TIME: [_this.getCurrentTime()[0],_this.getCurrentTime()[1]],
         RECEIVER_ADDRESS: '', // 收货地址
         SYSREMARK: '', // 系统备注
       };
@@ -2050,7 +2050,7 @@ export default {
                 clearable: true
               };
               _this.formConfig.formValue[item.tabth.colname] = [];
-              if (item.tabth.colname === 'PAY_TIME') _this.formConfig.formValue[item.tabth.colname] = [_this.getCurrentTime1()[0],_this.getCurrentTime1()[1]];
+              if (item.tabth.colname === 'PAY_TIME') _this.formConfig.formValue[item.tabth.colname] = [_this.getCurrentTime()[0],_this.getCurrentTime()[1]];
             }
             if (item.type === 'propInput') {
               formData[index] = {
@@ -2484,17 +2484,9 @@ export default {
     getCurrentTime() {
       const self = this;
       const timestamp = Date.parse(new Date());
-      const SevenDaysTimestamp = Date.parse(new Date()) - 7 * 24 * 3600 * 1000;
+      const SevenDaysTimestamp = Date.parse(new Date()) - 6 * 24 * 3600 * 1000;
       const defaultTimeArr = [];
       defaultTimeArr[0] = `${self.dateLong2String(SevenDaysTimestamp)} 00:00:00`;
-      defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
-      return defaultTimeArr;
-    },
-    getCurrentTime1() {
-      const self = this;
-      const timestamp = Date.parse(new Date());
-      const defaultTimeArr = [];
-      defaultTimeArr[0] = `${self.dateLong2String(timestamp)} 00:00:00`;
       defaultTimeArr[1] = `${self.dateLong2String(timestamp)} 23:59:59`;
       return defaultTimeArr;
     },

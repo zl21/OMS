@@ -241,7 +241,7 @@ export default {
   methods: {
     eyeClick() {
       val = !val;
-      this.$emit('freshLoad', val);
+      this.$emit('freshLoad1', val);
     },
     isQhMethod(data) {
       this.isQhChild = data;

@@ -82,6 +82,7 @@ export default {
   ReturnStorageSave: params => network.post('/api/cs/oc/oms/v1/ReturnStorageSave', params),
   searchButtonsInDetail: params => network.post('/api/cs/oc/oms/v1/searchButtonsInDetail', params),
   getDetail: params => network.post('/api/cs/oc/oms/v1/getDetail', params),
+  getDecryptDetail: params => network.post('/api/cs/oc/oms/v1/getDecryptDetail', params),
   export: params => network.post('/p/outpro/export', params),
   amendBody: (tableName, params) => network.post(port[tableName].amendBody, params),
   objectAdd: params => network.post('/p/cs/objectAdd', params),

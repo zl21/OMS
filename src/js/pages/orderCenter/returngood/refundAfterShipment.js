@@ -1,4 +1,4 @@
-// 额外退款新增/编辑、已发货退款编辑  共用此组件
+// 已发货退款编辑
 import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reForm from 'professionalComponents/businessForm';
@@ -893,6 +893,11 @@ export default {
     const customizeMessage = sessionStorage.getItem('customizeMessage');
     if (customizeMessage) {
       this.sessionStorageData = JSON.parse(customizeMessage)[this.$route.params.customizedModuleId == '41460334' ? 'undefined' : this.$route.params.customizedModuleId];
+      // if (this.$route.params.customizedModuleName == 'EXTRAREFUND') {
+      //   this.sessionStorageData = JSON.parse(customizeMessage).EXTRAREFUND;
+      // } else {
+      //   this.sessionStorageData = JSON.parse(customizeMessage).REFUNDAFTERSHIPMENT;
+      // }
     }
     // if (this.$route.query.id && !this.$route.query.new) {
     // eslint-disable-next-line no-mixed-operators

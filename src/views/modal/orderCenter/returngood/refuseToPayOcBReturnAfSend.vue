@@ -5,6 +5,15 @@
         :label-width="100"
         :rules="ruleValidate"
       >
+
+        <FormItem
+          label="打款结果"
+          prop="reasonType"
+        >
+          <RadioGroup v-model="reasonType">
+            <Radio label="拒绝打款" disabled />
+          </RadioGroup>
+        </FormItem>
         <FormItem
           label="拒绝打款原因"
           prop="reason"

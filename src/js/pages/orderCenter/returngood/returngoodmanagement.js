@@ -3073,7 +3073,7 @@ export default {
           this.$Message.warning(this.vmI18n.t('modalTips.ad')); // 收货人手机必填!
           return;
         }
-        if (phone.indexOf(1) != 0 || phone.length != 11) {
+        if (phone.length != 11) {
           this.$Message.warning(this.vmI18n.t('modalTips.ae')); // 电话号码不合法，请重新填写！
           return;
         }
