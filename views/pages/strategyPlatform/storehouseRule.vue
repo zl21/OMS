@@ -39,7 +39,7 @@
                 style="width: 250px; margin-top: 20px"
                 @on-keydown="fninput"
               />
-              <div class="buttons customized-detail-btn">
+              <div class="buttons ">
                 <businessButton :btn-config="btnConfig2" />
               </div>
             </div>

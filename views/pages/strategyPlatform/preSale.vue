@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-22 15:47:49
- * @LastEditTime: 2021-08-23 16:25:09
+ * @LastEditTime: 2021-08-24 11:13:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/preSale.vue
@@ -36,21 +36,23 @@
           <span>*</span>
           预计发货时间：
         </div>
-        <RadioGroup v-model="li.value" @on-change="radiochange($event, li)">
-          <Radio label="固定时间"></Radio>
-          <DatePicker
+
+         <Select v-model="li.PREDICT_TYPE" style="width:200px" @on-change="fnselect">
+            <Option v-for="item in li.valueList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
+        <div class="preSale-lable" v-show="li.PREDICT_TYPE == 1">
+           <DatePicker
             type="datetime"
             placeholder="固定时间"
             style="width: 200px"
             :value="li.PREDICT_DELIVER_GOODS_TIME"
             @on-change="fndatachange($event, li)"
           ></DatePicker>
-          <div class="preSale-lable">
-            <Radio label="付款后"></Radio>
-            <Input v-model="li.DAY_NUM" style="width: 100px" />
-            天
-          </div>
-        </RadioGroup>
+        </div>
+         <div class="preSale-lable" v-show="li.PREDICT_TYPE == 2">
+           <Input v-model="li.DAY_NUM" style="width: 100px" />
+           天
+        </div>
         <div class="preSale-text" v-show="index != 0">
            或
         </div>
@@ -78,7 +80,16 @@ export default {
         placeholder: '商品标题/规格名称中可用特殊符号和文字',
         show: false,
         icon: true,
-        value: '',
+        valueList: [
+          {
+             label: '固定时间',
+             value: 1,
+          },
+          {
+             label: '付款后',
+             value: 2,
+          }
+        ],
         PREDICT_TYPE: '',
         PREDICT_DELIVER_GOODS_TIME: '', //预计发货时间
         slectList: [
@@ -124,6 +135,9 @@ export default {
     }
   },
   methods: {
+    fnselect(v){
+console.log(v);
+    },
     fndel(i){
         this.datalist.splice(i,1)
         this.indexlenth = this.datalist.length - 1;
@@ -154,13 +168,7 @@ export default {
       this.datalist.push(JSON.parse(JSON.stringify(this.dataobj)));
       this.indexlenth = this.datalist.length - 1;
     },
-    radiochange(v, en) {
-      if (v == '付款后') {
-        en.PREDICT_TYPE = 2;
-      } else {
-        en.PREDICT_TYPE = 1;
-      }
-    },
+ 
     fndatachange(data, en) {
       en.PREDICT_DELIVER_GOODS_TIME = data;
     },
@@ -192,8 +200,7 @@ export default {
               newdata,
               'yyyy-MM-dd hh:mm:ss'
             );
-            this.dataobj.value =
-              item.PREDICT_TYPE == 2 ? '付款后' : '预计发货时间';
+        
             this.datalist.push(JSON.parse(JSON.stringify(this.dataobj)));
           });
         }
