@@ -956,7 +956,7 @@ export default {
           btnsite: "left",
           buttons: [
             {
-              type: 'primary', // 按钮类型
+              type: 'warning', // 按钮类型
               text: '删除明细', // 按钮文本
               isShow: true,
               btnclick: (e) => {
