@@ -269,6 +269,7 @@ export default {
         }
       },
       {
+        type: 'warning', // 按钮类型
         text: $i18n.t('btn.delete'), // 删除
         btnclick: () => {
           this.supplierDel();
@@ -772,9 +773,9 @@ export default {
       // })
     },
     /**
-     * 
-     * @param {请求数据} res 
-     * @param {自定义属性/固定属性} name 
+     *
+     * @param {请求数据} res
+     * @param {自定义属性/固定属性} name
      * @param {存储修改数组对象} modifyObj
      */
     dynamicAttr(res, name, modifyObj) {

@@ -47,11 +47,11 @@
         <!-- <Panel name="attr">
           自定义属性
           <div slot="content" class="customProperties">
-            <div class="panel-title">固定属性：</div>     
+            <div class="panel-title">固定属性：</div>
             <businessForm :form-config="customAttr.fixFormConfig" />
           </div>
           <div slot="content" class="customProperties">
-            <div class="panel-title">自定义属性：</div>     
+            <div class="panel-title">自定义属性：</div>
             <businessForm :form-config="customAttr.customFormConfig" />
           </div>
         </Panel> -->
@@ -80,9 +80,13 @@
           </div>
         </div>
         <div v-show="labelValue == 'supplier'" class="supplier">
-          <div class="supplier_header">
-            <businessForm :form-config="tableFormConfig" />
-            <businessButton :btn-config="supplierBtnConfig" />
+          <div class="from-btn">
+            <div class="businessForm-box">
+              <businessForm :form-config="tableFormConfig" />
+            </div>
+            <div class="businessButton">
+              <businessButton :btn-config="supplierBtnConfig" />
+            </div>
           </div>
           <div class="supplier_body">
             <Table
