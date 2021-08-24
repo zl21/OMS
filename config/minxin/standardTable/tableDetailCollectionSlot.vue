@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-18 10:08:27
- * @LastEditTime: 2021-08-09 19:15:39
+ * @LastEditTime: 2021-08-24 16:39:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/config/minxin/tableDetailCollectionSlot.vue
@@ -10,37 +10,42 @@
   <div class="detail-top">
     <!-- button + 搜索 -->
     <div class="detail-operation">
-      <slot name="detail-buttons"></slot>  
+      <slot name="detail-buttons"></slot>
       <slot name="detail-search"></slot>
     </div>
     <!-- 表格 -->
     <slot name="detail-table"></slot>
     <!-- 翻页 -->
     <div class="detail-content">
-	    <slot name="detail-page"></slot>
+      <slot name="detail-page"></slot>
     </div>
     <!-- 左右结果展示查询结果 -->
-	  <slot name="detail-queryCondition"></slot>
+    <slot name="detail-queryCondition"></slot>
   </div>
 </template>
 <script>
-    
- export default {
-    mounted(){
-    }
-}
+export default {
+  mounted() {},
+};
 </script>
 <style lang="less" scoped>
-@import '~@burgeon/oms-theme/skin/public.less';
-.TableDetailCollection{
+@import "~@burgeon/oms-theme/skin/public.less";
+.TableDetailCollection {
+  .detail-operation {
+    /deep/ .detail-buttons .ark-btn-primary {
+      margin-right: 0;
+    }
+  }
+  .detail-buttons .ark-btn-primary {
+    margin-right: 0;
+  }
   .detail-content {
     height: 40px;
-    #bundle > .flex(@justify:center,@align:center)
+    #bundle > .flex(@justify:center,@align:center);
   }
-  .detail-operation{
-    #bundle > .flex(@justify:space-between,@align:center);
+  .detail-operation {
+    #bundle > .flex(@justify:flex-end,@align:center);
     // margin-bottom: @base-mr;
   }
 }
-
 </style>
