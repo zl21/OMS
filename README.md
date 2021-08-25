@@ -314,3 +314,4 @@
 | v1.2.77 | fkinput-mrp行选中优化处理  |
 | v1.2.78 | 样式修改  |
 | v1.2.79 | 样式修改  |
+| v1.2.80 | element - page组件 换成 ark ui  - page  |

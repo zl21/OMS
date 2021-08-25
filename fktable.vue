@@ -87,7 +87,7 @@
       </p>
     </div>
     <div class="page" v-if="totalRowCount > 0 && range <= totalRowCount">
-      <el-pagination
+      <!-- <el-pagination
         small
         layout="prev, pager, next"
         @current-change="currentchange"
@@ -96,7 +96,13 @@
         :total="
           Math.ceil(totalRowCount / range) > 500 ? 500 * range : totalRowCount
         "
-      ></el-pagination>
+      ></el-pagination> -->
+      <Page 
+          :current="Number(visible)"
+          :page-size="range"
+          @on-change="currentchange" 
+          :total="Math.ceil(totalRowCount / range) > 500 ? 500 * range : totalRowCount"
+          size="small"/>
     </div>
   </div>
 </template>

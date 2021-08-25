@@ -1,3 +1,6 @@
+
+@import '~omsTheme/public.less';
+
 .buttonFk {
   button {
       height: 24px;
@@ -21,14 +24,20 @@
       border-radius: 5px;
       overflow: hidden;
       .el-dialog__header{
-        font-size: 14px;
+        font-size: 12px;
         padding: 0;
         height: 33px;
         line-height: 33px;
         text-align: left;
         color: #000;
         background: #f8f7f7;
+        padding: 0 16px;
         border-bottom: 1px solid #bcbcbc;
+        .el-dialog__headerbtn{
+          top: 6px;
+          padding: 0;
+          right: 16px;
+        }
       }
       .el-dialog__body{
         padding: 16px;
@@ -45,5 +54,12 @@
           }
         }
       }
+      // 图标替换
+      [class*=" el-icon-"], [class^=el-icon-]{
+        #bundle > .beforeIconf(@color:#999,@uncode:"\e638",@size:14px);
+      }
+      .el-icon-close:before {
+        content: "\e638";
+    }
     }
 }

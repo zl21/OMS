@@ -1,4 +1,5 @@
 @import '~omsTheme/public.less';
+
 .fktable {
   width: 300px;
   min-width: 150px;
@@ -9,14 +10,18 @@
   flex-direction: column;
   border: 1px solid #d1dbe5;
   padding: 5px;
-  .ark-select{
+
+  .ark-select {
     margin: 3px 0 10px 0;
   }
+
   .searchlist {
     margin-bottom: 6px;
     height: 24px;
+
     .el-autocomplete {
       float: left;
+
       input[type="text"] {
         height: 24px;
         border-radius: 2px;
@@ -30,6 +35,7 @@
     .buttonGrops {
       float: right;
       font-size: 0px;
+
       button {
         width: 66px;
         height: 24px;
@@ -65,12 +71,14 @@
     flex: 1;
     width: 100%;
     overflow: auto;
+
     table {
       width: 100%;
       flex-direction: column;
 
       flex: 1;
       color: #575757;
+
       thead {
         background-color: #f5f6fa;
         height: 26px;
@@ -99,9 +107,11 @@
         tr {
           border-bottom: 1px solid #d8d8d8;
           cursor: pointer;
+
           &:hover {
             background-color: #F8F7F7;
           }
+
           td {
             height: 30px;
             line-height: 30px;
@@ -113,23 +123,27 @@
 
           td:first-child {
             min-width: 30px;
+
             span {
               margin-left: 5px;
             }
           }
         }
+
         input {
           color: #dcdee2;
         }
+
         tr.selected {
           background-color: #f8f7f7;
         }
       }
-      
-      input{
+
+      input {
         vertical-align: middle;
         margin-top: -3px;
       }
+
       input[type=checkbox]::after {
         display: inline-block;
         width: 14px;
@@ -156,65 +170,31 @@
         -moz-osx-font-smoothing: grayscale;
       }
     }
+
     p {
       text-align: center;
       font-weight: normal;
       color: #575757;
     }
   }
+
   .page {
-    height: 20px;
-    margin-top: 10px;
-    .el-pagination{
-      padding: 0;
-      text-align: center;
-      margin-left: -5px;
-      /deep/ button{
+    margin-top: 6px;
+    height: 24px;
+    text-align: center;
+
+    /deep/ .ark-page.mini {
+      .ark-page-item {
         min-width: 19px;
         height: 19px;
         line-height: 19px;
-        margin-left: 5px;
-        &:hover {
-          color: #d4dade;
-        }
-      }
-      /deep/ .el-pager{
-        .more{
-          height: 19px;
-          line-height: 19px;
-          &:hover{
-            color: @base-color;
-          }
-        }
-        .number{
-          min-width: 19px;
-          height: 19px;
-          line-height: 19px;
-          margin-left: 5px;
-            &.active,&:hover{
-              color: @button-bg-font;
-              background-color: @base-color;
-              border-radius: 2px;
-          }
-        }
-      }
-    }
-
-    ul {
-      li {
-        height: 14px;
-        padding: 0 4px;
-        line-height: 14px;
-        min-width: auto;
-        width: auto;
-        border: none;
-      }
-
-      li:last-child {
-        height: 14px;
         padding: 0;
-        line-height: 14px;
-        min-width: 14px;
+      }
+
+      .ark-page-item-jump-next {
+        i {
+          font-size: 12px;
+        }
       }
     }
   }

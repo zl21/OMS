@@ -46,7 +46,7 @@
             name="first"
             class="el-tab-auto"
           >
-            <el-pagination
+            <!-- <el-pagination
               :current-page="l_center_data.l_currentPage"
               :page-sizes="[10, 20, 50, 100]"
               :page-size="l_center_data.l_page_size"
@@ -54,7 +54,20 @@
               :total="l_center_data.total"
               @size-change="l_handleSizeChange"
               @current-change="l_handleCurrentChange"
-            />
+            /> -->
+            <Page 
+             class-name="dfkialogPage"
+             :show-total="true"
+             :current="l_center_data.l_currentPage"
+             :total="l_center_data.total"
+             :page-size="l_center_data.l_page_size"
+             :page-size-opts="[10, 20, 50, 100]"
+             @on-change="l_handleCurrentChange" 
+             @on-page-size-change="l_handleSizeChange" 
+             pager-count = "5"
+             size="small" 
+             show-elevator 
+             show-sizer/>
             <show-table-data
               ref="screen_ck"
               v-loading.lock="l_screenLoading"
@@ -75,7 +88,7 @@
             name="second"
             class="el-tab-auto"
           >
-            <el-pagination
+            <!-- <el-pagination
               :current-page="r_center_data.r_currentPage"
               :page-sizes="[10, 20, 50, 100]"
               :page-size="r_center_data.r_page_size"
@@ -83,7 +96,20 @@
               :total="r_center_data.total"
               @size-change="r_handleSizeChange"
               @current-change="r_handleCurrentChange"
-            />
+            /> -->
+            <Page 
+             class-name="dfkialogPage"
+             :show-total="true"
+             :current="r_center_data.r_currentPage"
+             :total="r_center_data.total"
+             :page-size="r_center_data.r_page_size"
+             :page-size-opts="[10, 20, 50, 100]"
+             @on-change="l_handleCurrentChange" 
+             @on-page-size-change="l_handleSizeChange" 
+             pager-count = "5"
+             size="small" 
+             show-elevator 
+             show-sizer/>
             <show-table-data
               ref="result_ck"
               :table_head="r_table_data.header"
@@ -1250,5 +1276,8 @@ export default {
       }
     }
   }
+}
+.dfkialogPage{
+  margin: 10px 0;
 }
 </style>
