@@ -33,6 +33,11 @@ const orderLogo =  {
   IS_CASH_PRE_SELL: '现上预售', // 现预
   IS_WHOLESALE: '大额', // 大额
   RESERVE_BIGINT03: '赔付单',// 赔
+  VIP_LEVEL_V1: 'V1',// V1
+  VIP_LEVEL_V2: 'V2',// V2
+  VIP_LEVEL_V3: 'V3',// V3
+  VIP_LEVEL_V4: 'V4',// V4
+  VIP_LEVEL_V5: 'V5',// V5
 
 };
 
