@@ -1,7 +1,7 @@
 /*
  * @Author: flybird
  * @Date: 2021-06-04 13:20:21
- * @LastEditTime: 2021-08-17 15:39:44
+ * @LastEditTime: 2021-08-25 11:19:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
@@ -20,6 +20,9 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 import service from '@/service/index.js';
 import lodash from 'lodash';
 import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
+import componentsConfig from 'professionalComponents/package.json';
+import omsThemecConfig from '@burgeon/oms-theme/package.json';
+import internationalizationConfig from '@burgeon/internationalization/package.json';
 class InitAppConfig {
   constructor() {
     // -------------引入框架项目配置文件;
@@ -38,7 +41,15 @@ class InitAppConfig {
     Vue.prototype.$lodash = lodash;
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n;
-
+    window.$businessComponents = {
+      version:componentsConfig.version,
+    }
+    window.$businessOmsTheme = {
+      version:omsThemecConfig.version
+    }
+    window.$businessInternationalization = {
+      version:internationalizationConfig.version
+    }
 
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {
@@ -60,7 +71,6 @@ class InitAppConfig {
     // 屏幕变化
     window.onresize = () => clientWidthsFun();
   }
-
 }
 
 export default new InitAppConfig();
