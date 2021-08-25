@@ -94,11 +94,12 @@ export default {
               }
               // 2.特殊字段正则校验
               // 赔付单的客户电话只需要是11位，不需要进行合法性校验 37393
-              const telFlag = self.CheckRegx(/^\d{11}$/, masterForm.CUSTOMER_TEL); // 电话校验
-              if (!telFlag) {
-                self.$Message.error(window.vmI18n.t('modalTips.di')); // '顾客电话不合法!'
-                return;
-              }
+              // 加密改造去除校验
+              // const telFlag = self.CheckRegx(/^\d{11}$/, masterForm.CUSTOMER_TEL); // 电话校验
+              // if (!telFlag) {
+              //   self.$Message.error(window.vmI18n.t('modalTips.di')); // '顾客电话不合法!'
+              //   return;
+              // }
 
               // 3.保存
               self.save();
