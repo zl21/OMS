@@ -213,6 +213,11 @@ export const strategyPlatform = {
     refcolid: 181046,
     searchdata,
   },
+  ST_C_VIPCOM_PROJECT_LOG:  { // 档期日程规划
+    table: 'ST_C_VIPCOM_PROJECT_LOG',
+    refcolid: 183957,
+    searchdata,
+  },
 }
 
 //基础数据
