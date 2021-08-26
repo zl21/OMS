@@ -3889,7 +3889,7 @@ export default {
       };
       fromdata.append('param', JSON.stringify(param));
       this.service.common
-        .queryOrderList(fromdata)
+        .getOrderDecryptList(fromdata)
         .then(res => {
           if (res.data.data) {
             res.data.data.queryOrderResultList.forEach(item => {
