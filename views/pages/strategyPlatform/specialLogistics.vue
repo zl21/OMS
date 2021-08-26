@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-18 17:02:53
- * @LastEditTime: 2021-08-23 13:48:03
+ * @LastEditTime: 2021-08-26 10:41:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /云雀/src/views/pages/strategyPlatform/specialLogistics.vue
@@ -133,10 +133,10 @@
           >
           </Input>
         </div>
-        <div class="specialLogistics-model-head-right">
+        <!-- <div class="specialLogistics-model-head-right">
           <Button type="error" ghost @click="fntableAdd"> {{increase}} </Button>
           <Button type="error" ghost @click="fncancel">{{cancel}}</Button>
-        </div>
+        </div> -->
       </div>
       <businessActionTable
         :jordan-table-config="tableConfig"
@@ -147,6 +147,8 @@
         @on-select-all="onSelectAll"
         @on-select-all-cancel="onSelectAllCancel"
       />
+
+      <businessButton :btn-config="btnConfig2" />
     </Modal>
   </div>
 </template>

@@ -122,6 +122,24 @@ export default {
           }
         ]
       },
+      btnConfig2: {
+        btnsite: 'right', // 按钮对齐方式
+        typeAll: 'default',
+        buttons: [
+          {
+            type: 'primary',
+            text: $i18n.t('btn.increase'),//'添加',
+            disabled: false,
+            btnclick: this.fntableAdd
+          },
+          {
+            type: 'warning',
+            text: $i18n.t('common.cancel'), // 取消
+            disabled: false,
+            btnclick: this.fncancel
+          }
+        ]
+      },
      
       formConfig: {
         formData: [

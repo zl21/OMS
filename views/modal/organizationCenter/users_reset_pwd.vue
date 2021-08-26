@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-16 11:01:13
- * @LastEditTime: 2021-06-17 15:25:19
+ * @LastEditTime: 2021-08-26 11:08:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/views/modal/organizationCenter/users_reset_pwd.vue
@@ -54,8 +54,8 @@ export default {
             text: "确定",
             btnclick: () => {
          
-              if (this.$refs.FormLayout.formData.pwd.length < 8) {
-                this.$Message.warning('密码长度必须大于8位！');
+              if (this.$refs.FormLayout.formData.pwd.length < 6) {
+                this.$Message.warning('密码长度必须大于6位！');
                 return
               }
               let data = {
