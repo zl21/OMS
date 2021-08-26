@@ -1162,7 +1162,7 @@ export default {
       };
       fromdata.append('param', JSON.stringify(param));
       this.service.common
-        .getOrderDecryptList(fromdata)
+        .queryOrderList(fromdata)
         .then(res => {
           const query = _this.$route.query;
           if (res.data.data) {
@@ -1191,7 +1191,7 @@ export default {
           _this.order.table.loading = false;
         });
     },
-    // 确定原始订单编号
+    // 确定原始订单编号 
     queryorder(listData, isEnter) {
       const _this = this;
       if (isEnter) {
@@ -1255,7 +1255,7 @@ export default {
       this.information.formValue.CP_C_SHOP_ID = listData.CP_C_SHOP_ID
       this.information.formValue.CP_C_SHOP_ECODE = listData.CP_C_SHOP_ECODE
       this.information.formValue.VIP_NICK = listData.USER_NICK
-      this.information.formValue.VIP_PHONE = listData.VIP_PHONE
+      this.information.formValue.VIP_PHONE = listData.VIP_PHONE.length > 11 ? '***********' : listData.VIP_PHONE // 是否为密文
       this.information.formValue.RESERVE_VARCHAR01 = listData.ORIG_ORDER_NO
       this.information.formValue.TID = listData.SOURCE_CODE
 
@@ -1287,7 +1287,7 @@ export default {
           this.information.formValue.CP_C_SHOP_ID = data.CP_C_SHOP_ID
           this.information.formValue.CP_C_SHOP_ECODE = data.CP_C_SHOP_ECODE
           this.information.formValue.VIP_NICK = data.USER_NICK
-          this.information.formValue.VIP_PHONE = data.VIP_PHONE
+          this.information.formValue.VIP_PHONE = data.VIP_PHONE.length > 11 ? '***********' : data.VIP_PHONE // 是否为密文
           this.information.formValue.RESERVE_VARCHAR01 = data.ORIG_ORDER_NO
           this.information.formValue.TID = data.SOURCE_CODE
 
@@ -1383,7 +1383,7 @@ export default {
         ]
       };
       formData.append('param', JSON.stringify(requestData));
-      this.service.common.getOrderDecryptList(formData).then(res => {
+      this.service.common.queryOrderList(formData).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           const arr = [];
