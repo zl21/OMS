@@ -933,6 +933,12 @@ export default {
           this.pageLoad = false;
           if (res.data && res.data.code === 0) {
             const resData = res.data.data;
+            // 会员等级
+            if (resData.VIP_LEVEL) {
+              resData.VIP_LEVEL = `V${resData.VIP_LEVEL}`
+            } else {
+              resData.VIP_LEVEL = ''
+            }
             resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null ? this.vmI18n.t('common.no') : this.vmI18n.t('common.yes');
             const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
