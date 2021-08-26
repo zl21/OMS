@@ -46,11 +46,23 @@
       justify-content: space-between;
       width: 100%;
     }
+    /* 标注图标样式 */
+    .help-circle.ark-tooltip {
+      position: absolute;
+      right: -20px;
+      top: 20px;
+
+      .ark-icon {
+        font-size: 18px;
+        color: #ed4014;
+      }
+    }
+
   }
 }
 // /* 插槽字段的必填标识 */
 .req-star .ark-form-item-label::before {
   color: red;
   position: relative;
-  content: '* ';
+  content: '* '; 
 }
