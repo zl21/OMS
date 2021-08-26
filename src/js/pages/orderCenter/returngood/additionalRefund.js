@@ -1162,7 +1162,7 @@ export default {
       };
       fromdata.append('param', JSON.stringify(param));
       this.service.common
-        .queryOrderList(fromdata)
+        .getOrderDecryptList(fromdata)
         .then(res => {
           const query = _this.$route.query;
           if (res.data.data) {
@@ -1383,7 +1383,7 @@ export default {
         ]
       };
       formData.append('param', JSON.stringify(requestData));
-      this.service.common.queryOrderList(formData).then(res => {
+      this.service.common.getOrderDecryptList(formData).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           const arr = [];
