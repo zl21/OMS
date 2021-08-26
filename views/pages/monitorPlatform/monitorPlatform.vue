@@ -7,11 +7,11 @@
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
 -->
 <template>
-  <div class="monitoringPlatform">
+  <div class="monitoringPlatform" v-loading="pageLoading">
     <div class="header">
       <div class="time">
         <span>更新时间：{{ header.time }}</span>
-        <Icon type="icon-monitorPlat-fresh" />
+        <Icon type="icon-monitorPlat-fresh" @click="freshHandel"/>
       </div>
     </div>
     <div class="main">
@@ -293,6 +293,7 @@ export default {
   },
   data() {
     return {
+      pageLoading: false,
       m2Heigh: 0,
       m3Heigh: 0,
       noData: "",
@@ -702,6 +703,33 @@ export default {
   },
 
   methods: {
+    // 接口返回的数据处理，传参数决定处理哪一块
+    // 接口不放在这里调？放吧，不然全局刷新要调4次该方法
+    // 在这调的话，入参处理……
+    // 调接口并处理数据（可能有4个接口
+    getData(all=0, ...others) {
+      let params = { fresh: Boolean(all) };
+      let [m1={},m2={},m3={},m4={}] = others;
+      if (!all) {
+        // params.
+        // params = Object.assign({}, params, others);
+        params.m1 = m1;
+        params.m2 = m2;
+        params.m3 = m3;
+        params.m4 = m4;
+        console.log(params);
+      }
+    },
+    // 右上角-刷新icon事件
+    freshHandel: throttle(function(){
+      const self = this;
+      self.getData(0, {m1:1},{m2:2});
+      self.pageLoading = true;
+      // 接口处理
+      setTimeout(() => {
+        self.pageLoading = false;
+      }, 100);
+    }, 1000, { 'trailing': false }), 
     /** ----------------- 配置方法 -------------------- **/
     // 饼图
     /* pieChart() {
