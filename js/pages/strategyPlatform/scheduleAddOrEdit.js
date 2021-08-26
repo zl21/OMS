@@ -841,7 +841,7 @@ export default {
                 this.$Modal.info({
                   className: 'ark-dialog',
                   title: $i18n.t('modalTitle.tips'), // 提示
-                  content: $i18n.t('modalTitle.hx'), // 当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？
+                  content: $i18n.t('modalTips.hx'), // 当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？
                   mask: true,
                   showCancel: true,
                   okText: $i18n.t('common.determine'), // 确定
