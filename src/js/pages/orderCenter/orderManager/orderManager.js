@@ -3192,7 +3192,7 @@ export default {
       this.selection = this.$refs.agGridChild.AGTABLE.getSelect();
       if (this.selection.length !== 1) {
         return this.$Message.warning({
-          content: '请选择需要状态查询的记录！',
+          content: '请选择1条需要状态查询的记录！',
           duration: 5,
           top: 80
         });
