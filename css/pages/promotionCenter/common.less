@@ -1,5 +1,13 @@
 @import '~@burgeon/oms-theme/skin/public.less';
 //详情页布局
+.addOrEditActi{
+  /deep/ .stepsBars .stepsBars{
+    height: 100%;
+    .steps-item{
+      height: 25%;
+    }
+  }
+}
 .addOrEditActi,.batchActivity{
   display: flex;
   height: 100%;
@@ -35,6 +43,12 @@
     padding: 20px;
     width: 15%;
     background-color: #fff;
+    .stepsBars{
+      height: 100%;
+      .steps-item{
+        height: 25%;
+      }
+    }
   }
 }
 // 详情页 组件的公共样式
