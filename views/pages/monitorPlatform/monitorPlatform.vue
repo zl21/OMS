@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-16 17:06:24
+ * @LastEditTime: 2021-08-27 10:17:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -135,12 +135,12 @@
           </div>
         </div>
         <div :class="['main03body', m3Up, m3noData]" id="main03body" :style="{ height : m3Heigh + 'px'}">
-          <picture v-if="m3noData">
+          <picture v-show="m3noData">
             <source srcset="./img/la.png" media="(min-width: 1600px)" />
             <img src="./img/medium-car-image.jpg" alt="Car" />
             <span>暂无异常数据</span>
           </picture>
-          <template v-else>
+          <div class="main03body-main" v-show="!m3noData">
             <div
               class="m3Item comItem"
               v-for="(it, index) in main03.data"
@@ -171,7 +171,7 @@
                 </Tooltip>
               </div>
             </div>
-          </template>
+          </div>
         </div>
       </div>
       <div class="mainContent main04">
