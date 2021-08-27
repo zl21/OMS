@@ -37,6 +37,9 @@ export default {
     }
     .detail-buttons a {
       padding: 10px 8px 10px 0;
+      &:first-child {
+        padding-left: 16px;
+      }
     }
 
     .detail-search {
