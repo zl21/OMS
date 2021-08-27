@@ -1406,7 +1406,7 @@ export default {
       self.jordanTableConfig.data.forEach((item) => {
         qty += parseInt(item.QTY);
         amt = publicMethodsUtil.accAdd(
-          parseFloat(item.REAL_AMT).toFixed(2),
+          parseFloat(item.REAL_AMT),
           amt
         );
       });
@@ -1518,7 +1518,7 @@ export default {
             let qty = 0;
             self.jordanTableConfig.data.forEach((item) => {
               amt = publicMethodsUtil.accAdd(
-                parseFloat(item.REAL_AMT).toFixed(2),
+                parseFloat(item.REAL_AMT),
                 amt
               );
               qty += parseInt(item.QTY);
@@ -1714,7 +1714,7 @@ export default {
         if (item.IS_GIFT == '0') {
           noGiftFlag = true;
           realAmtTotal = publicMethodsUtil.accAdd(
-            parseFloat(item.REAL_AMT).toFixed(2),
+            parseFloat(item.REAL_AMT),
             realAmtTotal
           );
         }
@@ -1872,7 +1872,7 @@ export default {
                     let qty = 0;
                     self.jordanTableConfig.data.forEach((item) => {
                       amt = publicMethodsUtil.accAdd(
-                        parseFloat(item.REAL_AMT).toFixed(2),
+                        parseFloat(item.REAL_AMT),
                         amt
                       );
                       qty += item.QTY;
@@ -2075,7 +2075,7 @@ export default {
             let qty = 0;
             self.jordanTableConfig.data.forEach((item) => {
               amt = publicMethodsUtil.accAdd(
-                parseFloat(item.REAL_AMT).toFixed(2),
+                parseFloat(item.REAL_AMT),
                 amt
               );
               qty += item.QTY;
@@ -2136,7 +2136,7 @@ export default {
                     let qty = 0;
                     self.jordanTableConfig.data.forEach((item) => {
                       amt = publicMethodsUtil.accAdd(
-                        parseFloat(item.REAL_AMT).toFixed(2),
+                        parseFloat(item.REAL_AMT),
                         amt
                       );
                       qty += item.QTY;
