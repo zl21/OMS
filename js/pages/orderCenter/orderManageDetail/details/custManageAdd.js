@@ -88,7 +88,7 @@ export default {
         }] // 总计
       },
       // textArr:['删除赠品','替换商品','标记取消'], // 需要控制的按钮text
-      textArr:[$i18n.t('btn.deleteGift'),$i18n.t('btn.replaceGoods'),$i18n.t('btn.btn.markCancel')], // 需要控制的按钮text
+      textArr:[$i18n.t('btn.deleteGift'),$i18n.t('btn.replaceGoods'),$i18n.t('btn.markCancel')], // 需要控制的按钮text
       butArray:[],
       selection: [],
       checkSelection: [],
