@@ -135,13 +135,15 @@
           </div>
         </div>
         <div :class="['main03body', m3Up, m3noData]" id="main03body" :style="{ height : m3Heigh + 'px'}">
-          <picture v-show="m3noData">
+          <picture v-if="m3noData">
             <source srcset="./img/la.png" media="(min-width: 1600px)" />
             <img src="./img/medium-car-image.jpg" alt="Car" />
             <span>暂无异常数据</span>
           </picture>
-          <div class="main03body-main" v-show="!m3noData">
+          <!-- <div class="main03body-main" v-show="!m3noData"> -->
+          <template >
             <div
+              v-show="!m3noData"
               class="m3Item comItem"
               v-for="(it, index) in main03.data"
               :key="index"
@@ -171,7 +173,8 @@
                 </Tooltip>
               </div>
             </div>
-          </div>
+          </template>  
+          <!-- </div> -->
         </div>
       </div>
       <div class="mainContent main04">
@@ -1029,9 +1032,9 @@ export default {
         firstLeft = 0, // 第一个元素的横坐标
         rowSum = 0, // 行数
         flag = false;
-      for (const node of mBody.childNodes) {
+      for (const node of mBody.children) {
         if (node.className.includes(itemName)) {
-          firstLeft = mBody.childNodes[0].getClientRects()[0].x;
+          firstLeft = mBody.children[0].getClientRects()[0].x;
           nodeHeight = node.clientHeight;
           const itPosition = node.getClientRects()[0].x;
           if (itPosition == firstLeft) {

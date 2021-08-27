@@ -70,6 +70,17 @@ export default commodityClassifyAddOrEdit;
 
 <style lang="less" scoped>
 .commodityClassifyAddOrEdit {
+  /deep/ .ark-form-item.OPEN_DIMENSION {
+    display: flex;
+    justify-content: center;
+    label {
+      display: inline-block;
+      width: auto !important;
+    }
+    .ark-form-item-content {
+      margin-left: 0 !important;
+    }
+  }
   /* .subtablePart {
     position: relative;
     /deep/ .businessForm-box {

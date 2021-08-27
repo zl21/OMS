@@ -157,6 +157,7 @@ export default {
             label: '启用多维度规格',
             value: 'OPEN_DIMENSION',
             colname: 'OPEN_DIMENSION',
+            class: 'OPEN_DIMENSION',
             width: '6',
             disabled: false,
             switchChange: () => {
