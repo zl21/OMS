@@ -630,7 +630,7 @@ class DropDownConfig {
   //缺货拆分
   static shortageSplitHandler(ids) {
     let self = DropDownConfig.target
-    commonUtils.serviceHandler(self, 'splitOrder', { ids })
+    commonUtils.serviceHandler(self, 'orderCenter.splitOrder', { ids })
   }
   // 指定商品拆单
   static appointSplitHandler() {
