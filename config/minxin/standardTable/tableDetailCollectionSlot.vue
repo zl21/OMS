@@ -35,7 +35,34 @@ export default {
     /deep/ .detail-buttons .ark-btn-primary {
       margin-right: 0;
     }
+    .detail-buttons a {
+      padding: 10px 8px 10px 0;
+    }
+
+    .detail-search {
+      padding-right: 16px;
+      /deep/ .ark-select-single .ark-select-selection {
+        height: 32px;
+        .ark-select-selected-value {
+          height: 32px;
+          line-height: 32px;
+        }
+      }
+      .detail-search-input {
+        /deep/ .ark-input {
+          height: 32px;
+        }
+        /deep/ .ark-input-group-prepend .ark-btn span {
+          bottom: 0;
+        }
+        /deep/ .ark-input-icon {
+          height: 32px;
+          line-height: 32px;
+        }
+      }
+    }
   }
+  
   .detail-buttons .ark-btn-primary {
     margin-right: 0;
   }
