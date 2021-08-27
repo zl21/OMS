@@ -79,11 +79,11 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId) {
-      self.$message.error($i18n.t('modalTips.do'));// 店铺不能为空
+      self.$Message.warning($i18n.t('modalTips.do'));// 店铺不能为空
       return;
     }
     if (!formValue.query_date[0] && !formValue.bill_no) {
-      self.$message.error($i18n.t('modalTips.bw'));// 请输入平台时间或退供单号
+      self.$Message.warning($i18n.t('modalTips.bw'));// 请输入平台时间或退供单号
       return;
     }
     self.dialogLoad = true;
@@ -102,7 +102,7 @@ export default {
       const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(params);
       self.dialogLoad = false;
       if (code === 0) {
-        self.$message.success(message);
+        self.$Message.success(message);
         self.$emit('confirmImport');
         self.$emit('closeActionDialog', true);
       }

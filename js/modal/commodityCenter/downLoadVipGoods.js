@@ -119,7 +119,7 @@ export default {
       const shopId = this.formConfig.formData[0].itemdata.pid;
       if (!shopId || !formValue.query_date[0]) {
         // 店铺和平台时间不能为空
-        this.$message.error($i18n.t('modalTips.bg'));
+        this.$Message.warning($i18n.t('modalTips.bg'));
         return;
       }
       const params = JSON.stringify({
@@ -138,7 +138,7 @@ export default {
         const { data: { code, message } } = await this.service.strategyPlatform.vipItemGet({ param: params });
         this.dialogLoad = false;
         if (code === 0) {
-          this.$message.success(message);
+          this.$Message.success(message);
           this.$emit('confirmImport');
           this.$emit('closeActionDialog');
         } else {

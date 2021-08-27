@@ -69,7 +69,7 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId || !formValue.query_date[0]) {
-      self.$message.error($i18n.t('modalTips.bt'));// 店铺和平台时间不能为空
+      self.$Message.warning($i18n.t('modalTips.bt'));// 店铺和平台时间不能为空
       return;
     }
     const params = JSON.stringify({
@@ -82,7 +82,7 @@ export default {
     try {
       const { data: { code, message } } = await self.service.strategyPlatform.vipItemGet({ param: params });
       if (code === 0) {
-        this.$message.success(message);
+        this.$Message.success(message);
         this.$emit('confirmImport');
         this.$emit('closeActionDialog');
       } else {

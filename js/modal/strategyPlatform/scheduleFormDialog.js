@@ -102,7 +102,7 @@ export default {
       const msg = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
     
       if (msg) {
-        self.$message.error(msg);
+        self.$Message.warning(msg);
         flag = false;
       }
       return flag;
@@ -144,7 +144,7 @@ export default {
       .then(({ data: { code, message } }) => {
         this.loading = false;
         if (code == 0) {
-          this.$message.success(message);
+          this.$Message.success(message);
           this.$parent.$parent.closeConfirm();;
           this.$parent.$parent.$parent.querySchedule();
           this.$parent.$parent.$parent.initModify();

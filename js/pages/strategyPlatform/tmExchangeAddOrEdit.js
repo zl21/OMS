@@ -371,7 +371,7 @@ export default {
         : novalid.join('，')
 
       if (msg) {
-        self.$message.error(`${msg} 不能为空!`);
+        self.$Message.warning(`${msg} 不能为空!`);
         return false;
       }
 
@@ -409,7 +409,7 @@ export default {
             master: {}
           }
           this.isModify = false
-          this.$message.success(message)
+          this.$Message.success(message)
           this.onOk(this.ID == -1 && data.objId)
         }
       }).catch(() => this.loading = false)

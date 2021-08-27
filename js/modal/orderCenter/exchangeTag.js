@@ -18,12 +18,12 @@ export default {
     init() {
       this.$emit('closeActionDialog');
       if (this.idArray.length !== 1) {
-        this.$message.error($i18n.t('modalTips.ei')); // '请先选择一条数据更换吊牌！'
+        this.$Message.error($i18n.t('modalTips.ei')); // '请先选择一条数据更换吊牌！'
         return;
       }
       // .STATUS.val !== '缺货'
       if (this.selectRowData[0].STATUS && this.selectRowData[0].STATUS.val !== $i18n.t('other.outOfStock')) {
-        this.$message.error($i18n.t('modalTips.ej')); // '非【缺货】状态，不能进行换吊牌操作！'
+        this.$Message.error($i18n.t('modalTips.ej')); // '非【缺货】状态，不能进行换吊牌操作！'
         return;
       }
       this.$store.commit('customize/TabHref', {

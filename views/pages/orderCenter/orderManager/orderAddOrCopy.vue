@@ -1615,7 +1615,7 @@ export default {
         drpArr
       );
       if (mes) {
-        this.$message.error(mes);
+        this.$Message.warning(mes);
         return false;
       }
       // 强制保存正则校验失败（红框警告无效）的form时：
@@ -1669,7 +1669,7 @@ export default {
         }
       }
       if (!subInfo.length) {
-        this.$message.error("订单明细不能为空！");
+        this.$Message.warning("订单明细不能为空！");
         return false;
       }
       /* =========== 保存校验 end =========== */

@@ -122,9 +122,9 @@ export default {
         data: { code, message }
       } = await this.service.orderCenter.stockInSave(params);
       if (code == 0) {
-        this.$message.success(message);
+        this.$Message.success(message);
       } else {
-        this.$message.error(message);
+        this.$Message.error(message);
       }
     },
     async initForm() {

@@ -1002,30 +1002,30 @@ export default {
         valueArr,
         drpArr,
       );
-      if (mes) return this.$message.error(mes);
+      if (mes) return this.$Message.warning(mes);
       const mes1 = this.$OMS2.omsUtils.validatorNotEmpty(
         self.formConfigEx,
         valueArr,
         drpArr,
       );
-      if (mes1) return this.$message.error(mes1);
+      if (mes1) return this.$Message.warning(mes1);
       const over = self.overLength(self.formConfig.formValue);
       if (over) return
       if (this.bT == '1') {
-        if (!tui.length) return this.$message.error($i18n.t('modalTips.gg')); // "退货明细不能为空！"
-        if (!huan.length) return this.$message.error($i18n.t('modalTips.gi')); // "换货明细不能为空！"
+        if (!tui.length) return this.$Message.warning($i18n.t('modalTips.gg')); // "退货明细不能为空！"
+        if (!huan.length) return this.$Message.warning($i18n.t('modalTips.gi')); // "换货明细不能为空！"
       } else if (this.bT == '0' && !tui.length) {
-        this.$message.error($i18n.t('modalTips.gg'));
+        this.$Message.warning($i18n.t('modalTips.gg'));
         return false;
       }
       // 校验最终应退总金额不能小于0
       if (this.FINAL_ACTUAL_AMT < 0) {
-        this.$message.error($i18n.t('modalTips.gj')); // 最终应退总金额不能小于0！
+        this.$Message.warning($i18n.t('modalTips.gj')); // 最终应退总金额不能小于0！
         return
       }
       // 校验换货金额是否等于退货金额；一致则保存成功，不一致则提示“换货金额与退货金额不一致请重新确认”
       if (this.bT == '1' && this.EX_ACTUAL_AMT != this.PRO_ACTUAL_AMT) {
-        this.$message.error($i18n.t('modalTips.gk')); // 换货金额与退货金额不一致请重新确认！
+        this.$Message.warning($i18n.t('modalTips.gk')); // 换货金额与退货金额不一致请重新确认！
         return
       }
       /* =========== 保存校验 end =========== */

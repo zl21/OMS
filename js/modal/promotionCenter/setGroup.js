@@ -118,7 +118,7 @@ export default {
       const mapArr = [];
       const promActis = [];
       if (this.itemdata.radio == 1 && this.itemdata.setGroupName == '') {
-        self.$message.error($i18n.t('modalTips.es')); // '请填写分组名称'
+        self.$Message.warning($i18n.t('modalTips.es')); // '请填写分组名称'
         return;
       }
       self.tableData.forEach(item => {
@@ -131,7 +131,7 @@ export default {
       const setArr = new Set(mapArr); // 去重复
       console.log(setArr.size < mapArr.length ? '有重复' : '无重复');
       if (setArr.size < mapArr.length) {
-        self.$message.error($i18n.t('modalTips.et')); // '有重复优先级'
+        self.$Message.warning($i18n.t('modalTips.et')); // '有重复优先级'
         return;
       }
       const formData = new FormData();
@@ -147,10 +147,10 @@ export default {
         }
       } = await this.service.promotionCenter.updatePmGroup(formData);
       if (code === 0) {
-        self.$message.success($i18n.t('modalTips.eu')); // '设置分组成功'
+        self.$Message.success($i18n.t('modalTips.eu')); // '设置分组成功'
         self.closeDialog();
       } else {
-        self.$message.error(message);
+        self.$Message.error(message);
       }
     },
     closeDialog() {

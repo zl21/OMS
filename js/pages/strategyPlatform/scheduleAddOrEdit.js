@@ -809,7 +809,7 @@ export default {
                       this.$Modal.info({
                         className: 'ark-dialog',
                         title: $i18n.t('modalTitle.tips'), // 提示
-                        content: $i18n.t('modalTitle.ht'), // 确定删除？
+                        content: $i18n.t('modalTips.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
                         okText: $i18n.t('common.determine'), // 确定
@@ -991,7 +991,7 @@ export default {
                       this.$Modal.info({
                         className: 'ark-dialog',
                         title: $i18n.t('modalTitle.tips'), // 提示
-                        content: $i18n.t('modalTitle.ht'), // 确定删除？
+                        content: $i18n.t('modalTips.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
                         okText: $i18n.t('common.determine'), // 确定
@@ -1383,7 +1383,7 @@ export default {
             this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE != '0';
             this.initPickTable();
           } else {
-            this.$message.error(message);
+            this.$Message.error(message);
           }
         }).catch(() => this.loading = false);
       }
@@ -1399,7 +1399,7 @@ export default {
       const drpArr = ['CP_C_SHOP_ID'];
       const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
-        self.$message.error(mes);
+        self.$Message.warning(mes);
         return false;
       }
 
@@ -1424,10 +1424,10 @@ export default {
           this.isModify = false
           data && (this.ID = data);
           this.querySchedule();
-          this.$message.success(message);
+          this.$Message.success(message);
           return;
         }
-        this.$message.error(message);
+        this.$Message.error(message);
       });
     },
     /**
@@ -1444,7 +1444,7 @@ export default {
         this.loading = false;
         this[type].data = ID != -1 ? this[type].data.filter(i => i.ID != ID) : [];
         this.initModify();
-        code == 0 ? this.$message.info(message) : this.$message.error(message);
+        code == 0 ? this.$Message.success(message) : this.$Message.error(message);
       }).catch(() => this.loading = false);
     }
   },

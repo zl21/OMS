@@ -719,7 +719,7 @@ export default {
       const drpArr = ['PS_C_PRO_ID'];
       const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
-        this.$message.error(mes);
+        this.$Message.warning(mes);
         return false;
       }
       /* =========== 保存校验 end =========== */

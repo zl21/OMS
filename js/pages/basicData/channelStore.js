@@ -490,7 +490,7 @@ export default {
             self.setData(res.data.data);
             self.$Message.success(res.data.message);
           } else {
-            self.$message.error(res.data.message);
+            self.$Message.error(res.data.message);
           }
         });
     },

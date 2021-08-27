@@ -98,7 +98,7 @@ export default {
       const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(param);
       if (code === 0) {
         self.dialogLoad = false;
-        self.$message.success(message);
+        self.$Message.success(message);
         self.$emit('confirmImport');
         self.$emit('closeActionDialog', true);
       }

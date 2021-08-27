@@ -176,7 +176,7 @@ export default {
         } else {
           this.tab1 = this.tab1_default;
           // 订单详情获取失败
-          this.$message.error($i18n.t('modalTips.h3'));
+          this.$Message.error($i18n.t('modalTips.h3'));
         }
       }).finally(() => {
         this.loading = false;

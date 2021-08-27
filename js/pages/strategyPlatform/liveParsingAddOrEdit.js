@@ -480,7 +480,7 @@ export default {
         }
         return
       }
-      this.$message.error(message)
+      this.$Message.error(message)
     },
     isValid(obj, validFields) {
       let valid = true;
@@ -528,7 +528,7 @@ export default {
         let tip = msg && hasNoValid 
           ? `${msg.join('，')}，${$i18n.t('form_label.cd')} 不能为空!` 
           : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `${$i18n.t('form_label.cd')} 不能为空!`
-        self.$message.error(tip);
+        self.$Message.warning(tip);
         return false;
       }
       
@@ -537,7 +537,7 @@ export default {
       .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
       let uniqRow = Array.from(new Set(allRow))
       if (allRow.length != uniqRow.length) {
-        self.$message.error($i18n.t('modalTips.hp')) // 请勿重复添加直播商品识别规则!
+        self.$Message.warning($i18n.t('modalTips.hp')) // 请勿重复添加直播商品识别规则!
         return
       }
       
@@ -575,7 +575,7 @@ export default {
           }
         }
         this.isModify = false
-        this.$message.success(message)
+        this.$Message.success(message)
         this.onOk(this.ID == -1 && data.objId)
         return
       }

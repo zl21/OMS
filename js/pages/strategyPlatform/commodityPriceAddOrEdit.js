@@ -520,15 +520,15 @@ export default {
     // 删除明细
     deleteDetail() {
       const selectArr = this.goodsTableConfig.selectionData
-      if (!selectArr.length) return this.$message.warning($i18n.t('modalTips.hy'))
+      if (!selectArr.length) return this.$Message.warning($i18n.t('modalTips.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message }}) => {
         if (code == 0) {
-          this.$message.success(message)
+          this.$Message.success(message)
           this.queryPriceItem()
           return
         }
-        this.$message.error(message)
+        this.$Message.error(message)
       })
     },
     // 导入
@@ -559,12 +559,12 @@ export default {
       this.service.strategyPlatform.exportPrice(params).then(({ data: { code, data, message }}) => {
         this.loading = false
         if (code == 0 && data !== null) {
-          this.$message.success(message || "导出成功！");
+          this.$Message.success(message || "导出成功！");
           this.downloadUrlFile(data);
         } else if (code === 0) {
-          this.$message.success(message);
+          this.$Message.success(message);
         } else {
-          this.$message.error(message || "失败！");
+          this.$Message.error(message || "失败！");
         }
       }).catch(() => this.loading = false)
     },
@@ -789,7 +789,7 @@ export default {
             this.formConfig.formValue.ISACTIVE = this.isEnable ? '启用' : '停用'
           }
         } else {
-          this.$message.error(message)
+          this.$Message.error(message)
         }
       }).catch(() => this.loading = false)
     },
@@ -806,7 +806,7 @@ export default {
           this.goodsTableConfig.data = data.ST_C_PRICE_ITEM_LIST || []
           this.goodsTableConfig.total = data.PAGE_INFO.total
         } else {
-          this.$message.error(message)
+          this.$Message.error(message)
         }
       })
     },
@@ -817,7 +817,7 @@ export default {
       const valueArr = ['PLAN_NAME', 'BEGIN_TIME', 'END_TIME', 'PRIORITY'];
       const drpArr = ['CP_C_SHOP_ID'];
       const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
-      if (mes) return self.$message.error(mes);
+      if (mes) return self.$Message.warning(mes);
       
       const formConfig = this.goodsTableConfig.businessFormConfig
       /**子表新增校验 */
@@ -833,7 +833,7 @@ export default {
       }
       mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
       if ((!(PS_C_SPU_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {
-        return this.$message.error(mes2);
+        return this.$Message.error(mes2);
       } // 非回车保存就不提示子表表单校验提示
 
 
@@ -889,10 +889,10 @@ export default {
           }
           !this.isCopy && this.queryPrice(data.objId)
           !this.isCopy && this.queryPriceItem(data.objId)
-          this.$message.success(message)
+          this.$Message.success(message)
           return
         }
-        this.$message.error(message)
+        this.$Message.error(message)
       })
     },
   }

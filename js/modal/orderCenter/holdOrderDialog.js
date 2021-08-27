@@ -287,7 +287,7 @@ export default {
     confirmChange() {
       const requestData = this.confirmVerifyAssignment();
       if (requestData.message) {
-        this.$message.error(requestData.message);
+        this.$Message.error(requestData.message);
         return
       }
       let rows = this.componentData.ids;

@@ -768,10 +768,10 @@ export default {
       } = await this.service.promotionCenter.cpromLogQuery(formData);
       if (code === 0) {
         if (data.length === 0) {
-          self.$message.warning($i18n.t('modalTips.r8')); // 查询数据为空
+          self.$Message.warning($i18n.t('modalTips.r8')); // 查询数据为空
         } else {
           self.logData.data = data;
-          self.$message.success(message);
+          self.$Message.success(message);
           self.modal = true;
         }
       }

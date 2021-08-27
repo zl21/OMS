@@ -91,7 +91,6 @@ export default {
               .then(({ data: { code }}) => {
                 // 判断这个实体仓是否已经存在，如果已经存在就提示用户，并清掉仓库名称的值，让用户重新选择
                 if (code == -1) {
-                  // this.$message.warning(message)
                   this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE');
                   return
                 }
@@ -581,7 +580,7 @@ export default {
         }, 1000)
         return
       }
-      this.$message.error(message);
+      this.$Message.error(message);
     },
     async save(isSaveAll) {
       // 保存
@@ -591,12 +590,12 @@ export default {
       const drpArr = this.isAuto ? ['CP_C_PHY_WAREHOUSE_ID'] : ['CP_C_PHY_WAREHOUSE_ID', 'CP_C_LOGISTICS_ID'];
       const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) {
-        self.$message.error(mes);
+        self.$Message.warning(mes);
         return false;
       }
 
       const inputIDs = self.logisticsTableFormConfig.formValue.CP_C_LOGISTICS_ID; // 仓库
-      if (!inputIDs && this.isAuto && !isSaveAll) return this.$message.error('请选择物流公司！');
+      if (!inputIDs && this.isAuto && !isSaveAll) return this.$Message.warning('请选择物流公司！');
 
       const isEdit = this.isMasterRequired;
       const ST_C_EXPRESS_ALLOCATION = isEdit ? this.modify.master : this.formConfig.formValue;
@@ -616,7 +615,7 @@ export default {
       if (code == 0) {
         this.ID = data.objId || -1
         this.clearTableData()
-        !isSaveAll && this.$message.success(message)
+        !isSaveAll && this.$Message.success(message)
         if (isSaveAll) {
           this.onOk(this.$route.params.customizedModuleId == 'New' && this.ID)
         } else {
@@ -625,12 +624,12 @@ export default {
         }
         return
       }
-      this.$message.error(message);
+      this.$Message.error(message);
     },
     // 删除明细
     async deleteLogisticsCorp() {
       let partArrs = this.logisticsTableConfig.selectionData;
-      if (!partArrs.length) return this.$message.warning('请先选择需要删除的记录！');
+      if (!partArrs.length) return this.$Message.warning('请先选择需要删除的记录！');
       let allArrs = this.logisticsTableConfig.data;
       const ids = partArrs.map(i => i.ID).join(',');
       const {
@@ -640,7 +639,7 @@ export default {
         // 筛选出差集作为展示
         this.logisticsTableConfig.selectionData = []
         this.logisticsTableConfig.data = $omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
-        code == 0 ? this.$message.success(message) : this.$message.error(message);
+        code == 0 ? this.$Message.success(message) : this.$Message.error(message);
       }
     },
     /**
