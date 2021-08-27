@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-18 10:08:27
- * @LastEditTime: 2021-08-24 16:39:31
+ * @LastEditTime: 2021-08-27 10:41:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/config/minxin/tableDetailCollectionSlot.vue
@@ -71,7 +71,7 @@ export default {
     #bundle > .flex(@justify:center,@align:center);
   }
   .detail-operation {
-    #bundle > .flex(@justify:flex-end,@align:center);
+    #bundle > .flex(@justify:space-between,@align:center);
     // margin-bottom: @base-mr;
   }
 }
