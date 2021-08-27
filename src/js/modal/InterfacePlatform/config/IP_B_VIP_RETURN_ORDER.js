@@ -14,7 +14,7 @@ export default {
         isdisabled: false,
         inputList: [
           {
-            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 'IN (19,999999)', valuedata: 2 }]
+            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: '19,999999', valuedata: 2 }]
           }
         ],
         itemdata: {
