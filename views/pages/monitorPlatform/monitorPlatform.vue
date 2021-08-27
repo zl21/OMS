@@ -76,7 +76,7 @@
               </div>
             </div>
           </div>
-          <div :class="['main02body', up, noData]" id="main02body" :style="{ height : m2Heigh + 'px'}">
+          <div :class="['main02body', up, noData]" id="main02body" :style="{ height : m2Heigh + 'px'}" v-loading="m2Loading">
             <picture v-if="noData">
               <source srcset="./img/la.png" media="(min-width: 1600px)" />
               <img src="./img/medium-car-image.jpg" alt="Car" />
@@ -293,6 +293,7 @@ export default {
   },
   data() {
     return {
+      m2Loading: false,
       pageLoading: false,
       m2Heigh: 0,
       m3Heigh: 0,
@@ -708,6 +709,7 @@ export default {
     // 在这调的话，入参处理……
     // 调接口并处理数据（可能有4个接口
     getData(all=0, ...others) {
+      const self = this;
       let params = { fresh: Boolean(all) };
       let [m1={},m2={},m3={},m4={}] = others;
       if (!all) {
@@ -717,18 +719,18 @@ export default {
         params.m2 = m2;
         params.m3 = m3;
         params.m4 = m4;
-        console.log(params);
+        console.log('getData:params::', params);
+        setTimeout(() => {
+          self.pageLoading = false;
+          self.m2Loading = false;
+      }, 100);
       }
     },
     // 右上角-刷新icon事件
     freshHandel: throttle(function(){
       const self = this;
-      self.getData(0, {m1:1},{m2:2});
       self.pageLoading = true;
-      // 接口处理
-      setTimeout(() => {
-        self.pageLoading = false;
-      }, 100);
+      self.getData(0, {m1:1},{m2:2});
     }, 1000, { 'trailing': false }), 
     /** ----------------- 配置方法 -------------------- **/
     // 饼图
@@ -1108,6 +1110,12 @@ export default {
       this.main01.data.forEach((i,n) => {
         i.clickCss = n == index ? 'clickCss' : '';
       });
+      this.m2Loading = true;
+      const m1 = {
+        item: it,
+        action: this.main01.btn.find(i => i.type == 'primary')
+      }
+      this.getData(0, m1)
     },
     // 异常趋势图 接口选择
     selectCheck(item) {
