@@ -72,6 +72,11 @@ export default {
         },        
         {
           flag: false,
+          column: 'SG_B_OUT_BILL_NO',
+          label: '出库通知单'
+        },        
+        {
+          flag: false,
           column: 'PLATFORM_STATUS_NAME',
           label: '平台状态'
         },
