@@ -455,8 +455,8 @@ export default {
     },
     filterInputName(item) {
       const self = this;
-      // $(document).trigger('click')
-      $('.admin-container').trigger('click');
+      $(document).trigger('click');
+      // $('.admin-container').trigger('click');
       if (item.refcolval) {
         if (item.fkdisplay == 'drp' || item.fkdisplay == 'mrp') {
           self.getQueryClick(item, () => {

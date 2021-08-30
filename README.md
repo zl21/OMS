@@ -316,4 +316,4 @@
 | v1.2.79 | 样式修改  |
 | v1.2.80 | element - page组件 换成 ark ui  - page  |
 | v1.2.83 | business-form  样式修改  |
-| v1.2.84 | business-form  样式修改  |
+| v1.2.84 | fktable-仅一个处于激活状态 | 促销活动新增- 批量新增修改|
