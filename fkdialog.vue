@@ -11,9 +11,9 @@
     @MyDialogClose="dialogClose"
   >
     <template #title>
-      {{title}}
+      {{ title }}
     </template>
-    
+
     <div v-loading.lock="confirmLoading" class="fkdialog">
       <div class="dialog_left">
         <div class="left_top">
@@ -39,7 +39,8 @@
       </div>
       <div
         class="dialog_center"
-        :class="{ 'second-width': activeName === 'second' }">
+        :class="{ 'second-width': activeName === 'second' }"
+      >
         <el-tabs v-model="activeName">
           <el-tab-pane
             :label="vmI18n.t('SELECTEDRESULTS')"
@@ -55,19 +56,20 @@
               @size-change="l_handleSizeChange"
               @current-change="l_handleCurrentChange"
             /> -->
-            <Page 
-             class-name="dfkialogPage"
-             :show-total="true"
-             :current="l_center_data.l_currentPage"
-             :total="l_center_data.total"
-             :page-size="l_center_data.l_page_size"
-             :page-size-opts="[10, 20, 50, 100]"
-             @on-change="l_handleCurrentChange" 
-             @on-page-size-change="l_handleSizeChange" 
-             pager-count = "5"
-             size="small" 
-             show-elevator 
-             show-sizer/>
+            <Page
+              class-name="dfkialogPage"
+              :show-total="true"
+              :current="l_center_data.l_currentPage"
+              :total="l_center_data.total"
+              :page-size="l_center_data.l_page_size"
+              :page-size-opts="[10, 20, 50, 100]"
+              @on-change="l_handleCurrentChange"
+              @on-page-size-change="l_handleSizeChange"
+              pager-count="5"
+              size="small"
+              show-elevator
+              show-sizer
+            />
             <show-table-data
               ref="screen_ck"
               v-loading.lock="l_screenLoading"
@@ -97,19 +99,20 @@
               @size-change="r_handleSizeChange"
               @current-change="r_handleCurrentChange"
             /> -->
-            <Page 
-             class-name="dfkialogPage"
-             :show-total="true"
-             :current="r_center_data.r_currentPage"
-             :total="r_center_data.total"
-             :page-size="r_center_data.r_page_size"
-             :page-size-opts="[10, 20, 50, 100]"
-             @on-change="l_handleCurrentChange" 
-             @on-page-size-change="l_handleSizeChange" 
-             pager-count = "5"
-             size="small" 
-             show-elevator 
-             show-sizer/>
+            <Page
+              class-name="dfkialogPage"
+              :show-total="true"
+              :current="r_center_data.r_currentPage"
+              :total="r_center_data.total"
+              :page-size="r_center_data.r_page_size"
+              :page-size-opts="[10, 20, 50, 100]"
+              @on-change="l_handleCurrentChange"
+              @on-page-size-change="l_handleSizeChange"
+              pager-count="5"
+              size="small"
+              show-elevator
+              show-sizer
+            />
             <show-table-data
               ref="result_ck"
               :table_head="r_table_data.header"
@@ -197,7 +200,7 @@
 
           <span>
             <i class="iconfont" @click="showOrHidden = true">&#xe61c;</i>
-            <i class="iconfont" @click="clearAllResult">&#xe61e;</i>
+            <i class="iconfont" @click="clearAllResult">&#xe6a2;</i>
           </span>
         </div>
         <div class="right_center">
@@ -229,13 +232,14 @@
           <div class="modalContent">
             <i class="iconfont muBan">&#xe637;</i>
             <div class="textCenter">
-              {{ vmI18n.t("PAGENAME") }}：<input
+              <label>{{ vmI18n.t("PAGENAME") }}：</label>
+              <input
                 v-model="module_name"
                 type="text"
               />
             </div>
             <div class="modalBtn">
-              <button class="btn" @click="result_save">
+              <button class="btn result_save" @click="result_save">
                 <span>{{ vmI18n.t("ENSURE") }}</span>
               </button>
               <button class="btn" @click="showOrHidden = !showOrHidden">
@@ -1181,8 +1185,8 @@ export default {
 .ark-dialog {
   .fkdialog {
     .dialog_left {
-      flex: 1;
-      width: auto;
+      // flex: 1;
+      width: 200px;
       box-shadow: none;
       .dislogtree {
         .title {
@@ -1193,12 +1197,42 @@ export default {
             display: inline-block;
             vertical-align: middle;
           }
+          i {
+            &.iconfont {
+              // transform:inherit !important;
+            }
+            &::before {
+              color: #ccc;
+              content: "\ef90";
+              font-family: iconfont !important;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              background: #fff;
+              position: absolute;
+              left: 4px;
+              top: 9px;
+              width: 14px;
+              height: 14px;
+              line-height: 14px;
+            }
+          }
+          [style="transform: rotate(90deg);"]::before {
+            content: "\efd4";
+            transform: rotate(90deg);
+            left: 2px;
+            top: 7px;
+            font-size: 14px;
+          }
         }
       }
       .left_top {
         span i {
           color: @base-color;
         }
+      }
+      .left_center {
+        width: 100%;
       }
     }
     .dialog_center {
@@ -1245,7 +1279,7 @@ export default {
       }
     }
     .dialog_right {
-      flex: 1;
+      // flex: 1;
       // width: auto;
       .right_top {
         color: @base-color;
@@ -1275,9 +1309,47 @@ export default {
         }
       }
     }
+    .modalCenter{
+      height: auto !important;
+    }
+    .modalContent{
+      padding: 50px 30px 20px;
+      .textCenter{
+        margin: 0;
+        text-align:center;
+        font-size: 0;
+        label{
+          font-size: 12px;
+          display: inline-block;
+          width: 120px;
+          text-align: right
+        }
+        input{
+          font-size: 12px;
+          width: calc(100% - 120px);
+          #bundle > .defalutInput;
+        }
+      }
+      .modalBtn{
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 10px;
+        button{
+          #bundle > .defalutBtn;
+          span{
+            color: inherit;
+          }
+          &.result_save{
+            #bundle > .defalutBtn;
+          }
+        }
+      }
+    }
+    
   }
 }
-.dfkialogPage{
+.dfkialogPage {
   margin: 10px 0;
 }
 </style>
