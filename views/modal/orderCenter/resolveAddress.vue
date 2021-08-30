@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-12 14:32:32
- * @LastEditTime: 2021-05-19 18:11:00
+ * @LastEditTime: 2021-08-30 13:15:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/modal/orderCenter/resolveAddress.vue
@@ -25,7 +25,7 @@
           @on-blur="parseAddress"
           @on-enter="parseAddress"
         />
-         <Tooltip class="showTooltip" theme = "light" content="格式:张三,17788888888,上海上海市闵行区黎安路999号" placement="top-start">
+         <Tooltip class="showTooltip" theme = "light" content="格式:张三,17788888888,上海上海市闵行区黎安路999号" placement="right">
            <Icon type="ios-alert-outline" />
          </Tooltip>
       </FormItem>

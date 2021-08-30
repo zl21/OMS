@@ -3,11 +3,9 @@ import $i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default () => ({
   updated() {
     const { itemId, tableId, tableName } = this.$router.currentRoute.params;
-    console.log(itemId, tableId, tableName);
     if (tableName === 'OC_B_COMPENSATE_ORDER') { // 判断是否为需要操作的表
       setTimeout(() => {
         const { detail } = R3.store.state.customize.COMPENSATE;
-        console.log(detail);
         // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'zhoulan');
         // R3.store.commit('customize/COMPENSATE', { detail: [] });
       }, 500);
@@ -33,12 +31,10 @@ export default () => ({
   methods: {
     PAYSAVE() {
       setTimeout(async () => {
-        console.log('PAYSAVE::', this);
         let ID = this.$route.params.itemId;
         let main, obj, modifyData, flag;
         if (ID == 'New') {
           ID = '-1';
-          console.log(this.$store.state["V.OC_B_COMPENSATE_ORDER.10813.New"].updateData);
           main = this.$store.state["V.OC_B_COMPENSATE_ORDER.10813.New"].updateData.OC_B_COMPENSATE_ORDER.changeData;
           main.ID = '-1';
           for (const key in main) {
@@ -75,7 +71,6 @@ export default () => ({
         const payData = R3.store.state.customize.COMPENSATE;
         main.REDUNDANT_ORDER_ID = payData.other.orderId;
         const OC_B_COMPENSATE_ORDER_ITEM = payData.detail;
-        console.log('payData::', payData.detail);
         const IDS = R3.store.state.customize.COMPENSATE.deleteIds;
         if (ID != '-1' && !Object.keys(modifyData).length && !IDS.length && !OC_B_COMPENSATE_ORDER_ITEM.length) {
           return // 未修改 点保存无反应
@@ -139,7 +134,6 @@ export default () => ({
       let routeUrl = `V.${tableName}.${tableId}.${itemId}`;
       let mainOrder = this.$store.state[routeUrl].updateData[tableName].changeData;
       let OC_B_REFUND_ORDER_ITEM = JSON.parse(JSON.stringify(R3.store.state.customize.extraoOrderDetails)) //明细
-      console.log(OC_B_REFUND_ORDER_ITEM);
       // let IDS // 删除ids
       let ID
       if(itemId === 'New'){
@@ -196,9 +190,7 @@ export default () => ({
             return i;
         })
       }
-      console.log(OC_B_REFUND_ORDER_ITEM_Arr,OC_B_REFUND_ORDER_ITEM);
       const { data: { code, data, message} } = await this.service.orderCenter.extraSaveApi({ OC_B_REFUND_ORDER_EXTRA: mainOrder, OC_B_REFUND_ORDER_ITEM:OC_B_REFUND_ORDER_ITEM_Arr, ID });
-      console.log(code, data, message);
       if (code == 0) {
         this.$Message.success(message);
         if (itemId === 'New') {
