@@ -43,6 +43,10 @@ export default {
                 // label: '买家HOLD单'
                 label: window.vmI18n.t('form_label.buyer_HOLD'),
               },
+              {
+                value: '9',
+                label: '实物缺货HOLD单',
+              },
             ],
           },
           {
