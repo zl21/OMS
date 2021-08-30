@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-27 10:38:48
- * @LastEditTime: 2021-08-20 14:24:08
+ * @LastEditTime: 2021-08-30 17:16:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/businessForm.js
@@ -35,14 +35,14 @@ export default {
     // }
   },
   watch: {
-    flodData() {
-      if (this.flodData === 'el-icon-arrow-up') {
-        this.$refs[this.currentFlod].style.maxHeight = "";
-      } else {
-        // this.$refs[this.currentFlod].style.maxHeight = "96px";
-        this.$refs[this.currentFlod].style.overflow = "hidden";
-      }
-    }
+    // flodData() {
+    //   if (this.flodData === 'el-icon-arrow-up') {
+    //     this.$refs[this.currentFlod].style.maxHeight = "";
+    //   } else {
+    //     // this.$refs[this.currentFlod].style.maxHeight = "96px";
+    //     this.$refs[this.currentFlod].style.overflow = "hidden";
+    //   }
+    // }
   },
   created(){
   },
@@ -50,10 +50,10 @@ export default {
     console.log('updated');
   },
   mounted() {
-    if (this.formConfig.flodClick) {
-      // this.$refs[this.formConfig.flodClick].style.maxHeight = "96px";
-      this.$refs[this.formConfig.flodClick].style.overflow = "hidden";
-    }
+    // if (this.formConfig.flodClick) {
+    //   // this.$refs[this.formConfig.flodClick].style.maxHeight = "96px";
+    //   this.$refs[this.formConfig.flodClick].style.overflow = "hidden";
+    // }
     setTimeout(() => {
       let nodes = this.$refs.popLabel;
       nodes && nodes.forEach(e => {
@@ -102,17 +102,17 @@ export default {
     
     //点击折叠按钮事件
     flodClick(val) {
-      // alert(val);
-      if (this.flodData === 'el-icon-arrow-up') {
-        this.flodData = 'el-icon-arrow-down';
-        this.currentFlod = val;
+      // if (this.flodData === 'el-icon-arrow-up') {
+      //   this.flodData = 'el-icon-arrow-down';
+      //   // this.currentFlod = val;
 
-      } else {
-        this.flodData = 'el-icon-arrow-up';
-        this.currentFlod = val;
-      }
+      // } else {
+      //   this.flodData = 'el-icon-arrow-up';
+      //   // this.currentFlod = val;
+      // }
+      this.flodData === 'el-icon-arrow-down' ? this.flodData = 'el-icon-arrow-up' : this.flodData = 'el-icon-arrow-down';
       if (val) {
-        val();
+        val(this.flodData === 'el-icon-arrow-down' ? 'down' : 'up');
       }
     },
   }
