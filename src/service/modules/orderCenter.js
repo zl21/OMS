@@ -70,6 +70,7 @@ export default {
   virtualWarehouseStorage: params => network.post('/api/cs/oc/oms/v1/virtualWarehouseStorage', params), // 虚拟仓库入库
   cancelautorefund: params => network.post('/api/cs/oc/oms/v1/cancelautorefund', params), // 取消自动退款
   updateReturnBOrder: params => network.post('/api/cs/oc/oms/v1/updateReturnBOrder', params), // 批量原退
+  refundtoAgList: params => network.post('/api/cs/oc/oms/v1/refundtoAgList', params), // 批量ag退款
   orderReturnRecallFromWms: params => network.post('/p/cs/orderReturnRecallFromWms', params), // 从wms撤回
   retransmissionWms: params => network.post('/api/cs/oc/oms/v1/retransmissionWms', params), // 重传wms
   forcedCompletion: params => network.post('/api/cs/oc/oms/v1/forcedCompletion', params), // 强制完成
