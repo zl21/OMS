@@ -67,7 +67,10 @@ const common = {
   },
   SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT: {
     component: importCom,
-  }
+  },
+  PURCHASEIMPORT: {
+    component: importCom,
+  },
 }
 
 const allCenterModal = Object.assign(

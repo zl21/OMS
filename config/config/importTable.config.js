@@ -4,6 +4,15 @@
  */
 
 const importConfig = {
+  OC_B_PURCHASE__PURCHASE_IMPORT: {
+    // 采购单-导入
+    isAction: true,
+    tableName: 'OC_B_PURCHASE',
+    webname: 'PURCHASE_IMPORT',
+    tempApi: '/p/cs/oc/oms/v1/purchase/templateDownLoad',
+    okApi: '/p/cs/oc/oms/v1/purchase/import',
+    downErrorInfo: true
+  },
   SG_B_GOOD_DISTRIBUTION__SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT: {
     // 分货单单对象-导入
     isAction: true,
