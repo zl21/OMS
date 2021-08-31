@@ -86,7 +86,8 @@
         <span>{{ dataEmpty.message }}</span>
       </p>
     </div>
-    <div class="page" v-if="totalRowCount > 0 && range <= totalRowCount">
+    <div class="page" v-if="totalRowCount > 0">
+    <!-- <div class="page" v-if="totalRowCount > 0 && range <= totalRowCount"> -->
       <!-- <el-pagination
         small
         layout="prev, pager, next"

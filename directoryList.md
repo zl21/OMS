@@ -17,7 +17,7 @@
     |-- easyMatrix.vue // 简单矩阵（二维）组件
     |-- fkdialog.vue // 弹窗多选组件
     |-- fkinput.vue // 外键关联类型的input框
-    |-- fkinputPlus.vue // 下拉选择组件，基于arkUI DropDownSelectFilter、DropMultiSelectFilter
+    |-- fkinputPlus.vue // 下拉选择组件，基于arkUI DropDownSelectFilter、DropMultiSelectFilter（暂不支持省市区联动）
     |-- fktable.vue // 外键关联的table
     |-- importTable.vue // 公共导入组件 - 适用标准、全定制页面
     |-- loading.vue // 页面加载状态组件
