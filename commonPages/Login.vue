@@ -450,7 +450,7 @@ export default {
             position: inherit;
             margin: 0;
             width: 100%;
-            line-height: 38px;
+            // line-height: 38px;
             background: #5461b8;
             border-radius: 4px;
             font-size: 16px;
