@@ -1,12 +1,12 @@
-body .order_address.customized-modal {
-  font-size: 16px;
+.customized-modal .i_head {
+  height: 30px;
+  margin-bottom: 10px;
 }
-body .order_address.customized-modal .business-form-main .businessForm_a .popInput .item-input .title {
-  width: 100px;
+.customized-modal .i_body {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-body .order_address.customized-modal .showTooltip {
-  display: block;
-  position: absolute;
-  right: 7px;
-  top: 0;
+.customized-modal .i_food {
+  display: flex;
+  flex-direction: row-reverse;
 }
