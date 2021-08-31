@@ -6,14 +6,14 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
  */
-import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid';
+// import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid'; // npm
 import { debounce } from 'lodash'
 import i18n from "@burgeon/internationalization/i18n";
 
 export default {
     name: 'businessAgTable',
     components: {
-        commonTableByAgGrid
+        // commonTableByAgGrid
     },
     props: {
         renderParams: {

@@ -8,7 +8,7 @@
 -->
 <template>
     <div class="agTable">
-        <commonTableByAgGrid
+        <arkCommonTableByAgGrid
         ref="agGrid"
         :rowHeight="agTableConfig.rowHeight"
         :height="agTableConfig.tableHeight"
@@ -22,7 +22,7 @@
         @on-column-moved="colMoved"
         @on-column-pinned="colPinned"
         @on-sort-change="colSortChange"
-      ></commonTableByAgGrid>
+      ></arkCommonTableByAgGrid>
 
       <div class="page"
          v-show="agTableConfig.pageShow && (agTableConfig.rowData || []).length !== 0">
