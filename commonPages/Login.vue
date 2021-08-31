@@ -175,6 +175,8 @@ export default {
       R3.store.commit(`customize/language`, lang || "zh");
       this.initDom();
       this.$Message.success(message);
+      R3I18n(lang);
+      console.log(lang);
     },
     /**
      * 切换语言
