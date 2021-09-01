@@ -140,20 +140,20 @@
       }
 
       input {
+        position: relative;
         vertical-align: middle;
         margin-top: -3px;
       }
 
       input[type=checkbox]::after {
         display: inline-block;
-        width: 14px;
-        height: 14px;
-        line-height: 14px;
+        width: 13px;
+        height: 13px;
+        line-height: 13px;
         text-align: center;
-        position: relative;
-        top: -1px;
-        left: -1px;
-        // border: 1px solid @base-color;
+        position: absolute;
+        top: 0px;
+        left: 0px;
         border-radius: 2px;
         background-color: #fff;
         transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -162,7 +162,7 @@
       input[type=checkbox]:checked::after {
         font-family: "iconfont" !important;
         content: "\e715";
-        font-size: 14px;
+        font-size: 13px;
         color: @base-color;
         font-weight: normal;
         font-style: normal;

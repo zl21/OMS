@@ -322,3 +322,4 @@
 | v1.2.87 | 添加异常图标|
 | v1.2.88 | fkinput始终展示分页 |
 | v1.2.89 | businessForm input拓展聚焦事件 |
+| v1.2.90 | fktable --- 样式修改 |
