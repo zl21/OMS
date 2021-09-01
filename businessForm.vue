@@ -49,6 +49,7 @@
                    :regx="item.regx"
                    :maxlength="item.maxlength"
                    @on-blur="runMethods(item.inputblur)"
+                   @on-focus="runMethods(item.inputFocus ? item.inputFocus() : '')"
                    @on-change="runMethods(item.inputChange ? item.inputChange() : '')"></Input>
             <!-- 输入框图标 -->
             <!-- <Icon v-if="item.icon" :type="item.icon" /> -->
