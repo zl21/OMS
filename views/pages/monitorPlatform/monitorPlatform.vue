@@ -205,10 +205,10 @@
           </div>
         </div>
         <div class="selectBox">
-          <Form :label-width="80">
+          <Form :label-width="100">
             <Row>
               <Col span="6">
-                <FormItem label="项目：">
+                <FormItem label="第三方名称：">
                   <Select v-model="main04.projectV">
                     <Option
                       v-for="item in main04.projectOption"
@@ -551,7 +551,7 @@ export default {
       },
       // 模块3
       main03: {
-        title: "服务异常监控详细数据（AG项目1）",
+        title: "服务异常监控详细数据",
         btn: JSON.parse(JSON.stringify(dayBtnConifg)),
         btnSta: JSON.parse(JSON.stringify(statusBtnConifg)),
         data: [
@@ -566,7 +566,7 @@ export default {
             tips: "",
           },
           {
-            title: "转单服务",
+            title: "下发WMS服务",
             time: "2h",
             status: 1,
             min: 0,
@@ -576,7 +576,7 @@ export default {
             tips: "",
           },
           {
-            title: "转单服务",
+            title: "平台发货服务",
             time: "2h",
             status: 1,
             min: 0,
@@ -586,7 +586,7 @@ export default {
             tips: "",
           },
           {
-            title: "转单服务",
+            title: "取消拦截服务",
             time: "2h",
             status: 0,
             min: 0,
@@ -595,7 +595,7 @@ export default {
             desc: "积压单量",
             tips: "",
           },
-          {
+          /* {
             title: "转单服务",
             time: "2h",
             status: 0,
@@ -604,7 +604,7 @@ export default {
             value: 5670,
             desc: "积压单量",
             tips: "",
-          },
+          }, */
         ],
       },
       // 模块4 --- 接口异常趋势图
@@ -629,25 +629,29 @@ export default {
         projectOption: [
           {
             value: "1",
-            label: "New York",
+            label: "平台",
           },
           {
             value: "2",
-            label: "London",
+            label: "SAP",
+          },
+          {
+            value: "3",
+            label: "WMS",
           },
         ],
         apiOption: [
           {
             value: "1",
-            label: "接口1",
+            label: "取消发货自动退款",
           },
           {
             value: "2",
-            label: "接口2",
+            label: "退货入库自动退款",
           },
           {
             value: "3",
-            label: "接口3",
+            label: "平台发货",
           },
         ],
         projectV: "1",
@@ -1510,7 +1514,7 @@ export default {
           ],
         },
       ];
-      if (item.length === 2) {
+      if (item.length == 2) {
         this.main04.currentData.datas.push({
           type: "line",
           name: "接口2",
