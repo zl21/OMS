@@ -3,7 +3,6 @@ import businessBtn from 'professionalComponents/businessButton';
 
 export default {
   components: {
-    jordanBtn,
     businessBtn
   },
   data() {
