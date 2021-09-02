@@ -317,7 +317,8 @@ export default {
             status: 0,
             status_name: "异常",
             icon: 'icon-monitorPlat-warn', // 状态图标
-            title: "AG项目1", // 标题
+            title: "平台", // 标题
+            id: 'ptai',
             message: "异常单据", // 右下角展示的文字
             sum: 288, // 右下角展示的数量
             clickCss: 'clickCss', // 点击样式
@@ -326,7 +327,8 @@ export default {
             status: 1,
             status_name: "正常",
             icon: 'icon-monitorPlat-right',
-            title: "AG项目2",
+            title: "SAP",
+            id: 'sap',
             message: "异常单据",
             sum: 288,
             clickCss: '',
@@ -335,12 +337,13 @@ export default {
             status: 1,
             status_name: "正常",
             icon: 'icon-monitorPlat-right',
-            title: "AG项目3",
+            title: "WMS",
+            id: 'wms',
             message: "异常单据",
             sum: 288,
             clickCss: '',
           },
-          {
+          /* {
             status: 0,
             status_name: "异常",
             icon: 'icon-monitorPlat-warn',
@@ -348,7 +351,7 @@ export default {
             message: "异常单据",
             sum: 288,
             clickCss: '',
-          },
+          }, */
         ],
         pieData: [
           { value: 8, name: "总数" },
@@ -363,7 +366,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-home",
             color: '#4560AB',
-            title: "WMS(AG项目1)",
+            title: "平台（取消发货自动退款）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
             data: [
@@ -390,7 +393,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-out",
             color: '#FFAE34',
-            title: "WMS(AG项目1)",
+            title: "平台（退货入库自动退款）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
             data: [
@@ -417,7 +420,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-cancel",
             color: '#D656A7',
-            title: "WMS(AG项目1)",
+            title: "平台（平台发货）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
             data: [
@@ -444,7 +447,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-in",
             color: '#FF6951',
-            title: "WMS(AG项目1)",
+            title: "平台（同意换货回传平台）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
             data: [
@@ -471,7 +474,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-modify",
             color: '#A375C1',
-            title: "WMS(AG项目1)",
+            title: "平台（拒绝换货回传平台）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
             data: [
@@ -498,7 +501,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-synchro",
             color: '#FB79A1',
-            title: "WMS(AG项目1)",
+            title: "平台（修改地址回传平台）",
             statusIcon: "icon-monitorPlat-right",
             status: 1,
             data: [
@@ -681,7 +684,7 @@ export default {
   mounted() {
     // const domContent = document.getElementById('content');
     // domContent.style.padding = '0 0';
-    this.maxHeight("main02body", "m2Item", 1);
+    this.maxHeight("main02body", "m2Item");
     window.onresize = () => {
       console.log(11, this.tableName);
       if (this.tableName != 'MONITORINGPLATFORM') {
@@ -718,15 +721,354 @@ export default {
       if (!all) {
         // params.
         // params = Object.assign({}, params, others);
+        /** -------- 暂时的假数据 -------- */
+        if (m1.item.id == 'sap') {
+          this.main02.data = [
+            {
+            titleIcon: "icon-monitorPlat-home",
+            color: '#4560AB',
+            title: "SAP（SAP）",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
+            data: [
+              {
+                status: 0,
+                color: "gray",
+                A_name: "推送总数",
+                A_sum: 3880,
+              },
+              {
+                status: 1,
+                color: "green",
+                A_name: "推送成功",
+                A_sum: 345,
+              },
+              {
+                status: 0,
+                color: "red",
+                A_name: "推送失败率",
+                A_sum: "20%",
+              },
+            ],
+          },
+          ]
+        } else if (m1.item.id == 'wms') {
+          this.main02.data = [
+            {
+              titleIcon: "icon-monitorPlat-home",
+              color: '#4560AB',
+              title: "WMS(零售发货单下发WMS)",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-home",
+              color: '#4560AB',
+              title: "WMS(退换货单下发WMS)",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-home",
+              color: '#4560AB',
+              title: "WMS(采购退货单下发WMS)",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-home",
+              color: '#4560AB',
+              title: "WMS(发货包裹拦截）",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-home",
+              color: '#4560AB',
+              title: "WMS(实物调拨单下发WMS)",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+          ]
+        } else if (m1.item.id == 'ptai') {
+          this.main02.data = [
+          {
+            titleIcon: "icon-monitorPlat-home",
+            color: '#4560AB',
+            title: "平台（取消发货自动退款）",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
+            data: [
+              {
+                status: 0,
+                color: "gray",
+                A_name: "推送总数",
+                A_sum: 3880,
+              },
+              {
+                status: 1,
+                color: "green",
+                A_name: "推送成功",
+                A_sum: 345,
+              },
+              {
+                status: 0,
+                color: "red",
+                A_name: "推送失败率",
+                A_sum: "20%",
+              },
+            ],
+          },
+          {
+            titleIcon: "icon-monitorPlat-out",
+            color: '#FFAE34',
+            title: "平台（退货入库自动退款）",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
+            data: [
+              {
+                status: 0,
+                color: "gray",
+                A_name: "推送总数",
+                A_sum: 3880,
+              },
+              {
+                status: 1,
+                color: "green",
+                A_name: "推送成功",
+                A_sum: 345,
+              },
+              {
+                status: 0,
+                color: "red",
+                A_name: "推送失败率",
+                A_sum: "20%",
+              },
+            ],
+          },
+          {
+            titleIcon: "icon-monitorPlat-cancel",
+            color: '#D656A7',
+            title: "平台（平台发货）",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
+            data: [
+              {
+                status: 0,
+                color: "gray",
+                A_name: "推送总数",
+                A_sum: 3880,
+              },
+              {
+                status: 1,
+                color: "green",
+                A_name: "推送成功",
+                A_sum: 345,
+              },
+              {
+                status: 0,
+                color: "red",
+                A_name: "推送失败率",
+                A_sum: "20%",
+              },
+            ],
+          },
+          {
+            titleIcon: "icon-monitorPlat-in",
+            color: '#FF6951',
+            title: "平台（同意换货回传平台）",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
+            data: [
+              {
+                status: 0,
+                color: "gray",
+                A_name: "推送总数",
+                A_sum: 3880,
+              },
+              {
+                status: 1,
+                color: "green",
+                A_name: "推送成功",
+                A_sum: 345,
+              },
+              {
+                status: 0,
+                color: "red",
+                A_name: "推送失败率",
+                A_sum: "20%",
+              },
+            ],
+          },
+          {
+            titleIcon: "icon-monitorPlat-modify",
+            color: '#A375C1',
+            title: "平台（拒绝换货回传平台）",
+            statusIcon: "icon-monitorPlat-warn",
+            status: 0,
+            data: [
+              {
+                status: 0,
+                color: "gray",
+                A_name: "推送总数",
+                A_sum: 3880,
+              },
+              {
+                status: 1,
+                color: "green",
+                A_name: "推送成功",
+                A_sum: 345,
+              },
+              {
+                status: 0,
+                color: "red",
+                A_name: "推送失败率",
+                A_sum: "20%",
+              },
+            ],
+          },
+          {
+            titleIcon: "icon-monitorPlat-synchro",
+            color: '#FB79A1',
+            title: "平台（修改地址回传平台）",
+            statusIcon: "icon-monitorPlat-right",
+            status: 1,
+            data: [
+              {
+                status: 0,
+                color: "gray",
+                A_name: "推送总数",
+                A_sum: 3880,
+              },
+              {
+                status: 1,
+                color: "green",
+                A_name: "推送成功",
+                A_sum: 345,
+              },
+              {
+                status: 0,
+                color: "red",
+                A_name: "推送失败率",
+                A_sum: "20%",
+              },
+            ],
+          },
+        ]
+        }
+        /** -------- 暂时的假数据 -------- */
         params.m1 = m1;
         params.m2 = m2;
         params.m3 = m3;
         params.m4 = m4;
         console.log('getData:params::', params);
+        this.$nextTick(() => {
+          })
         setTimeout(() => {
+          self.maxHeight("main02body", "m2Item", 1);
           self.pageLoading = false;
           self.m2Loading = false;
-      }, 100);
+      }, 1000);
       }
     },
     // 右上角-刷新icon事件
@@ -1037,23 +1379,26 @@ export default {
           firstLeft = mBody.children[0].getClientRects()[0].x;
           nodeHeight = node.clientHeight;
           const itPosition = node.getClientRects()[0].x;
+          console.log('itPosition::', itPosition);
           if (itPosition == firstLeft) {
             rowSum += 1;
           }
           // console.log(itPosition,rowSum);
           // break;
         } else {
-          flag = true;
+          // flag = true;
         }
       }
-      if (flag) return;
+      console.log('rowSum::', rowSum);
+      if (!rowSum) return;
       self[body.includes('2') ? 'main02' : 'main03'].btnSta.find(i => i.webname == 'upDownIcon').disabled = rowSum <= 2;
       if (body.includes('2')) {
-        if (self.up == 'fadeInDom') {
+        if (self.up == 'fadeInDom' && !isInit) {
           self.m2Heigh = mBody.scrollHeight;
             mBody.style.transition = '2s'
         } else {
           self.m2Heigh = nodeHeight * (rowSum == 1 ? 1 : rowSum >= 2 ? 2 : 1) + (rowSum == 1 ? 2 : rowSum >= 2 ? 20 : 2);
+          console.log(self.m2Heigh);
           mBody.style.transition = '2s'
         }
       } else {
