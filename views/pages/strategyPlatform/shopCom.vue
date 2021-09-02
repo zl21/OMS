@@ -10,10 +10,26 @@
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
     />
-    <subTable
-      v-if="(isCopy || ID != -1) && labelDefaultValue == 'ST_C_PRICE_LOG'"
-      :component-data="subTableConfig"
-    />
+    <Modal
+      v-model="quDao.modal"
+      width="500"
+      titleAlign="left"
+      :title="quDao.title"
+      :mask="true"
+      footer-hide
+      class-name="ark-dialog"
+    >
+      <businessActionTable
+        :jordan-table-config="tabConfigQu"
+        @on-select="onSelectQ"
+        @on-select-cancel="onSelectCancelQ"
+        @on-select-all="onSelectAllQ"
+        @on-select-all-cancel="onSelectAllCancelQ"
+        @on-page-change="pageChangeQ"
+        @on-page-size-change="pageSizeChangeQ"
+      />
+      <businessButton :btn-config="btnConfigQu" class="modal-footer" />
+    </Modal>
     <businessDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
@@ -43,205 +59,116 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
-import myInput from 'professionalComponents/fkinput.vue';
-import subTable from 'professionalComponents/subTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-Vue.component('myInput', myInput)
 
 export default {
   components: {
-    subTable,
     businessButton,
     businessForm,
     businessActionTable,
     businessDialog,
-    myInput
   },
-  mixins: [new modifycurrentLabel()],
   data() {
     return {
+      value15: '11',
+      formatNumber: '10%',
       vmI18n: $i18n,
-      collapse: ['panel_baseInfo', 'panel_pickInfo', 'panel_warehouseInfo'],
-      ID: this.$route.params.customizedModuleId && (!['New', 'NEW'].includes(this.$route.params.customizedModuleId)) ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
-      loading: false,
-      isWatchChange: false, // 监听
-      isMasterRequired: false, // 主表是否已保存
-      isModify: false,
-      isCopy: false, // 是否复制
-      isEnable: false, // 是否启用
-      subTableConfig: {
-        centerName: '',
-        tablename: '',
-        objid: '',
-        pageShow: true
+      quDao: {
+        modal: false,
+        title: '渠道仓 - 库存比例',
       },
-      btnConfig: {
-        btnsite: 'right', // 按钮对齐方式
-        typeAll: 'default',
+      btnConfigQu: {
+        typeAll: 'default', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            webname: 'ST_C_PRICE_MAIN_SAVE', // 保存
-            text: $i18n.t('btn.save'), // 保存
-            size: '', // 按钮大小
+            text: $i18n.t('common.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              const self = this;
-              self.save(true);
-            },
+              this.quDao.modal = false;
+              // this.$emit('closeActionDialog');
+            }, // 按钮点击事件
           },
           {
-            webname: 'fix_back', // 返回
-            text: $i18n.t('btn.back'),
+            type: 'primary', // 按钮类型
+            text: $i18n.t('common.determine'), // 确定 按钮文本
+            disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.back();
+              this.quDaoOk();
             },
           },
-          {
-            webname: 'ST_C_PRICE_MAIN_COPY', // 返回
-            text: $i18n.t('common.copy'), // 复制
-            isShow: false,
-            btnclick: () => {
-              this.onOk(this.ID, true)
-            },
-          },
-        ]
+        ],
       },
-      formConfig: {
-        formData: [
+      loading: false,
+      tabConfigQu: {
+        indexColumn: true,
+        isShowSelection: true,
+        pageShow: true, // 控制分页是否显示
+        border: true, // 是否显示纵向边框
+        total: 0, // 设置总条数
+        width: '', // 表格宽度
+        height: '200',
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
+        pageSize: 10, // 默认每页条数100条，产品要求
+        pageIndex: 1, // 页码
+        totalData: [],
+        selection: [],
+        deleteData: [], // 暂存删除的数据，调保存的时候传给后端
+        addData: [], // 暂存添加的数据，调保存的时候传给后端
+        updateData: [], // 暂存修改的数据，调保存的时候传给后端
+        data: [
           {
-            style: '',
-            label: $i18n.t('form_label.bc'), // 策略ID
-            colname: 'PLAN_ID',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('PLAN_ID', 'master');
-            }
+            PS_C_SKU_ID: '菜鸟仓',
+            PEAK_VALUE: '',
+            QTY: 5,
           },
           {
-            style: 'input',
-            label: $i18n.t('form_label.bd'), // 策略名称
-            colname: 'PLAN_NAME',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('PLAN_NAME', 'master');
-            }
-          },
-          {
-            version: '1.4',
-            colname: 'CP_C_SHOP_ID',
-            style: 'popInput', // 输入框弹框单多选
-            width: '6',
-            itemdata: {
-              colid: 171534, // 当前字段的ID
-              colname: 'CP_C_SHOP_ID', // 当前字段的名称
-              fkdisplay: 'mrp', // 外键关联类型
-              isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
-              istooltip: true,
-              name: $i18n.t('table_label.shopName'), // 店铺名称
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'CP_C_SHOP', // 对应的表
-              reftableid: 171534, // 对应的表ID
-              valuedata: '' // 这个是选择的值
-            },
-            oneObj: e => {
-              console.log(e);
-              this.formConfig.formValue.CP_C_SHOP_ID = e.pid;
-              this.formConfig.formValue.CP_C_SHOP_ENAME = e.valuedata;
-              this.masterModifyData('CP_C_SHOP_ID', 'master');
-              this.masterModifyData('CP_C_SHOP_ENAME', 'master');
-            }
-          },
-          {
-            style: 'date', // 输入框类型
-            label: $i18n.t('form_label.be'), // 生效开始时间 // 输入框前文字
-            colname: 'BEGIN_TIME',
-            type: 'datetime',
-            width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd HH:mm:ss',
-            disabled: false,
-            options: {
-              disabledDate(date) {
-                return date && date.valueOf() < Date.now() - 86400000;
-              }
-            },
-            onChange: () => {
-              this.masterModifyData('BEGIN_TIME', 'master');
-            }
-          },
-          {
-            style: 'date', // 输入框类型
-            label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
-            colname: 'END_TIME',
-            type: 'datetime',
-            width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd HH:mm:ss',
-            disabled: false,
-            options: {
-              disabledDate(date) {
-                return date && date.valueOf() < Date.now() - 86400000;
-              }
-            },
-            onChange: () => {
-              this.masterModifyData('END_TIME', 'master');
-            }
-          },
-          {
-            style: 'input',
-            label: $i18n.t('table_label.priority'), // 优先级
-            colname: 'PRIORITY',
-            width: '6',
-            disabled: false,
-            regx: /^[1-9]$/,
-            inputChange: () => {
-              this.masterModifyData('PRIORITY', 'master');
-            }
-          },
-          {
-            style: 'input',
-            label: $i18n.t('table_label.remarks'), // 备注
-            colname: 'REMARK',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('REMARK', 'master');
-            }
-          },
-          {
-            style: '',
-            label: $i18n.t('form_label.bg'), //  启用状态
-            colname: 'ISACTIVE',
-            width: '6',
-            disabled: true,
-            // inputChange: () => {
-            //   this.masterModifyData('ISACTIVE', 'master');
-            //   this.isEnable = this.formConfig.formValue.ISACTIVE;
-            //   this.reloadForm()
-            // }
+            PS_C_SKU_ID: '唯品会仓',
+            PEAK_VALUE: '',
+            QTY: 5,
           }
         ],
-        formValue: {
-          PLAN_ID: '', // 策略ID
-          PLAN_NAME: '', // 策略名称
-          BEGIN_TIME: '', // 生效开始时间
-          END_TIME: '', // 生效结束时间
-          PRIORITY: '', // 优先级
-          ISACTIVE: '', // 启用状态
-          CP_C_SHOP_ID: '', // 店铺
-          CP_C_SHOP_ENAME: '',
-          REMARK: '' // 备注
-        },
-        ruleValidate: {
-          PLAN_ID: [{ required: false, message: ' ' }],
-          PLAN_NAME: [{ required: true, message: ' ' }],
-          BEGIN_TIME: [{ required: true, message: ' ' }],
-          END_TIME: [{ required: true, message: ' ' }],
-          PRIORITY: [{ required: true, message: ' ' }],
-          CP_C_SHOP_ID: [{ required: true, message: ' ' }]
-        }
+        columns: [
+          {
+            title: '渠道仓', // 渠道仓
+            key: "PS_C_SKU_ID",
+            align: "center",
+          },
+          {
+            title: '库存比例', // 库存比例
+            key: 'PEAK_VALUE',
+            align: "center",
+            render: (h, params) => {
+              return h('Input', {
+                style: {
+                  width: '150px',
+                  height: '100%',
+                },
+                class: 'kucun-scale',
+                props: {
+                  value: params.row.PEAK_VALUE,
+                  autosize: true,
+                  regx: /^\d{0,2}$/,
+                  suffix: "icon-percent-suffix",
+                },
+                on: {
+                  'on-change': e => {
+                    console.log(e.target.value);
+                    const v = e.target.value;
+                    params.row.PEAK_VALUE = v;
+                    this.tabConfigQu.data[params.index] = params.row;
+                    // this.getFkChooseItem(params.row);
+                  },
+                  'on-blur': (e) => {
+                    console.log(e.target.value);
+                    const v = e.target.value;
+                    // params.row.PEAK_VALUE = `${v}%`
+                  },
+                }
+              });
+            }
+          }
+        ],
       },
       tabConfig: {
         pageShow: true, // 控制分页是否显示
@@ -253,11 +180,11 @@ export default {
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
-        selectionData: [],
+        selection: [],
         deleteData: [], // 暂存删除的数据，调保存的时候传给后端
         addData: [], // 暂存添加的数据，调保存的时候传给后端
         updateData: [], // 暂存修改的数据，调保存的时候传给后端
-        data: [], // TODO 假数据
+        data: [],
         columns: [
           {
             type: 'selection',
@@ -271,78 +198,79 @@ export default {
             title: $i18n.t('table_label.serialNo'), // 序号
           },
           {
-            title: $i18n.t('table_label.code_SKU'), // SKU编码
+            title: '店铺名称', // 
             key: "PS_C_SKU_ID",
             align: "center",
-            required: false,
-            render: (h, params) => {
-              // this.isEnable
-              if (this.formConfig.formValue.ISACTIVE != '启用' && !this.isCopy) {
-                return h("div", [
-                  h("myInput", {
-                    style: {
-                      width: '100%',
-                      marginRight: '5px',
-                    },
-                    props: {
-                      colname: 'PS_C_SKU_ID',
-                      style: 'popInput',
-                      version: '1.4',
-                      isActive: true,
-                      itemdata: {
-                        colid: 171666,
-                        colname: 'PS_C_SKU_ID',
-                        fkdisplay: 'drp',
-                        isfk: true, // 是否有fk键
-                        isnotnull: true, // 是否必填
-                        name: '',
-                        readonly: false, // 是否可编辑，对应input   readonly属性
-                        pid: params.row.PS_C_SKU_ID,
-                        valuedata: params.row.PS_C_SKU_ECODE,
-                      },
-                    },
-                    on: {
-                      getFkChooseItem: (val) => {
-                        const { ID, ECODE } = val
-                        params.row.PS_C_SKU_ECODE = ECODE ? ECODE.val : '';
-                        params.row.PS_C_SKU_ID = ID ? ID.val : '';
-                        this.getFkChooseItem(params.row);
-                      },
-                    },
-                  })
-                ]);
-              }
-              return h('span', params.row.PS_C_SKU_ECODE)
-            },
           },
           {
-            title: $i18n.t('form_label.cw'), // 最低成交价格
+            title: '商品类型', // 
+            key: "PS_C_SKU_ID",
+            align: "center",
+          },
+          {
+            title: '类型值', // 
+            key: "PS_C_SKU_ID",
+            align: "center",
+          },
+          {
+            title: '安全库存数', // 
+            key: "QTY",
+            align: "center",
+            render: (h, params) => {
+              return h("InputNumber", {
+                props: {
+                  value: params.row.QTY,
+                  regx: /^[0-9]\d*$/,
+                  min: 0,
+                  disabled: false,
+                  editable: true,
+                },
+                on: {
+                  "on-change": (e) => {
+                    params.row.QTY = e;
+                    this.tabConfig.data[params.index] = params.row;
+                  },
+                },
+              });
+            }
+          },
+          {
+            title: '渠道仓', // 渠道仓
+            key: "PS_C_SKU_ID",
+            align: "center",
+          },
+          {
+            title: '库存比例', // 库存比例
             key: 'PEAK_VALUE',
             align: "center",
             render: (h, params) => {
-              // this.isActive
-              if (this.formConfig.formValue.ISACTIVE != '启用' && !this.isCopy) {
-                return h('Input', {
-                  style: {
-                    width: '150',
-                    height: '100%',
-                    border: '1px solid #dcdee2',
-                    'text-align': 'center'
+              return h('Input', {
+                style: {
+                  width: '150px',
+                  height: '100%',
+                },
+                class: 'kucun-scale',
+                props: {
+                  value: params.row.PEAK_VALUE,
+                  autosize: true,
+                  regx: /^\d{0,2}$/,
+                  suffix: "icon-percent-suffix",
+                },
+                on: {
+                  'on-change': e => {
+                    console.log(e.target.value);
+                    const v = e.target.value;
+                    params.row.PEAK_VALUE = v;
+                    this.tabConfig.data[params.index] = params.row;
+                    // this.getFkChooseItem(params.row);
                   },
-                  props: {
-                    value: params.row.MIN_REAL_AMT,
-                    autosize: true,
-                    regx: /^\d*\.{0,1}\d{0,4}$/
+                  'on-blur': (e) => {
+                    console.log(e.target.value);
+                    const v = e.target.value;
+                    // params.row.PEAK_VALUE = `${v}%`
                   },
-                  on: {
-                    'on-change': e => {
-                      params.row.MIN_REAL_AMT = e.target.value;
-                      this.getFkChooseItem(params.row);
-                    }
-                  }
-                });
-              }
-              return h('span', params.row.MIN_REAL_AMT)
+                }
+              });
             }
           }
         ],
@@ -351,90 +279,93 @@ export default {
           formData: [
             {
               version: '1.4',
-              colname: 'PS_C_SPU_ID',
+              colname: 'CP_C_SHOP_ID',
               style: 'popInput', // 输入框弹框单多选
               width: '6',
               itemdata: {
-                col: 1,
-                colid: 171667, // 当前字段的ID
-                colname: 'PS_C_SPU_ID', // 当前字段的名称
-                datelimit: 'all',
-                display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                colid: 167606, // 当前字段的ID
+                colname: 'CP_C_SHOP_ID', // 当前字段的名称
                 fkdisplay: 'drp', // 外键关联类型
-                inputname: 'PS_C_SPU_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
-                isnotnull: false, // 是否必填
-                isuppercase: false, // 是否转大写
-                length: 65535, // 最大长度是多少
-                name: $i18n.t('table_label.itemNo01'), // SPU编码
+                isnotnull: true, // 是否必填
+                name: $i18n.t('table_label.shopName'), // 店铺名称
                 readonly: false, // 是否可编辑，对应input   readonly属性
-                reftable: 'CP_C_SHOP', // 对应的表
-                reftableid: 171667, // 对应的表ID
-                row: 1,
-                statsize: -1,
-                type: 'STRING', // 这个是后台用的
                 valuedata: '', // 这个是选择的值
-                pid: '', // 啥 ？？？
+                pid: '',
               },
               oneObj: e => {
                 console.log(e);
-                this.tabConfig.businessFormConfig.formValue.PS_C_SPU_ID = e.pid;
-                this.tabConfig.businessFormConfig.formValue.PS_C_SPU_ECODE = e.valuedata;
+                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
+                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ECODE = e.valuedata;
               }
             },
             {
+              style: 'select', // 下拉框类型
+              label: '商品类型', // 商品类型
+              width: '6', // 所占宽度宽度
+              value: 'COM_TYPE', // 输入框的值
+              multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
+              disabled: false,
+              selectChange: () => { }, // 选中事件，默认返回选中的值,默认返回当前值value
+              options: [
+                {
+                  value: 1,
+                  label: $i18n.t('other.blessingBag') // 福袋
+                },
+                {
+                  value: 2,
+                  label: $i18n.t('other.common') // 普通
+                }
+              ]
+            },
+            {
               version: '1.4',
-              colname: 'PS_C_SKU_ID',
+              colname: 'PS_C_PRO_ID',
               style: 'popInput', // 输入框弹框单多选
               width: '6',
               itemdata: {
-                col: 1,
-                colid: 171666, // 当前字段的ID
-                colname: 'PS_C_SKU_ID', // 当前字段的名称
-                datelimit: 'all',
-                display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+                colid: 165990, // 当前字段的ID
+                colname: 'PS_C_PRO_ID', // 当前字段的名称
                 fkdisplay: 'drp', // 外键关联类型
-                inputname: 'PS_C_SKU_ID:ECODE', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
-                isuppercase: false, // 是否转大写
-                length: 65535, // 最大长度是多少
-                name: $i18n.t('table_label.code_SKU'), // SKU编码
+                name: $i18n.t('table_label.itemNo01'), // SPU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
-                reftable: 'CP_C_SHOP', // 对应的表
-                reftableid: 171666, // 对应的表ID
-                row: 1,
-                statsize: -1,
-                type: 'STRING', // 这个是后台用的
                 valuedata: '', // 这个是选择的值
-                pid: '', // 啥 ？？？
+                pid: '',
               },
               oneObj: e => {
-                this.tabConfig.businessFormConfig.formValue.PS_C_SKU_ID = e.pid;
-                this.tabConfig.businessFormConfig.formValue.PS_C_SKU_ECODE = e.valuedata;
+                console.log(e);
+                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
+                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ECODE = e.valuedata;
               }
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.bh'), // 最低成交单价
+              icon: 'ios-search',
+              label: '渠道仓', // 渠道仓
               colname: 'MIN_REAL_AMT',
               width: '6',
               disabled: false,
               regx: /^\d*\.{0,1}\d{0,4}$/,
+              iconclick: () => { },
+              inputFocus: () => {
+                this.quDao.modal = true;
+              },
               inputenter: () => {
                 this.save()
               }
             }
           ],
           formValue: {
-            PS_C_SPU_ID: '',
+            CP_C_SHOP_ID: '',
             PS_C_SPU_ECODE: '',
             PS_C_SKU_ID: '',
             PS_C_SKU_ECODE: '',
             MIN_REAL_AMT: ''
           },
           ruleValidate: {
-            MIN_REAL_AMT: [{
+            COM_TYPE: [{
               required: true,
               message: ' '
             }]
@@ -444,8 +375,18 @@ export default {
           typeAll: 'default',
           buttons: [
             {
+              webname: 'ST_C_PRICE_SUB_IMPORT',
+              text: '添加', // 
+              isShow: true,
+              type: 'primary',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.addHandel();
+              }
+            },
+            {
               webname: 'ST_C_PRICE_SUB_DELETE',
-              text: $i18n.t('modalTitle.deleteDetails'), // 删除明细
+              text: '删除', // 
               isShow: true,
               type: 'warning',
               disabled: false, // 按钮禁用控制
@@ -492,35 +433,35 @@ export default {
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},
       },
-      // tab切换配置
-      labelList: [
-        {
-          label: $i18n.t('panel_label.a7'), // 商品明细
-          value: 'goods',
-        },
-        {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
-          value: 'ST_C_PRICE_LOG',
-        }
-      ],
-      labelDefaultValue: 'goods', // 设置tab默认值，默认展示《自定义属性》
-      modify: {
-        master: {}, // 主表信息
-      }, // 修改的信息
     };
   },
+  computed: {
+    ID() {
+      return this.$route.params.customizedModuleId && (!['New', 'NEW'].includes(this.$route.params.customizedModuleId)) ? this.$route.params.customizedModuleId : '-1' // 记录主界面传入的ID
+    },
+  },
   async mounted() {
-    let copyId = this.$route.query.copy
-    this.isCopy = copyId != undefined
-    this.isWatchChange = true
-    if (this.ID == -1 && !this.isCopy) return
-    await this.getBtn()
-    this.isWatchChange = false
-    this.setEnable(false)
-    await this.queryPrice(copyId)
-    await this.queryPriceItem(copyId)
+    // if (this.ID == -1 && !this.isCopy) return
+    // await this.getBtn()
   },
   methods: {
+    // 添加 - 按钮
+    addHandel() {
+      this.tabConfig.data = [...this.tabConfig.data, ...this.tabConfigQu.data]
+    },
+    // 渠道仓弹窗-确定
+    quDaoOk() {
+      // this.tabConfigQu.data
+      const data = JSON.parse(JSON.stringify(this.tabConfigQu.data))
+      let val = '';
+      data.forEach(it => {
+        let item = '';
+        item = `${it.PS_C_SKU_ID}-${it.PEAK_VALUE}%,`
+        val += item
+      })
+      this.tabConfig.businessFormConfig.formValue.MIN_REAL_AMT = val;
+      this.quDao.modal = false;
+    },
     // 获取按钮权限
     async getBtn() {
       let params = { table: 'ST_C_PRICE', type: 'OBJ', serviceId: 'r3-oc-oms' }
@@ -552,6 +493,26 @@ export default {
       this.queryPriceItem();
     },
     pageSizeChange(e) {
+      this.tabConfig.pageSize = e;
+    },
+    onSelectQ(e) {
+      // e为选中的数组对象RowArr
+      this.tabConfig.selectionData = e;
+    },
+    onSelectCancelQ(e) {
+      this.tabConfig.selectionData = e;
+    },
+    onSelectAllQ(e) {
+      this.tabConfig.selectionData = e;
+    },
+    onSelectAllCancelQ() {
+      this.tabConfig.selectionData = [];
+    },
+    pageChangeQ(e) {
+      this.tabConfig.pageIndex = e;
+      this.queryPriceItem();
+    },
+    pageSizeChangeQ(e) {
       this.tabConfig.pageSize = e;
     },
     // 删除明细
@@ -620,16 +581,6 @@ export default {
       const date = new Date(time);
       return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
-    labelClick(e) { // tab明细切换
-      this.labelDefaultValue = e.value;
-      if (this.labelDefaultValue != 'ST_C_PRICE_LOG') return;
-      this.subTableConfig = {
-        centerName: 'strategyPlatform',
-        tablename: this.labelDefaultValue,
-        objid: this.ID,
-        pageShow: true
-      }
-    },
     back() {
       if (this.isModify) {
         this.$Modal.info({
@@ -682,42 +633,6 @@ export default {
         tableName: 'ST_C_PRICE',
         back: true,
       });
-    },
-    /**
-     * 记录主表修改信息方法
-     * @param {*} ecode 记录字段
-     * @param {*} obj 修改值存在modify下的某个对象中
-     * @returns 
-     */
-    masterModifyData(ecode, obj) {
-      const self = this;
-      if (!this.isWatchChange) return;
-      self.isModify = true;
-      let value = self.formConfig.formValue[ecode]
-      let isDate = Object.prototype.toString.call(value) == '[object Date]'
-      if (isDate) {
-        let newTime = this.formatDate(value)
-        let oldTime = self.modify[obj][ecode]
-        if (ecode == 'END_TIME') {
-          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
-          self.formConfig.formValue[ecode] = newTime
-        }
-        self.modify[obj][ecode] = newTime
-      } else {
-        self.modify[obj][ecode] = value;
-      }
-    },
-    getFkChooseItem(row) {
-      let itemIndex;
-      const curItem = this.tabConfig.updateData.find((i, index) => {
-        itemIndex = index;
-        return i.ID == row.ID;
-      });
-      if (curItem) {
-        this.tabConfig.updateData.splice(itemIndex, 1, row);
-      } else {
-        this.tabConfig.updateData.push(row);
-      }
     },
     /**
      * 查找并返回formData数组中该field字段对应的对象
@@ -860,16 +775,16 @@ export default {
       /**子表新增校验 */
       // const valueArr2 = ['MIN_REAL_AMT'];
       // let mes2 = $omsUtils.validatorNotEmpty(formConfig, valueArr2);
-      const { PS_C_SPU_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
+      const { CP_C_SHOP_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
       let mes2 = ''
       if (!MIN_REAL_AMT) {
         mes2 += $i18n.t('form_label.bh') // 最低成交单价
       }
-      if (!(PS_C_SPU_ID || PS_C_SKU_ID)) {
+      if (!(CP_C_SHOP_ID || PS_C_SKU_ID)) {
         mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
       }
       mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
-      if ((!(PS_C_SPU_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {
+      if ((!(CP_C_SHOP_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {
         return this.$Message.error(mes2);
       } // 非回车保存就不提示子表表单校验提示
 
@@ -937,4 +852,11 @@ export default {
 
 </script>
 <style lang="less" scoped>
+.shopCom {
+}
+/deep/ .ark-input-wrapper.kucun-scale {
+  .ark-input {
+    text-align: center;
+  }
+}
 </style>
