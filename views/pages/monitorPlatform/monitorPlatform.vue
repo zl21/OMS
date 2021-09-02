@@ -11,7 +11,7 @@
     <div class="header">
       <div class="time">
         <span>更新时间：{{ header.time }}</span>
-        <Icon type="icon-monitorPlat-fresh" @click="freshHandel"/>
+        <Icon type="icon-monitorPlat-fresh" @click="freshHandel" />
       </div>
     </div>
     <div class="main">
@@ -29,10 +29,14 @@
           </div>
           <div class="main01body">
             <div class="left">
-              <div id="main01Left"><i>{{main01.status_name}}</i></div>
-              <div class="legend" >
-                <template v-for="(it,index) in main01.pieData">
-                  <div :key="'pieLegend' + index"> <span>{{it.name}}</span> <i>{{it.value}}</i></div>
+              <div id="main01Left">
+                <i>{{ main01.status_name }}</i>
+              </div>
+              <div class="legend">
+                <template v-for="(it, index) in main01.pieData">
+                  <div :key="'pieLegend' + index">
+                    <span>{{ it.name }}</span> <i>{{ it.value }}</i>
+                  </div>
                 </template>
               </div>
             </div>
@@ -45,7 +49,7 @@
                   :class="[it.status == 0 ? 'abnormal' : 'normal', it.clickCss]"
                 >
                   <div class="title">
-                    <Icon :type="it.icon" :style="{}"/>
+                    <Icon :type="it.icon" :style="{}" />
                     <span>{{ it.title }}</span>
                   </div>
                   <div class="status">{{ it.status_name }}</div>
@@ -76,7 +80,12 @@
               </div>
             </div>
           </div>
-          <div :class="['main02body', up, noData]" id="main02body" :style="{ height : m2Heigh + 'px'}" v-loading="m2Loading">
+          <div
+            :class="['main02body', up, noData]"
+            id="main02body"
+            :style="{ height: m2Heigh + 'px' }"
+            v-loading="m2Loading"
+          >
             <picture v-if="noData">
               <source srcset="./img/la.png" media="(min-width: 1600px)" />
               <img src="./img/medium-car-image.jpg" alt="Car" />
@@ -90,7 +99,10 @@
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
                 <div class="title">
-                  <Icon :type="it.titleIcon" :style="{'background-color': it.color}"/>
+                  <Icon
+                    :type="it.titleIcon"
+                    :style="{ 'background-color': it.color }"
+                  />
                   <!-- <i :class="it.titleIcon"></i> -->
                   <span>{{ it.title }}</span>
                   <Icon :type="it.statusIcon" class="statusIcon" />
@@ -134,14 +146,18 @@
             </div>
           </div>
         </div>
-        <div :class="['main03body', m3Up, m3noData]" id="main03body" :style="{ height : m3Heigh + 'px'}">
+        <div
+          :class="['main03body', m3Up, m3noData]"
+          id="main03body"
+          :style="{ height: m3Heigh + 'px' }"
+        >
           <picture v-if="m3noData">
             <source srcset="./img/la.png" media="(min-width: 1600px)" />
             <img src="./img/medium-car-image.jpg" alt="Car" />
             <span>暂无异常数据</span>
           </picture>
           <!-- <div class="main03body-main" v-show="!m3noData"> -->
-          <template >
+          <template>
             <div
               v-show="!m3noData"
               class="m3Item comItem"
@@ -173,7 +189,7 @@
                 </Tooltip>
               </div>
             </div>
-          </template>  
+          </template>
           <!-- </div> -->
         </div>
       </div>
@@ -238,19 +254,19 @@ import { throttle } from 'lodash'
 // echarts-按需引入：
 import * as echarts from 'echarts/core';
 import {
-    TooltipComponent,
-    GridComponent
+  TooltipComponent,
+  GridComponent
 } from 'echarts/components';
 import {
-    GaugeChart,
-    LineChart
+  GaugeChart,
+  LineChart
 } from 'echarts/charts';
 import {
-    CanvasRenderer
+  CanvasRenderer
 } from 'echarts/renderers';
 
 echarts.use(
-    [GaugeChart, CanvasRenderer, TooltipComponent, GridComponent, LineChart, CanvasRenderer]
+  [GaugeChart, CanvasRenderer, TooltipComponent, GridComponent, LineChart, CanvasRenderer]
 );
 
 let dayBtnConifg = [
@@ -714,10 +730,10 @@ export default {
     // 接口不放在这里调？放吧，不然全局刷新要调4次该方法
     // 在这调的话，入参处理……
     // 调接口并处理数据（可能有4个接口
-    getData(all=0, ...others) {
+    getData(all = 0, ...others) {
       const self = this;
       let params = { fresh: Boolean(all) };
-      let [m1={},m2={},m3={},m4={}] = others;
+      let [m1 = {}, m2 = {}, m3 = {}, m4 = {}] = others;
       if (!all) {
         // params.
         // params = Object.assign({}, params, others);
@@ -725,32 +741,32 @@ export default {
         if (m1.item.id == 'sap') {
           this.main02.data = [
             {
-            titleIcon: "icon-monitorPlat-home",
-            color: '#4560AB',
-            title: "SAP（SAP）",
-            statusIcon: "icon-monitorPlat-warn",
-            status: 0,
-            data: [
-              {
-                status: 0,
-                color: "gray",
-                A_name: "推送总数",
-                A_sum: 3880,
-              },
-              {
-                status: 1,
-                color: "green",
-                A_name: "推送成功",
-                A_sum: 345,
-              },
-              {
-                status: 0,
-                color: "red",
-                A_name: "推送失败率",
-                A_sum: "20%",
-              },
-            ],
-          },
+              titleIcon: "icon-monitorPlat-home",
+              color: '#4560AB',
+              title: "SAP（SAP）",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
           ]
         } else if (m1.item.id == 'wms') {
           this.main02.data = [
@@ -892,169 +908,169 @@ export default {
           ]
         } else if (m1.item.id == 'ptai') {
           this.main02.data = [
-          {
-            titleIcon: "icon-monitorPlat-home",
-            color: '#4560AB',
-            title: "平台（取消发货自动退款）",
-            statusIcon: "icon-monitorPlat-warn",
-            status: 0,
-            data: [
-              {
-                status: 0,
-                color: "gray",
-                A_name: "推送总数",
-                A_sum: 3880,
-              },
-              {
-                status: 1,
-                color: "green",
-                A_name: "推送成功",
-                A_sum: 345,
-              },
-              {
-                status: 0,
-                color: "red",
-                A_name: "推送失败率",
-                A_sum: "20%",
-              },
-            ],
-          },
-          {
-            titleIcon: "icon-monitorPlat-out",
-            color: '#FFAE34',
-            title: "平台（退货入库自动退款）",
-            statusIcon: "icon-monitorPlat-warn",
-            status: 0,
-            data: [
-              {
-                status: 0,
-                color: "gray",
-                A_name: "推送总数",
-                A_sum: 3880,
-              },
-              {
-                status: 1,
-                color: "green",
-                A_name: "推送成功",
-                A_sum: 345,
-              },
-              {
-                status: 0,
-                color: "red",
-                A_name: "推送失败率",
-                A_sum: "20%",
-              },
-            ],
-          },
-          {
-            titleIcon: "icon-monitorPlat-cancel",
-            color: '#D656A7',
-            title: "平台（平台发货）",
-            statusIcon: "icon-monitorPlat-warn",
-            status: 0,
-            data: [
-              {
-                status: 0,
-                color: "gray",
-                A_name: "推送总数",
-                A_sum: 3880,
-              },
-              {
-                status: 1,
-                color: "green",
-                A_name: "推送成功",
-                A_sum: 345,
-              },
-              {
-                status: 0,
-                color: "red",
-                A_name: "推送失败率",
-                A_sum: "20%",
-              },
-            ],
-          },
-          {
-            titleIcon: "icon-monitorPlat-in",
-            color: '#FF6951',
-            title: "平台（同意换货回传平台）",
-            statusIcon: "icon-monitorPlat-warn",
-            status: 0,
-            data: [
-              {
-                status: 0,
-                color: "gray",
-                A_name: "推送总数",
-                A_sum: 3880,
-              },
-              {
-                status: 1,
-                color: "green",
-                A_name: "推送成功",
-                A_sum: 345,
-              },
-              {
-                status: 0,
-                color: "red",
-                A_name: "推送失败率",
-                A_sum: "20%",
-              },
-            ],
-          },
-          {
-            titleIcon: "icon-monitorPlat-modify",
-            color: '#A375C1',
-            title: "平台（拒绝换货回传平台）",
-            statusIcon: "icon-monitorPlat-warn",
-            status: 0,
-            data: [
-              {
-                status: 0,
-                color: "gray",
-                A_name: "推送总数",
-                A_sum: 3880,
-              },
-              {
-                status: 1,
-                color: "green",
-                A_name: "推送成功",
-                A_sum: 345,
-              },
-              {
-                status: 0,
-                color: "red",
-                A_name: "推送失败率",
-                A_sum: "20%",
-              },
-            ],
-          },
-          {
-            titleIcon: "icon-monitorPlat-synchro",
-            color: '#FB79A1',
-            title: "平台（修改地址回传平台）",
-            statusIcon: "icon-monitorPlat-right",
-            status: 1,
-            data: [
-              {
-                status: 0,
-                color: "gray",
-                A_name: "推送总数",
-                A_sum: 3880,
-              },
-              {
-                status: 1,
-                color: "green",
-                A_name: "推送成功",
-                A_sum: 345,
-              },
-              {
-                status: 0,
-                color: "red",
-                A_name: "推送失败率",
-                A_sum: "20%",
-              },
-            ],
-          },
-        ]
+            {
+              titleIcon: "icon-monitorPlat-home",
+              color: '#4560AB',
+              title: "平台（取消发货自动退款）",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-out",
+              color: '#FFAE34',
+              title: "平台（退货入库自动退款）",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-cancel",
+              color: '#D656A7',
+              title: "平台（平台发货）",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-in",
+              color: '#FF6951',
+              title: "平台（同意换货回传平台）",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-modify",
+              color: '#A375C1',
+              title: "平台（拒绝换货回传平台）",
+              statusIcon: "icon-monitorPlat-warn",
+              status: 0,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+            {
+              titleIcon: "icon-monitorPlat-synchro",
+              color: '#FB79A1',
+              title: "平台（修改地址回传平台）",
+              statusIcon: "icon-monitorPlat-right",
+              status: 1,
+              data: [
+                {
+                  status: 0,
+                  color: "gray",
+                  A_name: "推送总数",
+                  A_sum: 3880,
+                },
+                {
+                  status: 1,
+                  color: "green",
+                  A_name: "推送成功",
+                  A_sum: 345,
+                },
+                {
+                  status: 0,
+                  color: "red",
+                  A_name: "推送失败率",
+                  A_sum: "20%",
+                },
+              ],
+            },
+          ]
         }
         /** -------- 暂时的假数据 -------- */
         params.m1 = m1;
@@ -1063,20 +1079,20 @@ export default {
         params.m4 = m4;
         console.log('getData:params::', params);
         this.$nextTick(() => {
-          })
+        })
         setTimeout(() => {
           self.maxHeight("main02body", "m2Item", 1);
           self.pageLoading = false;
           self.m2Loading = false;
-      }, 1000);
+        }, 1000);
       }
     },
     // 右上角-刷新icon事件
-    freshHandel: throttle(function(){
+    freshHandel: throttle(function () {
       const self = this;
       self.pageLoading = true;
-      self.getData(0, {m1:1},{m2:2});
-    }, 1000, { 'trailing': false }), 
+      self.getData(0, { m1: 1 }, { m2: 2 });
+    }, 1000, { 'trailing': false }),
     /** ----------------- 配置方法 -------------------- **/
     // 饼图
     /* pieChart() {
@@ -1352,7 +1368,7 @@ export default {
         i == index ? (btnArr[i].type = "primary") : (btnArr[i].type = "text");
       });
       if (index) {
-        this.main04.currentData.key = ["1点","2点","3点","4点","5点","6点","7点","8点","9点","10点","11点","12点","12点","14点","15点","16点","17点","18点","19点","20点","21点","22点","23点","24点"];
+        this.main04.currentData.key = ["1点", "2点", "3点", "4点", "5点", "6点", "7点", "8点", "9点", "10点", "11点", "12点", "12点", "14点", "15点", "16点", "17点", "18点", "19点", "20点", "21点", "22点", "23点", "24点"];
       } else {
         this.main04.currentData.key = ["8-16", "8-17", "8-18"];
       }
@@ -1367,7 +1383,7 @@ export default {
       });
     },
     // 计算max-Height
-    maxHeight: throttle(function(body, itemName, isInit) {
+    maxHeight: throttle(function (body, itemName, isInit) {
       const self = this;
       const mBody = document.getElementById(body);
       let nodeHeight = 0,
@@ -1395,7 +1411,7 @@ export default {
       if (body.includes('2')) {
         if (self.up == 'fadeInDom' && !isInit) {
           self.m2Heigh = mBody.scrollHeight;
-            mBody.style.transition = '2s'
+          mBody.style.transition = '2s'
         } else {
           self.m2Heigh = nodeHeight * (rowSum == 1 ? 1 : rowSum >= 2 ? 2 : 1) + (rowSum == 1 ? 2 : rowSum >= 2 ? 20 : 2);
           console.log(self.m2Heigh);
@@ -1416,7 +1432,7 @@ export default {
     dayBtnHandel(item, panel) {
       this.btnStyleChange(item, 1, panel);
     },
-    statusBtnHandel: throttle(function(item, panel) {
+    statusBtnHandel: throttle(function (item, panel) {
       this.btnStyleChange(item, 0, panel);
     }, 1000, { 'trailing': false }),
     // 按钮样式变换、无数据时展示图片样式处理
@@ -1455,7 +1471,7 @@ export default {
       );
     },
     m1DomClick(it, index) {
-      this.main01.data.forEach((i,n) => {
+      this.main01.data.forEach((i, n) => {
         i.clickCss = n == index ? 'clickCss' : '';
       });
       this.m2Loading = true;
