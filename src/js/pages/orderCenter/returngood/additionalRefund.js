@@ -1604,9 +1604,6 @@ export default {
           if (item.value == 'RESERVE_VARCHAR02') item.disabled = false
         })
       } else {
-        this.returnInfo.formValue.RESERVE_BIGINT02 = ''
-        this.returnInfo.formValue.PRO_RETURN_STATUS = ''
-        this.returnInfo.formValue.RESERVE_VARCHAR02 = ''
         this.returnInfo.formData.forEach(item => {
           if (item.value == 'RESERVE_BIGINT02') item.disabled = true
           if (item.value == 'PRO_RETURN_STATUS') item.disabled = true
