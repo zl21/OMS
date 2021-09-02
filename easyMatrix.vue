@@ -1,7 +1,7 @@
 <!--简单矩阵，模糊匹配商品SKU-->
 <template>
   <div v-loading="pageLoad">
-    <jordanForm :formConfig="formConfig"></jordanForm>
+    <businessForm :formConfig="formConfig"></businessForm>
   </div>
 </template>
 

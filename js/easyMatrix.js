@@ -1,10 +1,10 @@
-import jordanForm from "../businessForm";
+import businessForm from "../businessForm";
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
 
 export default {
   components: {
-    jordanForm
+    businessForm
   },
   data() {
     return {
