@@ -1344,7 +1344,7 @@ export default {
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: async () => {
-              // this.doBatchAntiAudit();
+              this.statusSelectModal = false;
             } // 按钮点击事件
           }
         ]
