@@ -16,7 +16,7 @@
         </RadioGroup>
       </FormItem>
     </Form>
-    <jordanBtn  class="modal-footer" :btn-config="btnConfig" />
+    <businessBtn  class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 

@@ -11,7 +11,7 @@
       @on-select-all-cancel="onSelectAllCancel"
     />
     <!-- 公共弹框 -->
-    <jordanModal
+    <businessDialog
       :title="publicBouncedConfig.confirmTitle"
       :title-align="publicBouncedConfig.titleAlign"
       :width="publicBouncedConfig.width"

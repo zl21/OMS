@@ -1,9 +1,9 @@
 // import axios from 'axios';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessBtn from 'professionalComponents/businessButton';
 
 export default {
   components: {
-    jordanBtn
+    businessBtn
   },
   data() {
     return {

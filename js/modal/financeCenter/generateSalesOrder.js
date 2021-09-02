@@ -1,10 +1,10 @@
 import businessForm from 'professionalComponents/businessForm';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessBtn from 'professionalComponents/businessButton';
 
 export default {
   components: {
     businessForm,
-    jordanBtn
+    businessBtn
   },
   name: 'generateSalesOrder',
   data() {
