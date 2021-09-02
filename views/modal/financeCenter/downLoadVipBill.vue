@@ -5,7 +5,7 @@
     style="width:430px;padding-right:20px"
   >
     <businessForm :form-config="downLoadFormConfig" />
-    <jordanBtn :btn-config="downLoadBtnConfig" />
+    <businessBtn :btn-config="downLoadBtnConfig" />
   </div>
 </template>
 

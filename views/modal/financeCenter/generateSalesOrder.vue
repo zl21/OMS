@@ -5,7 +5,7 @@
     style="width:400px;padding-right:20px"
   >
     <businessForm :form-config="generateFormConfig" />
-    <jordanBtn :btn-config="generateBtnConfig" />
+    <businessBtn :btn-config="generateBtnConfig" />
   </div>
 </template>
 

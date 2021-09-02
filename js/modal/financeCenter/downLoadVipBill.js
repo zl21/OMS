@@ -1,11 +1,11 @@
 import businessForm from 'professionalComponents/businessForm';
-import jordanBtn from 'professionalComponents/businessButton';
+import businessBtn from 'professionalComponents/businessButton';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 
 export default {
   components: {
     businessForm,
-    jordanBtn
+    businessBtn
   },
   name: 'downloadVipBill',
   data() {
@@ -138,7 +138,7 @@ export default {
       if (startTime === '' && endTime === '' && !this.downLoadFormConfig.formValue.bill_numbere) {
         this.$Message.warning($i18n.t('modalTips.bh'));// 账单时间账单编码不能同时为空!
         return false;
-      } 
+      }
       // 如果没填写账单编码,则对时间格式进行判断
       if (!this.downLoadFormConfig.formValue.bill_numbere) {
         if (startTime === '' && endTime === '') {
@@ -162,7 +162,7 @@ export default {
           return false;
         }
       }
-      
+
       const param = {
         shop_id: this.downLoadFormConfig.formData[0].itemdata.pid,
         type: this.downLoadFormConfig.formValue.type,
@@ -172,7 +172,7 @@ export default {
       };
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      const { data: { oK } } = await this.service.financeCenter.triggerVipBill(formdata); 
+      const { data: { oK } } = await this.service.financeCenter.triggerVipBill(formdata);
       if (oK) {
         this.$Message.success('成功!');
       } else {
