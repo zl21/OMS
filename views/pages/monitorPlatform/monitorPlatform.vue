@@ -95,7 +95,7 @@
               <div
                 class="m2Item comItem"
                 v-for="(it, index) in main02.data"
-                :key="index"
+                :key="it.id + index"
                 :class="it.status == 0 ? 'abnormal' : 'normal'"
               >
                 <div class="title">
@@ -382,6 +382,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-home",
             color: '#4560AB',
+            id: 'p1',
             title: "平台（取消发货自动退款）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
@@ -409,6 +410,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-out",
             color: '#FFAE34',
+            id: 'p2',
             title: "平台（退货入库自动退款）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
@@ -436,6 +438,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-cancel",
             color: '#D656A7',
+            id: 'p3',
             title: "平台（平台发货）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
@@ -463,6 +466,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-in",
             color: '#FF6951',
+            id: 'p4',
             title: "平台（同意换货回传平台）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
@@ -490,6 +494,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-modify",
             color: '#A375C1',
+            id: 'p5',
             title: "平台（拒绝换货回传平台）",
             statusIcon: "icon-monitorPlat-warn",
             status: 0,
@@ -517,6 +522,7 @@ export default {
           {
             titleIcon: "icon-monitorPlat-synchro",
             color: '#FB79A1',
+            id: 'p5',
             title: "平台（修改地址回传平台）",
             statusIcon: "icon-monitorPlat-right",
             status: 1,
@@ -743,6 +749,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-home",
               color: '#4560AB',
+              id: 's1',
               title: "SAP（SAP）",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -773,6 +780,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-home",
               color: '#4560AB',
+              id: 'w1',
               title: "WMS(零售发货单下发WMS)",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -800,6 +808,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-home",
               color: '#4560AB',
+              id: 'w2',
               title: "WMS(退换货单下发WMS)",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -827,6 +836,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-home",
               color: '#4560AB',
+              id: 'w3',
               title: "WMS(采购退货单下发WMS)",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -854,6 +864,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-home",
               color: '#4560AB',
+              id: 'w4',
               title: "WMS(发货包裹拦截）",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -881,6 +892,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-home",
               color: '#4560AB',
+              id: 'w5',
               title: "WMS(实物调拨单下发WMS)",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -911,6 +923,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-home",
               color: '#4560AB',
+              id: 'p1',
               title: "平台（取消发货自动退款）",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -938,6 +951,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-out",
               color: '#FFAE34',
+              id: 'p2',
               title: "平台（退货入库自动退款）",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -965,6 +979,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-cancel",
               color: '#D656A7',
+              id: 'p3',
               title: "平台（平台发货）",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -992,6 +1007,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-in",
               color: '#FF6951',
+              id: 'p4',
               title: "平台（同意换货回传平台）",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -1019,6 +1035,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-modify",
               color: '#A375C1',
+              id: 'p5',
               title: "平台（拒绝换货回传平台）",
               statusIcon: "icon-monitorPlat-warn",
               status: 0,
@@ -1046,6 +1063,7 @@ export default {
             {
               titleIcon: "icon-monitorPlat-synchro",
               color: '#FB79A1',
+              id: 'p5',
               title: "平台（修改地址回传平台）",
               statusIcon: "icon-monitorPlat-right",
               status: 1,
@@ -1084,7 +1102,7 @@ export default {
           self.maxHeight("main02body", "m2Item", 1);
           self.pageLoading = false;
           self.m2Loading = false;
-        }, 1000);
+        }, 500);
       }
     },
     // 右上角-刷新icon事件
@@ -1395,7 +1413,6 @@ export default {
           firstLeft = mBody.children[0].getClientRects()[0].x;
           nodeHeight = node.clientHeight;
           const itPosition = node.getClientRects()[0].x;
-          console.log('itPosition::', itPosition);
           if (itPosition == firstLeft) {
             rowSum += 1;
           }
@@ -1405,7 +1422,6 @@ export default {
           // flag = true;
         }
       }
-      console.log('rowSum::', rowSum);
       if (!rowSum) return;
       self[body.includes('2') ? 'main02' : 'main03'].btnSta.find(i => i.webname == 'upDownIcon').disabled = rowSum <= 2;
       if (body.includes('2')) {
