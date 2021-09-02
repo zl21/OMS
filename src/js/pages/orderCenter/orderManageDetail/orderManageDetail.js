@@ -8,6 +8,8 @@ import OrderItem from '@/views/pages/OrderCenter/orderManageDetail/details/order
 import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js';
 import loading from '@/component/loading.vue';
 import comUtils from '@/assets/js/__utils__/common';
+import jordanBtn from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm';
 
 export default {
   name: 'OrderManageDetail',
@@ -18,12 +20,77 @@ export default {
     OrderItem,
     businessStatusFlag,
     businessDialog,
-    loading
+    loading,
+    jordanBtn,
+    businessForm
   },
   mixins: [buttonPermissionsMixin],
   data() {
     return {
       vmI18n: window.vmI18n,
+      statusSelectModal: false, // 状态查询弹框
+      statusSelectFormConfig: {
+        formValue: {
+          deliveryOrderCode: '',
+          status: '',
+          operateTime: ''
+        },
+        formData: [
+          {
+            style: 'input',
+            label: '发货单号', // 配送费用
+            placeholder: '', // 占位文本，默认为请输入
+            value: 'deliveryOrderCode',
+            dataAcessKey: 'deliveryOrderCode',
+            disabled: true,
+            width: '24',
+          },
+          {
+            style: 'input',
+            label: '最新发货单状态', // 配送费用
+            placeholder: '', // 占位文本，默认为请输入
+            value: 'status',
+            dataAcessKey: 'status',
+            disabled: true,
+            width: '24',
+          },
+          {
+            style: 'input',
+            label: '最新状态时间', // 配送费用
+            placeholder: '', // 占位文本，默认为请输入
+            value: 'operateTime',
+            dataAcessKey: 'operateTime',
+            disabled: true,
+            width: '24',
+          }
+        ]
+      },
+      statusSelectBtnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            type: '', // 按钮类型
+            text: '取消', // 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.statusSelectModal = false;
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: '确认', // 按钮文本
+            icon: '', // 按钮图标
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: async () => {
+              this.statusSelectModal = false;
+            } // 按钮点击事件
+          }
+        ]
+      },
       pageLoad: false,
       publicBouncedConfig: {},
       statusName: '', // 水印标识
@@ -709,6 +776,12 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'OcBOrderStatusQueryCmd',
+            btnclick: () => {
+              this.statusSelectClick();
+            } // 按钮点击事件
+          },
+          {
             webname: 'order_fund', // 返回
             btnclick: () => {
               comUtils.tabCloseAppoint(this);
@@ -1005,7 +1078,25 @@ export default {
           self.modal = false;
         });
       }
-    }
+    },
+    statusSelectClick() {
+      const param = {ids : this.tab1.order.ID}
+      const fromdata = new FormData();
+      fromdata.append('param', JSON.stringify(param));
+
+      this.service.common
+        .getOrderStatus(fromdata)
+        .then(res => {
+          if (res.data.code === 0) {
+            this.statusSelectModal = true;
+            this.statusSelectFormConfig.formValue.deliveryOrderCode = res.data.data.deliveryOrderCode;
+            this.statusSelectFormConfig.formValue.status = res.data.data.status;
+            this.statusSelectFormConfig.formValue.operateTime = res.data.data.operateTime;
+          } else {
+            this.$Message.error(res.data.message);
+          }
+        })
+    },
   },
   async created() {
     this.getPermissions('btnConfig', 'orderManager');
