@@ -247,6 +247,13 @@ export default {
               this.batchOriginalBack();
             }
           },
+          {
+            text: '批量ag退款',
+            webname: 'oc_b_return_order_batch_ag_refund',
+            btnclick: () => {
+              this.returnOrderBatch();
+            }
+          },
           // {
           //   text: "从WMS撤回", //按钮文本
           //   disabled: false, //按钮禁用控制
@@ -1676,6 +1683,39 @@ export default {
         cancelText: this.vmI18n.t('common.cancel'), // 取消
         onOk: () => {
           this.service.orderCenter.updateReturnBOrder({ ids }).then(res => {
+            if (res.data.code === 0) {
+              this.getList(this.statusTab);
+              this.$Message.success(res.data.message);
+              if (res.data.data.length) {
+                this.errModal = true;
+                this.errdataList = res.data.data;
+              }
+            } else {
+              const err = res.data.message || this.vmI18n.t('modalTips.m4'); // 批量原退失败！
+              this.$Message.info(err);
+            }
+          });
+        }
+      });
+    },
+    returnOrderBatch() {
+      if (this.$refs.agGridChild.AGTABLE.getSelect().length == 0) {
+        this.$Message.error(this.vmI18n.t('modalTips.l0')); // 请至少选中一项!
+        return;
+      }
+      const ids = [];
+      for (let i = 0; i < this.$refs.agGridChild.AGTABLE.getSelect().length; i++) {
+        ids.push(this.$refs.agGridChild.AGTABLE.getSelect()[i].ID);
+      }
+      this.$Modal.info({
+        title: this.vmI18n.t('modalTitle.tips'), // 提示
+        content: '是否确定批量ag退款？', // 是否确定批量ag退款？
+        mask: true,
+        showCancel: true,
+        okText: this.vmI18n.t('common.determine'), // 确定
+        cancelText: this.vmI18n.t('common.cancel'), // 取消
+        onOk: () => {
+          this.service.orderCenter.refundtoAgList({ ids }).then(res => {
             if (res.data.code === 0) {
               this.getList(this.statusTab);
               this.$Message.success(res.data.message);
