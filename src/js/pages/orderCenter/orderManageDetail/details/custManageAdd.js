@@ -870,7 +870,7 @@ export default {
       obj.forEach((item) => {
         if (item.REAL_AMT !== null) {
           amt = publicMethodsUtil.accAdd(
-            parseFloat(item.REAL_AMT).toFixed(2),
+            parseFloat(item.REAL_AMT),
             amt
           );
           qty += Number(item.QTY);
