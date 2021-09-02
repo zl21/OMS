@@ -7,6 +7,8 @@ export default {
   orderDownload: params => network.post('/p/cs/orderDownload', params),
   // 淘宝退单/京东退单/通用接口退单 退单下载
   refundDownload: params => network.post('/p/cs/refundDownload', params),
+  // 淘宝退单/京东退单/通用订单下载
+  stdpOrderGet: params => network.post('/p/cs/stdp/order/get', params),
   // 淘宝换货单接口
   exchangeDownload: params => network.post('/p/cs/exchangeDownload', params),
   // 寻仓订单下载
