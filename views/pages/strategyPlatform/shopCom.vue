@@ -70,8 +70,6 @@ export default {
   },
   data() {
     return {
-      value15: '11',
-      formatNumber: '10%',
       vmI18n: $i18n,
       quDao: {
         modal: false,
@@ -107,16 +105,12 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         width: '', // 表格宽度
-        height: '200',
+        height: '452',
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
-        totalData: [],
-        selection: [],
-        deleteData: [], // 暂存删除的数据，调保存的时候传给后端
-        addData: [], // 暂存添加的数据，调保存的时候传给后端
-        updateData: [], // 暂存修改的数据，调保存的时候传给后端
-        data: [
+        totalData: [], // 合计行
+        allData: [
           {
             PS_C_SKU_ID: '菜鸟仓',
             PEAK_VALUE: '',
@@ -126,8 +120,58 @@ export default {
             PS_C_SKU_ID: '唯品会仓',
             PEAK_VALUE: '',
             QTY: 5,
-          }
+          },
+          {
+            PS_C_SKU_ID: '唯品45会仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品1会仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品会2仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品会仓2',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品5会仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品6会仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品7会仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品8会仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
+          {
+            PS_C_SKU_ID: '唯品会9仓',
+            PEAK_VALUE: '',
+            QTY: 5,
+          },
         ],
+        selection: [],
+        deleteData: [], // 暂存删除的数据，调保存的时候传给后端
+        addData: [], // 暂存添加的数据，调保存的时候传给后端
+        updateData: [], // 暂存修改的数据，调保存的时候传给后端
+        data: [],
         columns: [
           {
             title: '渠道仓', // 渠道仓
@@ -162,7 +206,6 @@ export default {
                   'on-blur': (e) => {
                     console.log(e.target.value);
                     const v = e.target.value;
-                    // params.row.PEAK_VALUE = `${v}%`
                   },
                 }
               });
@@ -351,6 +394,7 @@ export default {
               iconclick: () => { },
               inputFocus: () => {
                 this.quDao.modal = true;
+                this.pageChangeQ(1);
               },
               inputenter: () => {
                 this.save()
@@ -447,16 +491,15 @@ export default {
   methods: {
     // 添加 - 按钮
     addHandel() {
-      this.tabConfig.data = [...this.tabConfig.data, ...this.tabConfigQu.data]
+      this.tabConfig.data = [...this.tabConfig.data, ...this.tabConfigQu.seslection]
     },
     // 渠道仓弹窗-确定
     quDaoOk() {
-      // this.tabConfigQu.data
-      const data = JSON.parse(JSON.stringify(this.tabConfigQu.data))
+      const data = JSON.parse(JSON.stringify(this.tabConfigQu.selection))
       let val = '';
       data.forEach(it => {
         let item = '';
-        item = `${it.PS_C_SKU_ID}-${it.PEAK_VALUE}%,`
+        item = `${it.PS_C_SKU_ID}-${it.PEAK_VALUE ? it.PEAK_VALUE : '0'}%,`
         val += item
       })
       this.tabConfig.businessFormConfig.formValue.MIN_REAL_AMT = val;
@@ -477,16 +520,16 @@ export default {
     },
     onSelect(e) {
       // e为选中的数组对象RowArr
-      this.tabConfig.selectionData = e;
+      this.tabConfig.selection = e;
     },
     onSelectCancel(e) {
-      this.tabConfig.selectionData = e;
+      this.tabConfig.selection = e;
     },
     onSelectAll(e) {
-      this.tabConfig.selectionData = e;
+      this.tabConfig.selection = e;
     },
     onSelectAllCancel() {
-      this.tabConfig.selectionData = [];
+      this.tabConfig.selection = [];
     },
     pageChange(e) {
       this.tabConfig.pageIndex = e;
@@ -497,27 +540,31 @@ export default {
     },
     onSelectQ(e) {
       // e为选中的数组对象RowArr
-      this.tabConfig.selectionData = e;
+      this.tabConfigQu.selection = e;
     },
     onSelectCancelQ(e) {
-      this.tabConfig.selectionData = e;
+      this.tabConfig.selection = e;
     },
     onSelectAllQ(e) {
-      this.tabConfig.selectionData = e;
+      this.tabConfig.selection = e;
     },
     onSelectAllCancelQ() {
-      this.tabConfig.selectionData = [];
+      this.tabConfig.selection = [];
     },
     pageChangeQ(e) {
-      this.tabConfig.pageIndex = e;
-      this.queryPriceItem();
+      this.tabConfigQu.pageIndex = e;
+      this.tabConfigQu.total = this.tabConfigQu.allData.length;
+      const pre = (e - 1) * this.tabConfigQu.pageSize;
+      const end = e * this.tabConfigQu.pageSize;
+      this.tabConfigQu.data = this.tabConfigQu.allData.slice(pre, end)
     },
     pageSizeChangeQ(e) {
-      this.tabConfig.pageSize = e;
+      this.tabConfigQu.pageSize = e;
+      this.pageChangeQ(1);
     },
     // 删除明细
     deleteDetail() {
-      const selectArr = this.tabConfig.selectionData
+      const selectArr = this.tabConfig.selection
       if (!selectArr.length) return this.$Message.warning($i18n.t('modalTips.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message } }) => {
@@ -551,7 +598,7 @@ export default {
     },
     // 导出
     handleExport() {
-      const ITEM_IDS = this.tabConfig.selectionData.map(i => i && i.ID)
+      const ITEM_IDS = this.tabConfig.selection.map(i => i && i.ID)
       const params = { ID: this.ID, ITEM_IDS: ITEM_IDS || [] }
       this.loading = true
       this.service.strategyPlatform.exportPrice(params).then(({ data: { code, data, message } }) => {
