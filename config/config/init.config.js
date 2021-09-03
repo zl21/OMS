@@ -23,6 +23,9 @@ import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册
 import componentsConfig from 'professionalComponents/package.json';
 import omsThemecConfig from '@burgeon/oms-theme/package.json';
 import internationalizationConfig from '@burgeon/internationalization/package.json';
+import r3Version from '@syman/burgeon-r3/package.json';
+import proVersion from '@/package.json';
+
 class InitAppConfig {
   constructor() {
     // -------------引入框架项目配置文件;
@@ -41,7 +44,14 @@ class InitAppConfig {
     Vue.prototype.$lodash = lodash;
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n;
-    window.$businessComponents = {
+    window.version = {
+      'business-components': componentsConfig.version,
+      'project-logic': proVersion.version,
+      'omsTheme': omsThemecConfig.version,
+      'i18n': internationalizationConfig.version,
+      'R3': r3Version.version,
+    }
+    /* window.$businessComponents = {
       version:componentsConfig.version,
     }
     window.$businessOmsTheme = {
@@ -49,7 +59,7 @@ class InitAppConfig {
     }
     window.$businessInternationalization = {
       version:internationalizationConfig.version
-    }
+    } */
 
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {
