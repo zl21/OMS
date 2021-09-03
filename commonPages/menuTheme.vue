@@ -1,31 +1,56 @@
 <!--
  * @Author: your name
- * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-09-03 13:28:06
+ * @Date: 2021-09-03 13:12:04
+ * @LastEditTime: 2021-09-03 13:31:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /project-logic/commonPages/WelcomePage.vue
+ * @FilePath: /project-logic/commonPages/menuTheme.vue
 -->
 <template>
-  <div class="welcomepage">
-    <SelectTheme></SelectTheme>
+  <div>
+    <Select v-model="model" style="width: 200px" @on-change="changeOtheme">
+      <Option v-for="item in themeArr" :value="item.value" :key="item.value">
+        {{
+          item.label
+        }}
+      </Option>
+    </Select>
   </div>
 </template>
 
 <script>
-import SelectTheme from './menuTheme';
-
 export default {
   name: "WelcomePage",
   data() {
     return {
       vmI18n: window.vmI18n,
+      themeArr: [
+        {
+          value: "oms",
+          label: "默认",
+        },
+        {
+          value: "oms2",
+          label: "主题1",
+        },
+      ],
+      model: "oms",
     };
   },
-  components:{
-    SelectTheme
+  created(){
+    let omsTheme = localStorage.getItem("VarTheme");
+    this.model = omsTheme
+    $store.commit('customize/VarTheme', omsTheme);
+    require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
   },
   methods: {
+    changeOtheme(e) {
+      if($store.state.customize.VarTheme != e){
+        this.model = e;
+        localStorage.setItem("VarTheme",e);
+        location.reload();
+      }
+    },
   },
   mounted() {
     const domContent = document.getElementById("content");

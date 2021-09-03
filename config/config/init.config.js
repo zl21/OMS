@@ -1,13 +1,14 @@
 /*
  * @Author: flybird
  * @Date: 2021-06-04 13:20:21
- * @LastEditTime: 2021-08-25 11:30:03
+ * @LastEditTime: 2021-09-03 11:36:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
  */
 import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
+// import '@burgeon/oms-theme/skin/oms/index.less'
 import R3 from '@syman/burgeon-r3';
 import Vue from 'vue';
 // import comUtils from '@/assets/js/__utils__/common';
@@ -25,11 +26,16 @@ import omsThemecConfig from '@burgeon/oms-theme/package.json';
 import internationalizationConfig from '@burgeon/internationalization/package.json';
 import r3Version from '@syman/burgeon-r3/package.json';
 import proVersion from '@/package.json';
-
+let omsTheme = localStorage.getItem("VarTheme");
+if(!omsTheme){
+  localStorage.setItem("VarTheme", 'oms');
+  omsTheme = localStorage.getItem("VarTheme");
+}
+require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
 class InitAppConfig {
   constructor() {
     // -------------引入框架项目配置文件;
-    const customizedTheme = require(`@burgeon/oms-theme/skin/${omsSkinTheme}/index.min.css`).default;
+    // const customizedTheme = require(`@burgeon/oms-theme/skin/${omsSkinTheme}/index.min.css`).default;
     // window.$store = store;
     Vue.prototype.qs = qs;
     window.$store = store;
@@ -38,7 +44,7 @@ class InitAppConfig {
     window.R3 = R3; // 暴露R3为全局变量
     window.$i18n = i18n; // 挂载国际化
     window.wangEditor = wangEditor;
-    Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
+    // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     // Vue.prototype.$comUtils = comUtils;
     Vue.prototype.$omsUtils = commonUtils;
     Vue.prototype.$lodash = lodash;

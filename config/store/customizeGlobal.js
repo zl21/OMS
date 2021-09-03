@@ -128,9 +128,14 @@ export const globalStore = {
     originalOrder:'',
     extraoOrderDetails:[],
     clear:false,
-    colRowNum:4 // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
+    colRowNum:4, // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
+    VarTheme:'oms'
   },
   mutations: {
+    VarTheme(state, x){
+      console.log('state, x:',state, x);
+      state.VarTheme = x;
+    },
     language(state, x) {
       state.language = x;
       // console.log('state.language::', x);
