@@ -353,7 +353,6 @@ export default {
               },
               event: {
                 'on-change': value => {
-                  // this.sellerRemarkValueChange('payMode', value);
                 }
               }
             }
@@ -742,7 +741,7 @@ export default {
               res.data.data.forEach(item => {
                 arr.push({
                   label: item.ENAME,
-                  value: item.OC_B_LARGE_CLASS_EXCEPTION_ID
+                  value: item.ID
                 })
               })
               item.item.props.options = arr;
