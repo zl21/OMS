@@ -7,7 +7,7 @@ import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 // import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import subTable from 'professionalComponents/subTable';
-import ImageUpload from 'arkui_BCL/ImageUpload';
+// import ImageUpload from 'arkui_BCL/ImageUpload';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -18,7 +18,7 @@ export default {
     businessLabel,
     businessStatusFlag,
     subTable,
-    ImageUpload
+    // ImageUpload
   },
   mixins: [new modifycurrentLabel()],
   data() {

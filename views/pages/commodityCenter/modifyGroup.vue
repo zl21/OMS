@@ -21,7 +21,7 @@
             slot="content"
             style="float: left; width: 250px; margin-top: 15px"
           >
-            <ImageUpload
+            <arkImageUpload
               v-model="imageValue"
               :http="http"
               :PropsData="dataitem"

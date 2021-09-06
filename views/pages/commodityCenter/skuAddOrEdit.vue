@@ -10,7 +10,7 @@
           <!-- SKU基本信息 -->
           {{vmI18n.t('panel_label.at')}}
           <div slot="content" class="customized_Info_img">
-            <ImageUpload
+            <arkImageUpload
               v-model="imageValue"
               :http="http"
               :PropsData="dataitem"
