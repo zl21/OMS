@@ -23,5 +23,9 @@ export default {
   // 调拨管理-仓间调拨
   TRANSFERAUDIT: {
     component: () => import('@/views/modal/InventoryCenter/transferaudit.vue')
+  },
+  // 平台店铺商品表-导入
+  CUSTOMSTANDPRODUCTITEMIMPORT: {
+    component: () => import('@/views/modal/InventoryCenter/customGoodsImport.vue')
   }
 };
