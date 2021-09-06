@@ -1,19 +1,19 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-09-03 13:28:06
+ * @LastEditTime: 2021-09-06 13:17:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
 -->
 <template>
   <div class="welcomepage">
-    <SelectTheme></SelectTheme>
+    <!-- <SelectTheme></SelectTheme> -->
   </div>
 </template>
 
 <script>
-import SelectTheme from './menuTheme';
+// import SelectTheme from './menuTheme';
 
 export default {
   name: "WelcomePage",
@@ -23,7 +23,7 @@ export default {
     };
   },
   components:{
-    SelectTheme
+    // SelectTheme
   },
   methods: {
   },
