@@ -264,6 +264,16 @@ export default {
         url: '/p/cs/ac/v1/settleStrategyImport',
         downloadUrl: '/p/cs/ac/v1/settleStrategyImportTemp'
       }, // O2O对账结算策略 - 导入
+      {
+        tableName: 'PS_C_SAMECITY_DETRIMENT_REF',
+        url: '/p/cs/product/platformGoodsIdImport',
+        downloadUrl: '/p/cs/product/downloadPsPlatformGoodsIdTemp'
+      }, // 同城购 - 平台商品ID导入
+      { 
+        tableName: 'SG_B_CHANNEL_PRODUCT_import',
+        url: '/p/cs/product/productItemImport',
+        downloadUrl: 'http://sm-r3-upload-test.oss-cn-shanghai.aliyuncs.com/SG_TMALL_NEW/%E5%A4%A9%E7%8C%AB%E6%96%B0%E5%93%81%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF20210903.xlsx?OSSAccessKeyId=LTAI4GC4xAd2Z1w55piRSMva&Expires=2630663238&Signature=mTRE2mj5IYksm8d%2Bta04EDcrTQs%3D'
+      } // 平台店铺商品表 - 导入
     ];
     return arr;
   },
