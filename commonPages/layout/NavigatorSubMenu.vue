@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-08-17 14:30:04
+ * @LastEditTime: 2021-09-03 15:40:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -32,6 +32,7 @@
 }
 </script>
 <style lang="less">
+@import '~@burgeon/oms-theme/skin/public.less';
 .NavigatorVertical .left img.banner{
    display: none;
 }
@@ -50,7 +51,7 @@
     overflow: inherit;
     transition: inherit !important;
     .left{
-      background: url('~assetsImg/mini-logo.png') right no-repeat #4855AF;
+      background: url('~assetsImg/mini-logo.png') right no-repeat @base-color;
       background-size:100% auto ;
     }
     .middle{
@@ -83,7 +84,7 @@
     transition: inherit !important;
     .left{
       display: block;
-      background: url('~assetsImg/menuLogo.png') right no-repeat #4855AF;
+      background: url('~assetsImg/menuLogo.png') right no-repeat @base-color;
       background-size:100% auto;
     }
     .ark-tooltip, .ark-tooltip-rel{
