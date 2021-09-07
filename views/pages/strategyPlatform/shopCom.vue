@@ -113,62 +113,62 @@ export default {
         totalData: [], // 合计行
         allData: [
           {
-            PS_C_SKU_ID: '菜鸟333仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '菜鸟333仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
             index: 12,
             _checked: true,
           },
           {
-            PS_C_SKU_ID: '唯品333会仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品333会仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
             _checked: true,
           },
           {
-            PS_C_SKU_ID: '唯品45会仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品45会仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品1会仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品1会仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品会2仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品会2仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品会3仓2',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品会3仓2',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品5会仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品5会仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品6会仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品6会仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品7会仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品7会仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品8会仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品8会仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
           {
-            PS_C_SKU_ID: '唯品会9仓',
-            PEAK_VALUE: '',
-            QTY: 5,
+            CP_C_ORG_CHANNEL_ID: '唯品会9仓',
+            INVENTORY_RATE: '',
+            LOW_STOCK: 5,
           },
         ],
         selection: [],
@@ -188,12 +188,12 @@ export default {
           },
           {
             title: '渠道仓', // 渠道仓
-            key: "PS_C_SKU_ID",
+            key: "CP_C_ORG_CHANNEL_ID",
             align: "center",
           },
           {
             title: '库存比例', // 库存比例
-            key: 'PEAK_VALUE',
+            key: 'INVENTORY_RATE',
             align: "center",
             render: (h, params) => {
               return h('Input', {
@@ -203,7 +203,7 @@ export default {
                 },
                 class: 'kucun-scale',
                 props: {
-                  value: params.row.PEAK_VALUE,
+                  value: params.row.INVENTORY_RATE,
                   autosize: true,
                   regx: /^\d{0,2}$/,
                   suffix: "icon-percent-suffix",
@@ -218,7 +218,7 @@ export default {
                     // e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
                     console.log(e.target.value);
                     const v = e.target.value;
-                    params.row.PEAK_VALUE = v;
+                    params.row.INVENTORY_RATE = v;
                     this.tabConfigQu.data[params.index] = params.row;
                     // this.getFkChooseItem(params.row);
                   },
@@ -226,13 +226,13 @@ export default {
                     // e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
                     console.log(e.target.value);
                     const v = e.target.value;
-                    params.row.PEAK_VALUE = v;
+                    params.row.INVENTORY_RATE = v;
                     this.tabConfigQu.data[params.index] = params.row;
                     // 判断当前数据是否选中，选中则更新selection中的数据
                     if (params.row._checked) {
-                      this.tabConfigQu.selection[this.findX(this.tabConfigQu.selection, params.row.pKey)] = params.row;
+                      // this.tabConfigQu.selection[this.findX(this.tabConfigQu.selection, params.row.pKey)] = params.row;
                     }
-                    this.tabConfigQu.allData[this.findX(this.tabConfigQu.allData, params.row.pKey)] = params.row;
+                    // this.tabConfigQu.allData[this.findX(this.tabConfigQu.allData, params.row.pKey)] = params.row;
                   },
                 }
               });
@@ -269,27 +269,27 @@ export default {
           },
           {
             title: '店铺名称', // 
-            key: "PS_C_SKU_ID",
+            key: "CP_C_SHOP_TITLE",
             align: "center",
           },
           {
             title: '商品类型', // 
-            key: "PS_C_SKU_ID",
+            key: "SKU_TYPE",
             align: "center",
           },
           {
             title: '类型值', // 
-            key: "PS_C_SKU_ID",
+            key: "SKU_TYPE_VAL",
             align: "center",
           },
           {
             title: '安全库存数', // 
-            key: "QTY",
+            key: "LOW_STOCK",
             align: "center",
             render: (h, params) => {
               return h("InputNumber", {
                 props: {
-                  value: params.row.QTY,
+                  value: params.row.LOW_STOCK,
                   regx: /^[0-9]\d*$/,
                   min: 0,
                   disabled: false,
@@ -297,7 +297,7 @@ export default {
                 },
                 on: {
                   "on-change": (e) => {
-                    params.row.QTY = e;
+                    params.row.LOW_STOCK = e;
                     this.tabConfig.data[params.index] = params.row;
                   },
                 },
@@ -306,12 +306,12 @@ export default {
           },
           {
             title: '渠道仓', // 渠道仓
-            key: "PS_C_SKU_ID",
+            key: "CP_C_ORG_CHANNEL_ID",
             align: "center",
           },
           {
             title: '库存比例', // 库存比例
-            key: 'PEAK_VALUE',
+            key: 'INVENTORY_RATE',
             align: "center",
             render: (h, params) => {
               return h('Input', {
@@ -321,7 +321,7 @@ export default {
                 },
                 class: 'kucun-scale',
                 props: {
-                  value: params.row.PEAK_VALUE,
+                  value: params.row.INVENTORY_RATE,
                   autosize: true,
                   regx: /^\d{0,2}$/,
                   suffix: "icon-percent-suffix",
@@ -330,14 +330,14 @@ export default {
                   'on-change': e => {
                     console.log(e.target.value);
                     const v = e.target.value;
-                    params.row.PEAK_VALUE = v;
+                    params.row.INVENTORY_RATE = v;
                     this.tabConfig.data[params.index] = params.row;
                     // this.getFkChooseItem(params.row);
                   },
                   'on-blur': (e) => {
                     console.log(e.target.value);
                     const v = e.target.value;
-                    // params.row.PEAK_VALUE = `${v}%`
+                    // params.row.INVENTORY_RATE = `${v}%`
                   },
                 }
               });
@@ -349,7 +349,7 @@ export default {
           formData: [
             {
               version: '1.4',
-              colname: 'CP_C_SHOP_ID',
+              colname: 'CP_C_SHOP_TITLE',
               style: 'popInput', // 输入框弹框单多选
               width: '6',
               itemdata: {
@@ -373,20 +373,11 @@ export default {
               style: 'select', // 下拉框类型
               label: '商品类型', // 商品类型
               width: '6', // 所占宽度宽度
-              value: 'COM_TYPE', // 输入框的值
+              value: 'SKU_TYPE', // 输入框的值
               multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
               disabled: false,
               selectChange: () => { }, // 选中事件，默认返回选中的值,默认返回当前值value
-              options: [
-                {
-                  value: 1,
-                  label: $i18n.t('other.blessingBag') // 福袋
-                },
-                {
-                  value: 2,
-                  label: $i18n.t('other.common') // 普通
-                }
-              ]
+              options: []
             },
             {
               version: '1.4',
@@ -411,10 +402,34 @@ export default {
               }
             },
             {
+              version: '1.4',
+              colname: 'PS_C_PRO_ID',
+              style: 'popInput', // 输入框弹框单多选
+              width: '6',
+              itemdata: {
+                isCustom: true,
+                api: '',
+                params: '',
+                colname: 'PS_C_PRO_ID', // 当前字段的名称
+                fkdisplay: 'drp', // 外键关联类型
+                isfk: true, // 是否有fk键
+                isnotnull: false, // 是否必填
+                name: 'SKU编码', // 
+                readonly: false, // 是否可编辑，对应input   readonly属性
+                valuedata: '', // 这个是选择的值
+                pid: '',
+              },
+              oneObj: e => {
+                console.log(e);
+                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
+                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ECODE = e.valuedata;
+              }
+            },
+            {
               style: 'input',
               icon: 'ios-search',
               label: '渠道仓', // 渠道仓
-              colname: 'MIN_REAL_AMT',
+              colname: 'CP_C_ORG_CHANNEL_ID',
               width: '6',
               disabled: false,
               regx: /^\d*\.{0,1}\d{0,4}$/,
@@ -431,12 +446,12 @@ export default {
           formValue: {
             CP_C_SHOP_ID: '',
             PS_C_SPU_ECODE: '',
-            PS_C_SKU_ID: '',
+            CP_C_ORG_CHANNEL_ID: '',
             PS_C_SKU_ECODE: '',
-            MIN_REAL_AMT: ''
+            CP_C_ORG_CHANNEL_ID: ''
           },
           ruleValidate: {
-            COM_TYPE: [{
+            SKU_TYPE: [{
               required: true,
               message: ' '
             }]
@@ -510,7 +525,7 @@ export default {
     /* 'tabConfigQu.allData': {
       handler(n, old) {
         const nDa = JSON.parse(JSON.stringify(n));
-        nDa.map(i => i.pKey = i.PS_C_SKU_ID + i.QTY); // 店铺+渠道
+        nDa.map(i => i.pKey = i.CP_C_ORG_CHANNEL_ID + i.LOW_STOCK); // 店铺+渠道
         this.tabConfigQu.allDa = nDa;
       },
       immediate: true,
@@ -522,10 +537,13 @@ export default {
       return this.$route.params.customizedModuleId && (!['New', 'NEW'].includes(this.$route.params.customizedModuleId)) ? this.$route.params.customizedModuleId : '-1' // 记录主界面传入的ID
     },
   },
+  created() {
+    this.getOptions()
+  },
   async mounted() {
     // if (this.ID == -1 && !this.isCopy) return
     // await this.getBtn()
-    this.tabConfigQu.allData.map(i => i.pKey = i.PS_C_SKU_ID + i.QTY); // 店铺+渠道
+    this.tabConfigQu.allData.map(i => i.pKey = i.CP_C_ORG_CHANNEL_ID + i.LOW_STOCK); // 店铺+渠道
   },
   methods: {
     // 添加 - 按钮
@@ -538,11 +556,11 @@ export default {
       let val = '';
       data.forEach(it => {
         let item = '';
-        item = `${it.PS_C_SKU_ID}-${it.PEAK_VALUE ? it.PEAK_VALUE : '0'}%,`
+        item = `${it.CP_C_ORG_CHANNEL_ID}-${it.INVENTORY_RATE ? it.INVENTORY_RATE : '0'}%,`
         console.log(item);
         val += item
       })
-      this.tabConfig.businessFormConfig.formValue.MIN_REAL_AMT = val;
+      this.tabConfig.businessFormConfig.formValue.CP_C_ORG_CHANNEL_ID = val;
       this.quDao.modal = false;
     },
     // 获取按钮权限
@@ -582,31 +600,31 @@ export default {
       // e为选中的数组对象RowArr
       // e.forEach(i => i._checked = true);
       this.tabConfigQu.selection = e;
-      this.tabConfigQu.allData.find(i => i.pKey == c.pKey)._checked = true;
-      this.tabConfigQu.data.find(i => i.pKey == c.pKey)._checked = true;
+      // this.tabConfigQu.allData.find(i => i.pKey == c.pKey)._checked = true;
+      // this.tabConfigQu.data.find(i => i.pKey == c.pKey)._checked = true;
     },
-    onSelectChangeQ(e) {
-
+    onSelectChangeQ(e) { // 更新了选中数据触发
+      this.tabConfigQu.selection = e;
     },
     onSelectCancelQ(e, c) {
       // e.forEach(i => i._checked = false);
       // debugger
       // const aa = this.tabConfigQu.selection.find(i => i.pKey == c.pKey);
       // this.tabConfigQu.selection.find(i => i.pKey == c.pKey)._checked = false;
-      this.tabConfigQu.allData.find(i => i.pKey == c.pKey)._checked = false;
+      // this.tabConfigQu.allData.find(i => i.pKey == c.pKey)._checked = false;
       this.tabConfigQu.selection = e;
       console.log(e);
     },
     onSelectAllQ(e) {
       // e.forEach(i => i._checked = true);
       this.tabConfigQu.selection = e;
-      this.tabConfigQu.date.map(i => i._checked = true);
-      this.tabConfigQu.allData.map(i => i._checked = true);
+      // this.tabConfigQu.date.map(i => i._checked = true);
+      // this.tabConfigQu.allData.map(i => i._checked = true);
     },
     onSelectAllCancelQ() {
       this.tabConfigQu.selection = [];
-      this.tabConfigQu.date.map(i => i._checked = false);
-      this.tabConfigQu.allData.map(i => i._checked = false);
+      // this.tabConfigQu.date.map(i => i._checked = false);
+      // this.tabConfigQu.allData.map(i => i._checked = false);
     },
     pageChangeQ(e) {
       this.tabConfigQu.pageIndex = e;
@@ -633,6 +651,19 @@ export default {
         }
       })
       return index
+    },
+    async getOptions() {
+      const fo = new FormData();
+      fo.append('table', 'SG_B_SHOP_PRO_SPECIAL_STRATEGY_ITEM');
+      fo.append('inlinemode', 'Y');
+      const { data: { data } } = await this.service.common.inputForitem(fo);
+      // const item = data.inpubobj.filter(it => it.colname == "SKU_TYPE");
+      const item = data.inpubobj[1];
+      const options = item.combobox.map((i) => ({
+        label: i.limitdesc,
+        value: i.limitval,
+      }))
+      this.tabConfig.businessFormConfig.formData[1].options = options;
     },
     // 删除明细
     deleteDetail() {
@@ -816,8 +847,8 @@ export default {
       let valid = true;
       for (let key of validFields) {
         if (!obj[key]) {
-          // TODO! `明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`
-          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $i18n.t('table_label.itemNo01')}不能为空`)
+          // TODO! `明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : 'SPU编码'}不能为空`
+          this.$Message.error(`明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : $i18n.t('table_label.itemNo01')}不能为空`)
           valid = false;
           break;
         }
@@ -882,90 +913,90 @@ export default {
         })
     },
     // 主子表保存
-    save(isSaveAll) {
-      /**主表校验 */
-      const self = this;
-      const valueArr = ['PLAN_NAME', 'BEGIN_TIME', 'END_TIME', 'PRIORITY'];
-      const drpArr = ['CP_C_SHOP_ID'];
-      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
-      if (mes) return self.$Message.warning(mes);
+    // save(isSaveAll) {
+    //   /**主表校验 */
+    //   const self = this;
+    //   const valueArr = ['PLAN_NAME', 'BEGIN_TIME', 'END_TIME', 'PRIORITY'];
+    //   const drpArr = ['CP_C_SHOP_ID'];
+    //   const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+    //   if (mes) return self.$Message.warning(mes);
 
-      const formConfig = this.tabConfig.businessFormConfig
-      /**子表新增校验 */
-      // const valueArr2 = ['MIN_REAL_AMT'];
-      // let mes2 = $omsUtils.validatorNotEmpty(formConfig, valueArr2);
-      const { CP_C_SHOP_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
-      let mes2 = ''
-      if (!MIN_REAL_AMT) {
-        mes2 += $i18n.t('form_label.bh') // 最低成交单价
-      }
-      if (!(CP_C_SHOP_ID || PS_C_SKU_ID)) {
-        mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
-      }
-      mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
-      if ((!(CP_C_SHOP_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {
-        return this.$Message.error(mes2);
-      } // 非回车保存就不提示子表表单校验提示
+    //   const formConfig = this.tabConfig.businessFormConfig
+    //   /**子表新增校验 */
+    //   // const valueArr2 = ['CP_C_ORG_CHANNEL_ID'];
+    //   // let mes2 = $omsUtils.validatorNotEmpty(formConfig, valueArr2);
+    //   const { CP_C_SHOP_ID, CP_C_ORG_CHANNEL_ID, CP_C_ORG_CHANNEL_ID } = formConfig.formValue
+    //   let mes2 = ''
+    //   if (!CP_C_ORG_CHANNEL_ID) {
+    //     mes2 += $i18n.t('form_label.bh') // 最低成交单价
+    //   }
+    //   if (!(CP_C_SHOP_ID || CP_C_ORG_CHANNEL_ID)) {
+    //     mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
+    //   }
+    //   mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
+    //   if ((!(CP_C_SHOP_ID || CP_C_ORG_CHANNEL_ID)) && this.isMasterRequired && !isSaveAll) {
+    //     return this.$Message.error(mes2);
+    //   } // 非回车保存就不提示子表表单校验提示
 
 
-      /**子表编辑校验 */
-      let validFields = ['PS_C_SKU_ECODE', 'MIN_REAL_AMT']
-      const hasNoValid = this.tabConfig.updateData
-        .some(i => !this.isValid(i, validFields))
-      if (hasNoValid) return
+    //   /**子表编辑校验 */
+    //   let validFields = ['PS_C_SKU_ECODE', 'CP_C_ORG_CHANNEL_ID']
+    //   const hasNoValid = this.tabConfig.updateData
+    //     .some(i => !this.isValid(i, validFields))
+    //   if (hasNoValid) return
 
-      let params = {
-        ID: this.ID || -1,
-        ST_C_PRICE: {},
-        ST_C_PRICE_ITEM_LIST: []
-      }
+    //   let params = {
+    //     ID: this.ID || -1,
+    //     ST_C_PRICE: {},
+    //     ST_C_PRICE_ITEM_LIST: []
+    //   }
 
-      /**
-       * 主表保存入参的两种情况：
-       * 1. 主表已保存，为表单修改字段 modify
-       * 2. 主表未保存，为表单所有字段
-       */
-      params.ST_C_PRICE = this.isMasterRequired ? this.modify.master : this.formConfig.formValue;
-      if (this.isCopy) {
-        params.ST_C_PRICE = this.formConfig.formValue
-        params.COPY_FLAG = this.$route.query.copy
-      }
+    //   /**
+    //    * 主表保存入参的两种情况：
+    //    * 1. 主表已保存，为表单修改字段 modify
+    //    * 2. 主表未保存，为表单所有字段
+    //    */
+    //   params.ST_C_PRICE = this.isMasterRequired ? this.modify.master : this.formConfig.formValue;
+    //   if (this.isCopy) {
+    //     params.ST_C_PRICE = this.formConfig.formValue
+    //     params.COPY_FLAG = this.$route.query.copy
+    //   }
 
-      params.ST_C_PRICE.BEGIN_TIME &&= this.formatDate(params.ST_C_PRICE.BEGIN_TIME)
-      params.ST_C_PRICE.END_TIME &&= this.formatDate(params.ST_C_PRICE.END_TIME)
-      params.ST_C_PRICE.hasOwnProperty('ISACTIVE')
-        && (params.ST_C_PRICE.ISACTIVE = params.ST_C_PRICE.ISACTIVE ? 'Y' : 'N')
+    //   params.ST_C_PRICE.BEGIN_TIME &&= this.formatDate(params.ST_C_PRICE.BEGIN_TIME)
+    //   params.ST_C_PRICE.END_TIME &&= this.formatDate(params.ST_C_PRICE.END_TIME)
+    //   params.ST_C_PRICE.hasOwnProperty('ISACTIVE')
+    //     && (params.ST_C_PRICE.ISACTIVE = params.ST_C_PRICE.ISACTIVE ? 'Y' : 'N')
 
-      !mes2 && (params.ST_C_PRICE_ITEM_LIST.push({ ID: -1, ...formConfig.formValue }))
-      isSaveAll && (params.ST_C_PRICE_ITEM_LIST = [
-        ...params.ST_C_PRICE_ITEM_LIST,
-        ...this.tabConfig.updateData
-      ])
+    //   !mes2 && (params.ST_C_PRICE_ITEM_LIST.push({ ID: -1, ...formConfig.formValue }))
+    //   isSaveAll && (params.ST_C_PRICE_ITEM_LIST = [
+    //     ...params.ST_C_PRICE_ITEM_LIST,
+    //     ...this.tabConfig.updateData
+    //   ])
 
-      this.service.strategyPlatform.savePrice(params)
-        .then(({ data: { code, data, message } }) => {
-          if (code == 0) {
-            if (this.ID != -1) {
-              // 清空明细表单
-              this.tabConfig.businessFormConfig.formValue.MIN_REAL_AMT = ''
-              this.setFormValue(this.tabConfig.businessFormConfig, 'PS_C_SKU')
-              this.setFormValue(this.tabConfig.businessFormConfig, 'PS_C_SPU')
-            }
-            this.reloadForm()
-            data && (this.ID = data.objId)
-            if (isSaveAll) {
-              this.modify = { master: {} }
-              this.isModify = false
-              this.onOk(['New', 'NEW'].includes(this.$route.params.customizedModuleId) && this.ID)
-            }
-            !this.isCopy && this.queryPrice(data.objId)
-            !this.isCopy && this.queryPriceItem(data.objId)
-            this.$Message.success(message)
-            return
-          }
-          this.$Message.error(message)
-        })
-    },
+    //   this.service.strategyPlatform.savePrice(params)
+    //     .then(({ data: { code, data, message } }) => {
+    //       if (code == 0) {
+    //         if (this.ID != -1) {
+    //           // 清空明细表单
+    //           this.tabConfig.businessFormConfig.formValue.CP_C_ORG_CHANNEL_ID = ''
+    //           this.setFormValue(this.tabConfig.businessFormConfig, 'PS_C_SKU')
+    //           this.setFormValue(this.tabConfig.businessFormConfig, 'PS_C_SPU')
+    //         }
+    //         this.reloadForm()
+    //         data && (this.ID = data.objId)
+    //         if (isSaveAll) {
+    //           this.modify = { master: {} }
+    //           this.isModify = false
+    //           this.onOk(['New', 'NEW'].includes(this.$route.params.customizedModuleId) && this.ID)
+    //         }
+    //         !this.isCopy && this.queryPrice(data.objId)
+    //         !this.isCopy && this.queryPriceItem(data.objId)
+    //         this.$Message.success(message)
+    //         return
+    //       }
+    //       this.$Message.error(message)
+    //     })
+    // },
   }
 };
 
