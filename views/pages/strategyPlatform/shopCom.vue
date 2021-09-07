@@ -22,6 +22,7 @@
       <businessActionTable
         :jordan-table-config="tabConfigQu"
         @on-select="onSelectQ"
+        @on-select-change="onSelectChangeQ"
         @on-select-cancel="onSelectCancelQ"
         @on-select-all="onSelectAllQ"
         @on-select-all-cancel="onSelectAllCancelQ"
@@ -99,7 +100,7 @@ export default {
       },
       loading: false,
       tabConfigQu: {
-        indexColumn: true,
+        // indexColumn: true,
         isShowSelection: true,
         pageShow: true, // 控制分页是否显示
         border: true, // 是否显示纵向边框
@@ -112,14 +113,17 @@ export default {
         totalData: [], // 合计行
         allData: [
           {
-            PS_C_SKU_ID: '菜鸟仓',
+            PS_C_SKU_ID: '菜鸟333仓',
             PEAK_VALUE: '',
             QTY: 5,
+            index: 12,
+            _checked: true,
           },
           {
-            PS_C_SKU_ID: '唯品会仓',
+            PS_C_SKU_ID: '唯品333会仓',
             PEAK_VALUE: '',
             QTY: 5,
+            _checked: true,
           },
           {
             PS_C_SKU_ID: '唯品45会仓',
@@ -137,7 +141,7 @@ export default {
             QTY: 5,
           },
           {
-            PS_C_SKU_ID: '唯品会仓2',
+            PS_C_SKU_ID: '唯品会3仓2',
             PEAK_VALUE: '',
             QTY: 5,
           },
@@ -174,6 +178,15 @@ export default {
         data: [],
         columns: [
           {
+            // type: 'index',
+            width: 60,
+            align: 'left',
+            title: $i18n.t('table_label.serialNo'), // 序号
+            render: (h, params) => {
+              return h('span', {}, (this.tabConfigQu.pageIndex - 1) * this.tabConfigQu.pageSize + params.index + 1)
+            }
+          },
+          {
             title: '渠道仓', // 渠道仓
             key: "PS_C_SKU_ID",
             align: "center",
@@ -196,7 +209,13 @@ export default {
                   suffix: "icon-percent-suffix",
                 },
                 on: {
+                  'on-click': e => {
+                    // event.stopPropagation();
+                    // e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+                    // e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                  },
                   'on-change': e => {
+                    // e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
                     console.log(e.target.value);
                     const v = e.target.value;
                     params.row.PEAK_VALUE = v;
@@ -204,8 +223,16 @@ export default {
                     // this.getFkChooseItem(params.row);
                   },
                   'on-blur': (e) => {
+                    // e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
                     console.log(e.target.value);
                     const v = e.target.value;
+                    params.row.PEAK_VALUE = v;
+                    this.tabConfigQu.data[params.index] = params.row;
+                    // 判断当前数据是否选中，选中则更新selection中的数据
+                    if (params.row._checked) {
+                      this.tabConfigQu.selection[this.findX(this.tabConfigQu.selection, params.row.pKey)] = params.row;
+                    }
+                    this.tabConfigQu.allData[this.findX(this.tabConfigQu.allData, params.row.pKey)] = params.row;
                   },
                 }
               });
@@ -479,6 +506,17 @@ export default {
       },
     };
   },
+  watch: {
+    /* 'tabConfigQu.allData': {
+      handler(n, old) {
+        const nDa = JSON.parse(JSON.stringify(n));
+        nDa.map(i => i.pKey = i.PS_C_SKU_ID + i.QTY); // 店铺+渠道
+        this.tabConfigQu.allDa = nDa;
+      },
+      immediate: true,
+      deep: true,
+    } */
+  },
   computed: {
     ID() {
       return this.$route.params.customizedModuleId && (!['New', 'NEW'].includes(this.$route.params.customizedModuleId)) ? this.$route.params.customizedModuleId : '-1' // 记录主界面传入的ID
@@ -487,6 +525,7 @@ export default {
   async mounted() {
     // if (this.ID == -1 && !this.isCopy) return
     // await this.getBtn()
+    this.tabConfigQu.allData.map(i => i.pKey = i.PS_C_SKU_ID + i.QTY); // 店铺+渠道
   },
   methods: {
     // 添加 - 按钮
@@ -500,6 +539,7 @@ export default {
       data.forEach(it => {
         let item = '';
         item = `${it.PS_C_SKU_ID}-${it.PEAK_VALUE ? it.PEAK_VALUE : '0'}%,`
+        console.log(item);
         val += item
       })
       this.tabConfig.businessFormConfig.formValue.MIN_REAL_AMT = val;
@@ -538,29 +578,61 @@ export default {
     pageSizeChange(e) {
       this.tabConfig.pageSize = e;
     },
-    onSelectQ(e) {
+    onSelectQ(e, c) {
       // e为选中的数组对象RowArr
+      // e.forEach(i => i._checked = true);
       this.tabConfigQu.selection = e;
+      this.tabConfigQu.allData.find(i => i.pKey == c.pKey)._checked = true;
+      this.tabConfigQu.data.find(i => i.pKey == c.pKey)._checked = true;
     },
-    onSelectCancelQ(e) {
-      this.tabConfig.selection = e;
+    onSelectChangeQ(e) {
+
+    },
+    onSelectCancelQ(e, c) {
+      // e.forEach(i => i._checked = false);
+      // debugger
+      // const aa = this.tabConfigQu.selection.find(i => i.pKey == c.pKey);
+      // this.tabConfigQu.selection.find(i => i.pKey == c.pKey)._checked = false;
+      this.tabConfigQu.allData.find(i => i.pKey == c.pKey)._checked = false;
+      this.tabConfigQu.selection = e;
+      console.log(e);
     },
     onSelectAllQ(e) {
-      this.tabConfig.selection = e;
+      // e.forEach(i => i._checked = true);
+      this.tabConfigQu.selection = e;
+      this.tabConfigQu.date.map(i => i._checked = true);
+      this.tabConfigQu.allData.map(i => i._checked = true);
     },
     onSelectAllCancelQ() {
-      this.tabConfig.selection = [];
+      this.tabConfigQu.selection = [];
+      this.tabConfigQu.date.map(i => i._checked = false);
+      this.tabConfigQu.allData.map(i => i._checked = false);
     },
     pageChangeQ(e) {
       this.tabConfigQu.pageIndex = e;
       this.tabConfigQu.total = this.tabConfigQu.allData.length;
       const pre = (e - 1) * this.tabConfigQu.pageSize;
       const end = e * this.tabConfigQu.pageSize;
+      // debugger
       this.tabConfigQu.data = this.tabConfigQu.allData.slice(pre, end)
     },
     pageSizeChangeQ(e) {
       this.tabConfigQu.pageSize = e;
       this.pageChangeQ(1);
+    },
+    setCheck(arr, y) {
+
+      // this.tabConfigQu.allData
+
+    },
+    findX(arr, id) {
+      let index = -1;
+      arr.forEach((it, x) => {
+        if (it.pKey == id) {
+          index = x;
+        }
+      })
+      return index
     },
     // 删除明细
     deleteDetail() {

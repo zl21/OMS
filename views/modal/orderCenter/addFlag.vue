@@ -38,6 +38,7 @@
       footer-hide
       :mask="true"
       @on-ok="asyncOK"
+      titleAlign="left"
       class-name="ark-dialog secModal"
     >
       <div>
