@@ -65,8 +65,7 @@
 <script>
 import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from "professionalComponents/businessActionTable";
-// var _ = require('lodash');
-import { ceil } from 'lodash'
+
 
 export default {
   components: {
@@ -414,7 +413,7 @@ export default {
       }
       this.totalData.push(it);
       // 最后一页 = length / pageSize
-      const endIndex = ceil(this.totalData.length / this.table.pageSize);
+      const endIndex = window._.ceil(this.totalData.length / this.table.pageSize);
       this.pageChange(endIndex);
     },
     getList() {

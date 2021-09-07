@@ -36,7 +36,7 @@
           :label-list="labelList"
         />
         <!-- 订单明细 -->
-        <!-- 
+        <!--
             <businessForm :form-config="formConfigDetail" @keyDown="keyDown">
               <template #spec01="{ rowData }">
                 <DropMultiSelectFilter
@@ -119,7 +119,6 @@ import dateUtil from "@/assets/js/__utils__/date.js";
 import axios from "axios";
 import Util from "@/assets/js/public/publicMethods";
 
-const _ = require("lodash");
 const areaList = require("@/assets/js/address/area-list");
 const { parse, parseArea } = require("@/assets/js/address/address-parse");
 

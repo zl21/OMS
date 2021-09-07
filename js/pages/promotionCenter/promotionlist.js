@@ -9,7 +9,6 @@ import businessForm from 'professionalComponents/businessForm';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
 import businessAgTable from 'professionalComponents/businessAgTable';
-import { debounce } from 'lodash'
 
 export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
@@ -683,7 +682,7 @@ export default {
             break;
         }
         this.getAgTableData(info, num, x);
-        
+
         /* if (data && data.ACTI_ALL_INFO) {
           // 全部
           this.getAgTableData(data.ACTI_ALL_INFO, data.ACTI_ALL_NUM, x || 0);
@@ -715,7 +714,7 @@ export default {
       this.saveCol(e.columns)
     },
     // 保存列信息
-    saveCol: debounce(function(data) {
+    saveCol: window._.debounce(function(data) {
       console.log(data);
       debugger // 取不到，用了防抖的原因吗？
     },1000),

@@ -6,7 +6,6 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { setWith } from 'lodash';
 
 export default {
   name: 'holdStrategyAddOrEdit',
@@ -508,7 +507,7 @@ export default {
                 value: 4,
                 label: '据预计发货时间提前'
               },
-              
+
             ],
             timeUnitOption: [
               {
@@ -721,9 +720,9 @@ export default {
     const self = this;
     if (self.ID > 0 && !self.$route.query.spuid) {
       // 详情
-      // const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name 
-      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-      // const data = { label: 'hold策略编辑', name:keepAliveModuleName}; //当前界面模块名称 
+      // const { customizedModuleName, customizedModuleId } = self.$route.params;//获取定制界面ID，Name
+      // const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称
+      // const data = { label: 'hold策略编辑', name:keepAliveModuleName}; //当前界面模块名称
       // self.$store.commit('global/modifycurrentLabel' , data)
       this.initData();
       // 日志
@@ -739,7 +738,7 @@ export default {
   },
   methods: {
     checkShow(){
-   
+
      if (this.formConfig2.formValue.ORDER_FLAG) {
        this.formConfig3.formData[0].label = "Hold单原因"
        this.formConfig3.formData[0].class = ""
@@ -833,15 +832,15 @@ export default {
             for (const k in this.formConfig4.formValue) {
               this.formConfig4.formValue[k] = item[k]
             }
-  
+
             if (this.formConfig4.formValue.IS_AUTO_RELEASE) {
               this.formConfig4.formData[2].style = 'select';
             }
             if (this.formConfig4.formValue.RELEASE_TIME_TYPE) {
               this.formConfig4.formData[3].style = 'formCompile';
             }
-            
-           
+
+
           }else{
             for (const k in this.formConfig5.formValue) {
               this.formConfig5.formValue[k] = item[k]
@@ -864,7 +863,7 @@ export default {
         }
 
 
-        
+
       }
     },
     // 保存
@@ -992,7 +991,7 @@ export default {
         }
         ST_C_HOLD_ORDER_STRATEGY_ITEM.push(obj)
       }
- 
+
       if (this.formConfig5.formValue.HOLD_ORDER_IS) {
         let obj = {
           HOLD_ORDER_REASON: this.formConfig5.formValue.HOLD_ORDER_REASON,
@@ -1032,7 +1031,7 @@ export default {
      * 记录主表修改信息方法
      * @param {*} ecode 记录字段
      * @param {*} formConfig 表单key
-     * @returns 
+     * @returns
      */
     masterModifyData(ecode, formConfig) {
       const self = this;
