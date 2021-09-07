@@ -1,19 +1,19 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-09-03 13:28:06
+ * @LastEditTime: 2021-09-06 17:30:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
 -->
 <template>
   <div class="welcomepage">
-    <SelectTheme></SelectTheme>
+    <!-- <SelectTheme></SelectTheme> -->
   </div>
 </template>
 
 <script>
-import SelectTheme from './menuTheme';
+// import SelectTheme from './menuTheme';
 
 export default {
   name: "WelcomePage",
@@ -22,9 +22,9 @@ export default {
       vmI18n: window.vmI18n,
     };
   },
-  components:{
-    SelectTheme
-  },
+  // components:{
+  //   SelectTheme
+  // },
   methods: {
   },
   mounted() {
@@ -41,12 +41,11 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import "~@burgeon/oms-theme/skin/public.less";
+@import '~@burgeon/oms-theme/skin/public.less';
 .welcomepage {
   width: 100%;
   height: 100%;
   background: url("~assetsImg/loginBg.png") center / 100% no-repeat #fff;
-  // background-size: contain;
   background-size: auto 100%;
   /deep/ .ark-dropdown {
     margin: 10px 10px 20px;

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-08-17 14:48:16
+ * @LastEditTime: 2021-09-06 14:50:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -15,6 +15,8 @@
     <div class="NaVertical-box">
       <!-- 自定义 问候-->
       <span class="timeTips">{{ timeTips }}, {{ welcome }}</span>
+      
+       <SelectTheme></SelectTheme>
       <!-- 模糊查询 -->
       <slot name="nav-input"></slot>
       <!-- 控制台 -->
@@ -34,9 +36,13 @@
 </template>
 <script>
 import service from '@/service/index';
+import SelectTheme from './menuTheme';
 
 export default {
   name: "NaVerticalslot",
+  components:{
+    SelectTheme
+  },
   data() {
     return {
       timeTips: '',
@@ -54,6 +60,11 @@ export default {
     })
   },
   mounted() {
+    // // 设置变量
+    // document.body.style.setProperty('--baseColor', '#7F583F');
+    // // 读取变量
+    // let getVal = document.body.style.getPropertyValue('--baseColor').trim();
+    // console.log(getVal);
     // 模拟点击，展示搜索框
     document.getElementsByClassName("buttonIcon")[0].click();
     this.$nextTick(() => {
@@ -137,8 +148,8 @@ export default {
 }
 // 搜索
 .NaVertical {
-  .ark-badge-count{
-
+  .tag{
+    line-height: 41px;
   }
   .NaVertical-box {
     width: 100%;
