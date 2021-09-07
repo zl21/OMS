@@ -166,6 +166,22 @@
 
       <jordanBtn :btnConfig="antiAuditBtnConfig"></jordanBtn>
     </Modal>
+
+
+    <!-- 状态查询 -->
+    <Modal
+      v-model="statusSelectModal"
+      :mask="true"
+      :title="'状态查询'"
+      width="420"
+      :footer-hide="true"
+    >
+      <div class="orderContent">
+        <businessForm :form-config="statusSelectFormConfig" />
+      </div>
+
+      <jordanBtn :btnConfig="statusSelectBtnConfig"></jordanBtn>
+    </Modal>
   </div>
 </template>
 
