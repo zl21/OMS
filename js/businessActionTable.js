@@ -379,6 +379,10 @@ export default {
     onCurrentChange(currentRow, oldCurrentRow) {
       this.$emit('on-current-change', currentRow, oldCurrentRow)
     },
+    // 在多选模式下有效，只要选中项发生变化时就会触发
+    onSelectChange(selection) {
+      this.$emit('on-select-change', selection)
+    },
     // 刷新按钮
     tableRefreshDetail() {
       this.$emit('table-refresh-detail')

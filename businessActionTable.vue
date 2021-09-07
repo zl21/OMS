@@ -55,6 +55,7 @@
       :no-data-text="noDataText"
       :show-header="showHeader"
       @on-current-change="onCurrentChange"
+      @on-selection-change="onSelectChange"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
       @on-select-all="onSelectAll"

@@ -324,3 +324,4 @@
 | v1.2.89 | businessForm input拓展聚焦事件 |
 | v1.2.90 | fktable --- 样式修改 |
 | v1.2.91 | jordan -> business |
+| v1.2.92 | table - onSelectChange |
