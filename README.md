@@ -325,3 +325,4 @@
 | v1.2.90 | fktable --- 样式修改 |
 | v1.2.91 | jordan -> business |
 | v1.2.92 | table - onSelectChange |
+| v1.2.93 | fkdialog-接口网关调整 |

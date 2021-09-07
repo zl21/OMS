@@ -527,7 +527,7 @@ export default {
       const param = new FormData();
       param.append("param", JSON.stringify(paramObj));
       console.log("522::");
-      this.service.promotionCenter.screenresult(param).then((res) => {
+      this.service.promotionCenter.screenresult(param, { serviceId: this.serviceId }).then((res) => {
         const response = this.version == "1.4" ? res.data.data : res.data;
         if (res.data.code !== 0) {
           return;
@@ -656,7 +656,7 @@ export default {
       const param = new FormData();
       param.append("param", JSON.stringify(paramObj));
       console.log("737::");
-      this.service.promotionCenter.screenresult(param).then((res) => {
+      this.service.promotionCenter.screenresult(param, { serviceId: this.serviceId }).then((res) => {
         const response = this.version == "1.4" ? res.data.data : res.data;
         if (res.data.code !== 0) {
           return;
@@ -848,7 +848,7 @@ export default {
       const param = new FormData();
       param.append("param", JSON.stringify(paramObj));
       console.log("1008::");
-      this.service.promotionCenter.screenresultcheck(param).then((res) => {
+      this.service.promotionCenter.screenresultcheck(param, { serviceId: this.serviceId }).then((res) => {
         const response = this.version == "1.4" ? res.data.data : res.data;
         if (res.data.code !== 0) {
           return;
@@ -862,7 +862,7 @@ export default {
       const param = new FormData();
       param.append("param", JSON.stringify(this.optimize_request));
       console.log("1033::");
-      this.service.promotionCenter.screenresultcheck(param).then((res) => {
+      this.service.promotionCenter.screenresultcheck(param, { serviceId: this.serviceId }).then((res) => {
         const response = this.version == "1.4" ? res.data.data : res.data;
         this.confirmLoading = false;
         if (res.data.code !== 0) {
@@ -932,7 +932,7 @@ export default {
       const param = new FormData();
       param.append("param", JSON.stringify(this.optimize_request));
       console.log("1112::");
-      this.service.promotionCenter.screenresultcheck(param).then((res) => {
+      this.service.promotionCenter.screenresultcheck(param, { serviceId: this.serviceId }).then((res) => {
         const response = this.version == "1.4" ? res.data.data : res.data;
         if (res.data.code !== 0) {
           return;
@@ -1025,7 +1025,7 @@ export default {
         const param = new FormData();
         param.append("param", JSON.stringify(this.request_param));
         console.log("1300::");
-        this.service.promotionCenter.screenresultcheck(param).then((res) => {
+        this.service.promotionCenter.screenresultcheck(param, { serviceId: this.serviceId }).then((res) => {
           const response = this.version == "1.4" ? res.data.data : res.data;
           this.confirmLoading = false;
           if (res.data.code !== 0) {
