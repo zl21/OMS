@@ -4,7 +4,6 @@
 // 兼容fktable1.4数据格式（云雀1.0）
 import SelectDialog from 'framework/components/dialog/selectDialog.vue';
 import FkTable from '../fktable.vue';
-import { debounce } from 'lodash'
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
 // import $ from '@/assets/js/jquery3.5.1.min.js';
@@ -191,7 +190,7 @@ export default {
     // 组件值传递
     inputChange(item) {
       const self = this;
-      // this.inputVal = 
+      // this.inputVal =
       if (self.itemdata.isuppercase && self.itemdata.valuedata) {
         self.itemdata.valuedata = self.itemdata.valuedata
           .toString()
@@ -308,7 +307,7 @@ export default {
     },
     // 外键下拉模糊查询
     querySearchAsync(queryString, cb) {
-      var regx = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/; 
+      var regx = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/;
       if (regx.test(queryString)) {// 如果包含特殊字符
         queryString = queryString.replace(regx,'')
       }
@@ -406,7 +405,7 @@ export default {
       self.autocompleteBlur(itemdata);
     },
 
-    autocompleteBlur: debounce(function(itemdata) {
+    autocompleteBlur: window._.debounce(function(itemdata) {
       setTimeout(()=>{
        const self = this;
        if (!self.isHandleSelect && !self.autocomplete) {
@@ -422,7 +421,7 @@ export default {
            );
            self.autocomplete = true;
            self.isHandleSelect = false;
-         } 
+         }
        }
        self.$refs['autocomplete' + itemdata.colname].suggestions = [];
       },300)
@@ -560,8 +559,8 @@ export default {
     /* ------------------------ 入参处理 start  ------------------------ */
     /**
      * 处理请求QueryList的入参
-     * @param {*} formData.item.itemdata 
-     * @returns 
+     * @param {*} formData.item.itemdata
+     * @returns
      * 1. 拼接'='：精准匹配
      */
     getFixedColumns(itemdata) {

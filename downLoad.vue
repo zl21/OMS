@@ -47,7 +47,6 @@ import businessForm from "professionalComponents/businessForm";
 import businessButton from "professionalComponents/businessButton";
 import businessDialog from "professionalComponents/businessDialog";
 import i18n from "@burgeon/internationalization/i18n";
-import { throttle } from 'lodash'
 
 // import CustomConfig from "@/config/customized.config.js";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
@@ -154,7 +153,7 @@ export default {
     }
   },
   methods: {
-    okHandel: throttle(function () {
+    okHandel: window._.throttle(function () {
       const self = this;
       console.log('determine::',new Date());
       self.modalConfig[self.tableName].determine(self);
@@ -235,4 +234,4 @@ export default {
   cursor: pointer;
   margin-top: 10px;
 }
-</style> 
+</style>
