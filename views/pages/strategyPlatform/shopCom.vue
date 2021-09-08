@@ -344,6 +344,83 @@ export default {
             }
           }
         ],
+        exForm: [
+          {
+            version: '1.4',
+            colname: 'PS_C_PRO_ID',
+            style: 'popInputPlus', // 输入框弹框单多选
+            width: '6',
+            itemdata: {
+              isCustom: true,
+              api: 'common.selProLike',
+              serviceId: 'r3-ps',
+              params: { 'ECODE': 1 },
+              colid: 165990, // 当前字段的ID
+              colname: 'PS_C_PRO_ID', // 当前字段的名称
+              fkdisplay: 'drp', // 外键关联类型
+              isfk: true, // 是否有fk键
+              isnotnull: false, // 是否必填
+              name: $i18n.t('table_label.itemNo01'), // SPU编码
+              readonly: false, // 是否可编辑，对应input   readonly属性
+              valuedata: '', // 这个是选择的值
+              pid: '',
+            },
+            popBefore: e => {
+              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { 'ECODE': 2 };
+            },
+            oneObj: e => {
+              console.log(e);
+              this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
+              this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ECODE = e.valuedata;
+            }
+          },
+          {
+            version: '1.4',
+            colname: 'PS_C_PRO_ID',
+            style: '', // 输入框弹框单多选
+            width: '6',
+            itemdata: {
+              isCustom: true,
+              api: '',
+              params: '',
+              colname: 'PS_C_PRO_ID', // 当前字段的名称
+              fkdisplay: 'drp', // 外键关联类型
+              isfk: true, // 是否有fk键
+              isnotnull: false, // 是否必填
+              name: 'SKU编码', // 
+              readonly: false, // 是否可编辑，对应input   readonly属性
+              valuedata: '', // 这个是选择的值
+              pid: '',
+            },
+            oneObj: e => {
+              console.log(e);
+              this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
+              this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ECODE = e.valuedata;
+            }
+          },
+          {
+            style: '',
+            label: '平台商品ID', // 平台商品ID
+            colname: 'CP_C_ORG_CHANNEL_ID',
+            width: '6',
+            disabled: false,
+            // regx: /^\d*\.{0,1}\d{0,4}$/,
+            inputenter: () => {
+              this.save()
+            }
+          },
+          {
+            style: '',
+            label: '平台条码ID', // 平台条码ID
+            colname: 'CP_C_ORG_CHANNEL_ID',
+            width: '6',
+            disabled: false,
+            // regx: /^\d*\.{0,1}\d{0,4}$/,
+            inputenter: () => {
+              this.save()
+            }
+          }
+        ],
         businessFormConfig: {
           gridBar: true,
           formData: [
@@ -376,54 +453,21 @@ export default {
               value: 'SKU_TYPE', // 输入框的值
               multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
               disabled: false,
-              selectChange: () => { }, // 选中事件，默认返回选中的值,默认返回当前值value
+              selectChange: (o) => {
+                const exF = this.tabConfig.exForm;
+                exF.forEach((i, x) => {
+                  if (x == Number(o.value) - 1) {
+                    if (i.itemdata) {
+                      i.style = 'popInput'
+                    } else {
+                      i.style = 'input'
+                    }
+                  } else {
+                    i.style = ''
+                  }
+                })
+              }, // 选中事件，默认返回选中的值,默认返回当前值value
               options: []
-            },
-            {
-              version: '1.4',
-              colname: 'PS_C_PRO_ID',
-              style: 'popInput', // 输入框弹框单多选
-              width: '6',
-              itemdata: {
-                colid: 165990, // 当前字段的ID
-                colname: 'PS_C_PRO_ID', // 当前字段的名称
-                fkdisplay: 'drp', // 外键关联类型
-                isfk: true, // 是否有fk键
-                isnotnull: false, // 是否必填
-                name: $i18n.t('table_label.itemNo01'), // SPU编码
-                readonly: false, // 是否可编辑，对应input   readonly属性
-                valuedata: '', // 这个是选择的值
-                pid: '',
-              },
-              oneObj: e => {
-                console.log(e);
-                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
-                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ECODE = e.valuedata;
-              }
-            },
-            {
-              version: '1.4',
-              colname: 'PS_C_PRO_ID',
-              style: 'popInput', // 输入框弹框单多选
-              width: '6',
-              itemdata: {
-                isCustom: true,
-                api: '',
-                params: '',
-                colname: 'PS_C_PRO_ID', // 当前字段的名称
-                fkdisplay: 'drp', // 外键关联类型
-                isfk: true, // 是否有fk键
-                isnotnull: false, // 是否必填
-                name: 'SKU编码', // 
-                readonly: false, // 是否可编辑，对应input   readonly属性
-                valuedata: '', // 这个是选择的值
-                pid: '',
-              },
-              oneObj: e => {
-                console.log(e);
-                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ID = e.pid;
-                this.tabConfig.businessFormConfig.formValue.CP_C_SHOP_ECODE = e.valuedata;
-              }
             },
             {
               style: 'input',
@@ -444,6 +488,7 @@ export default {
             }
           ],
           formValue: {
+            SKU_TYPE: '1',
             CP_C_SHOP_ID: '',
             PS_C_SPU_ECODE: '',
             CP_C_ORG_CHANNEL_ID: '',
@@ -543,6 +588,7 @@ export default {
   async mounted() {
     // if (this.ID == -1 && !this.isCopy) return
     // await this.getBtn()
+    this.tabConfig.businessFormConfig.formData.splice(2, 0, ...this.tabConfig.exForm);
     this.tabConfigQu.allData.map(i => i.pKey = i.CP_C_ORG_CHANNEL_ID + i.LOW_STOCK); // 店铺+渠道
   },
   methods: {

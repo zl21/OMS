@@ -24,6 +24,9 @@ export default {
   langSwitcher: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/langswitcher", params, serviceId),
   getObject: (params) => $network.post(`/p/cs/getObject?hash=${+new Date()}`, params),
   objectTableItem: (params) => $network.post(`/p/cs/objectTableItem?hash=${+new Date()}`, params),
+  // 自定义的外键关联查询接口
+  selSkuLike: (params, serviceId = { serviceId: "r3-ps" }) => $network.post(`/p/cs/ps/sku/v1/selSkuLike?hash=${+new Date()}`, params, serviceId),
+  selProLike: (params, serviceId = { serviceId: "r3-ps" }) => $network.post(`/p/cs/ps/pro/v1/selProLike?hash=${+new Date()}`, params, serviceId),
 
 
   // 详情页数据查询接口。共用于：inventoryCenter、orderCenter
