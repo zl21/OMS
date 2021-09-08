@@ -328,3 +328,4 @@
 | v1.2.93 | fkdialog-接口网关调整 |
 | v1.2.94 | fkinputPlus-支持自定义接口 |
 | v1.2.95 | fkinputPlus-支持自定义接口.v1 |
+| v1.2.98 | cdn引入elementUi（注：skx更新到该版本要使用CDN引入elementUi） |
