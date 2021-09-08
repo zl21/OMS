@@ -215,7 +215,7 @@ export default {
     }
   },
   methods: {
-    eyeClick:window._.throttle(function () {
+    eyeClick:_.throttle(function () {
       this.eyeText = this.eyeStatus ? $i18n.t('btn.show') : $i18n.t('btn.hide'); //隐藏 显示
       this.eyeStatus = !this.eyeStatus;
       this.$emit('freshLoad', { DECRYPT: this.eyeStatus });

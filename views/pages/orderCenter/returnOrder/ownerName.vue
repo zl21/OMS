@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 18:45:07
- * @LastEditTime: 2021-08-13 16:23:49
+ * @LastEditTime: 2021-09-07 18:57:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/OWNERNAME.vue
@@ -37,7 +37,7 @@ export default {
     }, 500);
   },
   methods:{
-    onClickEye:window._.throttle(function (val){
+    onClickEye:_.throttle(function (val){
      let obj = {
        Label:'Label',
        name:'name',
