@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-08-27 10:17:56
+ * @LastEditTime: 2021-09-07 18:56:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -1092,7 +1092,7 @@ export default {
       }
     },
     // 右上角-刷新icon事件
-    freshHandel: window._.throttle(function () {
+    freshHandel: _.throttle(function () {
       const self = this;
       self.pageLoading = true;
       self.getData(0, { m1: 1 }, { m2: 2 });
@@ -1387,7 +1387,7 @@ export default {
       });
     },
     // 计算max-Height
-    maxHeight: window._.throttle(function (body, itemName, isInit) {
+    maxHeight: _.throttle(function (body, itemName, isInit) {
       const self = this;
       const mBody = document.getElementById(body);
       let nodeHeight = 0,
@@ -1434,7 +1434,7 @@ export default {
     dayBtnHandel(item, panel) {
       this.btnStyleChange(item, 1, panel);
     },
-    statusBtnHandel: window._.throttle(function (item, panel) {
+    statusBtnHandel: _.throttle(function (item, panel) {
       this.btnStyleChange(item, 0, panel);
     }, 1000, { 'trailing': false }),
     // 按钮样式变换、无数据时展示图片样式处理
