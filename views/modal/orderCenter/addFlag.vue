@@ -413,7 +413,7 @@ export default {
       }
       this.totalData.push(it);
       // 最后一页 = length / pageSize
-      const endIndex = window._.ceil(this.totalData.length / this.table.pageSize);
+      const endIndex = _.ceil(this.totalData.length / this.table.pageSize);
       this.pageChange(endIndex);
     },
     getList() {

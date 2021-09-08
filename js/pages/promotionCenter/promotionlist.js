@@ -714,7 +714,7 @@ export default {
       this.saveCol(e.columns)
     },
     // 保存列信息
-    saveCol: window._.debounce(function(data) {
+    saveCol: _.debounce(function(data) {
       console.log(data);
       debugger // 取不到，用了防抖的原因吗？
     },1000),

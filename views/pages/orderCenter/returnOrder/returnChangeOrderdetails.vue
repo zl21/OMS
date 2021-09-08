@@ -822,7 +822,7 @@ export default {
       }, 500); */
     },
     // 生成'合计'行
-    totalNum: window._.debounce(function () {
+    totalNum: _.debounce(function () {
       const self = this;
       let amt = 0, qty = 0, realAmt = 0;
       const key1 = self.returnProduct == "0" ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
