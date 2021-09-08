@@ -355,6 +355,7 @@ export default {
               api: 'common.selProLike',
               serviceId: 'r3-ps',
               params: { 'ECODE': 1 },
+              dataEmptyMessage: '请输入值查询',
               colid: 165990, // 当前字段的ID
               colname: 'PS_C_PRO_ID', // 当前字段的名称
               fkdisplay: 'drp', // 外键关联类型
@@ -366,7 +367,7 @@ export default {
               pid: '',
             },
             popBefore: e => {
-              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { "ECODE": "1", "pageNumber": 1, "pageSize": 10 }
+              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { "ECODE": e.valuedata, "pageNumber": 1, "pageSize": 10 }
             },
             oneObj: e => {
               console.log(e);
