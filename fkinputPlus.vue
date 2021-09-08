@@ -258,17 +258,17 @@ export default {
       callback();
       const ApiUrl = this.itemdata.api.split('.');
       const { data: { data, code } } = await this.service[ApiUrl[0]][ApiUrl[1]](this.itemdata.params);
-      let rowDa = [],tabthDa = [];
+      let rowDa = [], tabthDa = [];
       if (code == 0) {
         const { row, tabth, totalRowCount } = data;
-        row.map(it => {
+        row.length && row.map(it => {
           let obj = {};
           for (const key in it) {
             obj[key] = { 'val': it[key] }
           }
           rowDa.push(obj)
         });
-        tabth.map(it => {
+        tabth.length && tabth.map(it => {
           let ob = {};
           for (const key in it) {
             ob.colname = key;
@@ -278,7 +278,7 @@ export default {
           tabthDa.push(obj)
         });
         if (isFuzzy) {
-          rowDa.forEach((item) => {
+          rowDa.length && rowDa.forEach((item) => {
             item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : '未设置columnsKey'; // 模糊搜索失焦/选中后展示在input中的字符
           });
           this.AutoData = rowDa;
