@@ -156,9 +156,9 @@ export default {
     itemdata: {
       handler(val, oldVal) {
         // if (val.pid || val.valuedata) { // 存在赋空值的情况
-          if (this.itemdata.fkdisplay == 'drp') {
-            this.defaultSelected = [{ ID: val.pid, Label: val.valuedata }];
-          }
+        if (this.itemdata.fkdisplay == 'drp') {
+          this.defaultSelected = [{ ID: val.pid, Label: val.valuedata }];
+        }
         // }
         if (val.isuppercase && val.valuedata) {
           val.valuedata = val.valuedata.toString().toUpperCase();
@@ -231,6 +231,10 @@ export default {
      * @val {Number} val 当前页数 / 输入的关键字
      */
     async getSelectData() {
+      if (this.itemdata.isCustom) {
+        this.getPopData();
+        return
+      }
       const query = this.handelParam();
       const { serviceId } = this.itemdata
       const version = this.version || this.itemdata.version || '1.3'; // 默认1.3,兼容斯凯奇
@@ -241,6 +245,28 @@ export default {
         this.data = {
           "start": 0,
           row,
+          tabth,
+        };
+        this.totalRowCount = totalRowCount;
+      }
+    },
+    // 不走queryList，走自定义接口，接口格式如：(商品特殊策略-详情-半定制明细-SKU/SPU编码)
+    async getPopData() {
+      const ApiUrl = this.itemdata.api.split('.');
+      const { data: { data, code } } = await this.service[ApiUrl[0]][ApiUrl[1]](this.itemdata.params);
+      let rowDa = [];
+      if (code == 0) {
+        const { row, tabth, totalRowCount } = data;
+        row.map(it => {
+          let obj = {};
+          for (const key in it) {
+            obj[key] = { 'val': it[key] }
+          }
+          rowDa.push(obj)
+        });
+        this.data = {
+          "start": 0,
+          row: rowDa,
           tabth,
         };
         this.totalRowCount = totalRowCount;
