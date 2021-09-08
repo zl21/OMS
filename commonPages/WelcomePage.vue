@@ -1,19 +1,17 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-09-08 09:46:26
+ * @LastEditTime: 2021-09-08 09:55:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
 -->
 <template>
   <div class="welcomepage">
-    <!-- <SelectTheme></SelectTheme> -->
   </div>
 </template>
 
 <script>
-// import SelectTheme from './menuTheme';
 
 export default {
   name: "WelcomePage",

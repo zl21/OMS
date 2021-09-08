@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 14:03:34
- * @LastEditTime: 2021-09-06 14:50:29
+ * @LastEditTime: 2021-09-08 09:55:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/NaVerticalslot.vue
@@ -16,7 +16,7 @@
       <!-- 自定义 问候-->
       <span class="timeTips">{{ timeTips }}, {{ welcome }}</span>
       
-       <SelectTheme></SelectTheme>
+       <!-- <SelectTheme></SelectTheme> -->
       <!-- 模糊查询 -->
       <slot name="nav-input"></slot>
       <!-- 控制台 -->
@@ -36,12 +36,12 @@
 </template>
 <script>
 import service from '@/service/index';
-import SelectTheme from './menuTheme';
+// import SelectTheme from './menuTheme';
 
 export default {
   name: "NaVerticalslot",
   components:{
-    SelectTheme
+    // SelectTheme
   },
   data() {
     return {
