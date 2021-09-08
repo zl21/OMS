@@ -366,7 +366,7 @@ export default {
               pid: '',
             },
             popBefore: e => {
-              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { 'ECODE': 2 };
+              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { "ECODE": "1", "pageNumber": 1, "pageSize": 10 }
             },
             oneObj: e => {
               console.log(e);
@@ -381,8 +381,8 @@ export default {
             width: '6',
             itemdata: {
               isCustom: true,
-              api: '',
-              params: '',
+              api: 'common.selSkuLike',
+              params: { "ECODE": "1", "pageNumber": 1, "pageSize": 10 },
               colname: 'PS_C_PRO_ID', // 当前字段的名称
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
@@ -458,7 +458,7 @@ export default {
                 exF.forEach((i, x) => {
                   if (x == Number(o.value) - 1) {
                     if (i.itemdata) {
-                      i.style = 'popInput'
+                      i.style = 'popInputPlus'
                     } else {
                       i.style = 'input'
                     }
