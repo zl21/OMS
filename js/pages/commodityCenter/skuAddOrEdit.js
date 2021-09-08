@@ -5,7 +5,7 @@ import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import orderItem from 'professionalComponents/subTable';
 import loading from 'professionalComponents/loading';
-import ImageUpload from 'arkui_BCL/ImageUpload';
+// import ImageUpload from 'arkui_BCL/ImageUpload';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -16,7 +16,7 @@ export default {
     businessLabel,
     businessStatusFlag,
     loading,
-    ImageUpload
+    // ImageUpload
   },
   mixins: [new modifycurrentLabel()],
   data() {

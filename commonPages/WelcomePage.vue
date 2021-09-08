@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-09-06 17:30:32
+ * @LastEditTime: 2021-09-08 09:46:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -22,9 +22,9 @@ export default {
       vmI18n: window.vmI18n,
     };
   },
-  // components:{
-  //   SelectTheme
-  // },
+  components:{
+    // SelectTheme
+  },
   methods: {
   },
   mounted() {

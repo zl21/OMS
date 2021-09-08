@@ -15,11 +15,9 @@ import Vue from 'vue';
 import commonUtils from '@/config/config/commonUtils.js'
 import pageNote from 'burgeonConfig/config/pageNote'
 // import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
-import wangEditor from 'wangeditor';
 import qs from 'qs';
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 import service from '@/service/index.js';
-import lodash from 'lodash';
 import store from 'burgeonConfig/store/store'; // 将老框架公共状态注册为customize模块
 import componentsConfig from 'professionalComponents/package.json';
 import omsThemecConfig from '@burgeon/oms-theme/package.json';
@@ -43,11 +41,10 @@ class InitAppConfig {
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
     window.$i18n = i18n; // 挂载国际化
-    window.wangEditor = wangEditor;
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     // Vue.prototype.$comUtils = comUtils;
     Vue.prototype.$omsUtils = commonUtils;
-    Vue.prototype.$lodash = lodash;
+    Vue.prototype.$lodash = window._;
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n;
     window.version = {

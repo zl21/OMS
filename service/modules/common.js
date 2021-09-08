@@ -7,6 +7,7 @@ export default {
   fuzzyquerybyak: (params, obj) => $network.post(`/p/cs/fuzzyquerybyak?hash=${+new Date()}`, params, obj ? obj : { serviceId: "r3-cp" }),
   QueryList: (params, obj) => $network.post(`/p/cs/QueryList?hash=${+new Date()}`, params, obj ? obj : { serviceId: "r3-cp" }),
   getTableQuery: (params, obj) => $network.post("/p/cs/getTableQuery", params, obj ? obj : { serviceId: "r3-cp" }),
+  inputForitem: (params, obj) => $network.post(`/p/cs/inputForitem?hash=${+new Date()}`, params, obj ? obj : { serviceId: "r3-sg" }),
   skuQuery: (params, serviceId = { serviceId: "r3-cp" }) => $network.post("/p/cs/skuQuery", params, serviceId),
   selSku: (params, serviceId = { serviceId: "r3-ps" }) => $network.post('/p/cs/ps/sku/v1/selSku' , params , serviceId), //根据sku编码查询sku商品信息
   // 获取页面title

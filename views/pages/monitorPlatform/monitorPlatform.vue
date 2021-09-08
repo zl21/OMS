@@ -249,25 +249,7 @@
 <script>
 import businessButton from "professionalComponents/businessButton";
 import dateUtil from "@/assets/js/__utils__/date.js";
-// import * as echarts from "echarts";
-import { throttle } from 'lodash'
-// echarts-按需引入：
-import * as echarts from 'echarts/core';
-import {
-  TooltipComponent,
-  GridComponent
-} from 'echarts/components';
-import {
-  GaugeChart,
-  LineChart
-} from 'echarts/charts';
-import {
-  CanvasRenderer
-} from 'echarts/renderers';
-
-echarts.use(
-  [GaugeChart, CanvasRenderer, TooltipComponent, GridComponent, LineChart, CanvasRenderer]
-);
+import * as echarts from "echarts";
 
 let dayBtnConifg = [
   {
@@ -1110,7 +1092,7 @@ export default {
       }
     },
     // 右上角-刷新icon事件
-    freshHandel: throttle(function () {
+    freshHandel: window._.throttle(function () {
       const self = this;
       self.pageLoading = true;
       self.getData(0, { m1: 1 }, { m2: 2 });
@@ -1405,7 +1387,7 @@ export default {
       });
     },
     // 计算max-Height
-    maxHeight: throttle(function (body, itemName, isInit) {
+    maxHeight: window._.throttle(function (body, itemName, isInit) {
       const self = this;
       const mBody = document.getElementById(body);
       let nodeHeight = 0,
@@ -1452,7 +1434,7 @@ export default {
     dayBtnHandel(item, panel) {
       this.btnStyleChange(item, 1, panel);
     },
-    statusBtnHandel: throttle(function (item, panel) {
+    statusBtnHandel: window._.throttle(function (item, panel) {
       this.btnStyleChange(item, 0, panel);
     }, 1000, { 'trailing': false }),
     // 按钮样式变换、无数据时展示图片样式处理

@@ -17,7 +17,7 @@
           <!-- SPU基本信息 -->
           SPU {{ vmI18n.t("common.baseInformation") }}
           <div slot="content" class="customized_Info_img">
-            <ImageUpload
+            <arkImageUpload
               v-model="imageValue"
               :http="http"
               :PropsData="dataitem"

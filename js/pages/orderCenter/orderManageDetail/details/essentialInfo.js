@@ -4,7 +4,6 @@ import businessDialog from 'professionalComponents/businessDialog';
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import goodsTotalAmount from '@/views/pages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
-import { throttle } from 'lodash'
 export default {
   name: 'EssentialInfo',
   props: {
@@ -74,13 +73,13 @@ export default {
         {
           flag: false, // 需要加*
           width: '6',
-          column: 'CP_C_PHY_WAREHOUSE_ENAME', // 
+          column: 'CP_C_PHY_WAREHOUSE_ENAME', //
           label: $i18n.t('form_label.delivery_warehouse') + ':' //发货仓库
         },
         {
           flag: false, // 需要加*
           width: '6',
-          column: 'CP_C_LOGISTICS_ENAME', // 
+          column: 'CP_C_LOGISTICS_ENAME', //
           label: $i18n.t('form_label.logisticsCompany') + ':' //物流公司
         },
         {
@@ -216,7 +215,7 @@ export default {
     }
   },
   methods: {
-    eyeClick:throttle(function () {
+    eyeClick:window._.throttle(function () {
       this.eyeText = this.eyeStatus ? $i18n.t('btn.show') : $i18n.t('btn.hide'); //隐藏 显示
       this.eyeStatus = !this.eyeStatus;
       this.$emit('freshLoad', { DECRYPT: this.eyeStatus });

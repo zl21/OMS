@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/project-logic",
-  "version": "1.12.41",
+  "version": "1.12.46",
   "description": "burgeon company's project-logic for private npm",
   "main": "index.js",
   "scripts": {
@@ -18,12 +18,11 @@
     "babel-cli": "6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "burgeon-ui": "^1.0.56",
-    "vue-i18n": "^8.24.4",
-    "wangeditor": "^4.6.16"
+    "vue-i18n": "^8.24.4"
   },
   "dependencies": {
     "@burgeon/internationalization": "^1.1.1",
-    "@syman/ark-ui": "^1.2.0",
+    "@syman/ark-ui": "^1.1.48",
     "mddir": "^1.1.1",
     "qs": "^6.9.4"
   }

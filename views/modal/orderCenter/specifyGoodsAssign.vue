@@ -54,7 +54,6 @@
 // export default specifyGoodsAssign;
 import businessButton from "professionalComponents/businessButton";
 import inputP from "professionalComponents/fkinputPlus.vue";
-var _ = require('lodash');
 
 export default {
   components: {
@@ -207,7 +206,7 @@ export default {
         // this.$Message.warning($i18n.t("modalTips.zt")); // sku查询失败!
       }
     }, */
-    search: _.debounce(async function () {
+    search: window._.debounce(async function () {
       const self = this;
       if (!self.itemdata.valuedata && !self.searchValue) {
         self.$Message.warning($i18n.t("pHolder.z4")); // 请输入商品SKU

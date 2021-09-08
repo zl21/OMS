@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import { throttle } from 'lodash'
+
 export default {
   data(){
     return {
@@ -28,7 +28,7 @@ export default {
     }
   },
   created(){
-    
+
   },
   mounted(){
     // 模拟点击，加密
@@ -37,7 +37,7 @@ export default {
     }, 500);
   },
   methods:{
-    onClickEye:throttle(function (val){
+    onClickEye:window._.throttle(function (val){
      let obj = {
        Label:'Label',
        name:'name',

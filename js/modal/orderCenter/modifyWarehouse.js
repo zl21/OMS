@@ -8,7 +8,6 @@
  */
 import businessForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
-import { forEach } from 'lodash';
 
 export default {
   components: {
@@ -88,7 +87,7 @@ export default {
     };
   },
   mounted() {
-    
+
   },
   methods: {
     confirm(){

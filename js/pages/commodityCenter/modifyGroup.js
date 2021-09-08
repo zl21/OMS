@@ -10,7 +10,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 // import comUtils from '@/assets/js/__utils__/common.js';
 import subTable from 'professionalComponents/subTable';
-import ImageUpload from 'arkui_BCL/ImageUpload';
+// import ImageUpload from 'arkui_BCL/ImageUpload';
 import modifycurrentLabel from '@/assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -21,7 +21,7 @@ export default {
     businessStatusFlag,
     subTable,
     businessActionTable,
-    ImageUpload
+    // ImageUpload
   },
   mixins: [new modifycurrentLabel()],
   computed: {

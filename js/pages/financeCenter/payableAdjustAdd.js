@@ -9,7 +9,7 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 import tableInput from 'professionalComponents/businessTableInput.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import loading from 'professionalComponents/loading';
-import ImageUpload from 'arkui_BCL/ImageUpload';
+// import ImageUpload from 'arkui_BCL/ImageUpload';
 
 export default {
   name: 'payableAdjustAdd',
@@ -20,7 +20,7 @@ export default {
     businessLabel,
     businessStatusFlag,
     loading,
-    ImageUpload
+    // ImageUpload
   },
   mixins: [customPagingMixins, buttonPermissionsMixin],
   data() {
