@@ -8,6 +8,9 @@
  */
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
+  SG_B_SHOP_DETAIL: {
+    component: () => import('allpages/strategyPlatform/shopCom.vue'),
+  },
   // 策略平台-物流区域设置
   LOGISTICSAREA: {
     component: () => import('allpages/strategyPlatform/logisticsStrategy/logisticsArea'),
