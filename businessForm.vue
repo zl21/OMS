@@ -162,7 +162,7 @@
                       :inputList="item.inputList?item.inputList:[]"
                       :objList="item.objList?item.objList:[]"
                       :itemdata="item.itemdata"
-                      @pop-show-before="runMethods(item.popBefore)"
+                      @pop-show-before="runMethods(item.popBefore(item.itemdata),true)"
                       @inputBlur="(row)=>runMethods(typeof item.inputBlur == 'function' && item.inputBlur(item.itemdata.isBackRowItem ? row : item.itemdata),true)"
                       @getFkChooseItem="(row)=>runMethods(item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata))"
                       @inputEnter="(row)=>runMethods(item.inputEnter(item.itemdata.isBackRowItem ? row : item.itemdata),true)">
