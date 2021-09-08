@@ -232,7 +232,7 @@ export default {
      */
     async getSelectData() {
       if (this.itemdata.isCustom) {
-        this.getPopData();
+        this.getPopData(0);
         return
       }
       const query = this.handelParam();
@@ -250,11 +250,15 @@ export default {
         this.totalRowCount = totalRowCount;
       }
     },
+    handleCusParam() {
+      this.$emit('pop-show-before', this.itemdata);
+    },
     // 不走queryList，走自定义接口，接口格式如：(商品特殊策略-详情-半定制明细-SKU/SPU编码)
-    async getPopData() {
+    async getPopData(isFuzzy, callback = this.handleCusParam) {
+      callback();
       const ApiUrl = this.itemdata.api.split('.');
       const { data: { data, code } } = await this.service[ApiUrl[0]][ApiUrl[1]](this.itemdata.params);
-      let rowDa = [];
+      let rowDa = [],tabthDa = [];
       if (code == 0) {
         const { row, tabth, totalRowCount } = data;
         row.map(it => {
@@ -264,15 +268,35 @@ export default {
           }
           rowDa.push(obj)
         });
-        this.data = {
-          "start": 0,
-          row: rowDa,
-          tabth,
-        };
-        this.totalRowCount = totalRowCount;
+        tabth.map(it => {
+          let ob = {};
+          for (const key in it) {
+            ob.colname = key;
+            ob.name = it[key];
+            ob.show = key == this.itemdata.columnsKey[0]; // 选中后要展示的key
+          }
+          tabthDa.push(obj)
+        });
+        if (isFuzzy) {
+          rowDa.forEach((item) => {
+            item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : '未设置columnsKey'; // 模糊搜索失焦/选中后展示在input中的字符
+          });
+          this.AutoData = rowDa;
+        } else {
+          this.data = {
+            "start": 0,
+            row: rowDa,
+            tabth: tabthDa,
+          };
+          this.totalRowCount = totalRowCount;
+        }
       }
     },
     async getFuzzySelectData(val) {
+      if (this.itemdata.isCustom) {
+        this.getPopData(1);
+        return
+      }
       const query = this.handelFuzzyParam(val);
       const { version, serviceId } = this.itemdata
       const {

@@ -327,3 +327,4 @@
 | v1.2.92 | table - onSelectChange |
 | v1.2.93 | fkdialog-接口网关调整 |
 | v1.2.94 | fkinputPlus-支持自定义接口 |
+| v1.2.95 | fkinputPlus-支持自定义接口.v1 |
