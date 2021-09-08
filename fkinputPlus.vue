@@ -261,6 +261,7 @@ export default {
       let rowDa = [], tabthDa = [];
       if (code == 0) {
         const { row, tabth, totalRowCount } = data;
+        // row.push({ ID: 12, ECODE: '124', ENAME: '53453' });
         row.length && row.map(it => {
           let obj = {};
           for (const key in it) {
@@ -282,6 +283,7 @@ export default {
             item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : '未设置columnsKey'; // 模糊搜索失焦/选中后展示在input中的字符
           });
           this.AutoData = rowDa;
+          tabthDa.unshift({ 'colname': 'ID', 'name': 'ID' }); // 序号列
         } else {
           this.data = {
             "start": 0,
