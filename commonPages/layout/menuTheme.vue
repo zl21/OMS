@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-09-03 13:12:04
- * @LastEditTime: 2021-09-07 09:50:20
+ * @LastEditTime: 2021-09-07 17:17:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/menuTheme.vue
@@ -20,6 +20,7 @@
 
 <script>
 // import less from "libs/less/dist/less.js";
+// import '~_/src/assets/css.less'
 export default {
   name: "WelcomePage",
   data() {
@@ -39,11 +40,6 @@ export default {
     };
   },
   created(){
-    // setTimeout(() => {
-    //   less.modifyVars({'base-color':'#1890FF'}).then((res)=>{
-    //   console.log(res);
-    // })
-    // }, 1000);
     let omsTheme = localStorage.getItem("VarTheme");
     if(!omsTheme){
       localStorage.setItem("VarTheme",this.model);
@@ -57,6 +53,14 @@ export default {
       if(localStorage.getItem("VarTheme") != e){
         localStorage.setItem("VarTheme",e);
         location.reload();
+      //  setTimeout(() => {
+      //     less.modifyVars({
+      //       '@base-color': '#000'
+      //   }).then((res)=>{
+      //     console.log(res);
+      //     less.refreshStyles()
+      //   })
+      //  }, 1000);
       }
       // window.less.modifyVars({primary:'#1890FF'})
     },
