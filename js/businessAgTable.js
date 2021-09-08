@@ -59,7 +59,7 @@ export default {
         colSortChange(data){
             this.$emit('on-sort-change' , data);
         },
-        colMoved: window._.debounce(async function () {
+        colMoved: _.debounce(async function () {
             const self = this;
             const {api, columnApi} = self.$refs.agGrid;
             const colData = columnApi.getAllGridColumns()

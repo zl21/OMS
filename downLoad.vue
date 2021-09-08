@@ -153,7 +153,7 @@ export default {
     }
   },
   methods: {
-    okHandel: window._.throttle(function () {
+    okHandel: _.throttle(function () {
       const self = this;
       console.log('determine::',new Date());
       self.modalConfig[self.tableName].determine(self);

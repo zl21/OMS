@@ -120,7 +120,7 @@ export default {
     },
 
     // 确认导入的操作
-    importDialog: window._.throttle(function () {
+    importDialog: _.throttle(function () {
       if (this.handleBefore(this.files)) return;
       const okApi = this.currentConfig.okApi;
       const okParm = this.currentConfig.okParm;
