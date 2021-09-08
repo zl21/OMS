@@ -268,15 +268,15 @@ export default {
           }
           rowDa.push(obj)
         });
-        tabth.length && tabth.map(it => {
+        if (Object.keys(tabth).length) {
           let ob = {};
-          for (const key in it) {
+          for (const key in tabth) {
             ob.colname = key;
-            ob.name = it[key];
-            ob.show = key == this.itemdata.columnsKey[0]; // 选中后要展示的key
+            ob.name = tabth[key];
+            ob.show = key == this.itemdata.columnsKey ? this.itemdata.columnsKey[0] ? this.itemdata.columnsKey[0] : '' : ''; // 选中后要展示的key
+            tabthDa.push(ob)
           }
-          tabthDa.push(obj)
-        });
+        }
         if (isFuzzy) {
           rowDa.length && rowDa.forEach((item) => {
             item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : '未设置columnsKey'; // 模糊搜索失焦/选中后展示在input中的字符
