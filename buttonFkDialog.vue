@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-26 08:04:57
+ * @LastEditTime: 2021-09-01 15:44:14
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-business-components/buttonFkDialog.vue
+-->
 <!--点击按钮弹出外键关联弹框-->
 <template>
   <div class="buttonFk">
@@ -10,6 +18,7 @@
     </button>
     <fkdialog
       v-if="fkDialog.dialog && itemdata.reftable !== 'VP_C_VIP_ACC'"
+      :title="多选"
       :tablename="itemdata.reftable"
       :tableid="itemdata.reftableid"
       :right-list="fkDialog.lists"
