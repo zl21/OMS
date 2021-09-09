@@ -261,7 +261,12 @@ export default {
       let rowDa = [], tabthDa = [];
       if (code == 0) {
         const { row, tabth, totalRowCount } = data;
-        // row.push({ ID: 12, ECODE: '124', ENAME: '53453' });
+        // row.push({ID:12,ECODE:'124',ENAME:'53453'});
+        const showKey = this.itemdata.columnsKey ? this.itemdata.columnsKey[0] ? this.itemdata.columnsKey[0] : '' : '';
+        if (!showKey) {
+          console.error('未设置columnsKey！');
+          return
+        }
         row.length && row.map(it => {
           let obj = {};
           for (const key in it) {
@@ -270,20 +275,20 @@ export default {
           rowDa.push(obj)
         });
         if (Object.keys(tabth).length) {
-          let ob = {};
           for (const key in tabth) {
+            let ob = {};
             ob.colname = key;
             ob.name = tabth[key];
-            ob.show = key == this.itemdata.columnsKey ? this.itemdata.columnsKey[0] ? this.itemdata.columnsKey[0] : '' : ''; // 选中后要展示的key
+            ob.show = Boolean(key == showKey); // 选中后要展示的key
             tabthDa.push(ob)
           }
         }
+        tabthDa.unshift({ 'colname': 'ID', 'name': 'ID' }); // 序号列
         if (isFuzzy) {
           rowDa.length && rowDa.forEach((item) => {
-            item.value = this.itemdata.columnsKey ? item[this.itemdata.columnsKey[0]] : '未设置columnsKey'; // 模糊搜索失焦/选中后展示在input中的字符
+            item.value = item[showKey]; // 模糊搜索失焦/选中后展示在input中的字符
           });
           this.AutoData = rowDa;
-          tabthDa.unshift({ 'colname': 'ID', 'name': 'ID' }); // 序号列
         } else {
           this.data = {
             "start": 0,
