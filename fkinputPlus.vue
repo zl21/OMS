@@ -147,7 +147,7 @@ export default {
       defaultSelected: this.itemdata.defaultSelected || [],
       disabled: this.itemdata.disabled,
       isBackRowItem: this.itemdata.isBackRowItem,
-      pageIndex: this.itemdata.pageIndex || 0,
+      pageIndex: this.itemdata.pageIndex || 1,
       className: this.itemdata.className || '',
     }
   },
@@ -251,7 +251,7 @@ export default {
       }
     },
     handleCusParam() {
-      this.$emit('pop-show-before', this.itemdata);
+      this.$emit('pop-show-before', { ...this.itemdata, pageIndex: this.pageIndex });
     },
     // 不走queryList，走自定义接口，接口格式如：(商品特殊策略-详情-半定制明细-SKU/SPU编码)
     async getPopData(isFuzzy, callback = this.handleCusParam) {
