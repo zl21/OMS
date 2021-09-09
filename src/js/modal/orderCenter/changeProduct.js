@@ -63,7 +63,7 @@ export default {
                   ECODE: val.trim(),
                 },
               };
-              const res = await _this.service.common.skuQuery(query);
+              const res = await _this.service.common.queryTaobaoExceptionSkus(query);
               if (res.status === 200) {
                 const data = res.data.data.data;
                 const dimList = _this.formConfig.formData;

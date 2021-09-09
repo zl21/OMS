@@ -25,6 +25,7 @@ export default {
   getExpressAreaItemTable: params => network.post('/p/cs/getExpressAreaItemTable', params),
   exportExpressAreaItem: params => network.post('/p/cs/exportExpressAreaItem', params),
   skuQuery: params => network.post('/p/cs/skuQuery', params),
+  queryTaobaoExceptionSkus: params => network.post('/api/cs/oc/oms/v1/queryTaobaoExceptionSkus', params),
   fetchActionsInCustomizePage: params => network.get(`/p/cs/v2/fetchActionsInCustomizePage?${qs.stringify(params)}`),
   manualJdMatchingCheck: params => network.post('/p/cs/manualJdMatchingCheck', params),
   jdReturnStorageSave: params => network.get('/p/cs/jdReturnStorageSave', params),
@@ -77,8 +78,8 @@ export default {
   exportPayableAdjustment: params => network.post('/p/cs/exportPayableAdjustment', params),
   // 查询接口。共用于：financeCenter、orderCenter
   queryOrderList: params => network.post('/api/cs/oc/oms/v1/queryOrderList', params),
-  getOrderStatus: params => network.post('/api/cs/oc/oms/v1/getOrderStatus', params),
   getOrderDecryptList: params => network.post('/api/cs/oc/oms/v1/getOrderDecryptList', params),
+  getOrderStatus: params => network.post('/api/cs/oc/oms/v1/getOrderStatus', params),
   // sku异常登记
   abnormalRegistration: params => network.post('/api/cs/oc/oms/v1/queryExceptionOrderItem', params),
   getSmallClass: params => network.post('/api/cs/oc/oms/v1/querySmallClassException', params),
