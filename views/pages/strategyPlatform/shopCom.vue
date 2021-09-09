@@ -356,6 +356,7 @@ export default {
               serviceId: 'r3-ps',
               params: { 'ECODE': 1 },
               dataEmptyMessage: '请输入值查询',
+              columnsKey: ['ENAME'],
               colid: 165990, // 当前字段的ID
               colname: 'PS_C_PRO_ID', // 当前字段的名称
               fkdisplay: 'drp', // 外键关联类型
@@ -367,7 +368,7 @@ export default {
               pid: '',
             },
             popBefore: e => {
-              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { "ECODE": e.valuedata, "pageNumber": 1, "pageSize": 10 }
+              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { "ECODE": e.valuedata, "pageNumber": e.pageIndex, "pageSize": 10 }
             },
             oneObj: e => {
               console.log(e);
@@ -389,6 +390,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               name: 'SKU编码', // 
+              columnsKey: ['ENAME'],
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: '', // 这个是选择的值
               pid: '',
