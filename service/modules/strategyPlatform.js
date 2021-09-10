@@ -258,4 +258,12 @@ export default {  //
     $network.post('/p/cs/st/v1/tmallExchangeOrder/queryById', params,{ serviceId: 'r3-st' }), // 查询
   tamallTree: (params) => 
     $network.post('/p/cs/st/v1/ST_C_TMALL_EXCHANGE_ORDER/selectTree', params,{ serviceId: 'r3-st' }), // tree
+
+  /**店铺条码锁库策略 */
+  lockStorageSave: (params) =>
+    $network.post('/p/cs/sg/v1/shopSkuLockStrategy/save', params, { serviceId: 'r3-sg' }), // 新增
+  dropDownSKUList: (params) =>
+    $network.post('/p/cs/ps/sku/v1/selSkuLike', params), // SKU查询
+  dropDownSPUList: (params) =>
+    $network.post('/p/cs/ps/pro/v1/selProLike', params), // SPU查询
 }

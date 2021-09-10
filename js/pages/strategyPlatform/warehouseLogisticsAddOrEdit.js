@@ -648,27 +648,26 @@ export default {
      * @param {Boolean} isFilter 是否是模糊搜索
      */
     async getDropDownOptions(val, isFilter) {
-      const query = new FormData();
-      const startindex = isFilter ? 0 : (val - 1) * 10;
-      const search = {
-        isdroplistsearch: true,
-        refcolid: 171650,
-        fixedcolumns: {},
-        startindex,
-        range: 10
-      };
-      query.append('searchdata', JSON.stringify(search));
-
       const formdata = new FormData();
       if (isFilter) {
         formdata.append('ak', val.trim());
         formdata.append('colid', 171650);
         formdata.append('fixedcolumns', JSON.stringify({ whereKeys: {} }));
+      } else {
+        const startindex = isFilter ? 0 : (val - 1) * 10;
+        const search = {
+          isdroplistsearch: true,
+          refcolid: 171650,
+          fixedcolumns: {},
+          startindex,
+          range: 10
+        };
+        formdata.append('searchdata', JSON.stringify(search));
       }
 
       const { data: { code, data } } = isFilter 
         ? await this.service.common.fuzzyquerybyak(formdata)
-        : await this.service.common.QueryList(query);
+        : await this.service.common.QueryList(formdata);
       if (code == 0) {
         if (isFilter) {
           const autoData = data.map(item => ({ ID: item.ID || item.id, value: item.ENAME }));

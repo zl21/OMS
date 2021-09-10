@@ -11,6 +11,10 @@ export default {
   SG_B_SHOP_DETAIL: {
     component: () => import('allpages/strategyPlatform/shopCom.vue'),
   },
+  // 店铺条码锁库策略
+  SG_B_SHOP_LOCK_DETAIL: {
+    component: () => import('allpages/strategyPlatform/goodsInfoDetails'),
+  },
   // 策略平台-物流区域设置
   LOGISTICSAREA: {
     component: () => import('allpages/strategyPlatform/logisticsStrategy/logisticsArea'),
