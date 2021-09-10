@@ -653,7 +653,33 @@ export default {
       // this.tabConfigQu.data.find(i => i.pKey == c.pKey)._checked = true;
     },
     onSelectChangeQ(e) { // 更新了选中数据触发
+      e.forEach(i => i._checked = true);
       this.tabConfigQu.selection = e;
+      /**
+       * 更新allData：
+       *  1. 更新选中状态：_checked
+       *  2. 更新修改的数据
+       */
+      /* const all = JSON.parse(JSON.stringify(this.tabConfigQu.allData));
+      const arr3 = all.concat(e);
+      let obj = {};
+      const res = arr3.reduce((prev, cur, index, array) => {
+        obj[cur.pKey] ? '' : obj[cur.pKey] = true && prev.push(cur);
+        return prev
+      }, []);
+      this.tabConfigQu.allData = res */
+      const seIdArr = $omsUtils.sonList(e, 'pKey');
+      this.tabConfigQu.allData.forEach((it, x) => {
+        this.tabConfigQu.selection.forEach((se, y) => {
+          if (!it._checked && it.pKey == se.pKey) { // 选中本来没选中的
+            it._checked = true;
+          } else if (!it._checked) { // 本来就没选中的，不动
+            it._checked = false;
+          } else if (it._checked && !seIdArr.includes(it.pKey)) { // 本来选中,现在取消选中
+            it._checked = false;
+          }
+        })
+      })
     },
     onSelectCancelQ(e, c) {
       // e.forEach(i => i._checked = false);
