@@ -193,7 +193,7 @@ export default {
                 this.formConfig1.formValue,
                 this.formConfig2.formValue
               );
-              if (!self.isEmpty(masterTable)) {
+              if (!self.isEmpty(masterTable, 'isCopy')) {
                 return;
               }
               if (masterTable.is_kaip) {
@@ -2178,8 +2178,10 @@ export default {
       // if (!masterTable.CP_C_SHOP_ID) {
       //   promptMessage += "下单店铺,";
       // }
-      if (masterTable.RECEIVER_ADDRESS && !/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(masterTable.RECEIVER_ADDRESS)) {
-        promptMessage += '收货人地址格式不正确,';
+      if (actionType !== 'isCopy') {
+        if (masterTable.RECEIVER_ADDRESS && !/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(masterTable.RECEIVER_ADDRESS)) {
+          promptMessage += '收货人地址格式不正确,';
+        }
       }
       this.formConfig.formData.forEach((item) => {
         // 下单店铺
