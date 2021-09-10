@@ -109,16 +109,15 @@ export default {
               // 模糊查询的方法
               const _this = this;
               _this.formConfig.psCProEcode = val.trim();
-              const fromdata = new FormData();
+              // const fromdata = new FormData();
               const params = {
-                GLOBAL: val.trim(),
-                PAGENUM: 1,
-                PAGESIZE: 10,
-                CONDITION: {},
-                TABLENAME: 'PS_C_PRO',
+                isBlur: 'Y',
+                psCSku: {
+                  psCProEcode: val.trim(),
+                },
               };
-              fromdata.append('param', JSON.stringify(params));
-              const res = await this.service.common.screenresult(fromdata);
+              // fromdata.append('param', JSON.stringify(params));
+              const res = await this.service.common.queryTaobaoExceptionSkus(params);
               if (res.data.code === 0) {
                 const dimList = _this.formConfig.formData;
 
@@ -316,7 +315,7 @@ export default {
         },
       };
       try {
-        const res = await self.service.common.skuQuery(query);
+        const res = await self.service.common.queryTaobaoExceptionSkus(query);
         if (res.data.code == 0) {
           res.data.data.data.map((item) => {
             item.IS_GIFT == '0' ? '否' : '是';

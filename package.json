@@ -12,9 +12,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,vue}": [
-      "eslint"
-    ]
+    "*.{js,vue}": []
   },
   "author": "Burgeon Developer",
   "license": "ISC",
