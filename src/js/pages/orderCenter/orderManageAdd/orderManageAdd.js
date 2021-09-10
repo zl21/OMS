@@ -2173,7 +2173,7 @@ export default {
     // 获取区id
 
     // 非空验证方法
-    isEmpty(masterTable) {
+    isEmpty(masterTable, actionType) {
       let promptMessage = ''; // 非空提示信息
       // if (!masterTable.CP_C_SHOP_ID) {
       //   promptMessage += "下单店铺,";
