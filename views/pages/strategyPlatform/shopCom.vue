@@ -597,7 +597,7 @@ export default {
   methods: {
     // 添加 - 按钮
     addHandel() {
-      this.tabConfig.data = [...this.tabConfig.data, ...this.tabConfigQu.seslection]
+      this.tabConfig.data = [...this.tabConfig.data, ...this.tabConfigQu.selection]
     },
     // 渠道仓弹窗-确定
     quDaoOk() {
@@ -668,12 +668,20 @@ export default {
         return prev
       }, []);
       this.tabConfigQu.allData = res */
+      const pIndex = this.tabConfigQu.pageIndex;
+      const pSize = this.tabConfigQu.pageSize;
+      const pre = (pIndex - 1) * pSize;
+      const end = pIndex * pSize;
       const seIdArr = $omsUtils.sonList(e, 'pKey');
       this.tabConfigQu.allData.forEach((it, x) => {
+        if (x < pre || x > end - 1) {
+          // 分页之后选中有问题，返回的e只有当前页的选中项
+          return
+        }
         this.tabConfigQu.selection.forEach((se, y) => {
           if (!it._checked && it.pKey == se.pKey) { // 选中本来没选中的
             it._checked = true;
-          } else if (!it._checked) { // 本来就没选中的，不动
+          } else if (!it._checked) { // 本来就没选中的,不动
             it._checked = false;
           } else if (it._checked && !seIdArr.includes(it.pKey)) { // 本来选中,现在取消选中
             it._checked = false;
