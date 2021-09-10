@@ -356,6 +356,7 @@ export default {
               serviceId: 'r3-ps',
               params: { 'ECODE': 1 },
               dataEmptyMessage: '请输入值查询',
+              columnsKey: ['ENAME'],
               colid: 165990, // 当前字段的ID
               colname: 'PS_C_PRO_ID', // 当前字段的名称
               fkdisplay: 'drp', // 外键关联类型
@@ -367,7 +368,7 @@ export default {
               pid: '',
             },
             popBefore: e => {
-              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { "ECODE": e.valuedata, "pageNumber": 1, "pageSize": 10 }
+              this.tabConfig.businessFormConfig.formData[2].itemdata.params = { "ECODE": e.valuedata, "pageNumber": e.pageIndex, "pageSize": 10 }
             },
             oneObj: e => {
               console.log(e);
@@ -389,6 +390,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               name: 'SKU编码', // 
+              columnsKey: ['ENAME'],
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: '', // 这个是选择的值
               pid: '',
@@ -595,7 +597,7 @@ export default {
   methods: {
     // 添加 - 按钮
     addHandel() {
-      this.tabConfig.data = [...this.tabConfig.data, ...this.tabConfigQu.seslection]
+      this.tabConfig.data = [...this.tabConfig.data, ...this.tabConfigQu.selection]
     },
     // 渠道仓弹窗-确定
     quDaoOk() {
@@ -651,7 +653,41 @@ export default {
       // this.tabConfigQu.data.find(i => i.pKey == c.pKey)._checked = true;
     },
     onSelectChangeQ(e) { // 更新了选中数据触发
+      e.forEach(i => i._checked = true);
       this.tabConfigQu.selection = e;
+      /**
+       * 更新allData：
+       *  1. 更新选中状态：_checked
+       *  2. 更新修改的数据
+       */
+      /* const all = JSON.parse(JSON.stringify(this.tabConfigQu.allData));
+      const arr3 = all.concat(e);
+      let obj = {};
+      const res = arr3.reduce((prev, cur, index, array) => {
+        obj[cur.pKey] ? '' : obj[cur.pKey] = true && prev.push(cur);
+        return prev
+      }, []);
+      this.tabConfigQu.allData = res */
+      const pIndex = this.tabConfigQu.pageIndex;
+      const pSize = this.tabConfigQu.pageSize;
+      const pre = (pIndex - 1) * pSize;
+      const end = pIndex * pSize;
+      const seIdArr = $omsUtils.sonList(e, 'pKey');
+      this.tabConfigQu.allData.forEach((it, x) => {
+        if (x < pre || x > end - 1) {
+          // 分页之后选中有问题，返回的e只有当前页的选中项
+          return
+        }
+        this.tabConfigQu.selection.forEach((se, y) => {
+          if (!it._checked && it.pKey == se.pKey) { // 选中本来没选中的
+            it._checked = true;
+          } else if (!it._checked) { // 本来就没选中的,不动
+            it._checked = false;
+          } else if (it._checked && !seIdArr.includes(it.pKey)) { // 本来选中,现在取消选中
+            it._checked = false;
+          }
+        })
+      })
     },
     onSelectCancelQ(e, c) {
       // e.forEach(i => i._checked = false);

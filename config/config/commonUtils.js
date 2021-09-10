@@ -279,7 +279,7 @@ class commonUtils {
     })
   }
   /**
-   * 获取两个数组对象的并集
+   * 深拷贝
    * @param obj  拷贝的数据源
    */
   static deepClone(obj) {
