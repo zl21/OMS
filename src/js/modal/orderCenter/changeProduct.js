@@ -267,6 +267,9 @@ export default {
       onRowClickData: {},
       onRowClickText: '',
       onRowClickReplaceText: '',
+      webname: this.$parent.$parent.dialogComponentName || '',
+      leftTitle: '',
+      rightTitle: '',
       isTBsku: false
     };
   },
@@ -282,10 +285,32 @@ export default {
       type: Object,
     },
   },
+  computed: { },
+  created() {
+    switch (this.webname) {
+      case 'SKUABNORMALREGISTRATION': // 淘宝订单接口
+        this.leftTitle = 'SKU编码';
+        this.rightTitle = '自定义SKU';
+        break;
+      case '': // 京东订单接口
+        this.leftTitle = 'SKU编码';
+        this.rightTitle = '自定义SKU';
+        break;
+      case '': // 通用订单接口
+        this.leftTitle = 'SKU编码';
+        this.rightTitle = '自定义SKU';
+        break;
+      default:
+        break;
+    }
+  },
   mounted() {
     console.log(this.$attrs['obj-tab-action-dialog-config'], this.idArray)
     // 淘宝订单接口-sku异常登记sku替换
     if(this.$attrs['obj-tab-action-dialog-config'].webname === "SKUAbnormalRegistration") {
+      this.isTBsku = true
+    }
+    if ([].includes(this.webname)) {
       this.isTBsku = true
     }
   },
