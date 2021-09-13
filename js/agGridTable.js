@@ -1,4 +1,4 @@
-import agTable from '../common/js/custom-ag-grid-table'
+import agTable from 'professionalComponents/common/js/custom-ag-grid-table'
 import i18n from "@burgeon/internationalization/i18n";
 export default {
   data() {
