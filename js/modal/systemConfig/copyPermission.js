@@ -98,21 +98,6 @@ export default {
           }
         }
       });
-      // network.post('/p/cs/copyPermission', obj)
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       this.singlePermissionId = null;
-      //       this.multiplePermissionId = null;
-      //       this.copyType = '';
-      //       this.getTableData();
-      //       this.$Message.success({
-      //         content: res.data.message
-      //       });
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     throw err;
-      //   });
     },
     getCopyPermissionData() {
       service.systemConfig.cgroupsquery({
@@ -126,18 +111,6 @@ export default {
           }
         }
       });
-      // network.post('/p/cs/cgroupsquery', { NAME: '' })
-      //   .then((res) => {
-      //     if (res.data.code === 0) {
-      //       this.backupsDropData = res.data.data;
-      //       this.totalRowCount = res.data.data.length;
-      //       this.getSingleDropSelectData(1, res.data.data);
-      //       this.getMultipleDropSelectData(1, res.data.data);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     throw err;
-      //   });
     }, // 获取复制权限外键的数据
     getSingleDropSelectData(pageValue, data) {
       const start = (pageValue - 1) * this.dropPageSize;

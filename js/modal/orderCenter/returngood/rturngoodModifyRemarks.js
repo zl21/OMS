@@ -89,59 +89,6 @@ export default {
       } else {
         self.$Message.error(res.data.message);
       }
-
-      // if (!self.bouncedData.value) return;
-      // let cover = '';
-      // if (self.bouncedData.animal === $i18n.t("other.override_original_remarks")) { // '覆盖原备注'
-      //   cover = 'true';
-      // } else {
-      //   cover = 'false';
-      // }
-      // // let fromdata = new FormData();
-      // let param = {};
-      // // let url = '';
-      // let res;
-      // if (self.componentData.type == 1) {
-      //   param = {
-      //     ids: self.componentData.ids,
-      //     remark: self.bouncedData.value,
-      //     cover
-      //   };
-      //   // url = '/api/cs/oc/oms/v1/reRemarkUpdate';
-      //   res = await this.service.orderCenter.remarkUpdate(param);
-      // } else if (self.componentData.type == 2) {
-      //   param = {
-      //     IDS: self.componentData.ids,
-      //     BACK_MESSAGE: self.bouncedData.value,
-      //     COVER: cover
-      //   };
-      //   // url = '/api/cs/oc/oms/v1/modifyReturnSellerRemark';
-      //   res = await this.service.orderCenter.modifyReturnSellerRemark(param);
-      // }
-      // if (res.data.code === 0) {
-      //   self.$Message.success(res.data.message);
-      //   console.log(self);
-      //   self.$parent.$parent.$parent.getList(self.componentData.status);
-      //   self.$parent.$parent.closeConfirm();
-      // } else {
-      //   self.$Message.error(res.data.message);
-      // }
-      // fromdata.append("param", JSON.stringify(param));
-
-      // axios({
-      //   url,
-      //   method: 'post',
-      //   data: param
-      // }).then(res => {
-      //   if (res.data.code === 0) {
-      //     self.$Message.success(res.data.message);
-      //     console.log(self);
-      //     self.$parent.$parent.$parent.getList(self.componentData.status);
-      //     self.$parent.$parent.closeConfirm();
-      //   } else {
-      //     self.$Message.error(res.data.message);
-      //   }
-      // });
     }
   },
   mounted() {

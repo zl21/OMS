@@ -254,21 +254,6 @@ export default {
       } else {
         self.$Message.error(message);
       }
-      // axios({
-      //   url: '/api/cs/oc/oms/v1/modifygoods',
-      //   method: 'post',
-      //   // cancelToken: true,
-      //   data: param
-      // }).then(res => {
-      //   if (res.data.code === 0) {
-      //     self.$Message.info(res.data.message);
-      //     self.$parent.$parent.$parent.getData();
-      //     self.$parent.$parent.closeConfirm();
-      //     self.$parent.$parent.$parent.selection = [];
-      //   } else {
-      //     self.$Message.error(res.data.message);
-      //   }
-      // });
     },
     async search() {
       // 搜索

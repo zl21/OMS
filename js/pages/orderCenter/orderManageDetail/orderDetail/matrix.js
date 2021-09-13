@@ -995,23 +995,6 @@ export default {
               this.stockData = data.data;
             }
           });
-
-          // await axios({
-          //   // url: this.getStock,
-          //   url: this.tablename === 'OC_B_SALE' && this.saleType === 'NOR' ? '/p/cs/oc/v1/sale/queryCommonStorageByPro' : '/p/cs/sg/storage/queryCommonStorageByPro',
-          //   method: 'post',
-          //   data: {
-          //     storeId: this.distribId,
-          //     proEcode: this.encode,
-          //     phyWarehouseId: this.cp_c_phy_warehouse_id,
-          //     objId: this.objid
-          //   }
-          // }).then((res) => {
-          //   const data = res.data;
-          //   if (data.code === 0) {
-          //     this.stockData = data.data;
-          //   }
-          // });
         }
         if (this.hasReceiving) {
           // 修改后已验证
@@ -1098,21 +1081,6 @@ export default {
             this.stockData = data.data;
           }
         });
-
-        // return axios({
-        //   // url: this.getStock,
-        //   url: '/p/cs/sg/storage/queryCommonStorageByPro',
-        //   method: 'post',
-        //   data: {
-        //     storeId: this.takeStock,
-        //     proEcode: this.encode
-        //   }
-        // }).then((res) => {
-        //   const data = res.data;
-        //   if (data.code === 0) {
-        //     this.stockData = data.data;
-        //   }
-        // });
       }
     }, // 获取内容信息
     keydown(e) {

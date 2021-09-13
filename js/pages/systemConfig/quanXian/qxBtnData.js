@@ -82,34 +82,10 @@ export default {
         this.getTableData();
         this.isChange = false;
       }
-      // this.$network.post(url, this.$urlSearchParams(params))
-      //   .then((res) => {
-      //     this.spinShow = false;
-      //     this.$Modal.fcSuccess({
-      //       title: '成功',
-      //       content: res.data.message
-      //     });
-      //     this.getTableData();
-      //     this.isChange = false;
-      //   });
     },
     getSaveData() {
   
       this.saveTableArr = [];
-
-      // if (this.permissionType === 'sensitive') {
-      //   this.tableArr.rows.forEach((item, index) => {
-      //     if (item.ID === null || (item.ID === this.oldTableArr[index].ID && (item.IS_READ !== this.oldTableArr[index].IS_READ || item.IS_WRITE !== this.oldTableArr[index].IS_WRITE))) {
-      //       this.saveTableArr.push({
-      //         ISREAD: item.IS_READ ? 'Y' : 'N',
-      //         ISMODIFY: item.IS_WRITE ? 'Y' : 'N',
-      //         CP_C_COLUMN_ID: item.CP_C_COLUMN_ID,
-      //         ID: item.ID === null ? -1 : item.ID,
-      //         CP_C_GROUPS_ID: item.CP_C_GROUPS_ID
-      //       });
-      //     }
-      //   });
-      // } else {
       if (this.permissionType === 'brand') {
         this.tableArr.rows.forEach((item, index) => {
           if (item.ID === null || (item.ID === this.oldTableArr[index].ID && (item.IS_READ !== this.oldTableArr[index].IS_READ || item.IS_WRITE !== this.oldTableArr[index].IS_WRITE))) {

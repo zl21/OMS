@@ -144,24 +144,6 @@ export default {
           }
         });
       }
-
-      // axios({
-      //   method: 'post',
-      //   url: '/p/cs/selectVipcomMailSetColumn',
-      //   data: obj
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     const row = res.data.data;
-      //     self.saveObj.MAIL_CONTENT = row.MAIL_CONTENT;
-      //     self.itemdata.valuedata = row.MAIL_CONTENT;
-      //     self.saveObj.MAIL_TITLE = row.MAIL_TITLE;
-      //     self.$nextTick(() => {
-      //       if (self.$refs[`editor${self.objid}`]) {
-      //         self.$refs[`editor${self.objid}`].getData(self.itemdata);
-      //       }
-      //     });
-      //   }
-      // });
     },
     // 保存当前单据
     // flag 主表保存成功后的标志
@@ -184,20 +166,6 @@ export default {
           // self.$Message.error('保存失败');
         }
       }
-
-      // return axios({
-      //   url: '/p/cs/saveVipcomMail',
-      //   method: 'post',
-      //   data
-      // }).then(res => {
-      //   if (!flag) {
-      //     if (res.data.code === 0) {
-      //       self.$Message.success('保存成功!');
-      //     } else {
-      //       // self.$Message.error('保存失败');
-      //     }
-      //   }
-      // });
     },
     refreshGetData() {
       this.$emit('changeRefresh', false);

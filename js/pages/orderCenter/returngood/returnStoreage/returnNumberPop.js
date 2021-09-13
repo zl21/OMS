@@ -340,21 +340,6 @@ export default {
       } else {
         _this.$Message.warning(data.message);
       }
-      // axios({
-      //   url: '/api/cs/oc/oms/v1/manualMatchingConfirmationButton',
-      //   method: 'post',
-      //   // cancelToken: true,
-      //   data: param
-      // }).then(res => {
-      //   if (res.data.code == 0) {
-      //     _this.$parent.$parent.$parent.returnArr(res.data.data.oc_b_refund_in_id || '');
-      //     // _this.$parent.$parent.$parent.returnArr(_this.selectData[0].ID);
-      //     // _this.$parent.$parent.$parent.getList();
-      //     _this.$parent.$parent.closeConfirm();
-      //   } else {
-      //     _this.$Message.warning(res.data.message);
-      //   }
-      // });
     },
     // 错发强制匹配确定
     async okClick2() {
@@ -385,21 +370,6 @@ export default {
         } else {
           _this.$Message.warning(data.message);
         }
-
-        // axios({
-        //   url: '/api/cs/oc/oms/v1/seachForced',
-        //   method: 'post',
-        //   // cancelToken: true,
-        //   data: param
-        // }).then(res => {
-        //   if (res.data.code == 0) {
-        //     _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.PS_C_SKU_ECODE_ACTUAL, _this.selectData[0].PRODUCTITEMS[0].ID);
-        //     // _this.$parent.$parent.$parent.getList();
-        //     _this.$parent.$parent.closeConfirm();
-        //   } else {
-        //     _this.$Message.warning(res.data.message);
-        //   }
-        // });
       }
     },
     async wrongForce() {
@@ -424,20 +394,6 @@ export default {
       } else {
         this.$Message.warning(data.message);
       }
-
-      // axios({
-      //   url: '/api/cs/oc/oms/v1/seachForced',
-      //   method: 'post',
-      //   // cancelToken: true,
-      //   data: param
-      // }).then(res => {
-      //   this.$parent.$parent.closeConfirm();
-      //   if (res.data.code == 0) {
-      //     this.$parent.$parent.$parent.returnArr1(res.data.data.returnId, res.data.data.PS_C_SKU_ECODE_ACTUAL, this.wrongSelectData[0].ID);
-      //   } else {
-      //     this.$Message.warning(res.data.message);
-      //   }
-      // });
     },
     querycancel() {},
     wrongForceSelect(e) {

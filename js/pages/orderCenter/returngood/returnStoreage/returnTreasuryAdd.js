@@ -809,11 +809,6 @@ export default {
       const _this = this;
       _this.service.orderCenter
         .manualMatchingList({ id: _this.$route.query.id })
-        // axios({
-        //   url: '/api/cs/oc/oms/v1/manualMatchingList',
-        //   method: 'post',
-        //   data: { id: _this.$route.query.id },
-        // })
         .then((res) => {
           if (res.data.code === 0) {
             res.data.data.ocBRefundIn.IN_STORE_ENAME =

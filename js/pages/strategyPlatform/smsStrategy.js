@@ -104,21 +104,6 @@ export default {
     // 获取变量
     getVariableRest() {
       const self = this;
-      // axios({
-      //   method: "post",
-      //   url: "/p/cs/selectVipcomMailSetColumn",
-      //   data: {}
-      // }).then(function(res) {
-      //    if(res.data.data.code === 0){
-      //      let  rows = res.data.data.data;
-      //      self.lists = rows.map((row)=>{
-      //          return {
-      //             label: row.description,
-      //             click: () => self.setVariable(row.DESCRIPTION)
-      //          }
-      //      })
-      //    }
-      // });
 
       const rows = [
         '平台单号',
@@ -180,23 +165,6 @@ export default {
           }
         });
       }
-      // axios({
-      //   method: 'post',
-      //   url: '/p/cs/st/v1/querySmsContent',
-      //   data: formdata,
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     const row = res.data.data;
-      //     self.saveObj.MAIL_CONTENT = row.MAIL_CONTENT;
-      //     self.itemdata.valuedata = row;
-      //     // self.saveObj["MAIL_TITLE"] = row.MAIL_TITLE;
-      //     self.$nextTick(() => {
-      //       if (self.$refs[`editor${self.objid}`]) {
-      //         self.$refs[`editor${self.objid}`].getData(self.itemdata);
-      //       }
-      //     });
-      //   }
-      // });
     },
     // 保存当前单据
     async saveCurrent() {
@@ -214,16 +182,6 @@ export default {
       if (data.code !== 0) {
         self.$Message.error('保存失败');
       }
-
-      // return axios({
-      //   url: '/p/cs/st/v1/saveSmsContent',
-      //   method: 'post',
-      //   data,
-      // }).then((res) => {
-      //   if (res.data.code !== 0) {
-      //     self.$Message.error('保存失败');
-      //   }
-      // });
     },
     refreshGetData() {
       this.$emit('changeRefresh', false);

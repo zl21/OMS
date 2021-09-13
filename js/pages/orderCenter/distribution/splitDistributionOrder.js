@@ -2,8 +2,6 @@ import reButton from 'professionalComponents/businessButton';
 import reTable from 'professionalComponents/businessActionTable';
 import reDialog from 'professionalComponents/businessDialog';
 import loading from 'professionalComponents/loading';
-// import { post } from '@/utils/request';
-
 export default {
   components: {
     reButton,
@@ -216,10 +214,8 @@ export default {
       const params = {
         distributionId: this.pageConfig.customizedModuleId
       };
-      // this.$R3loading.show(this.customizedModuleName);
       this.loading = true;
       const self = this;
-      // post(this.$httpApi.order.distributionFindBydistributionId, params)
       self.service.orderCenter
         .distributionFindBydistributionId(params)
         .then(({ data }) => {
@@ -230,7 +226,6 @@ export default {
           }
         })
         .finally(() => {
-          // this.$R3loading.hide(this.customizedModuleName);
           this.loading = false;
         });
     },

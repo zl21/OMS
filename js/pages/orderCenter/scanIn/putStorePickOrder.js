@@ -1096,20 +1096,6 @@ export default {
       } else {
         self.$Message.error(data.message);
       }
-
-      // axios({
-      //   url: '/p/cs/sg/saveInPickOrder',
-      //   method: 'post',
-      //   data: formdata
-      // }).then((res) => {
-      //   console.log(res);
-      //   if (res.data.code === 0) {
-      //     self.$Message.success(res.data.message);
-      //     self.reload();
-      //   } else {
-      //     self.$Message.error(res.data.message);
-      //   }
-      // });
     },
     // 审核
     async audit() {
@@ -1129,19 +1115,6 @@ export default {
         } else {
           self.$Message.error(data.message);
         }
-        // axios({
-        //   url: '/p/cs/sg/auditInPickOrder',
-        //   method: 'post',
-        //   data: formdata
-        // }).then((res) => {
-        //   console.log(res);
-        //   if (res.data.code === 0) {
-        //     self.$Message.success(res.data.message);
-        //     self.reload();
-        //   } else {
-        //     self.$Message.error(res.data.message);
-        //   }
-        // });
       }
     },
     // 扫描后,更新未扫描商品表格

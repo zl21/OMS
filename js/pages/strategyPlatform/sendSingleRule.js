@@ -653,21 +653,6 @@ export default {
         });
         _this.listArr = listArr;
       }
-
-      // axios({
-      //   url,
-      //   method: 'post',
-      //   data: param
-      // }).then(res => {
-      //   _this.tableLoading = false;
-      //   if (res.data.code === 0) {
-      //     const listArr = res.data.data !== undefined ? res.data.data : [];
-      //     listArr.forEach(item => {
-      //       item.WAREHOUSE_RANK = JSON.parse(item.WAREHOUSE_RANK);
-      //     });
-      //     _this.listArr = listArr;
-      //   }
-      // });
     },
     inputBlur(item, rank, index) {
       for (let i = 0; i < item.length; i++) {
