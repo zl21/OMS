@@ -1224,6 +1224,19 @@ export default {
     };
   },
   watch: {
+    'formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME': {
+      handler(newValue, oldVal) {
+        if (newValue !== oldVal) {
+          // 清空‘配送物流’
+          this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = '';
+          this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = '';
+          this.formConfig.formData[2].itemdata.pid = '';
+          this.formConfig.formData[2].itemdata.valuedata = '';
+        } else {
+          console.log('watch');
+        }
+      }
+    },
     isSetOption(val) {
       const self = this;
       if (val) {
