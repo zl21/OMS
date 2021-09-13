@@ -1537,6 +1537,22 @@ export default {
         self.$Message.success(message || window.vmI18n.t('modalTips.z9'));
         self.ID = data.objid;
         self.getPayableAdjustment();
+      } else if (code === 1) {
+        // 二次确认弹窗
+        self.$Modal.info({
+          title: $i18n.t('modalTitle.tips'), // 提示
+          content: $i18n.t(`modalTips.${message}`),
+          mask: true,
+          showCancel: true,
+          okText: $i18n.t('common.determine'), // 确定
+          cancelText: $i18n.t('common.cancel'), // 取消
+          onOk: () => {
+            self.save();
+          },
+          onCancel: () => {
+            self.$emit('closeActionDialog', false)
+          },
+        })
       } else {
         self.$Message.error(message || window.vmI18n.t('modalTips.y0'));
       }

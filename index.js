@@ -63,6 +63,7 @@ Vue.prototype.service = service;
 Vue.prototype.qs = qs;
 window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
+window.$i18n = i18n;
 Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
 Vue.prototype.$comUtils = comUtils;
 
