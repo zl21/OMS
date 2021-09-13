@@ -1,16 +1,3 @@
-// import { Grid } from 'ag-grid';  // 版本：^17.1.1
-// import 'libs/ag-grid/dist/styles/ag-grid.css';  
-// import 'libs/ag-grid/dist/styles/ag-theme-balham.css';
-
-// 以上依赖包 需要通过CDN方式在项目中引入（不能大于17版本，样式会有问题，斯凯奇已测试）：
-{/* 
-  <script src="https://cdn.bootcdn.net/ajax/libs/ag-grid/17.1.1/ag-grid.js"></script>
-  <link href="https://cdn.bootcdn.net/ajax/libs/ag-grid/17.1.1/styles/ag-grid.css" rel="stylesheet">
-  <link href="https://cdn.bootcdn.net/ajax/libs/ag-grid/17.1.1/styles/ag-theme-balham.css" rel="stylesheet"></link> 
-*/}
-
-// 需要获取企业版的ag-grid-enterpriseCDN链接
-// import { LicenseManager } from 'libs/ag-grid-enterprise/main'; 
 import { agGridEnterpriseLicenseKey } from './constant';
 
 // 设置enterprise LicenseKey

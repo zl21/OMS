@@ -14,8 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@burgeon/oms-theme": "^1.4.7",
-    "@burgeon/project-logic": "^1.5.57",
-    "@syman/burgeon-r3": "^2.2.0"
+    "@burgeon/project-logic": "^1.5.57"
   },
   "dependencies": {
     "@burgeon/internationalization": "^1.0.64"

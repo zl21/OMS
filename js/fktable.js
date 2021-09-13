@@ -288,7 +288,6 @@ export default {
       }
       const serviceId = _self.itemdata.serviceId;
       _self.service.common.fuzzyquerybyak(params, serviceId ? { serviceId } : 0)
-        // $network.post('/p/cs/fuzzyquerybyak',params,serviceId ? { serviceId } : 0)
       .then((res) => {
         console.log('res:',res);
         this.fkDimData = res.data.data;
@@ -320,7 +319,6 @@ export default {
       }
       params.append('searchdata', JSON.stringify(this.formObj));
       const serviceId = _self.itemdata.serviceId;
-      // $network.post(url,params,serviceId ? { serviceId } : 0)
       _self.service.common.QueryList(params, serviceId ? { serviceId } : 0)
       .then((res) => {
         if (res.data.code == 0) {

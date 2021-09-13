@@ -1,5 +1,4 @@
 import agTable from '../common/js/custom-ag-grid-table'
-import R3 from '@syman/burgeon-r3';
 import i18n from "@burgeon/internationalization/i18n";
 export default {
   data() {
@@ -188,7 +187,7 @@ export default {
             let formdata = new FormData()
             formdata.append('tableid', self.$route.params.customizedModuleId)
             formdata.append('colposition', a)
-            R3.network.post('/p/cs/setColPosition', formdata)
+            $network.post('/p/cs/setColPosition', formdata)
               .then((res) => {
                 if (res.data.code == 0) {
                   self.columnState = res.data.data
@@ -221,7 +220,7 @@ export default {
                   let formdata = new FormData()
                   formdata.append('tableid', self.$route.params.customizedModuleId)
                   formdata.append('colposition', '')
-                  R3.network.post('/p/cs/setColPosition', formdata).then((res) => {
+                  $network.post('/p/cs/setColPosition', formdata).then((res) => {
                     if (res.data.code == 0) {
                       self.columnState = res.data.data
                       //更新表头
@@ -276,7 +275,7 @@ export default {
       let formdata = new FormData()
       formdata.append('id', this.$route.params.customizedModuleId)
       formdata.append('type', 'action')
-      R3.network.post('/p/cs/getUserConfig', formdata)
+      $network.post('/p/cs/getUserConfig', formdata)
         .then((res) => {
           // console.log(res);
           if (res.data.code == 0) {
