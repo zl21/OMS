@@ -2907,8 +2907,8 @@ export default {
                   // totalProdQty：总计：管理列表 所有商品总数；
                   // totalOrderAmt：总计：管理列表 所有订单总额
                   combined = [
-                    {__ag_sequence_column_name__:"合计" , QTY_ALL: res.data.data.sumProductQty , PRODUCT_AMT: res.data.data.sumOrderAmt},
-                    {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.totalProdQty , PRODUCT_AMT:res.data.data.totalOrderAmt}
+                    // {__ag_sequence_column_name__:"合计" , QTY_ALL: res.data.data.sumProductQty , PRODUCT_AMT: res.data.data.sumOrderAmt},
+                    // {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.totalProdQty , PRODUCT_AMT:res.data.data.totalOrderAmt}
                   ]
                 }
                 self.agTableConfig.pagenation.total = res.data.data.totalSize;
