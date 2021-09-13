@@ -331,3 +331,4 @@
 | v1.2.98 | cdn引入elementUi（注：skx更新到该版本要使用CDN引入elementUi） |
 | v1.2.99 | fkinputPlus-支持自定义接口.v2 |
 | v1.3.1 | 老agGrid替换引入方式，如有用到请使用CDN方式，详情看（组件库：custom-ag-grid-table.js头部备注） |
+| v1.3.2 | 商业版 --- agGrid替换CDN |
