@@ -386,10 +386,8 @@ export default {
         TOT_QTY_OUT: item.TOT_QTY_OUT,
         OC_B_VIPCOM_DISTRIBUTION_ID: item.OC_B_VIPCOM_DISTRIBUTION_ID
       }));
-      // this.$R3loading.show(this.customizedModuleName);
       this.loading = true;
       const self = this;
-      // post(this.$httpApi.order.distributionChangeTag, params)
       self.service.orderCenter
         .distributionChangeTag(params)
         .then(({ data }) => {

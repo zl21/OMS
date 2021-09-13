@@ -346,19 +346,6 @@ export default {
       } else {
         this.$Message.warning(data.message);
       }
-      // axios({
-      //   url: '/api/cs/oc/oms/v1/seachForced',
-      //   method: 'post',
-      //   // cancelToken: true,
-      //   data: param
-      // }).then((res) => {
-      //   this.$parent.$parent.closeConfirm();
-      //   if (res.data.code == 0) {
-      //     this.$parent.$parent.$parent.returnArr1(res.data.data.returnId, res.data.data.REAL_SEND_SKU, this.wrongSelectData[0].ID);
-      //   } else {
-      //     this.$Message.warning(res.data.message);
-      //   }
-      // });
     },
     querycancel() { },
     wrongForceSelect(e) {
