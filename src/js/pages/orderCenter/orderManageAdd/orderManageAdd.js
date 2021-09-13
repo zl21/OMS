@@ -1220,12 +1220,13 @@ export default {
         name: 'orderNo', // 组件名称
         url: 'modal/orderCenter/changeRemark',
       },
+      canChange: false,
     };
   },
   watch: {
     'formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME': {
       handler(newValue, oldVal) {
-        if (newValue !== oldVal) {
+        if (newValue !== oldVal && this.canChange) {
           // 清空‘配送物流’
           this.formConfig.formData[2].itemdata.pid = '';
           this.formConfig.formData[2].itemdata.valuedata = '';
@@ -2333,6 +2334,9 @@ export default {
       self.formConfig1.formValue.RESERVE_BIGINT12 = data.RESERVE_BIGINT12; // 同城标识
       self.formConfig1.formValue.IS_SELF_TAKE = data.IS_SELF_TAKE; // 是否自提
       self.getWarehouse(data.CP_C_SHOP_ID, data.CP_C_PHY_WAREHOUSE_ID);
+      setTimeout(() => {
+        self.canChange = true;
+      }, 2000);
       self.formConfig1.formData.forEach((item) => {
         // 收货人省份 收货人市 收货人区
         if (
