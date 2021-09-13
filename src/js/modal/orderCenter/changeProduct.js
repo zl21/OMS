@@ -8,7 +8,10 @@ export default {
     businessButton
   },
   data() {
+    // 当前页面名称
+    const pageName = this.$route.params.tableName;
     return {
+      pageName,
       vmI18n: window.vmI18n,
       loading: false,
       pro: '',
@@ -63,7 +66,13 @@ export default {
                   ECODE: val.trim(),
                 },
               };
-              const res = await _this.service.common.queryTaobaoExceptionSkus(query);
+              // 新增逻辑: 当页面为“淘宝订单接口”页面，使用新接口查询sku信息
+              let res = {};
+              if (this.pageName === 'IP_B_TAOBAO_ORDER') {
+                res = await _this.service.common.queryTaobaoExceptionSkus(query);
+              } else {
+                res = await _this.service.common.skuQuery(query);
+              }
               if (res.status === 200) {
                 const data = res.data.data.data;
                 const dimList = _this.formConfig.formData;
@@ -109,15 +118,28 @@ export default {
               // 模糊查询的方法
               const _this = this;
               _this.formConfig.psCProEcode = val.trim();
-              // const fromdata = new FormData();
-              const params = {
-                isBlur: 'Y',
-                psCSku: {
-                  psCProEcode: val.trim(),
-                },
-              };
-              // fromdata.append('param', JSON.stringify(params));
-              const res = await this.service.common.queryTaobaoExceptionSkus(params);
+              // 新增逻辑: 当页面为“淘宝订单接口”页面，使用新接口查询sku信息
+              let res = {};
+              if (this.pageName === 'IP_B_TAOBAO_ORDER') {
+                const params = {
+                  isBlur: 'Y',
+                  psCSku: {
+                    psCProEcode: val.trim(),
+                  },
+                };
+                res = await this.service.common.queryTaobaoExceptionSkus(params);
+              } else {
+                const fromdata = new FormData();
+                const params = {
+                  GLOBAL: val.trim(),
+                  PAGENUM: 1,
+                  PAGESIZE: 10,
+                  CONDITION: {},
+                  TABLENAME: 'PS_C_PRO',
+                };
+                fromdata.append('param', JSON.stringify(params));
+                res = await this.service.common.screenresult(fromdata);
+              }
               if (res.data.code === 0) {
                 const dimList = _this.formConfig.formData;
 
@@ -256,7 +278,7 @@ export default {
         },
         {
           // title: "商品SKU名称",
-          title: window.vmI18n.t('table_label.productSKUname'),
+          title: pageName === 'IP_B_TAOBAO_ORDER' ? '商品款号' : window.vmI18n.t('table_label.productSKUname'),
           key: 'SPEC',
         },
       ],
@@ -282,7 +304,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$attrs['obj-tab-action-dialog-config'], this.idArray)
     // 淘宝订单接口-sku异常登记sku替换
     if(this.$attrs['obj-tab-action-dialog-config'].webname === "SKUAbnormalRegistration") {
       this.isTBsku = true
@@ -315,7 +336,13 @@ export default {
         },
       };
       try {
-        const res = await self.service.common.queryTaobaoExceptionSkus(query);
+        let res = {};
+        // 新增逻辑: 当页面为“淘宝订单接口”页面，且为SKU异常处理弹出框左侧内容的时候，使用新接口查询sku信息
+        if (value === 'one' && this.pageName === 'IP_B_TAOBAO_ORDER') {
+          res = await self.service.common.queryTaobaoExceptionSkus(query);
+        } else {
+          res = await self.service.common.skuQuery(query);
+        }
         if (res.data.code == 0) {
           res.data.data.data.map((item) => {
             item.IS_GIFT == '0' ? '否' : '是';
