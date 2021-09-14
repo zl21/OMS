@@ -57,7 +57,8 @@ module.exports = {
     'vue/order-in-components': 'off',
     'no-extend-native': 'off',
     'no-eval': 'off',
-    'no-shadow': 'off'
+    'no-shadow': 'off',
+    'import/no-dynamic-require': 'off',
   },
   // overrides: [
   //   {
