@@ -130,6 +130,9 @@ export default {
         case 'IP_C_STANDPLAT_PRO_mcdr': // 通用商品-猫超商品导入
           this.downloadUrlFile(itemObj[0].downloadUrl);
           break;
+        case 'SG_B_CHANNEL_PRODUCT_import': // 平台店铺商品表-导入
+          this.downloadUrlFile(itemObj[0].downloadUrl);
+          break;
         default:
           this.getDownloadTemp(itemObj[0].downloadUrl);
           break;

@@ -263,7 +263,12 @@ export default {
         tableName: 'PS_C_SAMECITY_DETRIMENT_REF',
         url: '/p/cs/product/platformGoodsIdImport',
         downloadUrl: '/p/cs/product/downloadPsPlatformGoodsIdTemp'
-      } // 同城购 - 平台商品ID导入
+      }, // 同城购 - 平台商品ID导入
+      { 
+        tableName: 'SG_B_CHANNEL_PRODUCT_import',
+        url: '/p/cs/product/productItemImport',
+        downloadUrl: 'http://sm-r3-upload-prod.oss-cn-hangzhou.aliyuncs.com/SG_TMALL_NEW/%E5%A4%A9%E7%8C%AB%E6%96%B0%E5%93%81%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF20210903.xlsx?OSSAccessKeyId=LTAI4GC4xAd2Z1w55piRSMva&Expires=1000001631612823&Signature=DXqYZhfyDRxf9s5JDE7u2YQy5CU%3D'
+      } // 平台店铺商品表 - 导入
     ];
     return arr;
   },
