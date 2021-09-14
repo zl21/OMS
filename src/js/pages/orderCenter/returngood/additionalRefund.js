@@ -1032,6 +1032,7 @@ export default {
                 self.$emit('closeActionDialog', false)
               },
             })
+            self.strike = false
             return
           }
           self.$Message.success(res.data.message);
