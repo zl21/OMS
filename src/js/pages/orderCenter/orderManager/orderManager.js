@@ -644,6 +644,12 @@ export default {
             webname: 'OrderDeliveryUrgent' // 加急发货
           },
           {
+            webname: 'OversoldMarkingOpen', // 超卖打标
+          },
+          {
+            webname: 'OversoldMarkingCancel', // 取消打标-超卖打标
+          },
+          {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
             webname: 'Split the order',
             btnclick: () => {
@@ -1419,6 +1425,31 @@ export default {
       }
       // eslint-disable-next-line default-case
       switch (val) {
+        case 'OversoldMarkingCancel':
+        case 'OversoldMarkingOpen': {
+          if (self.selection.length === 0) {
+            self.$Message.warning({
+              content: '请选择需要超卖打标的记录！', // 请选择需要超卖打标的记录！
+              duration: 5,
+              top: 80
+            });
+            return;
+          }
+          this.pageLoad = true;
+          const IDS = self.selection.map(item => item.ID);
+          const api = val == 'OversoldMarkingCancel' ? 'cancelOversoldMarking' : 'openOversoldMarking';
+          this.service.orderCenter[api]({ IDS, 'TYPE':1 }).then(res => {
+            this.pageLoad = false;
+            if (res.data.code == 0) {
+              self.$Message.success(res.data.message);
+              self.selection = [];
+              self.getData();
+            } else {
+              self.$Message.error(res.data.message);
+            }
+          });
+          break;
+        }
         case 'Newly added': {
           // 新增
           R3.store.commit('global/tabOpen', {
