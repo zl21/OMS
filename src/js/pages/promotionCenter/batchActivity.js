@@ -86,6 +86,7 @@ export default {
         gift_doubles: '0', // 赠品翻倍 1--翻倍 0-不翻倍
         max_doubles_limits: '1', // 最大翻倍次数
         gift_methods: '1', // 赠送方式  1-全部送  2-顺序送  3-随机送
+        gift_amount_type: '1',
         list: [
           {
             gift_products: [],
