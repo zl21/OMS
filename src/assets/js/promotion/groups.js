@@ -176,6 +176,16 @@ const groups = {
       value: '3'
     }
   ],
+  giftAmountType: [ // 赠送数类型
+    {
+      title: '有限赠品',
+      value: '1'
+    },
+    {
+      title: '无限赠品',
+      value: '2'
+    },
+  ],
   batchGiftMethods: [ // 批量赠送方式
     {
       title: '全部送',
