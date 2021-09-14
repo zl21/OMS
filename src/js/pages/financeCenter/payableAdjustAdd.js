@@ -1030,6 +1030,7 @@ export default {
     },
     async getPayableAdjustment() {
       const self = this;
+      self.isSaveLoading = true;
       const param = {
         objid: self.ID
       };
@@ -1037,7 +1038,7 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       const {
         data: { code, data, message }
-      } = await this.service.financeCenter.getPayableAdjustment(fromdata);
+      } = await this.service.financeCenter.getPayableAdjustment(fromdata).finally(e => self.isSaveLoading = false);
       if (code === 0) {
         self.labelList = [
           {
@@ -1057,7 +1058,6 @@ export default {
       } else {
         self.$Message.warning(message || window.vmI18n.t('modalTips.z8'));
       }
-      self.isSaveLoading = false;
     },
     // 分页change 事件
     pageChange(val) {
@@ -1094,7 +1094,7 @@ export default {
       self.formConfig.formValue.IMAGE = self.dataitem.valuedata;
     },
     // 生成赔付单form及table请求数据
-    generateFromdata() {
+    generateFromdata(isCheck) {
       const self = this;
       const payableAdjustmentDO = self.formConfig.formValue;
       const payableAdjustmentItemDO = this.mixinTableArr('jordanTableConfig');
@@ -1103,6 +1103,7 @@ export default {
         AC_F_PAYABLE_ADJUSTMENT_ITEM: payableAdjustmentItemDO
       };
       const param = {
+        ifCheck: isCheck ? 1 : 0,
         objid: self.ID,
         fixcolumn: data
       };
@@ -1253,7 +1254,7 @@ export default {
         // 接口
         const {
           data: { code, data, message }
-        } = await this.service.financeCenter.getCompensate(formdata);
+        } = await this.service.financeCenter.getCompensate(formdata).catch(e => self.isSaveLoading = false);
         console.log('formdata:', code, data, message);
         if (code === 0) {
           self.formConfig.formValue.PAYABLE_PRICE = data.payablePrice;
@@ -1526,21 +1527,38 @@ export default {
     CheckRegx(reg, field) {
       return reg.test(field);
     },
-    async save() {
+    async save(isCheck = 1) {
       const self = this;
       self.isSaveLoading = true;
-      const fromdata = self.generateFromdata();
+      const fromdata = self.generateFromdata(isCheck);
       const {
         data: { code, data, message }
-      } = await self.service.financeCenter.savePayableAdjustment(fromdata);
+      } = await self.service.financeCenter.savePayableAdjustment(fromdata).finally(e => self.isSaveLoading = false);
       if (code === 0) {
+        if (data.ifShow) {
+          // 二次确认弹窗
+          self.$Modal.info({
+            title: $i18n.t('modalTitle.tips'), // 提示
+            content: message,
+            mask: true,
+            showCancel: true,
+            okText: $i18n.t('common.determine'), // 确定
+            cancelText: $i18n.t('common.cancel'), // 取消
+            onOk: () => {
+              self.save(0);
+            },
+            onCancel: () => {
+              self.$emit('closeActionDialog', false)
+            },
+          })
+          return
+        }
         self.$Message.success(message || window.vmI18n.t('modalTips.z9'));
         self.ID = data.objid;
         self.getPayableAdjustment();
       } else {
         self.$Message.error(message || window.vmI18n.t('modalTips.y0'));
       }
-      self.isSaveLoading = false;
     }, // 保存方法
 
     async enterSave() {

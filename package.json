@@ -74,7 +74,6 @@
     "ag-grid-enterprise": "17.1.1",
     "axios": "^0.18.0",
     "burgeon-ui": "^1.0.56",
-    "element-ui": "^2.14.0",
     "n": "^1.0.7",
     "qs": "^6.9.4",
     "timers-browserify": "^2.0.12",
