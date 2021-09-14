@@ -3326,33 +3326,14 @@ export default {
       //  || (_this.status == 20 && _this.$route.query.id != -1)
     },
     // 保存接口
-    async save(params, isCheck = 1) {
+    async save(params) {
       // 防止多次触发
       const _this = this;
       _this.isSaveLoading = true;
-      params.ifCheck = isCheck ? 1 : 0;
       _this.service.common.returnOrder(params).then(res => {
         _this.availableStock = false;
         _this.isModalSave = false;
         if (res.data.code === 0) {
-          if (res.data.ifShow) {
-            // 二次确认弹窗
-            _this.$Modal.info({
-              title: $i18n.t('modalTitle.tips'), // 提示
-              content: res.data.message,
-              mask: true,
-              showCancel: true,
-              okText: $i18n.t('common.determine'), // 确定
-              cancelText: $i18n.t('common.cancel'), // 取消
-              onOk: () => {
-                _this.save(params, 0);
-              },
-              onCancel: () => {
-                _this.$emit('closeActionDialog', false)
-              },
-            })
-            return
-          }
           _this.$Message.success(res.data.message);
           // _this.$store.commit('customize/TabHref', {
           //   id: 2661,
