@@ -1016,7 +1016,7 @@ export default {
       data.ifCheck = isCheck ? 1 : 0;
       this.service.orderCenter.saveAfterDeliver(data).then(res => {
         if (res.data.code == 0) {
-          if (res.data.ifShow) {
+          if (res.data.data.ifShow) {
             // 二次确认弹窗
             self.$Modal.info({
               title: $i18n.t('modalTitle.tips'), // 提示
