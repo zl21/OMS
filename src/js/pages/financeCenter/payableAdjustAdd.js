@@ -1535,7 +1535,7 @@ export default {
         data: { code, data, message }
       } = await self.service.financeCenter.savePayableAdjustment(fromdata).finally(e => self.isSaveLoading = false);
       if (code === 0) {
-        if (!data.ifShow) {
+        if (data.ifShow) {
           // 二次确认弹窗
           self.$Modal.info({
             title: $i18n.t('modalTitle.tips'), // 提示
