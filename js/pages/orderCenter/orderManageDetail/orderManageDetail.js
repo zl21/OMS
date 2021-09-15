@@ -3,8 +3,8 @@ import businessLabel from 'professionalComponents/businessLabel';
 import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessDialog from 'professionalComponents/businessDialog';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo';
-import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
+import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
+import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import DropDownConfig from 'burgeonConfig/config/dropDown.config';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
@@ -160,7 +160,7 @@ export default {
 
       const { customizedModuleName } = this.$router.currentRoute.params;
       this.loading = true;
-      
+
       // this.$R3loading.show(customizedModuleName);
       let self=this;
       this.service.orderCenter.getDetail(data).then((res) => {

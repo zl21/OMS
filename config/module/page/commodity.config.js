@@ -19,7 +19,7 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   // 商品中心-组合福袋商品-新增/详情
   COMBINEDCOMMODITY: {
-    component: () => import('allpages/commodityCenter/combinedCommodity'),
+    component: () => import('allpages/commodityCenter/combinedCommodity.vue'),
     // labelName: '组合福袋商品编辑',
     labelName: i18n.t('menu.a6')
   },
@@ -54,4 +54,4 @@ export default {
     // labelName: '商品分类',
     labelName: i18n.t('menu.ac')
   },
-}; 
+};

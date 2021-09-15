@@ -3,7 +3,7 @@ import SingleBox from 'professionalComponents/singleBox.vue';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
-import meetConditions from 'allpages/promotionCenter/details/meetConditions';
+import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
 import businessDialog from 'professionalComponents/businessDialog';
 import businessButton from 'professionalComponents/businessButton';
 

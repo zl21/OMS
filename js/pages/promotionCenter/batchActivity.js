@@ -1,5 +1,5 @@
-import BasicInfo from 'allpages/promotionCenter/details/basicInfo';
-import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet';
+import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
+import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet.vue';
 import stepsBars from 'professionalComponents/steps';
 import groups from '@/assets/js/promotion/groups';
 import businessButton from 'professionalComponents/businessButton';

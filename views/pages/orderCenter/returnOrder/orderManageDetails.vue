@@ -69,8 +69,8 @@
   import businessStatusFlag from 'professionalComponents/businessStatusFlag';
   import businessDialog from 'professionalComponents/businessDialog';
   import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-  import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo';
-  import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem';
+  import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
+  import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
   import DropDownConfig from 'burgeonConfig/config/dropDown.config';
   import BtnConfig from 'burgeonConfig/config/funBtn.config';
   import BurgeonEvent from 'burgeonConfig/config/event.config';
@@ -130,7 +130,7 @@
         error_tip: '', // 错误提示
         dialogs: {},
         btnConfig: BtnConfig.config(),
-        // 
+        //
         returnBtn: {
           btnsite:'right', // 按钮对齐方式
           typeAll: 'default',

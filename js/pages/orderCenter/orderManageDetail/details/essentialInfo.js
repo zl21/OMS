@@ -1,7 +1,7 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessDialog from 'professionalComponents/businessDialog';
-import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem';
+import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem.vue';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import goodsTotalAmount from '@/views/pages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
 export default {

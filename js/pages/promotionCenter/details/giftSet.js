@@ -3,7 +3,7 @@ import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import SingleBox from 'professionalComponents/singleBox';
 import { tableCols } from '../promotion.config';
 import ButtonFkDialog from 'professionalComponents/buttonFkDialog';
-import SetCommodity from 'allpages/promotionCenter/details/setCommodity';
+import SetCommodity from 'allpages/promotionCenter/details/setCommodity.vue';
 import businessDialog from 'professionalComponents/businessDialog';
 import businessButton from 'professionalComponents/businessButton';
 

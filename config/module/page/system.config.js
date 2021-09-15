@@ -10,39 +10,39 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   //   查看用户权限
   USERPERMISSION: {
-    component: () => import('allpages/systemConfig/userPermission/userPermission'),
+    component: () => import('allpages/systemConfig/userPermission/userPermission.vue'),
   },
   // 商品权限
   COMMODITYAUTHORITY: {
-    component: () => import('allpages/systemConfig/commodityAuthority/commodityAuthority'),
+    component: () => import('allpages/systemConfig/commodityAuthority/commodityAuthority.vue'),
   },
   // 店仓权限
   STOREWAREHOUSEPERMISSIONS: {
-    component: () => import('allpages/systemConfig/quanXian/quanXian'),
+    component: () => import('allpages/systemConfig/quanXian/quanXian.vue'),
   },
   //  敏感列权限
   SENSITIVECOLUMNPERMISSIONS: {
-    component:  () => import('allpages/systemConfig/quanXian/quanXian'),
+    component:  () => import('allpages/systemConfig/quanXian/quanXian.vue'),
   },
   //  角色
   CP_C_GROUPS: {
-    component:  () => import('allpages/systemConfig/quanXian/quanXian'),
+    component:  () => import('allpages/systemConfig/quanXian/quanXian.vue'),
   },
   //  用户档案
   CP_C_HRUSERS: {
-    component:  () => import('allpages/systemConfig/quanXian/quanXian'),
-  },  
- 
+    component:  () => import('allpages/systemConfig/quanXian/quanXian.vue'),
+  },
+
   // 品牌权限
   BRANDPERMISSIONS: {
-    component:  () => import('allpages/systemConfig/quanXian/quanXian'),
+    component:  () => import('allpages/systemConfig/quanXian/quanXian.vue'),
   },
   //功能权限
   JURISDICTIONDATA:{
-    component:() => import('allpages/systemConfig/quanXian/FunctionPowerNew'),
+    component:() => import('allpages/systemConfig/quanXian/FunctionPowerNew.vue'),
   },
   //数据权限
   DATAJURISDICTION:{
-    component:  () => import('allpages/systemConfig/quanXian/quanXian'),
+    component:  () => import('allpages/systemConfig/quanXian/quanXian.vue'),
   }
 };

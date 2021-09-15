@@ -14,12 +14,12 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   // 赔付单
   PAYABLEADJUSTMENTLIST: {
-    component: () => import('allpages/financialCenter/payableAdjust/payableAdjustmentList'),
+    component: () => import('allpages/financialCenter/payableAdjust/payableAdjustmentList.vue'),
     // component: payableAdjustmentList,
   },
   // 新增赔付单
   PAYABLEADJUSTADD: {
-    component: () => import('allpages/financialCenter/payableAdjust/payableAdjustAdd'),
+    component: () => import('allpages/financialCenter/payableAdjust/payableAdjustAdd.vue'),
     // component: payableAdjustAdd,
   },
 };
