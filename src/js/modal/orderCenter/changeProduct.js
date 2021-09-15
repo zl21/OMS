@@ -24,7 +24,7 @@ export default {
           {
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
-              if (this.isTBsku) {
+              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
                 this.$emit('closeActionDialog');
               } else {
                 this.$parent.$parent.closeConfirm();
