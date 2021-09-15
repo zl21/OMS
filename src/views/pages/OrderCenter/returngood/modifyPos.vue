@@ -1,6 +1,23 @@
 <template>
   <div class="bounced">
-    <Form :label-width="65"> </Form>
+    <Form :label-width="100"> 
+      <FormItem label="退回物流公司：">
+        <Input
+          v-model="form.company"
+          type="input"
+          :rows="4"
+          placeholder="请输入"
+        />
+      </FormItem>
+      <FormItem label="退回物流单号：">
+        <Input
+          v-model="form.orderNo"
+          type="input"
+          :rows="4"
+          placeholder="请输入"
+        />
+      </FormItem>
+    </Form>
     <jordanBtn :btn-config="btnConfig" />
   </div>
 </template>
@@ -15,6 +32,10 @@ export default {
   },
   data() {
     return {
+      form: {
+        company: 'test',
+        orderNo: 'test',
+      },
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)

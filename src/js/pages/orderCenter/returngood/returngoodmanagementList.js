@@ -401,7 +401,7 @@ export default {
               // ✧ 校验退换货单的入库仓库是否为pos管控仓，若否，则提示：“仅支持对pos管控仓的仓库进行物流信息的修改！”
               if (it.CP_C_PHY_WAREHOUSE_IN_ID_NAME != 'pos管控仓') {
                 this.$Message.error('仅支持对pos管控仓的仓库进行物流信息的修改！');
-                return
+                // return
               }
               if (it.RETURN_STATUS_NAME == '待退货入库' && true) {
                 
