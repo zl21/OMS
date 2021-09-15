@@ -96,6 +96,8 @@ export default {
       let account = document.querySelector(".divAccount");
       let code = document.querySelector(".divCode");
       let inputNodes = document.querySelectorAll(".loginCore .container input");
+      let r3ChangeLan = document.querySelectorAll(".loginCore .changeLang");
+      r3ChangeLan[0] && (r3ChangeLan[0].style.display = "none");
       code &&
         code.setAttribute("data-code", this.vmI18n.t("other.verticalCode"));
       if (isPhone) {
