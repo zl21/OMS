@@ -1,20 +1,11 @@
 <template>
   <div class="bounced">
-    <Form :label-width="65">
-      <FormItem label="修改备注">
-        <Input v-model="bouncedData.value" type="textarea" :rows="4" placeholder="请输入" />
-        <RadioGroup v-model="bouncedData.animal">
-          <Radio label="覆盖原备注" />
-          <Radio label="追加到原备注" />
-        </RadioGroup>
-      </FormItem>
-    </Form>
+    <Form :label-width="65"> </Form>
     <jordanBtn :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
-
 import axios from 'axios';
 import jordanBtn from 'professionalComponents/businessButton';
 
@@ -24,10 +15,6 @@ export default {
   },
   data() {
     return {
-      bouncedData: {
-        animal: '覆盖原备注',
-        value: ''
-      },
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -51,7 +38,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
-              _this.okClick();
+              // _this.okClick();
             } // 按钮点击事件
           }
         ]
@@ -64,75 +51,10 @@ export default {
       default: {}
     }
   },
-  methods: {
-    initData() {
-      this.bouncedData.value = '';
-    },
-    okClick() {
-      const self = this;
-      if (!self.bouncedData.value) return;
-      let cover = '';
-      if (self.bouncedData.animal === '覆盖原备注') {
-        cover = 'true';
-      } else {
-        cover = 'false';
-      }
-      // let fromdata = new FormData();
-      let param = {};
-      let url = '';
-      if (self.componentData.type == 1) {
-        param = {
-          ids: self.componentData.ids,
-          remark: self.bouncedData.value,
-          cover
-        };
-        url = '/api/cs/oc/oms/v1/reRemarkUpdate';
-      } else if (self.componentData.type == 2) {
-        param = {
-          IDS: self.componentData.ids,
-          BACK_MESSAGE: self.bouncedData.value,
-          COVER: cover
-        };
-        url = '/api/cs/oc/oms/v1/modifyReturnSellerRemark';
-      }
-      // fromdata.append("param", JSON.stringify(param));
-      axios({
-        url,
-        method: 'post',
-        data: param
-      }).then(res => {
-        if (res.data.code === 0) {
-          self.$Message.success(res.data.message);
-          console.log(self);
-          self.$parent.$parent.$parent.getList(self.componentData.status);
-          self.$parent.$parent.closeConfirm();
-        } else {
-          self.$Message.error(res.data.message);
-        }
-      });
-    }
-  },
-  mounted() {
-    const _this = this;
-    window.addEventListener('keydown', e => {
-      const key = e.keyCode;
-      if (key == 13) {
-        if (_this.bouncedData.value) {
-          _this.okClick();
-        }
-      } else if (key == 27) {
-        _this.$parent.$parent.closeConfirm();
-      }
-    });
-  },
-  destroyed() {
-    this.initData();
-    window.removeEventListener('keydown', this, false);
-  }
-};
-
+  methods: {},
+  mounted() { },
+}
 </script>
 
 <style lang="less">
-@import '~@/css/pages/orderCenter/returngood/rturngoodModifyRemarks.less';
 </style>
