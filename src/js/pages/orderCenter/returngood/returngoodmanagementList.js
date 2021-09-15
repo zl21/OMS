@@ -381,7 +381,7 @@ export default {
           },
           {
             text: '修改pos管控仓物流', // 修改pos管控仓物流
-            webname: 'modifyPos',
+            webname: 'oc_b_return_order_pos_incustomize',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.modifyPosConfig.confirmTitle = '修改pos管控仓物流';
@@ -409,7 +409,7 @@ export default {
               this.modifyPosConfig.componentData = {
                 it,
               };
-              this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
+              this.$children.find(item => item.name === 'modifyPos').openConfirm();
             } // 按钮点击事件
           },
         ]
