@@ -44,6 +44,23 @@ export default {
       // 公共弹框
       publicBouncedConfig: {},
       // 弹框配置
+      modifyPosConfig: {
+        refFuns: 'confirmFun',
+        confirmTitle: '修改pos管控仓物流',
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '440',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'modifyPos', // 组件名称
+        url: 'pages/OrderCenter/returngood/modifyPos',
+        keepAlive: true,
+        excludeString: 'modifyPos', // 将name传进去，确认不缓存
+        componentData: {}
+      },
       changeRemarkConfig: {
         refFuns: 'confirmFun',
         confirmTitle: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
@@ -360,6 +377,39 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.regenerateTheOrder();
+            } // 按钮点击事件
+          },
+          {
+            text: '修改pos管控仓物流', // 修改pos管控仓物流
+            webname: 'modifyPos',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              // this.modifyPosConfig.confirmTitle = '修改pos管控仓物流';
+              const selectArr = this.$refs.agGridChild.AGTABLE.getSelect();
+              if (!selectArr.length) {
+                this.$Message.error('请选择需要操作的单据！');
+                return;
+              } else if (selectArr.length > 1) {
+                this.$Message.error('仅支持对单个单据执行操作！');
+                return;
+              }
+              /**
+               * "CP_C_PHY_WAREHOUSE_IN_ID_NAME" - "入库实体仓库"
+               * "CP_C_STORE_ENAME" - "入库逻辑仓库"
+               */
+              const it = selectArr[0];
+              // ✧ 校验退换货单的入库仓库是否为pos管控仓，若否，则提示：“仅支持对pos管控仓的仓库进行物流信息的修改！”
+              if (it.CP_C_PHY_WAREHOUSE_IN_ID_NAME != 'pos管控仓') {
+                this.$Message.error('仅支持对pos管控仓的仓库进行物流信息的修改！');
+                return
+              }
+              if (it.RETURN_STATUS_NAME == '待退货入库' && true) {
+                
+              }
+              this.modifyPosConfig.componentData = {
+                it,
+              };
+              this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
             } // 按钮点击事件
           },
         ]
