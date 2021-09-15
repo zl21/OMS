@@ -1045,12 +1045,12 @@ export default {
           });
           self.$nextTick(()=>{
              self.$store.commit('customize/TabOpen', {
-              id: res.data.data,
+              id: res.data.data.objId,
               type: 'action',
               name: 'EXTRAREFUND',
               label: '额外退款编辑',
               query: Object.assign({
-                id: res.data.data,
+                id: res.data.data.objId,
                 tabTitle: '额外退款编辑'
               }),
             });
