@@ -34,7 +34,7 @@ export default {
           {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
-              if (this.isTBsku) {
+              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER' ) {
                 this.save();
               } else {
                 this.confirm();
@@ -316,7 +316,7 @@ export default {
           case 'IP_B_JINGDONG_ORDER':
             return '平台条码';
           default:
-            return vmI18n.t("modalTitle.a1");
+            return vmI18n.t('modalTitle.a1');
         }
       } else {
         switch(this.pageName) {
@@ -327,8 +327,8 @@ export default {
           case 'IP_B_JINGDONG_ORDER':
             return '商品条码';
           default:
-            return vmI18n.t("modalTitle.a4");
-        }
+            return vmI18n.t('modalTitle.a4');
+        };
       }
       
     },
@@ -393,6 +393,19 @@ export default {
         this[loadName] = false;
       } catch (e) {
         this[loadName] = false;
+      }
+    },
+    getSaveUrl(pageName) {
+      switch(pageName) {
+        // 京东订单接口
+        case 'IP_B_JINGDONG_ORDER':
+          return '/api/cs/oc/oms/v1/bathChangeJingdongExceptionSkus';
+        // 通用订单接口
+        case 'IP_B_STANDPLAT_ORDER':
+          return '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus';
+        // 淘宝订单接口
+        default:
+          return '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus';
       }
     },
     confirm() {
@@ -476,10 +489,9 @@ export default {
       result.ids = self.idArray;
       result.changeGoodsSku = self.onRowClickData.ECODE;
       result.sku_code = self.onRowClickReplaceData.ECODE;
-      // result.type = 1;
       this.loading = true;
       axios({
-        url: '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus',
+        url: self.getSaveUrl(self.pageName),
         method: 'post',
         data: result,
       }).then((res) => {
