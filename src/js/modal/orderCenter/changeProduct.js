@@ -66,7 +66,15 @@ export default {
                   ECODE: val.trim(),
                 },
               };
-              const res = await _this.skuQuery(this.pageName, query);
+              if (this.pageName === 'IP_B_STANDPLAT_ORDER') {
+                Object.assign(query, {
+                  psCSku: {
+                    ECODE: val.trim(),
+                    skuPropertiesName: val.trim(),
+                  }
+                })
+              }
+              const res = await _this.skuQueryCommon(this.pageName, query);
               if (res.status === 200) {
                 const data = res.data.data.data;
                 const dimList = _this.formConfig.formData;
@@ -114,14 +122,23 @@ export default {
               _this.formConfig.psCProEcode = val.trim();
               // 新增逻辑: 当页面为“淘宝订单接口”页面，使用新接口查询sku信息
               let res = {};
-              if (this.pageName === 'IP_B_TAOBAO_ORDER' || this.pageName === 'IP_B_JINGDONG_ORDER') {
+              console.log('val', val)
+              if (this.pageName === 'IP_B_TAOBAO_ORDER' || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
                 const params = {
                   isBlur: 'Y',
                   psCSku: {
                     psCProEcode: val.trim(),
                   },
                 };
-                res = await this.service.common.queryTaobaoExceptionSkus(params);
+                if (this.pageName === 'IP_B_STANDPLAT_ORDER') {
+                  Object.assign(params, {
+                    psCSku: {
+                      psCProEcode: val.trim(),
+                      skuPropertiesName: val.trim(),
+                    }
+                  })
+                }
+                res = await this.skuQueryCommon(this.pageName, params);
               } else {
                 const fromdata = new FormData();
                 const params = {
@@ -315,6 +332,9 @@ export default {
           // 京东订单接口
           case 'IP_B_JINGDONG_ORDER':
             return '平台条码';
+          // 通用订单接口
+          case 'IP_B_STANDPLAT_ORDER':
+            return '平台条码';
           default:
             return vmI18n.t('modalTitle.a1');
         }
@@ -326,13 +346,16 @@ export default {
           // 京东订单接口
           case 'IP_B_JINGDONG_ORDER':
             return '商品条码';
+          // 通用订单接口
+          case 'IP_B_STANDPLAT_ORDER':
+            return '商家外部编码';
           default:
             return vmI18n.t('modalTitle.a4');
         };
       }
       
     },
-    skuQuery(pageName, params) {
+    skuQueryCommon(pageName, params) {
       switch(pageName) {
         // 淘宝订单接口
         case 'IP_B_TAOBAO_ORDER':
@@ -340,6 +363,9 @@ export default {
         // 京东订单接口
         case 'IP_B_JINGDONG_ORDER':
           return this.service.common.queryJingdongExceptionSkus(params);
+        // 通用订单接口
+        case 'IP_B_STANDPLAT_ORDER':
+          return this.service.common.queryStandPlatExceptionSkus(params);
         default:
           return this.service.common.skuQuery(params);
       }
@@ -366,10 +392,18 @@ export default {
               : self.replace_proName.trim(),
         },
       };
+      if (this.pageName === 'IP_B_STANDPLAT_ORDER') {
+        Object.assign(query, {
+          psCSku: {
+            ...query.psCSku,
+            skuPropertiesName: self.formConfig.formValue.psCProEcode.trim(),
+          }
+        })
+      }
       try {
         let res = {};
         if (value === 'one') {
-          res = await self.skuQuery(this.pageName, query);
+          res = await self.skuQueryCommon(this.pageName, query);
         } else {
           res = await self.service.common.skuQuery(query);
         }
@@ -402,7 +436,7 @@ export default {
           return '/api/cs/oc/oms/v1/bathChangeJingdongExceptionSkus';
         // 通用订单接口
         case 'IP_B_STANDPLAT_ORDER':
-          return '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus';
+          return '/api/cs/oc/oms/v1/bathChangeStandPlatExceptionSkus';
         // 淘宝订单接口
         default:
           return '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus';

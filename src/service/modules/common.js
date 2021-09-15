@@ -27,6 +27,7 @@ export default {
   skuQuery: params => network.post('/p/cs/skuQuery', params),
   queryTaobaoExceptionSkus: params => network.post('/api/cs/oc/oms/v1/queryTaobaoExceptionSkus', params),
   queryJingdongExceptionSkus: params => network.post('/api/cs/oc/oms/v1/queryJingdongExceptionSkus', params),
+  queryStandPlatExceptionSkus: params => network.post('/api/cs/oc/oms/v1/queryStandPlatExceptionSkus', params),
   fetchActionsInCustomizePage: params => network.get(`/p/cs/v2/fetchActionsInCustomizePage?${qs.stringify(params)}`),
   manualJdMatchingCheck: params => network.post('/p/cs/manualJdMatchingCheck', params),
   jdReturnStorageSave: params => network.get('/p/cs/jdReturnStorageSave', params),
