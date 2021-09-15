@@ -1,10 +1,9 @@
 <template>
-  <div class="bounced">
+  <div class="bounced" v-loading="loading">
     <Form :label-width="100"> 
       <FormItem label="退回物流公司：">
         <Input
           v-model="form.company"
-          type="input"
           :rows="4"
           placeholder="请输入"
         />
@@ -12,7 +11,6 @@
       <FormItem label="退回物流单号：">
         <Input
           v-model="form.orderNo"
-          type="input"
           :rows="4"
           placeholder="请输入"
         />
@@ -32,6 +30,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       form: {
         company: 'test',
         orderNo: 'test',
@@ -59,7 +58,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
-              // _this.okClick();
+              _this.okClick();
             } // 按钮点击事件
           }
         ]
@@ -72,7 +71,14 @@ export default {
       default: {}
     }
   },
-  methods: {},
+  methods: {
+    async okClick() {
+      // this.form
+      const self = this;
+      this.loading = true;
+      const { data: { data: { code, data, message } } } = await this.service.orderCenter.getOrderId(this.form).finally(e => this.loading = false);
+    },
+  },
   mounted() { },
 }
 </script>
