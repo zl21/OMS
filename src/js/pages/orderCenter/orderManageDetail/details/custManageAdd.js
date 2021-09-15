@@ -302,7 +302,7 @@ export default {
       this.request(this.componentData);
     },
     tableDeleteDetail() { },
-    request(req) {
+    request: _.debounce(function(req) {
       const self = this;
       self.objid = req.objid;
       if (self.objid === -1) return;
@@ -359,7 +359,7 @@ export default {
           this.$Message.error('数据加载失败');
         }
       });
-    },
+    }, 300),
     getColumns() {
       const columns = [
         {
