@@ -27,6 +27,16 @@ module.exports = {
     node: true
   },
   rules: {
+    'vue/max-attributes-per-line': ['error', {
+      'singleline': {
+        'max': 2,
+        'allowFirstLine': true
+      },      
+      'multiline': {
+        'max': 1,
+        'allowFirstLine': false
+      }
+    }],
     'no-trailing-spaces': 'off',
     'linebreak-style': 'off',
     'import/no-cycle': 'off',
@@ -57,16 +67,8 @@ module.exports = {
     'vue/order-in-components': 'off',
     'no-extend-native': 'off',
     'no-eval': 'off',
-    'no-shadow': 'off'
+    'no-shadow': 'off',
   },
-  // overrides: [
-  //   {
-  //     files: ['*.vue'],
-  //     rules: {
-  //       indent: 'off'
-  //     }
-  //   }
-  // ],
   parserOptions: {
     parser: 'babel-eslint',
     sourceType: 'module',
