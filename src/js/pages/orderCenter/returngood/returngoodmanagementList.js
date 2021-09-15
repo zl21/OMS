@@ -409,7 +409,7 @@ export default {
               this.modifyPosConfig.componentData = {
                 it,
               };
-              this.$children.find(item => item.name === 'rturngoodModifyRemarks').openConfirm();
+              this.$children.find(item => item.name === 'modifyPos').openConfirm();
             } // 按钮点击事件
           },
         ]
