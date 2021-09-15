@@ -1,7 +1,7 @@
 /*
  * @Author: flybird
  * @Date: 2021-06-04 13:20:21
- * @LastEditTime: 2021-09-03 11:36:52
+ * @LastEditTime: 2021-09-15 10:24:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
@@ -54,15 +54,6 @@ class InitAppConfig {
       'i18n': internationalizationConfig.version,
       'R3': r3Version.version,
     }
-    /* window.$businessComponents = {
-      version:componentsConfig.version,
-    }
-    window.$businessOmsTheme = {
-      version:omsThemecConfig.version
-    }
-    window.$businessInternationalization = {
-      version:internationalizationConfig.version
-    } */
 
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {

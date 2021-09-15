@@ -1,6 +1,6 @@
-import businessForm from 'professionalComponents/businessForm';
-import businessButton from 'professionalComponents/businessButton';
-import businessDialog from 'professionalComponents/businessDialog';
+import businessForm from 'professionalComponents/businessForm.vue';
+import businessButton from 'professionalComponents/businessButton.vue';
+import businessDialog from 'professionalComponents/businessDialog.vue';
 
 import CustomConfig from '@/config/customized.config.js';
 const modalConfig = CustomConfig.cusDownLoadAllConfig;

@@ -1,4 +1,4 @@
-import businessButton from 'professionalComponents/businessButton';
+import businessButton from 'professionalComponents/businessButton.vue';
 import { getLodop } from 'professionalComponents/common/js/LodopFuncs';
 
 export default {

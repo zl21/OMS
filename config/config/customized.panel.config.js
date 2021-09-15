@@ -1,13 +1,13 @@
 /**
  * defined组件的配置项
  */
-import returnGoods from '@/views/pages/orderCenter/returngood/returnGoods.vue';
-import returnAmount from '@/views/pages/orderCenter/returngood/returnAmount.vue';
-import remark from '@/views/pages/strategyPlatform/preformAction.vue'
-import paySearchOri from '@/views/pages/orderCenter/pay/paySearchOri.vue';
-import sourceBillNo from '@/views/pages/orderCenter/extraRefund/sourceBillNo.vue';
-import AUDITID from '@/views/pages/orderCenter/returnOrder/ownerName.vue';
-import preSale from '@/views/pages/strategyPlatform/preSale.vue'
+import returnGoods from 'allpages/orderCenter/returngood/returnGoods.vue';
+import returnAmount from 'allpages/orderCenter/returngood/returnAmount.vue';
+import remark from 'allpages/strategyPlatform/preformAction.vue'
+import paySearchOri from 'allpages/orderCenter/pay/paySearchOri.vue';
+import sourceBillNo from 'allpages/orderCenter/extraRefund/sourceBillNo.vue';
+import AUDITID from 'allpages/orderCenter/returnOrder/ownerName.vue';
+import preSale from 'allpages/strategyPlatform/preSale.vue'
 
 let custommizeMain = {
   REDUNDANT_ORDER_ID: paySearchOri,

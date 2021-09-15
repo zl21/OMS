@@ -1,5 +1,5 @@
-import businessForm from 'professionalComponents/businessForm';
-import businessBtn from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm.vue';
+import businessBtn from 'professionalComponents/businessButton.vue';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 
 export default {

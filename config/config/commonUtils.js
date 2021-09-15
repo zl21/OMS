@@ -1341,7 +1341,7 @@ class commonUtils {
    */
   static tabHref = (_self, params, extendObj = {}) => {
     // 返回--要传固定id
-    const selection = [];
+    let selection = [];
     if (!_self.vueAgTable) {
       selection = _self.$refs.agGridChild.AGTABLE.getSelect();
     } // 获取勾行数据;

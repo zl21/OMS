@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-17 14:48:57
- * @LastEditTime: 2021-06-24 10:42:21
+ * @LastEditTime: 2021-09-15 10:22:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/customized.modal.config.js
@@ -18,7 +18,7 @@ import InterfaceConfig from '../module/modal/interface.config.js'; // ----------
 import ReportCenter from '../module/modal/report.config.js'; // ----------报表中心
 import basicDataConfig from '../module/modal/basicData.config'; // -----------基础数据
 
-import importCom from 'professionalComponents/importTable';
+import importCom from 'professionalComponents/importTable.vue';
 import downLoad from 'professionalComponents/downLoad.vue'
 const common = {
   DOWNLOADCOMMODITY: {

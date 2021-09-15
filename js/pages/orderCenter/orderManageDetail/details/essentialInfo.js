@@ -1,9 +1,9 @@
-import businessButton from 'professionalComponents/businessButton';
-import businessActionTable from 'professionalComponents/businessActionTable';
-import businessDialog from 'professionalComponents/businessDialog';
+import businessButton from 'professionalComponents/businessButton.vue';
+import businessActionTable from 'professionalComponents/businessActionTable.vue';
+import businessDialog from 'professionalComponents/businessDialog.vue';
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem.vue';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
-import goodsTotalAmount from '@/views/pages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
+import goodsTotalAmount from 'allpages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
 export default {
   name: 'EssentialInfo',
   props: {

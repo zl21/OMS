@@ -35,14 +35,6 @@
           :name="item.value"
         />
       </Tabs>
-      <!-- <agTable
-        ref="agGridChild"
-        :ag-table-config="agTableConfig"
-        @on-row-dblclick="onRowDblclick"
-        @on-page-change="pageChange"
-        @on-page-size-change="pageSizeChange"
-        @on-sort-changed="onSortChanged"
-      /> -->
       <businessAgTable
         v-loading="agLoaing"
         :ag-table-config="agTableConfig"

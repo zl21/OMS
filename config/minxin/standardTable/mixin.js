@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-06-18 10:14:53
- * @LastEditTime: 2021-06-18 11:24:25
+ * @LastEditTime: 2021-09-15 10:07:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /front-standard-product/src/config/minxin/mixin.js
  */
 import detailbuttons from './detailbuttons.vue';
-import tableDetailCollectionSlot from './tableDetailCollectionSlot';
+import tableDetailCollectionSlot from './tableDetailCollectionSlot.vue';
 
 export default {
   slotArray:{

@@ -1,4 +1,4 @@
-import businessForm from 'professionalComponents/businessForm';
+import businessForm from 'professionalComponents/businessForm.vue';
 
 export default {
   components: {

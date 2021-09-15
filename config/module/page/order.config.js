@@ -9,17 +9,17 @@
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   OC_B_ORDER_VIRTUAL_TABLE: {
-    component: () => import('@/views/pages/orderCenter/orderManager/orderAddOrCopy.vue'),
+    component: () => import('allpages/orderCenter/orderManager/orderAddOrCopy.vue'),
     labelName: '订单新增',
     isList: false,
   },
   OC_B_ORDER: {
-    component: () => import('@/views/pages/orderCenter/returnOrder/orderManageDetails.vue'),
+    component: () => import('allpages/orderCenter/returnOrder/orderManageDetails.vue'),
     labelName: '订单详情',
     isList: false
   },
   RETURNDETAILS: {
-    component: () => import('@/views/pages/orderCenter/returnOrder/returnGoodsOrderDetails.vue'),
+    component: () => import('allpages/orderCenter/returnOrder/returnGoodsOrderDetails.vue'),
   },
   // 订单中心-扫描入库
   SCANIN: {

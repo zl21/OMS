@@ -1,5 +1,5 @@
-import businessForm from 'professionalComponents/businessForm';
-import businessButton from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm.vue';
+import businessButton from 'professionalComponents/businessButton.vue';
 
 export default {
   components: {

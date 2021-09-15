@@ -16,11 +16,11 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   /* 2.0: */
   SHOPAUTHORIZE: {
-    component: () => import('@/views/pages/basicData/authorize.vue'),
+    component: () => import('allpages/basicData/authorize.vue'),
     labelName: i18n.t('form_label.ap'),//店铺授权
   },
   SHOPAUTHORIZEDETAILS: {
-    component: () => import('@/views/pages/basicData/authorizeDetails.vue'),
+    component: () => import('allpages/basicData/authorizeDetails.vue'),
   },
   LOGISTICSCOMPANYFILESADDOREDIT: {
     // component: logisticsCompanyFilesAddOrEdit,

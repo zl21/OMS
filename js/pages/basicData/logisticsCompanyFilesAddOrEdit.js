@@ -7,7 +7,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
 import loading from 'professionalComponents/loading';
 import subTable from 'professionalComponents/subTable';
-import orderNumberNnalysis from '@/views/pages/basicData/orderNumberNnalysis.vue';
+import orderNumberNnalysis from 'allpages/basicData/orderNumberNnalysis.vue';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {

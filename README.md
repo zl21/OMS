@@ -49,7 +49,7 @@
 | v1.0.0   | 初始化标准化逻辑库 |
 | v1.0.1   | 初始化共用逻辑模块 |
 | v1.0.2   | 架构逻辑模块移入逻辑库 |
-| v1.0.3   | 修改引用别名@/views/pages->allpages |
+| v1.0.3   | 修改引用别名 '@/views/pages'-> 'allpages' |
 | v1.0.4   | 移入系统配置静态资源 |
 | v1.0.5   | 统一替换 loading 引用 |
 | v1.0.6   | 去掉 loading 引用 |
@@ -1077,7 +1077,7 @@
 | v1.12.45 | 移除wangEditor |
 | v1.12.47 | 隐藏主题切换 |
 | v1.12.48 | 删除多余的custom-ag-grid-table.js |
-
+| v1.12.50 | 优化.vue后缀引用 && 修改部分引用别名 '@/views/pages'-> 'allpages'|
 
 
 

@@ -1,6 +1,6 @@
 // import axios from 'axios';
-import BusinessForm from 'professionalComponents/businessForm';
-import BusinessBtn from 'professionalComponents/businessButton';
+import BusinessForm from 'professionalComponents/businessForm.vue';
+import BusinessBtn from 'professionalComponents/businessButton.vue';
 
 export default {
   components: {

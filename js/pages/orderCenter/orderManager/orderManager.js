@@ -1,22 +1,19 @@
 
-  import businessButton from 'professionalComponents/businessButton';
-  import businessForm from 'professionalComponents/businessForm';
-  import agTable from 'professionalComponents/agGridTable';
+  import businessButton from 'professionalComponents/businessButton.vue';
+  import businessForm from 'professionalComponents/businessForm.vue';
   import BurgeonEvent from 'burgeonConfig/config/event.config';
-  import businessDialog from 'professionalComponents/businessDialog';
-  // import loading from 'professionalComponents/loading.vue';
+  import businessDialog from 'professionalComponents/businessDialog.vue';
   import dateUtil from '@/assets/js/__utils__/date.js';
   import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-  import dynamicSearch from '@/views/pages/orderCenter/orderManager/dynamicSearch.vue';
-  import formSetting from '@/views/pages/orderCenter/orderManager/formSetting.vue';
-  import proDetail from '@/views/pages/orderCenter/orderManager/proDetail';
-  import businessAgTable from 'professionalComponents/businessAgTable';
+  import dynamicSearch from 'allpages/orderCenter/orderManager/dynamicSearch.vue';
+  import formSetting from 'allpages/orderCenter/orderManager/formSetting.vue';
+  import proDetail from 'allpages/orderCenter/orderManager/proDetail.vue';
+  import businessAgTable from 'professionalComponents/businessAgTable.vue';
   import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
   export default {
     components: {
       businessButton,
       businessForm,
-      agTable,
       dynamicSearch,
       formSetting,
       businessDialog,
