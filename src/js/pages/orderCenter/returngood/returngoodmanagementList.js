@@ -399,10 +399,12 @@ export default {
                */
               const it = selectArr[0];
               // ✧ 校验退换货单的入库仓库是否为pos管控仓，若否，则提示：“仅支持对pos管控仓的仓库进行物流信息的修改！”
+              /* 
               if (it.CP_C_PHY_WAREHOUSE_IN_ID_NAME != 'pos管控仓') {
                 this.$Message.error('仅支持对pos管控仓的仓库进行物流信息的修改！');
                 // return
               }
+              */
               let flag = false;
               if (it.RETURN_STATUS_NAME == '待退货入库' && ['未传', '成功', '失败'].includes(it.IS_TOWMS)) {
                 // ✧ 校验退换货单的单据状态是否为“待退货入库”&传wms状态=未传、成功、失败，若否，则提示：“仅支持对待退货入库，传wms状态=未传/成功/失败”进行操作！”
@@ -410,7 +412,7 @@ export default {
               }
               if (!flag) {
                 this.$Message.error('仅支持对待退货入库，传wms状态=未传/成功/失败”进行操作！');
-                // return
+                return
               }
               this.modifyPosConfig.componentData = {
                 it,

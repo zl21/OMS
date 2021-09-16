@@ -138,7 +138,7 @@ export default {
       } = this.formConfig.formValue;
       if (!logisticsId && !logisticsName && !logisticsCode || !expressCode) {
         this.$Message.error('物流公司/物流单号必填，请录入！');
-        // return
+        return
       }
       const param = {
         id, // id：数据主键
