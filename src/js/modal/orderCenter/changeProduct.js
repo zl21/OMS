@@ -256,6 +256,7 @@ export default {
         ],
       },
       proName: '',
+      skuPropertiesName: '',
       replace_proName: '',
       replaceTableLoad: false,
       tableLoad: false,
@@ -351,15 +352,16 @@ export default {
               key: 'ECODE',
             },
             {
+              // 商品款号
+              title: '商品款号',
+              key: 'SPEC',
+            },
+            {
               // 商品名称
               title: window.vmI18n.t('table_label.productName'),
               key: 'PS_C_PRO_ENAME',
             },
-            {
-              // 商品SKU名称
-              title: '商品款号',
-              key: 'SPEC',
-            },
+            
           ];
         // 京东订单接口
         case 'IP_B_JINGDONG_ORDER':
@@ -370,18 +372,18 @@ export default {
               key: 'ECODE',
             },
             {
-              // 商品名称
-              title: window.vmI18n.t('table_label.productName'),
-              key: 'psCProEname',
-            },
-            {
               // 商品款号
               title: '商品款号',
               key: 'psCProEcode',
             },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'psCProEname',
+            },
           ];
         // 通用订单接口
-        case 'IP_B_JINGDONG_ORDER':
+        case 'IP_B_STANDPLAT_ORDER':
           return [
             {
               // 商品SKU
@@ -389,14 +391,14 @@ export default {
               key: 'ECODE',
             },
             {
-              // 商品名称
-              title: window.vmI18n.t('table_label.productName'),
-              key: 'psCProEname',
-            },
-            {
               // 商品款号
               title: '商品款号',
               key: 'psCProEcode',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'psCProEname',
             },
             {
               // 条码属性
