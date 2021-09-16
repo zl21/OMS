@@ -19,6 +19,14 @@
               @on-enter="search('one')"
             />
           </div>
+          <div class="search_child" v-if="pageName === 'IP_B_STANDPLAT_ORDER'">
+            <span class="lable" >条码属性:</span>
+            <Input
+              v-model="skuPropertiesName"
+              @on-enter="search('one')"
+            />
+          </div>
+          <div class="search_child" v-if="pageName === 'IP_B_STANDPLAT_ORDER'" />
           <div class="search_child">
             <!-- 搜索 -->
             <Button
@@ -70,7 +78,7 @@
           </div>
         </div>
         <Table
-          :columns="columns"
+          :columns="replaceColumns"
           :data="replace_data"
           :loading="replaceTableLoad"
           :highlight-row="true"

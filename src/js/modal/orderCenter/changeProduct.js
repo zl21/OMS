@@ -66,14 +66,6 @@ export default {
                   ECODE: val.trim(),
                 },
               };
-              if (this.pageName === 'IP_B_STANDPLAT_ORDER') {
-                Object.assign(query, {
-                  psCSku: {
-                    ECODE: val.trim(),
-                    skuPropertiesName: val.trim(),
-                  }
-                })
-              }
               const res = await _this.skuQueryCommon(this.pageName, query);
               if (res.status === 200) {
                 const data = res.data.data.data;
@@ -130,14 +122,6 @@ export default {
                     psCProEcode: val.trim(),
                   },
                 };
-                if (this.pageName === 'IP_B_STANDPLAT_ORDER') {
-                  Object.assign(params, {
-                    psCSku: {
-                      psCProEcode: val.trim(),
-                      skuPropertiesName: val.trim(),
-                    }
-                  })
-                }
                 res = await this.skuQueryCommon(this.pageName, params);
               } else {
                 const fromdata = new FormData();
@@ -275,23 +259,24 @@ export default {
       replace_proName: '',
       replaceTableLoad: false,
       tableLoad: false,
-      columns: [
+      replaceColumns: [
         {
-          // title: "商品SKU",
+          // 商品SKU
           title: window.vmI18n.t('table_label.commoditySKU'),
           key: 'ECODE',
         },
         {
-          // title: "商品名称",
+          // 商品名称
           title: window.vmI18n.t('table_label.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
-          // title: "商品SKU名称",
-          title: pageName === 'IP_B_TAOBAO_ORDER' ? '商品款号' : window.vmI18n.t('table_label.productSKUname'),
+          // 商品SKU名称
+          title: window.vmI18n.t('table_label.productSKUname'),
           key: 'SPEC',
         },
       ],
+      columns: this.renderTableCol(pageName),
       data: [],
       replace_data: [],
       onRowClickReplaceData: {},
@@ -355,6 +340,90 @@ export default {
       }
       
     },
+    renderTableCol(pageName) {
+      switch(pageName) {
+        // 淘宝订单接口
+        case 'IP_B_TAOBAO_ORDER':
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'PS_C_PRO_ENAME',
+            },
+            {
+              // 商品SKU名称
+              title: '商品款号',
+              key: 'SPEC',
+            },
+          ];
+        // 京东订单接口
+        case 'IP_B_JINGDONG_ORDER':
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'psCProEname',
+            },
+            {
+              // 商品款号
+              title: '商品款号',
+              key: 'psCProEcode',
+            },
+          ];
+        // 通用订单接口
+        case 'IP_B_JINGDONG_ORDER':
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'psCProEname',
+            },
+            {
+              // 商品款号
+              title: '商品款号',
+              key: 'psCProEcode',
+            },
+            {
+              // 条码属性
+              title: '条码属性',
+              key: 'skuPropertiesName',
+            },
+          ];
+        default:
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'PS_C_PRO_ENAME',
+            },
+            {
+              // 商品SKU名称
+              title: window.vmI18n.t('table_label.productSKUname'),
+              key: 'SPEC',
+            },
+          ];
+      }
+    },
     skuQueryCommon(pageName, params) {
       switch(pageName) {
         // 淘宝订单接口
@@ -392,11 +461,11 @@ export default {
               : self.replace_proName.trim(),
         },
       };
-      if (this.pageName === 'IP_B_STANDPLAT_ORDER') {
+      if (this.pageName === 'IP_B_STANDPLAT_ORDER' && value === 'one') {
         Object.assign(query, {
           psCSku: {
             ...query.psCSku,
-            skuPropertiesName: self.formConfig.formValue.psCProEcode.trim(),
+            skuPropertiesName: self.skuPropertiesName.trim(),
           }
         })
       }
