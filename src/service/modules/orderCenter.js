@@ -8,6 +8,7 @@ export default {
   /**
    * 零售发货单
    */
+  refundInLogisticsUpdate: params => network.post('/api/cs/oc/oms/v1/refundInLogisticsUpdate', params), // 退换-修改Pos管控仓
   auditOrder: params => network.post('/api/cs/oc/oms/v1/auditOrder', params), // 审核
   auditOrderForce: params => network.post('/api/cs/oc/oms/v1/auditOrderForce', params), // 强制审核
   getSupplyPrice: params => network.post('/api/cs/oc/oms/v1/getSupplyPrice', params), // 获取猫超供货价

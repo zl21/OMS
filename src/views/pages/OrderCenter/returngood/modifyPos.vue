@@ -35,10 +35,6 @@ export default {
   data() {
     return {
       loading: false,
-      form: {
-        company: 'test',
-        orderNo: 'test',
-      },
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -69,6 +65,8 @@ export default {
       },
       formConfig: {
         formValue: {
+          CP_C_LOGISTICS_ID: '',
+          CP_C_LOGISTICS_ECODE: '',
           CP_C_LOGISTICS_ENAME: '', // 退回物流公司
           LOGISTICS_CODE: '', // 退回物流单号
         },
@@ -79,38 +77,38 @@ export default {
         },
         formData: [
           {
-            style: 'popInput',
+            style: 'popInputPlus',
             width: '400',
             dataAcessKey: 'CP_C_LOGISTICS_ENAME',
             value: 'CP_C_LOGISTICS_ID',
             itemdata: {
-              col: 1,
+              isBackRowItem: true,
               colid: 168212,
               colname: 'CP_C_LOGISTICS_ENAME', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: window.vmI18n.t('form_label.returnLogisticsCompany'), // 退回物流公司
-              inputname: 'CP_C_LOGISTICS_ENAME:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
-              isuppercase: false, // 是否转大写
-              length: 65535, // 最大长度是多少
+              isnotnull: true, // 是否必填
               name: window.vmI18n.t('form_label.returnLogisticsCompany'), // 退回物流公司input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'OC_B_RETURN_ORDER', // 对应的表
-              reftableid: 24578, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '' // 这个是选择的值
+              valuedata: '', // 这个是选择的值
+              pid: '',
             },
-            // oneObj: e => {
-            //   this.oneObjs(e);
-            // }
+            oneObj: val => {
+              if (!Object.keys(val).length) {
+                this.formConfig.formValue.CP_C_LOGISTICS_ID = '';
+                this.formConfig.formValue.CP_C_LOGISTICS_ENAME = '';
+                this.formConfig.formValue.CP_C_LOGISTICS_ECODE = '';
+                return
+              }
+              const it = val.rowItem;
+              this.formConfig.formValue.CP_C_LOGISTICS_ID = it.ID.val;
+              this.formConfig.formValue.CP_C_LOGISTICS_ENAME = it.ENAME.val;
+              this.formConfig.formValue.CP_C_LOGISTICS_ECODE = it.ENAME.val;
+            }
           },
           {
             style: 'input',
+            placeholder: '请输入',
             label: window.vmI18n.t('form_label.returnLogisticsNumber'), // 退回物流单号
             dataAcessKey: 'LOGISTICS_CODE',
             value: 'LOGISTICS_CODE',
@@ -132,10 +130,38 @@ export default {
       // this.form
       const self = this;
       this.loading = true;
-      const { data: { data: { code, data, message } } } = await this.service.orderCenter.getOrderId(this.form).finally(e => this.loading = false);
+      const { ID: id } = this.componentData.it;
+      const { 
+        CP_C_LOGISTICS_ID: logisticsId,
+        CP_C_LOGISTICS_ECODE: logisticsCode,
+        CP_C_LOGISTICS_ENAME: logisticsName,
+        LOGISTICS_CODE: expressCode
+      } = this.formConfig.formValue;
+      if (!logisticsId && !logisticsName && !logisticsCode || !expressCode) {
+        this.$Message.error('物流公司/物流单号必填，请录入！');
+        // return
+      }
+      const param = {
+        id, // id：数据主键
+        logisticsId, // logisticsId：物流公司ID
+        logisticsCode, // logisticsCode：物流公司编码
+        logisticsName,  // logisticsName：物流公司名称
+        expressCode, // expressCode：物流单号
+      };
+      const { data: { code, data, message } } = await this.service.orderCenter.refundInLogisticsUpdate(param).finally(e => this.loading = false);
+      if (code == 0) {
+        self.$Message.success(message);
+        self.$parent.$parent.$parent.getList(self.componentData.status);
+        self.$parent.$parent.closeConfirm();
+      } else {
+        self.$Message.error(message);
+      }
     },
   },
-  mounted() { },
+  mounted() {
+    // 退回物流单号：默认从原退换货单中带出，可编辑修改，必填
+    this.formConfig.formValue.LOGISTICS_CODE = this.componentData.it.LOGISTICS_CODE || '';
+  },
 }
 </script>
 

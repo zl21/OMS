@@ -403,11 +403,18 @@ export default {
                 this.$Message.error('仅支持对pos管控仓的仓库进行物流信息的修改！');
                 // return
               }
-              if (it.RETURN_STATUS_NAME == '待退货入库' && true) {
-                
+              let flag = false;
+              if (it.RETURN_STATUS_NAME == '待退货入库' && ['未传', '成功', '失败'].includes(it.IS_TOWMS)) {
+                // ✧ 校验退换货单的单据状态是否为“待退货入库”&传wms状态=未传、成功、失败，若否，则提示：“仅支持对待退货入库，传wms状态=未传/成功/失败”进行操作！”
+                flag = true;
+              }
+              if (!flag) {
+                this.$Message.error('仅支持对待退货入库，传wms状态=未传/成功/失败”进行操作！');
+                // return
               }
               this.modifyPosConfig.componentData = {
                 it,
+                status: this.statusTab,
               };
               this.$children.find(item => item.name === 'modifyPos').openConfirm();
             } // 按钮点击事件
