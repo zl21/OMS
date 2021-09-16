@@ -72,8 +72,7 @@ export default {
         },
         // 表单非空提示
         ruleValidate: {
-          ORIG_ORDER_ID: [{ required: true, message: ' ', trigger: 'blur' }],
-          BILL_TYPE: [{ required: true, message: ' ', trigger: 'blur' }]
+          LOGISTICS_CODE: [{ required: true, message: ' ', trigger: 'blur' }],
         },
         formData: [
           {
