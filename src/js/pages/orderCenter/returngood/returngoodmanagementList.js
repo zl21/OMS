@@ -401,12 +401,12 @@ export default {
                 return
               }
               let flag = false;
-              if (it.RETURN_STATUS_NAME == '待退货入库' && ['未传', '成功', '失败'].includes(it.IS_TOWMS)) {
+              if (it.RETURN_STATUS_NAME == '待退货入库' && ['未传WMS', '传WMS成功', '传WMS失败'].includes(it.IS_TOWMS)) {
                 // ✧ 校验退换货单的单据状态是否为“待退货入库”&传wms状态=未传、成功、失败，若否，则提示：“仅支持对待退货入库，传wms状态=未传/成功/失败”进行操作！”
                 flag = true;
               }
               if (!flag) {
-                this.$Message.error('仅支持对待退货入库，传wms状态=未传/成功/失败”进行操作！');
+                this.$Message.error("仅支持对'待退货入库'，传wms状态=未传/成功/失败”进行操作！");
                 return
               }
               this.modifyPosConfig.componentData = {

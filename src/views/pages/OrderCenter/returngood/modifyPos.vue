@@ -1,5 +1,5 @@
 <template>
-  <div class="bounced" v-loading="loading">
+  <div class="modifyPosDom" v-loading="loading">
     <businessForm :form-config="formConfig" />
     <!-- <Form :label-width="100">
       <FormItem label="退回物流公司：">
@@ -164,5 +164,10 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.modifyPosDom {
+  /deep/ .orderManageEdit .ark-form-item.popInput .item-input label.title {
+    padding-right: 3px !important;
+  }
+}
 </style>
