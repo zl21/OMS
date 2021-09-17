@@ -4359,6 +4359,11 @@ export default {
     },
     getDataByProInfoList(ecode) {
       const _this = this;
+      // 新增-输入原单-回车，有 this.order.table.data[0].QUERYORDERITEMRESULTLIST
+      // 复制-this.order.table.data = []，所以会报错
+      if (!this.order.table.data.length) {
+        return
+      }
       const list = this.order.table.data[0].QUERYORDERITEMRESULTLIST;
       const proInfo = list.find(x => x.ecode == ecode);
       if (proInfo) {
