@@ -102,7 +102,7 @@ export default {
               const it = val.rowItem;
               this.formConfig.formValue.CP_C_LOGISTICS_ID = it.ID.val;
               this.formConfig.formValue.CP_C_LOGISTICS_ENAME = it.ENAME.val;
-              this.formConfig.formValue.CP_C_LOGISTICS_ECODE = it.ENAME.val;
+              this.formConfig.formValue.CP_C_LOGISTICS_ECODE = it.ECODE.val;
             }
           },
           {
