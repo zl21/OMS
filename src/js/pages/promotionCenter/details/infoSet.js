@@ -612,7 +612,8 @@ export default {
       namelist.forEach(obj => {
         const row = {};
         if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
-          row.ECODE = obj.PS_C_SKU_ECODE || '';
+          row.ECODE = obj.SKU_ID || '';
+          // row.ECODE = obj.PS_C_SKU_ECODE || '';
           row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.ID = obj.SKU_ID;
         } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {
