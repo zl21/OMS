@@ -741,6 +741,11 @@ export default {
           dataAcessKey: 'OOID'
         },
         {
+          key: 'RESERVE_VARCHAR05',
+          title: '平台规格',
+          dataAcessKey: 'RESERVE_VARCHAR05'
+        },
+        {
           title: '商品重量(KG)',
           key: 'STANDARD_WEIGHT',
         },
@@ -879,7 +884,7 @@ export default {
       totalData = [
         {
           index: '总计',
-          REAL_AMT: amt,
+          REAL_AMT: amt.toFixed(2),
           QTY: qty
         }
       ];

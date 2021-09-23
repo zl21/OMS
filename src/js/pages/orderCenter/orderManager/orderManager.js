@@ -666,7 +666,7 @@ export default {
                 this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
                   // 提前判断下该单据是否可拆单
                   if (res.data.code == 0) {
-                    if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || self.selection[0].PLATFORM === 50) {
+                    if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || (self.selection[0].PLATFORM === 50 && (!self.selection[0].RESERVE_VARCHAR02 || self.selection[0].RESERVE_VARCHAR02 == null))) {
                       self.$Message.warning({
                         content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
                         duration: 5,
@@ -2938,8 +2938,8 @@ export default {
                   // totalProdQty：总计：管理列表 所有商品总数；
                   // totalOrderAmt：总计：管理列表 所有订单总额
                   combined = [
-                    {__ag_sequence_column_name__:"合计" , QTY_ALL: res.data.data.sumProductQty , PRODUCT_AMT: res.data.data.sumOrderAmt},
-                    {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.totalProdQty , PRODUCT_AMT:res.data.data.totalOrderAmt}
+                    // {__ag_sequence_column_name__:"合计" , QTY_ALL: res.data.data.sumProductQty , PRODUCT_AMT: res.data.data.sumOrderAmt},
+                    // {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.totalProdQty , PRODUCT_AMT:res.data.data.totalOrderAmt}
                   ]
                 }
                 self.agTableConfig.pagenation.total = res.data.data.totalSize;

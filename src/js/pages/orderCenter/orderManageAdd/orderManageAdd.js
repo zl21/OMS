@@ -1155,33 +1155,34 @@ export default {
             title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
             key: 'IS_GIFT',
             dataAcessKey: 'IS_GIFT',
-            render: (h, params) => h(
-              'Select', {
-                style: {
-                  width: '150px',
-                },
-                attrs: {
-                  disabled: true,
-                },
-                props: {
-                  value: String(params.row.IS_GIFT),
-                },
-                on: {
-                  'on-change': (value) => {
-                    this.jordanTableConfig.data[
-                      params.index
-                    ].IS_GIFT = Number(value);
-                  },
-                },
-              },
-              this.isgift.forEach(item => h('Option', {
-                props: {
-                  value: item.value,
-                  label: item.label,
-                  transfer: true,
-                },
-              }))
-            ),
+            render: (h, params) => h('span', {}, params.row.IS_GIFT == 1 ? '是' : '否'),
+            // render: (h, params) => h(
+            //   'Select', {
+            //     style: {
+            //       width: '150px',
+            //     },
+            //     // attrs: {
+            //     //   disabled: true,
+            //     // },
+            //     props: {
+            //       value: String(params.row.IS_GIFT),
+            //     },
+            //     on: {
+            //       'on-change': (value) => {
+            //         this.jordanTableConfig.data[
+            //           params.index
+            //         ].IS_GIFT = Number(value);
+            //       },
+            //     },
+            //   },
+            //   this.isgift.forEach(item => h('Option', {
+            //     props: {
+            //       value: item.value,
+            //       label: item.label,
+            //       transfer: true,
+            //     },
+            //   }))
+            // ),
           },
           {
             title: window.vmI18n.t('table_label.adjustment_amount'),

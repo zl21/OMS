@@ -3333,7 +3333,6 @@ export default {
       _this.service.common.returnOrder(params).then(res => {
         _this.availableStock = false;
         _this.isModalSave = false;
-        _this.isSaveLoading = false;
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           // _this.$store.commit('customize/TabHref', {
@@ -3374,7 +3373,7 @@ export default {
           const err = res.data.message || _this.vmI18n.t('modalTips.au'); // 新增退换货订单失败
           _this.$Message.error(err);
         }
-      });
+      }).finally(e => _this.isSaveLoading = false);
     },
     // 售后审核
     afterAudit() {

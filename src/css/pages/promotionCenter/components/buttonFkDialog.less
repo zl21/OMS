@@ -10,4 +10,16 @@
       border-radius: 2px;
       margin-right: 5px;
     }
+  /deep/ .fkdialog {
+    .node .title i {
+      vertical-align: baseline;
+    }
+    .dislogtreebox {
+      overflow-y: scroll;
+      max-height: 410px;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+  }
 }
