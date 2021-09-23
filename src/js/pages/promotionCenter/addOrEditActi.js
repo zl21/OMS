@@ -628,12 +628,14 @@ export default {
           // 非搭配
           const arrs = this.condition_info_setting.productslist || [];
           if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') }; // 无数据
+          console.log('非搭配::', arrs);
           rs = this.checkTable(arrs);
         }
         if (this.condition_info_setting.products_join === '2') {
           // 搭配
           const arrs = this.condition_info_setting.productsArrs || [];
           if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') }; // 无数据
+          console.log('搭配::', arrs);
           rs = this.checkTableTab(arrs, 'info');
         }
       }
@@ -651,8 +653,9 @@ export default {
         if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') };
         rs = this.checkTable(arrs);
       } else {
-        const arrs = this.gift_info_setting.gift_productslist || [];
+        const arrs = this.gift_info_setting.gift_productsArrs || [];
         if (arrs.length === 0) return { code: -1, message: tablename + this.vmI18n.t('modalTips.r6') };
+        console.log('梯度::', arrs);
         rs = this.checkTableTab(arrs, 'gift');
       }
       if (rs.code === -1) {
@@ -677,8 +680,8 @@ export default {
           if (rows.length === 0) return { code: -1, message: `表格【${tab.group}】,无数据` };
         } else {
           // WARNING:这块赠品信息提示有问题 提到下面的if(type === 'gift')逻辑中
-          // rows = tab.productslist || [];
-          // if (rows.length === 0) return { code: -1, message: '无数据' };
+          rows = tab.productslist || [];
+          if (rows.length === 0) return { code: -1, message: '无数据' };
         }
         const res = this.checkTable(rows);
         if (res.code === -1) {
@@ -686,10 +689,13 @@ export default {
           return res;
         }
       }
+      /* 
       if (type === 'gift') {
         const giftRows = tabs || [];
         if (giftRows.length === 0) return { code: -1, message: '无数据' };
+        giftRows = rows;
       }
+      */
       return { code: 0, message: this.vmI18n.t('modalTips.s4') };
     },
     checkTable(rows) {
