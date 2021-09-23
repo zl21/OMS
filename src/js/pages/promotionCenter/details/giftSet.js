@@ -161,9 +161,6 @@ export default {
       this.giftData.gift_methods = val;
       this.clearPdts();
     },
-    checkGiftAmountTypeChange(val) {
-      this.giftData.gift_amount_type = val;
-    },
     checkGiftGrossChange(val) {
       this.giftData.give_num_share = val;
 

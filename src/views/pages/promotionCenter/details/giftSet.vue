@@ -31,13 +31,6 @@
         <SingleBox :value="giftData.gift_methods" :options="groups.giftMethods" @changeSingle="checkGiftMethodsChange" />
       </div>
     </div>
-    <!--赠送数类型-->
-    <div class="row">
-      <div class="form_label"><i class="red">*</i>赠送数类型：</div>
-      <div class="form_content">
-        <SingleBox :value="giftData.gift_amount_type" :options="groups.giftAmountType" @changeSingle="checkGiftAmountTypeChange" />
-      </div>
-    </div>
     <!--赠送总量-->
     <div class="row" v-if="showPdtsArr">
       <div class="form_label"><i class="red">*</i>赠送总量：</div>
