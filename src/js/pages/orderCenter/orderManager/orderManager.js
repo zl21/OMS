@@ -542,6 +542,12 @@ export default {
                 return;
               }
               this.pageLoad = true;
+              for (const it of self.selection) {
+                /**
+                 * ✧ 如果所选的零售发货单存在状态不为‘待审核’的记录，提示：“存在状态不为待审核的记录XXX，不允许重新分仓”
+                 * ✧ 如果所选的零售发货单存在没有打“撤”标的记录，提示：“存在没有打撤标的记录XXX，不允许重新分仓”
+                 */
+              }
               const ids = self.selection.map(item => item.ID);
               this.service.orderCenter.pullBackSearchOrder({ ids }).then(res => {
                 this.pageLoad = false;
