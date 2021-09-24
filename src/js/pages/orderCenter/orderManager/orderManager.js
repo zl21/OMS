@@ -1429,6 +1429,7 @@ export default {
       // eslint-disable-next-line default-case
       switch (val) {
         case 'wmsWithdrawSplit': {
+
           if (self.selection.length <= 0) {
             self.$Message.warning({
               content: '请勾选需要批量拆单的记录！', // 请勾选需要批量拆单的记录！
