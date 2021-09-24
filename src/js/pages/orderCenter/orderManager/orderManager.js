@@ -848,6 +848,35 @@ export default {
           {
             webname: 'Amendment Notes' // 批量修改备注
           },
+          {
+            webname: 'batchCancelHang', // 批量解挂
+            btnclick: () => {
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if (self.selection.length <= 0) {
+                self.$Message.warning({
+                  content: '请选择需要解挂的记录！',
+                  duration: 5,
+                  top: 80
+                });
+                rerurn
+              }
+              this.pageLoad = true;
+              const ids = self.selection.map(item => item.ID);
+              const param = new FormData();
+              param.append('param', JSON.stringify({'ids':ids}))
+              this.service.orderCenter.batchCancelHang(param).then(res => {
+                this.pageLoad = false;
+                if (res.data.code == 0) {
+                  self.$Message.success(res.data.message);
+                  self.selection = [];
+                  self.getData();
+                } else {
+                  self.$Message.error(res.data.message);
+                }
+              }).finally(e => self.pageLoad = false);
+            }
+          },
           // {
           //   text: "工单", //按钮文本
           //   btnclick: () => {} //按钮点击事件
