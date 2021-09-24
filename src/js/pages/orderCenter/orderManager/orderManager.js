@@ -644,9 +644,6 @@ export default {
             webname: 'OrderDeliveryUrgent' // 加急发货
           },
           {
-            webname: 'pullBackSearchWarehouse', // 撤回重新分仓
-          },
-          {
             webname: 'wmsWithdrawSplit', // 撤回单拆单
           },
           {
