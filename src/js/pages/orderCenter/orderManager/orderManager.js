@@ -644,6 +644,12 @@ export default {
             webname: 'OrderDeliveryUrgent' // 加急发货
           },
           {
+            webname: 'pullBackSearchWarehouse', // 撤回重新分仓
+          },
+          {
+            webname: 'wmsWithdrawSplit', // 撤回单拆单
+          },
+          {
             webname: 'OversoldMarkingOpen', // 超卖打标
           },
           {
@@ -1425,6 +1431,17 @@ export default {
       }
       // eslint-disable-next-line default-case
       switch (val) {
+        case 'wmsWithdrawSplit': {
+          if (self.selection.length <= 0) {
+            self.$Message.warning({
+              content: '请勾选需要批量拆单的记录！', // 请勾选需要批量拆单的记录！
+              duration: 5,
+              top: 80
+            });
+            return;
+          }
+          break;
+        }
         case 'OversoldMarkingCancel':
         case 'OversoldMarkingOpen': {
           if (self.selection.length === 0) {
