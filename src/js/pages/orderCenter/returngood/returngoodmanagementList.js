@@ -1032,6 +1032,7 @@ export default {
               item.INVENTED_STATUS = '虚拟入库已入库';
             }
             item.PLATFORM = item.PLAT_NAME; // 平台类型
+            item.CP_C_LOGISTICS_ID_POS = item.CP_C_LOGISTICS_ID; // 退回物流公司id
             item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
             item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
             // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
