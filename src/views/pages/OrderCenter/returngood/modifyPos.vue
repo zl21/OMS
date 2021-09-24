@@ -94,15 +94,14 @@ export default {
             },
             oneObj: val => {
               if (!Object.keys(val).length) {
-                this.formConfig.formValue.CP_C_LOGISTICS_ID = '';
-                this.formConfig.formValue.CP_C_LOGISTICS_ENAME = '';
-                this.formConfig.formValue.CP_C_LOGISTICS_ECODE = '';
+                this.setVal();
                 return
               }
               const it = val.rowItem;
-              this.formConfig.formValue.CP_C_LOGISTICS_ID = it.ID.val;
-              this.formConfig.formValue.CP_C_LOGISTICS_ENAME = it.ENAME.val;
-              this.formConfig.formValue.CP_C_LOGISTICS_ECODE = it.ECODE.val;
+              const a = it.ID ? it.ID.val ? it.ID.val : '' : it.id || '';
+              const b = it.ECODE.val ? it.ECODE.val : it.ECODE || '';
+              const c = it.ENAME.val ? it.ENAME.val : it.ENAME || '';
+              this.setVal(a, b, c);
             }
           },
           {
@@ -156,10 +155,20 @@ export default {
         self.$Message.error(message);
       }
     },
+    setVal(a='', b='', c='') {
+      this.formConfig.formValue.CP_C_LOGISTICS_ID = a;
+      this.formConfig.formValue.CP_C_LOGISTICS_ECODE = b;
+      this.formConfig.formValue.CP_C_LOGISTICS_ENAME = c;
+    },
   },
   mounted() {
+    const { LOGISTICS_CODE = '', CP_C_LOGISTICS_ECODE = '', CP_C_LOGISTICS_ENAME = '', CP_C_LOGISTICS_ID = ''} = this.componentData.it;
     // 退回物流单号：默认从原退换货单中带出，可编辑修改，必填
-    this.formConfig.formValue.LOGISTICS_CODE = this.componentData.it.LOGISTICS_CODE || '';
+    this.formConfig.formValue.LOGISTICS_CODE = LOGISTICS_CODE;
+
+    this.formConfig.formData[0].itemdata.valuedata = CP_C_LOGISTICS_ENAME;
+    this.formConfig.formData[0].itemdata.pid = CP_C_LOGISTICS_ID;
+    this.setVal(CP_C_LOGISTICS_ID, CP_C_LOGISTICS_ECODE, CP_C_LOGISTICS_ENAME);
   },
 }
 </script>
