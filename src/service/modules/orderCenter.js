@@ -8,6 +8,8 @@ export default {
   /**
    * 零售发货单
    */
+  checkWmsWithdrawSplit: params => network.post('/api/cs/oc/oms/v1/checkWmsWithdrawSplit', params), // 零售-撤回单拆单-校验
+  saveWmsWithdrawSplit: params => network.post('/api/cs/oc/oms/v1/saveWmsWithdrawSplit', params), // 零售-撤回单拆单-确定
   cancelOversoldMarking: params => network.post('/api/cs/oc/oms/v1/cancelOversoldMarking', params), // 零售-取消'超'标
   openOversoldMarking: params => network.post('/api/cs/oc/oms/v1/openOversoldMarking', params), // 零售-'超'标
   auditOrder: params => network.post('/api/cs/oc/oms/v1/auditOrder', params), // 审核

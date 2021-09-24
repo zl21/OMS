@@ -1429,15 +1429,36 @@ export default {
       // eslint-disable-next-line default-case
       switch (val) {
         case 'wmsWithdrawSplit': {
-
           if (self.selection.length <= 0) {
             self.$Message.warning({
               content: '请勾选需要批量拆单的记录！', // 请勾选需要批量拆单的记录！
               duration: 5,
               top: 80
             });
-            return;
+            // return;
           }
+          let modalCon = {
+            confirmTitle: '撤回单拆单',
+            titleAlign: 'center', //设置标题是否居中 center left
+            width: '400',
+            scrollable: false, //是否可以滚动
+            closable: true, //是否可以按esc关闭
+            draggable: true, //是否可以拖动
+            mask: true, //是否显示遮罩层
+            maskClosable: false, //是否可以点击蒙层关闭
+            transfer: true, //是否将弹层放在body内
+            name: 'wmsWithdrawSplitCom', //组件名称
+            url: 'modal/orderCenter/wmsWithdrawSplitCom',
+            keepAlive: true,
+            componentData: {'seletDa': self.selection},
+            quit: function () {
+              this.closeConfirm()
+            },
+          }
+          self.publicBouncedConfig = modalCon;
+          setTimeout(() => {
+            self.$children.find(item => item.name === 'wmsWithdrawSplitCom').openConfirm();
+          }, 100);
           break;
         }
         case 'OversoldMarkingCancel':
