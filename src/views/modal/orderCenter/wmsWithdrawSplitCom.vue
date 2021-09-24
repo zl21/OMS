@@ -1,8 +1,8 @@
 <template>
   <div class="wmsWithdrawSplitDom" v-loading="loading">
-    <Form :label-width="210" :model="formItem">
-      <FormItem :label="`${formItem.label}：`">
-        <InputNumber v-model="formItem.num" @on-change="inputChange" />
+    <Form :label-width="210" :model="formItem" :rules="ruleValidate">
+      <FormItem :label="`${formItem.label}：`" prop="num">
+        <Input v-model="formItem.num" @on-change="inputChange" />
       </FormItem>
     </Form>
     <businessButton class="modalBth" :btn-config="btnConfig" />
@@ -22,7 +22,26 @@ export default {
     }
   },
   data() {
+    const validateNum = (rule, value, callback) => {
+      const regx = /^[1-9]+([0-9]*)$|^0$/;
+      const tip = '请输入正整数';
+      if (value === '') {
+        callback(new Error(tip));
+      } else {
+        if (regx.test(value)) {
+          callback();
+        } else {
+          callback(new Error(tip));
+        }
+      }
+    };
     return {
+      ruleValidate: {
+        num: [
+          // { type: 'integer', message: '请输入正整数'},
+          { validator: validateNum, trigger: 'blur' }
+        ],
+      },
       formItem: {
         cover: 'false',
         flag: '1',
