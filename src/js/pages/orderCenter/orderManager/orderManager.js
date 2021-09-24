@@ -529,6 +529,33 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'pullBackSearchWarehouse', // 撤回重新分仓
+            btnclick: () => {
+              const self = this;
+              self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+              if (self.selection.length <= 0) {
+                self.$Message.warning({
+                  content: '请勾选需要撤回重新分仓的记录！', // 请勾选需要撤回重新分仓的记录！
+                  duration: 5,
+                  top: 80
+                });
+                return;
+              }
+              this.pageLoad = true;
+              const ids = self.selection.map(item => item.ID);
+              this.service.orderCenter.pullBackSearchOrder({ ids }).then(res => {
+                this.pageLoad = false;
+                if (res.data.code == 0) {
+                  self.$Message.success(res.data.message);
+                  self.selection = [];
+                  self.getData();
+                } else {
+                  self.$Message.error(res.data.message);
+                }
+              });
+            }
+          },
+          {
             webname: 'Modify warehouse' // 批量修改仓库
           },
           {
@@ -642,12 +669,6 @@ export default {
           },
           {
             webname: 'OrderDeliveryUrgent' // 加急发货
-          },
-          {
-            webname: 'pullBackSearchWarehouse', // 撤回重新分仓
-          },
-          {
-            webname: 'wmsWithdrawSplit', // 撤回单拆单
           },
           {
             webname: 'OversoldMarkingOpen', // 超卖打标
@@ -1431,17 +1452,6 @@ export default {
       }
       // eslint-disable-next-line default-case
       switch (val) {
-        case 'wmsWithdrawSplit': {
-          if (self.selection.length <= 0) {
-            self.$Message.warning({
-              content: '请勾选需要批量拆单的记录！', // 请勾选需要批量拆单的记录！
-              duration: 5,
-              top: 80
-            });
-            return;
-          }
-          break;
-        }
         case 'OversoldMarkingCancel':
         case 'OversoldMarkingOpen': {
           if (self.selection.length === 0) {
