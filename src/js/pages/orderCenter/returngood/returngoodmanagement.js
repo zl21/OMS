@@ -1948,7 +1948,6 @@ export default {
         _this.labelDefaultValue = 1;
         _this.isTab = 0;
         this.jordanTableConfig.data = this.refundDtoList.data;
-        console.log('this.jordanTableConfig.data', this.refundDtoList.data);
         this.jordanTableConfig.columns = [
           {
             key: 'REFUND_BILL_NO',
@@ -2400,9 +2399,9 @@ export default {
             dataAcessKey: 'QTY_CAN_REFUND'
           },
           {
-            key: 'PRICE_TAG',
+            key: _this.$route.query.id === '-1' ? 'PRICE_TAG' : 'PRICE',
             title: _this.vmI18n.t('table_label.tagPrice'), // 吊牌价
-            dataAcessKey: 'PRICE_TAG'
+            dataAcessKey: _this.$route.query.id === '-1' ? 'PRICE_TAG' : 'PRICE_LIST',
           },
           {
             key: 'amt_refund_single',
