@@ -3125,7 +3125,7 @@ export default {
           ps_c_pro_ename: item[i].PS_C_PRO_ENAME,
           qty_can_refund: parseInt(item[i].QTY_CAN_REFUND),
           qty_refund: parseInt(item[i].QTY_REFUND),
-          PRICE_LIST: item[i].PRICE,
+          PRICE_LIST: _this.$route.query.id === '-1' ? item[i].PRICE_TAG : item[i].PRICE_LIST,
           price: item[i].PRICE,
           sex: item[i].SEX,
           amt_refund: item[i].AMT_REFUND,
