@@ -1,23 +1,6 @@
 <template>
   <div class="modifyPosDom" v-loading="loading">
     <businessForm :form-config="formConfig" />
-    <!-- <Form :label-width="100">
-      <FormItem label="退回物流公司：">
-        <Input
-          v-model="form.company"
-          :rows="4"
-          placeholder="请输入"
-        />
-      </FormItem>
-      
-      <FormItem label="退回物流单号：">
-        <Input
-          v-model="form.orderNo"
-          :rows="4"
-          placeholder="请输入"
-        />
-      </FormItem>
-    </Form> -->
     <jordanBtn :btn-config="btnConfig" />
   </div>
 </template>
@@ -127,7 +110,6 @@ export default {
     async okClick() {
       // this.form
       const self = this;
-      this.loading = true;
       const { ID: id } = this.componentData.it;
       const { 
         CP_C_LOGISTICS_ID: logisticsId,
@@ -137,8 +119,9 @@ export default {
       } = this.formConfig.formValue;
       if (!logisticsId && !logisticsName && !logisticsCode || !expressCode) {
         this.$Message.error('物流公司/物流单号必填，请录入！');
-        return
+        return;
       }
+      this.loading = true;
       const param = {
         id, // id：数据主键
         logisticsId, // logisticsId：物流公司ID
