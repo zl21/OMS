@@ -1364,6 +1364,7 @@ export default {
               newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
               newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
               newQueryList.push(newItem);
+              newItem.PRICE_TAG = subitem.PRICE_TAG;
             });
 
             /* for await (const subitem of queryList) {
@@ -1947,6 +1948,7 @@ export default {
         _this.labelDefaultValue = 1;
         _this.isTab = 0;
         this.jordanTableConfig.data = this.refundDtoList.data;
+        console.log('this.jordanTableConfig.data', this.refundDtoList.data);
         this.jordanTableConfig.columns = [
           {
             key: 'REFUND_BILL_NO',
@@ -2398,9 +2400,9 @@ export default {
             dataAcessKey: 'QTY_CAN_REFUND'
           },
           {
-            key: 'PRICE',
+            key: 'PRICE_TAG',
             title: _this.vmI18n.t('table_label.tagPrice'), // 吊牌价
-            dataAcessKey: 'PRICE_LIST'
+            dataAcessKey: 'PRICE_TAG'
           },
           {
             key: 'amt_refund_single',
@@ -2422,45 +2424,6 @@ export default {
             dataAcessKey: 'AMT_SETTLE_TOT',
             title: _this.vmI18n.t('table_label.settlementAmount') // 结算金额
           },
-          // { // 2021-01-26 森马优化功能去掉该商品标记
-          //   key: 'PRODUCT_MARK',
-          //   title: _this.vmI18n.t('form_label.goodsMark'), // 商品标记
-          //   dataAcessKey: 'PRODUCT_MARK',
-          //   render: (h, params) => {
-          //     const list = [
-          //       {
-          //         SPEC: '正品'
-          //       },
-          //       {
-          //         SPEC: '次品'
-          //       }
-          //     ];
-          //     return h(
-          //       'Select',
-          //       {
-          //         style: {
-          //           width: '150px'
-          //         },
-          //         props: {
-          //           value: params.row.PRODUCT_MARK, // 结算方式
-          //           transfer: true
-          //         },
-          //         on: {
-          //           'on-change': value => {
-          //             console.log(params);
-          //             _this.jordanTableConfig.data[params.index].PRODUCT_MARK = value;
-          //           }
-          //         }
-          //       },
-          //       list.map(item => h('Option', {
-          //           props: {
-          //             value: item.SPEC,
-          //             label: item.SPEC
-          //           }
-          //         }))
-          //     );
-          //   }
-          // }
         ]; // 表头
         this.getDataAccess('OC_B_RETURN_ORDER', res => {
           this.jordanTableConfig.columns = this.setTablePermissions(this.jordanTableConfig.columns, res);
