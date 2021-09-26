@@ -23,7 +23,7 @@ export default {
   },
   data() {
     const validateNum = (rule, value, callback) => {
-      const regx = /^[1-9]+([0-9]*)$|^0$/;
+      const regx = /^[1-9]+([0-9]*)$/;
       const tip = '请输入正整数';
       if (value === '') {
         callback(new Error(tip));
@@ -85,9 +85,15 @@ export default {
     },
     ok() {
       const self = this;
+      const skuCount = self.formItem.num;
+      const regx = /^[1-9]+([0-9]*)$/;
+      if (!regx.test(skuCount)) {
+        self.$Message.error('请输入正整数！');
+        return
+      }
       self.loading = true;
       const ids = self.componentData.seletDa.map(item => item.ID);
-      this.service.orderCenter.saveWmsWithdrawSplit({ ids, skuCount: self.formItem.num }).then(res => {
+      this.service.orderCenter.saveWmsWithdrawSplit({ ids, skuCount }).then(res => {
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
           self.$parent.$parent.$parent.getData();
