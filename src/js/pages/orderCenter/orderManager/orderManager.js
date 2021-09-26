@@ -2962,7 +2962,7 @@ export default {
         return _this.$Message.error('非法字符，请检查后重新输入!');
       }
       const lists = _this.batchAntiAuditFormConfig.formValue.noticeNos.split(',').map(item => item.trim())
-      if (lists.length > 15000) return _this.$Message.error('文本过长，请分批处理!');
+      // if (lists.length > 15000) return _this.$Message.error('文本过长，请分批处理!');
 
       const param = {
         noticeNos: lists
