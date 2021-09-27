@@ -4058,6 +4058,7 @@ export default {
           queryListItem.amt_refund_single = selection.amtRefundSingle;
           queryListItem.PRICE_SETTLE = selection.priceSettle;
           queryListItem.AMT_SETTLE_TOT = selection.totPriceSettle;
+          queryListItem.PRICE_TAG = selection.PRICE_TAG;
           await _this.reconstructionGetDetail(selection, queryListItem, selection.ecode);
           queryList.push(queryListItem);
         }
