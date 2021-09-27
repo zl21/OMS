@@ -2767,8 +2767,8 @@ export default {
             title: _this.vmI18n.t('table_label.gender') // 性别
           },
           {
-            key: 'PRICE',
-            dataAcessKey: 'PRICE_LIST',
+            key: 'PRICE_TAG',
+            dataAcessKey: 'PRICE_TAG',
             title: _this.vmI18n.t('table_label.tagPrice') // 吊牌价
           },
           {
