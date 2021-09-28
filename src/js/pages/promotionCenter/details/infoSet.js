@@ -1,10 +1,10 @@
+import businessDialog from 'professionalComponents/businessDialog';
 import tableCols from '@/assets/js/promotion/columns';
 import SingleBox from '@/views/pages/promotionCenter/components/singleBox.vue';
 import ButtonFkDialog from '@/views/pages/promotionCenter/components/buttonFkDialog.vue';
 import detailtable from '@/views/pages/promotionCenter/details/table.vue';
 import detailtabs from '@/views/pages/promotionCenter/details/tableTabs.vue';
 import CTSIT from '@/views/pages/promotionCenter/details/CTSIT';
-import businessDialog from 'professionalComponents/businessDialog';
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
@@ -35,8 +35,10 @@ export default {
         const self = this;
         switch (val) {
           case '1':
-          case '2':
             this.columns = self.tableCols.infoColumns;
+            break;
+          case '2':
+            this.columns = self.tableCols.infoColumnsSku;
             break;
           case '3':
             this.columns = self.tableCols.infoColumnsxt;
@@ -583,7 +585,8 @@ export default {
       namelist.forEach(obj => {
         const row = {};
         if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
-          row.ECODE = obj.PS_C_SKU_ECODE || '';
+          row.ECODE = obj.SKU_ID || '';
+          // row.ECODE = obj.PS_C_SKU_ECODE || '';
           row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.SKU_ID = obj.SKU_ID || '';
           row.ID = obj.ID;
@@ -609,7 +612,8 @@ export default {
       namelist.forEach(obj => {
         const row = {};
         if (rs.reftable === 'SG_B_CHANNEL_PRODUCT') {
-          row.ECODE = obj.PS_C_SKU_ECODE || '';
+          row.ECODE = obj.SKU_ID || '';
+          // row.ECODE = obj.PS_C_SKU_ECODE || '';
           row.ENAME = obj.PS_C_PRO_ENAME || '';
           row.ID = obj.SKU_ID;
         } else if (rs.reftable === 'IP_C_TAOBAO_PRODUCT') {

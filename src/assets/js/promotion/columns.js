@@ -15,6 +15,22 @@ const tablecols = {
       fun: ''
     }
   ],
+  infoColumnsSku: [
+    {
+      slot: 'ECODE',
+      key: 'ECODE',
+      title: '平台SKUID'
+    },
+    {
+      key: 'ENAME',
+      title: '商品名称'
+    },
+    {
+      key: 'OPERATE',
+      title: '操作',
+      fun: ''
+    }
+  ],
   infoColumnsxt: [
     {
       slot: 'ECODE',
