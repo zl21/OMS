@@ -240,4 +240,7 @@ export default {
   created() {
     window.addEventListener('customizeClick', this.saveCurrent);
   },
+  beforeDestroy() {
+    window.removeEventListener('customizeClick', this.saveCurrent);
+  },
 };

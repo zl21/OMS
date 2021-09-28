@@ -644,6 +644,12 @@ export default {
             webname: 'OrderDeliveryUrgent' // 加急发货
           },
           {
+            webname: 'OversoldMarkingOpen', // 超卖打标
+          },
+          {
+            webname: 'OversoldMarkingCancel', // 取消打标-超卖打标
+          },
+          {
             text: window.vmI18n.t('btn.splitOrder'), // 拆分订单
             webname: 'Split the order',
             btnclick: () => {
@@ -660,7 +666,7 @@ export default {
                 this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
                   // 提前判断下该单据是否可拆单
                   if (res.data.code == 0) {
-                    if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || self.selection[0].PLATFORM === 50) {
+                    if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7 || (self.selection[0].PLATFORM === 50 && (!self.selection[0].RESERVE_VARCHAR02 || self.selection[0].RESERVE_VARCHAR02 == null))) {
                       self.$Message.warning({
                         content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
                         duration: 5,
@@ -1419,6 +1425,31 @@ export default {
       }
       // eslint-disable-next-line default-case
       switch (val) {
+        case 'OversoldMarkingCancel':
+        case 'OversoldMarkingOpen': {
+          if (self.selection.length === 0) {
+            self.$Message.warning({
+              content: '请选择需要超卖打标的记录！', // 请选择需要超卖打标的记录！
+              duration: 5,
+              top: 80
+            });
+            return;
+          }
+          this.pageLoad = true;
+          const IDS = self.selection.map(item => item.ID);
+          const api = val == 'OversoldMarkingCancel' ? 'cancelOversoldMarking' : 'openOversoldMarking';
+          this.service.orderCenter[api]({ IDS, 'TYPE':1 }).then(res => {
+            this.pageLoad = false;
+            if (res.data.code == 0) {
+              self.$Message.success(res.data.message);
+              self.selection = [];
+              self.getData();
+            } else {
+              self.$Message.error(res.data.message);
+            }
+          });
+          break;
+        }
         case 'Newly added': {
           // 新增
           R3.store.commit('global/tabOpen', {
@@ -2907,8 +2938,8 @@ export default {
                   // totalProdQty：总计：管理列表 所有商品总数；
                   // totalOrderAmt：总计：管理列表 所有订单总额
                   combined = [
-                    {__ag_sequence_column_name__:"合计" , QTY_ALL: res.data.data.sumProductQty , PRODUCT_AMT: res.data.data.sumOrderAmt},
-                    {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.totalProdQty , PRODUCT_AMT:res.data.data.totalOrderAmt}
+                    // {__ag_sequence_column_name__:"合计" , QTY_ALL: res.data.data.sumProductQty , PRODUCT_AMT: res.data.data.sumOrderAmt},
+                    // {__ag_sequence_column_name__:"总计" ,  QTY_ALL:res.data.data.totalProdQty , PRODUCT_AMT:res.data.data.totalOrderAmt}
                   ]
                 }
                 self.agTableConfig.pagenation.total = res.data.data.totalSize;

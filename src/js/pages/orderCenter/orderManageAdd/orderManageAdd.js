@@ -1155,33 +1155,34 @@ export default {
             title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
             key: 'IS_GIFT',
             dataAcessKey: 'IS_GIFT',
-            render: (h, params) => h(
-              'Select', {
-                style: {
-                  width: '150px',
-                },
-                attrs: {
-                  disabled: true,
-                },
-                props: {
-                  value: String(params.row.IS_GIFT),
-                },
-                on: {
-                  'on-change': (value) => {
-                    this.jordanTableConfig.data[
-                      params.index
-                    ].IS_GIFT = Number(value);
-                  },
-                },
-              },
-              this.isgift.forEach(item => h('Option', {
-                props: {
-                  value: item.value,
-                  label: item.label,
-                  transfer: true,
-                },
-              }))
-            ),
+            render: (h, params) => h('span', {}, params.row.IS_GIFT == 1 ? '是' : '否'),
+            // render: (h, params) => h(
+            //   'Select', {
+            //     style: {
+            //       width: '150px',
+            //     },
+            //     // attrs: {
+            //     //   disabled: true,
+            //     // },
+            //     props: {
+            //       value: String(params.row.IS_GIFT),
+            //     },
+            //     on: {
+            //       'on-change': (value) => {
+            //         this.jordanTableConfig.data[
+            //           params.index
+            //         ].IS_GIFT = Number(value);
+            //       },
+            //     },
+            //   },
+            //   this.isgift.forEach(item => h('Option', {
+            //     props: {
+            //       value: item.value,
+            //       label: item.label,
+            //       transfer: true,
+            //     },
+            //   }))
+            // ),
           },
           {
             title: window.vmI18n.t('table_label.adjustment_amount'),
@@ -1220,9 +1221,21 @@ export default {
         name: 'orderNo', // 组件名称
         url: 'modal/orderCenter/changeRemark',
       },
+      canChange: false,
     };
   },
   watch: {
+    'formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME': {
+      handler(newValue, oldVal) {
+        if (newValue !== oldVal && this.canChange) {
+          // 清空‘配送物流’
+          this.formConfig.formData[2].itemdata.pid = '';
+          this.formConfig.formData[2].itemdata.valuedata = '';
+        } else {
+          console.log('watch');
+        }
+      }
+    },
     isSetOption(val) {
       const self = this;
       if (val) {
@@ -2324,6 +2337,9 @@ export default {
       self.formConfig1.formValue.RESERVE_BIGINT12 = data.RESERVE_BIGINT12; // 同城标识
       self.formConfig1.formValue.IS_SELF_TAKE = data.IS_SELF_TAKE; // 是否自提
       self.getWarehouse(data.CP_C_SHOP_ID, data.CP_C_PHY_WAREHOUSE_ID);
+      setTimeout(() => {
+        self.canChange = true;
+      }, 2000);
       self.formConfig1.formData.forEach((item) => {
         // 收货人省份 收货人市 收货人区
         if (

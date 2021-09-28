@@ -63,6 +63,7 @@ Vue.prototype.service = service;
 Vue.prototype.qs = qs;
 window.R3 = R3; // 暴露R3为全局变量
 window.vmI18n = i18n; // 挂载国际化
+window.$i18n = i18n;
 Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
 Vue.prototype.$comUtils = comUtils;
 
@@ -86,16 +87,15 @@ R3.launchApplication({
     Login,
     WelcomePage
   },
-  // setComponentsProps: (type, props) => {  
-  // // 下拉多选 添加模糊查询多选功能
-  //   if (type === 'OBJ_FK') {
-  //     if(props.PropsData !== undefined && props.PropsData.fkobj.searchmodel ==='mrp'){
-  //       props.filterMode = true;
-  //     }
-  //   }
-  //   return props;
-  // },
-  // enableOpenNewTab: false,
+  setComponentsProps: (type, props) => {  
+  // 下拉多选 添加模糊查询多选功能
+    if (type === 'OBJ_FK') {
+      if(props.PropsData !== undefined && props.PropsData.fkobj.searchmodel ==='mrp'){
+        props.filterMode = true;
+      }
+    }
+    return props;
+  },
   connector,
   externalModules: customizedPageConfig, // 自定义界面
   externalModals: customizedModalConfig, // 自定义弹框

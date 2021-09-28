@@ -300,10 +300,10 @@ export default {
     },
   },
   created() {
-    if(this.$parent.$parent.selectRowData[0].STATUS.val == '等待卖家发货') {
+    /* if(this.$parent.$parent.selectRowData[0].STATUS.val == '等待卖家发货') {
       this.$Message.error('状态 ! ! !')
       this.$parent.$parent.closeActionDialog();
-    }
+    } */
   },
   mounted() {
     // 淘宝订单接口-sku异常登记sku替换

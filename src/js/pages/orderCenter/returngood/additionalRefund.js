@@ -972,7 +972,7 @@ export default {
   },
   methods: {
     // 保存
-    save(flag) {
+    save(flag, isCheck = 1) {
       const self = this;
       // 防暴击
       if (self.strike) return
@@ -1013,8 +1013,28 @@ export default {
 
       data.AfSend = AfSend;
       data.AfSendItem = AfSendItem;
+      data.ifCheck = isCheck ? 1 : 0;
       this.service.orderCenter.saveAfterDeliver(data).then(res => {
         if (res.data.code == 0) {
+          if (res.data.data.ifShow) {
+            // 二次确认弹窗
+            self.$Modal.info({
+              title: $i18n.t('modalTitle.tips'), // 提示
+              content: res.data.message,
+              mask: true,
+              showCancel: true,
+              okText: $i18n.t('common.determine'), // 确定
+              cancelText: $i18n.t('common.cancel'), // 取消
+              onOk: () => {
+                self.save(flag, 0);
+              },
+              onCancel: () => {
+                self.$emit('closeActionDialog', false)
+              },
+            })
+            self.strike = false
+            return
+          }
           self.$Message.success(res.data.message);
 
           comUtils.tabCloseAppoint(self);
@@ -1025,12 +1045,12 @@ export default {
           });
           self.$nextTick(()=>{
              self.$store.commit('customize/TabOpen', {
-              id: res.data.data,
+              id: res.data.data.objId,
               type: 'action',
               name: 'EXTRAREFUND',
               label: '额外退款编辑',
               query: Object.assign({
-                id: res.data.data,
+                id: res.data.data.objId,
                 tabTitle: '额外退款编辑'
               }),
             });
