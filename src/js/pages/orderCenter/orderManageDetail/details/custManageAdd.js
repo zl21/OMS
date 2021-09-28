@@ -82,7 +82,7 @@ export default {
         indexColumn: true,
         columns: [],
         data: [],
-        pageShow: false, // 控制分页是否显示
+        pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
@@ -90,7 +90,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
-        pageSize: 1000, // 每页条数
+        pageSize: 10, // 每页条数
         totalData: [] // 总计
       },
       selection: [],
@@ -302,7 +302,7 @@ export default {
       this.request(this.componentData);
     },
     tableDeleteDetail() { },
-    request(req) {
+    request: _.throttle(function(req) {
       const self = this;
       self.objid = req.objid;
       if (self.objid === -1) return;
@@ -337,7 +337,8 @@ export default {
               item.isOutOfStock = false;
             }
           });
-          self.showTable(lists);
+          const { total } = res.data.data;
+          self.showTable(lists, total);
 
           // 现货预售的明细显示橙色
           setTimeout(() => {
@@ -359,7 +360,7 @@ export default {
           this.$Message.error('数据加载失败');
         }
       });
-    },
+    }, 500, { 'trailing': true }),
     getColumns() {
       const columns = [
         {
@@ -866,7 +867,7 @@ export default {
         this.columns = this.setTablePermissions(columns, res);
       });
     },
-    showTable(obj) {
+    showTable(obj, total) {
       const tbody = obj;
       let totalData = [];
       // 明细合计
@@ -893,15 +894,16 @@ export default {
         isShowSelection: true,
         indexColumn: true, // 是否展示需要
         data: tbody,
-        pageShow: false, // 控制分页是否显示
+        pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
-        total: obj.totalRowCount, // 设置总条数
-        pageSizeOpts: obj.selectRange, // 每页条数切换的配置
-        pageSize: obj.defaultrange, // 每页条数
+        // total: obj.totalRowCount, // 设置总条数
+        total,
+        // pageSizeOpts: obj.selectRange, // 每页条数切换的配置
+        // pageSize: obj.defaultrange, // 每页条数
         totalData // 总计
       });
     },

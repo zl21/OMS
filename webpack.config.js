@@ -64,6 +64,12 @@ module.exports = () => ({
     // 'ag-grid': 'agGrid',
     'ark-ui': 'Ark',
     ztree: 'ztree',
+    lodash: {
+      commonjs: 'lodash',
+      commonjs2: 'lodash',
+      amd: 'lodash',
+      root: '_'
+    },
     jquery: '$'
   },
   devServer: {
