@@ -6,7 +6,7 @@ import publicDialogConfig from 'professionalComponents/common/js/publicDialog.js
 
 const _importA = file => require(`${file}.vue`).default;
 // import axios from "axios";
-var val = false;
+let val = false;
 
 export default {
   name: 'EssentialInfo',
@@ -158,7 +158,7 @@ export default {
         {
           flag: false, // 需要加*
           column: 'STORE_DELIVERY_STATUS_NAME',
-          label: '门店接口状态:'
+          label: '门店接单状态:'
         },
         {
           flag: false, // 需要加*
