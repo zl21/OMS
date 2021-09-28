@@ -24,7 +24,7 @@ export default {
           {
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
-              if (this.isTBsku) {
+              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
                 this.$emit('closeActionDialog');
               } else {
                 this.$parent.$parent.closeConfirm();
@@ -34,7 +34,7 @@ export default {
           {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
-              if (this.isTBsku) {
+              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER' ) {
                 this.save();
               } else {
                 this.confirm();
@@ -66,13 +66,7 @@ export default {
                   ECODE: val.trim(),
                 },
               };
-              // 新增逻辑: 当页面为“淘宝订单接口”页面，使用新接口查询sku信息
-              let res = {};
-              if (this.pageName === 'IP_B_TAOBAO_ORDER') {
-                res = await _this.service.common.queryTaobaoExceptionSkus(query);
-              } else {
-                res = await _this.service.common.skuQuery(query);
-              }
+              const res = await _this.skuQueryCommon(this.pageName, query);
               if (res.status === 200) {
                 const data = res.data.data.data;
                 const dimList = _this.formConfig.formData;
@@ -120,14 +114,15 @@ export default {
               _this.formConfig.psCProEcode = val.trim();
               // 新增逻辑: 当页面为“淘宝订单接口”页面，使用新接口查询sku信息
               let res = {};
-              if (this.pageName === 'IP_B_TAOBAO_ORDER') {
+              console.log('val', val)
+              if (this.pageName === 'IP_B_TAOBAO_ORDER' || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
                 const params = {
                   isBlur: 'Y',
                   psCSku: {
                     psCProEcode: val.trim(),
                   },
                 };
-                res = await this.service.common.queryTaobaoExceptionSkus(params);
+                res = await this.skuQueryCommon(this.pageName, params);
               } else {
                 const fromdata = new FormData();
                 const params = {
@@ -142,11 +137,10 @@ export default {
               }
               if (res.data.code === 0) {
                 const dimList = _this.formConfig.formData;
-
                 dimList.map((item) => {
                   // '商品款号'
                   if (item.label === window.vmI18n.t('table_label.itemNo')) {
-                    item.AuotData = res.data.data.list;
+                    item.AuotData = res.data.data.data;
                   }
                 });
               }
@@ -262,26 +256,28 @@ export default {
         ],
       },
       proName: '',
+      skuPropertiesName: '',
       replace_proName: '',
       replaceTableLoad: false,
       tableLoad: false,
-      columns: [
+      replaceColumns: [
         {
-          // title: "商品SKU",
+          // 商品SKU
           title: window.vmI18n.t('table_label.commoditySKU'),
           key: 'ECODE',
         },
         {
-          // title: "商品名称",
+          // 商品名称
           title: window.vmI18n.t('table_label.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
-          // title: "商品SKU名称",
-          title: pageName === 'IP_B_TAOBAO_ORDER' ? '商品款号' : window.vmI18n.t('table_label.productSKUname'),
+          // 商品SKU名称
+          title: window.vmI18n.t('table_label.productSKUname'),
           key: 'SPEC',
         },
       ],
+      columns: this.renderTableCol(pageName),
       data: [],
       replace_data: [],
       onRowClickReplaceData: {},
@@ -303,6 +299,12 @@ export default {
       type: Object,
     },
   },
+  created() {
+    if(this.$parent.$parent.selectRowData[0].STATUS.val == '等待卖家发货') {
+      this.$Message.error('状态 ! ! !')
+      this.$parent.$parent.closeActionDialog();
+    }
+  },
   mounted() {
     // 淘宝订单接口-sku异常登记sku替换
     if(this.$attrs['obj-tab-action-dialog-config'].webname === "SKUAbnormalRegistration") {
@@ -312,6 +314,138 @@ export default {
   methods: {
     radioChange(value) {
       console.log(value);
+    },
+    renderDialogTitle(type) {
+      if (type === 'before') {
+        switch(this.pageName) {
+          // 淘宝订单接口
+          case 'IP_B_TAOBAO_ORDER':
+            return 'SKU编码';
+          // 京东订单接口
+          case 'IP_B_JINGDONG_ORDER':
+            return '平台条码';
+          // 通用订单接口
+          case 'IP_B_STANDPLAT_ORDER':
+            return '平台条码';
+          default:
+            return vmI18n.t('modalTitle.a1');
+        }
+      } else {
+        switch(this.pageName) {
+          // 淘宝订单接口
+          case 'IP_B_TAOBAO_ORDER':
+            return '自定义SKU';
+          // 京东订单接口
+          case 'IP_B_JINGDONG_ORDER':
+            return '商品条码';
+          // 通用订单接口
+          case 'IP_B_STANDPLAT_ORDER':
+            return '商家外部编码';
+          default:
+            return vmI18n.t('modalTitle.a4');
+        };
+      }
+      
+    },
+    renderTableCol(pageName) {
+      switch(pageName) {
+        // 淘宝订单接口
+        case 'IP_B_TAOBAO_ORDER':
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品款号
+              title: '商品款号',
+              key: 'SPEC',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'PS_C_PRO_ENAME',
+            },
+            
+          ];
+        // 京东订单接口
+        case 'IP_B_JINGDONG_ORDER':
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品款号
+              title: '商品款号',
+              key: 'psCProEcode',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'psCProEname',
+            },
+          ];
+        // 通用订单接口
+        case 'IP_B_STANDPLAT_ORDER':
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品款号
+              title: '商品款号',
+              key: 'psCProEcode',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'psCProEname',
+            },
+            {
+              // 条码属性
+              title: '条码属性',
+              key: 'skuPropertiesName',
+            },
+          ];
+        default:
+          return [
+            {
+              // 商品SKU
+              title: window.vmI18n.t('table_label.commoditySKU'),
+              key: 'ECODE',
+            },
+            {
+              // 商品名称
+              title: window.vmI18n.t('table_label.productName'),
+              key: 'PS_C_PRO_ENAME',
+            },
+            {
+              // 商品SKU名称
+              title: window.vmI18n.t('table_label.productSKUname'),
+              key: 'SPEC',
+            },
+          ];
+      }
+    },
+    skuQueryCommon(pageName, params) {
+      switch(pageName) {
+        // 淘宝订单接口
+        case 'IP_B_TAOBAO_ORDER':
+          return this.service.common.queryTaobaoExceptionSkus(params);
+        // 京东订单接口
+        case 'IP_B_JINGDONG_ORDER':
+          return this.service.common.queryJingdongExceptionSkus(params);
+        // 通用订单接口
+        case 'IP_B_STANDPLAT_ORDER':
+          return this.service.common.queryStandPlatExceptionSkus(params);
+        default:
+          return this.service.common.skuQuery(params);
+      }
     },
     async search(value) {
       // sku查询
@@ -335,11 +469,18 @@ export default {
               : self.replace_proName.trim(),
         },
       };
+      if (this.pageName === 'IP_B_STANDPLAT_ORDER' && value === 'one') {
+        Object.assign(query, {
+          psCSku: {
+            ...query.psCSku,
+            skuPropertiesName: self.skuPropertiesName.trim(),
+          }
+        })
+      }
       try {
         let res = {};
-        // 新增逻辑: 当页面为“淘宝订单接口”页面，且为SKU异常处理弹出框左侧内容的时候，使用新接口查询sku信息
-        if (value === 'one' && this.pageName === 'IP_B_TAOBAO_ORDER') {
-          res = await self.service.common.queryTaobaoExceptionSkus(query);
+        if (value === 'one') {
+          res = await self.skuQueryCommon(this.pageName, query);
         } else {
           res = await self.service.common.skuQuery(query);
         }
@@ -363,6 +504,19 @@ export default {
         this[loadName] = false;
       } catch (e) {
         this[loadName] = false;
+      }
+    },
+    getSaveUrl(pageName) {
+      switch(pageName) {
+        // 京东订单接口
+        case 'IP_B_JINGDONG_ORDER':
+          return '/api/cs/oc/oms/v1/bathChangeJingdongExceptionSkus';
+        // 通用订单接口
+        case 'IP_B_STANDPLAT_ORDER':
+          return '/api/cs/oc/oms/v1/bathChangeStandPlatExceptionSkus';
+        // 淘宝订单接口
+        default:
+          return '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus';
       }
     },
     confirm() {
@@ -446,10 +600,9 @@ export default {
       result.ids = self.idArray;
       result.changeGoodsSku = self.onRowClickData.ECODE;
       result.sku_code = self.onRowClickReplaceData.ECODE;
-      // result.type = 1;
       this.loading = true;
       axios({
-        url: '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus',
+        url: self.getSaveUrl(self.pageName),
         method: 'post',
         data: result,
       }).then((res) => {

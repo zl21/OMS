@@ -4,7 +4,7 @@
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
-        <p>{{ isTBsku ? 'SKU编码' : vmI18n.t("modalTitle.a1") }}</p>
+        <p>{{ renderDialogTitle('before') }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="formConfig" />
@@ -19,6 +19,14 @@
               @on-enter="search('one')"
             />
           </div>
+          <div class="search_child" v-if="pageName === 'IP_B_STANDPLAT_ORDER'">
+            <span class="lable" >条码属性:</span>
+            <Input
+              v-model="skuPropertiesName"
+              @on-enter="search('one')"
+            />
+          </div>
+          <div class="search_child" v-if="pageName === 'IP_B_STANDPLAT_ORDER'" />
           <div class="search_child">
             <!-- 搜索 -->
             <Button
@@ -42,7 +50,7 @@
       </div>
       <div class="i_body1">
         <!-- <p>替换后商品SKU</p> -->
-        <p>{{ isTBsku ? '自定义SKU' : vmI18n.t("modalTitle.a4") }}</p>
+        <p>{{ renderDialogTitle('after') }}</p>
         <div class="search">
           <div class="skuBox">
             <re-form :form-config="replaceFormConfig" />
@@ -70,7 +78,7 @@
           </div>
         </div>
         <Table
-          :columns="columns"
+          :columns="replaceColumns"
           :data="replace_data"
           :loading="replaceTableLoad"
           :highlight-row="true"
