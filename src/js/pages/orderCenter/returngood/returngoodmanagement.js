@@ -1364,6 +1364,7 @@ export default {
               newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
               newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
               newQueryList.push(newItem);
+              newItem.PRICE_TAG = subitem.PRICE_TAG;
             });
 
             /* for await (const subitem of queryList) {
@@ -1673,8 +1674,12 @@ export default {
       _this.jordanTableConfig.loading = true;
       this.information.formData[4].style = 'input';
       _this.service.orderCenter.findDetail({
- id: _this.$route.query.id, start: 1, count: 50, isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined 
-}).then(async res => {
+          id: _this.$route.query.id, 
+          start: 1,
+          count: 50, 
+          isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined,
+        })
+      .then(async res => {
         if (res.data.code === 0) {
           _this.jordanTableConfig.loading = false;
           _this.information.formValue.BILL_TYPE = _this.$route.query.flag == 'RefundToExchange' ? '2' : String(res.data.data.returnOrders.BILL_TYPE); // 如果退货单通过列表按钮(退货转换过过来的,则单据类型默认为退换货)
@@ -1713,7 +1718,6 @@ export default {
             tempRefundDtoList[i].PRICE = tempRefundDtoList[i].PRICE_LIST;
             _this.reconstructionGetDetail(tempRefundDtoList[i], tempRefundDtoList[i]);
           }
-
           
           res.data.data.refundDtoList = tempRefundDtoList;
           for (let i = 0; i < res.data.data.exchangeDtoList.length; i++) {
@@ -1724,7 +1728,6 @@ export default {
           }
           _this.refundDtoList.data = res.data.data.refundDtoList;
           _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
-
           _this.jordanTableConfig.data = res.data.data.refundDtoList;
           _this.tId = res.data.data.returnOrders.TID;
           _this.onSelectData.push(res.data.data.returnOrders);
@@ -2398,9 +2401,9 @@ export default {
             dataAcessKey: 'QTY_CAN_REFUND'
           },
           {
-            key: 'PRICE',
+            key: _this.$route.query.id === '-1' ? 'PRICE_TAG' : 'PRICE',
             title: _this.vmI18n.t('table_label.tagPrice'), // 吊牌价
-            dataAcessKey: 'PRICE_LIST'
+            dataAcessKey: _this.$route.query.id === '-1' ? 'PRICE_TAG' : 'PRICE_LIST',
           },
           {
             key: 'amt_refund_single',
@@ -2422,45 +2425,6 @@ export default {
             dataAcessKey: 'AMT_SETTLE_TOT',
             title: _this.vmI18n.t('table_label.settlementAmount') // 结算金额
           },
-          // { // 2021-01-26 森马优化功能去掉该商品标记
-          //   key: 'PRODUCT_MARK',
-          //   title: _this.vmI18n.t('form_label.goodsMark'), // 商品标记
-          //   dataAcessKey: 'PRODUCT_MARK',
-          //   render: (h, params) => {
-          //     const list = [
-          //       {
-          //         SPEC: '正品'
-          //       },
-          //       {
-          //         SPEC: '次品'
-          //       }
-          //     ];
-          //     return h(
-          //       'Select',
-          //       {
-          //         style: {
-          //           width: '150px'
-          //         },
-          //         props: {
-          //           value: params.row.PRODUCT_MARK, // 结算方式
-          //           transfer: true
-          //         },
-          //         on: {
-          //           'on-change': value => {
-          //             console.log(params);
-          //             _this.jordanTableConfig.data[params.index].PRODUCT_MARK = value;
-          //           }
-          //         }
-          //       },
-          //       list.map(item => h('Option', {
-          //           props: {
-          //             value: item.SPEC,
-          //             label: item.SPEC
-          //           }
-          //         }))
-          //     );
-          //   }
-          // }
         ]; // 表头
         this.getDataAccess('OC_B_RETURN_ORDER', res => {
           this.jordanTableConfig.columns = this.setTablePermissions(this.jordanTableConfig.columns, res);
@@ -2479,6 +2443,7 @@ export default {
       } else if (index === 1) {
         _this.labelDefaultValue = 2;
         _this.isTab = 1;
+        // 如果选择了需要换货的数据
         if (_this.returnSelectData.length) {
           _this.exchangeDtoList.data = [];
           _this.jordanTableConfig2.data = [];
@@ -2805,8 +2770,8 @@ export default {
             title: _this.vmI18n.t('table_label.gender') // 性别
           },
           {
-            key: 'PRICE',
-            dataAcessKey: 'PRICE_LIST',
+            key: _this.$route.query.id === '-1' ? 'PRICE_TAG' : 'PRICE',
+            dataAcessKey: _this.$route.query.id === '-1' ? 'PRICE_TAG' : 'PRICE_LIST',
             title: _this.vmI18n.t('table_label.tagPrice') // 吊牌价
           },
           {
@@ -2857,6 +2822,7 @@ export default {
         this.getDataAccess('OC_B_RETURN_ORDER', res => {
           this.jordanTableConfig2.columns = this.setTablePermissions(this.jordanTableConfig2.columns, res);
         });
+        // 如果是新增页面
         if (_this.$route.query.id === '-1') {
           _this.jordanTableConfig2.businessFormConfig = {
             formValue: {
@@ -3163,7 +3129,7 @@ export default {
           ps_c_pro_ename: item[i].PS_C_PRO_ENAME,
           qty_can_refund: parseInt(item[i].QTY_CAN_REFUND),
           qty_refund: parseInt(item[i].QTY_REFUND),
-          PRICE_LIST: item[i].PRICE,
+          PRICE_LIST: _this.$route.query.id === '-1' ? item[i].PRICE_TAG : item[i].PRICE_LIST,
           price: item[i].PRICE,
           sex: item[i].SEX,
           amt_refund: item[i].AMT_REFUND,
@@ -3232,7 +3198,7 @@ export default {
           ps_c_size_ecode: Eitem[i].PS_C_SIZE_ECODE,
           ps_c_size_ename: Eitem[i].PS_C_SIZE_ENAME,
           ps_c_pro_ename: Eitem[i].PS_C_PRO_ENAME,
-          PRICE_LIST: Eitem[i].PRICE,
+          PRICE_LIST: Eitem[i].PRICE_TAG,
           price: Eitem[i].PRICE,
           sex: Eitem[i].SEX,
           amt_refund: Eitem[i].AMT_REFUND,
@@ -3245,7 +3211,6 @@ export default {
           oid: Eitem[i].oOId
         });
       }
-
       const money = {
         RETURN_AMT_LIST: _this.amountReturned,
         RETURN_AMT_SHIP: _this.returnPostage,
@@ -3270,9 +3235,9 @@ export default {
       // 是否无名件匹配
       if (copyFormValue.IS_ANONYMOUS) {
         if (copyFormValue.IS_ANONYMOUS == '是') {
-          copyFormValue.IS_ANONYMOUS = 1
+          copyFormValue.IS_ANONYMOUS = 1;
         } else if (copyFormValue.IS_ANONYMOUS == '否') {
-          copyFormValue.IS_ANONYMOUS = 0
+          copyFormValue.IS_ANONYMOUS = 0;
         }
       }
       const params = {
@@ -4093,6 +4058,7 @@ export default {
           queryListItem.amt_refund_single = selection.amtRefundSingle;
           queryListItem.PRICE_SETTLE = selection.priceSettle;
           queryListItem.AMT_SETTLE_TOT = selection.totPriceSettle;
+          queryListItem.PRICE_TAG = selection.PRICE_TAG;
           await _this.reconstructionGetDetail(selection, queryListItem, selection.ecode);
           queryList.push(queryListItem);
         }
