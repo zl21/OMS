@@ -29,10 +29,12 @@ export default {
   // 订单中心-新增
   ORDERMANAGEADD: {
     component: orderManageAdd,
+    labelName: '零售发货单新增'
   },
   // 订单中心-详情
   ORDERMANAGEDETAIL: {
-    component: orderManageDetail
+    component: orderManageDetail,
+    labelName: '零售发货单详情'
   },
   // 订单中心-退换货单详情
   RETURNGOOD: {

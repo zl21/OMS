@@ -19,5 +19,13 @@ export default {
   // 淘宝订单接口-SKU异常登记
   SKUABNORMALREGISTRATION: {
     component: () => import('@/views/modal/orderCenter/changeProduct.vue')
-  }
+  },
+  // 接口平台-京东接口订单-SKU异常处理
+  JDSKUEXCEPTIONHANDLING: {
+    component: () => import('@/views/modal/orderCenter/changeProduct.vue')
+  },
+  // 接口平台-通用订单接口-SKU异常处理
+  CURRENCYSKUEXCEPTIONHANDLING: {
+    component: () => import('@/views/modal/orderCenter/changeProduct.vue')
+  },
 };

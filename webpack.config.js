@@ -19,12 +19,12 @@ const burgeonPlugins = [
   new MiniCssExtractPlugin({
     filename: 'r3.css'
   }),
-  new CleanWebpackPlugin([process.env && process.env.production ? 'dist' : 'devDist']),
+  new CleanWebpackPlugin([envFlag ? 'dist' : 'devDist']),
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
     chunksSortMode: 'none',
-    title: process.env && process.env.production ? projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
-    template: process.env && process.env.production ? './index.pro.html' : './index.html',
+    title: envFlag ? projectConfig.projectsTitle : `Debug:${projectConfig.projectsTitle}`,
+    template: envFlag ? './index.pro.html' : './index.html',
     inject: true,
     favicon: projectConfig.projectIconPath
   }),
@@ -64,11 +64,17 @@ module.exports = () => ({
     // 'ag-grid': 'agGrid',
     'ark-ui': 'Ark',
     ztree: 'ztree',
+    lodash: {
+      commonjs: 'lodash',
+      commonjs2: 'lodash',
+      amd: 'lodash',
+      root: '_'
+    },
     jquery: '$'
   },
   devServer: {
     compress: true,
-    port: 8080,
+    // port: 8080,
     host: 'localhost',
     open: true,
     historyApiFallback: {
@@ -186,6 +192,7 @@ module.exports = () => ({
     }
   },
   optimization: {
+    minimize: envFlag,
     minimizer: [
       new TerserJSPlugin({
         sourceMap: true,

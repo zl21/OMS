@@ -406,7 +406,7 @@ export default {
                   this.$Message.warning(res.data.message);
                 } else {
                   const data = self.tab1.order;
-              if ((data.PLATFORM === 4 && data.PAY_TYPE === 2) || data.PLATFORM === 7 || data.PLATFORM === 50) {
+              if ((data.PLATFORM === 4 && data.PAY_TYPE === 2) || data.PLATFORM === 7 || (data.PLATFORM === 50 && (!data.RESERVE_VARCHAR02 || data.RESERVE_VARCHAR02 == null))) {
                 self.$Message.warning({
                   content: self.vmI18n.t('modalTips.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
                   duration: 5,
