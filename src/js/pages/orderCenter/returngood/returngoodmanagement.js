@@ -1324,6 +1324,7 @@ export default {
               _this.$Message.warning(res.data.message);
               return;
             }
+            _this.order.table.data = res.data.data.records;
             const queryList = [];
             res.data.data.records.forEach(item => {
               if (item.REFUND_STATUS != 6) queryList.push(item);
