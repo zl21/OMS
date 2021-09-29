@@ -220,7 +220,8 @@ export default {
       const self = this;
       if (this.itemdata.reftable === 'SG_B_CHANNEL_PRODUCT') {
         row.ENAME = item.PS_C_PRO_ENAME || '';
-        row.ECODE = item.PS_C_SKU_ECODE || '';
+        row.ECODE = item.SKU_ID || '';
+        // row.ECODE = item.PS_C_SKU_ECODE || '';
         row.SKU_ID = item.SKU_ID || '';
         row.ID = item.ID || '';
         if (this.itemdata.isSimulation) {
@@ -238,7 +239,7 @@ export default {
         row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.PS_C_SKU_ECODE || '';
         row.ID = item.ID;
-      }  else if (this.itemdata.reftable === 'PS_C_PRO') {
+      } else if (this.itemdata.reftable === 'PS_C_PRO') {
         row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.PS_C_PRO_ECODE || '';
         row.ID = item.ID;
