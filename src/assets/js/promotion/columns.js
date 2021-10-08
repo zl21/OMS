@@ -51,7 +51,8 @@ const tablecols = {
     {
       slot: 'ECODE',
       key: 'ECODE',
-      title: '商品数据编号'
+      // title: '商品数据编号'
+      title: '平台商品ID',
     },
     {
       key: 'ENAME',
