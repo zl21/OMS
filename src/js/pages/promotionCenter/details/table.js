@@ -221,6 +221,9 @@ export default {
       if (this.itemdata.reftable === 'SG_B_CHANNEL_PRODUCT') {
         row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.SKU_ID || '';
+        if (this.$route.params.customizedModuleName == 'SIMULATION') { // 模拟仿真
+          row.ECODE = item.PS_C_SKU_ECODE || '';
+        }
         // row.ECODE = item.PS_C_SKU_ECODE || '';
         row.SKU_ID = item.SKU_ID || '';
         row.ID = item.ID || '';
