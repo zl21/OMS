@@ -166,7 +166,7 @@ export default {
     checkPlatformChange(val) {
       this.basicData.platform_mark = val;
     },
-    add_prolist(objRow) {
+    add_prolist(objRow, other) {
       const obj = {};
       this.products_columns.forEach(col => {
         if (col.key == 'ALLSUM') {
@@ -180,8 +180,12 @@ export default {
           obj[col.key] = objRow.ECODE ? objRow[col.key] : '';
         }
       });
-      this.products_data.push(obj);
-      this.countTablelistView();
+      if (other) {
+        this.alertRowData(objRow, other[0], other[1], other[2])
+      } else {
+        this.products_data.push(obj);
+        this.countTablelistView();
+      }
     },
     del_prolist(row, currentPage, pageSize) {
       const rowCount = (currentPage - 1) * pageSize;
@@ -229,8 +233,9 @@ export default {
       obj.total = rows.length;
       obj.data = rows.slice(start, end);
     },
-    async getButtonFkChoose() {
-      const rs = this.itemdataFk || {};
+    async getButtonFkChoose(ob, ...arrs) {
+      const rs = ob.flag ? ob : this.itemdataFk || {};
+      let namelistold = JSON.parse(rs.pid).nameList;
       let namelist = JSON.parse(rs.pid).nameList;
       if (rs.isGetValue) {
         namelist = await this.isGetIndexValue(rs.reftable, namelist);
@@ -248,7 +253,14 @@ export default {
           row.SG_PRO_ID = obj.NUMIID;
           row.ALLSUM = Number(row.SUM * row.NUM).toFixed(2);
         }
-        this.add_prolist(row);
+        if (ob.flag) {
+          // 模糊搜索
+          const rowP = Object.assign({}, namelistold[0], row);
+          this.add_prolist(rowP, arrs);
+        } else {
+          // 批量新增fkDialog选中确定带出的数据
+          this.add_prolist(row);
+        }
       });
     },
     async isGetIndexValue(reftable, nameList) {
@@ -441,6 +453,13 @@ export default {
       this.deleteProperty(row);
       this.products_data.splice(index, 1, row);
       if (force) this.countTablelistView();
+    },
+    blurRowData(obj, x, y, z) {
+      const route = this.$route.params.customizedModuleName;
+      if (route == 'SIMULATION') {
+        this.getButtonFkChoose(obj, x, y, z)
+        return
+      }
     },
     /**
      * 删除多余属性

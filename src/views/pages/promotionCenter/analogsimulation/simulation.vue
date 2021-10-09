@@ -159,12 +159,14 @@
             @on-page-change="pageChange"
             @on-page-size-change="onPageSizeChange"
             @alertRowData="alertRowData"
+            @blurRowData="blurRowData"
           >
             <div
               slot="action"
               class="button_list"
             >
               <ButtonFkDialog
+                ref="simuFkdialog"
                 :itemdata="itemdataFk"
                 @getFkChooseItem="getButtonFkChoose"
               />

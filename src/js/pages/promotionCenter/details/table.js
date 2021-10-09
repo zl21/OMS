@@ -218,10 +218,11 @@ export default {
      */
     getFilterChooseItem(item, row) {
       const self = this;
+      const route = self.$route.params.customizedModuleName;
       if (this.itemdata.reftable === 'SG_B_CHANNEL_PRODUCT') {
         row.ENAME = item.PS_C_PRO_ENAME || '';
         row.ECODE = item.SKU_ID || '';
-        if (this.$route.params.customizedModuleName == 'SIMULATION') { // 模拟仿真
+        if (route == 'SIMULATION') { // 模拟仿真
           row.ECODE = item.PS_C_SKU_ECODE || '';
         }
         // row.ECODE = item.PS_C_SKU_ECODE || '';
@@ -257,7 +258,19 @@ export default {
       const copy_row = JSON.parse(JSON.stringify(row));
       // add by wdq  20200409  这边不能使用行副本去更新真实数据,否则不会引发表格重新渲染导致表格错位问题；因此还是要更新真实数据
       if (this.$parent.$el.className === 'tablists') this.$parent.$parent.alertOneTableRowData(copy_row, current, pageSize, true);
-      else this.$emit('alertRowData', copy_row, current, pageSize, true);
+      else if (route == 'SIMULATION') {
+        const obj = Object.assign({
+          CP_C_SHOP_TITLE: item.SHOP,
+          PS_C_PRO_ECODE: item.PS_C_PRO_ECODE || '',
+          NUMIID: item.NUMIID || '',
+        }, item, row)
+        this.itemdata.flag = 1;
+        this.itemdata.pid = JSON.stringify({ nameList: [obj] })
+        this.$emit('blurRowData', this.itemdata, current, pageSize, true);
+      } else {
+        this.itemdata.flag = 0;
+        this.$emit('alertRowData', copy_row, current, pageSize, true);
+      }
     },
     /**
      *  清空表格行信息中的商品信息
