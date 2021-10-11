@@ -324,3 +324,4 @@
 | v1.2.89 | businessForm input拓展聚焦事件 |
 | v1.2.90 | fktable --- 样式修改 |
 | v1.2.90-skx | agGridTable打开表头排序的方法 |
+| v1.2.91-skx | 版本调整 |
