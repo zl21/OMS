@@ -92,7 +92,7 @@ export default {
     }
   },
   mounted() {
-    // this.getUserConfig() //取消表头排序
+    this.getUserConfig() //取消表头排序
   },
   activated() {
     if (typeof this.AGTABLE === 'function' && this.AGTABLE.fixAgRenderChoke) {
