@@ -3,3 +3,36 @@
     transform: translateY(1px) !important;
   }
 }
+.stockInfo{
+  display: grid;
+  grid-template-columns: repeat(3,auto);
+  li{
+    display: grid;
+    grid-template-columns: 60px auto;
+    lable{
+      text-align: right;
+    }
+  }
+}
+
+.stockTitle{
+  font-size: 12px;
+  margin-top: 10px;
+  height: 40px;
+  line-height: 40px;
+  font-weight: normal;
+}
+.stockTable{
+  width: 100%;
+  th{
+    background-color: #f5f6fa;
+    text-align: left;
+  }
+  th,td{
+    padding: 0 12px;
+    border: 1px solid #f0f0f0;
+    width: calc(100%/3);
+    height: 32px;
+    line-height: 32px;
+  }
+}
