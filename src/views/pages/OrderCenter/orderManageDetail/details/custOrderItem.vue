@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-11 11:58:02
- * @LastEditTime: 2021-10-11 11:58:29
- * @LastEditors: your name
+ * @LastEditTime: 2021-10-12 14:20:05
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /r3-web-senmir-v1.4/src/views/pages/OrderCenter/orderManageDetail/details/custOrderItem.vue
 -->
@@ -20,7 +20,7 @@
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
     />
-    <Modal v-model="modal" title="库存查询" :loading="loading" mask="true" width="600">
+    <Modal v-model="modal" title="库存查询" :loading="loading" draggable mask="true" width="600">
       <ul class="stockInfo">
         <li v-for="(item, index) in modalTable.stockInfo" :key="index">
           <lable>{{ item.label }}:</lable><span>{{ item.value }}</span>
