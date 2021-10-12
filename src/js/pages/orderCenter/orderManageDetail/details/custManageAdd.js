@@ -643,9 +643,13 @@ export default {
             'a',
             {
               on: {
-                click: (e) => {
-                  console.log('e', e, params);
-                  this.getStockNumber(params.row);
+                click: () => {
+                  console.log(params.row.PRO_TYPE);
+                  if(params.row.PRO_TYPE == 4){
+                    this.$Message.warning('当前商品为组合品，请解析下挂商品后查看库存!')
+                  }else{
+                    this.getStockNumber(params.row);
+                  }
                 }
               }
             },
