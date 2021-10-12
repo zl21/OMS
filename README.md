@@ -325,3 +325,4 @@
 | v1.2.90 | fktable --- 样式修改 |
 | v1.2.90-skx | agGridTable打开表头排序的方法 |
 | v1.2.91-skx | 版本调整 |
+| v1.2.92-skx | agGridTable-onColumnMoved方法添加防抖 |
