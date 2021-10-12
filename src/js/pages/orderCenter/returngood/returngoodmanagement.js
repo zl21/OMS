@@ -2035,7 +2035,7 @@ export default {
             render: (h, params) => {
               const proEcode = params.row.PS_C_PRO_ECODE;
               const list = params.row.clrList;
-              if (_this.clrAndSizeFlag) {
+              if (_this.clrAndSizeFlag && _this.$route.query.flag !== 'RefundToExchange') {
                 return h(
                   'div',
                   {
@@ -2118,7 +2118,7 @@ export default {
                   ]
                 );
               }
-                return h(
+              return h(
                 'div',
                 {
                   style: {
@@ -2151,7 +2151,7 @@ export default {
             render: (h, params) => {
               const proEcode = params.row.PS_C_PRO_ECODE;
               const list = params.row.sizeList;
-              if (_this.clrAndSizeFlag) {
+              if (_this.clrAndSizeFlag && _this.$route.query.flag !== 'RefundToExchange') {
                 return h(
                   'div',
                   {
@@ -2270,7 +2270,7 @@ export default {
             dataAcessKey: 'QTY_REFUND',
             render: (h, params) => {
               const _this = this;
-              if (_this.qtyRefundEditFlag) {
+              if (_this.qtyRefundEditFlag && _this.$route.query.flag !== 'RefundToExchange') {
                 return h(
                   'div',
                   {
