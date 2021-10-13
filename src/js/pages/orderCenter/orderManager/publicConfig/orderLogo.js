@@ -5,6 +5,7 @@ const orderLogo =  {
   IS_INRETURNING: '是否退款中为是', //退款中
   IS_SPLIT: '是否拆分订单为是', //拆
   ORDER_TYPE: '订单类型为换货订单', //换
+  PRESELL_TYPE:'店铺预售', //店预
   ORDER_SOURCE: '订单来源为“手工新增”', //手
   IS_INVOICE: '顾客需要开发票', //票
   DOUBLE11_PRESALE_STATUS: '系统预售状态',  //预
