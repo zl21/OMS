@@ -405,7 +405,7 @@ export default {
       self.autocompleteBlur(itemdata);
     },
 
-    autocompleteBlur: _debounce(function(itemdata) {
+    autocompleteBlur: _.debounce(function(itemdata) {
       setTimeout(()=>{
        const self = this;
        if (!self.isHandleSelect && !self.autocomplete) {
