@@ -21,6 +21,5 @@
   },
   "dependencies": {
     "@burgeon/internationalization": "^1.0.64",
-    "lodash": "^4.17.21"
   }
 }

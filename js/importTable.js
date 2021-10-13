@@ -2,7 +2,6 @@ import businessButton from 'professionalComponents/businessButton';
 import loading from 'professionalComponents/loading';
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
-import { throttle } from 'lodash'
 
 export default {
   name: 'importTable',
@@ -121,7 +120,7 @@ export default {
     },
 
     // 确认导入的操作
-    importDialog: throttle(function () {
+    importDialog: _.throttle(function () {
       if (this.handleBefore(this.files)) return;
       const okApi = this.currentConfig.okApi;
       const okParm = this.currentConfig.okParm;

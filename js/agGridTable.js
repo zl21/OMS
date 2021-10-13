@@ -1,7 +1,6 @@
 import agTable from '../common/js/custom-ag-grid-table'
 import R3 from '@syman/burgeon-r3';
 import i18n from "@burgeon/internationalization/i18n";
-import { debounce } from 'lodash'
 export default {
   data() {
     return {
@@ -175,7 +174,7 @@ export default {
           onCellDoubleClicked: (event) => {
             self.$emit('on-row-dblclick', event.data, event.rowIndex)
           },
-          onColumnMoved: debounce((columnState) => {
+          onColumnMoved: _.debounce((columnState) => {
             //拖拽表头,更新表头顺序
             const {
               columnApi

@@ -4,7 +4,6 @@
 // 兼容fktable1.4数据格式（云雀1.0）
 import SelectDialog from 'framework/components/dialog/selectDialog.vue';
 import FkTable from '../fktable.vue';
-import { debounce } from 'lodash'
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
 // import $ from '@/assets/js/jquery3.5.1.min.js';
@@ -406,7 +405,7 @@ export default {
       self.autocompleteBlur(itemdata);
     },
 
-    autocompleteBlur: debounce(function(itemdata) {
+    autocompleteBlur: _debounce(function(itemdata) {
       setTimeout(()=>{
        const self = this;
        if (!self.isHandleSelect && !self.autocomplete) {

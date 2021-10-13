@@ -7,7 +7,6 @@
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
  */
 // import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid'; // npm
-import { debounce } from 'lodash'
 import i18n from "@burgeon/internationalization/i18n";
 
 export default {
@@ -60,7 +59,7 @@ export default {
         colSortChange(data){
             this.$emit('on-sort-change' , data);
         },
-        colMoved: debounce(async function () {
+        colMoved: _.debounce(async function () {
             const self = this;
             const {api, columnApi} = self.$refs.agGrid;
             const colData = columnApi.getAllGridColumns()
