@@ -2000,11 +2000,11 @@ export default {
           // 要合并的单据的付款方式只能为非货到付款
           message = self.vmI18n.t('modalTips.e8');
           break;
-        } else if (item.RESERVE_VARCHAR03_NAME !== '非预售' && item.RESERVE_VARCHAR03_NAME !== '预售尾款已付') {
+        } /* else if (item.RESERVE_VARCHAR03_NAME !== '非预售' && item.RESERVE_VARCHAR03_NAME !== '预售尾款已付') {
           // 要合并的单据的预售状态只能为非预售
           message = self.vmI18n.t('modalTips.e9');
           break;
-        } else if (item.CP_C_PHY_WAREHOUSE_ENAME === '') {
+        } */ else if (item.CP_C_PHY_WAREHOUSE_ENAME === '') {
           // 要合并的单据的发货仓库只能为非空
           message = self.vmI18n.t('modalTips.f0');
           break;
