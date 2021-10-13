@@ -1953,3 +1953,25 @@ body .history-and-favorite .history-favorite-container div.favorite ul li, body 
     }
   }
 }
+
+// 订单合并策略-详情-formLabel字段样式特殊处理
+#ST_C_MERGE_ORDER {
+  #IS_AUTOCHANGE {
+    .itemLabel {
+      width: 160px !important;
+      min-width: 120px;
+    }
+    .ItemComponentRoot .itemComponent {
+      flex: auto;
+    }
+  }
+  #IS_MERGER_PRESELL, #MAX_MERGED_COUNT {
+    .itemLabel {
+      width: 250px !important;
+      min-width: 120px;
+    }
+    .ItemComponentRoot .itemComponent {
+      flex: auto;
+    }
+  }
+}
