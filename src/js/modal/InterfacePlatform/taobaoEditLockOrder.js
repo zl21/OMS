@@ -1,5 +1,4 @@
 import axios from 'axios';
-import dayjs from 'dayjs';
 // import BusinessForm from 'professionalComponents/businessForm';
 import BusinessBtn from 'professionalComponents/businessButton';
 
@@ -29,13 +28,23 @@ export default {
 		return {
 			// pageLoad: false,
 			form: {
-				status: 0,
+				status: 1,
 				time: null
 			},
 			btnConfig: {
 				typeAll: 'error', // 按钮统一风格样式
 				btnsite: 'right', // 按钮位置 (right , center , left)
 				buttons: [
+					{
+						type: '', // 按钮类型
+						text: '取消', // 按钮文本
+						icon: '', // 按钮图标
+						size: '', // 按钮大小
+						disabled: false, // 按钮禁用控制
+						btnclick: () => {
+							this.$emit('closeActionDialog');
+						} // 按钮点击事件
+					},
 					{
 						type: '', // 按钮类型
 						text: '确定', // 按钮文本
@@ -46,97 +55,65 @@ export default {
 							this.confirmChange();
 						}
 					},
-					{
-						type: '', // 按钮类型
-						text: '取消', // 按钮文本
-						icon: '', // 按钮图标
-						size: '', // 按钮大小
-						disabled: false, // 按钮禁用控制
-						btnclick: () => {
-							this.$emit('closeActionDialog');
-						} // 按钮点击事件
-					}
 				]
 			},
 		};
 	},
+	watch: {
+		"form.status"(val) {
+			!val ? this.form.time = null : this.timeChange(this.$comUtils.dateFormat(new Date(), 'yyyy-MM-dd hh:mm:ss'));
+		},
+	},
 	mounted() {
-		this.timeChange(dayjs().format('YYYY-MM-DD HH:mm:ss'))
-		// const formData = new FormData();
-		// formData.append('param', '{}');
-		// this.pageLoad = true;
-		// axios({
-		// 	url: '/p/cs/exchangeRefuseReason',
-		// 	method: 'post',
-		// 	data: formData
-		// }).then(res => {
-		// 	this.pageLoad = false;
-		// 	if (res.data.code === 1) {
-		// 		const resData = JSON.parse(res.data.datas);
-		// 		this.formConfig.formData[0].options = resData.map(val => ({
-		// 			label: val.outRefuseCopywriting,
-		// 			value: val.refuseReasonId
-		// 		}));
-		// 	} else {
-		// 		this.$message.error('拒绝换货原因请求失败');
-		// 	}
-		// }).catch(() => {
-		// 	this.pageLoad = false;
-		// });
+		// 初始时间
+		this.timeChange(this.$comUtils.dateFormat(new Date(), 'yyyy-MM-dd hh:mm:ss'))
 	},
 	methods: {
 		/**
 		 * 预计解锁时间
-		 * @param {string} time
-		 * @param {string} type
+		 * @param {string} time [时间，例：2021-09-30 00:00:00]
+		 * @param {string} type [date/time/datatime]
 		 */
 		timeChange(time, type) {
-			const _time = dayjs(time).valueOf(),
-				currentTime = dayjs().valueOf(),
-				currentTimeStr = dayjs(currentTime).format('YYYY-MM-DD HH:mm:ss');
+			const _time = new Date(time).valueOf(),
+				currentTime = new Date().getTime(),
+				currentTimeStr = this.$comUtils.dateFormat(new Date(currentTime + 5 * 60000), 'yyyy-MM-dd hh:mm:ss');
 			this.form.time = currentTime >= _time ? currentTimeStr : time;
 		},
 
-		confirmChange() {
-			const param = {
-				...this.form,
-				ids: this.idArray
+		// 修改提交
+		async confirmChange() {
+			if (!this.idArray.length) return this.$message.warning('请先选择需要修改的订单');
+			// 校验时间，当天为Now，其他时间不变
+			if (!!this.form.status) {
+				if (!this.form.time) return this.$message.warning('请选择预计解锁时间');
+				this.timeChange(this.form.time);
 			}
-			console.log('param: ', param);
-			// const formValue = this.formConfig.formValue;
-			// if (!formValue.refuseReasonId) {
-			// 	this.$message.warning('拒绝换货原因不能为空');
-			// 	return;
-			// }
-			// if (this.idArray.length === 0) {
-			// 	this.$message.error('请先选择需要拒绝换货的单据！');
-			// 	return;
-			// }
-			// const param = {
-			// 	ids: this.idArray,
-			// 	menu: '淘宝换货单接口',
-			// 	refuseReasonId: formValue.refuseReasonId,
-			// 	outRefuseCopywriting: formValue.outRefuseCopywriting
-			// };
+			const { time: date, status: autoUnlock } = this.form;
+			const param = {
+				date: date,
+				autoUnlock: Boolean(autoUnlock),
+				ids: this.idArray.map((item) => Number(item))
+			};
+			// fromdata.append('param', JSON.stringify(param));
+			const res = await this.service.interfacePlatform.orderBatchModify(param)
+			if (res && res.code === 0) {
+				this.$message.success(res.message);
+			}
+			//  else this.$message.error(res.message || '修改失败');
+			setTimeout(() => {
+				this.$emit('closeActionDialog', true);
+			}, 300)
+
 			// const fromdata = new FormData();
 			// fromdata.append('param', JSON.stringify(param));
-			// this.pageLoad = true;
+
 			// axios({
-			// 	url: '/p/cs/exchangeRefuse',
+			// 	url: '/api/cs/oc/oms/v1/batchModify',
 			// 	method: 'post',
-			// 	data: fromdata
+			// 	data: param,
 			// }).then(res => {
-			// 	this.pageLoad = false;
-			// 	if (res.data.code === 0) {
-			// 		this.$message.success(res.data.message);
-			// 		this.$emit('closeActionDialog', true);
-			// 	} else {
-			// 		// this.$message.error(res.data.message || '拒绝换货失败');
-			// 		this.$emit('closeActionDialog', true);
-			// 	}
-			// }).catch(() => {
-			// 	this.pageLoad = false;
-			// });
+			// }).catch(() => { });
 		}
 	}
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="taobao-page">
+  <div class="taobao-page" style="width: 380px; padding: 0 16px">
     <Form :model="form" label-position="left" :label-width="100">
       <FormItem label="是否自动解锁" prop="status" :rules="{ required: true }">
         <RadioGroup v-model="form.status">
@@ -7,7 +7,8 @@
           <Radio :label="0">否</Radio>
         </RadioGroup>
       </FormItem>
-      <FormItem label="预计解锁时间" prop="time" :rules="{ required: true, type: 'string', message: '请选择预计解锁时间', trigger: 'change' }">
+      <!-- <FormItem label="预计解锁时间" prop="time" :rules="{ required: true, type: 'string', message: '请选择预计解锁时间', trigger: 'change' }"> -->
+      <FormItem label="预计解锁时间" prop="time" v-show="!!form.status" :rules="{ required: true, type: 'string', message: '请选择预计解锁时间', trigger: 'change' }">
         <DatePicker
           v-model="form.time"
           :options="{
