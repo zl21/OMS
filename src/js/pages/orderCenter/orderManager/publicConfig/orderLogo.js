@@ -38,6 +38,11 @@ const orderLogo =  {
   VIP_LEVEL_V3: 'V3',// V3
   VIP_LEVEL_V4: 'V4',// V4
   VIP_LEVEL_V5: 'V5',// V5
+  PRESELL_TYPE:'店铺预售', //店预
+  IS_HANG:'挂',//挂
+  IS_HOT_SINK:'预包',//预包
+  IS_RECALL___1:'溢',//溢
+  
 
 };
 
