@@ -64,7 +64,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@burgeon/business-components": "1.0.36",
+    "@burgeon/business-components": "1.0.36-senma",
     "@burgeon/internationalization": "1.0.35",
     "@burgeon/oms-theme": "1.0.6",
     "@syman/ark-ui": "1.1.9",
@@ -74,7 +74,6 @@
     "ag-grid-enterprise": "17.1.1",
     "axios": "^0.18.0",
     "burgeon-ui": "^1.0.56",
-    "dayjs": "^1.10.7",
     "element-ui": "^2.14.0",
     "n": "^1.0.7",
     "qs": "^6.9.4",
