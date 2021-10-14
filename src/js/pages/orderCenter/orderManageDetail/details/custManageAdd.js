@@ -5,10 +5,12 @@ import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
 // import config from "./config";
 import axios from 'axios';
+import qs from 'qs';
 
 export default {
   data() {
     return {
+      modal: false,
       isCombination: 1, // 1:组合商品 2:组合商品下挂商品
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
@@ -108,7 +110,67 @@ export default {
         }
       ],
       livePlatformArr: [],
-      giftTypeArr: []
+      giftTypeArr: [],
+      modalTable: {
+        stockInfo: [
+          {
+            label: '店铺',
+            value: '天猫旗舰店'
+          }, {
+            label: '商品名称',
+            value: '男长裤'
+          }, {
+            label: '商品Sku',
+            value: '001001'
+          }
+        ],
+        columns: [
+          {
+            title: 'Name',
+            key: 'name'
+          },
+          {
+            title: 'Age',
+            key: 'age'
+          },
+          {
+            title: 'Address',
+            key: 'address'
+          }
+        ],
+        data: [
+          {
+            name: 'John Brown',
+            age: 18,
+            address: '天猫逻辑仓库10',
+            date: '2016-10-03',
+            flag: true,
+            row: 2
+          },
+          {
+            name: 'John Brown',
+            age: 18,
+            address: '共享逻辑仓库10',
+            date: '2016-10-03',
+            row: 2
+          },
+          {
+            name: 'Jim Green',
+            age: 18,
+            flag: true,
+            address: '天猫逻辑仓库10',
+            date: '2016-10-03',
+            row: 2
+          },
+          {
+            name: 'Jim Green',
+            age: 24,
+            address: '天猫逻辑仓库10',
+            date: '2016-10-01',
+            row: 2
+          },
+        ]
+      }
     };
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
@@ -156,11 +218,38 @@ export default {
         });
       }
     });
-    this.$nextTick(()=>{
+    this.$nextTick(() => {
       this.getPermissions('tableConfig.businessButtonConfig', 'orderManager');
     });
   },
   methods: {
+
+    /**
+     * 获取可用库存
+     * @param {*} item
+     * @returns 
+     */
+    async getStockNumber({ ID: OC_B_ORDER_ID }) {
+      const res = await axios.post('/api/cs/oc/oms/v1/getOrderDetailStockList', { ID: this.componentData.order.ID, OC_B_ORDER_ID: OC_B_ORDER_ID });
+      if (res.data.code != 0 || !res.data.data) return this.$Message.warning('当前记录已不存在！');
+      const data = res.data.data.WAREHOUSE_SEARCH_ITEM_RESULT_LIST || [];
+      this.modalTable.stockInfo = [
+        {
+          label: '店铺',
+          value: res.data.data.CP_C_SHOP_TITLE || ""
+        }, {
+          label: '商品名称',
+          value: res.data.data.PS_C_PRO_ENAME || ""
+        }, {
+          label: '商品Sku',
+          value: res.data.data.PS_C_SKU_ECODE || ""
+        }
+      ]
+      console.log('data:',data);
+      this.modalTable.data = data || [];
+      this.modal = true;
+    },
+
     // 切换组合商品下拉
     checkCombination() {
       this.isCombination == 1 ? this.isCombination = 2 : this.isCombination = 1;
@@ -194,10 +283,10 @@ export default {
       const self = this;
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
-        self.$Message.error('至少选择一条订单明细'); 
+        self.$Message.error('至少选择一条订单明细');
         return;
       }
-      
+
       axios({
         url: '/api/cs/oc/oms/v1/markrefund',
         method: 'post',
@@ -216,10 +305,10 @@ export default {
       const self = this;
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
-        self.$Message.error('至少选择一条订单明细'); 
+        self.$Message.error('至少选择一条订单明细');
         return;
       }
-      
+
       axios({
         url: '/api/cs/oc/oms/v1/markRefundCancel',
         method: 'post',
@@ -246,12 +335,12 @@ export default {
       // self.BtnClickEvent({ name: "CHANGESKU" });
       const rows = this.selection.map(row => ({ ID: row.ID, SKU_ID: row.PS_C_SKU_ID }));
       if (rows.length === 0) {
-         self.$Message.error('请选择一条订单明细');
-         return;
+        self.$Message.error('请选择一条订单明细');
+        return;
       }
       if (rows.length > 1) {
-         self.$Message.error('只能一条订单明细');
-         return;
+        self.$Message.error('只能一条订单明细');
+        return;
       }
       axios({
         url: '/api/cs/oc/oms/v1/modifygoodscheck',
@@ -302,7 +391,7 @@ export default {
       this.request(this.componentData);
     },
     tableDeleteDetail() { },
-    request: _.throttle(function(req) {
+    request: _.throttle(function (req) {
       const self = this;
       self.objid = req.objid;
       if (self.objid === -1) return;
@@ -344,17 +433,17 @@ export default {
           setTimeout(() => {
             lists.forEach((item, index) => {
               if (item.RESERVE_BIGINT02 == 1) {
-                const dom = document.getElementsByClassName('jordan-table-box')[0].getElementsByClassName('ark-table-row')[index].getElementsByTagName('td')
-                const dom1 = document.getElementsByClassName('ark-table-fixed')[0].getElementsByClassName('ark-table-row')[index].getElementsByTagName('td')
+                const dom = document.getElementsByClassName('jordan-table-box')[0].getElementsByClassName('ark-table-row')[index].getElementsByTagName('td');
+                const dom1 = document.getElementsByClassName('ark-table-fixed')[0].getElementsByClassName('ark-table-row')[index].getElementsByTagName('td');
                 for (let i = 0; i < dom.length; i++) {
-                  dom[i].setAttribute('style', "background-color:#FF8800 !important;")
+                  dom[i].setAttribute('style', 'background-color:#FF8800 !important;');
                 }
                 for (let i = 0; i < dom1.length; i++) {
-                  dom1[i].setAttribute('style', "background-color:#FF8800 !important;")
+                  dom1[i].setAttribute('style', 'background-color:#FF8800 !important;');
                 }
               }
-            })
-          })
+            });
+          });
         } else {
           self.tableConfig.loading = false;
           this.$Message.error('数据加载失败');
@@ -399,7 +488,7 @@ export default {
                   transfer: true
                 },
                 style: {
-                  width: '120px'
+                  // width: '120px'
                 },
                 props: {
                   value: params.row.PS_C_CLR_ID
@@ -453,7 +542,7 @@ export default {
                   transfer: true
                 },
                 style: {
-                  width: '70px'
+                  // width: '70px'
                 },
                 props: {
                   value: params.row.PS_C_SIZE_ID
@@ -549,7 +638,23 @@ export default {
         {
           key: 'STOCK',
           title: '可用库存',
-          dataAcessKey: 'STOCK'
+          dataAcessKey: 'STOCK',
+          render: (h, params) => h(
+            'a',
+            {
+              on: {
+                click: () => {
+                  console.log(params.row.PRO_TYPE);
+                  if(params.row.PRO_TYPE == 4){
+                    this.$Message.warning('当前商品为组合品，请解析下挂商品后查看库存!')
+                  }else{
+                    this.getStockNumber(params.row);
+                  }
+                }
+              }
+            },
+            '查看库存'
+          )
         },
         {
           key: 'QTY_RETURN_APPLY',
@@ -949,6 +1054,13 @@ export default {
           self.$Message.error(res.data.message);
         }
       });
+    }
+  },
+  directives: {
+    rowSpan: {
+      bind(el, bingding) {
+        el.rowSpan = bingding.value;
+      }
     }
   },
   mounted() {
