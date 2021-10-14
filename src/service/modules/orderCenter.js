@@ -37,6 +37,7 @@ export default {
   manualUnHoldOrder: params => network.post('/api/cs/oc/oms/v1/manualUnHoldOrder', params), // 审核
   mergeOrderOne: params => network.post('/api/cs/oc/oms/v1/mergeOrderOne', params), // 合并订单
   cancelMergeOrder: params => network.post('/api/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
+  batchCancelHang: params => network.post('/api/cs/oc/oms/v1/batchCancelHang', params), // 零售-批量解挂
   /**
    * 零售发货单 - 详情
    */
