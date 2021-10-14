@@ -3048,6 +3048,9 @@ export default {
                   ]
                 }
                 self.agTableConfig.pagenation.total = res.data.data.totalSize;
+                queryOrderResultList.forEach(x => {
+                  x.LOCK_STATUS = x.RESERVE_BIGINT09_NAME; // 锁单状态展示字段与表头key不同
+                })
                 self.agTableConfig.rowData = queryOrderResultList;
                 self.agTableConfig.rowData.forEach(item => {
                   if (item.ORDER_STATUS === self.orderStatus.orderCancel || item.ORDER_STATUS === self.orderStatus.orderSystemInvalid) {
