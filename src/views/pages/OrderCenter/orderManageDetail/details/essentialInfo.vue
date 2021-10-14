@@ -26,7 +26,7 @@
             <p v-if="list.label ==='物流单号:'">
               {{ componentData.order[list.column] }}
               <span
-                v-if="componentData.order.RESERVE_BIGINT05 == 1"
+                v-if="componentData.order.IS_MULTI_PACK == 1"
                 style="color: red;"
               >(多包裹)</span>
             </p>
