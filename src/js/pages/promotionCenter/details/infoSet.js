@@ -678,6 +678,18 @@ export default {
     returnData(data) {
       this.$children.find(item => item.name === 'importTable').closeConfirm();
       if (data && data.length > 0) {
+        const ori = this.infoData.products_origin;
+        switch (ori) {
+          case '2':
+          case '4':
+            data.forEach(i => {
+              i.skuId = i.SKU_ID;
+              i.eCode = i.ECODE;
+              i.ECODE = i.SKU_ID; // 导入成功回显SKUID
+            })
+          default:
+            break;
+        }
         this.infoData.productslist = this.infoData.productslist.concat(data);
         this.countTablelistView();
       }
