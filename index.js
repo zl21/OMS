@@ -93,6 +93,8 @@ R3.launchApplication({
       if(props.PropsData !== undefined && props.PropsData.fkobj.searchmodel ==='mrp'){
         props.filterMode = true;
       }
+    } else if (type === undefined && R3.getModuleName().split('.')[0] === 'S') {
+      props.maxlength = Infinity;
     }
     return props;
   },
