@@ -328,3 +328,4 @@
 | v1.2.92-skx | agGridTable-onColumnMoved方法添加防抖 |
 | v1.2.93-skx | lodash引入优化 项目中window._ = loadsh |
 | v1.2.94-skx | fix: loadsh |
+| v1.2.95-skx | 去除老ag样式引用 |

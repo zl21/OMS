@@ -1,8 +1,8 @@
 import {
     Grid
   } from 'ag-grid'; //该依赖在标品项目中
-  import 'libs/ag-grid/dist/styles/ag-grid.css';  //该依赖在标品项目中
-  import 'libs/ag-grid/dist/styles/ag-theme-balham.css';  //该依赖在标品项目中
+  // import 'libs/ag-grid/dist/styles/ag-grid.css';  //该依赖在标品项目中
+  // import 'libs/ag-grid/dist/styles/ag-theme-balham.css';  //该依赖在标品项目中
   import {
     LicenseManager
   } from 'libs/ag-grid-enterprise/main'; //该依赖在标品项目中
