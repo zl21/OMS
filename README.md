@@ -330,3 +330,4 @@
 | v1.2.94-skx | fix: loadsh |
 | v1.2.95-skx | 去除老ag样式引用 |
 | v1.2.96-skx | 新ag封装序号列及兼容老ag的列移动的回调 |
+| v1.2.97-skx | delete: ag |
