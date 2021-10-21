@@ -87,6 +87,7 @@ export default {
       const tempUrl = self.currentConfig.tempUrl;
       const tempApi = self.currentConfig.tempApi;
       const tempParm = self.currentConfig.tempParm;
+      const tempWay = self.currentConfig.tempMethod;
       let param = new FormData();
       if (tempParm) { // 下载模板参数处理
         /* for (const key in tempParm) {
@@ -99,19 +100,41 @@ export default {
         this.downloadUrlFile(self.currentConfig.tempUrl);
       } else {
         // 通过请求Api接口下载模板
-        this.getDownloadTemp(tempApi, param);
+        this.getDownloadTemp(tempApi, param, tempWay, tempParm);
       }
     },
     // 通过Api下载模板-Handel
-    getDownloadTemp(url, param = null) {
+    getDownloadTemp(url, param = null, tempWay = 'post', tempParm) {
       if (param) {
-        $network.post(url, param).then((res) => {
+        if (tempWay == 'get') {
+          let str = '';
+          for (const key in tempParm) {
+            str += `${key}=${encodeURI(JSON.stringify(tempParm[key]))}&`;
+          }
+          $network[tempWay](`${url}?${str}`).then((res) => {
+            let ossUrl = res.data.data;
+            if (res.data.code === 0) {
+              if (tempWay == 'get') {
+                // $network.get(`/p/cs/download?filename=${ossUrl}`);
+                if (ossUrl.indexOf('http') === -1) {
+                  const origin = window.location.origin
+                  const urlD = `${origin}/p/cs/download?filename=${res.data.data}`
+                  this.downloadUrlFile(urlD);
+                }
+                return
+              }
+              this.downloadUrlFile(res.data.data);
+            }
+          });
+          return
+        }
+        $network[tempWay](url, param).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
         });
       } else {
-        $network.post(url).then((res) => {
+        $network[tempWay](url).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
