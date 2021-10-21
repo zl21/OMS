@@ -124,6 +124,8 @@
             @on-select-cancel="returnCancel"
             @on-select-all="returnSelectAll"
             @on-select-all-cancel="returnSelectAllCancel"
+            @on-page-change="pageChange"
+            @on-page-size-change="pageSizeChange"
           />
           <!-- 换货明细 -->
           <business-action-table
