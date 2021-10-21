@@ -48,11 +48,13 @@ class InitAppConfig {
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n;
     window.version = {
-      'business-components': componentsConfig.version,
+      '@burgeon/business-components': componentsConfig.version,
       'project-logic': proVersion.version,
-      'omsTheme': omsThemecConfig.version,
-      'i18n': internationalizationConfig.version,
-      'R3': r3Version.version,
+      '@burgeon/oms-theme': omsThemecConfig.version,
+      '@burgeon/internationalization': internationalizationConfig.version,
+      '@syman/burgeon-r3': r3Version.version,
+      '@syman/ark-ui': window.Ark.version,
+      '@syman/ark-ui-bcl': window.$Bcl.version,
     }
 
     // 路由守卫 去掉部分定制界面onresize方法
