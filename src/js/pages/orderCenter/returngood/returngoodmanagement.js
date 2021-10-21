@@ -1005,7 +1005,7 @@ export default {
         businessFormConfig: {}, // 表单配置
         columns: [],
         data: [], // 数据配置
-        pageShow: true, // 控制分页是否显示
+        pageShow: false, // 控制分页是否显示
         loading: false,
         height: 280, // 表格高度
         isShowDeleteDetailBtn: true, // 控制是否显示删除明细
@@ -1014,10 +1014,9 @@ export default {
         isShowSelection: true, // 是否显示checkedbox
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
-        currentPage: 1, // 当前页面
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30, 40, 50], // 每页条数切换的配置
-        pageSize: 50 // 每页条数
+        pageSize: 1000 // 每页条数
       }, // 退货明细
       jordanTableConfig2: {
         businessFormConfig: {}, // 表单配置
@@ -1678,8 +1677,8 @@ export default {
       this.information.formData[4].style = 'input';
       _this.service.orderCenter.findDetail({
         id: _this.$route.query.id,
-        start: _this.jordanTableConfig.currentPage || 1,
-        count: _this.jordanTableConfig.pageSize || 50,
+        start: 1,
+        count: 1000,
         isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined,
       }).then(async res => {
         if (res.data.code === 0) {
@@ -1781,8 +1780,6 @@ export default {
           }
           // 设置不可编辑文本框
           _this.setDisplayByReturnOrder(res.data.data.returnOrders);
-          const { totalRE } = res.data.data;
-          _this.jordanTableConfig.total = totalRE;
         } else {
           // 获取详情失败!
           const err = res.data.message || _this.vmI18n.t('modalTips.n6');
@@ -4367,14 +4364,6 @@ export default {
           _this.itemGbcode = '';
         }
       });
-    },
-    pageChange(val) {
-      this.jordanTableConfig.currentPage = val;
-      this.getList();
-    },
-    pageSizeChange(val) {
-      this.jordanTableConfig.pageSize = val;
-      this.getList();
     },
   }
 };
