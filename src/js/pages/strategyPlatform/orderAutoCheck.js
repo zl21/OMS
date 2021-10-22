@@ -364,6 +364,8 @@ export default {
           if (i === 8 && !item.value) {
             this.$delete(this.info, 'SKU_LINE_NUM_UP');
             this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
+            this.$delete(this.result, 'SKU_LINE_NUM_UP');
+            this.$delete(this.result, 'SKU_LINE_NUM_DOWN');
           }
         });
         this.result.EFFECTIVE_CONDITION = a.join(',');
