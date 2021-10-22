@@ -356,16 +356,16 @@ export default {
         this.result.EXCLUDE_SKU_TYPE = this.EXCLUDE_SKU_TYPE;
         this.result.SKU_CONTENT = this.info.SKU_CONTENT;
       } else if (type == 'effectiveCondition') {
+        if (e === false) {
+          this.$delete(this.info, 'SKU_LINE_NUM_UP');
+          this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
+          this.$delete(this.result, 'SKU_LINE_NUM_UP');
+          this.$delete(this.result, 'SKU_LINE_NUM_DOWN');
+        }
         const a = [];
         this.effectiveCondition.forEach((item, i) => {
           if (item.value) {
             a.push(i);
-          }
-          if (i === 8 && !item.value) {
-            this.$delete(this.info, 'SKU_LINE_NUM_UP');
-            this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
-            this.$delete(this.result, 'SKU_LINE_NUM_UP');
-            this.$delete(this.result, 'SKU_LINE_NUM_DOWN');
           }
         });
         this.result.EFFECTIVE_CONDITION = a.join(',');

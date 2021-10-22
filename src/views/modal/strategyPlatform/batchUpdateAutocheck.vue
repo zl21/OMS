@@ -211,7 +211,7 @@
                   <Row>
                     <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
                     <Col colspan="1" span="1">
-                          <Select v-model="effectiveCondition[8].value" @on-change="setResult('effectiveCondition')">
+                          <Select v-model="effectiveCondition[8].value" @on-change="setResult('effectiveCondition', effectiveCondition[8].value)">
                               <Option value="Y">是</Option>
                               <Option value="N">否</Option>
                           </Select>
