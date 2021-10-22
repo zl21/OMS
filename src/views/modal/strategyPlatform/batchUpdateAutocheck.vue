@@ -209,6 +209,30 @@
                     </Col>
                   </Row>
                   <Row>
+                    <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
+                    <Col colspan="1" span="1">
+                          <Select v-model="effectiveCondition[8].value" @on-change="setResult('effectiveCondition')">
+                              <Option value="Y">是</Option>
+                              <Option value="N">否</Option>
+                          </Select>
+                    </Col>
+                    <Col span="11">
+                    <i style="position:absolute;top:10px;left:8px;color:red" v-show="effectiveCondition[8].value == 'Y'">*</i>
+                      <FormItem label="SKU行数:">
+                        <Row>
+                          <Col span="11">
+                            <!--去除:maxlength="10"-->
+                            <Input v-model.number="info.SKU_LINE_NUM_UP" placeholder="大于等于" size="small" @on-change="setResult('SKU_LINE_NUM_UP', $event)" />
+                          </Col>
+                          <Col span="2" style="text-align: center">-</Col>
+                          <Col span="11">
+                            <Input v-model.number="info.SKU_LINE_NUM_DOWN" placeholder="小于等于" size="small" :maxlength="10" @on-change="setResult('SKU_LINE_NUM_DOWN', $event)" />
+                          </Col>
+                        </Row>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                  <Row>
                       <!-- <Checkbox v-model="effectiveCondition[4].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox> -->
                       <Col colspan="1"  span="1" style="padding-top:5px"><span>启用:</span></Col>
                       <Col colspan="1" span="1">

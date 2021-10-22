@@ -5,8 +5,8 @@ export default {
   components: {
     businessButton
   },
-  props:{
-    idArray:{
+  props: {
+    idArray: {
       type: Array
     }
   },
@@ -23,8 +23,8 @@ export default {
         buttons: [
           {
             text: '取消',
-            btnclick: async ()=>{
-                this.$emit('closeActionDialog', false);
+            btnclick: async () => {
+              this.$emit('closeActionDialog', false);
             }
           },
           {
@@ -93,6 +93,10 @@ export default {
         {
           key: 7,
           value: ''
+        },
+        {
+          key: 8,
+          value: ''
         }
       ],
       EXCLUDE_SKU_TYPE: 1,
@@ -142,7 +146,7 @@ export default {
         multiple: [],
       }));
       const res = await this.service.common.QueryList(query);
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         console.log('CP_C_LOGISTICS_ID_SELECT::res', res);
         this.CP_C_LOGISTICS_ID_SELECT.datas.row = res.data.datas.row;
         this.CP_C_LOGISTICS_ID_SELECT.totalRowCount = res.data.datas.totalRowCount;
@@ -216,12 +220,12 @@ export default {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER;
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER;
-      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
+      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME' || type === 'SKU_LINE_NUM_UP' || type === 'SKU_LINE_NUM_DOWN') {
         this.result[type] = this.info[type] ? this.info[type] : '';
       } else if (type == 'orderType') {
         let arr = []
-        this.orderType.map(item=>{
-          if(item !== 'N'){
+        this.orderType.map(item => {
+          if (item !== 'N') {
             arr.push(item);
           }
         })
@@ -245,7 +249,7 @@ export default {
           // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
           price = parseFloat(price);
         }
-        this.$nextTick(()=>{
+        this.$nextTick(() => {
           this.info[type] = price;
           this.result[type] = price;
         });
@@ -261,6 +265,10 @@ export default {
           if (item.value == 'Y') {
             a.push(i);
           }
+          if (i === 8 && item.value === 'N') {
+            this.$delete(this.info, 'SKU_LINE_NUM_UP');
+            this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
+          }
         });
         this.result.EFFECTIVE_CONDITION = a.join(',');
       }
@@ -273,7 +281,7 @@ export default {
     logisticSelected(e) {
       console.log('logisticSelected::e', e);
       this.CP_C_LOGISTICS_ID_SELECT.selectDatas = e;
-      this.result.CP_C_LOGISTICS_ID = e.map(item=>item.ID).join(',');
+      this.result.CP_C_LOGISTICS_ID = e.map(item => item.ID).join(',');
     },
     logisticClear() {
       console.log('logisticClear');
@@ -322,7 +330,7 @@ export default {
           return false;
         }
       }
-      if(this.info.beginTime > this.info.endTime) {
+      if (this.info.beginTime > this.info.endTime) {
         this.$Message.error('付款时间范围有误!');
         return false;
       }
@@ -336,6 +344,16 @@ export default {
         this.$Message.error('订单金额范围设置有误!');
         return false;
       }
+      if (effectiveCondition[8].value == 'Y') {
+        if (!this.info.SKU_LINE_NUM_UP || !this.info.SKU_LINE_NUM_DOWN) {
+          this.$Message.error('SKU行数为必填荐，请录入值');
+          return false;
+        }
+        if (this.info.SKU_LINE_NUM_UP > this.info.SKU_LINE_NUM_DOWN) {
+          this.$Message.error('SKU行数有误!');
+          return false;
+        }
+      }
       if (effectiveCondition[4].value == 'Y') {
         if (!this.info.RECEIVER_ADDRESS) {
           this.$Message.error('收货地址为必填项,没有输入值!');
@@ -345,50 +363,51 @@ export default {
       return true;
     },
     save() {
-        if(!this.judgeCondition()) return;
-        const list = this.providesList.map(item => item.Label);
-        this.result.CP_C_REGION_PROVINCE_ENAME = list.join(',');
-        this.service.strategyPlatform
-          .batchUpdateAutoCheck({
-            fixcolumn: {
-              ST_C_AUTOCHECK: this.result
-            },
-            objid: this.idArray.join(',')
-          })
-          .then(({ data }) => {
-              console.log(data);
-              if(data.code == 0){
-                  this.$Message.success(data.message);
-                  this.$emit('closeActionDialog', false);
-                  document.getElementById('reset').click();
-              }else {
-                this.$Modal.confirm({
-                    title: data.message,
-                    width: 350,
-                    mask: true,
-                    render: h => {
-                      if (data.data) {
-                        return h('Table', {
-                          props: {
-                            columns: [
-                              {
-                                  title: 'ID',
-                                  key: 'id'
-                              },
-                              {
-                                title: '提示信息',
-                                key: 'message'
-                              }
-                            ],
-                            data: data.data
-                          }
-                        });
-                      }
+      if (!this.judgeCondition()) return;
+      console.log('this.result: ', this.result);
+      const list = this.providesList.map(item => item.Label);
+      this.result.CP_C_REGION_PROVINCE_ENAME = list.join(',');
+      this.service.strategyPlatform
+        .batchUpdateAutoCheck({
+          fixcolumn: {
+            ST_C_AUTOCHECK: this.result
+          },
+          objid: this.idArray.join(',')
+        })
+        .then(({ data }) => {
+          console.log(data);
+          if (data.code == 0) {
+            this.$Message.success(data.message);
+            this.$emit('closeActionDialog', false);
+            document.getElementById('reset').click();
+          } else {
+            this.$Modal.confirm({
+              title: data.message,
+              width: 350,
+              mask: true,
+              render: h => {
+                if (data.data) {
+                  return h('Table', {
+                    props: {
+                      columns: [
+                        {
+                          title: 'ID',
+                          key: 'id'
+                        },
+                        {
+                          title: '提示信息',
+                          key: 'message'
+                        }
+                      ],
+                      data: data.data
                     }
                   });
-                  document.getElementById('reset').click();
+                }
               }
-          });
+            });
+            document.getElementById('reset').click();
+          }
+        });
     }
   }
 };

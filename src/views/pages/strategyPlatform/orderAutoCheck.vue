@@ -1,22 +1,15 @@
 <template>
   <div class="auto-check public-main">
-    <Spin
-      v-show="loading"
-      fix
-    >
-      <Icon
-        type="ios-loading"
-        size="18"
-        class="demo-spin-icon-load"
-      />
+    <Spin v-show="loading" fix>
+      <Icon type="ios-loading" size="18" class="demo-spin-icon-load" />
       <div>Loading</div>
     </Spin>
     <div class="operate left">
       <businessButton :btn-config="btnConfig" />
     </div>
 
-    <div class="public-content" >
-      <Tabs value="name1">
+    <div class="public-content">
+      <Tabs value="name1" style="overflow: auto;">
         <TabPane label="基本信息" name="name1">
           <Form ref="formValidate" :label-width="120" :model="info">
             <Collapse v-model="collapseShow">
@@ -140,7 +133,7 @@
                       <Checkbox v-model="effectiveCondition[1].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
-                      <i style="position:absolute;top:10px;left:20px;color:red" v-show="effectiveCondition[1].value">*</i>
+                      <i style="position: absolute; top: 10px; left: 20px; color: red" v-show="effectiveCondition[1].value">*</i>
                       <FormItem label="付款时间：">
                         <Row>
                           <Col span="11">
@@ -159,7 +152,7 @@
                       <Checkbox v-model="effectiveCondition[2].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
-                    <i style="position:absolute;top:10px;left:-4px;color:red" v-show="effectiveCondition[2].value">*</i>
+                      <i style="position: absolute; top: 10px; left: -4px; color: red" v-show="effectiveCondition[2].value">*</i>
                       <FormItem label="订单金额（元）:">
                         <Row>
                           <Col span="11">
@@ -169,6 +162,25 @@
                           <Col span="2" style="text-align: center">-</Col>
                           <Col span="11">
                             <Input v-model="info.LIMIT_PRICE_UP" placeholder size="small" :maxlength="10" @on-change="setResult('LIMIT_PRICE_UP', $event)" />
+                          </Col>
+                        </Row>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col colspan="1" span="1" style="padding-top: 10px">
+                      <Checkbox v-model="effectiveCondition[8].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
+                    </Col>
+                    <Col span="11">
+                      <i style="position: absolute; top: 10px; left: 8px; color: red" v-show="effectiveCondition[8].value">*</i>
+                      <FormItem label="SKU行数:">
+                        <Row>
+                          <Col span="11">
+                            <Input v-model.number="info.SKU_LINE_NUM_UP" placeholder="大于等于" size="small" @on-change="setResult('SKU_LINE_NUM_UP', $event)" />
+                          </Col>
+                          <Col span="2" style="text-align: center">-</Col>
+                          <Col span="11">
+                            <Input v-model.number="info.SKU_LINE_NUM_DOWN" placeholder="小于等于" size="small" :maxlength="10" @on-change="setResult('SKU_LINE_NUM_DOWN', $event)" />
                           </Col>
                         </Row>
                       </FormItem>
@@ -212,7 +224,7 @@
                       <Checkbox v-model="effectiveCondition[4].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
-                    <i style="position:absolute;top:10px;left:30px;color:red" v-show="effectiveCondition[4].value">*</i>
+                      <i style="position: absolute; top: 10px; left: 30px; color: red" v-show="effectiveCondition[4].value">*</i>
                       <FormItem label="收货地址:">
                         <Input v-model="info.RECEIVER_ADDRESS" placeholder="包含关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开" size="small" @on-change="setResult('RECEIVER_ADDRESS')" />
                       </FormItem>
@@ -299,9 +311,9 @@
   </div>
 </template>
 <script>
-  import orderAutoCheck from '@/js/pages/strategyPlatform/orderAutoCheck';
+import orderAutoCheck from '@/js/pages/strategyPlatform/orderAutoCheck';
 
-  export default orderAutoCheck;
+export default orderAutoCheck;
 </script>
 <style lang="less" type="text/less">
 @import '~@/assets/css/css_1_3/theme.less';
