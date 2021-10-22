@@ -1015,8 +1015,8 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [15, 30, 45, 60], // 每页条数切换的配置
-        pageSize: 15 // 每页条数
+        pageSizeOpts: [10, 20, 30, 40, 50], // 每页条数切换的配置
+        pageSize: 1000 // 每页条数
       }, // 退货明细
       jordanTableConfig2: {
         businessFormConfig: {}, // 表单配置
@@ -1676,7 +1676,10 @@ export default {
       _this.jordanTableConfig.loading = true;
       this.information.formData[4].style = 'input';
       _this.service.orderCenter.findDetail({
-      id: _this.$route.query.id, start: 1, count: 50, isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined
+        id: _this.$route.query.id,
+        start: 1,
+        count: 1000,
+        isRefund2Exchange: this.$route.query.flag == 'RefundToExchange' ? 1 : undefined,
       }).then(async res => {
         if (res.data.code === 0) {
           _this.jordanTableConfig.loading = false;
@@ -2204,13 +2207,6 @@ export default {
                                 _this.jordanTableConfig.data[params.index].BARCODE = '';
                                 return _this.$Message.warning('不允许出现条码一致的明细!');
                               }
-                              // for(let i =0; i<_this.returnSelectData.length;i++){
-                              //   let selection = _this.returnSelectData[i];
-                              //   if(selection.PS_C_PRO_ECODE === proEcode && selection.PS_C_CLR_ID === clrId && selection.PS_C_SIZE_ID === preSizeId){
-                              //     _this.returnSelectData.splice(i, 1);
-                              //     break;
-                              //   }
-                              // }
                               for (let i = 0; i < list.length; i++) {
                                 const sizeItem = list[i];
                                 if (sizeItem.psCSpec2objId === value) {
@@ -4368,6 +4364,6 @@ export default {
           _this.itemGbcode = '';
         }
       });
-    }
+    },
   }
 };
