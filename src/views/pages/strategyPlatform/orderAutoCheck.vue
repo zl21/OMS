@@ -169,7 +169,7 @@
                   </Row>
                   <Row>
                     <Col colspan="1" span="1" style="padding-top: 10px">
-                      <Checkbox v-model="effectiveCondition[8].value" size="small" @on-change="setResult('effectiveCondition', effectiveCondition[8].value)"> &nbsp; </Checkbox>
+                      <Checkbox v-model="effectiveCondition[8].value" size="small" @on-change="setResult('effectiveCondition')"> &nbsp; </Checkbox>
                     </Col>
                     <Col span="11">
                       <i style="position: absolute; top: 10px; left: 8px; color: red" v-show="effectiveCondition[8].value">*</i>
