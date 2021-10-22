@@ -262,7 +262,7 @@ export default {
       } else if (type == 'effectiveCondition') {
         const a = [];
         this.effectiveCondition.forEach((item, i) => {
-          if (i > 0) a.push((item.value == 'Y' ? "" : "-") + i);
+          if (i > 0 && item.value !== "") a.push((item.value == 'Y' ? "" : "-") + i);
         });
         this.result.EFFECTIVE_CONDITION = a.join(',');
       }

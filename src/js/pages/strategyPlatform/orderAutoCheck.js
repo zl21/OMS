@@ -151,7 +151,6 @@ export default {
     await this.queryLogisticsCompany();
     this.getAutoCheck().then(() => {
       this.QueryList();
-      this.setResult('effectiveCondition');
     });
   },
   methods: {
@@ -325,6 +324,7 @@ export default {
           this.indeterminate = false;
           this.checkAll = false;
         }
+        console.log('this.orderType:::', this.orderType);
         this.result.ORDER_TYPE = this.orderType.join(',');
       } else if (type == 'beginEndTime') {
         this.result.BEGIN_TIME = new Date(this.info.beginTime).getTime();
@@ -356,9 +356,17 @@ export default {
         this.result.EXCLUDE_SKU_TYPE = this.EXCLUDE_SKU_TYPE;
         this.result.SKU_CONTENT = this.info.SKU_CONTENT;
       } else if (type == 'effectiveCondition') {
+        if (e === false) {
+          this.$delete(this.info, 'SKU_LINE_NUM_UP');
+          this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
+          this.$delete(this.result, 'SKU_LINE_NUM_UP');
+          this.$delete(this.result, 'SKU_LINE_NUM_DOWN');
+        }
         const a = [];
         this.effectiveCondition.forEach((item, i) => {
-          if (i > 0) a.push((item.value ? "" : "-") + i);
+          if (item.value) {
+            a.push(i);
+          }
         });
         this.result.EFFECTIVE_CONDITION = a.join(',');
       }
