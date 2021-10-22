@@ -17,6 +17,23 @@
         <aTable ref="agGridChild" :ag-table-config="agTableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-row-dblclick="onRowDblclick" />
       </div>
     </div>
+    <!-- 修改pos管控仓物流-->
+    <businessDialog
+      :title="modifyPosConfig.confirmTitle"
+      :title-align="modifyPosConfig.titleAlign"
+      :width="modifyPosConfig.width"
+      :scrollable="modifyPosConfig.scrollable"
+      :closable="modifyPosConfig.closable"
+      :draggable="modifyPosConfig.draggable"
+      :mask="modifyPosConfig.mask"
+      :mask-closable="modifyPosConfig.maskClosable"
+      :transfer="modifyPosConfig.transfer"
+      :name="modifyPosConfig.name"
+      :url="modifyPosConfig.url"
+      :keep-alive="modifyPosConfig.keepAlive"
+      :exclude-string="modifyPosConfig.excludeString"
+      :component-data="modifyPosConfig.componentData"
+    />
     <!-- 修改备注-->
     <businessDialog
       :title="changeRemarkConfig.confirmTitle"

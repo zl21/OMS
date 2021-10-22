@@ -31,7 +31,7 @@ module.exports = {
       'singleline': {
         'max': 2,
         'allowFirstLine': true
-      },      
+      },
       'multiline': {
         'max': 1,
         'allowFirstLine': false
@@ -70,14 +70,6 @@ module.exports = {
     'no-shadow': 'off',
     'import/no-dynamic-require': 'off',
   },
-  // overrides: [
-  //   {
-  //     files: ['*.vue'],
-  //     rules: {
-  //       indent: 'off'
-  //     }
-  //   }
-  // ],
   parserOptions: {
     parser: 'babel-eslint',
     sourceType: 'module',

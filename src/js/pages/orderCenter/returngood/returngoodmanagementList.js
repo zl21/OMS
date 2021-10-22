@@ -44,6 +44,23 @@ export default {
       // 公共弹框
       publicBouncedConfig: {},
       // 弹框配置
+      modifyPosConfig: {
+        refFuns: 'confirmFun',
+        confirmTitle: '修改pos管控仓物流',
+        titleAlign: 'center', // 设置标题是否居中 center left
+        width: '440',
+        scrollable: false, // 是否可以滚动
+        closable: true, // 是否可以按esc关闭
+        draggable: true, // 是否可以拖动
+        mask: true, // 是否显示遮罩层
+        maskClosable: true, // 是否可以点击叉号关闭
+        transfer: true, // 是否将弹层放在body内
+        name: 'modifyPos', // 组件名称
+        url: 'pages/OrderCenter/returngood/modifyPos',
+        keepAlive: true,
+        excludeString: 'modifyPos', // 将name传进去，确认不缓存
+        componentData: {}
+      },
       changeRemarkConfig: {
         refFuns: 'confirmFun',
         confirmTitle: window.vmI18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
@@ -360,6 +377,43 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.regenerateTheOrder();
+            } // 按钮点击事件
+          },
+          {
+            text: '修改pos管控仓物流', // 修改pos管控仓物流
+            webname: 'oc_b_return_order_pos_incustomize',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              // this.modifyPosConfig.confirmTitle = '修改pos管控仓物流';
+              const selectArr = this.$refs.agGridChild.AGTABLE.getSelect();
+              if (!selectArr.length) {
+                this.$Message.error('请选择需要操作的单据！');
+                return;
+              } else if (selectArr.length > 1) {
+                this.$Message.error('仅支持对单个单据执行操作！');
+                return;
+              }
+              const it = selectArr[0];
+              // ✧ 校验退换货单的入库仓库是否为pos管控仓，若否，则提示：“仅支持对pos管控仓的仓库进行物流信息的修改！”
+              console.log('oc_b_return_order_pos_incustomize::', it);
+              if (it.IS_POS != '1') {
+                this.$Message.error('仅支持对pos管控仓的仓库进行物流信息的修改！');
+                return
+              }
+              let flag = false;
+              if (it.RETURN_STATUS_NAME == '待退货入库' && ['未传WMS', '传WMS成功', '传WMS失败'].includes(it.IS_TOWMS)) {
+                // ✧ 校验退换货单的单据状态是否为“待退货入库”&传wms状态=未传、成功、失败，若否，则提示：“仅支持对待退货入库，传wms状态=未传/成功/失败”进行操作！”
+                flag = true;
+              }
+              if (!flag) {
+                this.$Message.error("仅支持对'待退货入库'，传wms状态=未传/成功/失败”进行操作！");
+                return
+              }
+              this.modifyPosConfig.componentData = {
+                it,
+                status: this.statusTab,
+              };
+              this.$children.find(item => item.name === 'modifyPos').openConfirm();
             } // 按钮点击事件
           },
         ]
@@ -978,6 +1032,7 @@ export default {
               item.INVENTED_STATUS = '虚拟入库已入库';
             }
             item.PLATFORM = item.PLAT_NAME; // 平台类型
+            item.CP_C_LOGISTICS_ID_POS = item.CP_C_LOGISTICS_ID; // 退回物流公司id
             item.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ECODE; // 退回物流公司
             item.IS_RECEIVE_CONFIRM = item.IS_RECEIVE_CONFIRM == 0 ? '否' : '是'; // 是否确认收货
             // item.WMS_CANCEL_STATUS = item.WMS_CANCEL_STATUS == 0 ? '未撤回' : '已撤回'; // WMS撤回状态
