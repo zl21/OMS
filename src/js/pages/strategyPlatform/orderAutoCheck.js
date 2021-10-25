@@ -357,8 +357,8 @@ export default {
         this.result.SKU_CONTENT = this.info.SKU_CONTENT;
       } else if (type == 'effectiveCondition') {
         if (e === false) {
-          this.$delete(this.info, 'SKU_LINE_NUM_UP');
-          this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
+          // this.$delete(this.info, 'SKU_LINE_NUM_UP');
+          // this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
           this.$delete(this.result, 'SKU_LINE_NUM_UP');
           this.$delete(this.result, 'SKU_LINE_NUM_DOWN');
         }
