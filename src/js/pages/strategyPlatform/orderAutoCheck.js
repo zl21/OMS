@@ -25,7 +25,7 @@ export default {
           },
           {
             text: '刷新',
-            btnclick: async ()=>{
+            btnclick: async () => {
               this.loading = true;
               await this.queryLogisticsCompany();
               this.getAutoCheck().then(() => {
@@ -104,6 +104,10 @@ export default {
         {
           key: 7,
           value: false
+        },
+        {
+          key: 8,
+          value: false
         }
       ],
       EXCLUDE_SKU_TYPE: 1,
@@ -142,7 +146,7 @@ export default {
       this.QueryList();
     });
   },
-  async activated(){
+  async activated() {
     this.loading = true;
     await this.queryLogisticsCompany();
     this.getAutoCheck().then(() => {
@@ -163,7 +167,7 @@ export default {
         multiple: [],
       }));
       const res = await this.service.common.QueryList(query);
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         console.log('CP_C_LOGISTICS_ID_SELECT::res', res);
         this.CP_C_LOGISTICS_ID_SELECT.datas.row = res.data.datas.row;
         this.CP_C_LOGISTICS_ID_SELECT.totalRowCount = res.data.datas.totalRowCount;
@@ -307,7 +311,7 @@ export default {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
       } else if (type == 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
-      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
+      } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME' ||  type === 'SKU_LINE_NUM_UP' || type === 'SKU_LINE_NUM_DOWN') {
         this.result[type] = this.info[type] ? this.info[type] : '';
       } else if (type == 'orderType') {
         if (this.orderType.length === 3) {
@@ -341,7 +345,7 @@ export default {
           // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
           price = parseFloat(price);
         }
-        this.$nextTick(()=>{
+        this.$nextTick(() => {
           this.info[type] = price;
           this.result[type] = price;
         });
@@ -352,6 +356,12 @@ export default {
         this.result.EXCLUDE_SKU_TYPE = this.EXCLUDE_SKU_TYPE;
         this.result.SKU_CONTENT = this.info.SKU_CONTENT;
       } else if (type == 'effectiveCondition') {
+        if (e === false) {
+          // this.$delete(this.info, 'SKU_LINE_NUM_UP');
+          // this.$delete(this.info, 'SKU_LINE_NUM_DOWN');
+          this.$delete(this.result, 'SKU_LINE_NUM_UP');
+          this.$delete(this.result, 'SKU_LINE_NUM_DOWN');
+        }
         const a = [];
         this.effectiveCondition.forEach((item, i) => {
           if (item.value) {
@@ -369,7 +379,7 @@ export default {
     logisticSelected(e) {
       console.log('logisticSelected::e', e);
       this.CP_C_LOGISTICS_ID_SELECT.selectDatas = e;
-      this.result.CP_C_LOGISTICS_ID = e.map(item=>item.ID).join(',');
+      this.result.CP_C_LOGISTICS_ID = e.map(item => item.ID).join(',');
     },
     logisticClear() {
       console.log('logisticClear');
@@ -418,13 +428,23 @@ export default {
           return false;
         }
       }
-      if(this.info.beginTime > this.info.endTime) {
+      if (this.info.beginTime > this.info.endTime) {
         this.$Message.error('付款时间范围有误!');
         return false;
       }
       if (effectiveCondition[2].value) {
         if (!this.info.LIMIT_PRICE_DOWN || !this.info.LIMIT_PRICE_UP) {
           this.$Message.error('订单金额（元）为必填项,没有输入值!');
+          return false;
+        }
+      }
+      if (effectiveCondition[8].value) {
+        if (!this.info.SKU_LINE_NUM_UP || !this.info.SKU_LINE_NUM_DOWN) {
+          this.$Message.error('SKU行数为必填荐，请录入值');
+          return false;
+        }
+        if (this.info.SKU_LINE_NUM_UP > this.info.SKU_LINE_NUM_DOWN) {
+          this.$Message.error('SKU行数有误!');
           return false;
         }
       }
