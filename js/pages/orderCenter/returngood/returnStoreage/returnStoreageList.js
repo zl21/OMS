@@ -5,7 +5,7 @@ import businessDialog from 'professionalComponents/businessDialog';
 import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-import aTable from 'professionalComponents/agGridTable';
+import aTable from 'professionalComponents/businessAgTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';

@@ -1,6 +1,5 @@
 import businessLabel from 'professionalComponents/businessLabel';
 import businessButton from 'professionalComponents/businessButton';
-import aTable from 'professionalComponents/agGridTable.vue';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -513,7 +512,6 @@ export default {
     businessForm,
     businessButton,
     businessLabel,
-    aTable,
     // Mydialog,
     // errorMessage,
     dialogVisible,

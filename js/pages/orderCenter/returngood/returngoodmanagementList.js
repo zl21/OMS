@@ -7,7 +7,7 @@ import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import aTable from 'professionalComponents/agGridTable';
+import aTable from 'professionalComponents/businessAgTable';
 import unzipXv from '@/assets/js/dataToSmall';
 import loading from 'professionalComponents/loading';
 import commonUtils from 'burgeonConfig/config/commonUtils';
