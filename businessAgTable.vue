@@ -49,5 +49,14 @@ export default businessAgTable
 
 <style lang="less" scoped>
 @import "common/css/table.less";
-@import "css/agGridTable.less";
+// @import "css/agGridTable.less";
+.agTable {
+  .page {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #606266;
+  }
+}
 </style>
