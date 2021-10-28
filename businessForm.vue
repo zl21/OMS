@@ -168,6 +168,28 @@
             </fkinputPlus>
           </FormItem>
 
+          <!-- 输入框弹框多选 且 支持模糊多选-arkUiBcl-DropMultiSelectFilter -->
+          <FormItem v-if="item.style === 'dmsf'"
+                     ref="popLabel"
+                    :label="`${item.propsData.isnotnull ? '*' : ''}${item.propsData.name}`+ ':'"
+                    :class="item.class ? `${item.class}`+' '+'popInput' : 'popInput'">
+            <arkDropMultiSelectFilter :PropsData="propsData"
+                        :Url="item.url"
+                        v-model="item.value"
+                        :http="item.network"
+                        :AutoRequest="item.sendAutoMessage"
+                        :TableRequest="item.sendTableMessage"
+                        :autoDataMethods="item.autoDataMethods"
+                        :tableDataMethods="item.tableDataMethods"
+                        @on-valueChange="(row)=>runMethods(typeof item.valueChange == 'function' && item.valueChange(row))"
+                        @on-change="(row)=>runMethods(typeof item.onChange == 'function' && item.onChange(row))"
+                        @on-clear="(row)=>runMethods(typeof item.onClear == 'function' && item.onClear(row))"
+                        @on-keydown="(row)=>runMethods(typeof item.onKeydown == 'function' && item.onKeydown(row))"
+                        :EventFun="item.eventFun">
+              </arkDropMultiSelectFilter>
+            
+          </FormItem>
+
           <!-- 为多选+导入弹框专属引入 -->
           <!-- 输入框弹框单多选 -->
           <FormItem v-if="item.style === 'popInput_ld'"
