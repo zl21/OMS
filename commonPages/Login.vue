@@ -129,11 +129,11 @@ export default {
     },
     // 是否开启手机验证码登录
     isEnableLogin() {
-      let node =
-        document.querySelector(".loginPro") ||
-        document.querySelector(".divErCode");
-      this.isEnableLoginPro = !!node;
       this.$nextTick(() => {
+        let node =
+          document.querySelector(".loginPro") ||
+          document.querySelector(".divErCode");
+        this.isEnableLoginPro = !!node;
         node && this.initTab(true);
       });
     },
