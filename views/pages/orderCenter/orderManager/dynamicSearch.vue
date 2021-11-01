@@ -293,9 +293,11 @@
         });
         self.dynamicStructure.push(JSON.parse(obj));
         self.dynamicStructure.push(JSON.parse(obj));
+        this.$emit('toggleDom');
       },
       mdRemove() {
         this.dynamicStructure.splice(-2, 2);
+        this.$emit('toggleDom');
       },
     }
   };

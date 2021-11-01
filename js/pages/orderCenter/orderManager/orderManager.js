@@ -607,6 +607,15 @@
       }, 10); */
     },
     methods: {
+      toggleDom() {
+        this.$nextTick(() => {
+          let BASE_BOTTOM = -11;
+          let height = this.isFolding 
+            ? BASE_BOTTOM 
+            : BASE_BOTTOM - this.$refs.searchWarp.offsetHeight;
+          document.querySelectorAll('.customized-list-form .business-form-main .flodBtn')[0].style.bottom = `${height}px`;
+        })
+      },
       gridReady() {
         this.tabth = [
           {
@@ -623,6 +632,7 @@
       shutDownOrbounceOff() {
         const self = this;
         self.isFolding = !self.isFolding;
+        self.toggleDom();
         self.reset();
         self.initList(self.isFolding);
       },

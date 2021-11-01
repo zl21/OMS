@@ -3,11 +3,12 @@
     <div class="customized-list-form"  :class="[Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '',tablename == 'OC_B_ORDER' && !isFolding ? 'returnChangeOrder' :'']">
       <!-- form组件 -->
       <businessForm v-if="buttonInit" :form-config="formConfig" />
-      <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']">
+      <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']" ref="searchWarp">
         <dynamicSearch
           v-if="!isFolding && tablename == 'OC_B_ORDER'"
           ref="dynamicSearch"
           :dynamic-data="dynamicData"
+          @toggleDom="toggleDom"
         />
         <div v-if="tablename !== 'OC_B_ORDER'"></div>
         <businessButton class="searchBtn" :btn-config="searchBtn" />
