@@ -1,5 +1,3 @@
-// const _import = (file) =>
-//   require(`commonPage/${process.env.BRANCH_ENV}/page/${file}.vue`).default
 import businessButton from 'burgeonComponents/view/businessButton'
 import businessForm from 'burgeonComponents/view/businessForm'
 import i18n from "@burgeon/internationalization/i18n";
