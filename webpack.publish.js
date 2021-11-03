@@ -42,30 +42,6 @@ const config = {
       amd: 'vue-router',
       root: 'VueRouter'
     },
-    axios: {
-      commonjs: 'axios',
-      commonjs2: 'axios',
-      amd: 'axios',
-      root: 'axios'
-    },
-    'ark-ui': {
-      commonjs: 'ark-ui',
-      commonjs2: 'ark-ui',
-      amd: 'ark-ui',
-      root: 'Ark'
-    },
-    ztree: {
-      commonjs: 'ztree',
-      commonjs2: 'ztree',
-      amd: 'ztree',
-      root: 'ztree'
-    },
-    jquery: {
-      commonjs: 'jquery',
-      commonjs2: 'jquery',
-      amd: 'jquery',
-      root: '$'
-    },
   },
   module: {
     exprContextCritical: false,
@@ -147,6 +123,10 @@ const config = {
         {
           from: path.resolve(__dirname, "./src/static"),
           to: path.resolve(__dirname, "./burgeon.publish/static")
+        },
+        {
+          from: path.resolve(__dirname, "./src/common/css"),
+          to: path.resolve(__dirname, "./burgeon.publish/common/css")
         },
       ],
     })

@@ -1,12 +1,11 @@
 /*
  * @Author: your name
  * @Date: 2021-11-01 13:50:01
- * @LastEditTime: 2021-11-03 09:44:09
- * @LastEditors: your name
+ * @LastEditTime: 2021-11-03 13:46:56
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/src/js/buttonFkDialog.js
  */
-// import fkdialog from 'framework/components/tablelist/fkdialog.vue';
 import fkdialog from 'burgeonComponents/view/fkdialog.vue';
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n

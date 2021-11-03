@@ -3,8 +3,6 @@ import SelectDialog from 'framework/components/dialog/selectDialog.vue';
 import FkTable from 'burgeonComponents/view/fktable.vue';
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
-// import $ from '@/assets/js/jquery3.5.1.min.js';
-/* import Vue from 'vue' */
 
 export default {
   props: {
