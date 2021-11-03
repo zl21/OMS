@@ -51,8 +51,8 @@ export default {
       default: () => " "
     }, //组件名称
     url: {
-      type: String,
-      default: () => " "
+      type: Object,
+      default: () => {}
     }, //组件路由
     componentData: {
       type: Object,
@@ -100,7 +100,7 @@ export default {
     currentViewData() {
       const _self = this;
       let componentName = _self.name;
-      Vue.component(componentName, Vue.extend(_self.name));
+      Vue.component(componentName, Vue.extend(this.url));
       return componentName;
     }
   },
