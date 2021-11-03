@@ -42,24 +42,6 @@ const config = {
       amd: 'vue-router',
       root: 'VueRouter'
     },
-    axios: {
-      commonjs: 'axios',
-      commonjs2: 'axios',
-      amd: 'axios',
-      root: 'axios'
-    },
-    'ark-ui': {
-      commonjs: 'ark-ui',
-      commonjs2: 'ark-ui',
-      amd: 'ark-ui',
-      root: 'Ark'
-    },
-    ztree: {
-      commonjs: 'ztree',
-      commonjs2: 'ztree',
-      amd: 'ztree',
-      root: 'ztree'
-    },
     jquery: {
       commonjs: 'jquery',
       commonjs2: 'jquery',
