@@ -23,7 +23,7 @@
       <table>
         <thead>
           <tr>
-            <th v-for="(item, index) in fnfiltersId(tabth, 'ID')" :key="`thead-${index}`">
+            <th v-for="(item, index) in fnfiltersId(tabth, 'ID')" :key="`thead-checkbox-${index}`">
               <input
                 type="checkbox"
                 @click.stop="checkBoxAll"
