@@ -1,5 +1,3 @@
-// const _import = (file , basePathName) => basePathName === 'views' ? require(`projectLogic/${basePathName}/${file}.vue`).default : require(`@burgeon/${basePathName}/${file}.vue`).default;
-const _import = (file , basePathName) => require(`@burgeon/${basePathName}/${file}.vue`).default;
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
 
@@ -102,7 +100,7 @@ export default {
     currentViewData() {
       const _self = this;
       let componentName = _self.name;
-      Vue.component(componentName, Vue.extend(_import(_self.url , _self.basePathName)));
+      Vue.component(componentName, Vue.extend(_self.name));
       return componentName;
     }
   },
