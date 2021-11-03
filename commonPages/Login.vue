@@ -85,9 +85,10 @@ export default {
     const browseLan = localStorage.getItem("locale") || "zh";
     _this.vmI18n.locale = browseLan;
     this.curLang = langConfig.find((it) => it.type == browseLan).text;
+    this.isEnableLoginPro = !!window.ProjectConfig.enableLoginPro
   },
   mounted() {
-    this.isEnableLogin();
+    this.isEnableLoginPro && this.initTab(true);
     this.initDom();
   },
   methods: {
@@ -126,16 +127,6 @@ export default {
       loginBtn.innerHTML = `${this.vmI18n.t(
         "login"
       )} <img src="${require("assetsImg/arrow-right.png")}" />`;
-    },
-    // 是否开启手机验证码登录
-    isEnableLogin() {
-      this.$nextTick(() => {
-        let node =
-          document.querySelector(".loginPro") ||
-          document.querySelector(".divErCode");
-        this.isEnableLoginPro = !!node;
-        node && this.initTab(true);
-      });
     },
     initTab(isPhone) {
       let nodes = document.querySelectorAll(".tab");
