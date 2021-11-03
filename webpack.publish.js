@@ -42,12 +42,6 @@ const config = {
       amd: 'vue-router',
       root: 'VueRouter'
     },
-    jquery: {
-      commonjs: 'jquery',
-      commonjs2: 'jquery',
-      amd: 'jquery',
-      root: '$'
-    },
   },
   module: {
     exprContextCritical: false,
@@ -129,6 +123,10 @@ const config = {
         {
           from: path.resolve(__dirname, "./src/static"),
           to: path.resolve(__dirname, "./burgeon.publish/static")
+        },
+        {
+          from: path.resolve(__dirname, "./src/common/css"),
+          to: path.resolve(__dirname, "./burgeon.publish/common/css")
         },
       ],
     })
