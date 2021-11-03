@@ -29,10 +29,13 @@ export default {
       type: Object
     }
   },
-  computed:{
+  computed: {
     // flodClickClass(){
     //   return this.formConfig.flodClick ? '' : 'unFlodStyle';
     // }
+    formFields() {
+      return this.formConfig.formData.filter(i => i.style)
+    }
   },
   watch: {
     // flodData() {
