@@ -1,6 +1,6 @@
 import businessForm from "burgeonComponents/view/businessForm";
-import i18n from "@burgeon/internationalization/i18n";
-window.$i18n = i18n
+// import i18n from "@burgeon/internationalization/i18n";
+// window.$i18n = i18n
 
 export default {
   components: {
@@ -8,7 +8,7 @@ export default {
   },
   data() {
     return {
-      vmI18n: i18n,
+      // vmI18n: i18n,
       pageLoad: false,
       formConfig: {
         formValue: {

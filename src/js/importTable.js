@@ -1,7 +1,7 @@
 import businessButton from 'burgeonComponents/view/businessButton';
 import loading from 'burgeonComponents/view/loading';
-import i18n from "@burgeon/internationalization/i18n";
-window.$i18n = i18n
+// import i18n from "@burgeon/internationalization/i18n";
+// window.$i18n = i18n
 
 export default {
   name: 'importTable',
@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      vmI18n: i18n,
+      // vmI18n: i18n,
       key: '',
       text: '', // 选择的导入文件名
       files: {}, // 选择的文件

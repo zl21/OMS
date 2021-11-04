@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-business-components/js/vueAgTable.js
  */
 // import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid'; // npm
-import i18n from "@burgeon/internationalization/i18n";
+// import i18n from "@burgeon/internationalization/i18n";
 
 export default {
     name: 'businessAgTable',
@@ -31,7 +31,7 @@ export default {
     },
     data() {
         return {
-            vmI18n: i18n,
+            // vmI18n: i18n,
         }
     },
     methods: {

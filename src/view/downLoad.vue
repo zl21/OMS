@@ -46,7 +46,7 @@
 import businessForm from "burgeonComponents/view/businessForm";
 import businessButton from "burgeonComponents/view/businessButton";
 import businessDialog from "burgeonComponents/view/businessDialog";
-import i18n from "@burgeon/internationalization/i18n";
+// import i18n from "@burgeon/internationalization/i18n";
 
 // import CustomConfig from "@/config/customized.config.js";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
@@ -80,7 +80,7 @@ export default {
   data() {
     return {
       spinShow: false, // loading动画
-      vmI18n: i18n,
+      // vmI18n: i18n,
       downLoadModal: false,
       taskId: "",
       tableName: this.$route.params.tableName
@@ -92,7 +92,7 @@ export default {
         buttons: [
           {
             type: "", // 按钮类型
-            text: i18n.t("common.cancel"), // 取消 按钮文本
+            text: $i18n.t("common.cancel"), // 取消 按钮文本
             icon: "", // 按钮图标
             size: "", // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -102,7 +102,7 @@ export default {
           },
           {
             type: "", // 按钮类型
-            text: i18n.t("btn.download"), // 下载 按钮文本
+            text: $i18n.t("btn.download"), // 下载 按钮文本
             icon: "", // 按钮图标
             size: "", // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -116,7 +116,7 @@ export default {
       },
       downLoadFormConfig: {},
       dialogConfig: {
-        title: i18n.t("btn.import"),
+        title: $i18n.t("btn.import"),
         componentData: {
           tableName: "IP_C_STANDPLAT_PRO",
           returnData(data) {
@@ -136,7 +136,7 @@ export default {
     modalTitle() {
       let title = this.modalConfig[this.tableName].modalTitle
         ? this.modalConfig[this.tableName].modalTitle
-        : i18n.t("modalTitle.orderDownload");
+        : $i18n.t("modalTitle.orderDownload");
       return title;
     },
   },
@@ -177,13 +177,13 @@ export default {
         id: this.taskId,
         type: "singleView", // 类型action
         name: "singleView",
-        label: i18n.t("common.interface_download_taskTable_edit"), // 接口下载任务表编辑 tab中文名
+        label: $i18n.t("common.interface_download_taskTable_edit"), // 接口下载任务表编辑 tab中文名
         query: {
           id: this.taskId,
           pid: "24775",
-          ptitle: i18n.t("common.interface_download_taskTable"), // 接口下载任务表
+          ptitle: $i18n.t("common.interface_download_taskTable"), // 接口下载任务表
           ptype: "table",
-          tabTitle: i18n.t("common.interface_download_taskTable_edit"), // 接口下载任务表编辑
+          tabTitle: $i18n.t("common.interface_download_taskTable_edit"), // 接口下载任务表编辑
           tableName: "IP_T_CONSUMER_LOG",
         },
       });
@@ -193,7 +193,7 @@ export default {
       const _this = this;
       // 导入
       this.dialogConfig = {
-        title: i18n.t("btn.import"),
+        title: $i18n.t("btn.import"),
         componentData: {
           // 导入：key存在则在配置中找(tableName_webname)
           tableName: "IP_C_STANDPLAT_PRO",

@@ -284,12 +284,12 @@
 
 <script>
 /* type="ecmascript-6" */
-import i18n from "@burgeon/internationalization/i18n";
+// import i18n from "@burgeon/internationalization/i18n";
 import MyDialog from "framework/components/dialog/mydialog.vue";
 import DragDialog from "framework/components/dialog/mydialog.vue";
 import tree from "framework/components/tablelist/tree.vue";
 import ShowTableData from "framework/components/views/custompage/ShowTableData.vue";
-window.$i18n = i18n;
+// window.$i18n = i18n;
 
 export default {
   props: {
@@ -337,8 +337,8 @@ export default {
   },
   data() {
     return {
-      $i18n: i18n,
-      vmI18n: i18n,
+      // $i18n: i18n,
+      // vmI18n: i18n,
       confirmLoading: false, // 页面loading
       t_dialog_show: true, // 弹框显示
       ChineseDictionary: {}, // 名字集合

@@ -1,5 +1,5 @@
-import i18n from "@burgeon/internationalization/i18n";
-window.$i18n = i18n
+// import i18n from "@burgeon/internationalization/i18n";
+// window.$i18n = i18n
 
 export default {
   name: "businessDialog",
@@ -89,7 +89,7 @@ export default {
   },
   data() {
     return {
-      vmI18n: i18n,
+      // vmI18n: i18n,
       modal: this.$props.visible,
       currentView: "",
       commonObj: {},
