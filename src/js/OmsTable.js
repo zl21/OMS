@@ -1,12 +1,12 @@
 import OmsButton from 'burgeonComponents/view/OmsButton'
-import businessForm from 'burgeonComponents/view/businessForm'
+import OmsForm from 'burgeonComponents/view/OmsForm'
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
   },
   props: {
     jordanTableConfig: {

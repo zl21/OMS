@@ -4,7 +4,7 @@
  * @LastEditTime: 2021-11-03 13:46:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /burgeon-business-components/js/businessForm.js
+ * @FilePath: /burgeon-business-components/js/OmsForm.js
  */
 import myInputLd from 'framework/components/element/input.vue' //为多选+导入组件专属引入
 // 兼容fktable1.4数据格式（云雀1.0）

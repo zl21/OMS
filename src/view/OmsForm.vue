@@ -612,12 +612,12 @@
 </template>
 
 <script>
-import businessForm from 'burgeonComponents/js/businessForm.js';
-export default businessForm;
+import OmsForm from 'burgeonComponents/js/OmsForm.js';
+export default OmsForm;
 </script>
 
 <style lang='less'>
-@import "burgeonComponents/css/businessForm.less";
+@import "burgeonComponents/css/OmsForm.less";
 </style>
 
 

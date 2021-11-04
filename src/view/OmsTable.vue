@@ -1,6 +1,6 @@
 <template>
   <div class="jordan-table-box">
-    <!-- businessForm 按钮定位
+    <!-- OmsForm 按钮定位
     *colRowNum:获取当前展示几列；
     *formData.length:form的个数；
     1.如果存在businessFormConfig添加fromBtn 添加相对定位，并且给按钮添加绝对定位；
@@ -13,8 +13,8 @@
       ]">
       <div class="businessForm-box" 
         v-if="businessFormConfig !== undefined">
-        <businessForm :formConfig="businessFormConfig">
-        </businessForm>
+        <OmsForm :formConfig="businessFormConfig">
+        </OmsForm>
       </div>
       <!-- businessButtons -->
       <div class="businessButton" v-if="businessButtonConfig !== undefined">
