@@ -11,7 +11,7 @@
     |-- OmsForm.vue // 表单组件
     |-- OmsLabel.vue // 选项卡切换组件
     |-- businessStatusFlag.vue // 水印状态组件
-    |-- businessTableInput.vue // 表格中使用的input
+    |-- TableInput.vue // 表格中使用的input
     |-- buttonFkDialog.vue // 通过按钮触发fkdialog弹出
     |-- downLoad.vue // 公共下载组件
     |-- easyMatrix.vue // 简单矩阵（二维）组件
@@ -47,7 +47,7 @@
     |   |-- OmsForm.less
     |   |-- OmsLabel.less
     |   |-- businessStatusFlag.less
-    |   |-- businessTableInput.less
+    |   |-- TableInput.less
     |   |-- buttonFkDialog.less
     |   |-- fkinput.less
     |   |-- fktable.less
@@ -66,7 +66,7 @@
     |   |-- OmsForm.js
     |   |-- OmsLabel.js
     |   |-- businessStatusFlag.js
-    |   |-- businessTableInput.js
+    |   |-- TableInput.js
     |   |-- buttonFkDialog.js
     |   |-- easyMatrix.js
     |   |-- fkinput.js

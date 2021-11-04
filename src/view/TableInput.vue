@@ -4,7 +4,7 @@
  * @LastEditTime: 2021-11-02 17:57:42
  * @LastEditors: your name
  * @Description: In User Settings Edit
- * @FilePath: /burgeon-business-components/src/view/businessTableInput.vue
+ * @FilePath: /burgeon-business-components/src/view/TableInput.vue
 -->
 <!-- table表格中使用的input -->
 <template>
@@ -88,11 +88,11 @@
 </template>
 
 <script>
-import businessTableInput from 'burgeonComponents/js/businessTableInput.js';
-export default businessTableInput;
+import TableInput from 'burgeonComponents/js/TableInput.js';
+export default TableInput;
 </script>
 
 <style lang='less'>
-@import "burgeonComponents/css/businessTableInput.less";
+@import "burgeonComponents/css/TableInput.less";
 </style>
 
