@@ -51,7 +51,7 @@ import businessDialog from "burgeonComponents/view/businessDialog";
 // import CustomConfig from "@/config/customized.config.js";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
 
-export default {
+const downLoad = {
   components: {
     businessDialog,
     businessForm,
@@ -108,7 +108,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               // this.modalConfig[this.tableName].determine(this);
-              console.log('click::',new Date());
+              console.log('click::', new Date());
               this.okHandel();
             }, // 按钮点击事件
           },
@@ -155,7 +155,7 @@ export default {
   methods: {
     okHandel: _.throttle(function () {
       const self = this;
-      console.log('determine::',new Date());
+      console.log('determine::', new Date());
       self.modalConfig[self.tableName].determine(self);
     }, 3000, { 'trailing': false }),
     downLoadOk() {
@@ -214,6 +214,8 @@ export default {
     window.custSelf = null
   }
 };
+
+export default downLoad;
 </script>
 
 <style >
