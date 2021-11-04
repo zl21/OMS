@@ -8,7 +8,7 @@
         alt
       >
     -->
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark class="omsWaterMark" :text="statusName"/>
     </div>
     <Tabs
       :value="tab"

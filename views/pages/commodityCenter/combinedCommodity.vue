@@ -81,7 +81,7 @@
           </div>
         </div> 
         <!-- 水印 -->
-        <businessStatusFlag :status-name="statusName" />
+        <WaterMark class="omsWaterMark" :text="statusName"></WaterMark>
       </div>
     </div>
     <div
@@ -174,7 +174,7 @@
         <!--&gt;</businessActionTable>-->
         <!--</TabPane>-->
         <!-- 水印 -->
-        <businessStatusFlag :status-name="statusName" />
+        <WaterMark class="omsWaterMark" :text="statusName"></WaterMark>
       <!-- </Tabs> -->
     </div>
     <Modal

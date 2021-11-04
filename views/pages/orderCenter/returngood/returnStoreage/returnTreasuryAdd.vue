@@ -64,7 +64,7 @@
         </Modal>
       </div>
       <!-- 水印图片 -->
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark class="omsWaterMark" :text="statusName"/>
     </div>
   </div>
 </template>

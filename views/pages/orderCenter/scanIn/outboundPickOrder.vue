@@ -3,13 +3,7 @@
   <!-- 出库拣货单 -->
   <div class="outboundPickOrder">
     <div class="watermark">
-      <!-- 
-      <img
-        :src="watermark_src"
-        alt
-      >
-     -->  
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark class="omsWaterMark" :text="statusName"/>
     </div>
     <Tabs
       :value="tab"

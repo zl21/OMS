@@ -2,7 +2,6 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethods from '@/assets/js/public/publicMethods';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 
 import areaList from '@/assets/js/address/area-list';
 import { parseArea } from '@/assets/js/address/address-parse';
@@ -10,7 +9,6 @@ import { parseArea } from '@/assets/js/address/address-parse';
 parseArea(areaList);
 export default {
   components: {
-    businessStatusFlag,
     businessButton,
     businessForm,
     businessActionTable

@@ -59,7 +59,6 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
 import businessDialog from 'professionalComponents/businessDialog';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date.js';
@@ -71,7 +70,6 @@ export default {
     businessActionTable,
     businessDialog,
     businessLabel,
-    businessStatusFlag
   },
   // model: {
   //   prop: 'value',

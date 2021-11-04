@@ -1,7 +1,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 // import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'professionalComponents/subTable';
 import logTable from 'professionalComponents/LogTable';
@@ -16,7 +15,6 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     logTable,
     subTable,
     businessActionTable

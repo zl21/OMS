@@ -1,7 +1,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import orderItem from 'professionalComponents/subTable';
 import loading from 'professionalComponents/loading';
@@ -14,7 +13,6 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     loading,
     // ImageUpload
   },

@@ -1,6 +1,5 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessDialog from 'professionalComponents/businessDialog';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
@@ -17,7 +16,6 @@ export default {
     businessLabel,
     EssentialInfo,
     OrderItem,
-    businessStatusFlag,
     businessDialog,
     loading
   },

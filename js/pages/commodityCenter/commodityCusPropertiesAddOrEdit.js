@@ -4,7 +4,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import orderItem from 'professionalComponents/subTable';
 import businessActionTable from 'professionalComponents/businessActionTable';
@@ -17,7 +16,6 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     businessActionTable,
     loading,
   },

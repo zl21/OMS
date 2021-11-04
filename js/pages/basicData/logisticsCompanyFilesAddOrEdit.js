@@ -1,7 +1,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
@@ -15,7 +14,6 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     businessActionTable,
     addPlatformLogisticsCompany,
     loading,

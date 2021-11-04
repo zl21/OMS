@@ -1,13 +1,10 @@
 import buttons from 'professionalComponents/businessButton.vue';
 import Aform from 'professionalComponents/businessForm.vue';
 import Atable from 'professionalComponents/businessActionTable.vue';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
-// import axios from 'axios';
 
 export default {
   inject: ['reload'],
   components: {
-    businessStatusFlag,
     buttons,
     Atable,
     Aform

@@ -2,11 +2,9 @@ import buttons from 'professionalComponents/businessButton.vue';
 import Atable from 'professionalComponents/businessActionTable.vue';
 import Aform from 'professionalComponents/businessForm.vue';
 import businessDialog from 'professionalComponents/businessDialog';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 export default {
   // inject: ['reload'],
   components: {
-    businessStatusFlag,
     buttons,
     Atable,
     Aform,

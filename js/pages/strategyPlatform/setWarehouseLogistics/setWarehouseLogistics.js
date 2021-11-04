@@ -3,7 +3,6 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessModal from 'professionalComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import { setTimeout } from 'timers';
 import loading from 'professionalComponents/loading';
 
@@ -13,7 +12,6 @@ export default {
     businessForm,
     businessLabel,
     businessModal,
-    businessStatusFlag,
     loading
   },
   data() {

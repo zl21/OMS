@@ -5,7 +5,6 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 // import comUtils from '@/assets/js/__utils__/common.js';
@@ -18,7 +17,6 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     subTable,
     businessActionTable,
     // ImageUpload

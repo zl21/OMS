@@ -6,7 +6,6 @@ import businessLabel from 'professionalComponents/businessLabel';
 import { setTimeout } from 'timers';
 import businessDialog from 'professionalComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
@@ -29,7 +28,6 @@ export default {
     businessDialog,
     OrderItem,
     businessLabel,
-    businessStatusFlag,
     loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],

@@ -172,7 +172,7 @@
         </div>
       </div>
       <!--单据状态图片展示 -->
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark class="omsWaterMark" :text="statusName"/>
     </div>
     <!-- 导入 -->
     <businessModal

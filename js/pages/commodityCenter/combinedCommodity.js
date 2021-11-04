@@ -5,7 +5,6 @@ import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessDialog from 'professionalComponents/businessDialog';
 
 export default {
@@ -14,7 +13,6 @@ export default {
     businessForm,
     businessLabel,
     businessActionTable,
-    businessStatusFlag,
     businessDialog
   },
   data() {

@@ -5,7 +5,6 @@ import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
 import businessDialog from 'professionalComponents/businessDialog';
 import businessActionTable from 'professionalComponents/businessActionTable';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import loading from 'professionalComponents/loading';
 
@@ -16,7 +15,6 @@ export default {
     businessLabel,
     businessDialog,
     businessActionTable,
-    businessStatusFlag,
     loading
   },
   data() {

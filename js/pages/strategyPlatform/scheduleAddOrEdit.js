@@ -1,7 +1,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import subTable from 'professionalComponents/subTable';
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
@@ -16,7 +15,6 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     businessActionTable,
     scheduleFormDialog,
     businessDialog

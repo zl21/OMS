@@ -40,10 +40,11 @@
         </div>
       </template>
       <!--单据状态图片展示 -->
-      <businessStatusFlag
+      <!-- <businessStatusFlag
         :status-name="statusName"
         class="statusFlag"
-      />
+      /> -->
+      <WaterMark class="omsWaterMark" :text="statusName"></WaterMark>
     </div>
     <!--错误弹框-->
     <Modal
@@ -58,7 +59,6 @@
 <script>
   import businessButton from 'professionalComponents/businessButton';
   import businessLabel from 'professionalComponents/businessLabel';
-  import businessStatusFlag from 'professionalComponents/businessStatusFlag';
   import businessDialog from 'professionalComponents/businessDialog';
   import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
   import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
@@ -74,7 +74,6 @@
       businessLabel,
       EssentialInfo,
       OrderItem,
-      businessStatusFlag,
       businessDialog
     },
     mixins: [buttonPermissionsMixin],

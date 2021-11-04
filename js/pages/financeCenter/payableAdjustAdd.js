@@ -4,7 +4,6 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import businessLabel from 'professionalComponents/businessLabel';
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import tableInput from 'professionalComponents/businessTableInput.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
@@ -18,7 +17,6 @@ export default {
     businessForm,
     businessActionTable,
     businessLabel,
-    businessStatusFlag,
     loading,
     // ImageUpload
   },

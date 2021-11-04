@@ -2,7 +2,6 @@ import businessButton from 'professionalComponents/businessButton';
 import businessActionTable from 'professionalComponents/businessActionTable';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'professionalComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
@@ -15,7 +14,6 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessStatusFlag
   },
   mixins: [new modifycurrentLabel()],
   data() {

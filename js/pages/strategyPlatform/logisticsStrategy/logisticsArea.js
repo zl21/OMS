@@ -1,7 +1,6 @@
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import businessLabel from 'professionalComponents/businessLabel';
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 import businessModal from 'professionalComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import loading from 'professionalComponents/loading';
@@ -12,7 +11,6 @@ export default {
     businessForm,
     businessLabel,
     businessModal,
-    businessStatusFlag,
     loading
   },
   data() {
