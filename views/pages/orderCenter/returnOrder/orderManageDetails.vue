@@ -48,7 +48,7 @@
         </div>
       </template>
       <!--单据状态图片展示 -->
-      <WaterMark class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <!--错误弹框-->
     <Modal

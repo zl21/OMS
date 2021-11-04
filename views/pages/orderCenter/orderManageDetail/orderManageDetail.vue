@@ -44,7 +44,7 @@
         :status-name="statusName"
         class="statusFlag"
       /> -->
-      <WaterMark class="omsWaterMark" :text="statusName"></WaterMark>
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"></WaterMark>
     </div>
     <!--错误弹框-->
     <Modal

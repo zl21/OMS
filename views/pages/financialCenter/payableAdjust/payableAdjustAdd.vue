@@ -5,7 +5,7 @@
       <businessButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
-      <WaterMark v-if="showStatusFlag" class="omsWaterMark" :text="statusName"></WaterMark>
+      <WaterMark v-if="showStatusFlag && statusName" class="omsWaterMark" :text="statusName"></WaterMark>
       <Collapse v-model="spreadPanel">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->

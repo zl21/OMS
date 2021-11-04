@@ -64,7 +64,7 @@
         </Modal>
       </div>
       <!-- 水印图片 -->
-      <WaterMark class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
   <!-- 出库拣货单 -->
   <div class="outboundPickOrder">
     <div class="watermark">
-      <WaterMark class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <Tabs
       :value="tab"
