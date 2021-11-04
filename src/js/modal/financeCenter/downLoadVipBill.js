@@ -5,7 +5,7 @@ import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   components: {
     businessForm,
-    businessBtn
+    businessButton
   },
   name: 'downloadVipBill',
   data() {

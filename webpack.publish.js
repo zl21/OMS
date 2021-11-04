@@ -2,7 +2,6 @@
 const path = require('path');
 // const { VueLoaderPlugin } = require('vue-loader');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
@@ -20,6 +19,7 @@ const config = {
     library: 'BurgeonMaterials',
     libraryTarget: 'umd',
     umdNamedDefine: true,
+    clean: true,
     publicPath: './'
   },
   devtool: 'eval-cheap-module-source-map',
@@ -103,6 +103,7 @@ const config = {
     // port: 8080,
     host: '0.0.0.0',
     open: true,
+    static: './burgeon.publish',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -112,7 +113,6 @@ const config = {
     new MiniCssExtractPlugin({
       filename: 'BurgeonMaterials.min.css',
     }),
-    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
     new copyWebpackPlugin({
       patterns: [

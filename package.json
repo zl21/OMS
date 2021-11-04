@@ -2,7 +2,10 @@
   "name": "@burgeon/project-logic",
   "version": "1.0.0-op",
   "description": "burgeon company's project-logic for private npm",
-  "main": "index.js",
+  "main": "burgeon.publish/BurgeonMaterials.min.js",
+  "files": [
+    "burgeon.publish"
+],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js"
