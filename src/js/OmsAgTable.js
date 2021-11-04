@@ -10,7 +10,7 @@
 // import i18n from "@burgeon/internationalization/i18n";
 
 export default {
-    name: 'businessAgTable',
+    name: 'OmsAgTable',
     components: {
         // commonTableByAgGrid
     },

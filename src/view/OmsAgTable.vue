@@ -43,13 +43,12 @@
 </template>
 
 <script>
-import businessAgTable from 'burgeonComponents/js/businessAgTable'
-export default businessAgTable
+import OmsAgTable from 'burgeonComponents/js/OmsAgTable'
+export default OmsAgTable
 </script>
 
 <style lang="less" scoped>
 @import "burgeonComponents/common/css/table.less";
-// @import "css/agGridTable.less";
 .agTable {
   .page {
     padding: 10px 0;
