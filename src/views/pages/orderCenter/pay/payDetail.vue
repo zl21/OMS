@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="payDetail" v-loading="loading">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -38,15 +38,15 @@
 
 <script>
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import payDetailAdd from './payDetailAdd.vue';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   // name: 'payDetail',
   components: {
     payDetailAdd,
     businessButton,
-    businessActionTable,
+    OmsTable,
   },
   props: {
     idArray: {// 获取ID用于多选

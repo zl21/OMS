@@ -1,9 +1,7 @@
 // 额外退款新增/编辑、已发货退款编辑  共用此组件
 import reButton from 'burgeonComponents/businessButton';
-import reTable from 'burgeonComponents/businessActionTable';
-import reForm from 'burgeonComponents/businessForm';
-// import commonUtil from '@/assets/js/__utils__/common';
 import refundAfterShipment from './constants/refundAfterShipment';
+import { OmsTable as reTable, OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {

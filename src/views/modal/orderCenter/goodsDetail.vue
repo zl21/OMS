@@ -1,6 +1,6 @@
 <template>
   <div class="jordanModal">
-    <businessActionTable
+    <OmsTable
       class="jordan-action-table"
       :jordan-table-config="jordanTableConfig"
       @on-select="onSelect"

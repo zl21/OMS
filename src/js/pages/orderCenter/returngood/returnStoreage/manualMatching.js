@@ -1,17 +1,17 @@
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import businessDialog from 'burgeonComponents/businessDialog';
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import loading from 'burgeonComponents/loading';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessDialog,
     OrderItem,
     businessLabel,

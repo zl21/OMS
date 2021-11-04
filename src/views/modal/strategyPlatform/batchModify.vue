@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessButton from 'burgeonComponents/businessButton';
 
 export default {

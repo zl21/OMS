@@ -1,13 +1,14 @@
 // import axios from 'axios';
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsForm } from 'burgeonComponents';
+import { OmsTable } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
   },
   data() {
     return {

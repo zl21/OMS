@@ -1,7 +1,7 @@
 // 订单中心->智能地址解析页面
 
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 import loading from 'burgeonComponents/loading';
 

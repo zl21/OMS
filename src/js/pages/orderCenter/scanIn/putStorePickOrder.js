@@ -1,6 +1,6 @@
 import buttons from 'burgeonComponents/businessButton.vue';
 import Aform from 'burgeonComponents/businessForm.vue';
-import Atable from 'burgeonComponents/businessActionTable.vue';
+import { OmsTable as Atable } from 'burgeonComponents'
 
 export default {
   inject: ['reload'],

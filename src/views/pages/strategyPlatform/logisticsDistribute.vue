@@ -48,7 +48,7 @@
               class="logistics-foot-table customized-detail-table"
               v-if="tableshow"
             >
-              <businessActionTable
+              <OmsTable
                 :jordan-table-config="tableConfig"
                 @on-select="fnselect"
                 @on-select-cancel="fncancel"

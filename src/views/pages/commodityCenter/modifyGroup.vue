@@ -55,7 +55,7 @@
           v-show="label.labelValue === 'generalGroupItem'"
           class="generalGroupItem"
         >
-          <businessActionTable
+          <OmsTable
             :jordan-table-config="jordanTableConfigGenera"
             @on-select="onSelect"
             @on-select-cancel="onSelect"
@@ -67,7 +67,7 @@
           v-show="label.labelValue === 'luckbagGroupItem'"
           class="luckbagGroupItem"
         >
-          <businessActionTable
+          <OmsTable
             :jordan-table-config="jordanTableConfigLuck"
             @on-select="onSelect"
             @on-select-cancel="onSelect"

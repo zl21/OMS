@@ -27,7 +27,7 @@
         <businessLabel v-show="showSubtablePart" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <businessActionTable
+          <OmsTable
             v-show="showSubtablePart && labelDefaultValue === 'PROPERTYVALUES'"
             :jordan-table-config="propertyValuesConfig"
             @on-select="onSelect"

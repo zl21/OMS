@@ -11,10 +11,9 @@
 // export default changeWarehouse;
 import businessForm from "burgeonComponents/businessForm";
 import businessButton from "burgeonComponents/businessButton";
-import businessActionTable from "burgeonComponents/businessActionTable";
 import loading from "burgeonComponents/loading";
-
 import listeningToKeydownMixin from "@/assets/js/mixins/listeningToKeydown.js";
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
@@ -22,7 +21,7 @@ export default {
     loading,
     businessForm,
     businessButton,
-    businessActionTable,
+    OmsTable,
   },
   props: {
     componentData: {

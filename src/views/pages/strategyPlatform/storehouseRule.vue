@@ -44,7 +44,7 @@
               </div>
             </div>
 
-            <businessActionTable
+            <OmsTable
               :jordan-table-config="tableConfig"
               @on-page-change="fnchange"
               @on-page-size-change="fnSize"

@@ -1,7 +1,6 @@
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import businessDialog from 'burgeonComponents/businessDialog';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
@@ -12,11 +11,13 @@ import unzipXv from '@/assets/js/dataToSmall';
 import loading from 'burgeonComponents/loading';
 import commonUtils from 'burgeonConfig/config/commonUtils';
 import BurgeonEvent from 'burgeonConfig/config/event.config';
+import { OmsTable } from 'burgeonComponents'
+
 export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessLabel,
     businessDialog,
     aTable,

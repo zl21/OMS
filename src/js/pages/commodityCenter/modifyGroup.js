@@ -1,16 +1,17 @@
+
 /**
  * 组合商品
  */
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 // import comUtils from '@/assets/js/__utils__/common.js';
 import subTable from 'burgeonComponents/subTable';
 // import ImageUpload from 'arkui_BCL/ImageUpload';
 import modifycurrentLabel from '@/assets/js/mixins/modifycurrentLabel';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
@@ -18,7 +19,7 @@ export default {
     businessForm,
     businessLabel,
     subTable,
-    businessActionTable,
+    OmsTable,
     // ImageUpload
   },
   mixins: [new modifycurrentLabel()],

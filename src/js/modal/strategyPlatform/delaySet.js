@@ -1,6 +1,6 @@
 
   import businessButton from 'burgeonComponents/businessButton';
-  import businessForm from 'burgeonComponents/businessForm';
+  import { OmsForm } from 'burgeonComponents';
 
   const { getModuleName } = R3;
   export default {

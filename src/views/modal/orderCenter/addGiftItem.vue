@@ -13,7 +13,7 @@
     <!-- <businessForm :form-config="formConfig"></businessForm> -->
     <!-- businessButton -->
     <!-- <businessButton class="absolute" :btn-config="searchBtn"></businessButton> -->
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"

@@ -28,7 +28,7 @@
       @on-cancel="detailAddCancel"
       class-name="ark-dialog"
     >
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tableConfig"
         @on-select="onSelect"
         @on-select-cancel="onSelectCancel"
@@ -48,7 +48,7 @@
       footer-hide
       class-name="ark-dialog"
     >
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="replaceProductTable"
         @on-row-click="replaceOnSelect"
         @on-page-change="pageChange"
@@ -59,8 +59,8 @@
   </div>
 </template>
 <script>
-import businessActionTable from "burgeonComponents/businessActionTable";
 import businessButton from 'burgeonComponents/businessButton';
+import { OmsTable } from 'burgeonComponents'
 
 
 import {
@@ -74,7 +74,7 @@ export default {
   name: "retunAddDetail",
   components: {
     businessButton,
-    businessActionTable,
+    OmsTable,
   },
   props: {
     mainData: {},

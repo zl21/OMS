@@ -1,8 +1,9 @@
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsTable } from 'burgeonComponents'
 import EasyMatrix from 'burgeonComponents/easyMatrix';
 // import axios from 'axios';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
@@ -108,7 +109,7 @@ export default {
     };
   },
   components: {
-    businessActionTable,
+    OmsTable,
     EasyMatrix,
     businessButton
   },

@@ -42,7 +42,7 @@
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <businessActionTable
+          <OmsTable
             :key="cusAttrConfig.key"
             v-show="labelDefaultValue === 'PROPERTY'"
             :jordan-table-config="cusAttrConfig"

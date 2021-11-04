@@ -9,7 +9,7 @@
 <template>
   <div class="matchingDetails">
     <businessButton :btn-config="btnConfig" />
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -35,15 +35,15 @@
 
 <script>
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import addGiftItem from './addGiftItem';
 import service from '@/service/index';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessButton,
     addGiftItem,
-    businessActionTable,
+    OmsTable,
   },
   data() {
     return {

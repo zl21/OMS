@@ -38,7 +38,7 @@
       <div class="table custom-table">
         <!-- 订单明细 -->
         <div class="barcodeDetails">
-          <businessActionTable
+          <OmsTable
             :jordan-table-config="jordanTableConfig"
             @on-select="onSelect"
             @on-select-all="onSelectAll"

@@ -40,7 +40,7 @@
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
         {{ vmI18n.t("panel_label.scanDetails") }}
       </div>
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="jordanTableConfig"
         @on-row-click="onRowClick"
       />

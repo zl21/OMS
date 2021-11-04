@@ -7,7 +7,7 @@
 -->
 <template>
   <div class="payDetailAdd" v-loading="loading" style="width: 800px">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -24,13 +24,13 @@
 
 <script>
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'payDetailAdd',
   components: {
     businessButton,
-    businessActionTable,
+    OmsTable,
   },
   props: {
     subData: {

@@ -1,7 +1,7 @@
 <template>
   <!-- 异常处理 -->
   <div class="exceptionHandle customized-modal">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelect"

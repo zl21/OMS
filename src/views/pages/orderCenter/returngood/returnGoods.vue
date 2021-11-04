@@ -11,16 +11,15 @@
     <div class="switch" v-if="IS_GROUP">
       <span @click="onSitch()"> {{ switchText }} </span>
     </div>
-    <business-action-table :jordan-table-config="returnDetailAddTable.table" />
+    <OmsTable :jordan-table-config="returnDetailAddTable.table" />
   </div>
 </template>
 
 <script> 
-  import businessActionTable from 'burgeonComponents/businessActionTable';
-  export default {
+    export default {
     name:'returnGodds',
     components:{
-      businessActionTable
+      OmsTable
     },
     data(){
       return{

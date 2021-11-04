@@ -11,15 +11,15 @@
 <script>
 import businessButton from "burgeonComponents/businessButton";
 import businessForm from "burgeonComponents/businessForm";
-import businessActionTable from "burgeonComponents/businessActionTable";
 import loading from "burgeonComponents/loading";
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     loading,
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
   },
   props: {
     componentData: {

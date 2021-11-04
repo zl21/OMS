@@ -1,9 +1,12 @@
+
 import businessButton from 'burgeonComponents/businessButton.vue';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsTable } from 'burgeonComponents'
 import businessDialog from 'burgeonComponents/businessDialog.vue';
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem.vue';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import goodsTotalAmount from 'allpages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
+import { OmsTable } from 'burgeonComponents'
+
 export default {
   name: 'EssentialInfo',
   props: {
@@ -12,7 +15,7 @@ export default {
   components: {
     businessButton,
     businessDialog,
-    businessActionTable,
+    OmsTable,
     CusOrderItem,
     goodsTotalAmount
   },

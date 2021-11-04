@@ -1,4 +1,4 @@
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsTable } from 'burgeonComponents'
 // import { OC_B_ORDER } from './config';
 // import config from './config';
 export default {
@@ -26,7 +26,7 @@ export default {
     };
   },
   components: {
-    businessActionTable
+    OmsTable
   },
   props: {
     componentData: {}

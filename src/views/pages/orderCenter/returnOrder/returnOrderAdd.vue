@@ -115,8 +115,7 @@
 <script>
 // 退换货单详情
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
@@ -124,6 +123,7 @@ import BurgeonValidate from "burgeonConfig/config/validate.config";
 import searchOOID from './searchOOID.vue'
 import returnChangeOrderdetails from './returnChangeOrderdetails.vue'
 import { valiObj, waterMarkMap } from './returnConfig.js'
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   // name: 'returnOrderAdd',
@@ -132,7 +132,7 @@ export default {
     searchOOID,
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessLabel,
   },
   data() {

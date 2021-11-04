@@ -2,17 +2,17 @@
  * 组合商品 - 老组件
  */
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessButton,
     businessForm,
     businessLabel,
-    businessActionTable,
+    OmsTable,
     businessDialog
   },
   data() {

@@ -1,8 +1,7 @@
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsForm } from 'burgeonComponents';
 import publicMethods from '@/assets/js/public/publicMethods';
-
+import { OmsTable } from 'burgeonComponents'
 import areaList from '@/assets/js/address/area-list';
 import { parseArea } from '@/assets/js/address/address-parse';
 
@@ -11,7 +10,7 @@ export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable
+    OmsTable
   },
   data() {
     return {

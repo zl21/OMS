@@ -2,7 +2,7 @@
 <template>
   <div>
     <EasyMatrix :component-data="matrixData" />
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"

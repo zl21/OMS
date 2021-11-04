@@ -23,7 +23,7 @@
             </Button>
           </div>
         </div> -->
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="tableConfig"
           @on-select="onSelect1"
           @on-select-cancel="onSelectCancel1"
@@ -57,7 +57,7 @@
             </Button>
           </div>
         </div> -->
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="tableConfig2"
           @on-select="onSelect2"
           @on-select-cancel="onSelectCancel2"

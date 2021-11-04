@@ -25,7 +25,7 @@
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <businessActionTable
+          <OmsTable
             v-if="(isCopy || ID != -1) && labelDefaultValue == 'goods'"
             :jordan-table-config="goodsTableConfig"
             @on-select="onSelect"

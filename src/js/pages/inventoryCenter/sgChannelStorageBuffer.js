@@ -1,19 +1,21 @@
+
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import businessDialog from 'burgeonComponents/businessDialog';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsTable } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessLabel,
     businessDialog
   },

@@ -1,13 +1,18 @@
+
+
+
+
+
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import businessDialog from 'burgeonComponents/businessDialog';
 import myInput from 'burgeonComponents/fkinput.vue';
 import subTable from 'burgeonComponents/subTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 Vue.component('myInput', myInput)
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
@@ -15,7 +20,7 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessActionTable,
+    OmsTable,
     businessDialog,
     myInput
   },

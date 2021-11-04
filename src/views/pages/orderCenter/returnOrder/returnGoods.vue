@@ -9,22 +9,22 @@
 <template>
   <div v-loading="loading">
     <!-- 退货明细 -->
-    <business-action-table :jordan-table-config="businessActionTable" @on-select="returnOnSelect" @table-delete-detail="returnDeleteDetail" @table-add-detail="returnAddDetail" @on-select-cancel="returnCancel" @on-select-all="returnSelectAll" @on-select-all-cancel="returnSelectAllCancel" />
+    <OmsTable :jordan-table-config="omsTableConfig" @on-select="returnOnSelect" @table-delete-detail="returnDeleteDetail" @table-add-detail="returnAddDetail" @on-select-cancel="returnCancel" @on-select-all="returnSelectAll" @on-select-all-cancel="returnSelectAllCancel" />
     <!-- 添加明细弹框 -->
     <Modal v-model="returnDetailAddTable.modal" width="900" titleAlign="left" :title="`添加商品-已选（${returnDetailAddTable.table.selectLength}）`" :mask="true" @on-ok="resetReturnMainTable" @on-cancel="detailAddCancel">
-      <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" />
+      <OmsTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" />
     </Modal>
   </div>
 </template>
 
 <script>
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import { addDetailModalTableColumns } from './returnConfig.js';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'retunGoods',
   components: {
-    businessActionTable
+    OmsTable
   },
   props: {
     mainData: {}
@@ -35,7 +35,7 @@ export default {
       indexL: [], // 一并选中待选索引集
       haveGift: '', // 挂靠赠品-商品编码
       haveGroup: '', // 组合/福袋下挂的其他关联商品-商品编码
-      businessActionTable: {
+      omsTableConfig: {
         // businessFormConfig: {}, // 表单配置
         columns: [
           {
@@ -157,7 +157,7 @@ export default {
     };
   },
   created() {
-    let columns = this.businessActionTable.columns;
+    let columns = this.omsTableConfig.columns;
     // 需要添加render的key
     let arr = ['PS_C_PRO_ECODE', 'QTY_CAN_REFUND', 'PRICE_ACTUAL'];
     // key对应的render方法
@@ -261,7 +261,7 @@ export default {
             };
             return obj;
           });
-        this.businessActionTable.columns = thead;
+        this.omsTableConfig.columns = thead;
       }
     },
     /* -------------------- 退货明细 -------------------- */

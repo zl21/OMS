@@ -1,5 +1,5 @@
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 // import { standardTimeConversion } from  '@/assets/js/__utils__/date.js';
 
 const { getModuleName } = R3;

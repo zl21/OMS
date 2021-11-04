@@ -1,7 +1,6 @@
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
-
+import { OmsTable } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
@@ -9,7 +8,7 @@ export default {
   components: {
     businessForm,
     businessButton,
-    businessActionTable
+    OmsTable
   },
   props: {
     componentData: {

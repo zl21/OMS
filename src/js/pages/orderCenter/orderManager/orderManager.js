@@ -1,6 +1,6 @@
 
   import businessButton from 'burgeonComponents/businessButton.vue';
-  import businessForm from 'burgeonComponents/businessForm.vue';
+  import { OmsForm } from 'burgeonComponents'
   import BurgeonEvent from 'burgeonConfig/config/event.config';
   import businessDialog from 'burgeonComponents/businessDialog.vue';
   import dateUtil from '@/assets/js/__utils__/date.js';

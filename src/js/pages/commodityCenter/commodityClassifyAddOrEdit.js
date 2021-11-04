@@ -2,13 +2,13 @@
  * 商品分类
  */
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import orderItem from 'burgeonComponents/subTable';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import loading from 'burgeonComponents/loading';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
@@ -16,7 +16,7 @@ export default {
     businessButton,
     businessForm,
     businessLabel,
-    businessActionTable,
+    OmsTable,
     loading,
   },
   mixins: [new modifycurrentLabel()],

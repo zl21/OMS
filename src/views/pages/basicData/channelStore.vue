@@ -33,7 +33,7 @@
           v-show="labelDefaultValue == 'supplyStore'"
           class="supplyStore"
         >
-          <businessActionTable
+          <OmsTable
             :jordan-table-config="jordanTableConfig"
             @on-select="onSelect"
             @on-select-cancel="onSelect"

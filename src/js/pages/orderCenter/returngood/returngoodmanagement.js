@@ -1,7 +1,6 @@
 // 退换货单详情
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
 import businessDialog from 'burgeonComponents/businessDialog';
@@ -14,6 +13,7 @@ import commonUtils from 'burgeonConfig/config/commonUtils'
 // import OrderItem from './orderItem';
 
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
+import { OmsTable } from 'burgeonComponents'
 
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');
@@ -24,7 +24,7 @@ export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessDialog,
     OrderItem,
     businessLabel,

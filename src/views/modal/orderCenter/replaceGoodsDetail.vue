@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="i_body">
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tableConfig"
         @on-select="onSelect"
         @on-select-cancel="onSelectCancel"

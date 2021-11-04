@@ -1,4 +1,4 @@
-import businessForm from 'burgeonComponents/businessForm.vue';
+import { OmsForm } from 'burgeonComponents'
 import businessBtn from 'burgeonComponents/businessButton.vue';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 

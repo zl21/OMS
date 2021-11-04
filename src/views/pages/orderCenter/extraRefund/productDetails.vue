@@ -8,7 +8,7 @@
 -->
 <template>
   <div>
-    <businessActionTable 
+    <OmsTable 
     :jordan-table-config="tableConfig"
     @on-select="onSelect" 
     @on-select-cancel="onSelectCancel" 
@@ -17,7 +17,7 @@
     @on-page-change="pageChange" 
     @on-page-size-change="pageSizeChange" />
     <Modal v-model="addDetailsConfig.modal" width="900" title="新增明细" :mask="true" @on-ok="addDetailsOk">
-      <businessActionTable 
+      <OmsTable 
       :jordan-table-config="addDetailsConfig"  
       @on-select="addOnSelect" 
       @on-select-cancel="addOnSelectCancel" 
@@ -30,8 +30,7 @@
 </template>
 
 <script>
-import businessActionTable from 'burgeonComponents/businessActionTable';
-// import businessForm from 'burgeonComponents/businessForm';
+// import { OmsForm } from 'burgeonComponents';
 export default {
   data(){
     return {
@@ -177,7 +176,7 @@ export default {
     }
   },
   components: {
-    businessActionTable
+    OmsTable
   },
   computed: {
     isEdit () {

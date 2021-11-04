@@ -48,7 +48,7 @@
           :data="table.data"
           style="max-height: 300px; overflow: scroll"
         ></Table> -->
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="table"
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
@@ -64,12 +64,12 @@
 
 <script>
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from "burgeonComponents/businessActionTable";
+import { OmsTable } from 'burgeonComponents'
 
 
 export default {
   components: {
-    businessActionTable,
+    OmsTable,
     businessButton
   },
   props: {

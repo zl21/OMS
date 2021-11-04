@@ -1,5 +1,5 @@
 import businessButton from 'burgeonComponents/businessButton';
-import reActionTable from 'burgeonComponents/businessActionTable';
+import { OmsTable as reActionTable } from 'burgeonComponents'
 
 export default {
   name: 'ManualMarking',

@@ -1,4 +1,4 @@
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessBtn from 'burgeonComponents/businessButton';
 
 export default {

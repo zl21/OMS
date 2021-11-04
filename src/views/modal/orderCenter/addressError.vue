@@ -1,7 +1,7 @@
 <template>
   <!-- 地址异常处理 -->
   <div class="addressError customized-modal">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelect"

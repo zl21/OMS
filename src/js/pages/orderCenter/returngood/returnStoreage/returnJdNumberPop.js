@@ -1,14 +1,15 @@
+
 // import axios from 'axios';
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsForm } from 'burgeonComponents';
 // import { setTimeout } from 'timers';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
   },
   data() {
     return {

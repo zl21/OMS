@@ -1,7 +1,7 @@
 <template>
   <!-- 商品异常处理 -->
   <div class="productError customized-modal">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelect"

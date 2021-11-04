@@ -54,13 +54,13 @@
 <script>
 // 退换货单详情
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'searchOOID',
   components: {
     businessButton,
-    businessActionTable,
+    OmsTable,
   },
   model: {
     prop: 'value',

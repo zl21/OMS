@@ -1,6 +1,6 @@
 import service from '@/service/index'
 import businessButton from 'burgeonComponents/businessButton'
-import businessForm from 'burgeonComponents/businessForm'
+import { OmsForm } from 'burgeonComponents'
 import R3 from '@syman/burgeon-r3'
 import comMethods from 'burgeonConfig/config/commonUtils.js'
 export default {

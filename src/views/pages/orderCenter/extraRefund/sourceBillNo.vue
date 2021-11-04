@@ -55,19 +55,19 @@
 <script>
 // 退换货单详情
 import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
 import businessDialog from 'burgeonComponents/businessDialog';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'sourceBillNo',
   components: {
     businessButton,
-    businessActionTable,
+    OmsTable,
     businessDialog,
     businessLabel,
   },

@@ -1,5 +1,5 @@
 import businessButton from 'burgeonComponents/businessButton'
-import businessForm from 'burgeonComponents/businessForm'
+import { OmsForm } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
 import service from '@/service/index'
 

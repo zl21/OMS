@@ -1,5 +1,5 @@
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import subTable from 'burgeonComponents/subTable';
 import dateUtil from '@/assets/js/__utils__/date.js';

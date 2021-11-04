@@ -1,21 +1,21 @@
 <template>
   <div class="customized-modal" style="width: 800px">
-    <businessActionTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
+    <OmsTable :jordan-table-config="tableConfig" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" />
     <businessButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsForm } from 'burgeonComponents';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'addPlatformLogisticsCompany',
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
   },
   data() {
     return {

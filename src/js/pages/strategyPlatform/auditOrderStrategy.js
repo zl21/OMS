@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
  */
 import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import myInput from 'burgeonComponents/fkinput.vue';
 // import comUtils from '@/assets/js/__utils__/common.js';
 import subTable from 'burgeonComponents/subTable';

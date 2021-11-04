@@ -1,16 +1,21 @@
+
+
+
+
 import businessButton from 'burgeonComponents/businessButton.vue';
-import businessForm from 'burgeonComponents/businessForm.vue';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsForm } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 import businessDialog from 'burgeonComponents/businessDialog';
 import { setTimeout } from 'timers';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import loading from 'burgeonComponents/loading';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessDialog,
     loading
   },

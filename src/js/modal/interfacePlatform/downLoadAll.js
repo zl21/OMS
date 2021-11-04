@@ -1,4 +1,4 @@
-import businessForm from 'burgeonComponents/businessForm.vue';
+import { OmsForm } from 'burgeonComponents'
 import businessButton from 'burgeonComponents/businessButton.vue';
 import businessDialog from 'burgeonComponents/businessDialog.vue';
 

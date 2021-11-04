@@ -68,7 +68,7 @@
             />
           </div>
 
-          <businessActionTable
+          <OmsTable
             v-show="labelDefaultValue == 'logistics'"
             :jordan-table-config="logisticsTableConfig"
             @on-select="onSelect"
