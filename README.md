@@ -62,12 +62,12 @@
 | v1.0.14 | 修改 input 样式                                                                                                                        |
 | v1.0.15 | form 表单搜索收起状态下去掉固定高度添加最大高度，解决一行搜索条件留白过多问题                                                          |
 | v1.0.16 | LogTable.js 报错修复                                                                                                                   |
-| v1.0.17 | businessActionTable 组件新增功能,控制列表单击当前行当前行 checkbox 是否勾选 rowClickNoSelected:(不传参默认为勾选,传参为 true 为不勾选) |
+| v1.0.17 | OmsTable 组件新增功能,控制列表单击当前行当前行 checkbox 是否勾选 rowClickNoSelected:(不传参默认为勾选,传参为 true 为不勾选) |
 | v1.0.18 | agTable 翻页组件修改 size 属性                                                                                                         |
-| v1.0.19 | businessActionTable 单击表格行功能                                                                                                     |
-| v1.0.20 | businessActionTable 修改单元格高度                                                                                                     |
-| v1.0.21 | businessActionTable 修改布局                                                                                                           |
-| v1.0.22 | businessActionTable 修改布局 patch                                                                                                     |
+| v1.0.19 | OmsTable 单击表格行功能                                                                                                     |
+| v1.0.20 | OmsTable 修改单元格高度                                                                                                     |
+| v1.0.21 | OmsTable 修改布局                                                                                                           |
+| v1.0.22 | OmsTable 修改布局 patch                                                                                                     |
 | v1.0.23 | 表格组件新增行颜色                                                                                                                     |
 | v1.0.24 | 修改 agTable 序号宽度                                                                                                                  |
 | v1.0.25 | 优化 agTable 的重置所有列信息功能                                                                                                      |
@@ -82,7 +82,7 @@
 | v1.0.34 | easyMatrix 组件模糊搜索点击选中值后赋值给 value                                                                                        |
 | v1.0.35 | 增加待审核水印图片                                                                                                                     |
 | v1.0.36 | 弹窗组件增加动态 base 路径传参 basePathName                                                                                            |
-| v1.0.37 | businessActionTable 修改样式（添加最后一行下边线）                                                                                     |
+| v1.0.37 | OmsTable 修改样式（添加最后一行下边线）                                                                                     |
 | v1.0.38 | 添加促销组件                                                                                                                           |
 | v1.0.39 | agGrid 依赖文件迁移至私仓                                                                                                              |
 | v1.0.40 | agGrid 路径错误补丁                                                                                                                    |
@@ -224,13 +224,13 @@
 | v1.1.80 | businessForm-ckeckbox-onlyBox取值修复 |
 | v1.1.81 | 配置优化 |
 | v1.1.82 | 调整switchList组件样式｜vueAb样式调整|
-| v1.1.83 | businessActionTable form+button样式修改 |
+| v1.1.83 | OmsTable form+button样式修改 |
 | v1.1.84 | 表格优化 |
-| v1.1.85 | businessActionTable form+button优化 |
-| v1.1.86 | businessActionTable form+button优化1 |
-| v1.1.87 | businessActionTable form+button优化2 |
+| v1.1.85 | OmsTable form+button优化 |
+| v1.1.86 | OmsTable form+button优化1 |
+| v1.1.87 | OmsTable form+button优化2 |
 | v1.1.88 | fkinputPlus动态接口网关(兼容SKX) |
-| v1.1.89 | businessActionTable 回滚 |
+| v1.1.89 | OmsTable 回滚 |
 | v1.1.90 | 默认显示表头 |
 | v1.1.91 | businessButton 样式修改 |
 | v1.1.93 | fkinputPlus模糊搜索修复 |
@@ -274,7 +274,7 @@
 | v1.2.33 | easyMatrix-接口修复 |
 | v1.2.36 | fkdialog 支持网关 |
 | v1.2.37 | fkdialog 接口异常关闭loading |
-| v1.2.38 | businessActionTable 表格单选 |
+| v1.2.38 | OmsTable 表格单选 |
 | v1.2.39 | 导入组件-弹窗样式调整 |
 | v1.2.40 | fkdialog 样式修改 |
 | v1.2.41 | form 栅格修改|
@@ -295,10 +295,10 @@
 | v1.2.57 | 还原businessForm兼容处理 |
 | v1.2.58 | businessForm兼容处理 |
 | v1.2.59 | fktable-模糊搜索框添加focus焦点 |
-| v1.2.60 | businessActionTable-添加是否单选 |引用回滚修复 |
+| v1.2.60 | OmsTable-添加是否单选 |引用回滚修复 |
 | v1.2.62 | importTable兼容处理 |
 | v1.2.63 | businessActionTable修复 |
-| v1.2.64 | businessActionTable-兼容modal样式 |
+| v1.2.64 | OmsTable-兼容modal样式 |
 | v1.2.65 | fkinput 支持queryList/fuzzyquerybyak接口自定义入参 for skc |
 | v1.2.66 | fktable 支持queryList/fuzzyquerybyak接口自定义入参 for skc |
 | v1.2.67 | importTable-标准单对象导入拓展 |

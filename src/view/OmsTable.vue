@@ -114,10 +114,10 @@
 </template>
 
 <script>
-import businessActionTable from 'burgeonComponents/js/businessActionTable';
-export default businessActionTable;
+import OmsTable from 'burgeonComponents/js/OmsTable';
+export default OmsTable;
 </script>
 
 <style lang="less">
-@import 'burgeonComponents/css/businessActionTable.less';
+@import 'burgeonComponents/css/OmsTable.less';
 </style>

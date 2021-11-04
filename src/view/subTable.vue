@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import businessActionTable from "./businessActionTable.vue";
+import OmsTable from "./OmsTable.vue";
 // import config from "@/js/pages/orderCenter/orderManageDetail/details/config.js";
 export default {
   data() {
@@ -36,7 +36,7 @@ export default {
     };
   },
   components: {
-    businessActionTable,
+    OmsTable,
   },
   props: {
     /**
