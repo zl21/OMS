@@ -1,4 +1,3 @@
-// import commonUtils from '@burgeon/project-logic/config/config/commonUtils.js';
 import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 import i18n from "@burgeon/internationalization/i18n";
 window.$i18n = i18n
