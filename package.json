@@ -5,7 +5,7 @@
   "main": "burgeon.publish/businessComponents.min.js",
   "files": [
     "burgeon.publish"
-],
+  ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js"
