@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/view/businessButton';
+import OmsButton from 'burgeonComponents/view/OmsButton';
 import loading from 'burgeonComponents/view/loading';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
@@ -6,7 +6,7 @@ import loading from 'burgeonComponents/view/loading';
 export default {
   name: 'importTable',
   components: {
-    businessButton,
+    OmsButton,
     loading,
   },
   props: {

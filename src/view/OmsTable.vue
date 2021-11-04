@@ -18,7 +18,7 @@
       </div>
       <!-- businessButtons -->
       <div class="businessButton" v-if="businessButtonConfig !== undefined">
-        <businessButton :btnConfig="businessButtonConfig"></businessButton>
+        <OmsButton :btnConfig="businessButtonConfig"></OmsButton>
       </div>
     </div>
     <!-- button -->
@@ -33,7 +33,7 @@
       <Button class="import" v-show="isShowImportBtn" @click="tableImport">{{vmI18n.t('btn.import')}}</Button>
       <!-- 导出 -->
       <Button class="export" v-show="isShowExportBtn" @click="tableExport">{{vmI18n.t('btn.export')}}</Button>
-      <!-- <businessButton :btnConfig="detailButtonsConfig"></businessButton> -->
+      <!-- <OmsButton :btnConfig="detailButtonsConfig"></OmsButton> -->
     </div>
     <keep-alive>
       <component v-bind:is="currentView" :ref="currentView" :componentData="componentData"> </component>

@@ -115,11 +115,11 @@
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/js/businessButton.js';
-export default businessButton;
+import OmsButton from 'burgeonComponents/js/OmsButton.js';
+export default OmsButton;
 </script>
 <style lang='less' scoped>
-@import "burgeonComponents/css/businessButton.less";
+@import "burgeonComponents/css/OmsButton.less";
 </style>
 
 

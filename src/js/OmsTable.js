@@ -1,11 +1,11 @@
-import businessButton from 'burgeonComponents/view/businessButton'
+import OmsButton from 'burgeonComponents/view/OmsButton'
 import businessForm from 'burgeonComponents/view/businessForm'
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
   },
   props: {

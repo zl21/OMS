@@ -6,7 +6,7 @@
     |-- agGridTable.vue // 大量数据渲染表格agGrid组件, 基于js ag-grid
     |-- OmsTable.vue // 表格 + 表单 + 按钮组合组件
     |-- OmsAgTable.vue // 大量数据渲染表格组件，基于框架业务组件库CommonTableByAgGrid
-    |-- businessButton.vue // 按钮集组件
+    |-- OmsButton.vue // 按钮集组件
     |-- businessDialog.vue // 弹窗
     |-- businessForm.vue // 表单组件
     |-- businessLabel.vue // 选项卡切换组件
@@ -42,7 +42,7 @@
     |-- css
     |   |-- agGridTable.less
     |   |-- OmsTable.less
-    |   |-- businessButton.less
+    |   |-- OmsButton.less
     |   |-- businessDialog.less
     |   |-- businessForm.less
     |   |-- businessLabel.less
@@ -61,7 +61,7 @@
     |   |-- agGridTable.js
     |   |-- OmsTable.js
     |   |-- OmsAgTable.js
-    |   |-- businessButton.js
+    |   |-- OmsButton.js
     |   |-- businessDialog.js
     |   |-- businessForm.js
     |   |-- businessLabel.js

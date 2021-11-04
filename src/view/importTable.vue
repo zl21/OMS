@@ -54,7 +54,7 @@
         <p>{{ errorMessage }}</p>
       </div>
     </div>
-    <businessButton class="modal-footer" :btn-config="btnConfig" style="margin-top: 10px" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" style="margin-top: 10px" />
   </div>
 </template>
 <script>

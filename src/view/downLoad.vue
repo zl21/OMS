@@ -10,7 +10,7 @@
         </div>
       </template>
     </businessForm>
-    <businessButton class="modal-footer" :btn-config="downLoadBtnConfig" />
+    <OmsButton class="modal-footer" :btn-config="downLoadBtnConfig" />
     <!-- 确认下载弹框 订单下载-->
     <Modal
       v-model="downLoadModal"
@@ -44,7 +44,7 @@
 
 <script>
 import businessForm from "burgeonComponents/view/businessForm";
-import businessButton from "burgeonComponents/view/businessButton";
+import OmsButton from "burgeonComponents/view/OmsButton";
 import businessDialog from "burgeonComponents/view/businessDialog";
 // import i18n from "@burgeon/internationalization/i18n";
 
@@ -55,7 +55,7 @@ const downLoad = {
   components: {
     businessDialog,
     businessForm,
-    businessButton,
+    OmsButton,
   },
   props: {
     objList: {
