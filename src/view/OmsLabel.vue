@@ -4,7 +4,7 @@
  * @LastEditTime: 2021-11-02 17:57:15
  * @LastEditors: your name
  * @Description: In User Settings Edit
- * @FilePath: /burgeon-business-components/src/view/businessLabel.vue
+ * @FilePath: /burgeon-business-components/src/view/OmsLabel.vue
 -->
 <template>
   <div class="jordan-label-box">
@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import businessLabel from 'burgeonComponents/js/businessLabel.js';
-export default businessLabel;
+import OmsLabel from 'burgeonComponents/js/OmsLabel.js';
+export default OmsLabel;
 </script>
 
 <style lang="less" scoped>
-@import "burgeonComponents/css/businessLabel.less";
+@import "burgeonComponents/css/OmsLabel.less";
 </style>

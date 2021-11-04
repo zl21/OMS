@@ -9,7 +9,7 @@
     |-- OmsButton.vue // 按钮集组件
     |-- OmsDialog.vue // 弹窗
     |-- OmsForm.vue // 表单组件
-    |-- businessLabel.vue // 选项卡切换组件
+    |-- OmsLabel.vue // 选项卡切换组件
     |-- businessStatusFlag.vue // 水印状态组件
     |-- businessTableInput.vue // 表格中使用的input
     |-- buttonFkDialog.vue // 通过按钮触发fkdialog弹出
@@ -45,7 +45,7 @@
     |   |-- OmsButton.less
     |   |-- OmsDialog.less
     |   |-- OmsForm.less
-    |   |-- businessLabel.less
+    |   |-- OmsLabel.less
     |   |-- businessStatusFlag.less
     |   |-- businessTableInput.less
     |   |-- buttonFkDialog.less
@@ -64,7 +64,7 @@
     |   |-- OmsButton.js
     |   |-- OmsDialog.js
     |   |-- OmsForm.js
-    |   |-- businessLabel.js
+    |   |-- OmsLabel.js
     |   |-- businessStatusFlag.js
     |   |-- businessTableInput.js
     |   |-- buttonFkDialog.js
