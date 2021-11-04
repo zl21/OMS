@@ -2,7 +2,7 @@
 // window.$i18n = i18n
 
 export default {
-  name: "businessDialog",
+  name: "OmsDialog",
   props: {
     // 是否去掉页面缓存
     keepAlive: {

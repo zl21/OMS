@@ -30,7 +30,7 @@
       </p>
     </Modal>
 
-    <businessDialog
+    <OmsDialog
       ref="dialog"
       :title="dialogConfig.title"
       :component-data="dialogConfig.componentData"
@@ -45,7 +45,7 @@
 <script>
 import businessForm from "burgeonComponents/view/businessForm";
 import OmsButton from "burgeonComponents/view/OmsButton";
-import businessDialog from "burgeonComponents/view/businessDialog";
+import OmsDialog from "burgeonComponents/view/OmsDialog";
 // import i18n from "@burgeon/internationalization/i18n";
 
 // import CustomConfig from "@/config/customized.config.js";
@@ -53,7 +53,7 @@ import businessDialog from "burgeonComponents/view/businessDialog";
 
 const downLoad = {
   components: {
-    businessDialog,
+    OmsDialog,
     businessForm,
     OmsButton,
   },
