@@ -1,8 +1,7 @@
 import detailTable from 'allpages/promotionCenter/details/table.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
 import tabList from 'allpages/promotionCenter/details/tabList.vue';
-import ButtonFkDialog from 'burgeonComponents/buttonFkDialog';
-import { OmsDialog } from 'burgeonComponents'
+import { OmsDialog, ButtonFkDialog } from 'burgeonComponents'
 
 export default {
   name: 'detailTabs',
@@ -58,7 +57,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       // currentView:'',  //弹框
       // popDialog:'',
       dialogModal: {}, // 弹框传参
@@ -157,5 +156,5 @@ export default {
       this.show_dialog = false;
     }
   },
-  mounted() {}
+  mounted() { }
 };

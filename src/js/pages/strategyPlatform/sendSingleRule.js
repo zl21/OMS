@@ -1,24 +1,19 @@
 // import axios from 'axios';
-import { setTimeout } from 'timers';
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import { OmsDialog } from 'burgeonComponents'
+import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsDialog,
     OmsTable,
     loading
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       name: '',
       single: false,
       treeData: [],

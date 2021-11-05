@@ -1,12 +1,8 @@
 
 
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, subTable, OmsTable, OmsLabel } from 'burgeonComponents'
 import dateUtil from '@/assets/js/__utils__/date.js';
-import subTable from 'burgeonComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'holdStrategyAddOrEdit',
@@ -14,8 +10,8 @@ export default {
     subTable,
     OmsTable,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
   },
   mixins: [new modifycurrentLabel()],
   data() {
@@ -248,7 +244,7 @@ export default {
               console.log(val);
             },
             checkChange1: val => {
-               this.checkShow()
+              this.checkShow()
               // if (val) {
               //    this.formConfig5.formData[0].class = "radio-label"
               //    this.formConfig3.formData[0].class = ""
@@ -558,7 +554,7 @@ export default {
             radioChange: e => {
               this.masterModifyData('HOLD_ORDER_REASON', 'formConfig3')
             },
-            checkboxLabel:"其他"
+            checkboxLabel: "其他"
           },
           {
             style: 'checkbox',
@@ -660,7 +656,7 @@ export default {
         ],
         formValue: {
           HOLD_ORDER_REASON: '10', //hold单原因
-          HOLD_ORDER_IS:false,
+          HOLD_ORDER_IS: false,
           IS_AUTO_RELEASE: false, //是否自动释放
           RELEASE_TIME_TYPE: null,// 释放时点 1-指定时间点 2-固定时长
           RELEASE_TIME: null, //释放指定时间
@@ -737,19 +733,19 @@ export default {
     $omsUtils.getPermissions(this, 'btnConfig', { serviceId: 'r3-oc-oms', table: this.$route.params.customizedModuleName, type: 'OBJ' }, true);
   },
   methods: {
-    checkShow(){
+    checkShow() {
 
-     if (this.formConfig2.formValue.ORDER_FLAG) {
-       this.formConfig3.formData[0].label = "Hold单原因"
-       this.formConfig3.formData[0].class = ""
-     }
-     if (this.formConfig2.formValue.preSale && !this.formConfig2.formValue.ORDER_FLAG) {
-      this.formConfig4.formData[0].label = "Hold单原因"
-      this.formConfig4.formData[0].class = ""
-     }
-     if (this.formConfig2.formValue.preSale && this.formConfig2.formValue.ORDER_FLAG) {
-      this.formConfig4.formData[0].class = "radio-label"
-     }
+      if (this.formConfig2.formValue.ORDER_FLAG) {
+        this.formConfig3.formData[0].label = "Hold单原因"
+        this.formConfig3.formData[0].class = ""
+      }
+      if (this.formConfig2.formValue.preSale && !this.formConfig2.formValue.ORDER_FLAG) {
+        this.formConfig4.formData[0].label = "Hold单原因"
+        this.formConfig4.formData[0].class = ""
+      }
+      if (this.formConfig2.formValue.preSale && this.formConfig2.formValue.ORDER_FLAG) {
+        this.formConfig4.formData[0].class = "radio-label"
+      }
 
 
     },
@@ -823,12 +819,12 @@ export default {
               break;
           }
         })
-        data.ST_C_HOLD_ORDER_STRATEGY_ITEM.forEach(item=>{
+        data.ST_C_HOLD_ORDER_STRATEGY_ITEM.forEach(item => {
           if (item.HOLD_ORDER_REASON == "1") {
             for (const k in this.formConfig3.formValue) {
               this.formConfig3.formValue[k] = item[k]
             }
-          }else if (item.HOLD_ORDER_REASON == "2") { //
+          } else if (item.HOLD_ORDER_REASON == "2") { //
             for (const k in this.formConfig4.formValue) {
               this.formConfig4.formValue[k] = item[k]
             }
@@ -841,7 +837,7 @@ export default {
             }
 
 
-          }else{
+          } else {
             for (const k in this.formConfig5.formValue) {
               this.formConfig5.formValue[k] = item[k]
             }
@@ -967,14 +963,14 @@ export default {
       }
       let ST_C_HOLD_ORDER_STRATEGY_ITEM = []
       if (this.formConfig2.formValue.ORDER_FLAG && !this.formConfig2.formData[2].disabled) {
-       let obj = {
+        let obj = {
           HOLD_ORDER_REASON: this.formConfig3.formValue.HOLD_ORDER_REASON,
           IS_AUTO_RELEASE: this.formConfig3.formValue.IS_AUTO_RELEASE,
           RELEASE_TIME_TYPE: this.formConfig3.formValue.RELEASE_TIME_TYPE,
           RELEASE_DAY_TYPE: this.formConfig3.formValue.RELEASE_DAY_TYPE,
           RELEASE_TIME: this.formConfig3.formValue.RELEASE_TIME,
           FIXED_DURATION: this.formConfig3.formValue.FIXED_DURATION,
-          TIME_UNIT: this.formConfig3.formValue. TIME_UNIT,
+          TIME_UNIT: this.formConfig3.formValue.TIME_UNIT,
         }
         ST_C_HOLD_ORDER_STRATEGY_ITEM.push(obj)
       }
