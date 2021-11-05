@@ -1,5 +1,4 @@
 import { OmsButton, OmsForm, OmsTable, OmsDialog } from 'burgeonComponents'
-import { setTimeout } from 'timers';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 
 export default {

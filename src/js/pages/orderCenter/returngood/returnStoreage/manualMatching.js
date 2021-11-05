@@ -1,25 +1,21 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import { OmsDialog } from 'burgeonComponents'
+import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel } from 'burgeonComponents'
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
     OmsDialog,
     OrderItem,
-    businessLabel,
+    OmsLabel,
     loading
   },
   mixins: [buttonPermissionsMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       returnNumber: {
         refFuns: 'confirmFun',
         confirmTitle: '退单编号查询',
@@ -385,7 +381,7 @@ export default {
                       _this.index = params.index;
                       _this.returnNumber.componentData = {
                         // ids: params.row.ID,
-                        ids: _this.returnSelectData.map(item=> item.ID),
+                        ids: _this.returnSelectData.map(item => item.ID),
                         type: _this.isManual
                       };
                       _this.$children

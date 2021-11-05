@@ -1,21 +1,18 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import subTable from 'burgeonComponents/subTable';
+import { OmsButton, OmsForm, OmsLabel, subTable } from 'burgeonComponents'
 import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     subTable
   },
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       collapse: ['panel_baseInfo', 'panel_conds', 'panel_action'],
       loading: false,
       isEnable: false, // 是否启用
@@ -32,91 +29,91 @@ export default {
         btnsite: 'right', // 按钮对齐方式
         typeAll: 'default',
         buttons: [{
-            webname: 'lookup_save', // 保存
-            text: $i18n.t('btn.save'), // 保存
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              const self = this;
-              self.save();
-            },
+          webname: 'lookup_save', // 保存
+          text: $i18n.t('btn.save'), // 保存
+          size: '', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            const self = this;
+            self.save();
           },
-          {
-            webname: 'lookup_return', // 返回
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              this.back()
-            },
-          }
+        },
+        {
+          webname: 'lookup_return', // 返回
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            this.back()
+          },
+        }
         ]
       },
       formConfig1: {
         formData: [{
-            style: '',
-            label: $i18n.t('form_label.bc'), // 策略ID
-            colname: 'PLAN_ID',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('PLAN_ID', 'master', 'formConfig1');
+          style: '',
+          label: $i18n.t('form_label.bc'), // 策略ID
+          colname: 'PLAN_ID',
+          width: '6',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('PLAN_ID', 'master', 'formConfig1');
+          }
+        },
+        {
+          style: 'input',
+          label: $i18n.t('form_label.bd'), // 策略名称
+          colname: 'PLAN_NAME',
+          width: '6',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('PLAN_NAME', 'master', 'formConfig1');
+          }
+        },
+        {
+          style: 'date', // 输入框类型
+          label: $i18n.t('form_label.be'), // 生效开始时间 输入框前文字
+          colname: 'EFFECTIVE_BEGIN_TIME',
+          type: 'datetime',
+          width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+          format: 'yyyy-MM-dd HH:mm:ss',
+          disabled: false,
+          options: {
+            disabledDate(date) {
+              return date && date.valueOf() < Date.now() - 86400000;
             }
           },
-          {
-            style: 'input',
-            label: $i18n.t('form_label.bd'), // 策略名称
-            colname: 'PLAN_NAME',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('PLAN_NAME', 'master', 'formConfig1');
+          onChange: () => {
+            this.masterModifyData('EFFECTIVE_BEGIN_TIME', 'master', 'formConfig1');
+          }
+        },
+        {
+          style: 'date', // 输入框类型
+          label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
+          colname: 'EFFECTIVE_END_TIME',
+          type: 'datetime',
+          width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+          format: 'yyyy-MM-dd HH:mm:ss',
+          disabled: false,
+          options: {
+            disabledDate(date) {
+              return date && date.valueOf() < Date.now() - 86400000;
             }
           },
-          {
-            style: 'date', // 输入框类型
-            label: $i18n.t('form_label.be'), // 生效开始时间 输入框前文字
-            colname: 'EFFECTIVE_BEGIN_TIME',
-            type: 'datetime',
-            width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd HH:mm:ss',
-            disabled: false,
-            options: {
-              disabledDate (date) {
-                return date && date.valueOf() < Date.now() - 86400000;
-              }
-            },
-            onChange: () => {
-              this.masterModifyData('EFFECTIVE_BEGIN_TIME', 'master', 'formConfig1');
-            }
-          },
-          {
-            style: 'date', // 输入框类型
-            label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
-            colname: 'EFFECTIVE_END_TIME',
-            type: 'datetime',
-            width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'yyyy-MM-dd HH:mm:ss',
-            disabled: false,
-            options: {
-              disabledDate (date) {
-                return date && date.valueOf() < Date.now() - 86400000;
-              }
-            },
-            onChange: () => {
-              this.masterModifyData('EFFECTIVE_END_TIME', 'master', 'formConfig1');
-            }
-          },
-          {
-            style: '',
-            label: $i18n.t('form_label.bg'), // 启用状态
-            colname: 'ISACTIVE',
-            width: '6',
-            disabled: true,
-            // inputChange: () => {
-            //   this.masterModifyData('ISACTIVE', 'master', 'formConfig1');
-            //   this.isEnable = this.formConfig1.formValue.ISACTIVE;
-            //   this.setEnable();
-            // }
-          },
+          onChange: () => {
+            this.masterModifyData('EFFECTIVE_END_TIME', 'master', 'formConfig1');
+          }
+        },
+        {
+          style: '',
+          label: $i18n.t('form_label.bg'), // 启用状态
+          colname: 'ISACTIVE',
+          width: '6',
+          disabled: true,
+          // inputChange: () => {
+          //   this.masterModifyData('ISACTIVE', 'master', 'formConfig1');
+          //   this.isEnable = this.formConfig1.formValue.ISACTIVE;
+          //   this.setEnable();
+          // }
+        },
         ],
         formValue: {
           PLAN_ID: '', // 策略ID
@@ -240,7 +237,7 @@ export default {
               RULE_CONTEXT: ''
             }, // 识别规则
           ] // 直播商品识别
-        }, 
+        },
         ruleValidate: {
           CP_C_SHOP_ID: [{
             required: true,
@@ -344,7 +341,7 @@ export default {
       pageShow: true
     }
   },
-  created() {},
+  created() { },
   methods: {
     // 返回
     back() {
@@ -454,7 +451,7 @@ export default {
       })
       this.queryForm(this.formConfig1, 'PLAN_ID').style = 'input'
       this.queryForm(this.formConfig1, 'ISACTIVE').style = 'input'
-  
+
       const { CP_C_SHOP_ID, CP_C_SHOP_ENAME, ISACTIVE, BEGIN_TIME, END_TIME } = data
       const obj = this.queryForm(this.formConfig2, 'CP_C_SHOP_ID')
       obj.itemdata.pid = CP_C_SHOP_ID
@@ -469,7 +466,7 @@ export default {
     async queryLiveParsing() {
       this.loading = true
       this.isWatchChange = false
-      const { data: { code, data, message }} = await this.service.strategyPlatform.queryLiveParsing({ id: this.ID })
+      const { data: { code, data, message } } = await this.service.strategyPlatform.queryLiveParsing({ id: this.ID })
       this.loading = false
       if (code == 0) {
         if (data) {
@@ -509,7 +506,7 @@ export default {
         },
       }
       const mes = $omsUtils.validatorNotEmpty(formConfig, valueArr, drpArr);
-  
+
       const [startTime] = formConfig.formValue.TIME_RANGE
       let msg
       if (mes) {
@@ -517,28 +514,28 @@ export default {
         msg = !startTime && !msgArr.includes($i18n.t('form_label.timeType')) ? [...msgArr, $i18n.t('form_label.timeType')] : msgArr
       }
       msg = !mes ? startTime ? '' : [$i18n.t('form_label.timeType')] : msg
-      
+
       // 直播商品识别校验
       const hasNoValid = this.formConfig2.formValue.RULES
         .some(i => !this.isValid(i, ['RULE_TYPE', 'RULE_CONTEXT']))
 
       if (msg || hasNoValid) {
-        let tip = msg && hasNoValid 
-          ? `${msg.join('，')}，${$i18n.t('form_label.cd')} 不能为空!` 
+        let tip = msg && hasNoValid
+          ? `${msg.join('，')}，${$i18n.t('form_label.cd')} 不能为空!`
           : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `${$i18n.t('form_label.cd')} 不能为空!`
         self.$Message.warning(tip);
         return false;
       }
-      
+
       // 校验识别规则是否重复
       let allRow = this.formConfig2.formValue.RULES
-      .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
+        .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
       let uniqRow = Array.from(new Set(allRow))
       if (allRow.length != uniqRow.length) {
         self.$Message.warning($i18n.t('modalTips.hp')) // 请勿重复添加直播商品识别规则!
         return
       }
-      
+
       /**
        * 编辑页面，如果直播商品识别未做操作就不传，否则就传所有数据, 其他字段，操作了就传
        * 
@@ -560,7 +557,7 @@ export default {
       }
       delete params.rules
       this.loading = true
-      const { data: { code, data, message }} = await this.service.strategyPlatform.liveParsingSave(params)
+      const { data: { code, data, message } } = await this.service.strategyPlatform.liveParsingSave(params)
       this.loading = false
       if (code == 0) {
         this.modify = {

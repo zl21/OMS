@@ -1,34 +1,27 @@
-
-
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import { OmsDialog } from 'burgeonComponents'
+import { OmsButton, OmsForm, OmsDialog, OmsAgTable as aTable, OmsTable } from 'burgeonComponents'
 import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-import aTable from 'burgeonComponents/businessAgTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
-import { OmsTable } from 'burgeonComponents'
 
 const getCurrentTime = (() => {
-  return BurgeonDate.Format(new Date(),'yyyy-MM-dd 23:59:59');
+  return BurgeonDate.Format(new Date(), 'yyyy-MM-dd 23:59:59');
 })();
 const addSevenDay = (() => {
   const t = BurgeonDate.addDays(new Date(), -7);
-  return BurgeonDate.Format(t,'yyyy-MM-dd 00:00:00');
+  return BurgeonDate.Format(t, 'yyyy-MM-dd 00:00:00');
 })();
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
     OmsDialog,
     aTable,
-    loading
   },
   mixins: [buttonPermissionsMixin, isFavoriteMixin],
   props: {},
@@ -41,7 +34,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       isFavorite: false,
       // 公共弹框
       publicBouncedConfig: {},
@@ -70,7 +63,7 @@ export default {
         flodClickMsg: 'a',
         formData: [],
         formValue: {},
-        flodClick: () => {}
+        flodClick: () => { }
       },
       agTableConfig: {
         agLoading: false,
@@ -166,7 +159,7 @@ export default {
                 inputenter: () => {
                   _this.getList();
                 }, // 表单回车事件
-                iconclick: () => {}, // 点击icon图标事件
+                iconclick: () => { }, // 点击icon图标事件
                 clearable: true
               };
               // item.tabth.name === '创建时间'
@@ -223,7 +216,7 @@ export default {
                 inputenter: () => {
                   _this.getList();
                 }, // 表单回车事件
-                iconclick: () => {} // 点击icon图标事件
+                iconclick: () => { } // 点击icon图标事件
               };
               _this.formConfig.formValue[item.tabth.colname] = '';
               break;
@@ -241,7 +234,7 @@ export default {
                 inputenter: () => {
                   _this.getList();
                 }, // 表单回车事件
-                iconclick: () => {} // 点击icon图标事件
+                iconclick: () => { } // 点击icon图标事件
               };
               _this.formConfig.formValue[item.tabth.colname] = '';
               break;
@@ -253,11 +246,11 @@ export default {
                 clearable: true, // 是否显示下来清空按钮
                 value: item.tabth.colname, // 输入框的值
                 multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                selectChange: () => {}, // 选中事件，默认返回选中的值
+                selectChange: () => { }, // 选中事件，默认返回选中的值
                 clearSelect: e => {
-                  let funArr=['RETURN_STATUS','IS_ADD','IS_TOAG','IS_TOWMS','BILL_TYPE','IS_EXAMINE','IS_TODRP','IS_TRANSFER'];
-                  if(funArr.includes(e)){
-                    _this.formConfig.formValue[e]='';
+                  let funArr = ['RETURN_STATUS', 'IS_ADD', 'IS_TOAG', 'IS_TOWMS', 'BILL_TYPE', 'IS_EXAMINE', 'IS_TODRP', 'IS_TRANSFER'];
+                  if (funArr.includes(e)) {
+                    _this.formConfig.formValue[e] = '';
                   }
                 }, // 点击清空按钮回调
                 options: commonUtils.converSelect(item.tabth.combobox)
@@ -332,10 +325,10 @@ export default {
       if (CREATETIME && CREATETIME !== []) {
         console.log(CREATETIME[0]);
         if (CREATETIME[0] !== '') {
-          params.beginDate = CREATETIME[0] ? BurgeonDate.Format(CREATETIME[0],'yyyy-MM-dd hh:mm:ss') : '';
+          params.beginDate = CREATETIME[0] ? BurgeonDate.Format(CREATETIME[0], 'yyyy-MM-dd hh:mm:ss') : '';
         }
         if (CREATETIME[1] !== '') {
-          params.endDate = CREATETIME[1] ? BurgeonDate.Format(CREATETIME[1],'yyyy-MM-dd hh:mm:ss')  : '';
+          params.endDate = CREATETIME[1] ? BurgeonDate.Format(CREATETIME[1], 'yyyy-MM-dd hh:mm:ss') : '';
         }
       }
       return params;
@@ -386,7 +379,7 @@ export default {
     },
     exportClick() {
       const self = this;
-      if(!self.vueAgTable){
+      if (!self.vueAgTable) {
         self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
       }
       console.log(self.selection);
