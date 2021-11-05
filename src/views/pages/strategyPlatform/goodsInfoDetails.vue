@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="goodsTableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -12,12 +12,12 @@
   </div>
 </template>
 <script>
-import businessActionTable from "burgeonComponents/businessActionTable";
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: "retunGoods",
   components: {
-    businessActionTable,
+    OmsTable,
   },
   props: {
     mainData: {},

@@ -32,7 +32,6 @@
     <OmsTable
       :jordan-table-config="tableConfig"
     />
-    <!-- <loading :loading="loading" /> -->
   </div>
 </template>
 <script>

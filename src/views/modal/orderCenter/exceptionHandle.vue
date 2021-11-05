@@ -1,6 +1,6 @@
 <template>
   <!-- 异常处理 -->
-  <div class="exceptionHandle customized-modal">
+  <div class="exceptionHandle customized-modal" v-loading="loading">
     <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
@@ -11,7 +11,6 @@
       @on-page-size-change="pageSizeChange"
     />
     <OmsButton class="modal-footer" :btn-config="btnConfig" />
-    <loading :loading="loading" />
   </div>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
-  <div class="logisticsArea public-main custom-main">
-     <loading :loading="loading" />
+  <div class="logisticsArea public-main custom-main" v-loading="loading">
     <div class="custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
@@ -33,7 +32,7 @@
               <Tree id="tree" :data="treeData1" :disabled="true" :query="query" show-checkbox @on-select-change="selectChange" />
             </div>
           </div>
-          <div class="tableRight">
+          <div class="tableRight" v-loading="tableLoading">
             <div class="setTree">
               <div class="retrieveBox">
                 <!-- <span class="retrieveTitle">检索</span> -->
@@ -111,7 +110,6 @@
               </div>
             </div>
             <!-- 弹框 -->
-            <loading :loading="tableLoading" />
           </div>
         </div>
       </div>

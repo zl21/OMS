@@ -48,7 +48,6 @@
         @on-column-moved="colMoved"
         @on-sort-change="colSortChange"
       />
-      <!-- <loading :loading="loading" /> -->
     </div>
     <Modal
       v-model="modal"

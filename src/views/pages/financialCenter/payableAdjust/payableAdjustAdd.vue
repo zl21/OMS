@@ -1,6 +1,5 @@
 <template>
-  <div class="financialManageCenter public-main custom-main">
-    <loading :loading="loading" />
+  <div class="financialManageCenter public-main custom-main" v-loading="loading">
     <div class="buttons custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>

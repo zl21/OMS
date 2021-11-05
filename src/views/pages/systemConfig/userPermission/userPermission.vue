@@ -20,8 +20,7 @@
         />
       </div>
     </div>
-    <div class="middleware">
-      <loading :loading="loading" />
+    <div class="middleware" v-loading="loading">
       <div class="title_sec">
         <input
           v-model="middleSearch"
@@ -87,8 +86,7 @@
           :name="list.url"
         />
       </el-tabs>
-      <div class="rightware_table_centen">
-        <loading :loading="loading" />
+      <div class="rightware_table_centen" v-loading="loading">
         <div class="rightware_table_head">
           <table>
             <thead>

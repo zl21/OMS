@@ -1,6 +1,5 @@
 <template>
-  <div class="scanIn">
-    <loading :loading="loading" />
+  <div class="scanIn" v-loading="loading">
     <!-- 按钮 -->
     <div class="scan_button">
       <OmsButton :btn-config="btnConfig" />

@@ -8,8 +8,7 @@
 -->
 <template>
   <!-- 订单管理/订单详情 - 批量Hold单/Hold单 -->
-  <div class="hold-dialog customized-modal">
-    <loading :loading="loading" />
+  <div class="hold-dialog customized-modal" v-loading="loading">
     <div class="hold-form">
       <re-form :form-config="formConfig">
         <template #formCompile="{ rowData }">

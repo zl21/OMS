@@ -7,8 +7,11 @@
  * @FilePath: /project-logic/views/pages/commodityCenter/commodityCusPropertiesAddOrEdit.vue
 -->
 <template>
-  <div class="commodityCusPropertiesAddOrEdit customized-detail" :id="this.customizedModuleName">
-    <loading :loading="loading" />
+  <div
+    class="commodityCusPropertiesAddOrEdit customized-detail"
+    :id="this.customizedModuleName"
+    v-loading="loading"
+  >
     <div class="customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
@@ -24,7 +27,12 @@
       </Collapse>
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <OmsLabel v-show="showSubtablePart" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
+        <OmsLabel
+          v-show="showSubtablePart"
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+          @labelClick="labelClick"
+        />
         <!-- 子表Part -->
         <div class="subtablePart">
           <OmsTable
@@ -37,7 +45,10 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <orderItem v-show="showSubtablePart && labelDefaultValue !== 'PROPERTYVALUES'" :component-data="subTableConfig"></orderItem>
+          <orderItem
+            v-show="showSubtablePart && labelDefaultValue !== 'PROPERTYVALUES'"
+            :component-data="subTableConfig"
+          ></orderItem>
         </div>
       </div>
     </div>
@@ -50,7 +61,7 @@ export default commodityCusPropertiesAddOrEdit;
 </script>
 
 <style lang="less" scoped>
-@import '~burgeonComponents/burgeon.publish/common/css/theme.less';
+@import "~burgeonComponents/burgeon.publish/common/css/theme.less";
 .commodityCusPropertiesAddOrEdit {
   position: relative;
 }

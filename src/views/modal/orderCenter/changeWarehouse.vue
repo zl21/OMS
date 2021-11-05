@@ -1,6 +1,5 @@
 <template>
   <div class="customized-modal" v-loading="loading">
-    <loading :loading="loading" />
     <OmsForm :form-config="formConfig" />
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>

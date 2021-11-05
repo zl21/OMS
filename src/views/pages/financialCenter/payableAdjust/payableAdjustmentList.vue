@@ -1,6 +1,5 @@
 <template>
-  <div class="payableAdjustmentList custom-main" >
-    <loading :loading="agTableConfig.loading" />
+  <div class="payableAdjustmentList custom-main" v-loading="agTableConfig.loading">
     <div class="returnBtn totalHeight custom-btn">
       <!-- 按钮 -->
       <OmsButton :btn-config="btnConfig" />

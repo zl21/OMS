@@ -1,6 +1,5 @@
 <template>
-  <div class="skuAddOrEdit customized-detail" :id="this.customizedModuleName">
-    <loading :loading="loading" />
+  <div class="skuAddOrEdit customized-detail" :id="this.customizedModuleName" v-loading="loading">
     <div class="customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>

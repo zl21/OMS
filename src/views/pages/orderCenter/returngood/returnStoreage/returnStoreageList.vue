@@ -1,17 +1,14 @@
 <!--退换入库列表-->
 <template>
-  <div class="returnstoreage tableList custom-main">
-    <loading :loading="agTableConfig.agLoading" />
+  <div class="returnstoreage tableList custom-main" v-loading="agTableConfig.agLoading">
     <div class="returnstoreageBtn totalHeight custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="form totalHeight custom-form">
+    <div class="form totalHeight custom-form" v-loading="isShowFromLoading">
       <OmsForm :form-config="formConfig" class="searchList" />
-      <loading :loading="isShowFromLoading" />
     </div>
-    <div class="tableContent custom-table">
+    <div class="tableContent custom-table" v-loading="agTableConfig.agLoading">
       <!-- loading -->
-      <loading :loading="agTableConfig.agLoading" />
       <aTable
         ref="agGridChild"
         :ag-table-config="agTableConfig"

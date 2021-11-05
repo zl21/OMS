@@ -1,6 +1,5 @@
 <template>
-  <div class="page">
-    <loading :loading="loading" />
+  <div class="page" v-loading="loading">
     <re-button :btn-config="btnConfig" />
     <re-table :jordan-table-config="tableConfig" />
     <re-dialog
