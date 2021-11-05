@@ -308,7 +308,7 @@ export default {
       // let qty = 0;
       // obj.forEach((item) => {
       //   if (item.REAL_AMT !== null) {
-      //     amt = publicMethodsUtil.accAdd(
+      //     amt = $utils.accAdd(
       //       parseFloat(item.REAL_AMT).toFixed(2),
       //       amt
       //     );

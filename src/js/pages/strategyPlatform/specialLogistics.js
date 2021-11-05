@@ -1,5 +1,4 @@
 import { OmsButton, OmsForm, OmsTable, switchList, subTable,OmsLabel } from 'burgeonComponents'
-import dateUtil from '@/assets/js/__utils__/date.js';
 import axios from 'axios';
 import service from '@/service/index';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
@@ -225,8 +224,8 @@ export default {
             width: '12',
             disabled: false,
             onChange: () => {
-              this.formConfig.formValue.Time[0] && (this.formConfig.formValue.beginTime = dateUtil.getFormatDate(this.formConfig.formValue.Time[0], 'yyyy-MM-dd HH:mm:ss'))
-              this.formConfig.formValue.Time[1] && (this.formConfig.formValue.endTime = dateUtil.getFormatDate(this.formConfig.formValue.Time[1], 'yyyy-MM-dd') + " 23:59:59")
+              this.formConfig.formValue.Time[0] && (this.formConfig.formValue.beginTime = $utils.getFormatDate(this.formConfig.formValue.Time[0], 'yyyy-MM-dd HH:mm:ss'))
+              this.formConfig.formValue.Time[1] && (this.formConfig.formValue.endTime = $utils.getFormatDate(this.formConfig.formValue.Time[1], 'yyyy-MM-dd') + " 23:59:59")
             }
           },
           {
@@ -305,7 +304,7 @@ export default {
             width: '6',
             disabled: false,
             onChange: () => {
-              this.formConfighead.formValue.validTime = dateUtil.getFormatDate(this.formConfighead.formValue.validTime, 'yyyy-MM-dd HH:mm:ss')
+              this.formConfighead.formValue.validTime = $utils.getFormatDate(this.formConfighead.formValue.validTime, 'yyyy-MM-dd HH:mm:ss')
 
             }
           },
@@ -319,7 +318,7 @@ export default {
             disabled: false,
             onChange: () => {
 
-              this.formConfighead.formValue.invalidTime = $omsUtils.defaultEndTime(this.formConfighead.formValue.invalidTime, this.formConfighead.formValue.invalidTime)
+              this.formConfighead.formValue.invalidTime = $utils.defaultEndTime(this.formConfighead.formValue.invalidTime, this.formConfighead.formValue.invalidTime)
 
             }
           },

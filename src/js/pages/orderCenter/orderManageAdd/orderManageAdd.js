@@ -1403,7 +1403,7 @@ export default {
       self.jordanTableConfig.totalData = [];
       self.jordanTableConfig.data.forEach((item) => {
         qty += parseInt(item.QTY);
-        amt = publicMethodsUtil.accAdd(
+        amt = $utils.accAdd(
           parseFloat(item.REAL_AMT).toFixed(2),
           amt
         );
@@ -1528,7 +1528,7 @@ export default {
             let amt = 0;
             let qty = 0;
             self.jordanTableConfig.data.forEach((item) => {
-              amt = publicMethodsUtil.accAdd(
+              amt = $utils.accAdd(
                 parseFloat(item.REAL_AMT).toFixed(2),
                 amt
               );
@@ -1710,7 +1710,7 @@ export default {
       items.forEach((item) => {
         if (item.IS_GIFT == '0') {
           noGiftFlag = true;
-          realAmtTotal = publicMethodsUtil.accAdd(
+          realAmtTotal = $utils.accAdd(
             parseFloat(item.REAL_AMT).toFixed(2),
             realAmtTotal
           );
@@ -1870,7 +1870,7 @@ export default {
                   let amt = 0;
                   let qty = 0;
                   self.jordanTableConfig.data.forEach((item) => {
-                    amt = publicMethodsUtil.accAdd(
+                    amt = $utils.accAdd(
                       parseFloat(item.REAL_AMT).toFixed(2),
                       amt
                     );
@@ -1922,7 +1922,7 @@ export default {
                 if (data.PS_C_SKU_ECODE === d.PS_C_SKU_ECODE) {
                   d.QTY = parseInt(d.QTY) + parseInt(data.QTY);
 
-                  d.REAL_AMT = publicMethodsUtil.accMul(d.PRICE_ACTUAL, d.QTY);
+                  d.REAL_AMT = $utils.accMul(d.PRICE_ACTUAL, d.QTY);
                 }
               });
             } else {
@@ -1966,7 +1966,7 @@ export default {
               cloneArr.push({
                 RESERVE_DECIMAL02: item.tagPrice,
                 PRICE_ACTUAL: item.tagPrice,
-                REAL_AMT: publicMethodsUtil.accMul(item.tagPrice, 1),
+                REAL_AMT: $utils.accMul(item.tagPrice, 1),
                 PS_C_CLR_ENAME: item.colorName,
                 PS_C_SIZE_ENAME: item.sizeName,
                 PS_C_SKU_ECODE: item.ECODE,
@@ -1988,7 +1988,7 @@ export default {
               );
               if (d) {
                 d.QTY += parseInt(cloneArr[0].QTY);
-                d.REAL_AMT = publicMethodsUtil.accMul(d.PRICE_ACTUAL, d.QTY);
+                d.REAL_AMT = $utils.accMul(d.PRICE_ACTUAL, d.QTY);
                 _this.jordanTableConfig.data = [...x];
               } else {
                 _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(
@@ -2077,7 +2077,7 @@ export default {
             let amt = 0;
             let qty = 0;
             self.jordanTableConfig.data.forEach((item) => {
-              amt = publicMethodsUtil.accAdd(
+              amt = $utils.accAdd(
                 parseFloat(item.REAL_AMT).toFixed(2),
                 amt
               );
@@ -2134,7 +2134,7 @@ export default {
                   let amt = 0;
                   let qty = 0;
                   self.jordanTableConfig.data.forEach((item) => {
-                    amt = publicMethodsUtil.accAdd(
+                    amt = $utils.accAdd(
                       parseFloat(item.REAL_AMT).toFixed(2),
                       amt
                     );

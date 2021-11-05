@@ -13,10 +13,7 @@
 
 <script>
 // 退换货单详情
-import { OmsButton } from 'burgeonComponents'
-import { setTimeout } from 'timers';
-import dateUtil from '@/assets/js/__utils__/date.js';
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'searchOOID',
@@ -257,12 +254,12 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       if (time instanceof Array && time[0]) {
-        const start = dateUtil.getFormatDate(time[0], 'yyyy-MM-dd HH:mm:ss');
-        const end = dateUtil.getFormatDate(time[1], 'yyyy-MM-dd HH:mm:ss');
+        const start = $utils.getFormatDate(time[0], 'yyyy-MM-dd HH:mm:ss');
+        const end = $utils.getFormatDate(time[1], 'yyyy-MM-dd HH:mm:ss');
         return start + '~' + end
       } else {
         const date = new Date(time);
-        const resTime = dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+        const resTime = $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
         return resTime
       }
     },

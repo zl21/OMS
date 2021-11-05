@@ -1,6 +1,5 @@
 import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel, subTable } from 'burgeonComponents'
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
-import dateUtil from '@/assets/js/__utils__/date.js';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
@@ -1099,7 +1098,7 @@ export default {
       $omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_VIPCOM_PROJECT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         const { ACTIONS, SUB_ACTIONS } = res;
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
-        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        const webArr = $utils.sonList(SUB_ACTIONS, 'webname');
         this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes($i18n.t('btn.delete')); // 删除
         this.jordanTableConfig.isShowImportBtn = webArr.includes($i18n.t('btn.import')); // 导入
       });
@@ -1107,7 +1106,7 @@ export default {
     // 时间戳格式化
     formatDate(time, format) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, format || 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, format || 'yyyy-MM-dd HH:mm:ss');
     },
     // 返回
     back() {
@@ -1183,7 +1182,7 @@ export default {
         let newTime = this.formatDate(value)
         let oldTime = self.modify[obj][ecode]
         if (ecode == 'END_TIME') {
-          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
+          newTime = $utils.defaultEndTime(newTime, oldTime)
           self.formConfig.formValue[ecode] = newTime
         }
         self.modify[obj][ecode] = newTime

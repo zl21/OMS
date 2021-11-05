@@ -3,16 +3,15 @@ import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
 
 const getCurrentTime = (() => {
-  return BurgeonDate.Format(new Date(), 'yyyy-MM-dd 23:59:59');
+  return $utils.Format(new Date(),'yyyy-MM-dd 23:59:59');
 })();
 const addSevenDay = (() => {
-  const t = BurgeonDate.addDays(new Date(), -7);
-  return BurgeonDate.Format(t, 'yyyy-MM-dd 00:00:00');
+  const t = $utils.addDays(new Date(), -7);
+  return $utils.Format(t,'yyyy-MM-dd 00:00:00');
 })();
 
 export default {
@@ -325,10 +324,10 @@ export default {
       if (CREATETIME && CREATETIME !== []) {
         console.log(CREATETIME[0]);
         if (CREATETIME[0] !== '') {
-          params.beginDate = CREATETIME[0] ? BurgeonDate.Format(CREATETIME[0], 'yyyy-MM-dd hh:mm:ss') : '';
+          params.beginDate = CREATETIME[0] ? $utils.Format(CREATETIME[0],'yyyy-MM-dd hh:mm:ss') : '';
         }
         if (CREATETIME[1] !== '') {
-          params.endDate = CREATETIME[1] ? BurgeonDate.Format(CREATETIME[1], 'yyyy-MM-dd hh:mm:ss') : '';
+          params.endDate = CREATETIME[1] ? $utils.Format(CREATETIME[1],'yyyy-MM-dd hh:mm:ss')  : '';
         }
       }
       return params;

@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 京东订单接口列表界面(下载订单)
   formConfig: {
@@ -100,8 +99,8 @@ export default {
     const param = {
       shop_id: parseInt(self.downLoadFormConfig.formData[0].itemdata.pid),
       bill_no: formValue.orderNum, // 订单编号
-      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '', // 开始时间
-      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '', // 结束时间
+      start_time: start ? $utils.standardTimeConversiondateToStr(start) : '', // 开始时间
+      end_time: end ? $utils.standardTimeConversiondateToStr(end) : '', // 结束时间
       status: formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };

@@ -1,8 +1,6 @@
 import { OmsButton, OmsForm, OmsLabel, TableInput, OmsTable } from 'burgeonComponents'
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import dateUtil from '@/assets/js/__utils__/date.js';
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 
 export default {
   name: 'payableAdjustAdd',
@@ -1334,7 +1332,7 @@ export default {
       const filterLogData = logData.map(item => ({
         LOG_CONTENT: item.LOG_CONTENT,
         OWNERENAME: item.OWNERENAME,
-        CREATIONDATE: item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : ''
+        CREATIONDATE: item.CREATIONDATE ? $utils.DatesTime(item.CREATIONDATE) : ''
       }));
       self.allLogTableArr = filterLogData;
       self.customPagingFun(filterLogData, self.payableAdjustLog.pageSize, self.payableAdjustLog, 'payableAdjustLog');
@@ -1389,7 +1387,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     // 填充下拉选项框
     async getSelectData() {

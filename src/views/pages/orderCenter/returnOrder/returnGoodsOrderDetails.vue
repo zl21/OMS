@@ -480,25 +480,25 @@ export default {
       // 退款金额
       
       let returnAmount = {
-        PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        PRO_ACTUAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.PRO_ACTUAL_AMT)
         ), //商品应退金额
-        PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        PRO_REAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.PRO_REAL_AMT)
         ), //商品实退金额
-        SHIP_AMT: this.$OMS2.omsUtils.floatNumber(
+        SHIP_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.SHIP_AMT)
         ), //应退运费
-        ADJUST_AMT: this.$OMS2.omsUtils.floatNumber(
+        ADJUST_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.ADJUST_AMT)
         ), //调整金额
-        EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(
+        EXCHANGE_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.EXCHANGE_AMT)
         ), //换货金额
-        FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        FINAL_ACTUAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_ACTUAL_AMT)
         ), //最终应退总金额
-        FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        FINAL_REAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
         ), //最终实退总金额
       };
@@ -709,7 +709,7 @@ export default {
                  *   退货金额 = 退货单价 * 申请退货数量
                  */
                 params.row.QTY_REFUND = e;
-                params.row.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
+                params.row.REFUND_FEE = $utils.floatNumber(
                   Number(e) * Number(params.row.AMT_REFUND_SINGLE),
                   2
                 );
@@ -734,7 +734,7 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.QTY_EXCHANGE = e;
-                // params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+                // params.row.AMT_EXCHANGE = $utils.floatNumber(
                 //   Number(e) * Number(params.row.PRICE_ACTUAL),
                 //   2
                 // );
@@ -760,8 +760,8 @@ export default {
         //     on: {
         //       "on-change": (e) => {
         //         params.row.PRICE_ACTUAL = e.target.value;
-        //         params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(Number(e.target.value) * Number(params.row.QTY_EXCHANGE || 0));
-        //         this.omsTableConfig.data[params.index] = params.row;
+        //         params.row.AMT_EXCHANGE = $utils.floatNumber(Number(e.target.value) * Number(params.row.QTY_EXCHANGE || 0));
+        //         this.businessActionTable.data[params.index] = params.row;
         //         // 退货明细
         //         this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
         //         R3.store.commit(
@@ -845,14 +845,14 @@ export default {
         if (this.panelReturn) {
           self.omsTableConfig.totalData.push({
             index: `${$i18n.t("other.total")}`, // 合计
-            REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt),
+            REFUND_FEE: $utils.floatNumber(amt),
             QTY_REFUND: qty,
-            REAL_AMT: this.$OMS2.omsUtils.floatNumber(REAL_AMT) // 成交单价
+            REAL_AMT: $utils.floatNumber(REAL_AMT) // 成交单价
           });
         } else {
           self.omsTableConfig.totalData.push({
             index: `${$i18n.t("other.total")}:`,
-            AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt),
+            AMT_EXCHANGE: $utils.floatNumber(amt),
             QTY_EXCHANGE: qty,
           });
         }
@@ -864,40 +864,40 @@ export default {
         if (this.$route.params.tableName === "OC_B_RETURN_ORDER_ECXCHANGE_TABLE") {
             if(this.panelReturn){
               R3.store.commit(`customize/returnAmount`,JSON.parse(JSON.stringify({
-                    PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt)
+                    PRO_ACTUAL_AMT: $utils.floatNumber(amt)
                   })
                 )
               );
             FINAL_ACTUAL_AMT = Number(returnAmount.PRO_ACTUAL_AMT) + Number(returnAmount.SHIP_AMT) + Number(returnAmount.ADJUST_AMT) - Number(returnAmount.EXCHANGE_AMT);
             R3.store.commit(`customize/returnAmount`,JSON.parse(JSON.stringify({
-                    FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
+                    FINAL_ACTUAL_AMT: $utils.floatNumber(FINAL_ACTUAL_AMT),
                   })
                 )
               );
             }else{
               R3.store.commit( `customize/returnAmount`, JSON.parse( JSON.stringify({
-                    EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt),
+                    EXCHANGE_AMT: $utils.floatNumber(amt),
                   })
                 )
               );
             FINAL_ACTUAL_AMT = Number(returnAmount.PRO_ACTUAL_AMT) + Number(returnAmount.SHIP_AMT) + Number(returnAmount.ADJUST_AMT) - Number(returnAmount.EXCHANGE_AMT);
             R3.store.commit( `customize/returnAmount`, JSON.parse( JSON.stringify({
-                  FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
+                  FINAL_ACTUAL_AMT: $utils.floatNumber(FINAL_ACTUAL_AMT),
                 })
               )
             );
           }
         } else {
           R3.store.commit(`customize/returnAmount`, {
-            PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(amt),
-            EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(amt)
+            PRO_ACTUAL_AMT: $utils.floatNumber(amt),
+            EXCHANGE_AMT: $utils.floatNumber(amt)
           });
           FINAL_ACTUAL_AMT =
             Number(returnAmount.PRO_ACTUAL_AMT) +
             Number(returnAmount.SHIP_AMT) +
             Number(returnAmount.ADJUST_AMT);
           R3.store.commit(`customize/returnAmount`, {
-            FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(FINAL_ACTUAL_AMT),
+            FINAL_ACTUAL_AMT: $utils.floatNumber(FINAL_ACTUAL_AMT),
           });
         }
       }, 10);
@@ -912,7 +912,7 @@ export default {
       if (!allDa.length) {
         // 当前为空，则直接新增
         data.forEach((it) => {
-          it.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
+          it.REFUND_FEE = $utils.floatNumber(
             it.QTY_REFUND * it.AMT_REFUND_SINGLE,
             2
           );
@@ -922,23 +922,23 @@ export default {
         return;
       }
       data.forEach((it) => {
-        it.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
+        it.REFUND_FEE = $utils.floatNumber(
           it.QTY_REFUND * it.AMT_REFUND_SINGLE,
           2
         );
         allDa.forEach((item) => {
-          pryKeyArr = this.$OMS2.omsUtils.sonList(allDa, pryKey);
+          pryKeyArr = this.$utils.sonList(allDa, pryKey);
           if (it[pryKey] == item[pryKey]) {
             // 1.已经存在（数量累加起来，没超则累加，反之保持数量是最大值即可）
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
             if (Number(item.REAL_RETURNABLE_QTY) > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
               const sum = Util.accAdd(item.REFUND_FEE, it.REFUND_FEE)
-              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
+              item.REFUND_FEE = $utils.floatNumber(sum);
             } else {
               item.QTY_REFUND = Number(item.REAL_RETURNABLE_QTY);
               const sum = Number(item.PRICE_ACTUAL) * Number(item.QTY_REFUND)
-              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
+              item.REFUND_FEE = $utils.floatNumber(sum);
             }
           } else if (it[pryKey] && !pryKeyArr.includes(it[pryKey])) {
             // 2.不存在该条明细（则直接push）
@@ -975,7 +975,7 @@ export default {
       const allDa = self.omsTableConfig.data;
       const selDa = self.detailsArrData;
       if (!selDa.length) {
-        self.$OMS2.omsUtils.msgTips(self, "warning", "a8");
+        $utils.msgTips(self, "warning", "a8");
         return;
       }
       if (selDa.length == allDa.length) { // 全选删
@@ -1045,7 +1045,7 @@ export default {
         onOk: () => {
           self.$nextTick(() => {
             // 取差集展示：
-            self.omsTableConfig.data = self.$OMS2.omsUtils.getDifferentArr(
+            self.businessActionTable.data = $utils.getDifferentArr(
               allDa,
               selDa,
               key

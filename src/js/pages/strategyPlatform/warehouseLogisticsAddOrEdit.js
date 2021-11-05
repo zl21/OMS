@@ -356,8 +356,8 @@ export default {
     async getBtn() {
       let params = { table: 'ST_C_WAREHOUSE_LOGISTICS_SET', type: 'OBJ', serviceId: 'r3-oc-oms' }
       const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
-      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
-      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      const mainWebArr = $utils.sonList(ACTIONS, 'webname');
+      const subWebArr = $utils.sonList(SUB_ACTIONS, 'webname');
       this.logisticsTableButtonConfig.buttons.forEach(item => {
         item.isShow = subWebArr.includes(item.webname)
       })
@@ -486,7 +486,7 @@ export default {
           // 刚新增的被删除了则不push，且要从addData中移除
           let deArritem = [];
           deArritem.push(item);
-          self.logisticsTableConfig.addData = $omsUtils.getDifferentArr(self.logisticsTableConfig.addData, deArritem, 'ID');
+          self.logisticsTableConfig.addData = $utils.getDifferentArr(self.logisticsTableConfig.addData, deArritem, 'ID');
           return;
         }
         item.actionName = 'DELETE';
@@ -551,7 +551,7 @@ export default {
           this.queryForm(this.formConfig, 'CP_C_LOGISTICS_ID').style = this.isAuto ? '' : 'popInput';
           this.setEnable(isEnable);
 
-          $omsUtils.intersectFormValue(this.formConfig.formValue, ST_C_EXPRESS_ALLOCATION);
+          $utils.intersectFormValue(this.formConfig.formValue, ST_C_EXPRESS_ALLOCATION);
           let fieldNames = ['CP_C_PHY_WAREHOUSE', 'CP_C_LOGISTICS']
           fieldNames.forEach(i => {
             this.setFormValue(this.formConfig, i, {
@@ -632,7 +632,7 @@ export default {
       if (code == 0) {
         // 筛选出差集作为展示
         this.logisticsTableConfig.selectionData = []
-        this.logisticsTableConfig.data = $omsUtils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
+        this.logisticsTableConfig.data = $utils.getDifferentArr(allArrs, partArrs, 'CP_C_LOGISTICS_ID');
         code == 0 ? this.$Message.success(message) : this.$Message.error(message);
       }
     },

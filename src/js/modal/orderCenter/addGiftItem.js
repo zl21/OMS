@@ -1,7 +1,7 @@
 import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
-import commonUtils from 'burgeonConfig/config/commonUtils'
+// import commonUtils from 'burgeonConfig/config/commonUtils'
 import axios from 'axios'
 import { OmsTable } from 'burgeonComponents'
 
@@ -241,7 +241,7 @@ export default {
          
         } else {
           if (!res.data.data) {
-            commonUtils.tipShow('error', self, res.data.message) 
+            $utils.tipShow('error', self, res.data.message) 
             return
           }
           this.$Modal.confirm({
@@ -298,7 +298,7 @@ export default {
          
         } else {
           if (!res.data.data) {
-            commonUtils.tipShow('error', self, res.data.message) 
+            $utils.tipShow('error', self, res.data.message) 
             return
           }
           this.$Modal.confirm({

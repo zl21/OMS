@@ -701,7 +701,7 @@ export default {
         const pa = Number(this.PRO_ACTUAL_AMT || 0);
         const aa = Number(this.ADJUST_AMT == '-' ? 0 : this.ADJUST_AMT);
         const ea = Number(this.EX_ACTUAL_AMT || 0);
-        this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(newV) + aa - ea, 2);
+        this.FINAL_ACTUAL_AMT = $utils.floatNumber(pa + Number(newV) + aa - ea, 2);
       }
     },
     'ADJUST_AMT': {
@@ -710,7 +710,7 @@ export default {
         const pa = Number(this.PRO_ACTUAL_AMT || 0);
         const sa = Number(this.SHIP_AMT);
         const ea = Number(this.EX_ACTUAL_AMT || 0);
-        this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + Number(aa) + sa - ea, 2);
+        this.FINAL_ACTUAL_AMT = $utils.floatNumber(pa + Number(aa) + sa - ea, 2);
       }
     },
     "formConfig.formValue.BILL_TYPE": {
@@ -866,7 +866,7 @@ export default {
       const sa = Number(this.SHIP_AMT);
       const aa = Number(this.ADJUST_AMT);
       const ea = Number(this.EX_ACTUAL_AMT);
-      this.FINAL_ACTUAL_AMT = this.$OMS2.omsUtils.floatNumber(pa + sa + aa - ea, 2); // 最终应退总金额
+      this.FINAL_ACTUAL_AMT = $utils.floatNumber(pa + sa + aa - ea, 2); // 最终应退总金额
       // this.FINAL_ACTUAL_AMT = data.PRO_ACTUAL_AMT;
       /* if (data.length) {
         this.PRO_ACTUAL_AMT = 0.00;
@@ -1138,7 +1138,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, "yyyy-MM-dd HH:mm:ss");
+      return $utils.getFormatDate(date, "yyyy-MM-dd HH:mm:ss");
     },
     keyDown() { },
     // 根据'sku编码'ID，查询添加订单明细

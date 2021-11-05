@@ -98,7 +98,7 @@ export default {
                 const allDa = this.tableConfig.data;
                 const selDa = this.tableConfig.selectData;
                 const key = this.exCode ? 'OC_B_ORDER_DELIVERY_ID' : 'PS_C_SKU_ECODE';
-                this.tableConfig.data = $omsUtils.getDifferentArr(
+                this.tableConfig.data = $utils.getDifferentArr(
                   allDa,
                   selDa,
                   key
@@ -341,19 +341,19 @@ export default {
                 // params.row.COMPENSATE_QTY = null;
                 params.row.COMPENSATE_QTY = e;
                 if (e) {
-                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(e * Number(params.row.PRICE_ACTUAL || 0), 2);
+                  params.row.COMPENSATE_AMT = $utils.floatNumber(e * Number(params.row.PRICE_ACTUAL || 0), 2);
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 }
-                // params.row._rowKey = $omsUtils.generateKey(); // 写上就删不掉输入框里面的0
+                // params.row._rowKey = $utils.generateKey(); // 写上就删不掉输入框里面的0
               },
               'on-blur': e => {
                 const cq = params.row.COMPENSATE_QTY;
                 if (!cq && cq !== 0) {
                   // params.row.COMPENSATE_QTY = (self.isEdit && !['zhoulan', 'clear'].includes(self.isEdit)) ? 1 : 0;
                   params.row.COMPENSATE_QTY = 1;
-                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(params.row.COMPENSATE_QTY * Number(params.row.PRICE_ACTUAL || 0), 2);
-                  params.row._rowKey = $omsUtils.generateKey();
+                  params.row.COMPENSATE_AMT = $utils.floatNumber(params.row.COMPENSATE_QTY * Number(params.row.PRICE_ACTUAL || 0), 2);
+                  params.row._rowKey = $utils.generateKey();
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 }
@@ -378,9 +378,9 @@ export default {
                 //   // const ca = Number(e);
                 //   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL || 0);
                 //   if (ca > relCa) {
-                //     params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
+                //     params.row.COMPENSATE_AMT = $utils.floatNumber(relCa, 2);
                 //   } else {
-                //     params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
+                //     params.row.COMPENSATE_AMT = $utils.floatNumber(ca, 2);
                 //   }
                 //   this.tableConfig.data[params.index] = JSON.parse(JSON.stringify(params.row));
                 //   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
@@ -392,13 +392,13 @@ export default {
                   console.log(e.target._value);
                   const ca = Number(e.target._value);
                   const relCa = Number(params.row.COMPENSATE_QTY) * Number(params.row.PRICE_ACTUAL);
-                  params.row.COMPENSATE_AMT = $omsUtils.floatNumber(ca, 2);
+                  params.row.COMPENSATE_AMT = $utils.floatNumber(ca, 2);
                   if (self.exCode) {
                     if (ca > relCa) {
-                      params.row.COMPENSATE_AMT = $omsUtils.floatNumber(relCa, 2);
+                      params.row.COMPENSATE_AMT = $utils.floatNumber(relCa, 2);
                     }
                   }
-                  params.row._rowKey = $omsUtils.generateKey();
+                  params.row._rowKey = $utils.generateKey();
                   this.tableConfig.data[params.index] = params.row;
                   R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ detail: this.tableConfig.data })));
                 });

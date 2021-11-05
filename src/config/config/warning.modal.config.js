@@ -18,7 +18,7 @@ class WarningModal{
     static warningOk() {
       if (self.isExport) {
         // 有一项导出正在进行中
-        commonUtils.msgTips(self, 'warning', 'f8');
+        $utils.msgTips(self, 'warning', 'f8');
       } else {
         self.isExport = true;
         const fromdata = new FormData();

@@ -80,7 +80,7 @@ export default {
     del() {
       const self = this;
       if (!self.selectionData.length) {
-        $omsUtils.msgTips(self, 'warning', 'df');
+        $utils.msgTips(self, 'warning', 'df');
         return;
       }
       const delarr = self.selectionData.map(item => item.ID);
@@ -103,7 +103,7 @@ export default {
         if (res.data.code == 0) {
           this.resData = res.data.data;
         } else {
-          $omsUtils.msgTips(this, 'error', res.data.message, 0);
+          $utils.msgTips(this, 'error', res.data.message, 0);
         }
       });
     }

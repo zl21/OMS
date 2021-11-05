@@ -56,7 +56,7 @@ export default {
                     ) {
                       this.reForm.config[
                         index
-                      ].item.props.value = $omsUtils.dateFormat(
+                      ].item.props.value = $utils.dateFormat(
                         new Date(),
                         'yyyy-MM-dd'
                       );
@@ -912,7 +912,7 @@ export default {
           } else if (
             val.item.label === $i18n.t('form_label.documentDate')
           ) {
-            this.reForm.config[index].item.props.value = $omsUtils.dateFormat(
+            this.reForm.config[index].item.props.value = $utils.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -929,7 +929,7 @@ export default {
           } else if (
             val.item.label === $i18n.t('form_label.documentDate')
           ) {
-            this.reForm.config[index].item.props.value = $omsUtils.dateFormat(
+            this.reForm.config[index].item.props.value = $utils.dateFormat(
               new Date(),
               'yyyy-MM-dd'
             );
@@ -1801,14 +1801,14 @@ export default {
             OWNERENAME: AfSend.OWNERNAME,
             CREATIONDATE:
               AfSend.CREATIONDATE &&
-              $omsUtils.dateFormat(
+              $utils.dateFormat(
                 new Date(AfSend.CREATIONDATE),
                 'yyyy-MM-dd hh:mm:ss'
               ),
             MODIFIERENAME: AfSend.MODIFIERENAME || AfSend.MODIFIERNAME,
             MODIFIEDDATE:
               AfSend.MODIFIEDDATE &&
-              $omsUtils.dateFormat(
+              $utils.dateFormat(
                 new Date(AfSend.MODIFIEDDATE),
                 'yyyy-MM-dd hh:mm:ss'
               ),
@@ -1863,7 +1863,7 @@ export default {
             data[dataConfig[itemLabel]] == 1 ? '手动' : '自动';
         } else if (itemLabel === $i18n.t('form_label.documentDate')) {
           // 单据日期
-          item.item.props.value = $omsUtils.dateFormat(
+          item.item.props.value = $utils.dateFormat(
             new Date(data[dataConfig[itemLabel]]),
             'yyyy-MM-dd hh:mm:ss'
           );

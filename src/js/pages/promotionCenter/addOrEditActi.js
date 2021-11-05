@@ -1,8 +1,6 @@
 import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
 import InfoSet from 'allpages/promotionCenter/details/infoSet.vue';
 import GiftSet from 'allpages/promotionCenter/details/giftSet.vue';
-import groups from '@/assets/js/promotion/groups';
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 import { OmsButton, steps as stepsBars } from 'burgeonComponents'
 import promotionMixin from './promotion.mixin';
 
@@ -245,7 +243,7 @@ export default {
       for (const it of validateRes) {
         if (it.code === -1) return this.$Message.error(it.message);
       }
-      const index = this.basic_info.activity_type + BurgeonDate.Format(new Date(), 'yyyy-MM-dd 23:59:59')
+      const index = this.basic_info.activity_type + $utils.Format(new Date(), 'yyyy-MM-dd 23:59:59')
       const params = {
         objid: this.objid,
         basic_info: this.basic_info,
@@ -264,7 +262,7 @@ export default {
         } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
           // this.$Message.message($i18n.t('modalTips.z9'));
-          $omsUtils.msgTips(this, 'success', message, 0);
+          $utils.msgTips(this, 'success', message, 0);
           /* this.$message({
             type: 'success',
             message: $i18n.t('modalTips.z9') // 保存成功

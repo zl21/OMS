@@ -159,7 +159,7 @@ export default {
       // --------------------生成后端需要的数据-------------
       const self = this;
       if (!self.table.data.length) {
-        $omsUtils.msgTips(self, 'warning', 'fi');
+        $utils.msgTips(self, 'warning', 'fi');
         return;
       }
       const dataArry = self.table.data;
@@ -192,7 +192,7 @@ export default {
       .then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          $omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $utils.msgTips(self, 'success', res.data.message, 0);
           // 重新查询组织树
           this.getTree();
           this.table.data = [];

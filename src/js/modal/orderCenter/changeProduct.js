@@ -1,6 +1,4 @@
-import { OmsButton } from 'burgeonComponents'
-import commonUtils from 'burgeonConfig/config/commonUtils'
-import { OmsTable, OmsForm as reForm } from 'burgeonComponents'
+import { OmsButton, OmsTable, OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {
@@ -484,7 +482,7 @@ export default {
           this.$Message.success(res.data.message)
         } else {
           if (!res.data.data) {
-            commonUtils.tipShow('error', self, res.data.message)
+            $utils.tipShow('error', self, res.data.message)
             return
           }
           this.$Modal.confirm({

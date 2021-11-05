@@ -239,7 +239,7 @@ export default {
                         }
                         params.row.DESCRIPTION = value;
                       }
-                      params.row._rowKey = this.$omsUtils.generateKey();
+                      params.row._rowKey = $utils.generateKey();
                       this.table.data[params.index] = params.row;
                       this.totalData[rIndex - 1] = params.row;
                       // this.totalData = JSON.parse(JSON.stringify(this.table.data));
@@ -329,7 +329,7 @@ export default {
     determine() {
       const self = this;
       if (!self.social.length) {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', self.componentData.title == '添加标记' ? '请选择需要添加的标记!' : '请选择需要取消的标记', 0);
+        $utils.msgTips(self, 'warning', self.componentData.title == '添加标记' ? '请选择需要添加的标记!' : '请选择需要取消的标记', 0);
         return;
       }
       let obj = {
@@ -339,7 +339,7 @@ export default {
       self.service.orderCenter[self.componentData.title == '添加标记' ? 'addOrderLable' : 'cancelOrderLable'](obj).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $utils.msgTips(self, 'success', res.data.message, 0);
           self.$parent.$parent.$parent.query();
           this.$parent.$parent.closeConfirm();
         } else {
@@ -387,18 +387,18 @@ export default {
       modifyData = modifyData.concat(self.delData);
       for (const iterator of modifyData) {
         if (!iterator.DESCRIPTION) {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', '标记说明不能为空!', 0);
+          $utils.msgTips(self, 'warning', '标记说明不能为空!', 0);
           return;
         }
       }
       self.service.orderCenter.saveLable(modifyData).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $utils.msgTips(self, 'success', res.data.message, 0);
           this.modal = false;
           self.getList()
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          $utils.msgTips(self, 'error', res.data.message, 0);
           this.modal = false;
           self.getList()
         }
@@ -429,7 +429,7 @@ export default {
         if (res.data.code == 0) {
           self.flagList = res.data.data.row;
         } else {
-          self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+          $utils.msgTips(self, 'warning', res.data.message, 0);
         }
       })
     },
@@ -456,7 +456,7 @@ export default {
           this.totalData = arr;
           this.pageChange(1);
         } else {
-          // self.$OMS2.omsUtils.msgTips(self, 'warning', res.data.message, 0);
+          // $utils.msgTips(self, 'warning', res.data.message, 0);
         }
       })
     },

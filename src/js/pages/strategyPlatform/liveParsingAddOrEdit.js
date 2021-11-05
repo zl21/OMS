@@ -1,5 +1,4 @@
 import { OmsButton, OmsForm, OmsLabel, subTable } from 'burgeonComponents'
-import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -387,7 +386,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     /**
      * 记录主表修改信息方法
@@ -423,7 +422,7 @@ export default {
           let newTime = this.formatDate(value)
           let oldTime = self.modify[obj][ecode]
           if (ecode == 'EFFECTIVE_END_TIME') {
-            newTime = $omsUtils.defaultEndTime(newTime, oldTime)
+            newTime = $utils.defaultEndTime(newTime, oldTime)
             self[formName].formValue[ecode] = newTime
           }
           // self[formName].formValue[ecode] = newTime  // TODO END_TIME 复制失败
@@ -447,7 +446,7 @@ export default {
     // 表单赋值
     initForm(data) {
       ['formConfig1', 'formConfig2', 'formConfig3'].forEach(formName => {
-        $omsUtils.intersectFormValue(this[formName].formValue, data)
+        $utils.intersectFormValue(this[formName].formValue, data)
       })
       this.queryForm(this.formConfig1, 'PLAN_ID').style = 'input'
       this.queryForm(this.formConfig1, 'ISACTIVE').style = 'input'

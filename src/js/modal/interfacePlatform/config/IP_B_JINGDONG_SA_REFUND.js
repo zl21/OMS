@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date';
 export default {
   // 京东取消订单(下载订单)
   formConfig: {
@@ -68,8 +67,8 @@ export default {
     }
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
-      start_time: BurgeonDate.standardTimeConversiondateToStr(start),
-      end_time: BurgeonDate.standardTimeConversiondateToStr(end),
+      start_time: $utils.standardTimeConversiondateToStr(start),
+      end_time: $utils.standardTimeConversiondateToStr(end),
       table: self.$route.params.tableName // 当前表名 必传
     };
 

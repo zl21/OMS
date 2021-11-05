@@ -1,5 +1,4 @@
 // 淘宝换货单接口 - 换货单下载
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   formConfig: {
     formValue: {
@@ -82,8 +81,8 @@ export default {
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.bill_no,
-      start_time: BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]),
-      end_time: BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]),
+      start_time: $utils.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]),
+      end_time: $utils.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]),
       status: self.downLoadFormConfig.formValue.status,
       table: 'IP_B_TAOBAO_EXCHANGE'
     };

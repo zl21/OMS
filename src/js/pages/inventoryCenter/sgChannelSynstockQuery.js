@@ -500,8 +500,8 @@ export default {
         if (res.data.code === 0 && res.data.data.sgChannelStorageStockQResultList.length) {
           res.data.data.sgChannelStorageStockQResultList.forEach(item => {
             // item.ISACTIVE = item.ISACTIVE === "Y" ? "是" : "否";
-            item.CREATIONDATE = item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : '';
-            // item.MODIFIEDDATE = item.MODIFIEDDATE ? publicMethodsUtil.DatesTime(item.MODIFIEDDATE) : "";
+            item.CREATIONDATE = item.CREATIONDATE ? $utils.DatesTime(item.CREATIONDATE) : '';
+            // item.MODIFIEDDATE = item.MODIFIEDDATE ? $utils.DatesTime(item.MODIFIEDDATE) : "";
           });
           _this.jordanTableConfig.total = res.data.data.totalSize;
           _this.jordanTableConfig.data = res.data.data.sgChannelStorageStockQResultList;

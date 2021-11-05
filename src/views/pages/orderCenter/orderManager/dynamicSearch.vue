@@ -146,8 +146,6 @@
   </div>
 </template>
 <script>
-  import dateUtil from '@/assets/js/__utils__/date.js';
-
   export default {
     name: 'DynamicSearch',
     props: {
@@ -213,7 +211,7 @@
         // const dy = JSON.parse(JSON.stringify(this.dynamicStructure));
         /* dy.forEach(it => {
           if (it.VAL instanceof Array && it.VAL.length == 2) {
-            it.VAL = typeof it.VAL[0] == 'object' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
+            it.VAL = typeof it.VAL[0] == 'object' ? `${$utils.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${$utils.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
           }
         }) */
       },

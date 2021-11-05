@@ -1,5 +1,4 @@
 
-  import dateUtil from '@/assets/js/__utils__/date.js';
   export default {
     // 支付宝原始账单-下载账单
     formConfig: {
@@ -109,7 +108,7 @@
         return;
       }
       let startTime = formValue.query_date;
-      startTime = dateUtil.getFormatDate(startTime, 'yyyy-MM-dd');
+      startTime = $utils.getFormatDate(startTime, 'yyyy-MM-dd');
       const param = {
         table: 'AC_F_PLATFORM_BILL',
         accountCode: formValue.accountCode, // 账户名称 必传

@@ -757,12 +757,12 @@ export default {
           GUEST_TRIAL_ENAME: item.GUEST_TRIAL_ENAME,
           DELENAME: item.DELENAME,
           ISACTIVE: item.ISACTIVE === 'Y' ? '是' : '否',
-          CREATIONDATE: item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : '',
-          PAY_TIME: item.PAY_TIME ? publicMethodsUtil.DatesTime(item.PAY_TIME) : '',
-          MODIFIEDDATE: item.MODIFIEDDATE ? publicMethodsUtil.DatesTime(item.MODIFIEDDATE) : '',
-          GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME ? publicMethodsUtil.DatesTime(item.GUEST_TRIAL_TIME) : '',
-          FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME ? publicMethodsUtil.DatesTime(item.FINANCIAL_TRIAL_TIME) : '',
-          DEL_TIME: item.DEL_TIME ? publicMethodsUtil.DatesTime(item.DEL_TIME) : ''
+          CREATIONDATE: item.CREATIONDATE ? $utils.DatesTime(item.CREATIONDATE) : '',
+          PAY_TIME: item.PAY_TIME ? $utils.DatesTime(item.PAY_TIME) : '',
+          MODIFIEDDATE: item.MODIFIEDDATE ? $utils.DatesTime(item.MODIFIEDDATE) : '',
+          GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME ? $utils.DatesTime(item.GUEST_TRIAL_TIME) : '',
+          FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME ? $utils.DatesTime(item.FINANCIAL_TRIAL_TIME) : '',
+          DEL_TIME: item.DEL_TIME ? $utils.DatesTime(item.DEL_TIME) : ''
         }));
         _this.agTableConfig.pagenation.total = data.page.totalSize;
         _this.agTableConfig.rowData = _this.allTableArr;

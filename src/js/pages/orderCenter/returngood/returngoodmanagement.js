@@ -1212,7 +1212,7 @@ export default {
               newItem.SEX = subitem.SEX;
               newItem.PRICE = subitem.PRICE_SETTLE;
               newItem.amt_refund_single = subitem.PRICE_ACTUAL;
-              newItem.AMT_REFUND = publicMethodsUtil.accMul(newItem.QTY_REFUND, subitem.PRICE_ACTUAL).toFixed(2); // 退货金额realAmt
+              newItem.AMT_REFUND = $utils.accMul(newItem.QTY_REFUND, subitem.PRICE_ACTUAL).toFixed(2); // 退货金额realAmt
               newItem.QTY_IN = 0;
               newItem.PRODUCT_MARK = '正品';
               newItem.skuId = subitem.PS_C_SKU_ID;
@@ -1722,12 +1722,12 @@ export default {
       let a;
       let b;
       setTimeout(() => {
-        a = publicMethodsUtil.accAdd(
+        a = $utils.accAdd(
           _this.amountReturned ? _this.amountReturned : 0,
           _this.returnPostage
         );
-        b = publicMethodsUtil.accAdd(a, _this.otherAmount);
-        _this.returnTotalAmount = publicMethodsUtil.accSub(
+        b = $utils.accAdd(a, _this.otherAmount);
+        _this.returnTotalAmount = $utils.accSub(
           b,
           _this.exchangeAmount ? _this.exchangeAmount : 0
         );
@@ -2194,12 +2194,12 @@ export default {
                             }, 100);
                             return;
                           }
-                          params.row.AMT_REFUND = publicMethodsUtil.accMul(
+                          params.row.AMT_REFUND = $utils.accMul(
                             e.target.value,
                             params.row.amt_refund_single == 0 ? params.row.PRICE ?? 0 : params.row.amt_refund_single
                           );
                           // 计算结算金额
-                          params.row.AMT_SETTLE_TOT = publicMethodsUtil.accMul(e.target.value, params.row.PRICE_SETTLE ?? 0);
+                          params.row.AMT_SETTLE_TOT = $utils.accMul(e.target.value, params.row.PRICE_SETTLE ?? 0);
                           params.row.QTY_REFUND = e.target.value;
                           _this.refundDtoList.data[params.index] = params.row;
                           _this.returnSelectData.forEach((item) => {
@@ -2760,9 +2760,9 @@ export default {
                     on: {
                       'on-change': (e) => {
                         // _this.jordanTableConfig.data[params.index].QTY_EXCHANGE = e.target.value;
-                        // _this.jordanTableConfig.data[params.index].AMT_REFUND = publicMethodsUtil.accMul(e.target.value, _this.jordanTableConfig.data[params.index].PRICE);
+                        // _this.jordanTableConfig.data[params.index].AMT_REFUND = $utils.accMul(e.target.value, _this.jordanTableConfig.data[params.index].PRICE);
                         params.row.QTY_EXCHANGE = e.target.value;
-                        params.row.AMT_REFUND = publicMethodsUtil.accMul(
+                        params.row.AMT_REFUND = $utils.accMul(
                           e.target.value,
                           params.row.AMT_REFUND
                         );
@@ -3479,12 +3479,12 @@ export default {
               if (i) {
                 y.QTY_EXCHANGE = (parseInt(y.QTY_EXCHANGE) ? parseInt(y.QTY_EXCHANGE) : 0) + parseInt(obj.QTY_EXCHANGE);
                 dataList = [...j];
-                y.AMT_REFUND = publicMethodsUtil.accMul(y.QTY_EXCHANGE, obj.PRICE);
+                y.AMT_REFUND = $utils.accMul(y.QTY_EXCHANGE, obj.PRICE);
               } else {
                 // 判断退货明细中是否有单件实际成交价
                 // 有 => 单件实际成交价 * 数量
                 // 无 => 吊牌价 * 数量
-                y.AMT_REFUND = publicMethodsUtil.accMul((y.amtRefundSingle || true) ? obj.PRICE : y.amtRefundSingle, obj.QTY_EXCHANGE);
+                y.AMT_REFUND = $utils.accMul((y.amtRefundSingle || true) ? obj.PRICE : y.amtRefundSingle, obj.QTY_EXCHANGE);
                 y.QTY_EXCHANGE = parseInt(obj.QTY_EXCHANGE);
                 dataList.push(y);
               }
@@ -3498,10 +3498,10 @@ export default {
               if (s) {
                 s.QTY_EXCHANGE = (parseInt(s.QTY_EXCHANGE) ? parseInt(s.QTY_EXCHANGE) : 0) + parseInt(obj.QTY_EXCHANGE);
                 dataList = [...eData];
-                s.AMT_REFUND = publicMethodsUtil.accMul(s.QTY_EXCHANGE, obj.PRICE);
+                s.AMT_REFUND = $utils.accMul(s.QTY_EXCHANGE, obj.PRICE);
               } else {
                 dataList.push(obj);
-                obj.AMT_REFUND = publicMethodsUtil.accMul(obj.QTY_EXCHANGE, obj.PRICE); // 换货金额
+                obj.AMT_REFUND = $utils.accMul(obj.QTY_EXCHANGE, obj.PRICE); // 换货金额
               }
             }
           } else {
@@ -3514,18 +3514,18 @@ export default {
               d.QTY_REFUND = parseInt(d.QTY_REFUND) + parseInt(obj.QTY_REFUND);
               d.QTY_EXCHANGE = (parseInt(d.QTY_EXCHANGE) ? parseInt(d.QTY_EXCHANGE) : 0) + parseInt(obj.QTY_EXCHANGE);
               dataList = [...data];
-              d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_REFUND, d.PRICE); // 退货金额
-              d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_EXCHANGE, d.PRICE); // 换货金额
+              d.AMT_REFUND = $utils.accMul(d.QTY_REFUND, d.PRICE); // 退货金额
+              d.AMT_REFUND = $utils.accMul(d.QTY_EXCHANGE, d.PRICE); // 换货金额
             } else {
               dataList.push(obj);
-              obj.AMT_REFUND = publicMethodsUtil.accMul(obj.QTY_REFUND, obj.PRICE); // 退货金额
-              obj.AMT_REFUND = publicMethodsUtil.accMul(obj.QTY_EXCHANGE, obj.PRICE); // 换货金额
+              obj.AMT_REFUND = $utils.accMul(obj.QTY_REFUND, obj.PRICE); // 退货金额
+              obj.AMT_REFUND = $utils.accMul(obj.QTY_EXCHANGE, obj.PRICE); // 换货金额
             }
           }
           if (index == 1) {
             // 1 退货明细 2 退换货明细
             dataList.forEach((item) => {
-              item.AMT_REFUND = publicMethodsUtil.accMul(item.QTY_REFUND, item.PRICE);
+              item.AMT_REFUND = $utils.accMul(item.QTY_REFUND, item.PRICE);
             });
           }
           self[`${(index == 1) ? 'amountReturned' : 'exchangeAmount'}`] = self.calculateMoney(dataList, 1).toFixed(2);
@@ -3882,8 +3882,8 @@ export default {
           queryListItem.SEX = selection.sex;
           queryListItem.PRICE = selection.price;
           queryListItem.SKU_SPEC = selection.skuSpec; // 原单带出的规格
-          queryListItem.AMT_REFUND = publicMethodsUtil.accMul(selection.qty, selection.amtRefundSingle).toFixed(2); // 退货金额realAmt
-          // queryList[i].AMT_REFUND = queryList[i].realAmt ? publicMethodsUtil.accMul(queryList[i].amtRefundSingle, queryList[i].qty) : publicMethodsUtil.accMul(queryList[i].price, queryList[i].qty); // 退货金额
+          queryListItem.AMT_REFUND = $utils.accMul(selection.qty, selection.amtRefundSingle).toFixed(2); // 退货金额realAmt
+          // queryList[i].AMT_REFUND = queryList[i].realAmt ? $utils.accMul(queryList[i].amtRefundSingle, queryList[i].qty) : $utils.accMul(queryList[i].price, queryList[i].qty); // 退货金额
           queryListItem.QTY_IN = 0;
           queryListItem.PRODUCT_MARK = '正品';
           queryListItem.amtRefundSingle = selection.amtRefundSingle;
@@ -3938,7 +3938,7 @@ export default {
                   d.QTY_EXCHANGE = parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
                   d.QTY_CAN_REFUND = parseInt(d.QTY_CAN_REFUND) + parseInt(data.QTY_CAN_REFUND);
 
-                  d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_REFUND, d.PRICE);
+                  d.AMT_REFUND = $utils.accMul(d.QTY_REFUND, d.PRICE);
                 }
               });
             } else {
@@ -3964,7 +3964,7 @@ export default {
               val.forEach((data) => {
                 if (data.PS_C_SKU_ECODE === d.PS_C_SKU_ECODE) {
                   d.QTY_EXCHANGE = parseInt(d.QTY_EXCHANGE) + parseInt(data.QTY_EXCHANGE);
-                  d.AMT_REFUND = publicMethodsUtil.accMul(d.QTY_EXCHANGE, d.PRICE);
+                  d.AMT_REFUND = $utils.accMul(d.QTY_EXCHANGE, d.PRICE);
                 }
               });
             } else {

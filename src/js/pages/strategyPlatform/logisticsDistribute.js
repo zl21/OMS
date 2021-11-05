@@ -1,6 +1,5 @@
 import { OmsForm, OmsButton, subTable, OmsTable, OmsLabel } from 'burgeonComponents';
 import service from '@/service/index';
-import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -776,7 +775,7 @@ export default {
         //渲染明细表
         stCDeliveryAreaRegionItemList.records.forEach((item, index) => {
           item.index = index + 1;
-          item.modifieddate = dateUtil.getFormatDate(new Date(item.modifieddate), 'yyyy-MM-dd');
+          item.modifieddate = $utils.getFormatDate(new Date(item.modifieddate), 'yyyy-MM-dd');
         });
         this.tableConfig.data = stCDeliveryAreaRegionItemList.records;
       });

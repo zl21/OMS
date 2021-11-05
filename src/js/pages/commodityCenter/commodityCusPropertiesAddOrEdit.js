@@ -504,7 +504,7 @@ export default {
         rowData[key] = bFormV[key];
         rowData.actionName = 'SAVE';
         rowData.ID = '-1';
-        rowData.key = $omsUtils.generateKey();
+        rowData.key = $utils.generateKey();
       }
       self.propertyValuesConfig.addData.push(rowData);
       self.propertyValuesConfig.data.push(rowData);
@@ -525,7 +525,7 @@ export default {
           // 刚新增的被删除了则不push，且要从addData中移除
           let deArritem = [];
           deArritem.push(item);
-          self.propertyValuesConfig.addData = $omsUtils.getDifferentArr(self.propertyValuesConfig.addData, deArritem, 'ID');
+          self.propertyValuesConfig.addData = $utils.getDifferentArr(self.propertyValuesConfig.addData, deArritem, 'ID');
           return;
         } else {
           item.actionName = 'DELETE';
@@ -533,7 +533,7 @@ export default {
         }
       });
       // 筛选出差集作为展示
-      self.propertyValuesConfig.data = $omsUtils.getDifferentArr(allArrs, partArrs, 'ECODE');
+      self.propertyValuesConfig.data = $utils.getDifferentArr(allArrs, partArrs, 'ECODE');
     },
     /* -------------------- 子表Part end -------------------- */
 

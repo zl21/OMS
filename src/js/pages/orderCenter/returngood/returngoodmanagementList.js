@@ -590,7 +590,7 @@ export default {
           for (let i = 0; i < _this.agTableConfig.rowData.length; i++) {
             const item = _this.agTableConfig.rowData[i];
             tempArr.every(subitem => {
-              item[subitem] = item[subitem] && publicMethodsUtil.DatesTime(item[subitem]);
+              item[subitem] = item[subitem] && $utils.DatesTime(item[subitem]);
             })
 
             item.IS_ADD = item.IS_ADD == 0 ? '否' : '是'; // 是否手工新增

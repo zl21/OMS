@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // JITX寻仓接口列表界面(寻仓订单下载)
   formConfig: {
@@ -89,8 +88,8 @@ export default {
   },
   init: (self) => {
     let date = new Date()
-    let start = BurgeonDate.getFormatDate(date, 'yyyy-MM-dd HH:mm:00')
-    let end = BurgeonDate.getFormatDate(new Date(date.setMinutes(date.getMinutes() + 30)), 'yyyy-MM-dd HH:mm:00')
+    let start = $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:00')
+    let end = $utils.getFormatDate(new Date(date.setMinutes(date.getMinutes() + 30)), 'yyyy-MM-dd HH:mm:00')
     self.downLoadFormConfig.formValue.query_date = [start, end]
     self.$OMS2.omsUtils.formEmpty(self, 'downLoadFormConfig')
   },
@@ -116,8 +115,8 @@ export default {
     const param = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       status: self.downLoadFormConfig.formValue.order_status,
-      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '',
-      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '',
+      start_time: start ? $utils.standardTimeConversiondateToStr(start) : '',
+      end_time: end ? $utils.standardTimeConversiondateToStr(end) : '',
       table: self.$route.params.tableName // 当前表名 必传
     };
     // 寻仓订单下载

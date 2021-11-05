@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 唯品会 - 淘宝商品（下载商品）
   formConfig: {
@@ -74,8 +73,8 @@ export default {
     }
     const params = JSON.stringify({
       shop_id: shopId,
-      start_time: BurgeonDate.standardTimeConversiondateToStr(formValue.query_date[0]),
-      end_time: BurgeonDate.standardTimeConversiondateToStr(formValue.query_date[1])
+      start_time: $utils.standardTimeConversiondateToStr(formValue.query_date[0]),
+      end_time: $utils.standardTimeConversiondateToStr(formValue.query_date[1])
     });
     self.dialogLoad = true;
     // console.log(R3.network);

@@ -62,7 +62,7 @@ export default {
                     queryList[count].SEX = item.SEX;
                     queryList[count].PRICE = item.PRICELIST;
                     queryList[count].amt_refund_single = item.PRICELIST;
-                    queryList[count].AMT_REFUND = publicMethodsUtil.accMul(list.qty, item.PRICELIST).toFixed(2); // 退货金额realAmt
+                    queryList[count].AMT_REFUND = $utils.accMul(list.qty, item.PRICELIST).toFixed(2); // 退货金额realAmt
                     queryList[count].QTY_IN = 0;
                     queryList[count].PRODUCT_MARK = '正品';
                     queryList[count].ID = -1;
@@ -103,7 +103,7 @@ export default {
                   queryList.push({
                     RESERVE_DECIMAL02: item.PRICELIST,
                     PRICE_ACTUAL: item.PRICELIST,
-                    REAL_AMT: publicMethodsUtil.accMul(item.PRICELIST, list.qty),
+                    REAL_AMT: $utils.accMul(item.PRICELIST, list.qty),
                     PS_C_CLR_ENAME: item.CLRSENAME,
                     PS_C_SIZE_ENAME: item.SIZESENAME,
                     PS_C_SKU_ECODE: item.ECODE,

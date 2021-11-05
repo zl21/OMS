@@ -2,7 +2,6 @@
  * 商品分类
  */
 import { OmsButton, OmsForm, subTable as orderItem, OmsLabel, OmsTable } from 'burgeonComponents'
-import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -410,7 +409,7 @@ export default {
       $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'PS_C_PRO_CLASSIFY', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
         const { ACTIONS, SUB_ACTIONS } = res;
-        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        const webArr = $utils.sonList(SUB_ACTIONS, 'webname');
         this.cusAttrConfig.businessButtonConfig.buttons.forEach(item => {
           item.isShow = webArr.includes(item.webname);
           SUB_ACTIONS.forEach(it => {
@@ -716,7 +715,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
   },
 };

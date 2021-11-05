@@ -325,7 +325,7 @@ export default {
       $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_LOGISTICS', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
         const { ACTIONS, SUB_ACTIONS } = res;
-        const webArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+        const webArr = $utils.sonList(SUB_ACTIONS, 'webname');
         this.subTableConfig.businessButtonConfig.buttons.forEach(item => {
           item.isShow = webArr.includes(item.webname);
           SUB_ACTIONS.forEach(it => {
@@ -334,7 +334,7 @@ export default {
             }
           });
         });
-        this.subTableConfig.key += $OMS2.omsUtils.generateKey();
+        this.subTableConfig.key += $utils.generateKey();
         console.log('this.subTableConfig.businessButtonConfig.buttons::', this.subTableConfig.businessButtonConfig.buttons);
         this.subTableConfig1.businessButtonConfig.buttons.forEach(item => {
           item.isShow = webArr.includes(item.webname);
@@ -344,7 +344,7 @@ export default {
             }
           });
         });
-        this.subTableConfig1.key += $OMS2.omsUtils.generateKey();
+        this.subTableConfig1.key += $utils.generateKey();
         console.log('this.subTableConfig1.businessButtonConfig.buttons::', this.subTableConfig1.businessButtonConfig.buttons);
       });
     },
@@ -355,12 +355,12 @@ export default {
       const self = this;
       if (type == 'add') {
         self.addTableData = self.addTableData.concat(data); // 添加
-        self.addTableData = $omsUtils.unrepeated(self.addTableData, 'repeatKey'); // 去重，便于保存
+        self.addTableData = $utils.unrepeated(self.addTableData, 'repeatKey'); // 去重，便于保存
       }
       const allArr = self.totalData.concat(data)
-      // self.subTableConfig.data = $omsUtils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
+      // self.subTableConfig.data = $utils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
       // self.subTableConfig.total += self.subTableConfig.data.length - 1;
-      self.totalData = $omsUtils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
+      self.totalData = $utils.unrepeated(allArr, 'repeatKey'); // 取差值-展示
       self.subTableConfig.total = self.totalData.length;
       // 初始化展示10条
       self.pageChange(1);
@@ -387,11 +387,11 @@ export default {
           partNewArrs.push(it);
         }
       });
-      self.totalData = $omsUtils.getDifferentArr(allArrs, partNewArrs, 'repeatKey');
+      self.totalData = $utils.getDifferentArr(allArrs, partNewArrs, 'repeatKey');
       if (!IDS.length && partNewArrs.length) {
-        self.addTableData = $omsUtils.getDifferentArr(self.addTableData, partNewArrs, 'repeatKey');
+        self.addTableData = $utils.getDifferentArr(self.addTableData, partNewArrs, 'repeatKey');
         partNewArrs = [];
-        $omsUtils.msgTips(this, 'success', 'ay'); // 删除成功！
+        $utils.msgTips(this, 'success', 'ay'); // 删除成功！
         self.getTableData(self.totalData);
         return false;
       }
@@ -421,11 +421,11 @@ export default {
       let COMBINATION = `${PREFIX}${SUFFIX}`;
       if (data.length) {
         if (COMBINATION === '') {
-          $omsUtils.msgTips(this, 'warning', 'kd'); // 内容不能为空！
+          $utils.msgTips(this, 'warning', 'kd'); // 内容不能为空！
           return;
         }
         if (data.some((item) => { return item.COMBINATION === COMBINATION })) {
-          $omsUtils.msgTips(this, 'warning', 'ke'); // 重复数据，不能添加！
+          $utils.msgTips(this, 'warning', 'ke'); // 重复数据，不能添加！
           return;
         }
         this.subTableConfig1.data.push({ ID: '-1', PREFIX, SUFFIX, COMBINATION });
@@ -436,7 +436,7 @@ export default {
     // 删除
     async nalysisDetale() {
       let tableConfig = this.subTableConfig1
-      this.subTableConfig1.data = $omsUtils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'COMBINATION');
+      this.subTableConfig1.data = $utils.getDifferentArr(tableConfig.data, tableConfig.selectionData, 'COMBINATION');
       let arr = tableConfig.selectionData.map((item) => { if (item.ID !== '-1') return item.ID });
       let ids = arr.filter((item) => { return item != undefined });
       if (ids.length) {

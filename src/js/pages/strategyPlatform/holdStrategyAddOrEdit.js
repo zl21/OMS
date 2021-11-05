@@ -1,7 +1,4 @@
-
-
 import { OmsButton, OmsForm, subTable, OmsTable, OmsLabel } from 'burgeonComponents'
-import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -1034,7 +1031,7 @@ export default {
       let value = self[formConfig].formValue[ecode]
       if (ecode == 'VALID_END_TIME') {
         let oldTime = self.modify[ecode]
-        value = $omsUtils.defaultEndTime(value, oldTime)
+        value = $utils.defaultEndTime(value, oldTime)
         self[formConfig].formValue[ecode] = new Date(value)
       }
       self.modify[ecode] = value;
@@ -1084,7 +1081,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     // 校验提示
     resultTipsHand(requriredArr, labelArr) {

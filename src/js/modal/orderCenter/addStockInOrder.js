@@ -1,12 +1,11 @@
 import { OmsForm } from 'burgeonComponents';
 import { OmsButton } from 'burgeonComponents'
-import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
   name: 'AddStockInOrder',
   components: {
     OmsButton,
-    businessForm
+    OmsForm
   },
   props: {
     detail: {
@@ -149,7 +148,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     }
   }
 };

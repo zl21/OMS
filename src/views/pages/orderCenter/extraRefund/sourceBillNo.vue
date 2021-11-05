@@ -57,7 +57,6 @@
 import { OmsButton, OmsLabel, OmsDialog, OmsTable } from 'burgeonComponents'
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
   name: 'sourceBillNo',
