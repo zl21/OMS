@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-27 11:20:18
- * @LastEditTime: 2021-09-07 18:56:51
+ * @LastEditTime: 2021-11-05 17:22:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/WelcomePage.vue
@@ -248,7 +248,7 @@
 
 <script>
 import dateUtil from "@/assets/js/__utils__/date.js";
-import initCdnCustomize from '@/config/mixins/initCdnCustomize';
+import initCdnCustomize from '@/config/minxin/initCdnCustomize';
 import { OmsButton } from 'burgeonComponents'
 
 let dayBtnConifg = [

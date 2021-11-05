@@ -117,8 +117,12 @@ const config = {
     new copyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "./src/assets"),
-          to: path.resolve(__dirname, "./burgeon.publish/static/")
+          from: path.resolve(__dirname, "./src/assets/css"),
+          to: path.resolve(__dirname, "./burgeon.publish/static/css"),
+        },
+        {
+          from: path.resolve(__dirname, "./src/assets/img"),
+          to: path.resolve(__dirname, "./burgeon.publish/static/img"),
         },
       ],
     })
@@ -143,11 +147,6 @@ const config = {
   optimization: {
     minimizer: [new TerserJSPlugin({
       parallel: true,
-      terserOptions: {
-        compress: {
-          pure_funcs: ['console.log']
-        }
-      }
     }), new CssMinimizerPlugin()],
   },
 }
