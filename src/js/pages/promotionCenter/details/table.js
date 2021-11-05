@@ -1,4 +1,4 @@
-import TableSku from 'burgeonComponents/tableSku';
+import { TableSku } from 'burgeonComponents'
 
 export default {
   name: 'detailtable',

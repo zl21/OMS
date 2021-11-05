@@ -1,6 +1,5 @@
 // 退换货单详情
 import { OmsButton, OmsForm, OmsLabel, OmsDialog, OmsTable } from 'burgeonComponents'
-import { setTimeout } from 'timers';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';

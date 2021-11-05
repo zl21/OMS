@@ -1,11 +1,8 @@
 import { tableCols } from '../promotion.config';
-import SingleBox from 'burgeonComponents/singleBox.vue';
-import ButtonFkDialog from 'burgeonComponents/buttonFkDialog.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
-import { OmsDialog } from 'burgeonComponents'
-import { OmsButton } from 'burgeonComponents'
+import { OmsDialog, SingleBox, OmsButton, ButtonFkDialog } from 'burgeonComponents'
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {

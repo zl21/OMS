@@ -1,15 +1,20 @@
-import myInput from 'burgeonComponents/fkinputPlus.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 // import MultipleBox from 'burgeonComponents/multipleBox.vue';
-import SingleBox from 'burgeonComponents/singleBox.vue';
-import ButtonFkDialog from 'burgeonComponents/buttonFkDialog.vue';
 import { tableCols as tabList } from './promotion.config';
-import { OmsButton } from 'burgeonComponents'
+import { OmsButton, fkinputPlus as myInput, SingleBox, ButtonFkDialog } from 'burgeonComponents'
 import groups from '@/assets/js/promotion/groups';
 import promotionMixin from './promotion.mixin';
 
 export default {
-	mixins: [promotionMixin()],
+  mixins: [promotionMixin()],
+  components: {
+    OmsButton,
+    myInput,
+    detailtable,
+    // MultipleBox,
+    SingleBox,
+    ButtonFkDialog
+  },
   data() {
     return {
       btnConfig: {
@@ -53,7 +58,7 @@ export default {
             readonly: false,
             valuedata: '',
             notForm: true,
-            version:'1.4'
+            version: '1.4'
           }
         }, // 收货省份
         stores: {
@@ -71,7 +76,7 @@ export default {
             refobjid: '',
             valuedata: '',
             notForm: true,
-            version:'1.4'
+            version: '1.4'
           }
         } // 店铺名称
       },
@@ -108,14 +113,6 @@ export default {
     };
   },
   props: [],
-  components: {
-    OmsButton,
-    myInput,
-    detailtable,
-    // MultipleBox,
-    SingleBox,
-    ButtonFkDialog
-  },
   computed: {
     itemdataFk() {
       try {

@@ -1,15 +1,21 @@
-import businessLabel from 'burgeonComponents/businessLabel';
-import { OmsButton } from 'burgeonComponents'
+import { OmsButton, OmsForm, OmsLabel, OmsAgTable } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import groups from '@/assets/js/promotion/groups';
-import { OmsForm } from 'burgeonComponents';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
-import businessAgTable from 'burgeonComponents/businessAgTable';
 
 export default {
+  components: {
+    OmsAgTable,
+    OmsForm,
+    OmsButton,
+    OmsLabel,
+    // Mydialog,
+    // errorMessage,
+    dialogVisible,
+  },
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
@@ -28,7 +34,7 @@ export default {
       setGroupTableData: [], // 设置分组列表
       STATUS: [1, 2, 3], // 状态 1.草稿，2.已发布，3.下线
       formConfig: {
-        gridBar:true,
+        gridBar: true,
         formValue: {
           acti_no: '',
           acti_date: [`${this.setData(0, true)}`, `${this.setData(7)}`],
@@ -204,7 +210,7 @@ export default {
           total: 0,
           current: 1,
           pageSize: 20,
-          pageSizeOpts: [20,50,100,200,500,2000],
+          pageSizeOpts: [20, 50, 100, 200, 500, 2000],
         },
         renderArr: {
           ACTION_LOG: params => {
@@ -221,19 +227,19 @@ export default {
             resultElement.appendChild(iTag);
           }
         },
-        renderParams:(cellData)=> {
+        renderParams: (cellData) => {
           if (cellData.field == 'ACTION_LOG') {
             return {
               renderContainer: 'CellRenderByFunction',
               renderComponent: (h, params) => {
                 if (!params.row.ACTION_LOG) return;
                 return h('div', {
-                  on:{
-                    click:()=> {
+                  on: {
+                    click: () => {
                       this.viewLog(params.row);
                     }
                   },
-                  domProps: { },
+                  domProps: {},
                   style: {
                     color: '#0f8ee9 ',
                     textDecoration: 'underline ',
@@ -404,7 +410,7 @@ export default {
           valuedata: ''
         }
       },
-      formBtn:{
+      formBtn: {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
         buttons: [
@@ -427,9 +433,9 @@ export default {
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
-        buttons:[]
+        buttons: []
       },
-      extendBtn:[
+      extendBtn: [
         {
           // text: $i18n.t('btn.add'), // 新增,
           webname: 'xinzengcux_cuxiaohuodomg',
@@ -507,16 +513,7 @@ export default {
       this.getData(x);
     }
   },
-  components: {
-    businessAgTable,
-    businessForm,
-    OmsButton,
-    businessLabel,
-    // Mydialog,
-    // errorMessage,
-    dialogVisible,
-  },
-  activated(){
+  activated() {
     const self = this;
     self.$OMS2.BtnConfig.target = self;
     this.$OMS2.BtnConfig.singleType = 0;
@@ -529,7 +526,7 @@ export default {
     commodity() {
       return this.inputList[0].valuedata;
     },
-    colRowNum(){
+    colRowNum() {
       return $store.state.customize.colRowNum;
     }
   },
@@ -547,8 +544,8 @@ export default {
     // 检测屏幕变化 设置高度 重新渲染agTabe
     $omsUtils.onresizes(this, 650);
     const buttons = await self.$OMS2.BtnConfig.config();
-    this.btnConfig.buttons = [...buttons.buttons , ...this.extendBtn];
-    $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST' , serviceId:'r3-oc-oms'});
+    this.btnConfig.buttons = [...buttons.buttons, ...this.extendBtn];
+    $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST', serviceId: 'r3-oc-oms' });
   },
   methods: {
     getRowClass(params) {
@@ -625,7 +622,7 @@ export default {
     },
     // 查找
     async getData(x = 0) {
-      let currentPage,pageSize;
+      let currentPage, pageSize;
       if (this.vueAgTable) {
         currentPage = this.agTableConfig.pagenation.current;
         pageSize = this.agTableConfig.pagenation.pageSize;
@@ -656,7 +653,7 @@ export default {
         data: { code, data }
       } = await this.service.promotionCenter.selectPmList(formData);
       if (code === 0 && data) {
-        let info,num;
+        let info, num;
         this.tabConfig[0].total = data.ACTI_ALL_NUM;
         this.tabConfig[1].total = data.ACTI_RELEASE_NUM;
         this.tabConfig[2].total = data.ACTI_DRAFT_NUM;
@@ -712,14 +709,14 @@ export default {
       this.saveCol(e.columns)
     },
     // 保存列信息
-    saveCol: _.debounce(function(data) {
+    saveCol: _.debounce(function (data) {
       console.log(data);
       debugger // 取不到，用了防抖的原因吗？
-    },1000),
+    }, 1000),
     // 获取agTable数据
     getAgTableData(info, num, index) {
       const self = this;
-      if(self.vueAgTable) {
+      if (self.vueAgTable) {
         const currentPage = this.agTableConfig.pagenation.current;
         const pageSize = this.agTableConfig.pagenation.pageSize;
         // const columns = self.agTableConfig.columnDefs;
