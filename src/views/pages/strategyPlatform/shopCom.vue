@@ -1,7 +1,7 @@
 <!-- 店铺商品特殊策略 - 商品信息 - 半定制 -->
 <template>
   <div class="shopCom" v-loading="loading">  
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tabConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -19,7 +19,7 @@
       footer-hide
       class-name="ark-dialog"
     >
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tabConfigQu"
         @on-select="onSelectQ"
         @on-select-change="onSelectChangeQ"
@@ -29,9 +29,9 @@
         @on-page-change="pageChangeQ"
         @on-page-size-change="pageSizeChangeQ"
       />
-      <businessButton :btn-config="btnConfigQu" class="modal-footer" />
+      <OmsButton :btn-config="btnConfigQu" class="modal-footer" />
     </Modal>
-    <businessDialog
+    <OmsDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
       :draggable="importTable.draggable"
@@ -56,18 +56,15 @@
 /**
  * 店铺商品特殊策略 - 商品信息 - 半定制
  */
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
-import businessDialog from 'burgeonComponents/businessDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import { OmsButton, OmsForm, OmsDialog, OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton,
-    businessForm,
-    businessActionTable,
-    businessDialog,
+    OmsButton,
+    OmsForm,
+    OmsTable,
+    OmsDialog,
   },
   data() {
     return {
