@@ -132,11 +132,11 @@ const config = {
     },
     alias: {
       allpages: path.resolve(__dirname, './src/views/pages'),
-      burgeonConfig: path.resolve(__dirname, './src/config/'),
+      burgeonConfig: path.resolve(__dirname, './src/config'),
       burgeonComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
-      '@': path.resolve(__dirname, './src/'),
+      '@': path.resolve(__dirname, './src'),
       assetsImg: path.resolve(__dirname, './src/assets/img')
     }
   },

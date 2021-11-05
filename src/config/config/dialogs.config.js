@@ -173,7 +173,7 @@ class DialogConfig {
       width: '700',
       name: 'replaceGoodsDetail',
       // url: 'pages/orderCenter/orderManager/replaceGoodsDetail',
-      url: require('@/views/modal/orderCenter/orderManager/replaceGoodsDetail.vue').default,
+      url: require('@/views/modal/orderCenter/replaceGoodsDetail.vue').default,
       excludeString: 'replaceGoodsDetail',
     },
     holdOrderConfig: {
