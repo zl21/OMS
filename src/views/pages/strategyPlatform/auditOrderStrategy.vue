@@ -19,7 +19,7 @@
           {{ vmI18n.t('panel_label.basicData') }}
           <p slot="content">
             <span class="baseData">
-              <businessForm :form-config="formConfig" />
+              <OmsForm :form-config="formConfig" />
               <p class="createdTime">
                 <label>按系统创建时间等待</label>
                 <Input
@@ -330,11 +330,11 @@
       </Collapse>
       <div class="customized-detail-table">
         <div v-show="id != '-1'">
-          <businessLabel
+          <OmsLabel
             :label-list="label.labelList"
             :label-default-value="label.labelDefaultValue"
           >
-          </businessLabel>
+          </OmsLabel>
           <div>
             <subTable :component-data="subTableConfig"></subTable>
           </div>

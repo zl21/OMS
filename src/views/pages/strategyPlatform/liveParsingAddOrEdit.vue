@@ -9,14 +9,14 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfig1" />
+            <OmsForm :form-config="formConfig1" />
           </p>
         </Panel>
         <Panel name="panel_conds">
           <!-- 满足条件（满足以下条件的单据打“播”标） -->
           {{ vmI18n.t('form_label.meet_conditions') }}（{{ vmI18n.t('modalTitle.ae') }}）
           <p slot="content">
-            <businessForm :form-config="formConfig2">
+            <OmsForm :form-config="formConfig2">
               <template #timeType="{ rowData }">
                 <RadioGroup
                   v-model="rowData.value.BILL_TIME_TYPE"
@@ -76,21 +76,21 @@
                   />
                 </div>
               </template>
-            </businessForm>
+            </OmsForm>
           </p>
         </Panel>
         <Panel name="panel_action">
           <!-- 执行动作 -->
           {{ vmI18n.t("panel_label.ae") }}
           <p slot="content">
-            <businessForm :form-config="formConfig3" />
+            <OmsForm :form-config="formConfig3" />
           </p>
         </Panel>
       </Collapse>
 
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           v-show="ID != -1"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

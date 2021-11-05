@@ -12,7 +12,7 @@
     class="customized-modal"
     style="width: 400px;"
   >
-    <businessForm :form-config="formConfig"></businessForm>
+    <OmsForm :form-config="formConfig"></OmsForm>
     <OmsButton :btn-config="btnConfig" class="modal-footer"/>
   </div>
 </template>

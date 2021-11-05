@@ -18,7 +18,7 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm
+            <OmsForm
               :form-config="formConfig"
               @keyDown="keyDown"
             />
@@ -26,7 +26,7 @@
         </Panel>
       </Collapse>
       <div class="customized-detail-table">
-        <businessLabel
+        <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
         />

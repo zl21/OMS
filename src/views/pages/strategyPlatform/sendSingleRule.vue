@@ -11,7 +11,7 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="information" />
+            <OmsForm :form-config="information" />
           </p>
         </Panel>
       </Collapse>

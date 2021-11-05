@@ -11,14 +11,14 @@
             <!-- 基本信息 -->
             {{ vmI18n.t('common.baseInformation') }}
             <p slot="content">
-              <businessForm :form-config="information" />
+              <OmsForm :form-config="information" />
             </p>
           </Panel>
         </Collapse>
       </div>
       <div v-if="this.$route.params.customizedModuleId !== 'New'" class="salesTable custom-table">
         <!-- tab切换 -->
-        <businessLabel :label-default-value="labelDefaultValue" :label-list="labelList" class="jordanLabel" />
+        <OmsLabel :label-default-value="labelDefaultValue" :label-list="labelList" class="jordanLabel" />
         <!-- tree -->
         <div class="tableBox">
           <div class="tableLeft">

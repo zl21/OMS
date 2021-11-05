@@ -1,6 +1,6 @@
 <template>
   <div class="authinfodisplay">
-    <businessForm :form-config="formconfig" @keyDown="keyDown"> </businessForm>
+    <OmsForm :form-config="formconfig" @keyDown="keyDown"> </OmsForm>
     <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>

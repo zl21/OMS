@@ -19,7 +19,7 @@
             />
           </div>
           <div slot="content" class="customized_Info_form">
-            <businessForm
+            <OmsForm
               :form-config="formConfig"
               @keyDown="keyDown"
               :key="forceFresh"
@@ -90,7 +90,7 @@
                   @on-clear="rowData.item.clearInput"
                 />
               </template>
-            </businessForm>
+            </OmsForm>
           </div>
           <div slot="content" class="clear"></div>
         </Panel>
@@ -98,27 +98,27 @@
           <!-- 物理属性 -->
           {{vmI18n.t('panel_label.aw')}}
           <div slot="content">
-            <businessForm :form-config="formConfigWuLi" @keyDown="keyDown" :key="formConfigWuLi.key"/>
+            <OmsForm :form-config="formConfigWuLi" @keyDown="keyDown" :key="formConfigWuLi.key"/>
           </div>
         </Panel>
         <Panel name="panel_fixAttr">
           <!-- 固定属性 -->
           {{vmI18n.t('panel_label.b4')}}
           <div slot="content">
-            <businessForm :form-config="fixAttrFormConfig" @keyDown="keyDown" />
+            <OmsForm :form-config="fixAttrFormConfig" @keyDown="keyDown" />
           </div>
         </Panel>
         <Panel name="panel_cusAttr">
           <!-- 自定义属性 -->
           {{vmI18n.t('panel_label.b5')}}
           <div slot="content">
-            <businessForm :form-config="cusAttrFormConfig" @keyDown="keyDown" />
+            <OmsForm :form-config="cusAttrFormConfig" @keyDown="keyDown" />
           </div>
         </Panel>
       </Collapse>
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           class="jordanLabel"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
@@ -126,7 +126,7 @@
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <!-- <businessForm v-show="labelDefaultValue === 'PROPERTY'" :form-config="propertiesFormConfig"></businessForm> -->
+          <!-- <OmsForm v-show="labelDefaultValue === 'PROPERTY'" :form-config="propertiesFormConfig"></OmsForm> -->
           <orderItem :component-data="subTableConfig"></orderItem>
         </div>
       </div>

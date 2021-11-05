@@ -9,27 +9,27 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfig" @keyDown="keyDown" />
+            <OmsForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="2">
           <!-- 收货人信息 -->
           {{ vmI18n.t("common.consigneeInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfig1" />
+            <OmsForm :form-config="formConfig1" />
           </p>
         </Panel>
         <Panel name="3">
           <!-- 备注信息 -->
           {{ vmI18n.t("common.remarksInfo") }}
           <p slot="content">
-            <businessForm :form-config="formConfig2" />
+            <OmsForm :form-config="formConfig2" />
           </p>
         </Panel>
       </Collapse>
       <!-- tab切换 -->
       <div class="custom-label">
-        <businessLabel
+        <OmsLabel
           :label-default-value="labelDefaultValue"
           :label-list="labelList"
         />

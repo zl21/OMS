@@ -4,7 +4,7 @@
     class="generateSalesOrder"
     style="width:400px;padding-right:20px"
   >
-    <businessForm :form-config="generateFormConfig" />
+    <OmsForm :form-config="generateFormConfig" />
     <businessBtn :btn-config="generateBtnConfig" />
   </div>
 </template>

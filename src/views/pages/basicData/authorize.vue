@@ -59,13 +59,13 @@
           />
         </div>
         <div v-else class="shop-one-show">
-          <businessForm :form-config="formconfig" @keyDown="keyDown">
+          <OmsForm :form-config="formconfig" @keyDown="keyDown">
             <template #formCompile="{ rowData }">
               <div class="form-compile">
                 <p>{{ rowData.value.authTips }}</p>
               </div>
             </template>
-          </businessForm>
+          </OmsForm>
         </div>
         <OmsButton class="modal-footer" :btn-config="btnConfig" />
       </div>

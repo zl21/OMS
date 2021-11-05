@@ -1,7 +1,7 @@
 <template>
   <div class="addStockInOrder customized-modal">
     <div class="subtablePart">
-      <businessForm :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
     </div>
     <div class="buttons customized-modal-btn">
       <OmsButton :btn-config="btnConfig" />

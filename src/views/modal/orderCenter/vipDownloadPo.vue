@@ -1,6 +1,6 @@
 <template>
   <div style="width:400px;padding-right:20px">
-    <businessForm :form-config="pickorderFromConfig" />
+    <OmsForm :form-config="pickorderFromConfig" />
     <OmsButton :btn-config="pickorderBtnConfig" />
   </div>
 </template>

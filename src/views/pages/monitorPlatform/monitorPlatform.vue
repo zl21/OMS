@@ -247,9 +247,9 @@
 </template>
 
 <script>
-import businessButton from "burgeonComponents/businessButton";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import * as echarts from "echarts";
+import { OmsButton } from 'burgeonComponents'
 
 let dayBtnConifg = [
   {

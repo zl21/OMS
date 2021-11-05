@@ -18,13 +18,13 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfig" @keyDown="keyDown" />
+            <OmsForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
         </Panel>
       </Collapse>
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel v-show="showSubtablePart" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
+        <OmsLabel v-show="showSubtablePart" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
         <!-- 子表Part -->
         <div class="subtablePart">
           <OmsTable

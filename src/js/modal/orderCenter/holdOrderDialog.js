@@ -1,18 +1,16 @@
-import { OmsButton } from 'burgeonComponents'
-import loading from "burgeonComponents/loading";
-import { OmsForm as reForm } from 'burgeonComponents'
+import { OmsButton, OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {
-        reForm,
-    businessButton
+    reForm,
+    OmsButton
   },
   name: 'holdOrderDialog',
   props: ['componentData'],
   data() {
     const _this = this;
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       holdBtnClass: '',
       loading: false,
       formConfig: {

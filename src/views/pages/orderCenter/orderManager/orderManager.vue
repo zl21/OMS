@@ -2,7 +2,7 @@
   <div v-loading="loading" class="customized-list">
     <div class="customized-list-form"  :class="[Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '',tablename == 'OC_B_ORDER' && !isFolding ? 'returnChangeOrder' :'']">
       <!-- form组件 -->
-      <businessForm v-if="buttonInit" :form-config="formConfig" />
+      <OmsForm v-if="buttonInit" :form-config="formConfig" />
       <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']" ref="searchWarp">
         <dynamicSearch
           v-if="!isFolding && tablename == 'OC_B_ORDER'"
@@ -36,7 +36,7 @@
           :name="item.value"
         />
       </Tabs>
-      <businessAgTable
+      <OmsAgTable
         v-loading="agLoaing"
         :ag-table-config="agTableConfig"
         :options="options"

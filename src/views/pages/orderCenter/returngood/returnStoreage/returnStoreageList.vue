@@ -6,7 +6,7 @@
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="form totalHeight custom-form">
-      <businessForm :form-config="formConfig" class="searchList" />
+      <OmsForm :form-config="formConfig" class="searchList" />
       <loading :loading="isShowFromLoading" />
     </div>
     <div class="tableContent custom-table">

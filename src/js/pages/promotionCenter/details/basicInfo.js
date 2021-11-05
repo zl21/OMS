@@ -1,7 +1,7 @@
 // import dateUtil from "@/assets/js/__utils__/date";
 import BurgeonDate from '@/assets/js/__utils__/date';
 import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
-import { fkinputPlus as SingleBox, MultipleBox } from 'burgeonComponents'
+import { fkinputPlus as fkinput, SingleBox, MultipleBox } from 'burgeonComponents'
 groups.load();
 
 export default {

@@ -10,7 +10,7 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfig" />
+            <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
         <Panel
@@ -41,7 +41,7 @@
 
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           v-if="$route.params.customizedModuleId != 'New'"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

@@ -22,20 +22,20 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfig" @keyDown="keyDown" />
+            <OmsForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="panel_commodityDimension">
           <!-- 商品维度 -->
         {{vmI18n.t('panel_label.b6')}}
           <p slot="content">
-            <businessForm :form-config="formConfig2" @keyDown="keyDown" :key="fresh2"/>
+            <OmsForm :form-config="formConfig2" @keyDown="keyDown" :key="fresh2"/>
           </p>
         </Panel>
       </Collapse>
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"

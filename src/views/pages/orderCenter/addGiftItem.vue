@@ -10,7 +10,7 @@
 <template>
   <div class="customized-modal matchingDetails">
     <!-- <EasyMatrix :component-data="matrixData" /> -->
-    <businessForm :form-config="formConfig"></businessForm>
+    <OmsForm :form-config="formConfig"></OmsForm>
     <!-- businessButton -->
     <OmsButton class="absolute" :btn-config="searchBtn"></OmsButton>
     <div class="foot-table">

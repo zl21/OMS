@@ -1,6 +1,4 @@
-import buttons from 'burgeonComponents/businessButton.vue';
-import Aform from 'burgeonComponents/businessForm.vue';
-import { OmsTable as Atable } from 'burgeonComponents'
+import { OmsTable as Atable, OmsForm as Aform, OmsButton as buttons } from 'burgeonComponents'
 
 export default {
   inject: ['reload'],
@@ -11,7 +9,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       IMAGE: '', // 扫描图片
       load: true,
       clean: false, // 清空提示框

@@ -1,23 +1,19 @@
 <template>
-  <div class="jordanModal customized-modal">
-    <loading :loading="loading" />
+  <div class="jordanModal customized-modal" v-loading="loading">
     <!-- 修改物流 -->
     <div class="Modal-Form">
-      <businessForm :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
     </div>
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
-import businessButton from "burgeonComponents/businessButton";
-import businessForm from "burgeonComponents/businessForm";
-import loading from "burgeonComponents/loading";
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   components: {
-        OmsButton,
-    businessForm,
+    OmsButton,
+    OmsForm,
     OmsTable,
   },
   props: {
@@ -28,7 +24,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       formConfig: {
         formData: [
           {
@@ -49,7 +45,7 @@ export default {
               },
             ],
             itemdata: {
-              serviceId:'r3-cp',
+              serviceId: 'r3-cp',
               refcolval: {
                 fixcolumn: "CP_C_PHY_WAREHOUSE_ID",
                 expre: "equal",

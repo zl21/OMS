@@ -30,7 +30,7 @@
             />
           </p>
           <p slot="content">
-            <businessForm :form-config="formConfig" />
+            <OmsForm :form-config="formConfig" />
           </p>
           <div slot="content" class="clear"></div>
         </Panel>
@@ -46,7 +46,7 @@
       </Modal>
       <!-- tab切换 -->
       <div class="customized-detail-table">
-        <businessLabel
+        <OmsLabel
           :label-list="formConfig.formValue.group_type == '2' ? label.labelList : label.labelTagList"
           :label-default-value="label.labelValue"
           @labelClick="labelClick"

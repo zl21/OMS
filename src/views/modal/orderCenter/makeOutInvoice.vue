@@ -54,7 +54,7 @@
           {{ vmI18n.t("modalTips.zv") }}
         </span>
       </div>
-      <businessForm :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
     </div>
     <div
       v-if="invoiceFooterFlag"
@@ -64,7 +64,7 @@
         <!-- 收票信息 -->
         {{ vmI18n.t("form_label.ticket_info") }}
       </Divider>
-      <businessForm :form-config="formConfig2" />
+      <OmsForm :form-config="formConfig2" />
     </div>
     <OmsButton
       class="modalBth"
