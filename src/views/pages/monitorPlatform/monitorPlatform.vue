@@ -248,7 +248,7 @@
 
 <script>
 import dateUtil from "@/assets/js/__utils__/date.js";
-import * as echarts from "echarts";
+import initCdnCustomize from '@/config/mixins/initCdnCustomize';
 import { OmsButton } from 'burgeonComponents'
 
 let dayBtnConifg = [
@@ -292,6 +292,7 @@ export default {
   components: {
     OmsButton,
   },
+  mixins: [initCdnCustomize],
   data() {
     return {
       m2Loading: false,
