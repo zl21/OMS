@@ -12,7 +12,7 @@
 <style lang="less" scoped>
 </style>
 <script>
-  export default {
+ const loading = {
     props: {
       loading: {
         type: Boolean,
@@ -20,4 +20,5 @@
       }
     }
   };
+  export default loading
 </script>

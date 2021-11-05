@@ -33,9 +33,9 @@
   </div>
 </template>
 <script>
-  import buttonFkDialog from 'burgeonComponents/js/buttonFkDialog';
+  import ButtonFkDialog from 'burgeonComponents/js/buttonFkDialog';
 
-  export default buttonFkDialog;
+  export default ButtonFkDialog;
 </script>
 <style lang="less" scoped>
 @import "burgeonComponents/css/buttonFkDialog.less";

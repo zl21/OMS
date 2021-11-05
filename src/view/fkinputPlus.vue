@@ -80,7 +80,7 @@
 <script>
 // import objinput_dz from "./js/fkinput.js";
 // export default objinput_dz;
-export default {
+const fkinputPlus = {
   props: {
     itemdata: {
       type: Object
@@ -436,6 +436,8 @@ export default {
     /* ------------------- DropMultiSelectFilter组件事件 end  ------------------- */
   },
 }
+export default fkinputPlus
+
 </script>
 
 <style scoped lang="less">
