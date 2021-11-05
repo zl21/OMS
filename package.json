@@ -5,7 +5,7 @@
   "main": "burgeon.publish/businessComponents.min.js",
   "files": [
     "burgeon.publish"
-],
+  ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js"
@@ -31,7 +31,6 @@
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
-    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.1.0",
     "file-loader": "^6.2.0",
