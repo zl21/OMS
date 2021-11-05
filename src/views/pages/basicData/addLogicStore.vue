@@ -17,14 +17,14 @@
           <!-- 基础资料 -->
           {{ vmI18n.t('panel_label.basicData') }}
           <p slot="content">
-            <businessForm :form-config="formConfig" />
+            <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
         <Panel name="panel_businessInfo">
           <!-- 业务信息 -->
           {{ vmI18n.t('panel_label.ax') }}
           <p slot="content">
-            <businessForm :form-config="businessFormConfig" />
+            <OmsForm :form-config="businessFormConfig" />
           </p>
         </Panel>
       </Collapse>

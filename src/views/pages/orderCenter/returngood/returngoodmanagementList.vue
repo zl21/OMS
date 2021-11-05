@@ -11,11 +11,11 @@
     </div>
     <div class="returnForm totalHeight custom-form">
       <!-- form表单 -->
-      <businessForm v-if="resetForm" :form-config="formConfig" />
+      <OmsForm v-if="resetForm" :form-config="formConfig" />
     </div>
     <div class="salesTable custom-table">
       <!-- tab切换 -->
-      <businessLabel
+      <OmsLabel
         class="businessLabel totalHeight"
         :label-list="labelList"
         :label-default-value="labelDefaultValue"

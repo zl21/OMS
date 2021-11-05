@@ -1,4 +1,4 @@
-import { singleBox as SingleBox } from 'burgeonComponents'
+import { SingleBox } from 'burgeonComponents'
 
 export default {
   props: {

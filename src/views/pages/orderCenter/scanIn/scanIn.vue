@@ -20,7 +20,7 @@
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
         {{ vmI18n.t("panel_label.scanInfo") }}
       </div>
-      <businessForm :form-config="formConfig1" />
+      <OmsForm :form-config="formConfig1" />
     </div>
     <!-- 录入信息 -->
     <div class="scan_logg">
@@ -28,11 +28,11 @@
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
         {{ vmI18n.t("panel_label.enterInfo") }}
       </div>
-      <businessForm :form-config="formConfig2" />
+      <OmsForm :form-config="formConfig2" />
     </div>
     <!-- 特殊处理 -->
     <div class="scan_special">
-      <businessForm :form-config="formConfig3" />
+      <OmsForm :form-config="formConfig3" />
     </div>
     <!-- 扫描明细 -->
     <div class="scan_details">
@@ -51,7 +51,7 @@
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
         {{ vmI18n.t("panel_label.returnAndExchange_info") }}
       </div>
-      <businessForm :form-config="formConfig4" />
+      <OmsForm :form-config="formConfig4" />
     </div>
     <!-- 弹框 -->
     <div class="dilog">

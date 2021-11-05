@@ -13,14 +13,14 @@
             <!-- 基本信息 -->
             {{ vmI18n.t('common.baseInformation') }}
             <p slot="content">
-              <businessForm :form-config="information" />
+              <OmsForm :form-config="information" />
             </p>
           </Panel>
           <Panel name="2">
             <!-- 换货人信息 -->
             {{ vmI18n.t('panel_label.exchangeInfo') }}
             <p slot="content">
-              <businessForm :form-config="replacement" />
+              <OmsForm :form-config="replacement" />
             </p>
           </Panel>
           <Panel name="3">
@@ -104,7 +104,7 @@
       </div>
       <div class="salesTable custom-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           class="businessLabel"
           :label-list="labelList"
           :label-default-value="DefaultValue"
@@ -158,7 +158,7 @@
           @on-cancel="querycancel"
         >
           <div class="orderContent">
-            <businessForm :form-config="order.orderform" />
+            <OmsForm :form-config="order.orderform" />
             <OmsButton :btn-config="order.btn" />
           </div>
           <business-action-table

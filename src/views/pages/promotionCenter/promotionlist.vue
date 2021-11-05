@@ -2,7 +2,7 @@
   <!-- promactiqueryList -->
   <div class="customized-list" v-loading="loading">
     <div class="" :class="['customized-list-form','promotionForm',Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '']">
-      <businessForm :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
       <OmsButton :btn-config="formBtn" class="formBtn" />
     </div>
     <!-- 按钮 head_botton-->
@@ -26,7 +26,7 @@
             @on-page-size-change="pageSizeChange"
             @on-row-dblclick="handDblClick"
           /> -->
-          <businessAgTable
+          <OmsAgTable
             :ref="`agGridChild${index + 1}`"
             :ag-table-config="agTableConfig"
             :options="options"

@@ -12,14 +12,14 @@
             <!-- 基本信息 -->
             {{ vmI18n.t('common.baseInformation') }}
             <p slot="content">
-              <businessForm :form-config="formConfig" :key="formConfig.key"/>
+              <OmsForm :form-config="formConfig" :key="formConfig.key"/>
             </p>
           </Panel>
           <Panel v-show="showEx" name="2">
             <!-- 换货人信息 -->
             {{ vmI18n.t('panel_label.exchangeInfo') }}
             <p slot="content">
-              <businessForm :form-config="formConfigEx" :key="exFormKey"/>
+              <OmsForm :form-config="formConfigEx" :key="exFormKey"/>
             </p>
           </Panel>
           <Panel name="3">
@@ -92,7 +92,7 @@
       </div>
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel class="jordanLabel" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick"/>
+        <OmsLabel class="jordanLabel" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick"/>
         <div class="tableBox returnChangeOrderdetails">
           <returnChangeOrderdetails 
               :key="clearDetail"
@@ -114,16 +114,12 @@
 
 <script>
 // 退换货单详情
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import { setTimeout } from 'timers';
+import { OmsButton, OmsLabel, OmsForm, OmsTable } from 'burgeonComponents'
 import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import searchOOID from './searchOOID.vue'
 import returnChangeOrderdetails from './returnChangeOrderdetails.vue'
 import { valiObj, waterMarkMap } from './returnConfig.js'
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   // name: 'returnOrderAdd',
@@ -131,9 +127,9 @@ export default {
     returnChangeOrderdetails,
     searchOOID,
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessLabel,
+    OmsLabel,
   },
   data() {
     const validatePhoneNumber = BurgeonValidate.validatePhoneNumber;

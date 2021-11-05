@@ -23,7 +23,7 @@
             />
           </p>
           <p slot="content">
-            <businessForm
+            <OmsForm
               :form-config="formConfig"
               @keyDown="keyDown"
             />
@@ -34,7 +34,7 @@
           <!-- 日志 -->
           {{ vmI18n.t("common.journal") }}
           <p slot="content">
-            <businessForm :form-config="formConfigLog" />
+            <OmsForm :form-config="formConfigLog" />
           </p>
         </Panel>
         <Modal
@@ -54,7 +54,7 @@
         </Modal>
       </Collapse>
       <!-- tab切换 -->
-      <businessLabel
+      <OmsLabel
         :label-list="labelList"
         :label-default-value="labelDefaultValue"
         @labelClick="labelClick"

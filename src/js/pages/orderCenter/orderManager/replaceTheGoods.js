@@ -1,7 +1,5 @@
-// import businessForm from "burgeonComponents/businessForm";
-import { OmsButton } from 'burgeonComponents'
+import { OmsButton, OmsTable } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
@@ -22,7 +20,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default',
         btnsite: 'right',
@@ -149,7 +147,7 @@ export default {
         height: '350', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10 // 每页条数
       },
       selection: {}
@@ -157,13 +155,13 @@ export default {
   },
   methods: {
     // 选中某一项时触发
-    onSelect() {},
+    onSelect() { },
     // 取消选中某一项时触发
-    onSelectCancel() {},
+    onSelectCancel() { },
     // 点击全选时触发
-    onSelectAll() {},
+    onSelectAll() { },
     // 点击取消全选时触发
-    onSelectAllCancel() {},
+    onSelectAllCancel() { },
     // 单击某一行时触发
     onRowClick(row) {
       this.selection = row;
@@ -182,7 +180,7 @@ export default {
       this.tableConfig.pageSize = val;
       this.search();
     },
-    tableDeleteDetail() {},
+    tableDeleteDetail() { },
     async request(req) {
       const self = this;
       self.objid = req.objid || -1;
@@ -298,5 +296,5 @@ export default {
   mounted() {
     this.request(this.componentData);
   },
-  created() {}
+  created() { }
 };

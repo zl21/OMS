@@ -1,6 +1,6 @@
 <template>
   <div class="customized-modal" style="width:440px;">
-    <businessForm :form-config="downLoadFormConfig" />
+    <OmsForm :form-config="downLoadFormConfig" />
     <div class="timeBox">
       <!-- 修改时间 -->
       <label>{{ vmI18n.t('table_label.modificationTime') }}:</label>

@@ -9,9 +9,8 @@
 </template>
 
 <script>
-import reForm from "burgeonComponents/businessForm";
-import businessButton from "burgeonComponents/businessButton";
 import electronicSheetPrinting from "../inventoryCenter/electronicSheetPrinting.vue";
+import { OmsButton, OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {
@@ -23,7 +22,7 @@ export default {
   data() {
     const _this = this;
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       formConfig: {
         formData: [
           {

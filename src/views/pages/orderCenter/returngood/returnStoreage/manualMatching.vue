@@ -13,7 +13,7 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm
+            <OmsForm
               :form-config="information"
               @oneObjs="oneObjs"
             />
@@ -23,7 +23,7 @@
     </div>
     <div class="salesTable">
       <!-- tab切换 -->
-      <businessLabel
+      <OmsLabel
         class="businessLabel"
         :label-list="labelList"
         :label-default-value="DefaultValue"
@@ -54,7 +54,7 @@
         @on-cancel="querycancel"
       >
         <div class="orderContent">
-          <businessForm :form-config="order.orderform" />
+          <OmsForm :form-config="order.orderform" />
           <OmsButton :btn-config="order.btn" />
         </div>
         <OmsTable

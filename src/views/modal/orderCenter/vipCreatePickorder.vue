@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="customized-modal" style="width: 430px; padding-right: 20px">
-    <businessForm :form-config="pickorderFromConfig" />
+    <OmsForm :form-config="pickorderFromConfig" />
     <OmsButton class="modal-footer" :btn-config="pickorderBtnConfig" />
   </div>
 </template>

@@ -1,15 +1,13 @@
-import { OmsForm } from 'burgeonComponents';
-import { OmsDialog } from 'burgeonComponents'
+import { OmsForm, OmsDialog, OmsTable } from 'burgeonComponents';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
 // import publicDialogConfig from 'burgeonComponents/common/js/publicDialog'
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessDialog
+    OmsDialog
   },
   props: {
     componentData: {
@@ -32,7 +30,7 @@ export default {
   // },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       // 暂存选中数据
       selection: [],
       dialogs: DialogConfig.config(),
@@ -289,12 +287,12 @@ export default {
                     }
                   }
                 },
-                list.map(item =>h('Option', {
-                    props: {
-                      value: item.COLOR_ID || '',
-                      label: item.COLOR_NAME || ''
-                    }
-                  }))
+                list.map(item => h('Option', {
+                  props: {
+                    value: item.COLOR_ID || '',
+                    label: item.COLOR_NAME || ''
+                  }
+                }))
               );
             }
           },
@@ -340,12 +338,12 @@ export default {
                     }
                   }
                 },
-                list.map(item =>h('Option', {
-                    props: {
-                      value: item.SIZE_ID || '',
-                      label: item.SIZE_NAME || ''
-                    }
-                  }))
+                list.map(item => h('Option', {
+                  props: {
+                    value: item.SIZE_ID || '',
+                    label: item.SIZE_NAME || ''
+                  }
+                }))
               );
             }
           },
@@ -416,12 +414,12 @@ export default {
                       }
                     }
                   },
-                  self.islackstock.map(item =>h('Option', {
-                      props: {
-                        value: item.value,
-                        label: item.label
-                      }
-                    }))
+                  self.islackstock.map(item => h('Option', {
+                    props: {
+                      value: item.value,
+                      label: item.label
+                    }
+                  }))
                 );
               }
               const IS_LACKSTOCK = params.row.IS_LACKSTOCK === 1 ? '是' : '否';

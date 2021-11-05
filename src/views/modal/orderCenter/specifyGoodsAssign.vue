@@ -52,8 +52,7 @@
 <script>
 // import specifyGoodsAssign from '@/js/modal/orderCenter/specifyGoodsAssign';
 // export default specifyGoodsAssign;
-import businessButton from "burgeonComponents/businessButton";
-import inputP from "burgeonComponents/fkinputPlus.vue";
+import { fkinputPlus as inputP, OmsButton } from 'burgeonComponents'
 
 export default {
   components: {

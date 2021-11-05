@@ -1,6 +1,6 @@
 <template>
   <!-- JIT配货单-实缺拆分 -->
-  <div class="realDeficiencySplit"  v-loading="loading">
+  <div class="realDeficiencySplit" v-loading="loading">
     <!-- <loading :loading="loading" /> -->
     <OmsButton :btn-config="btnConfig" />
     <div slot="content">
@@ -18,10 +18,8 @@
 </template>
 
 <script>
-// import { OmsButton } from 'burgeonComponents'
-import myInput from 'burgeonComponents/fkinput.vue';
 import Vue from 'vue';
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, Fkinput as myInput, OmsButton } from 'burgeonComponents'
 
 Vue.component('drpInput', myInput);
 export default {
@@ -114,11 +112,11 @@ export default {
           buttons: [
             {
               text: '添加',
-              btnclick: () => {},
+              btnclick: () => { },
             },
             {
               text: $i18n.t('common.cancel'), // 取消,
-              btnclick: () => {},
+              btnclick: () => { },
             },
           ],
         },

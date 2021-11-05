@@ -17,13 +17,13 @@
           <!-- 基础信息 -->
           {{ vmI18n.t("other.basic_info") }}
           <p slot="content">
-            <businessForm :form-config="formConfig" />
+            <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
-        <businessLabel
+        <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"

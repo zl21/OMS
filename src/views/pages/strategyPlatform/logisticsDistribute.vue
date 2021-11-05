@@ -19,7 +19,7 @@
         <Panel name="panel_baseInfo">
           {{ baseInformation }}
           <div slot="content" class="logistics-top-form">
-            <businessForm :form-config="FormConfig" @keyDown="keyDown" />
+            <OmsForm :form-config="FormConfig" @keyDown="keyDown" />
           </div>
         </Panel>
       </Collapse>
@@ -27,7 +27,7 @@
       <!-- ark 组件 -->
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"
@@ -36,7 +36,7 @@
           <div slot="content">
             <div slot="content" class="logistics-top-form formlout">
               <div class="customized-detail-footfrom">
-                <businessForm :form-config="formConfig" @keyDown="keyDown" />
+                <OmsForm :form-config="formConfig" @keyDown="keyDown" />
               </div>
 
               <div class="customized-detail-footbtn">

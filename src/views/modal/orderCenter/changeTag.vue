@@ -3,16 +3,22 @@
   <div class="changeTag" v-loading="loading">
     <OmsButton :btn-config="btnConfig" />
     <div slot="content">
-      <OmsTable :jordan-table-config="tableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" />
+      <OmsTable
+        :jordan-table-config="tableConfig"
+        @on-page-change="pageChange"
+        @on-page-size-change="pageSizeChange"
+        @on-select="onSelect"
+        @on-select-cancel="onSelectCancel"
+        @on-select-all="onSelectAll"
+        @on-select-all-cancel="onSelectAllCancel"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { OmsButton } from 'burgeonComponents'
-import myInput from 'burgeonComponents/fkinput.vue';
+import { OmsButton, Fkinput as myInput, OmsTable } from 'burgeonComponents'
 import Vue from 'vue';
-import { OmsTable } from 'burgeonComponents'
 
 Vue.component('drpInput', myInput);
 export default {

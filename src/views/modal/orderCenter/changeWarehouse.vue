@@ -1,7 +1,7 @@
 <template>
   <div class="customized-modal" v-loading="loading">
     <loading :loading="loading" />
-    <businessForm :form-config="formConfig" />
+    <OmsForm :form-config="formConfig" />
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
@@ -9,16 +9,13 @@
 // import changeWarehouse from "@/js/modal/orderCenter/changeWarehouse";
 
 // export default changeWarehouse;
-import businessForm from "burgeonComponents/businessForm";
-import businessButton from "burgeonComponents/businessButton";
-import loading from "burgeonComponents/loading";
 import listeningToKeydownMixin from "@/assets/js/mixins/listeningToKeydown.js";
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
-        businessForm,
+    OmsForm,
     OmsButton,
     OmsTable,
   },
@@ -31,7 +28,7 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       isShowFromLoading: false, // 加载
       zIndex: 2500,
       totalRowCount: 0,
@@ -96,7 +93,7 @@ export default {
               },
             ],
             itemdata: {
-              serviceId:'r3-cp',
+              serviceId: 'r3-cp',
               colid: 171251,
               colname: "CP_C_PHY_WAREHOUSE_ID",
               name: "仓库名称",

@@ -3,7 +3,7 @@
     :class="['dialogForm', 'customized-modal', { 'fix-height': componentData.type == 'warehouseWarrant' }]"
     v-loading="loading">
     <div class="subtablePart">
-      <businessForm
+      <OmsForm
         v-if="componentData.dialogConfig.length == 1"
         :form-config="componentData.dialogConfig[0].formConfig"
       />
@@ -18,7 +18,7 @@
         >
           {{ item.title }}
           <p slot="content">
-            <businessForm :form-config="item.formConfig" />
+            <OmsForm :form-config="item.formConfig" />
           </p>
         </Panel>
       </Collapse>

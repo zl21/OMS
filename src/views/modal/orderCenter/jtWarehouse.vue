@@ -1,6 +1,6 @@
 <template>
   <div style="width: 400px; padding-right: 20px">
-    <businessForm :form-config="warehouseManagementFromConfig" />
+    <OmsForm :form-config="warehouseManagementFromConfig" />
     <OmsButton :btn-config="warehouseManagementBtnConfig" />
   </div>
 </template>

@@ -7,7 +7,7 @@
           <!-- {{ vmI18n.t("other.basic_info") }} -->
           基础信息
           <p slot="content">
-            <businessForm :form-config="formConBasic" :key="formKey1" />
+            <OmsForm :form-config="formConBasic" :key="formKey1" />
           </p>
         </Panel>
       </Collapse>
@@ -17,17 +17,16 @@
 
 <script>
 import BurgeonDate from '@/assets/js/__utils__/date';
-import fkinput from 'burgeonComponents/fkinputPlus.vue';
 import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
-import businessForm from "burgeonComponents/businessForm";
+import { fkinputPlus as fkinput, OmsForm } from 'burgeonComponents'
 groups.load();
 
 export default {
   name: 'BasicInfoP',
   components: {
     fkinput,
-    businessForm,
+    OmsForm,
   },
   data() {
     return {

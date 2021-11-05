@@ -18,13 +18,13 @@
         <Panel name="panel_baseInfo">
           {{ baseInformation }}
           <p slot="content">
-            <businessForm :form-config="formConfig" @keyDown="keyDown" />
+            <OmsForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
         </Panel>
       </Collapse>
 
       <div v-if="pageShow" class="customized-detail-table">
-        <businessLabel
+        <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"

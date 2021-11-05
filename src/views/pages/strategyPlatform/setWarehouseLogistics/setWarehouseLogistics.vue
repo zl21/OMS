@@ -12,7 +12,7 @@
             <!-- 基本信息 -->
             {{ vmI18n.t("common.baseInformation") }}
             <p slot="content">
-              <businessForm :form-config="information" />
+              <OmsForm :form-config="information" />
             </p>
           </Panel>
         </Collapse>
@@ -22,7 +22,7 @@
         class="tableContent custom-table"
       >
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           class="jordanLabel"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

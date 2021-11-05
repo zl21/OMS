@@ -8,7 +8,7 @@
         <p>平台特殊:</p>
       </div>
       <div class="batch_form">
-        <businessForm :form-config="formConfig" />
+        <OmsForm :form-config="formConfig" />
       </div>
     </div>
     <div class="batch_button">

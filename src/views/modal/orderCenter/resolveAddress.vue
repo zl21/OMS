@@ -30,7 +30,7 @@
          </Tooltip>
       </FormItem>
       <!-- 新地址 -->
-      <businessForm :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
       <!-- 收货人 -->
       <FormItem :label="vmI18n.t('form_label.consignee')" prop="receiver_name">
         <Input

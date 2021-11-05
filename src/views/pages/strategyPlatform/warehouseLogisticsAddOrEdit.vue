@@ -18,14 +18,14 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :key="forceReload" :form-config="formConfig" />
+            <OmsForm :key="forceReload" :form-config="formConfig" />
           </p>
         </Panel>
       </Collapse>
 
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           v-show="this.ID || isAuto"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
@@ -41,7 +41,7 @@
                 : '',
             ]"
           >
-            <businessForm
+            <OmsForm
               v-if="labelDefaultValue == 'logistics'"
               :form-config="logisticsTableFormConfig"
             >
@@ -61,7 +61,7 @@
                 >
                 </DropMultiSelectFilter>
               </template>
-            </businessForm>
+            </OmsForm>
             <OmsButton
               v-if="labelDefaultValue == 'logistics'"
               :btn-config="logisticsTableButtonConfig"

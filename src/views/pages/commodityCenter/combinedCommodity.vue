@@ -15,7 +15,7 @@
             <Panel name="1">
               <!-- 基本信息 -->
               {{ vmI18n.t('common.baseInformation') }}
-              <businessForm
+              <OmsForm
                 slot="content"
                 :form-config="formConfig1"
               />
@@ -23,7 +23,7 @@
             <Panel name="2">
               <!-- 日志 -->
               {{ vmI18n.t('common.journal') }}
-              <businessForm
+              <OmsForm
                 slot="content"
                 :form-config="formConfig2"
               />
@@ -32,7 +32,7 @@
         </div>
         <div class="commodity-detail-box">
           <div class="bar-code-detail">
-            <businessLabel
+            <OmsLabel
               :label-default-value="tabconfig1.labelDefaultValue"
               :label-list="tabconfig1.labelList"
             />
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="combined-commodity-detail">
-            <businessLabel
+            <OmsLabel
               :label-default-value="tabconfig2.labelDefaultValue"
               :label-list="tabconfig2.labelList"
             />
@@ -105,7 +105,7 @@
               <Panel name="1">
                 <!-- 基本信息 -->
                 {{ vmI18n.t('common.baseInformation') }}
-                <businessForm
+                <OmsForm
                   slot="content"
                   :form-config="formConfig1"
                 />
@@ -113,7 +113,7 @@
               <Panel name="2">
                 <!-- 日志 -->
                 {{ vmI18n.t('common.journal') }}
-                <businessForm
+                <OmsForm
                   slot="content"
                   :form-config="formConfig2"
                 />
@@ -122,7 +122,7 @@
           </div>
           <div class="commodity-detail-box">
             <div class="bar-code-detail">
-              <businessLabel
+              <OmsLabel
                 :label-default-value="tabconfig1.labelDefaultValue"
                 :label-list="tabconfig1.labelList"
               />
@@ -142,7 +142,7 @@
               </div>
             </div>
             <div class="combined-commodity-detail">
-              <businessLabel
+              <OmsLabel
                 :label-default-value="tabconfig2.labelDefaultValue"
                 :label-list="tabconfig2.labelList"
               />
