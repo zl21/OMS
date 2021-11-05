@@ -4,8 +4,7 @@ import { OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {
-    loading,
-    reForm,
+        reForm,
     businessButton
   },
   name: 'holdOrderDialog',

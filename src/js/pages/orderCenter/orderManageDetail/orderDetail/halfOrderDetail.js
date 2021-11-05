@@ -7,7 +7,6 @@ import matrixInput from 'allpages/orderCenter/orderManageDetail/orderDetail/matr
 import pageNation from 'framework/components/page/pagenation.vue';
 import R3 from '@syman/burgeon-r3';
 import port from '@/config/config/orderDetailConnector.js';
-import loading from 'burgeonComponents/loading';
 
 export default {
   props: {

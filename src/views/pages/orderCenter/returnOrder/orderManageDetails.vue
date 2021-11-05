@@ -63,7 +63,7 @@
 <script>
   import { OmsButton } from 'burgeonComponents'
   import businessLabel from 'burgeonComponents/businessLabel';
-  import businessDialog from 'burgeonComponents/businessDialog';
+  import { OmsDialog } from 'burgeonComponents'
   import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
   import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
   import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';

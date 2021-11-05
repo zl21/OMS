@@ -1,7 +1,4 @@
-import reButton from 'burgeonComponents/businessButton';
-import reDialog from 'burgeonComponents/businessDialog';
-import loading from 'burgeonComponents/loading';
-import { OmsTable as reTable } from 'burgeonComponents'
+import { OmsTable as reTable, OmsButton as reButton, OmsDialog as reDialog } from 'burgeonComponents'
 
 export default {
   components: {
@@ -12,9 +9,9 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       pageConfig: {},
-      loading:false,
+      loading: false,
       btnConfig: {
         typeAll: 'default',
         buttons: [
@@ -71,26 +68,26 @@ export default {
             title: $i18n.t('table_label.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
-                h(
-                  'Button',
-                  {
-                    props: {
-                      type: 'error',
-                      size: 'small',
-                      ghost: true
-                    },
-                    style: {
-                      marginRight: '5px'
-                    },
-                    on: {
-                      click: () => {
-                        this.replaceChange(params);
-                      }
-                    }
+              h(
+                'Button',
+                {
+                  props: {
+                    type: 'error',
+                    size: 'small',
+                    ghost: true
                   },
-                  params.row.replaceStatus ? '撤回' : '替换'
-                )
-              ])
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.replaceChange(params);
+                    }
+                  }
+                },
+                params.row.replaceStatus ? '撤回' : '替换'
+              )
+            ])
           }
         ],
         data: []
@@ -343,9 +340,9 @@ export default {
       this.dialogTableConfig.current = pagingData.current;
     },
     // 导入
-    tableImport() {},
+    tableImport() { },
     // 导出
-    tableExport() {},
+    tableExport() { },
     // 切换分页的个数
     onPageSizeChange(val) {
       this.dialogTableConfig.pageSize = val;

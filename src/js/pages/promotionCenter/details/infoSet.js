@@ -4,7 +4,7 @@ import ButtonFkDialog from 'burgeonComponents/buttonFkDialog.vue';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 import { OmsButton } from 'burgeonComponents'
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
@@ -15,7 +15,7 @@ export default {
     detailtable,
     detailtabs,
     SingleBox,
-    businessDialog,
+    OmsDialog,
     meetConditions,
     ButtonFkDialog
   },

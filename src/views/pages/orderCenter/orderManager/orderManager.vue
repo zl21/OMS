@@ -67,7 +67,7 @@
         />
       </p>
     </Modal>
-    <businessDialog
+    <OmsDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
       :component-data="publicBouncedConfig.componentData"
@@ -86,7 +86,7 @@
       :width="publicBouncedConfig.width"
     />
     <!-- 导入 -->
-    <businessDialog
+    <OmsDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
       :draggable="importTable.draggable"

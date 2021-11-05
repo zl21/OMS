@@ -1,17 +1,13 @@
-import { OmsForm } from 'burgeonComponents';
-import { OmsButton } from 'burgeonComponents'
+import { OmsForm, OmsButton, subTable, OmsTable, OmsLabel } from 'burgeonComponents';
 import service from '@/service/index';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import subTable from 'burgeonComponents/subTable';
-import businessLabel from 'burgeonComponents/businessLabel';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessForm,
+    OmsForm,
     OmsButton,
-    businessLabel,
+    OmsLabel,
     OmsTable,
     subTable
   },
@@ -22,13 +18,13 @@ export default {
       collapse: 'panel_baseInfo',
       changeCount: 0, //判断数据是否修改过
       value: [1, 2],
-      baseInformation:$i18n.t('common.baseInformation'),
+      baseInformation: $i18n.t('common.baseInformation'),
       id: '',
       defaultColumn: 2,
       startindex: 0, //分页
       modalTitle: $i18n.t('form_label.za'), //'添加排除区域', // 弹出窗标题！
       modal1: false, // 弹窗开关
-      btnSave:$i18n.t('btn.save'),
+      btnSave: $i18n.t('btn.save'),
       btnBack: $i18n.t('btn.back'),
       btnConfig: {
         btnsite: 'right', // 按钮对齐方式
@@ -107,7 +103,7 @@ export default {
             }
           }, {
             text: '删除区域',
-            type:"warning",
+            type: "warning",
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_deleteArea",
             disabled: false, // 按钮禁用控制
@@ -152,7 +148,7 @@ export default {
                 this.btnConfig2.buttons[3].isShow = true
 
               } else {
-                
+
                 item.item.required = true
                 this.modalTitle = '添加排除区域';
                 this.tableConfig.columns[2].title = '排除省份';
@@ -227,7 +223,7 @@ export default {
             width: '8',
             disabled: true,
             switchChange: () => {
-             
+
             }
           }
         ],
@@ -585,7 +581,7 @@ export default {
     },
     queryAllCheckedProvince() {
       let data = {
-        ID: this.$route.params.customizedModuleId == "New" ? "-1":this.$route.params.customizedModuleId ,
+        ID: this.$route.params.customizedModuleId == "New" ? "-1" : this.$route.params.customizedModuleId,
         AREA_RANGE_TYPE: this.AliasFormConfig.formValue.REGION_TYPE
       }
       service.strategyPlatform.queryAllCheckedProvince(data).then(res => {
@@ -929,7 +925,7 @@ export default {
       });
     },
     fnselectAll(v) {
-  
+
       this.tableSelectArr = v
     },
     querList(data, fixedcolumnsData) {

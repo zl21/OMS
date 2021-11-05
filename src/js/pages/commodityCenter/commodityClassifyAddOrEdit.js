@@ -1,28 +1,22 @@
 /**
  * 商品分类
  */
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, subTable as orderItem, OmsLabel, OmsTable } from 'burgeonComponents'
 import dateUtil from '@/assets/js/__utils__/date.js';
-import orderItem from 'burgeonComponents/subTable';
-import loading from 'burgeonComponents/loading';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     orderItem,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsTable,
-    loading,
   },
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       fresh2: 0,
       subTableConfig: {},
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
@@ -301,7 +295,7 @@ export default {
         height: '300', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         totalData: [],
         selectionData: [], // 选中的数据
@@ -354,7 +348,7 @@ export default {
           typeAll: 'default',
           buttons: [{
             webname: 'CLASSIFY_AddDetailBtn',
-            type:'primary',
+            type: 'primary',
             text: $i18n.t('btn.increase'), //'添加',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -363,7 +357,7 @@ export default {
           },
           {
             webname: 'CLASSIFY_DeleteDetailBtn',
-            type:'warning',
+            type: 'warning',
             text: $i18n.t('btn.delete'), // 删除
             btnclick: () => {
               this.deleteAttrValue();
@@ -426,7 +420,7 @@ export default {
           });
         });
         this.cusAttrConfig.key += 1;
-        console.log('this.cusAttrConfig.businessButtonConfig.buttons::',this.cusAttrConfig.businessButtonConfig.buttons);
+        console.log('this.cusAttrConfig.businessButtonConfig.buttons::', this.cusAttrConfig.businessButtonConfig.buttons);
       });
     },
     /* -------------------- 详情初始化 start -------------------- */
@@ -452,7 +446,7 @@ export default {
         self.formConfig2 = $omsUtils.transformForm(data.PsCProClassify, self.formConfig2, inputArr2, drpArr2);
         self.cusAttrConfig.data = data.PsCProClassifyItems;
         // 特别地（规格名称赋值）
-        const specialObj = {'PS_C_SPEC_GROUP_ENAME1':'PS_C_SPEC_GROUP_ID1', 'PS_C_SPEC_GROUP_ENAME2':'PS_C_SPEC_GROUP_ID2', 'PS_C_SPEC_GROUP_ENAME3':'PS_C_SPEC_GROUP_ID2'};
+        const specialObj = { 'PS_C_SPEC_GROUP_ENAME1': 'PS_C_SPEC_GROUP_ID1', 'PS_C_SPEC_GROUP_ENAME2': 'PS_C_SPEC_GROUP_ID2', 'PS_C_SPEC_GROUP_ENAME3': 'PS_C_SPEC_GROUP_ID2' };
         for (const key in specialObj) {
           this.formConfig2.formData.find(it => it.colname == key).itemdata.pid = data.PsCProClassify[specialObj[key]] ? data.PsCProClassify[specialObj[key]] : '';
         }
@@ -485,7 +479,7 @@ export default {
     async addAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.businessFormConfig.formData[0].itemdata.valuedata.length) {
-        self.$Message.warning( $i18n.t('modalTips.kk') );
+        self.$Message.warning($i18n.t('modalTips.kk'));
         return false;
       }
       this.loading = true;
@@ -513,7 +507,7 @@ export default {
     async deleteAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.selectionData.length) {
-        self.$Message.warning( $i18n.t('modalTips.ka')  );
+        self.$Message.warning($i18n.t('modalTips.ka'));
         return false;
       }
       const delIDS = [];
@@ -627,7 +621,7 @@ export default {
         tableId: 10091,
         type: 'S',
         tableName: 'PS_C_PRO_CLASSIFY',
-        label:   $i18n.t('menu.ac'), //'商品分类',
+        label: $i18n.t('menu.ac'), //'商品分类',
         back: true,
       });
     },

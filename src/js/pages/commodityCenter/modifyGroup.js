@@ -2,25 +2,17 @@
 /**
  * 组合商品
  */
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-
+import { OmsButton, OmsForm, OmsLabel, subTable } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-// import comUtils from '@/assets/js/__utils__/common.js';
-import subTable from 'burgeonComponents/subTable';
-// import ImageUpload from 'arkui_BCL/ImageUpload';
 import modifycurrentLabel from '@/assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     subTable,
     OmsTable,
-    // ImageUpload
   },
   mixins: [new modifycurrentLabel()],
   computed: {

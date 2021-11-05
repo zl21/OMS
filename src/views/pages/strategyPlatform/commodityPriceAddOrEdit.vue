@@ -40,7 +40,7 @@
             :component-data="subTableConfig"
           />
 
-          <businessDialog
+          <OmsDialog
             :closable="importTable.closable"
             :component-data="importTable.componentData"
             :draggable="importTable.draggable"

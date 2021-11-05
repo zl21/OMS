@@ -1,13 +1,10 @@
-import businessButton from "burgeonComponents/businessButton";
-import businessForm from "burgeonComponents/businessForm";
-import loading from 'burgeonComponents/loading';
+import { OmsButton, OmsForm } from 'burgeonComponents'
 
 export default {
   name: "addAliasOrRegion",
   components: {
     OmsButton,
-    businessForm,
-    loading,
+    OmsForm,
   },
   data() {
     return {

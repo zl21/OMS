@@ -67,7 +67,7 @@
       </Modal>
     </div>
     <!-- 退单编号-->
-    <businessDialog
+    <OmsDialog
       :title="returnNumber.confirmTitle"
       :title-align="returnNumber.titleAlign"
       :width="returnNumber.width"

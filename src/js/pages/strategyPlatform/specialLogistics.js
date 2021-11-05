@@ -1,22 +1,15 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-// import loading from 'burgeonComponents/loading';
-import businessLabel from 'burgeonComponents/businessLabel';
-import switchList from 'burgeonComponents/switchList';
+import { OmsButton, OmsForm, OmsTable, switchList, subTable,OmsLabel } from 'burgeonComponents'
 import dateUtil from '@/assets/js/__utils__/date.js';
-import subTable from 'burgeonComponents/subTable';
-
 import axios from 'axios';
 import service from '@/service/index';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'specialLogistics',
   components: {
     OmsButton,
-    businessLabel,
-    businessForm,
+    OmsLabel,
+    OmsForm,
     switchList,
     OmsTable,
     subTable
@@ -73,10 +66,10 @@ export default {
         tablename: '',
         objid: '',
       },
-      baseInformation:$i18n.t('common.baseInformation'),
-      meet_conditions:$i18n.t('form_label.meet_conditions'),
-      increase:$i18n.t('btn.increase'),
-      cancel:$i18n.t('common.cancel'),
+      baseInformation: $i18n.t('common.baseInformation'),
+      meet_conditions: $i18n.t('form_label.meet_conditions'),
+      increase: $i18n.t('btn.increase'),
+      cancel: $i18n.t('common.cancel'),
       // tab切换配置
       labelList: [
         {
@@ -140,7 +133,7 @@ export default {
           }
         ]
       },
-     
+
       formConfig: {
         formData: [
 
@@ -666,7 +659,7 @@ export default {
               oneObj: val => {
                 val[0] && this.cpCPhyWarehousedata.push(val[0]);
                 this.WarehouseItemListobj.cpCPhyWarehouseEname = this.tableConfig2.businessFormConfig.formData[0].itemdata.pid;
-  
+
                 // 选中触发事件
               }
             },
@@ -698,7 +691,7 @@ export default {
                 pid: '' // 啥 ？？？
               },
               oneObj: val => {
-  
+
                 val[0] && this.cpCLogisticsdata.push(val[0]);
                 // 选中触发事件
                 this.WarehouseItemListobj.cpCLogisticsEname = this.tableConfig2.businessFormConfig.formData[1].itemdata.pid;
@@ -709,22 +702,22 @@ export default {
           formValue: {},
           ruleValidate: {}
         },
-        businessButtonConfig:{
-            typeAll: 'default',
-            buttons: [
-              {
-                type: 'primary',
-                text: $i18n.t('btn.increase'),//'添加',
-                disabled: false,
-                btnclick: this.foottable
-              },
-              {
-                type: 'warning',
-                text: $i18n.t('btn.delete'), // 删除
-                disabled: false,
-                btnclick: this.deleteLogistics
-              }
-            ]
+        businessButtonConfig: {
+          typeAll: 'default',
+          buttons: [
+            {
+              type: 'primary',
+              text: $i18n.t('btn.increase'),//'添加',
+              disabled: false,
+              btnclick: this.foottable
+            },
+            {
+              type: 'warning',
+              text: $i18n.t('btn.delete'), // 删除
+              disabled: false,
+              btnclick: this.deleteLogistics
+            }
+          ]
         },
         indexColumn: false,
         isShowSelection: false,
@@ -756,7 +749,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         current: 1,
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
       tableConfig3: {
@@ -817,7 +810,7 @@ export default {
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
         current: 1,
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
       },
       columnsCity: [
@@ -1004,7 +997,7 @@ export default {
           this.queryLogisticsWarehousePages();
         });
       } else {
-        this.$Message.warning( $i18n.t('modalTips.ja'));
+        this.$Message.warning($i18n.t('modalTips.ja'));
       }
     },
     //商品属性删除
@@ -1253,7 +1246,7 @@ export default {
         for (let y in this.formConfighead.formValue) {
           if (key == y) {
             if (!this.formConfighead.formValue[key] && this.querfrom(this.formConfighead.formData, key).style != null) {
-              this.$Message.warning( $i18n.t('modalTips.hg') + this.querfrom(this.formConfighead.formData, key).label + '!');
+              this.$Message.warning($i18n.t('modalTips.hg') + this.querfrom(this.formConfighead.formData, key).label + '!');
               return;
             }
           }
@@ -1261,7 +1254,7 @@ export default {
       }
 
       if (this.formConfig.formValue.billType.length == 0) {
-        this.$Message.warning( $i18n.t('modalTips.jc'));
+        this.$Message.warning($i18n.t('modalTips.jc'));
         return;
       }
 
@@ -1269,7 +1262,7 @@ export default {
         this.$Message.warning($i18n.t('modalTips.jd'));
         return;
       }
-      
+
       //校验包裹属性
       let listdata = this.switchListdata.list;
       for (let v of listdata) {
@@ -1279,7 +1272,7 @@ export default {
             return;
           }
           if (v.value2 < v.value) {
-            this.$Message.warning( $i18n.t('modalTips.jf'));
+            this.$Message.warning($i18n.t('modalTips.jf'));
             return;
           }
         }
@@ -1390,7 +1383,7 @@ export default {
               this.$store.commit('global/tabOpen', {
                 type: 'C',
                 url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}`,
-                label:$i18n.t('panel_label.an'), //"特殊物流方案新增",
+                label: $i18n.t('panel_label.an'), //"特殊物流方案新增",
                 customizedModuleName: this.customizedModuleName,
                 customizedModuleId: res.data.data.objId
               })
@@ -1479,7 +1472,7 @@ export default {
         }
         this.modal3 = false;
       } else {
-        this.$Message.warning($i18n.t('modalTips.jh') );
+        this.$Message.warning($i18n.t('modalTips.jh'));
       }
 
 
@@ -1558,8 +1551,8 @@ export default {
     },
     fnselect() {
       if (this.isactive == 'Y') {
-        this.$Message.warning( $i18n.t('modalTips.ji'))
-          //'启用状态，不可编辑！');
+        this.$Message.warning($i18n.t('modalTips.ji'))
+        //'启用状态，不可编辑！');
         return;
       }
       this.specialAssignLogisticsAddressItemList = []

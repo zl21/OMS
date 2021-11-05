@@ -16,8 +16,7 @@ import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    loading,
-    OmsButton,
+        OmsButton,
     businessForm,
     OmsTable,
   },

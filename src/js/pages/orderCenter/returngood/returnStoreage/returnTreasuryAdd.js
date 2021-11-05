@@ -1,32 +1,22 @@
-
-
-
-
-
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsTable, OmsLabel } from 'burgeonComponents'
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import loading from 'burgeonComponents/loading';
-import { OmsTable } from 'burgeonComponents'
-
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
     OrderItem,
-    businessLabel,
+    OmsLabel,
     loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       loading: false,
       openDefault: [1], // 默认展开
       returnSelectData: [], // 列表选中数据
@@ -577,20 +567,20 @@ export default {
     this.$nextTick(() => {
       if (this.$route.query.id === -1) {
         // 新增 或者退货转换货单状态
-        let webnameArr = ['ManualMatching_save','Mismatchingmandatorymatching_return'];
+        let webnameArr = ['ManualMatching_save', 'Mismatchingmandatorymatching_return'];
         let buttonArr = []
         this.btnConfig.buttons.forEach((element) => {
-          if(element.webname && webnameArr.includes(element.webname)){
+          if (element.webname && webnameArr.includes(element.webname)) {
             buttonArr.push(element);
           }
         });
         this.btnConfig.buttons = buttonArr;
       } else {
-        let webnameArr = ['ManualMatching_save','ManualMatching_tuihuoruku','Mismatchingmandatorymatching_cuofa','Mismatchingmandatorymatching_return'];
+        let webnameArr = ['ManualMatching_save', 'ManualMatching_tuihuoruku', 'Mismatchingmandatorymatching_cuofa', 'Mismatchingmandatorymatching_return'];
         let buttonArr = []
         console.log(this.btnConfig.buttons);
         this.btnConfig.buttons.forEach((element) => {
-          if(element.webname && webnameArr.includes(element.webname)){
+          if (element.webname && webnameArr.includes(element.webname)) {
             buttonArr.push(element);
           }
         });
@@ -1047,7 +1037,7 @@ export default {
       this.jordanTableConfig.data[this.index].OC_B_RETURN_ORDER_ID = data;
     },
     // 取消
-    querycancel() {},
+    querycancel() { },
     // 切换tab
     labelClick(item, index) {
       console.log(item, index);

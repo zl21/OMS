@@ -1,7 +1,6 @@
 // 额外退款新增/编辑、已发货退款编辑  共用此组件
-import reButton from 'burgeonComponents/businessButton';
 import refundAfterShipment from './constants/refundAfterShipment';
-import { OmsTable as reTable, OmsForm as reForm } from 'burgeonComponents'
+import { OmsTable as reTable, OmsForm as reForm, OmsButton as reButton } from 'burgeonComponents'
 
 export default {
   components: {
@@ -11,7 +10,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       sessionStorageData: '',
       IMAGE: '', // 图片
       imgIndex: 0, // 当前操作图片位置
@@ -511,7 +510,7 @@ export default {
                 this.sellerRemarkValueChange('returnType', data.valuedata);
               }
             },
-            InputEnter: () => {},
+            InputEnter: () => { },
           },
         ],
       },
@@ -861,7 +860,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         current: '', // 当前页
       },
@@ -1129,7 +1128,7 @@ export default {
       }
     },
     // 取消
-    querycancel() {},
+    querycancel() { },
     onCurrentChange(val) {
       this.selectData = val;
     },
@@ -1269,8 +1268,8 @@ export default {
       const data = {};
       data.objId =
         self.$route.params.customizedModuleId === 'New' ||
-        self.$route.query.cid ||
-        self.$route.query.oid
+          self.$route.query.cid ||
+          self.$route.query.oid
           ? -1
           : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
@@ -1686,7 +1685,7 @@ export default {
         });
       }
     },
-    addItemCancel() {},
+    addItemCancel() { },
     // 新增明细表格数据单多选操作
     onSelect(e) {
       this.addItem.addList = e;
@@ -2040,17 +2039,12 @@ export default {
       }
       // 卖家备注数据补偿
       this.sellerRemarkCompensation();
-      this.reForm.config[index].item.props.value = `${
-        sellerRemarkData.USER_NICK
-      }-${sellerRemarkData.VIP_PHONE}${$i18n.t('modalTips.j7')}${
-        sellerRemarkData.SOURCE_CODE
-      }${$i18n.t('modalTips.j8')}${
-        sellerRemarkData.OC_B_RETURN_TYPE_ENAME
-      }${$i18n.t('modalTips.j9')}${
-        sellerRemarkData.AMT_RETURN_APPLY || 0
-      }${$i18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${
-        sellerRemarkData.BUYER_ALIPAY_NO
-      }${$i18n.t('modalTips.k1')}`;
+      this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK
+        }-${sellerRemarkData.VIP_PHONE}${$i18n.t('modalTips.j7')}${sellerRemarkData.SOURCE_CODE
+        }${$i18n.t('modalTips.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME
+        }${$i18n.t('modalTips.j9')}${sellerRemarkData.AMT_RETURN_APPLY || 0
+        }${$i18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO
+        }${$i18n.t('modalTips.k1')}`;
       // 亲，您好！您的订单号
       // 因为
       // 原因，给您申请
@@ -2123,17 +2117,12 @@ export default {
       sellerRemarkData.AMT_RETURN_APPLY = newValue;
       // 卖家备注数据补偿
       this.sellerRemarkCompensation();
-      this.reForm.config[index].item.props.value = `${
-        sellerRemarkData.USER_NICK
-      }-${sellerRemarkData.VIP_PHONE}${$i18n.t('modalTips.j7')}${
-        sellerRemarkData.SOURCE_CODE
-      }${$i18n.t('modalTips.j8')}${
-        sellerRemarkData.OC_B_RETURN_TYPE_ENAME
-      }${$i18n.t('modalTips.j9')}${
-        sellerRemarkData.AMT_RETURN_APPLY || 0
-      }${$i18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${
-        sellerRemarkData.BUYER_ALIPAY_NO
-      }${$i18n.t('modalTips.k1')}`;
+      this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK
+        }-${sellerRemarkData.VIP_PHONE}${$i18n.t('modalTips.j7')}${sellerRemarkData.SOURCE_CODE
+        }${$i18n.t('modalTips.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME
+        }${$i18n.t('modalTips.j9')}${sellerRemarkData.AMT_RETURN_APPLY || 0
+        }${$i18n.t('modalTips.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO
+        }${$i18n.t('modalTips.k1')}`;
       // 亲，您好！您的订单号
       // 因为
       // 原因，给您申请

@@ -1,27 +1,22 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import aTable from 'burgeonComponents/businessAgTable';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsButton, OmsForm, OmsDialog, OmsLabel, OmsAgTable as aTable } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import customPagingMixins from '@/assets/js/mixins/customPaging';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import loading from 'burgeonComponents/loading';
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     aTable,
-    businessLabel,
-    businessDialog,
+    OmsLabel,
+    OmsDialog,
     loading
   },
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       allTableArr: [],
       selectArr: [],
       // 弹框配置 导入
@@ -328,7 +323,7 @@ export default {
         ],
         formValue: {},
         flodClick() {
-          setTimeout(() =>{
+          setTimeout(() => {
             this.setTableHeight();
           }, 10);
         }
@@ -664,7 +659,7 @@ export default {
     // 获取列表数据
     async getList() {
       const _this = this;
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       /* 
       if (_this.agTableConfig.loading) {
         return;
@@ -827,9 +822,9 @@ export default {
       };
     },
     // 导入
-    returnExport() {},
+    returnExport() { },
     // 导出
-    returnImport() {},
+    returnImport() { },
     // 设置表格高度
     // setTableHeight() {
     //   const _this = this;
@@ -875,7 +870,7 @@ export default {
     // 警告框确认
     async warningOk() {
       const _this = this;
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       _this.agTableConfig.loading = true;
       // this.$R3loading.show(customizedModuleName);
       const mainData = _this.formConfig.formValue;

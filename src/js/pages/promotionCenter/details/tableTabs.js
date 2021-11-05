@@ -2,7 +2,7 @@ import detailTable from 'allpages/promotionCenter/details/table.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
 import tabList from 'allpages/promotionCenter/details/tabList.vue';
 import ButtonFkDialog from 'burgeonComponents/buttonFkDialog';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 
 export default {
   name: 'detailTabs',

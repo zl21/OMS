@@ -1,6 +1,6 @@
 import { OmsForm } from 'burgeonComponents'
 import { OmsButton } from 'burgeonComponents'
-import businessDialog from 'burgeonComponents/businessDialog.vue';
+import { OmsDialog } from 'burgeonComponents'
 
 import CustomConfig from '@/config/customized.config.js';
 const modalConfig = CustomConfig.cusDownLoadAllConfig;
@@ -9,7 +9,7 @@ const modalConfig = CustomConfig.cusDownLoadAllConfig;
 
 export default {
   components: {
-    businessDialog,
+    OmsDialog,
     businessForm,
     OmsButton,
   },

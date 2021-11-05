@@ -1,23 +1,17 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsLabel, TableInput, OmsTable } from 'burgeonComponents'
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import tableInput from 'burgeonComponents/businessTableInput.vue';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import loading from 'burgeonComponents/loading';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'payableAdjustAdd',
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessLabel,
-    loading,
-    // ImageUpload
+    OmsLabel,
+    TableInput
   },
   mixins: [customPagingMixins, buttonPermissionsMixin],
   data() {

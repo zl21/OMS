@@ -51,7 +51,7 @@
     </div>
 
     <!-- 矩阵框-->
-    <businessDialog
+    <OmsDialog
       :closable="matrixBox.closable"
       :component-data="matrixBox.componentData"
       :draggable="matrixBox.draggable"

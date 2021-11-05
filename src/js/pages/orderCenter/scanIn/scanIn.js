@@ -1,23 +1,13 @@
-
-
-
-
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsButton, OmsForm, OmsTable, OmsDialog } from 'burgeonComponents'
 import { setTimeout } from 'timers';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import loading from 'burgeonComponents/loading';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessDialog,
-    loading
+    OmsDialog,
   },
   // inject: ['reload'],
   mixins: [buttonPermissionsMixin],
@@ -78,7 +68,7 @@ export default {
               if (
                 item.itemdata &&
                 item.itemdata.name ===
-                  $i18n.t('form_label.logisticsCompany')
+                $i18n.t('form_label.logisticsCompany')
               ) {
                 // 物流公司
                 item.itemdata.valuedata = sessionStorage.getItem('companyName');
@@ -278,7 +268,7 @@ export default {
         if (
           item.itemdata &&
           item.itemdata.name ===
-            $i18n.t('form_label.salesReturn_to_warehouse')
+          $i18n.t('form_label.salesReturn_to_warehouse')
         ) {
           if (
             self.formConfig2.formValue.BATCH_TYPE ===
@@ -356,7 +346,7 @@ export default {
         if (
           item.itemdata &&
           item.itemdata.name ===
-            $i18n.t('form_label.salesReturn_to_warehouse')
+          $i18n.t('form_label.salesReturn_to_warehouse')
         ) {
           // 销退入库仓
           allData.LOGICAL_WAREHOUSE_ID = item.itemdata.pid;
@@ -535,7 +525,7 @@ export default {
                 if (
                   item.itemdata &&
                   item.itemdata.name ===
-                    $i18n.t('form_label.logisticsCompany')
+                  $i18n.t('form_label.logisticsCompany')
                 ) {
                   // 物流公司
                   item.itemdata.valuedata = sessionStorage.getItem(
@@ -646,7 +636,7 @@ export default {
   },
   watch: {
     // 监听是否为无头件
-    isNoHeader() {},
+    isNoHeader() { },
     dilogList() {
       const self = this;
       const arr = [];
@@ -668,7 +658,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       errModelTitle: '',
       isModal3: false,
       loading: false,
@@ -1137,7 +1127,7 @@ export default {
                       (self.formConfig3.formValue.PS_C_SKU_ECODE ===
                         item.PS_C_SKU_ECODE ||
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          item.GBCODE) &&
+                        item.GBCODE) &&
                       item.OC_B_RETURN_ORDER_ID
                     ) {
                       // 条码相等且有退换货单号
@@ -1150,7 +1140,7 @@ export default {
                       (self.formConfig3.formValue.PS_C_SKU_ECODE ===
                         item.PS_C_SKU_ECODE ||
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          item.GBCODE) &&
+                        item.GBCODE) &&
                       !item.OC_B_RETURN_ORDER_ID
                     ) {
                       // 条码相等且无退换货单号
@@ -1213,7 +1203,7 @@ export default {
                         (self.formConfig3.formValue.PS_C_SKU_ECODE ===
                           item.PS_C_SKU_ECODE ||
                           self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                            item.GBCODE) &&
+                          item.GBCODE) &&
                         item.QTY > item.QTY_SCAN
                       ) {
                         item.QTY_SCAN = Number(item.QTY_SCAN) + 1;
@@ -1240,9 +1230,9 @@ export default {
                       // self.error_two();
                       if (
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          item.PS_C_SKU_ECODE ||
+                        item.PS_C_SKU_ECODE ||
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          item.GBCODE
+                        item.GBCODE
                       ) {
                         const arr = JSON.parse(JSON.stringify(item));
                         arr.OC_B_RETURN_ORDER_ID = '';
@@ -1277,7 +1267,7 @@ export default {
                   // return self.formConfig3.formValue.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE;
                   (item) =>
                     self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                      item.PS_C_SKU_ECODE ||
+                    item.PS_C_SKU_ECODE ||
                     self.formConfig3.formValue.PS_C_SKU_ECODE === item.GBCODE // 2019/6/6 需求改动，同时匹配发出条码和国标码；
                 );
                 if (isDlog === false) {
@@ -1335,7 +1325,7 @@ export default {
                       (self.formConfig3.formValue.PS_C_SKU_ECODE ===
                         item.PS_C_SKU_ECODE ||
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          item.GBCODE) &&
+                        item.GBCODE) &&
                       item.OC_B_RETURN_ORDER_ID
                     ) {
                       // 条码或国标码相等且有退换货单号
@@ -1348,7 +1338,7 @@ export default {
                       (self.formConfig3.formValue.PS_C_SKU_ECODE ===
                         item.PS_C_SKU_ECODE ||
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          item.GBCODE) &&
+                        item.GBCODE) &&
                       !item.OC_B_RETURN_ORDER_ID
                     ) {
                       // 条码相等且无退换货单号
@@ -1364,7 +1354,7 @@ export default {
                       (self.formConfig3.formValue.PS_C_SKU_ECODE ===
                         items.PS_C_SKU_ECODE ||
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          items.GBCODE) &&
+                        items.GBCODE) &&
                       !items.OC_B_RETURN_ORDER_ID
                     ) {
                       // items.QTY_SCAN++;
@@ -1379,7 +1369,7 @@ export default {
                         (self.formConfig3.formValue.PS_C_SKU_ECODE ===
                           items.PS_C_SKU_ECODE ||
                           self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                            items.GBCODE) &&
+                          items.GBCODE) &&
                         items.QTY > items.QTY_SCAN
                       ) {
                         items.QTY_SCAN = Number(items.QTY_SCAN) + 1;
@@ -1406,9 +1396,9 @@ export default {
                       // self.error_two();
                       if (
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          items.PS_C_SKU_ECODE ||
+                        items.PS_C_SKU_ECODE ||
                         self.formConfig3.formValue.PS_C_SKU_ECODE ===
-                          items.GBCODE
+                        items.GBCODE
                       ) {
                         const arr = JSON.parse(JSON.stringify(items));
                         arr.OC_B_RETURN_ORDER_ID = '';

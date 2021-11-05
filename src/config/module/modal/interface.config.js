@@ -1,4 +1,4 @@
-import downLoad from 'burgeonComponents/downLoad.vue'
+import { downLoad } from 'burgeonComponents'
 
 // 接口平台
 export default {

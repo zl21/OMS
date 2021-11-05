@@ -54,7 +54,7 @@
           />
         </div>
       </div>
-      <businessDialog
+      <OmsDialog
         :batch-closed="scheduleFormConfig.batchClosed"
         :closable="scheduleFormConfig.closable"
         :component-data="scheduleFormConfig.componentData"

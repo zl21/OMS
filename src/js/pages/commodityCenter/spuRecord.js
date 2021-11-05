@@ -1,18 +1,13 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsLabel, subTable } from 'burgeonComponents'
 import dateUtil from '@/assets/js/__utils__/date.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import orderItem from 'burgeonComponents/subTable';
-import subTable from 'burgeonComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
-    orderItem,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     subTable,
   },
   mixins: [new modifycurrentLabel()],
@@ -1053,7 +1048,7 @@ export default {
           }
         });
       });
-      arr.forEach((it,index) => {
+      arr.forEach((it, index) => {
         if (it.id == '-1' && it.actionName == 'UPDATE') {
           it.actionName = 'SAVE';
         }

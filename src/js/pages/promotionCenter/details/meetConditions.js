@@ -1,4 +1,4 @@
-import SingleBox from 'burgeonComponents/singleBox';
+import { singleBox as SingleBox } from 'burgeonComponents'
 
 export default {
   props: {
@@ -11,7 +11,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       CompareNames: [
         {
           value: 'QTTY',
@@ -76,6 +76,6 @@ export default {
   mounted() {
     console.log($store.state.customize.forginkeys.groups);
     this.CompareNames = [{ value: 'QTTY', label: '数量' },
-      { value: 'AMT_LIST', label: '吊牌金额' }];
+    { value: 'AMT_LIST', label: '吊牌金额' }];
   }
 };

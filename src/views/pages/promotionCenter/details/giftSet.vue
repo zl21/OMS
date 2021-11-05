@@ -158,7 +158,7 @@
     </div>
 
     <!--导入组件-->
-    <businessDialog
+    <OmsDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
       :draggable="importTable.draggable"

@@ -1,11 +1,8 @@
 
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
-import businessDialog from 'burgeonComponents/businessDialog.vue';
+import { OmsButton, OmsTable, OmsDialog } from 'burgeonComponents'
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem.vue';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import goodsTotalAmount from 'allpages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'EssentialInfo',
@@ -14,7 +11,7 @@ export default {
   },
   components: {
     OmsButton,
-    businessDialog,
+    OmsDialog,
     OmsTable,
     CusOrderItem,
     goodsTotalAmount
@@ -200,29 +197,29 @@ export default {
       },
       deep: true
     },
-    'componentData.order.ORDER_TYPE':{
-      handler(newValue){
+    'componentData.order.ORDER_TYPE': {
+      handler(newValue) {
         // 颜色配置
         const orderTypeText = ['正常', '换货', '补发', '虚拟', '预售'];
         const orderTypeColor = ['90BB57', 'ffae34', '5461B8', '99c2f1', 'a375c1'];
-        this.orderTypeClass = $omsUtils.generateMap(orderTypeText,orderTypeColor,newValue)
+        this.orderTypeClass = $omsUtils.generateMap(orderTypeText, orderTypeColor, newValue)
       }
     },
-    'componentData.order.PLATFORM_STATUS':{
-      handler(newValue){
+    'componentData.order.PLATFORM_STATUS': {
+      handler(newValue) {
         // 颜色配置
         const platformStatusText = ['等待买家付款', '等待卖家发货', '等待买家确认收货', '卖家部分发货', '交易完成'];
         const platformStatusColor = ['ffae34', 'ff6951', '99c2f1', 'a375c1', '90BB57'];
-        this.platformStatusClass = $omsUtils.generateMap(platformStatusText,platformStatusColor,newValue);
+        this.platformStatusClass = $omsUtils.generateMap(platformStatusText, platformStatusColor, newValue);
       }
     }
   },
   methods: {
-    eyeClick:_.throttle(function () {
+    eyeClick: _.throttle(function () {
       this.eyeText = this.eyeStatus ? $i18n.t('btn.show') : $i18n.t('btn.hide'); //隐藏 显示
       this.eyeStatus = !this.eyeStatus;
       this.$emit('freshLoad', { DECRYPT: this.eyeStatus });
-    },2000),
+    }, 2000),
     isQhMethod(data) {
       this.isQhChild = data;
     },

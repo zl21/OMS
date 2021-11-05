@@ -1,19 +1,12 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import orderItem from 'burgeonComponents/subTable';
-import logTable from 'burgeonComponents/LogTable';
-import subTable from 'burgeonComponents/subTable';
+import { OmsButton, OmsTable, OmsForm, subTable, logTable, OmsLabel } from 'burgeonComponents';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'CP_C_ORG_CHANNEL',
   components: {
-    orderItem,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     logTable,
     subTable,
     OmsTable
@@ -21,7 +14,7 @@ export default {
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       collapse: 'panel_baseInfo',
       labelValue: 'supplyStore',
       subTableConfig: {
@@ -34,7 +27,7 @@ export default {
         typeAll: 'default',
         buttons: []
       },
-      extendBtn:[
+      extendBtn: [
         {
           webname: 'CP_C_ORG_CHANNEL_SAVE', // 保存
           text: $i18n.t('btn.save'), // 保存
@@ -63,7 +56,7 @@ export default {
                     tableId: 10327,
                     type: 'S',
                     tableName: 'CP_C_ORG_CHANNEL',
-                    label:  $i18n.t('menu.a4'), //'渠道仓档案',
+                    label: $i18n.t('menu.a4'), //'渠道仓档案',
                     back: true,
                   });
                 }
@@ -75,7 +68,7 @@ export default {
                 tableId: 10327,
                 type: 'S',
                 tableName: 'CP_C_ORG_CHANNEL',
-                label:  $i18n.t('menu.a4'), //'渠道仓档案',
+                label: $i18n.t('menu.a4'), //'渠道仓档案',
                 back: true,
               });
             }
@@ -126,9 +119,9 @@ export default {
           ]
         }
       },
-      jordanExtendBtn:[
+      jordanExtendBtn: [
         {
-          type:'primary',
+          type: 'primary',
           webname: 'CP_C_ORG_CHANNEL_ADD', // 返回
           text: $i18n.t('btn.increase'), // 添加
           btnclick: () => {
@@ -137,7 +130,7 @@ export default {
           }
         },
         {
-          type:'warning',
+          type: 'warning',
           webname: 'CP_C_ORG_CHANNEL_DEL', // 删除
           text: $i18n.t('btn.delete'), // 删除
           btnclick: () => {
@@ -147,7 +140,7 @@ export default {
       ],
       jordanTableConfig: {
         indexColumn: true,
-        isShowSelection:true,
+        isShowSelection: true,
         pageShow: this.id != '-1',
         total: 0, // 设置总条数
         pageSizeOpts: [10, 30, 45, 60], // 每页条数切换的配置
@@ -157,11 +150,11 @@ export default {
           typeAll: 'default',
           btnsite: 'right', // 按钮位置 (right , center , left)
           buttons: [
-            
+
           ]
         },
         businessFormConfig: {
-          gridBar:true, //开启栅格栏
+          gridBar: true, //开启栅格栏
           formData: [
             {
               version: '1.4',
@@ -265,49 +258,49 @@ export default {
             title: $i18n.t('form_label.db'), // 供货比例
             key: 'RATE',
             render: (h, params) => h(
-                'div',
-                {
-                  style: {
-                    width: '50px'
-                  }
-                },
-                [
-                  h('Input', {
-                    props: {
-                      value: params.row.RATE,
-                      placeholder: ' ',
-                      regx: /^$|^100$|^(\d|[1-9]\d)(\.\d+)*$/
-                    },
-                    on: {
-                      'on-change': val => {
-                        this.isModify = true;
-                        console.log(val.target.value);
-                        params.row.RATE = val.target.value;
-                        this.jordanTableConfig.data[params.index] = params.row;
-                      }
+              'div',
+              {
+                style: {
+                  width: '50px'
+                }
+              },
+              [
+                h('Input', {
+                  props: {
+                    value: params.row.RATE,
+                    placeholder: ' ',
+                    regx: /^$|^100$|^(\d|[1-9]\d)(\.\d+)*$/
+                  },
+                  on: {
+                    'on-change': val => {
+                      this.isModify = true;
+                      console.log(val.target.value);
+                      params.row.RATE = val.target.value;
+                      this.jordanTableConfig.data[params.index] = params.row;
                     }
-                  }),
-                  h('span', {}, '%')
-                ]
-              )
+                  }
+                }),
+                h('span', {}, '%')
+              ]
+            )
           },
           {
             title: $i18n.t('panel_label.ao'), // 自动分配
             key: 'IS_AUTO_ASSIGN',
             render: (h, params) => h('Checkbox', {
-                props: {
-                  value: Boolean(params.row.IS_AUTO_ASSIGN)
-                },
-                on: {
-                  'on-change': val => {
-                    console.log(val);
-                    console.log(params);
-                    params.row.IS_AUTO_ASSIGN = Number(val);
-                    this.jordanTableConfig.data[params.index] = params.row;
-                    this.isModify = true;
-                  }
+              props: {
+                value: Boolean(params.row.IS_AUTO_ASSIGN)
+              },
+              on: {
+                'on-change': val => {
+                  console.log(val);
+                  console.log(params);
+                  params.row.IS_AUTO_ASSIGN = Number(val);
+                  this.jordanTableConfig.data[params.index] = params.row;
+                  this.isModify = true;
                 }
-              })
+              }
+            })
           },
           {
             title: $i18n.t('table_label.priority'), // 优先级
@@ -363,13 +356,13 @@ export default {
       return this.$route.params.customizedModuleId == 'New' ? '-1' : this.$route.params.customizedModuleId;
     },
     // 获取当前展示几列
-    colRowNum(){
+    colRowNum() {
       return $store.state.customize.colRowNum;
     }
   },
-  watch:{
+  watch: {
     // 获取当前展示几列
-    colRowNum:{
+    colRowNum: {
       handler(newVal) {
         this.jordanTableConfig.businessFormConfig.colRowNum = newVal;
       },
@@ -395,12 +388,12 @@ export default {
             value: 'supplyStore'
           }
         ];
-      }else {
+      } else {
         // await $omsUtils.getPermissions(this, 'btnConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true).then(res=>{
         //   console.log(res);
         // });
         // await $omsUtils.getPermissions(this.jordanTableConfig, 'businessButtonConfig', { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
-        $omsUtils.getBtnPermission(this , ['btnConfig' , 'jordanTableConfig.businessButtonConfig'] , { table: 'CP_C_ORG_CHANNEL', type: 'OBJ' , serviceId:'r3-oc-oms'} , true);
+        $omsUtils.getBtnPermission(this, ['btnConfig', 'jordanTableConfig.businessButtonConfig'], { table: 'CP_C_ORG_CHANNEL', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
       }
     },
     pageSizeChange(val) {
@@ -567,7 +560,7 @@ export default {
       this.subTableConfig = {
         centerName: 'basicData',
         tablename: this.labelDefaultValue,
-        pageShow:true,
+        pageShow: true,
         objid: this.id
       };
     },

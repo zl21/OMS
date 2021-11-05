@@ -4,7 +4,6 @@ import copyModal from 'allpages/systemConfig/quanXian/copyModal.vue';
 import R3 from '@syman/burgeon-r3';
 import form from '@/assets/js/__utils__/form';
 import qxBtnData from './qxBtnData';
-import loading from 'burgeonComponents/loading';
 
 const { FilterTree, SelectTree, SearchForm } = R3.components;
 const { network, urlSearchParams } = R3;

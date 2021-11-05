@@ -57,7 +57,7 @@
 import { OmsButton } from 'burgeonComponents'
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date.js';
@@ -68,7 +68,7 @@ export default {
   components: {
     OmsButton,
     OmsTable,
-    businessDialog,
+    OmsDialog,
     businessLabel,
   },
   // model: {

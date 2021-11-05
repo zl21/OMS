@@ -33,7 +33,7 @@
       </div>
     </div>
     <!-- 修改备注-->
-    <businessDialog
+    <OmsDialog
       :title="changeRemarkConfig.confirmTitle"
       :title-align="changeRemarkConfig.titleAlign"
       :width="changeRemarkConfig.width"
@@ -51,7 +51,7 @@
       :component-data="changeRemarkConfig.componentData"
     />
     <!-- 修改退回仓库-->
-    <businessDialog
+    <OmsDialog
       :title="modifyWarehouse.confirmTitle"
       :title-align="modifyWarehouse.titleAlign"
       :width="modifyWarehouse.width"
@@ -68,7 +68,7 @@
       :component-data="modifyWarehouse.componentData"
     />
     <!-- 修改物流公司-->
-    <businessDialog
+    <OmsDialog
       :title="modifyReturnOrderLogistics.confirmTitle"
       :title-align="modifyReturnOrderLogistics.titleAlign"
       :width="modifyReturnOrderLogistics.width"
@@ -85,7 +85,7 @@
       :component-data="modifyReturnOrderLogistics.componentData"
     />
     <!-- 修改from表单 -->
-    <businessDialog
+    <OmsDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
       :component-data="publicBouncedConfig.componentData"
@@ -104,7 +104,7 @@
       :width="publicBouncedConfig.width"
     />
     <!-- 导入 -->
-    <businessDialog
+    <OmsDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"

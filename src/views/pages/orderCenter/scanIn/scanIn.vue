@@ -55,7 +55,7 @@
     </div>
     <!-- 弹框 -->
     <div class="dilog">
-      <businessDialog
+      <OmsDialog
         :closable="changeWarehouseConfig.closable"
         :component-data="changeWarehouseConfig.componentData"
         :draggable="changeWarehouseConfig.draggable"

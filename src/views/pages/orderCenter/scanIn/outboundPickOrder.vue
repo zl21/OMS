@@ -323,7 +323,7 @@
     >
       <p>{{ scanOutbound.warnMessage }}</p>
     </Modal>
-    <businessDialog
+    <OmsDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"

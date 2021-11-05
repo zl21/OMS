@@ -1,10 +1,9 @@
 import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
 import InfoSet from 'allpages/promotionCenter/details/infoSet.vue';
 import GiftSet from 'allpages/promotionCenter/details/giftSet.vue';
-import stepsBars from 'burgeonComponents/steps';
 import groups from '@/assets/js/promotion/groups';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
-import { OmsButton } from 'burgeonComponents'
+import { OmsButton, steps as stepsBars } from 'burgeonComponents'
 import promotionMixin from './promotion.mixin';
 
 export default {
@@ -13,9 +12,9 @@ export default {
     InfoSet,
     GiftSet,
     stepsBars,
-    businessButton
+    OmsButton
   },
-	mixins: [promotionMixin()],
+  mixins: [promotionMixin()],
   data() {
     return {
       freshKey: 0,
@@ -261,7 +260,7 @@ export default {
       formData.append('param', JSON.stringify(params));
       try {
         const {
-          data: { code, data , message}
+          data: { code, data, message }
         } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
           // this.$Message.message($i18n.t('modalTips.z9'));
@@ -460,12 +459,12 @@ export default {
           };
         };
         for (const iterator of arrs) {
-          if(iterator.productslist.some(item=>item.ECODE =='')){
-              flag = true;
-              break;
+          if (iterator.productslist.some(item => item.ECODE == '')) {
+            flag = true;
+            break;
           }
         };
-        if(flag){
+        if (flag) {
           return {
             code: -1,
             message: tablename + $i18n.t('modalTips.r6')
