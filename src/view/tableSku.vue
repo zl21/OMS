@@ -44,7 +44,7 @@
   </div>
 </template>
 <script>
-  import tableSku from 'burgeonComponents/js/tableSku';
+  import TableSku from 'burgeonComponents/js/tableSku';
 
-  export default tableSku;
+  export default TableSku;
 </script>
