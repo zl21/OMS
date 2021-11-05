@@ -100,5 +100,5 @@ export default commodityClassifyAddOrEdit;
     }
   } */
 }
-@import "~burgeonComponents/common/css/theme.less";
+@import "~burgeonComponents/burgeon.publish/common/css/theme.less";
 </style>

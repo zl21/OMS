@@ -44,5 +44,5 @@ export default nationalProvincialMunicipalEdit;
 </script>
 
 <style lang="less" scoped>
-@import '~burgeonComponents/common/css/theme.less';
+@import '~burgeonComponents/burgeon.publish/common/css/theme.less';
 </style>

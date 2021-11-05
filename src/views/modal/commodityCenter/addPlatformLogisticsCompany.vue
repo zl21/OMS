@@ -238,7 +238,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-// @import '~burgeonComponents/common/css/theme.less';
+// @import '~burgeonComponents/burgeon.publish/common/css/theme.less';
 /* .addPlatformLogisticsCompany {
   /deep/ .subtablePart {
     position: relative;
