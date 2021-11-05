@@ -30,10 +30,10 @@
   </div>
 </template>
 <script>
-  import multipleBox from 'burgeonComponents/js/multipleBox';
+  import MultipleBox from 'burgeonComponents/js/MultipleBox';
 
-  export default multipleBox;
+  export default MultipleBox;
  </script>
 <style lang="less" scoped>
-@import "burgeonComponents/css/multipleBox.less";
+@import "burgeonComponents/css/MultipleBox.less";
 </style>>
