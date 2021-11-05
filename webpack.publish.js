@@ -120,10 +120,10 @@ const config = {
     new VueLoaderPlugin(),
     new copyWebpackPlugin({
       patterns: [
-        {
+        /* {
           from: path.resolve(__dirname, "./src/static"),
           to: path.resolve(__dirname, "./burgeon.publish/static")
-        },
+        }, */
         {
           from: path.resolve(__dirname, "./src/common/css"),
           to: path.resolve(__dirname, "./burgeon.publish/common/css")

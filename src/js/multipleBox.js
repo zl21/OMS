@@ -1,10 +1,10 @@
-import i18n from "@burgeon/internationalization/i18n";
+// import i18n from "@burgeon/internationalization/i18n";
 
 export default {
   name: 'MultipleBox',
   data() {
     return {
-      vmI18n: i18n,
+      // vmI18n: i18n,
       indeterminate: true,
       all: false,
       names: [] // 选中项目的名称

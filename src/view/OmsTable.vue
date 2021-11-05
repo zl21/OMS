@@ -1,6 +1,6 @@
 <template>
   <div class="jordan-table-box">
-    <!-- businessForm 按钮定位
+    <!-- OmsForm 按钮定位
     *colRowNum:获取当前展示几列；
     *formData.length:form的个数；
     1.如果存在businessFormConfig添加fromBtn 添加相对定位，并且给按钮添加绝对定位；
@@ -13,12 +13,12 @@
       ]">
       <div class="businessForm-box" 
         v-if="businessFormConfig !== undefined">
-        <businessForm :formConfig="businessFormConfig">
-        </businessForm>
+        <OmsForm :formConfig="businessFormConfig">
+        </OmsForm>
       </div>
       <!-- businessButtons -->
       <div class="businessButton" v-if="businessButtonConfig !== undefined">
-        <businessButton :btnConfig="businessButtonConfig"></businessButton>
+        <OmsButton :btnConfig="businessButtonConfig"></OmsButton>
       </div>
     </div>
     <!-- button -->
@@ -33,7 +33,7 @@
       <Button class="import" v-show="isShowImportBtn" @click="tableImport">{{vmI18n.t('btn.import')}}</Button>
       <!-- 导出 -->
       <Button class="export" v-show="isShowExportBtn" @click="tableExport">{{vmI18n.t('btn.export')}}</Button>
-      <!-- <businessButton :btnConfig="detailButtonsConfig"></businessButton> -->
+      <!-- <OmsButton :btnConfig="detailButtonsConfig"></OmsButton> -->
     </div>
     <keep-alive>
       <component v-bind:is="currentView" :ref="currentView" :componentData="componentData"> </component>
@@ -114,10 +114,10 @@
 </template>
 
 <script>
-import businessActionTable from 'burgeonComponents/js/businessActionTable';
-export default businessActionTable;
+import OmsTable from 'burgeonComponents/js/OmsTable';
+export default OmsTable;
 </script>
 
 <style lang="less">
-@import 'burgeonComponents/css/businessActionTable.less';
+@import 'burgeonComponents/css/OmsTable.less';
 </style>

@@ -1,12 +1,12 @@
-import businessButton from 'burgeonComponents/view/businessButton'
-import businessForm from 'burgeonComponents/view/businessForm'
-import i18n from "@burgeon/internationalization/i18n";
-window.$i18n = i18n
+import OmsButton from 'burgeonComponents/view/OmsButton'
+import OmsForm from 'burgeonComponents/view/OmsForm'
+// import i18n from "@burgeon/internationalization/i18n";
+// window.$i18n = i18n
 
 export default {
   components: {
-    businessButton,
-    businessForm,
+    OmsButton,
+    OmsForm,
   },
   props: {
     jordanTableConfig: {
@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       FormPadding:'',
-      vmI18n: i18n,
+      // vmI18n: i18n,
       // 输入框文字
       searchInputValue: '',
       // 输入框前搜索select

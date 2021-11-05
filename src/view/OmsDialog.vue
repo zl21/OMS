@@ -4,7 +4,7 @@
  * @LastEditTime: 2021-11-02 17:54:15
  * @LastEditors: your name
  * @Description: In User Settings Edit
- * @FilePath: /burgeon-business-components/src/view/businessDialog.vue
+ * @FilePath: /burgeon-business-components/src/view/OmsDialog.vue
 -->
 <!--引入曼卡龙的弹框组件-->
 <template>
@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import businessDialog from 'burgeonComponents/js/businessDialog.js';
-export default businessDialog;
+import OmsDialog from 'burgeonComponents/js/OmsDialog.js';
+export default OmsDialog;
 </script>
 
 <style lang="less">
-@import "burgeonComponents/css/businessDialog.less";
+@import "burgeonComponents/css/OmsDialog.less";
 </style>
