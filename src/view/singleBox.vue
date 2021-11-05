@@ -24,9 +24,9 @@
   </div>
 </template>
 <script>
-  import singleBox from 'burgeonComponents/js/singleBox';
+  import SingleBox from 'burgeonComponents/js/singleBox';
 
-  export default singleBox;
+  export default SingleBox;
  </script>
 <style lang="less" scoped>
 @import "burgeonComponents/css/singleBox.less";

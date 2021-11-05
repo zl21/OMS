@@ -8,16 +8,27 @@
 -->
 <template>
   <div class="content-li-item switchList">
-    <label style="width: 85px;">{{switchList.label}}:</label>
+    <label style="width: 85px">{{ switchList.label }}:</label>
     <div class="content-li-item-left">
-      <div class="content-li-item-left-a" v-for="em,index in switchList.list" :key="index">
+      <div
+        class="content-li-item-left-a"
+        v-for="(em, index) in switchList.list"
+        :key="index"
+      >
         <span class="left-a">
-          <i-switch v-model="em.val" :disabled="em.disabled" :size="em.size ? em.size : switchList.size ? switchList.size : 'small'" switchList/>
-          {{em.name}}
+          <i-switch
+            v-model="em.val"
+            :disabled="em.disabled"
+            :size="
+              em.size ? em.size : switchList.size ? switchList.size : 'small'
+            "
+            switchList
+          />
+          {{ em.name }}
         </span>
 
         <span v-if="em.isok" class="left-b-em">*</span>
-        <span>{{em.label}}:</span>
+        <span>{{ em.label }}:</span>
 
         <Input
           v-model="em.value"
@@ -27,7 +38,7 @@
           :disabled="em.disabled"
           :maxlength="em.maxlength"
         />
-        {{em.symbol}}
+        {{ em.symbol }}
         <Input
           v-model="em.value2"
           :disabled="em.disabled"
@@ -36,14 +47,14 @@
           :regx="em.regx2"
           :maxlength="em.maxlength"
         />
-        {{em.type}}
+        {{ em.type }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+const switchList = {
   props: {
     switchList: {
       type: Object,
@@ -53,6 +64,7 @@ export default {
     return {};
   },
 };
+export default switchList
 </script>
 
 <style lang="less" scoped>

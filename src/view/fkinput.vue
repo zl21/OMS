@@ -145,8 +145,8 @@
 </template>
 
 <script>
-import objinput_dz from "burgeonComponents/js/fkinput.js";
-export default objinput_dz;
+import Fkinput from "burgeonComponents/js/fkinput.js";
+export default Fkinput;
 </script>
 
 <style scoped lang="less">
