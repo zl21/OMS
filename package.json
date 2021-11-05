@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/business-components",
-  "version": "1.3.41-beta",
+  "version": "1.0.1-op",
   "description": "burgeon company's business-components lib for private npm",
   "main": "burgeon.publish/businessComponents.min.js",
   "files": [
