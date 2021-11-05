@@ -1,7 +1,7 @@
 /**
  * 商品自定义属性
  */
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
@@ -13,7 +13,7 @@ import { OmsTable } from 'burgeonComponents'
 export default {
   components: {
     orderItem,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
     OmsTable,

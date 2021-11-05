@@ -1,6 +1,6 @@
 
 
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessDialog from 'burgeonComponents/businessDialog';
 import strUtil from '@/assets/js/__utils__/util';
@@ -24,7 +24,7 @@ const addSevenDay = (() => {
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     OmsTable,
     businessDialog,

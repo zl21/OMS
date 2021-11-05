@@ -15,17 +15,17 @@
       :defaultconfig="config"
     >
     </FormLayout>
-    <businessButton class="absolute" :btn-config="btnConfig" />
+    <OmsButton class="absolute" :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton'
+import { OmsButton } from 'burgeonComponents'
 import service from '@/service/index'
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
   },
   data() {
     return {

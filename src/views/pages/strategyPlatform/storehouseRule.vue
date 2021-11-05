@@ -10,7 +10,7 @@
   <div class="customized-detail" v-loading="loading">
     <!-- <loading :loading="loading" /> -->
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
 
     <div class="customized-detail-main">
@@ -40,7 +40,7 @@
                 @on-keydown="fninput"
               />
               <div class="buttons ">
-                <businessButton :btn-config="btnConfig2" />
+                <OmsButton :btn-config="btnConfig2" />
               </div>
             </div>
 

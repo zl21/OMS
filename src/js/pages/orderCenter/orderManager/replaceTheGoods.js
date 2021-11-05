@@ -1,5 +1,5 @@
 // import businessForm from "burgeonComponents/businessForm";
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 import { OmsTable } from 'burgeonComponents'
 

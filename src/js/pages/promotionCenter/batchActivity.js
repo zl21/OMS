@@ -2,7 +2,7 @@ import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
 import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet.vue';
 import stepsBars from 'burgeonComponents/steps';
 import groups from '@/assets/js/promotion/groups';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import promotionMixin from './promotion.mixin';
 
 export default {

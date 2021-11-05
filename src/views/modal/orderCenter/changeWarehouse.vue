@@ -2,7 +2,7 @@
   <div class="customized-modal" v-loading="loading">
     <loading :loading="loading" />
     <businessForm :form-config="formConfig" />
-    <businessButton :btn-config="btnConfig" class="modal-footer" />
+    <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
@@ -20,7 +20,7 @@ export default {
   components: {
     loading,
     businessForm,
-    businessButton,
+    OmsButton,
     OmsTable,
   },
   props: {

@@ -2,7 +2,7 @@
   <div class="financialManageCenter public-main custom-main">
     <loading :loading="loading" />
     <div class="buttons custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <WaterMark v-if="showStatusFlag && statusName" class="omsWaterMark" :text="statusName"></WaterMark>

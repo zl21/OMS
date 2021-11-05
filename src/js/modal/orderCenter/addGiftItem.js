@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton'
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
 import commonUtils from 'burgeonConfig/config/commonUtils'
@@ -169,7 +169,7 @@ export default {
   components: {
     OmsTable,
     businessForm,
-    businessButton,
+    OmsButton,
   },
   props: {
     componentData: {

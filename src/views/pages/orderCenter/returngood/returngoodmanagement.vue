@@ -4,7 +4,7 @@
      <loading :loading="loading" />
     <!--按钮块-->
     <div class="returnAddBtn custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <div class="returnAddColl">
@@ -159,7 +159,7 @@
         >
           <div class="orderContent">
             <businessForm :form-config="order.orderform" />
-            <businessButton :btn-config="order.btn" />
+            <OmsButton :btn-config="order.btn" />
           </div>
           <business-action-table
             :jordan-table-config="order.table"

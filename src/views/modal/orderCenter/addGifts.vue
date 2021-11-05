@@ -16,7 +16,7 @@
       v-focus
       class="focusStyle"
     >
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

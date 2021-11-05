@@ -1,7 +1,7 @@
 <template>
   <div class="customized-detail orderMangeDetails" v-loading="loading">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="returnBtn" />
+      <OmsButton :btn-config="returnBtn" />
     </div>
     <div class="customized-detail-main">
       <div style="padding:12px;width:100%;margin:0 auto">
@@ -57,7 +57,7 @@
   </div>
 </template>
 <script>
-  import businessButton from 'burgeonComponents/businessButton';
+  import { OmsButton } from 'burgeonComponents'
   import businessLabel from 'burgeonComponents/businessLabel';
   import businessDialog from 'burgeonComponents/businessDialog';
   import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -70,7 +70,7 @@
   export default {
     name: 'OrderManageDetail',
     components: {
-      businessButton,
+      OmsButton,
       businessLabel,
       EssentialInfo,
       OrderItem,

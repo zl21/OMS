@@ -45,7 +45,7 @@
         height="266"
       />
     </div>
-    <businessButton class="modal-footer" :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 
@@ -58,7 +58,7 @@ import inputP from "burgeonComponents/fkinputPlus.vue";
 export default {
   components: {
     inputP,
-    businessButton,
+    OmsButton,
   },
   data() {
     return {

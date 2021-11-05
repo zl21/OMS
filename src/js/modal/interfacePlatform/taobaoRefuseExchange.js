@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import { OmsForm } from 'burgeonComponents'
-import BusinessBtn from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
   components: {

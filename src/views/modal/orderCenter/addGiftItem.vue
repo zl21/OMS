@@ -12,7 +12,7 @@
     <!-- <EasyMatrix :component-data="matrixData" /> -->
     <!-- <businessForm :form-config="formConfig"></businessForm> -->
     <!-- businessButton -->
-    <!-- <businessButton class="absolute" :btn-config="searchBtn"></businessButton> -->
+    <!-- <OmsButton class="absolute" :btn-config="searchBtn"></OmsButton> -->
     <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
@@ -25,7 +25,7 @@
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
     />
-    <businessButton class="modal-footer" :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 <script>

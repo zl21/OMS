@@ -3,11 +3,11 @@
   <div class="customized-list" v-loading="loading">
     <div class="" :class="['customized-list-form','promotionForm',Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '']">
       <businessForm :form-config="formConfig" />
-      <businessButton :btn-config="formBtn" class="formBtn" />
+      <OmsButton :btn-config="formBtn" class="formBtn" />
     </div>
     <!-- 按钮 head_botton-->
     <div class="customized-list-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <!-- 列表部分 -->
     <div class="customized-list-table">

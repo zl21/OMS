@@ -4,7 +4,7 @@
     <loading :loading="loading" />
     <!--按钮块-->
     <div style="margin-top: 8px;">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <!-- form表单 -->
     <div class="TreasuryDefault">
@@ -55,7 +55,7 @@
       >
         <div class="orderContent">
           <businessForm :form-config="order.orderform" />
-          <businessButton :btn-config="order.btn" />
+          <OmsButton :btn-config="order.btn" />
         </div>
         <OmsTable
           :jordan-table-config="order.table"

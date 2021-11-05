@@ -19,7 +19,7 @@
       <button v-if="showPublishButton" @click="publish">
         {{ vmI18n.t('btn.publish') }}
       </button> -->
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <div class="batchActivity">

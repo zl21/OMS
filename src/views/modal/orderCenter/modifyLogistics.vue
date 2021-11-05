@@ -5,7 +5,7 @@
     <div class="Modal-Form">
       <businessForm :form-config="formConfig" />
     </div>
-    <businessButton :btn-config="btnConfig" class="modal-footer" />
+    <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
@@ -17,7 +17,7 @@ import { OmsTable } from 'burgeonComponents'
 export default {
   components: {
     loading,
-    businessButton,
+    OmsButton,
     businessForm,
     OmsTable,
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="collapse">

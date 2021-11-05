@@ -12,7 +12,7 @@
     <!-- <EasyMatrix :component-data="matrixData" /> -->
     <businessForm :form-config="formConfig"></businessForm>
     <!-- businessButton -->
-    <businessButton class="absolute" :btn-config="searchBtn"></businessButton>
+    <OmsButton class="absolute" :btn-config="searchBtn"></OmsButton>
     <div class="foot-table">
       <Table
         :columns="columns10"
@@ -30,7 +30,7 @@
       />
     </div>
 
-    <businessButton class="absolute2" :btn-config="BtnConfig"></businessButton>
+    <OmsButton class="absolute2" :btn-config="BtnConfig"></OmsButton>
   </div>
 </template>
 <script>

@@ -48,7 +48,7 @@
         </template>
       </re-form>
     </div>
-    <businessButton
+    <OmsButton
       :class="['modal-footer', holdBtnClass]"
       :btn-config="btnConfig"
     />

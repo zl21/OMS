@@ -30,7 +30,7 @@
         />
       </div>
       <div slot="footer" class="modal_footer">
-        <businessButton :btn-config="btnConfig" />
+        <OmsButton :btn-config="btnConfig" />
       </div>
     </Modal>
     <!-- </my-dialog> -->

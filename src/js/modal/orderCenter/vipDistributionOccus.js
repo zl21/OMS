@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import R3 from '@syman/burgeon-r3';
 
 const { getModuleName } = R3;

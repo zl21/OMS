@@ -13,7 +13,7 @@
     style="width:430px;padding-right:20px"
   >
     <businessForm :form-config="downLoadFormConfig" />
-    <businessButton :btn-config="downLoadBtnConfig" />
+    <OmsButton :btn-config="downLoadBtnConfig" />
   </div>
 </template>
 

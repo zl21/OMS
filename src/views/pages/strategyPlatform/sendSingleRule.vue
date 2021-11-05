@@ -1,7 +1,7 @@
 <template>
   <div class="sendSingleRule public-main custom-main">
     <div class="custom-btn">
-      <businessButton
+      <OmsButton
       :btn-config="btnConfig"
     />
     </div>

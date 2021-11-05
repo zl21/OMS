@@ -90,7 +90,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <businessButton class="modal-footer" :btn-config="buttonConfig" />
+      <OmsButton class="modal-footer" :btn-config="buttonConfig" />
     </el-dialog>
   </div>
 </template>

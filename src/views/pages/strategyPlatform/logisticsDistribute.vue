@@ -10,7 +10,7 @@
   <div class="customized-detail logistics">
     <!-- 按钮 -->
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
 
     <!-- 内容 -->
@@ -40,7 +40,7 @@
               </div>
 
               <div class="customized-detail-footbtn">
-                <businessButton :btn-config="btnConfig2" />
+                <OmsButton :btn-config="btnConfig2" />
               </div>
             </div>
 

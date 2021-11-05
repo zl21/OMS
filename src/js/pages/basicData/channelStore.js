@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import orderItem from 'burgeonComponents/subTable';
@@ -11,7 +11,7 @@ export default {
   name: 'CP_C_ORG_CHANNEL',
   components: {
     orderItem,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
     logTable,

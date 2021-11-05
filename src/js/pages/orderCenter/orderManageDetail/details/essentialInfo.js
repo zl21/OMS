@@ -1,5 +1,5 @@
 
-import businessButton from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 import businessDialog from 'burgeonComponents/businessDialog.vue';
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem.vue';
@@ -13,7 +13,7 @@ export default {
     componentData: {}
   },
   components: {
-    businessButton,
+    OmsButton,
     businessDialog,
     OmsTable,
     CusOrderItem,

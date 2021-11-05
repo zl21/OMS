@@ -81,7 +81,7 @@
         <span>{{ vmI18n.t("modalTips.zg") }}</span>
         <span style="color: #003200">{{ onRowClickReplaceText }}</span>
       </span>
-      <businessButton class="modal-footer" :btn-config="btnConfig" />
+      <OmsButton class="modal-footer" :btn-config="btnConfig" />
     </div>
   </div>
 </template>

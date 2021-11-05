@@ -35,7 +35,7 @@
         @on-select-all="onSelectAll"
         @on-select-all-cancel="onSelectAllCancel"
       />
-      <businessButton :btn-config="btnConfigTui" class="modal-footer" />
+      <OmsButton :btn-config="btnConfigTui" class="modal-footer" />
     </Modal>
     <!-- 替换/添加明细 -->
     <Modal
@@ -54,12 +54,12 @@
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
       />
-      <businessButton :btn-config="btnConfigHuan" class="modal-footer" />
+      <OmsButton :btn-config="btnConfigHuan" class="modal-footer" />
     </Modal>
   </div>
 </template>
 <script>
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 
 
@@ -73,7 +73,7 @@ import Util from "@/assets/js/public/publicMethods";
 export default {
   name: "retunAddDetail",
   components: {
-    businessButton,
+    OmsButton,
     OmsTable,
   },
   props: {

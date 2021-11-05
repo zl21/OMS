@@ -13,7 +13,7 @@
 
 <script>
 // 退换货单详情
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { setTimeout } from 'timers';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import { OmsTable } from 'burgeonComponents'
@@ -21,7 +21,7 @@ import { OmsTable } from 'burgeonComponents'
 export default {
   name: 'searchOOID',
   components: {
-    businessButton,
+    OmsButton,
     OmsTable,
   },
   data() {

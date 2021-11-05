@@ -1,7 +1,7 @@
 /**
  * 商品分类
  */
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import dateUtil from '@/assets/js/__utils__/date.js';
@@ -13,7 +13,7 @@ import { OmsTable } from 'burgeonComponents'
 export default {
   components: {
     orderItem,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
     OmsTable,

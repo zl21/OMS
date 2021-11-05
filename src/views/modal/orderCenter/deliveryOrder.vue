@@ -25,7 +25,7 @@
       </div>
     </div>
     
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

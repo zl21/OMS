@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
@@ -12,7 +12,7 @@ import { OmsTable } from 'burgeonComponents'
 export default {
   name: 'payableAdjustAdd',
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     OmsTable,
     businessLabel,

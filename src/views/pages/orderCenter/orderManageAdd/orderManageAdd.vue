@@ -1,7 +1,7 @@
 <template>
   <div class="order-add public-main custom-main">
     <div class="orderButtons custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <Collapse v-model="value1">

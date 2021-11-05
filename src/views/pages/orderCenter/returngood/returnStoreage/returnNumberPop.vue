@@ -6,7 +6,7 @@
         :form-config="order.orderform"
         @oneObjs="threeObjs"
       />
-      <businessButton :btn-config="order.btn" />
+      <OmsButton :btn-config="order.btn" />
     </div>
     <business-action-table
       :jordan-table-config="order.table"
@@ -15,7 +15,7 @@
       @on-select-all="onSelectAll"
       @on-select-all-cancel="onSelectAllCancel"
     />
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
     <div class="wrongForce">
       <Modal
         v-model="wrong.modal"

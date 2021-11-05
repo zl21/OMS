@@ -1,5 +1,5 @@
 
-  import businessButton from 'burgeonComponents/businessButton';
+  import { OmsButton } from 'burgeonComponents'
   import { OmsForm } from 'burgeonComponents';
 
   const { getModuleName } = R3;
@@ -16,7 +16,7 @@
       tablename: '' // 动作定义关联的表格
     },
     components: {
-      businessButton,
+      OmsButton,
       businessForm
     },
     data() {

@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 import EasyMatrix from 'burgeonComponents/easyMatrix';
 // import axios from 'axios';

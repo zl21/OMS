@@ -26,7 +26,7 @@
       class-name="ark-dialog"
     >
       <div class="dialog-footer" slot="footer">
-        <businessButton :btn-config="btnConfigMo" />
+        <OmsButton :btn-config="btnConfigMo" />
       </div>
       <payDetailAdd
         @detailAddData="detailAddDataHandel"
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import payDetailAdd from './payDetailAdd.vue';
 import { OmsTable } from 'burgeonComponents'
 
@@ -45,7 +45,7 @@ export default {
   // name: 'payDetail',
   components: {
     payDetailAdd,
-    businessButton,
+    OmsButton,
     OmsTable,
   },
   props: {

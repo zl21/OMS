@@ -7,7 +7,7 @@
       style="height: 100%; display: flex; flex-direction: column"
     >
       <div class="btn-operate custom-btn">
-        <businessButton :btn-config="btnConfig" />
+        <OmsButton :btn-config="btnConfig" />
       </div>
       <div class="public-content">
         <div class="item-collapse">
@@ -98,7 +98,7 @@
           class="custom-label"
         > -->
           <div class="btn-operate custom-btn">
-            <businessButton :btn-config="btnConfig" />
+            <OmsButton :btn-config="btnConfig" />
           </div>
           <div class="item-collapse">
             <Collapse v-model="value1">

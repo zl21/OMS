@@ -1,7 +1,7 @@
 <template>
   <div class="productSpecification">
     <div class="productSpecification_button">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="productSpecification_table">
       <Table :columns="columns" :data="resData" @on-selection-change="onSelectionChange" @on-column-click="onColumnClick" />

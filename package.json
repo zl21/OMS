@@ -5,7 +5,7 @@
   "main": "burgeon.publish/BurgeonMaterials.min.js",
   "files": [
     "burgeon.publish"
-],
+  ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js"
@@ -52,7 +52,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@burgeon/business-components": "^1.3.41-beta",
+    "@burgeon/business-components": "^1.0.1-op",
     "@burgeon/internationalization": "^1.1.1",
     "@syman/ark-ui": "1.2.5",
     "@syman/burgeon-r3": "^3.3.1",

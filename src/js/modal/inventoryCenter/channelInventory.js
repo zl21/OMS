@@ -1,8 +1,8 @@
-import businessButton from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
   },
   data() {
     return {

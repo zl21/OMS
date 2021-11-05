@@ -1,6 +1,6 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import { tableCols } from '../promotion.config';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
 	name: 'dialogVisiblex',
@@ -55,7 +55,7 @@ export default {
 		},
 	},
 	components: {
-		businessButton,
+		OmsButton,
 		detailtable,
 	},
 	computed: {

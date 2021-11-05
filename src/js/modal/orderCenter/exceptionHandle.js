@@ -1,11 +1,11 @@
-  import businessButton from 'burgeonComponents/businessButton';
+  import { OmsButton } from 'burgeonComponents'
   import loading from 'burgeonComponents/loading.vue';
   import { OmsTable } from 'burgeonComponents'
 
   export default {
     components: {
       OmsTable,
-      businessButton,
+      OmsButton,
       loading
     },
     computed: {

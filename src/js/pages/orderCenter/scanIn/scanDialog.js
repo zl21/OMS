@@ -4,7 +4,7 @@
 
 
 import { OmsTable } from 'burgeonComponents'
-import businessButton from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 
 export default {

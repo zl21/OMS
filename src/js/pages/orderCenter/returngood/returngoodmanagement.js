@@ -1,5 +1,5 @@
 // 退换货单详情
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
@@ -22,7 +22,7 @@ parseArea(areaList);
 export default {
   name: 'returngoodmanagement',
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     OmsTable,
     businessDialog,

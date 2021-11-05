@@ -17,19 +17,19 @@
       @on-page-size-change="pageSizeChange"
     />
     <!-- <div class="buttons customized-modal-btn">
-      <businessButton :btn-config="btnConfigMo" />
+      <OmsButton :btn-config="btnConfigMo" />
     </div> -->
   </div>
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'payDetailAdd',
   components: {
-    businessButton,
+    OmsButton,
     OmsTable,
   },
   props: {

@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import dateUtil from '@/assets/js/__utils__/date.js';
@@ -10,7 +10,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 export default {
   components: {
     orderItem,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
     subTable,

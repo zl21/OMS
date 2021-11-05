@@ -1,6 +1,6 @@
 
 
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import dateUtil from '@/assets/js/__utils__/date.js';
@@ -13,7 +13,7 @@ export default {
   components: {
     subTable,
     OmsTable,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
   },

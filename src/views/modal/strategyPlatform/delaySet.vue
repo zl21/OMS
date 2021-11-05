@@ -1,7 +1,7 @@
 <template>
   <div>
     <businessForm :form-config="formConfig" />
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

@@ -1,13 +1,13 @@
 
 // import axios from 'axios';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 // import { setTimeout } from 'timers';
 import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     OmsTable,
   },

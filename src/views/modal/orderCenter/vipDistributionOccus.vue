@@ -5,7 +5,7 @@
         {{ corfirmMessage }}
       </p>
       <br>
-      <businessButton :btn-config="confirmBtnConfig" />
+      <OmsButton :btn-config="confirmBtnConfig" />
     </div>
   </div>
 </template>

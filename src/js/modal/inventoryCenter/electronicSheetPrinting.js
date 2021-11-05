@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 import { getLodop } from 'burgeonComponents/common/js/LodopFuncs';
 
 export default {

@@ -1,5 +1,5 @@
 import { OmsForm } from 'burgeonComponents'
-import businessButton from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 import businessDialog from 'burgeonComponents/businessDialog.vue';
 
 import CustomConfig from '@/config/customized.config.js';
@@ -11,7 +11,7 @@ export default {
   components: {
     businessDialog,
     businessForm,
-    businessButton,
+    OmsButton,
   },
   props: {
     objList: {

@@ -5,7 +5,7 @@ import loading from 'burgeonComponents/loading';
 export default {
   name: "addAliasOrRegion",
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     loading,
   },

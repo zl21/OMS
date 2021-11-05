@@ -27,10 +27,10 @@
       />
     </div>
     <div class="footer">
-      <businessButton
+      <OmsButton
         :btn-config="btnConfig"
         class="modalBth modal-footer"
-      ></businessButton>
+      ></OmsButton>
     </div>
     <Modal
       v-model="modal"
@@ -42,7 +42,7 @@
       class-name="ark-dialog secModal"
     >
       <div>
-        <businessButton :btn-config="modalBtnConfigAdd"></businessButton>
+        <OmsButton :btn-config="modalBtnConfigAdd"></OmsButton>
         <!-- <Table
           :columns="table.columns"
           :data="table.data"
@@ -53,17 +53,17 @@
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
         />
-        <businessButton
+        <OmsButton
           :btn-config="modalBtnConfig"
           class="modal-footer"
-        ></businessButton>
+        ></OmsButton>
       </div>
     </Modal>
   </div>
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 
 

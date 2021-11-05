@@ -10,7 +10,7 @@
   <!-- 组合商品编辑 -->
   <div class="modifyGroup customized-detail">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="collapse">

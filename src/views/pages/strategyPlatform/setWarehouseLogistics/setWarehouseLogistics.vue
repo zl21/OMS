@@ -3,7 +3,7 @@
     <!-- 弹框 -->
     <loading :loading="loading" />
     <div class="custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <div class="tableTop">

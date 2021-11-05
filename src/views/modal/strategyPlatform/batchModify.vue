@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="batch_button">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <Modal v-model="modal" :mask="true" @on-ok="determine">
       <p>未勾选记录,将批量更新所有查询结果(共计{{ idArray.length }}行,是否确定继续操作</p>
@@ -22,7 +22,7 @@
 
 <script>
 import { OmsForm } from 'burgeonComponents';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
   components: {

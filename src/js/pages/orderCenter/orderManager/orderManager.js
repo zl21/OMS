@@ -1,5 +1,5 @@
 
-  import businessButton from 'burgeonComponents/businessButton.vue';
+  import { OmsButton } from 'burgeonComponents'
   import { OmsForm } from 'burgeonComponents'
   import BurgeonEvent from 'burgeonConfig/config/event.config';
   import businessDialog from 'burgeonComponents/businessDialog.vue';
@@ -12,7 +12,7 @@
   import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
   export default {
     components: {
-      businessButton,
+      OmsButton,
       businessForm,
       dynamicSearch,
       formSetting,

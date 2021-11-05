@@ -36,7 +36,7 @@
       title="关联原单"
     >
       <div class="dialog-footer" slot="footer">
-        <businessButton :btn-config="btnConfigMo" />
+        <OmsButton :btn-config="btnConfigMo" />
       </div>
       <div class="customized-detail-table">
         <business-action-table
@@ -53,13 +53,13 @@
 
 <script>
 // 退换货单详情
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'searchOOID',
   components: {
-    businessButton,
+    OmsButton,
     OmsTable,
   },
   model: {

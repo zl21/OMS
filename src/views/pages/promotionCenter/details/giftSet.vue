@@ -104,7 +104,7 @@
               slot="MatchOperate"
               class="form_button"
             >
-              <businessButton :btn-config="btnConfig" />
+              <OmsButton :btn-config="btnConfig" />
             </div>
           </detailtabs>
         </div>

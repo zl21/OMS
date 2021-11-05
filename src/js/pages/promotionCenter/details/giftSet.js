@@ -5,12 +5,12 @@ import { tableCols } from '../promotion.config';
 import ButtonFkDialog from 'burgeonComponents/buttonFkDialog';
 import SetCommodity from 'allpages/promotionCenter/details/setCommodity.vue';
 import businessDialog from 'burgeonComponents/businessDialog';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'giftSet',
   components: {
-    businessButton,
+    OmsButton,
     detailtable,
     detailtabs,
     SingleBox,

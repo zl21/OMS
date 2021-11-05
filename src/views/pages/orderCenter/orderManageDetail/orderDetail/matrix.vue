@@ -277,7 +277,7 @@
       <span>该矩形框表示︰条码档案不存在该条码！</span>
     </div>
     <div v-if="general && btnFlag" class="ff-matrix--box-btn">
-      <businessButton :btn-config="buttonConfig" />
+      <OmsButton :btn-config="buttonConfig" />
       <!-- <button
         class="ff-matrix-btn ff-matrix-btn-cancel"
         @click="cancel"

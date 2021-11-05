@@ -4,7 +4,7 @@
     <div class="Modal-Form">
       <businessForm :form-config="formConfig" />
     </div>
-    <businessButton :btn-config="btnConfig" class="modal-footer" />
+    <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
@@ -14,7 +14,7 @@ import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
   },
   props: {

@@ -21,7 +21,7 @@
       >
     </div>
     <div>
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div>
       <OmsTable
@@ -38,7 +38,7 @@
       />
     </div>
     <div class="order-footer">
-      <businessButton :btn-config="btnConfig2" />
+      <OmsButton :btn-config="btnConfig2" />
     </div>
   </div>
 </template>

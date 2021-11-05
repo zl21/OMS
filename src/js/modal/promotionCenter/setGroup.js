@@ -1,5 +1,5 @@
 import myInputLd from 'framework/components/element/input';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'DialogVisible',

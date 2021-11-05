@@ -1,4 +1,4 @@
-    import businessButton from 'burgeonComponents/businessButton';
+    import { OmsButton } from 'burgeonComponents'
   import loading from 'burgeonComponents/loading.vue';
   import drpInput from 'burgeonComponents/fkinput.vue';
   Vue.component('drpInput', drpInput)
@@ -7,7 +7,7 @@
   export default {
     components: {
       OmsTable,
-      businessButton,
+      OmsButton,
       loading,
       drpInput
     },

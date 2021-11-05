@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import publicMethods from '@/assets/js/public/publicMethods';
 import { OmsTable } from 'burgeonComponents'
@@ -8,7 +8,7 @@ import { parseArea } from '@/assets/js/address/address-parse';
 parseArea(areaList);
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     OmsTable
   },

@@ -130,6 +130,7 @@ const config = {
       path: require.resolve('path-browserify'),
     },
     alias: {
+      allpages: path.resolve(__dirname, './src/views/pages'),
       burgeonComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),

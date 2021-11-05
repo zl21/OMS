@@ -1,5 +1,5 @@
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -510,7 +510,7 @@ export default {
   components: {
     businessAgTable,
     businessForm,
-    businessButton,
+    OmsButton,
     businessLabel,
     // Mydialog,
     // errorMessage,

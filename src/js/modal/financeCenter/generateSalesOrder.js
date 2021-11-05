@@ -1,5 +1,5 @@
 import { OmsForm } from 'burgeonComponents'
-import businessBtn from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
   components: {

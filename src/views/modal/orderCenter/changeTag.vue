@@ -1,7 +1,7 @@
 <template>
   <!-- JIT配货单-换吊牌 -->
   <div class="changeTag" v-loading="loading">
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
     <div slot="content">
       <OmsTable :jordan-table-config="tableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-select="onSelect" @on-select-cancel="onSelectCancel" @on-select-all="onSelectAll" @on-select-all-cancel="onSelectAllCancel" />
     </div>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import myInput from 'burgeonComponents/fkinput.vue';
 import Vue from 'vue';
 import { OmsTable } from 'burgeonComponents'
@@ -18,7 +18,7 @@ Vue.component('drpInput', myInput);
 export default {
   name: 'changeTag',
   components: {
-    businessButton,
+    OmsButton,
     OmsTable,
     myInput,
   },

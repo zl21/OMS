@@ -2,7 +2,7 @@
 
 
 
-import businessButton from 'burgeonComponents/businessButton.vue';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents'
 import { OmsTable } from 'burgeonComponents'
 import businessDialog from 'burgeonComponents/businessDialog';
@@ -13,7 +13,7 @@ import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     OmsTable,
     businessDialog,

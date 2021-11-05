@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import businessLabel from 'burgeonComponents/businessLabel';
 import businessDialog from 'burgeonComponents/businessDialog';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -12,7 +12,7 @@ import loading from 'burgeonComponents/loading';
 export default {
   name: 'OrderManageDetail',
   components: {
-    businessButton,
+    OmsButton,
     businessLabel,
     EssentialInfo,
     OrderItem,

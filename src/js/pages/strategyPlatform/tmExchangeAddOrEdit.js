@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import subTable from 'burgeonComponents/subTable';
@@ -9,7 +9,7 @@ export default {
   components: {
     subTable,
     OmsTable,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
   },
