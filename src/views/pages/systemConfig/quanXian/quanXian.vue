@@ -7,8 +7,7 @@
  * @FilePath: /burgeon-project-logic/views/pages/systemConfig/quanXian/quanXian.vue
 -->
 <template>
-  <div class="jurisdiction custom-main functionPower" v-loading="spinShow">
-    <loading :loading="loading" />
+  <div class="jurisdiction custom-main functionPower" v-loading="spinShow || loading">
     <div class="custom-btn">
       <OmsButton :btn-config="buttonConfig" />
     </div>

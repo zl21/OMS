@@ -1,7 +1,6 @@
 <template>
   <!-- JIT配货单-实缺拆分 -->
   <div class="realDeficiencySplit" v-loading="loading">
-    <!-- <loading :loading="loading" /> -->
     <OmsButton :btn-config="btnConfig" />
     <div slot="content">
       <OmsTable

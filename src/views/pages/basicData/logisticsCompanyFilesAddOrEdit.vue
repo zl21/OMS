@@ -7,8 +7,7 @@
  * @FilePath: /burgeon-project-logic/views/pages/basicData/logisticsCompanyFilesAddOrEdit.vue
 -->
 <template>
-  <div class="customized-detail" >
-    <loading :loading="loading" />
+  <div class="customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>

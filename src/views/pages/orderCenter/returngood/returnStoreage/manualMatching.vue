@@ -1,7 +1,6 @@
 <!-- 退货入库手工匹配 && 错发强制匹配 -->
 <template>
-  <div class="returnTreasury">
-    <loading :loading="loading" />
+  <div class="returnTreasury" v-loading="loading">
     <!--按钮块-->
     <div style="margin-top: 8px;">
       <OmsButton :btn-config="btnConfig" />

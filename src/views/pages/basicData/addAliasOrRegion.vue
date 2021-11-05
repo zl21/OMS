@@ -3,8 +3,8 @@
   <div
     class="cusArkCollapse customized-detail"
     :id="this.customizedModuleName"
+    v-loading="loading"
   >
-    <loading :loading="loading" />
     <div class="buttons customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>

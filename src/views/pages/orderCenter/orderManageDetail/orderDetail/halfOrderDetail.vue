@@ -47,8 +47,8 @@
         v-show="listShow"
         class="ff-order-detail--box"
         :class="{ 'ff-order-detail--box-full': !matrixShow }"
+        v-loading="tableLoading"
       > 
-        <loading :loading="tableLoading" />
         <custom-table
           ref="custom"
           :t-head="tHead"
@@ -92,8 +92,8 @@
         <div
           ref="detail"
           class="ff-o-popper-class"
+          v-loading="hasMatch ? loading || revealLoading : loading"
         >
-          <loading :loading="hasMatch ? loading || revealLoading : loading" />
           <matrix
             v-if="visible"
             ref="matrixOne"

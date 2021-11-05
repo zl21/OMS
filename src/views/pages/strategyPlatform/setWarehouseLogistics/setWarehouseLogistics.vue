@@ -1,7 +1,6 @@
 <template>
-  <div class="setWarehouseLogistics public-main custom-main">
+  <div class="setWarehouseLogistics public-main custom-main" v-loading="loading">
     <!-- 弹框 -->
-    <loading :loading="loading" />
     <div class="custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
@@ -83,7 +82,7 @@
             </div>
           </div>
           <!-- table -->
-          <div class="tableRight">
+          <div class="tableRight" v-loading="tableLoading">
             <div class="all-table">
               <div
                 id="conTop"
@@ -167,7 +166,6 @@
               </div>
             </div>
             <!-- 弹框 -->
-            <loading :loading="tableLoading" />
           </div>
         </div>
       </div>

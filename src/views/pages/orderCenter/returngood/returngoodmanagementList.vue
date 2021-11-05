@@ -1,10 +1,9 @@
 <template>
   <div
-    class="returnGoodList custom-main">
-    <loading
-      :loading="agTableConfig.agLoading"
-      :class="{ loadingActive: loadingActive }"
-    />
+    class="returnGoodList custom-main"
+    :loading="agTableConfig.agLoading"
+    :class="{ loadingActive: loadingActive }"
+  >
     <div class="returnBtn totalHeight custom-btn">
       <!-- 按钮 -->
       <OmsButton :btn-config="btnConfig" />
@@ -19,15 +18,17 @@
         class="businessLabel totalHeight"
         :label-list="labelList"
         :label-default-value="labelDefaultValue"
-        @labelClick="(val) => eventGather.labelClick(val,'getList')"
+        @labelClick="(val) => eventGather.labelClick(val, 'getList')"
       />
       <!-- 列表组件 -->
       <div class="tableBox">
         <aTable
           ref="agGridChild"
           :ag-table-config="agTableConfig"
-          @on-page-change="(val) => eventGather.pageChange(val,'getList')"
-          @on-page-size-change="(val) => eventGather.pageSizeChange(val,'getList')"
+          @on-page-change="(val) => eventGather.pageChange(val, 'getList')"
+          @on-page-size-change="
+            (val) => eventGather.pageSizeChange(val, 'getList')
+          "
           @on-row-dblclick="onRowDblclick"
         />
       </div>

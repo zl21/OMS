@@ -1,7 +1,6 @@
 <template>
   <!-- 退换货订单新增 -->
-  <div class="returngood public-main custom-main">
-     <loading :loading="loading" />
+  <div class="returngood public-main custom-main" v-loading="loading">
     <!--按钮块-->
     <div class="returnAddBtn custom-btn">
       <OmsButton :btn-config="btnConfig" />

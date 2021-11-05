@@ -1,6 +1,5 @@
 <template>
-  <div class="auto-check public-main custom-main">
-    <loading :loading="loading" />
+  <div class="auto-check public-main custom-main" v-loading="loading">
     <div class="operate custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>

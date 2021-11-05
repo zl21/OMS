@@ -1,5 +1,5 @@
 <template>
-  <div class="sendSingleRule public-main custom-main">
+  <div class="sendSingleRule public-main custom-main" v-loading="saveLoading">
     <div class="custom-btn">
       <OmsButton
       :btn-config="btnConfig"
@@ -63,7 +63,7 @@
             >
               全选
             </Checkbox>
-            <div class="treeBox">
+            <div class="treeBox" v-loading="treeLoading">
               <Tree
                 id="tree"
                 :data="treeData"
@@ -71,7 +71,6 @@
                 :query="query"
                 show-checkbox
               />
-              <loading :loading="treeLoading" />
             </div>
           </div>
           <div class="tableSynchronous">
@@ -85,7 +84,7 @@
             </div>
           </div>
           <!-- table -->
-          <div class="tableRight">
+          <div class="tableRight" v-loading="tableLoading">
             <div class="all-table">
               <div
                 v-if="information.formValue.ETYPE === '1'"
@@ -249,7 +248,6 @@
                 </div>
               </div>
             </div>
-            <loading :loading="tableLoading" />
           </div>
         </div>
       </div>
@@ -295,7 +293,6 @@
     <!-- <Modal v-model="warningModal" title="提示" width="420" @on-ok="warningOk" :mask="true">
       <p>是否确认导出？</p>
     </Modal>-->
-    <loading :loading="saveLoading" />
   </div>
 </template>
 

@@ -8,8 +8,7 @@
 -->
 <!--订单中心->智能地址解析页面-->
 <template>
-  <div class="order_address customized-modal">
-    <loading :loading="loading" />
+  <div class="order_address customized-modal" v-loading="loading">
     <Form :model="data" :label-width="100" :rules="ruleValidate">
       <!-- <FormItem label="收货信息"> -->
       <FormItem :label="vmI18n.t('table_label.receivingInfo')">

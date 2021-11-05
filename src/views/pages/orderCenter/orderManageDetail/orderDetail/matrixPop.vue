@@ -2,8 +2,8 @@
   <div
     class="ff-matrix--table"
     :class="{'ff-matrix--min-table': general}"
+    v-loading="saveLoading"
   >
-    <loading :loading="saveLoading" />
     <div
       v-if="general"
       class="ff-matrix--head"

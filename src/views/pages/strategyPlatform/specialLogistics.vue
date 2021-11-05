@@ -11,7 +11,6 @@
     class="customized-detail"
     v-loading="loading"
   >
-    <!-- <loading :loading="loading" /> -->
     <div class="customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>

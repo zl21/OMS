@@ -1,7 +1,6 @@
 <!-- 退货入库新增、详情 -->
 <template>
-  <div class="returnTreasurys public-main custom-main">
-    <loading :loading="loading" />
+  <div class="returnTreasurys public-main custom-main" v-loading="loading">
     <!--按钮块-->
     <div class="returnTreasurysBtn custom-btn">
       <OmsButton :btn-config="btnConfig" />
