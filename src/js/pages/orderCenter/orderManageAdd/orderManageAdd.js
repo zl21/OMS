@@ -1,6 +1,6 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import businessDialog from 'burgeonComponents/businessDialog';
@@ -8,6 +8,7 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from 'burgeonConfig/config/validate.config';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
+import { OmsTable } from 'burgeonComponents'
 
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');
@@ -15,9 +16,9 @@ const { parse, parseArea } = require('@/assets/js/address/address-parse');
 parseArea(areaList);
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessLabel,
     businessDialog,
   },

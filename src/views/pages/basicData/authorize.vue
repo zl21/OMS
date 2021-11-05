@@ -67,7 +67,7 @@
             </template>
           </businessForm>
         </div>
-        <businessButton class="modal-footer" :btn-config="btnConfig" />
+        <OmsButton class="modal-footer" :btn-config="btnConfig" />
       </div>
     </Modal>
     <Modal
@@ -81,7 +81,7 @@
     >
       <div class="customized-modal">
         <p class="tips"><span class="iconfont"></span>{{vmI18n.t('modalTips.hb') }}</p>
-        <businessButton class="modal-footer" :btn-config="authoriBtnConfig" />
+        <OmsButton class="modal-footer" :btn-config="authoriBtnConfig" />
       </div>
     </Modal>
   </div>

@@ -55,7 +55,7 @@
         @on-row-click="onRowClick"
       />
     </div>
-    <businessButton
+    <OmsButton
       class="modalBtn"
       :btn-config="btnConfig"
     />

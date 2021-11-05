@@ -2,7 +2,7 @@
   <!-- 手工拆单 -->
   <div class="splitOrder customized-detail">
     <div class="manual_button customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="manual_list">
       <div class="list_left">

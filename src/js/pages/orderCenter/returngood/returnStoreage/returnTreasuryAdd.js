@@ -1,23 +1,26 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+
+
+
+
+
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessActionTable from 'burgeonComponents/businessActionTable';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import loading from 'burgeonComponents/loading';
+import { OmsTable } from 'burgeonComponents'
 
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     OrderItem,
     businessLabel,
-    businessStatusFlag,
     loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],

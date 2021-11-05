@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import businessBtn from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents';
 
 export default {
   components: {

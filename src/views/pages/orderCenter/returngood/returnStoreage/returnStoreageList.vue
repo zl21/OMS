@@ -3,7 +3,7 @@
   <div class="returnstoreage tableList custom-main">
     <loading :loading="agTableConfig.agLoading" />
     <div class="returnstoreageBtn totalHeight custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="form totalHeight custom-form">
       <businessForm :form-config="formConfig" class="searchList" />

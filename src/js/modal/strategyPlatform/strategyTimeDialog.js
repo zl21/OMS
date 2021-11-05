@@ -1,12 +1,12 @@
 // import httpServer from '@/utils/request';
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import format from '@/assets/js/__utils__/date';
 
 const { getModuleName } = R3;
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm
   },
   /**

@@ -1,18 +1,16 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import subTable from 'burgeonComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
-    businessActionTable,
+    OmsTable,
     subTable
   },
   mixins: [new modifycurrentLabel()],

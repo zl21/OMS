@@ -1,19 +1,16 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import publicMethods from '@/assets/js/public/publicMethods';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
-
+import { OmsTable } from 'burgeonComponents'
 import areaList from '@/assets/js/address/area-list';
 import { parseArea } from '@/assets/js/address/address-parse';
 
 parseArea(areaList);
 export default {
   components: {
-    businessStatusFlag,
-    businessButton,
+    OmsButton,
     businessForm,
-    businessActionTable
+    OmsTable
   },
   data() {
     return {

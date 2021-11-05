@@ -1,14 +1,14 @@
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsForm } from 'burgeonComponents';
 import businessDialog from 'burgeonComponents/businessDialog';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
 // import publicDialogConfig from 'burgeonComponents/common/js/publicDialog'
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessDialog
   },
   props: {

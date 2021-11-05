@@ -4,7 +4,7 @@
     <loading :loading="loading" />
     <!--按钮块-->
     <div style="margin-top: 8px;">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <!-- form表单 -->
     <div class="TreasuryDefault">
@@ -31,7 +31,7 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <businessActionTable
+        <OmsTable
           v-if="labelDefaultValue"
           :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
@@ -55,9 +55,9 @@
       >
         <div class="orderContent">
           <businessForm :form-config="order.orderform" />
-          <businessButton :btn-config="order.btn" />
+          <OmsButton :btn-config="order.btn" />
         </div>
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="order.table"
           @on-select="onquerySelect"
           @on-select-cancel="onqueryCancel"

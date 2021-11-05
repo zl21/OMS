@@ -1,7 +1,8 @@
 import reButton from 'burgeonComponents/businessButton';
-import reTable from 'burgeonComponents/businessActionTable';
 import reDialog from 'burgeonComponents/businessDialog';
 import loading from 'burgeonComponents/loading';
+import { OmsTable as reTable } from 'burgeonComponents'
+
 export default {
   components: {
     reButton,

@@ -10,7 +10,7 @@
   <div class="jurisdiction custom-main functionPower" v-loading="spinShow">
     <loading :loading="loading" />
     <div class="custom-btn">
-      <businessButton :btn-config="buttonConfig" />
+      <OmsButton :btn-config="buttonConfig" />
     </div>
     <div class="content">
       <div class="contentLeft">
@@ -40,7 +40,7 @@
               :default-column="searchFormConfig.defaultColumn"
               :defaultconfig="searchFormConfig.defaultconfig"
             />
-            <businessButton :btn-config="searchBtnConfig" />
+            <OmsButton :btn-config="searchBtnConfig" />
           </div>
           <div class="table_content">
             <quanXianTable

@@ -1,9 +1,15 @@
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
-import businessButton from 'burgeonComponents/businessButton.vue';
+
+
+
+
+
+import { OmsTable } from 'burgeonComponents'
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessActionTable,
+    OmsTable,
     businessButton
   },
   methods: {

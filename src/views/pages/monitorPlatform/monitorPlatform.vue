@@ -290,7 +290,7 @@ let statusBtnConifg = [
 export default {
   name: "WelcomePage",
   components: {
-    businessButton,
+    OmsButton,
   },
   data() {
     return {

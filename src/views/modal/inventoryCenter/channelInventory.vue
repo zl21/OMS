@@ -8,7 +8,7 @@
     <!-- title == '按筛选条件手工同步到页面' -->
       {{ webname == 'manualCalcSyncPageChannelProduct' ? '是否确认同步页面' :vmI18n.t('modalTips.by') }}
     </p>
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

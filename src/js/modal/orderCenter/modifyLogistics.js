@@ -1,7 +1,8 @@
-import businessForm from 'burgeonComponents/businessForm';
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsForm } from 'burgeonComponents';
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
@@ -13,8 +14,8 @@ export default {
   },
   components: {
     businessForm,
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   computed: {},
   data() {

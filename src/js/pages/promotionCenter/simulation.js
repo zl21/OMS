@@ -4,7 +4,7 @@ import detailtable from 'allpages/promotionCenter/details/table.vue';
 import SingleBox from 'burgeonComponents/singleBox.vue';
 import ButtonFkDialog from 'burgeonComponents/buttonFkDialog.vue';
 import { tableCols as tabList } from './promotion.config';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import groups from '@/assets/js/promotion/groups';
 import promotionMixin from './promotion.mixin';
 
@@ -109,7 +109,7 @@ export default {
   },
   props: [],
   components: {
-    businessButton,
+    OmsButton,
     myInput,
     detailtable,
     // MultipleBox,

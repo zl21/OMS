@@ -11,11 +11,11 @@
           @toggleDom="toggleDom"
         />
         <div v-if="tablename !== 'OC_B_ORDER'"></div>
-        <businessButton class="searchBtn" :btn-config="searchBtn" />
+        <OmsButton class="searchBtn" :btn-config="searchBtn" />
       </div>
     </div>
     <div class="custom-btn customized-list-btn">
-      <businessButton
+      <OmsButton
         :btn-config="btnConfig"
         @dropDownClick="val => eventGather.dropDownClickChange(val, extendBtn)"
       />

@@ -6,7 +6,7 @@
     <div class="time-dialog-form">
       <businessForm :form-config="formConfig" />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

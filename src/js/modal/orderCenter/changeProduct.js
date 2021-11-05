@@ -1,13 +1,12 @@
-import reForm from 'burgeonComponents/businessForm'
-import businessButton from 'burgeonComponents/businessButton'
-import businessActionTable from 'burgeonComponents/businessActionTable'
+import { OmsButton } from 'burgeonComponents'
 import commonUtils from 'burgeonConfig/config/commonUtils'
+import { OmsTable, OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {
     reForm,
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   data() {
     return {

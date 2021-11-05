@@ -4,7 +4,7 @@
       <label>修改传WMS拣货单字段 : </label>
       <Input v-model="send_wms_pick" />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

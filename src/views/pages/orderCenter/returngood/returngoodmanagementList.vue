@@ -7,7 +7,7 @@
     />
     <div class="returnBtn totalHeight custom-btn">
       <!-- 按钮 -->
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="returnForm totalHeight custom-form">
       <!-- form表单 -->

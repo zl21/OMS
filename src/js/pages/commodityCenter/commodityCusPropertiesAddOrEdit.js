@@ -1,24 +1,22 @@
 /**
  * 商品自定义属性
  */
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import orderItem from 'burgeonComponents/subTable';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import loading from 'burgeonComponents/loading';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     orderItem,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
-    businessActionTable,
+    OmsTable,
     loading,
   },
   mixins: [new modifycurrentLabel()],

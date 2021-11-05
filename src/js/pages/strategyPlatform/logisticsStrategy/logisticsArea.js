@@ -1,18 +1,16 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 import businessModal from 'burgeonComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import loading from 'burgeonComponents/loading';
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
     businessModal,
-    businessStatusFlag,
     loading
   },
   data() {

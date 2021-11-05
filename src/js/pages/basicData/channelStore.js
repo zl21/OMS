@@ -1,25 +1,22 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
-// import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'burgeonComponents/subTable';
 import logTable from 'burgeonComponents/LogTable';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import subTable from 'burgeonComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'CP_C_ORG_CHANNEL',
   components: {
     orderItem,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     logTable,
     subTable,
-    businessActionTable
+    OmsTable
   },
   mixins: [new modifycurrentLabel()],
   data() {

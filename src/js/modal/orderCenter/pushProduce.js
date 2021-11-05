@@ -1,5 +1,5 @@
-import reForm from 'burgeonComponents/businessForm';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {

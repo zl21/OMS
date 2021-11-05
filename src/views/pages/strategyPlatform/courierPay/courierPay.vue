@@ -12,7 +12,7 @@
       v-if="identifying === 3"
       class="img"
     >
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <div class="buttons">
       <business-button :btn-config="btnConfig" />

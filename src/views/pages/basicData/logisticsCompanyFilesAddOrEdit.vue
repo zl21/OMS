@@ -10,7 +10,7 @@
   <div class="customized-detail" >
     <loading :loading="loading" />
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
@@ -30,7 +30,7 @@
         <businessLabel :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <businessActionTable
+          <OmsTable
             :class="'PROPERTYVALUES'"
             :key="subTableConfig.key"
             v-show="labelDefaultValue === 'PROPERTYVALUES'"
@@ -42,7 +42,7 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <businessActionTable
+          <OmsTable
             :key="subTableConfig1.key"
             v-show="labelDefaultValue == 'CP_C_LOGISTICS_FIX'"
             :jordan-table-config="subTableConfig1"

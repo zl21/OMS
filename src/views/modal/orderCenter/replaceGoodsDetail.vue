@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="i_body">
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tableConfig"
         @on-select="onSelect"
         @on-select-cancel="onSelectCancel"
@@ -37,7 +37,7 @@
         @on-page-size-change="pageSizeChange"
       />
     </div>
-    <businessButton class="modal-footer" :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 

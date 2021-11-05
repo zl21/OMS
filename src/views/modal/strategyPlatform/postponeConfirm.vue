@@ -11,7 +11,7 @@
         format="yyyy-MM-dd HH:mm:ss"
       />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
     <!-- <div class="button">
       <Button
         type="error"

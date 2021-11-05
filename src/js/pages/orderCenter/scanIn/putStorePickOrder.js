@@ -1,13 +1,10 @@
 import buttons from 'burgeonComponents/businessButton.vue';
 import Aform from 'burgeonComponents/businessForm.vue';
-import Atable from 'burgeonComponents/businessActionTable.vue';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
-// import axios from 'axios';
+import { OmsTable as Atable } from 'burgeonComponents'
 
 export default {
   inject: ['reload'],
   components: {
-    businessStatusFlag,
     buttons,
     Atable,
     Aform

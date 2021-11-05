@@ -1,22 +1,20 @@
 // import axios from 'axios';
 import { setTimeout } from 'timers';
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import businessDialog from 'burgeonComponents/businessDialog';
-import businessActionTable from 'burgeonComponents/businessActionTable';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import loading from 'burgeonComponents/loading';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
     businessDialog,
-    businessActionTable,
-    businessStatusFlag,
+    OmsTable,
     loading
   },
   data() {

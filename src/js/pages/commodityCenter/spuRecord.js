@@ -1,24 +1,19 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-// import comUtils from '@/assets/js/__utils__/common.js';
 import orderItem from 'burgeonComponents/subTable';
 import subTable from 'burgeonComponents/subTable';
-// import ImageUpload from 'arkui_BCL/ImageUpload';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
     orderItem,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
     subTable,
-    // ImageUpload
   },
   mixins: [new modifycurrentLabel()],
   data() {

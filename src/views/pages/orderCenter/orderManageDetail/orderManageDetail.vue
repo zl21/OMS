@@ -1,7 +1,7 @@
 <template>
   <div class="customized-detail orderMangeDetails" v-loading="loading">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="returnBtn" />
+      <OmsButton :btn-config="returnBtn" />
     </div>
     <div class="customized-detail-main">
       <div style="padding:12px;width:100%;margin:0 auto">
@@ -40,10 +40,11 @@
         </div>
       </template>
       <!--单据状态图片展示 -->
-      <businessStatusFlag
+      <!-- <businessStatusFlag
         :status-name="statusName"
         class="statusFlag"
-      />
+      /> -->
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"></WaterMark>
     </div>
     <!--错误弹框-->
     <Modal
@@ -56,9 +57,8 @@
   </div>
 </template>
 <script>
-  import businessButton from 'burgeonComponents/businessButton';
+  import { OmsButton } from 'burgeonComponents'
   import businessLabel from 'burgeonComponents/businessLabel';
-  import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
   import businessDialog from 'burgeonComponents/businessDialog';
   import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
   import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
@@ -70,11 +70,10 @@
   export default {
     name: 'OrderManageDetail',
     components: {
-      businessButton,
+      OmsButton,
       businessLabel,
       EssentialInfo,
       OrderItem,
-      businessStatusFlag,
       businessDialog
     },
     mixins: [buttonPermissionsMixin],

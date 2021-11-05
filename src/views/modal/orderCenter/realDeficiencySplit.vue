@@ -2,9 +2,9 @@
   <!-- JIT配货单-实缺拆分 -->
   <div class="realDeficiencySplit"  v-loading="loading">
     <!-- <loading :loading="loading" /> -->
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
     <div slot="content">
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tableConfig"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
@@ -19,17 +19,17 @@
 
 <script>
 // import loading from 'burgeonComponents/loading';
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
 import myInput from 'burgeonComponents/fkinput.vue';
 import Vue from 'vue';
+import { OmsTable } from 'burgeonComponents'
 
 Vue.component('drpInput', myInput);
 export default {
   name: 'realDeficiencySplit',
   components: {
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
     // loading,
     myInput,
   },

@@ -4,7 +4,7 @@
     <div class="afterSaleCopy-form">
       <re-form :form-config="formConfig"></re-form>
     </div>
-    <businessButton :btn-config="btnConfig" class="modal-footer" />
+    <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import electronicSheetPrinting from "../inventoryCenter/electronicSheetPrinting.
 export default {
   components: {
     reForm,
-    businessButton,
+    OmsButton,
   },
   name: "afterSaleCopy",
   props: ["componentData"],

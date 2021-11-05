@@ -1,6 +1,5 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 import businessDialog from 'burgeonComponents/businessDialog';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
@@ -13,11 +12,10 @@ import loading from 'burgeonComponents/loading';
 export default {
   name: 'OrderManageDetail',
   components: {
-    businessButton,
+    OmsButton,
     businessLabel,
     EssentialInfo,
     OrderItem,
-    businessStatusFlag,
     businessDialog,
     loading
   },

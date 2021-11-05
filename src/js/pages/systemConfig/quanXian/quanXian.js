@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import quanXianTable from 'allpages/systemConfig/quanXian/quanXianTable.vue';
 import copyModal from 'allpages/systemConfig/quanXian/copyModal.vue';
 import R3 from '@syman/burgeon-r3';
@@ -10,7 +10,7 @@ const { FilterTree, SelectTree, SearchForm } = R3.components;
 const { network, urlSearchParams } = R3;
 export default {
   components: {
-    businessButton,
+    OmsButton,
     quanXianTable,
     FilterTree,
     SelectTree,

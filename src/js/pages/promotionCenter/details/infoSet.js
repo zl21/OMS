@@ -5,13 +5,13 @@ import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
 import businessDialog from 'burgeonComponents/businessDialog';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
   name: 'InfoSet',
   components: {
-    businessButton,
+    OmsButton,
     detailtable,
     detailtabs,
     SingleBox,

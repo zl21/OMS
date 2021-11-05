@@ -57,7 +57,7 @@
         *支持上下拖拽排序
     </p>
     <div class="footer-button">
-      <!-- <businessButton
+      <!-- <OmsButton
         :btn-config="btnConfig"
         style="display:flex;justify-content: flex-end;"
       /> -->
@@ -75,7 +75,7 @@
   </div>
 </template>
 <script>
-  import businessButton from 'burgeonComponents/businessButton';
+  import { OmsButton } from 'burgeonComponents'
 
   export default {
     components: {

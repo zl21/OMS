@@ -1,12 +1,12 @@
-import businessForm from 'burgeonComponents/businessForm';
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsForm } from 'burgeonComponents';
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     businessForm,
-    businessButton,
-    businessActionTable
+    OmsButton,
+    OmsTable
   },
   props: {
     componentData: {

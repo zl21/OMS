@@ -66,7 +66,7 @@
       </Divider>
       <businessForm :form-config="formConfig2" />
     </div>
-    <businessButton
+    <OmsButton
       class="modalBth"
       :btn-config="btnConfig"
     />

@@ -1,12 +1,10 @@
 // 退换货单详情
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
 import businessDialog from 'burgeonComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
@@ -15,6 +13,7 @@ import commonUtils from 'burgeonConfig/config/commonUtils'
 // import OrderItem from './orderItem';
 
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
+import { OmsTable } from 'burgeonComponents'
 
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');
@@ -23,13 +22,12 @@ parseArea(areaList);
 export default {
   name: 'returngoodmanagement',
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessDialog,
     OrderItem,
     businessLabel,
-    businessStatusFlag,
     loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],

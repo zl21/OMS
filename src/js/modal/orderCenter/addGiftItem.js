@@ -1,9 +1,10 @@
-import businessButton from 'burgeonComponents/businessButton'
-import businessActionTable from 'burgeonComponents/businessActionTable'
-import businessForm from 'burgeonComponents/businessForm'
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
 import commonUtils from 'burgeonConfig/config/commonUtils'
 import axios from 'axios'
+import { OmsTable } from 'burgeonComponents'
+
 export default {
   mixins: [listeningToKeydownMixin],
   data() {
@@ -166,9 +167,9 @@ export default {
     }
   },
   components: {
-    businessActionTable,
+    OmsTable,
     businessForm,
-    businessButton,
+    OmsButton,
   },
   props: {
     componentData: {

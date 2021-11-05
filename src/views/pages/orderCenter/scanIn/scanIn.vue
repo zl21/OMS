@@ -3,7 +3,7 @@
     <loading :loading="loading" />
     <!-- 按钮 -->
     <div class="scan_button">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <!-- 高级搜索 -->
     <div class="scan_search">
@@ -40,7 +40,7 @@
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
         {{ vmI18n.t("panel_label.scanDetails") }}
       </div>
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="jordanTableConfig"
         @on-row-click="onRowClick"
       />
@@ -101,27 +101,27 @@
     <!-- 提示音 -->
     <audio id="fm01">
       <!--以下所有 您的浏览器不支持 audio 与元素。 -->
-      <source src="./MP3/fm01.mp3" type="audio/ogg" />
+      <source src="/views/pages/orderCenter/scanIn/MP3/fm01.mp3" type="audio/ogg" />
       {{ vmI18n.t("modalTips.h6") }}
     </audio>
     <audio id="fm02">
-      <source src="./MP3/fm02.mp3" type="audio/ogg" />
+      <source src="/views/pages/orderCenter/scanIn/MP3/fm02.mp3" type="audio/ogg" />
       {{ vmI18n.t("modalTips.h6") }}
     </audio>
     <audio id="fm03">
-      <source src="./MP3/fm03.mp3" type="audio/ogg" />
+      <source src="/views/pages/orderCenter/scanIn/MP3/fm03.mp3" type="audio/ogg" />
       {{ vmI18n.t("modalTips.h6") }}
     </audio>
     <audio id="fm04">
-      <source src="./MP3/fm04.mp3" type="audio/ogg" />
+      <source src="/views/pages/orderCenter/scanIn/MP3/fm04.mp3" type="audio/ogg" />
       {{ vmI18n.t("modalTips.h6") }}
     </audio>
     <audio id="error01">
-      <source src="./MP3/error01.mp3" type="audio/ogg" />
+      <source src="/views/pages/orderCenter/scanIn/MP3/error01.mp3" type="audio/ogg" />
       {{ vmI18n.t("modalTips.h6") }}
     </audio>
     <audio id="error02">
-      <source src="./MP3/error02.mp3" type="audio/ogg" />
+      <source src="/views/pages/orderCenter/scanIn/MP3/error02.mp3" type="audio/ogg" />
       {{ vmI18n.t("modalTips.h6") }}
     </audio>
   </div>

@@ -1,11 +1,11 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 // import { standardTimeConversion } from  '@/assets/js/__utils__/date.js';
 
 const { getModuleName } = R3;
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm
   },
   /**

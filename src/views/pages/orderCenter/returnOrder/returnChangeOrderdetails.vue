@@ -28,14 +28,14 @@
       @on-cancel="detailAddCancel"
       class-name="ark-dialog"
     >
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tableConfig"
         @on-select="onSelect"
         @on-select-cancel="onSelectCancel"
         @on-select-all="onSelectAll"
         @on-select-all-cancel="onSelectAllCancel"
       />
-      <businessButton :btn-config="btnConfigTui" class="modal-footer" />
+      <OmsButton :btn-config="btnConfigTui" class="modal-footer" />
     </Modal>
     <!-- 替换/添加明细 -->
     <Modal
@@ -48,19 +48,19 @@
       footer-hide
       class-name="ark-dialog"
     >
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="replaceProductTable"
         @on-row-click="replaceOnSelect"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
       />
-      <businessButton :btn-config="btnConfigHuan" class="modal-footer" />
+      <OmsButton :btn-config="btnConfigHuan" class="modal-footer" />
     </Modal>
   </div>
 </template>
 <script>
-import businessActionTable from "burgeonComponents/businessActionTable";
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 
 
 import {
@@ -73,8 +73,8 @@ import Util from "@/assets/js/public/publicMethods";
 export default {
   name: "retunAddDetail",
   components: {
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   props: {
     mainData: {},

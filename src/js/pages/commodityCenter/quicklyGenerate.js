@@ -1,4 +1,4 @@
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import axios from 'axios';
 // import comUtils from '@/assets/js/__utils__/common.js';
 

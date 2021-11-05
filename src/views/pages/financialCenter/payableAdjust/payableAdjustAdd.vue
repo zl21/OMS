@@ -2,13 +2,10 @@
   <div class="financialManageCenter public-main custom-main">
     <loading :loading="loading" />
     <div class="buttons custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
-      <businessStatusFlag
-        v-if="showStatusFlag"
-        :status-name="statusName"
-      />
+      <WaterMark v-if="showStatusFlag && statusName" class="omsWaterMark" :text="statusName"></WaterMark>
       <Collapse v-model="spreadPanel">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
@@ -47,7 +44,7 @@
           @on-ok="resetMainTable"
           @on-cancel="detailAddCancel"
         >
-          <businessActionTable
+          <OmsTable
             :jordan-table-config="detailAddTable.table"
             @on-select="detailAddOnSelect"
             @on-select-cancel="detailAddOnCancel"
@@ -67,7 +64,7 @@
       <div class="table">
         <!-- 赔付单明细 -->
         <div class="barcodeDetails">
-          <businessActionTable
+          <OmsTable
             v-show="labelDefaultValue === '1'"
             :jordan-table-config="jordanTableConfig"
             @table-delete-detail="delTableDetail"
@@ -79,7 +76,7 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <businessActionTable
+          <OmsTable
             v-show="labelDefaultValue === '2'"
             :jordan-table-config="payableAdjustLog"
             @on-page-change="logPageChange"

@@ -7,7 +7,7 @@
 -->
 <template>
   <div class="payDetailAdd" v-loading="loading" style="width: 800px">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -17,20 +17,20 @@
       @on-page-size-change="pageSizeChange"
     />
     <!-- <div class="buttons customized-modal-btn">
-      <businessButton :btn-config="btnConfigMo" />
+      <OmsButton :btn-config="btnConfigMo" />
     </div> -->
   </div>
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'payDetailAdd',
   components: {
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   props: {
     subData: {

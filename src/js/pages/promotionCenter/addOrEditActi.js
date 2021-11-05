@@ -4,7 +4,7 @@ import GiftSet from 'allpages/promotionCenter/details/giftSet.vue';
 import stepsBars from 'burgeonComponents/steps';
 import groups from '@/assets/js/promotion/groups';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import promotionMixin from './promotion.mixin';
 
 export default {

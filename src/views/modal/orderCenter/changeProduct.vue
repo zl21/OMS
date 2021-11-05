@@ -23,7 +23,7 @@
             </Button>
           </div>
         </div> -->
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="tableConfig"
           @on-select="onSelect1"
           @on-select-cancel="onSelectCancel1"
@@ -57,7 +57,7 @@
             </Button>
           </div>
         </div> -->
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="tableConfig2"
           @on-select="onSelect2"
           @on-select-cancel="onSelectCancel2"
@@ -81,7 +81,7 @@
         <span>{{ vmI18n.t("modalTips.zg") }}</span>
         <span style="color: #003200">{{ onRowClickReplaceText }}</span>
       </span>
-      <businessButton class="modal-footer" :btn-config="btnConfig" />
+      <OmsButton class="modal-footer" :btn-config="btnConfig" />
     </div>
   </div>
 </template>

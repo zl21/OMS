@@ -1,6 +1,7 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+
+
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessDialog from 'burgeonComponents/businessDialog';
 import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -11,6 +12,8 @@ import BurgeonDate from '@/assets/js/__utils__/date.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import loading from 'burgeonComponents/loading';
 import commonUtils from 'burgeonConfig/config/commonUtils';
+import { OmsTable } from 'burgeonComponents'
+
 const getCurrentTime = (() => {
   return BurgeonDate.Format(new Date(),'yyyy-MM-dd 23:59:59');
 })();
@@ -21,9 +24,9 @@ const addSevenDay = (() => {
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessDialog,
     aTable,
     loading

@@ -10,7 +10,7 @@
   <div class="commodityCusPropertiesAddOrEdit customized-detail" :id="this.customizedModuleName">
     <loading :loading="loading" />
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
@@ -27,7 +27,7 @@
         <businessLabel v-show="showSubtablePart" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <businessActionTable
+          <OmsTable
             v-show="showSubtablePart && labelDefaultValue === 'PROPERTYVALUES'"
             :jordan-table-config="propertyValuesConfig"
             @on-select="onSelect"

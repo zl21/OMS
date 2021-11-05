@@ -1,23 +1,21 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import subTable from 'burgeonComponents/subTable';
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import businessDialog from 'burgeonComponents/businessDialog';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     subTable,
-    businessButton,
+    OmsButton,
     businessForm,
     businessLabel,
-    businessStatusFlag,
-    businessActionTable,
+    OmsTable,
     scheduleFormDialog,
     businessDialog
   },

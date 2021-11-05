@@ -27,10 +27,10 @@
       />
     </div>
     <div class="footer">
-      <businessButton
+      <OmsButton
         :btn-config="btnConfig"
         class="modalBth modal-footer"
-      ></businessButton>
+      ></OmsButton>
     </div>
     <Modal
       v-model="modal"
@@ -42,34 +42,34 @@
       class-name="ark-dialog secModal"
     >
       <div>
-        <businessButton :btn-config="modalBtnConfigAdd"></businessButton>
+        <OmsButton :btn-config="modalBtnConfigAdd"></OmsButton>
         <!-- <Table
           :columns="table.columns"
           :data="table.data"
           style="max-height: 300px; overflow: scroll"
         ></Table> -->
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="table"
           @on-page-change="pageChange"
           @on-page-size-change="pageSizeChange"
         />
-        <businessButton
+        <OmsButton
           :btn-config="modalBtnConfig"
           class="modal-footer"
-        ></businessButton>
+        ></OmsButton>
       </div>
     </Modal>
   </div>
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from "burgeonComponents/businessActionTable";
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 
 
 export default {
   components: {
-    businessActionTable,
+    OmsTable,
     businessButton
   },
   props: {

@@ -7,7 +7,7 @@
       style="height: 100%; display: flex; flex-direction: column"
     >
       <div class="btn-operate custom-btn">
-        <businessButton :btn-config="btnConfig" />
+        <OmsButton :btn-config="btnConfig" />
       </div>
       <div class="public-content">
         <div class="item-collapse">
@@ -40,7 +40,7 @@
               <p style="color:red;padding-left:56px;padding-top:5px">
                 提示: 平台维护条码也需大写
               </p>
-              <businessActionTable
+              <OmsTable
                 ref="codeTable"
                 :jordan-table-config="jordanTableConfig1"
                 @on-select="onSelect"
@@ -64,7 +64,7 @@
                 <p style="color:#fff;padding-left:55px;padding-top:5px">
                   1
                 </p>
-                <businessActionTable
+                <OmsTable
                   :jordan-table-config="jordanTableConfig2"
                   @table-delete-detail="commodityDeleteDetail"
                   @on-select="RightonSelect"
@@ -81,7 +81,7 @@
           </div>
         </div> 
         <!-- 水印 -->
-        <businessStatusFlag :status-name="statusName" />
+        <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"></WaterMark>
       </div>
     </div>
     <div
@@ -98,7 +98,7 @@
           class="custom-label"
         > -->
           <div class="btn-operate custom-btn">
-            <businessButton :btn-config="btnConfig" />
+            <OmsButton :btn-config="btnConfig" />
           </div>
           <div class="item-collapse">
             <Collapse v-model="value1">
@@ -127,7 +127,7 @@
                 :label-list="tabconfig1.labelList"
               />
               <div class="tab-content">
-                <businessActionTable
+                <OmsTable
                   ref="codeTable"
                   :jordan-table-config="jordanTableConfig1"
                   @on-select="onSelect"
@@ -148,7 +148,7 @@
               />
               <div class="tab-content">
                 <div class="wrap">
-                  <businessActionTable
+                  <OmsTable
                     :jordan-table-config="jordanTableConfig2"
                     @table-delete-detail="commodityDeleteDetail"
                     @on-select="RightonSelect"
@@ -166,15 +166,15 @@
           </div>
         <!-- </TabPane> -->
         <!--<TabPane label="修改日志" :name="'日志'">-->
-        <!--<businessActionTable-->
+        <!--<OmsTable-->
         <!--ref="oprateLog"-->
         <!--:jordanTableConfig="oprateLogTableConfig"-->
         <!--@on-page-change="operateLogPageChange"-->
         <!--@on-page-size-change="operateLogPageSizeChange"-->
-        <!--&gt;</businessActionTable>-->
+        <!--&gt;</OmsTable>-->
         <!--</TabPane>-->
         <!-- 水印 -->
-        <businessStatusFlag :status-name="statusName" />
+        <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"></WaterMark>
       <!-- </Tabs> -->
     </div>
     <Modal

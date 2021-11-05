@@ -3,7 +3,7 @@
     <!-- 弹框 -->
     <loading :loading="loading" />
     <div class="custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <div class="tableTop">
@@ -172,7 +172,7 @@
         </div>
       </div>
       <!--单据状态图片展示 -->
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <!-- 导入 -->
     <businessModal

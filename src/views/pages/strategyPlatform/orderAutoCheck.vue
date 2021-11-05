@@ -2,7 +2,7 @@
   <div class="auto-check public-main custom-main">
     <loading :loading="loading" />
     <div class="operate custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <Tabs value="name1">

@@ -1,24 +1,24 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 // import loading from 'burgeonComponents/loading';
 import businessLabel from 'burgeonComponents/businessLabel';
 import switchList from 'burgeonComponents/switchList';
-import businessActionTable from 'burgeonComponents/businessActionTable';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import subTable from 'burgeonComponents/subTable';
 
 import axios from 'axios';
 import service from '@/service/index';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'specialLogistics',
   components: {
-    businessButton,
+    OmsButton,
     businessLabel,
     businessForm,
     switchList,
-    businessActionTable,
+    OmsTable,
     subTable
   },
   mixins: [new modifycurrentLabel()],

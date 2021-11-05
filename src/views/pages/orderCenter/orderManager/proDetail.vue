@@ -29,19 +29,18 @@
          {{Vmi18n.t('form_label.b1')}}
       </div>
     </div>
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
     />
     <!-- <loading :loading="loading" /> -->
   </div>
 </template>
 <script>
-  import businessActionTable from 'burgeonComponents/businessActionTable.vue';
-  // import loading from 'burgeonComponents/loading.vue';
+  import { OmsTable } from 'burgeonComponents'
 
   export default {
     components: {
-      businessActionTable,
+      OmsTable,
       // loading
     },
     props: {

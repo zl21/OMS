@@ -1,12 +1,14 @@
+
 // 发货单派单规则 - 修改仓库
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'strategyModifyLogistics',
   components: {
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   props: {
     componentData: {},

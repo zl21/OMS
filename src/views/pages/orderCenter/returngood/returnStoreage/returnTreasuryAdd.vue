@@ -4,7 +4,7 @@
     <loading :loading="loading" />
     <!--按钮块-->
     <div class="returnTreasurysBtn custom-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <!-- form表单 -->
@@ -52,7 +52,7 @@
         >
           <div class="orderContent">
             <businessForm :form-config="order.orderform" />
-            <businessButton :btn-config="order.btn" />
+            <OmsButton :btn-config="order.btn" />
           </div>
           <div class="orderTable">
             <business-action-table
@@ -64,7 +64,7 @@
         </Modal>
       </div>
       <!-- 水印图片 -->
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
   </div>
 </template>

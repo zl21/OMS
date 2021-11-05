@@ -1,12 +1,13 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable.vue';
+import { OmsButton } from 'burgeonComponents'
+import { OmsTable } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   props: {
     componentData: {

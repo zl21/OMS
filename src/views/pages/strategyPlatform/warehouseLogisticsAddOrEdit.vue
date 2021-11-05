@@ -10,7 +10,7 @@
   <!-- 仓库物流设置 -->
   <div class="customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
@@ -62,13 +62,13 @@
                 </DropMultiSelectFilter>
               </template>
             </businessForm>
-            <businessButton
+            <OmsButton
               v-if="labelDefaultValue == 'logistics'"
               :btn-config="logisticsTableButtonConfig"
             />
           </div>
 
-          <businessActionTable
+          <OmsTable
             v-show="labelDefaultValue == 'logistics'"
             :jordan-table-config="logisticsTableConfig"
             @on-select="onSelect"

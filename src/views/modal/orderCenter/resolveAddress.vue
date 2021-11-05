@@ -80,7 +80,7 @@
         <span>{{ componentData.SYS_REMARK }}</span>
       </FormItem>
     </Form>
-    <businessButton class="modal-footer" :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 

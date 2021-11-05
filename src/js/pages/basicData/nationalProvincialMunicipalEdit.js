@@ -1,12 +1,12 @@
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import orderItem from 'burgeonComponents/subTable';
 import businessLabel from 'burgeonComponents/businessLabel';
 
 export default {
   name: 'NationalProvincialMunicipalEdit',
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
     orderItem,
     businessLabel

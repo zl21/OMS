@@ -2,7 +2,7 @@
 <template>
   <div>
     <EasyMatrix :component-data="matrixData" />
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -16,7 +16,7 @@
       v-focus
       class="focusStyle"
     >
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

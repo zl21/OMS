@@ -1,7 +1,7 @@
 <template>
   <div class="sendSingleRule public-main custom-main">
     <div class="custom-btn">
-      <businessButton
+      <OmsButton
       :btn-config="btnConfig"
     />
     </div>
@@ -254,7 +254,7 @@
         </div>
       </div>
       <!--单据状态图片展示 -->
-      <businessStatusFlag :status-name="statusName" />
+      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <!-- 修改仓库-->
     <businessDialog

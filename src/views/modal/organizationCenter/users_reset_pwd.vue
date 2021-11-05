@@ -15,12 +15,12 @@
     >
     </FormLayout>
 
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import service from '@/service/index';
 
 export default {

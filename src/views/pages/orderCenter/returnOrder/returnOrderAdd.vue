@@ -3,7 +3,7 @@
   <div class="customized-detail returnOrderAdd" v-loading="loading">
     <!--按钮块-->
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <div class="returnAddColl">
@@ -105,7 +105,7 @@
     <!-- 查询原始订单编号 -->
     <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="vmI18n.t('form_label.cv')">
         <div class="modal-footer" slot="footer">
-            <businessButton :btn-config="btnConfigMo" />
+            <OmsButton :btn-config="btnConfigMo" />
         </div>
         <searchOOID :orderData="orderData" @getRowData="getRowData"></searchOOID>
     </Modal>
@@ -114,9 +114,8 @@
 
 <script>
 // 退换货单详情
-import businessButton from 'burgeonComponents/businessButton';
-import businessForm from 'burgeonComponents/businessForm';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
+import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
@@ -124,15 +123,16 @@ import BurgeonValidate from "burgeonConfig/config/validate.config";
 import searchOOID from './searchOOID.vue'
 import returnChangeOrderdetails from './returnChangeOrderdetails.vue'
 import { valiObj, waterMarkMap } from './returnConfig.js'
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   // name: 'returnOrderAdd',
   components: {
     returnChangeOrderdetails,
     searchOOID,
-    businessButton,
+    OmsButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessLabel,
   },
   data() {

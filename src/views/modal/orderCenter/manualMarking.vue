@@ -15,7 +15,7 @@
     >
       <re-action-table :jordan-table-config="depositConfig" />
     </div>
-    <businessButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

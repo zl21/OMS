@@ -1,10 +1,10 @@
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import groups from '@/assets/js/promotion/groups';
-import businessForm from 'burgeonComponents/businessForm';
+import { OmsForm } from 'burgeonComponents';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
 import businessAgTable from 'burgeonComponents/businessAgTable';
@@ -510,7 +510,7 @@ export default {
   components: {
     businessAgTable,
     businessForm,
-    businessButton,
+    OmsButton,
     businessLabel,
     // Mydialog,
     // errorMessage,

@@ -6,13 +6,13 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/modifyWarehouse.js
  */
-import businessForm from 'burgeonComponents/businessForm';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsForm } from 'burgeonComponents';
+import { OmsButton } from 'burgeonComponents'
 
 export default {
   components: {
     businessForm,
-    businessButton,
+    OmsButton,
   },
   props: {
     componentData:{

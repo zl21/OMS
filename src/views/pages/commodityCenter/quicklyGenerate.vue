@@ -1,7 +1,7 @@
 <template>
   <div class="quicklyGenerate customized-detail">
     <div class="quick_header customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="quick_body customized-detail-main">
       <Tabs value="name1">

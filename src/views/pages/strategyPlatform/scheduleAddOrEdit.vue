@@ -2,7 +2,7 @@
   <!-- 档期日程规划 -->
   <div class="customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
@@ -20,7 +20,7 @@
           <!-- 创建拣货单 -->
           {{ vmI18n.t('panel_label.au') }}
           <p slot="content">
-            <businessActionTable
+            <OmsTable
               :jordan-table-config="pickingTableConfig"
             />
           </p>
@@ -32,7 +32,7 @@
           <!-- 创建入库单 -->
           {{ vmI18n.t('panel_label.av') }}
           <p slot="content">
-            <businessActionTable
+            <OmsTable
               :jordan-table-config="warehouseWarrantConfig"
             />
           </p>

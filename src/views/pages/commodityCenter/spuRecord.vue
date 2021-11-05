@@ -9,7 +9,7 @@
 <template>
   <div class="spuRecord customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
@@ -66,7 +66,7 @@
         <!-- 子表Part -->
         <div v-show="labelValue == 'skuInfo'" class="skuInfo">
           <div class="productSpecification_button">
-            <businessButton :btn-config="skuInfoBtnConfig" />
+            <OmsButton :btn-config="skuInfoBtnConfig" />
           </div>
           <div class="productSpecification_table">
             <Table
@@ -85,7 +85,7 @@
               <businessForm :form-config="tableFormConfig" />
             </div>
             <div class="businessButton">
-              <businessButton :btn-config="supplierBtnConfig" />
+              <OmsButton :btn-config="supplierBtnConfig" />
             </div>
           </div>
           <div class="supplier_body">

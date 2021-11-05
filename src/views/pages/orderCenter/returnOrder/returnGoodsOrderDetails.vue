@@ -13,8 +13,8 @@
       <span @click="onSitch()"> {{ switchText }} </span>
     </div>
     <!-- 退货明细 -->
-    <business-action-table
-      :jordan-table-config="businessActionTable"
+    <OmsTable
+      :jordan-table-config="omsTableConfig"
       @on-select="returnOnSelect"
       @on-select-cancel="returnCancel"
       @on-select-all="returnSelectAll"
@@ -31,7 +31,7 @@
       @on-cancel="detailAddCancel"
       class-name="ark-dialog"
     >
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tableConfig"
         @on-select="onSelect"
         @on-select-cancel="onSelectCancel"
@@ -49,7 +49,7 @@
       @on-ok="replaceOk"
       class-name="ark-dialog"
     >
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="replaceProductTable"
         @on-row-click="replaceOnSelect"
         @on-page-change="pageChange"
@@ -59,7 +59,7 @@
   </div>
 </template>
 <script>
-import businessActionTable from "burgeonComponents/businessActionTable";
+import { OmsTable } from 'burgeonComponents'
 
 import {
   addDetailModalTableColumns,
@@ -71,7 +71,7 @@ import Util from "@/assets/js/public/publicMethods";
 export default {
   name: "retunGoods",
   components: {
-    businessActionTable,
+    OmsTable,
   },
   props: {
     mainData: {},
@@ -102,7 +102,7 @@ export default {
         tui: [],
         huan: [],
       }, // 传给主表的数据(用于保存)(监听时机:删除明细/新增确认)
-      businessActionTable: {
+      omsTableConfig: {
         // businessFormConfig: {}, // 表单配置
         businessButtonConfig: {
           typeAll: "default", // 按钮统一风格样式
@@ -307,17 +307,17 @@ export default {
         let renderKeys = []; // render key
         // if (newData === "0") {
         //   renderKeys = ["REFUND_ID", "QTY_REFUND"];
-        //   this.businessActionTable.businessButtonConfig.buttons[1].isShow = false;
-        //   this.businessActionTable.businessButtonConfig.buttons[0].isShow = true;
-        //   this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
-        //   this.businessActionTable.data = this.toMainData.tui;
+        //   this.omsTableConfig.businessButtonConfig.buttons[1].isShow = false;
+        //   this.omsTableConfig.businessButtonConfig.buttons[0].isShow = true;
+        //   this.omsTableConfig.businessButtonConfig.buttons[2].isShow = true;
+        //   this.omsTableConfig.data = this.toMainData.tui;
         // } else if (newData === "1") {
         //   renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
-        //   this.businessActionTable.businessButtonConfig.buttons[0].isShow = false;
-        //   this.businessActionTable.businessButtonConfig.buttons[1].isShow = true;
-        //   this.businessActionTable.businessButtonConfig.buttons[1].text = $i18n.t('btn.addDetail');//新增明细
-        //   this.businessActionTable.businessButtonConfig.buttons[2].isShow = true;
-        //   this.businessActionTable.data = this.toMainData.huan;
+        //   this.omsTableConfig.businessButtonConfig.buttons[0].isShow = false;
+        //   this.omsTableConfig.businessButtonConfig.buttons[1].isShow = true;
+        //   this.omsTableConfig.businessButtonConfig.buttons[1].text = $i18n.t('btn.addDetail');//新增明细
+        //   this.omsTableConfig.businessButtonConfig.buttons[2].isShow = true;
+        //   this.omsTableConfig.data = this.toMainData.huan;
         // }
       },
       immediate: true,
@@ -332,28 +332,28 @@ export default {
     this.panelReturn = ["tapComponent.returnGoodsDetails",'tapComponent.returnDetails'].includes(this.$parent.$parent.panelInstance);
     //编辑页面 换货/退货逻辑
     this.getBtn().then((res) => {
-      let BtnConfig = this.businessActionTable.businessButtonConfig.buttons;
+      let BtnConfig = this.omsTableConfig.businessButtonConfig.buttons;
       // 换货明细
       if (this.$parent.$parent.panelInstance === "tapComponent.changeGoodsDetails") {
         BtnConfig[0].isShow = false;
         BtnConfig[1].isShow = true;
         BtnConfig[2].isShow = true;
-        this.businessActionTable.columns = this.tableHead.huan;
+        this.omsTableConfig.columns = this.tableHead.huan;
         this.renderColumn = this.tableHead.huan;
         // 手工新增
         setTimeout(() => {
             this.renderHandle([ "DISPUTE_ID","QTY_EXCHANGE","AMT_EXCHANGE"]) //render方法
           }, 100);
-        this.businessActionTable.data = this.toMainData.huan;
+        this.omsTableConfig.data = this.toMainData.huan;
         // 退货明细
       } else if (this.panelReturn) {
-        this.businessActionTable.columns = this.tableHead.tui;
+        this.omsTableConfig.columns = this.tableHead.tui;
         this.renderColumn = this.tableHead.tui;
         if (this.$parent.$parent.panelInstance === 'tapComponent.returnDetails' && this.$route.query.RETURN_SOURCE !== '手工新增') {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = false;
           BtnConfig[2].isShow = false;
-          this.businessActionTable.columns = this.businessActionTable.columns.filter((i) => delete i.render);
+          this.omsTableConfig.columns = this.omsTableConfig.columns.filter((i) => delete i.render);
         }else{
           BtnConfig[0].isShow = true;
           BtnConfig[1].isShow = false;
@@ -362,7 +362,7 @@ export default {
             this.renderHandle(["REFUND_ID", "QTY_REFUND"]); //render方法
           }, 100);
         }
-        this.businessActionTable.data = this.toMainData.tui;
+        this.omsTableConfig.data = this.toMainData.tui;
       }
       // 判断如果单据状态为确认/完成/取消 不可编辑  下发WMS状态 0：未下发 1: 下发中 2:下发成功 3:下发失败 4:撤回成功
       setTimeout(() => {
@@ -370,7 +370,7 @@ export default {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = false;
           BtnConfig[2].isShow = false;
-          this.businessActionTable.columns = this.businessActionTable.columns.filter((i) => delete i.render);
+          this.omsTableConfig.columns = this.omsTableConfig.columns.filter((i) => delete i.render);
         }
       }, 100);
     })
@@ -420,7 +420,7 @@ export default {
     async getBtn() {
       return $OMS2.omsUtils.getPermissions(this, '', { table: 'OC_B_RETURN_ORDER', type: 'OBJ' }, true).then(res => {
         const { ACTIONS, SUB_ACTIONS } = res
-        this.businessActionTable.businessButtonConfig.buttons.forEach(item => {
+        this.omsTableConfig.businessButtonConfig.buttons.forEach(item => {
           if(!SUB_ACTIONS.some(y => y.webname === item.webname)){
               item.isShow = false
           } else {
@@ -443,7 +443,7 @@ export default {
             }
           }
         })
-        return this.businessActionTable.businessButtonConfig.buttons
+        return this.omsTableConfig.businessButtonConfig.buttons
       });
     },
     // 获取详情数据
@@ -474,7 +474,7 @@ export default {
       let wmsIssueStatus = sessionStorage.getItem("WMS_ISSUE_STATUS");
       this.IS_COMBINATION = OC_B_RETURN_ORDER.IS_COMBINATION;
       // 退货明细
-      this.businessActionTable.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
+      this.omsTableConfig.columns = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; //表头
       // 退货明细
       this.renderColumn = this.panelReturn ? REFUND_ITEM_TABTH : EXCHANGE_ITEM_TABTH; // render
       // 退款金额
@@ -508,7 +508,7 @@ export default {
       );
       if (code === 0) {
         // 初始赋值
-        this.businessActionTable.data =this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS: OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
+        this.omsTableConfig.data =this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS: OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
         // 表头存起来
         this.tableHead.tui = REFUND_ITEM_TABTH;
         this.tableHead.huan = EXCHANGE_ITEM_TABTH;
@@ -537,7 +537,7 @@ export default {
         ID: this.$route.params.itemId,
         PT_SKU
       });
-      this.businessActionTable.data = this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
+      this.omsTableConfig.data = this.panelReturn ? OC_B_RETURN_ORDER_REFUND_ITEMS : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
       this.toMainData.tui = OC_B_RETURN_ORDER_REFUND_ITEMS;
       this.toMainData.huan = OC_B_RETURN_ORDER_EXCHANGE_ITEMS;
       R3.store.commit(
@@ -654,7 +654,7 @@ export default {
                       "customize/returnOrderChangeItem",
                       JSON.parse(JSON.stringify(this.toMainData))
                     );
-                  this.businessActionTable.data[params.index] = params.row;
+                  this.omsTableConfig.data[params.index] = params.row;
                 }, 300);
               },
             },
@@ -680,7 +680,7 @@ export default {
                       JSON.parse(JSON.stringify(this.toMainData))
                     );
                   }
-                  this.businessActionTable.data[params.index] = params.row;
+                  this.omsTableConfig.data[params.index] = params.row;
                 }, 300);
               },
             },
@@ -713,7 +713,7 @@ export default {
                   Number(e) * Number(params.row.AMT_REFUND_SINGLE),
                   2
                 );
-                this.businessActionTable.data[params.index] = params.row;
+                this.omsTableConfig.data[params.index] = params.row;
                 R3.store.commit(
                   "customize/returnOrderChangeItem",
                   JSON.parse(JSON.stringify(this.toMainData))
@@ -761,7 +761,7 @@ export default {
         //       "on-change": (e) => {
         //         params.row.PRICE_ACTUAL = e.target.value;
         //         params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(Number(e.target.value) * Number(params.row.QTY_EXCHANGE || 0));
-        //         this.businessActionTable.data[params.index] = params.row;
+        //         this.omsTableConfig.data[params.index] = params.row;
         //         // 退货明细
         //         this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
         //         R3.store.commit(
@@ -783,7 +783,7 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.AMT_EXCHANGE = e.target.value;
-                this.businessActionTable.data[params.index] = params.row;
+                this.omsTableConfig.data[params.index] = params.row;
                 // 退货明细
                 this.toMainData[this.panelReturn ? "tui" : "huan"][params.index] = params.row;
                 R3.store.commit(
@@ -802,10 +802,10 @@ export default {
         arr.includes(k.key) && (this.renderColumn[i].render = obj[k.key]);
       });
       // 赋值
-      this.businessActionTable.columns = this.renderColumn;
+      this.omsTableConfig.columns = this.renderColumn;
       setTimeout(() => {
-        if (this.businessActionTable.columns[0].key !== "selection") {
-          this.businessActionTable.columns.unshift(
+        if (this.omsTableConfig.columns[0].key !== "selection") {
+          this.omsTableConfig.columns.unshift(
             {
               key: "selection",
               type: "selection",
@@ -832,32 +832,32 @@ export default {
       const key1 = this.panelReturn ? "QTY_REFUND" : "QTY_EXCHANGE"; // 申请退货数量 : 换货数量
       const key2 = this.panelReturn ? "REFUND_FEE" : "AMT_EXCHANGE"; // 退货金额 : 成交金额
       const key3 = this.panelReturn ? "PRO_ACTUAL_AMT" : "AMT_EXCHANGE"; // 商品应退金额 : 换货金额
-      self.businessActionTable.totalData = [];
-      if (!self.businessActionTable.data) return;
-      self.businessActionTable.data.forEach((item) => {
+      self.omsTableConfig.totalData = [];
+      if (!self.omsTableConfig.data) return;
+      self.omsTableConfig.data.forEach((item) => {
         qty += Number(item[key1] || 0);
         amt = Util.accAdd(Number(item[key2]), Number(amt));
         REAL_AMT = Util.accAdd(Number(item['REAL_AMT']), Number(REAL_AMT));
       });
       setTimeout(() => {
         // 退货明细
-        if(self.businessActionTable.totalData.length) return;
+        if(self.omsTableConfig.totalData.length) return;
         if (this.panelReturn) {
-          self.businessActionTable.totalData.push({
+          self.omsTableConfig.totalData.push({
             index: `${$i18n.t("other.total")}`, // 合计
             REFUND_FEE: this.$OMS2.omsUtils.floatNumber(amt),
             QTY_REFUND: qty,
             REAL_AMT: this.$OMS2.omsUtils.floatNumber(REAL_AMT) // 成交单价
           });
         } else {
-          self.businessActionTable.totalData.push({
+          self.omsTableConfig.totalData.push({
             index: `${$i18n.t("other.total")}:`,
             AMT_EXCHANGE: this.$OMS2.omsUtils.floatNumber(amt),
             QTY_EXCHANGE: qty,
           });
         }
         // 计算'商品应退金额'
-        this.toMainData[key3] = self.businessActionTable.totalData[0][key2];
+        this.toMainData[key3] = self.omsTableConfig.totalData[0][key2];
         this.$emit("subTableData", this.toMainData);
         let returnAmount = R3.store.state.customize.returnAmount;
         let FINAL_ACTUAL_AMT;
@@ -906,7 +906,7 @@ export default {
     insertOrderDetail(dataArr = []) {
       const self = this;
       const data = dataArr;
-      const allDa = self.businessActionTable.data;
+      const allDa = self.omsTableConfig.data;
       const pryKey = this.panelReturn ? "REFUND_ITEM_UNIQUE_KEY" : "PS_C_SKU_ECODE";
       let pryKeyArr = [];
       if (!allDa.length) {
@@ -917,7 +917,7 @@ export default {
             2
           );
         });
-        self.businessActionTable.data = data;
+        self.omsTableConfig.data = data;
         self.totalNum();
         return;
       }
@@ -942,14 +942,14 @@ export default {
             }
           } else if (it[pryKey] && !pryKeyArr.includes(it[pryKey])) {
             // 2.不存在该条明细（则直接push）
-            self.businessActionTable.data.push(it);
+            self.omsTableConfig.data.push(it);
           } else {
             console.log("other!");
           }
         });
       });
       self.totalNum();
-      self.toMainData.tui = self.businessActionTable.data;
+      self.toMainData.tui = self.omsTableConfig.data;
     },
     /* -------------------- 退/换货明细 - 列表表格事件 -------------------- */
     // 退货明细 - 列表勾选
@@ -972,7 +972,7 @@ export default {
       /* 可能要判断是哪个明细的 */
       const self = this;
       self.isMainDelete = true;
-      const allDa = self.businessActionTable.data;
+      const allDa = self.omsTableConfig.data;
       const selDa = self.detailsArrData;
       if (!selDa.length) {
         self.$OMS2.omsUtils.msgTips(self, "warning", "a8");
@@ -980,8 +980,8 @@ export default {
       }
       if (selDa.length == allDa.length) { // 全选删
         self.detailsArrData = [];
-        self.businessActionTable.data = [];
-        self.toMainData[self.panelReturn ? 'tui':'huan'] = self.businessActionTable.data;
+        self.omsTableConfig.data = [];
+        self.toMainData[self.panelReturn ? 'tui':'huan'] = self.omsTableConfig.data;
         R3.store.commit(
           "customize/returnOrderChangeItem",
           JSON.parse(JSON.stringify(self.toMainData))
@@ -1045,13 +1045,13 @@ export default {
         onOk: () => {
           self.$nextTick(() => {
             // 取差集展示：
-            self.businessActionTable.data = self.$OMS2.omsUtils.getDifferentArr(
+            self.omsTableConfig.data = self.$OMS2.omsUtils.getDifferentArr(
               allDa,
               selDa,
               key
             );
             self.totalNum();
-            self.toMainData[self.panelReturn ? 'tui':'huan'] = self.businessActionTable.data
+            self.toMainData[self.panelReturn ? 'tui':'huan'] = self.omsTableConfig.data
             R3.store.commit(
               "customize/returnOrderChangeItem",
               JSON.parse(JSON.stringify(self.toMainData))
@@ -1143,7 +1143,7 @@ export default {
     // 加/替换明细 - 确定
     async replaceOk() {
       let self = this;
-      let tableData = self.businessActionTable.data; // 添加
+      let tableData = self.omsTableConfig.data; // 添加
       let replaceArr = [] //替换
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
       if (JSON.stringify(selectData) == "{}") {
@@ -1183,7 +1183,7 @@ export default {
         } else {
           replaceArr.push(newItem);
         }
-        self.businessActionTable.data = replaceArr;
+        self.omsTableConfig.data = replaceArr;
       }
       this.totalNum();
       this.toMainData.huan = tableData;

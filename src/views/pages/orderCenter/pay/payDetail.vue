@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="payDetail" v-loading="loading">
-    <businessActionTable
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -26,7 +26,7 @@
       class-name="ark-dialog"
     >
       <div class="dialog-footer" slot="footer">
-        <businessButton :btn-config="btnConfigMo" />
+        <OmsButton :btn-config="btnConfigMo" />
       </div>
       <payDetailAdd
         @detailAddData="detailAddDataHandel"
@@ -37,16 +37,16 @@
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
 import payDetailAdd from './payDetailAdd.vue';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   // name: 'payDetail',
   components: {
     payDetailAdd,
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   props: {
     idArray: {// 获取ID用于多选

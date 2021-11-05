@@ -2,7 +2,7 @@
   <div class="customized-modal" v-loading="loading">
     <loading :loading="loading" />
     <businessForm :form-config="formConfig" />
-    <businessButton :btn-config="btnConfig" class="modal-footer" />
+    <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
@@ -11,18 +11,17 @@
 // export default changeWarehouse;
 import businessForm from "burgeonComponents/businessForm";
 import businessButton from "burgeonComponents/businessButton";
-import businessActionTable from "burgeonComponents/businessActionTable";
 import loading from "burgeonComponents/loading";
-
 import listeningToKeydownMixin from "@/assets/js/mixins/listeningToKeydown.js";
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
     loading,
     businessForm,
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
   },
   props: {
     componentData: {

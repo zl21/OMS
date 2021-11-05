@@ -8,7 +8,7 @@
         :form-config="formConfig"
       />
     </div>
-    <businessButton
+    <OmsButton
       :btn-config="btnConfig"
     />
   </div>

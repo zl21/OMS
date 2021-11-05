@@ -1,13 +1,13 @@
 <template>
   <div class="authinfodisplay">
     <businessForm :form-config="formconfig" @keyDown="keyDown"> </businessForm>
-    <businessButton class="modal-footer" :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
-import businessForm from 'burgeonComponents/businessForm'
-import businessButton from 'burgeonComponents/businessButton'
+import { OmsForm } from 'burgeonComponents'
+import { OmsButton } from 'burgeonComponents'
 import service from '@/service/index'
 
 export default {

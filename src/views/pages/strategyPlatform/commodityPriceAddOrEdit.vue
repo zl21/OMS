@@ -2,7 +2,7 @@
   <!-- 商品价格策略 -->
   <div class="customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
@@ -25,7 +25,7 @@
         />
         <!-- 子表Part -->
         <div class="subtablePart">
-          <businessActionTable
+          <OmsTable
             v-if="(isCopy || ID != -1) && labelDefaultValue == 'goods'"
             :jordan-table-config="goodsTableConfig"
             @on-select="onSelect"

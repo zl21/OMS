@@ -4,7 +4,7 @@
       <businessForm :form-config="formConfig" />
     </div>
     <div class="buttons customized-modal-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
   </div>
 </template>

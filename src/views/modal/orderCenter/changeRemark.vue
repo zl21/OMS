@@ -71,7 +71,7 @@
         </RadioGroup>
       </FormItem>
     </Form>
-    <businessButton
+    <OmsButton
       class="modalBth modal-footer"
       :btn-config="btnConfig"
     />

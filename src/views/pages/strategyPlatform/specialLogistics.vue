@@ -13,7 +13,7 @@
   >
     <!-- <loading :loading="loading" /> -->
     <div class="customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
@@ -64,7 +64,7 @@
                 <div class="content-li-item-left-a">
            
 
-                  <businessActionTable
+                  <OmsTable
                     :jordan-table-config="tableConfig3"
                     @on-page-change="tablepageA"
                     @on-page-size-change="tablesizeA"
@@ -85,8 +85,8 @@
         />
         <div slot="content" v-show="labelDefaultValue == 'PROPERTY'">
           <!-- <businessForm :form-config="formConfig1" @keyDown="keyDown" />
-          <businessButton :btn-config="btnConfig1" /> -->
-          <businessActionTable
+          <OmsButton :btn-config="btnConfig1" /> -->
+          <OmsTable
             :jordan-table-config="tableConfig2"
             @on-page-change="tablepageB"
             @on-page-size-change="tablesizeB"
@@ -138,7 +138,7 @@
           <Button type="error" ghost @click="fncancel">{{cancel}}</Button>
         </div> -->
       </div>
-      <businessActionTable
+      <OmsTable
         :jordan-table-config="tableConfig"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
@@ -148,7 +148,7 @@
         @on-select-all-cancel="onSelectAllCancel"
       />
 
-      <businessButton :btn-config="btnConfig2" />
+      <OmsButton :btn-config="btnConfig2" />
     </Modal>
   </div>
 </template>

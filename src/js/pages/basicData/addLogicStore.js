@@ -1,11 +1,11 @@
-  import businessButton from 'burgeonComponents/businessButton';
-  import businessForm from 'burgeonComponents/businessForm';
+  import { OmsButton } from 'burgeonComponents'
+  import { OmsForm } from 'burgeonComponents';
   import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
   // import comUtils from '@/assets/js/__utils__/common.js';
 
   export default {
     components: {
-      businessButton,
+      OmsButton,
       businessForm
     },
     data() {

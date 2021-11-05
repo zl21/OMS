@@ -8,8 +8,8 @@
 -->
 <template>
   <div class="matchingDetails">
-    <businessButton :btn-config="btnConfig" />
-    <businessActionTable
+    <OmsButton :btn-config="btnConfig" />
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"
@@ -34,16 +34,16 @@
 </template>
 
 <script>
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
 import addGiftItem from './addGiftItem';
 import service from '@/service/index';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton,
+    OmsButton,
     addGiftItem,
-    businessActionTable,
+    OmsTable,
   },
   data() {
     return {

@@ -2,7 +2,7 @@
   <div class="orderAddorCopy customized-detail" v-loading="loading">
     <!-- <loading :loading="loading"></loading> -->
     <div class="orderButtons customized-detail-btn">
-      <businessButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
       <Collapse v-model="panelDefaultValue">
@@ -55,7 +55,7 @@
               </template>
             </businessForm>
              -->
-        <businessActionTable
+        <OmsTable
           :jordan-table-config="jordanTableConfig"
           @on-select="onSelect"
           @on-select-all="onSelectAll"
@@ -108,7 +108,6 @@
 <script>
 import businessButton from "burgeonComponents/businessButton";
 import businessForm from "burgeonComponents/businessForm";
-import businessActionTable from "burgeonComponents/businessActionTable";
 import businessLabel from "burgeonComponents/businessLabel";
 import businessDialog from "burgeonComponents/businessDialog";
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -118,6 +117,7 @@ import BurgeonValidate from "burgeonConfig/config/validate.config";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import axios from "axios";
 import Util from "@/assets/js/public/publicMethods";
+import { OmsTable } from 'burgeonComponents'
 
 const areaList = require("@/assets/js/address/area-list");
 const { parse, parseArea } = require("@/assets/js/address/address-parse");
@@ -126,9 +126,9 @@ parseArea(areaList);
 export default {
   name: "orderAddorCopy",
   components: {
-    businessButton,
+    OmsButton,
     businessForm,
-    businessActionTable,
+    OmsTable,
     businessLabel,
     businessDialog,
   },

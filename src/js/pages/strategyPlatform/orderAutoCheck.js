@@ -1,12 +1,12 @@
 // import timestampToTime from '@/assets/js/__utils__/usual';
 import logTable from 'burgeonComponents/LogTable';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsButton } from 'burgeonComponents'
 import loading from 'burgeonComponents/loading';
 
 export default {
   components: {
     logTable,
-    businessButton,
+    OmsButton,
     loading
   },
   data() {

@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <businessButton class="modal-footer" :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 

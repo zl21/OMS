@@ -1,11 +1,11 @@
-import businessForm from 'burgeonComponents/businessForm';
-import businessButton from 'burgeonComponents/businessButton';
+import { OmsForm } from 'burgeonComponents';
+import { OmsButton } from 'burgeonComponents'
 import dateUtil from '@/assets/js/__utils__/date.js';
 
 export default {
   name: 'AddStockInOrder',
   components: {
-    businessButton,
+    OmsButton,
     businessForm
   },
   props: {

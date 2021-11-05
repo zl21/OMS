@@ -46,7 +46,7 @@
          </div>
       </div>
       <div class="dialog-footer" slot="footer">
-        <businessButton :btn-config="btnConfigMo" />
+        <OmsButton :btn-config="btnConfigMo" />
       </div>
     </Modal>
   </div>
@@ -54,24 +54,22 @@
 
 <script>
 // 退换货单详情
-import businessButton from 'burgeonComponents/businessButton';
-import businessActionTable from 'burgeonComponents/businessActionTable';
+import { OmsButton } from 'burgeonComponents'
 import businessLabel from 'burgeonComponents/businessLabel';
 import { setTimeout } from 'timers';
 import businessDialog from 'burgeonComponents/businessDialog';
-import businessStatusFlag from 'burgeonComponents/businessStatusFlag';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date.js';
+import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'sourceBillNo',
   components: {
-    businessButton,
-    businessActionTable,
+    OmsButton,
+    OmsTable,
     businessDialog,
     businessLabel,
-    businessStatusFlag
   },
   // model: {
   //   prop: 'value',

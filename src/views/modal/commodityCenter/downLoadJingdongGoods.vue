@@ -19,7 +19,7 @@
         @focus="monthSearchStartDate = null"
       />
     </div>
-    <businessButton class="modal-footer" :btn-config="buttonConfig" />
+    <OmsButton class="modal-footer" :btn-config="buttonConfig" />
   </div>
 </template>
 
