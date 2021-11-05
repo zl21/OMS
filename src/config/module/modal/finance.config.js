@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/modal/finance.config.js
  */
-import downLoad from 'burgeonComponents/downLoad.vue'
+import { downLoad } from 'burgeonComponents'
 
 // 财务中心
 export default {

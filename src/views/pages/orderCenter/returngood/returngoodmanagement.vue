@@ -174,7 +174,7 @@
       <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <!-- 修改备注 11-->
-    <businessDialog
+    <OmsDialog
       :title="changeRemarkConfig.confirmTitle"
       :title-align="changeRemarkConfig.titleAlign"
       :width="changeRemarkConfig.width"
@@ -222,7 +222,7 @@
       />
     </Modal>
     <!-- 矩阵框-->
-    <businessDialog
+    <OmsDialog
       :title="matrixBox.confirmTitle"
       :title-align="matrixBox.titleAlign"
       :width="matrixBox.width"

@@ -1,11 +1,8 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
-import SingleBox from 'burgeonComponents/singleBox';
 import { tableCols } from '../promotion.config';
-import ButtonFkDialog from 'burgeonComponents/buttonFkDialog';
 import SetCommodity from 'allpages/promotionCenter/details/setCommodity.vue';
-import businessDialog from 'burgeonComponents/businessDialog';
-import { OmsButton } from 'burgeonComponents'
+import { OmsDialog, SingleBox, ButtonFkDialog, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'giftSet',
@@ -15,7 +12,7 @@ export default {
     detailtabs,
     SingleBox,
     ButtonFkDialog,
-    businessDialog,
+    OmsDialog,
     SetCommodity
   },
   props: {

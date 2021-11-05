@@ -1,26 +1,22 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import customPagingMixins from '@/assets/js/mixins/customPaging';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessLabel,
-    businessDialog
+    OmsLabel,
+    OmsDialog
   },
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       allTableArr: [],
       selectArr: [],
       warningModal: false, // 警告弹框
@@ -70,7 +66,7 @@ export default {
           {
             label: $i18n.t('table_label.shopName'), // '店铺名称',
             value: 'CP_C_SHOP_TITLE',
-              style: 'popInput', // 输入框弹框单多选
+            style: 'popInput', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -516,7 +512,7 @@ export default {
         }
       });
     },
-    oneObjs() {},
+    oneObjs() { },
     // 列表勾选
     returnOnSelect(e) {
       this.returnSelectData = e;
@@ -545,9 +541,9 @@ export default {
       this.jordanTableConfig.pageSize = val;
     },
     // 导入
-    returnExport() {},
+    returnExport() { },
     // 导出
-    returnImport() {},
+    returnImport() { },
     // 设置表格高度
     setTableHeight() {
       const _this = this;

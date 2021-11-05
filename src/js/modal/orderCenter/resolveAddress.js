@@ -3,7 +3,6 @@
 import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
-import loading from 'burgeonComponents/loading';
 
 const areaList = require('@/assets/js/address/area-list.js');
 const { parse, parseArea } = require('@/assets/js/address/address-parse.js');

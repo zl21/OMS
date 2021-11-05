@@ -1,7 +1,7 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import ButtonFkDialog from 'burgeonComponents/buttonFkDialog';
 import TableSku from 'burgeonComponents/tableSku';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 
 export default {
   name: 'batchTables',

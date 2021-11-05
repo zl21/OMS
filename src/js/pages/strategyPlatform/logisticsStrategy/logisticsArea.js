@@ -1,21 +1,16 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import businessModal from 'burgeonComponents/businessDialog';
+import { OmsButton, OmsForm, OmsLabel, OmsDialog as businessModal } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import loading from 'burgeonComponents/loading';
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     businessModal,
-    loading
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       warningModal: false,
       loading: false,
       tableLoading: false,
@@ -409,7 +404,7 @@ export default {
     // 同步table数据
     async synchronous() {
       const _this = this;
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       _this.tableLoading = true;
       // this.$R3loading.show(customizedModuleName);
       _this.dataArr = [];

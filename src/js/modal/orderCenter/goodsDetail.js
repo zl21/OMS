@@ -1,5 +1,5 @@
 import { OmsForm } from 'burgeonComponents';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
 // import publicDialogConfig from 'burgeonComponents/common/js/publicDialog'
 import DialogConfig from 'burgeonConfig/config/dialogs.config';

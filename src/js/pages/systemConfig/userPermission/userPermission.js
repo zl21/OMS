@@ -1,5 +1,4 @@
 import tree from 'framework/components/tree/tree2';
-import loading from 'burgeonComponents/loading';
 
 export default {
   data() {

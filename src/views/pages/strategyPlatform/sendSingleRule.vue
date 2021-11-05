@@ -257,7 +257,7 @@
       <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <!-- 修改仓库-->
-    <businessDialog
+    <OmsDialog
       :title="modifyWarehouse.confirmTitle"
       :title-align="modifyWarehouse.titleAlign"
       :width="modifyWarehouse.width"
@@ -274,7 +274,7 @@
       :component-data="modifyWarehouse.componentData"
     />
     <!-- 导入 -->
-    <businessDialog
+    <OmsDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"

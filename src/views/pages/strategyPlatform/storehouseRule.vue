@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <businessDialog
+    <OmsDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
       :draggable="importTable.draggable"
@@ -75,7 +75,7 @@
       :url="importTable.url"
       :width="importTable.width"
       :basePathName="importTable.basePathName"
-    ></businessDialog>
+    ></OmsDialog>
   </div>
 </template>
 

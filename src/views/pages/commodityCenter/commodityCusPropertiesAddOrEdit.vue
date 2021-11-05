@@ -50,7 +50,7 @@ export default commodityCusPropertiesAddOrEdit;
 </script>
 
 <style lang="less" scoped>
-@import '~burgeonComponents/common/css/theme.less';
+@import '~burgeonComponents/burgeon.publish/common/css/theme.less';
 .commodityCusPropertiesAddOrEdit {
   position: relative;
 }

@@ -68,7 +68,7 @@
     </div>
 
     <!-- 矩阵框-->
-    <businessDialog
+    <OmsDialog
       :closable="matrixBox.closable"
       :component-data="matrixBox.componentData"
       :draggable="matrixBox.draggable"
@@ -85,7 +85,7 @@
       :width="matrixBox.width"
     />
     <!-- 明细导入 -->
-    <businessDialog
+    <OmsDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
       :draggable="importTable.draggable"
@@ -109,7 +109,7 @@
 import businessButton from "burgeonComponents/businessButton";
 import businessForm from "burgeonComponents/businessForm";
 import businessLabel from "burgeonComponents/businessLabel";
-import businessDialog from "burgeonComponents/businessDialog";
+import { OmsDialog } from 'burgeonComponents';
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
@@ -130,7 +130,7 @@ export default {
     businessForm,
     OmsTable,
     businessLabel,
-    businessDialog,
+    OmsDialog,
   },
   // mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {

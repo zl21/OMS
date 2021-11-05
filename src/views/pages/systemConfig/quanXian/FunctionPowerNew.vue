@@ -210,7 +210,7 @@
         </div>
       </div>
     </div>
-    <businessDialog
+    <OmsDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
       :component-data="publicBouncedConfig.componentData"
@@ -237,7 +237,7 @@
 // const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
 const store = vm.$store
 import service from '@/service/index';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 export default {

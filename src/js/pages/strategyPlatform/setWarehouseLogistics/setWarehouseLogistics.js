@@ -1,22 +1,18 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import businessModal from 'burgeonComponents/businessDialog';
+import { OmsButton, OmsForm, OmsLabel, OmsDialog as businessModal } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { setTimeout } from 'timers';
-import loading from 'burgeonComponents/loading';
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     businessModal,
     loading
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       warningModal: false,
       saveModal: false,
       saveModalText: '', // 保存空物流提示
@@ -310,7 +306,7 @@ export default {
       this.service.strategyPlatform
         .saveWarehouseLogistics(fromData)
         .then(res => {
-          
+
           if (res.data.oK) {
             _this.$Message.success($i18n.t('modalTips.z9')); // 保存成功
             if (this.$route.params.customizedModuleId !== 'New') {
@@ -333,7 +329,7 @@ export default {
           const err = error || $i18n.t('modalTips.y0'); // 保存失败
           _this.$Message.error(err);
           // _this.refresh();
-        }).finally(()=>{
+        }).finally(() => {
           _this.loading = false;
         })
         ;
@@ -486,7 +482,7 @@ export default {
     // 检索
     async enter(e) {
       const _this = this;
-      const {customizedModuleName}=this.$router.currentRoute.params;
+      const { customizedModuleName } = this.$router.currentRoute.params;
       _this.listArr = [];
       _this.tableLoading = true;
       // this.$R3loading.show(customizedModuleName);

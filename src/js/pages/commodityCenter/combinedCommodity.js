@@ -1,23 +1,19 @@
 /**
  * 组合商品 - 老组件
  */
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import businessDialog from 'burgeonComponents/businessDialog';
-import { OmsTable } from 'burgeonComponents'
+import { OmsButton, OmsForm, OmsLabel, OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsTable,
-    businessDialog
+    OmsForm
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       objid: '',
       value1: '1', // 折叠框绑定的数据
       statusName: '', // 水印字样  单据状态

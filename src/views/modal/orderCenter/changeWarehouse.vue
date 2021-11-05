@@ -18,8 +18,7 @@ import { OmsTable } from 'burgeonComponents'
 export default {
   mixins: [listeningToKeydownMixin],
   components: {
-    loading,
-    businessForm,
+        businessForm,
     OmsButton,
     OmsTable,
   },

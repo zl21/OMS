@@ -8,7 +8,6 @@
     components: {
       OmsTable,
       OmsButton,
-      loading,
       drpInput
     },
     computed: {

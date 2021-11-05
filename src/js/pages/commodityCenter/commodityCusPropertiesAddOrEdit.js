@@ -1,23 +1,17 @@
 /**
  * 商品自定义属性
  */
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsLabel, subTable as orderItem, OmsTable } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
-import orderItem from 'burgeonComponents/subTable';
-import loading from 'burgeonComponents/loading';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     orderItem,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsTable,
-    loading,
   },
   mixins: [new modifycurrentLabel()],
   data() {
@@ -51,130 +45,130 @@ export default {
         btnsite: 'right',
         typeAll: 'default',
         buttons: [{
-            webname: 'ATTRIBUTE_SaveBtn',
-            text: $i18n.t('btn.save'), // 保存
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.save();
-            },
+          webname: 'ATTRIBUTE_SaveBtn',
+          text: $i18n.t('btn.save'), // 保存
+          size: '', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.save();
           },
-          {
-            webname: 'fix_back',
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              this.back();
-            },
+        },
+        {
+          webname: 'fix_back',
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            this.back();
           },
+        },
         ],
       },
       // 主表Part-formConfig
       formConfig: {
         formData: [{
-            style: 'input',
-            label: '属性编码',
-            value: 'ECODE',
-            colname: 'ECODE',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('ECODE', 'master');
-            },
+          style: 'input',
+          label: '属性编码',
+          value: 'ECODE',
+          colname: 'ECODE',
+          width: '6',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('ECODE', 'master');
           },
-          {
-            style: 'input',
-            label: '属性名称',
-            value: 'ENAME',
-            colname: 'ENAME',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('ENAME', 'master');
-            },
+        },
+        {
+          style: 'input',
+          label: '属性名称',
+          value: 'ENAME',
+          colname: 'ENAME',
+          width: '6',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('ENAME', 'master');
           },
-          {
-            style: 'input',
-            label: '属性别名',
-            value: 'ALIAS_NAME',
-            colname: 'ALIAS_NAME',
-            width: '6',
-            disabled: false,
-            inputChange: () => {
-              this.masterModifyData('ALIAS_NAME', 'master');
-            },
+        },
+        {
+          style: 'input',
+          label: '属性别名',
+          value: 'ALIAS_NAME',
+          colname: 'ALIAS_NAME',
+          width: '6',
+          disabled: false,
+          inputChange: () => {
+            this.masterModifyData('ALIAS_NAME', 'master');
           },
-          {
-            colname: 'TYPE',
-            style: 'select', // 下拉框类型
-            label: '属性类型',
-            width: '6', // 所占宽度宽度
-            value: 'TYPE', // 输入框的值
-            disabled: false,
-            selectChange: (value) => {
-              this.masterModifyData('TYPE', 'master');
-              if (this.ID < 0) {
-                if (this.formConfig.formValue.TYPE == 'LIST') {
-                  this.showSubtablePart = true;
-                } else {
-                  this.showSubtablePart = false;
+        },
+        {
+          colname: 'TYPE',
+          style: 'select', // 下拉框类型
+          label: '属性类型',
+          width: '6', // 所占宽度宽度
+          value: 'TYPE', // 输入框的值
+          disabled: false,
+          selectChange: (value) => {
+            this.masterModifyData('TYPE', 'master');
+            if (this.ID < 0) {
+              if (this.formConfig.formValue.TYPE == 'LIST') {
+                this.showSubtablePart = true;
+              } else {
+                this.showSubtablePart = false;
+              }
+            } else {
+              // 下拉型，展示'属性值'
+              if (this.formConfig.formValue.TYPE == 'LIST') {
+                if (this.labelList[0].value != 'PROPERTYVALUES') {
+                  this.labelList.unshift({
+                    label: '属性值',
+                    value: 'PROPERTYVALUES',
+                  });
+                  this.labelDefaultValue = 'PROPERTYVALUES';
                 }
               } else {
-                // 下拉型，展示'属性值'
-                if (this.formConfig.formValue.TYPE == 'LIST') {
-                  if (this.labelList[0].value != 'PROPERTYVALUES') {
-                    this.labelList.unshift({
-                      label: '属性值',
-                      value: 'PROPERTYVALUES',
-                    });
-                    this.labelDefaultValue = 'PROPERTYVALUES';
+                this.labelList.forEach((it, index) => {
+                  if (it.value == 'PROPERTYVALUES') {
+                    this.labelList.splice(index, 1);
+                    this.labelDefaultValue = '';
                   }
-                } else {
-                  this.labelList.forEach((it, index) => {
-                    if (it.value == 'PROPERTYVALUES') {
-                      this.labelList.splice(index, 1);
-                      this.labelDefaultValue = '';
-                    }
-                  });
-                }
+                });
               }
-            },
-            options: [
-              // 下拉框选项值
-            ],
+            }
           },
-          {
-            colname: 'LOCATION',
-            style: 'select', // 下拉框类型
-            label: '属性形式',
-            width: '6', // 所占宽度宽度
-            value: 'LOCATION', // 输入框的值
-            disabled: false,
-            /* tips: {
-              content: '枚举：全部、固定属性、自定义属性；默认：全部',
-              maxWidth: '400',
-              // placement:'bottom',
-              // theme:'light',
-            }, */
-            selectChange: (value) => {
-              this.masterModifyData('LOCATION', 'master');
-            },
-            options: [
-              // 下拉框选项值
-            ],
+          options: [
+            // 下拉框选项值
+          ],
+        },
+        {
+          colname: 'LOCATION',
+          style: 'select', // 下拉框类型
+          label: '属性形式',
+          width: '6', // 所占宽度宽度
+          value: 'LOCATION', // 输入框的值
+          disabled: false,
+          /* tips: {
+            content: '枚举：全部、固定属性、自定义属性；默认：全部',
+            maxWidth: '400',
+            // placement:'bottom',
+            // theme:'light',
+          }, */
+          selectChange: (value) => {
+            this.masterModifyData('LOCATION', 'master');
           },
-          {
-            colname: 'TABLE_NAME',
-            style: 'select', // 下拉框类型
-            label: '属性归属',
-            width: '6', // 所占宽度宽度
-            value: 'TABLE_NAME', // 输入框的值
-            selectChange: (value) => {
-              this.masterModifyData('TABLE_NAME', 'master');
-            },
-            options: [
-              // 下拉框选项值
-            ],
+          options: [
+            // 下拉框选项值
+          ],
+        },
+        {
+          colname: 'TABLE_NAME',
+          style: 'select', // 下拉框类型
+          label: '属性归属',
+          width: '6', // 所占宽度宽度
+          value: 'TABLE_NAME', // 输入框的值
+          selectChange: (value) => {
+            this.masterModifyData('TABLE_NAME', 'master');
           },
+          options: [
+            // 下拉框选项值
+          ],
+        },
         ],
         formValue: {
           ECODE: '',
@@ -224,7 +218,7 @@ export default {
         height: '332', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         totalData: [],
         selectionData: [],
@@ -235,130 +229,130 @@ export default {
         isShowSelection: true, // 是否展示select框
         indexColumn: true, // 是否展示序号列
         columns: [{
-            title: '名称',
-            key: 'ECODE',
-            render: (h, params) =>
-              h('Input', {
-                props: {
-                  value: params.row.ECODE,
-                },
-                style: {
-                  // border: '4px solid #ccc',
-                },
-                on: {
-                  'on-change': (e) => {
-                    console.log(e.target.value);
-                    if (e.target.value != '') {
-                      // 修改时，校验是否已经存在，名称不能重复
-                      const rowID = params.row.ID;
-                      this.propertyValuesConfig.data.forEach((it) => {
-                        if (it.ECODE == e.target.value) {
-                          this.$message.error('名称已存在！');
-                          this.propertyValuesConfig.data.forEach((it) => {
-                            if (it.ID == rowID) {
-                              // 重置为未修改前的ECODE
-                              e.target.value = it.ECODE;
-                            }
-                          });
-                        }
-                      });
+          title: '名称',
+          key: 'ECODE',
+          render: (h, params) =>
+            h('Input', {
+              props: {
+                value: params.row.ECODE,
+              },
+              style: {
+                // border: '4px solid #ccc',
+              },
+              on: {
+                'on-change': (e) => {
+                  console.log(e.target.value);
+                  if (e.target.value != '') {
+                    // 修改时，校验是否已经存在，名称不能重复
+                    const rowID = params.row.ID;
+                    this.propertyValuesConfig.data.forEach((it) => {
+                      if (it.ECODE == e.target.value) {
+                        this.$message.error('名称已存在！');
+                        this.propertyValuesConfig.data.forEach((it) => {
+                          if (it.ID == rowID) {
+                            // 重置为未修改前的ECODE
+                            e.target.value = it.ECODE;
+                          }
+                        });
+                      }
+                    });
+                  }
+                  if (params.row.ID != -1) {
+                    // ID不为-1则是修改，反之为新增的
+                    params.row.ECODE = e.target.value;
+                    if (!this.propertyValuesConfig.updateData.length) {
+                      params.row.actionName = 'UPDATE';
+                      this.propertyValuesConfig.updateData.push(params.row);
+                      return;
                     }
-                    if (params.row.ID != -1) {
-                      // ID不为-1则是修改，反之为新增的
-                      params.row.ECODE = e.target.value;
-                      if (!this.propertyValuesConfig.updateData.length) {
+                    this.propertyValuesConfig.updateData.forEach((it) => {
+                      if (it.ID != params.row.ID) {
+                        // 不存在则push
                         params.row.actionName = 'UPDATE';
                         this.propertyValuesConfig.updateData.push(params.row);
-                        return;
+                      } else if (it.ID == params.row.ID) {
+                        // 存在则修改对应的ECODE
+                        it.ECODE = e.target.value;
+                        // 存在则判断SORT_NO是否被改过，未改过则保存时仅传ECODE
+                        if (it.SORT_NO == params.row.SORT_NO) {
+                          delete it.SORT_NO;
+                        }
                       }
-                      this.propertyValuesConfig.updateData.forEach((it) => {
-                        if (it.ID != params.row.ID) {
-                          // 不存在则push
-                          params.row.actionName = 'UPDATE';
-                          this.propertyValuesConfig.updateData.push(params.row);
-                        } else if (it.ID == params.row.ID) {
-                          // 存在则修改对应的ECODE
-                          it.ECODE = e.target.value;
-                          // 存在则判断SORT_NO是否被改过，未改过则保存时仅传ECODE
-                          if (it.SORT_NO == params.row.SORT_NO) {
-                            delete it.SORT_NO;
-                          }
-                        }
-                      });
-                    } else {
-                      this.propertyValuesConfig.addData.forEach((it) => {
-                        // 修改对应项
-                        if (it.key == params.row.key) {
-                          it.ECODE = e.target.value;
-                        }
-                      });
+                    });
+                  } else {
+                    this.propertyValuesConfig.addData.forEach((it) => {
+                      // 修改对应项
+                      if (it.key == params.row.key) {
+                        it.ECODE = e.target.value;
+                      }
+                    });
+                  }
+                },
+              },
+            }),
+        },
+        {
+          title: '顺序号',
+          key: 'SORT_NO',
+          render: (h, params) =>
+            h('Input', {
+              props: {
+                value: params.row.SORT_NO,
+              },
+              on: {
+                'on-change': (e) => {
+                  if (params.row.ID != -1) {
+                    // ID不为-1则是修改，反之为新增的
+                    params.row.SORT_NO = e.target.value;
+                    if (!this.propertyValuesConfig.updateData.length) {
+                      params.row.actionName = 'UPDATE';
+                      this.propertyValuesConfig.updateData.push(params.row);
+                      return;
                     }
-                  },
-                },
-              }),
-          },
-          {
-            title: '顺序号',
-            key: 'SORT_NO',
-            render: (h, params) =>
-              h('Input', {
-                props: {
-                  value: params.row.SORT_NO,
-                },
-                on: {
-                  'on-change': (e) => {
-                    if (params.row.ID != -1) {
-                      // ID不为-1则是修改，反之为新增的
-                      params.row.SORT_NO = e.target.value;
-                      if (!this.propertyValuesConfig.updateData.length) {
+                    this.propertyValuesConfig.updateData.forEach((it) => {
+                      if (it.ID != params.row.ID) {
+                        // 不存在则push
                         params.row.actionName = 'UPDATE';
                         this.propertyValuesConfig.updateData.push(params.row);
-                        return;
+                      } else if (it.ID == params.row.ID) {
+                        // 存在则修改对应的SORT_NO
+                        it.SORT_NO = e.target.value;
+                        // 存在则判断ECODE是否被改过，未改过则保存时仅传SORT_NO
+                        if (it.ECODE == params.row.ECODE) {
+                          delete it.ECODE;
+                        }
                       }
-                      this.propertyValuesConfig.updateData.forEach((it) => {
-                        if (it.ID != params.row.ID) {
-                          // 不存在则push
-                          params.row.actionName = 'UPDATE';
-                          this.propertyValuesConfig.updateData.push(params.row);
-                        } else if (it.ID == params.row.ID) {
-                          // 存在则修改对应的SORT_NO
-                          it.SORT_NO = e.target.value;
-                          // 存在则判断ECODE是否被改过，未改过则保存时仅传SORT_NO
-                          if (it.ECODE == params.row.ECODE) {
-                            delete it.ECODE;
-                          }
-                        }
-                      });
-                    } else {
-                      this.propertyValuesConfig.addData.forEach((it) => {
-                        // 修改对应项
-                        if (it.key == params.row.key) {
-                          it.SORT_NO = e.target.value;
-                        }
-                      });
-                    }
-                  },
+                    });
+                  } else {
+                    this.propertyValuesConfig.addData.forEach((it) => {
+                      // 修改对应项
+                      if (it.key == params.row.key) {
+                        it.SORT_NO = e.target.value;
+                      }
+                    });
+                  }
                 },
-              }),
-          },
+              },
+            }),
+        },
         ],
         businessFormConfig: {
           formData: [{
-              style: 'input',
-              label: '名称',
-              value: 'ECODE',
-              colname: 'ECODE',
-              width: '6',
-              disabled: false,
-            },
-            {
-              style: 'input',
-              label: '顺序号',
-              value: 'SORT_NO',
-              colname: 'SORT_NO',
-              width: '6',
-              disabled: false,
-            },
+            style: 'input',
+            label: '名称',
+            value: 'ECODE',
+            colname: 'ECODE',
+            width: '6',
+            disabled: false,
+          },
+          {
+            style: 'input',
+            label: '顺序号',
+            value: 'SORT_NO',
+            colname: 'SORT_NO',
+            width: '6',
+            disabled: false,
+          },
           ],
           formValue: {
             ECODE: '',
@@ -374,33 +368,33 @@ export default {
         businessButtonConfig: {
           typeAll: 'default',
           buttons: [{
-              type:'primary',
-              text: '添加',
-              size: '', // 按钮大小
-              disabled: false, // 按钮禁用控制
-              btnclick: () => {
-                this.addAttrValue();
-              },
+            type: 'primary',
+            text: '添加',
+            size: '', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.addAttrValue();
             },
-            {
-              type:'warning',
-              text: $i18n.t('btn.delete'), // 删除
-              btnclick: () => {
-                this.deleteAttrValue();
-              },
+          },
+          {
+            type: 'warning',
+            text: $i18n.t('btn.delete'), // 删除
+            btnclick: () => {
+              this.deleteAttrValue();
             },
+          },
           ],
         },
       },
       // tab切换配置
       labelList: [{
-          label: '属性值',
-          value: 'PROPERTYVALUES',
-        },
-        {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
-          value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
-        },
+        label: '属性值',
+        value: 'PROPERTYVALUES',
+      },
+      {
+        label: $i18n.t('panel_label.operationLog'), // 操作日志
+        value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
+      },
       ],
       labelDefaultValue: 'PROPERTYVALUES', // 设置tab默认值
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
@@ -432,9 +426,9 @@ export default {
       self.watchChange = true;
     }
   },
-  created() {},
+  created() { },
   methods: {
-    getBtn(){
+    getBtn() {
       $OMS2.omsUtils.getPermissions(this, 'btnConfig', { table: 'BS_C_EXTRA_ATTRIBUTE_DEF_PRO', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
         console.log('buttons::', this.btnConfig.buttons, 'res::', res);
       })
@@ -637,8 +631,8 @@ export default {
       });
     },
     /* --------------- 表格事件 --------------- */
-    delTableDetail() {},
-    addTableDetail() {},
+    delTableDetail() { },
+    addTableDetail() { },
     onSelect(e) {
       // e为选中的数组对象RowArr
       this.propertyValuesConfig.selectionData = e;
@@ -652,8 +646,8 @@ export default {
     onSelectAllCancel(e) {
       this.propertyValuesConfig.selectionData = e;
     },
-    pageChange() {},
-    pageSizeChange() {},
+    pageChange() { },
+    pageSizeChange() { },
 
     /* --------------------- 工具函数： --------------------- */
     keyDown(e) {

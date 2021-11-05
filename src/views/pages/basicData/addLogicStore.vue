@@ -38,5 +38,5 @@
   export default addLogicStore;
 </script>
 <style lang="less">
-@import '~burgeonComponents/common/css/theme.less';
+@import '~burgeonComponents/burgeon.publish/common/css/theme.less';
 </style>

@@ -1,25 +1,19 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsButton, OmsForm, OmsDialog, OmsLabel, OmsTable, OmsAgTable as aTable } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import aTable from 'burgeonComponents/businessAgTable';
 import unzipXv from '@/assets/js/dataToSmall';
-import loading from 'burgeonComponents/loading';
 import commonUtils from 'burgeonConfig/config/commonUtils';
 import BurgeonEvent from 'burgeonConfig/config/event.config';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessLabel,
-    businessDialog,
+    OmsLabel,
+    OmsDialog,
     aTable,
     loading
   },
@@ -27,7 +21,7 @@ export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       loadingActive: false,
       resetForm: true,
       eventGather: BurgeonEvent,

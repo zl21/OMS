@@ -1,28 +1,23 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import subTable from 'burgeonComponents/subTable';
+import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel, subTable } from 'burgeonComponents'
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
-import businessDialog from 'burgeonComponents/businessDialog';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     subTable,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsTable,
     scheduleFormDialog,
-    businessDialog
+    OmsDialog
   },
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       collapse: ['panel_baseInfo', 'panel_pickInfo', 'panel_warehouseInfo'],
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       forceReload: 0, // 组件重载
@@ -68,21 +63,21 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'lookup_save', // 保存
-            text: $i18n.t('btn.save'), // 保存
-            size: '', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              const self = this;
-              self.save();
-            },
+          text: $i18n.t('btn.save'), // 保存
+          size: '', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            const self = this;
+            self.save();
           },
-          {
-            webname: 'lookup_return', // 返回
-            text: $i18n.t('btn.back'),
-            btnclick: () => {
-              this.back();
-            },
-          }
+        },
+        {
+          webname: 'lookup_return', // 返回
+          text: $i18n.t('btn.back'),
+          btnclick: () => {
+            this.back();
+          },
+        }
         ]
       }, // 按钮
       formConfig: {
@@ -131,7 +126,7 @@ export default {
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
-              disabledDate (date) {
+              disabledDate(date) {
                 return date && date.valueOf() < Date.now() - 86400000;
               }
             },
@@ -149,7 +144,7 @@ export default {
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
-              disabledDate (date) {
+              disabledDate(date) {
                 return date && date.valueOf() < Date.now() - 86400000;
               }
             },
@@ -203,77 +198,77 @@ export default {
       dialogConfig: [],
       pickingForDate: {
         formData: [{
-            style: 'time', // 输入框类型
-            label: $i18n.t('table_label.creationTime'), // 创建时间 // 输入框前文字
-            colname: 'PICK_CREATE_DATE',
-            type: 'time',
-            placement: 'bottom',
-            value: 'PICK_CREATE_DATE', // 输入框的值
-            width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            format: 'HH:mm:ss',
-            disabled: false,
-            onChange: () => {
-              this.masterModifyData('PICK_CREATE_DATE', 'picking', 0);
-            }
-          },
-          {
-            version: '1.4',
-            colname: 'CP_C_ORIG_ID',
-            style: 'popInput', // 输入框弹框单多选
-            width: '24',
-            itemdata: {
-              col: 1,
-              colid: 169347, // 当前字段的ID
-              colname: 'CP_C_ORIG_ID', // 当前字段的名称
-              datelimit: 'all',
-              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-              fkdisplay: 'mrp', // 外键关联类型
-              inputname: 'CP_C_ORIG_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
-              isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              istooltip: true,
-              length: 65535, // 最大长度是多少
-              name: $i18n.t('form_label.bs'), // 唯品会仓库 // 赔付类型
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              reftable: 'CP_C_ORIG', // 对应的表
-              reftableid: 169347, // 对应的表ID
-              row: 1,
-              statsize: -1,
-              type: 'STRING', // 这个是后台用的
-              valuedata: '', // 这个是选择的值
-              pid: '', // 啥 ？？？
-            },
-            oneObj: e => {
-              this.dialogConfig[0].formConfig.formValue.CP_C_ORIG_ID = e.pid;
-              this.masterModifyData('CP_C_ORIG_ID', 'picking', 0);
-            },
-          },
-          {
-            style: 'select',
-            label: $i18n.t('form_label.bt'), // 拣货单类型
-            value: 'PICK_FLAG',
-            width: '24',
-            disabled: false,
-            colname: 'PICK_FLAG',
-            selectChange: () => {
-              this.masterModifyData('PICK_FLAG', 'picking', 0);
-            },
-            options: [ // radio选项
-              {
-                value: '1',
-                label: $i18n.t('other.common'), // 普通
-              },
-              {
-                value: '2',
-                label: $i18n.t('form_label.bx'), // 补货单 
-              },
-              {
-                value: '3',
-                label: $i18n.t('form_label.by'), // 预调拨
-              }
-            ]
+          style: 'time', // 输入框类型
+          label: $i18n.t('table_label.creationTime'), // 创建时间 // 输入框前文字
+          colname: 'PICK_CREATE_DATE',
+          type: 'time',
+          placement: 'bottom',
+          value: 'PICK_CREATE_DATE', // 输入框的值
+          width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
+          format: 'HH:mm:ss',
+          disabled: false,
+          onChange: () => {
+            this.masterModifyData('PICK_CREATE_DATE', 'picking', 0);
           }
+        },
+        {
+          version: '1.4',
+          colname: 'CP_C_ORIG_ID',
+          style: 'popInput', // 输入框弹框单多选
+          width: '24',
+          itemdata: {
+            col: 1,
+            colid: 169347, // 当前字段的ID
+            colname: 'CP_C_ORIG_ID', // 当前字段的名称
+            datelimit: 'all',
+            display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+            fkdisplay: 'mrp', // 外键关联类型
+            inputname: 'CP_C_ORIG_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+            isfk: true, // 是否有fk键
+            isnotnull: true, // 是否必填
+            isuppercase: false, // 是否转大写
+            istooltip: true,
+            length: 65535, // 最大长度是多少
+            name: $i18n.t('form_label.bs'), // 唯品会仓库 // 赔付类型
+            readonly: false, // 是否可编辑，对应input   readonly属性
+            reftable: 'CP_C_ORIG', // 对应的表
+            reftableid: 169347, // 对应的表ID
+            row: 1,
+            statsize: -1,
+            type: 'STRING', // 这个是后台用的
+            valuedata: '', // 这个是选择的值
+            pid: '', // 啥 ？？？
+          },
+          oneObj: e => {
+            this.dialogConfig[0].formConfig.formValue.CP_C_ORIG_ID = e.pid;
+            this.masterModifyData('CP_C_ORIG_ID', 'picking', 0);
+          },
+        },
+        {
+          style: 'select',
+          label: $i18n.t('form_label.bt'), // 拣货单类型
+          value: 'PICK_FLAG',
+          width: '24',
+          disabled: false,
+          colname: 'PICK_FLAG',
+          selectChange: () => {
+            this.masterModifyData('PICK_FLAG', 'picking', 0);
+          },
+          options: [ // radio选项
+            {
+              value: '1',
+              label: $i18n.t('other.common'), // 普通
+            },
+            {
+              value: '2',
+              label: $i18n.t('form_label.bx'), // 补货单 
+            },
+            {
+              value: '3',
+              label: $i18n.t('form_label.by'), // 预调拨
+            }
+          ]
+        }
         ],
         formValue: {
           PICK_CREATE_DATE: '', // 创建时间
@@ -462,7 +457,7 @@ export default {
         }
       }, // 拣货单表单-按未拣货数创建
       warehouseWarrant: [
-        { 
+        {
           title: $i18n.t('panel_label.aa'), // 创建条件
           formConfig: {
             formData: [{
@@ -474,7 +469,7 @@ export default {
               regx: /^[0-9]*$/,
               disabled: false,
               tips: {
-                content:  $i18n.t('modalTips.hw') // 当“店铺+唯品会仓库+发货仓库”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单
+                content: $i18n.t('modalTips.hw') // 当“店铺+唯品会仓库+发货仓库”相同的配货单中商品数量大于等于设置的峰值时，自动创建入库单
               },
               inputChange: () => {
                 this.masterModifyData('PEAK_VALUE', 'warehouseWarrant', 0);
@@ -747,7 +742,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -834,7 +829,7 @@ export default {
               width: '8',
               disabled: false,
               setRequired: '', // 必选标识,值不为required时无标识
-              radioChange: ()=>{
+              radioChange: () => {
                 if (!this.pickingTableConfig.data.length) return;
                 this.$Modal.info({
                   className: 'ark-dialog',
@@ -931,7 +926,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -1150,7 +1145,7 @@ export default {
       this.curDialog = key;
       this.initDetail = detail || {};
       this.initForm(detail, isEdit);
-      
+
       console.log(this.dialogConfig);
       this.scheduleFormConfig.componentData = {
         ID: this.ID,
@@ -1167,7 +1162,7 @@ export default {
       setTimeout(() => {
         this.$children.find(item => item.name === 'scheduleFormDialog').openConfirm();
       }, 800);
-     
+
     },
     /**
      * 记录主/子表修改信息方法
@@ -1175,11 +1170,11 @@ export default {
      * @param {*} obj 修改值存在modify下的某个对象中
      * @param {*} index 修改值存在formConfig索引
      */
-     masterModifyData(ecode, obj, index) {
+    masterModifyData(ecode, obj, index) {
       const self = this;
       if (!this.isWatchChange) return;
       self.isModify = true;
-      let value = index != undefined 
+      let value = index != undefined
         ? self.dialogConfig[index].formConfig.formValue[ecode]
         : self.formConfig.formValue[ecode];
       let type = Object.prototype.toString.call(value);
@@ -1238,10 +1233,10 @@ export default {
     setRules(rules, fields, isRequired) {
       return Object.fromEntries(
         Object.entries(rules)
-        .map(([key, value]) => {
-          fields.includes(key) && (value[0].required = isRequired);
-          return [key, value];
-        })
+          .map(([key, value]) => {
+            fields.includes(key) && (value[0].required = isRequired);
+            return [key, value];
+          })
       );
     },
     // 配送方式切换
@@ -1269,7 +1264,7 @@ export default {
     fillSelectOptions(formConfig, data, fieldName) {
       const obj = this.queryForm(formConfig, fieldName);
       if (!obj) return;
-      let options = data.hasOwnProperty('combobox') 
+      let options = data.hasOwnProperty('combobox')
         ? data.combobox.map(i => ({ value: i.limitval, label: i.limitdesc }))
         : data;
       const val = options.length ? options[0].value : '';
@@ -1305,7 +1300,7 @@ export default {
         item.formConfig = $omsUtils.initFormConfig(childs, item.formConfig);
         console.log(item.formConfig)
         /** 由于方法返回的外键字段值是对象，形如：{ pid: '', valuedata: ''} */
-        if (index == 1) { 
+        if (index == 1) {
           const obj = item.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID;
           item.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = obj ? obj.pid : '';
           item.formConfig.formValue.IS_AIR_EMBARGO = item.formConfig.formValue.IS_AIR_EMBARGO != '0';
@@ -1329,7 +1324,7 @@ export default {
             let dbVal = i == 'IS_AIR_EMBARGO' ? Boolean(Number(copyDetail[i])) : copyDetail[i];
             item.formConfig.formValue[i] = dbVal;
           });
-          
+
           item.formConfig.formData.forEach((i, index) => {
             if (i.colname === 'CP_C_ORIG_ID') {
               item.formConfig.formData[index].itemdata.pid = copyDetail.CP_C_ORIG_ID;
@@ -1344,7 +1339,7 @@ export default {
       this.dialogLoading = false;
       this.isWatchChange = true;
     },
-    
+
     // 承运商下拉项
     carrierDropList() {
       this.service.strategyPlatform.carrierDropList().then(({ data: { code, data } }) => {
@@ -1365,27 +1360,27 @@ export default {
       if (this.ID != -1) {
         this.loading = true;
         this.service.strategyPlatform.querySchedule({ ID: this.ID })
-        .then(({ data: { code, data, message } }) => {
-          this.loading = false;
-          if (code == 0) {
-            const {
-              PICK_CREATE_TYPE,
-              VIPCOM_PROJECT_LIST,
-              VIPCOM_PROJECT_PICK_LIST,
-              VIPCOM_PROJECT_STORE_IN_LIST
-            } = data || {};
-            VIPCOM_PROJECT_LIST && (this.isMasterRequired = true);
-            this.pickingTableConfig.data = VIPCOM_PROJECT_PICK_LIST || [];
-            this.warehouseWarrantConfig.data = VIPCOM_PROJECT_STORE_IN_LIST || [];
-            this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE;
-            this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE != '0';
-            this.initPickTable();
-          } else {
-            this.$Message.error(message);
-          }
-        }).catch(() => this.loading = false);
+          .then(({ data: { code, data, message } }) => {
+            this.loading = false;
+            if (code == 0) {
+              const {
+                PICK_CREATE_TYPE,
+                VIPCOM_PROJECT_LIST,
+                VIPCOM_PROJECT_PICK_LIST,
+                VIPCOM_PROJECT_STORE_IN_LIST
+              } = data || {};
+              VIPCOM_PROJECT_LIST && (this.isMasterRequired = true);
+              this.pickingTableConfig.data = VIPCOM_PROJECT_PICK_LIST || [];
+              this.warehouseWarrantConfig.data = VIPCOM_PROJECT_STORE_IN_LIST || [];
+              this.pickingTableConfig.businessFormConfig.formValue.PICK_CREATE_TYPE = PICK_CREATE_TYPE;
+              this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = VIPCOM_PROJECT_LIST.IS_OUTWAREHOUSE_ALONE != '0';
+              this.initPickTable();
+            } else {
+              this.$Message.error(message);
+            }
+          }).catch(() => this.loading = false);
       }
-      
+
       this.isWatchChange = true;
     },
     // 主表保存
@@ -1411,24 +1406,24 @@ export default {
         }
       });
       this.service.strategyPlatform.wphScheduleSave({ ID: this.ID, ...params })
-      .then(({ data: { code, data, message } }) => {
-        if (code == 0) {
-          if (this.ID > 0) {
-            this.onOk()
-            return
+        .then(({ data: { code, data, message } }) => {
+          if (code == 0) {
+            if (this.ID > 0) {
+              this.onOk()
+              return
+            }
+            this.isMasterRequired = true;
+            this.initModify();
+            this.isModify = false
+            data && (this.ID = data);
+            this.querySchedule();
+            this.$Message.success(message);
+            return;
           }
-          this.isMasterRequired = true;
-          this.initModify();
-          this.isModify = false
-          data && (this.ID = data);
-          this.querySchedule();
-          this.$Message.success(message);
-          return;
-        }
-        this.$Message.error(message);
-      });
+          this.$Message.error(message);
+        });
     },
-    
+
     /**
      * 拣货单/入库单删除
      * @param {*} ID 明细ID, -1则清空所有数据
@@ -1439,12 +1434,12 @@ export default {
       let payload = { ID, ST_C_VIPCOM_PROJECT_ID: this.ID };
       const api = type == 'pickingTableConfig' ? 'pickDelete' : 'warehouseInDelete';
       this.service.strategyPlatform[api](payload)
-      .then(({ data: { code, message } }) => {
-        this.loading = false;
-        this[type].data = ID != -1 ? this[type].data.filter(i => i.ID != ID) : [];
-        this.initModify();
-        code == 0 ? this.$Message.success(message) : this.$Message.error(message);
-      }).catch(() => this.loading = false);
+        .then(({ data: { code, message } }) => {
+          this.loading = false;
+          this[type].data = ID != -1 ? this[type].data.filter(i => i.ID != ID) : [];
+          this.initModify();
+          code == 0 ? this.$Message.success(message) : this.$Message.error(message);
+        }).catch(() => this.loading = false);
     }
   },
 };

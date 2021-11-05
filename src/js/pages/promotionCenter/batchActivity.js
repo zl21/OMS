@@ -1,8 +1,7 @@
 import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
 import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet.vue';
-import stepsBars from 'burgeonComponents/steps';
 import groups from '@/assets/js/promotion/groups';
-import { OmsButton } from 'burgeonComponents'
+import { OmsButton, steps as stepsBars } from 'burgeonComponents'
 import promotionMixin from './promotion.mixin';
 
 export default {
@@ -12,7 +11,7 @@ export default {
     stepsBars,
     businessButton
   },
-	mixins: [promotionMixin()],
+  mixins: [promotionMixin()],
   data() {
     return {
       vueMark: 'batchActivity',
@@ -43,8 +42,8 @@ export default {
       ],
     };
   },
-  computed: { },
-  watch: { },
+  computed: {},
+  watch: {},
   methods: {
     /**
      * 查询促销的详情
@@ -198,7 +197,7 @@ export default {
     /**
      * 初始化默认时间  时间范围好下线时间
      */
-    initDefaultTime() {},
+    initDefaultTime() { },
     /**
      * 保存草稿
      */
@@ -208,7 +207,7 @@ export default {
         if (it.code === -1) return this.$Message.error(it.message);
       }
       // const index = this.basic_info.activity_type + new Date().Format('yyyyMMddHHMMSS');
-      const index = this.basic_info.activity_type + $omsUtils.dateFormat(new Date() , 'yyyyMMddHHMMSS')
+      const index = this.basic_info.activity_type + $omsUtils.dateFormat(new Date(), 'yyyyMMddHHMMSS')
       const params = {
         objid: this.objid,
         basic_info: this.basic_info,

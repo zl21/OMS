@@ -21,7 +21,7 @@
       />
     </div>
     <!-- 修改from表单 -->
-    <businessDialog
+    <OmsDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
       :component-data="publicBouncedConfig.componentData"
@@ -40,7 +40,7 @@
       :width="publicBouncedConfig.width"
     />
     <!-- 导入 -->
-    <businessDialog
+    <OmsDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"

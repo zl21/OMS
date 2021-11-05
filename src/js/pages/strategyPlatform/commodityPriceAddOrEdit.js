@@ -1,33 +1,22 @@
-
-
-
-
-
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import businessDialog from 'burgeonComponents/businessDialog';
-import myInput from 'burgeonComponents/fkinput.vue';
-import subTable from 'burgeonComponents/subTable';
+import { OmsButton, OmsForm, OmsDialog, subTable, Fkinput as myInput, OmsLabel, OmsTable } from 'burgeonComponents'
 import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 Vue.component('myInput', myInput)
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     subTable,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsTable,
-    businessDialog,
+    OmsDialog,
     myInput
   },
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       collapse: ['panel_baseInfo', 'panel_pickInfo', 'panel_warehouseInfo'],
       ID: this.$route.params.customizedModuleId && (!['New', 'NEW'].includes(this.$route.params.customizedModuleId)) ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       loading: false,
@@ -130,7 +119,7 @@ export default {
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
-              disabledDate (date) {
+              disabledDate(date) {
                 return date && date.valueOf() < Date.now() - 86400000;
               }
             },
@@ -147,7 +136,7 @@ export default {
             format: 'yyyy-MM-dd HH:mm:ss',
             disabled: false,
             options: {
-              disabledDate (date) {
+              disabledDate(date) {
                 return date && date.valueOf() < Date.now() - 86400000;
               }
             },
@@ -215,7 +204,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -457,7 +446,7 @@ export default {
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},
-     },
+      },
       // tab切换配置
       labelList: [
         {
@@ -525,7 +514,7 @@ export default {
       const selectArr = this.goodsTableConfig.selectionData
       if (!selectArr.length) return this.$Message.warning($i18n.t('modalTips.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
-      this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message }}) => {
+      this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message } }) => {
         if (code == 0) {
           this.$Message.success(message)
           this.queryPriceItem()
@@ -559,7 +548,7 @@ export default {
       const ITEM_IDS = this.goodsTableConfig.selectionData.map(i => i && i.ID)
       const params = { ID: this.ID, ITEM_IDS: ITEM_IDS || [] }
       this.loading = true
-      this.service.strategyPlatform.exportPrice(params).then(({ data: { code, data, message }}) => {
+      this.service.strategyPlatform.exportPrice(params).then(({ data: { code, data, message } }) => {
         this.loading = false
         if (code == 0 && data !== null) {
           this.$Message.success(message || "导出成功！");
@@ -631,7 +620,7 @@ export default {
           })
         });
         return;
-      } else if (id){
+      } else if (id) {
         this.$nextTick(() => {
           this.$store.commit('global/tabOpen', {
             type: 'C',
@@ -660,7 +649,7 @@ export default {
       if (!this.isWatchChange) return;
       self.isModify = true;
       let value = self.formConfig.formValue[ecode]
-      let isDate = Object.prototype.toString.call(value) == '[object Date]' 
+      let isDate = Object.prototype.toString.call(value) == '[object Date]'
       if (isDate) {
         let newTime = this.formatDate(value)
         let oldTime = self.modify[obj][ecode]
@@ -692,7 +681,7 @@ export default {
      * @returns
      */
     queryForm(formConfig, field) {
-      return formConfig.formData.find(item => item.colname == field); 
+      return formConfig.formData.find(item => item.colname == field);
     },
     queryBtn(btnConfig, btnText) {
       return btnConfig.buttons.find(item => item.text == btnText);
@@ -718,7 +707,7 @@ export default {
     // 设置主表表单字段
     setMainTableFormConfig() {
       /**填充字段 */
-      this.queryForm(this.formConfig, 'PLAN_ID').style = this.isMasterRequired ? 'input' : '' 
+      this.queryForm(this.formConfig, 'PLAN_ID').style = this.isMasterRequired ? 'input' : ''
       this.queryForm(this.formConfig, 'ISACTIVE').style = this.isMasterRequired ? 'input' : ''
       this.isMasterRequired && this.setEnable()
       /**校验字段 */
@@ -734,9 +723,9 @@ export default {
         if (i.colname == 'CP_C_SHOP_ID') {
           i.itemdata.readonly = this.isCopy ? false : this.isEnable
         }
-        i.disabled = this.isCopy 
+        i.disabled = this.isCopy
           ? false
-          : this.isEnable ? FIELDS.includes(i.colname) : FIELDS.slice(0,2).includes(i.colname)
+          : this.isEnable ? FIELDS.includes(i.colname) : FIELDS.slice(0, 2).includes(i.colname)
       })
       this.goodsTableConfig.businessFormConfig.formData
         .forEach((i, index) => {
@@ -776,25 +765,25 @@ export default {
       // this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid
       // this.formConfig.formValue.ISACTIVE = this.formConfig.formValue.ISACTIVE == 'true'
       this.service.strategyPlatform.queryPrice({ id: ID || this.ID })
-      .then(({ data: { code, data, message }}) => {
-        this.loading = false
-        this.isWatchChange = true
-        if (code == 0) {
-          if (data) {
-            this.isEnable = data.ISACTIVE == 'Y'
-            this.isMasterRequired = true
-            this.reloadForm()
-            $omsUtils.intersectFormValue(this.formConfig.formValue, data)
-            this.setFormValue(this.formConfig, 'CP_C_SHOP', { 
-              pid: data.CP_C_SHOP_ID,
-              valuedata: data.CP_C_SHOP_ENAME
-            })
-            this.formConfig.formValue.ISACTIVE = this.isEnable ? '启用' : '停用'
+        .then(({ data: { code, data, message } }) => {
+          this.loading = false
+          this.isWatchChange = true
+          if (code == 0) {
+            if (data) {
+              this.isEnable = data.ISACTIVE == 'Y'
+              this.isMasterRequired = true
+              this.reloadForm()
+              $omsUtils.intersectFormValue(this.formConfig.formValue, data)
+              this.setFormValue(this.formConfig, 'CP_C_SHOP', {
+                pid: data.CP_C_SHOP_ID,
+                valuedata: data.CP_C_SHOP_ENAME
+              })
+              this.formConfig.formValue.ISACTIVE = this.isEnable ? '启用' : '停用'
+            }
+          } else {
+            this.$Message.error(message)
           }
-        } else {
-          this.$Message.error(message)
-        }
-      }).catch(() => this.loading = false)
+        }).catch(() => this.loading = false)
     },
     // 子表查询
     queryPriceItem(ID) {
@@ -804,14 +793,14 @@ export default {
         pageNum: this.goodsTableConfig.pageIndex
       }
       this.service.strategyPlatform.queryPriceItem(params)
-      .then(({ data: { code, data, message }}) => {
-        if (code == 0) {
-          this.goodsTableConfig.data = data.ST_C_PRICE_ITEM_LIST || []
-          this.goodsTableConfig.total = data.PAGE_INFO.total
-        } else {
-          this.$Message.error(message)
-        }
-      })
+        .then(({ data: { code, data, message } }) => {
+          if (code == 0) {
+            this.goodsTableConfig.data = data.ST_C_PRICE_ITEM_LIST || []
+            this.goodsTableConfig.total = data.PAGE_INFO.total
+          } else {
+            this.$Message.error(message)
+          }
+        })
     },
     // 主子表保存
     save(isSaveAll) {
@@ -821,7 +810,7 @@ export default {
       const drpArr = ['CP_C_SHOP_ID'];
       const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes) return self.$Message.warning(mes);
-      
+
       const formConfig = this.goodsTableConfig.businessFormConfig
       /**子表新增校验 */
       // const valueArr2 = ['MIN_REAL_AMT'];
@@ -845,7 +834,7 @@ export default {
       const hasNoValid = this.goodsTableConfig.updateData
         .some(i => !this.isValid(i, validFields))
       if (hasNoValid) return
-    
+
       let params = {
         ID: this.ID || -1,
         ST_C_PRICE: {},
@@ -862,7 +851,7 @@ export default {
         params.ST_C_PRICE = this.formConfig.formValue
         params.COPY_FLAG = this.$route.query.copy
       }
- 
+
       params.ST_C_PRICE.BEGIN_TIME &&= this.formatDate(params.ST_C_PRICE.BEGIN_TIME)
       params.ST_C_PRICE.END_TIME &&= this.formatDate(params.ST_C_PRICE.END_TIME)
       params.ST_C_PRICE.hasOwnProperty('ISACTIVE')
@@ -873,30 +862,30 @@ export default {
         ...params.ST_C_PRICE_ITEM_LIST,
         ...this.goodsTableConfig.updateData
       ])
-    
+
       this.service.strategyPlatform.savePrice(params)
-      .then(({ data: { code, data, message }}) => {
-        if (code == 0) {
-          if (this.ID != -1) {
-            // 清空明细表单
-            this.goodsTableConfig.businessFormConfig.formValue.MIN_REAL_AMT = ''
-            this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SKU')
-            this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SPU')
+        .then(({ data: { code, data, message } }) => {
+          if (code == 0) {
+            if (this.ID != -1) {
+              // 清空明细表单
+              this.goodsTableConfig.businessFormConfig.formValue.MIN_REAL_AMT = ''
+              this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SKU')
+              this.setFormValue(this.goodsTableConfig.businessFormConfig, 'PS_C_SPU')
+            }
+            this.reloadForm()
+            data && (this.ID = data.objId)
+            if (isSaveAll) {
+              this.modify = { master: {} }
+              this.isModify = false
+              this.onOk(['New', 'NEW'].includes(this.$route.params.customizedModuleId) && this.ID)
+            }
+            !this.isCopy && this.queryPrice(data.objId)
+            !this.isCopy && this.queryPriceItem(data.objId)
+            this.$Message.success(message)
+            return
           }
-          this.reloadForm()
-          data && (this.ID = data.objId)
-          if (isSaveAll) {
-            this.modify = { master: {} }
-            this.isModify = false
-            this.onOk(['New', 'NEW'].includes(this.$route.params.customizedModuleId) && this.ID)
-          }
-          !this.isCopy && this.queryPrice(data.objId)
-          !this.isCopy && this.queryPriceItem(data.objId)
-          this.$Message.success(message)
-          return
-        }
-        this.$Message.error(message)
-      })
+          this.$Message.error(message)
+        })
     },
   }
 };

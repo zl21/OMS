@@ -1,17 +1,13 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import subTable from 'burgeonComponents/subTable';
+import { OmsButton, OmsForm, subTable, OmsLabel, OmsTable } from 'burgeonComponents'
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     subTable,
     OmsTable,
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
   },
   mixins: [new modifycurrentLabel()],
   data() {
@@ -83,7 +79,7 @@ export default {
               reftableid: 171534, // 对应的表ID
               valuedata: '' // 这个是选择的值
             },
-            oneObj: (e) => { 
+            oneObj: (e) => {
               this.formConfig1.formValue.CP_C_SHOP_ID = e.pid;
               this.formConfig1.formValue.CP_C_SHOP_TITLE = e.valuedata;
               this.masterModifyData('CP_C_SHOP_ID', 'master', 'formConfig1');
@@ -175,8 +171,8 @@ export default {
               let newVal
               let oldVal = this.modify.master.EXCHANGE_DESC || this.backup.EXCHANGE_DESC || []
               if (
-                oldVal.length == 0 && val.includes(2) 
-                || !oldVal.includes('2') && val.includes('2') 
+                oldVal.length == 0 && val.includes(2)
+                || !oldVal.includes('2') && val.includes('2')
                 || val.includes('1') && val.includes('0') && !oldVal.includes('2')) {
                 newVal = ['0', '1', '2']
               } else if (!val.includes('2') && oldVal.includes('2')) {
@@ -400,17 +396,17 @@ export default {
       })
       this.loading = true
       this.service.strategyPlatform.tamallExchangeOrderSave(params)
-      .then(({ data: { code, data, message }}) => {
-        this.loading = false
-        if (code == 0) {
-          this.modify = {
-            master: {}
+        .then(({ data: { code, data, message } }) => {
+          this.loading = false
+          if (code == 0) {
+            this.modify = {
+              master: {}
+            }
+            this.isModify = false
+            this.$Message.success(message)
+            this.onOk(this.ID == -1 && data.objId)
           }
-          this.isModify = false
-          this.$Message.success(message)
-          this.onOk(this.ID == -1 && data.objId)
-        }
-      }).catch(() => this.loading = false)
+        }).catch(() => this.loading = false)
     },
     // 自动拒绝原因
     async tamallExchangeReasons(obj = {}) {
@@ -453,7 +449,7 @@ export default {
         default:
           break;
       }
-    },       
+    },
     // 主子表字段是否可编辑
     setEnable() {
       const FIELDS = ['ENAME', 'EXCHANGE_ADDR_ID']
@@ -484,7 +480,7 @@ export default {
           } else if (!val) {
             msg.push(tip[key])
           }
-        } 
+        }
       }
       return msg
     },

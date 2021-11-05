@@ -1,22 +1,16 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsTable, OmsLabel, subTable } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
-import loading from 'burgeonComponents/loading';
-import subTable from 'burgeonComponents/subTable';
 import orderNumberNnalysis from 'allpages/basicData/orderNumberNnalysis.vue';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsTable,
     addPlatformLogisticsCompany,
-    loading,
     subTable,
     orderNumberNnalysis
   },

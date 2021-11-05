@@ -1,17 +1,14 @@
 // import timestampToTime from '@/assets/js/__utils__/usual';
-import logTable from 'burgeonComponents/LogTable';
-import { OmsButton } from 'burgeonComponents'
-import loading from 'burgeonComponents/loading';
+import { OmsButton, LogTable as logTable } from 'burgeonComponents'
 
 export default {
   components: {
     logTable,
     OmsButton,
-    loading
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       loading: false,
       show: '',
       s: [],
@@ -28,7 +25,7 @@ export default {
           },
           {
             text: $i18n.t('btn.refresh'), // '刷新',
-            btnclick: async ()=>{
+            btnclick: async () => {
               this.loading = true;
               await this.queryLogisticsCompany();
               this.getAutoCheck().then(() => {
@@ -158,7 +155,7 @@ export default {
         multiple: [],
       }));
       const res = await this.service.common.QueryList(query);
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         console.log('CP_C_LOGISTICS_ID_SELECT::res', res);
         this.CP_C_LOGISTICS_ID_SELECT.datas.row = res.data.datas.row;
         this.CP_C_LOGISTICS_ID_SELECT.totalRowCount = res.data.datas.totalRowCount;
@@ -333,7 +330,7 @@ export default {
           // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
           price = parseFloat(price);
         }
-        this.$nextTick(()=>{
+        this.$nextTick(() => {
           this.info[type] = price;
           this.result[type] = price;
         });
@@ -361,7 +358,7 @@ export default {
     logisticSelected(e) {
       console.log('logisticSelected::e', e);
       this.CP_C_LOGISTICS_ID_SELECT.selectDatas = e;
-      this.result.CP_C_LOGISTICS_ID = e.map(item=>item.ID).join(',');
+      this.result.CP_C_LOGISTICS_ID = e.map(item => item.ID).join(',');
     },
     logisticClear() {
       console.log('logisticClear');

@@ -18,8 +18,7 @@
 </template>
 
 <script>
-// import loading from 'burgeonComponents/loading';
-import { OmsButton } from 'burgeonComponents'
+// import { OmsButton } from 'burgeonComponents'
 import myInput from 'burgeonComponents/fkinput.vue';
 import Vue from 'vue';
 import { OmsTable } from 'burgeonComponents'
@@ -30,8 +29,7 @@ export default {
   components: {
     OmsButton,
     OmsTable,
-    // loading,
-    myInput,
+    //     myInput,
   },
   data() {
     return {

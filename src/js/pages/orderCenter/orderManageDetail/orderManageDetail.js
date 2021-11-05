@@ -1,13 +1,12 @@
 import { OmsButton } from 'burgeonComponents'
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import DropDownConfig from 'burgeonConfig/config/dropDown.config';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
-import loading from 'burgeonComponents/loading';
 
 export default {
   name: 'OrderManageDetail',
@@ -16,7 +15,7 @@ export default {
     businessLabel,
     EssentialInfo,
     OrderItem,
-    businessDialog,
+    OmsDialog,
     loading
   },
   mixins: [buttonPermissionsMixin],

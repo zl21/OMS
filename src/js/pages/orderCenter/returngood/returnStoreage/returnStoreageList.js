@@ -2,7 +2,7 @@
 
 import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
@@ -10,7 +10,6 @@ import aTable from 'burgeonComponents/businessAgTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import BurgeonDate from '@/assets/js/__utils__/date.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import loading from 'burgeonComponents/loading';
 import commonUtils from 'burgeonConfig/config/commonUtils';
 import { OmsTable } from 'burgeonComponents'
 
@@ -27,7 +26,7 @@ export default {
     OmsButton,
     businessForm,
     OmsTable,
-    businessDialog,
+    OmsDialog,
     aTable,
     loading
   },

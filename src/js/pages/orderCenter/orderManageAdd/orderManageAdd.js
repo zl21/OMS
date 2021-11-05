@@ -1,14 +1,10 @@
 
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import businessDialog from 'burgeonComponents/businessDialog';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from 'burgeonConfig/config/validate.config';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import { OmsTable } from 'burgeonComponents'
 
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');
@@ -17,15 +13,15 @@ parseArea(areaList);
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessLabel,
-    businessDialog,
+    OmsLabel,
+    OmsDialog,
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       isShowFromLoading: false, // 加载
       matrixBox: {
         refFuns: 'confirmFun',

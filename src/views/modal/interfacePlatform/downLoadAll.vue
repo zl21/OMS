@@ -29,7 +29,7 @@
       </p>
     </Modal>
 
-    <businessDialog
+    <OmsDialog
       ref="dialog"
       :title="dialogConfig.title"
       :component-data="dialogConfig.componentData"

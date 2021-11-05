@@ -188,7 +188,7 @@
       <p>{{ tipMessage }}</p>
     </Modal>
     <!-- 导入 -->
-    <businessDialog
+    <OmsDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"

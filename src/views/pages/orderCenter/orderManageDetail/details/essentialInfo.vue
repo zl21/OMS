@@ -209,7 +209,7 @@
         </div>
       </Col>
     </Row>
-    <businessDialog
+    <OmsDialog
       :ref="dialogsConfig.name"
       :url="dialogsConfig.url"
       :title="dialogsConfig.title"

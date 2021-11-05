@@ -1,23 +1,19 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
-import subTable from 'burgeonComponents/subTable';
+import { OmsButton, OmsTable, subTable, OmsForm, OmsLabel } from 'burgeonComponents'
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
+    OmsForm,
+    OmsLabel,
     OmsTable,
     subTable
   },
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      colRowNum:4, // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
-      vmI18n:$i18n,
+      colRowNum: 4, // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
+      vmI18n: $i18n,
       collapse: 'panel_baseInfo',
       loading: false,
       isAuto: true, // 自动分配
@@ -86,16 +82,16 @@ export default {
             },
             oneObj: (e) => {
               this.service.strategyPlatform.checkPhyWarehouse({ ID: e.pid })
-              .then(({ data: { code }}) => {
-                // 判断这个实体仓是否已经存在，如果已经存在就提示用户，并清掉仓库名称的值，让用户重新选择
-                if (code == -1) {
-                  this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE');
-                  return
-                }
-                this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE', e);
-                this.masterModifyData('CP_C_PHY_WAREHOUSE_ID', 'master');
-                this.masterModifyData('CP_C_PHY_WAREHOUSE_ENAME', 'master');
-              })
+                .then(({ data: { code } }) => {
+                  // 判断这个实体仓是否已经存在，如果已经存在就提示用户，并清掉仓库名称的值，让用户重新选择
+                  if (code == -1) {
+                    this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE');
+                    return
+                  }
+                  this.setFormValue(this.formConfig, 'CP_C_PHY_WAREHOUSE', e);
+                  this.masterModifyData('CP_C_PHY_WAREHOUSE_ID', 'master');
+                  this.masterModifyData('CP_C_PHY_WAREHOUSE_ENAME', 'master');
+                })
             }
           },
           {
@@ -105,7 +101,7 @@ export default {
             colname: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             width: '6',
             disabled: false,
-            radioChange: ()=>{
+            radioChange: () => {
               this.toggleRadio();
               this.masterModifyData('IS_AUTO_LOGISTICS_DISTRIBUTION', 'master');
             }, // 切换时的方法
@@ -200,7 +196,7 @@ export default {
         row: []
       },
       logisticsTableFormConfig: {
-        gridBar:true,
+        gridBar: true,
         formData: [
           {
             label: $i18n.t('form_label.logisticsCompany'), // 物流公司
@@ -272,7 +268,7 @@ export default {
         buttons: [
           {
             webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_ADD',
-            type:'primary',
+            type: 'primary',
             text: $i18n.t('btn.increase'), // 添加
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -283,7 +279,7 @@ export default {
           },
           {
             webname: 'ST_C_WAREHOUSE_LOGISTICS_SUB_DELETE',
-            type:'warning',
+            type: 'warning',
             text: $i18n.t('btn.delete'), // 删除
             disabled: false, // 按钮禁用控制
             isShow: false,
@@ -303,7 +299,7 @@ export default {
         width: '', // 表格宽度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 默认每页条数100条，产品要求
         pageIndex: 1, // 页码
         totalData: [],
@@ -354,7 +350,7 @@ export default {
     this.ID != -1 && (await this.queryLogistics());
     await this.getDropDownOptions(1); // 初始化，解决下拉多选首次渲染问题
   },
-  created() {},
+  created() { },
   methods: {
     // 获取按钮权限
     async getBtn() {
@@ -457,7 +453,7 @@ export default {
           this.labelDefaultValue = this.isAuto ? 'logistics' : ''
           break;
         case false:
-          showIndex = this.isAuto ? [1,2] : [2]
+          showIndex = this.isAuto ? [1, 2] : [2]
           this.labelDefaultValue = this.isAuto ? 'logistics' : 'ST_WAREHOUSE_LOGISTICS_LOG'
           break;
         default:
@@ -600,7 +596,7 @@ export default {
       const ITEMS = this.logisticsTableConfig.addData;
 
       let params = {
-        ST_C_EXPRESS_ALLOCATION: { 
+        ST_C_EXPRESS_ALLOCATION: {
           ID: this.ID || -1,
           ...ST_C_EXPRESS_ALLOCATION,
           ISACTIVE: ST_C_EXPRESS_ALLOCATION.ISACTIVE ? 'Y' : 'N'
@@ -663,7 +659,7 @@ export default {
         formdata.append('searchdata', JSON.stringify(search));
       }
 
-      const { data: { code, data } } = isFilter 
+      const { data: { code, data } } = isFilter
         ? await this.service.common.fuzzyquerybyak(formdata)
         : await this.service.common.QueryList(formdata);
       if (code == 0) {

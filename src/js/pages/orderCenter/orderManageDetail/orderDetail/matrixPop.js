@@ -1,14 +1,12 @@
 import R3 from '@syman/burgeon-r3';
 import chineseDiction from 'framework/assets/js/ChineseDictionary.js';
 import port from '@/config/config/orderDetailConnector.js';
-import loading from 'burgeonComponents/loading';
 
 const { store } = R3;
 
 export default {
   components:{
-    loading,
-  },
+      },
   props: {
     proEcodeFlag: {
       // 矩阵框商品新增时,接受父组件组件matrixInput传输标记,itemInputEnter方法需要用的标记

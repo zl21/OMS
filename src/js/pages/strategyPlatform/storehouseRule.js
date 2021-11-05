@@ -1,28 +1,22 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-// import loading from 'burgeonComponents/loading';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsDialog, OmsTable, subTable, OmsLabel } from 'burgeonComponents'
 import service from '@/service/index';
-import businessDialog from 'burgeonComponents/businessDialog';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import subTable from 'burgeonComponents/subTable';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import { OmsTable } from 'burgeonComponents'
 
 
 export default {
   components: {
     OmsButton,
-    businessForm,
-    businessLabel,
-    businessDialog,
+    OmsForm,
+    OmsLabel,
+    OmsDialog,
     OmsTable,
     subTable
   },
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      baseInformation:$i18n.t('other.basic_info'),
+      baseInformation: $i18n.t('other.basic_info'),
       placeholder: $i18n.t('form_label.bb'),// '省市搜索',//省市搜索
       loading: false,
       pageShow: false,
@@ -64,14 +58,14 @@ export default {
           {
             text: $i18n.t('common.copy'),//'复制',
             isShow: false,
-            webname:"copy",
+            webname: "copy",
             disabled: false, // 按钮禁用控制
             btnclick: this.fnCopy
           },
 
           {
             text: $i18n.t('btn.next'),//'下一步',
-            webname:"next",
+            webname: "next",
             isShow: false,
             btnclick: () => {
               this.fnSave(2);
@@ -79,7 +73,7 @@ export default {
           },
           {
             text: $i18n.t('btn.previous'),//'上一步',
-            webname:"previous",
+            webname: "previous",
             isShow: false,
             btnclick: () => {
               this.lastStep();
@@ -163,7 +157,7 @@ export default {
             width: '8',
             disabled: false,
             selectChange: v => {
-            
+
               if (v.value == 171897) { //表示选择了唯品会
                 this.qurefrom("areaLevel")[0].style = null
               } else {
@@ -173,7 +167,7 @@ export default {
               this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = '';
               this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = '';
               this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.colid = v.value;
-            
+
             }, // 选中事件，默认返回选中的值,默认返回当前值value
             options: [
               // 下拉框选项值
@@ -410,7 +404,7 @@ export default {
   mounted() {
     this.init()
     this.getBtns()
- 
+
   },
   created() { },
 
@@ -456,10 +450,10 @@ export default {
           if (vm.$route.query.copy) {
             this.pageShow = true;
             this.fninit(vm.$route.query.copy);
-            setTimeout(()=>{
+            setTimeout(() => {
               this.fntableData(vm.$route.query.copy);
-            },500)
-          
+            }, 500)
+
             this.btnConfig2.buttons = []
           } else if (query.id) {
             this.fninit(query.id);
@@ -473,10 +467,10 @@ export default {
 
           this.fninit(this.id);
 
-          setTimeout(()=>{
+          setTimeout(() => {
             this.fntableData(this.id);
-          },500)
-         
+          }, 500)
+
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
             if (em.webname == 'previous') {
@@ -492,10 +486,10 @@ export default {
           // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
 
-          setTimeout(()=>{
+          setTimeout(() => {
             this.fntableData(this.id);
-          },500)
-         
+          }, 500)
+
           this.pageShow = true; //显示明细表
           this.btnConfig.buttons.forEach(em => {
             if (em.webname == 'copy') {
@@ -531,10 +525,10 @@ export default {
             this.pageShow = true;
             this.fninit(vm.$route.query.copy);
 
-            setTimeout(()=>{
+            setTimeout(() => {
               this.fntableData(vm.$route.query.copy);
-            },500)
-        
+            }, 500)
+
             this.btnConfig2.buttons = []
           } else if (query.id) {
             this.fninit(query.id);
@@ -549,10 +543,10 @@ export default {
 
           this.fninit(this.id);
 
-          setTimeout(()=>{
+          setTimeout(() => {
             this.fntableData(this.id);
-          },500)
-         
+          }, 500)
+
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
             if (em.webname == 'previous') {
@@ -568,14 +562,14 @@ export default {
           // this.$store.commit('global/modifycurrentLabel' , data)
           this.fninit(this.id);
 
-          setTimeout(()=>{
+          setTimeout(() => {
             this.fntableData(this.id);
-          },500)
-        
+          }, 500)
+
 
           this.pageShow = true;
           this.btnConfig.buttons.forEach(em => {
-            if (em.webname == 'copy' ) {
+            if (em.webname == 'copy') {
               em.isShow = true;
             }
           });
@@ -610,8 +604,8 @@ export default {
       this.fntableData(this.id);
     },
     fninput(v) {
-     
-      console.log( );
+
+      console.log();
       if (v.keyCode == 13) {
         this.seachVal = v.target.value;
         this.tableConfig.current = 1;
@@ -628,7 +622,7 @@ export default {
       this.fntableData(this.id);
     },
     importData() {
-      console.log(  this.formConfig.formValue.type);
+      console.log(this.formConfig.formValue.type);
       this.changeCount = 0;
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         //下载模版的地址
@@ -640,19 +634,19 @@ export default {
         return;
       }
 
-      if (this.customizedModuleName == 'ST_C_ORDER_WAREHOUSE'){
+      if (this.customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
         //下载模版的地址
         this.importTable.componentData.tempApi = `/p/cs/st/v1/orderWarehouse/exportData?id=${this.id}`;
         if (this.formConfig.formValue.type == 171897) { //表示唯品会
           this.importTable.componentData.tempApi = `/p/cs/st/v1/orderWarehouse/exportVipData?id=${this.id}`;
-            //导入文件的地址
-           this.importTable.componentData.okApi = `/p/cs/st/v1/orderWarehouse/importVipData`;
+          //导入文件的地址
+          this.importTable.componentData.okApi = `/p/cs/st/v1/orderWarehouse/importVipData`;
         }
         //上传文件的参数
         this.importTable.componentData.okParm = { id: this.id };
         this.$children.find(item => item.name === 'importTable').openConfirm();
       }
-     
+
     },
     fnoWexportData() {
       //导出
@@ -723,7 +717,7 @@ export default {
       }
 
       if (this.formConfig.formValue.type == 171897) {  //调用唯品会查询接口
-        this.placeholder =  $i18n.t('modalTips.hi') //"请输入唯品会仓库名称"
+        this.placeholder = $i18n.t('modalTips.hi') //"请输入唯品会仓库名称"
         service.strategyPlatform
           .getWarehouseVipInfo({
             params: {
@@ -734,7 +728,7 @@ export default {
             }
           })
           .then(res => {
-         
+
             if (res.data.code == 0) {
               let { columns, data, pageInfo } = res.data.data;
               data.forEach((em, index) => {
@@ -878,7 +872,7 @@ export default {
                 // this.qurebtn(this.btnConfig.buttons, "停用")[0].disabled = true
               }
 
-            }  else if (key == 'beginTime') {
+            } else if (key == 'beginTime') {
               //开始时间
               this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
             } else if (key == 'endTime') {
@@ -888,13 +882,13 @@ export default {
             }
 
           }
-          setTimeout(()=>{
+          setTimeout(() => {
             this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata = warehouseData.cpCShopEnames;
             this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.pid = warehouseData.cpCShopIds;
-          },500)
+          }, 500)
 
         });
-      
+
       }
 
     },
@@ -905,7 +899,7 @@ export default {
         for (const item in this.formConfig.ruleValidate) {
           if (em == item && this.qurefrom(em)[0].style != null) {
             if (this.formConfig.formValue[em] == '') {
-              this.$Message.error( $i18n.t('modalTips.hg') + this.qurefrom(em)[0].label + '!');
+              this.$Message.error($i18n.t('modalTips.hg') + this.qurefrom(em)[0].label + '!');
               return;
             }
           }
@@ -919,7 +913,7 @@ export default {
 
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         if (this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.valuedata == '') {
-          this.$Message.error( $i18n.t('modalTips.hg') + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
+          this.$Message.error($i18n.t('modalTips.hg') + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
           return;
         }
 
@@ -981,7 +975,7 @@ export default {
         return;
       }
       if (this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata == '') {
-        this.$Message.error( $i18n.t('modalTips.hg') + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
+        this.$Message.error($i18n.t('modalTips.hg') + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
         return;
       }
 

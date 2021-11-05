@@ -1,10 +1,9 @@
 import { OmsButton } from 'burgeonComponents'
 import { OmsForm } from 'burgeonComponents';
 import businessLabel from 'burgeonComponents/businessLabel';
-import businessDialog from 'burgeonComponents/businessDialog';
+import { OmsDialog } from 'burgeonComponents'
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import loading from 'burgeonComponents/loading';
 import { OmsTable } from 'burgeonComponents'
 
 export default {
@@ -12,7 +11,7 @@ export default {
     OmsButton,
     businessForm,
     OmsTable,
-    businessDialog,
+    OmsDialog,
     OrderItem,
     businessLabel,
     loading

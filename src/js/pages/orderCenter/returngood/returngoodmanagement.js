@@ -1,19 +1,14 @@
 // 退换货单详情
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import businessLabel from 'burgeonComponents/businessLabel';
+import { OmsButton, OmsForm, OmsLabel, OmsDialog, OmsTable } from 'burgeonComponents'
 import { setTimeout } from 'timers';
-import businessDialog from 'burgeonComponents/businessDialog';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import loading from 'burgeonComponents/loading';
 import commonUtils from 'burgeonConfig/config/commonUtils'
 // import OrderItem from './orderItem';
 
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
-import { OmsTable } from 'burgeonComponents'
 
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');
@@ -23,17 +18,16 @@ export default {
   name: 'returngoodmanagement',
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessDialog,
+    OmsDialog,
     OrderItem,
-    businessLabel,
-    loading
+    OmsLabel,
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       // 显示水印标识
       statusName: '',
       // 水印标识集合
@@ -4164,9 +4158,9 @@ export default {
           _this.clrListArr = res.data.data.psCSpec1objList;
           _this.sizeListArr = res.data.data.psCSpec2objList;
         } else {
-          _this.itemSkuEcode = (res.data.code === 0)?res.data.data.ecode:'';
-          _this.itemSkuId = (res.data.code === 0)?res.data.data.skuId:'';
-          _this.itemGbcode = (res.data.code === 0)?res.data.data.gbcode:'';
+          _this.itemSkuEcode = (res.data.code === 0) ? res.data.data.ecode : '';
+          _this.itemSkuId = (res.data.code === 0) ? res.data.data.skuId : '';
+          _this.itemGbcode = (res.data.code === 0) ? res.data.data.gbcode : '';
         }
       });
     },
