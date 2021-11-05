@@ -21,7 +21,7 @@
         
           {{baseInformation}}
           <div slot="content">
-            <businessForm
+            <OmsForm
               :form-config="formConfighead"
               @keyDown="keyDown"
               :key="force"
@@ -35,7 +35,7 @@
           <!-- 满足条件 -->
           {{ vmI18n.t('form_label.meet_conditions') }}
           <div slot="content">
-            <businessForm
+            <OmsForm
               :form-config="formConfig"
               @keyDown="keyDown"
               :key="force"
@@ -78,13 +78,13 @@
 
 
       <div class="customized-detail-table">
-        <businessLabel
+        <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"
         />
         <div slot="content" v-show="labelDefaultValue == 'PROPERTY'">
-          <!-- <businessForm :form-config="formConfig1" @keyDown="keyDown" />
+          <!-- <OmsForm :form-config="formConfig1" @keyDown="keyDown" />
           <OmsButton :btn-config="btnConfig1" /> -->
           <OmsTable
             :jordan-table-config="tableConfig2"
@@ -111,7 +111,7 @@
       @on-cancel="fncancelcity"
       class-name="customized-detail-modal2"
     >
-      <businessForm :form-config="formConfig2" @keyDown="keyDown" />
+      <OmsForm :form-config="formConfig2" @keyDown="keyDown" />
     </Modal>
     <Modal v-model="modal3" width="660" mask footer-hide  title="添加商品" >
       <div class="specialLogistics-model-head">

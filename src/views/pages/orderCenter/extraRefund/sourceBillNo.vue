@@ -43,7 +43,7 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-         </div>
+        </div>
       </div>
       <div class="dialog-footer" slot="footer">
         <OmsButton :btn-config="btnConfigMo" />
@@ -54,14 +54,10 @@
 
 <script>
 // 退换货单详情
-import { OmsButton } from 'burgeonComponents'
-import businessLabel from 'burgeonComponents/businessLabel';
-import { setTimeout } from 'timers';
-import { OmsDialog } from 'burgeonComponents'
+import { OmsButton, OmsLabel, OmsDialog, OmsTable } from 'burgeonComponents'
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date.js';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'sourceBillNo',
@@ -69,7 +65,7 @@ export default {
     OmsButton,
     OmsTable,
     OmsDialog,
-    businessLabel,
+    OmsLabel,
   },
   // model: {
   //   prop: 'value',
@@ -84,9 +80,9 @@ export default {
   // mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      disabled:false,
-      iosSearch:'ios-search',
-      BILL_NO:'',
+      disabled: false,
+      iosSearch: 'ios-search',
+      BILL_NO: '',
       vmI18n: $i18n,
       orderModal: false,
       OC_B_ORDER_ID: '',
@@ -113,10 +109,10 @@ export default {
                 this.$Message.warning('请选中一条单据！');
                 return false
               }
-              R3.store.commit('customize/originalOrder',this.table.selectionArr[0].BILL_NO);
+              R3.store.commit('customize/originalOrder', this.table.selectionArr[0].BILL_NO);
               this.BILL_NO = this.table.selectionArr[0].BILL_NO;
               this.table.selectionArr[0].ID = this.BILL_NO;
-              this.$emit('change',this.table.selectionArr,this)
+              this.$emit('change', this.table.selectionArr, this)
               this.orderModal = false;
               this.table.selectionArr = [];
             },
@@ -128,31 +124,31 @@ export default {
           {
             key: 'BILL_NO',
             title: '原订单编号'
-          },{
+          }, {
             key: 'SOURCE_CODE',
             title: '原平台单号'
-          },{
+          }, {
             key: 'EXPRESS_CODE',
             title: '物流单号'
-          },{
+          }, {
             key: 'CP_C_LOGISTICS_ENAME',
             title: '物流公司'
-          },{
+          }, {
             key: 'ALL_SKU',
             title: 'SKU编码'
-          },{
+          }, {
             key: 'BUYER_NICK',
             title: '买家昵称'
-          },{
+          }, {
             key: 'RECEIVER_NAME',
             title: '收货人'
-          },{
+          }, {
             key: 'RECEIVER_MOBILE',
             title: '收货人手机'
           }
         ], // 表头
         data: [], // 数据配置
-        selectionArr:[],
+        selectionArr: [],
         indexColumn: true, // 是否显示序号
         height: '300',
         loading: false,
@@ -161,7 +157,7 @@ export default {
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         pageIndex: 1, // 页码
         isShowSelection: true, // 是否显示checkedbox
@@ -172,7 +168,7 @@ export default {
             BILL_NO: "",
             SOURCE_CODE: '',
             EXPRESS_CODE: '',
-            RECEIVER_NAME:'',
+            RECEIVER_NAME: '',
             BUYER_NICK: '',
             RECEIVER_MOBILE: '',
           },
@@ -235,7 +231,7 @@ export default {
                 this.table.businessFormConfig.formValue.RECEIVER_NAME = '';
                 this.table.businessFormConfig.formValue.BUYER_NICK = '';
                 this.table.businessFormConfig.formValue.RECEIVER_MOBILE = '';
-                console.log('this.table.businessFormConfig.formValue:',this.table.businessFormConfig.formValue);
+                console.log('this.table.businessFormConfig.formValue:', this.table.businessFormConfig.formValue);
                 // this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
                 this.queryEnter(1, this.table.pageSize);
               }, // 按钮点击事件
@@ -253,10 +249,10 @@ export default {
       },
     };
   },
-  watch:{
-    BILL_NO(newVal){
-      if(!newVal){
-        R3.store.commit('customize/originalOrder','');
+  watch: {
+    BILL_NO(newVal) {
+      if (!newVal) {
+        R3.store.commit('customize/originalOrder', '');
       }
     }
   },
@@ -267,18 +263,18 @@ export default {
 
   },
   mounted() {
-    if(!(this.$route.params.itemId == 'New')){
-        this.disabled = true;
-        this.iosSearch = '';
-        const ID = this.$route.params.itemId;
-        const key = `V.OC_B_REFUND_ORDER_EXTRA.10825.${ID}`;
-        setTimeout(() => {
-          this.BILL_NO = this.$store.state[key].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata
-        }, 100);
+    if (!(this.$route.params.itemId == 'New')) {
+      this.disabled = true;
+      this.iosSearch = '';
+      const ID = this.$route.params.itemId;
+      const key = `V.OC_B_REFUND_ORDER_EXTRA.10825.${ID}`;
+      setTimeout(() => {
+        this.BILL_NO = this.$store.state[key].mainFormInfo.formData.data.addcolums[0].childs[1].valuedata
+      }, 100);
     }
   },
   methods: {
-    clear(){
+    clear() {
       this.BILL_NO = ''
       this.$emit('change', '');
       // 设置清除
@@ -295,40 +291,40 @@ export default {
       this.queryEnter();
       this.orderModal = true;
     },
-    inputenter(val) { 
-      let str = val.target.value.replace(/\s+/g,"");
-      R3.store.commit('customize/originalOrder',str);
-      this.queryEnter(1, this.table.pageSize,this.BILL_NO);
+    inputenter(val) {
+      let str = val.target.value.replace(/\s+/g, "");
+      R3.store.commit('customize/originalOrder', str);
+      this.queryEnter(1, this.table.pageSize, this.BILL_NO);
     },
-    inputblur() {  },
+    inputblur() { },
     inputChange(val) {
       // R3.store.commit('customize/originalOrder',val.target.value);
     },
     /* --------------------- 工具函数： --------------------- */
     keyDown() { },
     /* ------------------- 事件 part start ------------------- */
-    async queryEnter(pageNum = 1, pageSize = 10,enter) {
+    async queryEnter(pageNum = 1, pageSize = 10, enter) {
       const self = this;
       this.table.loading = true;
       let formValue = this.table.businessFormConfig.formValue;
       let paramsNull
       let params = {
-        pageNum:pageNum,
-        pageSize:pageSize,
+        pageNum: pageNum,
+        pageSize: pageSize,
         BILL_NO: formValue.BILL_NO || enter ? formValue.BILL_NO || enter : paramsNull,
         SOURCE_CODE: formValue.SOURCE_CODE ? formValue.SOURCE_CODE : paramsNull,
         EXPRESS_CODE: formValue.EXPRESS_CODE ? formValue.EXPRESS_CODE : paramsNull,
-        RECEIVER_NAME:formValue.RECEIVER_NAME ? formValue.RECEIVER_NAME : paramsNull,
+        RECEIVER_NAME: formValue.RECEIVER_NAME ? formValue.RECEIVER_NAME : paramsNull,
         BUYER_NICK: formValue.BUYER_NICK ? formValue.BUYER_NICK : paramsNull,
         RECEIVER_MOBILE: formValue.RECEIVER_MOBILE ? formValue.RECEIVER_MOBILE : paramsNull,
       }
-      const {data:{code,data}} = await self.service.orderCenter.queryExtraReturnOrder(params);
+      const { data: { code, data } } = await self.service.orderCenter.queryExtraReturnOrder(params);
       this.table.loading = false;
-      if(code === 0){
+      if (code === 0) {
         this.table.data = data.ORDER;
         this.table.total = data.TOTAL;
-        if(enter){
-          this.$emit('change', [{ID:this.table.data[0].BILL_NO}]);
+        if (enter) {
+          this.$emit('change', [{ ID: this.table.data[0].BILL_NO }]);
         }
       }
     },
@@ -349,8 +345,8 @@ export default {
     }
     /* ------------------- 子表事件 part end ------------------- */
   },
-  destroyed(){
-     R3.store.commit('customize/originalOrder','');
+  destroyed() {
+    R3.store.commit('customize/originalOrder', '');
   }
 };
 

@@ -26,7 +26,7 @@
             />
           </div>
           <div slot="content" class="customized_Info_form">
-            <businessForm :form-config="formConfig" />
+            <OmsForm :form-config="formConfig" />
           </div>
           <div slot="content" class="clear"></div>
         </Panel>
@@ -34,31 +34,31 @@
           <!-- 固定属性 -->
           {{ vmI18n.t("panel_label.b4") }}
           <div slot="content">
-            <businessForm :form-config="customAttr.fixFormConfig" />
+            <OmsForm :form-config="customAttr.fixFormConfig" />
           </div>
         </Panel>
         <Panel name="panel_cusAttr">
           <!-- 自定义属性 -->
           {{ vmI18n.t("panel_label.b5") }}
           <div slot="content">
-            <businessForm :form-config="customAttr.customFormConfig" />
+            <OmsForm :form-config="customAttr.customFormConfig" />
           </div>
         </Panel>
         <!-- <Panel name="attr">
           自定义属性
           <div slot="content" class="customProperties">
             <div class="panel-title">固定属性：</div>
-            <businessForm :form-config="customAttr.fixFormConfig" />
+            <OmsForm :form-config="customAttr.fixFormConfig" />
           </div>
           <div slot="content" class="customProperties">
             <div class="panel-title">自定义属性：</div>
-            <businessForm :form-config="customAttr.customFormConfig" />
+            <OmsForm :form-config="customAttr.customFormConfig" />
           </div>
         </Panel> -->
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
-        <businessLabel
+        <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
           @labelClick="labelClick"
@@ -82,7 +82,7 @@
         <div v-show="labelValue == 'supplier'" class="supplier">
           <div class="from-btn">
             <div class="businessForm-box">
-              <businessForm :form-config="tableFormConfig" />
+              <OmsForm :form-config="tableFormConfig" />
             </div>
             <div class="businessButton">
               <OmsButton :btn-config="supplierBtnConfig" />

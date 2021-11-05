@@ -17,14 +17,14 @@
           <!-- 基础资料 -->
           {{ vmI18n.t('panel_label.basicData') }}
           <div slot="content" class="customized_Info_form">
-            <businessForm :form-config="formConfig1" @keyDown="keyDown"> </businessForm>
+            <OmsForm :form-config="formConfig1" @keyDown="keyDown"> </OmsForm>
           </div>
         </Panel>
         <Panel name="panel_condition">
           <!-- 满足条件（满足以下条件的单据会进行hold单） -->
           {{ vmI18n.t('form_label.meet_conditions') }}（{{ vmI18n.t('modalTitle.ad') }}）
           <p slot="content">
-            <businessForm :form-config="formConfig2" @keyDown="keyDown">
+            <OmsForm :form-config="formConfig2" @keyDown="keyDown">
               <template #spec01="{ rowData }">
                 <div class="preLable">
                   <i-switch size="small" v-model="rowData.value.IS_DATE_TYPE" :disabled="rowData.item.disabledSwitch" @on-change="rowData.item.switchChange" />
@@ -61,7 +61,7 @@
                 <Checkbox v-model="rowData.value.preSale3" @on-change="rowData.item.checkChange" :disabled="rowData.item.disabled"> {{Il8n.t('other.selfPrediction')}}</Checkbox>
               </span>
               </template>
-            </businessForm>
+            </OmsForm>
           </p>
         </Panel>
         <Panel name="panel_action">
@@ -71,7 +71,7 @@
           
           
           <p slot="content" v-show="formConfig2.formValue.ORDER_FLAG && !formConfig2.formData[2].disabled || formConfig1.formValue.ISACTIVE == '启用'">
-            <businessForm :form-config="formConfig3" @keyDown="keyDown">
+            <OmsForm :form-config="formConfig3" @keyDown="keyDown">
               <template #spec03="{ rowData }">
                 <template v-if="formConfig3.formValue.RELEASE_TIME_TYPE === 1">
                   <DatePicker class="fiexdTime" v-model="rowData.value.RELEASE_TIME" :options="rowData.item.optionsTime" format="yyyy-MM-dd HH:mm:ss" type="datetime" confirm @on-change="rowData.item.datePickerChange"></DatePicker>
@@ -90,10 +90,10 @@
                   </Select>
                 </template>
               </template>
-            </businessForm>
+            </OmsForm>
           </p>
            <p slot="content" v-show="formConfig2.formValue.preSale && !formConfig2.formData[2].disabled || formConfig1.formValue.ISACTIVE == '启用' ">
-            <businessForm :form-config="formConfig4" @keyDown="keyDown">
+            <OmsForm :form-config="formConfig4" @keyDown="keyDown">
               <template #spec04="{ rowData }">
                 <template v-if="formConfig4.formValue.RELEASE_TIME_TYPE === 1">
                   <DatePicker class="fiexdTime" v-model="rowData.value.RELEASE_TIME" :options="rowData.item.optionsTime" format="yyyy-MM-dd HH:mm:ss" type="datetime" confirm @on-change="rowData.item.datePickerChange"></DatePicker>
@@ -112,10 +112,10 @@
                   </Select>
                 </template>
               </template>
-            </businessForm>
+            </OmsForm>
           </p>
            <p slot="content" v-show="!formConfig2.formValue.ORDER_FLAG && !formConfig2.formValue.preSale || formConfig2.formData[2].disabled || formConfig1.formValue.ISACTIVE == '启用'">
-            <businessForm :form-config="formConfig5" @keyDown="keyDown">
+            <OmsForm :form-config="formConfig5" @keyDown="keyDown">
               <template #spec05="{ rowData }">
                 <template v-if="formConfig5.formValue.RELEASE_TIME_TYPE === 1">
                   <DatePicker class="fiexdTime" v-model="rowData.value.RELEASE_TIME" :options="rowData.item.optionsTime" format="yyyy-MM-dd HH:mm:ss" type="datetime" confirm @on-change="rowData.item.datePickerChange"></DatePicker>
@@ -134,13 +134,13 @@
                   </Select>
                 </template>
               </template>
-            </businessForm>
+            </OmsForm>
           </p>
           
         
             <p slot="content">
-            <businessForm :form-config="formConfig6" @keyDown="keyDown">
-            </businessForm>
+            <OmsForm :form-config="formConfig6" @keyDown="keyDown">
+            </OmsForm>
           </p>
 
 
@@ -148,7 +148,7 @@
       </Collapse>
       <div v-if="ID !== '-1'" class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel :label-list="labelList" :label-default-value="labelDefaultValue" />
+        <OmsLabel :label-list="labelList" :label-default-value="labelDefaultValue" />
         <!-- 子表Part -->
         <div class="subtablePart">
           <subTable :component-data="subTableConfig"></subTable>

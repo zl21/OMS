@@ -10,14 +10,14 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfig" />
+            <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
       </Collapse>
 
       <div class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel
+        <OmsLabel
           v-show="isCopy || ID != -1 || isMasterRequired"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

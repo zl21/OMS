@@ -4,7 +4,7 @@
     class="time-dialog"
   >
     <div class="time-dialog-form">
-      <businessForm :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
     </div>
     <OmsButton :btn-config="btnConfig" />
   </div>

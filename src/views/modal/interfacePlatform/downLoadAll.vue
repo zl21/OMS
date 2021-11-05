@@ -1,14 +1,14 @@
 <template>
   <div class="customized-modal" style="width: 430px">
     <Spin v-if="spinShow" size="large" fix />
-    <businessForm :form-config="downLoadFormConfig">
+    <OmsForm :form-config="downLoadFormConfig">
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">
           <!-- 导入 -->
           [{{ vmI18n.t("btn.import") }}]
         </div>
       </template>
-    </businessForm>
+    </OmsForm>
     <OmsButton class="modal-footer" :btn-config="downLoadBtnConfig" />
     <!-- 确认下载弹框 订单下载-->
     <Modal

@@ -10,7 +10,7 @@
           <!-- 基础资料 -->
           {{ vmI18n.t('panel_label.basicData') }}
           <div slot="content" class="customized_Info_form">
-            <businessForm :form-config="formConfig1" />
+            <OmsForm :form-config="formConfig1" />
           </div>
         </Panel>
         <Panel name="panel_condition" class="wrap">
@@ -19,7 +19,7 @@
           <p slot="content">
             <!-- 自动同意换货 -->
             <label>{{ vmI18n.t('form_label.e3') }}:</label>
-            <businessForm :form-config="formConfig2">
+            <OmsForm :form-config="formConfig2">
               <template #exchangeDesc="{ rowData }">
                 <div class="changeForm">
                   <div class="preLable">
@@ -69,10 +69,10 @@
                   </div>
                 </div>
               </template>
-            </businessForm>
+            </OmsForm>
             <!-- 自动拒绝换货 -->
             <label style="position: relative; top: 12px;">{{ vmI18n.t('form_label.e4') }}:</label>
-            <businessForm :form-config="formConfig2">
+            <OmsForm :form-config="formConfig2">
               <template #stockout="{ rowData }">
                 <div class="changeForm">
                   <div class="preLable">
@@ -193,13 +193,13 @@
                   </div>
                 </div>
               </template>
-            </businessForm>
+            </OmsForm>
           </p>
         </Panel>
       </Collapse>
       <div v-if="ID !== '-1'" class="customized-detail-table">
         <!-- tab切换 -->
-        <businessLabel :label-list="labelList" :label-default-value="labelDefaultValue" />
+        <OmsLabel :label-list="labelList" :label-default-value="labelDefaultValue" />
         <!-- 子表Part -->
         <div class="subtablePart">
           <subTable :component-data="subTableConfig"></subTable>

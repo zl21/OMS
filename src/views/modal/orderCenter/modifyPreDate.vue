@@ -2,20 +2,19 @@
   <div class="jordanModal customized-modal" v-loading="loading">
     <!-- 修改预计发货时间 -->
     <div class="Modal-Form">
-      <businessForm :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
     </div>
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 <script>
-import businessButton from "burgeonComponents/businessButton";
-import businessForm from "burgeonComponents/businessForm";
 import dateUtil from '@/assets/js/__utils__/date.js';
+import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
   },
   props: {
     componentData: {

@@ -10,34 +10,34 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfigBase" @keyDown="keyDown" />
+            <OmsForm :form-config="formConfigBase" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="2" v-show="showRe">
           <!-- 收货人信息 -->
           {{ vmI18n.t("common.consigneeInformation") }}
           <p slot="content">
-            <businessForm :form-config="formConfigRe" />
+            <OmsForm :form-config="formConfigRe" />
           </p>
         </Panel>
         <!-- 备注信息 -->
         <!-- <Panel name="3">
           {{ vmI18n.t('common.remarksInfo') }}
           <p slot="content">
-            <businessForm :form-config="" />
+            <OmsForm :form-config="" />
           </p>
         </Panel> -->
       </Collapse>
       <!-- tab切换 -->
       <div class="customized-detail-table">
-        <businessLabel
+        <OmsLabel
           class="jordanLabel"
           :label-default-value="labelDefaultValue"
           :label-list="labelList"
         />
         <!-- 订单明细 -->
         <!--
-            <businessForm :form-config="formConfigDetail" @keyDown="keyDown">
+            <OmsForm :form-config="formConfigDetail" @keyDown="keyDown">
               <template #spec01="{ rowData }">
                 <DropMultiSelectFilter
                   :data="filterData || rowData.value[rowData.item.defVal].data"
@@ -53,7 +53,7 @@
                 >
                 </DropMultiSelectFilter>
               </template>
-            </businessForm>
+            </OmsForm>
              -->
         <OmsTable
           :jordan-table-config="jordanTableConfig"
@@ -106,10 +106,7 @@
   </div>
 </template>
 <script>
-import businessButton from "burgeonComponents/businessButton";
-import businessForm from "burgeonComponents/businessForm";
-import businessLabel from "burgeonComponents/businessLabel";
-import { OmsDialog } from 'burgeonComponents';
+import { OmsButton, OmsForm, OmsLabel, OmsDialog, OmsTable } from 'burgeonComponents'
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from "burgeonConfig/config/validate.config";
@@ -117,7 +114,6 @@ import BurgeonValidate from "burgeonConfig/config/validate.config";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import axios from "axios";
 import Util from "@/assets/js/public/publicMethods";
-import { OmsTable } from 'burgeonComponents'
 
 const areaList = require("@/assets/js/address/area-list");
 const { parse, parseArea } = require("@/assets/js/address/address-parse");
@@ -127,9 +123,9 @@ export default {
   name: "orderAddorCopy",
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
-    businessLabel,
+    OmsLabel,
     OmsDialog,
   },
   // mixins: [buttonPermissionsMixin, dataAccessMixin],

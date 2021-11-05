@@ -12,7 +12,7 @@
     class="downLoadVipBill"
     style="width:430px;padding-right:20px"
   >
-    <businessForm :form-config="downLoadFormConfig" />
+    <OmsForm :form-config="downLoadFormConfig" />
     <OmsButton :btn-config="downLoadBtnConfig" />
   </div>
 </template>

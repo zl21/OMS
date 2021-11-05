@@ -1,15 +1,11 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
-import EasyMatrix from 'burgeonComponents/easyMatrix';
-// import axios from 'axios';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, EasyMatrix, OmsButton } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
         indexColumn: true,
@@ -54,18 +50,18 @@ export default {
             // title: "操作",
             title: $i18n.t('table_label.operation'),
             render: (h, params) => h(
-                'a',
-                {
-                  on: {
-                    click: () => {
-                      const index = params.index;
-                      this.tableConfig.data.splice(index, 1);
-                    }
+              'a',
+              {
+                on: {
+                  click: () => {
+                    const index = params.index;
+                    this.tableConfig.data.splice(index, 1);
                   }
-                },
-                // "删除"
-                $i18n.t('btn.delete')
-              )
+                }
+              },
+              // "删除"
+              $i18n.t('btn.delete')
+            )
           }
         ],
         data: [],
@@ -76,7 +72,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10 // 每页条数
       },
       matrixData: {
@@ -111,24 +107,24 @@ export default {
   components: {
     OmsTable,
     EasyMatrix,
-    businessButton
+    OmsButton
   },
   props: {
     componentData: {}
   },
   methods: {
     // 选中某一项时触发
-    onSelect() {},
+    onSelect() { },
     // 取消选中某一项时触发
-    onSelectCancel() {},
+    onSelectCancel() { },
     // 点击全选时触发
-    onSelectAll() {},
+    onSelectAll() { },
     // 点击取消全选时触发
-    onSelectAllCancel() {},
+    onSelectAllCancel() { },
     // 单击某一行时触发
-    onRowClick() {},
+    onRowClick() { },
     // 单击某二行时触发
-    onRowDblclick() {},
+    onRowDblclick() { },
     // 分页change 事件
     // 添加赠品
     add(obj) {

@@ -1,6 +1,6 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import batchTables from 'allpages/promotionCenter/details/batchTables.vue';
-import { singleBox as SingleBox } from 'burgeonComponents'
+import { SingleBox } from 'burgeonComponents'
 import { tableCols } from '../promotion.config';
 
 export default {
