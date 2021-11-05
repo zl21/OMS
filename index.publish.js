@@ -26,6 +26,8 @@ if(!omsTheme){
   localStorage.setItem("VarTheme", 'oms');
   omsTheme = localStorage.getItem("VarTheme");
 }
+const { component } = R3
+Vue.component('WaterMark', component.WaterMark)
 require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
 class InitAppConfig {
   constructor() {
