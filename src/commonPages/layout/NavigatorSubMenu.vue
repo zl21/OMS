@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-29 10:56:54
- * @LastEditTime: 2021-09-03 15:40:39
+ * @LastEditTime: 2021-11-08 13:19:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
@@ -19,6 +19,7 @@
 </template>
 <script>
  export default {
+    name: "NavigatorSubMenu",
     props:{
         data:{
           type: Object

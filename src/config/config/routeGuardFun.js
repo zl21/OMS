@@ -1,7 +1,7 @@
 /*
  * @Author: 萧萧
  * @Date: 2021-05-17 17:36:59
- * @LastEditTime: 2021-08-03 19:30:31
+ * @LastEditTime: 2021-11-08 13:37:03
  * @LastEditors: Please set LastEditors
  * @Description: 路由守卫 -- 用于切换路由时一些操作
  * @FilePath: /project-logic/config/config/routeGuardConfig.js
@@ -32,6 +32,6 @@ let beforeEach = (to, from, next) =>{
   // 进入下一个钩子
   next();
 }
-export default{
+export default class routeGuardFun{
   beforeEach
 }

@@ -16,7 +16,11 @@ const config = {
     filename: 'BurgeonMaterials.min.js',
     path: path.join(__dirname, './burgeon.publish'),
     globalObject: 'this',
-    library: 'BurgeonMaterials',
+    library: {
+      name:'BurgeonMaterials',
+      type:'umd',
+      umdNamedDefine: true,
+    },
     libraryTarget: 'umd',
     umdNamedDefine: true,
     clean: true,

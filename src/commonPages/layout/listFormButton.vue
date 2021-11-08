@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-30 11:24:27
- * @LastEditTime: 2021-08-17 14:27:28
+ * @LastEditTime: 2021-11-08 13:18:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/commonPages/layout/listFormButton.vue
@@ -16,12 +16,11 @@
     >
       重置
     </Button>
-    <!-- <Button class="positionArrow" size="small" v-if="isShowSelectBut" @click="iconClick" :icon='icon'></Button> -->
-    <!-- {{slotProps.item.name}} -->
   </div>
 </template>
 <script>
 export default {
+  name: "ListFormButton",
   props: {
     ButttonCallBack: {
       type: Function,
