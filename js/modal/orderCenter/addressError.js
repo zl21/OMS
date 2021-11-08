@@ -1,14 +1,10 @@
-  import businessActionTable from 'professionalComponents/businessActionTable';
-  import businessButton from 'professionalComponents/businessButton';
-  import loading from 'professionalComponents/loading.vue';
-  import drpInput from 'professionalComponents/fkinput.vue';
+  import { OmsTable, OmsButton, Fkinput as drpInput } from 'burgeonComponents';;
   Vue.component('drpInput', drpInput)
 
   export default {
     components: {
-      businessActionTable,
-      businessButton,
-      loading,
+      OmsTable,
+      OmsButton,
       drpInput
     },
     computed: {

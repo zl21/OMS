@@ -1,24 +1,20 @@
 
-  import businessButton from 'professionalComponents/businessButton.vue';
-  import businessForm from 'professionalComponents/businessForm.vue';
+  import { OmsForm, OmsDialog, OmsButton, OmsAgTable } from 'burgeonComponents';
   import BurgeonEvent from 'burgeonConfig/config/event.config';
-  import businessDialog from 'professionalComponents/businessDialog.vue';
   import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
   import dynamicSearch from 'allpages/orderCenter/orderManager/dynamicSearch.vue';
   import formSetting from 'allpages/orderCenter/orderManager/formSetting.vue';
   import proDetail from 'allpages/orderCenter/orderManager/proDetail.vue';
-  import businessAgTable from 'professionalComponents/businessAgTable.vue';
   import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
   export default {
     components: {
-      businessButton,
-      businessForm,
+      OmsButton,
+      OmsForm,
       dynamicSearch,
       formSetting,
-      businessDialog,
-      // loading,
+      OmsDialog,
       proDetail,
-      businessAgTable
+      OmsAgTable
     },
     mixins: [isFavoriteMixin, new modifycurrentLabel(true)],
     data() {

@@ -1,12 +1,9 @@
-import businessActionTable from 'professionalComponents/businessActionTable';
-  import businessButton from 'professionalComponents/businessButton';
-  import loading from 'professionalComponents/loading.vue';
+  import { OmsTable, OmsButton } from 'burgeonComponents';;
 
   export default {
     components: {
-      businessActionTable,
-      businessButton,
-      loading
+      OmsTable,
+      OmsButton,
     },
     computed: {
       type() {
