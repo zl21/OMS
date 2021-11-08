@@ -182,7 +182,7 @@
           SUB_LIST: true
         };
         self.loading = true;
-        self.service.orderCenter.queryObjectList(data).then(res=>{
+        self.service.orderCenter.queryObject(data).then(res=>{
           if (res.data.code == 0) {
             const data = res.data.data;
             if (!data.ZIP) {

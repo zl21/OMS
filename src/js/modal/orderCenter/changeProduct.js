@@ -396,11 +396,7 @@ export default {
         data.current = this.tableConfig2.current
       }
 
-      axios({
-        method: 'post',
-        url: '/r3-ps/p/cs/ps/pro//v1/selectSkuProBySkuEcodeList',
-        data,
-      }).then((res) => {
+      this.service.commodityCenter.selectSkuProBySkuEcodeList(data).then((res) => {
         if (value == 'one') { //current
           this.tableConfig.current = res.data.data.current
           this.tableConfig.total = res.data.data.total

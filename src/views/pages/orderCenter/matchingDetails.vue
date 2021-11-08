@@ -321,7 +321,7 @@ export default {
           fixedcolumns: {},
         })
       );
-      service.orderCenter.returnTypeItemquery(fromdata).then((res) => {
+      service.orderCenter.objectTableItem(fromdata).then((res) => {
         //渲染明细表
         if (res.data.code == 0) {
           let data = res.data.data;
