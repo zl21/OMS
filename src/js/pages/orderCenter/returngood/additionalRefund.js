@@ -1571,9 +1571,12 @@ export default {
           if ((Afsend.PAYMENT_STATUS == 3) && (item.text === '保存' || item.text === '审核' || item.text === '复制')) item.disabled = true
           if ((Afsend.PAYMENT_STATUS == 5) && (item.text === '打款失败复审')) item.disabled = true
           if ((Afsend.PAYMENT_STATUS != 3 && Afsend.PAYMENT_STATUS != 5) && (item.text !== '返回')) item.disabled = true
-          const needPermissionBtnArr = ['审核', '复制'];
+        })
+        const needPermissionBtnArr = ['审核'];
+        const resArr = this.btnPermission.map(i => i.webdesc);
+        this.btnConfig.buttons.forEach(item => {
           this.btnPermission.forEach(it => {
-            if (needPermissionBtnArr.includes(item.text) && !needPermissionBtnArr.includes(it.text) || item.text == it.webdesc && it.ishide) {
+            if (needPermissionBtnArr.includes(item.text) && !resArr.includes(item.text) || item.text == it.webdesc && it.ishide) {
               item.disabled = true;
             }
           })
