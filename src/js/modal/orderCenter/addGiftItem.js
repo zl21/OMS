@@ -473,12 +473,7 @@ export default {
         data.groupType = 2
       }
 
-      
-      axios({
-        method: 'post',
-        url: '/r3-ps/p/cs/ps/pro//v1/selectSkuProBySkuEcodeList',
-        data,
-      }).then((res) => {
+      this.service.commodityCenter.selectSkuProBySkuEcodeList(data).then((res) => {
         this.tableConfig.total = res.data.data.total
         this.tableConfig.height = '458';
         this.tableConfig.columns = [
