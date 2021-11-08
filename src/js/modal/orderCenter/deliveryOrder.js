@@ -1,5 +1,4 @@
-import { OmsForm } from 'burgeonComponents';
-import { OmsButton } from 'burgeonComponents'
+import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   props: {
@@ -13,7 +12,7 @@ export default {
     },
   },
   components: {
-    businessForm,
+    OmsForm,
     OmsButton,
   },
   data() {

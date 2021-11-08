@@ -19,7 +19,7 @@
       </Form>
     </div>
     <div class="button">
-      <business-button :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 export default {
   components: {
     OmsTable,
-    businessButton
+    OmsButton
   },
   mixins: [listeningToKeydownMixin],
   props: {

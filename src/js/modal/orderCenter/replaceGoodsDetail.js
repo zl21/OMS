@@ -1,6 +1,5 @@
 // import axios from 'axios';
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   components: {

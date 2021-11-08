@@ -4,7 +4,7 @@ import service from '@/service/index';
 export default {
   name: 'CopyPermission',
   components: {
-    businessButton
+    OmsButton
   },
   data() {
     return {

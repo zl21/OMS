@@ -5,7 +5,7 @@
     style="width:400px;padding-right:20px"
   >
     <OmsForm :form-config="generateFormConfig" />
-    <businessBtn :btn-config="generateBtnConfig" />
+    <OmsButton :btn-config="generateBtnConfig" />
   </div>
 </template>
 

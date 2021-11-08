@@ -10,8 +10,7 @@ export default {
     OmsForm,
     aTable,
     OmsLabel,
-    OmsDialog,
-    loading
+    OmsDialog
   },
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {

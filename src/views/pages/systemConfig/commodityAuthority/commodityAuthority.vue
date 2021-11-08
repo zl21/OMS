@@ -15,7 +15,7 @@
               v-if="actionFlag.deleteFlag"
             >{{Buttonmap.CMD_DELETE.name}}</button>
             <button @click="refresh">{{Buttonmap.CMD_REFRESH.name}}</button>-->
-            <businessBtn :btn-config="btnConfig" />
+            <OmsButton :btn-config="btnConfig" />
           </div>
           <div class="content-fixed">
             <div

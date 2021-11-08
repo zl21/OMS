@@ -1,11 +1,10 @@
 // import axios from 'axios';
-import { OmsForm } from 'burgeonComponents'
-import { OmsButton } from 'burgeonComponents'
+import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   components: {
-    BusinessForm,
-    BusinessBtn,
+    OmsForm,
+    OmsButton,
   },
   props: {
     objList: {

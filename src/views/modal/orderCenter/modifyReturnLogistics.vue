@@ -9,7 +9,7 @@
 <template>
 <!-- 改退回物流 -->
     <div class="customized-modal">
-        <business-form :form-config="formConfig" />
+        <OmsForm :form-config="formConfig" />
         <OmsButton :btn-config="btnConfig" class="modal-footer" />
     </div>
 </template>

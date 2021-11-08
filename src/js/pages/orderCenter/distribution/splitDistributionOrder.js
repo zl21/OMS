@@ -4,8 +4,7 @@ export default {
   components: {
     reButton,
     reTable,
-    reDialog,
-    loading
+    reDialog
   },
   data() {
     return {

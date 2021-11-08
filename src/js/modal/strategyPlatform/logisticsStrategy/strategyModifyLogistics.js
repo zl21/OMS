@@ -1,8 +1,6 @@
 
 // 发货单派单规则 - 修改仓库
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'strategyModifyLogistics',

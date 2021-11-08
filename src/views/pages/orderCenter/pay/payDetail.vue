@@ -37,9 +37,8 @@
 </template>
 
 <script>
-import { OmsButton } from 'burgeonComponents'
+import { OmsTable, OmsButton } from 'burgeonComponents'
 import payDetailAdd from './payDetailAdd.vue';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   // name: 'payDetail',

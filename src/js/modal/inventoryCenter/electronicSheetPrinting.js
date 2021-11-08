@@ -3,7 +3,7 @@ import { getLodop } from 'burgeonComponents/common/js/LodopFuncs';
 
 export default {
   components: {
-    businessButton
+    OmsButton
   },
   props: {
     objList: {

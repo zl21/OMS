@@ -1,6 +1,5 @@
 import { OmsButton, OmsForm, OmsDialog, OmsLabel, OmsTable, OmsAgTable as aTable } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import unzipXv from '@/assets/js/dataToSmall';

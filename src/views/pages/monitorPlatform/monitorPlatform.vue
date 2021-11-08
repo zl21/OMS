@@ -247,7 +247,6 @@
 </template>
 
 <script>
-import dateUtil from "@/assets/js/__utils__/date.js";
 import initCdnCustomize from '@/config/minxin/initCdnCustomize';
 import { OmsButton } from 'burgeonComponents'
 

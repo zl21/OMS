@@ -34,10 +34,9 @@
 </template>
 
 <script>
-import { OmsButton } from 'burgeonComponents'
+import { OmsTable, OmsButton } from 'burgeonComponents'
 import addGiftItem from './addGiftItem';
 import service from '@/service/index';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   components: {

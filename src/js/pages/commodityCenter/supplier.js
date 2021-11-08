@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default {
   components: {
-    businessButton
+    OmsButton
   },
   data() {
     return {

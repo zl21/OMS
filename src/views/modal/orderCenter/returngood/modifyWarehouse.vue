@@ -1,7 +1,7 @@
 <template>
   <div class="modifyWarehouse">
-    <business-form :form-config="formConfig" />
-    <business-btn :btn-config="btnConfig" />
+    <OmsForm :form-config="formConfig" />
+    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

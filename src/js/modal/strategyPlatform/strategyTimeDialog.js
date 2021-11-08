@@ -1,13 +1,12 @@
 // import httpServer from '@/utils/request';
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
+import { OmsForm, OmsButton } from 'burgeonComponents'
 import format from '@/assets/js/__utils__/date';
 
 const { getModuleName } = R3;
 export default {
   components: {
     OmsButton,
-    businessForm
+    OmsForm
   },
   /**
    * @property {Array} idArr 选中的id

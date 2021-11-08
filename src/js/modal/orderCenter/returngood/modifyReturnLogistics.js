@@ -6,11 +6,10 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/returngood/modifyReturnLogistics.js
  */
-import { OmsForm } from 'burgeonComponents';
-import { OmsButton } from 'burgeonComponents'
+import { OmsForm, OmsButton } from 'burgeonComponents';
 export default {
     components:{
-        businessForm,
+      OmsForm,
         OmsButton,
     },
     props:{

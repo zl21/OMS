@@ -1,5 +1,4 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable as reActionTable } from 'burgeonComponents'
+import { OmsButton, OmsTable as reActionTable } from 'burgeonComponents'
 
 export default {
   name: 'ManualMarking',

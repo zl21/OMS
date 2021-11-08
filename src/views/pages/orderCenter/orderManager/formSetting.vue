@@ -79,7 +79,7 @@
 
   export default {
     components: {
-      businessButton
+      OmsButton
     },
     computed: {
       btnConfig() {
