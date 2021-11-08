@@ -4,7 +4,9 @@
   "description": "burgeon company's project-logic for private npm",
   "main": "burgeon.publish/BurgeonMaterials.min.js",
   "files": [
-    "burgeon.publish"
+    "burgeon.publish/static",
+    "BurgeonMaterials.min.js",
+    "BurgeonMaterials.min.css"
   ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
