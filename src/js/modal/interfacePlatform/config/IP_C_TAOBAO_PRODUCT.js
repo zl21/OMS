@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 商品中心 - 淘宝商品（下载商品）
   formConfig: {
@@ -68,8 +67,8 @@ export default {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
       item_num: formValue.numNumber, // 数字编号 必传
       table: 'IP_C_TAOBAO_PRODUCT', // 表名字 必传
-      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '',
-      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : ''
+      start_time: start ? $utils.standardTimeConversiondateToStr(start) : '',
+      end_time: end ? $utils.standardTimeConversiondateToStr(end) : ''
     };
     const res = await self.service.interfacePlatform.tbGoodsDownload(param);
     if (res.data.code === 0) {

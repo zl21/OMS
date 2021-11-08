@@ -534,25 +534,25 @@ export default {
           : EXCHANGE_ITEM_TABTH; // render
       // 退款金额
       let returnAmount = {
-        PRO_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        PRO_ACTUAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.PRO_ACTUAL_AMT)
         ),
-        PRO_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        PRO_REAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.PRO_REAL_AMT)
         ),
-        SHIP_AMT: this.$OMS2.omsUtils.floatNumber(
+        SHIP_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.SHIP_AMT)
         ),
-        ADJUST_AMT: this.$OMS2.omsUtils.floatNumber(
+        ADJUST_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.ADJUST_AMT)
         ),
-        EXCHANGE_AMT: this.$OMS2.omsUtils.floatNumber(
+        EXCHANGE_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.EXCHANGE_AMT)
         ),
-        FINAL_ACTUAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        FINAL_ACTUAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_ACTUAL_AMT)
         ),
-        FINAL_REAL_AMT: this.$OMS2.omsUtils.floatNumber(
+        FINAL_REAL_AMT: $utils.floatNumber(
           Number(OC_B_RETURN_ORDER.FINAL_REAL_AMT)
         ),
       };
@@ -726,7 +726,7 @@ export default {
                  *   退货金额 = 退货单价 * 申请退货数量
                  */
                 params.row.QTY_REFUND = e;
-                params.row.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
+                params.row.REFUND_FEE = $utils.floatNumber(
                   Number(e) * Number(params.row.AMT_REFUND_SINGLE),
                   2
                 );
@@ -748,7 +748,7 @@ export default {
             on: {
               "on-change": (e) => {
                 params.row.QTY_EXCHANGE = e;
-                // params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+                // params.row.AMT_EXCHANGE = $utils.floatNumber(
                 //   Number(e) * Number(params.row.PRICE_ACTUAL),
                 //   2
                 // );
@@ -769,7 +769,7 @@ export default {
         //       "on-change": (v) => {
         //         const e = v.target.value;
         //         params.row.PRICE_ACTUAL = e;
-        //         params.row.AMT_EXCHANGE = this.$OMS2.omsUtils.floatNumber(
+        //         params.row.AMT_EXCHANGE = $utils.floatNumber(
         //           Number(e) * Number(params.row.QTY_EXCHANGE),
         //           2
         //         );
@@ -839,14 +839,14 @@ export default {
         if (self.returnProduct == "0") {
           self.actionTableCon.totalData.push({
             index: `${$i18n.t("other.total")}:`, // 合计
-            REFUND_FEE: self.$OMS2.omsUtils.floatNumber(amt, 2),
+            REFUND_FEE: $utils.floatNumber(amt, 2),
             QTY_REFUND: qty,
             REAL_AMT: realAmt,
           });
         } else {
           self.actionTableCon.totalData.push({
             index: `${$i18n.t("other.total")}:`,
-            AMT_EXCHANGE: self.$OMS2.omsUtils.floatNumber(amt, 2),
+            AMT_EXCHANGE: $utils.floatNumber(amt, 2),
             QTY_EXCHANGE: qty,
           });
         }
@@ -866,7 +866,7 @@ export default {
       if (!allDa.length) {
         // 当前为空，则直接新增
         data.forEach((it) => {
-          it.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
+          it.REFUND_FEE = $utils.floatNumber(
             it.QTY_REFUND * it.AMT_REFUND_SINGLE,
             2
           );
@@ -877,23 +877,23 @@ export default {
       }
       data.forEach((it) => {
         // 申请退货数量(QTY_REFUND * 退货单价(AMT_REFUND_SINGLE
-        it.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(
+        it.REFUND_FEE = $utils.floatNumber(
           it.QTY_REFUND * it.AMT_REFUND_SINGLE,
           2
         );
         allDa.forEach((item) => {
-          pryKeyArr = this.$OMS2.omsUtils.sonList(allDa, pryKey);
+          pryKeyArr = this.$utils.sonList(allDa, pryKey);
           if (it[pryKey] == item[pryKey]) {
             // 1.已经存在（数量累加起来，没超则累加，反之保持数量是最大值即可）
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
             if (Number(item.RETURNABLE_QTY) > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
               const sum = Util.accAdd(item.REFUND_FEE, it.REFUND_FEE)
-              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
+              item.REFUND_FEE = $utils.floatNumber(sum);
             } else {
               item.QTY_REFUND = Number(it.RETURNABLE_QTY);
               const sum = Number(item.PRICE_ACTUAL) * Number(item.QTY_REFUND)
-              item.REFUND_FEE = this.$OMS2.omsUtils.floatNumber(sum);
+              item.REFUND_FEE = $utils.floatNumber(sum);
             }
           } else if (it[pryKey] && !pryKeyArr.includes(it[pryKey])) {
             // 2.不存在该条明细（则直接push）
@@ -1022,7 +1022,7 @@ export default {
             // 取差集展示：
             console.log(haveGift, haveGroup);
             const partList = [...selDa, ...giftArr, ...groupArr];
-            self.actionTableCon.data = $omsUtils.getDifferentArr(
+            self.actionTableCon.data = $utils.getDifferentArr(
               allDa,
               partList,
               key

@@ -56,7 +56,6 @@
 /**
  * 店铺商品特殊策略 - 商品信息 - 半定制
  */
-import dateUtil from '@/assets/js/__utils__/date.js';
 import { OmsButton, OmsForm, OmsDialog, OmsTable } from 'burgeonComponents'
 
 export default {
@@ -613,8 +612,8 @@ export default {
     async getBtn() {
       let params = { table: 'ST_C_PRICE', type: 'OBJ', serviceId: 'r3-oc-oms' }
       const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
-      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
-      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      const mainWebArr = $utils.sonList(ACTIONS, 'webname');
+      const subWebArr = $utils.sonList(SUB_ACTIONS, 'webname');
       this.tabConfig.businessButtonConfig.buttons.forEach(item => {
         item.isShow = subWebArr.includes(item.webname)
       })
@@ -809,7 +808,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     back() {
       if (this.isModify) {
@@ -963,7 +962,7 @@ export default {
               this.isEnable = data.ISACTIVE == 'Y'
               this.isMasterRequired = true
               this.reloadForm()
-              $omsUtils.intersectFormValue(this.formConfig.formValue, data)
+              $utils.intersectFormValue(this.formConfig.formValue, data)
               this.setFormValue(this.formConfig, 'CP_C_SHOP', {
                 pid: data.CP_C_SHOP_ID,
                 valuedata: data.CP_C_SHOP_ENAME

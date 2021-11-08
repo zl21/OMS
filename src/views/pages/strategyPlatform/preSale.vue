@@ -196,7 +196,7 @@ console.log(v);
             }
             this.dataobj.show = true;
             let newdata = new Date(item.PREDICT_DELIVER_GOODS_TIME);
-            this.dataobj.PREDICT_DELIVER_GOODS_TIME = $omsUtils.dateFormat(
+            this.dataobj.PREDICT_DELIVER_GOODS_TIME = $utils.dateFormat(
               newdata,
               'yyyy-MM-dd hh:mm:ss'
             );

@@ -241,7 +241,7 @@ export default {
         }
       }
       if (JSON.stringify(ST_C_SHOP_STRATEGY) == '{}') {
-        self.$OMS2.omsUtils.msgTips(self, 'warning', '未修改任何参数!', 0);
+        $utils.msgTips(self, 'warning', '未修改任何参数!', 0);
         return;
       }
       // if (data.IS_AUTO_SPLIT) {
@@ -256,7 +256,7 @@ export default {
       self.service.strategyPlatform.batchSave(data).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $utils.msgTips(self, 'success', res.data.message, 0);
           this.$parent.close();
         } else {
           let data = res.data.data;
@@ -281,7 +281,7 @@ export default {
               return false;
             }
           });
-          self.$OMS2.omsUtils.msgTips(self, 'error', res.data.message, 0);
+          $utils.msgTips(self, 'error', res.data.message, 0);
         }
       });
     }

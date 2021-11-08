@@ -1,5 +1,3 @@
-// import dateUtil from "@/assets/js/__utils__/date";
-import BurgeonDate from '@/assets/js/__utils__/date';
 import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
 import { fkinputPlus as fkinput, SingleBox, MultipleBox } from 'burgeonComponents'
 groups.load();
@@ -191,8 +189,8 @@ export default {
       let endTime = this.basicData.time_limit[1].replace(/\/|\s|\:/g, '');
       endTime = Number(endTime) > 0 ? Number(endTime) : 0;
       this.offlineTime = 0;
-      if (BurgeonDate.isDate(this.basicData.offline_time)) {
-        this.offlineTime = $omsUtils.dateFormat(this.basicData.offline_time, 'yyyyMMddhhmmss');
+      if ($utils.isDate(this.basicData.offline_time)) {
+        this.offlineTime = $utils.dateFormat(this.basicData.offline_time , 'yyyyMMddhhmmss');
       } else {
         this.offlineTime = this.basicData.offline_time.replace(/\/|\s|\:/g, '');
       }
@@ -200,8 +198,8 @@ export default {
       try {
         // && (Number(endTime) + diff > offline_time)
         if (endTime !== 0) {
-          this.offlineTime = BurgeonDate.addDays(new Date(this.basicData.time_limit[1]), 2);
-          this.basicData.offline_time = $omsUtils.dateFormat(this.offlineTime, 'yyyy/MM/dd hh:mm:ss')
+          this.offlineTime = $utils.addDays(new Date(this.basicData.time_limit[1]), 2);
+          this.basicData.offline_time = $utils.dateFormat(this.offlineTime , 'yyyy/MM/dd hh:mm:ss')
         }
       } catch (e) {
         throw new Error(e);

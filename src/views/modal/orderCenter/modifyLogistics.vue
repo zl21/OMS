@@ -197,7 +197,7 @@ export default {
           row.RESULT_MSG = row.message;
           return row;
         });
-        this.$OMS2.omsUtils.tipShow(
+        $utils.tipShow(
           "confirm",
           _this,
           data,

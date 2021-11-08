@@ -3,7 +3,6 @@ import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import groups from '@/assets/js/promotion/groups';
-import dateUtil from '@/assets/js/__utils__/date.js';
 import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
 
 export default {
@@ -570,12 +569,12 @@ export default {
     // 日期格式转换
     formatDate(time) {
       if (time instanceof Array && time[0]) {
-        const start = dateUtil.getFormatDate(time[0], 'yyyyMMdd');
-        const end = dateUtil.getFormatDate(time[1], 'yyyyMMddHH');
+        const start = $utils.getFormatDate(time[0], 'yyyyMMdd');
+        const end = $utils.getFormatDate(time[1], 'yyyyMMddHH');
         return start + '-' + end
       } else {
         const date = new Date(time);
-        const resTime = dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+        const resTime = $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
         return resTime
       }
     },
@@ -779,7 +778,7 @@ export default {
       this.newIds = [];
       if (this.vueAgTable) {
         this.newList = JSON.parse(JSON.stringify(this.selection));
-        this.newIds = $OMS2.omsUtils.sonList(this.newList, 'ACTI_ID');
+        this.newIds = $utils.sonList(this.newList, 'ACTI_ID');
       } else {
         const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
         const agGridTable = this.$refs[`${agGridChild}`][0].AGTABLE;

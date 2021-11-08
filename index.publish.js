@@ -11,7 +11,8 @@ import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import R3 from '@syman/burgeon-r3';
 import Vue from 'vue';
 import commonUtils from '@/config/config/commonUtils.js'
-import pageNote from '@/config/config/pageNote'
+import custUtils from 'professionalComponents/common/js/utils.js'
+import pageNote from 'burgeonConfig/config/pageNote'
 import qs from 'qs';
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 import service from '@/service/index.js';
@@ -37,12 +38,14 @@ class InitAppConfig {
     Vue.prototype.qs = qs;
     window.$store = store;
     window.$omsUtils = commonUtils;
+    window.$utils = custUtils;
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
     window.$i18n = i18n; // 挂载国际化
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     // Vue.prototype.$comUtils = comUtils;
     Vue.prototype.$omsUtils = commonUtils;
+    Vue.prototype.$utils = custUtils;
     Vue.prototype.$lodash = window._;
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n;

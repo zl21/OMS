@@ -67,10 +67,10 @@
          this.orderOrder.PRODUCT_DISCOUNT_AMT =  newVal.order.PRODUCT_DISCOUNT_AMT || 0.00;
          this.orderOrder.ORDER_DISCOUNT_AMT =  newVal.order.ORDER_DISCOUNT_AMT || 0.00;
          this.orderOrder.ADJUST_AMT =   newVal.order.ADJUST_AMT || 0.00;
-         let acc = publicMethodsUtil.accSub(Number(newVal.order.PRODUCT_AMT || 0.00),Number(newVal.order.PRODUCT_DISCOUNT_AMT || 0.00))
-         let acc1 = publicMethodsUtil.accSub(Number(acc),Number(newVal.order.ORDER_DISCOUNT_AMT || 0.00))
-         this.retailPriceTotal = publicMethodsUtil.accAdd(acc1,Number(newVal.order.ADJUST_AMT || 0.00));
-         this.retailPriceTotal = this.$OMS2.omsUtils.floatNumber(this.retailPriceTotal)
+         let acc = $utils.accSub(Number(newVal.order.PRODUCT_AMT || 0.00),Number(newVal.order.PRODUCT_DISCOUNT_AMT || 0.00))
+         let acc1 = $utils.accSub(Number(acc),Number(newVal.order.ORDER_DISCOUNT_AMT || 0.00))
+         this.retailPriceTotal = $utils.accAdd(acc1,Number(newVal.order.ADJUST_AMT || 0.00));
+         this.retailPriceTotal = $utils.floatNumber(this.retailPriceTotal)
          this.$emit('retailPriceTotal', this.retailPriceTotal);
         },
         deep: true

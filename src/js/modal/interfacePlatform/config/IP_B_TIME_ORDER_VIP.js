@@ -6,7 +6,6 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/interfacePlatform/config/IP_B_TIME_ORDER_VIP.js
  */
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 唯品会失效订单(下载订单)
   formConfig: {
@@ -86,10 +85,10 @@ export default {
     let startTime = self.downLoadFormConfig.formValue.query_date[0];
     let endTime = self.downLoadFormConfig.formValue.query_date[1];
     if (startTime) {
-      startTime = BurgeonDate.standardTimeConversiondateToStr(startTime);
+      startTime = $utils.standardTimeConversiondateToStr(startTime);
     }
     if (endTime) {
-      endTime = BurgeonDate.standardTimeConversiondateToStr(endTime);
+      endTime = $utils.standardTimeConversiondateToStr(endTime);
     }
     const param = {
       table: self.$route.params.tableName, // 当前表名 必传

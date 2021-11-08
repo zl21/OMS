@@ -568,13 +568,13 @@ class BtnConfig {
       }
       if (self.selection.length > 0) {
         if (isSingle && self.selection.length > 1) {
-          commonUtils.msgTips(self, 'warning', 'kg', 2) // 不支持批量操作！
+          $utils.msgTips(self, 'warning', 'kg', 2) // 不支持批量操作！
           return
         }
         self.btnConfig.loading = true
         let ids = []
         let myData
-        ids = commonUtils.sonList(self.selection, 'ID')
+        ids = $utils.sonList(self.selection, 'ID')
         if (paramsType == 1) {
           myData = ids
         } else if (paramsType == 2 || paramsType == 3) {
@@ -589,14 +589,14 @@ class BtnConfig {
         self.btnConfig.loading = false
         /* 
       if (self.selection.length !== 1 && ![3, 5, 7].includes(paramsType)) {
-        commonUtils.msgTips(self, 'warning', tips);
+        $utils.msgTips(self, 'warning', tips);
         self.btnConfig.loading = false;
       } else {
         this[funName](self, myData);
       } 
       */
       } else if (paramsType != 6) {
-        commonUtils.msgTips(self, 'warning', tips)
+        $utils.msgTips(self, 'warning', tips)
         self.btnConfig.loading = false
       } else {
         this[funName](self, [])
@@ -624,12 +624,12 @@ class BtnConfig {
     if (params.type === 'check') {
       // （PS:多选，有状态判断）
       if (self.selection.length === 1 && !matchingState) {
-        commonUtils.msgTips(self, 'warning', params.statusTips)
-        ids = commonUtils.sonList(self.selection, 'ID')
+        $utils.msgTips(self, 'warning', params.statusTips)
+        ids = $utils.sonList(self.selection, 'ID')
       } else {
         for (let i = 0; i < self.selection.length; i++) {
           if (!matchingState) {
-            commonUtils.msgTips(self, 'warning', params.statusTips)
+            $utils.msgTips(self, 'warning', params.statusTips)
             ids = []
             break
           } else {
@@ -643,10 +643,10 @@ class BtnConfig {
     ) {
       // （PS:单选，有状态判断）
       self.selection.length != 1
-        ? commonUtils.msgTips(self, 'warning', 'k3')
-        : commonUtils.msgTips(self, 'warning', params.statusTips)
+        ? $utils.msgTips(self, 'warning', 'k3')
+        : $utils.msgTips(self, 'warning', params.statusTips)
     } else {
-      ids = commonUtils.sonList(self.selection, 'ID')
+      ids = $utils.sonList(self.selection, 'ID')
     }
     // 如果不符合条件 返回false
     if (
@@ -884,12 +884,12 @@ class BtnConfig {
       type: 1,
     }
     if (BtnConfig.singleType) {
-      commonUtils.importTable(self, 'changeRemarkConfig', 'rturngoodModifyRemarks', 'btn.modifyRemarks')
+      $utils.importTable(self, 'changeRemarkConfig', 'rturngoodModifyRemarks', 'btn.modifyRemarks')
     } else {
       let ids = this.orderStatusRule(self, { type: 'check', statusCode: '20,30,40,50', statusTips: 'm2', })
       if (ids) {
         self.changeRemarkConfig.componentData.ids = ids.join(',')
-        commonUtils.importTable(self, 'changeRemarkConfig', 'rturngoodModifyRemarks', 'btn.modifyRemarks')
+        $utils.importTable(self, 'changeRemarkConfig', 'rturngoodModifyRemarks', 'btn.modifyRemarks')
       }
     }
   }
@@ -906,7 +906,7 @@ class BtnConfig {
         status: self.statusTab,
         type: 2,
       }
-      commonUtils.importTable(
+      $utils.importTable(
         self,
         'changeRemarkConfig',
         'rturngoodModifyRemarks',
@@ -919,7 +919,7 @@ class BtnConfig {
     if (BtnConfig.singleType) {
       if (self.$route.query.id == '-1') return;
       if (self.status !== 20) {
-        commonUtils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许换货先发!
+        $utils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许换货先发!
         return;
       }
       commonUtils.modalShow(self, 'kw', 'common.updateVirtualLibrary', { ID: id, }, 'part',
@@ -976,9 +976,9 @@ class BtnConfig {
         console.log(res);
         if(res.data.code == 0){
           self.query()
-          commonUtils.msgTips(self ,'success', '取消成功', 0)
+          $utils.msgTips(self ,'success', '取消成功', 0)
         }else {
-          commonUtils.tipShow(
+          $utils.tipShow(
             'confirm',
             self,
             res,
@@ -1112,7 +1112,7 @@ class BtnConfig {
         'all',
         function (res) {
           if (res.data.code === 0) {
-            commonUtils.msgTips(self, 'sucess', res.data.message)
+            $utils.msgTips(self, 'sucess', res.data.message)
             self.load()
           }
         }
@@ -1124,7 +1124,7 @@ class BtnConfig {
   //缺货回传
   shortageNoticeHandler(self, ids) {
     if (self.orderStatus !== 2)
-      return commonUtils.msgTips(self, 'warning', 'fe')
+      return $utils.msgTips(self, 'warning', 'fe')
     commonUtils.modalShow(
       self,
       'ff',
@@ -1133,7 +1133,7 @@ class BtnConfig {
       'all',
       function (res) {
         if (res.data.code === 0) {
-          commonUtils.msgTips(self, 'sucess', res.data.message)
+          $utils.msgTips(self, 'sucess', res.data.message)
           self.load()
         }
       }
@@ -1167,7 +1167,7 @@ class BtnConfig {
       'all',
       function (res) {
         if (res.data.code === 0) {
-          commonUtils.msgTips(self, 'sucess', res.data.message)
+          $utils.msgTips(self, 'sucess', res.data.message)
           self.autoRefresh()
         }
       }
@@ -1231,7 +1231,7 @@ class BtnConfig {
         'all',
         function (res) {
           if (res.data.code === 0) {
-            commonUtils.msgTips(self, 'sucess', res.data.message)
+            $utils.msgTips(self, 'sucess', res.data.message)
             self.query()
           }
         }
@@ -1291,7 +1291,7 @@ class BtnConfig {
             { returnId: recordID, isOrderHrefReturn: 'order' }
           )
         } else {
-          commonUtils.msgTips(self, 'warning', 'k4') // "此退换单状态不允许扫描入库,请重新选择!"
+          $utils.msgTips(self, 'warning', 'k4') // "此退换单状态不允许扫描入库,请重新选择!"
         }
       }
     )
@@ -1299,7 +1299,7 @@ class BtnConfig {
   //订单拆分处理
   splitOrderHandler(self, selection) {
     if(selection.length>1){
-      commonUtils.msgTips(self, 'warning' ,'b4');
+      $utils.msgTips(self, 'warning' ,'b4');
       return;
     }
     let selectItem = selection[0]
@@ -1322,7 +1322,7 @@ class BtnConfig {
     //   && item.PAY_TYPE === selectionOne.PAY_TYPE //支付方式
     //   && item.RECEIVER_ADDRESS_UNION === selectionOne.RECEIVER_ADDRESS_UNION) //收货人信息
     // if (!agreement) {
-    //   commonUtils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
+    //   $utils.msgTips(self, 'warning', 'fs'); // 订单信息不一致,不允许合并!
     //   return;
     // }
     // 状态判断提示
@@ -1350,7 +1350,7 @@ class BtnConfig {
       }
     }
     if (tips) {
-      commonUtils.msgTips(self, 'warning', tips);
+      $utils.msgTips(self, 'warning', tips);
       return;
     }
     const param = {
@@ -1372,7 +1372,7 @@ class BtnConfig {
         //判断合单状态
         if (!item.IS_MERGE) {
           // 未合并的订单不允许进行取消合并!
-          commonUtils.msgTips(self, 'warning', 'fx');
+          $utils.msgTips(self, 'warning', 'fx');
           self.btnConfig.loading = false
           return
         }
@@ -1381,7 +1381,7 @@ class BtnConfig {
         // if (!['缺货', '待审核', '已审核'].includes(item.ORDER_STATUS)) {
         if (![1].includes(item.ORDER_STATUS)) {
           // 当前状态异常，不允许操作！
-          // commonUtils.msgTips(self, 'warning', 'd9')
+          // $utils.msgTips(self, 'warning', 'd9')
           self.$Message.warning($i18n.t('modalTips.kh')) // 只允许待审核的订单进行取消合并！
           self.btnConfig.loading = false
           return
@@ -1399,7 +1399,7 @@ class BtnConfig {
         self.$Message.success(data.message || '成功！');
         self.query();
       }else{
-        commonUtils.tipShow('confirm' , self , res ,data.message, function(h){
+        $utils.tipShow('confirm' , self , res ,data.message, function(h){
           return h('Table' , {
             props:{
               columns:[
@@ -1424,16 +1424,16 @@ class BtnConfig {
   //新增退单处理
   addReturnOrderHandler(self, selection) {
     if (selection.length > 1) {
-      commonUtils.msgTips(self, 'warning', 'b6')
+      $utils.msgTips(self, 'warning', 'b6')
     } else {
       let orderDetails = selection[0]
       // 已取消，系统作废, // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
       if ([7, 8, 1, 2, 3, 4, 50, 21].includes(orderDetails.ORDER_STATUS)) {
         let tips = [7, 8].includes(orderDetails.ORDER_STATUS) ? 'b7' : 'b8'
         let fixTips = `${orderDetails.ID}${$i18n.t(`modalTips.${tips}`)}`
-        commonUtils.msgTips(self, 'warning', fixTips, 2)
+        $utils.msgTips(self, 'warning', fixTips, 2)
       } else if ([5, 6].includes(orderDetails.ORDER_STATUS)) {
-        commonUtils.msgTips(self, 'warning', 'h2') // "订单状态为仓库发货和平台发货才能新增退单!"
+        $utils.msgTips(self, 'warning', 'h2') // "订单状态为仓库发货和平台发货才能新增退单!"
       } else {
         let extendObj = {
           orderHrefReturnid: orderDetails.ID,
@@ -1516,7 +1516,7 @@ class BtnConfig {
       }
     })
     if (tips.length) {
-      commonUtils.msgTips(self, 'warning', tips)
+      $utils.msgTips(self, 'warning', tips)
     }
   }
   //手动入库处理;
@@ -1529,7 +1529,7 @@ class BtnConfig {
       'all',
       function (res) {
         if (res.data.code === 0) {
-          commonUtils.msgTips(self, 'sucess', res.data.message)
+          $utils.msgTips(self, 'sucess', res.data.message)
           self.getList(self.statusTab)
         } else {
           const err = res.data.message || $i18n.t('modalTips.l9') // 虚拟仓库入库失败！
@@ -1562,7 +1562,7 @@ class BtnConfig {
   releaseInventoryHandler(self, ids) {
     self.selection.forEach((item) => {
       if (item.ORDER_STATUS != 1) {
-        commonUtils.msgTips(self, 'warning', 'c3')
+        $utils.msgTips(self, 'warning', 'c3')
         return
       }
     })
@@ -1582,7 +1582,7 @@ class BtnConfig {
         extendObj
       )
     } else {
-      commonUtils.msgTips(self, 'warning', 'h1') // "只有仓库发货或者平台发货的订单才能操作!"
+      $utils.msgTips(self, 'warning', 'h1') // "只有仓库发货或者平台发货的订单才能操作!"
     }
   }
   //修改地址
@@ -1595,7 +1595,7 @@ class BtnConfig {
     }
 
     if (tips) {
-      commonUtils.msgTips(self, 'warning', tips)
+      $utils.msgTips(self, 'warning', tips)
       return
     }
     let params = { ID: self.objId, isShowPii: true }
@@ -1642,7 +1642,7 @@ class BtnConfig {
           }
         } else {
           self.tab1 = self.tab1_default
-          commonUtils.msgTips(self, 'error', 'h0') // 地址信息获取失败
+          $utils.msgTips(self, 'error', 'h0') // 地址信息获取失败
         }
       }
     )
@@ -1658,7 +1658,7 @@ class BtnConfig {
   exportChange(self, list = []) {
     if (self.isExport) {
       // 有一项导出正在进行中
-      commonUtils.msgTips(self, 'warning', 'f8')
+      $utils.msgTips(self, 'warning', 'f8')
     } else {
       self.isExport = true
       const fromdata = new FormData()
@@ -1702,7 +1702,7 @@ class BtnConfig {
   tuihuoExportClickHandler(self, list = []) {
     if (self.isExport) {
       // 有一项导出正在进行中
-      commonUtils.msgTips(self, 'warning', 'f8')
+      $utils.msgTips(self, 'warning', 'f8')
     } else {
       self.isExport = true
       const fromdata = new FormData()
@@ -1762,7 +1762,7 @@ class BtnConfig {
               .openConfirm()
           }, 100)
         } else {
-          commonUtils.tipShow('error', self, res)
+          $utils.tipShow('error', self, res)
         }
       }
     )
@@ -1792,7 +1792,7 @@ class BtnConfig {
               .openConfirm()
           }, 100)
         } else {
-          commonUtils.tipShow('error', self, res)
+          $utils.tipShow('error', self, res)
         }
       }
     )
@@ -1834,7 +1834,7 @@ class BtnConfig {
               row.RESULT_MSG = row.message
               return row
             })
-            commonUtils.tipShow(
+            $utils.tipShow(
               'confirm',
               self,
               res,
@@ -1869,7 +1869,7 @@ class BtnConfig {
   // 手工 WMS撤回重做
   wmsWithdrawHandler(self, id) {
     if (id.length > 1) {
-      commonUtils.msgTips(self, 'warning', 'ki', 2) // 只支持单个退货单做WMS撤回重做操作！
+      $utils.msgTips(self, 'warning', 'ki', 2) // 只支持单个退货单做WMS撤回重做操作！
       return
     }
     self.service.orderCenter.cancelReturnOrderFromWms({ ID: id[0] }).then((res) => {

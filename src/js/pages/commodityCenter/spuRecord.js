@@ -1,5 +1,4 @@
 import { OmsButton, OmsForm, OmsLabel, subTable } from 'burgeonComponents'
-import dateUtil from '@/assets/js/__utils__/date.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
@@ -153,7 +152,7 @@ export default {
         webname: 'PS_C_PRO_NEW_SKU',
         btnclick: () => {
           if (this.spuid == '-1') {
-            $omsUtils.msgTips(this, 'warning', 'cu');
+            $utils.msgTips(this, 'warning', 'cu');
             return;
           }
           this.isModify = true;
@@ -174,11 +173,11 @@ export default {
         webname: 'PS_C_PRO_QUICK_SKU',
         btnclick: () => {
           if (this.spuid == '-1') {
-            $omsUtils.msgTips(this, 'warning', 'cu');
+            $utils.msgTips(this, 'warning', 'cu');
             return;
           }
           if (!this.formConfig.formValue.PS_C_PRO_CLASSIFY_ID) {
-            $omsUtils.msgTips(this, 'warning', 'fj');
+            $utils.msgTips(this, 'warning', 'fj');
             return;
           }
           this.isModify = true;
@@ -601,12 +600,12 @@ export default {
       const cpCSupplierName = self.tableFormConfig.formValue.cpCSupplierName;
       const supplierId = self.tableFormConfig.formValue.cpCSupplierId;
       if (!supplierId) {
-        $omsUtils.msgTips(self, 'warning', 'fk');
+        $utils.msgTips(self, 'warning', 'fk');
         return;
       }
       // 判断表格中是否已经存在该供应商,如已存在,则不再添加
       if (self.supplier.resData.some(item => item.cpCSupplierId == supplierId)) {
-        $omsUtils.msgTips(self, 'warning', 'fl');
+        $utils.msgTips(self, 'warning', 'fl');
         return;
       }
       const obj = {};
@@ -877,7 +876,7 @@ export default {
       const self = this;
       self.isModify = true;
       if (JSON.stringify(self.skuInfo.rowClickData) == '{}') {
-        $omsUtils.msgTips(self, 'warning', 'fm');
+        $utils.msgTips(self, 'warning', 'fm');
         return;
       }
       const modifyData = self.skuInfo.rowClickData[self.skuInfo.clickColumns]; // 要应用到所有列的值
@@ -917,7 +916,7 @@ export default {
     supplierDel() {
       const self = this;
       if (!self.supplier.selectionData.length) {
-        $omsUtils.msgTips(self, 'warning', 'df');
+        $utils.msgTips(self, 'warning', 'df');
         return;
       }
       const delarr = self.supplier.selectionData.map(item => item.cpCSupplierId);
@@ -969,7 +968,7 @@ export default {
         }
       });
       if (str) {
-        $omsUtils.msgTips(self, 'warning', `${str}不能为空!`, 0);
+        $utils.msgTips(self, 'warning', `${str}不能为空!`, 0);
         return;
       }
       // 获取主表信息
@@ -999,7 +998,7 @@ export default {
         console.log(res);
         if (res.data.code == 0) {
           self.isModify = false;
-          $omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $utils.msgTips(self, 'success', res.data.message, 0);
           self.$store.commit('customize/TabOpen', {
             id: res.data.data,
             type: 'action',
@@ -1058,7 +1057,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     }
   },
 };

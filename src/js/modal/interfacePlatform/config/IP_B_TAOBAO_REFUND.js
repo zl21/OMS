@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 淘宝退单接口列表界面(淘宝退单下载)
   formConfig: {
@@ -99,8 +98,8 @@ export default {
     const params = {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: self.downLoadFormConfig.formValue.bill_no,
-      start_time:self.downLoadFormConfig.formValue.timerange[0] ? BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]) : undefined,
-      end_time:self.downLoadFormConfig.formValue.timerange[1] ? BurgeonDate.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]) : undefined,
+      start_time:self.downLoadFormConfig.formValue.timerange[0] ? $utils.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[0]) : undefined,
+      end_time:self.downLoadFormConfig.formValue.timerange[1] ? $utils.standardTimeConversiondateToStr(self.downLoadFormConfig.formValue.timerange[1]) : undefined,
       status: self.downLoadFormConfig.formValue.status,
       table: 'IP_B_TAOBAO_REFUND'
     };

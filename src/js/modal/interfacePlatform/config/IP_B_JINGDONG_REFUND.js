@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 京东退单接口列表界面(下载退单)
   formConfig: {
@@ -88,8 +87,8 @@ export default {
       shop_id: self.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: formValue.bill_no, // 平台单号
       service_no: formValue.service_no, // 服务单号
-      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '',
-      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '',
+      start_time: start ? $utils.standardTimeConversiondateToStr(start) : '',
+      end_time: end ? $utils.standardTimeConversiondateToStr(end) : '',
       table: self.$route.params.tableName // 当前表名 必传
     };
     self.dialogLoad = true;

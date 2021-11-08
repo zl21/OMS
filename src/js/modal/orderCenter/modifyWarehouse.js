@@ -92,8 +92,8 @@ export default {
   methods: {
     confirm(){
       let self = this;
-        if(!self.formConfig.formData[0].itemdata.pid){
-        $omsUtils.msgTips(self, 'warning', '请选择仓库!', 0)
+      if(!self.formConfig.formData[0].itemdata.pid){
+        $utils.msgTips(self, 'warning', '请选择仓库!', 0)
         return;
       }
       let ids = self.componentData.row.map(item=>{
@@ -108,7 +108,7 @@ export default {
       }).then(res=>{
         console.log(res);
         if(res.data.code == 0){
-          $omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $utils.msgTips(self, 'success', res.data.message, 0);
         }else {
           this.$Modal.confirm({
             className: 'ark-dialog',

@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import BurgeonDate from '@/assets/js/__utils__/date';
 import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 import { fkinputPlus as fkinput, OmsForm } from 'burgeonComponents'
@@ -464,7 +463,7 @@ export default {
       let endTime = this.basicData.time_limit[1].replace(/\/|\s|\:/g, '');
       endTime = Number(endTime) > 0 ? Number(endTime) : 0;
       this.offlineTime = 0;
-      if (BurgeonDate.isDate(this.basicData.offline_time)) {
+      if ($utils.isDate(this.basicData.offline_time)) {
         this.offlineTime = this.$comUtils.dateFormat(this.basicData.offline_time, 'yyyyMMddhhmmss');
       } else {
         this.offlineTime = this.basicData.offline_time.replace(/\/|\s|\:/g, '');
@@ -473,7 +472,7 @@ export default {
       try {
         // && (Number(endTime) + diff > offline_time)
         if (endTime !== 0) {
-          this.offlineTime = BurgeonDate.addDays(new Date(this.basicData.time_limit[1]), 2);
+          this.offlineTime = $utils.addDays(new Date(this.basicData.time_limit[1]), 2);
           this.basicData.offline_time = this.$comUtils.dateFormat(this.offlineTime, 'yyyy/MM/dd hh:mm:ss')
         }
       } catch (e) {

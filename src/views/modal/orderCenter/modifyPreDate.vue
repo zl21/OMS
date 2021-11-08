@@ -8,7 +8,6 @@
   </div>
 </template>
 <script>
-import dateUtil from '@/assets/js/__utils__/date.js';
 import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
@@ -84,7 +83,7 @@ export default {
       _this.loading = true;
       const param = {
         orderIds: _this.componentData.ids,
-        dateTime: dateUtil.getFormatDate(new Date(dateTime), 'yyyy-MM-dd HH:mm:ss')
+        dateTime: $utils.getFormatDate(new Date(dateTime), 'yyyy-MM-dd HH:mm:ss')
       }
       const {
         data: { data, code, message },

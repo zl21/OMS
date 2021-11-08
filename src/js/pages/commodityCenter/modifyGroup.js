@@ -584,11 +584,11 @@ export default {
       self.service.commodityCenter.selectGroupById(formdata).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          // $omsUtils.msgTips(self, 'success', res.data.message, 0);
+          // $utils.msgTips(self, 'success', res.data.message, 0);
           self.setForm(res.data.data);
         } else {
           // 走框架报错即可
-          // $omsUtils.msgTips(self, 'error', res.data.message, 0);
+          // $utils.msgTips(self, 'error', res.data.message, 0);
         }
       });
     },
@@ -663,7 +663,7 @@ export default {
         str += $i18n.t('menu.ac') // 商品分类
       }
       if (str) {
-        $omsUtils.msgTips(self, 'warning', `${str}不能为空!`, 0);
+        $utils.msgTips(self, 'warning', `${str}不能为空!`, 0);
         return;
       }
       self.modify.master.IMAGE = JSON.stringify(self.modify.master.IMAGE);
@@ -676,7 +676,7 @@ export default {
       self.service.commodityCenter.skuGroupSave(data).then(res => {
         console.log(res);
         if (res.data.code == 0) {
-          $omsUtils.msgTips(self, 'success', res.data.message, 0);
+          $utils.msgTips(self, 'success', res.data.message, 0);
           self.isModify = false
           $store.commit('customize/TabOpen', {
             id: res.data.data,
@@ -739,7 +739,7 @@ export default {
       self.isModify = true;
       const ename = self.groupType == 2 ? this.jordanTableConfigGenera.businessFormConfig.formValue.gbCode : this.jordanTableConfigLuck.businessFormConfig.formValue.gbCode;
       if (!ename) {
-        $omsUtils.msgTips(self, 'warning', 'fh');
+        $utils.msgTips(self, 'warning', 'fh');
         return;
       }
       let arr = {};
@@ -752,7 +752,7 @@ export default {
             const QTY = self.jordanTableConfigGenera.businessFormConfig.formValue.QTY;
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigGenera.data.some(item => item.ECODE == arr.ECODE)) {
-              $omsUtils.msgTips(self, 'warning', $i18n.t('modalTips.jz'), 0); // 请勿重复添加该明细!
+              $utils.msgTips(self, 'warning', $i18n.t('modalTips.jz'), 0); // 请勿重复添加该明细!
               return;
             }
             arr.PS_C_SKU_ID = '-1';
@@ -763,7 +763,7 @@ export default {
           } else if (self.groupType == 1) {
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigLuck.data.some(item => item.ECODE == arr.ECODE)) {
-              $omsUtils.msgTips(self, 'warning', $i18n.t('modalTips.jz'), 0); // 请勿重复添加该明细!
+              $utils.msgTips(self, 'warning', $i18n.t('modalTips.jz'), 0); // 请勿重复添加该明细!
               return;
             }
             arr.PS_C_SKU_ID = '-1';
@@ -780,7 +780,7 @@ export default {
     delGeneral() {
       const self = this;
       if (!self.selectDatas.length) {
-        $omsUtils.msgTips(self, 'warning', 'df');
+        $utils.msgTips(self, 'warning', 'df');
         return;
       }
       const data = [];
@@ -797,7 +797,7 @@ export default {
         }).then(res => {
           console.log(res);
           if (res.data.code == 0) {
-            $omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $utils.msgTips(self, 'success', res.data.message, 0);
             // 本地删除勾选数据 表格数据和modify里的数据
             const delArr = self.selectDatas.map(item => item.PS_C_SKU_ID);
             const resultArr = [];
@@ -827,7 +827,7 @@ export default {
       const self = this;
       const data = [];
       if (!self.selectDatas.length) {
-        $omsUtils.msgTips(self, 'warning', 'df', 0);
+        $utils.msgTips(self, 'warning', 'df', 0);
         return;
       }
       self.selectDatas.forEach(item => {
@@ -843,7 +843,7 @@ export default {
         }).then(res => {
           console.log(res);
           if (res.data.code == 0) {
-            $omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $utils.msgTips(self, 'success', res.data.message, 0);
             // 本地删除勾选数据 表格数据和modify里的数据
             const delArr = self.selectDatas.map(item => item.PS_C_SKU_ID);
             const resultArr = [];

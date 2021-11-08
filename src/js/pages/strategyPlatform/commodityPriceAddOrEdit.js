@@ -1,5 +1,4 @@
 import { OmsButton, OmsForm, OmsDialog, subTable, Fkinput as myInput, OmsLabel, OmsTable } from 'burgeonComponents'
-import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 Vue.component('myInput', myInput)
 
@@ -480,8 +479,8 @@ export default {
     async getBtn() {
       let params = { table: 'ST_C_PRICE', type: 'OBJ', serviceId: 'r3-oc-oms' }
       const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
-      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
-      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      const mainWebArr = $utils.sonList(ACTIONS, 'webname');
+      const subWebArr = $utils.sonList(SUB_ACTIONS, 'webname');
       this.goodsTableConfig.businessButtonConfig.buttons.forEach(item => {
         item.isShow = subWebArr.includes(item.webname)
       })
@@ -573,7 +572,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     labelClick(e) { // tab明细切换
       this.labelDefaultValue = e.value;
@@ -654,7 +653,7 @@ export default {
         let newTime = this.formatDate(value)
         let oldTime = self.modify[obj][ecode]
         if (ecode == 'END_TIME') {
-          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
+          newTime = $utils.defaultEndTime(newTime, oldTime)
           self.formConfig.formValue[ecode] = newTime
         }
         self.modify[obj][ecode] = newTime
@@ -773,7 +772,7 @@ export default {
               this.isEnable = data.ISACTIVE == 'Y'
               this.isMasterRequired = true
               this.reloadForm()
-              $omsUtils.intersectFormValue(this.formConfig.formValue, data)
+              $utils.intersectFormValue(this.formConfig.formValue, data)
               this.setFormValue(this.formConfig, 'CP_C_SHOP', {
                 pid: data.CP_C_SHOP_ID,
                 valuedata: data.CP_C_SHOP_ENAME

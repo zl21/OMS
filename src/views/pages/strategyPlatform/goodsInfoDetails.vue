@@ -246,7 +246,7 @@ export default {
     async getBtn() {
       let params = { table: 'SG_B_SHOP_SKU_LOCK_STRATEGY', type: 'OBJ', serviceId: 'r3-oc-oms' }
       const { SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
-      const subWebArr = $OMS2.omsUtils.sonList(SUB_ACTIONS, 'webname');
+      const subWebArr = $utils.sonList(SUB_ACTIONS, 'webname');
       this.goodsTableConfig.businessButtonConfig.buttons.forEach(item => {
         item.isShow = subWebArr.includes(item.webname)
       })

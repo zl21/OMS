@@ -218,9 +218,9 @@ export default {
        const subData = await this.$OMS2.omsUtils.initSubtable('OC_B_REFUND_ORDER_ITEM', route.itemId, '181618');
        subData.rowData.forEach(i => {
          i.QTY_REFUND = Number(i.QTY_REFUND);
-         i.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(i.AMT_ACTUAL_REFUND);
-         i.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(i.AMT_REFUND);
-         i.QTY_ACTUAL = this.$OMS2.omsUtils.floatNumber(i.QTY_ACTUAL);
+         i.AMT_ACTUAL_REFUND = $utils.floatNumber(i.AMT_ACTUAL_REFUND);
+         i.AMT_REFUND = $utils.floatNumber(i.AMT_REFUND);
+         i.QTY_ACTUAL = $utils.floatNumber(i.QTY_ACTUAL);
         });
        this.tableConfig.data = subData.rowData;
        await sessionStorage.setItem('copyDetails',JSON.stringify(subData.rowData));
@@ -292,7 +292,7 @@ export default {
                 on: {
                   'on-change': e => {
                       // let PRICE_ACTUAL = this.$route.params.itemId != 'New' ? params.row.PRICE || 0 : params.row.PRICE_ACTUAL || 0
-                      let num = this.$OMS2.omsUtils.floatNumber(Number(e) * Number(params.row.PRICE || 0))
+                      let num = $utils.floatNumber(Number(e) * Number(params.row.PRICE || 0))
                       // 申请退货数量
                       params.row.AMT_REFUND = isNaN(num) ? '0.00' : num;
                       // 退货金额
@@ -384,8 +384,8 @@ export default {
             let QTY_REFUND = Number(item.QTY || 0) - Number(item.QTY_RETURN_APPLY || 0);
             item.QTY_REFUND = QTY_REFUND;
             let PRICE = QTY_REFUND * Number(item.PRICE || 0);
-            item.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
-            item.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+            item.AMT_REFUND = $utils.floatNumber(PRICE);
+            item.AMT_ACTUAL_REFUND = $utils.floatNumber(PRICE);
           })
         }
         isAdd ? this.addDetailsConfig.data = data.ORDER_ITEM : this.tableConfig.data = data.ORDER_ITEM,
@@ -495,8 +495,8 @@ export default {
         let QTY_REFUND = Number(x.QTY || 0) - Number(x.QTY_RETURN_APPLY || 0)
         x.QTY_REFUND = QTY_REFUND;
         let PRICE = QTY_REFUND * Number(x.PRICE || 0);
-        x.AMT_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
-        x.AMT_ACTUAL_REFUND = this.$OMS2.omsUtils.floatNumber(PRICE);
+        x.AMT_REFUND = $utils.floatNumber(PRICE);
+        x.AMT_ACTUAL_REFUND = $utils.floatNumber(PRICE);
         // 如果是编辑的话 
         if(arr.every(y => y.ID !== x.ID)){
           // 不存在

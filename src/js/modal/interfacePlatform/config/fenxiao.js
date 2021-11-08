@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   formConfig: {
     formValue: {
@@ -82,8 +81,8 @@ export default {
       shop_id: downData.formData[0].itemdata.pid,
       ware_id: downData.formValue.ware_id, // 商品id
       item_num: downData.formValue.item_num, // 商品编码
-      start_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
-      end_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+      start_time: $utils.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
+      end_time: $utils.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
       table: _this.tablename // 当前表名 必传
     };
     const fromdata = new FormData();

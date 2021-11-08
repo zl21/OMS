@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 唯品会退工单（退供单下载）
   formConfig: {
@@ -94,8 +93,8 @@ export default {
       bill_no: formValue.bill_no
     };
     if (formValue.query_date[0]) {
-      params.start_time = BurgeonDate.standardTimeConversiondateToStr(formValue.query_date[0]);
-      params.end_time = BurgeonDate.standardTimeConversiondateToStr(formValue.query_date[1]);
+      params.start_time = $utils.standardTimeConversiondateToStr(formValue.query_date[0]);
+      params.end_time = $utils.standardTimeConversiondateToStr(formValue.query_date[1]);
     }
     try {
       // 唯品会退单下载

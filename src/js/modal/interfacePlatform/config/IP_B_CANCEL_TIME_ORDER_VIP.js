@@ -1,4 +1,3 @@
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   // 唯品会取消时效订单（取消时效订单下载）
   formConfig: {
@@ -78,10 +77,10 @@ export default {
     let startTime = self.downLoadFormConfig.formValue.query_date[0];
     let endTime = self.downLoadFormConfig.formValue.query_date[1];
     if (startTime) {
-      startTime = BurgeonDate.standardTimeConversiondateToStr(startTime);
+      startTime = $utils.standardTimeConversiondateToStr(startTime);
     }
     if (endTime) {
-      endTime = BurgeonDate.standardTimeConversiondateToStr(endTime);
+      endTime = $utils.standardTimeConversiondateToStr(endTime);
     }
     const param = {
       table: self.$route.params.tableName,

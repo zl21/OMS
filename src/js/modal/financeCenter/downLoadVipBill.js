@@ -1,11 +1,10 @@
 import { OmsForm } from 'burgeonComponents'
 import { OmsButton } from 'burgeonComponents'
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 
 export default {
   components: {
-    businessForm,
-    businessButton
+    OmsForm,
+    OmsButton
   },
   name: 'downloadVipBill',
   data() {
@@ -166,8 +165,8 @@ export default {
       const param = {
         shop_id: this.downLoadFormConfig.formData[0].itemdata.pid,
         type: this.downLoadFormConfig.formValue.type,
-        start_time: startTime ? BurgeonDate.standardTimeConversiondateToStr(startTime, 'yyyy-MM-dd hh:mm:ss') : '',
-        end_time: endTime ? BurgeonDate.standardTimeConversiondateToStr(endTime, 'yyyy-MM-dd hh:mm:ss') : '',
+        start_time: startTime ? $utils.standardTimeConversiondateToStr(startTime, 'yyyy-MM-dd hh:mm:ss') : '',
+        end_time: endTime ? $utils.standardTimeConversiondateToStr(endTime, 'yyyy-MM-dd hh:mm:ss') : '',
         bill_numbere: this.downLoadFormConfig.formValue.bill_numbere
       };
       const formdata = new FormData();

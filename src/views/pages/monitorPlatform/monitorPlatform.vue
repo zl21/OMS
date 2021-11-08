@@ -703,7 +703,7 @@ export default {
       this.maxHeight("main03body", "m3Item");
     };
 
-    this.header.time = dateUtil.getFormatDate(
+    this.header.time = $utils.getFormatDate(
       this.header.time,
       "yyyy-MM-dd HH:mm:ss"
     );

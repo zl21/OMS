@@ -1,5 +1,4 @@
 // 通用商品
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   formConfig: {
     formValue: {
@@ -99,8 +98,8 @@ export default {
     const param = {
       shop_id: downData.formData[0].itemdata.pid,
       bill_no: downData.formValue.sp_ids,
-      start_time: downData.formValue.startEndTimes[0] ? BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]) : undefined, // 开始时间
-      end_time: downData.formValue.startEndTimes[1] ? BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]) : undefined, // 结束时间
+      start_time: downData.formValue.startEndTimes[0] ? $utils.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]) : undefined, // 开始时间
+      end_time: downData.formValue.startEndTimes[1] ? $utils.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]) : undefined, // 结束时间
       table: _this.$route.params.tableName // 当前表名 必传
     };
     const {

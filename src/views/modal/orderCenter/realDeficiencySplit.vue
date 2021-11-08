@@ -172,7 +172,7 @@ export default {
     getFkChooseItem(val, rowD) {
       rowD.row.NEW_PS_C_SKU_ECODE = val.ADDRESS ? val.ADDRESS.val : '';
       rowD.row.actionName = 'UPDATE';
-      if (this.$OMS2.omsUtils.getUnionArr(this.tableConfig.updateData, [rowD.row], 'ID').length) {
+      if ($utils.getUnionArr(this.tableConfig.updateData, [rowD.row], 'ID').length) {
         // 已存在则覆盖（二次修改）
         const index = this.tableConfig.updateData.findIndex((it) => it.ID === rowD.row.ID);
         this.tableConfig.updateData.splice(index, 1, rowD.row);

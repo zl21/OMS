@@ -7,7 +7,6 @@
  * @FilePath: /burgeon-project-logic/js/modal/interfacePlatform/config/IP_B_STANDPLAT_ORDER.js
  */
 // 通用订单下载
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   formConfig: {
     formValue: {
@@ -86,8 +85,8 @@ export default {
     const param = {
       shop_id: _this.downLoadFormConfig.formData[0].itemdata.pid,
       bill_no: formValue.bill_no, // 订单编号
-      start_time: start ? BurgeonDate.standardTimeConversiondateToStr(start) : '', // 开始时间
-      end_time: end ? BurgeonDate.standardTimeConversiondateToStr(end) : '', // 结束时间
+      start_time: start ? $utils.standardTimeConversiondateToStr(start) : '', // 开始时间
+      end_time: end ? $utils.standardTimeConversiondateToStr(end) : '', // 结束时间
       table: self.$route.params.tableName // 当前表名 必传
     };
     const {

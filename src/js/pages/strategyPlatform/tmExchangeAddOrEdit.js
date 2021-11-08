@@ -312,7 +312,7 @@ export default {
     async getBtn() {
       let params = { table: 'ST_C_TMALL_EXCHANGE_ORDER', type: 'OBJ', serviceId: 'r3-oc-oms' }
       const { ACTIONS, SUB_ACTIONS } = await $omsUtils.getPermissions(this, 'btnConfig', params, true)
-      const mainWebArr = $OMS2.omsUtils.sonList(ACTIONS, 'webname');
+      const mainWebArr = $utils.sonList(ACTIONS, 'webname');
       this.btnConfig.buttons.forEach(item => {
         item.webname != 'fix_back' && (item.isShow = mainWebArr.includes(item.webname))
       })
@@ -323,8 +323,8 @@ export default {
       if (code == 0) {
         this.isWatchChange = false;
         this.isEnable = data.isactive == 'Y'
-        $omsUtils.intersectFormValue(this.formConfig1.formValue, data)
-        $omsUtils.intersectFormValue(this.formConfig2.formValue, data)
+        $utils.intersectFormValue(this.formConfig1.formValue, data)
+        $utils.intersectFormValue(this.formConfig2.formValue, data)
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.pid = data.CP_C_SHOP_ID
         this.queryForm(this.formConfig1, 'CP_C_SHOP_ID').itemdata.valuedata = data.CP_C_SHOP_TITLE
         this.queryForm(this.formConfig1, 'ECODE').style = 'input'

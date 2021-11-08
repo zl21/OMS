@@ -202,7 +202,7 @@ export default {
         // 颜色配置
         const orderTypeText = ['正常', '换货', '补发', '虚拟', '预售'];
         const orderTypeColor = ['90BB57', 'ffae34', '5461B8', '99c2f1', 'a375c1'];
-        this.orderTypeClass = $omsUtils.generateMap(orderTypeText, orderTypeColor, newValue)
+        this.orderTypeClass = $utils.generateMap(orderTypeText, orderTypeColor, newValue)
       }
     },
     'componentData.order.PLATFORM_STATUS': {
@@ -210,7 +210,7 @@ export default {
         // 颜色配置
         const platformStatusText = ['等待买家付款', '等待卖家发货', '等待买家确认收货', '卖家部分发货', '交易完成'];
         const platformStatusColor = ['ffae34', 'ff6951', '99c2f1', 'a375c1', '90BB57'];
-        this.platformStatusClass = $omsUtils.generateMap(platformStatusText, platformStatusColor, newValue);
+        this.platformStatusClass = $utils.generateMap(platformStatusText, platformStatusColor, newValue);
       }
     }
   },
@@ -235,7 +235,7 @@ export default {
     priceTotal(val) {
       // 商品总金额赋值
       this.retailPriceTotal = val;
-      this.orderPriceTotal = $omsUtils.floatNumber(Number(this.orderPriceTotal) + Number(val));
+      this.orderPriceTotal = $utils.floatNumber(Number(this.orderPriceTotal) + Number(val));
     },
     // 添加赠品
     addGiftHandler() {

@@ -1,5 +1,4 @@
 // 淘宝分销订单
-import BurgeonDate from '@/assets/js/__utils__/date.js';
 export default {
   formConfig: {
     formValue: {
@@ -95,8 +94,8 @@ export default {
     const param = {
       shop_id: downData.formData[0].itemdata.pid,
       bill_no: downData.formValue.sp_ids ? downData.formValue.sp_ids : downData.formValue.orderNum, // 订单编号
-      start_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
-      end_time: BurgeonDate.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+      start_time: $utils.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
+      end_time: $utils.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
       status: downData.formValue.orderStatus, // 状态 必传 给默认值
       table: _this.tablename // 当前表名 必传
     };

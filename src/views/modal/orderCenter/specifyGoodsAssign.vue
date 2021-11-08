@@ -249,7 +249,7 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.data.code == 0) {
-            self.$OMS2.omsUtils.msgTips(self, 'success', res.data.message, 0);
+            $utils.msgTips(self, 'success', res.data.message, 0);
             self.$parent.$parent.$parent.query();
             self.$parent.$parent.closeConfirm();
           } else {

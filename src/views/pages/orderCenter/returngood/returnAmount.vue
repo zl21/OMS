@@ -107,10 +107,10 @@ export default {
       this.editData.FINAL_ACTUAL_AMT = FINAL_ACTUAL_AMT;
       // this.editData.FINAL_REAL_AMT = FINAL_ACTUAL_AMT;
       R3.store.commit(`customize/returnAmount`, JSON.parse(JSON.stringify({
-        SHIP_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.SHIP_AMT),
-        ADJUST_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.ADJUST_AMT),
-        FINAL_ACTUAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_ACTUAL_AMT),
-        // FINAL_REAL_AMT:this.$OMS2.omsUtils.floatNumber(this.editData.FINAL_REAL_AMT),
+        SHIP_AMT:$utils.floatNumber(this.editData.SHIP_AMT),
+        ADJUST_AMT:$utils.floatNumber(this.editData.ADJUST_AMT),
+        FINAL_ACTUAL_AMT:$utils.floatNumber(this.editData.FINAL_ACTUAL_AMT),
+        // FINAL_REAL_AMT:$utils.floatNumber(this.editData.FINAL_REAL_AMT),
       })));
     },
     inputBlur(e){

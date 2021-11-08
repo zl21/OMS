@@ -1,6 +1,4 @@
 import service from '@/service/index'
-import BurgeonDate from '@/assets/js/__utils__/date';
-import publicMethodsUtil from '@/assets/js/public/publicMethods'; 
 class commonUtils {
   static gateWayPrefix = {
     basicData: '/r3-cp',
@@ -211,13 +209,13 @@ class commonUtils {
             if (callbackFun) {
               callbackFun(res)
             } else {
-              commonUtils.msgTips(self, 'success', '取消成功', 0)
+              $utils.msgTips(self, 'success', '取消成功', 0)
               self.selection = []
               self.query()
             }
           } else {
             // this.tipShow('error', self, res);
-            this.tipShow(
+            $utils.tipShow(
               'confirm',
               self,
               res,
@@ -252,118 +250,101 @@ class commonUtils {
         self.btnConfig.loading = false
       })
   }
-  /**
-   *
-   * @param {消息框类型} type :String,
-   * @param {当前页面实例} self ,
-   * @param {接口返回结果} res :Object,
-   * @param {是否定制消息框title} isTitle:String
-   * @param {消息框自定义render} renderFun :function
-   */
-  static tipShow(type, self, res, isTitle, renderFun) {
-    self.$Modal[type]({
-      title: isTitle ?? $i18n.t('modalTitle.tips'), // 提示
-      content: renderFun ?? res.data.message,
-      cancelType: true,
-      titleAlign: 'left',
-      closable: true,
-      mask: true,
-      draggable: true,
-      className: 'ark-dialog',
-      keyDown: (event) => {
-        if ([27, 13].includes(event.keyCode)) {
-          self.$Modal.remove()
-        }
-      },
-      render: renderFun,
-    })
-  }
-  /**
-   * 深拷贝
-   * @param obj  拷贝的数据源
-   */
-  static deepClone(obj) {
-    let objClone = Array.isArray(obj) ? [] : {}
-    if (obj && typeof obj === 'object') {
-      for (let key in obj) {
-        if (obj[key] && typeof obj[key] === 'object') {
-          objClone[key] = this.deepClone(obj[key])
-        } else {
-          objClone[key] = obj[key]
-        }
-      }
-    }
-    return objClone
-  }
-  /**
-   * 复杂的$Modal类型的提示弹窗
-   * @self {*} this
-   * @tips {*} modalTitle[tips]
-   * @okKey {*} {String} 点击确定要调用的接口，eg."common.queryList"
-   * @data {*} {Object} 点击确定调用的接口的入参
-   * @callback  {Object} 什么鬼？反正里面存了callbackType、callbackFun（具体处理接口返回的res的方法？）
-   * @param  {...any} callback
-   */
-  static modalShow(self, tips, okKey, data, ...callback) {
-    self.$Modal.info({
-      title: $i18n.t('modalTitle.tips'), // 提示
-      content: $i18n.t(`modalTips.${tips}`),
-      mask: true,
-      showCancel: true,
-      okText: $i18n.t('common.determine'), // 确定
-      cancelText: $i18n.t('common.cancel'), // 取消
-      onOk: () => {
-        let [callbackType, callbackFun] = callback
-        this.serviceHandler(self, okKey, data, callbackType, callbackFun)
-      },
-      onCancel: () => {
-        self.$emit('closeActionDialog', false)
-      },
-    })
-  }
+  // /**
+  //  *
+  //  * @param {消息框类型} type :String,
+  //  * @param {当前页面实例} self ,
+  //  * @param {接口返回结果} res :Object,
+  //  * @param {是否定制消息框title} isTitle:String
+  //  * @param {消息框自定义render} renderFun :function
+  //  */
+  // static tipShow(type, self, res, isTitle, renderFun) {
+  //   self.$Modal[type]({
+  //     title: isTitle ?? $i18n.t('modalTitle.tips'), // 提示
+  //     content: renderFun ?? res.data.message,
+  //     cancelType: true,
+  //     titleAlign: 'left',
+  //     closable: true,
+  //     mask: true,
+  //     draggable: true,
+  //     className: 'ark-dialog',
+  //     keyDown: (event) => {
+  //       if ([27, 13].includes(event.keyCode)) {
+  //         self.$Modal.remove()
+  //       }
+  //     },
+  //     render: renderFun,
+  //   })
+  // }
+  // /**
+  //  * 复杂的$Modal类型的提示弹窗
+  //  * @self {*} this
+  //  * @tips {*} modalTitle[tips]
+  //  * @okKey {*} {String} 点击确定要调用的接口，eg."common.queryList"
+  //  * @data {*} {Object} 点击确定调用的接口的入参
+  //  * @callback  {Object} 什么鬼？反正里面存了callbackType、callbackFun（具体处理接口返回的res的方法？）
+  //  * @param  {...any} callback
+  //  */
+  // static modalShow(self, tips, okKey, data, ...callback) {
+  //   self.$Modal.info({
+  //     title: $i18n.t('modalTitle.tips'), // 提示
+  //     content: $i18n.t(`modalTips.${tips}`),
+  //     mask: true,
+  //     showCancel: true,
+  //     okText: $i18n.t('common.determine'), // 确定
+  //     cancelText: $i18n.t('common.cancel'), // 取消
+  //     onOk: () => {
+  //       let [callbackType, callbackFun] = callback
+  //       this.serviceHandler(self, okKey, data, callbackType, callbackFun)
+  //     },
+  //     onCancel: () => {
+  //       self.$emit('closeActionDialog', false)
+  //     },
+  //   })
+  // }
 
-  // 数组对象根据子元素某各个key合并分组
-  static sonList(arr, key) {
-    return arr.map((item) => item[key])
-  }
+  // // 数组对象根据子元素某各个key合并分组
+  // static sonList(arr, key) {
+  //   return arr.map((item) => item[key])
+  // }
 
-  /**
-   * 扩展Array方法, 去除数组中空白数据
-   */
-  static notempty(val) {
-    return val.filter(function (s) {
-      return s && s.toString().trim()
-    })
-  }
+  // /**
+  //  * 扩展Array方法, 去除数组中空白数据
+  //  */
+  // static notempty(val) {
+  //   return val.filter(function (s) {
+  //     return s && s.toString().trim()
+  //   })
+  // }
 
-  /**
-   * $Message类型的提示框：
-   * @self {object} self 指向当前this
-   * @type {string} (eg.'warning'/'error'/'success'……)
-   * @tips {string} 当tipsType=1或不传时，tips为语言包中modalTips对应的key；当tipsType!=1时，tips为要展示的提示信息(如接口直接返回的message)
-   * @tipsType {number} 默认为1，等于1则使用语言包中的modalTips，不等于1则使用传过来的tips
-   */
-  static msgTips(self, type, tips, tipsType = 1) {
-    self.$Message[type]({
-      content: tipsType == 1 ? $i18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
-      duration: 5,
-      top: 80,
-    })
-  }
-  /**
-   *
-   * @param {this} self
-   * @param {弹框配置的名称} modalConfig
-   * @param {弹框文件名称} pageName
-   * @param {弹框标题} confirmTitle
-   */
-  static importTable(self, modalConfig, pageName, confirmTitle) {
-    console.log(confirmTitle)
-    self[modalConfig].confirmTitle = confirmTitle
-      ? $i18n.t(`${confirmTitle}`)
-      : self[modalConfig].confirmTitle // 弹框标题
-    self.$children.find((item) => item.name === pageName).openConfirm() // 文件名称
-  }
+  // /**
+  //  * $Message类型的提示框：
+  //  * @self {object} self 指向当前this
+  //  * @type {string} (eg.'warning'/'error'/'success'……)
+  //  * @tips {string} 当tipsType=1或不传时，tips为语言包中modalTips对应的key；当tipsType!=1时，tips为要展示的提示信息(如接口直接返回的message)
+  //  * @tipsType {number} 默认为1，等于1则使用语言包中的modalTips，不等于1则使用传过来的tips
+  //  */
+  // static msgTips(self, type, tips, tipsType = 1) {
+  //   self.$Message[type]({
+  //     content: tipsType == 1 ? $i18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+  //     duration: 5,
+  //     top: 80,
+  //   })
+  // }
+  // /**
+  //  *
+  //  * @param {this} self
+  //  * @param {弹框配置的名称} modalConfig
+  //  * @param {弹框文件名称} pageName
+  //  * @param {弹框标题} confirmTitle
+  //  */
+  // static importTable(self, modalConfig, pageName, confirmTitle) {
+  //   console.log(confirmTitle)
+  //   self[modalConfig].confirmTitle = confirmTitle
+  //     ? $i18n.t(`${confirmTitle}`)
+  //     : self[modalConfig].confirmTitle // 弹框标题
+  //   self.$children.find((item) => item.name === pageName).openConfirm() // 文件名称
+  // }
 
   /**
    * 导航跳转处理-跳定制
@@ -754,52 +735,52 @@ class commonUtils {
     return fD
   }
 
-  /**
-   * 获取两个数组对象的差集
-   * @param allArr：全数组
-   * @param partArr：缺省数组
-   * @key {ECODE} 根据key来做求差集
-   */
-  static getDifferentArr(allArr = [], partArr = [], key) {
-    const differentArr = [...allArr].filter((x) =>
-      [...partArr].every((y) => y[key] !== x[key])
-    )
-    return differentArr
-  }
+  // /**
+  //  * 获取两个数组对象的差集
+  //  * @param allArr：全数组
+  //  * @param partArr：缺省数组
+  //  * @key {ECODE} 根据key来做求差集
+  //  */
+  // static getDifferentArr(allArr = [], partArr = [], key) {
+  //   const differentArr = [...allArr].filter((x) =>
+  //     [...partArr].every((y) => y[key] !== x[key])
+  //   )
+  //   return differentArr
+  // }
 
-  /**
-   * 获取两个数组对象的交集
-   * @param Arr1 数组1
-   * @param Arr2 数组2
-   * @key {ID} 根据key来做求交集
-   */
-  static getUnionArr(Arr1 = [], Arr2 = [], key) {
-    const unionArr = [...Arr1].filter((x) =>
-      [...Arr2].some((y) => y[key] === x[key])
-    )
-    return unionArr
-  }
+  // /**
+  //  * 获取两个数组对象的交集
+  //  * @param Arr1 数组1
+  //  * @param Arr2 数组2
+  //  * @key {ID} 根据key来做求交集
+  //  */
+  // static getUnionArr(Arr1 = [], Arr2 = [], key) {
+  //   const unionArr = [...Arr1].filter((x) =>
+  //     [...Arr2].some((y) => y[key] === x[key])
+  //   )
+  //   return unionArr
+  // }
 
-  /**
-   * 用当前时间生成唯一Key
-   * @returns key
-   */
-  static generateKey() {
-    const now = new Date()
-    const year = now.getFullYear()
-    let month = now.getMonth() + 1
-    let day = now.getDate()
-    let hour = now.getHours()
-    let minutes = now.getMinutes()
-    let seconds = now.getSeconds()
-    String(month).length < 2 ? (month = Number('0' + month)) : month
-    String(day).length < 2 ? (day = Number('0' + day)) : day
-    String(hour).length < 2 ? (hour = Number('0' + hour)) : hour
-    String(minutes).length < 2 ? (minutes = Number('0' + minutes)) : minutes
-    String(seconds).length < 2 ? (seconds = Number('0' + seconds)) : seconds
-    const yyyyMMddHHmmss = `${year}${month}${day}${hour}${minutes}${seconds}`
-    return yyyyMMddHHmmss
-  }
+  // /**
+  //  * 用当前时间生成唯一Key
+  //  * @returns key
+  //  */
+  // static generateKey() {
+  //   const now = new Date()
+  //   const year = now.getFullYear()
+  //   let month = now.getMonth() + 1
+  //   let day = now.getDate()
+  //   let hour = now.getHours()
+  //   let minutes = now.getMinutes()
+  //   let seconds = now.getSeconds()
+  //   String(month).length < 2 ? (month = Number('0' + month)) : month
+  //   String(day).length < 2 ? (day = Number('0' + day)) : day
+  //   String(hour).length < 2 ? (hour = Number('0' + hour)) : hour
+  //   String(minutes).length < 2 ? (minutes = Number('0' + minutes)) : minutes
+  //   String(seconds).length < 2 ? (seconds = Number('0' + seconds)) : seconds
+  //   const yyyyMMddHHmmss = `${year}${month}${day}${hour}${minutes}${seconds}`
+  //   return yyyyMMddHHmmss
+  // }
 
   /**
    * @method 请求p/cs/getObject接口，初始化‘基础信息’Part的表单值
@@ -1142,23 +1123,23 @@ class commonUtils {
     }
   }
 
-  /**
-   * 含有部分相同属性的两个对象快速赋值法
-   * 对于相同的key, 用源对象覆盖目标对象
-   * @param {Object} target 目标对象
-   * @param {Object} origin 源对象
-   */
-  static intersectFormValue(target, origin) {
-    Object.keys(target).forEach((key) => {
-      if (origin[key]) {
-        if (typeof origin[key] == 'object') {
-          target[key] = JSON.parse(JSON.stringify(origin[key]))
-        } else {
-          target[key] = origin[key]
-        }
-      }
-    })
-  }
+  // /**
+  //  * 含有部分相同属性的两个对象快速赋值法
+  //  * 对于相同的key, 用源对象覆盖目标对象
+  //  * @param {Object} target 目标对象
+  //  * @param {Object} origin 源对象
+  //  */
+  // static intersectFormValue(target, origin) {
+  //   Object.keys(target).forEach((key) => {
+  //     if (origin[key]) {
+  //       if (typeof origin[key] == 'object') {
+  //         target[key] = JSON.parse(JSON.stringify(origin[key]))
+  //       } else {
+  //         target[key] = origin[key]
+  //       }
+  //     }
+  //   })
+  // }
   /**
    * 保留小数点几两位 不足自动补0
    *  @param {Number\String}
@@ -1193,29 +1174,29 @@ class commonUtils {
       }
     })
   }
-  /**
-   * 结束时间，只选择日期未选择时间的情况下，时间默认23:59:59
-   * @param {Date|String} newEndTime 改变后的结束时间
-   * @param {Date|String} oldEndTime 改变前的结束时间
-   * @returns 返回处理后的结束时间
-   */
-  static defaultEndTime(newEndTime, oldEndTime) {
-    let isNewDate = Object.prototype.toString.call(newEndTime) == '[object Date]'
-    let isOldDate = Object.prototype.toString.call(oldEndTime) == '[object Date]'
-    let [newDate, newTime] = (isNewDate
-      ? BurgeonDate.getFormatDate(newEndTime, 'yyyy-MM-dd HH:mm:ss') : newEndTime).split(' ')
-    let [oldDate, oldTime] = (oldEndTime && isOldDate
-      ? BurgeonDate.getFormatDate(oldEndTime, 'yyyy-MM-dd HH:mm:ss') : oldEndTime || '').split(' ')
+  // /**
+  //  * 结束时间，只选择日期未选择时间的情况下，时间默认23:59:59
+  //  * @param {Date|String} newEndTime 改变后的结束时间
+  //  * @param {Date|String} oldEndTime 改变前的结束时间
+  //  * @returns 返回处理后的结束时间
+  //  */
+  // static defaultEndTime(newEndTime, oldEndTime) {
+  //   let isNewDate = Object.prototype.toString.call(newEndTime) == '[object Date]'
+  //   let isOldDate = Object.prototype.toString.call(oldEndTime) == '[object Date]'
+  //   let [newDate, newTime] = (isNewDate
+  //     ? $utils.getFormatDate(newEndTime, 'yyyy-MM-dd HH:mm:ss') : newEndTime).split(' ')
+  //   let [oldDate, oldTime] = (oldEndTime && isOldDate
+  //     ? $utils.getFormatDate(oldEndTime, 'yyyy-MM-dd HH:mm:ss') : oldEndTime || '').split(' ')
 
-    let time = `${newDate} ${newTime}`
-    if (time != `${oldDate} ${oldTime}`
-      && newDate != oldDate
-      && '00:00:00' == newTime
-    ) {
-      time = `${newDate} 23:59:59`
-    }
-    return time
-  }
+  //   let time = `${newDate} ${newTime}`
+  //   if (time != `${oldDate} ${oldTime}`
+  //     && newDate != oldDate
+  //     && '00:00:00' == newTime
+  //   ) {
+  //     time = `${newDate} 23:59:59`
+  //   }
+  //   return time
+  // }
 
   /* ============================================== @/assets/js/__utils__/date ============================================== */
 
@@ -1266,59 +1247,59 @@ class commonUtils {
     };
   };
 
-  /**
-   * 日期 format
-   * @method 日期转换
-   * @param {Date} newDate {Object Date}
-   * @param {String} format {String} 示例: yyyy-MM-dd hh:mm:ss
-   */
-  static dateFormat = (newDate, format) => {
-    const e = {
-      'M+': newDate.getMonth() + 1,
-      'd+': newDate.getDate(),
-      'h+': newDate.getHours(),
-      'm+': newDate.getMinutes(),
-      's+': newDate.getSeconds()
-    };
-    if (/(y+)/.test(format)) {
-      format = format.replace(RegExp.$1, (`${newDate.getFullYear()}`).substr(4 - RegExp.$1.length));
-    }
-    for (const k in e) {
-      if (new RegExp(`(${k})`).test(format)) {
-        format = format.replace(RegExp.$1, (RegExp.$1.length == 1) ? (e[k]) : ((`00${e[k]}`).substr((`${e[k]}`).length)));
-      }
-    }
-    return format;
-  };
+  // /**
+  //  * 日期 format
+  //  * @method 日期转换
+  //  * @param {Date} newDate {Object Date}
+  //  * @param {String} format {String} 示例: yyyy-MM-dd hh:mm:ss
+  //  */
+  // static dateFormat = (newDate, format) => {
+  //   const e = {
+  //     'M+': newDate.getMonth() + 1,
+  //     'd+': newDate.getDate(),
+  //     'h+': newDate.getHours(),
+  //     'm+': newDate.getMinutes(),
+  //     's+': newDate.getSeconds()
+  //   };
+  //   if (/(y+)/.test(format)) {
+  //     format = format.replace(RegExp.$1, (`${newDate.getFullYear()}`).substr(4 - RegExp.$1.length));
+  //   }
+  //   for (const k in e) {
+  //     if (new RegExp(`(${k})`).test(format)) {
+  //       format = format.replace(RegExp.$1, (RegExp.$1.length == 1) ? (e[k]) : ((`00${e[k]}`).substr((`${e[k]}`).length)));
+  //     }
+  //   }
+  //   return format;
+  // };
 
-  // 获取当前时间
-  static getCurrentTime = () => {
-    let startTime = BurgeonDate.Format(new Date(), 'yyyy-MM-dd 23:59:59');
-    let endDay = BurgeonDate.addDays(new Date(), -7);
-    let endTime = BurgeonDate.Format(endDay, 'yyyy-MM-dd 00:00:00');
-    return [startTime, endTime];
-  }
+  // // 获取当前时间
+  // static getCurrentTime = () => {
+  //   let startTime = $utils.Format(new Date(), 'yyyy-MM-dd 23:59:59');
+  //   let endDay = $utils.addDays(new Date(), -7);
+  //   let endTime = $utils.Format(endDay, 'yyyy-MM-dd 00:00:00');
+  //   return [startTime, endTime];
+  // }
 
-  // 数组标准时间转换成yyyy-mm-dd格式
-  static getTimesValue = time => {
-    let timeValue = '';
-    const dateone = new Date(time[0]).toJSON();
-    const datetwo = new Date(time[1]).toJSON();
-    const dateTimeOne = new Date(+new Date(dateone) + 8 * 3600 * 1000)
-      .toISOString()
-      .replace(/T/g, ' ')
-      .replace(/\.[\d]{3}Z/, '');
-    const dateTimeTwo = new Date(+new Date(datetwo) + 8 * 3600 * 1000)
-      .toISOString()
-      .replace(/T/g, ' ')
-      .replace(/\.[\d]{3}Z/, '');
-    timeValue = `${dateTimeOne}~${dateTimeTwo}`;
+  // // 数组标准时间转换成yyyy-mm-dd格式
+  // static getTimesValue = time => {
+  //   let timeValue = '';
+  //   const dateone = new Date(time[0]).toJSON();
+  //   const datetwo = new Date(time[1]).toJSON();
+  //   const dateTimeOne = new Date(+new Date(dateone) + 8 * 3600 * 1000)
+  //     .toISOString()
+  //     .replace(/T/g, ' ')
+  //     .replace(/\.[\d]{3}Z/, '');
+  //   const dateTimeTwo = new Date(+new Date(datetwo) + 8 * 3600 * 1000)
+  //     .toISOString()
+  //     .replace(/T/g, ' ')
+  //     .replace(/\.[\d]{3}Z/, '');
+  //   timeValue = `${dateTimeOne}~${dateTimeTwo}`;
 
-    if (timeValue === '1970-01-01 08:00:00~1970-01-01 08:00:00') {
-      timeValue = '';
-    }
-    return timeValue;
-  }
+  //   if (timeValue === '1970-01-01 08:00:00~1970-01-01 08:00:00') {
+  //     timeValue = '';
+  //   }
+  //   return timeValue;
+  // }
 
   /**
    * 关闭当前tab
@@ -1462,221 +1443,184 @@ class commonUtils {
   /* ============================================== @/assets/js/public/publicMethods.js ============================================== */
 
 
-  // 标准时间转时间格式
-  static FromDates(time) {
-    const date = new Date(time);
-    const Y = `${date.getFullYear()}-`;
-    const M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-`;
-    const D = `${date.getDate()} `;
-    // const h = `${date.getHours()}:`;
-    // const m = `${date.getMinutes()}:`;
-    // const s = date.getSeconds();
-    return Y + M + D;
-  }
+  // // 标准时间转时间格式
+  // static FromDates(time) {
+  //   const date = new Date(time);
+  //   const Y = `${date.getFullYear()}-`;
+  //   const M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-`;
+  //   const D = `${date.getDate()} `;
+  //   // const h = `${date.getHours()}:`;
+  //   // const m = `${date.getMinutes()}:`;
+  //   // const s = date.getSeconds();
+  //   return Y + M + D;
+  // }
 
-  // 字符串转时间格式
-  static DatesTime(time) {
-    const date = new Date(time);
-    const Y = `${date.getFullYear()}-`;
-    const M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-`;
-    const D = `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()} `;
-    const h = `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}:`;
-    const m = `${date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}:`;
-    const s = (date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds());
-    return Y + M + D + h + m + s;
-  }
+  // // 字符串转时间格式
+  // static DatesTime(time) {
+  //   const date = new Date(time);
+  //   const Y = `${date.getFullYear()}-`;
+  //   const M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-`;
+  //   const D = `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()} `;
+  //   const h = `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}:`;
+  //   const m = `${date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}:`;
+  //   const s = (date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds());
+  //   return Y + M + D + h + m + s;
+  // }
 
-  // 加法函数
-  static accAdd(arg1, arg2) {
-    let r1; let r2; let m; let
-      c;
-    try {
-      r1 = arg1.toString().split('.')[1].length;
-    } catch (e) {
-      r1 = 0;
-    }
-    try {
-      r2 = arg2.toString().split('.')[1].length;
-    } catch (e) {
-      r2 = 0;
-    }
-    c = Math.abs(r1 - r2);
-    m = Math.pow(10, Math.max(r1, r2));
-    if (c > 0) {
-      const cm = 10 ** c;
-      if (r1 > r2) {
-        arg1 = Number(arg1.toString().replace('.', ''));
-        arg2 = Number(arg2.toString().replace('.', '')) * cm;
-      } else {
-        arg1 = Number(arg1.toString().replace('.', '')) * cm;
-        arg2 = Number(arg2.toString().replace('.', ''));
-      }
-    } else {
-      arg1 = Number(arg1.toString().replace('.', ''));
-      arg2 = Number(arg2.toString().replace('.', ''));
-    }
-    return (arg1 + arg2) / m;
-  }
+  // // 加法函数
+  // static accAdd(arg1, arg2) {
+  //   let r1; let r2; let m; let
+  //     c;
+  //   try {
+  //     r1 = arg1.toString().split('.')[1].length;
+  //   } catch (e) {
+  //     r1 = 0;
+  //   }
+  //   try {
+  //     r2 = arg2.toString().split('.')[1].length;
+  //   } catch (e) {
+  //     r2 = 0;
+  //   }
+  //   c = Math.abs(r1 - r2);
+  //   m = Math.pow(10, Math.max(r1, r2));
+  //   if (c > 0) {
+  //     const cm = 10 ** c;
+  //     if (r1 > r2) {
+  //       arg1 = Number(arg1.toString().replace('.', ''));
+  //       arg2 = Number(arg2.toString().replace('.', '')) * cm;
+  //     } else {
+  //       arg1 = Number(arg1.toString().replace('.', '')) * cm;
+  //       arg2 = Number(arg2.toString().replace('.', ''));
+  //     }
+  //   } else {
+  //     arg1 = Number(arg1.toString().replace('.', ''));
+  //     arg2 = Number(arg2.toString().replace('.', ''));
+  //   }
+  //   return (arg1 + arg2) / m;
+  // }
 
-  // 減法函數
-  static accSub(arg1, arg2) {
-    let r1; let r2;
-    try {
-      r1 = arg1.toString().split('.')[1].length;
-    } catch (e) {
-      r1 = 0;
-    }
-    try {
-      r2 = arg2.toString().split('.')[1].length;
-    } catch (e) {
-      r2 = 0;
-    }
-    const m = 10 ** Math.max(r1, r2); // last modify by deeka //动态控制精度长度
-    // const n = (r1 >= r2) ? r1 : r2;
-    return ((arg1 * m - arg2 * m) / m).toFixed(2);
-  }
+  // // 減法函數
+  // static accSub(arg1, arg2) {
+  //   let r1; let r2;
+  //   try {
+  //     r1 = arg1.toString().split('.')[1].length;
+  //   } catch (e) {
+  //     r1 = 0;
+  //   }
+  //   try {
+  //     r2 = arg2.toString().split('.')[1].length;
+  //   } catch (e) {
+  //     r2 = 0;
+  //   }
+  //   const m = 10 ** Math.max(r1, r2); // last modify by deeka //动态控制精度长度
+  //   // const n = (r1 >= r2) ? r1 : r2;
+  //   return ((arg1 * m - arg2 * m) / m).toFixed(2);
+  // }
 
-  // 乘法
-  static accMul(arg1, arg2) {
-    let m = 0; const s1 = arg1.toString();
-    const s2 = arg2.toString();
-    try {
-      m += s1.split('.')[1].length;
-    } catch (e) {
-      console.log(e);
-    }
-    try {
-      m += s2.split('.')[1].length;
-    } catch (e) {
-      console.log(e);
-    }
-    return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / (10 ** m);
-  }
+  // // 乘法
+  // static accMul(arg1, arg2) {
+  //   let m = 0; const s1 = arg1.toString();
+  //   const s2 = arg2.toString();
+  //   try {
+  //     m += s1.split('.')[1].length;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //   try {
+  //     m += s2.split('.')[1].length;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //   return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / (10 ** m);
+  // }
 
-  // 除法
-  static accDiv(arg1, arg2) {
-    let t1 = 0; let t2 = 0;
-    arg1 = arg1 || 0;
-    arg2 = arg2 || 0;
-    try {
-      t1 = arg1.toString().split('.')[1].length;
-    } catch (e) {
-      console.log(e);
-    }
-    try {
-      t2 = arg2.toString().split('.')[1].length;
-    } catch (e) {
-      console.log(e);
-    }
-    const r1 = Number(arg1.toString().replace('.', ''));
-    const r2 = Number(arg2.toString().replace('.', ''));
-    // return (r1 / r2) * Math.pow(10, t2 - t1);
-    return (r1 / r2) * (10 ** (t2 - t1));
-  }
+  // // 除法
+  // static accDiv(arg1, arg2) {
+  //   let t1 = 0; let t2 = 0;
+  //   arg1 = arg1 || 0;
+  //   arg2 = arg2 || 0;
+  //   try {
+  //     t1 = arg1.toString().split('.')[1].length;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //   try {
+  //     t2 = arg2.toString().split('.')[1].length;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //   const r1 = Number(arg1.toString().replace('.', ''));
+  //   const r2 = Number(arg2.toString().replace('.', ''));
+  //   // return (r1 / r2) * Math.pow(10, t2 - t1);
+  //   return (r1 / r2) * (10 ** (t2 - t1));
+  // }
 
-  /**
-   * 获取字段选项组值
-   *  @table 'PS_C_SKU' 表名
-   *  @colArr ["PAY_TYPE"] select类型的字段 的colname/英文名 的集合
-   *  @foldingName "基础信息" 折叠名称
-   *  @formConfig this.formConfig 待修改的formConfig
-   *  @return 返回this.formConfig.formData
-   * */
-  static async getTypeList(table, colArr, foldingName, formConfig) {
-    const fromdata = new FormData();
-    let fD = formConfig.formData;
-    fromdata.append('table', table);
-    fromdata.append('objid', -1);
-    const res = await service.common.getObject(fromdata);
-    res.data.data.addcolums.forEach((item) => {
-      if (item.parentdesc == foldingName) {
-        item.childs.forEach((it) => {
-          // it为接口返回的类似formData.Item的数据
-          colArr.forEach(colArrItem => {
-            if (it.colname == colArrItem) { // 用colname来匹配需要的select类型的item
-              fD.forEach((fDitem) => {
-                // 赋值给options
-                if (fDitem.colname === colArrItem) {
-                  fDitem.options = it.combobox.map((i) => ({
-                    label: i.limitdesc,
-                    value: i.limitval,
-                  }));
-                }
-              });
-            }
-          })
-        });
-      }
-    });
-    return fD;
-  }
+  // /**
+  //  * 获取n天后的日期
+  //  */
+  // static getDate(index) {
+  //   const date = new Date(); // 当前日期
+  //   const newDate = new Date();
+  //   newDate.setDate(date.getDate() + index);
+  //   const time = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`;
+  //   return time;
+  // }
 
-  /**
-   * 获取n天后的日期
-   */
-  static getDate(index) {
-    const date = new Date(); // 当前日期
-    const newDate = new Date();
-    newDate.setDate(date.getDate() + index);
-    const time = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`;
-    return time;
-  }
+  // /**
+  //  * 获取n天前的日期
+  //  */
+  // static getDateOld(index) {
+  //   const date = new Date(); // 当前日期
+  //   const newDate = new Date();
+  //   newDate.setDate(date.getDate() - index);
+  //   const mon = newDate.getMonth() + 1;
+  //   const day = newDate.getDate();
+  //   const time = `${newDate.getFullYear()}-${mon < 10 ? `0${mon}` : mon}-${day < 10 ? `0${day}` : day}`;
+  //   return time;
+  // }
 
-  /**
-   * 获取n天前的日期
-   */
-  static getDateOld(index) {
-    const date = new Date(); // 当前日期
-    const newDate = new Date();
-    newDate.setDate(date.getDate() - index);
-    const mon = newDate.getMonth() + 1;
-    const day = newDate.getDate();
-    const time = `${newDate.getFullYear()}-${mon < 10 ? `0${mon}` : mon}-${day < 10 ? `0${day}` : day}`;
-    return time;
-  }
+  // /**
+  //  * 获取两个字符串日期相差天数
+  //  */
+  // static dateDiff(startDate, endDate) {
+  //   let aDate;
+  //   aDate = startDate.split('-');
+  //   const oDate1 = new Date(`${aDate[1]}-${aDate[2]}-${aDate[0]}`);
+  //   aDate = endDate.split('-');
+  //   const oDate2 = new Date(`${aDate[1]}-${aDate[2]}-${aDate[0]}`);
+  //   const iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24);
+  //   return iDays;
+  // }
 
-  /**
-   * 获取两个字符串日期相差天数
-   */
-  static dateDiff(startDate, endDate) {
-    let aDate;
-    aDate = startDate.split('-');
-    const oDate1 = new Date(`${aDate[1]}-${aDate[2]}-${aDate[0]}`);
-    aDate = endDate.split('-');
-    const oDate2 = new Date(`${aDate[1]}-${aDate[2]}-${aDate[0]}`);
-    const iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24);
-    return iDays;
-  }
+  // /**
+  //  * 数组去重 ps:工作台专用
+  //  */
+  // static workArrHeavy(arr1, arr2) {
+  //   if (arr1 && arr2) {
+  //     for (let i = 0; i < arr1.length; i++) {
+  //       for (let j = 0; j < arr2.length; j++) {
+  //         if (arr1[i].key === arr2[j].key) {
+  //           arr1[i].value = arr2[j].value;
+  //           break;
+  //         }
+  //       }
+  //     }
+  //     return arr1;
+  //   }
+  //   return [];
+  // }
 
-  /**
-   * 数组去重 ps:工作台专用
-   */
-  static workArrHeavy(arr1, arr2) {
-    if (arr1 && arr2) {
-      for (let i = 0; i < arr1.length; i++) {
-        for (let j = 0; j < arr2.length; j++) {
-          if (arr1[i].key === arr2[j].key) {
-            arr1[i].value = arr2[j].value;
-            break;
-          }
-        }
-      }
-      return arr1;
-    }
-    return [];
-  }
-
-  /**
-   * 四舍五入改进
-   * num表示需要四舍五入的小数
-   * s表示需要保留几位小数
-   */
-  static toFixed(num, s) {
-    const times = 10 ** s;
-    let des = num * times + 0.5;
-    des = parseInt(des, 10) / times;
-    return `${des}`;
-  }
+  // /**
+  //  * 四舍五入改进
+  //  * num表示需要四舍五入的小数
+  //  * s表示需要保留几位小数
+  //  */
+  // static toFixed(num, s) {
+  //   const times = 10 ** s;
+  //   let des = num * times + 0.5;
+  //   des = parseInt(des, 10) / times;
+  //   return `${des}`;
+  // }
 
   /**
    * 导出
@@ -1799,7 +1743,7 @@ class commonUtils {
       // 编辑查询
       resData.forEach(e => {
         totalKey.forEach(v => {
-          if(e[v] !== undefined) mapObj.set(v,this.floatNumber(publicMethodsUtil.accAdd(Number(mapObj.get(v)), Number(e[v]))))
+          if(e[v] !== undefined) mapObj.set(v,this.floatNumber($utils.accAdd(Number(mapObj.get(v)), Number(e[v]))))
         });
       });
       return Object.fromEntries([...mapObj])

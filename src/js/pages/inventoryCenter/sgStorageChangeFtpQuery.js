@@ -232,7 +232,7 @@ export default {
         console.log(data, code, message);
         if (code === 0 && data.sgChannelStorageFtpResultList.length) {
           data.sgChannelStorageFtpResultList.forEach(item => {
-            item.CREATIONDATE = item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : '';
+            item.CREATIONDATE = item.CREATIONDATE ? $utils.DatesTime(item.CREATIONDATE) : '';
           });
           _this.jordanTableConfig.total = data.totalSize;
           _this.jordanTableConfig.data = data.sgChannelStorageFtpResultList;

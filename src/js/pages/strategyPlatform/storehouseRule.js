@@ -1,6 +1,5 @@
 import { OmsButton, OmsForm, OmsDialog, OmsTable, subTable, OmsLabel } from 'burgeonComponents'
 import service from '@/service/index';
-import dateUtil from '@/assets/js/__utils__/date.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 
@@ -145,7 +144,7 @@ export default {
             transfer: true,
             onChange: () => {
               if (!this.formConfig.formValue.endTime) return
-              this.formConfig.formValue.endTime = $omsUtils.defaultEndTime(this.formConfig.formValue.endTime, this.formConfig.formValue.endTime)
+              this.formConfig.formValue.endTime = $utils.defaultEndTime(this.formConfig.formValue.endTime, this.formConfig.formValue.endTime)
 
             }
           },
@@ -842,9 +841,9 @@ export default {
               this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.pid = warehouseData.cpCPhyWarehouseId;
             } else if (key == 'beginTime') {
               //开始时间
-              this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
+              this.formConfig.formValue[key] = $utils.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
             } else if (key == 'endTime') {
-              this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
+              this.formConfig.formValue[key] = $utils.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
             } else {
               this.formConfig.formValue[key] = warehouseData[key];
             }
@@ -874,9 +873,9 @@ export default {
 
             } else if (key == 'beginTime') {
               //开始时间
-              this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
+              this.formConfig.formValue[key] = $utils.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
             } else if (key == 'endTime') {
-              this.formConfig.formValue[key] = dateUtil.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
+              this.formConfig.formValue[key] = $utils.getFormatDate(new Date(warehouseData[key]), 'yyyy-MM-dd HH:mm:ss');
             } else {
               this.formConfig.formValue[key] = warehouseData[key];
             }

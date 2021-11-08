@@ -158,10 +158,10 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length != 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw'); // 请选择需要复制的单据
+      $utils.msgTips(self, 'warning', 'jw'); // 请选择需要复制的单据
       return
     }
-    const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
+    const IDS = self.$utils.sonList(self.selection, 'ID')
     const { data: { code, data, message } } = await self.service.orderCenter.billOcBOrderCopy({
       IDS,
       TYPE: 1,
@@ -193,7 +193,7 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length < 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
+      $utils.msgTips(self, 'warning', 'd8')
       return
     }
 
@@ -211,7 +211,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
+     $utils.msgTips(self, 'warning', 'kf')
       return
     }
   
@@ -227,7 +227,7 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length < 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
+      $utils.msgTips(self, 'warning', 'd8')
       return
     }
 
@@ -245,7 +245,7 @@ class DropDownConfig {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jx'); // 只允许缺货或待审核状态的订单进行添加！
+      $utils.msgTips(self, 'warning', 'jx'); // 只允许缺货或待审核状态的订单进行添加！
       return
     }
    
@@ -262,7 +262,7 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length < 1) { //
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'd8')
+      $utils.msgTips(self, 'warning', 'd8')
       return
     }
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { //
@@ -280,7 +280,7 @@ class DropDownConfig {
       self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
     }, 100)
     }else{
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
+      $utils.msgTips(self, 'warning', 'kf')
       return
     }
   }
@@ -291,10 +291,10 @@ class DropDownConfig {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length != 1) {
-      self.$OMS2.omsUtils.msgTips(self, 'warning', 'jw')
+      $utils.msgTips(self, 'warning', 'jw')
       return
     }
-    const IDS = self.$OMS2.omsUtils.sonList(self.selection, 'ID')
+    const IDS = self.$utils.sonList(self.selection, 'ID')
     const { data: { code, data, message } } = await self.service.orderCenter.billOcBOrderCopy({
       IDS,
       TYPE: 2,
@@ -430,7 +430,7 @@ class DropDownConfig {
     const self = DropDownConfig.target
     if (self.selection.length > 0) {
       self.btnConfig.loading = true
-      const ids = commonUtils.sonList(self.selection, 'ID')
+      const ids = $utils.sonList(self.selection, 'ID')
       let myData
       switch (paramsType) {
         case 1:
@@ -444,7 +444,7 @@ class DropDownConfig {
         case 3:
           self.selection.forEach((item, index) => {
             if (item.PLATFORM === 50) {
-              commonUtils.msgTips(self, 'warning', 'ex')
+              $utils.msgTips(self, 'warning', 'ex')
               self.btnConfig.loading = false
             }
           })
@@ -459,7 +459,7 @@ class DropDownConfig {
       myData = this.tab1.order;
       this[funName](myData, type);
     } */ else {
-      commonUtils.msgTips(self, 'warning', tips)
+      $utils.msgTips(self, 'warning', tips)
       self.btnConfig.loading = false
     }
   }
@@ -491,7 +491,7 @@ class DropDownConfig {
           }
           this.successHandler(params, objName, propertyName, tableType)
         } else {
-          commonUtils.tipShow('error', self, res)
+          $utils.tipShow('error', self, res)
         }
       })
       .finally(() => {
@@ -521,7 +521,7 @@ class DropDownConfig {
       case 'ORDER_STATUS':
         componentDataObj = {
           ids,
-          status: commonUtils.sonList(self.selection, componentDataType),
+          status: $utils.sonList(self.selection, componentDataType),
         }
         break
       case 'deposit':
@@ -573,7 +573,7 @@ class DropDownConfig {
   //修改物流;
   static modifyLogisticsHandler(rows) {
     let list = []
-    const ids = commonUtils.sonList(rows, 'ID')
+    const ids = $utils.sonList(rows, 'ID')
     list = rows.map((it) => ({ ID: it.ID, BILL_NO: it.BILL_NO }))
     this.serviceHandler(
       'checkOrderBeforeLogistics',
@@ -584,7 +584,7 @@ class DropDownConfig {
   //修改仓库
   static modifyWarehouseHandler(rows) {
     let list = []
-    const ids = commonUtils.sonList(rows, 'ID')
+    const ids = $utils.sonList(rows, 'ID')
     list = rows.map((it) => ({ ID: it.ID, BILL_NO: it.BILL_NO }))
     this.serviceHandler(
       'checkOrderBeforeWarehouse',
@@ -616,7 +616,7 @@ class DropDownConfig {
     if (ids[0].ORDER_STATUS == 1||ids[0].ORDER_STATUS == 2) {
       this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
     }else{
-     self.$OMS2.omsUtils.msgTips(self, 'warning', 'kf')
+      $utils.msgTips(self, 'warning', 'kf')
       self.btnConfig.loading = false
       return
     }
@@ -638,7 +638,7 @@ class DropDownConfig {
     let ids;
     if (self.selection.length > 0) {
       // self.btnConfig.loading = true
-      ids = commonUtils.sonList(self.selection, 'ID');
+      ids = $utils.sonList(self.selection, 'ID');
     } else {
       ids = [];
     }
@@ -652,7 +652,7 @@ class DropDownConfig {
           'specifyGoodsAssign'
         )
       } else {
-        // commonUtils.msgTips(self, 'error', res.data.message, 0);
+        // $utils.msgTips(self, 'error', res.data.message, 0);
       }
     })
 
@@ -674,7 +674,7 @@ class DropDownConfig {
       'all',
       function (res) {
         if (res.data.code === 0) {
-          commonUtils.msgTips(self, 'success', res.data.message, 2)
+          $utils.msgTips(self, 'success', res.data.message, 2)
           self.selection = []
           self.query()
         } else if (res.data.code == 1 && res.data.data) {
@@ -684,7 +684,7 @@ class DropDownConfig {
             row.RESULT_MSG = row.message
             return row
           })
-          commonUtils.tipShow(
+          $utils.tipShow(
             'confirm',
             self,
             res,
@@ -723,7 +723,7 @@ class DropDownConfig {
     if (ids.length === 1) {
       if (selectItem.COPY_REASON) {
         // 订单只能是原单才能复制
-        commonUtils.msgTips(DropDownConfig.target, 'warning', 'a2')
+        $utils.msgTips(DropDownConfig.target, 'warning', 'a2')
       } else if (
         type === 'oriInvalidCopy' &&
         ![7, 8].includes(selectItem.ORDER_STATUS)
@@ -731,12 +731,12 @@ class DropDownConfig {
         // 原单无效复制
         // 已取消
         // 非已取消或系统作废订单，不允许复制
-        commonUtils.msgTips(DropDownConfig.target, 'error', 'a3')
+        $utils.msgTips(DropDownConfig.target, 'error', 'a3')
         // 仓库发货
         // 平台发货
       } else if (![5, 6].includes(selectItem.ORDER_STATUS)) {
         // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
-        commonUtils.msgTips(DropDownConfig.target, 'error', 'a4')
+        $utils.msgTips(DropDownConfig.target, 'error', 'a4')
       } else {
         // 默认是丢单复制的query
         const query = {
@@ -756,7 +756,7 @@ class DropDownConfig {
         )
       }
     } else {
-      commonUtils.msgTips(DropDownConfig.target, 'warning', 'a5')
+      $utils.msgTips(DropDownConfig.target, 'warning', 'a5')
     }
   }
 }

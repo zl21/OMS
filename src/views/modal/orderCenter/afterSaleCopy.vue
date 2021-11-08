@@ -86,13 +86,13 @@ export default {
       const self = this;
       const ID = self.componentData.id;
       if (!ID) {
-        self.$OMS2.omsUtils.msgTips(self, "warning", "a8");
+        $utils.msgTips(self, "warning", "a8");
         return;
       }
       const IDS = [ID];
       const copyReason = self.formConfig.formValue.COPY_REASON_TYPE;
       if (!copyReason) {
-        self.$OMS2.omsUtils.msgTips(self, "warning", "请选择复制原因！", 2);
+        $utils.msgTips(self, "warning", "请选择复制原因！", 2);
         return;
       }
       const {
