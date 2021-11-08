@@ -1,11 +1,10 @@
-import { OmsForm } from 'burgeonComponents';
-import { OmsButton } from 'burgeonComponents'
+import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'ScheduleFormDialog',
   components: {
     OmsButton,
-    businessForm
+    OmsForm
   },
   props: {
     componentData: {

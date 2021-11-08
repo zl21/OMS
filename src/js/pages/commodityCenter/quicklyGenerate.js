@@ -1,10 +1,9 @@
 import { OmsButton } from 'burgeonComponents'
-import axios from 'axios';
 // import comUtils from '@/assets/js/__utils__/common.js';
 
 export default {
   components: {
-    businessButton
+    OmsButton
   },
   computed: {
     spuid() {

@@ -242,7 +242,7 @@ import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 export default {
   components: {
-    businessDialog
+    OmsDialog
   },
   data() {
     return {

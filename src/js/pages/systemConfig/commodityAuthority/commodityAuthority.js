@@ -12,7 +12,7 @@ export default {
   components: {
     FkDialog,
     GroupTree,
-    businessBtn
+    OmsButton
   },
   data() {
     return {

@@ -25,7 +25,7 @@ import service from '@/service/index';
 
 export default {
   components: {
-    businessButton
+    OmsButton
   },
   data() {
     return {

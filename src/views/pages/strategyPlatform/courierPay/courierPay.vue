@@ -15,7 +15,7 @@
       <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <div class="buttons">
-      <business-button :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <Collapse v-model="value1">
@@ -23,14 +23,14 @@
           <!-- 基本信息 -->
           {{ vmI18n.t("common.baseInformation") }}
           <p slot="content">
-            <business-form :form-config="formConfig" />
+            <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
         <Panel name="2">
           <!-- 日志 -->
           {{ vmI18n.t("common.journal") }}
           <p slot="content">
-            <business-form :form-config="formConfig1" />
+            <OmsForm :form-config="formConfig1" />
           </p>
         </Panel>
         <Panel name="3">

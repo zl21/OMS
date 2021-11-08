@@ -6,15 +6,13 @@
 </template>
 
 <script>
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
-import { OmsTable } from 'burgeonComponents'
+import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'addPlatformLogisticsCompany',
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     OmsTable,
   },
   data() {

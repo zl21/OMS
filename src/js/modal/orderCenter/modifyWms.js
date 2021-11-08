@@ -3,7 +3,7 @@ import { OmsButton } from 'burgeonComponents'
 export default {
   name: 'ModifyWms',
   components: {
-    businessButton
+    OmsButton
   },
   data() {
     return {

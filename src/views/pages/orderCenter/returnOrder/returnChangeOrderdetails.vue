@@ -59,9 +59,7 @@
   </div>
 </template>
 <script>
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
-
+import { OmsButton, OmsTable } from 'burgeonComponents'
 
 import {
   // addDetailModalTableColumns,

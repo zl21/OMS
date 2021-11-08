@@ -1,10 +1,8 @@
-import { OmsForm } from 'burgeonComponents';
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
+import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents';
 
 export default {
   components: {
-    businessForm,
+    OmsForm,
     OmsButton,
     OmsTable
   },

@@ -53,8 +53,7 @@
 
 <script>
 // 退换货单详情
-import { OmsButton } from 'burgeonComponents'
-import { OmsTable } from 'burgeonComponents'
+import { OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'searchOOID',

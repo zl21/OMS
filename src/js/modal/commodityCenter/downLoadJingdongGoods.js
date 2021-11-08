@@ -1,10 +1,10 @@
-import { businessForm, businessButton } from 'burgeonComponents';
+import { OmsForm, OmsButton } from 'burgeonComponents';
 
 
 export default {
   components: {
-    businessForm,
-    businessButton
+    OmsForm,
+    OmsButton
   },
   data() {
     const _this = this;

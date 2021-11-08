@@ -1,10 +1,9 @@
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm as reForm } from 'burgeonComponents'
+import { OmsButton, OmsForm as reForm } from 'burgeonComponents'
 
 export default {
   components: {
     reForm,
-    businessButton
+    OmsButton
   },
   data() {
     return {

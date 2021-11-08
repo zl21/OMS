@@ -4,7 +4,7 @@ import R3 from '@syman/burgeon-r3';
 const { getModuleName } = R3;
 export default {
   components: {
-    businessButton
+    OmsButton
   },
   props: {},
   data() {

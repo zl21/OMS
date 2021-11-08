@@ -91,7 +91,7 @@ export default {
   props: ['dialogVisible', 'checkList', 'setGroupTableData'],
   components: {
     myInputLd,
-    businessButton
+    OmsButton
   },
   computed: {},
   watch: {

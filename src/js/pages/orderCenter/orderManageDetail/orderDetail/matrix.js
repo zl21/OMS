@@ -4,8 +4,7 @@ import port from '@/config/config/orderDetailConnector.js';
 
 export default {
   components: {
-    OmsButton,
-    loading
+    OmsButton
   },
   name: 'matrix',
   props: {

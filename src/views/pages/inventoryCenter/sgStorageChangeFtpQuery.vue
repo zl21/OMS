@@ -2,15 +2,15 @@
   <div class="sgStorageChangeFtpQuery custom-main">
     <div class="returnBtn totalHeight custom-btn">
       <!-- 按钮 -->
-      <business-button :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="returnForm totalHeight custom-form">
       <!-- form表单 -->
-      <business-form :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
     </div>
     <div class="salesTable custom-table">
       <!-- tab切换 -->
-      <business-label
+      <OmsLabel
         class="businessLabel"
         :label-list="labelList"
         :label-default-value="labelDefaultValue"

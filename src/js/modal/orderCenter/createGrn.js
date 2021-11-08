@@ -2,7 +2,7 @@ import { OmsButton } from 'burgeonComponents'
 
 export default {
   components: {
-    businessButton
+    OmsButton
   },
   props: {
     idArray: {

@@ -1,6 +1,5 @@
 
-  import { OmsButton } from 'burgeonComponents'
-  import { OmsForm } from 'burgeonComponents';
+  import { OmsForm, OmsButton } from 'burgeonComponents'
 
   const { getModuleName } = R3;
   export default {
@@ -17,7 +16,7 @@
     },
     components: {
       OmsButton,
-      businessForm
+      OmsForm
     },
     data() {
       return {

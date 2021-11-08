@@ -10,7 +10,7 @@ export default {
     meetConditions,
     tabList,
     ButtonFkDialog,
-    businessDialog
+    OmsDialog
   },
   computed: {
     currentTab: {

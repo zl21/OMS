@@ -8,7 +8,7 @@
       @on-select-all-cancel="onSelectAllCancel"
     />
     <div class="dialogBtn">
-      <business-button :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
   </div>
 </template>

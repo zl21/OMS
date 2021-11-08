@@ -20,7 +20,7 @@
         class="tableContent custom-table"
       >
         <!-- tab切换 -->
-        <business-label
+        <OmsLabel
           class="jordanLabel"
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

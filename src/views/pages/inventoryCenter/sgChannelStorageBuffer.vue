@@ -2,15 +2,15 @@
   <div class="sgChannelStorageBuffer custom-main">
     <div class="returnBtn custom-btn">
       <!-- 按钮 -->
-      <business-Button :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="returnForm custom-form">
       <!-- form表单 -->
-      <business-Form :form-config="formConfig" />
+      <OmsForm :form-config="formConfig" />
     </div>
     <div class="salesTable custom-table">
       <!-- tab切换 -->
-      <business-Label
+      <OmsLabel
         class="businessLabel"
         :label-list="labelList"
         :label-default-value="labelDefaultValue"

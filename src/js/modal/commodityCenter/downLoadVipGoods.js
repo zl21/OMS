@@ -1,8 +1,8 @@
-import {businessForm} from 'burgeonComponents';
+import { OmsForm } from 'burgeonComponents';
 
 export default {
   components: {
-    businessForm
+    OmsForm
   },
   props: {
     objList: {

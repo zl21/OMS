@@ -1,5 +1,4 @@
-import { OmsForm } from 'burgeonComponents'
-import { OmsButton } from 'burgeonComponents'
+import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   components: {

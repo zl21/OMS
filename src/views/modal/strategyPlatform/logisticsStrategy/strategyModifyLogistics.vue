@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    <business-button :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" />
     <Modal
       v-model="cancelModel"
       title="提示"
