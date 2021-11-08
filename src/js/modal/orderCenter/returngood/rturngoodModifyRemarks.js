@@ -3,7 +3,7 @@ import { OmsButton } from 'burgeonComponents';
 
 export default {
   components: {
-    businessBtn
+    OmsButton
   },
   data() {
     return {

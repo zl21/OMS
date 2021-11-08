@@ -1,7 +1,7 @@
 <!--
  * @Author: xx
  * @Date: 2021-05-19 10:53:30
- * @LastEditTime: 2021-08-10 16:31:06
+ * @LastEditTime: 2021-11-08 15:27:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /project-logic/views/pages/orderCenter/returngood/returnGoods.vue
@@ -16,6 +16,7 @@
 </template>
 
 <script> 
+    import { OmsTable } from 'burgeonComponents'
     export default {
     name:'returnGodds',
     components:{
