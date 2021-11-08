@@ -1,7 +1,6 @@
 // 订单中心->智能地址解析页面
 
-import { OmsButton } from 'burgeonComponents'
-import { OmsForm } from 'burgeonComponents';
+import { OmsButton,OmsForm ,loading} from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 
 const areaList = require('@/assets/js/address/area-list.js');
@@ -16,7 +15,7 @@ export default {
   mixins: [listeningToKeydownMixin],
   components: {
     OmsButton,
-    businessForm,
+    OmsForm,
     loading
   },
   data() {
