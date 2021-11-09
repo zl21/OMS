@@ -333,21 +333,21 @@ function modifyObjectFunction(property, configObj = {}) {
 // console.log(new CustomizedConfig());
 // console.clear();
 const Custom = {
-	STLD: CustomizedConfig.STLD;
-	Rule: CustomizedConfig.Rule;
-	STLC: CustomizedConfig.STLC;
-	VTDC: CustomizedConfig.VTDC;
-	TDCM: CustomizedConfig.TDCM;
-	STLD: CustomizedConfig.STLD;
-	omsUtils: CustomizedConfig.omsUtils;
-	BtnConfig: CustomizedConfig.BtnConfig;
-	dropDownBtn: CustomizedConfig.dropDownBtn;
-	image: CustomizedConfig.image;
-	globalComponent: CustomizedConfig.globalComponent;
-	cusModalConfig: CustomizedConfig.cusModalConfig;
-	cusPageConfig: CustomizedConfig.cusPageConfig;
-	cusExternalTreeDatas: CustomizedConfig.cusExternalTreeDatas;
-	setCusExternalTreeDatas: (v) => CustomizedConfig.editCusExternalTreeDatas(v);
+	STLD: CustomizedConfig.STLD,
+	Rule: CustomizedConfig.Rule,
+	STLC: CustomizedConfig.STLC,
+	VTDC: CustomizedConfig.VTDC,
+	TDCM: CustomizedConfig.TDCM,
+	STLD: CustomizedConfig.STLD,
+	omsUtils: CustomizedConfig.omsUtils,
+	BtnConfig: CustomizedConfig.BtnConfig,
+	dropDownBtn: CustomizedConfig.dropDownBtn,
+	image: CustomizedConfig.image,
+	globalComponent: CustomizedConfig.globalComponent,
+	cusModalConfig: CustomizedConfig.cusModalConfig,
+	cusPageConfig: CustomizedConfig.cusPageConfig,
+	cusExternalTreeDatas: CustomizedConfig.cusExternalTreeDatas,
+	setCusExternalTreeDatas: (v) => CustomizedConfig.editCusExternalTreeDatas(v),
 }
 // export default CustomizedConfig;
 export default Custom

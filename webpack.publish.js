@@ -9,9 +9,7 @@ const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const config = {
-  entry: {
-    index: './index.publish.js'
-  },
+  entry: './index.publish.js',
   output: {
     filename: 'BurgeonMaterials.min.js',
     path: path.join(__dirname, './burgeon.publish'),
