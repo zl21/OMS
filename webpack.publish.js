@@ -10,7 +10,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const config = {
   entry: {
-    index: './customized.config.js'
+    index: './index.publish.js'
   },
   output: {
     filename: 'BurgeonMaterials.min.js',
