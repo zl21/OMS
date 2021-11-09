@@ -70,7 +70,7 @@ function modifyObjectFunction(property, configObj = {}) {
 	}
 }
 
-export default {
+module.exports =  {
     handerTreeList,
     compareObjectFunction,
     modifyObjectFunction,
