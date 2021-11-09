@@ -1,12 +1,10 @@
 {
   "name": "@burgeon/project-logic",
-  "version": "1.0.14-op",
+  "version": "1.0.15-op",
   "description": "burgeon company's project-logic for private npm",
   "main": "burgeon.publish/BurgeonMaterials.min.js",
   "files": [
-    "burgeon.publish/static",
-    "burgeon.publish/BurgeonMaterials.min.js",
-    "burgeon.publish/BurgeonMaterials.min.css"
+    "burgeon.publish"
   ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
