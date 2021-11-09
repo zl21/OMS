@@ -120,36 +120,4 @@ const tableNameList = [
   },
 ];
 
-let treeDataConfig = {};
-treeDataConfig = (() => {
-  tableNameList.forEach(item => {
-    if (!item.table) return;
-    treeDataConfig = Object.assign(treeDataConfig, {
-      [item.table]: () => async () => {
-        let data = [];
-        let income;
-        if (item.formdata) {
-          let formdata = new FormData();
-          formdata = item.formdata ? formdata.append('param', item.formdata) : '';
-          income = formdata;
-        } else if (item.json) {
-          income = item.json ? item.json : {};
-        }
-        const res = await service[item.center][item.api](income);
-        data = res.data instanceof Array ? res.data : res.data.data;
-        // data.map(item=>item.open =true)
-        const treeData = {
-          data,
-          name: item.name || 'ID',
-          placeholder: item.placeholder || '请输入',
-          query: item.query || {},
-          searchData: item.searchData || {}
-        };
-        return treeData;
-      }
-    });
-  });
-  return treeDataConfig;
-})();
-
-export default treeDataConfig;
+export default tableNameList;
