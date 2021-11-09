@@ -1,3 +1,6 @@
+import CustomizedConfig from 'burgeonConfig/customized.config';
+import cusAllPageConfig from './customized.page.config.js';
+
 function handerTreeList(tableNameList) {
     let treeDataConfig = {};
     tableNameList.forEach(item => {
@@ -70,10 +73,26 @@ function modifyObjectFunction(property, configObj = {}) {
 	}
 }
 
-module.exports =  {
+let beforeEach = (to, from, next) =>{
+    // 判断是否是定制界面
+    if(to.meta?.routePrefix === '/CUSTOMIZED'){
+      // 获取当前页面的路由的 
+      let currentKey = to.params.customizedModuleName;
+     
+      // 循环页面配置查找当前路由的配置 并给singleType赋值
+      currentKey in cusAllPageConfig && (CustomizedConfig.BtnConfig.singleType=Number(!cusAllPageConfig[currentKey].isList));
+    }
+    // 其他判断
+    
+    // 进入下一个钩子
+    next();
+  }
+
+export {
     handerTreeList,
     compareObjectFunction,
     modifyObjectFunction,
+    beforeEach,
 }
 /* treeDataConfig = (() => {
   tableNameList.forEach(item => {

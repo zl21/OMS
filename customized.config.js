@@ -1,5 +1,5 @@
 
-import { handerTreeList, compareObjectFunction } from '@/config/config/config.hander.js'
+import { handerTreeList, compareObjectFunction, beforeEach as beEach } from '@/config/config/config.hander.js'
 import customizedModal from '@/config/config/customized.modal.config.js'
 import customizedPage from '@/config/config/customized.page.config.js'
 import customizedExternalTreeDatas from '@/config/config/externalTreeDatas.config.js'
@@ -22,12 +22,15 @@ import cusValidate from '@/config/config/validate.config.js';
 
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import customizedService from '@/service/index.js'
+
+/* --------- mixin: --------- */
 import standardTableListsCustomize from '@/config/minxin/standardTableListsCustomize';
 import verticalTableDetailCustomize from '@/config/minxin/verticalTableDetailCustomize';
 import tableDetailCollectionMixin from '@/config/minxin/standardTable/mixin.js';
 import standardTableListdefindVue from '@/commonPages/layout/standardTableListdefind.vue';
 
 class CustomizedConfig {
+	// static #beforeEach = beEach;
 	static #STLD = {
 		defined: standardTableListdefindVue,
 	};
@@ -57,6 +60,10 @@ class CustomizedConfig {
 	static #dropDownBtn = dropDownBtn;
 	static #cusValidate = cusValidate;
 	/* ------------ 挂载项 start ------------- */
+
+	/* static get beforeEach() {
+		return this.#beforeEach;
+	} */
 	static get STLD() {
 		return this.#STLD;
 	}
@@ -295,6 +302,7 @@ class CustomizedConfig {
 // console.log(new CustomizedConfig());
 // console.clear();
 const Custom = {
+	beforeEach: beEach,
 	STLD: CustomizedConfig.STLD,
 	Rule: CustomizedConfig.Rule,
 	STLC: CustomizedConfig.STLC,
