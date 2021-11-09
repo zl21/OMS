@@ -210,8 +210,8 @@ export default {
     $network.post('/api/cs/vip/distribution/v1/changeTag', params), // 配货单换吊牌的保存
   managementOrderHold: (params) =>
     $network.post('/p/cs/oc/oms/v2/order/batch/hold', params), // 零售发货单-HOLD单
-  returnTypeItemquery: (params) =>
-    $network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
+  // returnTypeItemquery: (params) =>
+  //   $network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
   extraReturnTableLogQuery: (params) =>
     $network.get(
       `/api/cs/oc/oms/v1/getOcBReturnAfSendLog?${qs.stringify(params)}`
@@ -399,4 +399,19 @@ export default {
     cancelOrderLable:(params) => $network.post('/p/cs/oc/oms/v1/cancelOrderLable' , params),  //取消标记
     orderExport:(params) => $network.post('/p/cs/oc/oms/v1/export' , params), //订单列表里的导入功能
     updateDeliveryTime:(params) => $network.post('/p/cs/oc/b/oms/v1/ocborder/updateDeliveryTime' , params), // 零售列表-修改预计发货时间
+
+    querySgStorage: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/querySgStorage', params), // 列表-商品详情-查库存
+    orderDeliveryUrgent: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/orderDeliveryUrgent', params), // 加急发货接口
+    checkOrderDeliveryUrgent: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/checkOrderDeliveryUrgent', params), // 加急发货检查接口
+    returnSaveBill: params => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/returnSaveBill', params, { serviceId: 'r3-oc-oms' }), // 退换货单Add-save
+    getReturnItemBySourceCode: params => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/getReturnItemBySourceCode', params, { serviceId: 'r3-oc-oms' }), // 退换货单-原始订单编号-查找明细
+    objectTableItem: (params) => $network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
+    getReturnExchangeItemBySkuECode: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/getReturnExchangeItemBySkuECode', params, { serviceId: 'r3-oc-oms' }), // 获取对应sku的商品
+    getALlOrderReturnAndItemInfo: (params) => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/getALlOrderReturnAndItemInfo', params), // 退货单/换货单明细
+    queryExtraReturnOrder: (params) => $network.post('/p/cs/oc/oms/v1/ocborder/queryExtraReturnOrder', params), // 额外退款单-主表 原平台订单查询
+    queryExtraReturnOrderItem: (params) => $network.post('/p/cs/oc/oms/v1/ocborder/queryExtraReturnOrderItem', params), // 额外退款单-主表 订单明细查询
+    ocBCompensateOrder: (params) => $network.post('/p/cs/oc/b/oms/v1/ocBCompensateOrder/queryOrderList', params), // 赔付单-主表 订单明细查询
+    payQueryProList: (params) => $network.post('/p/cs/oc/b/oms/v1/ocBCompensateOrder/queryProList', params), // 赔付单-子表-新增明细
+    paySaveApi: (params) => $network.post('/p/cs/oc/b/oms/v1/ocBCompensateOrder/save', params), // 赔付单-保存
+    extraSaveApi: (params) => $network.post('/p/cs/oc/oms/v1/refundExtra/save', params), // 赔付单-保存
 }
