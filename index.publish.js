@@ -6,21 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
  */
-// import cus from './customized.config.js'
-import customizedModal from '@/config/config/customized.modal.config.js'
-import customizedPage from '@/config/config/customized.page.config.js'
-import customizedExternalTreeDatas from '@/config/config/externalTreeDatas.config.js'
-import customizeWaterMarkConfig from '@/config/config/customized.watermark.config.js'
-import filterUrlConfig from '@/config/config/filterUrl.config.js'
-import filterUrlForNetworkSc from '@/config/config/filterUrlForNetwork.js'
-import orderDetailConnector from '@/config/config/orderDetailConnector.js'
-import labelList from '@/config/config/labelList.js'
-import orderLogo from '@/config/config/orderLogo.js'
-import importTableConfig from '@/config/config/importTable.config.js'
-import oldConfig from '@/config/config/globalComponent.config.js'
-import subTableConfig from '@/config/config/subTable.config.js'
-import custommizeMain from '@/config/config/customized.panel.config.js'
-
+import cus from './customized.config.js'
 import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import R3 from '@syman/burgeon-r3';
@@ -56,7 +42,7 @@ class InitAppConfig {
     window.$utils = custUtils;
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
-    // window.OMS = cus;
+    window.OMS = cus;
     window.$i18n = i18n; // 挂载国际化
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     // Vue.prototype.$comUtils = comUtils;
