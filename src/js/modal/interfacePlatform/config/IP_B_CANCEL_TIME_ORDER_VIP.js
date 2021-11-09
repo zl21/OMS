@@ -1,3 +1,6 @@
+import i18n from '@burgeon/internationalization/i18n'; // 国际化
+window.$i18n = i18n
+
 export default {
   // 唯品会取消时效订单（取消时效订单下载）
   formConfig: {
