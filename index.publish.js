@@ -6,6 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
  */
+import cus from './customized.config.js'
 import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import R3 from '@syman/burgeon-r3';
@@ -41,6 +42,7 @@ class InitAppConfig {
     window.$utils = custUtils;
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
+    window.OMS = cus;
     window.$i18n = i18n; // 挂载国际化
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     // Vue.prototype.$comUtils = comUtils;
