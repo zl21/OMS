@@ -7,5 +7,6 @@
  * @FilePath: /burgeon-business-components/src/index.js
  */
 
-let burgeonComponents = require.context('burgeonComponents/view/', false,/.vue$/);
-export default burgeonComponents;
+let burgeonComponents = require.context('burgeonComponents/view/', false, /.vue$/);
+let comJs = require.context('burgeonComponents/common/js/', false, /.js$/);
+export default { burgeonComponents, comJs };
