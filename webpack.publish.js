@@ -12,14 +12,10 @@ const config = {
   entry: './index.publish.js',
   output: {
     filename: 'BurgeonMaterials.min.js',
-    chunkFilename: 'chunk/[name].js',
+    chunkFilename: 'MaterialsCenter/js/[name].min.js',
     path: path.join(__dirname, './burgeon.publish'),
     globalObject: 'this',
-    library: {
-      name:'BurgeonMaterials',
-      type:'umd',
-      umdNamedDefine: true,
-    },
+    library: 'BurgeonMaterials',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     clean: true,
@@ -117,6 +113,7 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: 'BurgeonMaterials.min.css',
+      chunkFilename: 'MaterialsCenter/css/[name].min.css',
     }),
     new VueLoaderPlugin(),
     new copyWebpackPlugin({

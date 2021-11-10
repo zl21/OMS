@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-08 20:32:29
- * @LastEditTime: 2021-08-05 15:43:18
+ * @LastEditTime: 2021-11-10 11:39:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/order.config.js
@@ -9,12 +9,16 @@
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   OC_B_ORDER_VIRTUAL_TABLE: {
-    component: () => import('allpages/orderCenter/orderManager/orderAddOrCopy.vue'),
+    component: () => import(
+      /* webpackChunkName:'orderCenterPage' */
+      'allpages/orderCenter/orderManager/orderAddOrCopy.vue'),
     labelName: '订单新增',
     isList: false,
   },
   OC_B_ORDER: {
-    component: () => import('allpages/orderCenter/returnOrder/orderManageDetails.vue'),
+    component: () => import(
+      /* webpackChunkName:'orderCenterPage' */
+      'allpages/orderCenter/returnOrder/orderManageDetails.vue'),
     labelName: '订单详情',
     isList: false
   },

@@ -935,10 +935,10 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     "to-fast-properties" "^2.0.0"
 
-"@burgeon/business-components@^1.0.5-op":
-  "integrity" "sha512-ntZ4HEMkagIB0MfabjRts0O6u7hCpyhCJxhBPjciUVRT41lwvr4iphpMuqsJY5rne/laQvZu1odx7lXsM4/pKA=="
-  "resolved" "https://packages.aliyun.com/60583434ff5718e91a64f406/npm/npm-registry/@burgeon/business-components/-/@burgeon/business-components-1.0.5-op.tgz"
-  "version" "1.0.5-op"
+"@burgeon/business-components@^1.0.9-op":
+  "integrity" "sha512-dNLNqonEcqARjTwjKbTGW8eazfRZd7CmYJfxFOIOmMm4YG8GFvEDmvUC4W1b7E9kzhmhXzafbanPVJGsJQzjUg=="
+  "resolved" "https://packages.aliyun.com/60583434ff5718e91a64f406/npm/npm-registry/@burgeon/business-components/-/@burgeon/business-components-1.0.9-op.tgz"
+  "version" "1.0.9-op"
   dependencies:
     "@burgeon/internationalization" "^1.1.1"
     "@syman/ark-ui" "1.2.5"
