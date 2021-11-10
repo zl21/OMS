@@ -128,10 +128,6 @@ const config = {
           from: path.resolve(__dirname, "./src/common/css"),
           to: path.resolve(__dirname, "./burgeon.publish/common/css")
         },
-        {
-          from: path.resolve(__dirname, "./src/common"),
-          to: path.resolve(__dirname, "./burgeon.publish/common")
-        },
       ],
     })
   ],
