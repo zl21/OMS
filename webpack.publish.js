@@ -12,6 +12,7 @@ const config = {
   entry: './index.publish.js',
   output: {
     filename: 'BurgeonMaterials.min.js',
+    chunkFilename: 'chunk/[name].js',
     path: path.join(__dirname, './burgeon.publish'),
     globalObject: 'this',
     library: {
@@ -79,9 +80,11 @@ const config = {
     },
     {
       test: /\.(png|jpg|gif|svg)$/,
+      type: 'javascript/auto',
       use: [{
         loader: 'url-loader',
         options: {
+          esModule: false,
           limit: 1000000,
           name: '[path][name].[ext]'
         }
