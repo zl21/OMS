@@ -15,7 +15,7 @@ export default {
   // 赔付单
   PAYABLEADJUSTMENTLIST: {
     component: () => import(
-      /* webpackchunkname: 'FinanceCenterPage' */
+      /* webpackChunkName: 'FinanceCenterPage' */
       'allpages/financialCenter/payableAdjust/payableAdjustmentList.vue'
     ),
     // component: payableAdjustmentList,
@@ -23,7 +23,7 @@ export default {
   // 新增赔付单
   PAYABLEADJUSTADD: {
     component: () => import(
-      /* webpackchunkname: 'FinanceCenterPage' */
+      /* webpackChunkName: 'FinanceCenterPage' */
       'allpages/financialCenter/payableAdjust/payableAdjustAdd.vue'
     ),
     // component: payableAdjustAdd,

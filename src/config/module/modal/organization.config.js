@@ -8,8 +8,11 @@
  */
 // 组织中心
 export default {
-    //重置密码
-    USERS_RESET_PWD:{
-        component: () => import('@/views/modal/organizationCenter/users_reset_pwd.vue'),
-    }
+  //重置密码
+  USERS_RESET_PWD: {
+    component: () => import(
+      /* webpackChunkName: 'OrganizationCenterModal' */
+      '@/views/modal/organizationCenter/users_reset_pwd.vue'
+    ),
+  }
 };

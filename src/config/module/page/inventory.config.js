@@ -9,35 +9,35 @@ export default {
   // 出库通知单==>生成出库拣货单==>出库拣货单
   OUTBOUNDPICKORDER: {
     component: () => import(
-      /* webpackchunkname: 'InventoryCenterPage' */
+      /* webpackChunkName: 'InventoryCenterPage' */
       'allpages/orderCenter/scanIn/outboundPickOrder.vue'
     ),
     // component: outboundPickOrder,
   },
   SGCHANNELSYNSTOCKQUERY: {
     component: () => import(
-      /* webpackchunkname: 'InventoryCenterPage' */
+      /* webpackChunkName: 'InventoryCenterPage' */
       'allpages/inventoryCenter/sgChannelSynstockQuery.vue'
     ),
     // component: sgChannelSynstockQuery
   },
   SGCHANNELSTORAGEBUFFER: {
     component: () => import(
-      /* webpackchunkname: 'InventoryCenterPage' */
+      /* webpackChunkName: 'InventoryCenterPage' */
       'allpages/inventoryCenter/sgChannelStorageBuffer.vue'
     ),
     // component: sgChannelStorageBuffer
   },
   SGSTORAGECHANGEFTPQUERY: {
     component: () => import(
-      /* webpackchunkname: 'InventoryCenterPage' */
+      /* webpackChunkName: 'InventoryCenterPage' */
       'allpages/inventoryCenter/sgStorageChangeFtpQuery.vue'
     ),
     // component: sgStorageChangeFtpQuery
   },
   SGCHANNELSTORAGEBUFFERPROCEDURE: {
     component: () => import(
-      /* webpackchunkname: 'InventoryCenterPage' */
+      /* webpackChunkName: 'InventoryCenterPage' */
       'allpages/inventoryCenter/sgChannelStorageBuffer.vue'
     ),
     // component: sgChannelStorageBuffer // 库存策略计算缓存池

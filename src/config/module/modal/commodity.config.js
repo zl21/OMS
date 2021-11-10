@@ -5,7 +5,10 @@ export default {
   // 通用商品(通用商品下载)  同接口平台通用订单接口
   // 京东商品 (下载商品) 
   DOWNLOADJINGDONGGOODS: {
-    component: () => import('@/views/modal/commodityCenter/downLoadJingdongGoods.vue'),
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterModal' */
+      '@/views/modal/commodityCenter/downLoadJingdongGoods.vue'
+    ),
   },
 
 };

@@ -5,7 +5,7 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   MONITORINGPLATFORM: {
     component: () => import(
-      /* webpackchunkname: 'MonitorCenterPage' */
+      /* webpackChunkName: 'MonitorCenterPage' */
       'allpages/monitorPlatform/monitorPlatform.vue'
     ),
     // labelName: i18n.t('menu.ae')

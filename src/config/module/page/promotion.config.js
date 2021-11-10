@@ -15,7 +15,7 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   PROMACTIQUERYLIST: {
     component: () => import(
-      /* webpackchunkname: 'PromotionCenterPage' */
+      /* webpackChunkName: 'PromotionCenterPage' */
       'allpages/promotionCenter/promotionlist.vue'
     ),
     // labelName: '促销活动',
@@ -23,19 +23,19 @@ export default {
   },
   PM_C_PROM_ACTI: {
     component: () => import(
-      /* webpackchunkname: 'PromotionCenterPage' */
+      /* webpackChunkName: 'PromotionCenterPage' */
       'allpages/promotionCenter/addOrEditActi.vue'
     )
   },
   PM_C_PROM_ACTI_BATCH_ADD: {
     component: () => import(
-      /* webpackchunkname: 'PromotionCenterPage' */
+      /* webpackChunkName: 'PromotionCenterPage' */
       'allpages/promotionCenter/batchActivity.vue'
     )
   },
   PM_C_PROM_PRE_TEST: {
     component: () => import(
-      /* webpackchunkname: 'PromotionCenterPage' */
+      /* webpackChunkName: 'PromotionCenterPage' */
       'allpages/promotionCenter/simulation.vue'
     )
   },
