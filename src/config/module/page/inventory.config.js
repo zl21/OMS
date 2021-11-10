@@ -8,23 +8,38 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   // 出库通知单==>生成出库拣货单==>出库拣货单
   OUTBOUNDPICKORDER: {
-    component: () => import('allpages/orderCenter/scanIn/outboundPickOrder.vue'),
+    component: () => import(
+      /* webpackchunkname: 'InventoryCenterPage' */
+      'allpages/orderCenter/scanIn/outboundPickOrder.vue'
+    ),
     // component: outboundPickOrder,
   },
   SGCHANNELSYNSTOCKQUERY: {
-    component: () => import('allpages/inventoryCenter/sgChannelSynstockQuery.vue'),
+    component: () => import(
+      /* webpackchunkname: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/sgChannelSynstockQuery.vue'
+    ),
     // component: sgChannelSynstockQuery
   },
   SGCHANNELSTORAGEBUFFER: {
-    component: () => import('allpages/inventoryCenter/sgChannelStorageBuffer.vue'),
+    component: () => import(
+      /* webpackchunkname: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/sgChannelStorageBuffer.vue'
+    ),
     // component: sgChannelStorageBuffer
   },
   SGSTORAGECHANGEFTPQUERY: {
-    component: () => import('allpages/inventoryCenter/sgStorageChangeFtpQuery.vue'),
+    component: () => import(
+      /* webpackchunkname: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/sgStorageChangeFtpQuery.vue'
+    ),
     // component: sgStorageChangeFtpQuery
   },
   SGCHANNELSTORAGEBUFFERPROCEDURE: {
-    component: () => import('allpages/inventoryCenter/sgChannelStorageBuffer.vue'),
+    component: () => import(
+      /* webpackchunkname: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/sgChannelStorageBuffer.vue'
+    ),
     // component: sgChannelStorageBuffer // 库存策略计算缓存池
   }
 

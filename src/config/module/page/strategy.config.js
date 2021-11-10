@@ -9,107 +9,150 @@
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   SG_B_SHOP_DETAIL: {
-    component: () => import('allpages/strategyPlatform/shopCom.vue'),
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/shopCom.vue'
+    ),
   },
   // 店铺条码锁库策略
   SG_B_SHOP_LOCK_DETAIL: {
-    component: () => import('allpages/strategyPlatform/goodsInfoDetails.vue'),
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/goodsInfoDetails.vue'
+    ),
   },
   // 策略平台-物流区域设置
   LOGISTICSAREA: {
-    component: () => import('allpages/strategyPlatform/logisticsStrategy/logisticsArea.vue'),
-    // labelName: '物流区域设置新增',
-    labelName: i18n.t('menu.ae')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/logisticsStrategy/logisticsArea.vue'
+    ),
+    labelName: i18n.t('menu.ae') // 物流区域设置新增
   },
   // 策略平台-仓库物流优先级方案(新增/详情)
   SETWAREHOUSELOGISTICS: {
-    component: () => import('allpages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics.vue'),
-    // labelName: '仓库物流优先级方案新增',
-    labelName: i18n.t('menu.af')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/setWarehouseLogistics/setWarehouseLogistics.vue'
+    ),
+    labelName: i18n.t('menu.af') // 仓库物流优先级方案新增
   },
   // 策略平台-快递赔付方案(新增/详情)
   COURIERPAY: {
-    component: () => import('allpages/strategyPlatform/courierPay/courierPay.vue'),
-    // labelName: '快递赔付方案编辑',
-    labelName: i18n.t('menu.ag')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/courierPay/courierPay.vue'
+    ),
+    labelName: i18n.t('menu.ag') // 快递赔付方案编辑
   },
   ORDERAUTOCHECK: {
-    component: () => import('allpages/strategyPlatform/orderAutoCheck.vue'),
-    // labelName: '订单自动审核编辑',
-    labelName: i18n.t('menu.ai')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/orderAutoCheck.vue'
+    ),
+    labelName: i18n.t('menu.ai') // 订单自动审核编辑
   },
   SENDSINGLERULE: {
-    component: () => import('allpages/strategyPlatform/sendSingleRule.vue'),
-    // labelName: '发货单派单规则',
-    labelName: i18n.t('menu.aj')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/sendSingleRule.vue'
+    ),
+    labelName: i18n.t('menu.aj') // 发货单派单规则
   },
   WPHEMAILSEND: {
-    component: () => import('allpages/strategyPlatform/wphEmailSend.vue'),
-    // labelName: '唯品会预警通知',
-    labelName: i18n.t('menu.ak')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/wphEmailSend.vue'
+    ),
+    labelName: i18n.t('menu.ak') // 唯品会预警通知
   },
   SMSSTRATEGY: {
-    component: () => import('allpages/strategyPlatform/smsStrategy.vue'),
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/smsStrategy.vue'
+    ),
   },
   ST_C_VIPCOM_PROJECT: {
-    component: () => import('allpages/strategyPlatform/scheduleAddOrEdit.vue'),
-    // labelName: '档期日程规划',
-    labelName: i18n.t('menu.al')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/scheduleAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.al') // 档期日程规划
   },
   ST_C_WAREHOUSE_LOGISTICS_SET: {
-    component: () => import('allpages/strategyPlatform/warehouseLogisticsAddOrEdit.vue'),
-    // labelName: '仓库物流设置',
-    labelName: i18n.t('menu.am')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/warehouseLogisticsAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.am') // 仓库物流设置
   },
   ST_C_PRICE: {
-    component: () => import('allpages/strategyPlatform/commodityPriceAddOrEdit.vue'),
-    // labelName: '商品价格策略',
-    labelName: i18n.t('menu.an')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/commodityPriceAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.an') // 商品价格策略
   },
   ST_C_LIVE_CAST_STRATEGY: {
-    component: () => import('allpages/strategyPlatform/liveParsingAddOrEdit.vue'),
-    // labelName: '直播解析策略',
-    labelName: i18n.t('menu.ao')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/liveParsingAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.ao') // 直播解析策略
   },
   ST_C_ORDER_WAREHOUSE: {
-    component: () => import('allpages/strategyPlatform/storehouseRule.vue'),
-    // labelName: '分仓规则',
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/storehouseRule.vue'
+    ),
     isList: true,
-    labelName: i18n.t('menu.ap'),
+    labelName: i18n.t('menu.ap'), // 分仓规则
   },
   ST_C_ASSIGN_LOGISTICS: {
-    component: () => import('allpages/strategyPlatform/storehouseRule.vue'),
-    // labelName: '分物流规则',
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/storehouseRule.vue'
+    ),
     isList: true,
-    labelName: i18n.t('menu.aq'),
+    labelName: i18n.t('menu.aq'), // 分物流规则
   },
   ST_C_SPECIAL_ASSIGN_LOGISTICS: {
-    component: () => import('allpages/strategyPlatform/specialLogistics.vue'),
-    // labelName: '特殊物流方案',
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/specialLogistics.vue'
+    ),
     isList: true,
-    labelName: i18n.t('menu.ar'),
+    labelName: i18n.t('menu.ar'), // 特殊物流方案
   },
   ST_C_DELIVERY_AREA: {
-    component: () => import('allpages/strategyPlatform/logisticsDistribute.vue'),
-    // labelName: '物流派送范围',
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/logisticsDistribute.vue'
+    ),
     isList: true,
-    labelName: i18n.t('menu.as'),
+    labelName: i18n.t('menu.as'), // 物流派送范围
   },
   ST_C_HOLD_ORDER_STRATEGY: {
-    component: () => import('allpages/strategyPlatform/holdStrategyAddOrEdit.vue'),
-    // labelName: 'HOLD单策略',
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/holdStrategyAddOrEdit.vue'
+    ),
     isList: true,
-    labelName: i18n.t('menu.at')
+    labelName: i18n.t('menu.at') // HOLD单策略
   },
   ST_C_TMALL_EXCHANGE_ORDER: {
-    component: () => import('allpages/strategyPlatform/tmExchangeAddOrEdit.vue'),
-    // labelName: '天猫换货策略',
-    labelName: i18n.t('menu.au')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/tmExchangeAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.au') // 天猫换货策略
   },
   ST_C_AUTO_AUDIT: {
-    component: () => import('allpages/strategyPlatform/auditOrderStrategy.vue'),
-    // labelName: '审单策略',
-    labelName: i18n.t('menu.av')
+    component: () => import(
+      /* webpackchunkname: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/auditOrderStrategy.vue'
+    ),
+    labelName: i18n.t('menu.av') // 审单策略
   }
 
 };

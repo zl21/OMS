@@ -19,39 +19,54 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   // 商品中心-组合福袋商品-新增/详情
   COMBINEDCOMMODITY: {
-    component: () => import('allpages/commodityCenter/combinedCommodity.vue'),
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterPage' */
+      'allpages/commodityCenter/combinedCommodity.vue'
+    ),
     // labelName: '组合福袋商品编辑',
     labelName: i18n.t('menu.a6')
   },
   /* 2.0: */
   PS_C_PRO: {
-    component: () => import('allpages/commodityCenter/spuRecord.vue'),
-    // labelName: '商品SPU',
-    labelName: i18n.t('menu.a7')
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterPage' */
+      'allpages/commodityCenter/spuRecord.vue'
+    ),
+    labelName: i18n.t('menu.a7') // 商品SPU
   },
   PS_C_SKU: {
-    component: () => import('allpages/commodityCenter/skuAddOrEdit.vue'),
-    // labelName: '商品SKU',,
-    labelName: i18n.t('menu.a8')
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterPage' */
+      'allpages/commodityCenter/skuAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.a8') // 商品SKU
   },
   PS_C_SKU_QUICKLY_ADD: {
-    component: () => import('allpages/commodityCenter/quicklyGenerate.vue'),
-    // labelName: 'SKU快速生成',
-    labelName: i18n.t('menu.a9')
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterPage' */
+      'allpages/commodityCenter/quicklyGenerate.vue'
+    ),
+    labelName: i18n.t('menu.a9') // SKU快速生成
   },
   BS_C_EXTRA_ATTRIBUTE_DEF_PRO: {
-    component: () => import('allpages/commodityCenter/commodityCusPropertiesAddOrEdit.vue'),
-    // labelName: '商品自定义属性',
-    labelName: i18n.t('menu.aa')
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterPage' */
+      'allpages/commodityCenter/commodityCusPropertiesAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.aa') // 商品自定义属性
   },
   PS_C_PRO_GROUP: {
-    component: () => import('allpages/commodityCenter/modifyGroup.vue'),
-    // labelName: '组合商品',
-    labelName: i18n.t('menu.ab')
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterPage' */
+      'allpages/commodityCenter/modifyGroup.vue'
+    ),
+    labelName: i18n.t('menu.ab') // 组合商品
   },
   PS_C_PRO_CLASSIFY: {
-    component: () => import('allpages/commodityCenter/commodityClassifyAddOrEdit.vue'),
-    // labelName: '商品分类',
-    labelName: i18n.t('menu.ac')
+    component: () => import(
+      /* webpackChunkName: 'CommodityCenterPage' */
+      'allpages/commodityCenter/commodityClassifyAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.ac') // 商品分类
   },
 };
