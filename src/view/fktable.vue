@@ -109,8 +109,8 @@
 </template>
 
 <script>
-import fktable from "burgeonComponents/js/fktable.js";
-export default fktable;
+import Fktable from "burgeonComponents/js/fktable.js";
+export default Fktable;
 </script>
 
 <style lang="less" scoped>

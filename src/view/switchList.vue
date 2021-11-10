@@ -54,7 +54,7 @@
 </template>
 
 <script>
-const switchList = {
+const SwitchList = {
   props: {
     switchList: {
       type: Object,
@@ -64,7 +64,7 @@ const switchList = {
     return {};
   },
 };
-export default switchList
+export default SwitchList
 </script>
 
 <style lang="less" scoped>

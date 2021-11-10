@@ -12,7 +12,7 @@
 <script>
 import OmsTable from "./OmsTable.vue";
 // import config from "@/js/pages/orderCenter/orderManageDetail/details/config.js";
-const subTable = {
+const SubTable = {
   data() {
     return {
       tableConfig: {
@@ -153,5 +153,5 @@ const subTable = {
     }
   },
 };
-export default subTable
+export default SubTable
 </script>

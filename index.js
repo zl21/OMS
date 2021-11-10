@@ -9,4 +9,13 @@
 
 let burgeonComponents = require.context('burgeonComponents/view/', false, /.vue$/);
 let comJs = require.context('burgeonComponents/common/js/', false, /.js$/);
+
+// 自动导入定制配置组件
+const context = require.context('burgeonComponents/view/', true, /\.vue$/);
+const CustomComponents = {}
+context.keys().forEach((key) => {
+  const component = context(key).default;
+  CustomComponents[component.name] = component
+});
+
 export default { burgeonComponents, comJs };

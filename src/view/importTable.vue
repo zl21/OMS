@@ -58,8 +58,8 @@
   </div>
 </template>
 <script>
-import importTable from 'burgeonComponents/js/importTable.js';
-export default importTable;
+import ImportTable from 'burgeonComponents/js/importTable.js';
+export default ImportTable;
 </script>
 
 <style scoped lang="less">
