@@ -1,5 +1,6 @@
 import myInput from "framework/components/input/objinput_dz.vue";
 export default {
+  name: 'TableInput',
   components: {
     myInput
   },

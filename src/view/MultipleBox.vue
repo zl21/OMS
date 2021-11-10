@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-  import MultipleBox from 'burgeonComponents/js/MultipleBox';
+  import MultipleBox from 'burgeonComponents/js/multipleBox';
 
   export default MultipleBox;
  </script>

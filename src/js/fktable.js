@@ -3,6 +3,7 @@ import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 // window.$i18n = i18n
 
 export default {
+  name: 'Fktable',
   props: {
     inputBox: true,
     defaultSelectedIds: {

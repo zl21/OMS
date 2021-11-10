@@ -7,15 +7,18 @@
  * @FilePath: /burgeon-business-components/src/index.js
  */
 
-let burgeonComponents = require.context('burgeonComponents/view/', false, /.vue$/);
-let comJs = require.context('burgeonComponents/common/js/', false, /.js$/);
+import Vue from 'vue';
 
-// 自动导入定制配置组件
+let burgeonComponents = require.context('burgeonComponents/view/', false, /.vue$/);
+let comJS = require.context('burgeonComponents/common/js/', false, /.js$/);
+
 const context = require.context('burgeonComponents/view/', true, /\.vue$/);
 const CustomComponents = {}
 context.keys().forEach((key) => {
-  const component = context(key).default;
-  CustomComponents[component.name] = component
+	const component = context(key).default;
+	CustomComponents[component.name] = component
+	Vue.component(component.name, component)
 });
-
-export default { burgeonComponents, comJs };
+console.log('CustomComponents::', CustomComponents);
+console.log('comJS::', comJS);
+export default { burgeonComponents, comJS };

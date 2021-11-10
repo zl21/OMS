@@ -52,6 +52,7 @@ import OmsDialog from "burgeonComponents/view/OmsDialog";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
 
 const DownLoad = {
+  name: 'DownLoad',
   components: {
     OmsDialog,
     OmsForm,

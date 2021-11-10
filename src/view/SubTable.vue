@@ -13,6 +13,7 @@
 import OmsTable from "./OmsTable.vue";
 // import config from "@/js/pages/orderCenter/orderManageDetail/details/config.js";
 const SubTable = {
+  name: 'SubTable',
   data() {
     return {
       tableConfig: {

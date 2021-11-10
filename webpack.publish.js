@@ -128,6 +128,10 @@ const config = {
           from: path.resolve(__dirname, "./src/common/css"),
           to: path.resolve(__dirname, "./burgeon.publish/common/css")
         },
+        {
+          from: path.resolve(__dirname, "./src/common"),
+          to: path.resolve(__dirname, "./burgeon.publish/common")
+        },
       ],
     })
   ],
@@ -149,7 +153,7 @@ const config = {
       parallel: true,
       terserOptions: {
         compress: {
-          pure_funcs: ['console.log']
+          // pure_funcs: ['console.log']
         }
       }
     }), new CssMinimizerPlugin()],

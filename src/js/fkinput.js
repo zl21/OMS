@@ -5,6 +5,7 @@ import FkTable from 'burgeonComponents/view/fktable.vue';
 // window.$i18n = i18n
 
 export default {
+  name: 'Fkinput',
   props: {
     /* autoRequest: {
       typeof: Object

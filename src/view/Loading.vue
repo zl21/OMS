@@ -13,6 +13,7 @@
 </style>
 <script>
  const Loading = {
+   name: 'Loading',
     props: {
       loading: {
         type: Boolean,

@@ -1,4 +1,5 @@
 export default {
+  name: 'OmsButton',
   data() {
     return {};
   },
@@ -10,8 +11,8 @@ export default {
   },
 
   methods: {
-    dropDownClick(name,...eventlist) {
-      this.$emit('dropDownClick', name,eventlist)
+    dropDownClick(name, ...eventlist) {
+      this.$emit('dropDownClick', name, eventlist)
     },
     button(ref) {
       this.$emit("buttonEvent", ref, this);

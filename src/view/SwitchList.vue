@@ -55,6 +55,7 @@
 
 <script>
 const SwitchList = {
+  name: 'SwitchList',
   props: {
     switchList: {
       type: Object,

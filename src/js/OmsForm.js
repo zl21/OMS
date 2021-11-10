@@ -11,6 +11,7 @@ import myInputLd from 'framework/components/element/input.vue' //为多选+导�
 import myInput from "burgeonComponents/view/fkinput.vue";
 import fkinputPlus from "burgeonComponents/view/fkinputPlus.vue";
 export default {
+  name: 'OmsForm',
   components: {
     fkinputPlus,
     myInput,

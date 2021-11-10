@@ -3,6 +3,7 @@ import OmsForm from "burgeonComponents/view/OmsForm";
 // window.$i18n = i18n
 
 export default {
+  name: 'easyMatrix',
   components: {
     OmsForm
   },

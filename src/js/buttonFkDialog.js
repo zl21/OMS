@@ -11,7 +11,7 @@ import fkdialog from 'burgeonComponents/view/fkdialog.vue';
 // window.$i18n = i18n
 
 export default {
-  name: 'ButtonFk',
+  name: 'ButtonFkDialog',
   components: {
     fkdialog
   },

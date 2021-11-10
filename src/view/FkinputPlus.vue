@@ -81,6 +81,7 @@
 // import objinput_dz from "./js/fkinput.js";
 // export default objinput_dz;
 const FkinputPlus = {
+  name: 'FkinputPlus',
   props: {
     itemdata: {
       type: Object
