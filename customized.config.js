@@ -1,5 +1,5 @@
 
-
+import { handerTreeList, compareObjectFunction, beforeEach as beEach } from '@/config/config/config.hander.js'
 import customizedModal from '@/config/config/customized.modal.config.js'
 import customizedPage from '@/config/config/customized.page.config.js'
 import customizedExternalTreeDatas from '@/config/config/externalTreeDatas.config.js'
@@ -22,12 +22,15 @@ import cusValidate from '@/config/config/validate.config.js';
 
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import customizedService from '@/service/index.js'
+
+/* --------- mixin: --------- */
 import standardTableListsCustomize from '@/config/minxin/standardTableListsCustomize';
 import verticalTableDetailCustomize from '@/config/minxin/verticalTableDetailCustomize';
 import tableDetailCollectionMixin from '@/config/minxin/standardTable/mixin.js';
 import standardTableListdefindVue from '@/commonPages/layout/standardTableListdefind.vue';
 
 class CustomizedConfig {
+	// static #beforeEach = beEach;
 	static #STLD = {
 		defined: standardTableListdefindVue,
 	};
@@ -57,6 +60,10 @@ class CustomizedConfig {
 	static #dropDownBtn = dropDownBtn;
 	static #cusValidate = cusValidate;
 	/* ------------ 挂载项 start ------------- */
+
+	/* static get beforeEach() {
+		return this.#beforeEach;
+	} */
 	static get STLD() {
 		return this.#STLD;
 	}
@@ -105,7 +112,7 @@ class CustomizedConfig {
 				}
 			}
 			this.#subTableConfig[key] = configItem[key];
- 		}
+		}
 		return this.#subTableConfig
 	}
 
@@ -167,7 +174,8 @@ class CustomizedConfig {
 
 	// 树结构配置项
 	static get cusExternalTreeDatas() {
-		return this.#customizedExternalTreeDatas;
+		let list = this.#customizedExternalTreeDatas;
+		return handerTreeList(list);
 	}
 	static editCusExternalTreeDatas(config = []) {
 		/* for (const key in configItem) {
@@ -175,9 +183,9 @@ class CustomizedConfig {
 		} */
 		let res = JSON.parse(JSON.stringify(this.#customizedExternalTreeDatas));
 		if (config.length) {
-			res = res.concat(config);
+			this.#customizedExternalTreeDatas = res.concat(config);
 		}
-		return res
+		return this.#customizedExternalTreeDatas
 	}
 
 	// 接口配置项
@@ -289,47 +297,52 @@ class CustomizedConfig {
 	}
 }
 
-/**
- * @method 用于比较对象
- * @propName 根据对象的什么属性进行比较（一般根据对象的key）
- * @objX @objY 待进行比较的两个对象
- * @return key值相同返回1
- */
-function compareObjectFunction(propName) {
-	return function (objX, objY) {
-		let x = objX[propName],
-			y = objY[propName];
-		if (x < y) {
-			return -1;
-		} else {
-			return 1;
-		}
-	}
-}
 
-/**
- * @method 用于修改二维对象的属性 eg.allCenter:{orderCenter:{orderAdd:'订单新增'}}
- * @property 对应当前类中的私有属性（私有属性不能通过中括号语法访问，可以尝试先改import进来的东西，改了之后再一次赋值给私有属性）
- * @configObj 外部传入的对象
- * @return 配置项
- */
-function modifyObjectFunction(property, configObj = {}) {
-	if (!Object.keys(configObj)) return
-	for (const key1 in configObj) {
-		if (!Object.keys(configObj[key1])) return
-		for (const key2 in configObj[key1]) {
-			const pubProperty = property;
-			if (pubProperty[key1]) {
-				// 存在此中心则修改
-				pubProperty[key1][key2] = configObj[key1][key2];
-			} else {
-				// 不存在此中心则直接新增
-				pubProperty[key1] = configObj[key1];
-			}
-		}
-	}
-}
 
 // console.log(new CustomizedConfig());
 // console.clear();
-export default CustomizedConfig;
+const Custom = {
+	beforeEach: beEach,
+	STLD: CustomizedConfig.STLD,
+	Rule: CustomizedConfig.Rule,
+	STLC: CustomizedConfig.STLC,
+	VTDC: CustomizedConfig.VTDC,
+	TDCM: CustomizedConfig.TDCM,
+	STLD: CustomizedConfig.STLD,
+	omsUtils: CustomizedConfig.omsUtils,
+	BtnConfig: CustomizedConfig.BtnConfig,
+	dropDownBtn: CustomizedConfig.dropDownBtn,
+	image: CustomizedConfig.image,
+	setImage: (v) => CustomizedConfig.editImage(v),
+	globalComponent: CustomizedConfig.globalComponent,
+	setGlobalComponent: (v) => CustomizedConfig.editGlobalComponent(v),
+	cusModalConfig: CustomizedConfig.cusModalConfig,
+	setCusModalConfig: (v) => CustomizedConfig.editCusModalConfig(v),
+	cusPageConfig: CustomizedConfig.cusPageConfig,
+	setCusPageConfig: (v) => CustomizedConfig.editCusPageConfig(v),
+	cusExternalTreeDatas: CustomizedConfig.cusExternalTreeDatas,
+	setCusExternalTreeDatas: (v) => CustomizedConfig.editCusExternalTreeDatas(v),
+	formDefined: CustomizedConfig.formDefined,
+	subTableConfig: CustomizedConfig.subTableConfig,
+	setSubTableConfig: (v) => CustomizedConfig.editSubTableConfig(v),
+	cusDownLoadAllConfig: CustomizedConfig.cusDownLoadAllConfig,
+	setDownLoadAllConfig: (v) => CustomizedConfig.editDownLoadAllConfig(v),
+	cusService: CustomizedConfig.cusService,
+	setCusService: (v) => CustomizedConfig.editCusService(v),
+	cusLabelList: CustomizedConfig.cusLabelList,
+	setCusLabelList: (v) => CustomizedConfig.editCusLabelList(v),
+	cusOrderLogo: CustomizedConfig.cusOrderLogo,
+	setCusOrderLogo: (v) => CustomizedConfig.editCusOrderLogo(v),
+	cusWaterMarkConfig: CustomizedConfig.cusWaterMarkConfig,
+	setCusWaterMarkConfig: (v) => CustomizedConfig.editCusWaterMarkConfig(v),
+	filterUrlForNetworkScript: CustomizedConfig.filterUrlForNetworkScript,
+	cusFilterUrlConfig: CustomizedConfig.cusFilterUrlConfig,
+	setCusFilterUrlConfig: (v) => CustomizedConfig.editCusFilterUrlConfig(v),
+	connector: CustomizedConfig.connector,
+	setConnector: (v) => CustomizedConfig.editConnector(v),
+	cusImport: CustomizedConfig.cusImport,
+	editCusImport: (v) => CustomizedConfig.editCusImport(v),
+	editConfig: (v) => CustomizedConfig.editConfig(v),
+}
+// export default CustomizedConfig;
+export default Custom
