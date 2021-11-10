@@ -1,5 +1,6 @@
 
 import { OmsButton, OmsForm, OmsDialog, OmsAgTable } from 'burgeonComponents'
+import BC from 'burgeonComponents';
 import BurgeonEvent from 'burgeonConfig/config/event.config';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
@@ -10,12 +11,12 @@ import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel'
 
 export default {
   components: {
-    OmsButton,
-    OmsForm,
+    // OmsButton: BC.OmsButton,
+    // OmsForm: BC.OmsForm,
     dynamicSearch,
     formSetting,
-    OmsDialog,
-    OmsAgTable
+    // OmsDialog: BC.OmsDialog,
+    // OmsAgTable: BC.OmsAgTable
   },
   mixins: [isFavoriteMixin, new modifycurrentLabel(true)],
   data() {
@@ -46,7 +47,8 @@ export default {
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
         basePathName: 'business-components',
-        url: 'importTable',
+        // url: 'importTable',
+        url: BC.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {
@@ -60,7 +62,7 @@ export default {
       labelValue: '',
       publicBouncedConfig: {
         name: '',
-        url: '',
+        url: {},
         componentData: {}
       },
 
@@ -73,7 +75,8 @@ export default {
           btnclick: () => {
             const self = this;
             self.publicBouncedConfig.name = 'approvalOfAbnormalSellingPrice';
-            self.publicBouncedConfig.url = 'modal/orderCenter/exceptionHandle';
+            // self.publicBouncedConfig.url = 'modal/orderCenter/exceptionHandle';
+            self.publicBouncedConfig.url = require('@/views/modal/orderCenter/exceptionHandle.vue').default;
             self.publicBouncedConfig.confirmTitle = '售价异常审批';
             self.publicBouncedConfig.width = 800;
             setTimeout(() => {
@@ -86,7 +89,8 @@ export default {
           btnclick: () => {
             const self = this;
             self.publicBouncedConfig.name = 'exceptionAddressMatching';
-            self.publicBouncedConfig.url = 'modal/orderCenter/addressError';
+            // self.publicBouncedConfig.url = 'modal/orderCenter/addressError';
+            self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addressError.vue').default;
             self.publicBouncedConfig.confirmTitle = '异常地址匹配';
             self.publicBouncedConfig.width = 800;
             setTimeout(() => {
@@ -203,7 +207,8 @@ export default {
           btnclick: () => {
             const self = this;
             self.publicBouncedConfig.name = 'modificationOfAbnormalMerchandise';
-            self.publicBouncedConfig.url = 'modal/orderCenter/productError';
+            // self.publicBouncedConfig.url = 'modal/orderCenter/productError';
+            self.publicBouncedConfig.url = require('@/views/modal/orderCenter/productError.vue').default;
             self.publicBouncedConfig.confirmTitle = '异常商品修改';
             self.publicBouncedConfig.width = 800;
             setTimeout(() => {
@@ -246,7 +251,8 @@ export default {
             }).then(res => {
               if (res.data.code == 0) {
                 self.publicBouncedConfig.name = 'modifyWarehouse';
-                self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
+                // self.publicBouncedConfig.url = 'modal/orderCenter/modifyWarehouse';
+                self.publicBouncedConfig.url = require('@/views/modal/orderCenter/modifyWarehouse.vue').default;
                 self.publicBouncedConfig.confirmTitle = '改退回仓库';
                 self.publicBouncedConfig.width = 500;
                 self.publicBouncedConfig.maskClosable = false;
@@ -290,7 +296,8 @@ export default {
             }).then(res => {
               if (res.data.code == 0) {
                 self.publicBouncedConfig.name = 'returnModifyLogistics';
-                self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
+                // self.publicBouncedConfig.url = 'modal/orderCenter/modifyReturnLogistics';
+                self.publicBouncedConfig.url = require('@/views/modal/orderCenter/modifyReturnLogistics.vue').default;
                 self.publicBouncedConfig.confirmTitle = '改退回物流';
                 self.publicBouncedConfig.width = 500;
                 self.publicBouncedConfig.maskClosable = false;
@@ -318,7 +325,8 @@ export default {
             }
             const ids = self.selection.map(item => item.ID);
             self.publicBouncedConfig.name = 'OC_ORDER_ADD_LABEL';
-            self.publicBouncedConfig.url = 'modal/orderCenter/addFlag';
+            // self.publicBouncedConfig.url = 'modal/orderCenter/addFlag';
+            self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addFlag.vue').default;
             self.publicBouncedConfig.confirmTitle = '添加标记';
             self.publicBouncedConfig.width = 500;
             self.publicBouncedConfig.componentData = {
@@ -343,7 +351,8 @@ export default {
             }
             const ids = self.selection.map(item => item.ID);
             self.publicBouncedConfig.name = 'OC_ORDER_ADD_LABEL';
-            self.publicBouncedConfig.url = 'modal/orderCenter/addFlag';
+            // self.publicBouncedConfig.url = 'modal/orderCenter/addFlag';
+            self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addFlag.vue').default;
             self.publicBouncedConfig.confirmTitle = '取消标记';
             self.publicBouncedConfig.width = 500;
             self.publicBouncedConfig.componentData = {

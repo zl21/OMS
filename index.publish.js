@@ -12,6 +12,10 @@ import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import R3 from '@syman/burgeon-r3';
 import Vue from 'vue';
 import commonUtils from '@/config/config/commonUtils.js'
+
+import { comJS } from 'burgeonComponents'
+console.log('comJS::', comJS);
+
 import custUtils from 'burgeonComponents/burgeon.publish/common/js/utils.js'
 import pageNote from 'burgeonConfig/config/pageNote'
 import qs from 'qs';
@@ -53,7 +57,7 @@ class InitAppConfig {
     Vue.prototype.vmI18n = i18n;
     window.version = {
       '@burgeon/business-components': componentsConfig.version,
-      'project-logic': proVersion.version,
+      '@burgeon/project-logic': proVersion.version,
       '@burgeon/oms-theme': omsThemecConfig.version,
       '@burgeon/internationalization': internationalizationConfig.version,
       '@syman/burgeon-r3': r3Version.version,
