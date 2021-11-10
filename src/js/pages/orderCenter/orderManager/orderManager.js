@@ -8,6 +8,7 @@ import dynamicSearch from 'allpages/orderCenter/orderManager/dynamicSearch.vue';
 import formSetting from 'allpages/orderCenter/orderManager/formSetting.vue';
 import proDetail from 'allpages/orderCenter/orderManager/proDetail.vue';
 import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
+const { Components } = BC
 
 export default {
   components: {
@@ -48,7 +49,7 @@ export default {
         name: 'importTable', // 组件名称
         basePathName: 'business-components',
         // url: 'importTable',
-        url: BC.ImportTable,
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {
