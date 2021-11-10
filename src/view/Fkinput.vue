@@ -145,10 +145,10 @@
 </template>
 
 <script>
-import Fkinput from "burgeonComponents/js/Fkinput.js";
+import Fkinput from "burgeonComponents/js/fkinput.js";
 export default Fkinput;
 </script>
 
 <style scoped lang="less">
-@import "burgeonComponents/css/Fkinput.less";
+@import "burgeonComponents/css/fkinput.less";
 </style>

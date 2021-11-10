@@ -1,6 +1,6 @@
 
 export default {
-  name: 'stepsBars',
+  name: 'Steps',
   data() {
     return {};
   },

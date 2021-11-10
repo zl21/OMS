@@ -51,7 +51,8 @@ import OmsDialog from "burgeonComponents/view/OmsDialog";
 // import CustomConfig from "@/config/customized.config.js";
 // const modalConfig = CustomConfig.cusDownLoadAllConfig;
 
-const downLoad = {
+const DownLoad = {
+  name: 'DownLoad',
   components: {
     OmsDialog,
     OmsForm,
@@ -215,7 +216,7 @@ const downLoad = {
   }
 };
 
-export default downLoad;
+export default DownLoad;
 </script>
 
 <style >

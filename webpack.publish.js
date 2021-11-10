@@ -149,7 +149,7 @@ const config = {
       parallel: true,
       terserOptions: {
         compress: {
-          pure_funcs: ['console.log']
+          // pure_funcs: ['console.log']
         }
       }
     }), new CssMinimizerPlugin()],

@@ -1,4 +1,5 @@
 export default {
+  name: 'OmsLabel',
   props: {
     labelList: {
       type: Array,

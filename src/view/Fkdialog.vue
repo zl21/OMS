@@ -283,9 +283,9 @@
 </template>
 
 <script>
-  import fkdialog from 'burgeonComponents/js/fkdialog';
+  import Fkdialog from 'burgeonComponents/js/fkdialog';
 
-  export default fkdialog;
+  export default Fkdialog;
 </script>
 <style lang="less" type="text/less">
 @import "~omsTheme/public.less";

@@ -1,4 +1,5 @@
 export default {
+  name: 'TableSku',
   props: {
     itemdata: {
       type: Object

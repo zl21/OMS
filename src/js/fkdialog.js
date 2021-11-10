@@ -7,6 +7,7 @@ import ShowTableData from "framework/components/views/custompage/ShowTableData.v
 // window.$i18n = i18n;
 
 export default {
+  name: 'Fkdialog',
   props: {
     serviceId: {
       type: String,

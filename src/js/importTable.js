@@ -4,7 +4,7 @@ import loading from 'burgeonComponents/view/loading';
 // window.$i18n = i18n
 
 export default {
-  name: 'importTable',
+  name: 'ImportTable',
   components: {
     OmsButton,
     loading,

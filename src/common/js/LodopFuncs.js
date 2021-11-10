@@ -13,7 +13,7 @@ let CLodopIsLocal;
 
 //= ===判断是否需要 Web打印服务CLodop:===
 //= ==(不支持插件的浏览器版本需要用它)===
-export function needCLodop() {
+function needCLodop() {
   try {
     const ua = navigator.userAgent;
     if (ua.match(/Windows\sPhone/i)) return true;
@@ -64,7 +64,7 @@ if (needCLodop()) {
 }
 
 //= ===获取LODOP对象的主过程：====
-export function getLodop(oOBJECT, oEMBED) {
+function getLodop(oOBJECT, oEMBED) {
   const strHtmInstall = "<br><font color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop32.zip' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
   const strHtmUpdate = "<br><font color='#FF00FF'>打印控件需要升级!点击这里<a href='install_lodop32.zip' target='_self'>执行升级</a>,升级后请重新进入。</font>";
   const strHtm64_Install = "<br><font color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop64.zip' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
@@ -82,7 +82,7 @@ export function getLodop(oOBJECT, oEMBED) {
     if (needCLodop()) {
       try {
         LODOP = getCLodop();
-      } catch (err) {}
+      } catch (err) { }
       if (!LODOP && document.readyState !== 'complete') {
         alert('网页还没下载完毕，请稍等一下再操作.');
         return;
@@ -117,7 +117,7 @@ export function getLodop(oOBJECT, oEMBED) {
                     },
                     attrs: {
                       href:
-                          'http://www.lodop.net/download/Lodop6.226_Clodop3.093.zip',
+                        'http://www.lodop.net/download/Lodop6.226_Clodop3.093.zip',
                       target: '_self',
                     },
                   },
@@ -179,7 +179,7 @@ export function getLodop(oOBJECT, oEMBED) {
           'style',
           'position:absolute;left:0px;top:-100px;width:0px;height:0px;'
         );
-        if (isIE) { 
+        if (isIE) {
           LODOP.setAttribute(
             'classid',
             'clsid:2105C259-1E0C-4534-8141-A753534CB4CA'
@@ -197,7 +197,7 @@ export function getLodop(oOBJECT, oEMBED) {
       }
     }
     if (LODOP.VERSION < '6.2.2.4') {
-      if (!needCLodop()) { 
+      if (!needCLodop()) {
         document.body.innerHTML = (is64IE ? strHtm64_Update : strHtmUpdate) + document.body.innerHTML;
       }
       return LODOP;
@@ -210,4 +210,9 @@ export function getLodop(oOBJECT, oEMBED) {
   } catch (err) {
     alert(`getLodop出错:${err}`);
   }
+}
+
+export default {
+  needCLodop: (v) => needCLodop(v),
+  getLodop: (x, y) => needCLodop(x, y),
 }
