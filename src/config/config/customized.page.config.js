@@ -21,11 +21,11 @@ const allCenterPage = Object.assign(
   SystemConfig,
   InventoryConfig, 
   basicDataConfig, 
-  {
-    ORDERDETAIL2: {
-      component: () => import('allpages/orderCenter/orderManageDetail/orderDetail/halfOrderDetail.vue')
-    }
-  },
+  // {
+  //   ORDERDETAIL2: {
+  //     component: () => import('allpages/orderCenter/orderManageDetail/orderDetail/halfOrderDetail.vue')
+  //   }
+  // },
 );
 
 export default allCenterPage;

@@ -8,7 +8,10 @@
  */
 // 系统配置
 export default {
-    AUTHINFODISPLAY: {  //平台店铺档案授权信息
-        component: ()=>import('@/views/modal/basicData/authinfodisplay.vue')
-      }
+  AUTHINFODISPLAY: {  //平台店铺档案授权信息
+    component: ()=> import(
+      /* webpackChunkName: 'BasicDataCenterModal' */
+      '@/views/modal/basicData/authinfodisplay.vue'
+    )
+  }
 };

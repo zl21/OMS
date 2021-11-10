@@ -26,14 +26,14 @@ export default {
   },
   RETURNDETAILS: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returnOrder/returnGoodsOrderDetails.vue'
     ),
   },
   // 订单中心-扫描入库
   SCANIN: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/scanIn/scanIn.vue'
     ),
     // component: scanIn,
@@ -41,7 +41,7 @@ export default {
   // 订单中心-列表
   ORDERMANAGER: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManager/orderManager.vue'
     ),
     // component: orderManager,
@@ -49,7 +49,7 @@ export default {
   },
   OC_B_RETURN_ORDER: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManager/orderManager.vue'
     ),
     labelName: i18n.t('panel_label.a1')
@@ -57,7 +57,7 @@ export default {
   // 订单中心-列表-拆分订单
   MANUAL_SPLIT: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManager/splitOrder.vue'
     ),
     // component: splitOrder,
@@ -65,7 +65,7 @@ export default {
   // 订单中心-新增
   ORDERMANAGEADD: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManageAdd/orderManageAdd.vue'
     ),
     // component: orderManageAdd,
@@ -73,7 +73,7 @@ export default {
   // 订单中心-详情
   ORDERMANAGEDETAIL: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManageDetail/orderManageDetail.vue'
     ),
     // component: orderManageDetail
@@ -82,7 +82,7 @@ export default {
   // 订单中心-退换货单详情
   RETURNGOOD: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returngoodmanagement.vue'
     ),
     // component: returnGood,
@@ -91,7 +91,7 @@ export default {
   // 订单中心-退换货单
   RETURNGOODLIST: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returngoodmanagementList.vue'
     ),
     // component: returnGoodManagementList,
@@ -99,7 +99,7 @@ export default {
   // // 订单中心-退货入库-列表
   RETURNSTOREAGELIST: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returnStoreage/returnStoreageList.vue'
     ),
     // component: returnStorageList,
@@ -107,14 +107,14 @@ export default {
   // // 订单中心-退货入库-新增 订单中心-退货入库-详情
   RETURNTREASURYADD: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returnStoreage/returnTreasuryAdd.vue'
     ),
     // component: returnTreasuryAdd,
   },
   REFUNDAFTERSHIPMENT: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/refundAfterShipment.vue'
     ),
     // component: refundAfterShipment,
@@ -122,7 +122,7 @@ export default {
   },
   EXTRAREFUND: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/refundAfterShipment.vue'
     ),
     // component: refundAfterShipment,
@@ -131,28 +131,28 @@ export default {
   MANUALMATCHING: {
     // 退货入库-手工匹配
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returnStoreage/manualMatching.vue'
     ),
   },
   WARNSENDMATCHING: {
     // 退货入库-错发匹配
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returnStoreage/manualMatching.vue'
     ),
   },
   DISTRIBUTIONORDERLIST: {
     // component: distributionOrderList,
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returnStoreage/manualMatching.vue'
     ),
   },
   SPLITDISTRIBUTIONORDER: {
     // JIT配货单-换吊牌
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/distribution/splitDistributionOrder.vue'
     ),
     labelName: i18n.t('menu.ay'), // JIT配货单-换吊牌
@@ -160,36 +160,42 @@ export default {
   //退货入库半定制
   MATCHINGDETAILS: { //_/views/pages/orderCenter/matchingDetails.vue
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/matchingDetails.vue'
     ),
   },
   // 退换货单新增
   OC_B_RETURN_ORDER_VIRTUAL_TABLE: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returnOrder/returnOrderAdd.vue'
     ),
     labelName: i18n.t('menu.az'), // 退换货新增
   },
   // 额外退款单
-  E_PRODUCT_DETAILS:{
+  E_PRODUCT_DETAILS: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/extraRefund/productDetails.vue'
     ),
   },
   // 发货前退款单
-  OC_B_REFUND_ORDER_SENT:{
+  OC_B_REFUND_ORDER_SENT: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returnGoods.vue'
     ),
   },
-  OC_B_REFUND_ORDER:{
+  OC_B_REFUND_ORDER: {
     component: () => import(
-      /* webpackchunkname: 'OrderCenterPage' */
+      /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returngood/returnGoods.vue'
     ),
+  },
+  ORDERDETAIL2: {
+    component: () => import(
+      /* webpackChunkName: 'OrderCenterPage' */
+      'allpages/orderCenter/orderManageDetail/orderDetail/halfOrderDetail.vue'
+    )
   }
 };

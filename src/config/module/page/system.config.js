@@ -11,42 +11,42 @@ export default {
   //   查看用户权限
   USERPERMISSION: {
     component: () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/userPermission/userPermission.vue'
     ),
   },
   // 商品权限
   COMMODITYAUTHORITY: {
     component: () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/commodityAuthority/commodityAuthority.vue'
     ),
   },
   // 店仓权限
   STOREWAREHOUSEPERMISSIONS: {
     component: () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
   },
   //  敏感列权限
   SENSITIVECOLUMNPERMISSIONS: {
     component:  () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
   },
   //  角色
   CP_C_GROUPS: {
     component:  () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
   },
   //  用户档案
   CP_C_HRUSERS: {
     component:  () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
   },
@@ -54,21 +54,21 @@ export default {
   // 品牌权限
   BRANDPERMISSIONS: {
     component:  () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
   },
   //功能权限
   JURISDICTIONDATA:{
     component:() => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/FunctionPowerNew.vue'
     ),
   },
   //数据权限
   DATAJURISDICTION:{
     component:  () => import(
-      /* webpackchunkname: 'SystemCenterPage' */
+      /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
   }
