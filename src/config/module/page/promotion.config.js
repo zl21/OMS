@@ -14,18 +14,30 @@
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   PROMACTIQUERYLIST: {
-    component: () => import('allpages/promotionCenter/promotionlist.vue'),
+    component: () => import(
+      /* webpackchunkname: 'PromotionCenterPage' */
+      'allpages/promotionCenter/promotionlist.vue'
+    ),
     // labelName: '促销活动',
     labelName: i18n.t('menu.ad'),
   },
   PM_C_PROM_ACTI: {
-    component: () => import('allpages/promotionCenter/addOrEditActi.vue')
+    component: () => import(
+      /* webpackchunkname: 'PromotionCenterPage' */
+      'allpages/promotionCenter/addOrEditActi.vue'
+    )
   },
   PM_C_PROM_ACTI_BATCH_ADD: {
-    component: () => import('allpages/promotionCenter/batchActivity.vue')
+    component: () => import(
+      /* webpackchunkname: 'PromotionCenterPage' */
+      'allpages/promotionCenter/batchActivity.vue'
+    )
   },
   PM_C_PROM_PRE_TEST: {
-    component: () => import('allpages/promotionCenter/simulation.vue')
+    component: () => import(
+      /* webpackchunkname: 'PromotionCenterPage' */
+      'allpages/promotionCenter/simulation.vue'
+    )
   },
   // ORDERDETAIL2: {
   //   component: orderDetail2

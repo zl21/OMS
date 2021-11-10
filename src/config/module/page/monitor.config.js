@@ -4,7 +4,10 @@
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   MONITORINGPLATFORM: {
-    component: () => import('allpages/monitorPlatform/monitorPlatform.vue'),
+    component: () => import(
+      /* webpackchunkname: 'MonitorCenterPage' */
+      'allpages/monitorPlatform/monitorPlatform.vue'
+    ),
     // labelName: i18n.t('menu.ae')
     labelName: '监控平台',
   },

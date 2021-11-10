@@ -16,51 +16,64 @@ import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   /* 2.0: */
   SHOPAUTHORIZE: {
-    component: () => import('allpages/basicData/authorize.vue'),
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/authorize.vue'
+    ),
     labelName: i18n.t('form_label.ap'),//店铺授权
   },
   SHOPAUTHORIZEDETAILS: {
-    component: () => import('allpages/basicData/authorizeDetails.vue'),
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/authorizeDetails.vue'
+    ),
   },
   LOGISTICSCOMPANYFILESADDOREDIT: {
     // component: logisticsCompanyFilesAddOrEdit,
-    component: () =>
-      import('allpages/basicData/logisticsCompanyFilesAddOrEdit.vue'),
-      labelName: i18n.t('menu.a0'), //物流公司档案
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/logisticsCompanyFilesAddOrEdit.vue'
+    ),
+    labelName: i18n.t('menu.a0'), //物流公司档案
   },
   ADDLOGICSTORE: {
     // component: addLogicStore,
-    component: () => import('allpages/basicData/addLogicStore.vue'),
-    labelName: '新增逻辑仓',
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/addLogicStore.vue'
+    ),
     labelName: i18n.t('menu.a1'), //新增逻辑仓
   },
   ADDALIAS: {
     // component: addAliasOrRegion,
-    component: () => import('allpages/basicData/addAliasOrRegion.vue'),
-    // labelName: '新增别名'
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/addAliasOrRegion.vue'
+    ),
     labelName: i18n.t('menu.a2'), //新增别名
-
   },
   ADDREGION: {
     // component: addAliasOrRegion,
-    component: () => import('allpages/basicData/addAliasOrRegion.vue'),
-    // labelName: '新增区域'
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/addAliasOrRegion.vue'
+    ),
     labelName: i18n.t('menu.a3'), //新增区域
-
   },
   CP_C_ORG_CHANNEL: {
     // component: channelStore,
-    component: () => import('allpages/basicData/channelStore.vue'),
-    // labelName: '渠道仓档案', // 元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
-    labelName: i18n.t('menu.a4'), //渠道仓档案
-
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/channelStore.vue'
+    ),
+    labelName: i18n.t('menu.a4'), //渠道仓档案  元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
   },
   NATIONALPROVINCIALMUNICIPALEDIT: {
     // component: nationalProvincialMunicipalEdit,
-    component: () =>
-      import('allpages/basicData/nationalProvincialMunicipalEdit.vue'),
-    // labelName: '国家省市区编辑'
+    component: () => import(
+      /* webpackChunkName: 'BasicDataCenterPage' */
+      'allpages/basicData/nationalProvincialMunicipalEdit.vue'
+    ),
     labelName: i18n.t('menu.a5'), //国家省市区编辑
-
   },
 }
