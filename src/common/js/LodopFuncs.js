@@ -13,7 +13,7 @@ let CLodopIsLocal;
 
 //= ===判断是否需要 Web打印服务CLodop:===
 //= ==(不支持插件的浏览器版本需要用它)===
-function needCLodop() {
+const needCLodop = () => {
   try {
     const ua = navigator.userAgent;
     if (ua.match(/Windows\sPhone/i)) return true;
@@ -47,7 +47,11 @@ function needCLodop() {
 }
 
 //= ===页面引用CLodop云打印必须的JS文件,用双端口(8000和18000）避免其中某个被占用：====
-if (needCLodop()) {
+const loadScript = () => {
+  let nodes = Array.from(document.querySelectorAll('script'));
+  let exsitScript = nodes.some(i => i.src.includes('/CLodopfuncs.js'));
+  if (exsitScript) return;
+
   const src1 = 'http://localhost:8000/CLodopfuncs.js?priority=1';
   const src2 = 'http://localhost:18000/CLodopfuncs.js?priority=0';
 
@@ -64,7 +68,7 @@ if (needCLodop()) {
 }
 
 //= ===获取LODOP对象的主过程：====
-function getLodop(oOBJECT, oEMBED) {
+const getLodop = (oOBJECT, oEMBED) => {
   const strHtmInstall = "<br><font color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop32.zip' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
   const strHtmUpdate = "<br><font color='#FF00FF'>打印控件需要升级!点击这里<a href='install_lodop32.zip' target='_self'>执行升级</a>,升级后请重新进入。</font>";
   const strHtm64_Install = "<br><font color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop64.zip' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
@@ -80,6 +84,8 @@ function getLodop(oOBJECT, oEMBED) {
     const ua = navigator.userAgent;
     const isIE = !!ua.match(/MSIE/i) || !!ua.match(/Trident/i);
     if (needCLodop()) {
+      loadScript();
+
       try {
         LODOP = getCLodop();
       } catch (err) { }
@@ -212,7 +218,4 @@ function getLodop(oOBJECT, oEMBED) {
   }
 }
 
-export default {
-  needCLodop: (v) => needCLodop(v),
-  getLodop: (x, y) => needCLodop(x, y),
-}
+export default { needCLodop, getLodop }
