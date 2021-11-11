@@ -1,16 +1,11 @@
-import { OmsForm, OmsButton, OmsDialog } from 'burgeonComponents'
-
 import CustomConfig from '@/config/customized.config.js';
 const modalConfig = CustomConfig.cusDownLoadAllConfig;
-
+import BC from 'burgeonComponents';
+const { Components } = BC
 // const formConfig = (file) => require(`./config/${file}.js`).default;
 
 export default {
-  components: {
-    OmsDialog,
-    OmsForm,
-    OmsButton,
-  },
+  components: {},
   props: {
     objList: {
       type: Array,
@@ -33,7 +28,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       spinShow: false, // loading动画
       downLoadModal: false,
       taskId: '',
@@ -75,8 +70,8 @@ export default {
           }
         },
         name: 'importTable',
-        basePathName: 'business-components',
-        url: 'importTable',
+        // url: 'importTable',
+        url: Components.ImportTable,
         width: 600
       }
     };
@@ -140,8 +135,8 @@ export default {
           }
         },
         name: 'importTable',
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
+        // url: 'importTable',
         width: 450
       };
       this.$refs.dialog.openConfirm();

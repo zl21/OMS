@@ -2,19 +2,15 @@ import { tableCols } from '../promotion.config';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
-import { OmsDialog, SingleBox, OmsButton, ButtonFkDialog } from 'burgeonComponents'
-
+import BC from 'burgeonComponents';
+const { Components } = BC
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {
   name: 'InfoSet',
   components: {
-    OmsButton,
     detailtable,
     detailtabs,
-    SingleBox,
-    OmsDialog,
     meetConditions,
-    ButtonFkDialog
   },
   props: {
     basicData: {
@@ -189,8 +185,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}

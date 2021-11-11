@@ -17,7 +17,7 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <aTable
+        <OmsAgTable
           ref="agtable"
           :ag-table-config="agTableConfig"
           @on-page-change="pageChange"

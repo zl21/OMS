@@ -17,17 +17,13 @@
 </template>
 
 <script>
-import { OmsButton, Fkinput as myInput, OmsTable } from 'burgeonComponents'
 import Vue from 'vue';
-
-Vue.component('drpInput', myInput);
+import BC from 'burgeonComponents';
+const { Components } = BC
+Vue.component('drpInput', Components.Fkinput);
 export default {
   name: 'changeTag',
-  components: {
-    OmsButton,
-    OmsTable,
-    myInput,
-  },
+  components: {},
   data() {
     return {
       // 弹框配置 导入
@@ -43,8 +39,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},

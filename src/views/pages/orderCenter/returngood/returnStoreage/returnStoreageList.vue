@@ -9,7 +9,7 @@
     </div>
     <div class="tableContent custom-table" v-loading="agTableConfig.agLoading">
       <!-- loading -->
-      <aTable
+      <OmsAgTable
         ref="agGridChild"
         :ag-table-config="agTableConfig"
         @on-page-change="pageChange"

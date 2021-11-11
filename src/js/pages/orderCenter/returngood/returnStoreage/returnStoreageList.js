@@ -1,27 +1,22 @@
-import { OmsButton, OmsForm, OmsDialog, OmsAgTable as aTable, OmsTable } from 'burgeonComponents'
 import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
+import BC from 'burgeonComponents';
+const { Components } = BC
 
 const getCurrentTime = (() => {
-  return $utils.Format(new Date(),'yyyy-MM-dd 23:59:59');
+  return $utils.Format(new Date(), 'yyyy-MM-dd 23:59:59');
 })();
 const addSevenDay = (() => {
   const t = $utils.addDays(new Date(), -7);
-  return $utils.Format(t,'yyyy-MM-dd 00:00:00');
+  return $utils.Format(t, 'yyyy-MM-dd 00:00:00');
 })();
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsDialog,
-    aTable,
-  },
+  components: {},
   mixins: [buttonPermissionsMixin, isFavoriteMixin],
   props: {},
   watch: {
@@ -51,8 +46,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
@@ -324,10 +318,10 @@ export default {
       if (CREATETIME && CREATETIME !== []) {
         console.log(CREATETIME[0]);
         if (CREATETIME[0] !== '') {
-          params.beginDate = CREATETIME[0] ? $utils.Format(CREATETIME[0],'yyyy-MM-dd hh:mm:ss') : '';
+          params.beginDate = CREATETIME[0] ? $utils.Format(CREATETIME[0], 'yyyy-MM-dd hh:mm:ss') : '';
         }
         if (CREATETIME[1] !== '') {
-          params.endDate = CREATETIME[1] ? $utils.Format(CREATETIME[1],'yyyy-MM-dd hh:mm:ss')  : '';
+          params.endDate = CREATETIME[1] ? $utils.Format(CREATETIME[1], 'yyyy-MM-dd hh:mm:ss') : '';
         }
       }
       return params;

@@ -52,7 +52,7 @@
         </div>
 
         <div class="subtablePart" v-show="labelDefaultValue != 'PROPERTY'">
-          <subTable :component-data="subTableConfig"></subTable>
+          <SubTable :component-data="subTableConfig"/>
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <aTable
+        <OmsAgTable
           ref="agGridChild"
           :ag-table-config="agTableConfig"
           @on-page-change="(val) => eventGather.pageChange(val, 'getList')"

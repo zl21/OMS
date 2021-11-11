@@ -117,7 +117,7 @@
       <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <!-- 导入 -->
-    <businessModal
+    <OmsDialog
       :closable="importTable.closable"
       :component-data="importTable.componentData"
       :draggable="importTable.draggable"
