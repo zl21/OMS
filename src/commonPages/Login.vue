@@ -89,7 +89,9 @@ export default {
   },
   mounted() {
     this.isEnableLoginPro && this.initTab(true);
-    this.initDom();
+    setTimeout(() => {
+      this.initDom();
+    }, 100)
   },
   methods: {
     initDom() {
