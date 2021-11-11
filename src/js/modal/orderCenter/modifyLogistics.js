@@ -1,4 +1,3 @@
-import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
@@ -9,15 +8,11 @@ export default {
       default: {},
     },
   },
-  components: {
-    OmsForm,
-    OmsButton,
-    OmsTable,
-  },
+  components: {},
   computed: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       isClice: false, // 防抖标识
       zIndex: 2500,
       totalRowCount: 0,
@@ -38,25 +33,25 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
-            type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.$parent.$parent.closeConfirm();
-            }, // 按钮点击事件
-          },
-          {
-            type: '', // 按钮类型
-            text: $i18n.t('common.determine'), // 确定
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.debounce(this.determine, 500);
-            }, // 按钮点击事件
-          }
+          type: '', // 按钮类型
+          text: $i18n.t('common.cancel'), // 取消
+          icon: '', // 按钮图标
+          size: 'small', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.$parent.$parent.closeConfirm();
+          }, // 按钮点击事件
+        },
+        {
+          type: '', // 按钮类型
+          text: $i18n.t('common.determine'), // 确定
+          icon: '', // 按钮图标
+          size: 'small', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.debounce(this.determine, 500);
+          }, // 按钮点击事件
+        }
         ],
       },
       loading: false,
@@ -90,14 +85,14 @@ export default {
         this.getListData();
       }
     },
-  
+
     // 防抖
     debounce(fun, time) {
       if (this.isClice) {
         return false;
       }
       this.isClice = true;
-      setTimeout(()=>{
+      setTimeout(() => {
         fun();
         this.isClice = false;
       }, time);
@@ -131,73 +126,73 @@ export default {
       fromdata.append('type', self.type);
       this.btnConfig.buttons[1].disabled = true;
       this.service.orderCenter.updateLogistics(fromdata)
-      .then((res) => {
-        if (res.data.code === 0) {
-          this.btnConfig.buttons[1].disabled = false;
-          if (self.$route.params.customizedModuleId == 2627) {
-            self.$parent.$parent.$parent.getData();
-            if (!res.data.data) {
+        .then((res) => {
+          if (res.data.code === 0) {
+            this.btnConfig.buttons[1].disabled = false;
+            if (self.$route.params.customizedModuleId == 2627) {
+              self.$parent.$parent.$parent.getData();
+              if (!res.data.data) {
+                self.$Message.success(res.data.message);
+                self.$parent.$parent.closeConfirm();
+                self.$parent.$parent.$parent.selection = [];
+              } else {
+                self.$Modal.error({
+                  // title: "提示",
+                  title: $i18n.t('modalTitle.tips'),
+                  render: h => h('div', {}, [
+                    h(
+                      'p',
+                      {
+                        style: {
+                          padding: '10px 15px 10px 0px',
+                        },
+                      },
+                      res.data.message
+                    ),
+                    h('Table', {
+                      props: {
+                        'disabled-hover': true,
+                        'highlight-row': false,
+                        // "no-data-text": "暂无数据",
+                        'no-data-text': $i18n.t('other.noDataAvailable'),
+                        columns: res.data.data.columns,
+                        data: res.data.data.prompt_data,
+                      },
+                    }),
+                  ]),
+                  cancelType: true,
+                  titleAlign: 'left',
+                  mask: true,
+                  width: 500,
+                  draggable: true,
+                  onOk: () => {
+                    self.$parent.$parent.closeConfirm();
+                  },
+                  keyDown: (event) => {
+                    if (event.keyCode === 27) {
+                      self.$parent.$parent.closeConfirm();
+                    } else if (event.keyCode === 13) {
+                      self.$parent.$parent.closeConfirm();
+                    }
+                  },
+                });
+              }
+            } else {
+              // 订单管理详情的刷新方法load()
+              self.$parent.$parent.$parent.load();
               self.$Message.success(res.data.message);
               self.$parent.$parent.closeConfirm();
-              self.$parent.$parent.$parent.selection = [];
-            } else {
-              self.$Modal.error({
-                // title: "提示",
-                title: $i18n.t('modalTitle.tips'),
-                render: h => h('div', {}, [
-                  h(
-                    'p',
-                    {
-                      style: {
-                        padding: '10px 15px 10px 0px',
-                      },
-                    },
-                    res.data.message
-                  ),
-                  h('Table', {
-                    props: {
-                      'disabled-hover': true,
-                      'highlight-row': false,
-                      // "no-data-text": "暂无数据",
-                      'no-data-text': $i18n.t('other.noDataAvailable'),
-                      columns: res.data.data.columns,
-                      data: res.data.data.prompt_data,
-                    },
-                  }),
-                ]),
-                cancelType: true,
-                titleAlign: 'left',
-                mask: true,
-                width: 500,
-                draggable: true,
-                onOk: () => {
-                  self.$parent.$parent.closeConfirm();
-                },
-                keyDown: (event) => {
-                  if (event.keyCode === 27) {
-                    self.$parent.$parent.closeConfirm();
-                  } else if (event.keyCode === 13) {
-                    self.$parent.$parent.closeConfirm();
-                  }
-                },
-              });
             }
           } else {
-            // 订单管理详情的刷新方法load()
-            self.$parent.$parent.$parent.load();
-            self.$Message.success(res.data.message);
-            self.$parent.$parent.closeConfirm();
+            self.$Message.warning({
+              content: res.data.message,
+              duration: 5,
+              top: 80,
+            });
+            this.btnConfig.buttons[1].disabled = false;
           }
-        } else {
-          self.$Message.warning({
-            content: res.data.message,
-            duration: 5,
-            top: 80,
-          });
-          this.btnConfig.buttons[1].disabled = false;
-        }
-        $omsUtils.setLoading();
-      });
+          $omsUtils.setLoading();
+        });
     },
     getListData() {
       const self = this;

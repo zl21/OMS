@@ -6,14 +6,8 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/modal/finance.config.js
  */
-import { downLoad } from 'burgeonComponents'
-
 // 财务中心
 export default {
-  DOWNLOADORDER: {
-    // component: () => import('burgeonComponents/downLoad.vue')
-    component: downLoad
-  },
   // 唯品会进度账单 唯品会月结账单列表 (下载账单)
   DOWNLOADVIPBILL: {
     component: () => import(

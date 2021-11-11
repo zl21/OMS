@@ -1,11 +1,5 @@
-import { OmsButton, OmsTable, OmsForm as reForm } from 'burgeonComponents'
-
 export default {
-  components: {
-    reForm,
-    OmsButton,
-    OmsTable,
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,
@@ -37,7 +31,7 @@ export default {
           formValue: {
             searchValue: '',
             psCProEcode: '',
-            proName:"",
+            proName: "",
           },
           formData: [
             {
@@ -48,7 +42,7 @@ export default {
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-              
+
               },
               dimEnter: () => {
                 this.search('one')
@@ -65,7 +59,7 @@ export default {
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-               
+
               },
               dimEnter: () => {
                 this.tableConfig.current = 1
@@ -77,14 +71,14 @@ export default {
               },
             },
             {
-              label: $i18n.t("table_label.itemNo02"), 
+              label: $i18n.t("table_label.itemNo02"),
               style: 'dimSearch',
               width: '12',
               value: 'proName',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-               
+
               },
               dimEnter: () => {
                 this.tableConfig.current = 1
@@ -104,7 +98,7 @@ export default {
           buttons: [
             {
               text: $i18n.t("btn.search"),
-              type:"primary",
+              type: "primary",
               btnclick: () => {
                 this.fnsearch('one')
               }, // 按钮点击事件
@@ -154,14 +148,14 @@ export default {
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         current: 1,
         pageSize: 10, // 每页条数
-        highlightRow:true,
+        highlightRow: true,
       },
       tableConfig2: {
         businessFormConfig: {
           formValue: {
             searchValue: '',
             psCProEcode: '',
-            proName:""
+            proName: ""
           },
           formData: [
             {
@@ -172,7 +166,7 @@ export default {
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-                
+
               },
               dimEnter: () => {
                 this.tableConfig.current2 = 1
@@ -190,7 +184,7 @@ export default {
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-                
+
               },
               dimEnter: () => {
                 this.search('two')
@@ -201,14 +195,14 @@ export default {
               },
             },
             {
-              label: $i18n.t("table_label.itemNo02"), 
+              label: $i18n.t("table_label.itemNo02"),
               style: 'dimSearch',
               width: '12',
               value: 'proName',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-               
+
               },
               dimEnter: () => {
                 this.tableConfig.current = 1
@@ -228,7 +222,7 @@ export default {
           buttons: [
             {
               text: $i18n.t("btn.search"),
-              type:"primary",
+              type: "primary",
               btnclick: () => {
                 this.fnsearch('two')
               }, // 按钮点击事件
@@ -278,7 +272,7 @@ export default {
         total: 0, // 设置总条数
         pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
-        highlightRow:true,
+        highlightRow: true,
       },
       replaceTableLoad: false,
       tableLoad: false,

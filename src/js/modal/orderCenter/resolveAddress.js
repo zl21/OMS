@@ -1,6 +1,5 @@
 // 订单中心->智能地址解析页面
 
-import { OmsButton, OmsForm } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 
 const areaList = require('@/assets/js/address/area-list.js');
@@ -13,21 +12,18 @@ export default {
     componentData: {},
   },
   mixins: [listeningToKeydownMixin],
-  components: {
-    OmsButton,
-    OmsForm
-  },
+  components: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       objId: -1,
       loading: false,
       newReceivAddress: '',
       ORDER_ADDRESS: '', // 新地址
-      formConfig:{
-        labelWidth:'80',
-        formValue:{},
-        formData:[{
+      formConfig: {
+        labelWidth: '80',
+        formValue: {},
+        formData: [{
           version: "1.4",
           colname: "CP_C_REGION_PROVINCE_ID",
           style: "popInput", // 输入框弹框单多选
@@ -55,7 +51,7 @@ export default {
             pid: ""
           },
           oneObj: (val) => {
-            console.log('val:',val);
+            console.log('val:', val);
             // 选中触发事件
             this.formConfig.formData[1].itemdata.pid = '';
             this.formConfig.formData[1].itemdata.valuedata = '';
@@ -65,8 +61,8 @@ export default {
             this.data.cp_c_region_city_id = ''
             this.data.cp_c_region_area_id = ''
           },
-          InputEnter: (val)=> {
-            console.log('InputEnter:',val);
+          InputEnter: (val) => {
+            console.log('InputEnter:', val);
             // 选中触发事件
             this.formConfig.formData[1].itemdata.pid = '';
             this.formConfig.formData[1].itemdata.valuedata = '';
@@ -110,7 +106,7 @@ export default {
               srccol: "CP_C_REGION_PROVINCE_ID",
             },
           },
-          InputBlur:(val) => {
+          InputBlur: (val) => {
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
             this.data.cp_c_region_city_id = val.pid;
@@ -122,9 +118,9 @@ export default {
             this.formConfig.formData[2].itemdata.valuedata = '';
             this.data.cp_c_region_city_id = val.pid;
             this.data.cp_c_region_area_id = ''
-            console.log('valval:',val);
+            console.log('valval:', val);
           },
-          InputEnter: (val)=> {
+          InputEnter: (val) => {
             this.formConfig.formData[2].itemdata.pid = '';
             this.formConfig.formData[2].itemdata.valuedata = '';
             this.data.cp_c_region_city_id = val.pid;
@@ -164,7 +160,7 @@ export default {
               srccol: "CP_C_REGION_CITY_ID",
             },
           },
-          InputBlur:(val) => {
+          InputBlur: (val) => {
             this.data.cp_c_region_area_id = val.pid
           },
           oneObj: (val) => {
@@ -172,7 +168,7 @@ export default {
             console.log("val::", val);
             this.data.cp_c_region_area_id = val.pid
           },
-          InputEnter: (val)=> {
+          InputEnter: (val) => {
             this.data.cp_c_region_area_id = val.pid
           }
         }]
@@ -186,7 +182,7 @@ export default {
         number: '/^d?$/',
       },
       //获取省份的id
-      province_id:'',
+      province_id: '',
       data: {
         receiver_address: '', //详细地址
         cp_c_region_province_id: '', //  省份
@@ -198,12 +194,12 @@ export default {
         receiver_zip: '', // 邮编
         ship_amt: '', // 
       }, // 需要提交的数据
-      ruleValidate:{
+      ruleValidate: {
         receiver_address: [
-            { required: true, message: ' ', trigger: 'blur' }
+          { required: true, message: ' ', trigger: 'blur' }
         ],
         receiver_name: [
-            { required: true, message: ' ', trigger: 'blur' }
+          { required: true, message: ' ', trigger: 'blur' }
         ],
         // receiver_mobile: [
         //     { required: true, message: ' ', trigger: 'blur' }
@@ -214,14 +210,14 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            disabled:false,
+            disabled: false,
             text: $i18n.t('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            disabled:false,
+            disabled: false,
             text: $i18n.t('common.determine'), // 确定
             btnclick: () => {
               this.update();
@@ -232,15 +228,15 @@ export default {
     };
   },
   methods: {
-    newAddressChange(){
+    newAddressChange() {
       if (this.newReceivAddress.length > 150) {
-        this.$nextTick(()=>{
-          this.newReceivAddress = this.newReceivAddress.substring(0,150);
+        this.$nextTick(() => {
+          this.newReceivAddress = this.newReceivAddress.substring(0, 150);
           this.$Message.warning("收货信息的最大长不能超过150");
         })
       }
     },
-    async initAddress(){
+    async initAddress() {
       this.loading = true;
       let params = {
         ID: this.objId,
@@ -251,7 +247,7 @@ export default {
         DECRYPT: true
       };
       try {
-        const { data: { data:{DATA} } } = await this.service.orderCenter.queryObject(params);
+        const { data: { data: { DATA } } } = await this.service.orderCenter.queryObject(params);
         // this.ORDER_ADDRESS = DATA.ORDER_ADDRESS;
         this.data.cp_c_region_province_id = DATA.ITEM.CP_C_REGION_PROVINCE_ID;
         this.data.cp_c_region_city_id = DATA.ITEM.CP_C_REGION_CITY_ID;
@@ -284,7 +280,7 @@ export default {
       this.data.receiver_phone = result.phone;
       this.data.receiver_zip = result.zip_code;
       this.newReceivAddress = result.newReceivAddress;
-      this.selectRegion(result.province,result.city,result.area)
+      this.selectRegion(result.province, result.city, result.area)
       // 判断是收货人基础信息是否正确
       await this.intelligentReciver();
     },
@@ -303,7 +299,7 @@ export default {
       }
     },
     update() {
-      if(!this.data.cp_c_region_province_id || !this.data.cp_c_region_city_id){
+      if (!this.data.cp_c_region_province_id || !this.data.cp_c_region_city_id) {
         return this.$Message.error('省、市不能为空！');
       }
       if (!this.data.receiver_name) {
@@ -323,7 +319,7 @@ export default {
         if (!f) return this.CheckRegxZip();
       }
       const self = this;
-      if(!this.data.cp_c_region_area_id){
+      if (!this.data.cp_c_region_area_id) {
         delete this.data.cp_c_region_area_id;
       }
       const param = {
@@ -387,20 +383,20 @@ export default {
       }
     },
     // 查询省市区并赋值
-    async selectRegion(provinceName,cityName,areaName){
-      let params = {provinceName,cityName,areaName};
-      let { data:{data:{provinceInfo,cityInfo,areaInfo}}} =  await this.service.orderCenter.selectRegion(params);
-      console.log(provinceInfo,cityInfo,areaInfo);
-      this.formConfig.formData[0].itemdata.valuedata = provinceInfo ?.name;
-      this.formConfig.formData[0].itemdata.pid = provinceInfo ?.id;
-      this.data.cp_c_region_province_id = provinceInfo ?.id;
-      this.formConfig.formData[1].itemdata.valuedata = cityInfo ?.name;
-      this.formConfig.formData[1].itemdata.pid = cityInfo ?.id;
-      this.data.cp_c_region_city_id = cityInfo ?.id;
-      this.formConfig.formData[2].itemdata.valuedata = areaInfo ?.name;
-      this.formConfig.formData[2].itemdata.pid = areaInfo ?.id;
-      this.data.cp_c_region_area_id = areaInfo ?.id;
-      if(provinceName.id || cityName.id){
+    async selectRegion(provinceName, cityName, areaName) {
+      let params = { provinceName, cityName, areaName };
+      let { data: { data: { provinceInfo, cityInfo, areaInfo } } } = await this.service.orderCenter.selectRegion(params);
+      console.log(provinceInfo, cityInfo, areaInfo);
+      this.formConfig.formData[0].itemdata.valuedata = provinceInfo?.name;
+      this.formConfig.formData[0].itemdata.pid = provinceInfo?.id;
+      this.data.cp_c_region_province_id = provinceInfo?.id;
+      this.formConfig.formData[1].itemdata.valuedata = cityInfo?.name;
+      this.formConfig.formData[1].itemdata.pid = cityInfo?.id;
+      this.data.cp_c_region_city_id = cityInfo?.id;
+      this.formConfig.formData[2].itemdata.valuedata = areaInfo?.name;
+      this.formConfig.formData[2].itemdata.pid = areaInfo?.id;
+      this.data.cp_c_region_area_id = areaInfo?.id;
+      if (provinceName.id || cityName.id) {
         // 地址解析状态
         this.dataAysis = true;
       }

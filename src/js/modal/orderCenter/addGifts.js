@@ -1,5 +1,4 @@
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
-import { OmsTable, EasyMatrix, OmsButton } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
@@ -103,11 +102,6 @@ export default {
         ]
       }
     };
-  },
-  components: {
-    OmsTable,
-    EasyMatrix,
-    OmsButton
   },
   props: {
     componentData: {}

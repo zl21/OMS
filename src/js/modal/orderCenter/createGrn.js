@@ -1,9 +1,5 @@
-import { OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsButton
-  },
+  components: {},
   props: {
     idArray: {
       default: []
@@ -11,7 +7,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       isError: false,
       errorMessage: '',
       transportStyle: {
@@ -74,7 +70,7 @@ export default {
       };
       formdata.append('param', JSON.stringify(obj));
       this.service.orderCenter.distributionCreateDelivery(formdata)
-        .then(res=>{
+        .then(res => {
           console.log(res);
           if (res.data.code === 0) {
             this.$Message.success(res.data.message);
@@ -87,7 +83,7 @@ export default {
     init() {
       const formdata = new FormData();
       formdata.append('param', JSON.stringify({ ids: this.idArray }));
-      this.service.orderCenter.checkBeforeCreateVipDelivery(formdata).then(res=>{
+      this.service.orderCenter.checkBeforeCreateVipDelivery(formdata).then(res => {
         console.log(res);
         if (res.data.code === 0) {
           const def = res.data.data.filter(item => item.SELECTED == 1)[0];
@@ -115,7 +111,7 @@ export default {
     },
     getData(row) {
       const arr = [];
-      row.forEach(item=>{
+      row.forEach(item => {
         const obj = {};
         for (const key in item) {
           const val = {};

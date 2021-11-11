@@ -1,14 +1,9 @@
 // import axios from 'axios';
-import { OmsTable, OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsButton,
-    OmsTable
-  },
+  components: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       radioValue: '2',
       searchValue: '',
       tableConfig: {
@@ -45,14 +40,14 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         isShowSelection: true, // 是否显示checkedbox
         highlightRow: true, // 高亮单选必须结合它
         multiple: false //false 单选
       },
       data: [],
-      currentSkuEcode:'',
+      currentSkuEcode: '',
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -81,7 +76,7 @@ export default {
     }
   },
   mounted() {
-    console.log('componentData:',this.componentData);
+    console.log('componentData:', this.componentData);
   },
   methods: {
     // 选中某一项时触发
@@ -90,17 +85,17 @@ export default {
       console.log(v)
     },
     // 取消选中某一项时触发
-    onSelectCancel() {},
+    onSelectCancel() { },
     // 点击全选时触发
-    onSelectAll() {},
+    onSelectAll() { },
     // 点击取消全选时触发
-    onSelectAllCancel() {},
+    onSelectAllCancel() { },
     // 单击某一行时触发
     onRowClick(row) {
       this.currentSkuEcode = row.skuEcode
     },
     // 单击某二行时触发
-    onRowDblclick() {},
+    onRowDblclick() { },
     // 分页change 事件
     pageChange(val) {
       console.log(val);
@@ -113,7 +108,7 @@ export default {
       this.tableConfig.pageSize = val;
       this.search();
     },
-    tableDeleteDetail() {},
+    tableDeleteDetail() { },
     // 搜索
     search() {
       // sku查询
@@ -134,23 +129,23 @@ export default {
     },
     // 替换
     async confirm() {
-      console.log('self.tableConfig.data:',this.tableConfig.data);
+      console.log('self.tableConfig.data:', this.tableConfig.data);
       const self = this;
       if (self.tableConfig.data.length == 0) {
         // sku不能为空!
         self.$Message.warning($i18n.t('modalTips.cg'));
         return;
       }
-      if(!this.currentSkuEcode){
+      if (!this.currentSkuEcode) {
         // 请选中一条单据!
         self.$Message.warning($i18n.t('modalTips.d8'));
         return;
       }
       console.log(this.componentData);
       let params = {
-        orderList:this.componentData.orderList,
-        skuEcodes:[this.componentData.oldSuk,this.currentSkuEcode],
-        spuIds:this.componentData.spuIds
+        orderList: this.componentData.orderList,
+        skuEcodes: [this.componentData.oldSuk, this.currentSkuEcode],
+        spuIds: this.componentData.spuIds
       }
       this.btnConfig.buttons[1].disabled = true;
       const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);
@@ -158,18 +153,18 @@ export default {
         this.btnConfig.buttons[1].disabled = false;
       }, 5000);
       console.log(code, message, data);
-      if(code ===  0){
+      if (code === 0) {
         self.$Message.success(message);
         self.$parent.$parent.closeConfirm();
         self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
-      } else if(code ===  -1){
+      } else if (code === -1) {
         this.$Modal.confirm({
           title: "message",
           width: 500,
-          className:'ark-dialog',
-          mask:true,
+          className: 'ark-dialog',
+          mask: true,
           render: h => h('div', {
-            },data[0].message)
+          }, data[0].message)
         });
       }
       // else if(data && code ===  -1){

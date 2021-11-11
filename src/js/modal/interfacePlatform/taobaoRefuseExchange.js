@@ -1,11 +1,6 @@
 // import axios from 'axios';
-import { OmsForm, OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsForm,
-    OmsButton,
-  },
+  components: {},
   props: {
     objList: {
       type: Array,
@@ -25,7 +20,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -125,7 +120,7 @@ export default {
         this.$message.warning('拒绝换货原因不能为空');
         return;
       }
-     
+
       const param = {
         ids: this.idArray,
         tableName: 'IP_B_TAOBAO_EXCHANGE',

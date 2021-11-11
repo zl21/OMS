@@ -1,12 +1,9 @@
-import { OmsButton, Fkinput as drpInput, OmsTable } from 'burgeonComponents'
-Vue.component('drpInput', drpInput)
+import BC from 'burgeonComponents'
+const { Components } = BC
+Vue.component('drpInput', Components.Fkinput)
 
 export default {
-  components: {
-    OmsTable,
-    OmsButton,
-    drpInput
-  },
+  components: {},
   computed: {
     type() {
       let type;

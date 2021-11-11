@@ -6,12 +6,9 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/src/js/modal/orderCenter/extraReturnImport.js
  */
-import { importTable } from 'burgeonComponents';
 
 export default {
-  components: {
-    importTable
-  },
+  components: {},
   props: {
     objList: {
       type: Array

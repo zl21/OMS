@@ -1,10 +1,5 @@
-import { OmsButton, OmsForm as reForm } from 'burgeonComponents'
-
 export default {
-  components: {
-    reForm,
-    OmsButton
-  },
+  components: {},
   name: 'holdOrderDialog',
   props: ['componentData'],
   data() {

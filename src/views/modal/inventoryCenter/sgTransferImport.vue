@@ -1,6 +1,6 @@
 <template>
   <div style="width: 550px;">
-    <importTable
+    <ImportTable
       :component-data="componentData"
       @closeActionDialog="closeActionDialog"
     />
