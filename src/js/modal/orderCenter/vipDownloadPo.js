@@ -1,10 +1,4 @@
-import { OmsForm, OmsButton } from 'burgeonComponents';
-
 export default {
-  components: {
-    OmsForm,
-    OmsButton
-  },
   data() {
     return {
       vmI18n:$i18n,

@@ -6,11 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/src/js/modal/strategyPlatform/syncStockStrategyImport.js
  */
-import { importTable } from 'burgeonComponents';
 export default {
-  components: {
-    importTable
-  },
   props: {
     objList: {
       type: Array

@@ -1,12 +1,7 @@
-import { OmsForm, OmsButton } from 'burgeonComponents'
 // import { standardTimeConversion } from  '@/assets/js/__utils__/date.js';
 
 const { getModuleName } = R3;
 export default {
-  components: {
-    OmsButton,
-    OmsForm
-  },
   /**
    * @property {Array} idArr 选中的id
    * @property {Array} objList 查询区域里面的字段
@@ -19,7 +14,7 @@ export default {
   props: ['idArray', 'objList', 'tablename', 'rowArr'],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       formConfig: {
         formValue: {
           BILL_TIME_TYPE: '',

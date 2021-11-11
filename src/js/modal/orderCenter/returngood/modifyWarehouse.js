@@ -1,9 +1,7 @@
-import { OmsForm, OmsButton } from 'burgeonComponents';
-
 export default {
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       formConfig: {
         formValue: {},
         ruleValidate: {},
@@ -62,10 +60,6 @@ export default {
       type: Object,
       default: {}
     }
-  },
-  components: {
-    OmsForm,
-    OmsButton,
   },
   methods: {
     async okClick() {

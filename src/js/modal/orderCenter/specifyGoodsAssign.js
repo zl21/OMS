@@ -1,9 +1,4 @@
-import { OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsButton
-  },
   data() {
     return {
       vmI18n:$i18n,

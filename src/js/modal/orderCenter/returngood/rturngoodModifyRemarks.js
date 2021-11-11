@@ -1,17 +1,13 @@
 // import axios from 'axios';
-import { OmsButton } from 'burgeonComponents';
 
 export default {
-  components: {
-    OmsButton
-  },
   data() {
     return {
       vmI18n: $i18n,
       bouncedData: {
         animal: '追加到原备注',
         value: '',
-        password:''
+        password: ''
       },
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -65,7 +61,7 @@ export default {
         self.$Message.error("最大只能输入200个字符！");
         return
       }
-      if(!this.bouncedData.value.length){
+      if (!this.bouncedData.value.length) {
         self.$Message.error("备注内容不能为空！");
         return
       }

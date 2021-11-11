@@ -31,7 +31,7 @@
           :label-default-value="labelDefaultValue"
         />
         <div class="subtablePart">
-          <orderItem :component-data="subTableConfig" />
+          <SubTable :component-data="subTableConfig" />
         </div>
       </div>
     </div>

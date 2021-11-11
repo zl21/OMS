@@ -1,6 +1,6 @@
 <template>
   <div class="import-page">
-    <importTable :component-data="componentData" />
+    <ImportTable :component-data="componentData" />
   </div>
 </template>
 

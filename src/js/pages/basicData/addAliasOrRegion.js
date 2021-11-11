@@ -1,11 +1,5 @@
-import { OmsButton, OmsForm } from 'burgeonComponents'
-
 export default {
   name: "addAliasOrRegion",
-  components: {
-    OmsButton,
-    OmsForm,
-  },
   data() {
     return {
       vmI18n: $i18n,

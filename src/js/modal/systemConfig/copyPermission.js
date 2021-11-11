@@ -1,11 +1,7 @@
-import { OmsButton } from 'burgeonComponents'
 import service from '@/service/index';
 
 export default {
   name: 'CopyPermission',
-  components: {
-    OmsButton
-  },
   data() {
     return {
       vmI18n:$i18n,

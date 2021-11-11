@@ -1,12 +1,8 @@
 import service from '@/service/index'
-import { OmsForm, OmsButton } from 'burgeonComponents'
 import R3 from '@syman/burgeon-r3'
 import comMethods from 'burgeonConfig/config/commonUtils.js'
+
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-  },
   data() {
     return {
       vmI18n:$i18n,

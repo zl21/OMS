@@ -1,9 +1,4 @@
-import { OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsButton
-  },
   props: {
     idArray: {
       type: Array

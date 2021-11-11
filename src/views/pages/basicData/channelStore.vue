@@ -44,7 +44,7 @@
           />
         </div>
          <div class="subtablePart" v-show="labelDefaultValue != 'supplyStore'">
-          <subTable :component-data="subTableConfig"></subTable>
+          <SubTable :component-data="subTableConfig"/>
           </div>
       </div>
     </div>

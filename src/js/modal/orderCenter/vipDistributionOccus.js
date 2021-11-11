@@ -1,11 +1,7 @@
-import { OmsButton } from 'burgeonComponents'
 import R3 from '@syman/burgeon-r3';
 
 const { getModuleName } = R3;
 export default {
-  components: {
-    OmsButton
-  },
   props: {},
   data() {
     return {

@@ -1,4 +1,3 @@
-import { OmsForm, OmsButton } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
 import service from '@/service/index'
 
@@ -126,10 +125,6 @@ export default {
       size: 10,
 
     }
-  },
-  components: {
-    OmsForm,
-    OmsButton,
   },
   props: {
     componentData: {
