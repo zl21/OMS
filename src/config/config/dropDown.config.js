@@ -199,7 +199,7 @@ class DropDownConfig {
 
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
-      self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+      self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
       self.publicBouncedConfig.confirmTitle = $i18n.t('modalTitle.ah') // 批量替换下挂商品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
@@ -233,7 +233,7 @@ class DropDownConfig {
 
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
       self.publicBouncedConfig.name = 'addGiftDialog'
-      self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
+      self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
       self.publicBouncedConfig.confirmTitle = $i18n.t('btn.deleteGift') // 删除赠品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
@@ -267,8 +267,8 @@ class DropDownConfig {
     }
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { //
       self.publicBouncedConfig.name = 'addGiftDialog'
-    self.publicBouncedConfig.url = 'modal/orderCenter/addGiftItem'
-    self.publicBouncedConfig.confirmTitle = $i18n.t('btn.addGift') // 添加赠品
+      self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
+      self.publicBouncedConfig.confirmTitle = $i18n.t('btn.addGift') // 添加赠品
 
     self.publicBouncedConfig.componentData = {
       data: self.selection,

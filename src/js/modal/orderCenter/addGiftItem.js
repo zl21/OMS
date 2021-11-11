@@ -1,4 +1,3 @@
-import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
 // import commonUtils from 'burgeonConfig/config/commonUtils'
 import axios from 'axios'
@@ -7,7 +6,7 @@ export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       objid: '',
       url: '',
       loading: false,
@@ -35,8 +34,8 @@ export default {
               dimEnter: (val) => {
                 this.searchGift()
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             },
             {
               label: $i18n.t('table_label.itemNo01'), // SPU编码
@@ -45,12 +44,12 @@ export default {
               value: 'SPU_CODE',
               columns: ['ECODE'],
               AuotData: [], //匹配的选项
-              dimChange: (search) => {},
+              dimChange: (search) => { },
               dimEnter: (val) => {
                 this.searchGift()
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             },
             {
               style: 'dimSearch', //输入框类型
@@ -59,14 +58,14 @@ export default {
               columns: ['ENAME'],
               width: '8',
               AuotData: [], //匹配的选项
-              dimChange: (search) => {},
+              dimChange: (search) => { },
               dimEnter: (val) => {
                 this.searchGift()
               },
-              dimSelect: (obj) => {},
-              dimblur: () => {},
+              dimSelect: (obj) => { },
+              dimblur: () => { },
             },
-           
+
           ],
         },
         // searchBtn
@@ -76,7 +75,7 @@ export default {
           buttons: [
             {
               text: '搜索',
-              type:"primary",
+              type: "primary",
               btnclick: () => {
                 this.tableConfig.current = 1
                 this.skuEcodes = ""
@@ -122,9 +121,9 @@ export default {
         height: '300', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
         pageSize: 10, // 每页条数
-        highlightRow:true,
+        highlightRow: true,
         multiple: false
       },
       btnConfig: {
@@ -132,7 +131,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            disabled:false,
+            disabled: false,
             text: $i18n.t('common.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
@@ -140,7 +139,7 @@ export default {
           },
           {
             text: $i18n.t('common.determine'),
-            disabled:false,
+            disabled: false,
             btnclick: () => {
               if (!this.skuEcodes) {
                 this.$Message.warning("请选中操作的数据")
@@ -164,11 +163,7 @@ export default {
       type: '', //组件传过来的类型，区分那里过来的
     }
   },
-  components: {
-    OmsTable,
-    OmsForm,
-    OmsButton,
-  },
+  components: {},
   props: {
     componentData: {
       type: Object,
@@ -195,24 +190,24 @@ export default {
         setTimeout(() => {
           this.btnConfig.buttons[1].disabled = false;
         }, 5000);
-        setTimeout(()=>{
+        setTimeout(() => {
           this.$parent.$parent.closeConfirm();
-        },1000)
+        }, 1000)
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
           this.$parent.$parent.$parent.$parent.getDetailsData()
-        } else if(res.data.code ===  -1){
+        } else if (res.data.code === -1) {
           this.$Modal.confirm({
             title: "message",
             width: 500,
-            className:'ark-dialog',
-            mask:true,
+            className: 'ark-dialog',
+            mask: true,
             render: h => h('div', {
-              },res.data.data[0].message)
+            }, res.data.data[0].message)
           });
         }
-       
-     
+
+
       })
     },
     deleteOrderGoods() {
@@ -233,13 +228,13 @@ export default {
         setTimeout(() => {
           this.btnConfig.buttons[1].disabled = false;
         }, 5000);
-       
+
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-         
+
         } else {
           if (!res.data.data) {
-            $utils.tipShow('error', self, res.data.message) 
+            $utils.tipShow('error', self, res.data.message)
             return
           }
           this.$Modal.confirm({
@@ -290,13 +285,13 @@ export default {
         setTimeout(() => {
           this.btnConfig.buttons[1].disabled = false;
         }, 5000);
-       
+
         if (res.data.code == 0) {
           this.$Message.success(res.data.message)
-         
+
         } else {
           if (!res.data.data) {
-            $utils.tipShow('error', self, res.data.message) 
+            $utils.tipShow('error', self, res.data.message)
             return
           }
           this.$Modal.confirm({
@@ -335,11 +330,11 @@ export default {
       console.log(v)
     },
     // 取消选中某一项时触发
-    onSelectCancel() {},
+    onSelectCancel() { },
     // 点击全选时触发
-    onSelectAll() {},
+    onSelectAll() { },
     // 点击取消全选时触发
-    onSelectAllCancel() {},
+    onSelectAllCancel() { },
     // 单击某一行时触发
     onRowClick(row) {
       console.log(row)
@@ -347,7 +342,7 @@ export default {
       this.onRowData = row
     },
     // 单击某二行时触发
-    onRowDblclick() {},
+    onRowDblclick() { },
     // 分页change 事件
     pageChange(val) {
       console.log(val);
@@ -360,7 +355,7 @@ export default {
       this.tableConfig.pageSize = val
       this.searchGift()
     },
-    tableDeleteDetail() {},
+    tableDeleteDetail() { },
     // 模糊搜索
     async fuzzyquerybyak(search) {
       if (this.url == '') {
@@ -393,7 +388,7 @@ export default {
     },
     // 搜索赠品
     searchGift() {
-   
+
       this.selectSkuProBySkuEcodeList()
     },
     // 提交
@@ -467,7 +462,7 @@ export default {
         size: this.tableConfig.pageSize,
         current: this.tableConfig.current,
       }
-     
+
       if (this.type == 'replace') {
         data.isGroup = 'Y'
         data.groupType = 2
@@ -537,14 +532,14 @@ export default {
         label: '数量', //输入框前文字
         value: 'number', //输入框的值
         regx: /^[1-9]\d*(\.\d+)?$/,
-        maxlength:8,
+        maxlength: 8,
         columns: ['number'],
         width: '8',
         AuotData: [], //匹配的选项
-        dimChange: (search) => {},
-        dimEnter: (val) => {},
-        dimSelect: (obj) => {},
-        dimblur: () => {},
+        dimChange: (search) => { },
+        dimEnter: (val) => { },
+        dimSelect: (obj) => { },
+        dimblur: () => { },
       }
       self.tableConfig.businessFormConfig.formData.push(obj)
     }
