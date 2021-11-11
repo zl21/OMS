@@ -1,4 +1,3 @@
-import { OmsButton, OmsForm, OmsTable, OmsLabel, subTable } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
 import orderNumberNnalysis from 'allpages/basicData/orderNumberNnalysis.vue';
@@ -6,12 +5,7 @@ import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
-    OmsButton,
-    OmsForm,
-    OmsLabel,
-    OmsTable,
     addPlatformLogisticsCompany,
-    subTable,
     orderNumberNnalysis
   },
   mixins: [new modifycurrentLabel()],

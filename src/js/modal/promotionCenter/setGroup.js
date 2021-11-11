@@ -1,5 +1,4 @@
 import myInputLd from 'framework/components/element/input';
-import { OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'DialogVisible',
@@ -91,7 +90,6 @@ export default {
   props: ['dialogVisible', 'checkList', 'setGroupTableData'],
   components: {
     myInputLd,
-    OmsButton
   },
   computed: {},
   watch: {

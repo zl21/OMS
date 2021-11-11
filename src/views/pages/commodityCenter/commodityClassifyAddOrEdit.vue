@@ -53,7 +53,7 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <orderItem
+          <SubTable
             v-show="labelDefaultValue == 'PS_C_CLASSIFY_LOG'"
             :component-data="subTableConfig"
           />

@@ -1,10 +1,6 @@
-import { OmsButton } from 'burgeonComponents'
 // import comUtils from '@/assets/js/__utils__/common.js';
-
 export default {
-  components: {
-    OmsButton
-  },
+  components: {},
   computed: {
     spuid() {
       return this.$route.query.id;

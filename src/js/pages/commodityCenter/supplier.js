@@ -1,10 +1,6 @@
-import { OmsButton } from 'burgeonComponents'
 import axios from 'axios';
 
 export default {
-  components: {
-    OmsButton
-  },
   data() {
     return {
       vmI18n:$i18n,

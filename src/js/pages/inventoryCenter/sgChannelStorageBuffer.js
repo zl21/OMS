@@ -1,5 +1,4 @@
 
-import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite.js';
 import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
@@ -7,13 +6,7 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions.js';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsLabel,
-    OmsDialog
-  },
+  components: {},
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {

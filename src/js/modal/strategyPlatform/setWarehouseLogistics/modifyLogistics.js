@@ -1,12 +1,6 @@
 // 策略平台-仓库物流优先级方案(新增/详情) - 修改物流
-import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable
-  },
   props: {
     componentData: {
       type: Object,
