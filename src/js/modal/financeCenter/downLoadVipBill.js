@@ -1,15 +1,10 @@
-import { OmsForm, OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsForm,
-    OmsButton
-  },
+  components: {},
   name: 'downloadVipBill',
   data() {
     const _this = this;
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       type: '', // 月结:month 进度: progress
       downLoadFormConfig: {
         formValue: {
@@ -88,7 +83,7 @@ export default {
             value: 'bill_numbere', // 输入框的值
             clearable: true,
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
-            inputenter: () => {}
+            inputenter: () => { }
           }
         ],
         ruleValidate: {
@@ -99,7 +94,7 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
-           {
+          {
             type: '', // 按钮类型
             text: $i18n.t('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
@@ -146,7 +141,7 @@ export default {
         // 账单时间不能跨月
         if (
           formValue.type === 'billDownload'
-            && startTime.getMonth() != endTime.getMonth()
+          && startTime.getMonth() != endTime.getMonth()
         ) {
           this.$Message.warning($i18n.t('modalTips.bj'));// 账单时间不能跨月
           return false;
@@ -154,7 +149,7 @@ export default {
         // 账单时间不能超过11天
         if (
           formValue.type === 'billDownload'
-            && endTime - startTime > 1000 * 60 * 60 * 24 * 11
+          && endTime - startTime > 1000 * 60 * 60 * 24 * 11
         ) {
           this.$Message.warning($i18n.t('modalTips.bk'));// 账单时间段天数要小于等于11天
           return false;

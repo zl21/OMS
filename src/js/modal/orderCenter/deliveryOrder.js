@@ -1,5 +1,3 @@
-import { OmsForm, OmsButton } from 'burgeonComponents'
-
 export default {
   props: {
     idArray: {
@@ -11,13 +9,10 @@ export default {
       defalut: () => []
     },
   },
-  components: {
-    OmsForm,
-    OmsButton,
-  },
+  components: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)

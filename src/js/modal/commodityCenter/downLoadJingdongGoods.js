@@ -1,11 +1,5 @@
-import { OmsForm, OmsButton } from 'burgeonComponents';
-
-
 export default {
-  components: {
-    OmsForm,
-    OmsButton
-  },
+  components: {},
   data() {
     const _this = this;
     return {

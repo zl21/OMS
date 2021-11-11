@@ -1,12 +1,8 @@
-import { OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsButton,
-  },
+  components: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       is_click: false,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -66,26 +62,26 @@ export default {
       // let paramsObj = self.$parent.$parent.formObj.fixedcolumns;
       // 获取搜索form表单的对象
       const param = {};
-        param.cpCShopIdList = this.allFormData.CP_C_SHOP_ID; // 平台店铺
-        param.skuId = this.allFormData.SKU_ID;// 平台SKUID
-        param.psCSkuEcode = this.allFormData.PS_C_SKU_ECODE;// 条码编码
-        param.psCProEcode = this.allFormData.PS_C_PRO_ECODE;// 商品编码(条码编码)
-        param.numiid = this.allFormData.NUMIID;// 平台商品id
-        param.cpCPlatformIdList = [];
-        param.statusList = this.allFormData.STATUS; // 商品状态
-        param.syncStatusList = this.allFormData.SYNC_STATUS; // 同步状态
-        param.syncFailedReason = this.allFormData.SYNC_FAILED_REASON ? [this.allFormData.SYNC_FAILED_REASON] : []; // 同步失败原因 PS:后端存在多条失败原因,故改为数组格式
-        if (this.allFormData.CP_C_PLATFORM_ID) { // 平台类型
-          this.allFormData.CP_C_PLATFORM_ID.forEach((item) => {
-            const obj = item.toString();
-            param.cpCPlatformIdList.push(obj);
-          });
-        }
-        self.is_click = true;
-        // 按筛选条件手工同步到页面
-        if (this.webname == 'manualCalcSyncPageChannelProduct') {
-          url = '/p/cs/storage/manualCalcSyncPageChannelProduct';
-        }
+      param.cpCShopIdList = this.allFormData.CP_C_SHOP_ID; // 平台店铺
+      param.skuId = this.allFormData.SKU_ID;// 平台SKUID
+      param.psCSkuEcode = this.allFormData.PS_C_SKU_ECODE;// 条码编码
+      param.psCProEcode = this.allFormData.PS_C_PRO_ECODE;// 商品编码(条码编码)
+      param.numiid = this.allFormData.NUMIID;// 平台商品id
+      param.cpCPlatformIdList = [];
+      param.statusList = this.allFormData.STATUS; // 商品状态
+      param.syncStatusList = this.allFormData.SYNC_STATUS; // 同步状态
+      param.syncFailedReason = this.allFormData.SYNC_FAILED_REASON ? [this.allFormData.SYNC_FAILED_REASON] : []; // 同步失败原因 PS:后端存在多条失败原因,故改为数组格式
+      if (this.allFormData.CP_C_PLATFORM_ID) { // 平台类型
+        this.allFormData.CP_C_PLATFORM_ID.forEach((item) => {
+          const obj = item.toString();
+          param.cpCPlatformIdList.push(obj);
+        });
+      }
+      self.is_click = true;
+      // 按筛选条件手工同步到页面
+      if (this.webname == 'manualCalcSyncPageChannelProduct') {
+        url = '/p/cs/storage/manualCalcSyncPageChannelProduct';
+      }
       R3.network.post(url, param).then((res) => {
         if (res.data.code === 0) {
           self.$emit('closeActionDialog');

@@ -18,14 +18,27 @@ import InterfaceConfig from '../module/modal/interface.config.js'; // ----------
 import ReportCenter from '../module/modal/report.config.js'; // ----------报表中心
 import basicDataConfig from '../module/modal/basicData.config'; // -----------基础数据
 
-import { importTable, downLoad } from 'burgeonComponents';
+import BC from 'burgeonComponents'
+const { Components } = BC
+
 const common = {
+  // 淘宝订单接口
+  DOWNLOADORDER: {
+    component: Components.DownLoad,
+  },
+  // 通用订单接口 通用退单接口 (通用订单下载)
+  DOWNLOADPUBLIC: {
+    component: Components.DownLoad,
+  },
+  DOWNLOADORDER: {
+    component: Components.DownLoad,
+  },
   DOWNLOADCOMMODITY: {
-    component: downLoad,
+    component: Components.DownLoad,
     labelName: '下载商品',
   },
   DOWNLOADCOMMON: {
-    component: downLoad,
+    component: Components.DownLoad,
     labelName: '下载PO单',
   },
   SKUIMPORT: {

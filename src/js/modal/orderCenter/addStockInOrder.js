@@ -1,11 +1,6 @@
-import { OmsForm, OmsButton } from 'burgeonComponents';
-
 export default {
   name: 'AddStockInOrder',
-  components: {
-    OmsButton,
-    OmsForm
-  },
+  components: {},
   props: {
     detail: {
       type: Object
@@ -116,7 +111,7 @@ export default {
         distributionId: this.objid,
         step: 1
       };
-      const { 
+      const {
         data: { code, message }
       } = await this.service.orderCenter.stockInSave(params);
       if (code == 0) {
@@ -126,7 +121,7 @@ export default {
       }
     },
     async initForm() {
-      const { 
+      const {
         data: { code, data }
       } = await this.service.orderCenter.getStockInDetail({ distributionId: this.objid });
       if (code == 0) {

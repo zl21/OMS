@@ -1,11 +1,6 @@
-import { OmsButton, OmsTable as reActionTable } from 'burgeonComponents'
-
 export default {
   name: 'ManualMarking',
-  components: {
-    reActionTable,
-    OmsButton,
-  },
+  components: {},
   props: {
     componentData: {
       type: Object,
@@ -15,7 +10,7 @@ export default {
   data() {
     const _this = this;
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       depositConfig: {
         jordanFormConfig: {
           formData: [
@@ -238,7 +233,7 @@ export default {
       }
     },
     // 查询
-    searchChange() {},
+    searchChange() { },
     // 弹窗确定事件
     confirmChange() {
       const componentData = this.$props.componentData;

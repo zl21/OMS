@@ -13,7 +13,7 @@
       v-else
       class="deposit"
     >
-      <re-action-table :jordan-table-config="depositConfig" />
+      <OmsTable :jordan-table-config="depositConfig" />
     </div>
     <OmsButton :btn-config="btnConfig" />
   </div>

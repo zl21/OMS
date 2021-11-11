@@ -1,13 +1,9 @@
-import { OmsButton } from 'burgeonComponents'
-
 export default {
   name: 'ModifyWms',
-  components: {
-    OmsButton
-  },
+  components: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       send_wms_pick: '',
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
@@ -22,16 +18,16 @@ export default {
             this.$emit('closeActionDialog');
           }, // 按钮点击事件
         },
-          {
-            type: '', // 按钮类型
-            text: $i18n.t('common.determine'), // 确定
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.determine();
-            }, // 按钮点击事件
-          }
+        {
+          type: '', // 按钮类型
+          text: $i18n.t('common.determine'), // 确定
+          icon: '', // 按钮图标
+          size: 'small', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.determine();
+          }, // 按钮点击事件
+        }
         ],
       },
     };
@@ -51,7 +47,7 @@ export default {
         obj.send_wms_pick = self.send_wms_pick;
         const formdata = new FormData();
         formdata.append('param', JSON.stringify(obj));
-        self.service.orderCenter.sendWmsPick(formdata).then(res=>{
+        self.service.orderCenter.sendWmsPick(formdata).then(res => {
           console.log(res);
           if (res.data.data.code == 0) {
             self.$Message.success(res.data.data.message);

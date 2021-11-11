@@ -1,14 +1,9 @@
-import { OmsForm, OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsForm,
-    OmsButton
-  },
+  components: {},
   name: 'generateSalesOrder',
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       type: '', // 月结:month 进度: progress
       generateFormConfig: {
         formValue: {

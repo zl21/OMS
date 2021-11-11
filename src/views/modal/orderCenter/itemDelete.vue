@@ -14,7 +14,7 @@
       </div>-->
       <div style="display: flex">
         <div class="skuBox">
-          <re-form :form-config="formConfig" />
+          <OmsForm :form-config="formConfig" />
           <!-- SKU编码:
           <Input
             v-model="searchValue"

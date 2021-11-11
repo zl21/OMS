@@ -1,12 +1,8 @@
-import { OmsButton,OmsTable } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
   mixins: [listeningToKeydownMixin],
-  components: {
-    OmsButton,
-    OmsTable,
-  },
+  components: {},
   props: {
     componentData: {
       type: Object,
@@ -16,7 +12,7 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       spinShow: false,
       // 提示
       confirmModal: false,
@@ -119,7 +115,7 @@ export default {
     // 保存备注
     async saveRemark() {
       const self = this;
-      if(self.formItem.textarea.match(/^\s+$/)){
+      if (self.formItem.textarea.match(/^\s+$/)) {
         this.$Message.warning('备注内容不能全是空格！');
         return;
       }

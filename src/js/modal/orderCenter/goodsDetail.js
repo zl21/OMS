@@ -1,14 +1,9 @@
-import { OmsForm, OmsDialog, OmsTable } from 'burgeonComponents';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
 // import publicDialogConfig from 'burgeonComponents/common/js/publicDialog'
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 export default {
-  components: {
-    OmsForm,
-    OmsTable,
-    OmsDialog
-  },
+  components: {},
   props: {
     componentData: {
       type: Object,

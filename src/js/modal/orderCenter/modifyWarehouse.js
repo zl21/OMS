@@ -6,31 +6,27 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/modal/orderCenter/modifyWarehouse.js
  */
-import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
-  components: {
-    OmsForm,
-    OmsButton,
-  },
+  components: {},
   props: {
-    componentData:{
-      type:Object,
-      default:{}
+    componentData: {
+      type: Object,
+      default: {}
     }
   },
   computed: {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       formConfig: {
         formValue: {},
         ruleValidate: {},
         formData: [{
           style: 'popInput',
           width: '24',
-          version:'1.4',
+          version: '1.4',
           itemdata: {
             col: 1,
             colid: 179536,
@@ -89,26 +85,26 @@ export default {
 
   },
   methods: {
-    confirm(){
+    confirm() {
       let self = this;
-      if(!self.formConfig.formData[0].itemdata.pid){
+      if (!self.formConfig.formData[0].itemdata.pid) {
         $utils.msgTips(self, 'warning', '请选择仓库!', 0)
         return;
       }
-      let ids = self.componentData.row.map(item=>{
+      let ids = self.componentData.row.map(item => {
         return {
-          ID:item.ID,
-          BILL_NO:item.BILL_NO
+          ID: item.ID,
+          BILL_NO: item.BILL_NO
         }
       });
       self.service.orderCenter.updateReturnWarehouse({
-        ID_AND_BILL_NO_LIST:ids,
+        ID_AND_BILL_NO_LIST: ids,
         CP_C_PHY_WAREHOUSE_ID: self.formConfig.formData[0].itemdata.pid,
-      }).then(res=>{
+      }).then(res => {
         console.log(res);
-        if(res.data.code == 0){
+        if (res.data.code == 0) {
           $utils.msgTips(self, 'success', res.data.message, 0);
-        }else {
+        } else {
           this.$Modal.confirm({
             className: 'ark-dialog',
             title: res.data.message,
@@ -116,15 +112,15 @@ export default {
             mask: true,
             render: (h) => {
               if (res.data.data) {
-                res.data.data.forEach((item , index)=>{
-                  item['index'] = index +1;
+                res.data.data.forEach((item, index) => {
+                  item['index'] = index + 1;
                 })
                 return h('Table', {
                   props: {
                     columns: [
                       {
                         title: $i18n.t('table_label.serialNo'), // 序号
-                        key:'index'
+                        key: 'index'
                       },
                       {
                         title: $i18n.t('form_label.billNo'), // 单据编号
@@ -138,8 +134,8 @@ export default {
                     data: res.data.data,
                   },
                 })
-              }else {
-                return h('p' , {} , res.data.message)
+              } else {
+                return h('p', {}, res.data.message)
               }
             },
           })

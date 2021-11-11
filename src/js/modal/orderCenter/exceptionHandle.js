@@ -1,10 +1,5 @@
-import { OmsButton, OmsTable } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsTable,
-    OmsButton,
-  },
+  components: {},
   computed: {
     type() {
       let type;

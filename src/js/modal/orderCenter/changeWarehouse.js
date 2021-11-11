@@ -1,13 +1,8 @@
-import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents';
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
   mixins: [listeningToKeydownMixin],
-  components: {
-    OmsForm,
-    OmsButton,
-    OmsTable
-  },
+  components: {},
   props: {
     componentData: {
       type: Object,
@@ -17,7 +12,7 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       isShowFromLoading: false, // 加载
       zIndex: 2500,
       totalRowCount: 0,
@@ -127,25 +122,25 @@ export default {
               self.$Modal.confirm({
                 title: $i18n.t('modalTitle.tips'), // 提示
                 render: h => h('div', {}, [
-                    h(
-                      'p',
-                      {
-                        style: {
-                          padding: '10px 15px 10px 0px'
-                        }
-                      },
-                      message
-                    ),
-                    h('Table', {
-                      props: {
-                        'disabled-hover': true,
-                        'highlight-row': false,
-                        'no-data-text': $i18n.t('other.noDataAvailable'), // 暂无数据
-                        columns: data.columns,
-                        data: data.prompt_data
+                  h(
+                    'p',
+                    {
+                      style: {
+                        padding: '10px 15px 10px 0px'
                       }
-                    })
-                  ]),
+                    },
+                    message
+                  ),
+                  h('Table', {
+                    props: {
+                      'disabled-hover': true,
+                      'highlight-row': false,
+                      'no-data-text': $i18n.t('other.noDataAvailable'), // 暂无数据
+                      columns: data.columns,
+                      data: data.prompt_data
+                    }
+                  })
+                ]),
                 cancelType: true,
                 showCancel: true,
                 titleAlign: 'left',
@@ -163,25 +158,25 @@ export default {
               self.$Modal.error({
                 title: $i18n.t('modalTitle.tips'), // 提示
                 render: h => h('div', {}, [
-                    h(
-                      'p',
-                      {
-                        style: {
-                          padding: '10px 15px 10px 0px'
-                        }
-                      },
-                      message
-                    ),
-                    h('Table', {
-                      props: {
-                        'disabled-hover': true,
-                        'highlight-row': false,
-                        'no-data-text': $i18n.t('other.noDataAvailable'), // 暂无数据
-                        columns: data.columns,
-                        data: data.prompt_data
+                  h(
+                    'p',
+                    {
+                      style: {
+                        padding: '10px 15px 10px 0px'
                       }
-                    })
-                  ]),
+                    },
+                    message
+                  ),
+                  h('Table', {
+                    props: {
+                      'disabled-hover': true,
+                      'highlight-row': false,
+                      'no-data-text': $i18n.t('other.noDataAvailable'), // 暂无数据
+                      columns: data.columns,
+                      data: data.prompt_data
+                    }
+                  })
+                ]),
                 cancelType: true,
                 titleAlign: 'left',
                 mask: true,
@@ -212,26 +207,26 @@ export default {
         self.$Modal.error({
           title: $i18n.t('modalTitle.tips'), // 提示
           render: h => h('div', {}, [
-              h(
-                'p',
-                {
-                  style: {
-                    padding: '10px 15px 10px 0px'
-                  }
-                },
-                message
-              ),
-              h('Table', {
-                props: {
-                  'disabled-hover': true,
-                  'highlight-row': false,
-                  // "no-data-text": "暂无数据",
-                  'no-data-text': $i18n.t('other.noDataAvailable'),
-                  columns: data.columns,
-                  data: data.prompt_data
+            h(
+              'p',
+              {
+                style: {
+                  padding: '10px 15px 10px 0px'
                 }
-              })
-            ]),
+              },
+              message
+            ),
+            h('Table', {
+              props: {
+                'disabled-hover': true,
+                'highlight-row': false,
+                // "no-data-text": "暂无数据",
+                'no-data-text': $i18n.t('other.noDataAvailable'),
+                columns: data.columns,
+                data: data.prompt_data
+              }
+            })
+          ]),
           cancelType: true,
           titleAlign: 'left',
           mask: true,

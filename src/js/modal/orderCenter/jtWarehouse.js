@@ -1,15 +1,10 @@
-import { OmsForm, OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsForm,
-    OmsButton,
-  },
+  components: {},
   props: {},
 
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       warehouseManagementBtnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -63,19 +58,19 @@ export default {
                 ].buttons.selectIdArr.join(','), // 列表中选中的数据id
                 PHYWAREHOUSE: formData[2].itemdata.pid, // 实体店仓id
                 DELIVERYTYPE:
-                self.warehouseManagementFromConfig.formValue.DELIVERYTYPE, // 配送方式
+                  self.warehouseManagementFromConfig.formValue.DELIVERYTYPE, // 配送方式
               };
               fromdata.append('param', JSON.stringify(param));
               this.service.orderCenter.generateOutOrder(fromdata).then((res) => {
-                  if (res.data.data.code === 0) {
-                    self.$Message.success(res.data.data.message);
-                    self.$emit('confirmImport');
-                    self.$emit('closeActionDialog');
-                  } else {
-                    self.$Message.error(res.data.data.message);
-                    self.$emit('uploadError', res.data.data.data);
-                    self.$emit('closeActionDialog');
-                  }
+                if (res.data.data.code === 0) {
+                  self.$Message.success(res.data.data.message);
+                  self.$emit('confirmImport');
+                  self.$emit('closeActionDialog');
+                } else {
+                  self.$Message.error(res.data.data.message);
+                  self.$emit('uploadError', res.data.data.data);
+                  self.$emit('closeActionDialog');
+                }
               });
             }, // 按钮点击事件
           }

@@ -1,6 +1,6 @@
 <template>
   <div style="width: 550px;">
-    <importTable :component-data="componentData" />
+    <ImportTable :component-data="componentData" />
   </div>
 </template>
 
