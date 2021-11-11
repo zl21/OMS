@@ -30,14 +30,11 @@ export default {
     binding.value && el.appendChild(node)
   },
   update(el, binding) {
+    let parentNode = el.loadingElement.parentNode
     if (binding.value) {
-      if (el.loadingElement.parentNode === null) {
-        el.appendChild(el.loadingElement);
-      }
+      parentNode === null && el.appendChild(el.loadingElement);
     } else {
-      if (el === el.loadingElement.parentNode) {
-        el.removeChild(el.loadingElement);
-      }
+      el === parentNode && el.removeChild(el.loadingElement);
     }
   },
   unbind(el) {
