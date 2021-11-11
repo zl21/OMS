@@ -1,5 +1,6 @@
 import { OmsButton } from 'burgeonComponents'
-import { getLodop } from 'burgeonComponents/common/js/LodopFuncs';
+import BC from 'burgeonComponents';
+const { getLodop } = BC.Utils;
 
 export default {
   components: {
