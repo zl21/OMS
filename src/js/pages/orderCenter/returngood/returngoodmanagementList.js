@@ -1,21 +1,14 @@
-import { OmsButton, OmsForm, OmsDialog, OmsLabel, OmsTable, OmsAgTable as aTable } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import unzipXv from '@/assets/js/dataToSmall';
 import commonUtils from 'burgeonConfig/config/commonUtils';
 import BurgeonEvent from 'burgeonConfig/config/event.config';
+import BC from 'burgeonComponents';
+const { Components } = BC
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsLabel,
-    OmsDialog,
-    aTable,
-    loading
-  },
+  components: {},
   // mixins: [isFavoriteMixin],
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
@@ -104,8 +97,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}

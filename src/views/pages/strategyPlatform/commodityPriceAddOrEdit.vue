@@ -35,7 +35,7 @@
             @on-page-change="pageChange"
             @on-page-size-change="pageSizeChange"
           />
-          <subTable
+          <SubTable
             v-if="(isCopy || ID != -1) && labelDefaultValue == 'ST_C_PRICE_LOG'"
             :component-data="subTableConfig"
           />

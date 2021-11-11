@@ -1,16 +1,10 @@
 // import axios from 'axios';
-import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import BC from 'burgeonComponents';
+const { Components } = BC
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsLabel,
-    OmsDialog,
-    OmsTable,
-    loading
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,
@@ -55,8 +49,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},

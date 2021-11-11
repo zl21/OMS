@@ -210,7 +210,7 @@
             </div>
           </div>
           <div class="scanTable">
-            <Atable
+            <OmsTable
               :jordan-table-config="scanOutbound.jordanTableConfig"
               @table-delete-detail="tableDeleteDetail"
               @table-import="tableImport"
@@ -228,14 +228,14 @@
         name="tab2"
       >
         <div class="orderButton">
-          <buttons :btn-config="pickOrder.btnConfig" />
+          <OmsButtonas :btn-config="pickOrder.btnConfig" />
         </div>
         <Collapse v-model="pickOrder.value1">
           <Panel name="1">
             <!-- 基本信息 -->
             {{ vmI18n.t("common.baseInformation") }}
             <p slot="content">
-              <Aform :form-config="pickOrder.formConfig" />
+              <OmsForm :form-config="pickOrder.formConfig" />
             </p>
           </Panel>
         </Collapse>
@@ -249,25 +249,25 @@
               label="拣货明细"
               name="pickDetail"
             >
-              <Atable :jordan-table-config="pickOrder.pickDetail" />
+              <OmsTable :jordan-table-config="pickOrder.pickDetail" />
             </TabPane>
             <TabPane
               label="来源出库通知单"
               name="sourceNotification"
             >
-              <Atable :jordan-table-config="pickOrder.sourceNotification" />
+              <OmsTable :jordan-table-config="pickOrder.sourceNotification" />
             </TabPane>
             <TabPane
               label="装箱明细"
               name="binningDetail"
             >
-              <Atable :jordan-table-config="pickOrder.binningDetail" />
+              <OmsTable :jordan-table-config="pickOrder.binningDetail" />
             </TabPane>
             <TabPane
               label="来源出库结果单"
               name="entryNotice"
             >
-              <Atable :jordan-table-config="pickOrder.entryNotice" />
+              <OmsTable :jordan-table-config="pickOrder.entryNotice" />
             </TabPane>
             <TabPane
               label="日志信息"
@@ -290,7 +290,7 @@
       width="800"
       @on-keydown="notScanKeyDown"
     >
-      <Atable :jordan-table-config="notScanData" />
+      <OmsTable :jordan-table-config="notScanData" />
     </Modal>
     <!-- 删除箱警告提示框 -->
     <Modal

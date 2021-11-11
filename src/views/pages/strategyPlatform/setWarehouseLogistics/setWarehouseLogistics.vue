@@ -173,7 +173,7 @@
       <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
     </div>
     <!-- 导入 -->
-    <businessModal
+    <OmsDialog
       :title="importTable.confirmTitle"
       :title-align="importTable.titleAlign"
       :width="importTable.width"
@@ -210,7 +210,7 @@
       <p>{{ saveModalText }}</p>
     </Modal>
     <!-- 修改物流公司-->
-    <businessModal
+    <OmsDialog
       :title="modifyLogistics.confirmTitle"
       :title-align="modifyLogistics.titleAlign"
       :width="modifyLogistics.width"

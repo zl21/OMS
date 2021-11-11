@@ -1,6 +1,6 @@
 <!-- 店铺商品特殊策略 - 商品信息 - 半定制 -->
 <template>
-  <div class="shopCom" v-loading="loading">  
+  <div class="shopCom" v-loading="loading">
     <OmsTable
       :jordan-table-config="tabConfig"
       @on-select="onSelect"
@@ -56,15 +56,12 @@
 /**
  * 店铺商品特殊策略 - 商品信息 - 半定制
  */
-import { OmsButton, OmsForm, OmsDialog, OmsTable } from 'burgeonComponents'
+import BC from 'burgeonComponents';
+const { Components } = BC
+
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsDialog,
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,
@@ -557,8 +554,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},

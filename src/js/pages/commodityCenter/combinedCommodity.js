@@ -1,16 +1,11 @@
 /**
  * 组合商品 - 老组件
  */
-import { OmsButton, OmsForm, OmsLabel, OmsTable } from 'burgeonComponents'
+import BC from 'burgeonComponents';
+const { Components } = BC
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsLabel,
-    OmsTable,
-    OmsForm
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,
@@ -650,8 +645,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        basePathName: 'business-components',
-        url: 'importTable',
+        url: Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {
