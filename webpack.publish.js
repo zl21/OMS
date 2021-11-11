@@ -19,7 +19,6 @@ const config = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
     clean: true,
-    publicPath: './'
   },
   devtool: 'eval-cheap-module-source-map',
   externals: {
