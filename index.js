@@ -9,9 +9,7 @@
 
 import Vue from 'vue';
 
-let burgeonComponents = require.context('burgeonComponents/view/', false, /.vue$/);
-let comJS = require.context('burgeonComponents/common/js/', false, /.js$/);
-
+let comJS = require.context('burgeonComponents/common/js/', false, /\.js$/);
 const Utils = {}
 comJS.keys().forEach(key => {
 	if (key == './utils.js') {
@@ -30,4 +28,12 @@ context.keys().forEach((key) => {
 	Vue.component(component.name, component)
 });
 
-export default { Components: CustomComponents, Utils };
+let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/);
+const Directives = directiveFiles.keys().reduce((Directives, modulePath) => {
+  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  const value = directiveFiles(modulePath)
+  Directives[moduleName] = value.default
+  return Directives
+}, {});
+
+export default { Components: CustomComponents, Utils, Directives };
