@@ -186,9 +186,10 @@ class DropDownConfig {
   static ORDER_REPLACE_BELONGS_GOODS() {
     // 替换下挂赠品
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config().pushProduceConfig)
-    )
+    // self.publicBouncedConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config().pushProduceConfig)
+    // )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
     if(!self.vueAgTable){
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
@@ -220,9 +221,10 @@ class DropDownConfig {
   static ORDER_DELETE_GOODS() {
     //批量删除
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config().pushProduceConfig)
-    )
+    // self.publicBouncedConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config().pushProduceConfig)
+    // )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
     if(!self.vueAgTable){
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
@@ -254,10 +256,10 @@ class DropDownConfig {
   static ORDER_ADD_GOODS() {
     //添加赠品
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config().pushProduceConfig)
-    )
-
+    // self.publicBouncedConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config().pushProduceConfig)
+    // )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
     if(!self.vueAgTable){
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
@@ -508,9 +510,12 @@ class DropDownConfig {
    */
   static successHandler(ids, objName, componentDataType, tableType) {
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config()[objName])
-    )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config()[objName])
+    // const curConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config()[objName])
+    // )
+    console.log(`组件配置:`, self.publicBouncedConfig);
+
     let componentDataObj = {}
 
     switch (componentDataType) {
@@ -563,7 +568,7 @@ class DropDownConfig {
     self.$nextTick(() => {
       self.$children.find((item) => {
         if (item.name === tableType) {
-          console.log(item);
+          console.log(`组件:${tableType}::`, item);
         }
         return item.name === tableType
       }).openConfirm()
