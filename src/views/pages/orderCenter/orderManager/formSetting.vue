@@ -75,12 +75,9 @@
   </div>
 </template>
 <script>
-  import { OmsButton } from 'burgeonComponents'
 
   export default {
-    components: {
-      OmsButton
-    },
+    components: {},
     computed: {
       btnConfig() {
         return this.extendBtn;

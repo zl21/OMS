@@ -6,15 +6,10 @@
 </template>
 
 <script>
-import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'addPlatformLogisticsCompany',
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-  },
+  components: {},
   data() {
     return {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID

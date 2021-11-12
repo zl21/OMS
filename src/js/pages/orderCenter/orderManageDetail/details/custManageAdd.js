@@ -1,7 +1,6 @@
 // 零售发货单-详情-订单明细
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   data() {
@@ -109,9 +108,6 @@ export default {
     };
   },
   mixins: [buttonPermissionsMixin],
-  components: {
-    OmsTable
-  },
   props: {
     componentData: {},
     isQh: {

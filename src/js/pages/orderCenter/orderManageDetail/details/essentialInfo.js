@@ -1,5 +1,4 @@
 
-import { OmsButton, OmsTable, OmsDialog } from 'burgeonComponents'
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem.vue';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import goodsTotalAmount from 'allpages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
@@ -10,9 +9,6 @@ export default {
     componentData: {}
   },
   components: {
-    OmsButton,
-    OmsDialog,
-    OmsTable,
     CusOrderItem,
     goodsTotalAmount
   },

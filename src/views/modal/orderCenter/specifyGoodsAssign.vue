@@ -24,7 +24,7 @@
           @on-enter="search"
           @on-click="search"
         /> -->
-        <inputP
+        <FkinputPlus
           version="1.4"
           :itemdata="itemdata"
           @getFkChooseItem="oneObj"
@@ -32,7 +32,7 @@
           @inputChange="inputChange"
           @inputEnter="inputEnter"
           @inputClear="inputClear"
-        ></inputP>
+        />
         <!-- 数量:
         <Input v-model="qty" style="width: 80px" />-->
       </div>
@@ -52,13 +52,9 @@
 <script>
 // import specifyGoodsAssign from '@/js/modal/orderCenter/specifyGoodsAssign';
 // export default specifyGoodsAssign;
-import { fkinputPlus as inputP, OmsButton } from 'burgeonComponents'
 
 export default {
-  components: {
-    inputP,
-    OmsButton,
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,

@@ -1,18 +1,10 @@
-import { OmsButton, OmsForm, OmsTable, switchList, subTable,OmsLabel } from 'burgeonComponents'
 import axios from 'axios';
 import service from '@/service/index';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   name: 'specialLogistics',
-  components: {
-    OmsButton,
-    OmsLabel,
-    OmsForm,
-    switchList,
-    OmsTable,
-    subTable
-  },
+  components: {},
   mixins: [new modifycurrentLabel()],
   watch: {
     'formConfig.formValue': {

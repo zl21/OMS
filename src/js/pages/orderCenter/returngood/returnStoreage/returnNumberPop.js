@@ -1,12 +1,5 @@
 // import axios from 'axios';
-import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-  },
   data() {
     return {
       vmI18n:$i18n,

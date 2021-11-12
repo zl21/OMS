@@ -1,11 +1,7 @@
 // import timestampToTime from '@/assets/js/__utils__/usual';
-import { OmsButton, LogTable as logTable } from 'burgeonComponents'
 
 export default {
-  components: {
-    logTable,
-    OmsButton,
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,

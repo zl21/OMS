@@ -1,6 +1,5 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import batchTables from 'allpages/promotionCenter/details/batchTables.vue';
-import { SingleBox } from 'burgeonComponents'
 import { tableCols } from '../promotion.config';
 
 export default {
@@ -8,7 +7,6 @@ export default {
   components: {
     detailtable,
     batchTables,
-    SingleBox,
   },
   props: {
     basicData: {

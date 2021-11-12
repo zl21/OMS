@@ -6,15 +6,11 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/orderCenter/vipJit/distributionOrderList.js
  */
-import { OmsTable } from 'burgeonComponents'
 import R3 from '@syman/burgeon-r3';
-
 const { network } = R3;
+
 export default {
   name: 'DistributionOrderList',
-  components: {
-    OmsTable
-  },
   data() {
     return {
       tableConfig: {

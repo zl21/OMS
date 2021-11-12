@@ -2,7 +2,7 @@
   <!-- 发货后退款 -->
   <div id="cbx" class="refundAfterShipment public-main custom-main">
     <div class="re_button custom-btn">
-      <reButton :btn-config="btnConfig" />
+      <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content">
       <div class="re_form">
@@ -39,10 +39,10 @@
                   </RadioGroup>
                 </div>
                 <div slot="returnType" class="returnType">
-                  <reForm :form-config="returnTypeFormConfig" />
+                  <OmsForm :form-config="returnTypeFormConfig" />
                 </div>
                 <div slot="returnTypeItem" class="returnType">
-                  <reForm :form-config="returnTypeItemConfig" />
+                  <OmsForm :form-config="returnTypeItemConfig" />
                 </div>
               </FormLayout>
             </p>
@@ -71,7 +71,7 @@
           </p>
         </div>
         <div v-show="navStatus === 0" class="re_table">
-          <reTable
+          <OmsTable
             :jordan-table-config="tableConfig"
             @on-page-change="tabllePageChange"
             @on-page-size-change="tabllePageSizeChange"
@@ -85,7 +85,7 @@
         </div>
         <!-- 日志 -->
         <div v-show="navStatus === 1" class="re_table">
-          <reTable
+          <OmsTable
             :jordan-table-config="returnLogTableConfig"
           />
         </div>
@@ -102,10 +102,10 @@
           @on-ok="queryorder"
         >
           <div class="orderContent">
-            <reForm :form-config="order.orderform" />
-            <reButton :btn-config="order.btn" />
+            <OmsForm :form-config="order.orderform" />
+            <OmsButton :btn-config="order.btn" />
           </div>
-          <reTable
+          <OmsTable
             :jordan-table-config="order.table"
             @on-current-change="onCurrentChange"
           />
@@ -121,7 +121,7 @@
           @on-cancel="addItemCancel"
           @on-ok="onAddItem"
         >
-          <reTable
+          <OmsTable
             :jordan-table-config="addItem.table"
             @on-select="onSelect"
             @on-select-all="onSelect"

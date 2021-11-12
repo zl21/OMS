@@ -1,13 +1,13 @@
 import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
 import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet.vue';
-import { OmsButton, steps as stepsBars } from 'burgeonComponents'
 import promotionMixin from './promotion.mixin';
+import BC from 'burgeonComponents'
+Vue.component('stepsBars', BC.Components.Steps)
 
 export default {
   components: {
     BasicInfo,
     BatchInfoSet,
-    stepsBars,
     OmsButton
   },
   mixins: [promotionMixin()],

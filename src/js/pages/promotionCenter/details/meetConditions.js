@@ -1,5 +1,3 @@
-import { SingleBox } from 'burgeonComponents'
-
 export default {
   props: {
     rule: {
@@ -69,9 +67,6 @@ export default {
     filterOPtWayChange(val) {
       this.rule.amount_style = val;
     }
-  },
-  components: {
-    SingleBox
   },
   mounted() {
     console.log($store.state.customize.forginkeys.groups);

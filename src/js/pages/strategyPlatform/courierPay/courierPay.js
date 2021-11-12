@@ -1,15 +1,10 @@
-import { OmsForm, OmsTable, OmsButton } from 'burgeonComponents'
 import publicMethods from '@/assets/js/public/publicMethods';
 import areaList from '@/assets/js/address/area-list';
 import { parseArea } from '@/assets/js/address/address-parse';
 
 parseArea(areaList);
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable
-  },
+  components: {},
   data() {
     return {
       vmI18n:$i18n,

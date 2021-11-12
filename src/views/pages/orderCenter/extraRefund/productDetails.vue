@@ -30,7 +30,6 @@
 </template>
 
 <script>
-// import { OmsForm } from 'burgeonComponents';
 export default {
   data(){
     return {
@@ -175,9 +174,7 @@ export default {
       }
     }
   },
-  components: {
-    OmsTable
-  },
+  components: {},
   computed: {
     isEdit () {
       return R3.store.state.customize.originalOrder;　　//需要监听的数据

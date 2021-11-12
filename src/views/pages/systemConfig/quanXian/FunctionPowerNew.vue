@@ -237,13 +237,9 @@
 // const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
 const store = vm.$store
 import service from '@/service/index';
-import { OmsDialog } from 'burgeonComponents'
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 export default {
-  components: {
-    OmsDialog
-  },
   data() {
     return {
       dialogs: DialogConfig.config(),

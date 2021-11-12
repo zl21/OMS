@@ -54,18 +54,12 @@
 
 <script>
 // 退换货单详情
-import { OmsButton, OmsLabel, OmsDialog, OmsTable } from 'burgeonComponents'
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 
 export default {
   name: 'sourceBillNo',
-  components: {
-    OmsButton,
-    OmsTable,
-    OmsDialog,
-    OmsLabel,
-  },
+  components: {},
   // model: {
   //   prop: 'value',
   //   event: 'change'

@@ -63,14 +63,9 @@
 </template>
 
 <script>
-import { OmsTable, OmsButton } from 'burgeonComponents'
-
 
 export default {
-  components: {
-    OmsTable,
-    OmsButton
-  },
+  components: {},
   props: {
     componentData: {
       type: Object

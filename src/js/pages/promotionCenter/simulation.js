@@ -1,19 +1,14 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 // import MultipleBox from 'burgeonComponents/multipleBox.vue';
 import { tableCols as tabList } from './promotion.config';
-import { OmsButton, fkinputPlus as myInput, SingleBox, ButtonFkDialog } from 'burgeonComponents'
 import groups from '@/assets/js/promotion/groups';
 import promotionMixin from './promotion.mixin';
 
 export default {
   mixins: [promotionMixin()],
   components: {
-    OmsButton,
-    myInput,
     detailtable,
     // MultipleBox,
-    SingleBox,
-    ButtonFkDialog
   },
   data() {
     return {

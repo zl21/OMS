@@ -1,15 +1,15 @@
 <template>
   <div class="page" v-loading="loading">
-    <re-button :btn-config="btnConfig" />
-    <re-table :jordan-table-config="tableConfig" />
-    <re-dialog
+    <OmsButton :btn-config="btnConfig" />
+    <OmsTable :jordan-table-config="tableConfig" />
+    <OmsDialog
       ref="dialog"
       :visible.sync="dialogConfig.visible"
       :title="dialogConfig.title"
       :width="dialogConfig.width"
     >
       <div slot="content">
-        <re-table
+        <OmsTable
           :jordan-table-config="dialogTableConfig"
           @table-delete-detail="tableDeleteDetail"
           @table-import="tableImport"
@@ -22,10 +22,10 @@
           @on-select-all-cancel="dialogTableSelect"
         />
         <div class="dialogFooter">
-          <re-button :btn-config="dialogBtnConfig" />
+          <OmsButton :btn-config="dialogBtnConfig" />
         </div>
       </div>
-    </re-dialog>
+    </OmsDialog>
   </div>
 </template>
 

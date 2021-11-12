@@ -18,15 +18,10 @@
 <script>
 import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
-import { fkinputPlus as fkinput, OmsForm } from 'burgeonComponents'
 groups.load();
 
 export default {
   name: 'BasicInfoP',
-  components: {
-    fkinput,
-    OmsForm,
-  },
   data() {
     return {
       vmI18n: i18n,

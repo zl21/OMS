@@ -8,13 +8,9 @@
   </div>
 </template>
 <script>
-import { OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-  },
+  components: {},
   props: {
     componentData: {
       type: Object,

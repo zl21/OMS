@@ -2,7 +2,6 @@ import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import { tableCols } from '../promotion.config';
 import SetCommodity from 'allpages/promotionCenter/details/setCommodity.vue';
-import { OmsDialog, SingleBox, ButtonFkDialog, OmsButton } from 'burgeonComponents'
 import BC from 'burgeonComponents';
 const { Components } = BC
 

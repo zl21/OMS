@@ -1,4 +1,3 @@
-import { OmsButton, OmsForm, OmsTable, OmsLabel } from 'burgeonComponents'
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
@@ -6,12 +5,7 @@ import BtnConfig from 'burgeonConfig/config/funBtn.config';
 
 export default {
   components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
     OrderItem,
-    OmsLabel,
-    loading
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {

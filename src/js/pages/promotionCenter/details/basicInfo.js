@@ -1,15 +1,9 @@
 import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
-import { fkinputPlus as fkinput, SingleBox, MultipleBox } from 'burgeonComponents'
 groups.load();
 
 export default {
   name: 'BasicInfo',
-  components: {
-    fkinput,
-    // myInputLd,
-    MultipleBox,
-    SingleBox
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,
@@ -190,7 +184,7 @@ export default {
       endTime = Number(endTime) > 0 ? Number(endTime) : 0;
       this.offlineTime = 0;
       if ($utils.isDate(this.basicData.offline_time)) {
-        this.offlineTime = $utils.dateFormat(this.basicData.offline_time , 'yyyyMMddhhmmss');
+        this.offlineTime = $utils.dateFormat(this.basicData.offline_time, 'yyyyMMddhhmmss');
       } else {
         this.offlineTime = this.basicData.offline_time.replace(/\/|\s|\:/g, '');
       }
@@ -199,7 +193,7 @@ export default {
         // && (Number(endTime) + diff > offline_time)
         if (endTime !== 0) {
           this.offlineTime = $utils.addDays(new Date(this.basicData.time_limit[1]), 2);
-          this.basicData.offline_time = $utils.dateFormat(this.offlineTime , 'yyyy/MM/dd hh:mm:ss')
+          this.basicData.offline_time = $utils.dateFormat(this.offlineTime, 'yyyy/MM/dd hh:mm:ss')
         }
       } catch (e) {
         throw new Error(e);

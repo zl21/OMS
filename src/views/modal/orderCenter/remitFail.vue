@@ -20,13 +20,10 @@
 </template>
 
 <script>
-import { OmsButton } from 'burgeonComponents'
 import service from '@/service/index'
 
 export default {
-  components: {
-    OmsButton,
-  },
+  components: {},
   data() {
     return {
       defaultColumn: 1,

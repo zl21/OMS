@@ -1,15 +1,4 @@
-
-
-
-
-
-import { OmsTable, OmsButton } from 'burgeonComponents'
-
 export default {
-  components: {
-    OmsTable,
-    OmsButton
-  },
   methods: {
     // 勾选事件
     onSelect(row) {

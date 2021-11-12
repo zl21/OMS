@@ -1,11 +1,6 @@
-import { OmsButton, OmsTable } from 'burgeonComponents'
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown.js';
 
 export default {
-  components: {
-    OmsTable,
-    OmsButton
-  },
   mixins: [listeningToKeydownMixin],
   props: {
     componentData: {}

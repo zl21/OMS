@@ -6,14 +6,10 @@
 </template>
 
 <script>
-import { OmsForm, OmsButton } from 'burgeonComponents'
 import service from '@/service/index'
 
 export default {
-  components: {
-    OmsForm,
-    OmsButton
-  },
+  components: {},
   data() {
     return {
       formconfig: {
