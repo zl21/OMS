@@ -4,13 +4,11 @@
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
-<script>
-// import changeWarehouse from "@/js/modal/orderCenter/changeWarehouse";
 
-// export default changeWarehouse;
+<script>
 import listeningToKeydownMixin from "@/assets/js/mixins/listeningToKeydown.js";
 
-export default {
+const changeWarehouse = {
   mixins: [listeningToKeydownMixin],
   components: {},
   props: {
@@ -119,27 +117,29 @@ export default {
       },
     };
   },
-  beforeDestroy() {
+  /* beforeDestroy() {
     document.removeEventListener("keydown", this.onKeyDown);
   },
   mounted() {
-    const _this = this;
-    console.log("this.componentData::", _this.componentData);
-    if (!_this.componentData.CP_C_SHOP_ID) {
-      _this.$Message.warning("no CP_C_SHOP_ID ！");
-    }
-    _this.querItem("CP_C_PHY_WAREHOUSE_ID").inputList = [
-      {
-        childs: [
-          {
-            colname: "CP_C_PHY_WAREHOUSE_ID",
-            refobjid: _this.componentData.CP_C_SHOP_ID || "",
-            valuedata: _this.componentData.CP_C_SHOP_ENAME || "_",
-          },
-        ],
-      },
-    ];
-  },
+    this.$nextTick(() => {
+      const _this = this;
+      console.log("this.componentData::", _this.componentData);
+      if (!_this.componentData.CP_C_SHOP_ID) {
+        _this.$Message.warning("no CP_C_SHOP_ID ！");
+      }
+      _this.querItem("CP_C_PHY_WAREHOUSE_ID").inputList = [
+        {
+          childs: [
+            {
+              colname: "CP_C_PHY_WAREHOUSE_ID",
+              refobjid: _this.componentData.CP_C_SHOP_ID || "",
+              valuedata: _this.componentData.CP_C_SHOP_ENAME || "_",
+            },
+          ],
+        },
+      ];
+    });
+  }, */
   methods: {
     querItem(key, type) {
       return this[type ? type : "formConfig"].formData.find(
@@ -339,9 +339,10 @@ export default {
     },
   },
 };
+export default changeWarehouse
 </script>
+
 <style scoped lang='less'>
-@import "~@/css/modal/orderCenter/changeWarehouse.less";
 .semiCustomModal {
   min-height: 100px;
 }

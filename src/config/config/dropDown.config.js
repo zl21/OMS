@@ -508,9 +508,12 @@ class DropDownConfig {
    */
   static successHandler(ids, objName, componentDataType, tableType) {
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config()[objName])
-    )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config()[objName])
+    // const curConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config()[objName])
+    // )
+    console.log(`组件配置:`, self.publicBouncedConfig);
+
     let componentDataObj = {}
 
     switch (componentDataType) {
@@ -563,7 +566,7 @@ class DropDownConfig {
     self.$nextTick(() => {
       self.$children.find((item) => {
         if (item.name === tableType) {
-          console.log(item);
+          console.log(`组件:${tableType}::`, item);
         }
         return item.name === tableType
       }).openConfirm()
