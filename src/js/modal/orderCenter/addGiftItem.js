@@ -1,6 +1,4 @@
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
-// import commonUtils from 'burgeonConfig/config/commonUtils'
-import axios from 'axios'
 
 export default {
   mixins: [listeningToKeydownMixin],

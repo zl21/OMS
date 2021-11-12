@@ -27,15 +27,13 @@ import customizedService from '@/service/index.js'
 import standardTableListsCustomize from '@/config/minxin/standardTableListsCustomize';
 import verticalTableDetailCustomize from '@/config/minxin/verticalTableDetailCustomize';
 import tableDetailCollectionMixin from '@/config/minxin/standardTable/mixin.js';
-import standardTableListdefindVue from '@/commonPages/layout/standardTableListdefind.vue';
 
-import NavigatorSubMenu from '@/commonPages/layout/NavigatorSubMenu.vue';
-import NaVerticalslot from '@/commonPages/layout/NaVerticalslot.vue';
+import layoutDirectionSlot from '@/commonPages/layout/';
 
 class CustomizedConfig {
 	// static #beforeEach = beEach;
 	static #STLD = {
-		defined: standardTableListdefindVue,
+		defined: layoutDirectionSlot.standardTableListdefind,
 	};
 	static #STLC = standardTableListsCustomize;
 	static #VTDC = verticalTableDetailCustomize;
@@ -306,14 +304,12 @@ class CustomizedConfig {
 // console.clear();
 const Custom = {
 	beforeEach: beEach,
-	NavigatorSubMenu,
-	NaVerticalslot,
+	...layoutDirectionSlot,
 	STLD: CustomizedConfig.STLD,
 	Rule: CustomizedConfig.Rule,
 	STLC: CustomizedConfig.STLC,
 	VTDC: CustomizedConfig.VTDC,
 	TDCM: CustomizedConfig.TDCM,
-	STLD: CustomizedConfig.STLD,
 	omsUtils: CustomizedConfig.omsUtils,
 	BtnConfig: CustomizedConfig.BtnConfig,
 	dropDownBtn: CustomizedConfig.dropDownBtn,
