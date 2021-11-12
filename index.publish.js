@@ -16,8 +16,12 @@ import Vue from 'vue';
 import commonUtils from '@/config/config/commonUtils.js'
 
 import BC from 'burgeonComponents'
-const { Utils } = BC
+const { Utils, Directives } = BC
 console.log('BC::', BC);
+
+Object.keys(Directives).forEach(key => {
+  Vue.directive(key, Directives[key])
+})
 
 // import custUtils from 'burgeonComponents/burgeon.publish/common/js/utils.js'
 import pageNote from 'burgeonConfig/config/pageNote'
