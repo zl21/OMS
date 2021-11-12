@@ -118,7 +118,7 @@ export default {
 </script>
 <style lang="less">
 @import "~@burgeon/oms-theme/skin/public.less";
-.favorite:before {
+.tag.favorite:before {
   content: "";
 }
 // 头部导航有关系的所有样式

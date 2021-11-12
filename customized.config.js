@@ -29,6 +29,9 @@ import verticalTableDetailCustomize from '@/config/minxin/verticalTableDetailCus
 import tableDetailCollectionMixin from '@/config/minxin/standardTable/mixin.js';
 import standardTableListdefindVue from '@/commonPages/layout/standardTableListdefind.vue';
 
+import NavigatorSubMenu from '@/commonPages/layout/NavigatorSubMenu.vue';
+import NaVerticalslot from '@/commonPages/layout/NaVerticalslot.vue';
+
 class CustomizedConfig {
 	// static #beforeEach = beEach;
 	static #STLD = {
@@ -303,6 +306,8 @@ class CustomizedConfig {
 // console.clear();
 const Custom = {
 	beforeEach: beEach,
+	NavigatorSubMenu,
+	NaVerticalslot,
 	STLD: CustomizedConfig.STLD,
 	Rule: CustomizedConfig.Rule,
 	STLC: CustomizedConfig.STLC,
