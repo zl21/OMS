@@ -42,46 +42,46 @@ const common = {
     labelName: '下载PO单',
   },
   SKUIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   SKUADDOREDIT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   SPUIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   REGIONIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   SYNCSTOCKSTRATEGYIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   IMPORTCOM: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   EXTRAIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   IMPORTPAYRESULT: {
-    component: importTable
+    component: Components.ImportTable,
   },
   LOGISTICSIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   WAREHOUSEIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   ZFBACCOUNTIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   GOODDISTRIBUTIONIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   SG_B_GOOD_DISTRIBUTION_ITEM_IMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
   PURCHASEIMPORT: {
-    component: importTable,
+    component: Components.ImportTable,
   },
 }
 
