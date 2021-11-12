@@ -19,6 +19,7 @@ import BC from 'burgeonComponents'
 const { Utils, Directives } = BC
 console.log('BC::', BC);
 
+// 注册自定义指令
 Object.keys(Directives).forEach(key => {
   Vue.directive(key, Directives[key])
 })
