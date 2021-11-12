@@ -114,7 +114,6 @@
 
 <script>
 // 退换货单详情
-import { OmsButton, OmsLabel, OmsForm, OmsTable } from 'burgeonComponents'
 import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import searchOOID from './searchOOID.vue'
@@ -126,10 +125,6 @@ export default {
   components: {
     returnChangeOrderdetails,
     searchOOID,
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsLabel,
   },
   data() {
     const validatePhoneNumber = BurgeonValidate.validatePhoneNumber;

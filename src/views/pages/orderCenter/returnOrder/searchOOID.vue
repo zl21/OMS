@@ -13,14 +13,10 @@
 
 <script>
 // 退换货单详情
-import { OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'searchOOID',
-  components: {
-    OmsButton,
-    OmsTable,
-  },
+  components: {},
   data() {
     return {
       vmI18n: $i18n,

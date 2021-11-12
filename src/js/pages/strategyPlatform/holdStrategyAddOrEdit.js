@@ -1,15 +1,8 @@
-import { OmsButton, OmsForm, subTable, OmsTable, OmsLabel } from 'burgeonComponents'
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   name: 'holdStrategyAddOrEdit',
-  components: {
-    subTable,
-    OmsTable,
-    OmsButton,
-    OmsForm,
-    OmsLabel,
-  },
+  components: {},
   mixins: [new modifycurrentLabel()],
   data() {
     return {

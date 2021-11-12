@@ -35,13 +35,8 @@
   </div>
 </template>
 <script>
-  import { OmsTable } from 'burgeonComponents'
 
   export default {
-    components: {
-      OmsTable,
-      // loading
-    },
     props: {
       title: {
         type: String,

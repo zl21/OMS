@@ -18,16 +18,12 @@
 
 <script>
 import Vue from 'vue';
-import { OmsTable, Fkinput as myInput, OmsButton } from 'burgeonComponents'
+import BC from 'burgeonComponents'
+Vue.component('drpInput', BC.Components.Fkinput);
 
-Vue.component('drpInput', myInput);
 export default {
   name: 'realDeficiencySplit',
-  components: {
-    OmsButton,
-    OmsTable,
-    //     myInput,
-  },
+  components: {},
   data() {
     return {
       loading: false,

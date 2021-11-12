@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="row">
-        <fkinput
+        <FkinputPlus
           :version="'1.4'"
           :itemdata="basicData.stores.itemdata"
           :is-object="basicData.stores.itemdata.isObject"
@@ -164,7 +164,7 @@
         </div>
       </div>
       <div class="row">
-        <fkinput
+        <FkinputPlus
           :itemdata="basicData.except_provinces.itemdata"
           @getFkChooseItem="oneObj_province"
         />

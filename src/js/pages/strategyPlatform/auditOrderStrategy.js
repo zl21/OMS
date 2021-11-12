@@ -6,18 +6,11 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/js/pages/strategyPlatform/auditOrderStrategy.js
  */
-import { OmsButton, OmsForm, Fkinput as myInput, subTable, OmsLabel } from 'burgeonComponents'
 // import comUtils from '@/assets/js/__utils__/common.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    myInput,
-    subTable,
-    OmsLabel
-  },
+  components: {},
   mixins: [new modifycurrentLabel()],
   data() {
     return {

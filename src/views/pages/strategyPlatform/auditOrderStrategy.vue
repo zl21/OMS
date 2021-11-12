@@ -103,7 +103,7 @@
                   >发货仓库：</label
                 >
                 <div class="popInput">
-                  <myInput
+                  <Fkinput
                     class="popInput"
                     :version="DELIVERY_WAREHOUSE.version"
                     :is-active="DELIVERY_WAREHOUSE.isActive"
@@ -131,7 +131,7 @@
                   >物流公司：</label
                 >
                 <div class="popInput">
-                  <myInput
+                  <Fkinput
                     class="popInput"
                     :version="LOGISTICS_COMPANY.version"
                     :is-active="LOGISTICS_COMPANY.isActive"
@@ -336,7 +336,7 @@
           >
           </OmsLabel>
           <div>
-            <subTable :component-data="subTableConfig"></subTable>
+            <SubTable :component-data="subTableConfig"/>
           </div>
         </div>
       </div>

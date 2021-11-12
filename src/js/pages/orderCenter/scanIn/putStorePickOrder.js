@@ -1,12 +1,5 @@
-import { OmsTable as Atable, OmsForm as Aform, OmsButton as buttons } from 'burgeonComponents'
-
 export default {
   inject: ['reload'],
-  components: {
-    buttons,
-    Atable,
-    Aform
-  },
   data() {
     return {
       vmI18n: $i18n,

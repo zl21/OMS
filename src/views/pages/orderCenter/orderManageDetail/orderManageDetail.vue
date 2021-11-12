@@ -57,7 +57,6 @@
   </div>
 </template>
 <script>
-import { OmsButton, OmsLabel, OmsDialog } from 'burgeonComponents'
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
@@ -68,11 +67,8 @@ import BurgeonEvent from 'burgeonConfig/config/event.config';
 export default {
   name: 'OrderManageDetail',
   components: {
-    OmsButton,
-    OmsLabel,
     EssentialInfo,
     OrderItem,
-    OmsDialog
   },
   mixins: [buttonPermissionsMixin],
   data() {

@@ -19,13 +19,10 @@
 
 <script>
 import { addDetailModalTableColumns } from './returnConfig.js';
-import { OmsTable } from 'burgeonComponents'
 
 export default {
   name: 'retunGoods',
-  components: {
-    OmsTable
-  },
+  components: {},
   props: {
     mainData: {}
   },

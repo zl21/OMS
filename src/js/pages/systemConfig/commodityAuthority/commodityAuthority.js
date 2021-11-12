@@ -2,7 +2,6 @@ import Buttonmap from 'framework/assets/js/buttonmap'; // 实际上没用到
 import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 import FkDialog from 'framework/components/tablelist/fkdialog';
 import GroupTree from 'framework/components/tree/groupTree';
-import { OmsButton } from 'burgeonComponents';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 /* import Vue from 'vue' */
 
@@ -12,7 +11,6 @@ export default {
   components: {
     FkDialog,
     GroupTree,
-    OmsButton
   },
   data() {
     return {

@@ -37,15 +37,12 @@
 </template>
 
 <script>
-import { OmsTable, OmsButton } from 'burgeonComponents'
 import payDetailAdd from './payDetailAdd.vue';
 
 export default {
   // name: 'payDetail',
   components: {
     payDetailAdd,
-    OmsButton,
-    OmsTable,
   },
   props: {
     idArray: {// 获取ID用于多选

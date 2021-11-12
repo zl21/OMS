@@ -59,7 +59,6 @@
   </div>
 </template>
 <script>
-import { OmsTable } from 'burgeonComponents'
 
 import {
   addDetailModalTableColumns,
@@ -70,9 +69,7 @@ import Util from "@/assets/js/public/publicMethods";
 
 export default {
   name: "retunGoods",
-  components: {
-    OmsTable,
-  },
+  components: {},
   props: {
     mainData: {},
     returnProduct: "",

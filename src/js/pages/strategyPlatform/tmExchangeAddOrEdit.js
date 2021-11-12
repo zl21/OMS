@@ -1,14 +1,7 @@
-import { OmsButton, OmsForm, subTable, OmsLabel, OmsTable } from 'burgeonComponents'
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
-  components: {
-    subTable,
-    OmsTable,
-    OmsButton,
-    OmsForm,
-    OmsLabel,
-  },
+  components: {},
   mixins: [new modifycurrentLabel()],
   data() {
     return {

@@ -1,17 +1,10 @@
-import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel, subTable } from 'burgeonComponents'
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
-    subTable,
-    OmsButton,
-    OmsForm,
-    OmsLabel,
-    OmsTable,
     scheduleFormDialog,
-    OmsDialog
   },
   mixins: [new modifycurrentLabel()],
   data() {

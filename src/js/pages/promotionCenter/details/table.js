@@ -1,10 +1,6 @@
-import { TableSku } from 'burgeonComponents'
-
 export default {
   name: 'detailtable',
-  components: {
-    TableSku
-  },
+  components: {},
   props: {
     tColumns: {
       type: Array

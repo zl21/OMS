@@ -21,13 +21,9 @@
 </template>
 
 <script>
-import { OmsForm, OmsButton } from 'burgeonComponents';
 
 export default {
-  components: {
-    OmsForm,
-    OmsButton
-  },
+  components: {},
   props: {
     idArray: {
       type: Array,

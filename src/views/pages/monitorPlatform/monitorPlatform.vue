@@ -248,7 +248,6 @@
 
 <script>
 import initCdnCustomize from '@/config/minxin/initCdnCustomize';
-import { OmsButton } from 'burgeonComponents'
 
 let dayBtnConifg = [
   {
@@ -288,9 +287,7 @@ let statusBtnConifg = [
 ];
 export default {
   name: "WelcomePage",
-  components: {
-    OmsButton,
-  },
+  components: {},
   mixins: [initCdnCustomize],
   data() {
     return {

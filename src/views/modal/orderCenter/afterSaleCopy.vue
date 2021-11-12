@@ -2,7 +2,7 @@
   <!-- 订单管理 - 售后复制 -->
   <div class="customized-modal afterSaleCopy">
     <div class="afterSaleCopy-form">
-      <re-form :form-config="formConfig"></re-form>
+      <OmsForm :form-config="formConfig"/>
     </div>
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
@@ -10,13 +10,9 @@
 
 <script>
 import electronicSheetPrinting from "../inventoryCenter/electronicSheetPrinting.vue";
-import { OmsButton, OmsForm as reForm } from 'burgeonComponents'
 
 export default {
-  components: {
-    reForm,
-    OmsButton,
-  },
+  components: {},
   name: "afterSaleCopy",
   props: ["componentData"],
   data() {

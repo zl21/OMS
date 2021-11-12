@@ -1,4 +1,3 @@
-import { OmsTable } from 'burgeonComponents'
 // import { OC_B_ORDER } from './config';
 // import config from './config';
 export default {
@@ -24,9 +23,6 @@ export default {
       objid: '',
       options: {} // 自定义属性（选填）
     };
-  },
-  components: {
-    OmsTable
   },
   props: {
     componentData: {}

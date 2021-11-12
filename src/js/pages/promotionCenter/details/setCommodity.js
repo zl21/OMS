@@ -1,6 +1,5 @@
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import { tableCols } from '../promotion.config';
-import { OmsButton } from 'burgeonComponents'
 
 export default {
 	name: 'dialogVisiblex',
@@ -12,14 +11,14 @@ export default {
 				buttons: [
 					{
 						text: $i18n.t('common.cancel'), // 取消
-						class:"white",
+						class: "white",
 						isShow: false,
 						disabled: false,
 						btnclick: () => this.closeDialogs()
 					},
 					{
 						text: $i18n.t('btn.save'), // 保存
-						class:"active",
+						class: "active",
 						disabled: false,
 						btnclick: () => this.confirm()
 					},
@@ -55,7 +54,6 @@ export default {
 		},
 	},
 	components: {
-		OmsButton,
 		detailtable,
 	},
 	computed: {
@@ -72,7 +70,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.btnConfig.buttons[0].isShow = !(this.objid > 0 && ['2','3'].includes(this.basicData.status));
+		this.btnConfig.buttons[0].isShow = !(this.objid > 0 && ['2', '3'].includes(this.basicData.status));
 	},
 	created() {
 	},

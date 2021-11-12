@@ -1,13 +1,7 @@
 // 额外退款新增/编辑、已发货退款编辑  共用此组件
 import refundAfterShipment from './constants/refundAfterShipment';
-import { OmsTable as reTable, OmsForm as reForm, OmsButton as reButton } from 'burgeonComponents'
 
 export default {
-  components: {
-    reButton,
-    reTable,
-    reForm,
-  },
   data() {
     return {
       vmI18n: $i18n,

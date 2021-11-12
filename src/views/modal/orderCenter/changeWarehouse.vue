@@ -9,15 +9,10 @@
 
 // export default changeWarehouse;
 import listeningToKeydownMixin from "@/assets/js/mixins/listeningToKeydown.js";
-import { OmsTable, OmsForm, OmsButton } from 'burgeonComponents'
 
 export default {
   mixins: [listeningToKeydownMixin],
-  components: {
-    OmsForm,
-    OmsButton,
-    OmsTable,
-  },
+  components: {},
   props: {
     componentData: {
       type: Object,

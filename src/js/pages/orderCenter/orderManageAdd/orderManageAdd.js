@@ -1,5 +1,4 @@
 
-import { OmsButton, OmsForm, OmsDialog, OmsTable, OmsLabel } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
@@ -11,13 +10,6 @@ const { parse, parseArea } = require('@/assets/js/address/address-parse');
 
 parseArea(areaList);
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsLabel,
-    OmsDialog,
-  },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {

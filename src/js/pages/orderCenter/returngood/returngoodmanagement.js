@@ -1,14 +1,11 @@
 // 退换货单详情
-import { OmsButton, OmsForm, OmsLabel, OmsDialog, OmsTable } from 'burgeonComponents'
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils'
 // import OrderItem from './orderItem';
-
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
-
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');
 
@@ -16,12 +13,7 @@ parseArea(areaList);
 export default {
   name: 'returngoodmanagement',
   components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsDialog,
     OrderItem,
-    OmsLabel,
   },
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {

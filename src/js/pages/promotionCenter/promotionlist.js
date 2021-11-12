@@ -1,4 +1,3 @@
-import { OmsButton, OmsForm, OmsLabel, OmsAgTable } from 'burgeonComponents'
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dialogVisible from '@/views/modal/promotionCenter/setGroup';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
@@ -7,10 +6,6 @@ import { baseColumnDefs, logDataCol, diStatusArr } from './promotion.config'
 
 export default {
   components: {
-    OmsAgTable,
-    OmsForm,
-    OmsButton,
-    OmsLabel,
     // Mydialog,
     // errorMessage,
     dialogVisible,

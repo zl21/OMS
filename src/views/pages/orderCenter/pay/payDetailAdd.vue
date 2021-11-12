@@ -23,14 +23,9 @@
 </template>
 
 <script>
-import { OmsTable, OmsButton } from 'burgeonComponents'
 
 export default {
   name: 'payDetailAdd',
-  components: {
-    OmsButton,
-    OmsTable,
-  },
   props: {
     subData: {
       type: [Array, Object],

@@ -1,11 +1,4 @@
-import { OmsTable as reTable, OmsButton as reButton, OmsDialog as reDialog } from 'burgeonComponents'
-
 export default {
-  components: {
-    reButton,
-    reTable,
-    reDialog
-  },
   data() {
     return {
       vmI18n: $i18n,

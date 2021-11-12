@@ -1,13 +1,6 @@
-import { OmsButton, OmsForm, OmsTable, OmsDialog } from 'burgeonComponents'
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsTable,
-    OmsDialog,
-  },
   // inject: ['reload'],
   mixins: [buttonPermissionsMixin],
   methods: {

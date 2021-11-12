@@ -1,11 +1,7 @@
 import chineseDiction from 'framework/assets/js/ChineseDictionary.js';
-import { OmsButton } from 'burgeonComponents'
 import port from '@/config/config/orderDetailConnector.js';
 
 export default {
-  components: {
-    OmsButton
-  },
   name: 'matrix',
   props: {
     encode: {
