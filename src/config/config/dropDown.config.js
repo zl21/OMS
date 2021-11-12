@@ -186,9 +186,10 @@ class DropDownConfig {
   static ORDER_REPLACE_BELONGS_GOODS() {
     // 替换下挂赠品
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config().pushProduceConfig)
-    )
+    // self.publicBouncedConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config().pushProduceConfig)
+    // )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
     if(!self.vueAgTable){
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
@@ -220,9 +221,10 @@ class DropDownConfig {
   static ORDER_DELETE_GOODS() {
     //批量删除
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config().pushProduceConfig)
-    )
+    // self.publicBouncedConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config().pushProduceConfig)
+    // )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
     if(!self.vueAgTable){
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
@@ -254,10 +256,10 @@ class DropDownConfig {
   static ORDER_ADD_GOODS() {
     //添加赠品
     let self = DropDownConfig.target
-    self.publicBouncedConfig = JSON.parse(
-      JSON.stringify(DialogConfig.config().pushProduceConfig)
-    )
-
+    // self.publicBouncedConfig = JSON.parse(
+    //   JSON.stringify(DialogConfig.config().pushProduceConfig)
+    // )
+    self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
     if(!self.vueAgTable){
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
