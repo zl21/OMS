@@ -37,7 +37,6 @@
       :name="dialogConfig.name"
       :url="dialogConfig.url"
       :width="540"
-      :basePathName="dialogConfig.basePathName"
     />
   </div>
 </template>
@@ -125,8 +124,7 @@ const DownLoad = {
           },
         },
         name: "importTable",
-        basePathName: "business-components",
-        url: "importTable",
+        url: require('./ImportTable.vue').default,
       },
     };
   },
@@ -204,8 +202,7 @@ const DownLoad = {
           },
         },
         name: "importTable",
-        basePathName: "business-components",
-        url: "importTable",
+        url: require('./ImportTable.vue').default,
         width: 450,
       };
       this.$refs.dialog.openConfirm();
