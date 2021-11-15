@@ -305,7 +305,8 @@ class DropDownConfig {
     })
     if (code == 0) {
       self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE'
-      self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
+      // self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
+      self.publicBouncedConfig.url = require('@/views/modal/orderCenter/afterSaleCopy.vue').default
       self.publicBouncedConfig.confirmTitle = $i18n.t('modalTitle.ag') // 售后复制
       self.publicBouncedConfig.componentData = { id: self.selection[0].ID }
       self.publicBouncedConfig.width = 400
