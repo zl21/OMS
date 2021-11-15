@@ -8,7 +8,9 @@
   ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
-    "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js"
+    "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js",
+    "push": "npm run build && yalc push",
+    "watch": "nodemon --ignore burgeon.publish/ --ignore node_modules/ --watch projects -C -e js,html,less,scss --debug -x npm run build && yalc push"
   },
   "repository": {
     "type": "git",
