@@ -89,7 +89,7 @@ let beforeEach = (to, from, next) =>{
     next();
   }
 
-export {
+export default {
     handerTreeList,
     compareObjectFunction,
     modifyObjectFunction,
