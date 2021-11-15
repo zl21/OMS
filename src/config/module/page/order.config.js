@@ -70,15 +70,6 @@ export default {
     ),
     // component: orderManageAdd,
   },
-  // 订单中心-详情
-  ORDERMANAGEDETAIL: {
-    component: () => import(
-      /* webpackChunkName: 'OrderCenterPage' */
-      'allpages/orderCenter/orderManageDetail/orderManageDetail.vue'
-    ),
-    // component: orderManageDetail
-    labelName: i18n.t('panel_label.retailInvoice_details'), //零售发货单详情
-  },
   // 订单中心-退换货单详情
   RETURNGOOD: {
     component: () => import(

@@ -20,12 +20,7 @@ const allCenterPage = Object.assign(
   StrategyPlatform,
   SystemConfig,
   InventoryConfig, 
-  basicDataConfig, 
-  // {
-  //   ORDERDETAIL2: {
-  //     component: () => import('allpages/orderCenter/orderManageDetail/orderDetail/halfOrderDetail.vue')
-  //   }
-  // },
+  basicDataConfig,
 );
 
 export default allCenterPage;
