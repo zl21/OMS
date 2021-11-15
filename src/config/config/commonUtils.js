@@ -383,7 +383,7 @@ class commonUtils {
         $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
    */
   static tabJump(
-    mutationType,
+    mutationType, // 对应mutationArr的数组下标
     id,
     type,
     tableName,

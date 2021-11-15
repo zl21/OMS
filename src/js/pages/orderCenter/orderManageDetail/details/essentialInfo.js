@@ -288,9 +288,11 @@ export default {
   },
   async created() {
     // 按钮权限配置
-    let ACTIONS = JSON.parse(sessionStorage.getItem("ACTIONS"));
-    let buttonArr1 = this.butArr.map((x) => { if (ACTIONS.some(y => y.webname === x.webname)) return x }).filter(item => item);
-    this.butArr = buttonArr1;
+    setTimeout(() => {
+      let ACTIONS = JSON.parse(sessionStorage.getItem("ACTIONS")) || [];
+      let buttonArr1 = this.butArr.map((x) => { if (ACTIONS.some(y => y.webname === x.webname)) return x }).filter(item => item);
+      this.butArr = buttonArr1;
+    }, 10);
     // this.butArr.forEach((x)=>{
     // 判断是否存在不存在设置为false，存在看是否显示ishide
     // if(!ACTIONS.some(y => y.webname === x.webname)){
