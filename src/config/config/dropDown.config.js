@@ -137,7 +137,7 @@ class DropDownConfig {
     let self = DropDownConfig.target
     let flag = false;
     for (const it of selectData) {
-      if (![1,2].includes(it.ORDER_STATUS)) {
+      if (![1, 2].includes(it.ORDER_STATUS)) {
         flag = true;
         break
       }
@@ -154,7 +154,7 @@ class DropDownConfig {
 
   static async canceledOrderCopyHander() {
     let self = DropDownConfig.target
-    if(!self.vueAgTable){
+    if (!self.vueAgTable) {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length != 1) {
@@ -168,15 +168,10 @@ class DropDownConfig {
       COPY_REASON_TYPE: 0,
     })
     if (code == 0) {
-      self.$store.commit('customize/TabOpen', {
-        id: 2307,
-        type: 'action',
-        name: 'OC_B_ORDER_VIRTUAL_TABLE',
+      self.$store.commit('global/tabOpen', {
+        url: `/CUSTOMIZED/OC_B_ORDER_VIRTUAL_TABLE/2307?copyType=1&sourceId=${self.selection[0].ID}`,
+        type: 'C',
         label: $i18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
-        query: Object.assign({
-          copyType: 1,
-          sourceId: self.selection[0].ID,
-        }),
       })
     } else {
       console.log(message)
@@ -190,7 +185,7 @@ class DropDownConfig {
     //   JSON.stringify(DialogConfig.config().pushProduceConfig)
     // )
     self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
-    if(!self.vueAgTable){
+    if (!self.vueAgTable) {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length < 1) {
@@ -198,7 +193,7 @@ class DropDownConfig {
       return
     }
 
-    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) {
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
       self.publicBouncedConfig.confirmTitle = $i18n.t('modalTitle.ah') // 批量替换下挂商品
@@ -207,15 +202,15 @@ class DropDownConfig {
         type: 'replace',
       }
       self.publicBouncedConfig.width = 800
-  
+
       setTimeout(() => {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
-    }else{
-     $utils.msgTips(self, 'warning', 'kf')
+    } else {
+      $utils.msgTips(self, 'warning', 'kf')
       return
     }
-  
+
   }
 
   static ORDER_DELETE_GOODS() {
@@ -225,7 +220,7 @@ class DropDownConfig {
     //   JSON.stringify(DialogConfig.config().pushProduceConfig)
     // )
     self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
-    if(!self.vueAgTable){
+    if (!self.vueAgTable) {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length < 1) {
@@ -233,7 +228,7 @@ class DropDownConfig {
       return
     }
 
-    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) { 
+    if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) {
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
       self.publicBouncedConfig.confirmTitle = $i18n.t('btn.deleteGift') // 删除赠品
@@ -242,15 +237,15 @@ class DropDownConfig {
         type: 'del',
       }
       self.publicBouncedConfig.width = 800
-  
+
       setTimeout(() => {
         self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
       }, 100)
-    }else{
+    } else {
       $utils.msgTips(self, 'warning', 'jx'); // 只允许缺货或待审核状态的订单进行添加！
       return
     }
-   
+
   }
 
   static ORDER_ADD_GOODS() {
@@ -260,7 +255,7 @@ class DropDownConfig {
     //   JSON.stringify(DialogConfig.config().pushProduceConfig)
     // )
     self.publicBouncedConfig = _.cloneDeep(DialogConfig.config().pushProduceConfig)
-    if(!self.vueAgTable){
+    if (!self.vueAgTable) {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length < 1) { //
@@ -272,16 +267,16 @@ class DropDownConfig {
       self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
       self.publicBouncedConfig.confirmTitle = $i18n.t('btn.addGift') // 添加赠品
 
-    self.publicBouncedConfig.componentData = {
-      data: self.selection,
-      type: 'add',
-    }
+      self.publicBouncedConfig.componentData = {
+        data: self.selection,
+        type: 'add',
+      }
 
-    self.publicBouncedConfig.width = 800
-    setTimeout(() => {
-      self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
-    }, 100)
-    }else{
+      self.publicBouncedConfig.width = 800
+      setTimeout(() => {
+        self.$children.find((item) => item.name === 'addGiftDialog').openConfirm()
+      }, 100)
+    } else {
       $utils.msgTips(self, 'warning', 'kf')
       return
     }
@@ -289,7 +284,7 @@ class DropDownConfig {
 
   static async afterSaleCopyHander() {
     let self = DropDownConfig.target
-    if(!self.vueAgTable){
+    if (!self.vueAgTable) {
       self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
     }
     if (self.selection.length != 1) {
@@ -557,7 +552,7 @@ class DropDownConfig {
           data,
         }
         break
-    
+
       default:
         componentDataObj = {
           ids,
@@ -619,16 +614,16 @@ class DropDownConfig {
   //替换商品
   static replaceProductHandler(ids) {
     let self = DropDownConfig.target
-    if (ids[0].ORDER_STATUS == 1||ids[0].ORDER_STATUS == 2) {
+    if (ids[0].ORDER_STATUS == 1 || ids[0].ORDER_STATUS == 2) {
       this.successHandler(ids, 'replaceConfig', 'product', 'replaceTheGoods')
-    }else{
+    } else {
       $utils.msgTips(self, 'warning', 'kf')
       self.btnConfig.loading = false
       return
     }
-    
+
   }
- 
+
   //删除商品
   static deleteProductHandler(ids) {
     this.successHandler(ids, 'itemDeleteConfig', 'product', 'itemDelete')

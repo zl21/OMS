@@ -112,6 +112,8 @@ import BurgeonValidate from "burgeonConfig/config/validate.config";
 import dateUtil from "@/assets/js/__utils__/date.js";
 import axios from "axios";
 import Util from "@/assets/js/public/publicMethods";
+import BC from 'burgeonComponents'
+const { Components } = BC
 
 const areaList = require("@/assets/js/address/area-list");
 const { parse, parseArea } = require("@/assets/js/address/address-parse");
@@ -156,7 +158,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: "matrixBox", // 组件名称
-        url: "modal/orderCenter/matrixBox",
+        url: require('@/views/modal/orderCenter/matrixBox.vue').default,
         keepAlive: true,
         excludeString: "matrixBox", // 将name传进去，确认不缓存
         componentData: {},

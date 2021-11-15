@@ -128,13 +128,20 @@ export default {
             text: $i18n.t('common.return'), // 返回
             btnclick: () => {
               $omsUtils.tabCloseAppoint(this);
-              this.$store.commit('customize/TabOpen', {
+              this.$store.commit('global/tabOpen', {
+                url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
+                type: 'C',
+                dynamicRoutingForCustomizePage: true,
+                label: $i18n.t('panel_label.retail_shipping_order'),//'零售发货单',
+              });
+              // $omsUtils.tabJump(0, '2307', 1, 'ORDERMANAGER', { i8n: 0, tip: `${$i18n.t('panel_label.retail_shipping_order')}` }, {}, 1, 1)
+              /* this.$store.commit('customize/TabOpen', {
                 id: '2307',
                 type: 'action',
                 name: 'ORDERMANAGER',
                 label: $i18n.t('panel_label.retail_shipping_order'),//'零售发货单',
                 back: true,
-              });
+              }); */
             }
           },
           {
