@@ -992,10 +992,9 @@ export default {
         if (res.data.code == 0) {
           self.isModify = false;
           $utils.msgTips(self, 'success', res.data.message, 0);
-          self.$store.commit('customize/TabOpen', {
-            id: res.data.data,
-            type: 'action',
-            name: 'PS_C_PRO',
+          self.$store.commit('global/tabOpen', {
+            url: `/CUSTOMIZED/PS_C_PRO/${res.data.data}`,
+            type: 'C',
             label: 'SPU编辑', // 额外退款编辑
           });
           // self.modify = {

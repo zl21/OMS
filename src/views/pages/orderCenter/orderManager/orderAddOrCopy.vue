@@ -2025,20 +2025,16 @@ export default {
       this.$destroy(true);
       if (this.$route.query.spuid) {
         // 保留，可能要返回退换货 ？
-        this.$store.commit("customize/TabOpen", {
-          id: "2307",
-          type: "action",
-          name: "ORDERMANAGER",
+        this.$store.commit("global/tabOpen", {
+          url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
+          type: "C",
           label: $i18n.t('panel_label.retail_shipping_order'),//"零售发货单",
-          back: true,
         });
       } else {
-        this.$store.commit("customize/TabOpen", {
-          id: "2307",
-          type: "action",
-          name: "ORDERMANAGER",
+        this.$store.commit("global/tabOpen", {
+          url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
+          type: "C",
           label: $i18n.t('panel_label.retail_shipping_order'),// "零售发货单",
-          back: true,
         });
       }
     },
