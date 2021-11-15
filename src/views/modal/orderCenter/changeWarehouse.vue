@@ -117,7 +117,7 @@ const changeWarehouse = {
       },
     };
   },
-  /* beforeDestroy() {
+  beforeDestroy() {
     document.removeEventListener("keydown", this.onKeyDown);
   },
   mounted() {
@@ -139,7 +139,7 @@ const changeWarehouse = {
         },
       ];
     });
-  }, */
+  },
   methods: {
     querItem(key, type) {
       return this[type ? type : "formConfig"].formData.find(
