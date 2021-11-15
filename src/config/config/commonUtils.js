@@ -285,23 +285,23 @@ class commonUtils {
   //  * @callback  {Object} 什么鬼？反正里面存了callbackType、callbackFun（具体处理接口返回的res的方法？）
   //  * @param  {...any} callback
   //  */
-  // static modalShow(self, tips, okKey, data, ...callback) {
-  //   self.$Modal.info({
-  //     title: $i18n.t('modalTitle.tips'), // 提示
-  //     content: $i18n.t(`modalTips.${tips}`),
-  //     mask: true,
-  //     showCancel: true,
-  //     okText: $i18n.t('common.determine'), // 确定
-  //     cancelText: $i18n.t('common.cancel'), // 取消
-  //     onOk: () => {
-  //       let [callbackType, callbackFun] = callback
-  //       this.serviceHandler(self, okKey, data, callbackType, callbackFun)
-  //     },
-  //     onCancel: () => {
-  //       self.$emit('closeActionDialog', false)
-  //     },
-  //   })
-  // }
+  static modalShow(self, tips, okKey, data, ...callback) {
+    self.$Modal.info({
+      title: $i18n.t('modalTitle.tips'), // 提示
+      content: $i18n.t(`modalTips.${tips}`),
+      mask: true,
+      showCancel: true,
+      okText: $i18n.t('common.determine'), // 确定
+      cancelText: $i18n.t('common.cancel'), // 取消
+      onOk: () => {
+        let [callbackType, callbackFun] = callback
+        this.serviceHandler(self, okKey, data, callbackType, callbackFun)
+      },
+      onCancel: () => {
+        self.$emit('closeActionDialog', false)
+      },
+    })
+  }
 
   // // 数组对象根据子元素某各个key合并分组
   // static sonList(arr, key) {
