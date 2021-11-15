@@ -1,7 +1,7 @@
 <template>
   <!-- 退换货订单-查询原始订单编号 -->
   <div class="searchOOID" v-loading="loading">
-    <business-action-table
+    <OmsTable
       :jordan-table-config="table"
       @on-row-click="onRowClick"
       @on-row-dblclick="onRowDblclick"

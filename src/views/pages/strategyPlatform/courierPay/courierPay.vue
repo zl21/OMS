@@ -37,7 +37,7 @@
           <!-- 明细信息 -->
           {{ vmI18n.t("common.detailed_info") }}
           <p slot="content">
-            <business-action-table
+            <OmsTable
               :jordan-table-config="jordanTableConfig"
               @on-select="onSelect"
               @on-select-all="onSelect"

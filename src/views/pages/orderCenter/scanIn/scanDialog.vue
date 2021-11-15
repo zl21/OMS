@@ -1,6 +1,6 @@
 <template>
   <div class="dialog">
-    <business-action-table
+    <OmsTable
       :jordan-table-config="jordanTableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"

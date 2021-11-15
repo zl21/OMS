@@ -36,7 +36,7 @@
     >
       <div class="customized-modal">
         <div class="customized-detail-table">
-          <business-action-table
+          <OmsTable
             :jordan-table-config="table"
             @on-row-click="onRowClick"
             @on-row-dblclick="onRowDblclick"

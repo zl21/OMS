@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="order-item">
-    <business-action-table
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"
       @on-select-cancel="onSelectCancel"

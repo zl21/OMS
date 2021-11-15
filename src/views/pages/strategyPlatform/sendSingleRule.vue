@@ -25,7 +25,7 @@
           :label-list="labelList"
           :label-default-value="labelDefaultValue"
         />
-        <business-action-table
+        <OmsTable
           v-if="showFlag"
           :jordan-table-config="jordanTableConfig"
           @on-select="OnSelect"

@@ -112,7 +112,7 @@
         <!-- 列表组件 -->
         <div class="tableBox">
           <!-- 退货明细 -->
-          <business-action-table
+          <OmsTable
             v-show="labelDefaultValue === 1"
             :jordan-table-config="jordanTableConfig"
             @on-select="returnOnSelect"
@@ -123,7 +123,7 @@
             @on-select-all-cancel="returnSelectAllCancel"
           />
           <!-- 换货明细 -->
-          <business-action-table
+          <OmsTable
             v-show="labelDefaultValue === 2"
             :jordan-table-config="jordanTableConfig2"
             @on-select="returnOnSelect2"
@@ -138,7 +138,7 @@
             :component-data="tab2"
           />
           <!-- 次品记录 -->
-          <business-action-table
+          <OmsTable
             v-show="labelDefaultValue === 4"
             :jordan-table-config="jordanTableConfig4"
           />
@@ -160,7 +160,7 @@
             <OmsForm :form-config="order.orderform" />
             <OmsButton :btn-config="order.btn" />
           </div>
-          <business-action-table
+          <OmsTable
             :jordan-table-config="order.table"
             @on-select="onquerySelect"
             @on-select-cancel="onqueryCancel"
@@ -212,7 +212,7 @@
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
     >
-      <business-action-table
+      <OmsTable
         :jordan-table-config="returnDetailAddTable.table"
         @on-select="returnDetailAddOnSelect"
         @on-select-cancel="returnDetailAddOnCancel"
