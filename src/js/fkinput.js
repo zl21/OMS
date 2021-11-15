@@ -652,7 +652,6 @@ export default {
             }
           } else {
             // 添加到明细输入框
-
             if (item.colname === itemdata.refcolval.srccol) {
               if (item.isfk) {
                 params[itemdata.refcolval.fixcolumn] = item.pid && item.valuedata
@@ -673,12 +672,14 @@ export default {
                 }
                 tipsname[itemdata.refcolval.fixcolumn] = item.child;
               }
+            } else {
+              throw new Error('不存在inputList.childs或inputList.child，item.colname != itemdata.refcolval.srccol')
             }
           }
         });
       }
       self.queryParams = params;
-
+      console.log('params::', params);
       for (const key in params) {
         if (params[key] != -1 && params[key]) {
           if (itemdata.fkdisplay === 'pop') {

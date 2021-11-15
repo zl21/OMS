@@ -109,7 +109,7 @@ const config = {
     static: './burgeon.publish',
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
     }),
