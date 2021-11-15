@@ -1,7 +1,7 @@
 <!-- 开发文档：http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/907865/2/2061 -->
 <template>
   <div>
-    <business-action-table
+    <OmsTable
       :jordan-table-config="tableConfig"
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
