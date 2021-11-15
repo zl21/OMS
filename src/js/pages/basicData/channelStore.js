@@ -589,10 +589,9 @@ export default {
         if (res.data.code == 0) {
           self.isModify = false;
           self.$Message.success(res.data.message);
-          this.$store.commit('customize/TabOpen', {
-            id: res.data.data.ID,
-            type: 'action',
-            name: 'CP_C_ORG_CHANNEL',
+          this.$store.commit('global/tabOpen', {
+            url: `/CUSTOMIZED/CP_C_ORG_CHANNEL/${res.data.data.ID}`,
+            type: 'C',
             label: '渠道仓编辑' // 额外退款编辑
           });
           // if (self.id != '-1') {

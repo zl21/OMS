@@ -780,10 +780,9 @@ export default {
             });
           } else {
             // this.initObjItem(self.ID);
-            $store.commit('customize/TabOpen', {
-              id: newId,
-              type: 'action',
-              name: 'PS_C_SKU',
+            $store.commit('global/tabOpen', {
+              url: `/CUSTOMIZED/PS_C_SKU/${newId}`,
+              type: 'C',
               label: $i18n.t('menu.b1'), // SKU编辑
             });
           }
@@ -831,10 +830,9 @@ export default {
           label: $i18n.t('menu.a8'), // 商品SKU
           back: true,
         });
-        this.$store.commit('customize/TabOpen', {
-          id: spuID,
-          type: 'action',
-          name: 'PS_C_PRO',
+        this.$store.commit('global/tabOpen', {
+          url: `/CUSTOMIZED/PS_C_PRO/${spuID}`,
+          type: 'C',
           label: $i18n.t('menu.b2'), // SPU编辑
         });
       } else {
