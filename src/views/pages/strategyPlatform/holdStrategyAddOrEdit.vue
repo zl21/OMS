@@ -152,7 +152,7 @@
         <!-- 子表Part -->
         <div class="subtablePart">
           <subTable :component-data="subTableConfig"></subTable>
-          <!-- <business-action-table :jordan-table-config="tableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" /> -->
+          <!-- <OmsTable :jordan-table-config="tableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" /> -->
         </div>
       </div>
     </div>

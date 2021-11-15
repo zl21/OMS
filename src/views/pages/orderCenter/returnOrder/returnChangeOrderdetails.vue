@@ -9,7 +9,7 @@
 <template>
   <div v-loading="loading">
     <!-- 退货明细 -->
-    <business-action-table
+    <OmsTable
       :jordan-table-config="actionTableCon"
       @on-select="returnOnSelect"
       @on-select-cancel="returnCancel"

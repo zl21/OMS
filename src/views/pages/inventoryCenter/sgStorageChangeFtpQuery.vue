@@ -17,7 +17,7 @@
       />
       <!-- 列表组件 -->
       <div class="tableBox">
-        <business-action-table
+        <OmsTable
           :jordan-table-config="jordanTableConfig"
           @on-select="returnOnSelect"
           @table-import="returnImport"

@@ -17,7 +17,7 @@
           />
           </Input>
         </div>
-        <business-action-table
+        <OmsTable
           :jordan-table-config="jordanTableConfig"
           @on-row-dblclick="onRowDblclick"
           @on-select="OnSelect"

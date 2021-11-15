@@ -28,7 +28,7 @@
         />
         <!-- 列表组件 -->
         <div class="tableBox">
-          <business-action-table
+          <OmsTable
             v-if="labelDefaultValue"
             :jordan-table-config="jordanTableConfig"
             @on-select="returnOnSelect"
@@ -54,7 +54,7 @@
             <OmsButton :btn-config="order.btn" />
           </div>
           <div class="orderTable">
-            <business-action-table
+            <OmsTable
               :jordan-table-config="order.table"
               @on-select="onquerySelect"
               @on-select-cancel="onqueryCancel"

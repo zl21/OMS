@@ -8,7 +8,7 @@
       />
       <OmsButton :btn-config="order.btn" />
     </div>
-    <business-action-table
+    <OmsTable
       :jordan-table-config="order.table"
       @on-select="onquerySelect"
       @on-select-cancel="onqueryCancel"
@@ -25,7 +25,7 @@
         @on-ok="wrongForce"
         @on-cancel="querycancel"
       >
-        <business-action-table
+        <OmsTable
           :jordan-table-config="wrong.table"
           @on-select="wrongForceSelect"
           @on-select-cancel="wrongForceCancel"
