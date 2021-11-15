@@ -30,10 +30,9 @@ export default {
             btnclick: () => {
               // $omsUtils.tabCloseAppoint(this);
               //   this.$destroy(true);
-              $store.commit('customize/TabOpen', {
-                id: this.spuid,
-                type: 'action',
-                name: 'PS_C_PRO',
+              $store.commit('global/tabOpen', {
+                url: `/CUSTOMIZED/PS_C_PRO/${this.spuid}`,
+                type: 'C',
                 label: '商品SPU编辑', // 额外退款编辑
               });
             }

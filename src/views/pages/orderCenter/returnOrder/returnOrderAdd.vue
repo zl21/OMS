@@ -1224,13 +1224,11 @@ export default {
     onOk() {
       $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
-      this.$store.commit("customize/TabOpen", {
-        id: "2624",
-        type: "action",
-        name: "OC_B_RETURN_ORDER",
+      this.$store.commit("global/tabOpen", {
+        url: '/CUSTOMIZED/OC_B_RETURN_ORDER/2624?isBack=true',
+        type: "C",
         // label: "退换货单",
         label: $i18n.t('panel_label.a1'),
-        back: true,
       });
     },
   },

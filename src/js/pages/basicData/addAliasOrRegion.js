@@ -710,10 +710,9 @@ export default {
         self.backable = true;
         self.$Message.success(message || $i18n.t("modalTips.z9"));
         $omsUtils.tabCloseAppoint(this);
-        this.$store.commit("customize/TabOpen", {
-          id: data,
-          type: "action",
-          name: "NATIONALPROVINCIALMUNICIPALEDIT",
+        this.$store.commit("global/tabOpen", {
+          url: `/CUSTOMIZED/NATIONALPROVINCIALMUNICIPALEDIT/${data}`,
+          type: 'C',
           label: $i18n.t('menu.a5'), // 国家省市区编辑
         });
       }
@@ -816,10 +815,9 @@ export default {
         self.backable = true;
         self.$Message.success(message || $i18n.t("modalTips.z9"));
         $omsUtils.tabCloseAppoint(this);
-        this.$store.commit("customize/TabOpen", {
-          id: data,
-          type: "action",
-          name: "NATIONALPROVINCIALMUNICIPALEDIT",
+        this.$store.commit("global/tabOpen", {
+          url: `/CUSTOMIZED/NATIONALPROVINCIALMUNICIPALEDIT/${data}`,
+          type: 'C',
           label: $i18n.t('menu.a5'), // 国家省市区编辑
         });
       }

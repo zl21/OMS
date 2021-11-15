@@ -671,10 +671,9 @@ export default {
         if (res.data.code == 0) {
           $utils.msgTips(self, 'success', res.data.message, 0);
           self.isModify = false
-          $store.commit('customize/TabOpen', {
-            id: res.data.data,
-            type: 'action',
-            name: 'PS_C_PRO_GROUP',
+          $store.commit('global/tabOpen', {
+            url: `/CUSTOMIZED/PS_C_PRO_GROUP/${res.data.data}`,
+            type: 'C',
             label: '组合商品编辑', // 额外退款编辑
           });
           self.modify.generalGroupItem = [];
