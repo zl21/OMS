@@ -2,9 +2,6 @@ import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
 import InfoSet from 'allpages/promotionCenter/details/infoSet.vue';
 import GiftSet from 'allpages/promotionCenter/details/giftSet.vue';
 import promotionMixin from './promotion.mixin';
-import Vue from 'vue';
-import BC from 'burgeonComponents'
-Vue.component('stepsBars', BC.Components.Steps)
 
 export default {
   components: {

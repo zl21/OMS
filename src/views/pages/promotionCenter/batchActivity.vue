@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="steps_bar">
-          <stepsBars :current.sync="current" :steps="stepsBar" />
+          <OmsSteps :current.sync="current" :steps="stepsBar" />
         </div>
       </div>
     </div>

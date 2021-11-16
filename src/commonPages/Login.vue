@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import R3 from "@syman/burgeon-r3";
 import service from '@/service/index';
 import i18n from "@burgeon/internationalization/i18n"; // 国际化
 window.$i18n = i18n;
