@@ -1,5 +1,6 @@
 import CustomizedConfig from 'burgeonConfig/customized.config';
 import cusAllPageConfig from './customized.page.config.js';
+import service from '@/service';
 
 function handerTreeList(tableNameList) {
     let treeDataConfig = {};
@@ -88,7 +89,7 @@ let beforeEach = (to, from, next) =>{
     next();
   }
 
-export {
+export default {
     handerTreeList,
     compareObjectFunction,
     modifyObjectFunction,
