@@ -1,6 +1,6 @@
 
 export default {
-  name: 'Steps',
+  name: 'OmsSteps',
   data() {
     return {};
   },
