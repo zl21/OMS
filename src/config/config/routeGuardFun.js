@@ -6,7 +6,7 @@
  * @Description: 路由守卫 -- 用于切换路由时一些操作
  * @FilePath: /project-logic/config/config/routeGuardConfig.js
  */
-import CustomizedConfig from 'burgeonConfig/customized.config';
+import CustomizedConfig from 'burgeonConfig';
 import cusAllPageConfig from './customized.page.config.js';
 
 /**

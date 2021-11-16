@@ -1,4 +1,4 @@
-import CustomizedConfig from 'burgeonConfig/customized.config';
+import CustomizedConfig from 'burgeonConfig';
 import cusAllPageConfig from './customized.page.config.js';
 import service from '@/service';
 
