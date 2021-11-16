@@ -1,64 +1,45 @@
-import { handerTreeList, compareObjectFunction, beforeEach as beEach } from 'burgeonConfig/config/config.hander.js'
-import customizedModal from 'burgeonConfig/config/customized.modal.config.js'
-import customizedPage from 'burgeonConfig/config/customized.page.config.js'
-import customizedExternalTreeDatas from 'burgeonConfig/config/externalTreeDatas.config.js'
-import customizeWaterMarkConfig from 'burgeonConfig/config/customized.watermark.config.js'
-import filterUrlConfig from 'burgeonConfig/config/filterUrl.config.js'
-import filterUrlForNetworkSc from 'burgeonConfig/config/filterUrlForNetwork.js'
-import orderDetailConnector from 'burgeonConfig/config/orderDetailConnector.js'
-import labelList from 'burgeonConfig/config/labelList.js'
-import orderLogo from 'burgeonConfig/config/orderLogo.js'
-import importTableConfig from 'burgeonConfig/config/importTable.config.js'
-import oldConfig from 'burgeonConfig/config/globalComponent.config.js'
-import subTableConfig from 'burgeonConfig/config/subTable.config.js'
-import custommizeMain from 'burgeonConfig/config/customized.panel.config.js'
-
-import commonUtils from 'burgeonConfig/config/commonUtils.js'
-import funBtn from 'burgeonConfig/config/funBtn.config.js'
-import dropDownBtn from 'burgeonConfig/config/dropDown.config.js'
-import cusValidate from 'burgeonConfig/config/validate.config.js';
-
 
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import customizedService from '@/service/index.js'
 
+/* --------- config: --------- */
+import configModule from '@/config/config';
 /* --------- mixin: --------- */
-import standardTableListsCustomize from 'burgeonConfig/minxin/standardTableListsCustomize';
-import verticalTableDetailCustomize from 'burgeonConfig/minxin/verticalTableDetailCustomize';
-import tableDetailCollectionMixin from 'burgeonConfig/minxin/standardTable/mixin.js';
+import mixinsModule from '@/config/minxin';
 
-import layoutDirectionSlot from '@/commonPages/layout/';
+import layoutModule from '@/commonPages/layout';
 
+console.log(configModule);
 class CustomizedConfig {
 	// static #beforeEach = beEach;
 	static #STLD = {
-		defined: layoutDirectionSlot.standardTableListdefind,
+		defined: layoutModule.standardTableListdefind,
 	};
-	static #STLC = standardTableListsCustomize;
-	static #VTDC = verticalTableDetailCustomize;
-	static #TDCM = tableDetailCollectionMixin;
-	static #custommizeMain = custommizeMain;
-	static #subTableConfig = subTableConfig;
-	static #customizedModal = customizedModal;
-	static #customizedPage = customizedPage;
-	static #customizedExternalTreeDatas = customizedExternalTreeDatas;
+	static #STLC =               mixinsModule.standardTableListsCustomize;
+	static #VTDC =               mixinsModule.verticalTableDetailCustomize;
+	static #TDCM =               mixinsModule['standardTable/mixin'];
+	static #custommizeMain =     configModule.customizedPanelConfig;
+	static #subTableConfig =     configModule.subTableConfig;
+	static #customizedModal =    configModule.customizedModalConfig;
+	static #customizedPage =     configModule.customizedPageConfig;
+	static #customizeWaterMarkConfig =    configModule.customizedWatermarkConfig;
+	static #customizedExternalTreeDatas = configModule.externalTreeDatasConfig;
+	static #filterUrlConfig =             configModule.filterUrlConfig;
+	static #filterUrlForNetworkSc =       configModule.filterUrlForNetwork;
+	static #orderDetailConnector =        configModule.orderDetailConnector;
+	static #labelList =          configModule.labelList;
+	static #orderLogo =          configModule.orderLogo;
+	static #importTableConfig =  configModule.importTableConfig;
+	static #cusImage =           configModule.globalComponentConfig.cusImage;
+	static #cusGlobalComponent = configModule.globalComponentConfig.cusGlobalComponent;
 	static #customizedService = customizedService;
-	static #customizeWaterMarkConfig = customizeWaterMarkConfig;
-	static #filterUrlConfig = filterUrlConfig;
-	static #filterUrlForNetworkSc = filterUrlForNetworkSc;
-	static #orderDetailConnector = orderDetailConnector;
-	static #labelList = labelList;
-	static #orderLogo = orderLogo;
-	static #importTableConfig = importTableConfig;
 	static #downLoadAllConfig = downLoadAllConfig;
-	static #cusGlobalComponent = oldConfig.cusGlobalComponent;
-	static #cusImage = oldConfig.cusImage;
 
 	/* 初始化项目的配置项，用于挂载 */
-	static #commonUtils = commonUtils;
-	static #funBtn = funBtn;
-	static #dropDownBtn = dropDownBtn;
-	static #cusValidate = cusValidate;
+	static #commonUtils = configModule.commonUtils;
+	static #funBtn =      configModule.funBtnConfig;
+	static #dropDownBtn = configModule.dropDownConfig;
+	static #cusValidate = configModule.validateConfig;
 	/* ------------ 挂载项 start ------------- */
 
 	/* static get beforeEach() {
@@ -175,7 +156,7 @@ class CustomizedConfig {
 	// 树结构配置项
 	static get cusExternalTreeDatas() {
 		let list = this.#customizedExternalTreeDatas;
-		return handerTreeList(list);
+		return configModule.configHander.handerTreeList(list);
 	}
 	static editCusExternalTreeDatas(config = []) {
 		/* for (const key in configItem) {
@@ -213,7 +194,7 @@ class CustomizedConfig {
 		return this.#labelList;
 	}
 	static editCusLabelList(configItem = []) {
-		const compareLable = compareObjectFunction('label');
+		const compareLable = configModule.configHander.compareObjectFunction('label');
 		for (const x in configItem) {
 			for (const y in this.#labelList) {
 				if (compareLable(configItem[x], this.#labelList[y])) {
@@ -302,8 +283,8 @@ class CustomizedConfig {
 // console.log(new CustomizedConfig());
 // console.clear();
 const Custom = {
-	beforeEach: beEach,
-	...layoutDirectionSlot,
+	beforeEach: configModule.configHander.beforeEach,
+	...layoutModule,
 	STLD: CustomizedConfig.STLD,
 	Rule: CustomizedConfig.Rule,
 	STLC: CustomizedConfig.STLC,

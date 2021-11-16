@@ -3,11 +3,6 @@ import BC from 'burgeonComponents';
 const { Components } = BC
 
 export default {
-  components: {
-    OmsButton,
-    OmsForm,
-    OmsLabel,
-  },
   data() {
     return {
       vmI18n: $i18n,

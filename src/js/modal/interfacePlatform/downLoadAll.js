@@ -1,4 +1,4 @@
-import CustomConfig from '@/config/customized.config.js';
+import CustomConfig from 'burgeonConfig';
 const modalConfig = CustomConfig.cusDownLoadAllConfig;
 import BC from 'burgeonComponents';
 const { Components } = BC
