@@ -12,7 +12,6 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n: $i18n,
       isClice: false, // 防抖标识
       zIndex: 2500,
       totalRowCount: 0,

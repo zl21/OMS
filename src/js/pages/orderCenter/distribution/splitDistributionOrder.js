@@ -1,7 +1,6 @@
 export default {
   data() {
     return {
-      vmI18n: $i18n,
       pageConfig: {},
       loading: false,
       btnConfig: {

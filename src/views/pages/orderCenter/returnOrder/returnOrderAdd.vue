@@ -129,7 +129,6 @@ export default {
   data() {
     const validatePhoneNumber = BurgeonValidate.validatePhoneNumber;
     return {
-      vmI18n: $i18n,
       loading: false,
       ID: this.$route.params.customizedModuleId && (this.$route.params.customizedModuleId != 'NEW' || this.$route.params.customizedModuleId != 'New') ? this.$route.params.customizedModuleId : '-1',
       watchChange: false, // 监听修改变化

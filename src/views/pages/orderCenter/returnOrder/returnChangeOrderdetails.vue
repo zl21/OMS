@@ -78,7 +78,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       btnConfigTui: {
         typeAll: "default",
         btnsite: "right",

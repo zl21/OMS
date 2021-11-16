@@ -65,7 +65,6 @@ export default {
           btnclick: () => this.removeGroup()
         },]
       },
-      vmI18n: $i18n,
       temp_time_type: '',
       columns: tableCols.infoColumns,
       data: [], // 表格数据

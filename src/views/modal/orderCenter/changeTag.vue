@@ -45,7 +45,6 @@ export default {
         componentData: {},
       },
       loading: false,
-      vmI18n: $i18n,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       btnConfig: {
         typeAll: 'default',

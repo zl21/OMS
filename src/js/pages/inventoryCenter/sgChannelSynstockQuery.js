@@ -9,7 +9,6 @@ export default {
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n: $i18n,
       allTableArr: [],
       selectArr: [],
       warningModal: false, // 警告弹框

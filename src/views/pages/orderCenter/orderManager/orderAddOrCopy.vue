@@ -127,7 +127,6 @@ export default {
     const validatePhoneNumber = BurgeonValidate.validatePhoneNumber;
     const validateReceiveAddress = BurgeonValidate.validateReceiveAddress;
     return {
-      vmI18n: $i18n,
       showRe: true,
       inputArrBase: [
         "SELLER_MEMO",

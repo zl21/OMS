@@ -19,7 +19,6 @@ export default {
   components: {},
   data() {
     return {
-      vmI18n: $i18n,
       loading: false,
       ID: this.$route.params.customizedModuleId && (this.$route.params.customizedModuleId != 'NEW' || this.$route.params.customizedModuleId != 'New') ? this.$route.params.customizedModuleId : '-1',
       backable: false,

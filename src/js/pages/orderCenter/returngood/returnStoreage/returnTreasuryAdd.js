@@ -10,7 +10,6 @@ export default {
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n: $i18n,
       loading: false,
       openDefault: [1], // 默认展开
       returnSelectData: [], // 列表选中数据

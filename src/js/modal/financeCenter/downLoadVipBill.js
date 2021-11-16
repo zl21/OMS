@@ -4,7 +4,6 @@ export default {
   data() {
     const _this = this;
     return {
-      vmI18n: $i18n,
       type: '', // 月结:month 进度: progress
       downLoadFormConfig: {
         formValue: {

@@ -12,7 +12,6 @@ export default {
   computed: {},
   data() {
     return {
-      vmI18n: $i18n,
       spinShow: false,
       // 提示
       confirmModal: false,

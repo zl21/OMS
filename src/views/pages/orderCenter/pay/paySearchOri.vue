@@ -68,7 +68,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       orderModal: false,
       loading: false,
       ID: this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1',

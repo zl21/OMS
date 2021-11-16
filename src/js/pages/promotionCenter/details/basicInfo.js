@@ -6,7 +6,6 @@ export default {
   components: {},
   data() {
     return {
-      vmI18n: $i18n,
       toMain: this.basicData,
       my_input_sh: {
         itemdata: {

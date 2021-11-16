@@ -3,7 +3,6 @@ import groups from '@/assets/js/promotion/groups';
 export default () => ({
   data() {
     return {
-      vmI18n: $i18n,
       objid: '-1', // 新增-1 保存的正整数
       extendBtn: [
         {

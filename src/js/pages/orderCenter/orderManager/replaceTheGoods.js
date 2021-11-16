@@ -15,7 +15,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default',
         btnsite: 'right',

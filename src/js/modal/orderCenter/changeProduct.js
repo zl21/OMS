@@ -2,7 +2,6 @@ export default {
   components: {},
   data() {
     return {
-      vmI18n: $i18n,
       pro: '',
       replace_pro: '',
       radioValue: '2',

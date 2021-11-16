@@ -35,7 +35,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       modal: false,
       formConfig: {
         formData: [

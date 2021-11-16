@@ -6,7 +6,6 @@ export default {
   data() {
     return {
       loading: false,
-      vmI18n: $i18n,
       collapse: ['panel_baseInfo', 'panel_fixAttr', 'panel_cusAttr'],
       labelValue: 'skuInfo',
       imageValue: '',

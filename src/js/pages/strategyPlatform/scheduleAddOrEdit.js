@@ -9,7 +9,6 @@ export default {
   mixins: [new modifycurrentLabel()],
   data() {
     return {
-      vmI18n: $i18n,
       collapse: ['panel_baseInfo', 'panel_pickInfo', 'panel_warehouseInfo'],
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       forceReload: 0, // 组件重载

@@ -13,7 +13,6 @@ export default {
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n: $i18n,
       isShowFromLoading: false, // 加载
       matrixBox: {
         refFuns: 'confirmFun',

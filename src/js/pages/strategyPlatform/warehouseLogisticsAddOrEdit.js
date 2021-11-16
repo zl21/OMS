@@ -6,7 +6,6 @@ export default {
   data() {
     return {
       colRowNum: 4, // 针对于定制界面 form表单根据屏幕变化设置个数（用于计算）
-      vmI18n: $i18n,
       collapse: 'panel_baseInfo',
       loading: false,
       isAuto: true, // 自动分配

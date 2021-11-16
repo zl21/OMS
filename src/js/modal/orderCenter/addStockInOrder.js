@@ -8,7 +8,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       ID: '-1', // 记录主界面传入的ID
       btnConfig: {
         typeAll: 'default',

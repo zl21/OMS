@@ -7,7 +7,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       isError: false,
       errorMessage: '',
       transportStyle: {

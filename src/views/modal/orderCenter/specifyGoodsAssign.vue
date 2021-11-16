@@ -57,7 +57,6 @@ export default {
   components: {},
   data() {
     return {
-      vmI18n: $i18n,
       clickRow: {},  //选中的sku数据
       btnConfig: {
         typeAll: "default", // 按钮统一风格样式

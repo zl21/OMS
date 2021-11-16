@@ -77,7 +77,6 @@ export default {
   mixins: [buttonPermissionsMixin],
   data() {
     return {
-      vmI18n: $i18n,
       pageLoad: false,
       publicBouncedConfig: {},
       statusName: '', // 水印标识

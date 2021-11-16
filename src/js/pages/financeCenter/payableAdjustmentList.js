@@ -8,7 +8,6 @@ export default {
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n: $i18n,
       allTableArr: [],
       selectArr: [],
       // 弹框配置 导入
