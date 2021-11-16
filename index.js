@@ -6,9 +6,6 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/src/index.js
  */
-
-import Vue from 'vue';
-
 let comJS = require.context('burgeonComponents/common/js/', false, /\.js$/);
 const Utils = {}
 comJS.keys().forEach(key => {
@@ -21,19 +18,33 @@ comJS.keys().forEach(key => {
 })
 
 const context = require.context('burgeonComponents/view/', false, /\.vue$/);
-const CustomComponents = {}
-context.keys().forEach((key) => {
-	const component = context(key).default;
-	CustomComponents[component.name] = component
-	Vue.component(component.name, component)
-});
+const Components = Utils.CM.exportModules(context);
+// const CustomComponents = {}
+// context.keys().forEach((key) => {
+// 	const component = context(key).default;
+// 	CustomComponents[component.name] = component
+// 	Vue.component(component.name, component)
+// });
 
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/);
-const Directives = directiveFiles.keys().reduce((Directives, modulePath) => {
-  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-  const value = directiveFiles(modulePath)
-  Directives[moduleName] = value.default
-  return Directives
-}, {});
+const Directives = Utils.CM.exportModules(directiveFiles)
 
-export default { Components: CustomComponents, Utils, Directives };
+const install = function(Vue, opts = {}) {
+	context.keys().forEach((key) => {
+		const component = context(key).default;
+		Vue.component(component.name, component)
+	});
+
+	Object.keys(Directives).forEach(key => {
+		Vue.directive(key, Directives[key])
+	})
+
+	window.$utils = Utils.CM;
+	Vue.prototype.$utils = Utils.CM;
+}
+
+export default {
+	install,
+	Components,
+	Utils
+};

@@ -8,6 +8,7 @@
  * 【Number】
  * 【Array】
  * 【DOM】
+ * 【File】
  */
 class custUtils {
   constructor() { }
@@ -1321,6 +1322,22 @@ class custUtils {
     else element.addEventListener(eventName, fn, false);
   }
   /* ============================================== 【DOM】END ============================================== */
+  /* ============================================== 【FILE】START ============================================== */
+  // 
+  static exportModules(requireFiles, handleModuleName) {
+    return requireFiles.keys().reduce((exportModules, modulePath) => {
+      let moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+      if (handleModuleName) {
+        // 文件名转驼峰
+        moduleName = moduleName.split('.').map((i,index) => {
+          return index === 0 ? i : i.charAt(0).toUpperCase() + i.slice(1)
+        }).join('')
+      }
+      exportModules[moduleName] = requireFiles(modulePath).default || requireFiles(modulePath)
+      return exportModules
+    }, {})
+  };
+  /* ============================================== 【FILE】END ============================================== */
 }
 
 
