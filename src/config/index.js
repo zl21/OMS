@@ -1,4 +1,3 @@
-
 import { handerTreeList, compareObjectFunction, beforeEach as beEach } from 'burgeonConfig/config/config.hander.js'
 import customizedModal from 'burgeonConfig/config/customized.modal.config.js'
 import customizedPage from 'burgeonConfig/config/customized.page.config.js'

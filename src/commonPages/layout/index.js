@@ -1,9 +1,8 @@
-let layoutFiles = require.context('@/commonPages/layout/', false, /\.vue$/);
-const layoutDirectionSlot = layoutFiles.keys().reduce((layoutDirectionSlot, modulePath) => {
+let requireAll = require.context('@/commonPages/layout', false, /\.vue$/);
+const modules = requireAll.keys().reduce((modules, modulePath) => {
   const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-  const value = layoutFiles(modulePath)
-  layoutDirectionSlot[moduleName] = value.default
-  return layoutDirectionSlot
+  modules[moduleName] = requireAll(modulePath).default
+  return modules
 }, {});
 
-export default layoutDirectionSlot;
+export default modules;

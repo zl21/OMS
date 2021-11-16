@@ -1,7 +1,7 @@
 /*
  * @Author: flybird
  * @Date: 2021-06-04 13:20:21
- * @LastEditTime: 2021-11-15 14:53:38
+ * @LastEditTime: 2021-11-16 09:59:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
@@ -17,8 +17,7 @@ import commonUtils from '@/config/config/commonUtils.js'
 
 import BC from 'burgeonComponents'
 const { Utils, Directives } = BC
-console.log('%cTest LocalDebug','color: #cc00ee;');
-console.log('%cTest nodemon watch files change','color: red;');
+
 console.log('BC::', BC);
 
 // 注册自定义指令

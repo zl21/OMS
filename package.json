@@ -10,7 +10,11 @@
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js",
     "push": "npm run build && yalc push",
-    "watch": "nodemon --ignore burgeon.publish/ --ignore node_modules/ --watch projects -C -e js,html,less,scss --debug -x npm run build && yalc push"
+    "watch": "nodemon --ignore burgeon.publish/ --ignore node_modules/ -C -e js,vue,less,scss --debug -x 'npm run build && yalc push'"
+  },
+  "scriptsComments": {
+    "push": "本地调试组件库包体并执行自动化",
+    "watch": "自动监听本地化类库代码变更后同步调试信息"
   },
   "repository": {
     "type": "git",
