@@ -61,7 +61,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       loading: false,
       status: '', // 根据单据状态渲染
       tableConfig: {

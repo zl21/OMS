@@ -4,7 +4,6 @@ export default {
   components: {},
   data() {
     return {
-      vmI18n: $i18n,
       resData: [],
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式

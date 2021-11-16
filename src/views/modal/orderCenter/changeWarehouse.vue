@@ -20,7 +20,6 @@ const changeWarehouse = {
   computed: {},
   data() {
     return {
-      vmI18n: $i18n,
       isShowFromLoading: false, // 加载
       zIndex: 2500,
       totalRowCount: 0,

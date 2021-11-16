@@ -8,7 +8,6 @@ export default {
   mixins: [buttonPermissionsMixin],
   data() {
     return {
-      vmI18n: $i18n,
       returnNumber: {
         refFuns: 'confirmFun',
         confirmTitle: '退单编号查询',

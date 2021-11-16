@@ -4,7 +4,6 @@ export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
-      vmI18n: $i18n,
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
         indexColumn: true,

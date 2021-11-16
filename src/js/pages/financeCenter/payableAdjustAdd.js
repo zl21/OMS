@@ -10,7 +10,6 @@ export default {
   mixins: [customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n: $i18n,
       loading: false,
       address: '', // 存储解析后的地址
       delTableList: [], // 删除明细中记录选中的标识

@@ -28,7 +28,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       itemdata_list: [],
       loading: false,
       resultArr: [],

@@ -18,7 +18,6 @@ export default {
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
-      vmI18n: $i18n,
       // 显示水印标识
       statusName: '',
       // 水印标识集合

@@ -13,7 +13,6 @@ export default {
   mixins: [isFavoriteMixin, buttonPermissionsMixin],
   data() {
     return {
-      vmI18n: $i18n,
       vueAgTable: true,
       loading: false,
       modal: false, // 查看日志弹框

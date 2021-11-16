@@ -22,7 +22,6 @@ export default {
     };
     /* -------------------- input校验器 end -------------------- */
     return {
-      vmI18n: $i18n,
       subTableConfig: {},
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       showSubtablePart: false,

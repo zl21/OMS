@@ -16,7 +16,6 @@ export default {
   mixins: [isFavoriteMixin, new modifycurrentLabel(true)],
   data() {
     return {
-      vmI18n: $i18n,
       vueAgTable: true, //是否切换为vue-ag-table
       modal: false,
       buttonInit: true,
@@ -1054,7 +1053,7 @@ export default {
       }
       self.$Modal.fcWarning({
         title: '加急打标',
-        content: self.vmI18n.t('modalTips.yc'),
+        content: $i18n.t('modalTips.yc'),
         showCancel: true,
         onOk: () => {
           if (IDS.length == 1) {

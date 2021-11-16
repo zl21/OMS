@@ -2,7 +2,6 @@ export default {
   name: "addAliasOrRegion",
   data() {
     return {
-      vmI18n: $i18n,
       ID:
         this.$route.params.customizedModuleId &&
           this.$route.params.customizedModuleId != "New"

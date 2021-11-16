@@ -29,7 +29,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       loading: false,
       itemdata_pro: [],
       itemdata_city: [],

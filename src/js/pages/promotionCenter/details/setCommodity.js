@@ -24,7 +24,6 @@ export default {
 					},
 				]
 			},
-			vmI18n: $i18n,
 			tableCols,
 			commodityList: {
 				current: 1,

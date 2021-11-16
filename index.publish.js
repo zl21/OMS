@@ -16,14 +16,8 @@ import Vue from 'vue';
 import commonUtils from '@/config/config/commonUtils.js'
 
 import BC from 'burgeonComponents'
-const { Utils, Directives } = BC
 
 console.log('BC::', BC);
-
-// 注册自定义指令
-Object.keys(Directives).forEach(key => {
-  Vue.directive(key, Directives[key])
-})
 
 // import custUtils from 'burgeonComponents/burgeon.publish/common/js/utils.js'
 import pageNote from 'burgeonConfig/config/pageNote'
@@ -44,23 +38,21 @@ if(!omsTheme){
 const { components } = R3
 Vue.component('WaterMark', components.WaterMark)
 require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
+
+Vue.use(BC);
 class InitAppConfig {
   constructor() {
     // -------------引入框架项目配置文件;
     // const customizedTheme = require(`@burgeon/oms-theme/skin/${omsSkinTheme}/index.min.css`).default;
-    // window.$store = store;
-    Vue.prototype.qs = qs;
     window.$store = store;
     window.$omsUtils = commonUtils;
-    window.$utils = Utils.CM;
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
     window.OMS = cus;
     window.$i18n = i18n; // 挂载国际化
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
-    // Vue.prototype.$comUtils = comUtils;
+    Vue.prototype.qs = qs;
     Vue.prototype.$omsUtils = commonUtils;
-    Vue.prototype.$utils = Utils.CM;
     Vue.prototype.$lodash = window._;
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n;

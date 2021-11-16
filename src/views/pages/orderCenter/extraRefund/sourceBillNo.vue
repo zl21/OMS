@@ -76,7 +76,6 @@ export default {
       disabled: false,
       iosSearch: 'ios-search',
       BILL_NO: '',
-      vmI18n: $i18n,
       orderModal: false,
       OC_B_ORDER_ID: '',
       loading: false,

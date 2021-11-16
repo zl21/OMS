@@ -3,7 +3,6 @@
 export default {
   data() {
     return {
-      vmI18n: $i18n,
       bouncedData: {
         animal: '追加到原备注',
         value: '',

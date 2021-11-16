@@ -39,7 +39,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       loading: false,
       tableConfig: {
         height: 300,

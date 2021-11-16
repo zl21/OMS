@@ -101,7 +101,6 @@ export default {
           },
         ]
       },
-      vmI18n: $i18n,
       currentTab: 0,
       tableCols,
       data: [], // 表格数据

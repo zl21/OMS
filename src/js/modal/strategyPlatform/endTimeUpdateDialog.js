@@ -14,7 +14,6 @@ export default {
   props: ['idArray', 'objList', 'tablename', 'rowArr'],
   data() {
     return {
-      vmI18n: $i18n,
       formConfig: {
         formValue: {
           BILL_TIME_TYPE: '',

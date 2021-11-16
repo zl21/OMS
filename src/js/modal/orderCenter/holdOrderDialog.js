@@ -5,7 +5,6 @@ export default {
   data() {
     const _this = this;
     return {
-      vmI18n: $i18n,
       holdBtnClass: '',
       loading: false,
       formConfig: {

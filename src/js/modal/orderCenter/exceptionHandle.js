@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: $i18n,
       loading: false,
       tableConfig: {
         indexColumn: true, // 是否显示序号

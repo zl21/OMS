@@ -3,7 +3,6 @@ export default {
   name: 'generateSalesOrder',
   data() {
     return {
-      vmI18n: $i18n,
       type: '', // 月结:month 进度: progress
       generateFormConfig: {
         formValue: {

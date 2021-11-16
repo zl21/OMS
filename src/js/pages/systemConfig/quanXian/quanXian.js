@@ -18,7 +18,6 @@ export default {
   data() {
     return {
       spinShow: false,
-      vmI18n: $i18n,
       loading: false,
       saveModal: false,
 

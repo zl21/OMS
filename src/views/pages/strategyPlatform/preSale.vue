@@ -67,7 +67,6 @@
 
 <script>
 import service from '@/service/index';
-// import commonUtils from '@/config/config/commonUtils.js';
 
 export default {
   data() {

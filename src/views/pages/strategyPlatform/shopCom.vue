@@ -64,7 +64,6 @@ export default {
   components: {},
   data() {
     return {
-      vmI18n: $i18n,
       quDao: {
         modal: false,
         title: '渠道仓 - 库存比例',
