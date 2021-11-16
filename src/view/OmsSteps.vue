@@ -37,9 +37,9 @@
   </div>
 </template>
 <script>
-  import Steps from 'burgeonComponents/js/steps';
+  import OmsSteps from 'burgeonComponents/js/steps';
 
-  export default Steps;
+  export default OmsSteps;
 </script>
 <style lang="less" scoped>
 @import "burgeonComponents/css/steps.less";
