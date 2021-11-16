@@ -1,32 +1,32 @@
 
-import { handerTreeList, compareObjectFunction, beforeEach as beEach } from '@/config/config/config.hander.js'
-import customizedModal from '@/config/config/customized.modal.config.js'
-import customizedPage from '@/config/config/customized.page.config.js'
-import customizedExternalTreeDatas from '@/config/config/externalTreeDatas.config.js'
-import customizeWaterMarkConfig from '@/config/config/customized.watermark.config.js'
-import filterUrlConfig from '@/config/config/filterUrl.config.js'
-import filterUrlForNetworkSc from '@/config/config/filterUrlForNetwork.js'
-import orderDetailConnector from '@/config/config/orderDetailConnector.js'
-import labelList from '@/config/config/labelList.js'
-import orderLogo from '@/config/config/orderLogo.js'
-import importTableConfig from '@/config/config/importTable.config.js'
-import oldConfig from '@/config/config/globalComponent.config.js'
-import subTableConfig from '@/config/config/subTable.config.js'
-import custommizeMain from '@/config/config/customized.panel.config.js'
+import { handerTreeList, compareObjectFunction, beforeEach as beEach } from 'burgeonConfig/config/config.hander.js'
+import customizedModal from 'burgeonConfig/config/customized.modal.config.js'
+import customizedPage from 'burgeonConfig/config/customized.page.config.js'
+import customizedExternalTreeDatas from 'burgeonConfig/config/externalTreeDatas.config.js'
+import customizeWaterMarkConfig from 'burgeonConfig/config/customized.watermark.config.js'
+import filterUrlConfig from 'burgeonConfig/config/filterUrl.config.js'
+import filterUrlForNetworkSc from 'burgeonConfig/config/filterUrlForNetwork.js'
+import orderDetailConnector from 'burgeonConfig/config/orderDetailConnector.js'
+import labelList from 'burgeonConfig/config/labelList.js'
+import orderLogo from 'burgeonConfig/config/orderLogo.js'
+import importTableConfig from 'burgeonConfig/config/importTable.config.js'
+import oldConfig from 'burgeonConfig/config/globalComponent.config.js'
+import subTableConfig from 'burgeonConfig/config/subTable.config.js'
+import custommizeMain from 'burgeonConfig/config/customized.panel.config.js'
 
-import commonUtils from '@/config/config/commonUtils.js'
-import funBtn from '@/config/config/funBtn.config.js'
-import dropDownBtn from '@/config/config/dropDown.config.js'
-import cusValidate from '@/config/config/validate.config.js';
+import commonUtils from 'burgeonConfig/config/commonUtils.js'
+import funBtn from 'burgeonConfig/config/funBtn.config.js'
+import dropDownBtn from 'burgeonConfig/config/dropDown.config.js'
+import cusValidate from 'burgeonConfig/config/validate.config.js';
 
 
 import downLoadAllConfig from '@/js/modal/interfacePlatform/config/downLoadAll.Config.js'
 import customizedService from '@/service/index.js'
 
 /* --------- mixin: --------- */
-import standardTableListsCustomize from '@/config/minxin/standardTableListsCustomize';
-import verticalTableDetailCustomize from '@/config/minxin/verticalTableDetailCustomize';
-import tableDetailCollectionMixin from '@/config/minxin/standardTable/mixin.js';
+import standardTableListsCustomize from 'burgeonConfig/minxin/standardTableListsCustomize';
+import verticalTableDetailCustomize from 'burgeonConfig/minxin/verticalTableDetailCustomize';
+import tableDetailCollectionMixin from 'burgeonConfig/minxin/standardTable/mixin.js';
 
 import layoutDirectionSlot from '@/commonPages/layout/';
 

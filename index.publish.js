@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
  */
-import cus from './customized.config.js'
+import cus from 'burgeonConfig'
 import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 import 'burgeonComponents/burgeon.publish/businessComponents.min.css' // 组件库样式
