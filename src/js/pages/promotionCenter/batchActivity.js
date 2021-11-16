@@ -5,8 +5,7 @@ import promotionMixin from './promotion.mixin';
 export default {
   components: {
     BasicInfo,
-    BatchInfoSet,
-    OmsButton
+    BatchInfoSet
   },
   mixins: [promotionMixin()],
   data() {

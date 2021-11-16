@@ -883,8 +883,7 @@ export default {
     DragDialog,
     ErrorTips,
     matrixInput,
-    pageNation,
-    loading
+    pageNation
   },
   created() {
     window.addEventListener('customizeClick', this.bigSave);

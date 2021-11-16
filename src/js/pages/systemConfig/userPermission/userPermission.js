@@ -216,8 +216,7 @@ export default {
     this.getCstoreorgload(); // 获取树节点
   },
   components: {
-    tree,
-    loading
+    tree
   },
   methods: {
     async getPermission(item) {
