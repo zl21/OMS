@@ -1,8 +1,6 @@
-let requireAll = require.context('@/commonPages/layout', false, /\.vue$/);
-const modules = requireAll.keys().reduce((modules, modulePath) => {
-  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-  modules[moduleName] = requireAll(modulePath).default
-  return modules
-}, {});
+import { exportModules } from '@/assets/js/__utils__/file';
+
+let requireFiles = require.context('@/commonPages/layout', false, /\.vue$/);
+const modules = exportModules(requireFiles)
 
 export default modules;
