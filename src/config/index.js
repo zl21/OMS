@@ -156,7 +156,7 @@ class CustomizedConfig {
 	// 树结构配置项
 	static get cusExternalTreeDatas() {
 		let list = this.#customizedExternalTreeDatas;
-		return configModule.configHander.handerTreeList(list);
+		return configModule.configHandle.handerTreeList(list);
 	}
 	static editCusExternalTreeDatas(config = []) {
 		/* for (const key in configItem) {
@@ -194,7 +194,7 @@ class CustomizedConfig {
 		return this.#labelList;
 	}
 	static editCusLabelList(configItem = []) {
-		const compareLable = configModule.configHander.compareObjectFunction('label');
+		const compareLable = configModule.configHandle.compareObjectFunction('label');
 		for (const x in configItem) {
 			for (const y in this.#labelList) {
 				if (compareLable(configItem[x], this.#labelList[y])) {
@@ -283,7 +283,7 @@ class CustomizedConfig {
 // console.log(new CustomizedConfig());
 // console.clear();
 const Custom = {
-	beforeEach: configModule.configHander.beforeEach,
+	beforeEach: configModule.configHandle.beforeEach,
 	...layoutModule,
 	STLD: CustomizedConfig.STLD,
 	Rule: CustomizedConfig.Rule,
