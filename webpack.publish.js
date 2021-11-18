@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = {
   entry: './index.publish.js',
@@ -40,6 +41,7 @@ const config = {
       amd: 'vue-router',
       root: 'VueRouter'
     },
+    burgeonComponents: 'Burgeon'
   },
   module: {
     exprContextCritical: false,
@@ -106,6 +108,7 @@ const config = {
     static: './burgeon.publish',
   },
   plugins: [
+    new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
     }),
@@ -138,7 +141,7 @@ const config = {
     alias: {
       allpages: path.resolve(__dirname, './src/views/pages'),
       burgeonConfig: path.resolve(__dirname, './src/config'),
-      burgeonComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components'),
+      // burgeonComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
       '@': path.resolve(__dirname, './src'),

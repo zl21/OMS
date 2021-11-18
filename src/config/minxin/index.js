@@ -1,13 +1,6 @@
-let excludes = ['./index.js']
-let requireMixin = require.context('@/config/minxin', true, /\.js$/);
+import { exportModules } from '@/assets/js/__utils__/file';
 
-const exportModules = requireMixin
-  .keys()
-  .filter(url => { return excludes.indexOf(url) === -1})
-  .reduce((exportModules, modulePath) => {
-    let moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-    exportModules[moduleName] = requireMixin(modulePath).default
-    return exportModules
-  }, {});
+let requireFiles = require.context('@/config/minxin', true, /\.js$/);
+const modules = exportModules(requireFiles, false, true)
 
-export default exportModules;
+export default modules;
