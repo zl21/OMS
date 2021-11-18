@@ -1,11 +1,7 @@
-import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
-  components: {
-    scheduleFormDialog,
-  },
   mixins: [new modifycurrentLabel()],
   data() {
     return {
@@ -38,7 +34,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'scheduleFormDialog', // 组件名称
-        url: 'modal/strategyPlatform/scheduleFormDialog',
+        url: require('@/views/modal/strategyPlatform/scheduleFormDialog.vue').default,
         keepAlive: true,
         excludeString: 'scheduleFormDialog', // 将name传进去，确认不缓存
         componentData: {},

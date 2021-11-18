@@ -44,7 +44,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'modifyLogistics', // 组件名称
-        url: 'modal/strategyPlatform/setWarehouseLogistics/modifyLogistics',
+        url: require('@/views/modal/strategyPlatform/setWarehouseLogistics/modifyLogistics').default,
         keepAlive: true,
         excludeString: 'modifyLogistics', // 将name传进去，确认不缓存
         componentData: {}
