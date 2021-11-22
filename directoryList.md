@@ -4,14 +4,14 @@
     |-- LogTable.vue // 日志表格组件
     |-- README.md
     |-- agGridTable.vue // 大量数据渲染表格agGrid组件, 基于js ag-grid
-    |-- businessActionTable.vue // 表格 + 表单 + 按钮组合组件
-    |-- businessAgTable.vue // 大量数据渲染表格组件，基于框架业务组件库CommonTableByAgGrid
-    |-- businessButton.vue // 按钮集组件
-    |-- businessDialog.vue // 弹窗
-    |-- businessForm.vue // 表单组件
-    |-- businessLabel.vue // 选项卡切换组件
+    |-- OmsTable.vue // 表格 + 表单 + 按钮组合组件
+    |-- OmsAgTable.vue // 大量数据渲染表格组件，基于框架业务组件库CommonTableByAgGrid
+    |-- OmsButton.vue // 按钮集组件
+    |-- OmsDialog.vue // 弹窗
+    |-- OmsForm.vue // 表单组件
+    |-- OmsLabel.vue // 选项卡切换组件
     |-- businessStatusFlag.vue // 水印状态组件
-    |-- businessTableInput.vue // 表格中使用的input
+    |-- TableInput.vue // 表格中使用的input
     |-- buttonFkDialog.vue // 通过按钮触发fkdialog弹出
     |-- downLoad.vue // 公共下载组件
     |-- easyMatrix.vue // 简单矩阵（二维）组件
@@ -41,13 +41,13 @@
     |       |-- publicDialog.js
     |-- css
     |   |-- agGridTable.less
-    |   |-- businessActionTable.less
-    |   |-- businessButton.less
-    |   |-- businessDialog.less
-    |   |-- businessForm.less
-    |   |-- businessLabel.less
+    |   |-- OmsTable.less
+    |   |-- OmsButton.less
+    |   |-- OmsDialog.less
+    |   |-- OmsForm.less
+    |   |-- OmsLabel.less
     |   |-- businessStatusFlag.less
-    |   |-- businessTableInput.less
+    |   |-- TableInput.less
     |   |-- buttonFkDialog.less
     |   |-- fkinput.less
     |   |-- fktable.less
@@ -59,14 +59,14 @@
     |-- js
     |   |-- LogTable.js
     |   |-- agGridTable.js
-    |   |-- businessActionTable.js
-    |   |-- businessAgTable.js
-    |   |-- businessButton.js
-    |   |-- businessDialog.js
-    |   |-- businessForm.js
-    |   |-- businessLabel.js
+    |   |-- OmsTable.js
+    |   |-- OmsAgTable.js
+    |   |-- OmsButton.js
+    |   |-- OmsDialog.js
+    |   |-- OmsForm.js
+    |   |-- OmsLabel.js
     |   |-- businessStatusFlag.js
-    |   |-- businessTableInput.js
+    |   |-- TableInput.js
     |   |-- buttonFkDialog.js
     |   |-- easyMatrix.js
     |   |-- fkinput.js

@@ -4,7 +4,8 @@ bin-release/
 [Oo]bj/
 [Bb]in/
 node_modules
-Burgeon.publish
+burgeon.publish
+
 # Other files and folders
 .settings/
 
