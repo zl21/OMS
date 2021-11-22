@@ -1,0 +1,95 @@
+// @import '~burgeonComponents/burgeon.publish/common/css/theme.less';
+@import '~@burgeon/oms-theme/skin/public.less';
+.customProperties{
+  display: grid;
+  grid-template-columns: 80px auto;
+  .panel-title{
+    margin-top: @base-mr;
+  }
+}
+.spuRecord {
+  .public-content {
+    /deep/ .ark-collapse {
+      margin-bottom: 0;
+    }
+  }
+  /deep/ .subtablePart {
+    .ark-form-item {
+      margin-bottom: 0;
+    }
+  }
+  /deep/ .business-form-main {
+    .ark-fkrp-poptip div {
+      outline: none;
+      height: 30px;
+    }
+    .item-col label.title i {
+      top: auto;
+      left: -2px !important;
+      font-size: 12px;
+      height: auto;
+      line-height: inherit;
+      vertical-align: inherit;
+    }
+    .ark-row {
+      div.ark-col-span-8:nth-child(8) {
+        .item-col .add-input {
+          color: #575757;
+          padding: 0 10px !important;
+        }
+      }
+    }
+  }
+}
+
+/* .ark-table-wrapper {
+  margin-top: 8px;
+} */
+
+.order .table {
+  display: flex;
+}
+
+.order .subtablePart,
+.order .orderDetails {
+  width: 100%;
+}
+.detailAdd .burgeon-modal {
+  width: 800px !important;
+}
+.detailAdd .burgeon-modal-body {
+  overflow: hidden;
+}
+.spuRecord {
+  position: relative;
+  .fromLoading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 1000 !important;
+  }
+}
+.spuRecord .burgeon-table-tfoot {
+  transform: translateY(0) !important;
+}
+.from-btn{
+  position: relative;
+  .businessButton{
+    position: absolute;
+    bottom: 0;
+    left: 23vw;
+    .button-combina .button-content{
+      .button-group:last-child{
+        button{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+// @import '~burgeonComponents/burgeon.publish/common/css/theme.less';
+@import url(https://cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/common/css/theme.less);
+
+.preLable-item {
+  color: red;
+  position: absolute;
+  left: 46px;
+  top: 3px;
+}
+.holdStrategyAddOrEdit {
+  /deep/ .CP_C_SHOP_IDS {
+    margin-left: 25px;
+  }
+  /deep/ .ark-checkbox-group {
+    line-height: 32px;
+    [type='checkbox'] {
+      vertical-align: middle;
+    }
+  }
+  /deep/ .fiexdTime {
+    width: 200px;
+    margin: 0 12px;
+  }
+  /deep/ .fixedSelect {
+    width: 150px;
+    .ark-select-selection {
+      height: 32px;
+      line-height: 30px;
+      border-radius: 5px;
+      margin: 0 12px;
+      .ark-select-placeholder,
+      .ark-select-selected-value {
+        height: 32px;
+        line-height: 30px;
+      }
+    }
+  }
+  /deep/ .ark-form-item.itemPlaceholder {
+    .ark-form-item-label {
+      color: transparent;
+    }
+    .ark-input-innerWrap,
+    .ark-input.ark-input-default {
+      display: none;
+    }
+  }
+  /deep/ .ark-form-item.soltDom {
+    .ark-form-item-label {
+      display: none;
+    }
+    .ark-form-item-content {
+      margin-left: 0 !important;
+      .preLable {
+        display: inline-block;
+        width: 120px;
+        text-align: right;
+        padding-right: 5px;
+        & > span {
+          vertical-align: middle;
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+  /deep/ .radio-label{
+    .ark-form-item-label{
+      display: none;
+    }
+  }
+  /deep/ .radio-label1{
+    display: none;
+  }
+  /deep/ .radio-label2{
+    display: none;
+  }
+  
+
+}

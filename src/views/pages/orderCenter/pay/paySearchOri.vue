@@ -1,0 +1,385 @@
+<!--
+ * @Author: zhou.l
+ * @Date: 2021-06-01 11:26:07
+ * @LastEditTime: 2021-08-10 16:40:31
+ * @LastEditors: Please set LastEditors
+ * @Description: 赔付单-新增-查询原订单编号-formItem
+-->
+<template>
+  <div class="OC_B_ORDER_ID">
+    <!-- <label class="itemLabel"> 零售发货单单号: </label> -->
+    <Input
+      class="oriCode"
+      :autocomplete="'new-password'"
+      disabled
+      @on-click="iconclick"
+      :icon="searchIcon"
+      v-model="orderId"
+      :placeholder="''"
+      @on-blur="inputblur"
+      @on-change="inputChange"
+    ></Input>
+    <Icon
+      v-if="orderId && orderId != '-1' && ID == '-1'"
+      class="oriCodeclear"
+      type="ios-close-circle"
+      @click="clear"
+    />
+    <!-- 查询原定单编号 -->
+    <Modal
+      v-model="orderModal"
+      width="800"
+      titleAlign="left"
+      :closable="true"
+      :mask="true"
+      class-name="ark-dialog"
+      title="关联原单"
+    >
+      <div class="dialog-footer" slot="footer">
+        <OmsButton :btn-config="btnConfigMo" />
+      </div>
+      <div class="customized-detail-table">
+        <OmsTable
+          :jordan-table-config="table"
+          @on-row-click="onRowClick"
+          @on-row-dblclick="onRowDblclick"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+        />
+      </div>
+    </Modal>
+  </div>
+</template>
+
+<script>
+// 退换货单详情
+
+export default {
+  name: 'searchOOID',
+  model: {
+    prop: 'value',
+    event: 'on-Change'
+  },
+  props: {
+    value: {
+      type: String,
+      default: () => '', // 框架传过来的value
+    },
+  },
+  data() {
+    return {
+      orderModal: false,
+      loading: false,
+      ID: this.$route.params.itemId && this.$route.params.itemId != 'New' ? this.$route.params.itemId : '-1',
+      orderId: '',
+      exCode: '',
+      backable: false,
+      modal: false,
+      getCurrenData: [],
+      isChecked: false,
+      btnConfigMo: {
+        typeAll: "default",
+        btnsite: "right",
+        buttons: [
+          {
+            text: $i18n.t('common.cancel'), // 取消
+            btnclick: () => {
+              this.destroyVm();
+            },
+          },
+          {
+            text: $i18n.t('common.determine'), // 确定
+            type: 'primary',
+            btnclick: () => {
+              if (!this.isChecked) {
+                this.$Message.warning('请选中一条单据！');
+                return false
+              }
+              this.$emit('change', this.getCurrenData, this);
+              // this.$emit('change', 'SF000000002', this);
+              const orderId = this.getCurrenData[0].billNo;
+              const exCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+              this.orderId = orderId;
+              this.exCode = exCode;
+              // this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID;
+              // this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+              const aa = this.getCurrenData[0].psCSkuEcode;
+              R3.store.commit('customize/COMPENSATE', { orderId });
+              R3.store.commit('customize/COMPENSATE', { exCode });
+              // R3.store.commit('customize/REDUNDANT_ORDER_ID', JSON.parse(JSON.stringify(this.other.expressCode)));
+              this.destroyVm();
+            },
+          },
+        ],
+      },
+      table: {
+        columns: [], // 表头
+        data: [], // 数据配置
+        indexColumn: true, // 是否显示序号
+        height: '270',
+        loading: false,
+        pageShow: true, // 控制分页是否显示
+        btnsShow: true, // 控制操作按钮是否显示
+        searchInputShow: false, // 控制搜索框是否显示
+        total: 0, // 设置总条数
+        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSize: 10, // 每页条数
+        pageIndex: 1, // 页码
+        isShowSelection: true, // 是否显示checkedbox
+        highlightRow: true, // 高亮单选必须结合它
+        multiple: false, //false 单选
+        businessFormConfig: {
+          formValue: {
+            billNo: "",
+            sourceCode: '',
+            expressCode: '',
+            // receiverName: '',
+            buyerNick: '',
+            // receiverMobile: '',
+          },
+          formData: [
+            {
+              style: 'input',
+              label: '零售发货单单号', // 原定单编号
+              colname: 'billNo',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            {
+              style: 'input',
+              label: $i18n.t('form_label.platform_billNo'), // 平台单号
+              colname: 'sourceCode',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            {
+              style: 'input',
+              label: '物流单号', // 物流单号
+              colname: 'expressCode',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            /* {
+              style: 'input',
+              label: $i18n.t('form_label.consignee'), // 收货人
+              colname: 'receiverName',
+              width: '8',
+              inputenter: () => this.queryEnter(1, 10)
+            }, */
+            {
+              style: 'input',
+              label: $i18n.t('table_label.buyerNickname'), // 买家昵称
+              colname: 'buyerNick',
+              width: '8',
+              regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_@#$%^&*+=-><~“”‘’。.，,：；/、\\`\|!！……\(\)\（\）《》?？·]+)$/,
+              inputenter: () => this.queryEnter(1, 10)
+            },
+            /* {
+              style: 'input',
+              label: $i18n.t('form_label.consignee_phone'), // 收货人手机
+              colname: 'receiverMobile',
+              width: '8',
+              // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
+              // regx: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+              // regx: /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+              // regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
+              // regx: /^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\d{8}$/,
+              inputenter: () => this.queryEnter(1, 10)
+            }, */
+          ],
+        },
+        businessButtonConfig: {
+          typeAll: 'default', // 按钮统一风格样式
+          btnsite: "right",
+          buttons: [
+            /* {
+              text: '重置',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.formEmpty(this, 'formConfig');
+                this.queryEnter(1, this.table.pageSize, true);
+              }, // 按钮点击事件
+            }, */
+            {
+              text: $i18n.t('btn.find'), // 查找 按钮文本
+              disabled: false, // 按钮禁用控制
+              type: 'primary',
+              btnclick: () => {
+                this.queryEnter(1, this.table.pageSize);
+              }, // 按钮点击事件
+            },
+          ],
+        }
+      },
+      other: {},
+    };
+  },
+  computed: {
+    searchIcon() {
+      return this.ID == '-1' ? 'ios-search' : '';
+    },
+  },
+  watch: {
+    orderModal(val) {
+      !val && this.destroyVm();
+    },
+    /* orderId: { ？？为什么要watch
+      handler(newValue, oldVal) {
+        // this.other.REDUNDANT_ORDER_ID = newValue
+        this.orderId = newValue;
+        // this.other.expressCode = this.getCurrenData[0] ? this.getCurrenData[0].expressCode : '';
+        R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
+        R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
+      },
+    }, */
+  },
+
+  created() { },
+  mounted() {
+    console.log('paySearchOri::mounted::');
+    const val = this.$parent.$props.value;
+    if (val) {
+      if (val instanceof Array && val.length) {
+        this.orderId = val[0].billNo || '';
+      } else {
+        this.orderId = val;
+      }
+      // this.other.REDUNDANT_ORDER_ID = this.REDUNDANT_ORDER_ID
+      R3.store.commit('customize/COMPENSATE', { orderId: this.orderId });
+
+      // R3.store.commit('customize/COMPENSATE', JSON.parse(JSON.stringify({ other: this.other })));
+      // R3.store.commit('customize/REDUNDANT_ORDER_ID', this.other.expressCode);
+    }
+    this.$nextTick(async () => {
+      this.queryEnter(1, 10, true);
+    });
+  },
+  methods: {
+    destroyVm() {
+      this.orderModal = false;
+      this.formEmpty(this, 'table.businessFormConfig');
+      this.table.data = [];
+    },
+    iconclick() {
+      // console.log(e, this);
+      this.orderModal = true;
+    },
+    clear() {
+      this.orderId = '';
+      this.$emit('change', '', this);
+      // 联动清空子表
+      this.getCurrenData[0] = {};
+      setTimeout(() => {
+        // R3.store.commit('customize/REDUNDANT_ORDER_ID', 'clear');
+        R3.store.commit('customize/COMPENSATE', { orderId: '' });
+        R3.store.commit('customize/COMPENSATE', { exCode: '' });
+      }, 10);
+    },
+    inputenter() { },
+    inputblur() { },
+    inputChange() { },
+    /* --------------------- 工具函数： --------------------- */
+    // 清空表单
+    formEmpty(_this, form, notvalueArr = [], notdrpArr = []) {
+      _this[form].formData.forEach((it) => {
+        if (it.itemdata && !notdrpArr.includes(it.colname)) {
+          it.itemdata.pid = '';
+          it.itemdata.valuedata = '';
+        }
+      })
+      for (const key in _this[form].formValue) {
+        if (!notvalueArr.includes(key)) {
+          _this[form].formValue[key] = ''
+        }
+      }
+      return _this[form]
+    },
+    keyDown() { },
+    /* ------------------- 事件 part start ------------------- */
+    async queryEnter(page = 1, pageSize = 10, isMounted) {
+      console.log(page, pageSize);
+      const self = this;
+      const ph = this.table.businessFormConfig.formValue.receiverMobile;
+      const regx = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
+      if (ph && !regx.test(ph)) {
+        self.$Message.warning('收货人手机格式不正确！');
+        return;
+      }
+      // 清空数据
+      this.table.loading = true;
+      this.table.data = [];
+      let fixedcolumns = JSON.parse(JSON.stringify(this.table.businessFormConfig.formValue))
+      for (const key in fixedcolumns) {
+        if (!fixedcolumns[key]) delete fixedcolumns[key];
+      }
+      const pageInfo = { pageNum: page, pageSize }
+      let param = { ...fixedcolumns, ...pageInfo }
+      param.web = 'paySearchOriginCode';
+      if (isMounted) param.expressCode = '-1';
+      const { data: { code, data } } = await self.service.orderCenter.ocBCompensateOrder(param).catch(e => {
+        this.table.loading = false;
+      });
+      this.table.loading = false;
+      this.table.columns = data.columns;
+      this.table.data = data.data;
+      this.table.total = data.pageInfo.total || 0;
+    },
+    onRowClick(row, index) {
+      if (row.expressCode || row.sourceCode) this.isChecked = true;
+      if (!row.expressCode) return this.$$Message.warning('当前选中行没有物流单号！')
+      this.getCurrenData = [{ ID: row.expressCode, Label: row.billNo, ...row }];
+      // sourceCode 平台单号
+      // billNo 原单号
+    },
+    onRowDblclick(row) {
+      console.log(row);
+    },
+    pageChange(page) {
+      console.log('page:', page);
+      this.table.pageIndex = page;
+      this.queryEnter(page, this.table.pageSize)
+    },
+    pageSizeChange(size) {
+      this.table.pageSize = size;
+      this.queryEnter(this.table.pageIndex, size)
+    }
+    /* ------------------- 子表事件 part end ------------------- */
+  },
+};
+
+</script>
+
+<style lang="less" scoped>
+.OC_B_ORDER_ID {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .itemLabel {
+    flex: 0 0 120px;
+  }
+  .oriCode /deep/.ark-input-innerWrap {
+    right: 3px;
+  }
+  /deep/.ark-input-icon {
+    height: 32px;
+    line-height: 32px;
+  }
+  .oriCodeclear {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    z-index: 9;
+    opacity: 0.7;
+  }
+}
+</style>

@@ -1,0 +1,105 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-06-29 10:56:54
+ * @LastEditTime: 2021-11-08 13:19:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /project-logic/commonPages/layput/NavigatorSubMenu.vue
+-->
+<template>
+    <div>
+        <Tooltip :content="data.label"  placement="right" theme="light" max-width="200">
+          <i class="iconfont icon" :class="`icon-menu-`+data.id"></i>
+        </Tooltip>
+        <div class="navigator-primary-menu-div">
+          <span class="displayNone">{{ data.label }}</span>
+        </div>
+         <Icon class="displayNone" type="ios-arrow-forward" />
+    </div>
+</template>
+<script>
+ export default {
+    name: "NavigatorSubMenu",
+    props:{
+        data:{
+          type: Object
+        },
+        index: {
+           type: Number
+        }
+    },
+    mounted(){ },
+    methods: { },
+}
+</script>
+<style lang="less">
+@import '~@burgeon/oms-theme/skin/public.less';
+.NavigatorVertical .left img.banner{
+   display: none;
+}
+.NavigatorVertical{
+  // 提示图标
+  .ark-tooltip, .ark-tooltip-rel{
+    width: 20px !important;
+    margin-right: 10px;
+  }
+  .ark-tooltip-light.ark-tooltip-popper[x-placement=right] .ark-tooltip-arrow{
+    width: 0;
+  }
+  // 收起
+  &.transferLeft{
+    width: 55px !important;
+    overflow: inherit;
+    transition: inherit !important;
+    .left{
+      background: url('~assetsImg/mini-logo.png') right no-repeat @base-color;
+      background-size:100% auto ;
+    }
+    .middle{
+      overflow: inherit;
+    }
+    .displayNone{
+      display: none;
+    }
+    .navigator-primary-menu{
+      &:hover{
+        .navigator-primary-menu-div .tips{
+          display: block;
+        }
+      }
+      .navigator-primary-menu-div{
+        overflow: inherit;
+      }
+    }
+    .ark-tooltip-light {
+      z-index: 99999;
+      .ark-tooltip-inner{
+        width: 80px;
+        line-height: 20px;
+      }
+    }
+  }
+  // 展开
+  &.transferRight{
+    width: 180px !important;
+    transition: inherit !important;
+    .left{
+      display: block;
+      background: url('~assetsImg/menuLogo.png') right no-repeat @base-color;
+      background-size:100% auto;
+    }
+    .ark-tooltip, .ark-tooltip-rel{
+      pointer-events: none;
+    }
+  }
+  // 展开部分
+  div .NavigatorSubMenu{
+    width: auto !important;
+    top: 51px !important;
+    height: calc(100% - 51px);
+    max-height: initial;
+    box-shadow: 16px 0 10px 0 rgba(0,0,0,.05)!important;
+  }
+}
+
+</style>

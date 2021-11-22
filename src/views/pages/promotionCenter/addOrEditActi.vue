@@ -1,0 +1,41 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-06-03 19:34:07
+ * @LastEditTime: 2021-06-08 11:05:49
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /burgeon-project-logic/views/pages/promotionCenter/addOrEditActi.vue
+-->
+<!-- 新增 或者 编辑 或者 复制促销-->
+<template>
+  <div class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
+      <OmsButton :btn-config="btnConfig" />
+    </div>
+    <div class="customized-detail-main">
+      <div class="addOrEditActi">
+        <div class="steps_content">
+          <div ref="basicSteps" class="basicSteps">
+            <div class="basic">
+              <BasicInfo ref="area_0" :basic-data="basic_info" @changeBasicData="basicDataHandel" :key="freshKey"/>
+            </div>
+            <div class="basic">
+              <InfoSet v-if="showInfoDataContainer" ref="area_1" :load-dis="loadDis" :basic-data="basic_info" :info-data="condition_info_setting" />
+            </div>
+            <div class="basic">
+              <GiftSet ref="area_2" :objid="objid" :load-dis="loadDis" :basic-data="basic_info" :gift-data="gift_info_setting" :dialogVisible="dialogVisible" @setcommodity="setCommodity" @closeDialog="closeDialog" @confirm="confirm" />
+            </div>
+          </div>
+        </div>
+        <div class="steps_bar">
+          <OmsSteps :current.sync="current" :steps="stepsBar" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import addOrEditActi from '@/js/pages/promotionCenter/addOrEditActi';
+
+export default addOrEditActi;
+</script>
