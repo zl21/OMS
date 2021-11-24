@@ -46,5 +46,6 @@ const install = function(Vue, opts = {}) {
 export default {
 	install,
 	Components,
-	Utils
+	Utils,
+	version: require('./package.json').version,
 };
