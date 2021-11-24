@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/project-logic",
-  "version": "1.0.30-op",
+  "version": "2.0.0",
   "description": "burgeon company's project-logic for private npm",
   "main": "burgeon.publish/BurgeonMaterials.min.js",
   "files": [
@@ -62,7 +62,6 @@
   "dependencies": {
     "@burgeon/internationalization": "^1.1.1",
     "@syman/ark-ui": "1.2.5",
-    "@syman/burgeon-r3": "^3.3.1",
     "@syman/burgeon-r3-components": "2.1.2",
     "awe-dnd": "^0.3.4",
     "compressing": "^1.5.1",

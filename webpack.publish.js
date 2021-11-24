@@ -50,6 +50,7 @@ module.exports = () => ({
   },
   devtool: 'eval-cheap-module-source-map',
   externals: {
+    '@syman/burgeon-r3': 'R3',
     vue: {
       commonjs: 'vue',
       commonjs2: 'vue',

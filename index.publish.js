@@ -11,7 +11,6 @@ import Vue from 'vue';
 import cus from 'burgeonConfig'
 import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
-// import 'burgeonComponents/burgeon.publish/businessComponents.min.css' // 组件库样式
 
 import R3 from '@syman/burgeon-r3';
 
@@ -19,18 +18,16 @@ import BC from 'burgeonComponents'
 
 console.log('BC::', BC);
 
-// import custUtils from 'burgeonComponents/burgeon.publish/common/js/utils.js'
 import pageNote from 'burgeonConfig/config/pageNote'
 import qs from 'qs';
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
 import service from '@/service/index.js';
 import store from '@/config/store/store'; // 将老框架公共状态注册为customize模块
-// import componentsConfig from 'burgeonComponents/package.json';
 
 import omsThemecConfig from '@burgeon/oms-theme/package.json';
 import internationalizationConfig from '@burgeon/internationalization/package.json';
-import r3Version from '@syman/burgeon-r3/package.json';
 import proVersion from './package.json';
+
 let omsTheme = localStorage.getItem("VarTheme");
 if(!omsTheme){
   localStorage.setItem("VarTheme", 'oms');
@@ -58,11 +55,11 @@ class InitAppConfig {
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n;
     window.version = {
-      // '@burgeon/business-components': componentsConfig.version,
       '@burgeon/project-logic': proVersion.version,
+      '@burgeon/business-components': BC.version,
       '@burgeon/oms-theme': omsThemecConfig.version,
       '@burgeon/internationalization': internationalizationConfig.version,
-      '@syman/burgeon-r3': r3Version.version,
+      '@syman/burgeon-r3': R3.version,
       '@syman/ark-ui': window.Ark.version,
       '@syman/ark-ui-bcl': window.$Bcl.version,
     }
