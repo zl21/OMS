@@ -1,0 +1,130 @@
+@import '~@/assets/css/css_1_3/common.less'; // 覆盖框架原主题
+.sourcstrategy {
+
+
+  .tag-red {
+    .ark-tag-text {
+      padding-right: 0;
+    }
+
+    &.ark-tag-checked {
+      font-family: iconfont !important;
+      position: relative;
+      border-color: @base-color;
+      padding-right: 12px;
+
+      .ark-tag-text {
+        color: @base-color;
+      }
+
+      &:before {
+        content: "\EC80";
+        border-radius: 3px 0 0 0;
+        font-size: 12px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 10px;
+        line-height: 10px;
+        background-color: @base-color;
+      }
+    }
+  }
+
+  .tag-blue {
+    .iconfont.iconios-close {
+      opacity: 0;
+    }
+
+    .ark-tag-text {
+      padding-right: 0;
+    }
+
+    &:hover {
+      border-color: @link-color;
+
+      .iconfont.iconios-close {
+        opacity: 1;
+        color: @link-color;
+      }
+
+      .ark-tag-text {
+        padding-right: 5px;
+        color: @link-color;
+      }
+    }
+  }
+
+  .ark-tag-text {
+    padding-right: 5px;
+  }
+
+  .ark-icon.iconios-close {
+    position: absolute;
+    right: 0;
+  }
+
+  .ark-tag-border.ark-tag-closable:after {
+    display: none !important;
+  }
+
+  .right-bar {
+    li {
+      cursor: pointer;
+
+      .icon-box {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+
+        .iconfont {
+          font-size: 40px;
+          color: @primary-color;
+
+          &.font-size-30 {
+            font-size: 30px !important;
+          }
+        }
+      }
+
+      .des {
+        font-size: 12px;
+        color: #999;
+        padding-top: 8px;
+        padding-bottom: 30px;
+        position: relative;
+
+        &:after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 25px;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          border-right: 1px dashed #999;
+        }
+      }
+
+      &:last-child {
+        .des {
+          &:after {
+            display: none;
+          }
+        }
+      }
+
+      &.curr {
+        .icon-box {
+          border: 1px dashed @primary-color;
+        }
+
+        .des {
+          &:after {
+            border-right: 1px dashed @primary-color;
+          }
+        }
+      }
+    }
+  }
+}
