@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
-    "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js"
+    "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js",
+    "report": "npm run build --report"
   },
   "repository": {
     "type": "git",

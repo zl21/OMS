@@ -6,9 +6,33 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const config = {
+const burgeonPlugins = [
+  new webpack.DefinePlugin({
+    'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new MiniCssExtractPlugin({
+    filename: 'businessComponents.min.css',
+  }),
+
+  new VueLoaderPlugin(),
+  new copyWebpackPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, "./src/common/css"),
+        to: path.resolve(__dirname, "./burgeon.publish/common/css")
+      },
+    ],
+  })
+];
+
+if (process.env.npm_config_report) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  burgeonPlugins.push(new BundleAnalyzerPlugin());
+}
+
+module.exports = () => ({
   entry: {
     index: './index.js'
   },
@@ -108,31 +132,7 @@ const config = {
     open: true,
     static: './burgeon.publish',
   },
-  plugins: [
-    // new BundleAnalyzerPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'businessComponents.min.css',
-    }),
-    // new CleanWebpackPlugin(['burgeon.publish']),
-    // new CleanWebpackPlugin(),
-    new VueLoaderPlugin(),
-    new copyWebpackPlugin({
-      patterns: [
-        /* {
-          from: path.resolve(__dirname, "./src/static"),
-          to: path.resolve(__dirname, "./burgeon.publish/static")
-        }, */
-        {
-          from: path.resolve(__dirname, "./src/common/css"),
-          to: path.resolve(__dirname, "./burgeon.publish/common/css")
-        },
-      ],
-    })
-  ],
+  plugins: burgeonPlugins,
   mode: 'production',
   resolve: {
     extensions: ['.js', '.json', '.vue', '.css'],
@@ -140,7 +140,6 @@ const config = {
       path: require.resolve('path-browserify'),
     },
     alias: {
-      // 'burgeonComponents': path.resolve(__dirname, './src/view'),
       burgeonComponents: path.resolve(__dirname, './src/'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
@@ -156,6 +155,4 @@ const config = {
       }
     }), new CssMinimizerPlugin()],
   },
-}
-
-module.exports = () => config;
+});
