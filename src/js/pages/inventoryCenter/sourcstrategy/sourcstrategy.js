@@ -1,22 +1,8 @@
-import businessButton from 'professionalComponents/businessButton';
-import businessForm from 'professionalComponents/businessForm';
-import businessActionTable from 'professionalComponents/businessActionTable';
-import businessDialog from 'professionalComponents/businessDialog';
-import comUtils from '@/assets/js/__utils__/common';
-import loading from '@/component/loading.vue';
-import aTable from 'professionalComponents/businessAgTable';
-import {isFavoriteMixin} from "@/assets/js/mixins/isFavorite";
+// import comUtils from '@/assets/js/__utils__/common';
+import isFavoriteMixin from "@/assets/js/mixins/isFavorite";
 
 
 export default {
-  components: {
-    businessButton,
-    businessForm,
-    businessActionTable,
-    businessDialog,
-    aTable,
-    loading
-  },
   mixins: [isFavoriteMixin],
   data() {
     return {
@@ -29,7 +15,7 @@ export default {
         rowData: [],
         renderArr: {}, // 表格内处理
         tableHeight: '560px',
-        pagenation: comUtils.pageConfig
+        pagenation: $Utils.pageConfig
       },
       selection: [],
       formConfig: {
@@ -139,9 +125,9 @@ export default {
   activated() {
     this.agTableConfig.pagenation.current = 1;
     // 计算高度 通过设置节点 'totalHeight'
-    comUtils.setTableHeight(this, 65);
+    $Utils.setTableHeight(this, 65);
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    comUtils.onresizes(this, 0);
+    $Utils.onresizes(this, 0);
   },
   methods: {
     /**

@@ -1,14 +1,13 @@
 <!--寻源策略表-->
 <template>
   <div class="storeScoreStrategy ">
-    <businessButton :btn-config="btnConfig" class="top-btns"/>
+    <OmsButton :btn-config="btnConfig" class="top-btns"/>
     <div class="br-d3d3d3 pd-10">
-      <businessForm :form-config="formConfig"/>
+      <OmsForm :form-config="formConfig"/>
     </div>
-    <div class="tableContent mg-tp-20">
+    <div class="tableContent mg-tp-20" v-loding="agTableConfig.agLoading">
       <!-- loading -->
-      <loading :loading="agTableConfig.agLoading"></loading>
-      <aTable
+      <OmsAgTable
         ref="agGridChild"
         :ag-table-config="agTableConfig"
         @on-page-change="pageChange"
