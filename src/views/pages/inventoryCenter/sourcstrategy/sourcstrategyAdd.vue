@@ -1,14 +1,14 @@
 <!--寻源策略表-->
 <template>
-  <div class="sourcstrategy pd-tp-20 relative pd-bt-50">
-    <businessStatusFlag v-if="ID!=='-1'&&status && statusObj[status]" :status-name="statusObj[status]"/>
+  <div class="sourcstrategy pd-tp-20 relative pd-bt-50" v-loading="loading">
+    <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]" class="omsWaterMark"/>
     <div class="pd-rt-100">
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-1">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
           <span class="iconfont icon-item icon-jibenxinxi font-size-24 color-primary"></span>
           <span class="pd-lf-15 font-size-18 font-weight-bold">基础信息</span>
         </div>
-        <businessForm :form-config="formConfig1"/>
+        <OmsForm :form-config="formConfig1"/>
       </div>
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-2">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
@@ -112,7 +112,7 @@
           <span class="pd-lf-15 font-size-18 font-weight-bold">评分策略</span>
         </div>
         <div>
-          <businessForm :form-config="formConfig2"/>
+          <OmsForm :form-config="formConfig2"/>
         </div>
       </div>
     </div>
@@ -150,10 +150,9 @@
     </div>
     <div class="fixed bottom-0 right-0" ref="rightBox" style="z-index: 999">
       <div class="flex flex-direction-row justify-content-end bg-base">
-        <businessButton :btn-config="btnConfig" class="top-btns"/>
+        <OmsButton :btn-config="btnConfig" class="top-btns"/>
       </div>
     </div>
-    <loading :loading="loading"/>
   </div>
 </template>
 
