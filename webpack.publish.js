@@ -7,9 +7,36 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const config = {
+const burgeonPlugins = [
+  new webpack.DefinePlugin({
+    'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new MiniCssExtractPlugin({
+    filename: 'BurgeonMaterials.min.css',
+    chunkFilename: 'MaterialsCenter/css/[name].min.css',
+  }),
+  new VueLoaderPlugin(),
+  new copyWebpackPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, "./src/assets/css"),
+        to: path.resolve(__dirname, "./burgeon.publish/static/css"),
+      },
+      {
+        from: path.resolve(__dirname, "./src/assets/img"),
+        to: path.resolve(__dirname, "./burgeon.publish/static/img"),
+      },
+    ],
+  })
+]
+if (process.env.npm_config_report) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  burgeonPlugins.push(new BundleAnalyzerPlugin());
+}
+
+module.exports = () => ({
   entry: './index.publish.js',
   output: {
     filename: 'BurgeonMaterials.min.js',
@@ -107,30 +134,7 @@ const config = {
     open: true,
     static: './burgeon.publish',
   },
-  plugins: [
-    new BundleAnalyzerPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'BurgeonMaterials.min.css',
-      chunkFilename: 'MaterialsCenter/css/[name].min.css',
-    }),
-    new VueLoaderPlugin(),
-    new copyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "./src/assets/css"),
-          to: path.resolve(__dirname, "./burgeon.publish/static/css"),
-        },
-        {
-          from: path.resolve(__dirname, "./src/assets/img"),
-          to: path.resolve(__dirname, "./burgeon.publish/static/img"),
-        },
-      ],
-    })
-  ],
+  plugins: burgeonPlugins,
   mode: 'production',
   resolve: {
     extensions: ['.js', '.json', '.vue', '.css'],
@@ -153,6 +157,4 @@ const config = {
       parallel: true,
     }), new CssMinimizerPlugin()],
   },
-}
-
-module.exports = () => config;
+});
