@@ -1,18 +1,10 @@
-import businessForm from 'professionalComponents/businessForm';
-import businessButton from 'professionalComponents/businessButton';
-import fkdialog from 'framework/components/tablelist/fkdialog.vue';
-import loading from '@/component/loading.vue';
+import FkDialog from 'framework/components/tablelist/fkdialog';
 import {checkRuleFunMixin} from "@/assets/js/mixins/checkFormRule";
-import businessStatusFlag from 'professionalComponents/businessStatusFlag';
 
 
 export default {
   components: {
-    businessForm,
-    businessButton,
-    fkdialog,
-    loading,
-    businessStatusFlag
+    FkDialog
   },
   mixins: [checkRuleFunMixin],
   data() {
