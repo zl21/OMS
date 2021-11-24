@@ -15,7 +15,7 @@ export default {
         rowData: [],
         renderArr: {}, // 表格内处理
         tableHeight: '560px',
-        pagenation: $Utils.pageConfig
+        pagenation: $utils.pageConfig
       },
       selection: [],
       formConfig: {
@@ -125,9 +125,9 @@ export default {
   activated() {
     this.agTableConfig.pagenation.current = 1;
     // 计算高度 通过设置节点 'totalHeight'
-    $Utils.setTableHeight(this, 65);
+    $utils.setTableHeight(this, 65);
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    $Utils.onresizes(this, 0);
+    $utils.onresizes(this, 0);
   },
   methods: {
     /**

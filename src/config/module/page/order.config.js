@@ -42,7 +42,8 @@ export default {
   ORDERMANAGER: {
     component: () => import(
       /* webpackChunkName: 'OrderCenterPage' */
-      'allpages/orderCenter/orderManager/orderManager.vue'
+      // 'allpages/orderCenter/orderManager/orderManager.vue'
+      'allpages/inventoryCenter/sourcstrategy/sourcstrategy.vue'
     ),
     // component: orderManager,
     labelName: i18n.t('panel_label.retail_shipping_order')

@@ -17,8 +17,7 @@ export default {
   SGCHANNELSYNSTOCKQUERY: {
     component: () => import(
       /* webpackChunkName: 'InventoryCenterPage' */
-      // 'allpages/inventoryCenter/sgChannelSynstockQuery.vue'
-      'allpages/inventoryCenter/sourcstrategy/sourcstrategy.vue'
+      'allpages/inventoryCenter/sgChannelSynstockQuery.vue'
     ),
     // component: sgChannelSynstockQuery
   },
