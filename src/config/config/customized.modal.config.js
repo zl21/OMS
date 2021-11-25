@@ -54,6 +54,11 @@ const common = {
     component: Components.ImportTable,
   },
   SYNCSTOCKSTRATEGYIMPORT: {
+    // 店铺同步库存策略-（导入-同步策略明细
+    component: Components.ImportTable,
+  },
+  PRODUCTSTRATEGYSHOPSCALEIMPORT{
+    // 店铺商品特殊设置-编辑-多店铺比例-明细导入
     component: Components.ImportTable,
   },
   IMPORTCOM: {

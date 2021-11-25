@@ -32,19 +32,6 @@ export default {
       '@/views/modal/strategyPlatform/strategyTimeDialog.vue'
     ), // 修改结束时间
   },
-  SYNCSTOCKSTRATEGYIMPORT: {
-    component: () => import(
-      /* webpackChunkName: 'StrategyCenterModal' */
-      '@/views/modal/strategyPlatform/syncStockStrategyImport.vue'
-    ), // 店铺同步库存策略-（导入-同步策略明细
-  },
-  PRODUCTSTRATEGYSHOPSCALEIMPORT: {
-    // 店铺商品特殊设置-编辑-多店铺比例-明细导入
-    component: () => import(
-      /* webpackChunkName: 'StrategyCenterModal' */
-      '@/views/modal/strategyPlatform/productStrategyShopScaleImport.vue'
-    ),
-  },
   BATCHMODIFY: { //店铺策略》批量修改
     component: () => import(
       /* webpackChunkName: 'StrategyCenterModal' */
