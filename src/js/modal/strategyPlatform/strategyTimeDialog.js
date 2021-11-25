@@ -14,7 +14,7 @@ export default {
   props: ['idArray', 'objList', 'tablename', 'rowArr'],
   data() {
     return {
-      vmI18n:$i18n,
+      dialogLoad: false,
       formConfig: {
         formValue: {
           DAY_TYPE: '',
@@ -28,6 +28,7 @@ export default {
             width: '24',
             value: 'DAY_TYPE',
             clearable: false,
+            transfer: true,
             disabled: true,
             options: []
           }, {
@@ -36,6 +37,7 @@ export default {
             label: $i18n.t('form_label.startTime'), // '开始时间',
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss',
+            transfer: true,
             value: 'BEGIN_TIME',
             disabled: true,
             placeholder: ''
@@ -44,6 +46,7 @@ export default {
             type: 'datetime',
             label: $i18n.t('form_label.endTime'), // '结束时间',
             width: '24',
+            transfer: true,
             format: 'yyyy-MM-dd HH:mm:ss',
             value: 'END_TIME',
             placeholder: ''
@@ -51,7 +54,7 @@ export default {
         ]
       },
       btnConfig: {
-        typeAll: 'default',
+        typeAll: 'error',
         btnsite: 'right',
         buttons: [
           {
@@ -102,17 +105,17 @@ export default {
       fromdata.append('table', this.infoParams.table);
       fromdata.append('isStrategyTime', 'Y');
       fromdata.append('END_TIME', format.getFormatDate(formValue.END_TIME, 'yyyy-MM-dd HH:mm:ss'));
-      $omsUtils.setLoading(true);
+      this.dialogLoad = true;
       try {
         const res = await this.service.strategyPlatform.holdOrderUpdateStrategyEndTime(fromdata);
-        $omsUtils.setLoading();
+        this.dialogLoad = false;
         if (res.data.data.code === 0) {
           this.$Message.success($i18n.t('modalTips.eo')); // '调整策略时间成功'
           this.$emit('confirmImport');
           this.$emit('closeActionDialog');
         }
       } catch (error) {
-        $omsUtils.setLoading();
+        this.dialogLoad = false;
       }
     }
   }
