@@ -1,4 +1,4 @@
-import detailtable from 'allpages/promotionCenter/details/table.vue';
+import detailtable from 'allpages/promotionCenter/onlinePromotion/details/table.vue';
 import { tableCols } from '../promotion.config';
 
 export default {

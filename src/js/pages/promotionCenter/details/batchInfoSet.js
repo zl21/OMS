@@ -1,5 +1,5 @@
-import detailtable from 'allpages/promotionCenter/details/table.vue';
-import batchTables from 'allpages/promotionCenter/details/batchTables.vue';
+import detailtable from 'allpages/promotionCenter/onlinePromotion/details/table.vue';
+import batchTables from 'allpages/promotionCenter/onlinePromotion/details/batchTables.vue';
 import { tableCols } from '../promotion.config';
 
 export default {
