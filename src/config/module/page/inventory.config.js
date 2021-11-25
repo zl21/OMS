@@ -42,18 +42,18 @@ export default {
     ),
     // component: sgChannelStorageBuffer // 库存策略计算缓存池
   },
+  // 共享池库存梯度策略-单对象
+  SYNCGRADIENTSTRATEGY: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/syncGradientStrategy/syncGradientStrategy.vue'
+    ),
+  },
   // 配销仓库存梯度策略-单对象
   SYNCGRADIENTSTRATEGYSA: {
     component: () => import(
       /* webpackChunkName: 'InventoryCenterPage' */
       'allpages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySA.vue'
-    ),
-  },
-  // 配销仓库存梯度策略-列表
-  SYNCGRADIENTSTRATEGYSALIST: {
-    component: () => import(
-      /* webpackChunkName: 'InventoryCenterPage' */
-      'allpages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySAList.vue'
     ),
   },
   // 寻源策略表-单对象
@@ -70,7 +70,7 @@ export default {
       'allpages/inventoryCenter/channelSkuStrategy.vue'
     ),
   },
-  // 比例同步策略
+  // 比例同步策略-单对象
   CHANNELRATIOSTRATEGY: {
     component: () => import(
       /* webpackChunkName: 'InventoryCenterPage' */
