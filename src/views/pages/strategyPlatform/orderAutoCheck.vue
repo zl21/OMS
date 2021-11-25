@@ -137,11 +137,27 @@
                       <FormItem label="付款时间：">
                         <Row>
                           <Col span="11">
-                            <DatePicker v-model="info.beginTime" format="yyyy-MM-dd HH:mm:ss" size="small" style="width: 200px" type="datetime" @on-change="setResult('beginEndTime')" />
+                            <DatePicker
+                              v-model="info.beginTime"
+                              format="yyyy-MM-dd HH:mm:ss"
+                              size="small"
+                              style="width: 200px"
+                              type="datetime"
+                              @on-change="setResult('beginEndTime')"
+                              :editable="false"
+                            />
                           </Col>
                           <Col span="2" style="text-align: center">-</Col>
                           <Col span="11">
-                            <DatePicker v-model="info.endTime" format="yyyy-MM-dd HH:mm:ss" size="small" style="width: 200px" type="datetime" @on-change="setResult('beginEndTime')" />
+                            <DatePicker
+                             v-model="info.endTime"
+                             format="yyyy-MM-dd HH:mm:ss"
+                             size="small"
+                             style="width: 200px"
+                             type="datetime"
+                             @on-change="setResult('beginEndTime')"
+                             :editable="false"
+                            />
                           </Col>
                         </Row>
                       </FormItem>
