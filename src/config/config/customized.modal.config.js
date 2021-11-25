@@ -23,10 +23,6 @@ const { Components } = BC
 
 const common = {
   /** ---------------------- 下载：---------------------- */
-  DOWNLOADORDER: {
-    // 淘宝订单接口
-    component: Components.DownLoad,
-  },
   DOWNLOADPUBLIC: {
     // 通用订单接口 通用退单接口 (通用订单下载)
     component: Components.DownLoad,
