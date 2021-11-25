@@ -32,7 +32,6 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
       objid: -1,
       lists: [
         {
@@ -76,8 +75,7 @@ export default {
     };
   },
   watch: {
-    // refresh(val) {
-    refresh() {
+    refresh(val) {
       console.log('refresh');
     },
     save(val) {
@@ -90,7 +88,7 @@ export default {
       console.log('editsave');
     },
     itemdata: {
-      handler(obj) {
+      handler(obj, oldobj) {
         this.saveObj.MAIL_CONTENT = obj.valuedata;
       },
       deep: true,
@@ -101,22 +99,26 @@ export default {
     getChangeItem(value) {
       this.itemdata.valuedata = value.valuedata;
     },
-    // 获取变量
+    //获取变量
     getVariableRest() {
       const self = this;
+      // axios({
+      //   method: "post",
+      //   url: "/p/cs/selectVipcomMailSetColumn",
+      //   data: {}
+      // }).then(function(res) {
+      //    if(res.data.data.code === 0){
+      //      let  rows = res.data.data.data;
+      //      self.lists = rows.map((row)=>{
+      //          return {
+      //             label: row.description,
+      //             click: () => self.setVariable(row.DESCRIPTION)
+      //          }
+      //      })
+      //    }
+      // });
 
-      const rows = [
-        '平台单号',
-        '收货人',
-        '买家昵称',
-        '本单件数',
-        '原单件数',
-        '快递公司',
-        '物流单号',
-        '支付时间',
-        '入库日期',
-        '出库日期',
-      ];
+      const rows = ['平台单号', '收货人', '买家昵称', '本单件数', '原单件数', '快递公司', '物流单号', '支付时间', '入库日期', '出库日期'];
       self.lists = rows.map((row) => ({
         label: row,
         click: () => self.setVariable(row),
@@ -147,13 +149,10 @@ export default {
       //   //table:self.tablename,
       //   objid: self.objid
       // };
-      self.objid =
-        self.$route.params.itemId === 'New' ? '-1' : self.$route.params.itemId;
-      const formdata = new FormData();
+      self.objid = self.$route.params.itemId === 'New' ? '-1' : self.$route.params.itemId;
+      let formdata = new FormData();
       formdata.append('objid', self.objid);
-      const { data } = await self.service.strategyPlatform.querySmsContent(
-        formdata
-      );
+      const { data } = await self.service.strategyPlatform.querySmsContent(formdata);
       if (data.code === 0) {
         const row = data.data;
         self.saveObj.MAIL_CONTENT = row.MAIL_CONTENT;
@@ -165,8 +164,25 @@ export default {
           }
         });
       }
+      // axios({
+      //   method: 'post',
+      //   url: '/p/cs/st/v1/querySmsContent',
+      //   data: formdata,
+      // }).then((res) => {
+      //   if (res.data.code === 0) {
+      //     const row = res.data.data;
+      //     self.saveObj.MAIL_CONTENT = row.MAIL_CONTENT;
+      //     self.itemdata.valuedata = row;
+      //     // self.saveObj["MAIL_TITLE"] = row.MAIL_TITLE;
+      //     self.$nextTick(() => {
+      //       if (self.$refs[`editor${self.objid}`]) {
+      //         self.$refs[`editor${self.objid}`].getData(self.itemdata);
+      //       }
+      //     });
+      //   }
+      // });
     },
-    // 保存当前单据
+    //保存当前单据
     async saveCurrent() {
       const self = this;
       const obj = {
@@ -182,6 +198,16 @@ export default {
       if (data.code !== 0) {
         self.$Message.error('保存失败');
       }
+
+      // return axios({
+      //   url: '/p/cs/st/v1/saveSmsContent',
+      //   method: 'post',
+      //   data,
+      // }).then((res) => {
+      //   if (res.data.code !== 0) {
+      //     self.$Message.error('保存失败');
+      //   }
+      // });
     },
     refreshGetData() {
       this.$emit('changeRefresh', false);
@@ -208,7 +234,7 @@ export default {
     objectEdit() {
       this.$emit('objectEdit');
     },
-    changeStopSave() {},
+    changeStopSave() { },
   },
   mounted() {
     this.modify = true;
@@ -220,5 +246,5 @@ export default {
       this.getData();
     }
   },
-  created() {},
+  created() { },
 };
