@@ -6,10 +6,9 @@
     <div class="public-content">
       <Tabs value="name1">
         <TabPane label="基本信息" name="name1">
-          <Form ref="formValidate" :label-width="120" :model="info">
+          <Form ref="formValidate" :label-width="130" :model="info">
             <Collapse v-model="collapseShow">
               <Panel name="1">
-                <!-- 基础资料 -->
                 {{ vmI18n.t("panel_label.basicData") }}
                 <div slot="content" class="content">
                   <Row>
@@ -58,8 +57,23 @@
                     </Col>
 
                     <Col span="6">
-                      <FormItem label="等待审核时间：">
-                        <Col span="20">
+                      <FormItem>
+                        <label slot="label">
+                          <Tooltip
+                            placement="top-start"
+                            max-width="250"
+                            content="修改时间后，延长一段时间再执行审核的时间"
+                          >
+                            <Icon
+                              type="ios-alert-outline"
+                              color="red"
+                              size="14"
+                              class="tooltip"
+                            />
+                          </Tooltip>
+                          等待审核时间：
+                        </label>
+                        <Col span="18">
                           <Input
                             v-model="info.WAIT_TIME"
                             size="small"
@@ -72,8 +86,23 @@
                     </Col>
 
                     <Col span="6">
-                      <FormItem label="反审核等待时间：">
-                        <Col span="20">
+                      <FormItem>
+                        <label slot="label">
+                          <Tooltip
+                            placement="top-start"
+                            max-width="250"
+                            content="用户执行反审核后，延长一段时间再执行重新审核的时间"
+                          >
+                            <Icon
+                              type="ios-alert-outline"
+                              color="red"
+                              size="14"
+                              class="tooltip"
+                            />
+                          </Tooltip>
+                          反审核等待时间：
+                        </label>
+                        <Col span="18">
                           <Input
                             v-model="info.ANTI_AUDIT_WAIT_TIME"
                             size="small"
@@ -116,13 +145,17 @@
                           <DropDownSelectFilter
                             :single="false"
                             :data="CP_C_LOGISTICS_ID_SELECT.datas"
-                            :total-row-count="CP_C_LOGISTICS_ID_SELECT.totalRowCount"
+                            :total-row-count="
+                              CP_C_LOGISTICS_ID_SELECT.totalRowCount
+                            "
                             :page-size="CP_C_LOGISTICS_ID_SELECT.pageSize"
                             :show-colname-key="'show'"
                             :data-empty-message="'暂无数据'"
                             :columns="CP_C_LOGISTICS_ID_SELECT.datas.tabth"
                             :auto-data="CP_C_LOGISTICS_ID_SELECT.autoData"
-                            :default-selected="CP_C_LOGISTICS_ID_SELECT.defaultSelected"
+                            :defaultSelected="
+                              CP_C_LOGISTICS_ID_SELECT.defaultSelected
+                            "
                             @on-page-change="changePage1"
                             @on-fkrp-selected="logisticSelected"
                             @on-clear="logisticClear"
@@ -131,6 +164,36 @@
                         </Col>
                       </FormItem>
                     </Col>
+
+                    <Col span="6">
+                      <FormItem label="创建人:">
+                        <Input
+                          v-model="info.OWNERENAME"
+                          disabled
+                          size="small"
+                        />
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="创建时间:">
+                        <Input v-model="CREATIONDATE" disabled size="small" />
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="修改人:">
+                        <Input
+                          v-model="info.MODIFIERENAME"
+                          disabled
+                          size="small"
+                        />
+                      </FormItem>
+                    </Col>
+                    <Col span="6">
+                      <FormItem label="修改时间:">
+                        <Input v-model="MODIFIEDDATE" disabled size="small" />
+                      </FormItem>
+                    </Col>
+
                     <Col span="6">
                       <FormItem label="手工订单：">
                         <Checkbox
@@ -186,6 +249,52 @@
                   <Row>
                     <Col colspan="1" span="1" style="padding-top: 10px">
                       <Checkbox
+                        v-model="effectiveCondition[8].value"
+                        size="small"
+                        @on-change="setResult('effectiveCondition')"
+                      >
+                        &nbsp;
+                      </Checkbox>
+                    </Col>
+                    <Col span="11">
+                      <i
+                        class="absolute top-10 left-20 color-red"
+                        v-show="effectiveCondition[8].value"
+                        >*</i
+                      >
+                      <FormItem label="订单折扣范围:">
+                        <Row>
+                          <Col span="11">
+                            <Input
+                              :disabled="!effectiveCondition[8].value"
+                              v-model.number="info.ORDER_DISCOUNT_DOWN"
+                              placeholder
+                              size="small"
+                              @on-change="
+                                setResult('ORDER_DISCOUNT_DOWN', $event)
+                              "
+                            />
+                          </Col>
+                          <Col class="text-align-center" span="2">-</Col>
+                          <Col span="11">
+                            <Input
+                              :disabled="!effectiveCondition[8].value"
+                              v-model.number="info.ORDER_DISCOUNT_UP"
+                              placeholder
+                              size="small"
+                              :maxlength="10"
+                              @on-change="
+                                setResult('ORDER_DISCOUNT_UP', $event)
+                              "
+                            />
+                          </Col>
+                        </Row>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col colspan="1" span="1" style="padding-top: 10px">
+                      <Checkbox
                         v-model="effectiveCondition[1].value"
                         size="small"
                         @on-change="setResult('effectiveCondition')"
@@ -195,19 +304,15 @@
                     </Col>
                     <Col span="11">
                       <i
+                        class="absolute left-45 top-10 color-red"
                         v-show="effectiveCondition[1].value"
-                        style="
-                          position: absolute;
-                          top: 10px;
-                          left: 20px;
-                          color: red;
-                        "
                         >*</i
                       >
-                      <FormItem label="付款时间：">
+                      <FormItem label="付款时间:">
                         <Row>
                           <Col span="11">
                             <DatePicker
+                              :disabled="!effectiveCondition[1].value"
                               v-model="info.beginTime"
                               format="yyyy-MM-dd HH:mm:ss"
                               size="small"
@@ -219,6 +324,7 @@
                           <Col span="2" style="text-align: center">-</Col>
                           <Col span="11">
                             <DatePicker
+                              :disabled="!effectiveCondition[1].value"
                               v-model="info.endTime"
                               format="yyyy-MM-dd HH:mm:ss"
                               size="small"
@@ -232,7 +338,7 @@
                     </Col>
                   </Row>
                   <Row>
-                    <Col colspan="1" span="1" style="padding-top: 10px">
+                    <Col class="pd-tp-10" colspan="1" span="1">
                       <Checkbox
                         v-model="effectiveCondition[2].value"
                         size="small"
@@ -243,13 +349,8 @@
                     </Col>
                     <Col span="11">
                       <i
+                        class="absolute top-10 left-10 color-red"
                         v-show="effectiveCondition[2].value"
-                        style="
-                          position: absolute;
-                          top: 10px;
-                          left: -4px;
-                          color: red;
-                        "
                         >*</i
                       >
                       <FormItem label="订单金额（元）:">
@@ -257,6 +358,7 @@
                           <Col span="11">
                             <!--去除:maxlength="10"-->
                             <Input
+                              :disabled="!effectiveCondition[2].value"
                               v-model.number="info.LIMIT_PRICE_DOWN"
                               placeholder
                               size="small"
@@ -266,6 +368,7 @@
                           <Col span="2" style="text-align: center">-</Col>
                           <Col span="11">
                             <Input
+                              :disabled="!effectiveCondition[2].value"
                               v-model="info.LIMIT_PRICE_UP"
                               placeholder
                               size="small"
@@ -322,17 +425,13 @@
                     </Col>
                     <Col span="11">
                       <i
+                        class="absolute top-10 left-45 color-red"
                         v-show="effectiveCondition[4].value"
-                        style="
-                          position: absolute;
-                          top: 10px;
-                          left: 30px;
-                          color: red;
-                        "
                         >*</i
                       >
                       <FormItem label="收货地址:">
                         <Input
+                          :disabled="!effectiveCondition[4].value"
                           v-model="info.RECEIVER_ADDRESS"
                           placeholder="包含关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开"
                           size="small"
@@ -354,6 +453,7 @@
                     <Col span="11">
                       <FormItem label="买家留言:">
                         <Input
+                          :disabled="!effectiveCondition[5].value"
                           v-model="info.BUYER_REMARK"
                           placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。"
                           size="small"
@@ -375,6 +475,7 @@
                     <Col span="11">
                       <FormItem label="卖家备注">
                         <Input
+                          :disabled="!effectiveCondition[6].value"
                           v-model="info.SELLER_REMARK"
                           placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。"
                           size="small"
@@ -383,6 +484,31 @@
                       </FormItem>
                     </Col>
                   </Row>
+
+                  <Row>
+                    <Col colspan="1" span="1" style="padding-top: 10px">
+                      <Checkbox
+                        v-model="effectiveCondition[9].value"
+                        size="small"
+                        @on-change="setResult('effectiveCondition')"
+                      >
+                        &nbsp;
+                      </Checkbox>
+                    </Col>
+                    <Col span="11">
+                      <FormItem label="单条码数量上限:">
+                        <Input
+                          :disabled="!effectiveCondition[9].value"
+                          v-model="info.SINGLE_SKU_NUM"
+                          :regx="/^-?\d+$/"
+                          placeholder="请输入数量"
+                          size="small"
+                          @on-change="setResult('SINGLE_SKU_NUM')"
+                        />
+                      </FormItem>
+                    </Col>
+                  </Row>
+
                   <!-- <Row>
                   <Col
                     colspan="1"
@@ -437,10 +563,12 @@
           </Form>
         </TabPane>
         <TabPane label="操作日志" name="name2">
-          <LogTable
-            :id="$route.params.customizedModuleId"
-            :table-name="$route.params.customizedModuleName"
-          />
+          <Table
+            border
+            height="550"
+            :data="TableData"
+            :columns="TableColumns"
+          ></Table>
         </TabPane>
       </Tabs>
     </div>

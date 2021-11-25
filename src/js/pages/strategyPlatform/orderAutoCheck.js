@@ -1,15 +1,39 @@
-// import timestampToTime from '@/assets/js/__utils__/usual';
+import formatData from '@/assets/js/__utils__/date';
 
 export default {
   components: {},
   data() {
     return {
+      TableData: [], // 日志数据
+      TableColumns: [
+        {
+          title: '修改内容',
+          key: 'modcontent'
+        },
+        {
+          title: '修改前',
+          key: 'BMOD'
+        },
+        {
+          title: '修改后',
+          key: 'AMOD'
+        },
+        {
+          title: '修改人',
+          key: 'modifierename'
+        },
+        {
+          title: '修改时间',
+          key: 'modifieddate',
+          sortable: true
+        }
+      ], // 日志表头
       loading: false,
       show: '',
       s: [],
       providesList: [],
       btnConfig: {
-        typeAll: 'default', // 按钮统一风格样式
+        typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
             text: '保存', // 查找 按钮文本
@@ -19,7 +43,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: $i18n.t('btn.refresh'), // '刷新',
+            text: '刷新',
             btnclick: async () => {
               this.loading = true;
               await this.queryLogisticsCompany();
@@ -29,7 +53,7 @@ export default {
             }
           },
           {
-            text: $i18n.t('common.return'), // 返回 按钮文本
+            text: '返回', // 查找 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               R3.store.commit('global/tabOpen', {
@@ -98,6 +122,14 @@ export default {
         {
           key: 7,
           value: false
+        },
+        {
+          key: 8,
+          value: false
+        },
+        {
+          key: 9,
+          value: false
         }
       ],
       EXCLUDE_SKU_TYPE: 1,
@@ -116,7 +148,7 @@ export default {
             },
             {
               colname: 'ENAME',
-              name: $i18n.t('form_label.logisticsCompany'), // '物流公司',
+              name: window.vmI18n.t('form_label.logisticsCompany'), // '物流公司',
               show: true
             },
           ],
@@ -131,6 +163,7 @@ export default {
     };
   },
   async mounted() {
+    this.getTableData();
     await this.queryLogisticsCompany();
     this.getAutoCheck().then(() => {
       this.QueryList();
@@ -174,6 +207,7 @@ export default {
           .then(({ data }) => {
             if (data.data.code == 0) {
               this.info = data.data.data;
+
               this.IS_AUTOCHECK_ORDER = this.info.IS_AUTOCHECK_ORDER == 'Y';
               this.IS_AUTOCHECK_PAY = this.info.IS_AUTOCHECK_PAY == 'Y';
               this.IS_FULL_GIFT_ORDER = this.info.IS_FULL_GIFT_ORDER == 'Y';
@@ -196,8 +230,8 @@ export default {
                   return tmpObj;
                 });
               }
-              this.info.beginTime = this.info.BEGIN_TIME ? $utils.timestampToTime(this.info.BEGIN_TIME) : '';
-              this.info.endTime = this.info.END_TIME ? $utils.timestampToTime(this.info.END_TIME) : '';
+              this.info.beginTime = this.info.BEGIN_TIME ? $omsUtils.timestampToTime(this.info.BEGIN_TIME) : '';
+              this.info.endTime = this.info.END_TIME ? $omsUtils.timestampToTime(this.info.END_TIME) : '';
               const arr = new Set(this.info.EFFECTIVE_CONDITION ? this.info.EFFECTIVE_CONDITION.split(',') : []);
 
               if (this.info.CP_C_REGION_PROVINCE_ENAME) {
@@ -211,8 +245,10 @@ export default {
                 }
               });
               this.EXCLUDE_SKU_TYPE = `${this.info.EXCLUDE_SKU_TYPE}`;
-              this.CREATIONDATE = this.info.CREATIONDATE ? $utils.timestampToTime(this.info.CREATIONDATE) : '';
-              this.MODIFIEDDATE = this.info.MODIFIEDDATE ? $utils.timestampToTime(this.info.MODIFIEDDATE) : '';
+              this.CREATIONDATE = this.info.CREATIONDATE ? $omsUtils.timestampToTime(this.info.CREATIONDATE) : '';
+              this.MODIFIEDDATE = this.info.MODIFIEDDATE ? $omsUtils.timestampToTime(this.info.MODIFIEDDATE) : '';
+
+
             }
             // this.$Message.error(data.data.message);
           })
@@ -281,19 +317,19 @@ export default {
       this.setResult('orderType');
     },
     setResult(type, e) {
-      if (type == 'IS_AUTOCHECK_ORDER') {
+      if (type === 'IS_AUTOCHECK_ORDER') {
         this.result.IS_AUTOCHECK_ORDER = this.IS_AUTOCHECK_ORDER ? 'Y' : 'N';
-      } else if (type == 'IS_AUTOCHECK_PAY') {
+      } else if (type === 'IS_AUTOCHECK_PAY') {
         this.result.IS_AUTOCHECK_PAY = this.IS_AUTOCHECK_PAY ? 'Y' : 'N';
-      } else if (type == 'IS_FULL_GIFT_ORDER') {
+      } else if (type === 'IS_FULL_GIFT_ORDER') {
         this.result.IS_FULL_GIFT_ORDER = this.IS_FULL_GIFT_ORDER ? 'Y' : 'N';
-      } else if (type == 'IS_MANUAL_ORDER') {
+      } else if (type === 'IS_MANUAL_ORDER') {
         this.result.IS_MANUAL_ORDER = this.IS_MANUAL_ORDER ? 'Y' : 'N';
-      } else if (type == 'IS_MERGE_ORDER') {
+      } else if (type === 'IS_MERGE_ORDER') {
         this.result.IS_MERGE_ORDER = this.IS_MERGE_ORDER ? 'Y' : 'N';
       } else if (type === 'AUDIT_WAIT_TIME' || type === 'WAIT_TIME' || type === 'RECEIVER_ADDRESS' || type === 'BUYER_REMARK' || type === 'SELLER_REMARK' || type === 'HOLD_WAIT_TIME' || type === 'UN_AUDIT_WAIT_TIME' || type === 'CP_C_LOGISTICS_ID' || type === 'ANTI_AUDIT_WAIT_TIME') {
         this.result[type] = this.info[type] ? this.info[type] : '';
-      } else if (type == 'orderType') {
+      } else if (type === 'orderType') {
         if (this.orderType.length === 3) {
           this.indeterminate = false;
           this.checkAll = true;
@@ -306,13 +342,13 @@ export default {
         }
         console.log('this.orderType:::', this.orderType);
         this.result.ORDER_TYPE = this.orderType.join(',');
-      } else if (type == 'beginEndTime') {
+      } else if (type === 'beginEndTime') {
         this.result.BEGIN_TIME = new Date(this.info.beginTime).getTime();
         this.result.END_TIME = new Date(this.info.endTime).getTime();
-      } else if (type == 'AUDIT_PRICE') {
+      } else if (type === 'AUDIT_PRICE') {
         this.result.AUDIT_PRICE_DOWN = parseFloat(this.info.AUDIT_PRICE_DOWN);
         this.result.AUDIT_PRICE_UP = parseFloat(this.info.AUDIT_PRICE_UP);
-      } else if (type.indexOf('LIMIT_PRICE') > -1) {
+      } else if (type.indexOf('LIMIT_PRICE') > -1 || type.indexOf('ORDER_DISCOUNT') > -1) {
         let price = `${e.target.value}`;
         price = price
           .replace(/[^\d.]/g, '') // 清除“数字”和“.”以外的字符
@@ -332,10 +368,12 @@ export default {
         // deprecated
         // this.result.LIMIT_PRICE_DOWN = parseFloat(this.info.LIMIT_PRICE_DOWN);
         // this.result.LIMIT_PRICE_UP = parseFloat(this.info.LIMIT_PRICE_UP);
-      } else if (type == 'EXCLUDE_SKU_TYPE' || type == 'SKU_CONTENT') {
+      } else if (type === 'EXCLUDE_SKU_TYPE' || type === 'SKU_CONTENT') {
         this.result.EXCLUDE_SKU_TYPE = this.EXCLUDE_SKU_TYPE;
         this.result.SKU_CONTENT = this.info.SKU_CONTENT;
-      } else if (type == 'effectiveCondition') {
+      } else if (type === 'SINGLE_SKU_NUM') {
+        this.result.SINGLE_SKU_NUM = this.info.SINGLE_SKU_NUM;
+      } else if (type === 'effectiveCondition') {
         const a = [];
         this.effectiveCondition.forEach((item, i) => {
           if (item.value) {
@@ -396,8 +434,18 @@ export default {
     judgeCondition() {
       // 限制条件勾选非空判断
       const effectiveCondition = this.effectiveCondition;
+      if (effectiveCondition[8].value) {
+        if (this.info.ORDER_DISCOUNT_DOWN === '' || this.info.ORDER_DISCOUNT_UP === '') {
+          this.$Message.error('已启用订单折扣限制，订单折扣范围不可为空!');
+          return false;
+        }
+      }
+      if (this.info.ORDER_DISCOUNT_DOWN > this.info.ORDER_DISCOUNT_UP) {
+        this.$Message.error('起始折扣应小于或等于截止折扣!');
+        return false;
+      }
       if (effectiveCondition[1].value) {
-        if (!this.info.beginTime || !this.info.endTime) {
+        if (this.info.beginTime === '' || this.info.endTime === '') {
           this.$Message.error('付款时间为必填项,没有选择值!');
           return false;
         }
@@ -407,17 +455,17 @@ export default {
         return false;
       }
       if (effectiveCondition[2].value) {
-        if (!this.info.LIMIT_PRICE_DOWN || !this.info.LIMIT_PRICE_UP) {
-          this.$Message.error('订单金额（元）为必填项,没有输入值!');
+        if (this.info.LIMIT_PRICE_DOWN === '' || this.info.LIMIT_PRICE_UP === '') {
+          this.$Message.error('已启用订单金额限制，订单金额不可为空!');
           return false;
         }
       }
       if (this.info.LIMIT_PRICE_DOWN > this.info.LIMIT_PRICE_UP) {
-        this.$Message.error('订单金额范围设置有误!');
+        this.$Message.error('起始金额应小于或等于截止金额!');
         return false;
       }
       if (effectiveCondition[4].value) {
-        if (!this.info.RECEIVER_ADDRESS) {
+        if (this.info.RECEIVER_ADDRESS === '') {
           this.$Message.error('收货地址为必填项,没有输入值!');
           return false;
         }
@@ -452,6 +500,7 @@ export default {
             if (data.data.code == 0) {
               this.$Message.success(data.data.message);
               this.QueryList();
+              this.getTableData();
               return;
             }
             if (data.data.message) {
@@ -461,6 +510,18 @@ export default {
             }
           });
       }
+    },
+    getTableData() {
+      this.service.strategyPlatform.queryAutoCheckLog({ ST_C_AUTOCHECK_ID: this.$route.params.customizedModuleId }).then(res => {
+        console.log(res);
+        if (res.data.code === 0) {
+          let resData = res.data.data;
+          resData.forEach(item => {
+            item.modifieddate = formatData.standardTimeConversiondateToStr(item.modifieddate);
+          })
+          this.TableData = resData;
+        }
+      })
     }
   }
 };
