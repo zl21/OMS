@@ -33,7 +33,13 @@
                       {{ vmI18n.t("form_label.refundOnly") }}
                     </Radio>
                     <!-- 退货退款 -->
-                    <Radio label="0">
+                    <Radio
+                      v-if="
+                        $route.params.customizedModuleName ===
+                        'REFUNDAFTERSHIPMENT'
+                      "
+                      label="0"
+                    >
                       {{ vmI18n.t("form_label.returnRefund") }}
                     </Radio>
                   </RadioGroup>
@@ -51,7 +57,7 @@
             <!-- 日志 -->
             {{ vmI18n.t("panel_label.log") }}
             <div slot="content">
-              <re-form :form-config="logFormConfig" />
+              <OmsForm :form-config="logFormConfig" />
             </div>
           </Panel>
         </Collapse>
@@ -86,7 +92,8 @@
         <!-- 日志 -->
         <div v-show="navStatus === 1" class="re_table">
           <OmsTable
-            :jordan-table-config="returnLogTableConfig"
+            v-loading="returnLogTableLoad"
+            :jordanTableConfig="returnLogTableConfig"
           />
         </div>
       </div>
@@ -107,6 +114,7 @@
           </div>
           <OmsTable
             :jordan-table-config="order.table"
+            @on-select="onSelectOrder"
             @on-current-change="onCurrentChange"
           />
         </Modal>
@@ -138,7 +146,7 @@
   </div>
 </template>
 <script>
-import orderItem from "@/js/pages/orderCenter/returngood/refundAfterShipment";
+import orderItem from '@/js/pages/orderCenter/returngood/refundAfterShipment';
 
 export default orderItem;
 </script>

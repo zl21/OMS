@@ -16,7 +16,7 @@ export default {
   PROMACTIQUERYLIST: {
     component: () => import(
       /* webpackChunkName: 'PromotionCenterPage' */
-      'allpages/promotionCenter/promotionlist.vue'
+      'allpages/promotionCenter/onlinePromotion/promotionlist.vue'
     ),
     // labelName: '促销活动',
     labelName: i18n.t('menu.ad'),
@@ -24,19 +24,19 @@ export default {
   PM_C_PROM_ACTI: {
     component: () => import(
       /* webpackChunkName: 'PromotionCenterPage' */
-      'allpages/promotionCenter/addOrEditActi.vue'
+      'allpages/promotionCenter/onlinePromotion/addOrEditActi.vue'
     )
   },
   PM_C_PROM_ACTI_BATCH_ADD: {
     component: () => import(
       /* webpackChunkName: 'PromotionCenterPage' */
-      'allpages/promotionCenter/batchActivity.vue'
+      'allpages/promotionCenter/onlinePromotion/batchActivity.vue'
     )
   },
   PM_C_PROM_PRE_TEST: {
     component: () => import(
       /* webpackChunkName: 'PromotionCenterPage' */
-      'allpages/promotionCenter/simulation.vue'
+      'allpages/promotionCenter/onlinePromotion/simulation.vue'
     )
   },
   // ORDERDETAIL2: {

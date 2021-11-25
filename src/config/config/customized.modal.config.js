@@ -22,12 +22,9 @@ import BC from 'burgeonComponents'
 const { Components } = BC
 
 const common = {
-  // 淘宝订单接口
-  DOWNLOADORDER: {
-    component: Components.DownLoad,
-  },
-  // 通用订单接口 通用退单接口 (通用订单下载)
+  /** ---------------------- 下载：---------------------- */
   DOWNLOADPUBLIC: {
+    // 通用订单接口 通用退单接口 (通用订单下载)
     component: Components.DownLoad,
   },
   DOWNLOADORDER: {
@@ -40,6 +37,15 @@ const common = {
   DOWNLOADCOMMON: {
     component: Components.DownLoad,
     labelName: '下载PO单',
+  },
+  /** ---------------------- 导入：---------------------- */
+  REFUNDIMPORT: {
+    // 自定义导入
+    component: Components.ImportTable,
+  },
+  EXTRARETURNIMPORT: {
+    // 导入打款结果
+    component: Components.ImportTable,
   },
   SKUIMPORT: {
     component: Components.ImportTable,

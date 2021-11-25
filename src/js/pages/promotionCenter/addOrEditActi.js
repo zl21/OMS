@@ -1,6 +1,6 @@
-import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
-import InfoSet from 'allpages/promotionCenter/details/infoSet.vue';
-import GiftSet from 'allpages/promotionCenter/details/giftSet.vue';
+import BasicInfo from 'allpages/promotionCenter/onlinePromotion/details/basicInfo.vue';
+import InfoSet from 'allpages/promotionCenter/onlinePromotion/details/infoSet.vue';
+import GiftSet from 'allpages/promotionCenter/onlinePromotion/details/giftSet.vue';
 import promotionMixin from './promotion.mixin';
 
 export default {

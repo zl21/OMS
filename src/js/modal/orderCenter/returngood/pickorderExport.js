@@ -6,7 +6,7 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
+      vmI18n: $i18n,
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -20,23 +20,23 @@ export default {
             this.$emit('closeActionDialog');
           }, // 按钮点击事件
         },
-          {
-            type: '', // 按钮类型
-            text: $i18n.t('common.determine'), // 确定
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.determine();
-            }, // 按钮点击事件
-          }
+        {
+          type: '', // 按钮类型
+          text: $i18n.t('common.determine'), // 确定
+          icon: '', // 按钮图标
+          size: 'small', // 按钮大小
+          disabled: false, // 按钮禁用控制
+          btnclick: () => {
+            this.determine();
+          }, // 按钮点击事件
+        }
         ],
       },
     };
   },
   methods: {
     determine() {
-      this.service.orderCenter.pickOrderExport({ idList: this.idArray }).then(res=>{
+      this.service.orderCenter.pickOrderExport({ idList: this.idArray }).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           const downloadFile = {};

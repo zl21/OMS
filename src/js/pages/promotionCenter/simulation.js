@@ -1,4 +1,4 @@
-import detailtable from 'allpages/promotionCenter/details/table.vue';
+import detailtable from 'allpages/promotionCenter/onlinePromotion/details/table.vue';
 // import MultipleBox from 'burgeonComponents/multipleBox.vue';
 import { tableCols as tabList } from './promotion.config';
 import groups from '@/assets/js/promotion/groups';

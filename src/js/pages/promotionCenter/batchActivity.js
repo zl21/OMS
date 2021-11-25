@@ -1,5 +1,5 @@
-import BasicInfo from 'allpages/promotionCenter/details/basicInfo.vue';
-import BatchInfoSet from 'allpages/promotionCenter/details/batchInfoSet.vue';
+import BasicInfo from 'allpages/promotionCenter/onlinePromotion/details/basicInfo.vue';
+import BatchInfoSet from 'allpages/promotionCenter/onlinePromotion/details/batchInfoSet.vue';
 import promotionMixin from './promotion.mixin';
 
 export default {

@@ -83,12 +83,6 @@ export default {
     )
   },
 
-  EXTRARETURNIMPORT: {
-    component: () => import(
-      /* webpackChunkName: 'OrderCenterModal' */
-      '@/views/modal/orderCenter/extraReturnImport.vue'
-    )
-  },
   CREATEGRN: {
     component: () => import(
       /* webpackChunkName: 'OrderCenterModal' */

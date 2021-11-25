@@ -1,7 +1,7 @@
-import detailtable from 'allpages/promotionCenter/details/table.vue';
-import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
+import detailtable from 'allpages/promotionCenter/onlinePromotion/details/table.vue';
+import detailtabs from 'allpages/promotionCenter/onlinePromotion/details/tableTabs.vue';
 import { tableCols } from '../promotion.config';
-import SetCommodity from 'allpages/promotionCenter/details/setCommodity.vue';
+import SetCommodity from 'allpages/promotionCenter/onlinePromotion/details/setCommodity.vue';
 import BC from 'burgeonComponents';
 const { Components } = BC
 
