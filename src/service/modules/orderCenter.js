@@ -414,4 +414,9 @@ export default {
     payQueryProList: (params) => $network.post('/p/cs/oc/b/oms/v1/ocBCompensateOrder/queryProList', params), // 赔付单-子表-新增明细
     paySaveApi: (params) => $network.post('/p/cs/oc/b/oms/v1/ocBCompensateOrder/save', params), // 赔付单-保存
     extraSaveApi: (params) => $network.post('/p/cs/oc/oms/v1/refundExtra/save', params), // 赔付单-保存
+
+
+    retailBusinessTargetDetailQuery: (params) => $network.post('/p/cs/retailBusinessTargetDetailQuery', params), // 营业指标明细(天)-查询
+    retailBusinessTargetSalerQuery: (params) => $network.post('/p/cs/retailBusinessTargetSalerQuery', params), // 营业指标明细(店员)-查询
+    retailBusinessTargetSave: (params) => $network.post('/p/cs/retailBusinessTargetDetailQuery', params), // 营业指标明细(天/店员)-保存
 }
