@@ -41,6 +41,40 @@ export default {
       'allpages/inventoryCenter/sgChannelStorageBuffer.vue'
     ),
     // component: sgChannelStorageBuffer // 库存策略计算缓存池
-  }
-
+  },
+  // 配销仓库存梯度策略-单对象
+  SYNCGRADIENTSTRATEGYSA: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySA.vue'
+    ),
+  },
+  // 配销仓库存梯度策略-列表
+  SYNCGRADIENTSTRATEGYSALIST: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySAList.vue'
+    ),
+  },
+  // 寻源策略表-单对象
+  SOURCSTRATEGYDETAIL: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/sourcstrategy/sourcstrategyAdd.vue'
+    ),
+  },
+  // 特殊条码按比例同步策略-单对象
+  CHANNELSKUSTRATEGY: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/channelSkuStrategy.vue'
+    ),
+  },
+  // 比例同步策略
+  CHANNELRATIOSTRATEGY: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/channelRatioStrategy.vue'
+    ),
+  },
 };

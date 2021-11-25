@@ -251,7 +251,7 @@ export default {
           if (new Date(formValue.RELEASE_TIME).getTime() < Date.now()) {
             return { message: $i18n.t('modalTips.zp') }; // 指定时点释放的时间不能小于当前时间
           }
-          params.RELEASE_TIME = this.$comUtils.dateFormat(formValue.RELEASE_TIME, 'yyyy-MM-dd hh:mm:ss');
+          params.RELEASE_TIME = $utils.dateFormat(formValue.RELEASE_TIME, 'yyyy-MM-dd hh:mm:ss');
         } else if (formValue.RELEASE_TIME_TYPE === '2') {
           // 判断固定时长后释放的相应参数
           if (formValue.DAY_TYPE && formValue.FIXED_DURATION && formValue.TIME_UNIT) {

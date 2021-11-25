@@ -19,7 +19,7 @@
           :name="`${index}`"
         >
           <!-- hasNation 是否自动计算序号 -->
-          <!-- <aTable
+          <!-- <OmsAgTable
             :ref="`agGridChild${index + 1}`"
             :ag-table-config="user.agTableConfig"
             @on-page-change="pageChange"
