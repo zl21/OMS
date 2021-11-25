@@ -33,7 +33,6 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
       lists: [
         {
           label: '品牌',
@@ -76,16 +75,19 @@ export default {
     };
   },
   watch: {
-    // refresh(val) {
-    refresh() {
+    refresh(val) {
       console.log('refresh');
     },
-    editsave() {
+    // save(val) {
+    //   if (val) {
+    //     this.saveCurrent().then(() => this.$emit('changeSave', false)).catch(() => this.$emit('changeSave', false));
+    //   }
+    // },
+    editsave(val) {
       console.log('editsave');
     },
     itemdata: {
-      // handler(obj, oldobj) {
-      handler(obj) {
+      handler(obj, oldobj) {
         this.saveObj.MAIL_CONTENT = obj.valuedata;
       },
       deep: true
@@ -144,6 +146,24 @@ export default {
           }
         });
       }
+
+      // axios({
+      //   method: 'post',
+      //   url: '/p/cs/selectVipcomMailSetColumn',
+      //   data: obj
+      // }).then((res) => {
+      //   if (res.data.code === 0) {
+      //     const row = res.data.data;
+      //     self.saveObj.MAIL_CONTENT = row.MAIL_CONTENT;
+      //     self.itemdata.valuedata = row.MAIL_CONTENT;
+      //     self.saveObj.MAIL_TITLE = row.MAIL_TITLE;
+      //     self.$nextTick(() => {
+      //       if (self.$refs[`editor${self.objid}`]) {
+      //         self.$refs[`editor${self.objid}`].getData(self.itemdata);
+      //       }
+      //     });
+      //   }
+      // });
     },
     // 保存当前单据
     // flag 主表保存成功后的标志
@@ -166,13 +186,26 @@ export default {
           // self.$Message.error('保存失败');
         }
       }
+
+      // return axios({
+      //   url: '/p/cs/saveVipcomMail',
+      //   method: 'post',
+      //   data
+      // }).then(res => {
+      //   if (!flag) {
+      //     if (res.data.code === 0) {
+      //       self.$Message.success('保存成功!');
+      //     } else {
+      //       // self.$Message.error('保存失败');
+      //     }
+      //   }
+      // });
     },
     refreshGetData() {
       this.$emit('changeRefresh', false);
     },
     changeSave() {
-      // this.$emit('changeSave', val);
-      this.$emit('changeSave');
+      this.$emit('changeSave', val);
     },
     newLySave() {
       this.$emit('changeHasContent', true);
@@ -208,7 +241,7 @@ export default {
     window.addEventListener('customizeClick', (data) => {
       console.log('customizeClick::data', data);
       if (data.detail.type === 'save') {
-        const flag = typeof (data.detail.mainTableParame) !== 'undefined';
+        let flag = typeof (data.detail.mainTableParame) === "undefined" ? false : true;
         this.saveCurrent(flag);
       }
       // if ( && ) {
