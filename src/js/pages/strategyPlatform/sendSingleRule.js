@@ -1,5 +1,4 @@
 // import axios from 'axios';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import BC from 'burgeonComponents';
 const { Components } = BC
 
@@ -738,11 +737,11 @@ export default {
           if (res.data.code === 0) {
             const ess = res.data.message || $i18n.t('modalTips.z2'); // '导出成功';
             _this.$Message.success(ess);
-            publicMethodsUtil.downloadUrlFile(res.data.data);
+            $omsUtils.downloadUrlFile(res.data.data);
           } else {
             // const err = res.data.message || $i18n.t('modalTips.y6'); // '导出失败';
             // _this.$Message.error(err);
-            publicMethodsUtil.downloadUrlFile(res.data.data);
+            $omsUtils.downloadUrlFile(res.data.data);
           }
         });
     },
@@ -802,11 +801,11 @@ export default {
           if (res.data.code === 0) {
             const ess = res.data.message || $i18n.t('modalTips.z2'); // '导出成功';
             _this.$Message.success(ess);
-            publicMethodsUtil.downloadUrlFile(res.data.data);
+            $omsUtils.downloadUrlFile(res.data.data);
           } else {
             // const err = res.data.message || $i18n.t('modalTips.y6'); // '导出失败';
             // _this.$Message.error(err);
-            publicMethodsUtil.downloadUrlFile(res.data.data);
+            $omsUtils.downloadUrlFile(res.data.data);
           }
         });
     },

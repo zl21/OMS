@@ -1,5 +1,4 @@
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import customPagingMixins from '@/assets/js/mixins/customPaging';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 
@@ -844,7 +843,7 @@ export default {
         if (code === 0 && data !== null) {
           const mes = message || $i18n.t('modalTips.z2'); // 导出成功！
           _this.$Message.success(mes);
-          publicMethodsUtil.downloadUrlFile(data);
+          $omsUtils.downloadUrlFile(data);
         } else {
           // const err = message || $i18n.t('modalTips.z3'); // 失败！
           // _this.$Message.error(err);
@@ -911,7 +910,7 @@ export default {
       if (code === 0 && data !== null) {
         const mes = message || $i18n.t('modalTips.z2'); // 导出成功！
         _this.$Message.success(mes);
-        publicMethodsUtil.downloadUrlFile(data);
+        $omsUtils.downloadUrlFile(data);
       } else {
         // const err = message || $i18n.t('modalTips.z3'); // 失败！
         // _this.$Message.error(err);

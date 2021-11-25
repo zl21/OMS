@@ -45,7 +45,6 @@
 </template>
 
 <script>
-  import publicMethodsUtil from '@/assets/js/public/publicMethods';
   export default {
     name: 'EssentialInfo',
     props: {

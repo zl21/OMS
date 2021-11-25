@@ -111,7 +111,6 @@ import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import dateUtil from "@/assets/js/__utils__/date.js";
 import axios from "axios";
-import Util from "@/assets/js/public/publicMethods";
 import BC from 'burgeonComponents'
 const { Components } = BC
 
@@ -1731,7 +1730,7 @@ export default {
       self.jordanTableConfig.totalData = [];
       self.jordanTableConfig.data.forEach((item) => {
         qty += parseInt(item.QTY || 0);
-        amt = Util.accAdd(parseFloat(item.REAL_AMT || 0).toFixed(2), amt);
+        amt = $omsUtils.accAdd(parseFloat(item.REAL_AMT || 0).toFixed(2), amt);
       });
       setTimeout(() => {
         if (!self.jordanTableConfig.totalData.length) {
@@ -1920,7 +1919,7 @@ export default {
             // 1.非复制的且已存在该条明细(已经存在的明细都是刚刚新增的，不是复制带出来的，且，即将新增的是已经存在的，累加)
             const preQty = Number(item.QTY)
             item.QTY = preQty + Number(it.QTY);
-            item.REAL_AMT = $utils.floatNumber(Util.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
+            item.REAL_AMT = $utils.floatNumber($omsUtils.accAdd(item.REAL_AMT, it.REAL_AMT), 2);
           } else if (!it.OOID && !pryKeyArr.includes(it.pryKey)) {
             // 2.非复制的且不存在该条明细
             self.jordanTableConfig.data.push(it);

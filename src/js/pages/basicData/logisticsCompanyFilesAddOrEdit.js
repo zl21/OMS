@@ -1,4 +1,3 @@
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import addPlatformLogisticsCompany from '@/views/modal/commodityCenter/addPlatformLogisticsCompany';
 import orderNumberNnalysis from 'allpages/basicData/orderNumberNnalysis.vue';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
@@ -610,7 +609,7 @@ export default {
     // 填充下拉选项框
     async getSelectData() {
       const self = this;
-      self.formConfig.formData = await publicMethodsUtil.getTypeList('BS_C_EXTRA_ATTRIBUTE_DEF_PRO', ['TYPE', 'LOCATION', 'TABLE_NAME'], '基础信息', self.formConfig);
+      self.formConfig.formData = await $omsUtils.getTypeList('BS_C_EXTRA_ATTRIBUTE_DEF_PRO', ['TYPE', 'LOCATION', 'TABLE_NAME'], '基础信息', self.formConfig);
     },
     keyDown(e) {
       // console.log(e);

@@ -2,7 +2,6 @@
 /**
  * 组合商品
  */
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import modifycurrentLabel from '@/assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -686,7 +685,7 @@ export default {
     // 获取类型下拉数据
     async getSelectOption() {
       const self = this;
-      self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO_GROUP', ['TYPE'], '基础信息', self.formConfig);
+      self.formConfig.formData = await $omsUtils.getTypeList('PS_C_PRO_GROUP', ['TYPE'], '基础信息', self.formConfig);
     },
     // 删除图片
     deleteImg() {

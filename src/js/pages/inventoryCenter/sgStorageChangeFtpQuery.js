@@ -1,6 +1,5 @@
 
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import customPagingMixins from '@/assets/js/mixins/customPaging';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
@@ -291,7 +290,7 @@ export default {
           if (res.data.code === 0 && res.data.data !== null) {
             const mes = res.data.message || $i18n.t('modalTips.z2'); // '导出成功！';
             _this.$Message.success(mes);
-            publicMethodsUtil.downloadUrlFile(res.data.data);
+            $omsUtils.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
             // const err = res.data.message || $i18n.t('modalTips.z3'); // '失败！';
@@ -321,7 +320,7 @@ export default {
         if (res.data.code === 0 && res.data.data !== null) {
           const mes = res.data.message || $i18n.t('modalTips.z2'); // '导出成功！';
           _this.$Message.success(mes);
-          publicMethodsUtil.downloadUrlFile(res.data.data);
+          $omsUtils.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
           // const err = res.data.message || $i18n.t('modalTips.z3'); // '失败！';

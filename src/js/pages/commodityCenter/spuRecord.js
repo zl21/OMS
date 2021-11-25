@@ -1,4 +1,3 @@
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -554,7 +553,7 @@ export default {
       self.loading = true;
       self.dataitem.url = $omsUtils.splicingGateWay('commodityCenter', '/p/cs/upload2')
       self.init().then(async () => {
-        self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO', ['TYPE'], '基础信息', self.formConfig);
+        self.formConfig.formData = await $omsUtils.getTypeList('PS_C_PRO', ['TYPE'], '基础信息', self.formConfig);
         // await self.getSelectOption();
       }).then(async () => {
         await self.querySpu();
@@ -628,7 +627,7 @@ export default {
     // 获取类型下拉数据
     async getSelectOption() {
       const self = this;
-      self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO', ['TYPE'], '基础信息', self.formConfig);
+      self.formConfig.formData = await $omsUtils.getTypeList('PS_C_PRO', ['TYPE'], '基础信息', self.formConfig);
     },
     // 记录主表修改信息方法
     /**

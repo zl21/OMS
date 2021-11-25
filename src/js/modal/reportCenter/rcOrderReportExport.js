@@ -1,4 +1,3 @@
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 
 const { getModuleName } = R3;
 
@@ -87,7 +86,7 @@ export default {
               tableName: 'CP_C_TASK'
             }
           });
-          publicMethodsUtil.downloadUrlFile(res.data.data);
+          $omsUtils.downloadUrlFile(res.data.data);
         } else {
           // const err = res.data.message || '失败！';
           // self.$Message.error(err);

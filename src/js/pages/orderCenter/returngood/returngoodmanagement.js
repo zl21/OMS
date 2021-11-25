@@ -1,5 +1,4 @@
 // 退换货单详情
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';

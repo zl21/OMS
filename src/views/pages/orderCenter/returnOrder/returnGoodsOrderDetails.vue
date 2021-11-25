@@ -65,7 +65,6 @@ import {
   tuiColumns,
   huanColumns,
 } from "./returnConfig.js";
-import Util from "@/assets/js/public/publicMethods";
 
 export default {
   name: "retunGoods",
@@ -833,8 +832,8 @@ export default {
       if (!self.omsTableConfig.data) return;
       self.omsTableConfig.data.forEach((item) => {
         qty += Number(item[key1] || 0);
-        amt = Util.accAdd(Number(item[key2]), Number(amt));
-        REAL_AMT = Util.accAdd(Number(item['REAL_AMT']), Number(REAL_AMT));
+        amt = $omsUtils.accAdd(Number(item[key2]), Number(amt));
+        REAL_AMT = $omsUtils.accAdd(Number(item['REAL_AMT']), Number(REAL_AMT));
       });
       setTimeout(() => {
         // 退货明细
@@ -930,7 +929,7 @@ export default {
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
             if (Number(item.REAL_RETURNABLE_QTY) > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
-              const sum = Util.accAdd(item.REFUND_FEE, it.REFUND_FEE)
+              const sum = $omsUtils.accAdd(item.REFUND_FEE, it.REFUND_FEE)
               item.REFUND_FEE = $utils.floatNumber(sum);
             } else {
               item.QTY_REFUND = Number(item.REAL_RETURNABLE_QTY);

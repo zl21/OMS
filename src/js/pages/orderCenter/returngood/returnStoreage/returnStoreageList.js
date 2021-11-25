@@ -1,7 +1,6 @@
 import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
 import BC from 'burgeonComponents';
@@ -394,7 +393,7 @@ export default {
           if (res.data.code == 0 && res.data.data !== null) {
             const mes = res.data.message || $i18n.t('modalTips.z2');
             self.$Message.success(mes);
-            publicMethodsUtil.downloadUrlFile(res.data.data);
+            $omsUtils.downloadUrlFile(res.data.data);
           } else {
             const err = res.data.message || $i18n.t('modalTips.z3');
             self.$Message.error(err);
@@ -427,7 +426,7 @@ export default {
           const mes = res.data.message || $i18n.t('modalTips.z2');
           self.$Message.success(mes);
           // return (window.location = res.data.data);
-          publicMethodsUtil.downloadUrlFile(res.data.data);
+          $omsUtils.downloadUrlFile(res.data.data);
         } else {
           // let err = res.data.message || "失败！";
           const err = res.data.message || $i18n.t('modalTips.z3');

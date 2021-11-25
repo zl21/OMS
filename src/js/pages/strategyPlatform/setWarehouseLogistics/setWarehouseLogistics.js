@@ -1,4 +1,3 @@
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import BC from 'burgeonComponents';
 const { Components } = BC
 
@@ -560,11 +559,11 @@ export default {
       if (code === 0) {
         const ess = data.message || $i18n.t('modalTips.z2'); // 导出成功
         _this.$Message.success(ess);
-        publicMethodsUtil.downloadUrlFile(data);
+        $omsUtils.downloadUrlFile(data);
       } else {
         const err = data.message || $i18n.t('modalTips.y6'); // 导出失败
         _this.$Message.success(err);
-        publicMethodsUtil.downloadUrlFile(data);
+        $omsUtils.downloadUrlFile(data);
       }
     },
     saveOk() {

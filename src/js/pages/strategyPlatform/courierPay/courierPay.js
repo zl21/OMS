@@ -1,4 +1,3 @@
-import publicMethods from '@/assets/js/public/publicMethods';
 import areaList from '@/assets/js/address/area-list';
 import { parseArea } from '@/assets/js/address/address-parse';
 
@@ -22,8 +21,8 @@ export default {
         // 表单一
         formValue: {
           BILL_NO: '', // 单据标号
-          BEGIN_TIME: `${publicMethods.getDate(0)} 00:00:00`, // 生效日期
-          END_TIME: `${publicMethods.getDate(6)} 23:59:59`, // 结束日期
+          BEGIN_TIME: `${$omsUtils.getDate(0)} 00:00:00`, // 生效日期
+          END_TIME: `${$omsUtils.getDate(6)} 23:59:59`, // 结束日期
           ENAME: '', // 方案名称
           PLAN_DESC: '', // 方案描述
           CP_C_PHY_WAREHOUSE_ID: '' // 实体仓id

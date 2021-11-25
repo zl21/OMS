@@ -1,5 +1,4 @@
 import matrix from 'allpages/orderCenter/orderManageDetail/orderDetail/matrix.vue';
-import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
 
 export default {
   name: 'matrixBox',

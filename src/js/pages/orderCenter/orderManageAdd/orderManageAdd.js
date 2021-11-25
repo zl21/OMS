@@ -1,5 +1,4 @@
 
-import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import BurgeonValidate from 'burgeonConfig/config/validate.config';
@@ -929,7 +928,7 @@ export default {
                         params.row.PRICE_ACTUAL = Number(e.target.value);
                         params.row.PRICE = Number(e.target.value);
                         if (params.row.QTY) {
-                          params.row.REAL_AMT = publicMethodsUtil
+                          params.row.REAL_AMT = $omsUtils
                             .accMul(params.row.QTY, params.row.PRICE_ACTUAL)
                             .toFixed(2);
                         }
@@ -979,7 +978,7 @@ export default {
                         'on-change': (e) => {
                           params.row.QTY = Number(e.target.value);
                           if (params.row.PRICE_ACTUAL) {
-                            params.row.REAL_AMT = publicMethodsUtil
+                            params.row.REAL_AMT = $omsUtils
                               .accMul(params.row.QTY, params.row.PRICE_ACTUAL)
                               .toFixed(2);
                           }

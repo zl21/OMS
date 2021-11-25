@@ -1,4 +1,3 @@
-  import publicMethodsUtil from '@/assets/js/public/publicMethods.js';
   // import comUtils from '@/assets/js/__utils__/common.js';
 
   export default {
@@ -192,7 +191,7 @@
       },
       async getSelectOption() {
         const self = this;
-        self.formConfig.formData = await publicMethodsUtil.getTypeList('PS_C_PRO_GROUP', ['TYPE'], '基础信息', self.formConfig);
+        self.formConfig.formData = await $omsUtils.getTypeList('PS_C_PRO_GROUP', ['TYPE'], '基础信息', self.formConfig);
       },
       save() {
         const self = this;

@@ -1,6 +1,5 @@
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date';
-import omsUtils from '@/assets/js/public/publicMethods';
 
 export default {
   components: {
@@ -1273,7 +1272,7 @@ export default {
         let newTime = this.formatDate(value)
         let oldTime = self.modify[obj][ecode]
         if (ecode == 'END_TIME') {
-          newTime = omsUtils.defaultEndTime(newTime, oldTime)
+          newTime = $omsUtils.defaultEndTime(newTime, oldTime)
           self.formConfig.formValue[ecode] = newTime
         }
         self.modify[obj][ecode] = newTime
@@ -1567,9 +1566,9 @@ export default {
     // 查询
     async querySchedule() {
       this.isWatchChange = false;
-      const data = await omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
+      const data = await $omsUtils.getObject('ST_C_VIPCOM_PROJECT', this.ID);
       if (!data) return
-      this.formConfig = omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
+      this.formConfig = $omsUtils.initFormConfig(data.addcolums[0].childs, this.formConfig);
       this.formConfig.formValue.CP_C_SHOP_ID = data.addcolums[0].childs[0].refobjid;
       this.formConfig.formValue.IS_OUTWAREHOUSE_ALONE = false;
       if (this.ID != -1) {
@@ -1612,7 +1611,7 @@ export default {
       /* =========== 保存校验 start =========== */
       const valueArr = ['ENAME', 'BEGIN_TIME', 'END_TIME', 'RANK'];
       const drpArr = ['CP_C_SHOP_ID'];
-      const mes = omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const mes = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
       if (mes !== 1) {
         self.$message.error(mes);
         return false;
