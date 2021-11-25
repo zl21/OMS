@@ -3,12 +3,11 @@
     class="semiCustomModal"
     style="width: 400px;"
   >
-    <div class="Modal-Form">
+    <!-- <div class="Modal-Form">
       <p v-if="isError">
         {{ errorMessage }}
       </p>
       <div class="Modal-Form-Item">
-        <!-- 档期日程归属 -->
         <label>{{ vmI18n.t("form_label.scheduleOwnership") }}:</label>
         <DropDownSelectFilter
           :single="true"
@@ -21,15 +20,14 @@
         />
       </div>
       <div class="Modal-Form-Item">
-        <!--  运输方式 -->
         <label>{{ vmI18n.t("form_label.transportationMode") }}:</label>
         <Input
           v-model="transportStyle.text"
           disabled
         />
       </div>
-    </div>
-
+    </div> -->
+    <OmsForm :form-config="formConfig" />
     <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
