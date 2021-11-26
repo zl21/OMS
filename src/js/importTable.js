@@ -1,5 +1,5 @@
 import OmsButton from 'burgeonComponents/view/OmsButton';
-import loading from 'burgeonComponents/view/loading';
+import loading from 'burgeonComponents/view/Loading';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 

@@ -8,12 +8,11 @@
         class="button-group"
         v-for="(item, index) in btnConfig.buttons"
         :key="index"
-        :class="(item.isShow && item.isShow === false) ? 'button-group-none' : ''"
+        :class="item.isShow && item.isShow === false ? 'button-group-none' : ''"
       >
         <template
           v-if="item.isShow === false || item.isShow ? item.isShow : true"
         >
-        
           <!-- icon 设置按钮的图标类型 custom-icon 设置按钮的自定义图标 -->
           <Button
             v-if="!item.dropDown"
@@ -115,9 +114,31 @@
 </template>
 
 <script>
-import OmsButton from 'burgeonComponents/js/OmsButton.js';
-export default OmsButton;
+export default {
+  name: 'OmsButton',
+  data() {
+    return {};
+  },
+
+  props: {
+    btnConfig: {
+      type: Object
+    }
+  },
+
+  methods: {
+    dropDownClick(name, ...eventlist) {
+      this.$emit('dropDownClick', name, eventlist)
+    },
+    button(ref) {
+      this.$emit("buttonEvent", ref, this);
+    }
+  }
+};
+// import OmsButton from 'burgeonComponents/js/OmsButton.js';
+// export default OmsButton;
 </script>
+
 <style lang='less' scoped>
 @import "burgeonComponents/css/OmsButton.less";
 </style>

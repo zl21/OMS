@@ -9,12 +9,49 @@
 <template>
   <!-- 定制页面通用日志表格 只需要引入组件,传入当前表明和详情id即可-->
   <div class="logTable">
-    <Table :columns="columns"
-           :data="data"></Table>
+    <Table :columns="columns" :data="data"></Table>
   </div>
 </template>
 
 <script>
-import LogTable from 'burgeonComponents/js/LogTable.js';
-export default LogTable;
+export default {
+  name: 'LogTable',
+  data() {
+    return {
+      columns: [],
+      data: []
+    }
+  },
+  props: {
+    tableName: {
+      type: String
+    },
+    id: {
+      type: String
+    }
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      //请求表头和表数据
+      let params = {
+        tableName: this.tableName || this.$route.query.tableName,
+        objid: this.id || this.$route.query.id
+      }
+      this.service.common.SelectLog(params).then(res => {
+        if (res.data.data.code == 0) {
+          if (!res.data.data.data) return;
+          this.columns = res.data.data.data.title;
+          this.data = res.data.data.data.data;
+        } else {
+          console.error(res.data.data.message || '日志服务请求失败!');
+        }
+      })
+    }
+  }
+}
+// import LogTable from 'burgeonComponents/js/LogTable.js';
+// export default LogTable;
 </script>

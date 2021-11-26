@@ -9,8 +9,7 @@
     </Spin>
   </div>
 </template>
-<style lang="less" scoped>
-</style>
+
 <script>
  const Loading = {
    name: 'Loading',
@@ -23,3 +22,6 @@
   };
   export default Loading
 </script>
+
+<style lang="less" scoped>
+</style>

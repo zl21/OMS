@@ -43,8 +43,8 @@
     </el-autocomplete>
   </div>
 </template>
+
 <script>
   import TableSku from 'burgeonComponents/js/tableSku';
-
   export default TableSku;
 </script>
