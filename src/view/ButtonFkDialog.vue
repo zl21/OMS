@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import fkdialog from 'burgeonComponents/view/fkdialog.vue';
+import fkdialog from 'burgeonComponents/view/Fkdialog.vue';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 

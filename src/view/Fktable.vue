@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import Fktable from "burgeonComponents/js/fktable.js";
+import Fktable from "burgeonComponents/js/Fktable.js";
 export default Fktable;
 </script>
 

@@ -45,6 +45,6 @@
 </template>
 
 <script>
-  import TableSku from 'burgeonComponents/js/tableSku';
+  import TableSku from 'burgeonComponents/js/TableSku';
   export default TableSku;
 </script>

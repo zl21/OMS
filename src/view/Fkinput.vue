@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import Fkinput from "burgeonComponents/js/fkinput.js";
+import Fkinput from "burgeonComponents/js/Fkinput.js";
 export default Fkinput;
 </script>
 

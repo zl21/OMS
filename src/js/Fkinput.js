@@ -1,6 +1,6 @@
 // 兼容fktable1.4数据格式（云雀1.0）
 import SelectDialog from 'framework/components/dialog/selectDialog.vue';
-import FkTable from 'burgeonComponents/view/fktable.vue';
+import FkTable from 'burgeonComponents/view/Fktable.vue';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 

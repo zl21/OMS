@@ -8,8 +8,8 @@
  */
 import myInputLd from 'framework/components/element/input.vue' //为多选+导入组件专属引入
 // 兼容fktable1.4数据格式（云雀1.0）
-import myInput from "burgeonComponents/view/fkinput.vue";
-import fkinputPlus from "burgeonComponents/view/fkinputPlus.vue";
+import myInput from "burgeonComponents/view/Fkinput.vue";
+import fkinputPlus from "burgeonComponents/view/FkinputPlus.vue";
 export default {
   name: 'OmsForm',
   components: {

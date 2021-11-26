@@ -58,7 +58,7 @@
   </div>
 </template>
 <script>
-import ImportTable from 'burgeonComponents/js/importTable.js';
+import ImportTable from 'burgeonComponents/js/ImportTable.js';
 export default ImportTable;
 </script>
 

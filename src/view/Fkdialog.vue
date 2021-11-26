@@ -283,7 +283,7 @@
 </template>
 
 <script>
-  import Fkdialog from 'burgeonComponents/js/fkdialog';
+  import Fkdialog from 'burgeonComponents/js/Fkdialog';
   export default Fkdialog;
 </script>
 

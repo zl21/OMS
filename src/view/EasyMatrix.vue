@@ -14,6 +14,6 @@
 </template>
 
 <script>
-import EasyMatrix from 'burgeonComponents/js/easyMatrix.js';
+import EasyMatrix from 'burgeonComponents/js/EasyMatrix.js';
 export default EasyMatrix;
 </script>
