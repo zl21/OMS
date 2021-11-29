@@ -39,6 +39,11 @@ require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
 
 import ImportCDNJS from 'import-cdn-js';
 
+// import { initCdn } from './src/assets/js/loadCdn';
+// initCdn([{
+//   'css': ['https://cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.css']
+// }])
+
 export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.js', 'Burgeon')
     .then(Burgeon => {
       Vue.use(Burgeon);
