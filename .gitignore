@@ -2,3 +2,4 @@ node_modules
 Burgeon.publish
 package-lock.json
 directoryList.md
+burgeon.publish*

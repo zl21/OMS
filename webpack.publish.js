@@ -41,7 +41,7 @@ module.exports = () => ({
   output: {
     filename: 'BurgeonMaterials.min.js',
     chunkFilename: 'MaterialsCenter/js/[name].min.js',
-    path: path.join(__dirname, './burgeon.publish'),
+    path: path.join(__dirname, `./burgeon.publish@${require('./package.json').version}`),
     globalObject: 'this',
     library: 'BurgeonMaterials',
     libraryTarget: 'umd',
