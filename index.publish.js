@@ -42,7 +42,7 @@ import ImportCDNJS from 'import-cdn-js';
 export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.js', 'Burgeon')
     .then(Burgeon => {
       Vue.use(Burgeon);
-      window.BC = Burgeon;
+      window.BC = Burgeon.default;
       
       console.log(BC);
       let cus = require('@/config').default;
