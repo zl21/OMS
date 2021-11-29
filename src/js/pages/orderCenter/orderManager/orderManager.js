@@ -79,7 +79,11 @@ export default {
             return params.data.PAY_TIME ? formatData.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''
            }, // 付款时间
          AUDIT_TIME: params => { if(params.data.AUDIT_TIME === undefined) return; return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''}, // 审核时间
-         DISTRIBUTION_TIME: params => {if(params.data.DISTRIBUTION_TIME === undefined) return; return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''}, // 配货时间
+         DISTRIBUTION_TIME: params => {
+          //  if(params.data.DISTRIBUTION_TIME === undefined) return; 
+          //  return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''
+            return !!params.data.DISTRIBUTION_TIME ? formatData.standardTimeConversiondateToStr(params.data.DISTRIBUTION_TIME) : '';
+          }, // 配货时间
          CREATIONDATE: params => { if(params.data.CREATIONDATE === undefined) return; return params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''}, // 创建时间
          HOLD_RELEASE_TIME: params => { if(params.data.HOLD_RELEASE_TIME === undefined) return; return params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''}, // HOLD单释放时间
          SCAN_TIME: params => {if(params.data.SCAN_TIME === undefined) return; return params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''}, // 出库时间
