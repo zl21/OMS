@@ -6,11 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
+const { ESBuildPlugin } = require('esbuild-loader')
 const burgeonPlugins = [
   new webpack.DefinePlugin({
     'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
   }),
+  new ESBuildPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new MiniCssExtractPlugin({
     filename: 'businessComponents.min.css',
@@ -77,9 +78,13 @@ module.exports = () => ({
     },
     {
       test: /\.m?js$/,
-      use: {
-        loader: 'babel-loader'
-      },
+      // use: {
+      //   loader: 'babel-loader',
+      // }
+      loader: 'esbuild-loader',
+      options: {
+        target: 'es2015'
+      }
     },
     {
       test: /\.css$/,
