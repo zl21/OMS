@@ -43,7 +43,6 @@ import ImportCDNJS from 'import-cdn-js';
 // initCdn([{
 //   'css': ['https://cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.css']
 // }])
-
 export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.js', 'Burgeon')
     .then(Burgeon => {
       Vue.use(Burgeon);
