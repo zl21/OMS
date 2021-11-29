@@ -2,7 +2,7 @@ import { tableCols } from '../promotion.config';
 import detailtable from 'allpages/promotionCenter/details/table.vue';
 import detailtabs from 'allpages/promotionCenter/details/tableTabs.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 // const _import = file => require(`@/jordanComponents/views/${file}.vue`).default;
 export default {

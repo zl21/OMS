@@ -1,4 +1,4 @@
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { getLodop } = BC.Utils;
 
 export default {

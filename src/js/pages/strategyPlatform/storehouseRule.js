@@ -1,6 +1,6 @@
 import service from '@/service/index';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 
 export default {

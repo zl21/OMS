@@ -64,9 +64,9 @@
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
-import DropDownConfig from 'burgeonConfig/config/dropDown.config';
-import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import BurgeonEvent from 'burgeonConfig/config/event.config';
+import DropDownConfig from '@/config/config/dropDown.config';
+import BtnConfig from '@/config/config/funBtn.config';
+import BurgeonEvent from '@/config/config/event.config';
 
 export default {
   name: 'OrderManageDetail',

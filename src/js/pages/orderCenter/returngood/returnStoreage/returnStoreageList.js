@@ -2,9 +2,9 @@ import strUtil from '@/assets/js/__utils__/util';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import commonUtils from 'burgeonConfig/config/commonUtils';
-import BC from 'burgeonComponents';
+import BtnConfig from '@/config/config/funBtn.config';
+import commonUtils from '@/config/config/commonUtils';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 
 const getCurrentTime = (() => {

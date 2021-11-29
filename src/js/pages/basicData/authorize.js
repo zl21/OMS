@@ -1,6 +1,6 @@
 import service from '@/service/index'
 import R3 from '@syman/burgeon-r3'
-import comMethods from 'burgeonConfig/config/commonUtils.js'
+import comMethods from '@/config/config/commonUtils.js'
 
 export default {
   data() {

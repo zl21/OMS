@@ -1,6 +1,6 @@
 //定制按钮配置类
 import commonUtils from './commonUtils'
-import DialogConfig from 'burgeonConfig/config/dialogs.config'
+import DialogConfig from '@/config/config/dialogs.config'
 
 class BtnConfig {
   static target;

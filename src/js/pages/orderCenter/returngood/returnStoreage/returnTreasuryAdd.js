@@ -1,7 +1,7 @@
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import BtnConfig from 'burgeonConfig/config/funBtn.config';
+import BtnConfig from '@/config/config/funBtn.config';
 
 export default {
   components: {

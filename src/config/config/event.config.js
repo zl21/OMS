@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/config/config/event.config.js
  */
 //定制事件配置类
-import DropDownConfig from 'burgeonConfig/config/dropDown.config';
+import DropDownConfig from '@/config/config/dropDown.config';
 class BurgeonEvent {
     static target;
     constructor() {

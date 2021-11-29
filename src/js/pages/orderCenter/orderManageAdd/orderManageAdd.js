@@ -2,8 +2,8 @@
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import BurgeonValidate from 'burgeonConfig/config/validate.config';
-import BtnConfig from 'burgeonConfig/config/funBtn.config';
+import BurgeonValidate from '@/config/config/validate.config';
+import BtnConfig from '@/config/config/funBtn.config';
 
 const areaList = require('@/assets/js/address/area-list');
 const { parse, parseArea } = require('@/assets/js/address/address-parse');

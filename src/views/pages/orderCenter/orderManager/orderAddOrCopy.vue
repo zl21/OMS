@@ -107,12 +107,12 @@
 <script>
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 // import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import BurgeonValidate from "burgeonConfig/config/validate.config";
-// import BtnConfig from 'burgeonConfig/config/funBtn.config';
+import BurgeonValidate from "@/config/config/validate.config";
+// import BtnConfig from '@/config/config/funBtn.config';
 import dateUtil from "@/assets/js/__utils__/date.js";
 import axios from "axios";
 import Util from "@/assets/js/public/publicMethods";
-import BC from 'burgeonComponents'
+// import BC from 'burgeonComponents'
 const { Components } = BC
 
 const areaList = require("@/assets/js/address/area-list");

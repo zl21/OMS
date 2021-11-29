@@ -1,4 +1,4 @@
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 
 export default {

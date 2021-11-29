@@ -1,11 +1,11 @@
-import BurgeonEvent from 'burgeonConfig/config/event.config';
+import BurgeonEvent from '@/config/config/event.config';
 import dateUtil from '@/assets/js/__utils__/date.js';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dynamicSearch from 'allpages/orderCenter/orderManager/dynamicSearch.vue';
 import formSetting from 'allpages/orderCenter/orderManager/formSetting.vue';
 import proDetail from 'allpages/orderCenter/orderManager/proDetail.vue';
 import modifycurrentLabel from '../../../../assets/js/mixins/modifycurrentLabel';
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 
 export default {

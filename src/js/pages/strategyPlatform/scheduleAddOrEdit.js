@@ -1,4 +1,4 @@
-import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import DialogConfig from '@/config/config/dialogs.config';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {

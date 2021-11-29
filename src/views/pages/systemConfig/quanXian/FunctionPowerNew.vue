@@ -234,10 +234,10 @@
 <script>
 
 
-// const functionPowerActions = () => require(`burgeonConfig/config/functionPower.actions.js`);
+// const functionPowerActions = () => require(`@/config/config/functionPower.actions.js`);
 const store = vm.$store
 import service from '@/service/index';
-import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import DialogConfig from '@/config/config/dialogs.config';
 
 export default {
   data() {

@@ -67,6 +67,7 @@
     "compressing": "^1.5.1",
     "cross-env": "^7.0.3",
     "css-minimizer-webpack-plugin": "^3.1.1",
+    "import-cdn-js": "0.0.2",
     "path-browserify": "^1.0.1",
     "timers-browserify": "^2.0.12",
     "v-viewer": "^1.6.4",

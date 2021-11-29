@@ -114,8 +114,8 @@
 
 <script>
 // 退换货单详情
-import BurgeonValidate from "burgeonConfig/config/validate.config";
-// import BtnConfig from 'burgeonConfig/config/funBtn.config';
+import BurgeonValidate from "@/config/config/validate.config";
+// import BtnConfig from '@/config/config/funBtn.config';
 import searchOOID from './searchOOID.vue'
 import returnChangeOrderdetails from './returnChangeOrderdetails.vue'
 import { valiObj, waterMarkMap } from './returnConfig.js'

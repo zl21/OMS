@@ -2,7 +2,7 @@
 import commonUtils from './commonUtils'
 // import publicDialogConfig from 'burgeonComponents/common/js/publicDialog'
 
-import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import DialogConfig from '@/config/config/dialogs.config';
 class DropDownConfig {
   static target;
   //是否单对象界面: 0否1是;

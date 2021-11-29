@@ -1,6 +1,6 @@
 
 import CusOrderItem from 'allpages/orderCenter/orderManageDetail/details/custOrderItem.vue';
-import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import DialogConfig from '@/config/config/dialogs.config';
 import goodsTotalAmount from 'allpages/orderCenter/orderManageDetail/details/goodsTotalAmount.vue';
 
 export default {

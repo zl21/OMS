@@ -1,7 +1,7 @@
 import detailTable from 'allpages/promotionCenter/details/table.vue';
 import meetConditions from 'allpages/promotionCenter/details/meetConditions.vue';
 import tabList from 'allpages/promotionCenter/details/tabList.vue';
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 
 export default {

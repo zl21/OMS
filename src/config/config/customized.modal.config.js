@@ -18,7 +18,7 @@ import InterfaceConfig from '../module/modal/interface.config.js'; // ----------
 import ReportCenter from '../module/modal/report.config.js'; // ----------报表中心
 import basicDataConfig from '../module/modal/basicData.config'; // -----------基础数据
 
-import BC from 'burgeonComponents'
+// import BC from 'burgeonComponents'
 const { Components } = BC
 
 const common = {

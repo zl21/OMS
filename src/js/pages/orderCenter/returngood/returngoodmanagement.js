@@ -2,8 +2,8 @@
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import commonUtils from 'burgeonConfig/config/commonUtils'
+import BtnConfig from '@/config/config/funBtn.config';
+import commonUtils from '@/config/config/commonUtils'
 // import OrderItem from './orderItem';
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
 const areaList = require('@/assets/js/address/area-list');

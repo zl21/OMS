@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 
 export default {

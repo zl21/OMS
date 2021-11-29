@@ -1,6 +1,6 @@
 import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
 // import publicDialogConfig from 'burgeonComponents/common/js/publicDialog'
-import DialogConfig from 'burgeonConfig/config/dialogs.config';
+import DialogConfig from '@/config/config/dialogs.config';
 
 export default {
   components: {},

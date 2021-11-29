@@ -1,7 +1,7 @@
 /**
  * 组合商品 - 老组件
  */
-import BC from 'burgeonComponents';
+// import BC from 'burgeonComponents';
 const { Components } = BC
 
 export default {
