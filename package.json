@@ -1,6 +1,6 @@
 {
-  "name": "oms-ui",
-  "version": "2.0.1",
+  "name": "burgeon-omsui",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
