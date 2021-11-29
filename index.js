@@ -16,6 +16,7 @@ comJS.keys().forEach(key => {
 		Object.assign(Utils, obj)
 	}
 })
+Utils.unZip = require('./src/common/js/zip/index').default
 
 const context = require.context('burgeonComponents/view/', false, /\.vue$/);
 const Components = Utils.CM.exportModules(context);

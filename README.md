@@ -51,6 +51,8 @@
 | v2.0.0 | 重构后第一版-修改版本号 |
 | v2.0.1 | 暴露包版本信息 |
 | v2.0.2 | fix warning 'There are multiple modules with names that only differ in casing.' |
+| v2.0.3 | unZip方法 |
+| …… | …… |
 | …… | …… |
 | v1.0.1  | 重构组件库项目架构                                                                                                                     |
 | v1.0.2  | 添加使用说明                                                                                                                           |
