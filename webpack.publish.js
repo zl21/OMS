@@ -39,9 +39,9 @@ if (process.env.npm_config_report) {
 module.exports = () => ({
   entry: './index.publish.js',
   output: {
-    filename: `BurgeonMaterials.min.js@${require('./package.json').version}`,
+    filename: 'BurgeonMaterials.min.js',
     chunkFilename: 'MaterialsCenter/js/[name].min.js',
-    path: path.join(__dirname, './burgeon.publish'),
+    path: path.join(__dirname, `./burgeon.publish@${require('./package.json').version}`),
     globalObject: 'this',
     library: 'BurgeonMaterials',
     libraryTarget: 'umd',
