@@ -27,6 +27,7 @@
             :ghost="item.ghost ? true : false"
             :shape="item.shape ? item.shape : undefined"
             :class="item.class"
+            :loading="item.loading"
             >{{ item.text }}</Button
           >
           <!-- 下拉菜单按钮 -->

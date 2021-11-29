@@ -334,3 +334,4 @@
 | v1.2.98-skx | importTable add http:get |
 | v1.2.99-skx | businessForm add arkDropMultiSelectFilter |
 | v1.3.0-skx | fix: businessActionTable columns not iteratable |
+| v1.3.1-skx | businessTable loading |
