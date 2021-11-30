@@ -22,11 +22,11 @@ const burgeonPlugins = [
     patterns: [
       {
         from: path.resolve(__dirname, "./src/assets/css"),
-        to: path.resolve(__dirname, `./burgeon.publish@${require('./package.json').version}/static/css`),
+        to: path.resolve(__dirname, './burgeon.publish/static/css'),
       },
       {
         from: path.resolve(__dirname, "./src/assets/img"),
-        to: path.resolve(__dirname, `./burgeon.publish@${require('./package.json').version}/static/img`),
+        to: path.resolve(__dirname, './burgeon.publish/static/img'),
       },
     ],
   })
@@ -41,7 +41,7 @@ module.exports = () => ({
   output: {
     filename: 'BurgeonMaterials.min.js',
     chunkFilename: 'MaterialsCenter/js/[name].min.js',
-    path: path.join(__dirname, `./burgeon.publish@${require('./package.json').version}`),
+    path: path.join(__dirname, './burgeon.publish'),
     globalObject: 'this',
     library: 'BurgeonMaterials',
     libraryTarget: 'umd',
@@ -133,7 +133,7 @@ module.exports = () => ({
     // port: 8080,
     host: '0.0.0.0',
     open: true,
-    static: `./burgeon.publish@${require('./package.json').version}`,
+    static: './burgeon.publish',
   },
   plugins: burgeonPlugins,
   mode: 'production',
