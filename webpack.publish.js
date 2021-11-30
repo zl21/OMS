@@ -22,11 +22,11 @@ const burgeonPlugins = [
     patterns: [
       {
         from: path.resolve(__dirname, "./src/assets/css"),
-        to: path.resolve(__dirname, "./burgeon.publish/static/css"),
+        to: path.resolve(__dirname, `./burgeon.publish@${require('./package.json').version}/static/css`),
       },
       {
         from: path.resolve(__dirname, "./src/assets/img"),
-        to: path.resolve(__dirname, "./burgeon.publish/static/img"),
+        to: path.resolve(__dirname, `./burgeon.publish@${require('./package.json').version}/static/img`),
       },
     ],
   })
@@ -133,7 +133,7 @@ module.exports = () => ({
     // port: 8080,
     host: '0.0.0.0',
     open: true,
-    static: './burgeon.publish',
+    static: `./burgeon.publish@${require('./package.json').version}`,
   },
   plugins: burgeonPlugins,
   mode: 'production',
