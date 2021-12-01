@@ -80,13 +80,13 @@ export default {
     // component: returnGood,
     labelName: i18n.t('menu.b7'), //退货单详情
   },
-  // 订单中心-退换货单
+  // 订单中心-退换货单-列表
   RETURNGOODLIST: {
     component: () => import(
       /* webpackChunkName: 'OrderCenterPage' */
-      'allpages/orderCenter/returngood/returngoodmanagementList.vue'
+      'allpages/orderCenter/returngood/returnGoodList.vue'
     ),
-    // component: returnGoodManagementList,
+    // component: returnGoodList,
   },
   // // 订单中心-退货入库-列表
   RETURNSTOREAGELIST: {

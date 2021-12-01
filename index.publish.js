@@ -66,7 +66,7 @@ class InitAppConfig {
 
     // 路由守卫 去掉部分定制界面onresize方法
     R3.router.afterEach(to => {
-      const tableNameArr = ['ORDERMANAGER', 'PAYABLEADJUSTMENTLIST', 'returngoodmanagementList', 'manualMatching', 'RETURNSTOREAGELIST', 'PROMACTIQUERYLIST', 'SETWAREHOUSELOGISTICS'];
+      const tableNameArr = ['ORDERMANAGER', 'PAYABLEADJUSTMENTLIST', 'returnGoodList', 'manualMatching', 'RETURNSTOREAGELIST', 'PROMACTIQUERYLIST', 'SETWAREHOUSELOGISTICS'];
       const currentTable = to.params.tableName || to.params.customizedModuleName;
       if (!tableNameArr.includes(currentTable)) {
         // window.onresize = null;
