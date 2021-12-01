@@ -2,8 +2,6 @@ import OmsButton from '../view/OmsButton.vue'
 import buttonMd from './md/OmsButton.md'
 import { action } from "@storybook/addon-actions";
 
-import '@syman/ark-ui/dist/styles/bjIconfonts/iconfont.css';
-
 export default {
 	title: 'Basic/OmsButton',
 	component: OmsButton,

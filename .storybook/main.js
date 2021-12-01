@@ -54,6 +54,7 @@ module.exports = {
     }
     config.externals = {
       ...config.externals,
+      $i18n: 'OmsI18n',
       '@syman/ark-ui-bcl': '$Bcl',
       'ark-ui': 'Ark',
       vue: 'Vue',

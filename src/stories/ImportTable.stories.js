@@ -2,9 +2,7 @@ import ImportTable from '../view/ImportTable.vue'
 import Md from './md/OmsButton.md'
 import { action } from "@storybook/addon-actions";
 
-import '@syman/ark-ui/dist/styles/bjIconfonts/iconfont.css';
-import i18n from "@burgeon/internationalization/i18n"; // 国际化
-window.$i18n = i18n;
+// import i18n from "@burgeon/internationalization/i18n"; // 国际化
 export default {
 	title: 'Basic/ImportTable',
 	component: ImportTable,
