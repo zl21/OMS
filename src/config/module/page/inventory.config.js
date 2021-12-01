@@ -77,4 +77,82 @@ export default {
       'allpages/inventoryCenter/channelRatioStrategy.vue'
     ),
   },
+  // 店仓评分 - 列表
+  STORESCORESTRATEGY: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/storeScoreStrategy/storeScoreStrategy.vue'
+    ),
+  },
+  // 店仓评分 - 详情
+  STORESCORESTRATEGYDETAIL: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/storeScoreStrategy/storeScoreStrategyAdd.vue'
+    ),
+  },
+ // 渠道库存管理
+ CHANNELSTOCKCONTROL: {
+  component: () => import(
+    /* webpackChunkName: 'InventoryCenterPage' */
+    'allpages/inventoryCenter/channelStockControl/channelStockControl.vue'
+  ),
+  // 配销仓调拨单 - 商品明细Tab
+   SHARESATRANSFER: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+  // 分货退货单 - 商品明细Tab
+  SHAREALLOCATIONRETURN: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+  // 分货单 - 商品明细Tab
+  SHAREALLOCATION: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+  // 逻辑解冻单 - 商品明细Tab
+  STOUNFREEZE: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+  // 库存调整单 - 商品明细Tab
+  STOADJUST: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+  // 共享调整单 - 商品明细Tab
+  SHAREADJUST: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+  // 门店预售活动 - 商品明细Tab
+  STOREPRESALE: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+  // 逻辑冻结单 - 商品明细Tab
+  STOFREEZE: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
+    ),
+  },
+},
+  
 };

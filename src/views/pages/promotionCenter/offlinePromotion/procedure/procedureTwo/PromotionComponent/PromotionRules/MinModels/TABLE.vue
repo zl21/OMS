@@ -1,6 +1,6 @@
 <template>
    <div class="promisionTbale">
-      <jordan-action-table
+      <OmsTable
           :jordanTableConfig="jordanTableConfig"
           @on-select="onSelect"
           @on-select-cancel="onSelectCancel"
@@ -12,7 +12,7 @@
           @on-page-size-change="pageSizeChange"
           @on-current-change="onCurrentChange"
           @table-import="tableImport"
-          @table-export="tableExport"></jordan-action-table>
+          @table-export="tableExport" />
       <el-dialog title="导入" :visible.sync="modal"  width="30%">
         <div class="import-panel">
           <el-upload
@@ -40,13 +40,9 @@
    </div>
 </template>
 <script>
-import jordanActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 export default {
   name:'tablePromsion',
-  components:{
-    jordanActionTable
-  },
   props:{
     scheme_data:{},
     choose_commodity:{}
