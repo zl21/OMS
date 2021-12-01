@@ -3,7 +3,7 @@ import pageNation from 'framework/components/page/pagenation.vue';
 import propSelect from '@/commonPages/AutoForm/propSelect';
 import actionForm from '@/commonPages/AutoForm/actionForm';
 import selectTag from '@/commonPages/AutoForm/selectTag'
-import tableHeaderCustom from "./tableHeaderCustom.vue";
+import tableHeaderCustom from "allpages/inventoryCenter/channelStockControl/tableHeaderCustom.vue";
 import { setFormDataFunMixin } from "@/assets/js/mixins/setFormData";
 import { setActionFormMixin } from "@/assets/js/mixins/setActionFormData";
 import copy from 'copy-to-clipboard';

@@ -65,6 +65,7 @@
     "@syman/burgeon-r3-components": "2.1.2",
     "awe-dnd": "^0.3.4",
     "compressing": "^1.5.1",
+    "copy-to-clipboard": "^3.3.1",
     "cross-env": "^7.0.3",
     "css-minimizer-webpack-plugin": "^3.1.1",
     "path-browserify": "^1.0.1",
