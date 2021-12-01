@@ -153,6 +153,20 @@ export default {
       'allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'
     ),
   },
+  // 逻辑调拨单批量导入 - 动作定义 （单对象的提交按钮）
+   TRANSFER_SUBMIT: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/transferSubmit.vue'
+    ),
+  },
+  // 配销仓调拨单批量导入 - 动作定义 （单对象的提交按钮）
+  SHARE_SA_BATCH_TRANSFER_SUBMIT: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterPage' */
+      'allpages/inventoryCenter/shareSaBatchTransferSubmit.vue'
+    ),
+  },
 },
   
 };
