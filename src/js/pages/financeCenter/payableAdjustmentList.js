@@ -7,6 +7,48 @@ export default {
   mixins: [isFavoriteMixin, customPagingMixins, buttonPermissionsMixin],
   data() {
     return {
+      caiShengModel: false,
+      defaultColumn: 1,
+      caiShengConfig: [
+        {
+          item: {
+            type: 'Select', // 组件类型
+            required: true,
+            field: 'IS_RECEIVE_PAYMENT',
+            label: '是否已收到赔付',
+            with: "130px",
+            props: {
+              value: "1",
+              options: [
+                {
+                  value: '0',
+                  label: '否'
+                },
+                {
+                  value: '1',
+                  label: '是'
+                },
+              ]
+            },
+            event: {
+              'on-change': (e) => {
+                console.log(e);
+              }
+            }
+          }
+        },
+        {
+          item: {
+            type: 'Input', // 组件类型
+            required: false, // 是否必填
+            field: 'REMARK',
+            label: '备注',
+            props: {
+              value: '',
+            }
+          }
+        }
+      ],
       allTableArr: [],
       selectArr: [],
       // 弹框配置 导入
@@ -26,6 +68,62 @@ export default {
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
+      },
+      // 责任放 弹框配置
+      responsibility: {
+        title: '确认责任方',
+        width: '432', // 控制窗口宽度
+        visible: false, // 控制窗口 hidd || show
+        footerHide: false, // 显示footer
+        confirm: async () => {
+          // 确 认
+          // const actioveSelect = this.$refs.agtable.AGTABLE.getSelect();
+          const formData = new FormData();
+          formData.append('param', JSON.stringify({
+            ids: this.selection.map(val => val.ID), // 选中的列表
+            RESPONSIBLE_PARTY: this.responsibility.formConfig.formValue.RESPONSIBLE_PARTY // 责任方id
+          }));
+          const data = await this.service.financeCenter.confirmResponsibilityObjtct(formData);
+          if (data.data.data.code !== null) {
+            const mes = data.data.data.message;
+            const messageName = data.data.data.code === 0 ? 'success' : 'error';
+            this.$Message[messageName](mes);
+          }
+          this.responsibility.visible = false;
+        },
+        formConfig: {
+          colSpan: 24,
+          formValue: {},
+          formData: [
+            {
+              label: '责任方',
+              value: 'RESPONSIBLE_PARTY',
+              style: 'select',
+              options: [
+                {
+                  value: '1',
+                  label: 'TP'
+                },
+                {
+                  value: '2',
+                  label: '快递仓储',
+                },
+                {
+                  value: '3',
+                  label: '客户',
+                },
+                {
+                  value: '4',
+                  label: '斯凯奇'
+                },
+                {
+                  value: '5',
+                  label: '其他'
+                }
+              ]
+            }
+          ]
+        }, // 控制窗口 插槽内表单内容呈现
       },
       warningModal: false, // 警告弹框
       btnConfig: {
@@ -47,11 +145,11 @@ export default {
                 type: 'action', // 类型action
                 name: 'payableAdjustAdd', // 文件名
                 // label: "赔付单新增", //tab中文名
-                label: $it('panel_label.add_claimForm'), // tab中文名
+                label: $it('丢件单新增'), // tab中文名
                 query: Object.assign({
                   id: -1, // id
                   // tabTitle: "赔付单新增", //tab中文名
-                  tabTitle: $it('panel_label.add_claimForm') // tab中文名
+                  tabTitle: $it('丢件单新增') // tab中文名
                 }) // 带的参数
               });
             } // 按钮点击事件
@@ -69,6 +167,14 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.invalid();
+            } // 按钮点击事件
+          },
+          {
+            webname: 'AcFPayableAdjustmentBizAuditListCmd', // 财审
+            text: "业审", // 按钮文本
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.yeShen();
             } // 按钮点击事件
           },
           {
@@ -93,6 +199,14 @@ export default {
             btnclick: () => {
               this.unCustAudit();
             } // 按钮点击事件
+          },
+          {
+            webname: 'OmsPayableAdjustmentConfirmResponsiblePartyCmd', // 确认责任方
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.responsibility.formConfig.formValue = {}; // 清空
+              this.responsibility.visible = true;
+            }, // 按钮点击事件
           },
           {
             icon: 'iconfont iconbj_col', // 按钮图标
@@ -137,12 +251,16 @@ export default {
                 value: '2'
               },
               {
-                label: $it('common.financeAudited'), // 已财审
+                label: '已业审', // 已业审
                 value: '3'
               },
               {
-                label: $it('common.voided'), // 已作废
+                label: $it('common.financeAudited'), // 已财审
                 value: '4'
+              },
+              {
+                label: $it('common.voided'), // 已作废
+                value: '5'
               }
             ]
           },
@@ -308,13 +426,56 @@ export default {
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: '',
             clearable: '' // 是否显示清空按钮,默认为true   false
+          },
+          {
+            style: 'select', // 下拉框类型
+            label: '责任方', // 责任方
+            width: '6', // 所占宽度宽度
+            value: 'RESPONSIBLE_PARTY', // 输入框的值
+            multiple: true,
+            options: [
+              // 下拉框选项值
+            ]
+          },
+          {
+            style: 'input', // 下拉框类型
+            label: '责任人', // 责任方
+            width: '6', // 所占宽度宽度
+            value: 'RESPONSIBLE_PERSON', // 输入框的值
+            multiple: true
+          },
+          {
+            style: 'select', // 下拉框类型
+            label: '是否已收到赔付', // 是否已收到赔付
+            width: '6', // 所占宽度宽度
+            value: 'IS_RECEIVE_PAYMENT', // 输入框的值
+            options: [
+              {
+                value: '-1',
+                label: '全部'
+              },
+              {
+                value: '0',
+                label: '否'
+              },
+              {
+                value: '1',
+                label: '是'
+              },
+            ]
+          },
+          {
+            style: 'select', // 下拉框类型
+            label: '传DRP状态', // 传DRP状态
+            width: '6', // 所占宽度宽度
+            value: 'TO_DRP_STATUS', // 输入框的值
+            multiple: true,
+            options: []
           }
         ],
         formValue: {},
-        flodClick() {
-          setTimeout(() => {
-            this.setTableHeight();
-          }, 10);
+        flodClick(v) {
+          strUtil.flodClick(v)
         }
       }, // form表单
       labelList: [
@@ -328,8 +489,9 @@ export default {
 
       agTableConfig: {
         loading: false,
-        // isIndex: true, // 如果要自定义序号，则将此key的值设置为true，而后自己定义序号生成器，可参考promotionlist.vue
-        tableHeight: '440px',
+        isIndex: true, // 如果要自定义序号，则将此key的值设置为true，而后自己定义序号生成器，可参考promotionlist.vue
+        pageShow: true,
+        tableHeight: '412px',
         columnDefs: [
           {
             headerName: $it('form_label.billStatus'), // 单据状态
@@ -446,32 +608,59 @@ export default {
           {
             headerName: $it('table_label.usable'), // 可用
             field: 'ISACTIVE'
+          },
+          {
+            headerName: '传DRP状态', // 责任方
+            field: 'TO_DRP_STATUS_ENAME'
+          },
+          {
+            headerName: '责任方', // 责任方
+            field: 'RESPONSIBLE_PARTY_NAME'
+          },
+          {
+            headerName: '责任人', // 责任人
+            field: 'RESPONSIBLE_PERSON'
+          },
+          {
+            headerName: '原因备注', // 原因备注
+            field: 'REASON_REMARK'
           }
         ],
         rowData: [],
-        renderArr: {
-          ACTION_LOG: params => {
-            // console.log("params :>> ", params);
-            if (!params.data.ACTION_LOG) return;
-            const resultElement = document.createElement('div');
-            const iTag = document.createElement('div');
-            iTag.style.color = '#0f8ee9';
-            iTag.style.textDecoration = 'underline';
-            iTag.innerText = params.data.ACTION_LOG;
-            iTag.style.cursor = 'pointer';
-            iTag.onclick = () => {
-              // console.log(params.data);
-              this.viewLog(params.data);
-            };
-            resultElement.appendChild(iTag);
-            return resultElement;
+        renderParams: (cellData) => {
+          if (cellData.field == 'ACTION_LOG') {
+            return {
+              renderContainer: 'CellRenderByFunction',
+              renderComponent: (h, params) => {
+                if (!params.data.ACTION_LOG) return;
+                const resultElement = document.createElement('div');
+                const iTag = document.createElement('div');
+                iTag.style.color = '#0f8ee9';
+                iTag.style.textDecoration = 'underline';
+                iTag.innerText = params.data.ACTION_LOG;
+                iTag.style.cursor = 'pointer';
+                iTag.onclick = () => {
+                  this.viewLog(params.data);
+                };
+                resultElement.appendChild(iTag);
+              }
+            }
           }
         },
         pagenation: $omsUtils.pageConfig
       }, // 全部
+      options: {
+        rowHeight: 40,
+        getRowClass: this.getRowClass, // 改变行颜色
+        // onColumnResized: this.onColumnResized, // aG列宽改变回调
+        // getMainMenuItems: this.getMainMenuItems, // 重置所有列位置信息
+        datas: {},
+        floatingFilter: true
+      },
       // returnSelectData: [], // 列表选中数据
       isShowFromLoading: false,
-      statusTab: '' // 单据类型
+      statusTab: '', // 单据类型
+      formOptions: {}
     };
   },
   activated() {
@@ -480,11 +669,14 @@ export default {
     this.getList();
 
     // 计算高度 通过设置节点 'totalHeight'
-    $omsUtils.setTableHeight(this, 50);
+    // $omsUtils.setTableHeight(this, 50);
     // 检测屏幕变化 设置高度 重新渲染agTabe
-    $omsUtils.onresizes(this, 10);
+    // $omsUtils.onresizes(this, 10);
   },
   created() {
+    this.agTableConfig.columnDefs.forEach((item) => {
+      item.isagfilter = true
+    })
     const self = this;
     self.getSelectData();
   },
@@ -504,34 +696,112 @@ export default {
     this.getList();
   },
   methods: {
+    colPinned() { },
+    colMoved() { },
+    onSelectionChange(e) {
+      this.selection = e;
+    },
+    getRowClass(params) {
+      const { data: { BILL_STATUS } } = params; // 获取行索引
+      if (BILL_STATUS === 5) {
+        // 已作废
+        return 'gray';
+      }
+      if (BILL_STATUS === 3 || BILL_STATUS === 4) {
+        // 已业审 已财审
+        return 'blue';
+      }
+      // 未审核 #323233
+      return 'grey1';
+    },
+    async caiShengModelok() {
+      const { IS_RECEIVE_PAYMENT, REMARK } = this.$refs.caiShengref.formData;
+      const self = this;
+      let ids = [];
+      //  self.selection = self.$refs.agtable.AGTABLE.getSelect();
+      this.selection.forEach(item => {
+        ids.push(item.ID);
+      });
+
+      const param = {
+        ids,
+        IS_RECEIVE_PAYMENT,
+        REMARK
+      };
+
+      const formdata = new FormData();
+      formdata.append('param', JSON.stringify(param));
+
+      const {
+        data: { data }
+      } = await this.service.financeCenter.fiAuditPayableAdjustment(formdata);
+      if (data.code === 0) {
+        self.$Message.success(data.message);
+        self.getList();
+      } else {
+        self.$Message.error(data.message);
+      }
+      this.$refs.caiShengref.reset();
+    },
     // 填充下拉选项框
     async getSelectData() {
       const self = this;
-      const arrBillType = await this.getColOption(
+      // const arrBillType = await this.getColOption(
+      //   'AC_F_PAYABLE_ADJUSTMENT',
+      //   // "基本信息",
+      //   $it('common.baseInformation'),
+      //   'BILL_TYPE'
+      // );
+      // const arrAdjustType = await this.getColOption(
+      //   'AC_F_PAYABLE_ADJUSTMENT',
+      //   // "基本信息",
+      //   $it('common.baseInformation'),
+      //   'ADJUST_TYPE'
+      // );
+      // const arrChannel = await this.getColOption(
+      //   'AC_F_PAYABLE_ADJUSTMENT',
+      //   // "基本信息",
+      //   $it('common.baseInformation'),
+      //   'RESERVE_BIGINT01'
+      // );
+      // // 责任方窗口options
+      // const arrResponsibility = await this.getColOption(
+      //   'AC_F_PAYABLE_ADJUSTMENT',
+      //   // "基本信息",
+      //   $it('common.baseInformation'),
+      //   'RESPONSIBLE_PARTY'
+      // );
+      const formOptions = await this.getColOption(
         'AC_F_PAYABLE_ADJUSTMENT',
-        // "基本信息",
         $it('common.baseInformation'),
-        'BILL_TYPE'
+        ['BILL_TYPE', 'ADJUST_TYPE', 'RESERVE_BIGINT01', 'RESPONSIBLE_PARTY', 'TO_DRP_STATUS']
       );
-      const arrAdjustType = await this.getColOption(
-        'AC_F_PAYABLE_ADJUSTMENT',
-        // "基本信息",
-        $it('common.baseInformation'),
-        'ADJUST_TYPE'
-      );
-      const arrChannel = await this.getColOption(
-        'AC_F_PAYABLE_ADJUSTMENT',
-        // "基本信息",
-        $it('common.baseInformation'),
-        'RESERVE_BIGINT01'
-      );
+      this.formOptions = formOptions;
       self.formConfig.formData.forEach(item => {
-        if (item.value === 'BILL_TYPE') {
-          item.options = arrBillType;
-        } else if (item.value === 'ADJUST_TYPE') {
-          item.options = arrAdjustType;
-        } else if (item.value === 'RESERVE_BIGINT01') {
-          item.options = arrChannel;
+        switch (item.value) {
+          case 'BILL_TYPE':
+            item.options = formOptions.list.BILL_TYPE;
+            break;
+          case 'ADJUST_TYPE':
+            item.options = formOptions.list.ADJUST_TYPE;
+            break;
+          case 'RESERVE_BIGINT01':
+            item.options = formOptions.list.RESERVE_BIGINT01;
+            break;
+          case 'RESPONSIBLE_PARTY':
+            // 责任方
+            item.options = formOptions.list.RESPONSIBLE_PARTY;
+            break;
+          case 'TO_DRP_STATUS':
+            // 传DRP状态
+            item.options = formOptions.list.TO_DRP_STATUS;
+            break;
+        }
+      });
+      self.responsibility.formConfig.formData.forEach((item) => {
+        if (item.value === 'RESPONSIBLE_PARTY') {
+          // 确认责任方 Select options 赋值
+          item.options = formOptions.list.RESPONSIBLE_PARTY;
         }
       });
     },
@@ -542,6 +812,7 @@ export default {
       return new Promise(async resolve => {
         let optionData = [];
         let selectData = [];
+        const valueObject = {};
         const res = await this.service.common.getObject(fromdata);
         if (res.data.data) {
           selectData = res.data.data.addcolums;
@@ -549,17 +820,35 @@ export default {
             if (item.parentdesc === parentColName) {
               const childItem = item.childs;
               childItem.forEach(item => {
-                if (item.colname === childColName) {
-                  optionData = item.combobox.map(subItem => ({
-                    label: subItem.limitdesc,
-                    value: subItem.limitval
-                  }));
+                if (childColName.includes(item.colname)) {
+                  valueObject[item.colname] = {};
+                  optionData[item.colname] = item.combobox.map(subItem => {
+                    valueObject[item.colname][subItem.limitval] = subItem.limitdesc;
+                    return {
+                      label: subItem.limitdesc,
+                      value: subItem.limitval
+                    };
+                  });
                 }
+              });
+            } else if (item.child.colname === childColName[4]) {
+              const colname = item.child.colname;
+              // 因为传drp状态不在接口的基础信息里面
+              valueObject[colname] = {};
+              optionData[colname] = item.child.combobox.map(subItem => {
+                valueObject[colname][subItem.limitval] = subItem.limitdesc;
+                return {
+                  label: subItem.limitdesc,
+                  value: subItem.limitval
+                };
               });
             }
           });
         }
-        resolve(optionData);
+        resolve({
+          list: optionData,
+          valueObject
+        });
       });
     },
     // 查找
@@ -569,7 +858,7 @@ export default {
     },
     async invalid() {
       const self = this;
-      self.selection = self.$refs.agtable.AGTABLE.getSelect();
+      // self.selection = self.$refs.agtable.AGTABLE.getSelect();
       const ids = [];
       this.selection.forEach(item => {
         ids.push(item.ID);
@@ -584,21 +873,36 @@ export default {
         self.$Message.success(res.data.data.message);
         self.getList();
       } else {
-        // self.$Message.error(res.data.data.message);
+        self.$Message.error(res.data.data.message);
       }
     },
     // 财审
     async fiAudit() {
       const self = this;
+      let ids = [];
+      // self.selection = self.$refs.agtable.AGTABLE.getSelect();
+      this.selection.forEach(item => {
+        ids.push(item.ID);
+      });
+      if (ids.length == 0) {
+        self.$Message.error('请选着一条数据！');
+        return;
+      }
+      this.caiShengModel = true;
+    },
+    // 业审
+    async yeShen() {
+      const self = this;
       const formdata = self.generateAuditFromdata();
+      // 接口
       const {
         data: { data }
-      } = await this.service.financeCenter.fiAuditPayableAdjustment(formdata);
+      } = await this.service.financeCenter.bizAuditPayableAdjustment(formdata);
       if (data.code === 0) {
         self.$Message.success(data.message);
         self.getList();
       } else {
-        // self.$Message.error(data.message);
+        self.$Message.error(data.message);
       }
     },
     // 客审
@@ -613,7 +917,7 @@ export default {
         self.$Message.success(data.message);
         self.getList();
       } else {
-        // self.$Message.error(data.message);
+        self.$Message.error(data.message);
       }
     },
     // 反客审
@@ -628,13 +932,13 @@ export default {
         self.$Message.success($it('modalTips.z1')); // 反客审成功!
         self.getList();
       } else {
-        // self.$Message.error(data.message);
+        self.$Message.error(data.message);
       }
     },
     generateAuditFromdata() {
       const ids = [];
       const self = this;
-      self.selection = self.$refs.agtable.AGTABLE.getSelect();
+      // self.selection = self.$refs.agtable.AGTABLE.getSelect();
       this.selection.forEach(item => {
         ids.push(item.ID);
       });
@@ -648,16 +952,12 @@ export default {
     // 获取列表数据
     async getList() {
       const _this = this;
-      const { customizedModuleName } = this.$router.currentRoute.params;
-      /* 
       if (_this.agTableConfig.loading) {
         return;
       }
-      */
       _this.agTableConfig.rowData = [];
       _this.agTableConfig.pagenation.total = 0;
       _this.agTableConfig.loading = true;
-      // this.$R3loading.show(customizedModuleName);
 
       const mainData = _this.formConfig.formValue;
       let creationdateStart = '';
@@ -698,8 +998,16 @@ export default {
         TID: mainData.TID,
         BILL_STATUS: mainData.BILL_STATUS,
         ORDER_NO: mainData.ORDER_NO,
-        RESERVE_BIGINT01: mainData.RESERVE_BIGINT01
+        GBCODE: mainData.GBCODE,
+        RESERVE_BIGINT01: mainData.RESERVE_BIGINT01,
+        RESPONSIBLE_PARTY: mainData.RESPONSIBLE_PARTY,
+        RESPONSIBLE_PERSON: mainData.RESPONSIBLE_PERSON,
+        TO_DRP_STATUS: mainData.TO_DRP_STATUS,
       };
+
+      if (mainData.IS_RECEIVE_PAYMENT != '-1') { // 增加是否已收到赔付查询条件
+        whereInfoForm.IS_RECEIVE_PAYMENT = mainData.IS_RECEIVE_PAYMENT;
+      }
 
       const param = {
         whereInfo: whereInfoForm,
@@ -710,10 +1018,9 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       // 接口
       const {
-        data: { code, data }
+        data: { code, data, message }
       } = await this.service.financeCenter.getPayableAdjustmentList(fromdata);
       _this.agTableConfig.loading = false;
-      // this.$R3loading.hide(customizedModuleName);
       _this.returnSelectData = [];
       if (code === 0 && data.payableAdjustmentList.length) {
         // Table表单赋值
@@ -746,21 +1053,28 @@ export default {
           GUEST_TRIAL_ENAME: item.GUEST_TRIAL_ENAME,
           DELENAME: item.DELENAME,
           ISACTIVE: item.ISACTIVE === 'Y' ? '是' : '否',
-          CREATIONDATE: item.CREATIONDATE ? $utils.DatesTime(item.CREATIONDATE) : '',
-          PAY_TIME: item.PAY_TIME ? $utils.DatesTime(item.PAY_TIME) : '',
-          MODIFIEDDATE: item.MODIFIEDDATE ? $utils.DatesTime(item.MODIFIEDDATE) : '',
-          GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME ? $utils.DatesTime(item.GUEST_TRIAL_TIME) : '',
-          FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME ? $utils.DatesTime(item.FINANCIAL_TRIAL_TIME) : '',
-          DEL_TIME: item.DEL_TIME ? $utils.DatesTime(item.DEL_TIME) : ''
+          TO_DRP_STATUS_ENAME: this.formOptions.valueObject.TO_DRP_STATUS[item.TO_DRP_STATUS],
+          CREATIONDATE: item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : '',
+          PAY_TIME: item.PAY_TIME ? publicMethodsUtil.DatesTime(item.PAY_TIME) : '',
+          MODIFIEDDATE: item.MODIFIEDDATE ? publicMethodsUtil.DatesTime(item.MODIFIEDDATE) : '',
+          GUEST_TRIAL_TIME: item.GUEST_TRIAL_TIME ? publicMethodsUtil.DatesTime(item.GUEST_TRIAL_TIME) : '',
+          FINANCIAL_TRIAL_TIME: item.FINANCIAL_TRIAL_TIME ? publicMethodsUtil.DatesTime(item.FINANCIAL_TRIAL_TIME) : '',
+          DEL_TIME: item.DEL_TIME ? publicMethodsUtil.DatesTime(item.DEL_TIME) : '',
+          RESPONSIBLE_PARTY_NAME: item.RESPONSIBLE_PARTY_NAME,
+          RESPONSIBLE_PERSON: item.RESPONSIBLE_PERSON,
+          REASON_REMARK: item.REASON_REMARK
         }));
+
         _this.agTableConfig.pagenation.total = data.page.totalSize;
         _this.agTableConfig.rowData = _this.allTableArr;
       } else {
         _this.agTableConfig.rowData = [];
         _this.agTableConfig.pagenation.total = 0;
+        console.log(message);
         // _this.$Message.warning(message);
       }
-      this.$refs.agtable.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData, this.getExtendObj());
+      this.agTableConfig.columnDefs = [...this.agTableConfig.columnDefs];
+      // this.$refs.agtable.agGridTable(this.agTableConfig.columnDefs, this.agTableConfig.rowData, this.getExtendObj());
     },
     // 双击时触发
     onRowDblclick(row) {
@@ -768,10 +1082,10 @@ export default {
         id: row.ID, // 单据id
         type: 'action', // 类型action
         name: 'payableAdjustAdd', // 文件名
-        label: $it('panel_label.details_claimForm'), // 赔付单详情
+        label: '丢件单详情', // 赔付单详情
         query: Object.assign({
           id: row.ID, // 单据id
-          tabTitle: $it('panel_label.details_claimForm') // 赔付单详情
+          tabTitle: '丢件单详情' // 赔付单详情
         }) // 带的参数
       });
     },
@@ -797,12 +1111,16 @@ export default {
         getRowStyle(params) {
           // console.log("params :>> ", params);
           // 设置行样式
-          if (params.data.BILL_STATUS === 4) {
+          if (params.data.BILL_STATUS === 5) {
             // 已作废
             return { color: 'gray' };
           }
-          if (params.data.BILL_STATUS === 3) {
+          if (params.data.BILL_STATUS === 4) {
             // 已财审
+            return { color: 'blue' };
+          }
+          if (params.data.BILL_STATUS === 3) {
+            // 已业审
             return { color: 'blue' };
           }
           // 未审核
@@ -829,8 +1147,8 @@ export default {
     // 导出
     async exportClick() {
       const _this = this;
-      _this.selection = _this.$refs.agtable.AGTABLE.getSelect();
-      console.log('selection', _this.selection);
+      // _this.selection = _this.$refs.agtable.AGTABLE.getSelect();
+      // console.log('selection', _this.selection);
       if (_this.selection.length) {
         const ids = [];
         for (let i = 0; i < _this.selection.length; i++) {
@@ -843,7 +1161,7 @@ export default {
         if (code === 0 && data !== null) {
           const mes = message || $it('modalTips.z2'); // 导出成功！
           _this.$Message.success(mes);
-          $omsUtils.downloadUrlFile(data);
+          publicMethodsUtil.downloadUrlFile(data);
         } else {
           // const err = message || $it('modalTips.z3'); // 失败！
           // _this.$Message.error(err);
@@ -859,9 +1177,7 @@ export default {
     // 警告框确认
     async warningOk() {
       const _this = this;
-      const { customizedModuleName } = this.$router.currentRoute.params;
       _this.agTableConfig.loading = true;
-      // this.$R3loading.show(customizedModuleName);
       const mainData = _this.formConfig.formValue;
       let creationdateStart = '';
       let creationdateEnd = '';
@@ -910,13 +1226,12 @@ export default {
       if (code === 0 && data !== null) {
         const mes = message || $it('modalTips.z2'); // 导出成功！
         _this.$Message.success(mes);
-        $omsUtils.downloadUrlFile(data);
+        publicMethodsUtil.downloadUrlFile(data);
       } else {
         // const err = message || $it('modalTips.z3'); // 失败！
         // _this.$Message.error(err);
       }
       _this.agTableConfig.loading = false;
-      // this.$R3loading.hide(customizedModuleName);
     }
   },
   destroyed() {
