@@ -189,7 +189,7 @@ export default {
               // 模糊查询的方法
               const self = this;
               const fromdata = new FormData();
-              const param = {
+              let param = {
                 highSearch: [
                   {
                     type: 'select',
@@ -271,13 +271,12 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '赔付类型',
               inputname: 'AC_F_COMPENSATION_TYPE_ID:ID', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.payableAdjustType'), // 赔付类型
+              name: $it('丢件类型'), // 丢件类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'AC_F_COMPENSATION_TYPE', // 对应的表
               reftableid: 249130445, // 对应的表ID
@@ -296,7 +295,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.payableAdjustReason'), // 赔付原因
+            label: $it('丢件原因'), // 丢件原因
             width: '8', // 所占宽度宽度
             value: 'AC_F_COMPENSATION_REASON_ID', // 输入框的值
             options: [
@@ -319,7 +318,7 @@ export default {
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
               name: $it('other.shop'), // 店铺
-              readonly: true, // 是否可编辑，对应input   readonly属性
+              readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 24475, // 对应的表ID
               row: 1,
@@ -333,10 +332,9 @@ export default {
               this.formConfig.formValue.CP_C_SHOP_TITLE = val.valuedata;
             }
           },
-
           {
             style: 'select', // 下拉框类型
-            label: $it('table_label.paymentWay'), // 支付方式
+            label: window.vmI18n.t('table_label.paymentWay'), // 支付方式
             width: '8', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             options: [
@@ -391,6 +389,13 @@ export default {
             style: 'input', // 文本录入
             label: $it('table_label.vip_nickname'), // 会员昵称
             value: 'CUSTOMER_NICK',
+            width: '8',
+            disabled: true
+          },
+          {
+            style: 'input',
+            label: '原单金额', // 总应付金额
+            value: 'ORIGIN_ORDER_AMT',
             width: '8',
             disabled: true
           },
@@ -477,6 +482,27 @@ export default {
             label: $it('table_label.remarks'), // 备注
             value: 'REMARK',
             width: '16'
+          },
+          {
+            style: 'select', // 下拉框类型
+            label: '责任方', // 责任方
+            width: '8', // 所占宽度宽度
+            value: 'RESPONSIBLE_PARTY', // 输入框的值
+            options: [
+              // 下拉框选项值
+            ]
+          },
+          {
+            style: 'input', // 下拉框类型
+            label: '责任人', // 责任人
+            width: '8', // 所占宽度宽度
+            value: 'RESPONSIBLE_PERSON', // 输入框的值
+          },
+          {
+            style: 'input', // 下拉框类型
+            label: '原因备注', // 原因备注
+            width: '8', // 所占宽度宽度
+            value: 'REASON_REMARK', // 输入框的值
           }
         ],
         // 表单一
@@ -494,7 +520,9 @@ export default {
           PAY_TIME: '',
           CP_C_PHY_WAREHOUSE_ID: '',
           IMAGE: '',
-          PAYABLE_PRICE: ''
+          ORIGIN_ORDER_AMT: "",
+          PAYABLE_PRICE: '',
+          RESPONSIBLE_PARTY: ""
         },
         ruleValidate: {
           BILL_TYPE: [{ required: true, message: ' ' }],
@@ -794,11 +822,11 @@ export default {
             key: 'TRUE_PRICE'
           },
           {
-            title: $it('table_label.payable_unitPrice'), // 应付单价
+            title: $it('应收单价'), // 应收单价
             key: 'PAY_AMT'
           },
           {
-            title: $it('table_label.amountDue'), // 应付金额
+            title: $it('应收金额'), // 应收金额
             key: 'PAYABLE_PRICE',
             render: (h, params) => {
               if (this.unAutitFlag) {
@@ -947,7 +975,9 @@ export default {
     const self = this;
 
     // 获取下拉选项组选项
-    self.getSelectData();
+    setTimeout(() => {
+      self.getSelectData();
+    }, 300);
     // ID>0进行表单赋值
     if (self.ID > 0) {
       self.getPayableAdjustment();
@@ -1074,7 +1104,7 @@ export default {
         return;
       }
       const fromdata = new FormData();
-      const param = {
+      let param = {
         highSearch: [
           {
             type: 'select',
@@ -1092,8 +1122,8 @@ export default {
           },
           {
             type: 'input',
-            queryName: 'BILL_NO',
-            value: obj.tem.BILL_NO
+            queryName: 'ID',
+            value: obj.tem.ID
           }
         );
       } else {
@@ -1109,6 +1139,18 @@ export default {
       } = await this.service.common.queryOrderList(fromdata);
       if (code === 0) {
         const dataByBillNo = data.queryOrderResultList;
+        // 解密
+        let searchdata = {
+          ID: dataByBillNo[0].ID,
+          isShowPii: true,
+        }
+        await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata).then(res => {
+          if (res.data.code === 0) {
+            let resData = res.data.data;
+            dataByBillNo[0].RECEIVER_NAME = resData.RECEIVER_NAME;
+            dataByBillNo[0].RECEIVER_MOBILE = resData.RECEIVER_MOBILE;
+          }
+        })
         const item = dataByBillNo[0];
         // Form表单赋值
         let payType = item.PAY_TYPE;
@@ -1128,6 +1170,7 @@ export default {
         self.formConfig.formValue.CUSTOMER_NICK = item.USER_NICK;
         self.formConfig.formValue.LOGISTICS_NO = item.EXPRESSCODE;
         self.formConfig.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
+        self.formConfig.formValue.ORIGIN_ORDER_AMT = item.ORDER_AMT.toFixed(2)
         self.formConfig.formValue.PAYABLE_PRICE = 0;
         self.addSelection = [];
         self.detailAddTable.table.data = self.addSelection;
@@ -1263,41 +1306,58 @@ export default {
       }
       let billType = mainData.BILL_TYPE;
       let adjustType = mainData.ADJUST_TYPE;
-      self.formConfig.formValue.BILL_NO = mainData.BILL_NO;
-      self.formConfig.formValue.TID = mainData.TID;
+      const formValue = {};
+      formValue.BILL_NO = mainData.BILL_NO;
+      formValue.TID = mainData.TID;
       if (payType) {
         payType = payType.toString();
-        self.formConfig.formValue.PAY_TYPE = payType;
+        formValue.PAY_TYPE = payType;
       }
       if (billType) {
         billType = billType.toString();
-        self.formConfig.formValue.BILL_TYPE = billType;
+        formValue.BILL_TYPE = billType;
       }
-      self.formConfig.formValue.ORDER_NO = mainData.ORDER_NO;
+      formValue.ORDER_NO = mainData.ORDER_NO;
       if (adjustType) {
         adjustType = adjustType.toString();
-        self.formConfig.formValue.ADJUST_TYPE = adjustType;
+        formValue.ADJUST_TYPE = adjustType;
       }
-      self.formConfig.formValue.CUSTOMER_NAME = mainData.CUSTOMER_NAME ? mainData.CUSTOMER_NAME : '';
-      self.formConfig.formValue.CUSTOMER_TEL = mainData.CUSTOMER_TEL ? mainData.CUSTOMER_TEL : '';
-      self.formConfig.formValue.ALIPAY_ACCOUNT = mainData.ALIPAY_ACCOUNT ? mainData.ALIPAY_ACCOUNT : '';
-      self.formConfig.formValue.CUSTOMER_NICK = mainData.CUSTOMER_NICK ? mainData.CUSTOMER_NICK : '';
-      self.formConfig.formValue.LOGISTICS_NO = mainData.LOGISTICS_NO ? mainData.LOGISTICS_NO : '';
-      self.formConfig.formValue.EXPRESS_OUTLETS = mainData.EXPRESS_OUTLETS ? mainData.EXPRESS_OUTLETS : '';
-      self.formConfig.formValue.PAYABLE_PRICE = mainData.PAYABLE_PRICE ? mainData.PAYABLE_PRICE : '';
-      self.formConfig.formValue.REMARK = mainData.REMARK ? mainData.REMARK : '';
-      self.formConfig.formValue.PAY_TIME = this.formatDate(mainData.PAY_TIME);
-      self.formConfig.formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(mainData.SOURCE_OUTSOURCE_DATE);
-      self.formConfig.formValue.CP_C_LOGISTICS_ID = mainData.CP_C_LOGISTICS_ID;
-      self.formConfig.formValue.CP_C_SHOP_ID = mainData.CP_C_SHOP_ID;
-      self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = mainData.CP_C_PHY_WAREHOUSE_ID;
-      self.formConfig.formValue.IMAGE = mainData.IMAGE;
-      self.formConfig.formValue.AC_F_COMPENSATION_REASON_ID = mainData.AC_F_COMPENSATION_REASON_ID;
-      self.formConfigLog.formValue.OWNERENAME = mainData.OWNERENAME;
-      self.formConfigLog.formValue.MODIFIERNAME = mainData.MODIFIERNAME;
-      self.formConfigLog.formValue.SOURCE_OUTSOURCE_DATE = mainData.SOURCE_OUTSOURCE_DATE;
-      self.formConfigLog.formValue.CREATIONDATE = this.formatDate(mainData.CREATIONDATE);
-      self.formConfigLog.formValue.MODIFIEDDATE = this.formatDate(mainData.MODIFIEDDATE);
+      formValue.CUSTOMER_NAME = mainData.CUSTOMER_NAME ? mainData.CUSTOMER_NAME : '';
+      formValue.CUSTOMER_TEL = mainData.CUSTOMER_TEL ? mainData.CUSTOMER_TEL : '';
+      formValue.ALIPAY_ACCOUNT = mainData.ALIPAY_ACCOUNT ? mainData.ALIPAY_ACCOUNT : '';
+      formValue.CUSTOMER_NICK = mainData.CUSTOMER_NICK ? mainData.CUSTOMER_NICK : '';
+      formValue.LOGISTICS_NO = mainData.LOGISTICS_NO ? mainData.LOGISTICS_NO : '';
+      formValue.EXPRESS_OUTLETS = mainData.EXPRESS_OUTLETS ? mainData.EXPRESS_OUTLETS : '';
+      formValue.PAYABLE_PRICE = mainData.PAYABLE_PRICE ? mainData.PAYABLE_PRICE : '';
+      formValue.REMARK = mainData.REMARK ? mainData.REMARK : '';
+      formValue.PAY_TIME = this.formatDate(mainData.PAY_TIME);
+      formValue.SOURCE_OUTSOURCE_DATE = this.formatDate(mainData.SOURCE_OUTSOURCE_DATE);
+      formValue.CP_C_LOGISTICS_ID = mainData.CP_C_LOGISTICS_ID;
+      formValue.CP_C_SHOP_ID = mainData.CP_C_SHOP_ID;
+      formValue.CP_C_PHY_WAREHOUSE_ID = mainData.CP_C_PHY_WAREHOUSE_ID;
+      formValue.IMAGE = mainData.IMAGE;
+      formValue.AC_F_COMPENSATION_REASON_ID = mainData.AC_F_COMPENSATION_REASON_ID;
+      formValue.RESPONSIBLE_PARTY = String(mainData.RESPONSIBLE_PARTY);
+      formValue.ORIGIN_ORDER_AMT = mainData.ORIGIN_ORDER_AMT;
+
+      const formLogValue = {};
+      formLogValue.OWNERENAME = mainData.OWNERENAME;
+      formLogValue.MODIFIERNAME = mainData.MODIFIERNAME;
+      formLogValue.SOURCE_OUTSOURCE_DATE = mainData.SOURCE_OUTSOURCE_DATE;
+      formLogValue.CREATIONDATE = this.formatDate(mainData.CREATIONDATE);
+      formLogValue.MODIFIEDDATE = this.formatDate(mainData.MODIFIEDDATE);
+      setTimeout(() => {
+        self.$nextTick(() => {
+          self.$set(self.formConfig, 'formValue', {
+            ...self.formConfig.formValue,
+            ...formValue
+          });
+          self.$set(self.formConfigLog, 'formValue', {
+            ...self.formConfigLog.formValue,
+            ...formLogValue
+          });
+        });
+      }, 300);
       self.formConfig.formData.forEach(item => {
         if (item.itemdata && item.itemdata.name === $it('form_label.expressCompanyName')) {
           item.itemdata.valuedata = mainData.CP_C_LOGISTICS_ENAME;
@@ -1327,7 +1387,7 @@ export default {
       const filterLogData = logData.map(item => ({
         LOG_CONTENT: item.LOG_CONTENT,
         OWNERENAME: item.OWNERENAME,
-        CREATIONDATE: item.CREATIONDATE ? $utils.DatesTime(item.CREATIONDATE) : ''
+        CREATIONDATE: item.CREATIONDATE ? publicMethodsUtil.DatesTime(item.CREATIONDATE) : ''
       }));
       self.allLogTableArr = filterLogData;
       self.customPagingFun(filterLogData, self.payableAdjustLog.pageSize, self.payableAdjustLog, 'payableAdjustLog');
@@ -1390,27 +1450,39 @@ export default {
       const arrPayType = [];
       const arrAdjustType = [];
       const arrBillType = [];
-      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'PAY_TYPE');
-      self.selectData.forEach(item => {
+      const ArrRESPONSIBLEType = [];
+
+      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), ['PAY_TYPE', 'ADJUST_TYPE', 'BILL_TYPE', 'RESPONSIBLE_PARTY']);
+      self.selectData.PAY_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrPayType.push(obj);
       });
-      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'ADJUST_TYPE');
-      self.selectData.forEach(item => {
+      // 调整类型
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'ADJUST_TYPE');
+      self.selectData.ADJUST_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrAdjustType.push(obj);
       });
-      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'BILL_TYPE');
-      self.selectData.forEach(item => {
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'BILL_TYPE');
+      self.selectData.BILL_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrBillType.push(obj);
       });
+      // 责任方options
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'RESPONSIBLE_PARTY');
+      self.selectData.RESPONSIBLE_PARTY.forEach(item => {
+        const obj = {};
+        obj.label = item.limitdesc;
+        obj.value = item.limitval;
+        ArrRESPONSIBLEType.push(obj);
+      });
+
       self.formConfig.formData.forEach(item => {
         if (item.value === 'PAY_TYPE') {
           item.options = arrPayType;
@@ -1418,8 +1490,15 @@ export default {
           item.options = arrAdjustType;
         } else if (item.value === 'BILL_TYPE') {
           item.options = arrBillType;
+        } else if (item.value === 'RESPONSIBLE_PARTY') {
+          item.options = ArrRESPONSIBLEType;
         }
       });
+
+      // ID>0进行表单赋值
+      if (self.ID > 0) {
+        self.getPayableAdjustment();
+      }
     },
     // 获取控件对应下拉选项值
     async getColOption(tableName, parentColName, childColName) {
@@ -1427,15 +1506,22 @@ export default {
       const fromdata = new FormData();
       fromdata.append('table', tableName);
       fromdata.append('objid', -1);
+      self.selectData = {};
+      childColName.forEach(item => {
+        self.selectData[item] = [];
+      });
       const res = await self.service.common.getObject(fromdata);
       const selectData = res.data.data.addcolums;
       selectData.forEach(item => {
         if (item.parentdesc === parentColName) {
           const childItem = item.childs;
           childItem.forEach(item => {
-            if (item.colname === childColName) {
-              self.selectData = item.combobox;
+            if (childColName.includes(item.colname)) {
+              self.selectData[item.colname] = item.combobox;
             }
+            // if (item.colname === childColName) {
+            //   self.selectData = item.combobox;
+            // }
           });
         }
       });
