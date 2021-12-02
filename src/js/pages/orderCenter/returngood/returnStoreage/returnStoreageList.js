@@ -54,47 +54,73 @@ export default {
         flodClickMsg: 'a',
         formData: [],
         formValue: {},
-        flodClick: () => { }
+        flodClick(v) {
+          strUtil.flodClick(v)
+        }
       },
       agTableConfig: {
+        isIndex: true,
+        pageShow: true,
         agLoading: false,
         columnDefs: [],
         rowData: [],
-        renderArr: {
-          ID: param => {
-            const resDom = document.createElement('a');
-            resDom.style['text-decoration'] = 'underline';
-            resDom.innerHTML = param.data.ID;
-            return resDom;
-          },
-          SOURCE_CODE: param => {
-            const self = this;
-            const resDom = document.createElement('a');
-            resDom.style['text-decoration'] = 'underline';
-            resDom.innerHTML = param.data.SOURCE_CODE;
-            resDom.onclick = function () {
-              console.log(self);
-              const formdata = new FormData();
-              formdata.append('param', JSON.stringify({ sourceCode: param.data.SOURCE_CODE }));
-              self.service.orderCenter.getOrderId(formdata).then(res => {
-                console.log(res);
-                if (res.data.code === 0) {
-                  R3.store.commit('global/tabOpen', {
-                    type: 'C',
-                    customizedModuleName: 'orderManageDetail',
-                    customizedModuleId: res.data.data,
-                    label: $it('panel_label.retailInvoice_details')
-                  });
-                } else {
-                  self.$Message.warning(res.data.message);
+        renderParams: (cellData) => {
+          const field = cellData.field;
+          switch (field) {
+            case 'ID':
+              return {
+                renderContainer: 'CellRenderByFunction',
+                renderComponent: (h, param) => {
+                  return h('a', {
+                    style: {
+                      textDecoration: 'underline',
+                    },
+                  }, param.value)
                 }
-              });
-            };
-            return resDom;
+              }
+              break;
+            case 'SOURCE_CODE':
+              return {
+                renderContainer: 'CellRenderByFunction',
+                renderComponent: (h, param) => {
+                  return h('a', {
+                    style: {
+                      textDecoration: 'underline',
+                    },
+                    on: {
+                      click: () => {
+                        const formdata = new FormData();
+                        formdata.append('param', JSON.stringify({ sourceCode: param.data.SOURCE_CODE }));
+                        this.service.orderCenter.getOrderId(formdata).then(res => {
+                          console.log(res);
+                          if (res.data.code === 0) {
+                            R3.store.commit('global/tabOpen', {
+                              type: 'C',
+                              customizedModuleName: 'orderManageDetail',
+                              customizedModuleId: res.data.data,
+                              label: window.vmI18n.t('panel_label.retailInvoice_details')
+                            });
+                          } else {
+                            this.$Message.warning(res.data.message);
+                          }
+                        });
+                      }
+                    }
+                  }, param.value)
+                }
+              }
+              break;
+            default:
+              break;
           }
         },
         tableHeight: '560px',
-        pagenation: $omsUtils.pageConfig
+        pagenation: comUtils.pageConfig
+      },
+      options: {
+        rowHeight: 40,
+        datas: {},
+        floatingFilter: true
       },
       selection: [],
       searchObj: {},
@@ -158,7 +184,8 @@ export default {
               break;
             case 'propInput':
               formData[index] = {
-                style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
+                style: 'popInputPlus', // 输入框弹框单多选
+                // style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
                 width: '6',
                 itemdata: {
                   col: 1,
@@ -181,6 +208,7 @@ export default {
                   scale: 0,
                   statsize: -1,
                   type: item.tabth.type, // 这个是后台用的
+                  verion: '1.4',
                   pid: '',
                   valuedata: '' // 这个是选择的值
                 },
@@ -255,6 +283,7 @@ export default {
         res.data.data.columns.forEach(item => {
           item.field = item.key;
           item.headerName = item.title;
+          item.isagfilter = true;
           delete item.key;
           delete item.title;
         });
@@ -329,16 +358,14 @@ export default {
       // const {customizedModuleName}=this.$router.currentRoute.params;
       self.selection = [];
       self.agTableConfig.agLoading = true;
-      // this.$R3loading.show(customizedModuleName);
       const params = this.requestParams();
       this.service.orderCenter.ReturnStorageList(params).then(res => {
         // if (res.data.code === 1) {
         self.agTableConfig.agLoading = false;
-        // this.$R3loading.hide(customizedModuleName);
         const data = res.data.data || {};
         self.agTableConfig.rowData = data.queryResult || [];
         self.agTableConfig.pagenation.total = data.totalSize;
-        self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
+        // self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
         // }
       });
     },

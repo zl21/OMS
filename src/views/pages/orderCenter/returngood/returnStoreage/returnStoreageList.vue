@@ -5,13 +5,14 @@
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="form totalHeight custom-form" v-loading="isShowFromLoading">
-      <OmsForm :form-config="formConfig" class="searchList" />
+      <OmsForm maxHeight="120" :form-config="formConfig" class="searchList" />
     </div>
     <div class="tableContent custom-table" v-loading="agTableConfig.agLoading">
       <!-- loading -->
       <OmsAgTable
         ref="agGridChild"
         :ag-table-config="agTableConfig"
+        :options="options"
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
         @on-row-dblclick="onRowDblclick"
