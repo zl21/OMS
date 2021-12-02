@@ -47,13 +47,19 @@ class InitAppConfig {
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
     window.OMS = cus;
-    window.$i18n = i18n; // 挂载国际化
+    // window.$i18n = i18n; // 挂载国际化
+    window.$it = (str) => {
+      return i18n.t(str)
+    }
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     Vue.prototype.qs = qs;
     Vue.prototype.$omsUtils = cus.omsUtils;
     Vue.prototype.$lodash = window._;
     Vue.prototype.service = service;
-    Vue.prototype.vmI18n = i18n;
+    // Vue.prototype.vmI18n = i18n;
+    Vue.prototype.$it = (str) => {
+      return i18n.t(str)
+    }
     window.version = {
       '@burgeon/project-logic': proVersion.version,
       '@burgeon/business-components': BC.version,
