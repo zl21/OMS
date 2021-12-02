@@ -35,16 +35,16 @@ const changeWarehouse = {
       updateRemark: "",
       updateRemarkOptions: [
         {
-          label: $i18n.t("other.originalWarehouseOutOfStock_change"), // '原仓缺货改仓',
-          value: $i18n.t("other.originalWarehouseOutOfStock_change"),
+          label: $it("other.originalWarehouseOutOfStock_change"), // '原仓缺货改仓',
+          value: $it("other.originalWarehouseOutOfStock_change"),
         },
         {
-          label: $i18n.t("other.sysWrongJudgment_change"), // '系统错判改仓',
-          value: $i18n.t("other.sysWrongJudgment_change"),
+          label: $it("other.sysWrongJudgment_change"), // '系统错判改仓',
+          value: $it("other.sysWrongJudgment_change"),
         },
         {
-          label: $i18n.t("other.sysWrongJudgment_change"), // '新增仓库改仓',
-          value: $i18n.t("other.newWarehouse_change"),
+          label: $it("other.sysWrongJudgment_change"), // '新增仓库改仓',
+          value: $it("other.newWarehouse_change"),
         },
       ],
       btnConfig: {
@@ -52,14 +52,14 @@ const changeWarehouse = {
         btnsite: "right", // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $i18n.t("common.cancel"), // 取消
+            text: $it("common.cancel"), // 取消
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: $i18n.t("common.determine"), // 确定
+            text: $it("common.determine"), // 确定
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.determine(false);
@@ -160,7 +160,7 @@ const changeWarehouse = {
       const self = this;
       if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
         self.$Message.warning({
-          content: $i18n.t("modalTips.zi"), // 请选择仓库
+          content: $it("modalTips.zi"), // 请选择仓库
           duration: 5,
           top: 80,
         });
@@ -214,7 +214,7 @@ const changeWarehouse = {
                     key: "BILL_NO",
                   },
                   {
-                    title: $i18n.t('form_label.e0'), // 失败原因
+                    title: $it('form_label.e0'), // 失败原因
                     key: "RESULT_MSG",
                   },
                 ],
@@ -264,13 +264,13 @@ const changeWarehouse = {
             {
               colname: "ename",
               // name: "发货仓库名称",
-              name: $i18n.t("table_label.deliveryWarehouse_name"),
+              name: $it("table_label.deliveryWarehouse_name"),
               show: true,
             },
             {
               colname: "ecode",
               // name: "发货仓库编码",
-              name: $i18n.t("table_label.deliveryWarehouse_code"),
+              name: $it("table_label.deliveryWarehouse_code"),
               show: false,
             },
           ],
@@ -313,13 +313,13 @@ const changeWarehouse = {
           {
             colname: "ename",
             // name: "发货仓库名称",
-            name: $i18n.t("table_label.deliveryWarehouse_name"),
+            name: $it("table_label.deliveryWarehouse_name"),
             show: true,
           },
           {
             colname: "ecode",
             // name: "发货仓库编码",
-            name: $i18n.t("table_label.deliveryWarehouse_code"),
+            name: $it("table_label.deliveryWarehouse_code"),
             show: false,
           },
         ],

@@ -12,7 +12,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.import'),
+        confirmTitle: $it('modalTitle.import'),
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -47,11 +47,11 @@ export default {
                 type: 'action', // 类型action
                 name: 'payableAdjustAdd', // 文件名
                 // label: "赔付单新增", //tab中文名
-                label: $i18n.t('panel_label.add_claimForm'), // tab中文名
+                label: $it('panel_label.add_claimForm'), // tab中文名
                 query: Object.assign({
                   id: -1, // id
                   // tabTitle: "赔付单新增", //tab中文名
-                  tabTitle: $i18n.t('panel_label.add_claimForm') // tab中文名
+                  tabTitle: $it('panel_label.add_claimForm') // tab中文名
                 }) // 带的参数
               });
             } // 按钮点击事件
@@ -65,7 +65,7 @@ export default {
           },
           {
             webname: 'Tovoid_yingfukuantiaozhengdan', // 作废
-            text: $i18n.t('btn.void'), // 按钮文本
+            text: $it('btn.void'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.invalid();
@@ -73,7 +73,7 @@ export default {
           },
           {
             webname: 'Financialtrial_yingfukuantiaozhengdan', // 财审
-            text: $i18n.t('btn.financeAudit'), // 按钮文本
+            text: $it('btn.financeAudit'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.fiAudit();
@@ -81,7 +81,7 @@ export default {
           },
           {
             webname: 'Guesttrial_yingfukuantiaozhengdan', // 客审
-            text: $i18n.t('btn.custAudit'), // 按钮文本
+            text: $it('btn.custAudit'), // 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.custAudit();
@@ -98,7 +98,7 @@ export default {
             icon: 'iconfont iconbj_col', // 按钮图标
             webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
             size: 'small', // 按钮大小
-            name: $i18n.t('btn.collection'), // 收藏
+            name: $it('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
@@ -111,44 +111,44 @@ export default {
         formData: [
           {
             style: 'input', // 文本录入
-            label: $i18n.t('form_label.billNo'), // 单据编号
+            label: $it('form_label.billNo'), // 单据编号
             value: 'BILL_NO',
             width: '6'
           },
           {
             style: 'input', // 文本录入
-            label: $i18n.t('form_label.platform_billNo'), // 平台单号
+            label: $it('form_label.platform_billNo'), // 平台单号
             value: 'TID',
             width: '6'
           },
           {
             style: 'select', // 下拉框类型
-            label: $i18n.t('form_label.billStatus'), // 单据状态
+            label: $it('form_label.billStatus'), // 单据状态
             width: '6', // 所占宽度宽度
             value: 'BILL_STATUS', // 输入框的值
             multiple: true,
             options: [
               {
-                label: $i18n.t('common.unAudit'), // 未审核
+                label: $it('common.unAudit'), // 未审核
                 value: '1'
               },
               {
-                label: $i18n.t('common.custAudited'), // 已客审
+                label: $it('common.custAudited'), // 已客审
                 value: '2'
               },
               {
-                label: $i18n.t('common.financeAudited'), // 已财审
+                label: $it('common.financeAudited'), // 已财审
                 value: '3'
               },
               {
-                label: $i18n.t('common.voided'), // 已作废
+                label: $it('common.voided'), // 已作废
                 value: '4'
               }
             ]
           },
           {
             style: 'input',
-            label: $i18n.t('form_label.source_billNo'), // 来源单据编号
+            label: $it('form_label.source_billNo'), // 来源单据编号
             value: 'ORDER_NO',
             width: '6'
           },
@@ -168,7 +168,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $i18n.t('form_label.physicalWarehouseName'), // 实体仓名称
+              name: $it('form_label.physicalWarehouseName'), // 实体仓名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 23451, // 对应的表ID
@@ -199,7 +199,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $i18n.t('form_label.expressCompanyName'), // 快递公司名称
+              name: $it('form_label.expressCompanyName'), // 快递公司名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               row: 1,
@@ -229,7 +229,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $i18n.t('form_label.commodityCode'), // 商品条码
+              name: $it('form_label.commodityCode'), // 商品条码
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_SKU', // 对应的表
               row: 1,
@@ -245,13 +245,13 @@ export default {
           },
           {
             style: 'input', // 文本录入
-            label: $i18n.t('form_label.gBCode'), // 国标码
+            label: $it('form_label.gBCode'), // 国标码
             value: 'GBCODE',
             width: '6'
           },
           {
             style: 'select', // 下拉框类型
-            label: $i18n.t('form_label.adjustmentType'), // 调整类型
+            label: $it('form_label.adjustmentType'), // 调整类型
             width: '6', // 所占宽度宽度
             value: 'ADJUST_TYPE', // 输入框的值
             multiple: true,
@@ -261,7 +261,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $i18n.t('form_label.billType'), // 单据类型
+            label: $it('form_label.billType'), // 单据类型
             width: '6', // 所占宽度宽度
             value: 'BILL_TYPE', // 输入框的值
             multiple: true,
@@ -271,7 +271,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $i18n.t('form_label.channelType'), // 渠道类型
+            label: $it('form_label.channelType'), // 渠道类型
             width: '6', // 所占宽度宽度
             value: 'RESERVE_BIGINT01', // 输入框的值
             multiple: true,
@@ -282,7 +282,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $i18n.t('form_label.creationDate'), // 创建日期
+            label: $it('form_label.creationDate'), // 创建日期
             width: '6',
             value: 'CREATIONDATE',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -292,7 +292,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $i18n.t('form_label.custAuditDate'), // 客审日期
+            label: $it('form_label.custAuditDate'), // 客审日期
             width: '6',
             value: 'GUEST_TRIAL_TIME',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -302,7 +302,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $i18n.t('form_label.financeAuditDate'), // 财审日期
+            label: $it('form_label.financeAuditDate'), // 财审日期
             width: '6',
             value: 'FINANCIAL_TRIAL_TIME',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -319,7 +319,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $i18n.t('panel_label.all'), // 全部
+          label: $it('panel_label.all'), // 全部
           value: '1',
           isShow: true
         }
@@ -332,119 +332,119 @@ export default {
         tableHeight: '440px',
         columnDefs: [
           {
-            headerName: $i18n.t('form_label.billStatus'), // 单据状态
+            headerName: $it('form_label.billStatus'), // 单据状态
             field: 'BILL_STATUS_NAME'
           },
           {
-            headerName: $i18n.t('form_label.billNo'), // 单据编号
+            headerName: $it('form_label.billNo'), // 单据编号
             field: 'BILL_NO'
           },
           {
-            headerName: $i18n.t('form_label.platform_billNo'), // 平台单号
+            headerName: $it('form_label.platform_billNo'), // 平台单号
             field: 'TID'
           },
           {
-            headerName: $i18n.t('form_label.billType'), // 单据类型
+            headerName: $it('form_label.billType'), // 单据类型
             field: 'BILL_TYPE_NAME'
           },
           {
-            headerName: $i18n.t('form_label.adjustmentType'), // 调整类型
+            headerName: $it('form_label.adjustmentType'), // 调整类型
             field: 'ADJUST_TYPE_NAME'
           },
           {
-            headerName: $i18n.t('table_label.shopName'), // 店铺名称
+            headerName: $it('table_label.shopName'), // 店铺名称
             field: 'CP_C_SHOP_TITLE'
           },
           {
-            headerName: $i18n.t('table_label.physicalWarehouse'), // 实体仓
+            headerName: $it('table_label.physicalWarehouse'), // 实体仓
             field: 'CP_C_PHY_WAREHOUSE_ENAME'
           },
           {
-            headerName: $i18n.t('table_label.compensation_expressCompany'), // 赔付快递公司
+            headerName: $it('table_label.compensation_expressCompany'), // 赔付快递公司
             field: 'CP_C_LOGISTICS_ENAME'
           },
           {
-            headerName: $i18n.t('table_label.expressNo'), // 快递单号
+            headerName: $it('table_label.expressNo'), // 快递单号
             field: 'LOGISTICS_NO'
           },
           {
-            headerName: $i18n.t('table_label.total_amountDue'), // 总应付金额
+            headerName: $it('table_label.total_amountDue'), // 总应付金额
             field: 'PAYABLE_PRICE'
           },
           {
-            headerName: $i18n.t('table_label.paymentWay'), // 支付方式
+            headerName: $it('table_label.paymentWay'), // 支付方式
             field: 'PAY_TYPE_NAME'
           },
           {
-            headerName: $i18n.t('table_label.remarks'), // 备注
+            headerName: $it('table_label.remarks'), // 备注
             field: 'REMARK'
           },
           {
-            headerName: $i18n.t('form_label.source_billNo'), // 来源单据编号
+            headerName: $it('form_label.source_billNo'), // 来源单据编号
             field: 'ORDER_NO'
           },
           {
-            headerName: $i18n.t('table_label.custTelephone'), // 顾客电话
+            headerName: $it('table_label.custTelephone'), // 顾客电话
             field: 'CUSTOMER_TEL'
           },
           {
-            headerName: $i18n.t('table_label.custName'), // 顾客姓名
+            headerName: $it('table_label.custName'), // 顾客姓名
             field: 'CUSTOMER_NAME'
           },
           {
-            headerName: $i18n.t('table_label.alipay'), // 支付宝号
+            headerName: $it('table_label.alipay'), // 支付宝号
             field: 'ALIPAY_ACCOUNT'
           },
           {
-            headerName: $i18n.t('table_label.vip_nickname'), // 会员昵称
+            headerName: $it('table_label.vip_nickname'), // 会员昵称
             field: 'CUSTOMER_NICK'
           },
           {
-            headerName: $i18n.t('table_label.paymentTime'), // 付款时间
+            headerName: $it('table_label.paymentTime'), // 付款时间
             field: 'PAY_TIME'
           },
           {
-            headerName: $i18n.t('table_label.creationTime'), // 创建时间
+            headerName: $it('table_label.creationTime'), // 创建时间
             field: 'CREATIONDATE'
           },
           {
-            headerName: $i18n.t('table_label.creator'), // 创建人
+            headerName: $it('table_label.creator'), // 创建人
             field: 'OWNERENAME'
           },
           {
-            headerName: $i18n.t('table_label.modificationTime'), // 修改时间
+            headerName: $it('table_label.modificationTime'), // 修改时间
             field: 'MODIFIEDDATE'
           },
           {
-            headerName: $i18n.t('table_label.reviser'), // 修改人
+            headerName: $it('table_label.reviser'), // 修改人
             field: 'MODIFIERENAME'
           },
           {
-            headerName: $i18n.t('table_label.custAuditTime'), // 客审时间
+            headerName: $it('table_label.custAuditTime'), // 客审时间
             field: 'GUEST_TRIAL_TIME'
           },
           {
-            headerName: $i18n.t('table_label.custAuditMan'), // 客审人
+            headerName: $it('table_label.custAuditMan'), // 客审人
             field: 'GUEST_TRIAL_ENAME'
           },
           {
-            headerName: $i18n.t('table_label.financeAuditTime'), // 财审时间
+            headerName: $it('table_label.financeAuditTime'), // 财审时间
             field: 'FINANCIAL_TRIAL_TIME'
           },
           {
-            headerName: $i18n.t('table_label.financeAuditMan'), // 财审人
+            headerName: $it('table_label.financeAuditMan'), // 财审人
             field: 'FINANCIAL_TRIAL_ENAME'
           },
           {
-            headerName: $i18n.t('table_label.voidTime'), // 作废时间
+            headerName: $it('table_label.voidTime'), // 作废时间
             field: 'DEL_TIME'
           },
           {
-            headerName: $i18n.t('table_label.voidMan'), // 作废人
+            headerName: $it('table_label.voidMan'), // 作废人
             field: 'DELENAME'
           },
           {
-            headerName: $i18n.t('table_label.usable'), // 可用
+            headerName: $it('table_label.usable'), // 可用
             field: 'ISACTIVE'
           }
         ],
@@ -510,19 +510,19 @@ export default {
       const arrBillType = await this.getColOption(
         'AC_F_PAYABLE_ADJUSTMENT',
         // "基本信息",
-        $i18n.t('common.baseInformation'),
+        $it('common.baseInformation'),
         'BILL_TYPE'
       );
       const arrAdjustType = await this.getColOption(
         'AC_F_PAYABLE_ADJUSTMENT',
         // "基本信息",
-        $i18n.t('common.baseInformation'),
+        $it('common.baseInformation'),
         'ADJUST_TYPE'
       );
       const arrChannel = await this.getColOption(
         'AC_F_PAYABLE_ADJUSTMENT',
         // "基本信息",
-        $i18n.t('common.baseInformation'),
+        $it('common.baseInformation'),
         'RESERVE_BIGINT01'
       );
       self.formConfig.formData.forEach(item => {
@@ -625,7 +625,7 @@ export default {
         data: { data }
       } = await this.service.financeCenter.cancelAuditPayableAdjustment(formdata);
       if (data.code === 0) {
-        self.$Message.success($i18n.t('modalTips.z1')); // 反客审成功!
+        self.$Message.success($it('modalTips.z1')); // 反客审成功!
         self.getList();
       } else {
         // self.$Message.error(data.message);
@@ -768,10 +768,10 @@ export default {
         id: row.ID, // 单据id
         type: 'action', // 类型action
         name: 'payableAdjustAdd', // 文件名
-        label: $i18n.t('panel_label.details_claimForm'), // 赔付单详情
+        label: $it('panel_label.details_claimForm'), // 赔付单详情
         query: Object.assign({
           id: row.ID, // 单据id
-          tabTitle: $i18n.t('panel_label.details_claimForm') // 赔付单详情
+          tabTitle: $it('panel_label.details_claimForm') // 赔付单详情
         }) // 带的参数
       });
     },
@@ -841,16 +841,16 @@ export default {
           data: { code, data, message }
         } = await this.service.common.exportPayableAdjustment(idList);
         if (code === 0 && data !== null) {
-          const mes = message || $i18n.t('modalTips.z2'); // 导出成功！
+          const mes = message || $it('modalTips.z2'); // 导出成功！
           _this.$Message.success(mes);
           $omsUtils.downloadUrlFile(data);
         } else {
-          // const err = message || $i18n.t('modalTips.z3'); // 失败！
+          // const err = message || $it('modalTips.z3'); // 失败！
           // _this.$Message.error(err);
         }
       } else {
         if (_this.agTableConfig.rowData.length === 0) {
-          _this.$Message.error($i18n.t('modalTips.z4')); // 列表没有数据,无法导出!
+          _this.$Message.error($it('modalTips.z4')); // 列表没有数据,无法导出!
           return;
         }
         _this.warningModal = true;
@@ -908,11 +908,11 @@ export default {
         data: { code, data, message }
       } = await this.service.common.exportPayableAdjustment(param);
       if (code === 0 && data !== null) {
-        const mes = message || $i18n.t('modalTips.z2'); // 导出成功！
+        const mes = message || $it('modalTips.z2'); // 导出成功！
         _this.$Message.success(mes);
         $omsUtils.downloadUrlFile(data);
       } else {
-        // const err = message || $i18n.t('modalTips.z3'); // 失败！
+        // const err = message || $it('modalTips.z3'); // 失败！
         // _this.$Message.error(err);
       }
       _this.agTableConfig.loading = false;

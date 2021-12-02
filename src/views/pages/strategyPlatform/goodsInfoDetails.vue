@@ -68,7 +68,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: $i18n.t('table_label.serialNo'), // 序号
+            title: $it('table_label.serialNo'), // 序号
           },
           {
             title: '商品类型', // 商品类型
@@ -165,7 +165,7 @@ export default {
           buttons: [
             {
               webname: 'ST_C_PRICE_SUB_DELETE',
-              text: $i18n.t('btn.add'), // 新增
+              text: $it('btn.add'), // 新增
               isShow: true,
               type: 'primary',
               disabled: false, // 按钮禁用控制
@@ -175,7 +175,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_DELETE',
-              text: $i18n.t('modalTitle.deleteDetails'), // 删除明细
+              text: $it('modalTitle.deleteDetails'), // 删除明细
               isShow: true,
               type: 'warning',
               disabled: false, // 按钮禁用控制
@@ -185,7 +185,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_IMPORT',
-              text: $i18n.t('modalTitle.import'), // 导入
+              text: $it('modalTitle.import'), // 导入
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -194,7 +194,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_EXPORT',
-              text: $i18n.t('btn.export'), // 导出
+              text: $it('btn.export'), // 导出
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {

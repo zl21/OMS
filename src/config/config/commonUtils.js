@@ -226,15 +226,15 @@ class commonUtils {
                   props: {
                     columns: [
                       {
-                        title: $i18n.t('table_label.serialNo'), // 序号
+                        title: $it('table_label.serialNo'), // 序号
                         key: 'INDEX',
                       },
                       {
-                        title: $i18n.t('form_label.billNo'), // 单据编号
+                        title: $it('form_label.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: $i18n.t('form_label.e0'), // 失败原因
+                        title: $it('form_label.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],
@@ -260,7 +260,7 @@ class commonUtils {
   //  */
   // static tipShow(type, self, res, isTitle, renderFun) {
   //   self.$Modal[type]({
-  //     title: isTitle ?? $i18n.t('modalTitle.tips'), // 提示
+  //     title: isTitle ?? $it('modalTitle.tips'), // 提示
   //     content: renderFun ?? res.data.message,
   //     cancelType: true,
   //     titleAlign: 'left',
@@ -287,12 +287,12 @@ class commonUtils {
   //  */
   static modalShow(self, tips, okKey, data, ...callback) {
     self.$Modal.info({
-      title: $i18n.t('modalTitle.tips'), // 提示
-      content: $i18n.t(`modalTips.${tips}`),
+      title: $it('modalTitle.tips'), // 提示
+      content: $it(`modalTips.${tips}`),
       mask: true,
       showCancel: true,
-      okText: $i18n.t('common.determine'), // 确定
-      cancelText: $i18n.t('common.cancel'), // 取消
+      okText: $it('common.determine'), // 确定
+      cancelText: $it('common.cancel'), // 取消
       onOk: () => {
         let [callbackType, callbackFun] = callback
         this.serviceHandler(self, okKey, data, callbackType, callbackFun)
@@ -326,7 +326,7 @@ class commonUtils {
   //  */
   // static msgTips(self, type, tips, tipsType = 1) {
   //   self.$Message[type]({
-  //     content: tipsType == 1 ? $i18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+  //     content: tipsType == 1 ? $it(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
   //     duration: 5,
   //     top: 80,
   //   })
@@ -341,7 +341,7 @@ class commonUtils {
   // static importTable(self, modalConfig, pageName, confirmTitle) {
   //   console.log(confirmTitle)
   //   self[modalConfig].confirmTitle = confirmTitle
-  //     ? $i18n.t(`${confirmTitle}`)
+  //     ? $it(`${confirmTitle}`)
   //     : self[modalConfig].confirmTitle // 弹框标题
   //   self.$children.find((item) => item.name === pageName).openConfirm() // 文件名称
   // }
@@ -367,11 +367,11 @@ class commonUtils {
       id: id,
       type: 'action',
       name: moduleName,
-      label: $i18n.t(`${labelName}`), // 订单管理
+      label: $it(`${labelName}`), // 订单管理
       back: isback,
       query: Object.assign({
         id: id,
-        tabTitle: $i18n.t(`${labelName}`), // 订单管理
+        tabTitle: $it(`${labelName}`), // 订单管理
         ...exendObj,
       }),
     })
@@ -393,7 +393,7 @@ class commonUtils {
     global,
     tableId
   ) {
-    const label = labelName.i8n ? $i18n.t(`${labelName.tip}`) : labelName.tip; // 语言包有就走语言包，不存在则直接取
+    const label = labelName.i8n ? $it(`${labelName.tip}`) : labelName.tip; // 语言包有就走语言包，不存在则直接取
     let mutationArr = ['customize/TabOpen', 'customize/switchActiveTab', 'customize/TabClose', 'customize/TabHref'];
     if (global) mutationArr = ['global/tabOpen'];
     const muta = mutationArr[mutationType];
@@ -456,13 +456,13 @@ class commonUtils {
     R3.store.commit(`global/${eventType}`, {
       type: actionType,
       tableName: moduleName,
-      label: $i18n.t(`${labelName}`),
+      label: $it(`${labelName}`),
       tableId: tableId,
       id: id,
       query: Object.assign({
         id: id,
-        ptitle: $i18n.t(`${labelName}`),
-        tabTitle: $i18n.t(`${labelName}`),
+        ptitle: $it(`${labelName}`),
+        tabTitle: $it(`${labelName}`),
         tableName: moduleName,
         back: isback,
         ...exendObj,
@@ -531,7 +531,7 @@ class commonUtils {
         })
         self[array].buttons.forEach((btn) => {
           if (btn.webname == 'fix_back') {
-            btn.text = $i18n.t("btn.back");
+            btn.text = $it("btn.back");
             if (!c.some(it => it.webname == 'fix_back')) {
               c.push(btn)
             }
@@ -641,7 +641,7 @@ class commonUtils {
               c.push(btn)
             }
             // if (btn.webname == 'fix_back') {
-            //   btn.text = $i18n.t("btn.back");
+            //   btn.text = $it("btn.back");
             //   if (!c.some(it => it.webname == 'fix_back')) {
             //     c.push(btn)
             //   }
@@ -1331,7 +1331,7 @@ class commonUtils {
       id = selection[0].ID;
     }
     if ((selection.length != 1 && params.id !== '-1') || (selection.length != 1 && params.cloneReturnGoodId)) {
-      _self.$Message.warning($i18n.t('modalTips.zm'))
+      _self.$Message.warning($it('modalTips.zm'))
       return;
     }
     _self.$store.commit('customize/TabHref', {

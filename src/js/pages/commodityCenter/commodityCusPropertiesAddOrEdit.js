@@ -37,7 +37,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'ATTRIBUTE_SaveBtn',
-          text: $i18n.t('btn.save'), // 保存
+          text: $it('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -46,7 +46,7 @@ export default {
         },
         {
           webname: 'fix_back',
-          text: $i18n.t('btn.back'),
+          text: $it('btn.back'),
           btnclick: () => {
             this.back();
           },
@@ -369,7 +369,7 @@ export default {
           },
           {
             type: 'warning',
-            text: $i18n.t('btn.delete'), // 删除
+            text: $it('btn.delete'), // 删除
             btnclick: () => {
               this.deleteAttrValue();
             },
@@ -383,7 +383,7 @@ export default {
         value: 'PROPERTYVALUES',
       },
       {
-        label: $i18n.t('panel_label.operationLog'), // 操作日志
+        label: $it('panel_label.operationLog'), // 操作日志
         value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
       },
       ],
@@ -597,12 +597,12 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             self.onOk()
           },

@@ -87,7 +87,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -97,7 +97,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.determine'), // 下载 按钮文本
+            text: $it('common.determine'), // 下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -162,7 +162,7 @@ export default {
       noZeroShwoFlag: true,
       isStoreFlag: true,
       saveLoading: false, // 保存loading
-      store: $i18n.t('form_label.a8'), // '杭州店仓', // 店仓名字
+      store: $it('form_label.a8'), // '杭州店仓', // 店仓名字
       saleType: '', // 销售类型
       tHead: [], // 码数集合
       tColor: [], // color集合
@@ -268,7 +268,7 @@ export default {
             });
         });
       this.$message({
-        message: $i18n.t('modalTips.dd'), // '匹配成功',
+        message: $it('modalTips.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj); // 向上传递改变的数据
@@ -291,7 +291,7 @@ export default {
             });
         });
       this.$message({
-        message: $i18n.t('modalTips.dd'), // '匹配成功',
+        message: $it('modalTips.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj);
@@ -316,7 +316,7 @@ export default {
             });
         });
       this.$message({
-        message: $i18n.t('modalTips.dd'), // '匹配成功',
+        message: $it('modalTips.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj);
@@ -485,7 +485,7 @@ export default {
             arr.push(obj.PS_C_SKU_ECODE.trim());
           });
         // 请输入数量
-        if (!arr.length) return this.$Message.error($i18n.t('modalTips.de'));
+        if (!arr.length) return this.$Message.error($it('modalTips.de'));
       }
       if (this.tablename === 'OC_B_ORDER') {
         this.$emit('confirmOk', this.amendObj);
@@ -583,7 +583,7 @@ export default {
         this.$set(this, 'paramsObj', ''); // 初始化
         if (resData.code === 0) {
           this.$message({
-            message: $i18n.t('modalTips.z9'), // '保存成功',
+            message: $it('modalTips.z9'), // '保存成功',
             type: 'success'
           });
         } else {
@@ -1268,7 +1268,7 @@ export default {
             });
         });
       this.$message({
-        message: $i18n.t('modalTips.dd'), // '匹配成功',
+        message: $it('modalTips.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj);

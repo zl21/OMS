@@ -45,7 +45,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             size: '',
             btnclick: () => { 
               const self = this;
@@ -54,7 +54,7 @@ export default {
             }
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             size: '',
             btnclick: () => {
               const self = this;
@@ -117,7 +117,7 @@ export default {
             type: 'asc'
           },
           {
-            title: $i18n.t('table_label.shopName'), // 店铺名称
+            title: $it('table_label.shopName'), // 店铺名称
             key: 'CP_C_SHOP_TITLE',
             width: '',
             type: 'asc'

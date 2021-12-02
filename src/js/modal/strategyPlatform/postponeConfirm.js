@@ -13,7 +13,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -22,7 +22,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -40,7 +40,7 @@ export default {
     },
     confirm() {
       const data = {
-        title: $i18n.t('modalTitle.epostponep'), // '延期',
+        title: $it('modalTitle.epostponep'), // '延期',
         tablename: 'ST_C_SHOP_ITEM_VIRTUAL_HIGH_STOCK',
         objids: this.idArray,
         newEndTime: this.renderTime(this.time)
@@ -63,7 +63,7 @@ export default {
               this.confirm();
             },
             onCancel: () => {
-              this.$Message.info($i18n.t('modalTips.ep')); // '点击了取消!'
+              this.$Message.info($it('modalTips.ep')); // '点击了取消!'
             }
           });
         } else {

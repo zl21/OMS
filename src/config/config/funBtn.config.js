@@ -249,7 +249,7 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('cancelOrder'), // 按钮点击事件
       },
       {
-        text: $i18n.t('btn.orderBlocking'), // 订单拦截
+        text: $it('btn.orderBlocking'), // 订单拦截
         webname: 'orderBlocking',
         btnclick: () => this.btnMainHandler('interceptOrder'),
       },
@@ -281,7 +281,7 @@ class BtnConfig {
         btnclick: () => this.btnMainHandler('batchReturnOrder'),
       },
       {
-        text: $i18n.t('btn.release_inventory'), // 释放库存
+        text: $it('btn.release_inventory'), // 释放库存
         webname: 'release_inventory',
         btnclick: () => this.btnMainHandler('releaseInventory'),
       },
@@ -317,7 +317,7 @@ class BtnConfig {
       {
         icon: 'iconfont iconbj_col', // 收藏图标
         webname: 'isFavorite',
-        name: $i18n.t('btn.collection'),
+        name: $it('btn.collection'),
         btnclick: () => BtnConfig.target.setFavorite(),
       },
       //--------------------------------------------------单对象页面---------------------------------
@@ -990,15 +990,15 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $i18n.t('table_label.serialNo'), // 序号
+                        title: $it('table_label.serialNo'), // 序号
                         key: 'index',
                       },
                       {
-                        title: $i18n.t('form_label.billNo'), // 单据编号
+                        title: $it('form_label.billNo'), // 单据编号
                         key: 'billNo',
                       },
                       {
-                        title: $i18n.t('form_label.e0'), // 失败原因
+                        title: $it('form_label.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1010,7 +1010,7 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $i18n.t('form_label.e0'), // 失败原因
+                        title: $it('form_label.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1382,7 +1382,7 @@ class BtnConfig {
         if (![1].includes(item.ORDER_STATUS)) {
           // 当前状态异常，不允许操作！
           // $utils.msgTips(self, 'warning', 'd9')
-          self.$Message.warning($i18n.t('modalTips.kh')) // 只允许待审核的订单进行取消合并！
+          self.$Message.warning($it('modalTips.kh')) // 只允许待审核的订单进行取消合并！
           self.btnConfig.loading = false
           return
         }
@@ -1407,7 +1407,7 @@ class BtnConfig {
                   title: 'ID',
                   key: 'objid',
                 },{
-                  title: $i18n.t('form_label.billNo'), // 单据编号
+                  title: $it('form_label.billNo'), // 单据编号
                   key: 'objno',
                 },{
                   title: '详细信息', // TODO!
@@ -1430,7 +1430,7 @@ class BtnConfig {
       // 已取消，系统作废, // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
       if ([7, 8, 1, 2, 3, 4, 50, 21].includes(orderDetails.ORDER_STATUS)) {
         let tips = [7, 8].includes(orderDetails.ORDER_STATUS) ? 'b7' : 'b8'
-        let fixTips = `${orderDetails.ID}${$i18n.t(`modalTips.${tips}`)}`
+        let fixTips = `${orderDetails.ID}${$it(`modalTips.${tips}`)}`
         $utils.msgTips(self, 'warning', fixTips, 2)
       } else if ([5, 6].includes(orderDetails.ORDER_STATUS)) {
         $utils.msgTips(self, 'warning', 'h2') // "订单状态为仓库发货和平台发货才能新增退单!"
@@ -1498,7 +1498,7 @@ class BtnConfig {
     _this.importTable.componentData = {
       tableName: 'OUT_OF_STOCK_MEMO',
     }
-    _this.importTable.confirmTitle = $i18n.t('btn.note_import')
+    _this.importTable.confirmTitle = $it('btn.note_import')
     _this.$children.find((item) => item.name === 'importTable').openConfirm()
   }
   //变更发货平台处理
@@ -1532,7 +1532,7 @@ class BtnConfig {
           $utils.msgTips(self, 'sucess', res.data.message)
           self.getList(self.statusTab)
         } else {
-          const err = res.data.message || $i18n.t('modalTips.l9') // 虚拟仓库入库失败！
+          const err = res.data.message || $it('modalTips.l9') // 虚拟仓库入库失败！
           let renderInfo = {
             props: {
               columns: [
@@ -1541,7 +1541,7 @@ class BtnConfig {
                   key: 'objid',
                 },
                 {
-                  title: $i18n.t('modalTitle.du'), // 报错信息
+                  title: $it('modalTitle.du'), // 报错信息
                   key: 'message',
                 },
               ],
@@ -1679,11 +1679,11 @@ class BtnConfig {
         }
         // 零售发货单列表tab 区分审核失败/多次缺货类型订单查询
         // '审核失败'
-        if (self.statusData.label == $i18n.t('other.auditError')) {
+        if (self.statusData.label == $it('other.auditError')) {
           param.status = { label: '待审核', value: '1', isShow: true }
           // '多次缺货'
         } else if (
-          this.statusData.label == $i18n.t('other.multipleOutOfStock')
+          this.statusData.label == $it('other.multipleOutOfStock')
         ) {
           param.status = { label: '缺货', value: '2', isShow: true }
         }
@@ -1844,15 +1844,15 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $i18n.t('table_label.serialNo'), // 序号
+                        title: $it('table_label.serialNo'), // 序号
                         key: 'INDEX',
                       },
                       {
-                        title: $i18n.t('form_label.billNo'), // 单据编号
+                        title: $it('form_label.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: $i18n.t('form_label.e0'), // 失败原因
+                        title: $it('form_label.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],

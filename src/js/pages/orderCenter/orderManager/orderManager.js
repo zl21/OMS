@@ -116,11 +116,11 @@ export default {
                           props: {
                             columns: [
                               {
-                                title: $i18n.t('table_label.serialNo'), // 序号
+                                title: $it('table_label.serialNo'), // 序号
                                 key: 'index'
                               },
                               {
-                                title: $i18n.t('form_label.billNo'), // 单据编号
+                                title: $it('form_label.billNo'), // 单据编号
                                 key: 'billNo'
                               },
                               {
@@ -168,11 +168,11 @@ export default {
                           props: {
                             columns: [
                               {
-                                title: $i18n.t('table_label.serialNo'), // 序号
+                                title: $it('table_label.serialNo'), // 序号
                                 key: 'index'
                               },
                               {
-                                title: $i18n.t('form_label.billNo'), // 单据编号
+                                title: $it('form_label.billNo'), // 单据编号
                                 key: 'billNo'
                               },
                               {
@@ -416,8 +416,8 @@ export default {
         btnsite: 'right',
         buttonsRight: [
           {
-            text: $i18n.t('btn.find'), // 查找 按钮文本
-            // text: $i18n.t('btn.search'), // 搜索
+            text: $it('btn.find'), // 查找 按钮文本
+            // text: $it('btn.search'), // 搜索
             size: 'large',
             shape: 'circle',
             // icon: 'ios-search',
@@ -428,7 +428,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: $i18n.t('btn.reset'), // 按钮文本 重置
+            text: $it('btn.reset'), // 按钮文本 重置
             size: 'large',
             shape: 'circle',
             // icon: 'ios-refresh',
@@ -986,7 +986,7 @@ export default {
           this.$store.commit('global/tabOpen', {
             type: 'C',
             customizedModuleName: this.tablename,
-            label: $i18n.t('panel_label.retailInvoice_details'), //零售发货单详情
+            label: $it('panel_label.retailInvoice_details'), //零售发货单详情
             customizedModuleId: val.ID,
           });
           break;
@@ -995,7 +995,7 @@ export default {
             this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_VIRTUAL_TABLE',
-              label: $i18n.t('menu.b7'), //退货单详情
+              label: $it('menu.b7'), //退货单详情
               tableId: 10728,
               id: `${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&SOURCE_CODE=${val.SOURCE_CODE}`
             });
@@ -1003,7 +1003,7 @@ export default {
             this.$store.commit('global/tabOpen', {
               type: 'V',
               tableName: 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
-              label: $i18n.t('menu.b8'), //换货单详情
+              label: $it('menu.b8'), //换货单详情
               tableId: 10754,
               id: `${val.ID}?RETURN_SOURCE=${val.RETURN_SOURCE}&SOURCE_CODE=${val.SOURCE_CODE}`
             });
@@ -1053,7 +1053,7 @@ export default {
       }
       self.$Modal.fcWarning({
         title: '加急打标',
-        content: $i18n.t('modalTips.yc'),
+        content: $it('modalTips.yc'),
         showCancel: true,
         onOk: () => {
           if (IDS.length == 1) {
@@ -1095,7 +1095,7 @@ export default {
         if (res.data.code == 0) {
           this.$Modal.confirm({
             className: 'ark-dialog',
-            title: $i18n.t('modalTitle.tips'),
+            title: $it('modalTitle.tips'),
             content: res.data.message,
             showCancel: true,
             mask: true,

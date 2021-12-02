@@ -14,7 +14,7 @@ export default function (isList) {
       if (!label) return
       let mode = ''
       if (!isList) {
-        let text = !(customizedModuleId > 0) ? $i18n.t('btn.add') : $i18n.t('table_label.edit')
+        let text = !(customizedModuleId > 0) ? $it('btn.add') : $it('table_label.edit')
         mode = localStorage.getItem('locale') == 'zh' ? text : ` ${text}`
       }
       label = label.replace(/新增|编辑|Add|Edit/, '').concat(mode)
@@ -33,7 +33,7 @@ export default function (isList) {
         if (!label) return
         let text = ''
         if (typeof type == 'boolean') {
-          text = type ? $i18n.t('btn.add') : $i18n.t('table_label.edit')
+          text = type ? $it('btn.add') : $it('table_label.edit')
         }
         const mode = localStorage.getItem('locale') == 'zh' ? text : ` ${text}`
         const filterLabel = label.replace(/新增|编辑|Add|Edit/, '')

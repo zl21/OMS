@@ -35,13 +35,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $i18n.t('other.shop'), // 店铺
+              fkdesc: $it('other.shop'), // 店铺
               inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $i18n.t('other.shop'), // 店铺input前面显示的lable值
+              name: $it('other.shop'), // 店铺input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP',
               reftableid: 24475,
@@ -57,7 +57,7 @@ export default {
           },
           {
             style: 'radio', // 输入框类型
-            label: $i18n.t('other.downloadMethod'), // 下载方式 输入框前文字
+            label: $it('other.downloadMethod'), // 下载方式 输入框前文字
             value: 'type', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             options: [
@@ -70,7 +70,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: $i18n.t('other.billTime'), // 账单时间 输入框前文字
+            label: $it('other.billTime'), // 账单时间 输入框前文字
             value: 'timerange', // 输入框的值
             type: 'datetimerange',
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -78,7 +78,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: $i18n.t('other.billCode'), // 账单编码 输入框前文字
+            label: $it('other.billCode'), // 账单编码 输入框前文字
             value: 'bill_numbere', // 输入框的值
             clearable: true,
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -95,7 +95,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消 按钮文本
+            text: $it('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -105,7 +105,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.downloadNow'), // 立即下载 按钮文本
+            text: $it('common.downloadNow'), // 立即下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -124,17 +124,17 @@ export default {
       const startTime = formValue.timerange[0];
       const endTime = formValue.timerange[1];
       if (this.downLoadFormConfig.formData[0].itemdata.pid == '') {
-        this.$Message.warning($i18n.t('modalTips.bg'));// 请输入需要下载的店铺!
+        this.$Message.warning($it('modalTips.bg'));// 请输入需要下载的店铺!
         return false;
       }
       if (startTime === '' && endTime === '' && !this.downLoadFormConfig.formValue.bill_numbere) {
-        this.$Message.warning($i18n.t('modalTips.bh'));// 账单时间账单编码不能同时为空!
+        this.$Message.warning($it('modalTips.bh'));// 账单时间账单编码不能同时为空!
         return false;
       }
       // 如果没填写账单编码,则对时间格式进行判断
       if (!this.downLoadFormConfig.formValue.bill_numbere) {
         if (startTime === '' && endTime === '') {
-          this.$Message.warning($i18n.t('modalTips.bi'));// 账单时间不能为空
+          this.$Message.warning($it('modalTips.bi'));// 账单时间不能为空
           return false;
         }
         // 账单时间不能跨月
@@ -142,7 +142,7 @@ export default {
           formValue.type === 'billDownload'
           && startTime.getMonth() != endTime.getMonth()
         ) {
-          this.$Message.warning($i18n.t('modalTips.bj'));// 账单时间不能跨月
+          this.$Message.warning($it('modalTips.bj'));// 账单时间不能跨月
           return false;
         }
         // 账单时间不能超过11天
@@ -150,7 +150,7 @@ export default {
           formValue.type === 'billDownload'
           && endTime - startTime > 1000 * 60 * 60 * 24 * 11
         ) {
-          this.$Message.warning($i18n.t('modalTips.bk'));// 账单时间段天数要小于等于11天
+          this.$Message.warning($it('modalTips.bk'));// 账单时间段天数要小于等于11天
           return false;
         }
       }
@@ -178,11 +178,11 @@ export default {
     // 月结,进度
     if (this.$route.params.tableName == 'AC_F_VIP_BILL_MONTH') {
       this.downLoadFormConfig.formValue.type = 'billMonthDownload';
-      this.downLoadFormConfig.formData[1].options[0].label = $i18n.t('btn.monthlyBillDownload');// 月结账单下载
+      this.downLoadFormConfig.formData[1].options[0].label = $it('btn.monthlyBillDownload');// 月结账单下载
       this.downLoadFormConfig.formData[1].options[0].value = 'billMonthDownload';
     } else {
       this.downLoadFormConfig.formValue.type = 'billDownload';
-      this.downLoadFormConfig.formData[1].options[0].label = $i18n.t('btn.downloadProgressBill');// 进度账单下载
+      this.downLoadFormConfig.formData[1].options[0].label = $it('btn.downloadProgressBill');// 进度账单下载
       this.downLoadFormConfig.formData[1].options[0].value = 'billDownload';
     }
   }

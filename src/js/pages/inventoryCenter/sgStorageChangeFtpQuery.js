@@ -31,7 +31,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $i18n.t('table_label.platform_store_title'), // '平台店铺标题',
+              name: $it('table_label.platform_store_title'), // '平台店铺标题',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               row: 1,
@@ -60,7 +60,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $i18n.t('form_label.barCode'), // '条码',
+              name: $it('form_label.barCode'), // '条码',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_SKU', // 对应的表
               row: 1,
@@ -76,14 +76,14 @@ export default {
           },
           {
             style: 'input',
-            label: $i18n.t('table_label.productNo'), // '商品编码',
+            label: $it('table_label.productNo'), // '商品编码',
             value: 'PS_C_SKU_ECODE',
             width: '6'
           },
 
           {
             style: 'input', // 文本录入
-            label: $i18n.t('form_label.gBCode'), // '国标码',
+            label: $it('form_label.gBCode'), // '国标码',
             value: 'GBCODE',
             width: '6'
           }
@@ -98,7 +98,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $i18n.t('common.all'), // '全部',
+          label: $it('common.all'), // '全部',
           value: '1',
           isShow: true
         }
@@ -107,39 +107,39 @@ export default {
       jordanTableConfig: {
         columns: [
           {
-            title: $i18n.t('table_label.platform_store_title'), // '平台店铺标题',
+            title: $it('table_label.platform_store_title'), // '平台店铺标题',
             key: 'CP_C_SHOP_TITLE'
           },
           {
-            title: $i18n.t('table_label.a0'), // '期初可售数',
+            title: $it('table_label.a0'), // '期初可售数',
             key: 'QTY_BEGIN'
           },
           {
-            title: $i18n.t('table_label.a1'), // '变化数量',
+            title: $it('table_label.a1'), // '变化数量',
             key: 'QTY_CHANGE'
           },
           {
-            title: $i18n.t('table_label.a2'), // '期末可售数',
+            title: $it('table_label.a2'), // '期末可售数',
             key: 'QTY_END'
           },
           {
-            title: $i18n.t('form_label.bar_code'), // '条码编码',
+            title: $it('form_label.bar_code'), // '条码编码',
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: $i18n.t('table_label.productNo'), // '商品编码',
+            title: $it('table_label.productNo'), // '商品编码',
             key: 'PS_C_PRO_ECODE'
           },
           {
-            title: $i18n.t('table_label.productName'), // '商品名称',
+            title: $it('table_label.productName'), // '商品名称',
             key: 'PS_C_PRO_ENAME'
           },
           {
-            title: $i18n.t('form_label.gBCode'), // '国标码',
+            title: $it('form_label.gBCode'), // '国标码',
             key: 'GBCODE'
           },
           {
-            title: $i18n.t('table_label.creationTime'), // '创建时间',
+            title: $it('table_label.creationTime'), // '创建时间',
             key: 'CREATIONDATE'
           }
         ], // 表头
@@ -200,9 +200,9 @@ export default {
       // }
       const mainData = _this.formConfig.formValue;
       if (!mainData.CP_C_SHOP_ID) {
-        _this.$Message.error($i18n.t('modalTips.do')); // '店铺不能为空!');
+        _this.$Message.error($it('modalTips.do')); // '店铺不能为空!');
       } else if (!mainData.PS_C_SKU_ID) {
-        _this.$Message.error($i18n.t('modalTips.dp')); // '条码不能为空!');
+        _this.$Message.error($it('modalTips.dp')); // '条码不能为空!');
       } else {
         _this.jordanTableConfig.data = [];
         _this.jordanTableConfig.total = 0;
@@ -288,18 +288,18 @@ export default {
         const idList = { idList: ids };
         this.service.common.exportPayableAdjustment(idList).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
-            const mes = res.data.message || $i18n.t('modalTips.z2'); // '导出成功！';
+            const mes = res.data.message || $it('modalTips.z2'); // '导出成功！';
             _this.$Message.success(mes);
             $omsUtils.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
-            // const err = res.data.message || $i18n.t('modalTips.z3'); // '失败！';
+            // const err = res.data.message || $it('modalTips.z3'); // '失败！';
             // _this.$Message.error(err);
           }
         });
       } else {
         if (_this.jordanTableConfig.data.length === 0) {
-          _this.$Message.error($i18n.t('modalTips.z4')); // '列表没有数据,无法导出!';
+          _this.$Message.error($it('modalTips.z4')); // '列表没有数据,无法导出!';
           return;
         }
         if (_this.statusTab === '') {
@@ -318,12 +318,12 @@ export default {
       };
       this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
-          const mes = res.data.message || $i18n.t('modalTips.z2'); // '导出成功！';
+          const mes = res.data.message || $it('modalTips.z2'); // '导出成功！';
           _this.$Message.success(mes);
           $omsUtils.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
-          // const err = res.data.message || $i18n.t('modalTips.z3'); // '失败！';
+          // const err = res.data.message || $it('modalTips.z3'); // '失败！';
           // _this.$Message.error(err);
         }
       });

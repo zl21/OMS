@@ -17,13 +17,13 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             btnclick: () => {
               this.close();
             }
           },
           {
-            text: $i18n.t('btn.simulation_trial_calculation'), // 仿真试算
+            text: $it('btn.simulation_trial_calculation'), // 仿真试算
             btnclick: () => {
               this.execute_simulation();
             }
@@ -49,7 +49,7 @@ export default {
             isfk: true,
             isnotnull: true,
             // name: "收货省份",
-            name: $i18n.t('form_label.receiving_province'),
+            name: $it('form_label.receiving_province'),
             readonly: false,
             valuedata: '',
             notForm: true,
@@ -66,7 +66,7 @@ export default {
             isfk: true,
             isnotnull: true,
             // name: "店铺名称",
-            name: $i18n.t('table_label.shopName'),
+            name: $it('table_label.shopName'),
             readonly: false,
             refobjid: '',
             valuedata: '',
@@ -281,7 +281,7 @@ export default {
         console.log('data', data);
         self.result_data = data.result;
         self.result_columns = data.cloumns;
-        self.$Message.success($i18n.t('modalTips.t5'));
+        self.$Message.success($it('modalTips.t5'));
       } else {
         self.result_data = [];
       }
@@ -310,25 +310,25 @@ export default {
     },
     checkSimulation() {
       if (!this.basicData.stores.itemdata.pid) {
-        return { code: '-1', message: $i18n.t('modalTips.t6') };
+        return { code: '-1', message: $it('modalTips.t6') };
       }
       if (this.basicData.time_type === '') {
-        return { code: '-1', message: $i18n.t('modalTips.t7') };
+        return { code: '-1', message: $it('modalTips.t7') };
       }
       if (this.basicData.time_limit === '') {
-        return { code: '-1', message: $i18n.t('modalTips.t8') };
+        return { code: '-1', message: $it('modalTips.t8') };
       }
       if (this.basicData.order_list === '') {
-        return { code: '-1', message: $i18n.t('modalTips.t9') };
+        return { code: '-1', message: $it('modalTips.t9') };
       }
       // if(this.basicData.platform_mark === ""){
       //     return {code:"-1",message:"平台标记未填写"}
       // }
       if (!this.basicData.receiving_porvince.itemdata.pid) {
-        return { code: '-1', message: $i18n.t('modalTips.s0') };
+        return { code: '-1', message: $it('modalTips.s0') };
       }
       if (this.products_data.length == 0) {
-        return { code: '-1', message: $i18n.t('modalTips.s1') };
+        return { code: '-1', message: $it('modalTips.s1') };
       }
       for (let i = 0; i < this.products_data.length; i++) {
         const row = this.products_data[i];
@@ -338,14 +338,14 @@ export default {
             // return { code: -1, message: `商品列表第${i + 1}行数据未填写完毕` };
             return {
               code: -1,
-              message: `${$i18n.t('modalTips.s2')}${i + 1}${$i18n.t('modalTips.s3')}`
+              message: `${$it('modalTips.s2')}${i + 1}${$it('modalTips.s3')}`
             };
           }
         }
       }
 
       // return { code: 0, message: "校验完成" };
-      return { code: 0, message: $i18n.t('modalTips.s4') };
+      return { code: 0, message: $it('modalTips.s4') };
     },
     /**
      *  修改行数据

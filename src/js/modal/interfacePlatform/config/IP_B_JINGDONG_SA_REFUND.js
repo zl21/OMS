@@ -19,7 +19,7 @@ export default {
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           serviceId: 'r3-cp',
-          name: $i18n.t('other.shop'), // 店铺 input前面显示的lable值
+          name: $it('other.shop'), // 店铺 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           pid: '',
           valuedata: '', // 这个是选择的值
@@ -28,7 +28,7 @@ export default {
       },
       {
         style: 'date', // 输入框类型
-        label: $i18n.t('form_label.e5'), // 退款申请时间 输入框前文字
+        label: $it('form_label.e5'), // 退款申请时间 输入框前文字
         colname: 'startEndTimes',
         type: 'datetimerange',
         value: 'startEndTimes', // 输入框的值
@@ -57,12 +57,12 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($i18n.t('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.startEndTimes
     if (!start) {
-      self.$Message.warning($i18n.t('modalTips.kv')); // 请输入退款申请时间
+      self.$Message.warning($it('modalTips.kv')); // 请输入退款申请时间
       return false;
     }
     const param = {

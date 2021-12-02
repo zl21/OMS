@@ -73,7 +73,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消 按钮文本
+            text: $it('common.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.quDao.modal = false;
@@ -82,7 +82,7 @@ export default {
           },
           {
             type: 'primary', // 按钮类型
-            text: $i18n.t('common.determine'), // 确定 按钮文本
+            text: $it('common.determine'), // 确定 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.quDaoOk();
@@ -173,7 +173,7 @@ export default {
             // type: 'index',
             width: 60,
             align: 'left',
-            title: $i18n.t('table_label.serialNo'), // 序号
+            title: $it('table_label.serialNo'), // 序号
             render: (h, params) => {
               return h('span', {}, (this.tabConfigQu.pageIndex - 1) * this.tabConfigQu.pageSize + params.index + 1)
             }
@@ -257,7 +257,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: $i18n.t('table_label.serialNo'), // 序号
+            title: $it('table_label.serialNo'), // 序号
           },
           {
             title: '店铺名称', // 
@@ -354,7 +354,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $i18n.t('table_label.itemNo01'), // SPU编码
+              name: $it('table_label.itemNo01'), // SPU编码
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: '', // 这个是选择的值
               pid: '',
@@ -430,7 +430,7 @@ export default {
                 fkdisplay: 'drp', // 外键关联类型
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
-                name: $i18n.t('table_label.shopName'), // 店铺名称
+                name: $it('table_label.shopName'), // 店铺名称
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 valuedata: '', // 这个是选择的值
                 pid: '',
@@ -522,7 +522,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_IMPORT',
-              text: $i18n.t('modalTitle.import'), // 导入
+              text: $it('modalTitle.import'), // 导入
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -531,7 +531,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_EXPORT',
-              text: $i18n.t('btn.export'), // 导出
+              text: $it('btn.export'), // 导出
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -543,7 +543,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.import'), // 导入
+        confirmTitle: $it('modalTitle.import'), // 导入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -742,7 +742,7 @@ export default {
     // 删除明细
     deleteDetail() {
       const selectArr = this.tabConfig.selection
-      if (!selectArr.length) return this.$Message.warning($i18n.t('modalTips.hy'))
+      if (!selectArr.length) return this.$Message.warning($it('modalTips.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message } }) => {
         if (code == 0) {
@@ -809,12 +809,12 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },
@@ -881,9 +881,9 @@ export default {
       let isEdit = this.ID != -1
       let tableBtnConfig = this.tabConfig.businessButtonConfig
       let isShowTableBtn = this.isEnable ? false : !this.isCopy
-      let addBtn = this.queryBtn(this.btnConfig, $i18n.t('common.copy'))
-      let delBtn = this.queryBtn(tableBtnConfig, $i18n.t('btn.deleteDetail'))
-      let importBtn = this.queryBtn(tableBtnConfig, $i18n.t('modalTitle.import'))
+      let addBtn = this.queryBtn(this.btnConfig, $it('common.copy'))
+      let delBtn = this.queryBtn(tableBtnConfig, $it('btn.deleteDetail'))
+      let importBtn = this.queryBtn(tableBtnConfig, $it('modalTitle.import'))
       addBtn && (addBtn.isShow = isEdit) // 复制
       delBtn && (delBtn.isShow = isShowTableBtn) // 删除明细
       importBtn && (importBtn.isShow = isShowTableBtn) // 导入
@@ -922,7 +922,7 @@ export default {
       for (let key of validFields) {
         if (!obj[key]) {
           // TODO! `明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : 'SPU编码'}不能为空`
-          this.$Message.error(`明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : $i18n.t('table_label.itemNo01')}不能为空`)
+          this.$Message.error(`明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : $it('table_label.itemNo01')}不能为空`)
           valid = false;
           break;
         }
@@ -1002,10 +1002,10 @@ export default {
     //   const { CP_C_SHOP_ID, CP_C_ORG_CHANNEL_ID, CP_C_ORG_CHANNEL_ID } = formConfig.formValue
     //   let mes2 = ''
     //   if (!CP_C_ORG_CHANNEL_ID) {
-    //     mes2 += $i18n.t('form_label.bh') // 最低成交单价
+    //     mes2 += $it('form_label.bh') // 最低成交单价
     //   }
     //   if (!(CP_C_SHOP_ID || CP_C_ORG_CHANNEL_ID)) {
-    //     mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
+    //     mes2 += ` SPU/${$it('table_label.code_SKU')}` // i18n SPU/SKU编码
     //   }
     //   mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
     //   if ((!(CP_C_SHOP_ID || CP_C_ORG_CHANNEL_ID)) && this.isMasterRequired && !isSaveAll) {

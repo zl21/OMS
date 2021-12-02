@@ -18,7 +18,7 @@ export default {
         buttons: [
           {
             webname: 'ST_C_HOLD_STRATEGY_SAVE',
-            text: $i18n.t('btn.save'), // 保存
+            text: $it('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.save();
@@ -26,7 +26,7 @@ export default {
           },
           {
             webname: 'fix_back',
-            text: $i18n.t('btn.back'),
+            text: $it('btn.back'),
             btnclick: () => {
               this.back();
             }
@@ -63,14 +63,14 @@ export default {
           {
             colname: 'ECODE',
             width: '6',
-            label: $i18n.t('form_label.bc'), // 策略ID
+            label: $it('form_label.bc'), // 策略ID
             style: null,
             regx: /^(\s*|[A-Za-z0-9]+)$/,
           },
           {
             colname: 'ENAME',
             width: '6',
-            label: $i18n.t('form_label.bd'), // 策略名称
+            label: $it('form_label.bd'), // 策略名称
             style: 'input',
             inputChange: () => {
               this.masterModifyData('ENAME', 'formConfig1')
@@ -79,7 +79,7 @@ export default {
           {
             colname: 'ISACTIVE',
             width: '6',
-            label: $i18n.t('form_label.bg'), // 启用状态
+            label: $it('form_label.bg'), // 启用状态
             style: null,
             // inputChange: () => {
             //   this.masterModifyData('ISACTIVE', 'formConfig1')
@@ -95,7 +95,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: $i18n.t('form_label.be'), // 生效开始时间
+            label: $it('form_label.be'), // 生效开始时间
             colname: 'VALID_BEGIN_TIME',
             value: '',
             width: '6',
@@ -113,7 +113,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: $i18n.t('form_label.bf'), // 生效结束时间
+            label: $it('form_label.bf'), // 生效结束时间
             colname: 'VALID_END_TIME',
             value: '',
             width: '6',
@@ -153,7 +153,7 @@ export default {
             itemdata: {
               colid: '172070',
               colname: 'CP_C_SHOP_IDS',
-              name: $i18n.t('table_label.shopName'), // 店铺名称
+              name: $it('table_label.shopName'), // 店铺名称
               valuedata: '',
               pid: '',
               fkdisplay: 'mrp',
@@ -175,7 +175,7 @@ export default {
             colname: 'TIME',
             style: 'formCompile',
             class: 'soltDom',
-            label: $i18n.t('form_label.timeType'), // 时间类型
+            label: $it('form_label.timeType'), // 时间类型
             format: 'yyyy-MM-dd HH:mm:ss',
             slotName: 'spec01',
             width: '24',
@@ -354,7 +354,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: $i18n.t('form_label.timeType'), // 时间类型
+            label: $it('form_label.timeType'), // 时间类型
             slotName: 'spec03',
             width: '10',
             disabled: false,
@@ -484,7 +484,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: $i18n.t('form_label.timeType'), // 时间类型
+            label: $it('form_label.timeType'), // 时间类型
             slotName: 'spec04',
             width: '10',
             disabled: false,
@@ -600,7 +600,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: $i18n.t('form_label.timeType'), // 时间类型
+            label: $it('form_label.timeType'), // 时间类型
             slotName: 'spec05',
             width: '10',
             disabled: false,
@@ -683,7 +683,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          label: $it('panel_label.operationLog'), // 操作日志
           value: 'ST_HOLD_ORDER_STRATEGY_LOG'
         }
       ],
@@ -1040,12 +1040,12 @@ export default {
       if (Object.keys(this.modify).length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             self.onOk();
           }

@@ -9,7 +9,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
           type: '', // 按钮类型
-          text: $i18n.t('common.cancel'), // 取消
+          text: $it('common.cancel'), // 取消
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -19,7 +19,7 @@ export default {
         },
         {
           type: '', // 按钮类型
-          text: $i18n.t('common.determine'), // 确定
+          text: $it('common.determine'), // 确定
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -56,7 +56,7 @@ export default {
           }
         });
       } else {
-        self.$Message.warning($i18n.t('modalTips.el')); // '请输入传WMS拣货单字段!'
+        self.$Message.warning($it('modalTips.el')); // '请输入传WMS拣货单字段!'
       }
     }
   }

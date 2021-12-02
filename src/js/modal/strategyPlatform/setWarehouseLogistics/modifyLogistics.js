@@ -14,11 +14,11 @@ export default {
         columns: [
           {
             key: 'ENAME',
-            title: $i18n.t('form_label.logisticsCompany'), // '物流公司'
+            title: $it('form_label.logisticsCompany'), // '物流公司'
           },
           {
             key: 'ECODE',
-            title: $i18n.t('form_label.logisticsNo'), // '物流编号'
+            title: $it('form_label.logisticsNo'), // '物流编号'
           }
         ],
         data: [], // 数据配置
@@ -34,7 +34,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -42,7 +42,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -103,7 +103,7 @@ export default {
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(res.data.data.message);
       } else {
-        const err = res.data.data.message || $i18n.t('modalTips.z3');
+        const err = res.data.data.message || $it('modalTips.z3');
         _this.$Message.error(err);
       }
     },
@@ -142,7 +142,7 @@ export default {
           if (this.selectData[i].CP_C_LOGISTICS_ECODE === ecode) {
             this.selectData.splice(i, 1);
             this.total = this.selectData.length;
-            this.$Message.success($i18n.t('modalTips.ay'));
+            this.$Message.success($it('modalTips.ay'));
             break;
           }
         }
@@ -172,12 +172,12 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       const res = await this.service.common.delWarehouseLogistics(fromdata);
       if (res.data.data.code === 0) {
-        const ess = res.data.data.message || $i18n.t('modalTips.ay');
+        const ess = res.data.data.message || $it('modalTips.ay');
         this.getLogistics();
         this.$parent.$parent.$parent.refresh();
         this.$Message.success(ess);
       } else {
-        const err = res.data.data.message || $i18n.t('modalTips.z3');
+        const err = res.data.data.message || $it('modalTips.z3');
         this.$Message.error(err);
       }
       this.total = this.selectData.length;

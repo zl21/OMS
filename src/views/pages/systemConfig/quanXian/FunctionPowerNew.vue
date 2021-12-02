@@ -352,13 +352,13 @@ export default {
           tbodyWidth: '62px'
         },
         {
-          title: $i18n.t('table_label.edit'), // 编辑
+          title: $it('table_label.edit'), // 编辑
           key: 'edit',
           editValue: false,
           tbodyWidth: '62px'
         },
         {
-          title: $i18n.t('btn.delete'), // 删除
+          title: $it('btn.delete'), // 删除
           key: 'delete',
           deleteValue: false,
           tbodyWidth: '62px'
@@ -491,7 +491,7 @@ export default {
       this.getSaveData();
       if (this.tableSaveData.length > 0) {
         this.$Modal.fcWarning({
-          title: $i18n.t("modalTitle.tips"), // 提示
+          title: $it("modalTitle.tips"), // 提示
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
@@ -752,7 +752,7 @@ export default {
               });
             } else {
               this.$Modal.fcWarning({
-                title: $i18n.t("modalTitle.tips"), // 提示
+                title: $it("modalTitle.tips"), // 提示
                 className: 'ark-dialog',
                 mask: true,
                 content: res.data.message,

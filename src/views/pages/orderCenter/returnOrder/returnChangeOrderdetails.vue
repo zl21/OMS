@@ -82,13 +82,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             btnclick: () => {
               this.detailAddCancel();
             },
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               this.resetReturnMainTable();
@@ -101,7 +101,7 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             btnclick: () => {
               // this.$emit("closeActionDialog", false);
               this.replaceProductTable.modal = false;
@@ -109,7 +109,7 @@ export default {
             },
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               this.replaceOk();
@@ -148,7 +148,7 @@ export default {
             {
               webname: 'returnOrderAddProductItem',
               type: "primary",
-              text: $i18n.t('btn.addDetail'), // 按钮文本 新增明细
+              text: $it('btn.addDetail'), // 按钮文本 新增明细
               isShow: true,
               btnclick: (e) => {
                 if (
@@ -156,7 +156,7 @@ export default {
                   !this.mainData.SOURCE_CODE
                 ) {
                   // 原平台单号不能为空！
-                  this.$Message.warning($i18n.t('modalTips.ho'));
+                  this.$Message.warning($it('modalTips.ho'));
                   return;
                 }
                 setTimeout(() => {
@@ -167,7 +167,7 @@ export default {
             {
               webname: 'returnOrderReplaceProduct',
               type: "primary", // 按钮类型
-              text: $i18n.t('btn.replaceDetail'), // 按钮文本 替换明细
+              text: $it('btn.replaceDetail'), // 按钮文本 替换明细
               isShow: true,
               btnclick: (e) => {
                 console.log(e);
@@ -176,7 +176,7 @@ export default {
                   !this.mainData.SOURCE_CODE
                 ) {
                   // 原平台单号不能为空！
-                  this.$Message.warning($i18n.t('modalTips.ho'));
+                  this.$Message.warning($it('modalTips.ho'));
                   return;
                 }
                 this.getPlaceData(0, 0);
@@ -185,7 +185,7 @@ export default {
             {
               webname: 'returnOrderDeleteProductItem',
               type: "warning", // 按钮类型
-              text: $i18n.t('btn.deleteDetail'), // 按钮文本 删除明细
+              text: $it('btn.deleteDetail'), // 按钮文本 删除明细
               isShow: true,
               btnclick: (e) => {
                 console.log(e, this.detailsArrData.length);
@@ -230,7 +230,7 @@ export default {
           btnsite: "right", // 按钮位置 (right , center , left)
           buttons: [
             {
-              text: $i18n.t('btn.reset'), //重置
+              text: $it('btn.reset'), //重置
               btnclick: () => {
                 this.resetFun();
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
@@ -238,7 +238,7 @@ export default {
             },
             {
               type: "primary", // 按钮类型
-              text: $i18n.t('btn.search'), // 按钮文本 搜索
+              text: $it('btn.search'), // 按钮文本 搜索
               isShow: true,
               btnclick: (e) => {
                 this.getPlaceData(1, this.replaceProductTable.pageSize);
@@ -254,7 +254,7 @@ export default {
           },
           formData: [
             {
-              label: $i18n.t('table_label.code_SKU'),//SKU编码
+              label: $it('table_label.code_SKU'),//SKU编码
               style: "dimSearch",
               width: "8",
               value: "ECODE",
@@ -273,7 +273,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $i18n.t('form_label.skuName'), //sku名称
+              label: $it('form_label.skuName'), //sku名称
               style: "dimSearch",
               width: "8",
               value: "ENAME",
@@ -291,7 +291,7 @@ export default {
             },
             {
               style: "dimSearch", //输入框类型
-              label: $i18n.t('table_label.itemNo01'), //输入框前文字 SPU编码
+              label: $it('table_label.itemNo01'), //输入框前文字 SPU编码
               value: "PS_C_PRO_ECODE", //输入框的值
               columns: ["ENAME"],
               width: "8",
@@ -348,7 +348,7 @@ export default {
           // this.getBtn();
           this.actionTableCon.businessButtonConfig.buttons[0].isShow = false;
           this.actionTableCon.businessButtonConfig.buttons[1].isShow = true;
-          this.actionTableCon.businessButtonConfig.buttons[1].text = $i18n.t('btn.addDetail'); //新增明细
+          this.actionTableCon.businessButtonConfig.buttons[1].text = $it('btn.addDetail'); //新增明细
           this.actionTableCon.businessButtonConfig.buttons[2].isShow = true;
           this.actionTableCon.data = this.toMainData.huan;
         }
@@ -371,27 +371,27 @@ export default {
       this.getBtn().then((res) => {
         let BtnConfig = this.actionTableCon.businessButtonConfig.buttons;
         // 换货明细
-        if (this.$parent.$parent.panelRef === $i18n.t('form_label.exchangeDetails')) {
+        if (this.$parent.$parent.panelRef === $it('form_label.exchangeDetails')) {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = true;
           BtnConfig[2].isShow = false;
           // 平台
-          if (this.$route.query.RETURN_SOURCE == $i18n.t('other.platForm')) {
+          if (this.$route.query.RETURN_SOURCE == $it('other.platForm')) {
             BtnConfig[1].isShow = false;
           }
           this.actionTableCon.columns = this.tableHead.huan;
           this.renderColumn = this.tableHead.huan;
           // 手工新增
-          if (this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')) {
+          if (this.$route.query.RETURN_SOURCE !== $it('btn.addManually')) {
             this.renderHandle([["QTY_EXCHANGE"]]); //render方法
           } else {
             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
           }
           this.actionTableCon.data = this.toMainData.huan;
           // 退货明细
-        } else if (this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')) {
+        } else if (this.$parent.$parent.panelRef === $it('form_label.returnDetails')) {
           // 平台
-          if (this.$route.query.RETURN_SOURCE == $i18n.t('other.platForm')) {
+          if (this.$route.query.RETURN_SOURCE == $it('other.platForm')) {
             BtnConfig[0].isShow = false;
             BtnConfig[1].isShow = false;
             BtnConfig[2].isShow = false;
@@ -400,7 +400,7 @@ export default {
           this.actionTableCon.columns = this.tableHead.tui;
           this.renderColumn = this.tableHead.tui;
           // 手工新增
-          if (this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')) {
+          if (this.$route.query.RETURN_SOURCE !== $it('btn.addManually')) {
             this.renderHandle([["QTY_EXCHANGE"]]); //render方法
           } else {
             this.renderHandle([["REFUND_ID", "QTY_EXCHANGE"]]); //render方法
@@ -459,7 +459,7 @@ export default {
             } else {
               if (item.webname == 'returnOrderAddProductItem') {
                 item.isShow = false
-                item.text = $i18n.t('btn.addDetail'); //新增明细
+                item.text = $it('btn.addDetail'); //新增明细
               }
             }
           }
@@ -515,12 +515,12 @@ export default {
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
       this.actionTableCon.columns =
         // 退货明细
-        this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
+        this.$parent.$parent.panelRef === $it('form_label.returnDetails')
           ? REFUND_ITEM_TABTH
           : EXCHANGE_ITEM_TABTH; //表头
       this.renderColumn =
         // 退货明细
-        this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
+        this.$parent.$parent.panelRef === $it('form_label.returnDetails')
           ? REFUND_ITEM_TABTH
           : EXCHANGE_ITEM_TABTH; // render
       // 退款金额
@@ -555,17 +555,17 @@ export default {
         // 初始赋值
         let renderArr =
           // 退货明细
-          this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
+          this.$parent.$parent.panelRef === $it('form_label.returnDetails')
             ? ["REFUND_ID", "QTY_REFUND"]
             : ["QTY_EXCHANGE", "AMT_EXCHANGE"]; // render
         // 手工新增
-        if (this.$route.query.RETURN_SOURCE !== $i18n.t('btn.addManually')) {
+        if (this.$route.query.RETURN_SOURCE !== $it('btn.addManually')) {
           renderArr = [];
         }
         this.renderHandle(renderArr);
         this.actionTableCon.data =
           // 退货明细
-          this.$parent.$parent.panelRef === $i18n.t('form_label.returnDetails')
+          this.$parent.$parent.panelRef === $it('form_label.returnDetails')
             ? OC_B_RETURN_ORDER_REFUND_ITEMS
             : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
 
@@ -829,14 +829,14 @@ export default {
       setTimeout(() => {
         if (self.returnProduct == "0") {
           self.actionTableCon.totalData.push({
-            index: `${$i18n.t("other.total")}:`, // 合计
+            index: `${$it("other.total")}:`, // 合计
             REFUND_FEE: $utils.floatNumber(amt, 2),
             QTY_REFUND: qty,
             REAL_AMT: realAmt,
           });
         } else {
           self.actionTableCon.totalData.push({
-            index: `${$i18n.t("other.total")}:`,
+            index: `${$it("other.total")}:`,
             AMT_EXCHANGE: $utils.floatNumber(amt, 2),
             QTY_EXCHANGE: qty,
           });
@@ -974,30 +974,30 @@ export default {
       haveGroup = haveGroup.join(',').replace(/(，|,)$/, "");
       if (this.returnProduct == "0") {
         // 删除退货商品
-        title = $i18n.t('modalTips.jk');
+        title = $it('modalTips.jk');
         key = "REFUND_ITEM_UNIQUE_KEY";
         if (haveGift && !haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
-          msg = `${$i18n.t('modalTips.jl')}：${haveGift} ？`;
+          msg = `${$it('modalTips.jl')}：${haveGift} ？`;
           giftArr = allDa.filter(it => a1.includes(it[key]));
         } else if (haveGroup && !haveGift) {
           // 请确认是否删除当前选中的退货商品，还存在组合/福袋下挂的其他关联商品
-          msg = `${$i18n.t('modalTips.jm')}：${haveGroup} ？`;
+          msg = `${$it('modalTips.jm')}：${haveGroup} ？`;
           groupArr = allDa.filter(it => a2.includes(it[key]));
         } else if (haveGift && haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
           // 并且还存在组合/福袋下挂的其他关联商品
-          msg = `${$i18n.t('modalTips.jl')}：${haveGift}，${$i18n.t('modalTips.jo')}：${haveGroup}。`;
+          msg = `${$it('modalTips.jl')}：${haveGift}，${$it('modalTips.jo')}：${haveGroup}。`;
           bothArr = [...giftArr, ...groupArr]
         } else {
           // 请确认是否删除当前选中的退货商品？
-          msg = $i18n.t('modalTips.jp');
+          msg = $it('modalTips.jp');
         }
       } else {
-        title = $i18n.t('modalTips.jq'); // 删除换货商品
+        title = $it('modalTips.jq'); // 删除换货商品
         key = "PS_C_SKU_ECODE";
         // 请确认是否删除当前选中的换货商品？
-        msg = $i18n.t('modalTips.jr');
+        msg = $it('modalTips.jr');
       }
       this.$Modal.info({
         title,
@@ -1006,8 +1006,8 @@ export default {
         mask: true,
         className: 'ark-dialog errTip',
         showCancel: true,
-        okText: $i18n.t("common.determine"), // 确定
-        cancelText: $i18n.t("common.cancel"), // 取消
+        okText: $it("common.determine"), // 确定
+        cancelText: $it("common.cancel"), // 取消
         onOk: () => {
           this.$nextTick(() => {
             // 取差集展示：
@@ -1044,7 +1044,7 @@ export default {
       const tui = this.tableConfig.data;
       const addToList = tui.filter((i) => i._checked);
       if (!addToList.length) {
-        this.$Message.warning($i18n.t('modalTips.gn')); // 请选择一条明细！
+        this.$Message.warning($it('modalTips.gn')); // 请选择一条明细！
         return false
       } else {
         this.tableConfig.modal = false;
@@ -1133,7 +1133,7 @@ export default {
       let tableData = self.actionTableCon.data;
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
       if (!Object.keys(selectData).length) {
-        self.$Message.warning($i18n.t('modalTips.gl')); // 请选中一条明细！
+        self.$Message.warning($it('modalTips.gl')); // 请选中一条明细！
         return false
       }
       let params = {

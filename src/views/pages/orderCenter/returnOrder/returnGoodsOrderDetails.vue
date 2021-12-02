@@ -77,7 +77,7 @@ export default {
     return {
       vmI18n:$i18n,
       IS_COMBINATION:0,//4 代表组合商品
-      switchText: $i18n.t('form_label.b0'), //切换为sku商品展示
+      switchText: $it('form_label.b0'), //切换为sku商品展示
       returnArr: [],
       changeArr: [],
       loading: false,
@@ -107,7 +107,7 @@ export default {
             {
               webname: 'returnOrderAddProductItem',
               type: "primary",
-              text: $i18n.t('btn.addDetail'), // 按钮文本 新增明细
+              text: $it('btn.addDetail'), // 按钮文本 新增明细
               isShow: true,
               btnclick: (e) => {
                 if (
@@ -115,7 +115,7 @@ export default {
                   !this.mainData.SOURCE_CODE
                 ) {
                   // this.$Message.warning("原平台单号不能为空！");
-                  this.$Message.warning($i18n.t('modalTips.ho'));
+                  this.$Message.warning($it('modalTips.ho'));
                   return;
                 }
                 this.tableConfig.modal = true;
@@ -127,11 +127,11 @@ export default {
             {
               webname: 'returnOrderReplaceProduct',
               type: "primary", // 按钮类型
-              text: $i18n.t('btn.replaceDetail'), // 按钮文本 替换明细
+              text: $it('btn.replaceDetail'), // 按钮文本 替换明细
               isShow: true,
               btnclick: (e) => {
                 if(this.detailsArrData.length > 1){
-                   this.$Message.warning($i18n.t('modalTips.dz'));
+                   this.$Message.warning($it('modalTips.dz'));
                    return false;
                 }
                 if (
@@ -139,7 +139,7 @@ export default {
                   !this.mainData.SOURCE_CODE
                 ) {
                   // this.$Message.warning("原平台单号不能为空！");
-                  this.$Message.warning($i18n.t('modalTips.ho'));
+                  this.$Message.warning($it('modalTips.ho'));
                   return;
                 }
                 this.getPlaceData(0,0);
@@ -149,7 +149,7 @@ export default {
             {
               webname: 'returnOrderDeleteProductItem',
               type: "warning", // 按钮类型
-              text: $i18n.t('btn.deleteDetail'), // 按钮文本 删除明细
+              text: $it('btn.deleteDetail'), // 按钮文本 删除明细
               isShow: true,
               btnclick: (e) => {
                 this.deleteMainTableData();
@@ -201,7 +201,7 @@ export default {
           btnsite: "right", // 按钮位置 (right , center , left)
           buttons: [
             {
-              text: $i18n.t('btn.reset'), //重置
+              text: $it('btn.reset'), //重置
               btnclick: () => {
                 this.resetFun();
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
@@ -209,7 +209,7 @@ export default {
             },
             {
               type: "primary", // 按钮类型
-              text: $i18n.t('btn.search'), // 按钮文本 搜索
+              text: $it('btn.search'), // 按钮文本 搜索
               isShow: true,
               btnclick: (e) => {
                 this.getPlaceData(0, this.replaceProductTable.pageSize);
@@ -225,7 +225,7 @@ export default {
           },
           formData: [
             {
-              label: $i18n.t('table_label.code_SKU'),//SKU编码
+              label: $it('table_label.code_SKU'),//SKU编码
               style: "dimSearch",
               width: "8",
               value: "ECODE",
@@ -244,7 +244,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $i18n.t('form_label.skuName'), //sku名称
+              label: $it('form_label.skuName'), //sku名称
               style: "dimSearch",
               width: "8",
               value: "ENAME",
@@ -261,7 +261,7 @@ export default {
             },
             {
               style: "dimSearch", //输入框类型
-              label: $i18n.t('table_label.itemNo01'), //输入框前文字 SPU编码
+              label: $it('table_label.itemNo01'), //输入框前文字 SPU编码
               value: "PS_C_PRO_ECODE", //输入框的值
               columns: ["ENAME"],
               width: "8",
@@ -311,7 +311,7 @@ export default {
         //   renderKeys = ["QTY_EXCHANGE", "PRICE_ACTUAL"];
         //   this.omsTableConfig.businessButtonConfig.buttons[0].isShow = false;
         //   this.omsTableConfig.businessButtonConfig.buttons[1].isShow = true;
-        //   this.omsTableConfig.businessButtonConfig.buttons[1].text = $i18n.t('btn.addDetail');//新增明细
+        //   this.omsTableConfig.businessButtonConfig.buttons[1].text = $it('btn.addDetail');//新增明细
         //   this.omsTableConfig.businessButtonConfig.buttons[2].isShow = true;
         //   this.omsTableConfig.data = this.toMainData.huan;
         // }
@@ -408,7 +408,7 @@ export default {
     // 切换商品展示类型
     onSitch(){
       // 切换为sku商品展示 切换为平台商品展示
-      this.isSku ? this.switchText = $i18n.t('form_label.b0') : this.switchText = $i18n.t('form_label.b1');
+      this.isSku ? this.switchText = $it('form_label.b0') : this.switchText = $it('form_label.b1');
       this.isSku = !this.isSku;
       this.getDetailsData(!this.isSku);
     },
@@ -434,7 +434,7 @@ export default {
             } else {
               if (item.webname == 'returnOrderAddProductItem') {
                 item.isShow = false
-                item.text = $i18n.t('btn.addDetail');//新增明细
+                item.text = $it('btn.addDetail');//新增明细
               }
             }
           }
@@ -809,7 +809,7 @@ export default {
               align: "center",
             },
             {
-              title: $i18n.t('table_label.serialNo'), // 序号
+              title: $it('table_label.serialNo'), // 序号
               key: "index",
               type: "index",
               align: "center",
@@ -840,14 +840,14 @@ export default {
         if(self.omsTableConfig.totalData.length) return;
         if (this.panelReturn) {
           self.omsTableConfig.totalData.push({
-            index: `${$i18n.t("other.total")}`, // 合计
+            index: `${$it("other.total")}`, // 合计
             REFUND_FEE: $utils.floatNumber(amt),
             QTY_REFUND: qty,
             REAL_AMT: $utils.floatNumber(REAL_AMT) // 成交单价
           });
         } else {
           self.omsTableConfig.totalData.push({
-            index: `${$i18n.t("other.total")}:`,
+            index: `${$it("other.total")}:`,
             AMT_EXCHANGE: $utils.floatNumber(amt),
             QTY_EXCHANGE: qty,
           });
@@ -995,39 +995,39 @@ export default {
       let msg, title, key;
       if (self.panelReturn) {
         // 删除退货商品
-        title = $i18n.t('modalTips.jk');
+        title = $it('modalTips.jk');
         key = "REFUND_ITEM_UNIQUE_KEY";
         if (haveGift) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
-          msg = `${$i18n.t('modalTips.jl')}：${haveGift.replace(
+          msg = `${$it('modalTips.jl')}：${haveGift.replace(
             /(，|,)$/,
             " "
           )} ？`;
         } else if (haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在组合/福袋下挂的其他关联商品
-          msg = `${$i18n.t('modalTips.jm')}：${haveGroup.replace(
+          msg = `${$it('modalTips.jm')}：${haveGroup.replace(
             /(，|,)$/,
             " "
           )} ？`;
         } else if (haveGift && haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
           // 并且还存在组合/福袋下挂的其他关联商品
-          msg = `${$i18n.t('modalTips.jl')}：${haveGift.replace(
+          msg = `${$it('modalTips.jl')}：${haveGift.replace(
             /(，|,)$/,
             " "
-          )}，${$i18n.t('modalTips.jo')}：${haveGroup.replace(
+          )}，${$it('modalTips.jo')}：${haveGroup.replace(
             /，$/,
             ""
           )}。`;
         } else {
           // 请确认是否删除当前选中的退货商品？
-          msg = $i18n.t('modalTips.jp');
+          msg = $it('modalTips.jp');
         }
       } else {
-        title = $i18n.t('modalTips.jq');; // 删除换货商品
+        title = $it('modalTips.jq');; // 删除换货商品
         key = "PS_C_SKU_ECODE";
         // 请确认是否删除当前选中的换货商品？
-        msg = $i18n.t('modalTips.jr');
+        msg = $it('modalTips.jr');
       }
       self.$Modal.info({
         title,
@@ -1036,8 +1036,8 @@ export default {
         className: 'ark-dialog',
         mask: true,
         showCancel: true,
-        okText: $i18n.t("common.determine"), // 确定
-        cancelText: $i18n.t("common.cancel"), // 取消
+        okText: $it("common.determine"), // 确定
+        cancelText: $it("common.cancel"), // 取消
         onOk: () => {
           self.$nextTick(() => {
             // 取差集展示：
@@ -1064,7 +1064,7 @@ export default {
       const tui = this.tableConfig.data;
       const addToList = tui.filter((i) => i._checked);
       if (!addToList.length) {
-        this.$Message.warning($i18n.t('modalTips.gn')); // 请选择一条明细！
+        this.$Message.warning($it('modalTips.gn')); // 请选择一条明细！
         return false
       } else {
         this.tableConfig.modal = false;
@@ -1143,7 +1143,7 @@ export default {
       let replaceArr = [] //替换
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
       if (JSON.stringify(selectData) == "{}") {
-        self.$Message.warning($i18n.t('modalTips.gl')); // 请选中一条明细！
+        self.$Message.warning($it('modalTips.gl')); // 请选中一条明细！
         return;
       }
       let params = {

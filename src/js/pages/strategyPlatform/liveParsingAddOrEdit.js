@@ -22,7 +22,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'lookup_save', // 保存
-          text: $i18n.t('btn.save'), // 保存
+          text: $it('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -32,7 +32,7 @@ export default {
         },
         {
           webname: 'lookup_return', // 返回
-          text: $i18n.t('btn.back'),
+          text: $it('btn.back'),
           btnclick: () => {
             this.back()
           },
@@ -42,7 +42,7 @@ export default {
       formConfig1: {
         formData: [{
           style: '',
-          label: $i18n.t('form_label.bc'), // 策略ID
+          label: $it('form_label.bc'), // 策略ID
           colname: 'PLAN_ID',
           width: '6',
           disabled: false,
@@ -52,7 +52,7 @@ export default {
         },
         {
           style: 'input',
-          label: $i18n.t('form_label.bd'), // 策略名称
+          label: $it('form_label.bd'), // 策略名称
           colname: 'PLAN_NAME',
           width: '6',
           disabled: false,
@@ -62,7 +62,7 @@ export default {
         },
         {
           style: 'date', // 输入框类型
-          label: $i18n.t('form_label.be'), // 生效开始时间 输入框前文字
+          label: $it('form_label.be'), // 生效开始时间 输入框前文字
           colname: 'EFFECTIVE_BEGIN_TIME',
           type: 'datetime',
           width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -79,7 +79,7 @@ export default {
         },
         {
           style: 'date', // 输入框类型
-          label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
+          label: $it('form_label.bf'), // 生效结束时间 输入框前文字
           colname: 'EFFECTIVE_END_TIME',
           type: 'datetime',
           width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -96,7 +96,7 @@ export default {
         },
         {
           style: '',
-          label: $i18n.t('form_label.bg'), // 启用状态
+          label: $it('form_label.bg'), // 启用状态
           colname: 'ISACTIVE',
           width: '6',
           disabled: true,
@@ -134,7 +134,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               istooltip: true,
-              name: $i18n.t('table_label.shopName'), // 店铺名称
+              name: $it('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -150,7 +150,7 @@ export default {
           },
           {
             style: 'formCompile',
-            label: $i18n.t('form_label.timeType'), // 时间类型
+            label: $it('form_label.timeType'), // 时间类型
             colname: 'BILL_TIME_TYPE',
             width: '24',
             disabled: false,
@@ -159,11 +159,11 @@ export default {
             options: [
               {
                 value: 1,
-                label: $i18n.t('form_label.orderTime'), // 下单时间
+                label: $it('form_label.orderTime'), // 下单时间
               },
               {
                 value: 2,
-                label: $i18n.t('form_label.bj'), // 支付时间
+                label: $it('form_label.bj'), // 支付时间
               }
             ],
             radioChange: () => {
@@ -174,8 +174,8 @@ export default {
             }
           },
           {
-            label: $i18n.t('form_label.cd'), // 直播商品识别
-            subLabel: $i18n.t('form_label.bi'), // 识别规则
+            label: $it('form_label.cd'), // 直播商品识别
+            subLabel: $it('form_label.bi'), // 识别规则
             style: 'formCompile',
             slotName: 'rule',
             reqStar: true, // 插槽必填标识
@@ -186,15 +186,15 @@ export default {
             options: [
               {
                 value: 1,
-                label: $i18n.t('table_label.product_title'), // 商品标题
+                label: $it('table_label.product_title'), // 商品标题
               },
               {
                 value: 2,
-                label: $i18n.t('form_label.platformCommodityID'), // 平台商品ID
+                label: $it('form_label.platformCommodityID'), // 平台商品ID
               },
               {
                 value: 3,
-                label: $i18n.t('form_label.buyer_message'), // 买家留言
+                label: $it('form_label.buyer_message'), // 买家留言
               }
             ],
             radioChange: (item) => {
@@ -253,11 +253,11 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $i18n.t('form_label.bk'), // 主播ID
+            label: $it('form_label.bk'), // 主播ID
             colname: 'LIVE_ANCHOR_ID',
             width: '24',
             class: 'custom-width',
-            placeholder: $i18n.t('modalTips.hq'), // 请录入主播ID
+            placeholder: $it('modalTips.hq'), // 请录入主播ID
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_ID', 'master', 'formConfig3');
@@ -265,11 +265,11 @@ export default {
           },
           {
             style: 'input',
-            label: $i18n.t('form_label.bl'), // 主播昵称
+            label: $it('form_label.bl'), // 主播昵称
             colname: 'LIVE_ANCHOR_NAME',
             width: '24',
             class: 'custom-width',
-            placeholder: $i18n.t('modalTips.hr'), // 请录入主播昵称
+            placeholder: $it('modalTips.hr'), // 请录入主播昵称
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_NAME', 'master', 'formConfig3');
@@ -277,14 +277,14 @@ export default {
           },
           {
             style: 'radio',
-            label: $i18n.t('form_label.bm'), // 订单标签
+            label: $it('form_label.bm'), // 订单标签
             colname: 'ORDER_TAG',
             width: '24',
             disabled: false,
             options: [
               {
                 value: 1,
-                label: $i18n.t('form_label.bn'), // “播”标
+                label: $it('form_label.bn'), // “播”标
               }
             ],
             radioChange: () => {
@@ -307,7 +307,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          label: $it('panel_label.operationLog'), // 操作日志
           value: 'ST_C_LIVE_CAST_STRATEGY_LOG'
         }
       ],
@@ -340,12 +340,12 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },
@@ -503,9 +503,9 @@ export default {
       let msg
       if (mes) {
         let msgArr = mes.replace(/ 不能为空!/, '').split('，')
-        msg = !startTime && !msgArr.includes($i18n.t('form_label.timeType')) ? [...msgArr, $i18n.t('form_label.timeType')] : msgArr
+        msg = !startTime && !msgArr.includes($it('form_label.timeType')) ? [...msgArr, $it('form_label.timeType')] : msgArr
       }
-      msg = !mes ? startTime ? '' : [$i18n.t('form_label.timeType')] : msg
+      msg = !mes ? startTime ? '' : [$it('form_label.timeType')] : msg
 
       // 直播商品识别校验
       const hasNoValid = this.formConfig2.formValue.RULES
@@ -513,8 +513,8 @@ export default {
 
       if (msg || hasNoValid) {
         let tip = msg && hasNoValid
-          ? `${msg.join('，')}，${$i18n.t('form_label.cd')} 不能为空!`
-          : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `${$i18n.t('form_label.cd')} 不能为空!`
+          ? `${msg.join('，')}，${$it('form_label.cd')} 不能为空!`
+          : msg && !hasNoValid ? `${msg.join('，')} 不能为空!` : `${$it('form_label.cd')} 不能为空!`
         self.$Message.warning(tip);
         return false;
       }
@@ -524,7 +524,7 @@ export default {
         .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
       let uniqRow = Array.from(new Set(allRow))
       if (allRow.length != uniqRow.length) {
-        self.$Message.warning($i18n.t('modalTips.hp')) // 请勿重复添加直播商品识别规则!
+        self.$Message.warning($it('modalTips.hp')) // 请勿重复添加直播商品识别规则!
         return
       }
 

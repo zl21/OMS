@@ -20,19 +20,19 @@ export default {
         {
           class: 'icon-jibenxinxi',
           // content: "基础信息",
-          content: $i18n.t('other.basic_info'),
+          content: $it('other.basic_info'),
           finish: false
         },
         {
           class: 'icon-liuchengtiaojian',
           // content: "条件信息",
-          content: $i18n.t('other.condition_info'),
+          content: $it('other.condition_info'),
           finish: false
         },
         {
           class: 'icon-huodong',
           // content: "活动概览",
-          content: $i18n.t('other.activity_overview'),
+          content: $it('other.activity_overview'),
           finish: false
         }
       ],
@@ -71,14 +71,14 @@ export default {
         // this.basic_info.platform_mark = groups.platformTabs.map((item)=>{//平台标记
         //   return item.value;
         // });
-        this.basic_info.time_type = groups.timeTypes.find(item => item.title === $i18n.t('other.payment_date')).value; // 付款日期
-        this.basic_info.activity_type = groups.actiTypes.find(item => item.title === $i18n.t('other.Designated_free_purchase')).value; // 指定买赠
-        this.basic_info.buyer_limit_frequency = groups.buyerLimitFrequency.find(item => item.title === $i18n.t('other.unlimited')).value; // 不限制
-        this.basic_info.order_notes_type = groups.orderRemarks.find(item => item.title === $i18n.t('form_label.buyer_message')).value; // 买家留言
+        this.basic_info.time_type = groups.timeTypes.find(item => item.title === $it('other.payment_date')).value; // 付款日期
+        this.basic_info.activity_type = groups.actiTypes.find(item => item.title === $it('other.Designated_free_purchase')).value; // 指定买赠
+        this.basic_info.buyer_limit_frequency = groups.buyerLimitFrequency.find(item => item.title === $it('other.unlimited')).value; // 不限制
+        this.basic_info.order_notes_type = groups.orderRemarks.find(item => item.title === $it('form_label.buyer_message')).value; // 买家留言
         // 条件设置
-        this.batch_infos_setting.products_origin = groups.productsOrigin.find(item => item.title === $i18n.t('other.systemCommodity_SKU')).value; // 系统商品SKU
-        this.batch_infos_setting.gift_doubles = groups.giftDoubles.find(item => item.title === $i18n.t('other.no_double')).value; // 不翻倍
-        this.batch_infos_setting.gift_methods = groups.batchGiftMethods.find(item => item.title === $i18n.t('other.sendAll')).value; // 全部送
+        this.batch_infos_setting.products_origin = groups.productsOrigin.find(item => item.title === $it('other.systemCommodity_SKU')).value; // 系统商品SKU
+        this.batch_infos_setting.gift_doubles = groups.giftDoubles.find(item => item.title === $it('other.no_double')).value; // 不翻倍
+        this.batch_infos_setting.gift_methods = groups.batchGiftMethods.find(item => item.title === $it('other.sendAll')).value; // 全部送
         this.basic_info.activity_name = '';
         this.basic_info.stores.itemdata.valuedata = '';
         this.basic_info.stores.itemdata.pid = '';
@@ -113,18 +113,18 @@ export default {
     validate2() {
       let rs = {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       }; // 校验完成
       if (this.batch_infos_setting.gift_doubles === '1' && this.batch_infos_setting.max_doubles_limits === '') {
         return {
           code: -1,
-          message: $i18n.t('modalTips.r0')
+          message: $it('modalTips.r0')
         }; // 最大翻倍数未填写！
       }
       if (this.batch_infos_setting.list.length === 0) {
         return {
           code: -1,
-          message: $i18n.t('modalTips.r1')
+          message: $it('modalTips.r1')
         }; // 请先添加商品和赠品！
       }
       for (let i = 0; i < this.batch_infos_setting.list.length; i++) {
@@ -133,7 +133,7 @@ export default {
         if (productArr.length === 0) {
           return {
             code: -1,
-            message: $i18n.t('modalTips.r2')
+            message: $it('modalTips.r2')
           }; // 商品列表无数据
         }
         rs = this.checkTableProducts(productArr, i);
@@ -144,7 +144,7 @@ export default {
         if (giftArr.length === 0) {
           return {
             code: -1,
-            message: $i18n.t('modalTips.r3')
+            message: $it('modalTips.r3')
           }; // 赠品列表无数据
         }
         rs = this.checkTableGift(giftArr, i);
@@ -169,7 +169,7 @@ export default {
       }
       return {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       }; // 校验完成
     },
     checkTableGift(arr, index) {
@@ -187,7 +187,7 @@ export default {
       }
       return {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       }; // 校验完成
     },
     /**

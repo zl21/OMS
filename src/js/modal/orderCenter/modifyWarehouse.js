@@ -57,7 +57,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -68,7 +68,7 @@ export default {
           {
             type: '', // 按钮类
             // text: "", //按钮文本
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -118,15 +118,15 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: $i18n.t('table_label.serialNo'), // 序号
+                        title: $it('table_label.serialNo'), // 序号
                         key: 'index'
                       },
                       {
-                        title: $i18n.t('form_label.billNo'), // 单据编号
+                        title: $it('form_label.billNo'), // 单据编号
                         key: 'objno',
                       },
                       {
-                        title: $i18n.t('form_label.e0'), // 失败原因
+                        title: $it('form_label.e0'), // 失败原因
                         key: 'message'
                       }
                     ],

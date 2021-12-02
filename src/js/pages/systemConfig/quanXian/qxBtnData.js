@@ -5,7 +5,7 @@ export default {
         // 正常
         buttons: [
           {
-            text: $i18n.t('btn.save'), // 保存
+            text: $it('btn.save'), // 保存
             icon: '',
             btnClick: () => {
               this.saveQuanXian();
@@ -19,7 +19,7 @@ export default {
           //   }
           // },
           {
-            text: $i18n.t('btn.refresh'), // '刷新',
+            text: $it('btn.refresh'), // '刷新',
             icon: '',
             btnClick: () => {
               this.refresh();

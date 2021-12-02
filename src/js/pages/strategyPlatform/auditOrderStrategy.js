@@ -89,21 +89,21 @@ export default {
       },
       extendBtn: [
         {
-          text: $i18n.t('btn.save'), // 保存
+          text: $it('btn.save'), // 保存
           webname: 'ST_C_AUTO_AUDIT_SAVE',
           btnclick: () => {
             this.save();
           }
         },
         {
-          text: $i18n.t('common.return'), // 返回
+          text: $it('common.return'), // 返回
           webname: 'ST_C_AUTO_AUDIT_RETURN',
           btnclick: () => {
             if (this.isModify) {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
-                title: $i18n.t('modalTitle.tips'), // 提示
-                content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+                title: $it('modalTitle.tips'), // 提示
+                content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
@@ -136,14 +136,14 @@ export default {
         formData: [
           {
             style: '',
-            label: $i18n.t('form_label.bc'), // 策略ID
+            label: $it('form_label.bc'), // 策略ID
             value: 'PLAN_ID',
             width: '6',
             disabled: true
           },
           {
             style: 'input',
-            label: $i18n.t('form_label.bd'), // 策略名称
+            label: $it('form_label.bd'), // 策略名称
             value: 'PLAN_NAME',
             width: '6',
             inputChange: () => {
@@ -267,7 +267,7 @@ export default {
       },
       label: {
         labelList: [{
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          label: $it('panel_label.operationLog'), // 操作日志
           value: 'log',
         }],
         labelDefaultValue: 'log'

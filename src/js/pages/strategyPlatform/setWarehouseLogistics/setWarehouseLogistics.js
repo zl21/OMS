@@ -78,7 +78,7 @@ export default {
     this.labelList = [
       {
         // label: "区域明细",
-        label: $i18n.t('form_label.region_details'),
+        label: $it('form_label.region_details'),
         value: '1',
         isShow: true
       }
@@ -86,7 +86,7 @@ export default {
     this.btnConfig.buttons = [
       // {
       //   // text: "新增",
-      //   text: $i18n.t('btn.add'), // 按钮文本
+      //   text: $it('btn.add'), // 按钮文本
       //   btnclick: () => {
       //     const _this = this;
       //     _this.$store.commit('customize/TabHref', {
@@ -94,29 +94,29 @@ export default {
       //       type: 'action', // 类型action
       //       name: 'setWarehouseLogistics', // 文件名
       //       // label: "仓库物流优先级设置", // tab中文名
-      //       label: $i18n.t('panel_label.setWarehouseLogistics'),
+      //       label: $it('panel_label.setWarehouseLogistics'),
       //       query: Object.assign({
       //         id: -1, // 单据id
       //         // tabTitle: "仓库物流优先级设置", // tab中文名
-      //         tabTitle: $i18n.t('panel_label.setWarehouseLogistics')
+      //         tabTitle: $it('panel_label.setWarehouseLogistics')
       //       }) // 带的参数
       //     });
       //   }
       // },
       {
         // text: "保存",
-        text: $i18n.t('btn.save'), // 按钮文本
+        text: $it('btn.save'), // 按钮文本
         btnclick: () => {
           const _this = this;
           if (this.$route.params.customizedModuleId !== 'New') {
             if (_this.listArr.length == 0) {
               // _this.$Message.warning("请选择物流区域!");
-              _this.$Message.warning($i18n.t('modalTips.y7'));
+              _this.$Message.warning($it('modalTips.y7'));
               return;
             }
             if (_this.theadArr.length == 0) {
               // _this.$Message.warning("请选择区域物流!");
-              _this.$Message.warning($i18n.t('modalTips.y7'));
+              _this.$Message.warning($it('modalTips.y7'));
               return;
             }
             if (_this.listArr.length > 0) {
@@ -134,7 +134,7 @@ export default {
               });
               if (text) {
                 // _this.saveModalText = `${text}的物流优先级为空,保存会导致该数据删除,是否确认保存?`;
-                _this.saveModalText = `${text}${$i18n.t('modalTips.y8')}`;
+                _this.saveModalText = `${text}${$it('modalTips.y8')}`;
                 _this.saveModal = true;
               } else {
                 _this.save();
@@ -147,7 +147,7 @@ export default {
       },
       {
         // text: "作废",
-        text: $i18n.t('btn.void'), // 按钮文本
+        text: $it('btn.void'), // 按钮文本
         disabled: true,
         btnclick: () => {
           const _this = this;
@@ -156,7 +156,7 @@ export default {
       },
       {
         // text: "导入",
-        text: $i18n.t('btn.import'), // 按钮文本
+        text: $it('btn.import'), // 按钮文本
         disabled: true,
         btnclick: () => {
           const _this = this;
@@ -169,7 +169,7 @@ export default {
       },
       {
         // text: "导出",
-        text: $i18n.t('btn.export'), // 按钮文本
+        text: $it('btn.export'), // 按钮文本
         disabled: true,
         btnclick: () => {
           const _this = this;
@@ -178,7 +178,7 @@ export default {
       },
       {
         // text: "修改物流",
-        text: $i18n.t('btn.modify_logistics'), // 按钮文本
+        text: $it('btn.modify_logistics'), // 按钮文本
         disabled: true,
         btnclick: () => {
           this.modifyLogistics.componentData = { id: this.$route.params.customizedModuleId == 'New' ? '-1' : this.$route.params.customizedModuleId };
@@ -187,7 +187,7 @@ export default {
       },
       {
         // text: "刷新",
-        text: $i18n.t('btn.refresh'), // 按钮文本
+        text: $it('btn.refresh'), // 按钮文本
         disabled: true,
         btnclick: () => {
           const _this = this;
@@ -196,7 +196,7 @@ export default {
       },
       {
         // text: "返回",
-        text: $i18n.t('btn.back'), // 按钮文本
+        text: $it('btn.back'), // 按钮文本
         btnclick: () => {
           const _this = this;
           $omsUtils.tabCloseAppoint(_this);
@@ -225,7 +225,7 @@ export default {
           isnotnull: true,
           isuppercase: false,
           length: 20,
-          name: $i18n.t('form_label.warehouse'),
+          name: $it('form_label.warehouse'),
           readonly: false,
           refobjid: '14',
           reftable: 'CP_C_PHY_WAREHOUSE',
@@ -238,7 +238,7 @@ export default {
       },
       {
         style: 'input',
-        label: $i18n.t('table_label.remarks'),
+        label: $it('table_label.remarks'),
         value: 'REMARK',
         width: '6'
       }
@@ -248,7 +248,7 @@ export default {
       this.information.formData[0].itemdata.readonly = true;
       this.setTableHeight();
       this.refresh();
-      const btnTxetArr1 = [$i18n.t('btn.modify_logistics'), $i18n.t('btn.void'), $i18n.t('btn.export'), $i18n.t('btn.import'), $i18n.t('btn.refresh')];
+      const btnTxetArr1 = [$it('btn.modify_logistics'), $it('btn.void'), $it('btn.export'), $it('btn.import'), $it('btn.refresh')];
       this.btnConfig.buttons.forEach(item => {
         // "修改物流" || "作废" || "导出" || "导入" || "刷新"
         if (btnTxetArr1.includes(item.text)) {
@@ -256,8 +256,8 @@ export default {
         }
       });
     }
-    this.importTable.confirmTitle = $i18n.t('modalTitle.import');
-    this.modifyLogistics.confirmTitle = $i18n.t('modalTitle.select_logisticsCompany');
+    this.importTable.confirmTitle = $it('modalTitle.import');
+    this.modifyLogistics.confirmTitle = $it('modalTitle.select_logisticsCompany');
   },
   methods: {
     // 保存
@@ -299,7 +299,7 @@ export default {
         .then(res => {
 
           if (res.data.oK) {
-            _this.$Message.success($i18n.t('modalTips.z9')); // 保存成功
+            _this.$Message.success($it('modalTips.z9')); // 保存成功
             if (this.$route.params.customizedModuleId !== 'New') {
               this.refresh();
             } else {
@@ -307,17 +307,17 @@ export default {
                 id: res.data.data.data.objid, // 单据id
                 type: 'action', // 类型action
                 name: 'setWarehouseLogistics', // 文件名
-                label: $i18n.t('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
+                label: $it('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
                 query: Object.assign({
                   id: res.data.data.data.objid, // 单据id
-                  tabTitle: $i18n.t('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
+                  tabTitle: $it('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
                 }) // 带的参数
               });
             }
           }
         })
         .catch(error => {
-          const err = error || $i18n.t('modalTips.y0'); // 保存失败
+          const err = error || $it('modalTips.y0'); // 保存失败
           _this.$Message.error(err);
           // _this.refresh();
         }).finally(() => {
@@ -342,8 +342,8 @@ export default {
             _this.information.formValue.REMARK = res.data.data.warehouseLogistics.REMARK;
             if (res.data.data.warehouseLogistics.ISACTIVE === 'N') {
               // _this.statusName = "已作废";
-              _this.statusName = $i18n.t('common.voided');
-              const btnTxetArr = [$i18n.t('btn.modify_logistics'), $i18n.t('btn.void'), $i18n.t('btn.import'), $i18n.t('btn.export'), $i18n.t('btn.save')];
+              _this.statusName = $it('common.voided');
+              const btnTxetArr = [$it('btn.modify_logistics'), $it('btn.void'), $it('btn.import'), $it('btn.export'), $it('btn.save')];
               _this.btnConfig.buttons.forEach(item => {
                 // ["修改物流" || "作废" || "导入" || "导出" || "保存"]
                 if (btnTxetArr.includes(item.text)) {
@@ -464,7 +464,7 @@ export default {
           setTimeout(() => {
             item[index].rank = '';
             // this.$Message.info("优先级设置重复");
-            this.$Message.info($i18n.t('modalTips.y9'));
+            this.$Message.info($it('modalTips.y9'));
           }, 200);
           return;
         }
@@ -502,7 +502,7 @@ export default {
         });
       } else {
         _this.$Message.error(
-          data.message || $i18n.t('modalTips.z3') // 失败
+          data.message || $it('modalTips.z3') // 失败
         );
       }
     },
@@ -522,11 +522,11 @@ export default {
       } = await this.service.strategyPlatform.voidWarehouseLogistics(fromData);
       _this.loading = false;
       if (code === 0) {
-        const ess = data.message || $i18n.t('modalTips.y4'); // 作废成功
+        const ess = data.message || $it('modalTips.y4'); // 作废成功
         _this.getTreeData();
         _this.$Message.success(ess);
       } else {
-        const err = message || $i18n.t('modalTips.y4'); // 作废失败
+        const err = message || $it('modalTips.y4'); // 作废失败
         _this.$Message.success(err);
       }
     },
@@ -557,11 +557,11 @@ export default {
       } = await this.service.strategyPlatform.exportWarehouseLogisticsRank(param);
       console.log(code, data);
       if (code === 0) {
-        const ess = data.message || $i18n.t('modalTips.z2'); // 导出成功
+        const ess = data.message || $it('modalTips.z2'); // 导出成功
         _this.$Message.success(ess);
         $omsUtils.downloadUrlFile(data);
       } else {
-        const err = data.message || $i18n.t('modalTips.y6'); // 导出失败
+        const err = data.message || $it('modalTips.y6'); // 导出失败
         _this.$Message.success(err);
         $omsUtils.downloadUrlFile(data);
       }

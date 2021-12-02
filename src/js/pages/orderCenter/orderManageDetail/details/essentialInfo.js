@@ -39,62 +39,62 @@ export default {
         {
           width: '6',
           column: 'SOURCE_CODE',
-          label: $i18n.t('table_label.platform_orderNo') + ':', // 平台单号 输入框前文字
+          label: $it('table_label.platform_orderNo') + ':', // 平台单号 输入框前文字
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'BILL_NO',
-          label: $i18n.t('form_label.billNo') + ':', //'单据编号:'
+          label: $it('form_label.billNo') + ':', //'单据编号:'
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_SHOP_TITLE',
-          label: $i18n.t('other.shop') + ':', // 店铺名称
+          label: $it('other.shop') + ':', // 店铺名称
         },
         {
           flag: false,
           width: '6',
           column: 'ORDER_TYPE',
-          label: $i18n.t('form_label.billType') + ':', // 单据类型
+          label: $it('form_label.billType') + ':', // 单据类型
         },
         {
           flag: false,
           width: '6',
           column: 'PLATFORM_STATUS',
-          label: $i18n.t('form_label.e8') + ':' //平台状态
+          label: $it('form_label.e8') + ':' //平台状态
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_PHY_WAREHOUSE_ENAME', //
-          label: $i18n.t('form_label.delivery_warehouse') + ':' //发货仓库
+          label: $it('form_label.delivery_warehouse') + ':' //发货仓库
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_LOGISTICS_ENAME', //
-          label: $i18n.t('form_label.logisticsCompany') + ':' //物流公司
+          label: $it('form_label.logisticsCompany') + ':' //物流公司
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'EXPRESS_CODE',
-          label: $i18n.t('form_label.logisticsOrder_No') + ':' // 物流单号
+          label: $it('form_label.logisticsOrder_No') + ':' // 物流单号
         },
         // {
         {
           flag: false,
           width: '12',
           column: 'BUYER_MESSAGE',
-          label: $i18n.t('form_label.buyerNotes') + ':', // 买家备注
+          label: $it('form_label.buyerNotes') + ':', // 买家备注
         },
         {
           flag: false,
           width: '12',
           column: 'SELLER_MEMO',
-          label: $i18n.t('form_label.sellerNotes') + ':', // 卖家备注
+          label: $it('form_label.sellerNotes') + ':', // 卖家备注
         },
 
       ],
@@ -103,49 +103,49 @@ export default {
           flag: false,
           width: '12',
           column: 'RECEIVER_NAME',
-          label: $i18n.t('form_label.consignee') + ':'//收货人
+          label: $it('form_label.consignee') + ':'//收货人
         },
         {
           flag: false, // 需要加*
           width: '12',
           column: 'BUYER_NICK',
-          label: $i18n.t('table_label.buyerNickname') + ':', // 买家昵称
+          label: $it('table_label.buyerNickname') + ':', // 买家昵称
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_MOBILE',
-          label: $i18n.t('form_label.consignee_phone') + ':', // 收货人手机号
+          label: $it('form_label.consignee_phone') + ':', // 收货人手机号
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_PHONE',
-          label: $i18n.t('form_label.e6') + ':', // 收货人电话
+          label: $it('form_label.e6') + ':', // 收货人电话
         },
         {
           flag: false,
           width: '12',
           column: 'CP_C_REGION_PROVINCE_ENAME',
-          label: $i18n.t('form_label.aa') + ':'  //省市区
+          label: $it('form_label.aa') + ':'  //省市区
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_ZIP',
-          label: $i18n.t('form_label.e7') + ':', // 收货人邮编
+          label: $it('form_label.e7') + ':', // 收货人邮编
         },
         {
           flag: false,
           width: '24',
           column: 'RECEIVER_ADDRESS',
-          label: $i18n.t('form_label.ab') + ':' // 详细地址
+          label: $it('form_label.ab') + ':' // 详细地址
         },
         {
           flag: false,
           width: '24',
           column: 'SYS_REMARK',
-          label: $i18n.t('other.systemNotes') + ':',// 系统备注
+          label: $it('other.systemNotes') + ':',// 系统备注
         },
       ],
       tableConfig: {
@@ -163,7 +163,7 @@ export default {
       retailPriceTotal: '',
       orderPriceTotal: '',
       eyeStatus: false, // '订单收获地址'的眼睛icon的开/闭状态
-      eyeText: $i18n.t('btn.show'), //显示
+      eyeText: $it('btn.show'), //显示
       butArr: [{
         webname: 'orderBillInfoSecurity',
         isShow: true,
@@ -211,7 +211,7 @@ export default {
   },
   methods: {
     eyeClick: _.throttle(function () {
-      this.eyeText = this.eyeStatus ? $i18n.t('btn.show') : $i18n.t('btn.hide'); //隐藏 显示
+      this.eyeText = this.eyeStatus ? $it('btn.show') : $it('btn.hide'); //隐藏 显示
       this.eyeStatus = !this.eyeStatus;
       this.$emit('freshLoad', { DECRYPT: this.eyeStatus });
     }, 2000),
@@ -264,8 +264,8 @@ export default {
     // 修改地址
     modifyAddress() {
       // '待审核','缺货'
-      if (![$i18n.t('common.toBeReviewed'), $i18n.t('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
-        this.$Message.error($i18n.t('modalTips.fq')); //订单状态不满足，不允许修改地址！
+      if (![$it('common.toBeReviewed'), $it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
+        this.$Message.error($it('modalTips.fq')); //订单状态不满足，不允许修改地址！
         return false;
       }
       this.dialogs.address.data = this.componentData.order;

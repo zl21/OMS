@@ -99,7 +99,7 @@ const baseColumnDefs = [
 		field: 'REMARK'
 	},
 	{
-		headerName: $i18n.t('table_label.operation'), // 操作
+		headerName: $it('table_label.operation'), // 操作
 		// headerName: vmI18n.t("table_label.operation"),
 		field: 'ACTION_LOG'
 	}
@@ -107,39 +107,39 @@ const baseColumnDefs = [
 const logDataCol = [
 	{
 		// title: "序号",
-		title: $i18n.t('table_label.serialNo'),
+		title: $it('table_label.serialNo'),
 		type: 'index',
 		width: 60,
 		align: 'center'
 	},
 	{
 		// title: "操作时间",
-		title: $i18n.t('table_label.operatorTime'),
+		title: $it('table_label.operatorTime'),
 		key: 'creationdate'
 	},
 	{
 		// title: "操作人",
-		title: $i18n.t('form_label.operator'),
+		title: $it('form_label.operator'),
 		key: 'operator'
 	},
 	{
 		// title: "操作描述",
-		title: $i18n.t('table_label.operation_description'),
+		title: $it('table_label.operation_description'),
 		key: 'describes'
 	}
 ];
 const diStatusArr = [
 	{
 		value: 1,
-		label: $i18n.t('btn.draft') // 草稿
+		label: $it('btn.draft') // 草稿
 	},
 	{
 		value: 2,
-		label: $i18n.t('btn.published') // 已发布
+		label: $it('btn.published') // 已发布
 	},
 	{
 		value: 3,
-		label: $i18n.t('btn.offline') // 下线
+		label: $it('btn.offline') // 下线
 	}
 ];
 const tableCols = {
@@ -155,7 +155,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -171,7 +171,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -187,7 +187,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -219,7 +219,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -251,7 +251,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -287,7 +287,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -323,7 +323,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -345,7 +345,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -367,7 +367,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -389,7 +389,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -424,7 +424,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -473,7 +473,7 @@ const tableCols = {
 		{
 			align: 'center',
 			key: 'OPERATE',
-			title: $i18n.t('table_label.operation'), // 操作
+			title: $it('table_label.operation'), // 操作
 			fun: ''
 		}
 	],

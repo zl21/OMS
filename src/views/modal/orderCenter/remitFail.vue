@@ -32,14 +32,14 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消,
+            text: $it('common.cancel'), // 取消,
             btnclick: () => {
               this.$emit('closeActionDialog', false)
 
             }, // 按钮点击事件
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             btnclick: () => {
 
               this.determine()

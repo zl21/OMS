@@ -61,7 +61,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'SKU_SaveBtn',
-          text: $i18n.t('btn.save'), // 保存
+          text: $it('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -70,7 +70,7 @@ export default {
         },
         {
           webname: 'fix_back',
-          text: $i18n.t('btn.back'),
+          text: $it('btn.back'),
           btnclick: () => {
             this.back()
           },
@@ -85,7 +85,7 @@ export default {
           path: 'AC_F_PAYABLE_ADJUSTMENT/-1/',
         },
         colname: 'IMAGE',
-        name: $i18n.t('other.uploadVoucher'), // 上传凭证
+        name: $it('other.uploadVoucher'), // 上传凭证
         readonly: false,
         valuedata: [],
       },
@@ -98,7 +98,7 @@ export default {
           itemdata: {
             colid: '165990',
             colname: 'PS_C_PRO_ID',
-            name: $i18n.t('table_label.itemNo01'), // SPU编码
+            name: $it('table_label.itemNo01'), // SPU编码
             valuedata: '',
             pid: '',
             fkdisplay: 'drp',
@@ -402,11 +402,11 @@ export default {
               value: 'PROPERTY',
             }, */
         {
-          label: $i18n.t('panel_label.as'), // 备用条码
+          label: $it('panel_label.as'), // 备用条码
           value: 'PS_C_ALTERNATE_SKU',
         },
         {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          label: $it('panel_label.operationLog'), // 操作日志
           value: 'PS_C_SKU_LOG',
         },
       ],
@@ -752,7 +752,7 @@ export default {
       this.loading = false;
       if (code === 0) {
         this.backable = true;
-        self.$Message.success(message || $i18n.t('modalTips.z9'));
+        self.$Message.success(message || $it('modalTips.z9'));
         self.modify.master = {};
         self.modify.exAttr = {};
         // 数据回显
@@ -770,7 +770,7 @@ export default {
               id: newId,
               type: 'action',
               name: 'PS_C_SKU',
-              label: $i18n.t('menu.b1'), // SKU编辑
+              label: $it('menu.b1'), // SKU编辑
               query: Object.assign({
                 spuid: this.spuID,
                 spucode: this.formConfig.formValue.ECODE || '',
@@ -782,7 +782,7 @@ export default {
             $store.commit('global/tabOpen', {
               url: `/CUSTOMIZED/PS_C_SKU/${newId}`,
               type: 'C',
-              label: $i18n.t('menu.b1'), // SKU编辑
+              label: $it('menu.b1'), // SKU编辑
             });
           }
         }, 20);
@@ -802,12 +802,12 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             self.onOk()
           },
@@ -826,20 +826,20 @@ export default {
           tableId: 10105,
           type: 'S',
           tableName: 'PS_C_SKU',
-          label: $i18n.t('menu.a8'), // 商品SKU
+          label: $it('menu.a8'), // 商品SKU
           back: true,
         });
         this.$store.commit('global/tabOpen', {
           url: `/CUSTOMIZED/PS_C_PRO/${spuID}`,
           type: 'C',
-          label: $i18n.t('menu.b2'), // SPU编辑
+          label: $it('menu.b2'), // SPU编辑
         });
       } else {
         this.$store.commit('global/tabOpen', {
           tableId: 10105,
           type: 'S',
           tableName: 'PS_C_SKU',
-          label: $i18n.t('menu.a8'), // 商品SKU
+          label: $it('menu.a8'), // 商品SKU
           back: true,
         });
       }

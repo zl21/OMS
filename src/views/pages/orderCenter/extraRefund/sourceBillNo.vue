@@ -88,13 +88,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             btnclick: () => {
               this.orderModal = false;
             },
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               if (!this.table.selectionArr.length) {
@@ -174,7 +174,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.platform_billNo'), // 平台单号
+              label: $it('form_label.platform_billNo'), // 平台单号
               colname: 'SOURCE_CODE',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),
@@ -188,21 +188,21 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.consignee'), // 收货人
+              label: $it('form_label.consignee'), // 收货人
               colname: 'RECEIVER_NAME',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),
             },
             {
               style: 'input',
-              label: $i18n.t('table_label.buyerNickname'), // 买家昵称
+              label: $it('table_label.buyerNickname'), // 买家昵称
               colname: 'BUYER_NICK',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.consignee_phone'), // 收货人手机
+              label: $it('form_label.consignee_phone'), // 收货人手机
               colname: 'RECEIVER_MOBILE',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),
@@ -214,7 +214,7 @@ export default {
           btnsite: "right",
           buttons: [
             {
-              text: $i18n.t('btn.reset'), //重置
+              text: $it('btn.reset'), //重置
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.table.businessFormConfig.formValue.BILL_NO = '';
@@ -229,7 +229,7 @@ export default {
               }, // 按钮点击事件
             },
             {
-              text: $i18n.t('btn.find'), // 查找 按钮文本
+              text: $it('btn.find'), // 查找 按钮文本
               disabled: false, // 按钮禁用控制
               type: 'primary',
               btnclick: () => {

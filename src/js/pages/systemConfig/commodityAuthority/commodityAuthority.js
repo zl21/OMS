@@ -20,14 +20,14 @@ export default {
         btnsite: 'left', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $i18n.t('btn.delete'), // 删除 按钮文本
+            text: $it('btn.delete'), // 删除 按钮文本
             webname: '',
             btnclick: () => {
               this.deleteAuthority();
             } // 按钮点击事件
           },
           {
-            text: $i18n.t('btn.refresh'), // 按钮文本
+            text: $it('btn.refresh'), // 按钮文本
             webname: '',
             btnclick: () => {
               this.refresh();

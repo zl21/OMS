@@ -19,19 +19,19 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $i18n.t('btn.back'), // 返回
+            text: $it('btn.back'), // 返回
             btnclick: () => {
               this.close();
             }
           },
           {
-            text: $i18n.t('btn.saveDraft'), // 保存草稿
+            text: $it('btn.saveDraft'), // 保存草稿
             btnclick: () => {
               this.saveDraft();
             }
           },
           {
-            text: $i18n.t('btn.publish'), // 发布
+            text: $it('btn.publish'), // 发布
             btnclick: () => {
               this.publish();
             }
@@ -229,7 +229,7 @@ export default {
       } catch (error) {
         // self.$message({ type: "error", message: "获取促销详情异常" });
         self.loading = false;
-        // self.$Message.error($i18n.t('modalTips.r4'));
+        // self.$Message.error($it('modalTips.r4'));
       }
     },
     /**
@@ -258,11 +258,11 @@ export default {
           data: { code, data, message }
         } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
-          // this.$Message.message($i18n.t('modalTips.z9'));
+          // this.$Message.message($it('modalTips.z9'));
           $utils.msgTips(this, 'success', message, 0);
           /* this.$message({
             type: 'success',
-            message: $i18n.t('modalTips.z9') // 保存成功
+            message: $it('modalTips.z9') // 保存成功
           }); */
           // action never used
           // let action = 'customize/switchActiveTab';
@@ -280,10 +280,10 @@ export default {
             //   // id: this.objid, // id
             //   // type: 'action', // 类型action
             //   // name: 'addOrEditActi', // 文件名
-            //   label: $i18n.t('panel_label.editPromotion'), // 编辑促销活动
+            //   label: $it('panel_label.editPromotion'), // 编辑促销活动
             //   query: Object.assign({
             //     id: this.objid, // id
-            //     // tabTitle: $i18n.t('panel_label.editPromotion') // 编辑促销活动
+            //     // tabTitle: $it('panel_label.editPromotion') // 编辑促销活动
             //   }) // 带的参数
             // });
           });
@@ -381,7 +381,7 @@ export default {
     },
     validate2() {
       // const tablename = "商品列表";
-      const tablename = $i18n.t('other.product_list');
+      const tablename = $it('other.product_list');
       // 1.指定-非搭配   2.全场-不梯度, 规则至少需要选中一个
       // add  by wdq  1情况 不控制   (this.basic_info.activity_type === "GA" && this.condition_info_setting.products_join === "1")
       if ((this.basic_info.activity_type === 'PA' || (this.basic_info.activity_type === 'GA' && this.condition_info_setting.products_join === '1')) && this.basic_info.gradient_gift === '0') {
@@ -390,13 +390,13 @@ export default {
         if (!o) {
           return {
             code: -1,
-            message: $i18n.t('modalTips.r5') // 【满足条件】至少要选中一项并且填写数量或金额条件
+            message: $it('modalTips.r5') // 【满足条件】至少要选中一项并且填写数量或金额条件
           };
         }
       }
       let rs = {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       }; // 校验完成
       if (this.basic_info.activity_type === 'GA') {
         // 指定
@@ -406,7 +406,7 @@ export default {
           if (arrs.length === 0) {
             return {
               code: -1,
-              message: tablename + $i18n.t('modalTips.r6')
+              message: tablename + $it('modalTips.r6')
             };
           } // 无数据
           rs = this.checkTable(arrs);
@@ -417,7 +417,7 @@ export default {
           if (arrs.length === 0) {
             return {
               code: -1,
-              message: tablename + $i18n.t('modalTips.r6')
+              message: tablename + $it('modalTips.r6')
             };
           } // 无数据
           rs = this.checkTableTab(arrs, 'info');
@@ -429,10 +429,10 @@ export default {
       return rs;
     },
     validate3() {
-      const tablename = $i18n.t('other.gift_list');
+      const tablename = $it('other.gift_list');
       let rs = {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       }; // 赠品列表
       if (this.basic_info.gradient_gift === '0') {
         // 不梯度
@@ -440,7 +440,7 @@ export default {
         if (arrs.length === 0) {
           return {
             code: -1,
-            message: tablename + $i18n.t('modalTips.r6')
+            message: tablename + $it('modalTips.r6')
           };
         }
         rs = this.checkTable(arrs);
@@ -450,7 +450,7 @@ export default {
         if (arrs.length === 0) {
           return {
             code: -1,
-            message: tablename + $i18n.t('modalTips.r6')
+            message: tablename + $it('modalTips.r6')
           };
         };
         for (const iterator of arrs) {
@@ -462,7 +462,7 @@ export default {
         if (flag) {
           return {
             code: -1,
-            message: tablename + $i18n.t('modalTips.r6')
+            message: tablename + $it('modalTips.r6')
           };
         }
         rs = this.checkTableTab(arrs, 'gift');
@@ -514,7 +514,7 @@ export default {
       }
       return {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       };
     },
     checkTable(rows) {
@@ -532,7 +532,7 @@ export default {
       }
       return {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       };
     },
   },

@@ -92,14 +92,14 @@
         list: [],
         extendBtn: [
           {
-            text: $i18n.t('common.cancel'), // 取消,
+            text: $it('common.cancel'), // 取消,
             webname: 'query', // 退货换单 - 新增
             btnclick: () => {
               this.$emit('update:modal', false);
             }, // 按钮点击事件
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             webname: 'test_aaa', // 退货换单 - 新增
             btnclick: () => {
               this.save();

@@ -87,7 +87,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.platform_billNo'), // 平台单号
+              label: $it('form_label.platform_billNo'), // 平台单号
               colname: 'SOURCE_CODE',
               width: '8',
               // inputenter: () => this.queryBounced(),
@@ -112,21 +112,21 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('table_label.buyerNickname'), // 买家昵称
+              label: $it('table_label.buyerNickname'), // 买家昵称
               colname: 'BUYER_NICK',
               width: '8',
               // inputenter: () => this.queryBounced(),
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.consignee'), // 收货人
+              label: $it('form_label.consignee'), // 收货人
               colname: 'RECEIVER_NAME',
               width: '8',
               // inputenter: () => this.queryBounced(),
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.consignee_phone'), // 收货人手机
+              label: $it('form_label.consignee_phone'), // 收货人手机
               colname: 'RECEIVER_MOBILE',
               width: '8',
               // inputenter: () => this.queryBounced(),
@@ -175,7 +175,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.billNo'), // 订单编号
+              label: $it('form_label.billNo'), // 订单编号
               colname: 'BILL_NO',
               width: '8',
               // inputenter: () => this.queryBounced(),
@@ -187,7 +187,7 @@ export default {
           btnsite: "right",
           buttons: [
             {
-              text: $i18n.t('btn.reset'),//'重置'
+              text: $it('btn.reset'),//'重置'
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.formEmpty(this, 'formConfig', ['ORDER_DATE', 'PAY_TIME']);
@@ -195,7 +195,7 @@ export default {
               }, // 按钮点击事件
             },
             {
-              text: $i18n.t('btn.find'), // 查找 按钮文本
+              text: $it('btn.find'), // 查找 按钮文本
               disabled: false, // 按钮禁用控制
               type: 'primary',
               btnclick: () => {

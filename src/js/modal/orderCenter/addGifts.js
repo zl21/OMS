@@ -12,32 +12,32 @@ export default {
           {
             key: 'ECODE',
             // title: "条码"
-            title: $i18n.t('form_label.barCode')
+            title: $it('form_label.barCode')
           },
           {
             key: 'sizeName',
             // title: "尺码",
-            title: $i18n.t('other.size')
+            title: $it('other.size')
           },
           {
             key: 'colorName',
             // title: "颜色",
-            title: $i18n.t('other.color')
+            title: $it('other.color')
           },
           {
             key: 'QTY',
             // title: "数量",
-            title: $i18n.t('table_label.quantities')
+            title: $it('table_label.quantities')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: $i18n.t('table_label.productName')
+            title: $it('table_label.productName')
           },
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: $i18n.t('table_label.whetherGift'),
+            title: $it('table_label.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -46,7 +46,7 @@ export default {
           {
             key: 'IS_DELETE',
             // title: "操作",
-            title: $i18n.t('table_label.operation'),
+            title: $it('table_label.operation'),
             render: (h, params) => h(
               'a',
               {
@@ -58,7 +58,7 @@ export default {
                 }
               },
               // "删除"
-              $i18n.t('btn.delete')
+              $it('btn.delete')
             )
           }
         ],
@@ -87,13 +87,13 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消 按钮文本
+            text: $it('common.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           },
           {
-            text: $i18n.t('common.determine'), // 确定 按钮文本
+            text: $it('common.determine'), // 确定 按钮文本
             btnclick: () => {
               this.submit();
             }
@@ -140,7 +140,7 @@ export default {
         IS_GIFT: item.IS_GIFT
       }));
       if (rows.length === 0) {
-        self.$Message.error($i18n.t('modalTips.eg')); // '无赠品可添加！'
+        self.$Message.error($it('modalTips.eg')); // '无赠品可添加！'
         return;
       }
 
@@ -156,7 +156,7 @@ export default {
         self.$parent.$parent.$parent.selection = [];
       } else {
         // let mes = message || "失败";
-        const mes = message || $i18n.t('modalTips.z3');
+        const mes = message || $it('modalTips.z3');
         self.$Message.error(mes);
       }
     },
@@ -170,27 +170,27 @@ export default {
         {
           key: 'ECODE',
           // title: "条码",
-          title: $i18n.t('form_label.barCode')
+          title: $it('form_label.barCode')
         },
         {
           key: 'QTY',
           // title: "数量",
-          title: $i18n.t('table_label.quantities')
+          title: $it('table_label.quantities')
         },
         {
           key: 'PS_C_PRO_ENAME',
           // title: "商品名称",
-          title: $i18n.t('table_label.productName')
+          title: $it('table_label.productName')
         },
         {
           key: 'GBCODE',
           // title: "国标码",
-          title: $i18n.t('form_label.gBCode')
+          title: $it('form_label.gBCode')
         },
         {
           key: 'IS_GIFT',
           // title: "是否赠品",
-          title: $i18n.t('table_label.whetherGift')
+          title: $it('table_label.whetherGift')
         }
       ];
       this.columns = cols;

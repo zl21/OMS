@@ -146,7 +146,7 @@ export default {
       ],
       matrixBox: {
         refFuns: "confirmFun",
-        confirmTitle: $i18n.t("modalTitle.matrixEntry"), // 矩阵录入
+        confirmTitle: $it("modalTitle.matrixEntry"), // 矩阵录入
         titleAlign: "left", // 设置标题是否居中 center left
         width: "860",
         scrollable: false, // 是否可以滚动
@@ -203,7 +203,7 @@ export default {
           },
           {
             webname: 'fix_back',
-            text: $i18n.t("btn.back"),
+            text: $it("btn.back"),
             btnclick: () => {
               this.back();
             },
@@ -584,7 +584,7 @@ export default {
               ];
               // if (!flag) {
               // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-              // self.$Message.warning($i18n.t("modalTips.f9"));
+              // self.$Message.warning($it("modalTips.f9"));
               self.selectRegion(addressObj.province, addressObj.city, addressObj.area).then(res => {
                 let { data: { data: { provinceInfo, cityInfo, areaInfo } } } = res;
                 const queryData = self.formConfigRe.formData;
@@ -986,38 +986,38 @@ export default {
             align: 'center',
           },
           {
-            title: $i18n.t("table_label.serialNo"), // "序号",
+            title: $it("table_label.serialNo"), // "序号",
             key: "index",
             type: "index",
             align: 'center',
           },
           {
-            title: $i18n.t("table_label.code_SKU"), // SKU编码
+            title: $it("table_label.code_SKU"), // SKU编码
             key: "PS_C_SKU_ECODE",
             dataAcessKey: "PS_C_SKU_ECODE",
           },
           {
-            title: $i18n.t("form_label.skuName"), // SKU名称
+            title: $it("form_label.skuName"), // SKU名称
             key: "PS_C_SKU_ENAME",
             dataAcessKey: "PS_C_SKU_ENAME",
           },
           {
-            title: $i18n.t("table_label.itemNo01"), // SPU编码
+            title: $it("table_label.itemNo01"), // SPU编码
             key: "PS_C_PRO_ECODE",
             dataAcessKey: "PS_C_PRO_ECODE",
           },
           {
-            title: $i18n.t("table_label.itemNo02"), // SPU名称
+            title: $it("table_label.itemNo02"), // SPU名称
             key: "PS_C_PRO_ENAME",
             dataAcessKey: "PS_C_PRO_ENAME",
           },
           {
-            title: $i18n.t("form_label.cu"), // 零售价
+            title: $it("form_label.cu"), // 零售价
             key: "PRICE",
             dataAcessKey: "PRICE",
           },
           {
-            title: $i18n.t("table_label.unitPrice"), // 成交单价
+            title: $it("table_label.unitPrice"), // 成交单价
             key: "PRICE_ACTUAL",
             /* render: (h, params) => {
               const self = this;
@@ -1101,7 +1101,7 @@ export default {
             }, */
           },
           {
-            title: $i18n.t("table_label.quantities"), // 数量
+            title: $it("table_label.quantities"), // 数量
             key: "QTY",
             dataAcessKey: "QTY",
             render: (h, params) => {
@@ -1155,7 +1155,7 @@ export default {
             }
           },
           {
-            title: $i18n.t("table_label.transactionAmount"), // 成交金额
+            title: $it("table_label.transactionAmount"), // 成交金额
             key: "REAL_AMT",
             dataAcessKey: "REAL_AMT",
             render: (h, params) => {
@@ -1233,7 +1233,7 @@ export default {
             },
           },
           {
-            title: $i18n.t("table_label.adjustment_amount"), // 调整金额
+            title: $it("table_label.adjustment_amount"), // 调整金额
             key: "ADJUST_AMT",
             dataAcessKey: "ADJUST_AMT",
             render: (h, params) =>
@@ -1244,7 +1244,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $i18n.t("panel_label.order_detailed"), // 订单明细
+          label: $it("panel_label.order_detailed"), // 订单明细
           value: "1",
           isShow: true,
         },
@@ -1252,7 +1252,7 @@ export default {
       labelDefaultValue: "1", // 设置tab默认值
       orderNo: {
         refFuns: "confirmFun",
-        confirmTitle: $i18n.t("modalTitle.matrixEntry"), // 矩阵录入
+        confirmTitle: $it("modalTitle.matrixEntry"), // 矩阵录入
         titleAlign: "left", // 设置标题是否居中 center left
         width: "800",
         scrollable: false, // 是否可以滚动
@@ -1507,11 +1507,11 @@ export default {
         // 子表初始化（加两列
         if (self.copyType == '2') {
           const exCol = [{
-            title: $i18n.t("form_label.b3"), // 商品优惠
+            title: $it("form_label.b3"), // 商品优惠
             key: "AMT_DISCOUNT",
           },
           {
-            title: $i18n.t("form_label.ct"), // 订单优惠
+            title: $it("form_label.ct"), // 订单优惠
             key: "ORDER_SPLIT_AMT",
           },]
           self.jordanTableConfig.columns = self.jordanTableConfig.columns.concat(exCol);
@@ -1735,7 +1735,7 @@ export default {
       setTimeout(() => {
         if (!self.jordanTableConfig.totalData.length) {
           self.jordanTableConfig.totalData.push({
-            selection: `${$i18n.t("other.total")}:`, // 合计
+            selection: `${$it("other.total")}:`, // 合计
             REAL_AMT: $utils.floatNumber(amt, 2), // 精确到两位小数
             QTY: qty,
           });
@@ -1869,13 +1869,13 @@ export default {
         if (data[0].WHETHER_VIRTUAL_PRODUCTION) {
           // 虚拟字段的处理
           self.$Modal.info({
-            title: $i18n.t("modalTitle.tips"), // 提示
+            title: $it("modalTitle.tips"), // 提示
             // content: `${skuCode}条码为虚拟条码，是否继续添加？`,
             content: data[0].VIRTUAL_GOODS_NOTICE,
             mask: true,
             showCancel: true,
-            okText: $i18n.t("btn.increase"), // 添加
-            cancelText: $i18n.t("common.cancel"), // 取消
+            okText: $it("btn.increase"), // 添加
+            cancelText: $it("common.cancel"), // 取消
             onOk: () => {
               self.insertOrderDetail(data);
             },
@@ -2003,13 +2003,13 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
-          title: $i18n.t("modalTitle.tips"), // 提示
+          title: $it("modalTitle.tips"), // 提示
           content: "当前修改未保存，确定返回？",
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $i18n.t("common.determine"), // 确定
-          cancelText: $i18n.t("common.cancel"), // 取消
+          okText: $it("common.determine"), // 确定
+          cancelText: $it("common.cancel"), // 取消
           onOk: () => {
             self.onOk();
           },
@@ -2026,13 +2026,13 @@ export default {
         this.$store.commit("global/tabOpen", {
           url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
           type: "C",
-          label: $i18n.t('panel_label.retail_shipping_order'),//"零售发货单",
+          label: $it('panel_label.retail_shipping_order'),//"零售发货单",
         });
       } else {
         this.$store.commit("global/tabOpen", {
           url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
           type: "C",
-          label: $i18n.t('panel_label.retail_shipping_order'),// "零售发货单",
+          label: $it('panel_label.retail_shipping_order'),// "零售发货单",
         });
       }
     },

@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       isSku: false,
-      switchText: $i18n.t('form_label.b0'), //切换为sku商品展示
+      switchText: $it('form_label.b0'), //切换为sku商品展示
       IS_GROUP: true,
       returnDetailAddTable: {
         modal: false,
@@ -34,7 +34,7 @@ export default {
           loading: false,
           isShowSelection: true, // 是否显示checkedbox
           totalData: [{
-            index: $i18n.t("other.total")
+            index: $it("other.total")
           }]
         }
       },
@@ -51,7 +51,7 @@ export default {
     // 切换商品展示类型
     async onSitch() {
       // 切换为sku商品展示 切换为平台商品展示
-      this.isSku ? this.switchText = $i18n.t('form_label.b0') : this.switchText = $i18n.t('form_label.b1');
+      this.isSku ? this.switchText = $it('form_label.b0') : this.switchText = $it('form_label.b1');
       this.isSku = !this.isSku;
       this.getData()
     },

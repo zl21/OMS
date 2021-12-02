@@ -25,7 +25,7 @@ export default {
         typeAll: 'default',
         buttons: [{
           webname: 'CLASSIFY_SaveBtn',
-          text: $i18n.t('btn.save'), // 保存
+          text: $it('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -34,7 +34,7 @@ export default {
         },
         {
           webname: 'fix_back',
-          text: $i18n.t('btn.back'),
+          text: $it('btn.back'),
           btnclick: () => {
             this.back();
           },
@@ -104,7 +104,7 @@ export default {
         },
         {
           style: null,
-          label: $i18n.t('form_label.bg'), //  启用状态
+          label: $it('form_label.bg'), //  启用状态
           value: 'STATUS',
           colname: 'STATUS',
           width: '8',
@@ -339,7 +339,7 @@ export default {
           buttons: [{
             webname: 'CLASSIFY_AddDetailBtn',
             type: 'primary',
-            text: $i18n.t('btn.increase'), //'添加',
+            text: $it('btn.increase'), //'添加',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.addAttrValue();
@@ -348,7 +348,7 @@ export default {
           {
             webname: 'CLASSIFY_DeleteDetailBtn',
             type: 'warning',
-            text: $i18n.t('btn.delete'), // 删除
+            text: $it('btn.delete'), // 删除
             btnclick: () => {
               this.deleteAttrValue();
             },
@@ -363,7 +363,7 @@ export default {
         value: 'PROPERTY',
       },
       {
-        label: $i18n.t('panel_label.operationLog'), // 操作日志
+        label: $it('panel_label.operationLog'), // 操作日志
         value: 'PS_C_CLASSIFY_LOG',
       },
       ],
@@ -469,7 +469,7 @@ export default {
     async addAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.businessFormConfig.formData[0].itemdata.valuedata.length) {
-        self.$Message.warning($i18n.t('modalTips.kk'));
+        self.$Message.warning($it('modalTips.kk'));
         return false;
       }
       this.loading = true;
@@ -497,7 +497,7 @@ export default {
     async deleteAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.selectionData.length) {
-        self.$Message.warning($i18n.t('modalTips.ka'));
+        self.$Message.warning($it('modalTips.ka'));
         return false;
       }
       const delIDS = [];
@@ -590,12 +590,12 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             self.onOk();
           },
@@ -611,7 +611,7 @@ export default {
         tableId: 10091,
         type: 'S',
         tableName: 'PS_C_PRO_CLASSIFY',
-        label: $i18n.t('menu.ac'), //'商品分类',
+        label: $it('menu.ac'), //'商品分类',
         back: true,
       });
     },

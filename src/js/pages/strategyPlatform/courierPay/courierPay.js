@@ -114,7 +114,7 @@ export default {
       labelList: [
         {
           // label: "订单明细",
-          label: $i18n.t('panel_label.order_detailed'),
+          label: $it('panel_label.order_detailed'),
           value: '1',
           isShow: true
         }
@@ -135,7 +135,7 @@ export default {
   mounted() {
     const self = this;
     // console.log('self.$route.query.id',self.$route.params.customizedModuleId);
-    this.statusName = $i18n.t('common.voided'); // '已作废';
+    this.statusName = $it('common.voided'); // '已作废';
     if (self.$route.params.customizedModuleId == 'New') {
       self.objid = -1;
     } else {
@@ -145,7 +145,7 @@ export default {
       {
         style: 'input',
         // label: "单据编号",
-        label: $i18n.t('form_label.billNo'),
+        label: $it('form_label.billNo'),
         value: 'BILL_NO',
         width: '6',
         disabled: true,
@@ -172,7 +172,7 @@ export default {
           isnotnull: true,
           fkdesc: '实体仓档案',
           // name: "实体仓",
-          name: $i18n.t('table_label.physicalWarehouse'),
+          name: $it('table_label.physicalWarehouse'),
           fkdisplay: 'mrp',
           row: 1,
           inputname: 'CP_C_PHY_WAREHOUSE_ID:ENAME',
@@ -187,7 +187,7 @@ export default {
         style: 'date',
         type: '', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         // label: "生效日期",
-        label: $i18n.t('form_label.effectiveDate'),
+        label: $it('form_label.effectiveDate'),
         value: 'BEGIN_TIME',
         width: '6',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -198,7 +198,7 @@ export default {
         style: 'date',
         type: '', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         // label: "结束日期",
-        label: $i18n.t('form_label.endDate'),
+        label: $it('form_label.endDate'),
         value: 'END_TIME',
         width: '6',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -208,7 +208,7 @@ export default {
       {
         style: 'input',
         // label: "方案名称",
-        label: $i18n.t('form_label.schemeName'),
+        label: $it('form_label.schemeName'),
         value: 'ENAME',
         width: '6',
         inputenter: () => {
@@ -219,7 +219,7 @@ export default {
       {
         style: 'input',
         // label: "方案描述",
-        label: $i18n.t('form_label.schemeDescription'),
+        label: $it('form_label.schemeDescription'),
         value: 'PLAN_DESC',
         width: '6',
         inputenter: () => {
@@ -232,7 +232,7 @@ export default {
       {
         style: 'input',
         // label: "创建人",
-        label: $i18n.t('table_label.creator'),
+        label: $it('table_label.creator'),
         value: 'OWNERENAME',
         width: '6',
         disabled: true
@@ -240,7 +240,7 @@ export default {
       {
         style: 'input',
         // label: "创建时间",
-        label: $i18n.t('table_label.creationTime'),
+        label: $it('table_label.creationTime'),
         value: 'CREATIONDATE',
         width: '6',
         disabled: true
@@ -248,7 +248,7 @@ export default {
       {
         style: 'input',
         // label: "修改人",
-        label: $i18n.t('table_label.reviser'),
+        label: $it('table_label.reviser'),
         value: 'MODIFIERENAME',
         width: '6',
         disabled: true
@@ -256,7 +256,7 @@ export default {
       {
         style: 'input',
         // label: "修改时间",
-        label: $i18n.t('table_label.modificationTime'),
+        label: $it('table_label.modificationTime'),
         value: 'MODIFIEDDATE',
         width: '6',
         disabled: true
@@ -264,7 +264,7 @@ export default {
       {
         style: 'input',
         // label: "作废人",
-        label: $i18n.t('table_label.voidMan'),
+        label: $it('table_label.voidMan'),
         value: 'DELENAME',
         width: '6',
         disabled: true
@@ -272,7 +272,7 @@ export default {
       {
         style: 'input',
         // label: "作废时间",
-        label: $i18n.t('table_label.voidTime'),
+        label: $it('table_label.voidTime'),
         value: 'DEL_TIME',
         width: '6',
         disabled: true
@@ -280,7 +280,7 @@ export default {
       {
         style: 'input',
         // label: "审核人",
-        label: $i18n.t('form_label.reviewer'),
+        label: $it('form_label.reviewer'),
         value: 'CHECKENAME',
         width: '6',
         disabled: true
@@ -288,7 +288,7 @@ export default {
       {
         style: 'input',
         // label: "审核时间",
-        label: $i18n.t('table_label.auditTime'),
+        label: $it('table_label.auditTime'),
         value: 'CHECKTIME',
         width: '6',
         disabled: true
@@ -296,7 +296,7 @@ export default {
       {
         style: 'input',
         // label: "结案人",
-        label: $i18n.t('form_label.closingMan'),
+        label: $it('form_label.closingMan'),
         value: 'FINISHENAME',
         width: '6',
         disabled: true
@@ -304,7 +304,7 @@ export default {
       {
         style: 'input',
         // label: "结案时间",
-        label: $i18n.t('form_label.closingTime'),
+        label: $it('form_label.closingTime'),
         value: 'FINISHTIME',
         width: '6',
         disabled: true
@@ -328,7 +328,7 @@ export default {
           isuppercase: false,
           isnotnull: true,
           fkdesc: '物流公司档案',
-          name: $i18n.t('form_label.expressCompanyName'), // 快递公司名称
+          name: $it('form_label.expressCompanyName'), // 快递公司名称
           fkdisplay: 'drp',
           row: 1,
           inputname: 'CP_C_LOGISTICS_ID:ENAME',
@@ -346,7 +346,7 @@ export default {
       {
         style: 'select', // 下拉框类型
         // label: "赔付类型", // 下拉框前的值
-        label: $i18n.t('form_label.payableAdjustType'),
+        label: $it('form_label.payableAdjustType'),
         width: '6', // 所占宽度宽度
         value: 'COMPENSATE_TYPE', // 输入框的值
         selectChange: () => {
@@ -401,19 +401,19 @@ export default {
           // 下拉框选项值
           {
             // label: "价格赔付",
-            label: $i18n.t('other.price_compensation'),
+            label: $it('other.price_compensation'),
             value: 1,
             disabled: false
           },
           {
             // label: "邮费赔付",
-            label: $i18n.t('other.postage_compensation'),
+            label: $it('other.postage_compensation'),
             value: 2,
             disabled: true
           },
           {
             // label: "固定结算",
-            label: $i18n.t('other.fixed_settlement'),
+            label: $it('other.fixed_settlement'),
             value: 3,
             disabled: false
           }
@@ -422,7 +422,7 @@ export default {
       {
         style: 'select', // 下拉框类型
         // label: "赔付标准", // 下拉框前的值
-        label: $i18n.t('form_label.payableAdjustStandard'),
+        label: $it('form_label.payableAdjustStandard'),
         width: '6', // 所占宽度宽度
         value: 'COMPENSATE_STANDARD', // 输入框的值
         disabled: false,
@@ -431,19 +431,19 @@ export default {
           // 下拉框选项值
           {
             // label: "销售价",
-            label: $i18n.t('other.sales_price'),
+            label: $it('other.sales_price'),
             value: 1,
             disabled: false
           },
           {
             // label: "标准价",
-            label: $i18n.t('table_label.standardPrice'),
+            label: $it('table_label.standardPrice'),
             value: 2,
             disabled: false
           },
           {
             // label: "邮费",
-            label: $i18n.t('other.postage'),
+            label: $it('other.postage'),
             value: 3,
             disabled: true
           }
@@ -452,7 +452,7 @@ export default {
       {
         style: 'input', // 输入框类型
         // label: "倍数", // 输入框前文字
-        label: $i18n.t('form_label.multiple'),
+        label: $it('form_label.multiple'),
         value: 'MULTIPLE', // 输入框的值
         width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         disabled: false,
@@ -464,7 +464,7 @@ export default {
       {
         style: 'input', // 输入框类型
         // label: "结算价", // 输入框前文字
-        label: $i18n.t('form_label.settlement_price'),
+        label: $it('form_label.settlement_price'),
         value: 'SETTLEMENTPRICE', // 输入框的值
         width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         inputenter: () => {
@@ -476,7 +476,7 @@ export default {
     this.jordanTableConfig.columns = [
       {
         // title: "快递名称",
-        title: $i18n.t('table_label.expressName'),
+        title: $it('table_label.expressName'),
         sortable: true,
         key: 'CP_C_LOGISTICS_ENAME',
         width: '',
@@ -487,22 +487,22 @@ export default {
       },
       {
         // title: "赔付类型",
-        title: $i18n.t('form_label.payableAdjustType'),
+        title: $it('form_label.payableAdjustType'),
         key: 'COMPENSATE_TYPE'
       },
       {
         // title: "赔付标准",
-        title: $i18n.t('form_label.payableAdjustStandard'),
+        title: $it('form_label.payableAdjustStandard'),
         key: 'COMPENSATE_STANDARD'
       },
       {
         // title: "倍数",
-        title: $i18n.t('form_label.multiple'),
+        title: $it('form_label.multiple'),
         key: 'MULTIPLE'
       },
       {
         // title: "结算价",
-        title: $i18n.t('form_label.settlement_price'),
+        title: $it('form_label.settlement_price'),
         key: 'SETTLEMENTPRICE'
       }
     ];
@@ -510,7 +510,7 @@ export default {
       {
         // type: '',  //按钮类型
         // text: "保存", // 按钮文本
-        text: $i18n.t('btn.save'), // 按钮文本
+        text: $it('btn.save'), // 按钮文本
         size: '', // 按钮大小
         disabled: false, // 按钮禁用控制
         btnclick: () => {
@@ -519,14 +519,14 @@ export default {
       },
       {
         // text: "返回",
-        text: $i18n.t('btn.back'), // 按钮文本
+        text: $it('btn.back'), // 按钮文本
         btnclick: () => {
           $omsUtils.tabCloseAppoint(this);
           R3.store.commit('global/tabOpen', {
             type: 'S',
             tableId: 24613,
             tableName: 'ST_C_COMPENSATE',
-            label: $i18n.t('panel_label.express_compensation_scheme'),
+            label: $it('panel_label.express_compensation_scheme'),
             back: true
           });
         }
@@ -543,26 +543,26 @@ export default {
       // 非空效验
       if (String(a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) {
         // self.$Message.warning("实体仓不能为空");
-        self.$message.warning($i18n.t('modalTips.x0'));
+        self.$message.warning($it('modalTips.x0'));
         return;
       }
       if (String(a.fixcolumn.ST_C_COMPENSATE.BEGIN_TIME) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.BEGIN_TIME) {
         // self.$Message.warning("生效日期不能为空");
-        self.$message.warning($i18n.t('modalTips.x1'));
+        self.$message.warning($it('modalTips.x1'));
         return;
       }
       if (String(a.fixcolumn.ST_C_COMPENSATE.END_TIME) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.END_TIME) {
         // self.$message.warning('结束日期不能为空');
-        self.$message.warning($i18n.t('modalTips.x2'));
+        self.$message.warning($it('modalTips.x2'));
         return;
       }
       if (String(a.fixcolumn.ST_C_COMPENSATE.ENAME) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.ENAME) {
         // self.$message.warning('方案名称不能为空');
-        self.$message.warning($i18n.t('modalTips.x3'));
+        self.$message.warning($it('modalTips.x3'));
         return;
       }
       if (!self.jordanTableConfig.data.length) {
-        self.$message.error($i18n.t('modalTips.x4'));
+        self.$message.error($it('modalTips.x4'));
         return;
       }
       const formdata = new FormData();
@@ -742,17 +742,17 @@ export default {
       const valueType = self.jordanTableConfig.businessFormConfig.formValue;
       if ((valueType.COMPENSATE_TYPE === 1 || valueType.COMPENSATE_TYPE === 2) && (valueType.COMPENSATE_STANDARD === '' || valueType.MULTIPLE === '')) {
         self.$message.warning('赔付标准和倍数不能为空');
-        self.$message.warning($i18n.t('modalTips.x5'));
+        self.$message.warning($it('modalTips.x5'));
         return;
       }
       if (valueType.COMPENSATE_TYPE === 3 && valueType.SETTLEMENTPRICE === '') {
         self.$message.warning('结算价不能为空');
-        self.$message.warning($i18n.t('modalTips.x6'));
+        self.$message.warning($it('modalTips.x6'));
         return;
       }
       if (self.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid === '') {
         self.$message.warning('快递公司名称不能为空');
-        self.$message.warning($i18n.t('modalTips.x7'));
+        self.$message.warning($it('modalTips.x7'));
         return;
       }
       addList.CP_C_LOGISTICS_ENAME = self.jordanTableConfig.businessFormConfig.formData[0].itemdata.valuedata;
@@ -772,11 +772,11 @@ export default {
               type: 'action',
               name: 'courierPay',
               // label: "快递赔付方案",
-              label: $i18n.t('panel_label.express_compensation_scheme'),
+              label: $it('panel_label.express_compensation_scheme'),
               query: Object.assign({
                 id: res.data.data.data.objid,
                 // tabTitle: "快递赔付方案",
-                tabTitle: $i18n.t('panel_label.express_compensation_scheme')
+                tabTitle: $it('panel_label.express_compensation_scheme')
               })
             });
           }

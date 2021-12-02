@@ -18,7 +18,7 @@ export default {
           },
           formData: [
             {
-              label: $i18n.t('table_label.code_SKU'), // SKU编码
+              label: $it('table_label.code_SKU'), // SKU编码
               style: 'dimSearch',
               width: '8',
               value: 'SKU_CODE',
@@ -35,7 +35,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $i18n.t('table_label.itemNo01'), // SPU编码
+              label: $it('table_label.itemNo01'), // SPU编码
               style: 'dimSearch',
               width: '8',
               value: 'SPU_CODE',
@@ -50,7 +50,7 @@ export default {
             },
             {
               style: 'dimSearch', //输入框类型
-              label: $i18n.t("table_label.itemNo02"), // SPU名称 输入框前文字
+              label: $it("table_label.itemNo02"), // SPU名称 输入框前文字
               value: 'SPU_NAE', //输入框的值
               columns: ['ENAME'],
               width: '8',
@@ -87,19 +87,19 @@ export default {
         columns: [
           {
             key: 'skuEcode',
-            title: $i18n.t('table_label.code_SKU'), // SKU编码
+            title: $it('table_label.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $i18n.t('table_label.itemNo01'), // SPU编码
+            title: $it('table_label.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $i18n.t("table_label.itemNo02"), // SPU名称
+            title: $it("table_label.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: $i18n.t('form_label.skuName'), // SKU名称
+            title: $it('form_label.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
@@ -129,13 +129,13 @@ export default {
         buttons: [
           {
             disabled: false,
-            text: $i18n.t('common.cancel'),
+            text: $it('common.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: $i18n.t('common.determine'),
+            text: $it('common.determine'),
             disabled: false,
             btnclick: () => {
               if (!this.skuEcodes) {
@@ -249,7 +249,7 @@ export default {
                         key: 'billNo',
                       },
                       {
-                        title: $i18n.t('modalTitle.a6'), // '提示信息',
+                        title: $it('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -306,7 +306,7 @@ export default {
                         key: 'billNo',
                       },
                       {
-                        title: $i18n.t('modalTitle.a6'), // '提示信息',
+                        title: $it('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -392,7 +392,7 @@ export default {
     async submit() {
       const self = this;
       if (!self.onRowData) {
-        self.$Message.error($i18n.t('modalTips.eg')) // '无赠品可添加！'
+        self.$Message.error($it('modalTips.eg')) // '无赠品可添加！'
         return
       }
       const ids = []
@@ -427,7 +427,7 @@ export default {
                         key: 'billNo',
                       },
                       {
-                        title: $i18n.t('modalTitle.a6'), // '提示信息',
+                        title: $it('modalTitle.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -488,19 +488,19 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: $i18n.t('table_label.code_SKU'), // SKU编码
+            title: $it('table_label.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $i18n.t('table_label.itemNo01'), // SPU编码
+            title: $it('table_label.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $i18n.t("table_label.itemNo02"), // SPU名称
+            title: $it("table_label.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: $i18n.t('form_label.skuName'), // SKU名称
+            title: $it('form_label.skuName'), // SKU名称
           },
           {
             key: 'brandEname',

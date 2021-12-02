@@ -13,7 +13,7 @@ export default {
         formData: [
           {
             style: 'select', // 下拉框类型
-            label: $i18n.t('form_label.supplierID'), // 供应商ID 下拉框前的值
+            label: $it('form_label.supplierID'), // 供应商ID 下拉框前的值
             width: '24', // 所占宽度宽度
             value: 'vendorId', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -28,7 +28,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $i18n.t('other.billCode'), // 账单编码 下拉框前的值
+            label: $it('other.billCode'), // 账单编码 下拉框前的值
             width: '24', // 所占宽度宽度
             value: 'billNumber', // 输入框的值
             multiple: false,
@@ -46,7 +46,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消 按钮文本
+            text: $it('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -56,7 +56,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $i18n.t('btn.generate'), // 生成 按钮文本
+            text: $it('btn.generate'), // 生成 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -116,12 +116,12 @@ export default {
       const formValue = this.generateFormConfig.formValue;
       if (!formValue.vendorId) {
         // 供应商ID不能为空!
-        this.$Message.warning($i18n.t('modalTips.bl'));
+        this.$Message.warning($it('modalTips.bl'));
         return false;
       }
       if (!formValue.billNumber) {
         // 账单编码不能为空!
-        this.$Message.warning($i18n.t('modalTips.bm'));
+        this.$Message.warning($it('modalTips.bm'));
         return false;
       }
       const params = {

@@ -9,7 +9,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消 按钮文本
+            text: $it('common.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -19,7 +19,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.determine'), // 确定 按钮文本
+            text: $it('common.determine'), // 确定 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -55,9 +55,9 @@ export default {
         return;
       }
       // 库存按查询条件同步
-      // if (self.$parent.title === $i18n.t('modalTitle.z0')) url = '/p/cs/storage/manualSynchChannelStorageByQuery';
+      // if (self.$parent.title === $it('modalTitle.z0')) url = '/p/cs/storage/manualSynchChannelStorageByQuery';
       // // 商品按查询条件同步
-      // else if (self.$parent.title === $i18n.t('modalTitle.z1')) url = '/p/cs/storage/manualCalcAndSynchChannelProduct';
+      // else if (self.$parent.title === $it('modalTitle.z1')) url = '/p/cs/storage/manualCalcAndSynchChannelProduct';
       // let paramsObj = self.$parent.$parent.formObj.fixedcolumns;
       // 获取搜索form表单的对象
       const param = {};

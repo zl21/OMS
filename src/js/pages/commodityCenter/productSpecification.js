@@ -9,19 +9,19 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         loading: false, // 按钮加载
         buttons: [{
-          text: $i18n.t('btn.newSKU'), // 新增SKU
+          text: $it('btn.newSKU'), // 新增SKU
           btnclick: () => {
 
           }
         },
         {
-          text: $i18n.t('btn.fastNew'), // 快速新增
+          text: $it('btn.fastNew'), // 快速新增
           btnclick: () => {
 
           }
         },
         {
-          text: $i18n.t('btn.applyToAllColumn'), // 应用到所有列
+          text: $it('btn.applyToAllColumn'), // 应用到所有列
           btnclick: () => {
             this.useAllColumns();
           }
@@ -34,14 +34,14 @@ export default {
         type: 'index',
         width: 60,
         align: 'center',
-        title: $i18n.t('table_label.serialNo'), // 序号
+        title: $it('table_label.serialNo'), // 序号
       },
       {
-        title: $i18n.t('table_label.code_SKU'), // SKU编码
+        title: $it('table_label.code_SKU'), // SKU编码
         key: 'ECODE'
       },
       {
-        title: $i18n.t('form_label.skuName'), // SKU名称
+        title: $it('form_label.skuName'), // SKU名称
         key: 'ENAME'
       },
       {
@@ -77,7 +77,7 @@ export default {
     },
     useAllColumns() {
       this.resData.forEach(ele => {
-        ele[this.clickColumns] = $i18n.t('btn.applyToAllColumn');
+        ele[this.clickColumns] = $it('btn.applyToAllColumn');
       });
     },
     onSelectionChange(selection) {

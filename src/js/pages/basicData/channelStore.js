@@ -20,7 +20,7 @@ export default {
       extendBtn: [
         {
           webname: 'CP_C_ORG_CHANNEL_SAVE', // 保存
-          text: $i18n.t('btn.save'), // 保存
+          text: $it('btn.save'), // 保存
           size: '', // 按钮大小
           disabled: false, // 按钮禁用控制
           btnclick: () => {
@@ -30,13 +30,13 @@ export default {
         },
         {
           webname: 'CP_C_ORG_CHANNEL_RETURN', // 返回
-          text: $i18n.t('btn.back'),
+          text: $it('btn.back'),
           btnclick: () => {
             if (this.isModify) {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
-                title: $i18n.t('modalTitle.tips'), // 提示
-                content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+                title: $it('modalTitle.tips'), // 提示
+                content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
@@ -46,7 +46,7 @@ export default {
                     tableId: 10327,
                     type: 'S',
                     tableName: 'CP_C_ORG_CHANNEL',
-                    label: $i18n.t('menu.a4'), //'渠道仓档案',
+                    label: $it('menu.a4'), //'渠道仓档案',
                     back: true,
                   });
                 }
@@ -58,7 +58,7 @@ export default {
                 tableId: 10327,
                 type: 'S',
                 tableName: 'CP_C_ORG_CHANNEL',
-                label: $i18n.t('menu.a4'), //'渠道仓档案',
+                label: $it('menu.a4'), //'渠道仓档案',
                 back: true,
               });
             }
@@ -69,7 +69,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $i18n.t('form_label.d9'), // 渠道仓编码
+            label: $it('form_label.d9'), // 渠道仓编码
             value: 'ECODE',
             width: '8',
             disabled: false,
@@ -80,7 +80,7 @@ export default {
           },
           {
             style: 'input',
-            label: $i18n.t('form_label.da'), // 渠道仓名称
+            label: $it('form_label.da'), // 渠道仓名称
             value: 'ENAME',
             width: '8',
             maxlength: 225,
@@ -113,7 +113,7 @@ export default {
         {
           type: 'primary',
           webname: 'CP_C_ORG_CHANNEL_ADD', // 返回
-          text: $i18n.t('btn.increase'), // 添加
+          text: $it('btn.increase'), // 添加
           btnclick: () => {
             // 查询逻辑仓,实体仓
             this.logicQuery();
@@ -122,7 +122,7 @@ export default {
         {
           type: 'warning',
           webname: 'CP_C_ORG_CHANNEL_DEL', // 删除
-          text: $i18n.t('btn.delete'), // 删除
+          text: $it('btn.delete'), // 删除
           btnclick: () => {
             this.delete();
           }
@@ -163,7 +163,7 @@ export default {
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $i18n.t("table_label.logicWarehouse"), // 逻辑仓
+                name: $it("table_label.logicWarehouse"), // 逻辑仓
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
                 reftableid: 10091, // 对应的表ID
@@ -180,7 +180,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.db'), // 供货比例
+              label: $it('form_label.db'), // 供货比例
               value: 'RATE',
               disabled: false,
               dataAcessKey: '',
@@ -192,7 +192,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('table_label.priority'), // 优先级
+              label: $it('table_label.priority'), // 优先级
               value: 'SUPPLY_PRIORITY',
               disabled: false,
               dataAcessKey: 'SUPPLY_PRIORITY',
@@ -205,7 +205,7 @@ export default {
             },
             // {
             //   style: 'checkbox',
-            //   label: $i18n.t('panel_label.ao'), // 自动分配
+            //   label: $it('panel_label.ao'), // 自动分配
             //   value: 'IS_AUTO_ASSIGN',
             //   disabled: false,
             //   dataAcessKey: 'IS_AUTO_ASSIGN',
@@ -237,15 +237,15 @@ export default {
         },
         columns: [
           {
-            title: $i18n.t("table_label.logicWarehouse"), // 逻辑仓
+            title: $it("table_label.logicWarehouse"), // 逻辑仓
             key: 'CP_C_STORE_ENAME'
           },
           {
-            title: $i18n.t('table_label.physicalWarehouse'), // 实体仓
+            title: $it('table_label.physicalWarehouse'), // 实体仓
             key: 'CP_C_PHY_WAREHOUSE_ENAME'
           },
           {
-            title: $i18n.t('form_label.db'), // 供货比例
+            title: $it('form_label.db'), // 供货比例
             key: 'RATE',
             render: (h, params) => h(
               'div',
@@ -275,7 +275,7 @@ export default {
             )
           },
           {
-            title: $i18n.t('panel_label.ao'), // 自动分配
+            title: $it('panel_label.ao'), // 自动分配
             key: 'IS_AUTO_ASSIGN',
             render: (h, params) => h('Checkbox', {
               props: {
@@ -293,7 +293,7 @@ export default {
             })
           },
           {
-            title: $i18n.t('table_label.priority'), // 优先级
+            title: $it('table_label.priority'), // 优先级
             key: 'SUPPLY_PRIORITY',
             render: (h, params) => h(
               'div',
@@ -329,11 +329,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $i18n.t('panel_label.b0'), // 供货逻辑仓
+          label: $it('panel_label.b0'), // 供货逻辑仓
           value: 'supplyStore'
         },
         {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          label: $it('panel_label.operationLog'), // 操作日志
           value: 'CP_ORG_CHANNEL_LOG'
         }
       ],
@@ -374,7 +374,7 @@ export default {
       if (self.id == '-1') {
         self.labelList = [
           {
-            label: $i18n.t('panel_label.b0'), // 供货逻辑仓
+            label: $it('panel_label.b0'), // 供货逻辑仓
             value: 'supplyStore'
           }
         ];
@@ -400,15 +400,15 @@ export default {
       const self = this;
       const ids = [];
       if (!self.selecData.length) {
-        self.$Message.warning($i18n.t('modalTips.ka')); // 请选择需要删除的内容
+        self.$Message.warning($it('modalTips.ka')); // 请选择需要删除的内容
         return;
       }
       if (self.jordanTableConfig.data.length == self.selecData.length) {
-        self.$Message.warning($i18n.t('modalTips.kb')); // 不可全部删除逻辑仓数据，请至少保留一条！
+        self.$Message.warning($it('modalTips.kb')); // 不可全部删除逻辑仓数据，请至少保留一条！
         return;
       }
       if (self.jordanTableConfig.data.length == 1) {
-        self.$Message.warning($i18n.t('modalTips.kc')); // 明细不能为空
+        self.$Message.warning($it('modalTips.kc')); // 明细不能为空
         return;
       }
       self.selecData.forEach(item => {
@@ -480,18 +480,18 @@ export default {
       const id = self.jordanTableConfig.businessFormConfig.formValue.CP_C_STORE_ID;
       let str = '';
       if (!id) {
-        str += `${$i18n.t("table_label.logicWarehouse")} `; // 逻辑仓
+        str += `${$it("table_label.logicWarehouse")} `; // 逻辑仓
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.RATE) {
-        str += `${$i18n.t("form_label.db")} `; // 供货比例
+        str += `${$it("form_label.db")} `; // 供货比例
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY) {
-        str += `${$i18n.t('table_label.priority')} `; // 优先级
+        str += `${$it('table_label.priority')} `; // 优先级
       }
       if (str) {
         self.$Message.warning(`${str}不能为空!`);
         return;
       }
       if (self.jordanTableConfig.data.some(item => item.CP_C_STORE_ID == id)) {
-        self.$Message.warning($i18n.t('modalTips.ia')); // 请勿重复添加
+        self.$Message.warning($it('modalTips.ia')); // 请勿重复添加
         return;
       }
       self.service.basicData
@@ -508,7 +508,7 @@ export default {
             const theSameStore = self.jordanTableConfig.data.filter(item => item.CP_C_PHY_WAREHOUSE_ID == data.CP_C_PHY_WAREHOUSE_ID);
             // 判断该实体仓下是否已存在该优先级
             if (theSameStore.some(item => item.SUPPLY_PRIORITY == self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY)) {
-              self.$Message.warning($i18n.t('modalTips.ib')); // 同一实体仓下优先级不能重复
+              self.$Message.warning($it('modalTips.ib')); // 同一实体仓下优先级不能重复
               return;
             }
             // end
@@ -559,20 +559,20 @@ export default {
       const self = this;
       let str = '';
       if (!self.formConfig.formValue.ECODE) {
-        str += `${$i18n.t('form_label.d9')} `; // 渠道仓编码
+        str += `${$it('form_label.d9')} `; // 渠道仓编码
       } else if (!self.formConfig.formValue.ENAME) {
-        str += `${$i18n.t('form_label.da')} `; // 渠道仓名称
+        str += `${$it('form_label.da')} `; // 渠道仓名称
       }
       if (str) {
         self.$Message.warning(`${str}不能为空!`);
         return;
       }
       if (!self.jordanTableConfig.data.length) {
-        self.$Message.warning($i18n.t('modalTips.ic')); // 请先添加明细
+        self.$Message.warning($it('modalTips.ic')); // 请先添加明细
         return;
       }
       if (self.jordanTableConfig.data.some(item => item.RATE == '')) {
-        self.$Message.warning($i18n.t('modalTips.id')); // 供货比例不能为空
+        self.$Message.warning($it('modalTips.id')); // 供货比例不能为空
         return;
       }
       const data = {

@@ -11,7 +11,7 @@
           buttons: [
             {
               webname: 'lookup_save', // 保存
-              text: $i18n.t('btn.save'), // 保存
+              text: $it('btn.save'), // 保存
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -20,7 +20,7 @@
             },
             {
               webname: 'lookup_return', // 返回
-              text: $i18n.t('btn.back'),
+              text: $it('btn.back'),
               btnclick: () => {
                 $omsUtils.tabCloseAppoint(this);
                 this.$destroy(true);
@@ -39,7 +39,7 @@
           formData: [
             {
               style: 'input',
-              label: $i18n.t('form_label.du'), // 逻辑仓编码
+              label: $it('form_label.du'), // 逻辑仓编码
               value: 'ECODE',
               width: '6',
               disabled: false,
@@ -48,7 +48,7 @@
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.dv'), // 逻辑仓名称
+              label: $it('form_label.dv'), // 逻辑仓名称
               value: 'ENAME',
               width: '6',
               disabled: false,
@@ -67,7 +67,7 @@
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
-                name: $i18n.t('form_label.dw'), // 所属实体仓 // 赔付类型
+                name: $it('form_label.dw'), // 所属实体仓 // 赔付类型
                 readonly: true, // 是否可编辑，对应input   readonly属性
                 reftable: 'PS_C_BRAND', // 对应的表
                 reftableid: 166035, // 对应的表ID
@@ -82,7 +82,7 @@
             {
               colname: 'group_type',
               style: 'select', // 下拉框类型
-              label: $i18n.t('form_label.dx'), // 仓库类型
+              label: $it('form_label.dx'), // 仓库类型
               width: '6', // 所占宽度宽度
               value: 'STORETYPE', // 输入框的值
               clearable: true,
@@ -92,18 +92,18 @@
               options: [
                 // 下拉框选项值
                 {
-                  label: $i18n.t('form_label.qualityGoods'), // 正品
+                  label: $it('form_label.qualityGoods'), // 正品
                   value: '1'
                 },
                 {
-                  label: $i18n.t('form_label.ungraded'), // 次品
+                  label: $it('form_label.ungraded'), // 次品
                   value: '2'
                 }
               ]
             },
             {
               style: 'textarea',
-              label: $i18n.t('table_label.remarks'), // 备注
+              label: $it('table_label.remarks'), // 备注
               value: 'REMARK',
               width: '24',
               disabled: false,
@@ -143,14 +143,14 @@
           formData: [
             {
               style: 'checkbox',
-              label: $i18n.t('form_label.dy'), // 主仓
+              label: $it('form_label.dy'), // 主仓
               value: 'IS_MAIN_WAREHOUSE',
               width: '6',
               disabled: false,
             },
             {
               style: 'checkbox',
-              label: $i18n.t('form_label.dz'), // 负库存控制
+              label: $it('form_label.dz'), // 负库存控制
               value: 'ISNEGATIVE',
               width: '6',
               disabled: false,
@@ -199,13 +199,13 @@
         data = Object.assign(self.formConfig.formValue, self.businessFormConfig.formValue);
         let str = '';
         if (!data.ECODE) {
-          str += `${$i18n.t('form_label.du')} `; // 逻辑仓编码
+          str += `${$it('form_label.du')} `; // 逻辑仓编码
         } else if (!data.ENAME) {
-          str += `${$i18n.t('form_label.dv')} `; // 逻辑仓名称
+          str += `${$it('form_label.dv')} `; // 逻辑仓名称
         } else if (!data.CP_C_PHY_WAREHOUSE_ID) {
-          str += `${$i18n.t('form_label.dw')} `; // 所属实体仓
+          str += `${$it('form_label.dw')} `; // 所属实体仓
         } else if(!data.STORETYPE){
-          str += `${$i18n.t('form_label.dx')} `; // 仓库类型
+          str += `${$it('form_label.dx')} `; // 仓库类型
         }
         if (str) {
           self.$Message.warning(`${str}不能为空!`);

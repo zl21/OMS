@@ -13,13 +13,13 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.close();
             },
           },
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             size: '', // 按钮大小
             btnclick: () => {
               this.save();

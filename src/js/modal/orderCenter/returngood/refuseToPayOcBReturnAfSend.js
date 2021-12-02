@@ -9,7 +9,7 @@ export default {
       reason: '',
       ruleValidate: {
         reason: [
-          { required: true, message: $i18n.t('modalTips.ef'), trigger: 'blur' }
+          { required: true, message: $it('modalTips.ef'), trigger: 'blur' }
         ],
       },
       btnConfig: {
@@ -17,7 +17,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
           type: '', // 按钮类型
-          text: $i18n.t('common.cancel'), // 取消
+          text: $it('common.cancel'), // 取消
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -27,7 +27,7 @@ export default {
         },
         {
           type: '', // 按钮类型
-          text: $i18n.t('common.determine'), // 确定
+          text: $it('common.determine'), // 确定
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     determine() {
-      if (!this.reason) return this.$Message.warning($i18n.t('modalTips.ef')); // '拒绝打款原因不能为空!'
+      if (!this.reason) return this.$Message.warning($it('modalTips.ef')); // '拒绝打款原因不能为空!'
       this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason }).then(res => {
         console.log(res);
         if (res.data.data.code == 0) {
@@ -60,7 +60,7 @@ export default {
                     key: 'objid'
                   },
                   {
-                    title: $i18n.t('modalTitle.a5'), // '报错信息'
+                    title: $it('modalTitle.a5'), // '报错信息'
                     key: 'message'
                   }
                 ],

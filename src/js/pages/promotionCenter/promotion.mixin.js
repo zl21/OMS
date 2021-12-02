@@ -7,21 +7,21 @@ export default () => ({
       extendBtn: [
         {
           webname: 'PM_C_PROM_ACTI_RETURN_B',
-          text: $i18n.t('btn.back'), // 返回
+          text: $it('btn.back'), // 返回
           btnclick: () => {
             this.close();
           }
         },
         {
           webname: 'PM_C_PROM_ACTI_SAVE',
-          text: $i18n.t('btn.saveDraft'), // 保存草稿
+          text: $it('btn.saveDraft'), // 保存草稿
           btnclick: () => {
             this.saveDraft();
           }
         },
         {
           webname: 'PM_C_PROM_ACTI_PUBLISH',
-          text: $i18n.t('btn.publish'), // 发布
+          text: $it('btn.publish'), // 发布
           btnclick: () => {
             this.publish();
           }
@@ -38,7 +38,7 @@ export default () => ({
             fkdisplay: 'drp', // 外键关联类型
             isfk: true, // 是否有fk键
             isnotnull: true, // 是否必填
-            name: $i18n.t('table_label.shopName'),
+            name: $it('table_label.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
             isOneData: true,
             valuedata: '', // 这个是选择的值
@@ -64,7 +64,7 @@ export default () => ({
             fkdisplay: 'mrp',
             isfk: true,
             isnotnull: false,
-            name: $i18n.t('common.exclude_province'),
+            name: $it('common.exclude_province'),
             readonly: false,
             valuedata: '',
             notForm: true,
@@ -92,25 +92,25 @@ export default () => ({
         {
           class: 'icon-jibenxinxi',
           // content: "基础信息",
-          content: $i18n.t('other.basic_info'),
+          content: $it('other.basic_info'),
           finish: false
         },
         {
           class: 'icon-liuchengtiaojian',
           // content: "条件信息",
-          content: $i18n.t('other.condition_info'),
+          content: $it('other.condition_info'),
           finish: false
         },
         {
           class: 'icon-zengpin',
           // content: "赠品信息",
-          content: $i18n.t('other.gift_info'),
+          content: $it('other.gift_info'),
           finish: false
         },
         {
           class: 'icon-huodong',
           // content: "活动概览",
-          content: $i18n.t('other.activity_overview'),
+          content: $it('other.activity_overview'),
           finish: false
         }
       ],
@@ -236,19 +236,19 @@ export default () => ({
       if (this.basic_info.activity_name === '') {
         return {
           code: -1,
-          message: $i18n.t('modalTips.s5')
+          message: $it('modalTips.s5')
         }; // 活动名称未填写！
       }
       if (!this.basic_info.stores.itemdata.valuedata) {
         return {
           code: -1,
-          message: $i18n.t('modalTips.s6')
+          message: $it('modalTips.s6')
         }; // 店铺名称未填写！
       }
       if (this.basic_info.order_type.length === 0) {
         return {
           code: -1,
-          message: $i18n.t('modalTips.s7')
+          message: $it('modalTips.s7')
         }; // 订单类型必选！
       }
       // if(this.basic_info.platform_mark.length === 0){
@@ -257,25 +257,25 @@ export default () => ({
       if (this.basic_info.time_limit === '' || this.basic_info.time_limit[0] === '' || this.basic_info.time_limit[1] === '') {
         return {
           code: -1,
-          message: $i18n.t('modalTips.t8')
+          message: $it('modalTips.t8')
         }; // 时间范围未填写！
       }
       if (this.basic_info.offline_time === '') {
         return {
           code: -1,
-          message: $i18n.t('modalTips.s8')
+          message: $it('modalTips.s8')
         }; // 下线时间未填写！
       }
       if (this.basic_info.buyer_limit_frequency === '1' && !this.basic_info.buyer_max_frequency) {
         return {
           code: -1,
-          message: $i18n.t('modalTips.s9')
+          message: $it('modalTips.s9')
         }; // 最大限制次数未填写！
       }
 
       return {
         code: 0,
-        message: $i18n.t('modalTips.s4')
+        message: $it('modalTips.s4')
       }; // 校验完成
     },
     initBtn() {

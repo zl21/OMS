@@ -88,13 +88,13 @@ export default {
             btnclick: () => this.setCommodity()
           },
           {
-            text: $i18n.t("btn.add_ladder"), // 添加阶梯
+            text: $it("btn.add_ladder"), // 添加阶梯
             class: "white",
             disabled: false,
             btnclick: () => this.addSteps()
           },
           {
-            text: $i18n.t("btn.delete_ladder"), // 删除阶梯
+            text: $it("btn.delete_ladder"), // 删除阶梯
             class: "white",
             disabled: false,
             btnclick: () => this.removeSteps()

@@ -19,7 +19,7 @@ export default {
       // 修改仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.a3'), // 请选择仓库
+        confirmTitle: $it('modalTitle.a3'), // 请选择仓库
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '760',
         scrollable: false, // 是否可以滚动
@@ -37,7 +37,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.import'),
+        confirmTitle: $it('modalTitle.import'),
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -61,13 +61,13 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $i18n.t('form_label.ruleName'),
+            label: $it('form_label.ruleName'),
             value: 'ENAME',
             width: '6',
           },
           {
             style: 'select',
-            label: $i18n.t('form_label.type'),
+            label: $it('form_label.type'),
             width: '6',
             value: 'ETYPE',
             selectChange: () => {
@@ -77,7 +77,7 @@ export default {
               // 下拉框选项值
               {
                 value: '1',
-                label: $i18n.t('form_label.a0'),
+                label: $it('form_label.a0'),
               },
               // {
               //   value: "2",
@@ -85,13 +85,13 @@ export default {
               // },
               {
                 value: '3',
-                label: $i18n.t('form_label.a1'),
+                label: $it('form_label.a1'),
               },
             ],
           },
           {
             style: 'input',
-            label: $i18n.t('table_label.remarks'),
+            label: $it('table_label.remarks'),
             value: 'REMARK',
             width: '6',
           },
@@ -122,14 +122,14 @@ export default {
           //   }
           // },
           {
-            text: $i18n.t('btn.save'), // '保存',
+            text: $it('btn.save'), // '保存',
             btnclick: () => {
               const _this = this;
               _this.save();
             },
           },
           {
-            text: $i18n.t('btn.void'), // '作废',
+            text: $it('btn.void'), // '作废',
             disabled: true,
             btnclick: () => {
               const _this = this;
@@ -137,7 +137,7 @@ export default {
             },
           },
           {
-            text: $i18n.t('btn.import'), // '导入',
+            text: $it('btn.import'), // '导入',
             disabled: true,
             btnclick: () => {
               const _this = this;
@@ -154,7 +154,7 @@ export default {
             },
           },
           {
-            text: $i18n.t('btn.export'), // '导出',
+            text: $it('btn.export'), // '导出',
             disabled: true,
             btnclick: () => {
               const _this = this;
@@ -162,7 +162,7 @@ export default {
             },
           },
           {
-            text: $i18n.t('btn.modifyWarehouse'), // '修改仓库',
+            text: $it('btn.modifyWarehouse'), // '修改仓库',
             disabled: true,
             btnclick: () => {
               const _this = this;
@@ -178,7 +178,7 @@ export default {
             },
           },
           {
-            text: $i18n.t('btn.refresh'), // '刷新',
+            text: $it('btn.refresh'), // '刷新',
             disabled: true,
             btnclick: () => {
               const _this = this;
@@ -186,7 +186,7 @@ export default {
             },
           },
           {
-            text: $i18n.t('btn.back'), // '返回',
+            text: $it('btn.back'), // '返回',
             btnclick: () => {
               $omsUtils.tabCloseAppoint(this);
               const _this = this;
@@ -222,7 +222,7 @@ export default {
                 isnotnull: true,
                 isuppercase: false,
                 length: 20,
-                name: $i18n.t('form_label.warehouse'), // '仓库',
+                name: $it('form_label.warehouse'), // '仓库',
                 readonly: false,
                 reftable: 'CP_C_PHY_WAREHOUSE',
                 reftableid: 24486,
@@ -234,7 +234,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.a2'), // '仓库优先级',
+              label: $it('form_label.a2'), // '仓库优先级',
               value: 'RANK',
               width: '6',
               inputenter: () => {
@@ -244,7 +244,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.a3'), // '发货比例',
+              label: $it('form_label.a3'), // '发货比例',
               value: 'SEND_RATE',
               width: '6',
               inputenter: () => {
@@ -261,19 +261,19 @@ export default {
         columns: [
           {
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
-            title: $i18n.t('form_label.warehouse'), // '仓库'
+            title: $it('form_label.warehouse'), // '仓库'
           },
           {
             key: 'RANK',
-            title: $i18n.t('form_label.a2'), // '仓库优先级'
+            title: $it('form_label.a2'), // '仓库优先级'
           },
           {
             key: 'SEND_RATE',
-            title: $i18n.t('form_label.a3'), // '发货比例'
+            title: $it('form_label.a3'), // '发货比例'
           },
           {
             key: 'QTY_SEND',
-            title: $i18n.t('form_label.a4'), // '发货数量'
+            title: $it('form_label.a4'), // '发货数量'
           },
         ],
         isShowImportBtn: true,
@@ -292,7 +292,7 @@ export default {
       },
       labelList: [
         {
-          label: $i18n.t('form_label.a5'), // '按收货地址',
+          label: $it('form_label.a5'), // '按收货地址',
           value: '1',
           isShow: true,
         },
@@ -308,17 +308,17 @@ export default {
     const _this = this;
     // [修改仓库,导入,导出,作废,刷新]
     _this.btnTxetArr = [
-      $i18n.t('btn.modifyWarehouse'),
-      $i18n.t('btn.import'),
-      $i18n.t('btn.export'),
-      $i18n.t('btn.void'),
-      $i18n.t('btn.refresh'),
+      $it('btn.modifyWarehouse'),
+      $it('btn.import'),
+      $it('btn.export'),
+      $it('btn.void'),
+      $it('btn.refresh'),
     ];
     if (_this.$route.params.customizedModuleId !== 'New') {
       // [规则名称,类型]
       const formLabelArr = [
-        $i18n.t('form_label.ruleName'),
-        $i18n.t('form_label.type'),
+        $it('form_label.ruleName'),
+        $it('form_label.type'),
       ];
       _this.information.formData.forEach((item) => {
         if (formLabelArr.includes(item.label)) {
@@ -340,11 +340,11 @@ export default {
       const ETYPE = _this.information.formValue.ETYPE;
       if (_this.$route.params.customizedModuleId === 'New') {
         if (!_this.information.formValue.ENAME) {
-          _this.$Message.error($i18n.t('modalTips.cp')); // '规则名称必填'
+          _this.$Message.error($it('modalTips.cp')); // '规则名称必填'
           return;
         }
         if (!ETYPE) {
-          _this.$Message.error($i18n.t('modalTips.cq')); // '规则类型必填'
+          _this.$Message.error($it('modalTips.cq')); // '规则类型必填'
           return;
         }
       }
@@ -353,7 +353,7 @@ export default {
         ETYPE === '1' &&
         _this.$route.params.customizedModuleId !== 'New'
       ) {
-        _this.$Message.error($i18n.t('modalTips.cr')); // '请先设置仓库'
+        _this.$Message.error($it('modalTips.cr')); // '请先设置仓库'
         return;
       }
       _this.saveLoading = true;
@@ -391,7 +391,7 @@ export default {
       this.service.strategyPlatform.saveSendRule(formData).then((res) => {
         _this.saveLoading = false;
         if (res.data.data.code === 0) {
-          _this.$Message.success($i18n.t('modalTips.z9')); // '保存成功'
+          _this.$Message.success($it('modalTips.z9')); // '保存成功'
           if (_this.$route.params.customizedModuleId !== 'New') {
             if (ETYPE === '2') _this.getWarehouseRateResult();
             else if (ETYPE === '1' || ETYPE === '3') _this.getTree();
@@ -400,17 +400,17 @@ export default {
               id: res.data.data.data.objid, // 单据id
               type: 'action', // 类型action
               name: 'sendSingleRule', // 文件名
-              label: $i18n.t('panel_label.edit_order_dispatch_rule'), // '订单派单规则编辑', // tab中文名
+              label: $it('panel_label.edit_order_dispatch_rule'), // '订单派单规则编辑', // tab中文名
               query: Object.assign({
                 id: res.data.data.data.objid, // 单据id
-                tabTitle: $i18n.t(
+                tabTitle: $it(
                   'panel_label.edit_order_dispatch_rule'
                 ), // '订单派单规则编辑' // tab中文名
               }), // 带的参数
             });
           }
         } else {
-          // _this.$Message.success(res.data.data.message || $i18n.t('modalTips.y0')); // '保存失败'
+          // _this.$Message.success(res.data.data.message || $it('modalTips.y0')); // '保存失败'
         }
       });
     },
@@ -418,17 +418,17 @@ export default {
     saveWherehouseAdd() {
       const _this = this;
       if (_this.$route.params.customizedModuleId == 'New') {
-        _this.$Message.info($i18n.t('modalTips.cu')); // '请先保存主表信息'
+        _this.$Message.info($it('modalTips.cu')); // '请先保存主表信息'
         return;
       }
       if (
         !_this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid
       ) {
-        _this.$Message.error($i18n.t('modalTips.cv')); // '仓库必填'
+        _this.$Message.error($it('modalTips.cv')); // '仓库必填'
         return;
       }
       if (!_this.information.formValue.ETYPE) {
-        _this.$Message.error($i18n.t('modalTips.cw')); // '仓库优先级必填必填'
+        _this.$Message.error($it('modalTips.cw')); // '仓库优先级必填必填'
         return;
       }
 
@@ -458,7 +458,7 @@ export default {
       formData.append('param', JSON.stringify(param));
       this.service.strategyPlatform.saveSendRule(formData).then((res) => {
         if (res.data.data.code === 0) {
-          _this.$Message.success($i18n.t('modalTips.cx')); // '新增成功'
+          _this.$Message.success($it('modalTips.cx')); // '新增成功'
           _this.getWarehouseRateResult();
           _this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid =
             '';
@@ -467,7 +467,7 @@ export default {
           _this.jordanTableConfig.businessFormConfig.formValue.RANK = '';
           _this.jordanTableConfig.businessFormConfig.formValue.SEND_RATE = '';
         } else {
-          // _this.$Message.error(res.data.data.message || $i18n.t('modalTips.cy')); // '新增失败'
+          // _this.$Message.error(res.data.data.message || $it('modalTips.cy')); // '新增失败'
         }
       });
     },
@@ -489,13 +489,13 @@ export default {
             _this.information.formValue.ETYPE = res.data.data.ETYPE;
             _this.information.formValue.REMARK = res.data.data.REMARK;
             if (res.data.data.ISACTIVE === 'N') {
-              _this.statusName = $i18n.t('common.voided'); // '已作废';
+              _this.statusName = $it('common.voided'); // '已作废';
               _this.jordanTableConfig.isShowImportBtn = false;
               _this.jordanTableConfig.isShowExportBtn = false;
               _this.jordanTableConfig.isShowDeleteDetailBtn = false;
               _this.jordanTableConfig.businessFormConfig = {};
               // [修改仓库,导入,导出,作废,保存]
-              _this.btnTxetArr.splice(-1, 1, $i18n.t('btn.save'));
+              _this.btnTxetArr.splice(-1, 1, $it('btn.save'));
               _this.btnConfig.buttons.forEach((item) => {
                 if (_this.btnTxetArr.includes(item.text)) {
                   item.disabled = true;
@@ -514,8 +514,8 @@ export default {
               // '按收货地址' : '派单规则明细'
               this.labelList[0].label =
                 _this.information.formValue.ETYPE === '1'
-                  ? $i18n.t('form_label.a5')
-                  : $i18n.t('form_label.a6');
+                  ? $it('form_label.a5')
+                  : $it('form_label.a6');
             } else if (_this.information.formValue.ETYPE === '2') {
               _this.showFlag = true;
               _this.getWarehouseRateResult();
@@ -527,7 +527,7 @@ export default {
                 }
               });
               // '分仓比例'
-              this.labelList[0].label = $i18n.t('form_label.a7');
+              this.labelList[0].label = $it('form_label.a7');
             }
           }
         });
@@ -646,7 +646,7 @@ export default {
         ) {
           setTimeout(() => {
             item[index].rank = '';
-            this.$Message.info($i18n.t('modalTips.y9')); // '优先级设置重复'
+            this.$Message.info($it('modalTips.y9')); // '优先级设置重复'
           }, 200);
           return;
         }
@@ -684,7 +684,7 @@ export default {
             });
             _this.treeData = res.data.data.sendRuleTree;
           } else {
-            // _this.$Message.error(res.data.data.message || $i18n.t('modalTips.z3')); // '失败'
+            // _this.$Message.error(res.data.data.message || $it('modalTips.z3')); // '失败'
           }
         });
     },
@@ -703,11 +703,11 @@ export default {
       this.service.strategyPlatform.voidSendRule(fromdata).then((res) => {
         _this.saveLoading = false;
         if (res.data.data.code === 0) {
-          const ess = res.data.data.message || $i18n.t('modalTips.y4'); // '作废成功';
+          const ess = res.data.data.message || $it('modalTips.y4'); // '作废成功';
           _this.getMianTable();
           _this.$Message.success(ess);
         } else {
-          // const err = res.data.data.message || $i18n.t('modalTips.y5'); // '作废失败';
+          // const err = res.data.data.message || $it('modalTips.y5'); // '作废失败';
           // _this.$Message.error(err);
         }
       });
@@ -735,11 +735,11 @@ export default {
         .exportSendRuleWarehouseRate(param)
         .then((res) => {
           if (res.data.code === 0) {
-            const ess = res.data.message || $i18n.t('modalTips.z2'); // '导出成功';
+            const ess = res.data.message || $it('modalTips.z2'); // '导出成功';
             _this.$Message.success(ess);
             $omsUtils.downloadUrlFile(res.data.data);
           } else {
-            // const err = res.data.message || $i18n.t('modalTips.y6'); // '导出失败';
+            // const err = res.data.message || $it('modalTips.y6'); // '导出失败';
             // _this.$Message.error(err);
             $omsUtils.downloadUrlFile(res.data.data);
           }
@@ -751,7 +751,7 @@ export default {
       if (_this.selectAllList.length) {
         _this.selectAllList.forEach((item) => ids.push(item.ID));
       } else {
-        _this.$Message.error($i18n.t('modalTips.df')); // '请选择需要删除的数据'
+        _this.$Message.error($it('modalTips.df')); // '请选择需要删除的数据'
         return;
       }
       const fromdata = new FormData();
@@ -767,11 +767,11 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.service.strategyPlatform.delSendRule(fromdata).then((res) => {
         if (res.data.data.code === 0) {
-          const ess = res.data.data.message || $i18n.t('modalTips.ay'); // '删除成功';
+          const ess = res.data.data.message || $it('modalTips.ay'); // '删除成功';
           _this.getMianTable();
           _this.$Message.success(ess);
         } else {
-          // const err = res.data.data.message || $i18n.t('modalTips.cs'); // '删除失败';
+          // const err = res.data.data.message || $it('modalTips.cs'); // '删除失败';
           // _this.$Message.error(err);
         }
       });
@@ -799,11 +799,11 @@ export default {
         .exportSendRuleWarehouseRank(param)
         .then((res) => {
           if (res.data.code === 0) {
-            const ess = res.data.message || $i18n.t('modalTips.z2'); // '导出成功';
+            const ess = res.data.message || $it('modalTips.z2'); // '导出成功';
             _this.$Message.success(ess);
             $omsUtils.downloadUrlFile(res.data.data);
           } else {
-            // const err = res.data.message || $i18n.t('modalTips.y6'); // '导出失败';
+            // const err = res.data.message || $it('modalTips.y6'); // '导出失败';
             // _this.$Message.error(err);
             $omsUtils.downloadUrlFile(res.data.data);
           }

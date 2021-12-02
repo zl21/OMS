@@ -102,7 +102,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: $i18n.t('btn.save'), // 保存
+              text: $it('btn.save'), // 保存
               btnclick: () => {
                 const self = this;
                 self.save();
@@ -144,7 +144,7 @@ export default {
             //     }
             // },
             {
-              text: $i18n.t('common.return'), // 返回
+              text: $it('common.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -258,19 +258,19 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: $i18n.t('btn.save'), // 保存
+              text: $it('btn.save'), // 保存
               btnclick: () => {
                 console.log('保存');
               }
             },
             {
-              text: $i18n.t('btn.refresh'), // '刷新',
+              text: $it('btn.refresh'), // '刷新',
               btnclick: () => {
                 this.reload();
               }
             },
             {
-              text: $i18n.t('common.return'), // 返回
+              text: $it('common.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -488,7 +488,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('table_label.remarks'), // 备注
+              label: $it('table_label.remarks'), // 备注
               value: 'REMARK',
               dataAcessKey: 'SHIP_AMT',
               disabled: false,
@@ -764,11 +764,11 @@ export default {
       } else if (res.BILL_STATUS == 2) {
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已审核';
         // self.watermark_src = '../../../../static/img/watermark/checked.png';
-        self.statusName = $i18n.t('common.reviewed'); // '已审核';
+        self.statusName = $it('common.reviewed'); // '已审核';
       } else if (res.BILL_STATUS == 3) {
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已作废';
         // self.watermark_src = '../../../../static/img/watermark/void.png';
-        self.statusName = $i18n.t('common.voided'); // '已作废';
+        self.statusName = $it('common.voided'); // '已作废';
       }
       self.pickOrder.logFormConfig.formValue.STATUS_NAME = res.STATUS_NAME; // 审核人
       self.pickOrder.logFormConfig.formValue.STATUS_TIME = self.toDate(res.STATUS_TIME); // 审核时间

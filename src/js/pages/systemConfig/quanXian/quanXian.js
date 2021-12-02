@@ -136,7 +136,7 @@ export default {
     this.getTableData();//获取表格
 
     this.buttonConfig.buttons = this.permissionType === 'brand' || this.permissionType === 'sensitivecol'
-      ? this.normal.buttons.filter(item => item.text != $i18n.t('btn.copyPermissions'))
+      ? this.normal.buttons.filter(item => item.text != $it('btn.copyPermissions'))
       : this.normal.buttons;
     // businessButton组件中定义的点击事件是'btnclick'
     this.buttonConfig.buttons.forEach(item => {
@@ -147,24 +147,24 @@ export default {
     // const { customizedModuleName } = this.$route.params;
     this.sensitiveColumns = [
       {
-        title: $i18n.t('table_label.sensitiveColumn'),
+        title: $it('table_label.sensitiveColumn'),
         // title: "敏感列",
         key: 'CP_C_COLUMN_ENAME'
       },
       {
-        title: $i18n.t('table_label.view'),
+        title: $it('table_label.view'),
         // title: "查看",
         key: 'IS_READ'
       },
       {
-        title: $i18n.t('table_label.edit'),
+        title: $it('table_label.edit'),
         // title: "编辑",
         key: 'IS_WRITE'
       }
     ];
 
     const btnSearchObj = {
-      text: $i18n.t('btn.search'),
+      text: $it('btn.search'),
       icon: '',
       btnclick: () => {
         const self = this;
@@ -179,7 +179,7 @@ export default {
       }
     };
     this.searchBtnConfig.buttons.push(btnSearchObj);
-    this.filterTreeConfig.placeholder = $i18n.t('pHolder.enter');
+    this.filterTreeConfig.placeholder = $it('pHolder.enter');
   },
   methods: {
     treeChange(val, obj) {
@@ -379,7 +379,7 @@ export default {
 
         this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
         if (refresh) {
-          this.$Message.success($i18n.t('common.refresh_succee')); // 刷新成功
+          this.$Message.success($it('common.refresh_succee')); // 刷新成功
         }
       }
       this.loading = false;
@@ -397,7 +397,7 @@ export default {
       } = await this.service.systemConfig.copyShopPermission(param);
       if (code === 0) {
         this.$Modal.success({
-          title: $i18n.t('modalTitle.tips'),
+          title: $it('modalTitle.tips'),
           content: message,
           cancelType: true,
           titleAlign: 'left',

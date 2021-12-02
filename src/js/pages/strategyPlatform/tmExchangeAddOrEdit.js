@@ -21,7 +21,7 @@ export default {
         buttons: [
           {
             webname: 'ST_C_TMALL_EXCHANGE_MAIN_SAVE',
-            text: $i18n.t('btn.save'), // 保存
+            text: $it('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
             isShow: false,
             btnclick: () => {
@@ -30,7 +30,7 @@ export default {
           },
           {
             webname: 'fix_back',
-            text: $i18n.t('btn.back'),
+            text: $it('btn.back'),
             btnclick: () => {
               this.back();
             }
@@ -43,13 +43,13 @@ export default {
           {
             style: null,
             colname: 'ECODE',
-            label: $i18n.t('form_label.bc'), // 策略ID
+            label: $it('form_label.bc'), // 策略ID
             width: '6'
           },
           {
             style: 'input',
             colname: 'ENAME',
-            label: $i18n.t('form_label.bd'), // 策略名称
+            label: $it('form_label.bd'), // 策略名称
             width: '6',
             inputChange: () => {
               this.masterModifyData('ENAME', 'master', 'formConfig1');
@@ -66,7 +66,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: $i18n.t('table_label.shopName'), // 店铺名称
+              name: $it('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -82,14 +82,14 @@ export default {
           },
           {
             style: 'select',
-            label: $i18n.t('form_label.ce'), // 换货地址
+            label: $it('form_label.ce'), // 换货地址
             width: '12',
             colname: 'EXCHANGE_ADDR_ID',
             options: [],
             onOpenChange: (flag) => {
               const _this = this;
               if (flag && !_this.formConfig1.formValue.CP_C_SHOP_ID) {
-                _this.$Message.warning($i18n.t('modalTips.hz')); // 请先选择店铺
+                _this.$Message.warning($it('modalTips.hz')); // 请先选择店铺
                 return;
               }
             },
@@ -131,8 +131,8 @@ export default {
       formConfig2: {
         formData: [
           {
-            label: $i18n.t('form_label.cf'), // 换货说明,
-            subLabel: $i18n.t('form_label.ch'), // 偏差N元同意换货<=,
+            label: $it('form_label.cf'), // 换货说明,
+            subLabel: $it('form_label.ch'), // 偏差N元同意换货<=,
             style: 'formCompile',
             colname: 'IS_AUTO_APPROVE',
             class: 'soltDom',
@@ -143,15 +143,15 @@ export default {
             disabled: false,
             options: [
               {
-                label: $i18n.t('common.all'), // 全部
+                label: $it('common.all'), // 全部
                 value: '2'
               },
               {
-                label: $i18n.t('form_label.ci'), // 有,
+                label: $it('form_label.ci'), // 有,
                 value: '1'
               },
               {
-                label: $i18n.t('form_label.cj'), // 没有,
+                label: $it('form_label.cj'), // 没有,
                 value: '0'
               }
             ],
@@ -184,9 +184,9 @@ export default {
             }
           },
           {
-            label: $i18n.t('form_label.ck'), // 缺货自动拒绝,
-            subLabel1: $i18n.t('form_label.cl'), // 缺货自动拒绝换货原因
-            subLabel2: $i18n.t('form_label.cm'), // 缺货自动拒绝文案
+            label: $it('form_label.ck'), // 缺货自动拒绝,
+            subLabel1: $it('form_label.cl'), // 缺货自动拒绝换货原因
+            subLabel2: $it('form_label.cm'), // 缺货自动拒绝文案
             style: 'formCompile',
             slotName: 'stockout',
             reqStr: true,
@@ -211,10 +211,10 @@ export default {
             }
           },
           {
-            label: $i18n.t('form_label.cn'), // 偏差N元自动拒绝
-            subLabel1: $i18n.t('form_label.co'), // 偏差N元拒绝换货>
-            subLabel2: $i18n.t('form_label.cp'), // 偏差N元自动拒绝换货原因
-            subLabel3: $i18n.t('form_label.cq'), // 偏差N元自动拒绝文案
+            label: $it('form_label.cn'), // 偏差N元自动拒绝
+            subLabel1: $it('form_label.co'), // 偏差N元拒绝换货>
+            subLabel2: $it('form_label.cp'), // 偏差N元自动拒绝换货原因
+            subLabel3: $it('form_label.cq'), // 偏差N元自动拒绝文案
             style: 'formCompile',
             slotName: 'bias',
             reqStr: true,
@@ -268,7 +268,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          label: $it('panel_label.operationLog'), // 操作日志
           value: 'ST_TMALL_EXCHANGE_LOG'
         }
       ],
@@ -458,11 +458,11 @@ export default {
     isValid() {
       let msg = []
       let tip = {
-        EXCHANGE_DESC: $i18n.t('form_label.cf'), // 换货说明,
-        AOTU_APPROVE_DEVIATION_PRICE: $i18n.t('form_label.ch'), // 偏差N元同意换货
-        OOS_AUTO_REJECT_REASON_ID: $i18n.t('form_label.cl'), // 缺货自动拒绝换货原因
-        AUTO_REJECT_DEVIATION_PRICE: $i18n.t('form_label.co'), // 偏差N元拒绝换货
-        DEVIATION_AUTO_REJECT_REASON_ID: $i18n.t('form_label.cp'), // 偏差N元自动拒绝换货原因
+        EXCHANGE_DESC: $it('form_label.cf'), // 换货说明,
+        AOTU_APPROVE_DEVIATION_PRICE: $it('form_label.ch'), // 偏差N元同意换货
+        OOS_AUTO_REJECT_REASON_ID: $it('form_label.cl'), // 缺货自动拒绝换货原因
+        AUTO_REJECT_DEVIATION_PRICE: $it('form_label.co'), // 偏差N元拒绝换货
+        DEVIATION_AUTO_REJECT_REASON_ID: $it('form_label.cp'), // 偏差N元自动拒绝换货原因
       }
       for (let key in this.formConfig2.ruleValidate) {
         let val = this.formConfig2.formValue[key]
@@ -497,12 +497,12 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },

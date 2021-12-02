@@ -36,12 +36,12 @@ export default {
       islackstock: [
         {
           // label: "是",
-          label: $i18n.t('common.yes'),
+          label: $it('common.yes'),
           value: '1'
         },
         {
           // label: "否",
-          label: $i18n.t('common.no'),
+          label: $it('common.no'),
           value: '0'
         }
       ],
@@ -53,7 +53,7 @@ export default {
           buttons: [
             {
               type: '', // 按钮类型
-              text: $i18n.t('btn.deleteGift'), // 删除赠品
+              text: $it('btn.deleteGift'), // 删除赠品
               icon: '', // 按钮图标
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -62,7 +62,7 @@ export default {
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0) {
                   // return self.$Message.error("至少选择一条订单明细");
-                  self.$Message.error($i18n.t('modalTips.zk'));
+                  self.$Message.error($it('modalTips.zk'));
                   return;
                 }
                 const param = {
@@ -81,7 +81,7 @@ export default {
             },
             {
               type: '', // 按钮类型
-              text: $i18n.t('btn.addGift'), // 添加赠品
+              text: $it('btn.addGift'), // 添加赠品
               icon: '', // 按钮图标
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -119,13 +119,13 @@ export default {
               } // 按钮点击事件
             },
             {
-              text: $i18n.t('btn.rark_refundComplete'), // 标记退款完成
+              text: $it('btn.rark_refundComplete'), // 标记退款完成
               btnclick: async () => {
                 const self = this;
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0) {
                   // return self.$Message.error("至少选择一条订单明细");
-                  self.$Message.error($i18n.t('modalTips.zk'));
+                  self.$Message.error($it('modalTips.zk'));
                   return;
                 }
                 const param = {
@@ -147,7 +147,7 @@ export default {
             },
             {
               type: '', // 按钮类型
-              text: $i18n.t('btn.replaceGoods'), // 更换商品
+              text: $it('btn.replaceGoods'), // 更换商品
               icon: '', // 按钮图标
               size: 'small', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -157,7 +157,7 @@ export default {
                 if (ids.length === 0) {
                   self.$Message.warning({
                     // content: "请选中其中一条记录",
-                    content: $i18n.t('modalTips.al'),
+                    content: $it('modalTips.al'),
                     duration: 5,
                     top: 80
                   });
@@ -166,7 +166,7 @@ export default {
                 if (ids.length > 1) {
                   self.$Message.warning({
                     // content: "请选中一条记录",
-                    content: $i18n.t('modalTips.am'),
+                    content: $it('modalTips.am'),
                     duration: 5,
                     top: 80
                   });
@@ -238,11 +238,11 @@ export default {
           {
             key: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: $i18n.t('table_label.productNo')
+            title: $it('table_label.productNo')
           },
           {
             // title: "颜色",
-            title: $i18n.t('other.color'),
+            title: $it('other.color'),
             key: 'PS_C_CLR_ENAME',
             width: 80,
             render: (h, params) => {
@@ -293,7 +293,7 @@ export default {
           // 尺寸
           {
             // title: "尺寸",
-            title: $i18n.t('other.sizes'),
+            title: $it('other.sizes'),
             key: 'PS_C_SIZE_ENAME',
             width: 80,
             render: (h, params) => {
@@ -344,12 +344,12 @@ export default {
           {
             key: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: $i18n.t('form_label.barCode')
+            title: $it('form_label.barCode')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: $i18n.t('table_label.productName'),
+            title: $it('table_label.productName'),
             width: 200,
             ellipsis: true
           },
@@ -361,22 +361,22 @@ export default {
           {
             key: 'QTY',
             // title: "数量",
-            title: $i18n.t('table_label.quantities')
+            title: $it('table_label.quantities')
           },
           {
             key: 'QTY_LOST',
             // title: "缺货数量",
-            title: $i18n.t('table_label.outOfStock_quantit')
+            title: $it('table_label.outOfStock_quantit')
           },
           {
             key: 'STOCK',
             // title: "库存",
-            title: $i18n.t('table_label.stock')
+            title: $it('table_label.stock')
           },
           {
             key: 'IS_LACKSTOCK',
             // title: "实物报缺",
-            title: $i18n.t('table_label.materialShortage'),
+            title: $it('table_label.materialShortage'),
             width: 80,
             render: (h, params) => {
               // 订单状态为未确认或者缺货状态时,实物报缺为可修改
@@ -431,7 +431,7 @@ export default {
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: $i18n.t('table_label.whetherGift'),
+            title: $it('table_label.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT === 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -440,53 +440,53 @@ export default {
           {
             key: 'PRICE_LIST',
             // title: "吊牌价",
-            title: $i18n.t('table_label.tagPrice')
+            title: $it('table_label.tagPrice')
           },
           {
             key: 'PRICE_ACTUAL',
             // title: "成交单价",
-            title: $i18n.t('table_label.unitPrice')
+            title: $it('table_label.unitPrice')
           },
           {
             key: 'REAL_AMT',
             // title: "成交金额",
-            title: $i18n.t('table_label.transactionAmount')
+            title: $it('table_label.transactionAmount')
           },
           {
             key: 'PRICE_SETTLE',
             // title: "结算单价",
-            title: $i18n.t('table_label.unitPriceSettlement')
+            title: $it('table_label.unitPriceSettlement')
           },
           {
             key: 'TOT_PRICE_SETTLE',
             // title: "结算总额",
-            title: $i18n.t('table_label.totalSettlement')
+            title: $it('table_label.totalSettlement')
           },
           {
             key: 'AMT_DISCOUNT',
             // title: "优惠金额",
-            title: $i18n.t('table_label.preferential_amount')
+            title: $it('table_label.preferential_amount')
           },
           {
             key: 'ADJUST_AMT',
             // title: "调整金额",
-            title: $i18n.t('table_label.adjustment_amount')
+            title: $it('table_label.adjustment_amount')
           },
           {
             key: 'ORDER_SPLIT_AMT',
             // title: "平摊金额",
-            title: $i18n.t('table_label.equal_amount'),
+            title: $it('table_label.equal_amount'),
             render: (h, params) => h('span', {}, Number(params.row.ORDER_SPLIT_AMT).toFixed(2))
           },
           {
             key: 'REFUND_STATUS_EXT',
             // title: "退款状态",
-            title: $i18n.t('table_label.refund_status')
+            title: $it('table_label.refund_status')
           },
           {
             key: 'DISTRIBUTION_PRICE',
             // title: "分销金额",
-            title: $i18n.t('table_label.distribution_amount')
+            title: $it('table_label.distribution_amount')
           }
         ],
         data: []
@@ -514,7 +514,7 @@ export default {
         }
       });
       if (!isExit) {
-        this.$Message.warning($i18n.t('modalTips.dy')); // '此商品中不存在该颜色和尺寸'
+        this.$Message.warning($it('modalTips.dy')); // '此商品中不存在该颜色和尺寸'
         return;
       }
       const ocBOrderItemId = data.ID || -1;
@@ -561,7 +561,7 @@ export default {
       self.jordanTableConfig.total = res.data.data.total;
       self.jordanTableConfig.data.forEach(item => {
         // '退款成功'
-        if (item.REFUND_STATUS_EXT === $i18n.t('other.RefundSuccessful')) {
+        if (item.REFUND_STATUS_EXT === $it('other.RefundSuccessful')) {
           item.isGray = true;
         } else {
           item.isGray = false;

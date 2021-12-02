@@ -20,7 +20,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -30,7 +30,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -48,7 +48,7 @@ export default {
           {
             style: 'date',
             type: 'datetime', // 日期组件类型,默认为data  (daterange)为双日期区间选择
-            label: $i18n.t('form_label.delayDate'), // '延期日期'
+            label: $it('form_label.delayDate'), // '延期日期'
             width: '24',
             value: 'lockTime',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -64,7 +64,7 @@ export default {
     submit() {
       const self = this;
       if (this.formConfig.formValue.lockTime === '') {
-        return this.$Message.error($i18n.t('modalTips.en')); // 延期日期不能为空！
+        return this.$Message.error($it('modalTips.en')); // 延期日期不能为空！
       }
       const param = {
         delayDate: this.formConfig.formValue.lockTime.Format('yyyy-MM-dd hh:mm:ss'),

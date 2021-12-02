@@ -28,7 +28,7 @@ export default {
         buttons: [
           {
             webname: 'ST_C_PRICE_MAIN_SAVE', // 保存
-            text: $i18n.t('btn.save'), // 保存
+            text: $it('btn.save'), // 保存
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -38,14 +38,14 @@ export default {
           },
           {
             webname: 'fix_back', // 返回
-            text: $i18n.t('btn.back'),
+            text: $it('btn.back'),
             btnclick: () => {
               this.back();
             },
           },
           {
             webname: 'ST_C_PRICE_MAIN_COPY', // 返回
-            text: $i18n.t('common.copy'), // 复制
+            text: $it('common.copy'), // 复制
             isShow: false,
             btnclick: () => {
               this.onOk(this.ID, true)
@@ -57,7 +57,7 @@ export default {
         formData: [
           {
             style: '',
-            label: $i18n.t('form_label.bc'), // 策略ID
+            label: $it('form_label.bc'), // 策略ID
             colname: 'PLAN_ID',
             width: '6',
             disabled: false,
@@ -67,7 +67,7 @@ export default {
           },
           {
             style: 'input',
-            label: $i18n.t('form_label.bd'), // 策略名称
+            label: $it('form_label.bd'), // 策略名称
             colname: 'PLAN_NAME',
             width: '6',
             disabled: false,
@@ -87,7 +87,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               istooltip: true,
-              name: $i18n.t('table_label.shopName'), // 店铺名称
+              name: $it('table_label.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -103,7 +103,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: $i18n.t('form_label.be'), // 生效开始时间 // 输入框前文字
+            label: $it('form_label.be'), // 生效开始时间 // 输入框前文字
             colname: 'BEGIN_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -120,7 +120,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: $i18n.t('form_label.bf'), // 生效结束时间 输入框前文字
+            label: $it('form_label.bf'), // 生效结束时间 输入框前文字
             colname: 'END_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -137,7 +137,7 @@ export default {
           },
           {
             style: 'input',
-            label: $i18n.t('table_label.priority'), // 优先级
+            label: $it('table_label.priority'), // 优先级
             colname: 'PRIORITY',
             width: '6',
             disabled: false,
@@ -148,7 +148,7 @@ export default {
           },
           {
             style: 'input',
-            label: $i18n.t('table_label.remarks'), // 备注
+            label: $it('table_label.remarks'), // 备注
             colname: 'REMARK',
             width: '6',
             disabled: false,
@@ -158,7 +158,7 @@ export default {
           },
           {
             style: '',
-            label: $i18n.t('form_label.bg'), //  启用状态
+            label: $it('form_label.bg'), //  启用状态
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
@@ -214,10 +214,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: $i18n.t('table_label.serialNo'), // 序号
+            title: $it('table_label.serialNo'), // 序号
           },
           {
-            title: $i18n.t('table_label.code_SKU'), // SKU编码
+            title: $it('table_label.code_SKU'), // SKU编码
             key: "PS_C_SKU_ID",
             align: "center",
             required: false,
@@ -262,7 +262,7 @@ export default {
             },
           },
           {
-            title: $i18n.t('form_label.cw'), // 最低成交价格
+            title: $it('form_label.cw'), // 最低成交价格
             key: 'PEAK_VALUE',
             align: "center",
             render: (h, params) => {
@@ -312,7 +312,7 @@ export default {
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $i18n.t('table_label.itemNo01'), // SPU编码
+                name: $it('table_label.itemNo01'), // SPU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171667, // 对应的表ID
@@ -345,7 +345,7 @@ export default {
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $i18n.t('table_label.code_SKU'), // SKU编码
+                name: $it('table_label.code_SKU'), // SKU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171666, // 对应的表ID
@@ -362,7 +362,7 @@ export default {
             },
             {
               style: 'input',
-              label: $i18n.t('form_label.bh'), // 最低成交单价
+              label: $it('form_label.bh'), // 最低成交单价
               colname: 'MIN_REAL_AMT',
               width: '6',
               disabled: false,
@@ -391,7 +391,7 @@ export default {
           buttons: [
             {
               webname: 'ST_C_PRICE_SUB_DELETE',
-              text: $i18n.t('modalTitle.deleteDetails'), // 删除明细
+              text: $it('modalTitle.deleteDetails'), // 删除明细
               isShow: true,
               type: 'warning',
               disabled: false, // 按钮禁用控制
@@ -401,7 +401,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_IMPORT',
-              text: $i18n.t('modalTitle.import'), // 导入
+              text: $it('modalTitle.import'), // 导入
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -410,7 +410,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_EXPORT',
-              text: $i18n.t('btn.export'), // 导出
+              text: $it('btn.export'), // 导出
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -422,7 +422,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.import'), // 导入
+        confirmTitle: $it('modalTitle.import'), // 导入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -440,11 +440,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $i18n.t('panel_label.a7'), // 商品明细
+          label: $it('panel_label.a7'), // 商品明细
           value: 'goods',
         },
         {
-          label: $i18n.t('panel_label.operationLog'), // 操作日志
+          label: $it('panel_label.operationLog'), // 操作日志
           value: 'ST_C_PRICE_LOG',
         }
       ],
@@ -502,7 +502,7 @@ export default {
     // 删除明细
     deleteDetail() {
       const selectArr = this.goodsTableConfig.selectionData
-      if (!selectArr.length) return this.$Message.warning($i18n.t('modalTips.hy'))
+      if (!selectArr.length) return this.$Message.warning($it('modalTips.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message } }) => {
         if (code == 0) {
@@ -579,12 +579,12 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $i18n.t('modalTitle.tips'), // 提示
-          content: $i18n.t('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('modalTitle.tips'), // 提示
+          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $i18n.t('common.determine'), // 确定
-          cancelText: $i18n.t('common.cancel'), // 取消
+          okText: $it('common.determine'), // 确定
+          cancelText: $it('common.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },
@@ -687,9 +687,9 @@ export default {
       let isEdit = this.ID != -1
       let tableBtnConfig = this.goodsTableConfig.businessButtonConfig
       let isShowTableBtn = this.isEnable ? false : !this.isCopy
-      let addBtn = this.queryBtn(this.btnConfig, $i18n.t('common.copy'))
-      let delBtn = this.queryBtn(tableBtnConfig, $i18n.t('btn.deleteDetail'))
-      let importBtn = this.queryBtn(tableBtnConfig, $i18n.t('modalTitle.import'))
+      let addBtn = this.queryBtn(this.btnConfig, $it('common.copy'))
+      let delBtn = this.queryBtn(tableBtnConfig, $it('btn.deleteDetail'))
+      let importBtn = this.queryBtn(tableBtnConfig, $it('modalTitle.import'))
       addBtn && (addBtn.isShow = isEdit) // 复制
       delBtn && (delBtn.isShow = isShowTableBtn) // 删除明细
       importBtn && (importBtn.isShow = isShowTableBtn) // 导入
@@ -728,7 +728,7 @@ export default {
       for (let key of validFields) {
         if (!obj[key]) {
           // TODO! `明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`
-          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $i18n.t('table_label.itemNo01')}不能为空`)
+          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $it('table_label.itemNo01')}不能为空`)
           valid = false;
           break;
         }
@@ -808,10 +808,10 @@ export default {
       const { PS_C_SPU_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
       let mes2 = ''
       if (!MIN_REAL_AMT) {
-        mes2 += $i18n.t('form_label.bh') // 最低成交单价
+        mes2 += $it('form_label.bh') // 最低成交单价
       }
       if (!(PS_C_SPU_ID || PS_C_SKU_ID)) {
-        mes2 += ` SPU/${$i18n.t('table_label.code_SKU')}` // i18n SPU/SKU编码
+        mes2 += ` SPU/${$it('table_label.code_SKU')}` // i18n SPU/SKU编码
       }
       mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
       if ((!(PS_C_SPU_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {

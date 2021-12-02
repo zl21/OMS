@@ -14,14 +14,14 @@ export default {
             {
               webname:'orderItemAddGift',
               type: 'primary', // 按钮类型
-              text: $i18n.t('btn.addGift'), // 按钮文本 添加赠品
+              text: $it('btn.addGift'), // 按钮文本 添加赠品
               isShow: true,
               btnclick: () => {
                 // 判断条件是否符合
                 const self = this;
                 // '缺货','待审核'
-                if(![$i18n.t('common.toBeReviewed'),$i18n.t('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
-                  self.$Message.error($i18n.t('modalTips.gd')); //只有状态为待审核和缺货才能添加赠品！
+                if(![$it('common.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
+                  self.$Message.error($it('modalTips.gd')); //只有状态为待审核和缺货才能添加赠品！
                   return;
                 };
                 this.$emit('addGiftHandler')
@@ -30,7 +30,7 @@ export default {
             {
               webname:'Delete_Merchandise',
               type: 'warning', // 按钮类型
-              text: $i18n.t('btn.deleteGift'), // 按钮文本 删除赠品
+              text: $it('btn.deleteGift'), // 按钮文本 删除赠品
               disabled: true,
               isShow: true,
               btnclick: () => {
@@ -39,7 +39,7 @@ export default {
             },
             {
               webname:'aa',
-              text: $i18n.t('btn.rark_refundComplete'), // 按钮文本 标记退款完成
+              text: $it('btn.rark_refundComplete'), // 按钮文本 标记退款完成
               disabled: true,
               isShow: true,
               btnclick: () => {
@@ -48,7 +48,7 @@ export default {
             },
             {
               webname:'orderItemReplaceProduct',
-              text: $i18n.t('btn.replaceGoods') , // 按钮文本 替换商品
+              text: $it('btn.replaceGoods') , // 按钮文本 替换商品
               disabled: true,
               isShow: true,
               btnclick: () => {
@@ -58,7 +58,7 @@ export default {
             },
             {
               webname:'orderMarkupCancel',
-              text: $i18n.t('btn.markCancel'), //标记取消
+              text: $it('btn.markCancel'), //标记取消
               disabled: true,
               isShow: true,
               btnclick: () => {
@@ -82,11 +82,11 @@ export default {
         pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
         pageSize: 1000, // 每页条数
         totalData: [{
-          index:$i18n.t("other.total")
+          index:$it("other.total")
         }] // 总计
       },
       // textArr:['删除赠品','替换商品','标记取消'], // 需要控制的按钮text
-      textArr:[$i18n.t('btn.deleteGift'),$i18n.t('btn.replaceGoods'),$i18n.t('btn.markCancel')], // 需要控制的按钮text
+      textArr:[$it('btn.deleteGift'),$it('btn.replaceGoods'),$it('btn.markCancel')], // 需要控制的按钮text
       butArray:[],
       selection: [],
       checkSelection: [],
@@ -94,11 +94,11 @@ export default {
       options: {}, // 自定义属性（选填）
       islackstock: [
         {
-          label: $i18n.t('common.yes'), //是
+          label: $it('common.yes'), //是
           value: '1'
         },
         {
-          label: $i18n.t('common.no'), //否
+          label: $it('common.no'), //否
           value: '0'
         }
       ],
@@ -155,8 +155,8 @@ export default {
       const self = this;
       const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
       // 非赠品 缺货 待审核
-      if(GIFT_TYPES.includes($i18n.t('form_label.ac')) && ![$i18n.t('common.toBeReviewed'),$i18n.t('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
-        self.$Message.error($i18n.t('modalTips.fr')); //勾选明细含有非赠品禁止删除！
+      if(GIFT_TYPES.includes($it('form_label.ac')) && ![$it('common.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
+        self.$Message.error($it('modalTips.fr')); //勾选明细含有非赠品禁止删除！
         return;
       }
       const PS_C_SKU_CODES = this.checkSelection.map(row => row.PS_C_SKU_ECODE);
@@ -199,7 +199,7 @@ export default {
         itemIds: this.checkSelection.map(row => row.ID), 
       });
       if (code === 0) {
-        self.$Message.success(message || $i18n.t('modalTips.er')); //成功！
+        self.$Message.success(message || $it('modalTips.er')); //成功！
       }
     },
     // 标记退款
@@ -208,7 +208,7 @@ export default {
     //   const ids = this.checkSelection.map(row => row.ID);
     //   if (ids.length === 0) {
     //     // 至少选择一条订单明细
-    //     self.$Message.error($i18n.t('modalTips.zk'));
+    //     self.$Message.error($it('modalTips.zk'));
     //     return;
     //   }
     //   const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
@@ -216,7 +216,7 @@ export default {
     //     self.$parent.$parent.load();
     //     self.$Message.success(message);
     //   } else {
-    //     self.$Message.error($i18n.t('modalTips.z3'));
+    //     self.$Message.error($it('modalTips.z3'));
     //   }
     // },
     // 标记取消退款
@@ -225,7 +225,7 @@ export default {
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
         // 至少选择一条订单明细
-        self.$Message.error($i18n.t('modalTips.z3'));
+        self.$Message.error($it('modalTips.z3'));
         return;
       }
       const { data: { data: { code, message } } } = await this.service.orderCenter.markRefundCancel({ itemIds: ids.join(','), orderId: this.$route.params.customizedModuleId });
@@ -240,12 +240,12 @@ export default {
     replaceGoodsDetail() {
       if (this.checkSelection.length !== 1) {
         // 请选择一条需要替换的明细!
-        this.$Message.warning($i18n.t('modalTips.dv'));
+        this.$Message.warning($it('modalTips.dv'));
         return;
       }
       // 缺货 待审核
-      if(![$i18n.t('other.outOfStock'),$i18n.t('common.toBeReviewed')].includes(this.componentData.order.ORDER_STATUS)){
-        this.$Message.error($i18n.t('modalTips.gc')); //只允许缺货或待审核状态的订单进行替换！
+      if(![$it('other.outOfStock'),$it('common.toBeReviewed')].includes(this.componentData.order.ORDER_STATUS)){
+        this.$Message.error($it('modalTips.gc')); //只允许缺货或待审核状态的订单进行替换！
         return;
       }
       this.$emit('replaceGoodsDetail', this.checkSelection);

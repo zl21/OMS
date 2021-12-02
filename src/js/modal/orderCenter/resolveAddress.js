@@ -210,14 +210,14 @@ export default {
         buttons: [
           {
             disabled: false,
-            text: $i18n.t('common.cancel'), // 取消
+            text: $it('common.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
             disabled: false,
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             btnclick: () => {
               this.update();
             },
@@ -290,11 +290,11 @@ export default {
         if (!f) return this.CheckRegxMobile();
       } else {
         // 请填写收货人手机
-        return this.$Message.error($i18n.t('modalTips.yi'));
+        return this.$Message.error($it('modalTips.yi'));
       }
       if (!this.data.receiver_name) {
         // 请填写收货人名称
-        return this.$Message.error($i18n.t('modalTips.yj'));
+        return this.$Message.error($it('modalTips.yj'));
       }
     },
     update() {
@@ -307,7 +307,7 @@ export default {
       }
       if (!this.data.receiver_address) {
         // 请填写详细地址！
-        return this.$Message.error($i18n.t('modalTips.ym'));
+        return this.$Message.error($it('modalTips.ym'));
       }
       let f = this.CheckRegx(this.regx.mobile, this.data.receiver_mobile);
       if (this.componentData.ck != 50) {
@@ -360,15 +360,15 @@ export default {
     },
     CheckRegxMobile() {
       // 收货人手机不合法
-      return this.$Message.error($i18n.t('modalTips.yn'));
+      return this.$Message.error($it('modalTips.yn'));
     },
     CheckRegxPhone() {
       // 收货人电话不合法
-      return this.$Message.error($i18n.t('modalTips.yo'));
+      return this.$Message.error($it('modalTips.yo'));
     },
     CheckRegxZip() {
       // 邮编不合法
-      return this.$Message.error($i18n.t('modalTips.yp'));
+      return this.$Message.error($it('modalTips.yp'));
     },
     onKeyDown(e) {
       if (this.$refs.newReceivAddress.$refs.input === document.activeElement) {

@@ -10,14 +10,14 @@ export default {
 				btnsite: "right",
 				buttons: [
 					{
-						text: $i18n.t('common.cancel'), // 取消
+						text: $it('common.cancel'), // 取消
 						class: "white",
 						isShow: false,
 						disabled: false,
 						btnclick: () => this.closeDialogs()
 					},
 					{
-						text: $i18n.t('btn.save'), // 保存
+						text: $it('btn.save'), // 保存
 						class: "active",
 						disabled: false,
 						btnclick: () => this.confirm()

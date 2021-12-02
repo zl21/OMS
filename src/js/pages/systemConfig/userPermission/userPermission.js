@@ -50,150 +50,150 @@ export default {
   mounted() {
     this.tabsList = [
       {
-        label: $i18n.t('panel_label.warehouse_authority'),
+        label: $it('panel_label.warehouse_authority'),
         url: '/p/cs/chrstoregroupquery'
       },
       {
-        label: $i18n.t('panel_label.supplier_authority'),
+        label: $it('panel_label.supplier_authority'),
         url: '/p/cs/chrsuppgroupquery'
       },
       {
-        label: $i18n.t('panel_label.distributionCenter_authority'),
+        label: $it('panel_label.distributionCenter_authority'),
         url: '/p/cs/chrgroupsdistrib/query'
       },
       {
-        label: $i18n.t('panel_label.brand_authority'),
+        label: $it('panel_label.brand_authority'),
         url: '/p/cs/cgroupsbrand/query'
       },
       {
-        label: $i18n.t('panel_label.commodity_authority'),
+        label: $it('panel_label.commodity_authority'),
         url: '/p/cs/cgrouppro/query'
       },
       {
-        label: $i18n.t('panel_label.company_authority'),
+        label: $it('panel_label.company_authority'),
         url: '/p/cs/chrgroupscompany/query'
       },
       {
-        label: $i18n.t('panel_label.role_authority'),
+        label: $it('panel_label.role_authority'),
         url: '/p/cs/cusergroupquery'
       }
     ];
     this.rightHead = {
       '/p/cs/chrstoregroupquery': [
         {
-          label: $i18n.t('table_label.distributionCenterName'),
+          label: $it('table_label.distributionCenterName'),
           // label: "配销中心名称",
           name: 'CP_C_DISTRIB_ENAME'
         },
         {
-          label: $i18n.t('table_label.storehouse'),
+          label: $it('table_label.storehouse'),
           // label: "店仓",
           name: 'STOREENAME'
         },
         {
-          label: $i18n.t('table_label.mainStore_warehouse'),
+          label: $it('table_label.mainStore_warehouse'),
           // label: "制单主店仓",
           name: 'ISMAIN'
         },
         {
-          label: $i18n.t('table_label.check_mainStore'),
+          label: $it('table_label.check_mainStore'),
           // label: "查看主店仓",
           name: 'ISREAD'
         }
       ], // 店仓权限
       '/p/cs/chrsuppgroupquery': [
         {
-          label: $i18n.t('table_label.supplierCode'),
+          label: $it('table_label.supplierCode'),
           // label: "供应商编码",
           name: 'SUPECODE'
         },
         {
-          label: $i18n.t('table_label.supplierName'),
+          label: $it('table_label.supplierName'),
           // label: "供应商名称",
           name: 'SUPENAME'
         },
         {
-          label: $i18n.t('table_label.supplier_fullName'),
+          label: $it('table_label.supplier_fullName'),
           // label: "供应商全称",
           name: 'AllNAME'
         }
       ], // 供应商权限
       '/p/cs/chrgroupsdistrib/query': [
         {
-          label: $i18n.t('table_label.distributionCenterCode'),
+          label: $it('table_label.distributionCenterCode'),
           // label: "配销中心编码",
           name: 'CP_C_DISTRIB_ECODE'
         },
         {
-          label: $i18n.t('table_label.distributionCenterName'),
+          label: $it('table_label.distributionCenterName'),
           // label: "配销中心名称",
           name: 'CP_C_DISTRIB_ENAME'
         },
         {
-          label: $i18n.t('table_label.view'),
+          label: $it('table_label.view'),
           // label: "查看",
           name: 'ISREAD'
         },
         {
-          label: $i18n.t('table_label.edit'),
+          label: $it('table_label.edit'),
           // label: "编辑",
           name: 'ISWRITE'
         }
       ], // 配销中心权限
       '/p/cs/cgroupsbrand/query': [
         {
-          label: $i18n.t('table_label.brand'),
+          label: $it('table_label.brand'),
           // label: "品牌",
           name: 'BRANDENAME'
         },
         {
-          label: $i18n.t('table_label.view'),
+          label: $it('table_label.view'),
           // label: "查看",
           name: 'ISREAD'
         }
       ], // 品牌权限
       '/p/cs/cgrouppro/query': [
         {
-          label: $i18n.t('table_label.productNo'),
+          label: $it('table_label.productNo'),
           // label: "商品编号",
           name: 'ecode'
         },
         {
-          label: $i18n.t('table_label.productName'),
+          label: $it('table_label.productName'),
           // label: "商品名称",
           name: 'ename'
         }
       ], // 商品权限
       '/p/cs/chrgroupscompany/query': [
         {
-          label: $i18n.t('table_label.companyCode'),
+          label: $it('table_label.companyCode'),
           // label: "公司编码",
           name: 'ECODE'
         },
         {
-          label: $i18n.t('table_label.companyName'),
+          label: $it('table_label.companyName'),
           // label: "公司名称",
           name: 'ENAME'
         },
         {
-          label: $i18n.t('table_label.view'),
+          label: $it('table_label.view'),
           // label: "查看",
           name: 'ISREAD'
         },
         {
-          label: $i18n.t('table_label.edit'),
+          label: $it('table_label.edit'),
           // label: "编辑",
           name: 'ISWRITE'
         }
       ],
       '/p/cs/cusergroupquery': [
         {
-          label: $i18n.t('table_label.roles'),
+          label: $it('table_label.roles'),
           // label: "角色",
           name: 'name'
         },
         {
-          label: $i18n.t('table_label.description'),
+          label: $it('table_label.description'),
           // label: "说明",
           name: 'description'
         }

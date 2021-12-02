@@ -34,7 +34,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $i18n.t('common.determine'), // 确定
+            text: $it('common.determine'), // 确定
             type: 'default',
             btnclick: () => {
               this.save()

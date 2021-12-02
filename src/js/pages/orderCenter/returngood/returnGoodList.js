@@ -18,11 +18,11 @@ export default {
       eventGather: BurgeonEvent,
       errThData: [
         {
-          title: $i18n.t('form_label.chargebackNumber'), // 退单编号
+          title: $it('form_label.chargebackNumber'), // 退单编号
           key: 'id'
         },
         {
-          title: $i18n.t('table_label.abnormalInfo'), // 异常信息
+          title: $it('table_label.abnormalInfo'), // 异常信息
           key: 'error'
         }
       ],
@@ -33,7 +33,7 @@ export default {
       // 弹框配置
       changeRemarkConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
+        confirmTitle: $it('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -51,7 +51,7 @@ export default {
       // 修改退回仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.modify_returnWarehouse'), // 修改退货仓库
+        confirmTitle: $it('modalTitle.modify_returnWarehouse'), // 修改退货仓库
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -68,7 +68,7 @@ export default {
       },
       modifyReturnOrderLogistics: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
+        confirmTitle: $it('modalTitle.modify_logisticsCompany'), // 修改物流公司
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -86,7 +86,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('btn.import'), // 导入
+        confirmTitle: $it('btn.import'), // 导入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -114,27 +114,27 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $i18n.t('panel_label.all'), // 全部
+          label: $it('panel_label.all'), // 全部
           value: '',
           isShow: true
         },
         {
-          label: $i18n.t('form_label.waitFor_return_warehous'), // 等待退货入库
+          label: $it('form_label.waitFor_return_warehous'), // 等待退货入库
           value: '20',
           isShow: true
         },
         {
-          label: $i18n.t('form_label.waitFor_afterSale_confirm'), // 等待售后确认
+          label: $it('form_label.waitFor_afterSale_confirm'), // 等待售后确认
           value: '30',
           isShow: true
         },
         {
-          label: $i18n.t('form_label.complete'), // 完成
+          label: $it('form_label.complete'), // 完成
           value: '50',
           isShow: true
         },
         {
-          label: $i18n.t('common.cancel'), // 取消
+          label: $it('common.cancel'), // 取消
           value: '60',
           isShow: true
         }
@@ -432,7 +432,7 @@ export default {
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       _this.formConfig.formData.forEach(item => {
         // '原始订单编号'
-        if (item.itemdata?.name == $i18n.t('form_label.originalOrderNo')) {
+        if (item.itemdata?.name == $it('form_label.originalOrderNo')) {
           _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
         }
       });
