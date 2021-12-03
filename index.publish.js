@@ -29,7 +29,7 @@ import internationalizationConfig from '@burgeon/internationalization/package.js
 import proVersion from './package.json';
 
 let omsTheme = localStorage.getItem("VarTheme");
-if(!omsTheme){
+if (!omsTheme) {
   localStorage.setItem("VarTheme", 'oms');
   omsTheme = localStorage.getItem("VarTheme");
 }
@@ -60,6 +60,7 @@ class InitAppConfig {
     Vue.prototype.$it = (str) => {
       return i18n.t(str)
     }
+    Vue.prototype.$i18n = i18n;
     window.version = {
       '@burgeon/project-logic': proVersion.version,
       '@burgeon/business-components': BC.version,

@@ -17,7 +17,7 @@
       >
         <Icon type="ios-repeat" />
         <!-- 切换为sku商品显示 -->
-         {{Vmi18n.t('form_label.b0')}}
+         {{$it('form_label.b0')}}
       </div>
       <div
         v-show="!isQh"
@@ -26,7 +26,7 @@
       >
         <Icon type="ios-repeat" />
         <!-- 切换平台商品明细 -->
-         {{Vmi18n.t('form_label.b1')}}
+         {{$it('form_label.b1')}}
       </div>
     </div>
     <OmsTable
@@ -48,7 +48,6 @@
       return {
         loading: false,
         isQh: true,
-        Vmi18n:$i18n,
         tableConfig: {
           columns: [
             {

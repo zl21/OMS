@@ -13,7 +13,7 @@
             v-for="item in langConfig"
             :key="item.type"
             @click.native="toggleLang(item.type)"
-            :disabled="vmI18n.locale == item.type"
+            :disabled="$i18n.locale == item.type"
             >{{ item.text }}</DropdownItem
           >
         </DropdownMenu>
@@ -80,7 +80,7 @@ export default {
   created() {
     const _this = this;
     const browseLan = localStorage.getItem("locale") || "zh";
-    _this.vmI18n.locale = browseLan;
+    $i18n.locale = browseLan;
     this.curLang = langConfig.find((it) => it.type == browseLan).text;
     this.isEnableLoginPro = !!window.ProjectConfig.enableLoginPro
   },
@@ -148,7 +148,7 @@ export default {
     toggleLang(lang) {
       const _this = this;
       let message = ["zh", "en"].includes(lang)
-        ? _this.vmI18n.messages[lang].tip_info
+        ? $i18n.messages[lang].tip_info
         : lang;
       switch (message) {
         case "ja":
@@ -162,7 +162,7 @@ export default {
       }
       localStorage.setItem("locale", lang);
       // _this.vmI18n.locale = localStorage.getItem('locale');
-      _this.vmI18n.locale = lang;
+      $i18n.locale = lang;
       this.curLang = langConfig.find((it) => it.type == lang).text;
       R3.store.commit(`customize/language`, lang || "zh");
       this.initDom();
