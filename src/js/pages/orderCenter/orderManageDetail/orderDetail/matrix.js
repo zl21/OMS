@@ -976,19 +976,22 @@ export default {
       if (this.general) { // 通用矩阵
         if (this.hasStock) {
           console.log('matrix.js: getBodyData');
-          let tempPath=this.tablename === 'OC_B_SALE' && this.saleType === 'NOR' ? 'oc/v1/sale':'sg/storage';
-          let url= `/p/cs/${tempPath}/queryCommonStorageByPro`;
-          await this.service.common.publicUrlParams(url, {
-            storeId: this.distribId,
-            proEcode: this.encode,
-            phyWarehouseId: this.cp_c_phy_warehouse_id,
-            objId: this.objid
-          }).then((res) => {
-            const data = res.data;
-            if (data.code === 0) {
-              this.stockData = data.data;
-            }
-          });
+          if (this.$route.params.customizedModuleName !== 'ORDERMANAGEADD' && this.$route.params.customizedModuleName !== 'RETURNGOOD') {
+            let tempPath = this.tablename === 'OC_B_SALE' && this.saleType === 'NOR'
+            ? 'oc/v1/sale':'sg/storage';
+            let url= `/p/cs/${tempPath}/queryCommonStorageByPro`;
+            await this.service.common.publicUrlParams(url, {
+              storeId: this.distribId,
+              proEcode: this.encode,
+              phyWarehouseId: this.cp_c_phy_warehouse_id,
+              objId: this.objid
+            }).then((res) => {
+              const data = res.data;
+              if (data.code === 0) {
+                this.stockData = data.data;
+              }
+            });
+          }
         }
         if (this.hasReceiving) {
           // 修改后已验证
@@ -1226,7 +1229,7 @@ export default {
       if (val) {
         this.control = {};
         this.amendObj = {};
-        if (this.distribId === '' && this.cp_c_phy_warehouse_id === '') return;
+        // if (this.distribId === '' && this.cp_c_phy_warehouse_id === '') return;
         this.getTableData();
       }
     }, // 刷新数据
@@ -1350,7 +1353,7 @@ export default {
     }
     if (this.tablename === 'OC_B_RETURN_ORDER') this.isStoreFlag = false;
     if (this.distribIds && this.distribIds !== undefined) this.cp_c_phy_warehouse_id = this.distribIds;
-    if (this.distribId === '' && this.cp_c_phy_warehouse_id === '') return;
+    // if (this.distribId === '' && this.cp_c_phy_warehouse_id === '') return;
     this.getTableData();
   },
   created() {

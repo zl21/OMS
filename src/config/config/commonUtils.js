@@ -1626,56 +1626,56 @@ class commonUtils {
    * 导出
    * src 导出路径
    */
-  static downloadUrlFile(url) {
-    const self = this;
-    const domFrame = window.parent.document.getElementById('downLoadListFrame');
-    if (domFrame != null) {
-      window.parent.document.body.removeChild(domFrame);
-    }
-    const downloadFile = {};
-    if (typeof downloadFile.iframe === 'undefined') {
-      const iframe = document.createElement('iframe');
-      iframe.setAttribute('id', 'downLoadListFrame');
-      self.addEvent('load', iframe, () => {
-        self.iframeLoad(iframe);
-      });
-      iframe.src = url;
-      iframe.style.display = 'none';
-      downloadFile.iframe = iframe;
-      document.body.appendChild(downloadFile.iframe);
-      setTimeout(() => {
-        iframe.src = '';
-      }, 1000);
-    }
+  // static downloadUrlFile(url) {
+  //   const self = this;
+  //   const domFrame = window.parent.document.getElementById('downLoadListFrame');
+  //   if (domFrame != null) {
+  //     window.parent.document.body.removeChild(domFrame);
+  //   }
+  //   const downloadFile = {};
+  //   if (typeof downloadFile.iframe === 'undefined') {
+  //     const iframe = document.createElement('iframe');
+  //     iframe.setAttribute('id', 'downLoadListFrame');
+  //     self.addEvent('load', iframe, () => {
+  //       self.iframeLoad(iframe);
+  //     });
+  //     iframe.src = url;
+  //     iframe.style.display = 'none';
+  //     downloadFile.iframe = iframe;
+  //     document.body.appendChild(downloadFile.iframe);
+  //     setTimeout(() => {
+  //       iframe.src = '';
+  //     }, 1000);
+  //   }
 
-    // const eleLink = document.createElement('a');
-    // eleLink.setAttribute('href', src);
-    // eleLink.style.display = 'none';
-    // document.body.appendChild(eleLink);
-    // eleLink.click();
-    // document.body.removeChild(eleLink);
+  //   // const eleLink = document.createElement('a');
+  //   // eleLink.setAttribute('href', src);
+  //   // eleLink.style.display = 'none';
+  //   // document.body.appendChild(eleLink);
+  //   // eleLink.click();
+  //   // document.body.removeChild(eleLink);
 
-    // const download_file = {};
-    // if (typeof (download_file.iframe) === 'undefined') {
-    //   const iframe = document.createElement('iframe');
-    //   download_file.iframe = iframe;
-    //   document.body.appendChild(download_file.iframe);
-    // }
-    // download_file.iframe.src = src;
-    // download_file.iframe.style.display = 'none';
-  }
+  //   // const download_file = {};
+  //   // if (typeof (download_file.iframe) === 'undefined') {
+  //   //   const iframe = document.createElement('iframe');
+  //   //   download_file.iframe = iframe;
+  //   //   document.body.appendChild(download_file.iframe);
+  //   // }
+  //   // download_file.iframe.src = src;
+  //   // download_file.iframe.style.display = 'none';
+  // }
 
-  // 判断iframe的src
-  static iframeLoad(iframe) {
-    const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
-    console.log('src::', src);
-  }
+  // // 判断iframe的src
+  // static iframeLoad(iframe) {
+  //   const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
+  //   console.log('src::', src);
+  // }
 
-  // 调用方法时绑定iframe的load事件
-  static addEvent(eventName, element, fn) {
-    if (element.attachEvent) element.attachEvent(`on${eventName}`, fn);
-    else element.addEventListener(eventName, fn, false);
-  }
+  // // 调用方法时绑定iframe的load事件
+  // static addEvent(eventName, element, fn) {
+  //   if (element.attachEvent) element.attachEvent(`on${eventName}`, fn);
+  //   else element.addEventListener(eventName, fn, false);
+  // }
 
   static timestampToTime(timestamp) {
     const a = (`${timestamp}`).length;

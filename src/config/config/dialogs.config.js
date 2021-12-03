@@ -199,7 +199,16 @@ class DialogConfig {
       // url: 'modal/systemConfig/copyPermission',
       url: require('@/views/modal/systemConfig/copyPermission.vue').default,
       excludeString: 'copyPermission',
-    }
+    },
+    // 弹窗配置 会员加急发货
+    vipSpeedDispatchConfig: {
+      title: '会员加急发货打标', // 会员加急发货打标
+      width: 400,
+      name: 'manualMarking',
+      // url: 'modal/orderCenter/manualMarking',
+      url: require('@/views/modal/orderCenter/manualMarking.vue').default,
+      excludeString: 'manualMarking'
+    },
   }
   static config() {
     return (this.customConfig = Object.fromEntries(
