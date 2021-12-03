@@ -22,7 +22,8 @@ const Template = (args, { argTypes }) => ({
 	props: Object.keys(argTypes),
 	template: '<OmsButton v-bind="$props" @dropDownClick="dropClick" @onClick="onClick"/>',
 	methods: {
-		dropClick: action("")
+		dropClick: action(""),
+		onClick: action("")
 	}
 })
 
