@@ -334,7 +334,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: window.vmI18n.t('table_label.paymentWay'), // 支付方式
+            label: window.$it('table_label.paymentWay'), // 支付方式
             width: '8', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             options: [
@@ -1452,7 +1452,7 @@ export default {
       const arrBillType = [];
       const ArrRESPONSIBLEType = [];
 
-      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), ['PAY_TYPE', 'ADJUST_TYPE', 'BILL_TYPE', 'RESPONSIBLE_PARTY']);
+      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), ['PAY_TYPE', 'ADJUST_TYPE', 'BILL_TYPE', 'RESPONSIBLE_PARTY']);
       self.selectData.PAY_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
@@ -1460,14 +1460,14 @@ export default {
         arrPayType.push(obj);
       });
       // 调整类型
-      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'ADJUST_TYPE');
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'ADJUST_TYPE');
       self.selectData.ADJUST_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrAdjustType.push(obj);
       });
-      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'BILL_TYPE');
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'BILL_TYPE');
       self.selectData.BILL_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
@@ -1475,7 +1475,7 @@ export default {
         arrBillType.push(obj);
       });
       // 责任方options
-      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', this.vmI18n.t('common.baseInformation'), 'RESPONSIBLE_PARTY');
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'RESPONSIBLE_PARTY');
       self.selectData.RESPONSIBLE_PARTY.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;

@@ -6,17 +6,17 @@
         <RadioGroup v-model="radioValue" @on-change="radioChange">
           <Radio label="2">
             <!-- 按页面已勾选订单 -->
-            <span>{{ vmI18n.t("modalTips.cd") }}</span>
+            <span>{{ $it("modalTips.cd") }}</span>
           </Radio>
           <Radio label="1">
             <!-- 按筛选条件选中订单 -->
-            <span>{{ vmI18n.t("modalTips.ce") }}</span>
+            <span>{{ $it("modalTips.ce") }}</span>
           </Radio>
         </RadioGroup>
       </div>
       <!-- 商品SKU -->
       <div style="float: right" class="searchForm">
-        <!-- {{ vmI18n.t("table_label.commoditySKU") }}: -->
+        <!-- {{ $it("table_label.commoditySKU") }}: -->
         <!-- <Input
           v-model="searchValue"
           icon="ios-search"

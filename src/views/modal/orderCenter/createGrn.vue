@@ -8,7 +8,7 @@
         {{ errorMessage }}
       </p>
       <div class="Modal-Form-Item">
-        <label>{{ vmI18n.t("form_label.scheduleOwnership") }}:</label>
+        <label>{{ $it("form_label.scheduleOwnership") }}:</label>
         <DropDownSelectFilter
           :single="true"
           :data="datas"
@@ -20,7 +20,7 @@
         />
       </div>
       <div class="Modal-Form-Item">
-        <label>{{ vmI18n.t("form_label.transportationMode") }}:</label>
+        <label>{{ $it("form_label.transportationMode") }}:</label>
         <Input
           v-model="transportStyle.text"
           disabled

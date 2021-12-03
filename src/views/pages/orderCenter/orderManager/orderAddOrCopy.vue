@@ -7,21 +7,21 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="1">
           <!-- 基本信息 -->
-          {{ vmI18n.t("common.baseInformation") }}
+          {{ $it("common.baseInformation") }}
           <p slot="content">
             <OmsForm :form-config="formConfigBase" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="2" v-show="showRe">
           <!-- 收货人信息 -->
-          {{ vmI18n.t("common.consigneeInformation") }}
+          {{ $it("common.consigneeInformation") }}
           <p slot="content">
             <OmsForm :form-config="formConfigRe" />
           </p>
         </Panel>
         <!-- 备注信息 -->
         <!-- <Panel name="3">
-          {{ vmI18n.t('common.remarksInfo') }}
+          {{ $it('common.remarksInfo') }}
           <p slot="content">
             <OmsForm :form-config="" />
           </p>

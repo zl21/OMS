@@ -10,27 +10,27 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ vmI18n.t('common.baseInformation') }}
+            {{ $it('common.baseInformation') }}
             <p slot="content">
               <OmsForm :form-config="information" />
             </p>
           </Panel>
           <Panel name="2">
             <!-- 换货人信息 -->
-            {{ vmI18n.t('panel_label.exchangeInfo') }}
+            {{ $it('panel_label.exchangeInfo') }}
             <p slot="content">
               <OmsForm :form-config="replacement" />
             </p>
           </Panel>
           <Panel name="3">
             <!-- 退货金额 -->
-            {{ vmI18n.t('panel_label.returnAmount') }}
+            {{ $it('panel_label.returnAmount') }}
             <div slot="content">
               <div class="sales">
                 <ul>
                   <li>
                     <!-- 商品应退金额 -->
-                    <p>{{ vmI18n.t('other.refundAmountGoods') }}</p>
+                    <p>{{ $it('other.refundAmountGoods') }}</p>
                     <input
                       v-model="amountReturned"
                       type="text"
@@ -42,7 +42,7 @@
                   </li>
                   <li>
                     <!-- 应退邮费 -->
-                    <p>{{ vmI18n.t('other.refundablePostage') }}</p>
+                    <p>{{ $it('other.refundablePostage') }}</p>
                     <input
                       v-model="returnPostage"
                       type="text"
@@ -54,7 +54,7 @@
                   </li>
                   <li>
                     <!-- 其他金额 -->
-                    <p>{{ vmI18n.t('other.otherAmounts') }}</p>
+                    <p>{{ $it('other.otherAmounts') }}</p>
                     <input
                       v-model="otherAmount"
                       type="text"
@@ -66,7 +66,7 @@
                   </li>
                   <li>
                     <!-- 换货金额 -->
-                    <p>{{ vmI18n.t('other.exchangeAmounts') }}</p>
+                    <p>{{ $it('other.exchangeAmounts') }}</p>
                     <input
                       v-model="exchangeAmount"
                       type="text"
@@ -78,7 +78,7 @@
                   </li>
                   <li>
                     <!-- 退货单总金额 -->
-                    <p>{{ vmI18n.t('other.totalAmountReturnOrder') }}</p>
+                    <p>{{ $it('other.totalAmountReturnOrder') }}</p>
                     <input
                       v-model="returnTotalAmount"
                       type="text"
@@ -88,7 +88,7 @@
                   </li>
                   <li>
                     <!-- 代销结算金额 -->
-                    <p>{{ vmI18n.t('other.settlementAmountConsignment') }}</p>
+                    <p>{{ $it('other.settlementAmountConsignment') }}</p>
                     <input
                       v-model="settlementAmount"
                       type="text"
@@ -152,7 +152,7 @@
           width="900"
           :closable="true" 
           :mask="true"
-          :title="vmI18n.t('modalTitle.query_OriginalOrderNo')"
+          :title="$it('modalTitle.query_OriginalOrderNo')"
           @on-ok="queryorder"
           @on-cancel="querycancel"
         >
@@ -193,7 +193,7 @@
     <Modal
       v-model="availableStock"
       class="available"
-      :title="vmI18n.t('modalTitle.tips')"
+      :title="$it('modalTitle.tips')"
       width="400"
       :mask-closable="false"
       :mask="true"
@@ -202,13 +202,13 @@
     >
       <!-- 。是否继续？ -->
       <p class="availableStock">
-        {{ availableStockMassage }}{{ vmI18n.t('modalTips.n2') }}
+        {{ availableStockMassage }}{{ $it('modalTips.n2') }}
       </p>
     </Modal>
     <Modal
       v-model="returnDetailAddTable.modal"
       class="detailAdd"
-      :title="vmI18n.t('modalTitle.newReturnDetails')"
+      :title="$it('modalTitle.newReturnDetails')"
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
     >

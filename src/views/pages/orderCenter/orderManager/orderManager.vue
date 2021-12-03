@@ -117,45 +117,45 @@
     <Modal
       v-model="warningModal"
       :mask="true"
-      :title="vmI18n.t('common.warning')"
+      :title="$it('common.warning')"
       width="420"
       @on-ok="warningOk"
     >
       <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
-      <p>{{ vmI18n.t("modalTips.e3") }}</p>
+      <p>{{ $it("modalTips.e3") }}</p>
     </Modal>
     <Modal
       v-model="distributeLogisticsModal"
       :mask="true"
-      :title="vmI18n.t('common.warning')"
+      :title="$it('common.warning')"
       width="420"
       @on-ok="distributeLogistics"
     >
       <!-- 将对查询出的订单数据重新分配快递，是否继续? -->
-      <p>{{ vmI18n.t("modalTips.e4") }}</p>
+      <p>{{ $it("modalTips.e4") }}</p>
     </Modal>
     <Modal
       v-model="distributeWarehouseModal"
       :mask="true"
-      :title="vmI18n.t('common.warning')"
+      :title="$it('common.warning')"
       width="420"
       @on-ok="distributeWarehouse"
     >
       <!-- 将对查询出的订单数据重新分配仓库，是否继续? -->
-      <p>{{ vmI18n.t("modalTips.e5") }}</p>
+      <p>{{ $it("modalTips.e5") }}</p>
     </Modal>
     <!-- 警告 -->
     <Modal
       v-model="batchReturnOrderModal"
       :mask="true"
-      :title="vmI18n.t('common.warning')"
+      :title="$it('common.warning')"
       width="420"
       class="customizedModal"
       @on-cancel="onBatchReturnOrderCancel"
       @on-ok="doBatchReturnOrder"
     >
       <!-- 批量生成退换货订单，是否继续? -->
-      <p>{{ vmI18n.t("modalTips.e6") }}</p>
+      <p>{{ $it("modalTips.e6") }}</p>
       <div class="orderContent">
         <OmsForm :form-config="batchReturnFormConfig" />
       </div>

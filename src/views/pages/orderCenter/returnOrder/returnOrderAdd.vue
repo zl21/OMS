@@ -10,28 +10,28 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ vmI18n.t('common.baseInformation') }}
+            {{ $it('common.baseInformation') }}
             <p slot="content">
               <OmsForm :form-config="formConfig" :key="formConfig.key"/>
             </p>
           </Panel>
           <Panel v-show="showEx" name="2">
             <!-- 换货人信息 -->
-            {{ vmI18n.t('panel_label.exchangeInfo') }}
+            {{ $it('panel_label.exchangeInfo') }}
             <p slot="content">
               <OmsForm :form-config="formConfigEx" :key="exFormKey"/>
             </p>
           </Panel>
           <Panel name="3">
             <!-- 退款金额 -->
-            {{ vmI18n.t('form_label.refundAmount') }}
+            {{ $it('form_label.refundAmount') }}
             <p slot="content">
               <ul class="calculation-main">
                 <li>
                   <div class="calculation-item">
                     <!-- 根据所有退货商品明细的应退金额合计自动算出，只读展示，正数 -->
                     <!-- <span>商品应退金额</span> -->
-                    <span :title=" vmI18n.t('other.refundAmountGoods')">{{ vmI18n.t('other.refundAmountGoods') }}</span>
+                    <span :title=" $it('other.refundAmountGoods')">{{ $it('other.refundAmountGoods') }}</span>
                     <label>{{PRO_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -40,7 +40,7 @@
                   <div class="calculation-item">
                     <!-- 正数，选填项 -->
                     <!-- <span>应退运费</span> -->
-                    <span :title="vmI18n.t('form_label.ad')">{{ vmI18n.t('form_label.ad') }}</span>
+                    <span :title="$it('form_label.ad')">{{ $it('form_label.ad') }}</span>
                     <Input
                       v-model="SHIP_AMT"
                       type="text"
@@ -56,7 +56,7 @@
                   <div class="calculation-item">
                     <!-- 可正可负，选填项 -->
                     <!-- <span>调整金额</span> -->
-                    <span :title="vmI18n.t('table_label.adjustment_amount')">{{ vmI18n.t('table_label.adjustment_amount') }}</span>
+                    <span :title="$it('table_label.adjustment_amount')">{{ $it('table_label.adjustment_amount') }}</span>
                     <Input
                       v-model="ADJUST_AMT"
                       type="text"
@@ -72,7 +72,7 @@
                   <div class="calculation-item">
                     <!-- sum所有换货商品“成交金额“，只读，正数 -->
                     <!-- <span>换货金额</span> -->
-                    <span :title="vmI18n.t('other.exchangeAmounts')">{{ vmI18n.t('other.exchangeAmounts') }}</span>
+                    <span :title="$it('other.exchangeAmounts')">{{ $it('other.exchangeAmounts') }}</span>
                     <label>{{EX_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -81,7 +81,7 @@
                   <div class="calculation-item">
                     <!-- 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，只读展示 -->
                     <!-- <span class="black">最终应退总金额</span> -->
-                    <span class="black" :title="vmI18n.t('form_label.ae')">{{ vmI18n.t('form_label.ae') }}</span>
+                    <span class="black" :title="$it('form_label.ae')">{{ $it('form_label.ae') }}</span>
                     <label>{{FINAL_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -103,7 +103,7 @@
       </div>
     </div>
     <!-- 查询原始订单编号 -->
-    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="vmI18n.t('form_label.cv')">
+    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="$it('form_label.cv')">
         <div class="modal-footer" slot="footer">
             <OmsButton :btn-config="btnConfigMo" />
         </div>

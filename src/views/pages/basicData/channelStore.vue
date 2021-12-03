@@ -15,7 +15,7 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基础信息 -->
-          {{ vmI18n.t("other.basic_info") }}
+          {{ $it("other.basic_info") }}
           <p slot="content">
             <OmsForm :form-config="formConfig" />
           </p>

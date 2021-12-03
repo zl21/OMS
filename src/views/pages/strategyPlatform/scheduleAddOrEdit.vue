@@ -7,19 +7,19 @@
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          {{ vmI18n.t('common.baseInformation') }}
+          {{ $it('common.baseInformation') }}
           <p slot="content">
             <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
         <Panel v-show="ID != -1 || isMasterRequired" name="panel_pickInfo">
-          {{ vmI18n.t('panel_label.au') }}
+          {{ $it('panel_label.au') }}
           <p slot="content">
             <OmsTable :jordan-table-config="pickingTableConfig" />
           </p>
         </Panel>
         <Panel v-show="ID != -1 || isMasterRequired" name="panel_warehouseInfo">
-          {{ vmI18n.t('panel_label.av') }}
+          {{ $it('panel_label.av') }}
           <p slot="content">
             <OmsTable :jordan-table-config="warehouseWarrantConfig" />
           </p>

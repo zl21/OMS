@@ -10,7 +10,7 @@
 const baseColumnDefs = [
 	{
 		headerName: '序号',
-		// headerName: vmI18n.t("table_label.serialNo"),
+		// headerName: $it("table_label.serialNo"),
 		field: 'SERIAL_NO',
 		pinned: 'left',
 		width: 90,
@@ -25,82 +25,82 @@ const baseColumnDefs = [
 	},
 	{
 		headerName: '促销编号',
-		// headerName: vmI18n.t("table_label.serialNo"),
+		// headerName: $it("table_label.serialNo"),
 		field: 'ACTI_NO'
 	},
 	{
 		headerName: '活动名称',
-		// headerName: vmI18n.t("form_label.activityName"),
+		// headerName: $it("form_label.activityName"),
 		field: 'ACTI_NAME'
 	},
 	{
 		headerName: '参与店铺',
-		// headerName: vmI18n.t("table_label.participating_store"),
+		// headerName: $it("table_label.participating_store"),
 		field: 'STORE_NAMES'
 	},
 	{
 		headerName: '活动时间段',
-		// headerName: vmI18n.t("table_label.activity_period"),
+		// headerName: $it("table_label.activity_period"),
 		field: 'ACTI_DATE'
 	},
 	{
 		headerName: '失效下线时间',
-		// headerName: vmI18n.t("table_label.failure_offline_time"),
+		// headerName: $it("table_label.failure_offline_time"),
 		field: 'DOWN_TIME'
 	},
 	{
 		headerName: '剩余可送',
-		// headerName: vmI18n.t("table_label.rest_sent"),
+		// headerName: $it("table_label.rest_sent"),
 		field: 'STOCK'
 	},
 	{
 		headerName: '已送数量',
-		// headerName: vmI18n.t("table_label.delivered_quantity"),
+		// headerName: $it("table_label.delivered_quantity"),
 		field: 'SEND'
 	},
 	{
 		headerName: '状态',
-		// headerName: vmI18n.t("table_label.status"),
+		// headerName: $it("table_label.status"),
 		field: 'status'
 	},
 	{
 		headerName: '分组名称',
-		// headerName: vmI18n.t("table_label.groupName"),
+		// headerName: $it("table_label.groupName"),
 		field: 'GROUP_NAME'
 	},
 	{
 		headerName: '优先级',
-		// headerName: vmI18n.t("table_label.priority"),
+		// headerName: $it("table_label.priority"),
 		field: 'LEVEL'
 	},
 	{
 		headerName: '创建人',
-		// headerName: vmI18n.t("table_label.creator"),
+		// headerName: $it("table_label.creator"),
 		field: 'OWNERENAME'
 	},
 	{
 		headerName: '创建时间',
-		// headerName: vmI18n.t("table_label.creationTime"),
+		// headerName: $it("table_label.creationTime"),
 		field: 'CREATIONDATE'
 	},
 	{
 		headerName: '修改人',
-		// headerName: vmI18n.t("table_label.reviser"),
+		// headerName: $it("table_label.reviser"),
 		field: 'OWNERENAME'
 	},
 	{
 		headerName: '修改时间',
-		// headerName: vmI18n.t("table_label.modificationTime"),
+		// headerName: $it("table_label.modificationTime"),
 		field: 'MODIFIEDDATE'
 	},
 	{
 		headerName: '备注',
-		// headerName: vmI18n.t("table_label.remarks"),
+		// headerName: $it("table_label.remarks"),
 		field: 'REMARK'
 	},
 	{
 		headerName: $it('table_label.operation'), // 操作
-		// headerName: vmI18n.t("table_label.operation"),
+		// headerName: $it("table_label.operation"),
 		field: 'ACTION_LOG'
 	}
 ];

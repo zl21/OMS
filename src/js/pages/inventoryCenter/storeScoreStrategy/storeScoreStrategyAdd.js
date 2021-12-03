@@ -73,13 +73,13 @@ export default {
           {
             webname: 'lookup_dianchangpingfen',
             type: 'posdefault',
-            text: window.vmI18n.t('btn.save'), // 保存
+            text: window.$it('btn.save'), // 保存
             btnclick: () => {
               this.save()
             }
           },
           {
-            text: window.vmI18n.t('btn.back'), // 返回
+            text: window.$it('btn.back'), // 返回
             btnclick: () => {
               $utils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
@@ -185,7 +185,7 @@ export default {
               name: 'STORESCORESTRATEGYDETAIL', // 文件名
               label: '店仓评分设置表', //  tab中文名
             });
-            this.$Message.success(window.vmI18n.t('modalTips.z9')); // '保存成功'
+            this.$Message.success(window.$it('modalTips.z9')); // '保存成功'
           } else {
             // this.$Message.error(res.data.message);
           }

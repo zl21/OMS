@@ -1536,7 +1536,7 @@ export default {
     exportFun() {
       if (this.isExport) {
         // 有一项导出正在进行中
-        this.$Message.error(window.vmI18n.t('modalTips.f8'));
+        this.$Message.error(window.$it('modalTips.f8'));
         return;
       }
       this.isExport = true;
@@ -1570,15 +1570,15 @@ export default {
             //   R3.store.commit('global/tabOpen', {
             //     type: 'V',
             //     tableName: 'CP_C_TASK',
-            //     label: window.vmI18n.t('other.myMission'),
+            //     label: window.$it('other.myMission'),
             //     tableId: 24386,
             //     id: data,
             //     query: {
             //       id: data,
             //       pid: '10010',
-            //       ptitle: window.vmI18n.t('other.myMission'),
+            //       ptitle: window.$it('other.myMission'),
             //       ptype: 'table',
-            //       tabTitle: window.vmI18n.t('other.myMission'),
+            //       tabTitle: window.$it('other.myMission'),
             //       tableName: 'CP_C_TASK'
             //     }
             //   });
@@ -1587,7 +1587,7 @@ export default {
             // });
           }
         } else {
-          const err = res.data.message || window.vmI18n.t('modalTips.z3'); // 失败！
+          const err = res.data.message || window.$it('modalTips.z3'); // 失败！
           this.$Message.error(err);
         }
       })

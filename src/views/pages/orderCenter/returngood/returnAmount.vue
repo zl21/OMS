@@ -12,12 +12,12 @@
       <li>
         <div class="calculation-item bg">
           <!-- 商品实退金额 -->
-          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.cr') }}</span>
+          <span :title="$it('form_label.cr')">{{ $it('form_label.cr') }}</span>
           <label>{{ data.PRO_REAL_AMT }}</label>
         </div>
         <div class="calculation-item">
           <!-- 商品应退金额 -->
-          <span :title="vmI18n.t('other.refundAmountGoods')">{{ vmI18n.t('other.refundAmountGoods') }}</span>
+          <span :title="$it('other.refundAmountGoods')">{{ $it('other.refundAmountGoods') }}</span>
           <label>{{ data.PRO_ACTUAL_AMT }}</label>
         </div>
       </li>
@@ -25,7 +25,7 @@
       <li>
         <div class="calculation-item">
           <!-- 应退运费 -->
-          <span :title="vmI18n.t('form_label.cr')">{{ vmI18n.t('form_label.ad') }}</span>
+          <span :title="$it('form_label.cr')">{{ $it('form_label.ad') }}</span>
           <label>
             <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange()"/>
             <span v-else>
@@ -38,7 +38,7 @@
       <li>
         <div class="calculation-item">
           <!-- 调整金额 -->
-          <span :title="vmI18n.t('table_label.adjustment_amount')">{{vmI18n.t('table_label.adjustment_amount')}}</span>
+          <span :title="$it('table_label.adjustment_amount')">{{$it('table_label.adjustment_amount')}}</span>
           <label>
             <Input v-if="type && status" v-model="editData.ADJUST_AMT"  :regx="/^-?\d*\.{0,1}\d{0,2}$/"  @on-change="inputChange()" @on-blur="inputBlur"/>
             <span v-else>
@@ -51,7 +51,7 @@
       <li v-if="tableName" >
         <div class="calculation-item">
           <!-- 换货金额 -->
-          <span :title="vmI18n.t('other.exchangeAmounts')">{{ vmI18n.t('other.exchangeAmounts') }}</span>
+          <span :title="$it('other.exchangeAmounts')">{{ $it('other.exchangeAmounts') }}</span>
           <label>{{ data.EXCHANGE_AMT }}</label>
         </div>
       </li>
@@ -59,12 +59,12 @@
       <li>
         <div class="calculation-item">
           <!-- 最终应退总金额 -->
-          <span class="black" :title="vmI18n.t('form_label.ae')">{{ vmI18n.t('form_label.ae') }}</span>
+          <span class="black" :title="$it('form_label.ae')">{{ $it('form_label.ae') }}</span>
           <label>{{ data.FINAL_ACTUAL_AMT }}</label>
         </div>
         <div class="calculation-item bg">
           <!-- 最终实退总金额 -->
-          <span class="black" :title="vmI18n.t('form_label.cs')">{{ vmI18n.t('form_label.cs') }}</span>
+          <span class="black" :title="$it('form_label.cs')">{{ $it('form_label.cs') }}</span>
           <label>{{ data.FINAL_REAL_AMT }}</label>
         </div>
       </li>
@@ -75,7 +75,6 @@
 export default {
   data() {
     return {
-      vmI18n:$i18n,
       regx:/^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
       data: R3.store.state.customize.returnAmount,
       editData:JSON.parse(JSON.stringify(R3.store.state.customize.returnAmount)),

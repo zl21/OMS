@@ -43,7 +43,7 @@ export default {
         },
         {
           webname: 'lookup_return', // 返回
-          text: window.vmI18n.t('btn.back'),
+          text: window.$it('btn.back'),
           btnclick: () => {
             this.back();
           },
@@ -765,12 +765,12 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: window.vmI18n.t('modalTitle.tips'), // 提示
+                        title: window.$it('modalTitle.tips'), // 提示
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
-                        okText: window.vmI18n.t('common.determine'), // 确定
-                        cancelText: window.vmI18n.t('common.cancel'), // 取消
+                        okText: window.$it('common.determine'), // 确定
+                        cancelText: window.$it('common.cancel'), // 取消
                         onOk: () => {
                           this.subTableDelete(params.row.ID, 'pickingTableConfig');
                         },
@@ -797,12 +797,12 @@ export default {
                 if (!this.pickingTableConfig.data.length) return;
                 this.$Modal.info({
                   className: 'ark-dialog',
-                  title: window.vmI18n.t('modalTitle.tips'), // 提示
+                  title: window.$it('modalTitle.tips'), // 提示
                   content: '当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？',
                   mask: true,
                   showCancel: true,
-                  okText: window.vmI18n.t('common.determine'), // 确定
-                  cancelText: window.vmI18n.t('common.cancel'), // 取消
+                  okText: window.$it('common.determine'), // 确定
+                  cancelText: window.$it('common.cancel'), // 取消
                   onOk: () => {
                     this.initPickTable();
                     this.subTableDelete(-1, 'pickingTableConfig');
@@ -975,12 +975,12 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: window.vmI18n.t('modalTitle.tips'), // 提示
+                        title: window.$it('modalTitle.tips'), // 提示
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
-                        okText: window.vmI18n.t('common.determine'), // 确定
-                        cancelText: window.vmI18n.t('common.cancel'), // 取消
+                        okText: window.$it('common.determine'), // 确定
+                        cancelText: window.$it('common.cancel'), // 取消
                         onOk: () => {
                           this.subTableDelete(params.row.ID, 'warehouseWarrantConfig');
                         },
@@ -1187,12 +1187,12 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
-          title: window.vmI18n.t('modalTitle.tips'), // 提示
+          title: window.$it('modalTitle.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.vmI18n.t('common.determine'), // 确定
-          cancelText: window.vmI18n.t('common.cancel'), // 取消
+          okText: window.$it('common.determine'), // 确定
+          cancelText: window.$it('common.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },

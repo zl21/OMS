@@ -3,7 +3,6 @@
   export default {
     data() {
       return {
-        vmI18n:$i18n,
         collapse: ['panel_baseInfo', 'panel_businessInfo'],
         btnConfig: {
           btnsite: 'right', // 按钮对齐方式

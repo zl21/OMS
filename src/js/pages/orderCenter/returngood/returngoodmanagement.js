@@ -569,7 +569,7 @@ export default {
                     _this.information.formValue.CP_C_LOGISTICS_ID = arrList.CP_C_LOGISTICS_ID;
                     _this.information.formData.forEach(list => {
                       // 退回物流公司
-                      if (list.style === 'popInput' && list.itemdata.name === _this.vmI18n.t('form_label.returnLogisticsCompany')) {
+                      if (list.style === 'popInput' && list.itemdata.name === $it('form_label.returnLogisticsCompany')) {
                         list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
                         list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
                       }

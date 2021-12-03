@@ -5,7 +5,7 @@
       <template #compile="{ rowData }">
         <div class="import-box" @click="importBoxOpen(rowData.item)">
           <!-- 导入 -->
-          [{{ vmI18n.t("btn.import") }}]
+          [{{ $it("btn.import") }}]
         </div>
       </template>
     </OmsForm>
@@ -22,10 +22,10 @@
     >
       <p>
         <!-- 订单下载任务已经发送，任务ID： -->
-        {{ vmI18n.t("modalTips.bn") }}
+        {{ $it("modalTips.bn") }}
         <span class="taskID" @click="taskIDClick">{{ taskId }}</span>
         <!-- ，请前往接口下载任务表查看下载进度！ -->
-        {{ vmI18n.t("modalTips.bo") }}
+        {{ $it("modalTips.bo") }}
       </p>
     </Modal>
 

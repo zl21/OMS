@@ -11,13 +11,13 @@
   <div class="customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
       <!-- <button @click="close">
-        {{ vmI18n.t('common.cancel') }}
+        {{ $it('common.cancel') }}
       </button>
       <button v-if="showSaveButton" @click="saveDraft">
-        {{ vmI18n.t('btn.saveDraft') }}
+        {{ $it('btn.saveDraft') }}
       </button>
       <button v-if="showPublishButton" @click="publish">
-        {{ vmI18n.t('btn.publish') }}
+        {{ $it('btn.publish') }}
       </button> -->
       <OmsButton :btn-config="btnConfig" />
     </div>

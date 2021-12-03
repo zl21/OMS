@@ -19,7 +19,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: window.vmI18n,
       pageLoad: false,
       isActive: false,
       agTableConfig: {
@@ -494,7 +493,7 @@ export default {
       const self = this;
       if (!self.selection.length) {
         // 请先选择需要复制的订单
-        self.$Message.warning(this.vmI18n.t('modalTips.a1'));
+        self.$Message.warning($it('modalTips.a1'));
         return;
       }
       const selectItem = self.selection[0];
@@ -502,7 +501,7 @@ export default {
       if (self.selection.length === 1) {
         if (selectItem.COPY_REASON) {
           // 订单只能是原单才能复制
-          self.$Message.warning(this.vmI18n.t('modalTips.a2'));
+          self.$Message.warning($it('modalTips.a2'));
           return;
         }
         // 原单无效复制
@@ -510,14 +509,14 @@ export default {
           // 已取消
           if (selectItem.ORDER_STATUS != 7 && selectItem.ORDER_STATUS != 8) {
             // 非已取消或系统作废订单，不允许复制
-            self.$Message.error(this.vmI18n.t('modalTips.a3'));
+            self.$Message.error($it('modalTips.a3'));
             return;
           }
           // 仓库发货
           // 平台发货
-        } else if (ORDERSTATUSNAME !== this.vmI18n.t('other.warehouseDelivery') && ORDERSTATUSNAME !== this.vmI18n.t('other.platformDelivery')) {
+        } else if (ORDERSTATUSNAME !== $it('other.warehouseDelivery') && ORDERSTATUSNAME !== $it('other.platformDelivery')) {
           // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
-          self.$Message.error(this.vmI18n.t('modalTips.a4'));
+          self.$Message.error($it('modalTips.a4'));
           return;
         }
         // 默认是丢单复制的query
@@ -540,7 +539,7 @@ export default {
         });
       } else {
         self.$Message.warning({
-          content: this.vmI18n.t('modalTips.a5'), // 请选择一条需要复制的订单！
+          content: $it('modalTips.a5'), // 请选择一条需要复制的订单！
           duration: 5,
           top: 80
         });
@@ -562,12 +561,12 @@ export default {
             this[type]();
           } else if (res.data.code === -3) {
             this.$Modal.info({
-              title: self.vmI18n.t('modalTitle.tips'), // 提示
+              title: $it('modalTitle.tips'), // 提示
               content: res.data.message, // 零售发货单/JIT订单中间表存在可合并的订单还未参与合并，仍要继续次操作吗？
               mask: true,
               showCancel: true,
-              okText: self.vmI18n.t('common.determine'), // 确定
-              cancelText: self.vmI18n.t('common.cancel'), // 取消
+              okText: $it('common.determine'), // 确定
+              cancelText: $it('common.cancel'), // 取消
               onOk: () => {
                 self[type]();
               },
@@ -601,7 +600,7 @@ export default {
           .then(res => {
             if (res.data.code === 0) {
               self.$Modal.success({
-                title: self.vmI18n.t('modalTitle.tips'), // 提示
+                title: $it('modalTitle.tips'), // 提示
                 content: res.data.message,
                 cancelType: true,
                 titleAlign: 'left',
@@ -617,7 +616,7 @@ export default {
               self.getData();
             } else {
               self.$Modal.error({
-                title: self.vmI18n.t('modalTitle.tips'), // 提示
+                title: $it('modalTitle.tips'), // 提示
                 content: res.data.message,
                 cancelType: true,
                 titleAlign: 'left',
@@ -634,7 +633,7 @@ export default {
           });
       } else {
         self.$Message.warning({
-          content: self.vmI18n.t('modalTips.a6'), // 请选择需要审核的记录！
+          content: $it('modalTips.a6'), // 请选择需要审核的记录！
           duration: 5,
           top: 80
         });
@@ -647,7 +646,7 @@ export default {
       const selectionLength = self.selection.length;
       if (selectionLength === 0) {
         self.$Message.warning({
-          content: self.vmI18n.t('modalTips.d7'), // 请选择要合并的单据！
+          content: $it('modalTips.d7'), // 请选择要合并的单据！
           duration: 5,
           top: 80
         });
@@ -657,19 +656,19 @@ export default {
         // 待审核  已审核
         if (item.ORDERSTATUSNAME !== '待审核') {
           // 要合并的单据的订单状态只能为待审核或已审核
-          message = self.vmI18n.t('modalTips.e7');
+          message = $it('modalTips.e7');
           break;
         } else if (item.PAYTYPENAME === '货到付款') {
           // 要合并的单据的付款方式只能为非货到付款
-          message = self.vmI18n.t('modalTips.e8');
+          message = $it('modalTips.e8');
           break;
         } else if (item.RESERVE_VARCHAR03_NAME !== '非预售' && item.RESERVE_VARCHAR03_NAME !== '预售尾款已付') {
           // 要合并的单据的预售状态只能为非预售
-          message = self.vmI18n.t('modalTips.e9');
+          message = $it('modalTips.e9');
           break;
         } else if (item.CP_C_PHY_WAREHOUSE_ENAME === '') {
           // 要合并的单据的发货仓库只能为非空
-          message = self.vmI18n.t('modalTips.f0');
+          message = $it('modalTips.f0');
           break;
         }
       }
@@ -697,12 +696,12 @@ export default {
           self.pageLoad = false;
           if (res.data.code === 0) {
             // 合并订单成功
-            self.$Message.success(res.data.message || self.vmI18n.t('modalTips.f1'));
+            self.$Message.success(res.data.message || $it('modalTips.f1'));
             self.getData();
             self.selection = [];
           } else {
             // 合并订单失败
-            self.$Message.error(res.data.message || self.vmI18n.t('modalTips.f2'));
+            self.$Message.error(res.data.message || $it('modalTips.f2'));
           }
         })
         .catch(() => {
@@ -714,13 +713,13 @@ export default {
       const self = this;
       if (self.selection.length === 0) {
         // 请选择需要操作的单据！
-        this.$Message.warning(self.vmI18n.t('modalTips.d8'));
+        this.$Message.warning($it('modalTips.d8'));
         return;
       }
       for (const item of self.selection) {
         if (!['缺货', '待审核', '已审核'].includes(item.ORDERSTATUSNAME)) {
           // 当前状态异常，不允许操作！
-          this.$Message.warning(this.vmI18n.t('modalTips.d9'));
+          this.$Message.warning($it('modalTips.d9'));
           return;
         }
       }
@@ -738,12 +737,12 @@ export default {
           self.pageLoad = false;
           if (res.data.code === 0) {
             // 取消合并订单成功
-            self.$Message.success(res.data.message || self.vmI18n.t('modalTips.f3'));
+            self.$Message.success(res.data.message || $it('modalTips.f3'));
             self.getData();
             self.selection = [];
           } else {
             // 取消合并订单失败
-            self.$Message.error(res.data.message || self.vmI18n.t('modalTips.f4'));
+            self.$Message.error(res.data.message || $it('modalTips.f4'));
           }
         })
         .catch(() => {
@@ -1683,7 +1682,7 @@ export default {
     checkBatchReturnOrder(selection) {
       const self = this;
       if (selection.length > 80) {
-        throw new Error(self.vmI18n.t('modalTips.f5')); // 请选择不超过80笔订单的数据！;
+        throw new Error($it('modalTips.f5')); // 请选择不超过80笔订单的数据！;
       }
       for (let i = 0; i < selection.length; i++) {
         const item = selection[i];
@@ -1724,21 +1723,21 @@ export default {
           R3.store.commit('global/tabOpen', {
             type: 'V',
             tableName: 'CP_C_TASK',
-            label: self.vmI18n.t('other.myMission'),
+            label: $it('other.myMission'),
             tableId: 24386,
             id: res.data.data,
             query: {
               id: res.data.data,
               pid: '10010',
-              ptitle: self.vmI18n.t('other.myMission'),
+              ptitle: $it('other.myMission'),
               ptype: 'table',
-              tabTitle: self.vmI18n.t('other.myMission'),
+              tabTitle: $it('other.myMission'),
               tableName: 'CP_C_TASK'
             }
           });
         } else {
           self.$Modal.error({
-            title: self.vmI18n.t('modalTitle.tips'), // 提示
+            title: $it('modalTitle.tips'), // 提示
             content: res.data.message,
             cancelType: true,
             titleAlign: 'left',
@@ -1868,7 +1867,7 @@ export default {
         type: 'C',
         customizedModuleName: 'orderManageDetail',
         customizedModuleId: row.ID,
-        label: this.vmI18n.t('panel_label.retailInvoice_details')
+        label: $it('panel_label.retailInvoice_details')
       });
     },
     // 返回置换两行索引
@@ -1905,7 +1904,7 @@ export default {
       if (this.isExport) {
         // 有一项导出正在进行中
 
-        this.$Message.error(this.vmI18n.t('modalTips.f8'));
+        this.$Message.error($it('modalTips.f8'));
         return;
       }
       this.isExport = true;
@@ -1939,11 +1938,11 @@ export default {
       this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
         this.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
-          const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+          const mes = res.data.message || $it('modalTips.z2'); // 导出成功！
           this.$Message.success(mes);
           $omsUtils.downloadUrlFile(res.data.data);
         } else {
-          const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+          const err = res.data.message || $it('modalTips.z3'); // 失败！
           this.$Message.error(err);
         }
       });
@@ -1953,7 +1952,7 @@ export default {
       const actioveSelect = this.selection;
       if (actioveSelect.length === 0) {
         // 请选择需要操作的单据！
-        this.$Message.warning(this.vmI18n.t('modalTips.d8'));
+        this.$Message.warning($it('modalTips.d8'));
         return;
       }
       const FormData = {
@@ -1973,7 +1972,7 @@ export default {
       const _this = this;
       // 有一项导出正在进行中
       if (this.isExport) {
-        this.$Message.error(this.vmI18n.t('modalTips.f8'));
+        this.$Message.error($it('modalTips.f8'));
         return;
       }
       this.isExport = true;
@@ -1992,11 +1991,11 @@ export default {
       _this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
         this.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
-          const mes = res.data.message || this.vmI18n.t('modalTips.z2'); // 导出成功！
+          const mes = res.data.message || $it('modalTips.z2'); // 导出成功！
           _this.$Message.success(mes);
           $omsUtils.downloadUrlFile(res.data.data);
         } else {
-          const err = res.data.message || this.vmI18n.t('modalTips.z3'); // 失败！
+          const err = res.data.message || $it('modalTips.z3'); // 失败！
           _this.$Message.error(err);
         }
       });

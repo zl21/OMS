@@ -7,14 +7,14 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
-          {{ vmI18n.t("common.baseInformation") }}
+          {{ $it("common.baseInformation") }}
           <p slot="content">
             <OmsForm :form-config="formConfig1" />
           </p>
         </Panel>
         <Panel name="panel_conds">
           <!-- 满足条件（满足以下条件的单据打“播”标） -->
-          {{ vmI18n.t('form_label.meet_conditions') }}（{{ vmI18n.t('modalTitle.ae') }}）
+          {{ $it('form_label.meet_conditions') }}（{{ $it('modalTitle.ae') }}）
           <p slot="content">
             <OmsForm :form-config="formConfig2">
               <template #timeType="{ rowData }">
@@ -62,11 +62,11 @@
                   <Input v-model="ruleItem.RULE_CONTEXT"
                     :disabled="ruleItem.RULE_TYPE == '' || isEnable"
                     :autosize="{minRows: 2,maxRows: 5}"
-                    :placeholder="vmI18n.t('modalTips.jy')"
+                    :placeholder="$it('modalTips.jy')"
                     @on-change="rowData.item.inputChange(ruleItem)"
                     style="width: 250px;"
                   />
-                  <span class="condition">{{ vmI18n.t('form_label.cg') }}</span>
+                  <span class="condition">{{ $it('form_label.cg') }}</span>
                   <Icon
                     v-if="!isEnable"
                     :type="index == 0 ? 'ios-add' : 'ios-remove'"
@@ -81,7 +81,7 @@
         </Panel>
         <Panel name="panel_action">
           <!-- 执行动作 -->
-          {{ vmI18n.t("panel_label.ae") }}
+          {{ $it("panel_label.ae") }}
           <p slot="content">
             <OmsForm :form-config="formConfig3" />
           </p>

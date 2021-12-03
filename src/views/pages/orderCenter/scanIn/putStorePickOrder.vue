@@ -228,7 +228,7 @@
         <Collapse v-model="pickOrder.value1">
           <Panel name="1">
             <!-- 基本信息 -->
-          {{ vmI18n.t("common.baseInformation") }}
+          {{ $it("common.baseInformation") }}
             <p slot="content">
               <OmsForm :form-config="pickOrder.formConfig" />
             </p>

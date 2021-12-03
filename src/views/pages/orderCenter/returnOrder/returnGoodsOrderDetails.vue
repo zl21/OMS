@@ -25,7 +25,7 @@
       v-model="tableConfig.modal"
       width="900"
       titleAlign="left"
-      :title="`${vmI18n.t('modalTitle.ac')}（${selectLen}）`"
+      :title="`${$it('modalTitle.ac')}（${selectLen}）`"
       :mask="true"
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
@@ -44,7 +44,7 @@
       v-model="replaceProductTable.modal"
       width="900"
       titleAlign="left"
-      :title="vmI18n.t('btn.replaceDetail')"
+      :title="$it('btn.replaceDetail')"
       :mask="true"
       @on-ok="replaceOk"
       class-name="ark-dialog"
@@ -75,7 +75,6 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
       IS_COMBINATION:0,//4 代表组合商品
       switchText: $it('form_label.b0'), //切换为sku商品展示
       returnArr: [],
