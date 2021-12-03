@@ -445,7 +445,8 @@ export default {
     // this.getSearchData();
     // 获取from数据
     // this.getFromData();
-    console.log('btnConfig', this.btnConfig);
+    debugger
+    console.log('---btnConfig::', this.btnConfig);
     const _this = this;
     _this.getHeaderList();
     _this.$nextTick(() => {

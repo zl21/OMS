@@ -10,7 +10,6 @@
 // import payableAdjustmentList from 'allpages/financialCenter/payableAdjust/payableAdjustmentList';
 // 财务中心-赔付单新增
 // import payableAdjustAdd from 'allpages/financialCenter/payableAdjust/payableAdjustAdd';
-import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   // 赔付单
   PAYABLEADJUSTMENTLIST: {

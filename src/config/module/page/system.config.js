@@ -6,7 +6,6 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/system.config.js
  */
-import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   //   查看用户权限
   USERPERMISSION: {

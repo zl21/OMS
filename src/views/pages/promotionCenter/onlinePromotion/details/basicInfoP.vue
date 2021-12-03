@@ -4,7 +4,7 @@
     <div class="143142">
       <Collapse v-model="panelDefaultValue">
         <Panel name="basic">
-          <!-- {{ vmI18n.t("other.basic_info") }} -->
+          <!-- {{ vm$it("other.basic_info") }} -->
           基础信息
           <p slot="content">
             <OmsForm :form-config="formConBasic" :key="formKey1" />
@@ -17,15 +17,12 @@
 
 <script>
 import groups from '@/assets/js/promotion/groups'; // 促销的一些初始化配置文件
-import i18n from '@burgeon/internationalization/i18n'; // 国际化
 groups.load();
 
 export default {
   name: 'BasicInfoP',
   data() {
     return {
-      vmI18n: i18n,
-      $i18n: i18n,
       formKey1: 0,
       panelDefaultValue: 'basic',
       formConBasic: {
