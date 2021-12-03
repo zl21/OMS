@@ -35,37 +35,37 @@ if (!omsTheme) {
 const { components } = R3
 Vue.component('WaterMark', components.WaterMark)
 require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
+import Burgeon from 'burgeonComponents'
 
-export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.js', 'Burgeon')
-  .then(Burgeon => {
-    Vue.use(Burgeon.default);
-    window.BC = Burgeon.default;
+// export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.js', 'Burgeon')
+//   .then(Burgeon => {
+    Vue.use(Burgeon);
+    window.BC = Burgeon;
     
-    console.log(BC);
-    let cus = require('@/config').default;
-    console.log(cus);
     let pageNote = require('@/config/config/pageNote').default;
     console.log(pageNote);
 
     window.$store = store;
-    window.$omsUtils = cus.omsUtils;
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
-    window.OMS = cus;
-    // window.$i18n = i18n; // 挂载国际化
+    window.$i18n = i18n; // 挂载国际化
     window.$it = (str) => {
       return i18n.t(str)
     }
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     Vue.prototype.qs = qs;
-    Vue.prototype.$omsUtils = cus.omsUtils;
     Vue.prototype.$lodash = window._;
     Vue.prototype.service = service;
     // Vue.prototype.vmI18n = i18n;
     Vue.prototype.$it = (str) => {
       return i18n.t(str)
     }
-    Vue.prototype.$i18n = i18n;
+
+    let cus = require('@/config').default;
+    window.OMS = cus;
+    window.$omsUtils = cus.omsUtils;
+    Vue.prototype.$omsUtils = cus.omsUtils;
+
     window.version = {
       '@burgeon/project-logic': proVersion.version,
       '@burgeon/business-components': BC.version,
@@ -95,7 +95,8 @@ export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/busin
     clientWidthsFun();
     // 屏幕变化
     window.onresize = () => clientWidthsFun();
-})
+    
+// })
 // class InitAppConfig {
 //   constructor() {
 //     // -------------引入框架项目配置文件;
@@ -145,3 +146,4 @@ export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/busin
 // }
 
 // export default new InitAppConfig();
+export default {}
