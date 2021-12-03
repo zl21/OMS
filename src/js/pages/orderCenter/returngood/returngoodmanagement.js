@@ -3848,7 +3848,7 @@ export default {
       _this.addSelection = [];
       _this.returnDetailAddTable.table.data = _this.addSelection;
       for await (const selection of this.onSelectData[0].QUERYORDERITEMRESULTLIST) {
-        // const selection = this.onSelectData[0].QUERYORDERITEMRESULTLIST[i];
+        const selection = this.onSelectData[0].QUERYORDERITEMRESULTLIST[i];
         if (selection.refundStatus !== 6) {
           const queryListItem = {};
           queryListItem.ID = -1;

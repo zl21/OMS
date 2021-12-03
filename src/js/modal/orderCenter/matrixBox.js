@@ -28,9 +28,6 @@ export default {
         Object.keys(val).forEach(keys => {
           const obj = val[keys];
           arr.push(obj.PS_C_SKU_ECODE.trim());
-        });
-        Object.keys(val).forEach(keys => {
-          const obj = val[keys];
           arrList.push({ sku: obj.PS_C_SKU_ECODE.trim(), qty: obj.count === '' ? 0 : obj.count.trim() });
         });
         const fromdata = new FormData();
