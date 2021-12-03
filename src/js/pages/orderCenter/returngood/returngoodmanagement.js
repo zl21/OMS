@@ -1302,7 +1302,7 @@ export default {
               }
               // _this.status = res.data.data.returnOrders.RETURN_STATUS;
               // 设置水印
-              // _this.statusName = _this.waterMarkMap[_this.status]
+              _this.statusName = _this.waterMarkMap[_this.status]
                 ?_this.waterMarkMap[_this.status]
                 : 'Watermark to be added';
               _this.defectiveList = res.data.data.orderDefects;
