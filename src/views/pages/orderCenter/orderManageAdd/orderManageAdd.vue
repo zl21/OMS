@@ -27,29 +27,28 @@
           </p>
         </Panel>
       </Collapse>
-      <!-- tab切换 -->
-      <div class="custom-label">
-        <OmsLabel
-          :label-default-value="labelDefaultValue"
-          :label-list="labelList"
+    </div>
+    <!-- tab切换 -->
+    <div class="custom-label">
+      <OmsLabel
+        :label-default-value="labelDefaultValue"
+        :label-list="labelList"
+      />
+    </div>
+    <!-- 表格 -->
+    <div class="table custom-table">
+      <!-- 订单明细 -->
+      <div class="barcodeDetails">
+        <OmsTable
+          :jordan-table-config="jordanTableConfig"
+          @on-select="onSelect"
+          @on-select-all="onSelectAll"
+          @on-select-all-cancel="onSelectAllCancel"
+          @on-select-cancel="onSelectCancel"
+          @table-delete-detail="tableDeleteDetail"
         />
       </div>
-      <!-- 表格 -->
-      <div class="table custom-table">
-        <!-- 订单明细 -->
-        <div class="barcodeDetails">
-          <OmsTable
-            :jordan-table-config="jordanTableConfig"
-            @on-select="onSelect"
-            @on-select-all="onSelectAll"
-            @on-select-all-cancel="onSelectAllCancel"
-            @on-select-cancel="onSelectCancel"
-            @table-delete-detail="tableDeleteDetail"
-          />
-        </div>
-      </div>
     </div>
-
     <!-- 矩阵框-->
     <OmsDialog
       :closable="matrixBox.closable"
@@ -70,7 +69,7 @@
   </div>
 </template>
 <script>
-import orderManageAdd from "@/js/pages/orderCenter/orderManageAdd/orderManageAdd";
+import orderManageAdd from '@/js/pages/orderCenter/orderManageAdd/orderManageAdd';
 
 export default orderManageAdd;
 </script>
