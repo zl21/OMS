@@ -17,6 +17,8 @@ export default {
   mixins: [buttonPermissionsMixin, dataAccessMixin],
   data() {
     return {
+      shopId: '',
+      Query: '', // 是否是enter事件
       // 显示水印标识
       statusName: '',
       // 水印标识集合
@@ -286,8 +288,9 @@ export default {
       isreplacement: true, // 换货数量
       ispurchase: true, // 购买数量
       openDefault: [], // 默认展开设置
-      clrListArr: [],
-      sizeListArr: [],
+      clrListArr: {},
+      sizeListArr: {},
+      detailSelectOptions: {},
       itemSkuEcode: '',
       itemSkuId: '',
       itemGbcode: '',
@@ -318,11 +321,17 @@ export default {
           SELLER_MEMO: '', // 卖家备注
           BILL_NO: '', // 订单编号
           PLATFORM: '', // 平台
+          TO_DRP_STATUS_NAME: '', // 传DRP状态
+          TO_DRP_COUNT: 0, // 传DRP次数
+          TO_DRP_FAILED_REASON: '', // 传DRP失败原因
+          RETURN_DESC: '' // 平台退款原因
         },
         // 表单非空提示
         ruleValidate: {
           ORIG_ORDER_ID: [{ required: true, message: ' ', trigger: 'blur' }],
           BILL_TYPE: [{ required: true, message: ' ', trigger: 'blur' }],
+          RETURN_REASON: [{ required: true, message: ' ', trigger: 'blur' }],
+          // LOGISTICS_CODE: [{ required: true, message: ' ', trigger: 'blur' }]
         },
         formData: [
           {
@@ -438,7 +447,7 @@ export default {
             style: 'input',
             label: $it('form_label.platformRefundNo'), // 平台退款单号
             dataAcessKey: 'RETURN_ID',
-            disabled: true, // 按钮禁用控制
+            disabled: false, // 按钮禁用控制
             value: 'RETURN_ID',
             width: '6',
           },
@@ -480,6 +489,7 @@ export default {
             width: '6', // 所占宽度宽度
             value: 'RETURN_REASON',
             disabled: false, // 按钮禁用控制
+            rules: true,
             options: [],
           },
           {
@@ -488,6 +498,7 @@ export default {
             dataAcessKey: 'LOGISTICS_CODE',
             value: 'LOGISTICS_CODE',
             disabled: false, // 按钮禁用控制
+            isnotnull: false,
             width: '6',
           },
           {
@@ -539,47 +550,46 @@ export default {
             value: 'IS_BACK',
             disabled: false, // 按钮禁用控制
             checked: false, // 是否勾选控制
-            checkboxChange: (e) => {
+            checkboxChange: e => {
               const _this = this;
               const phy = _this.information.formData[13].itemdata;
               const phyIn = _this.information.formData[14].itemdata;
               if (!e) {
-                _this.service.common
-                  .queryOcBOrder({
-                    id: _this.information.formValue.ORIG_ORDER_ID,
-                  })
-                  .then((res) => {
-                    if (res.data.code === 0) {
-                      phy.pid = phyIn.pid;
-                      phy.valuedata = phyIn.valuedata;
-                      _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID =
-                        phyIn.pid;
-                      const arrList = JSON.parse(res.data.data);
-                      _this.information.formValue.LOGISTICS_CODE =
-                        arrList.EXPRESSCODE;
-                      _this.information.formValue.CP_C_LOGISTICS_ID =
-                        arrList.CP_C_LOGISTICS_ID;
-                      _this.information.formData.forEach((list) => {
-                        // 退回物流公司
-                        if (
-                          list.style === 'popInput' &&
-                          list.itemdata.name ===
-                          $it('form_label.returnLogisticsCompany')
-                        ) {
-                          list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
-                          list.itemdata.valuedata =
-                            arrList.CP_C_LOGISTICS_ENAME;
-                        }
-                      });
-                    }
-                  });
+                _this.service.common.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID }).then(res => {
+                  if (res.data.code === 0) {
+                    phy.pid = phyIn.pid;
+                    phy.valuedata = phyIn.valuedata;
+                    const arrList = JSON.parse(res.data.data);
+                    // 点击'是否原退'时，'入库实体仓库'赋值取字段：CP_C_PHY_WAREHOUSE_IN_ID
+                    phy.pid = arrList.CP_C_PHY_WAREHOUSE_IN_ID;
+                    phy.valuedata = arrList.CP_C_PHY_WAREHOUSE_IN_ID_NAME;
+                    _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = arrList.CP_C_PHY_WAREHOUSE_IN_ID;
+
+                    _this.information.formValue.LOGISTICS_CODE = arrList.EXPRESSCODE;
+                    _this.information.formValue.CP_C_LOGISTICS_ID = arrList.CP_C_LOGISTICS_ID;
+                    _this.information.formData.forEach(list => {
+                      // 退回物流公司
+                      if (list.style === 'popInput' && list.itemdata.name === _this.vmI18n.t('form_label.returnLogisticsCompany')) {
+                        list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
+                        list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
+                      }
+                    });
+                  }
+                });
               } else {
                 _this.information.formValue.LOGISTICS_CODE = '';
-                phy.pid = '';
-                phy.valuedata = '';
-                _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = '';
+                if (_this.$route.query.id === '-1' && _this.warehouseInInfo) {
+                  // '入库实体仓库'保留billCopy带出来的值
+                  phy.pid = _this.warehouseInInfo.pid;
+                  phy.valuedata = _this.warehouseInInfo.valuedata;
+                  _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = _this.warehouseInInfo.pid;
+                } else {
+                  phy.pid = '';
+                  phy.valuedata = '';
+                  _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = '';
+                }
               }
-            },
+            }
           },
           {
             style: 'popInput',
@@ -602,7 +612,7 @@ export default {
               fkdesc: $it('form_label.physicalWarehouseFile'), // 实体仓档案
               inputname: 'CP_C_PHY_WAREHOUSE_IN_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
+              isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
               name: $it('form_label.warehousingEntity'), // 入库实体仓库 input前面显示的lable值
@@ -633,7 +643,7 @@ export default {
               fkdesc: $it('form_label.physicalWarehouseFile'), // 实体仓档案
               inputname: 'CP_C_PHY_WAREHOUSE_ID:ENAME:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
-              isnotnull: false, // 是否必填
+              isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
               name: $it('form_label.shipPhysicalWarehouse'), // 发货实体仓库input前面显示的lable值
@@ -679,6 +689,34 @@ export default {
             value: 'BILL_NO',
             width: '6',
           },
+          {
+            style: 'input',
+            label: '传DRP状态',
+            disabled: true,
+            value: 'TO_DRP_STATUS_NAME',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: '传DRP次数',
+            disabled: true,
+            value: 'TO_DRP_COUNT',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: '传DRP失败原因',
+            disabled: true,
+            value: 'TO_DRP_FAILED_REASON',
+            width: '6'
+          },
+          {
+            style: 'input',
+            label: '平台退款原因',
+            value: 'RETURN_DESC',
+            width: '6',
+            disabled: true
+          }
         ],
       }, // 基本信息
       returnDetailAddTable: {
@@ -705,6 +743,11 @@ export default {
               key: 'QTY_REFUND',
               title: $it('table_label.appleNumber'), // 申请数量
               dataAcessKey: 'QTY_REFUND',
+            },
+            {
+              key: 'AVAILABLE_QTY',
+              title: '可用库存',
+              dataAcessKey: 'AVAILABLE_QTY'
             },
             {
               key: 'PS_C_SKU_ECODE',
@@ -1077,6 +1120,7 @@ export default {
     window.removeEventListener('keydown', this, false);
   },
   mounted() {
+    if (this.$route.query.clear) $omsUtils.tabCloseAppoint(this);
     BtnConfig.target = this;
     BtnConfig.singleType = 1;
     this.$nextTick(() => {
@@ -1115,6 +1159,7 @@ export default {
           .then((res) => {
             if (res.data.code === 0) {
               const item = res.data.data.baseInfo;
+              this.shopId = item.ID;
               const replace = _this.replacement.formValue;
               this.onSelectData.push(item);
               this.information.formData.forEach((list) => {
@@ -1131,6 +1176,10 @@ export default {
               _this.information.formData[14].itemdata.pid = this.warehouseId;
               _this.information.formData[14].itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
               _this.information.formValue.CP_C_PHY_WAREHOUSE_ID = this.warehouseId;
+              _this.information.formData[13].itemdata.pid = item.RESERVE_BIGINT05;
+              _this.information.formData[13].itemdata.valuedata = item.RESERVE_VARCHAR05;
+              _this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = item.RESERVE_BIGINT05;
+              _this.warehouseInInfo = { pid: item.RESERVE_BIGINT05, valuedata: item.RESERVE_VARCHAR05 };
               _this.information.formValue.BILL_NO = item.BILL_NO;
               _this.information.formValue.ORIG_ORDER_ID = item.ID; // 编号
               _this.information.formValue.PRO_RETURN_STATUS = item.PRO_RETURN_STATUS; // 退货状态
@@ -1169,6 +1218,7 @@ export default {
           detailType: 2, // 退换货订单使用
         })
           .then(async (res) => {
+            this.shopId = res.data.data.records[0].ID;
             if (res.data.code != 0) {
               _this.$Message.warning(res.data.message);
               return;
@@ -1176,7 +1226,7 @@ export default {
             const queryList = res.data.data.records.filter((item) => item.REFUND_STATUS != 6);
 
             const newQueryList = [];
-
+            const ecodeList = [];
             queryList.forEach((subitem) => {
               const newItem = {};
               newItem.reserve_bigint10 = subitem.ID;
@@ -1200,18 +1250,21 @@ export default {
               newItem.QTY_EXCHANGE = subitem.QTY;
               newItem.SEX_NAME = subitem.SEX_NAME;
               newItem.SEX = subitem.SEX;
+              newItem.PRICE = subitem.PRICE_LIST;
               newItem.PRICE = subitem.PRICE_SETTLE;
               newItem.amt_refund_single = subitem.PRICE_ACTUAL;
               newItem.AMT_REFUND = $utils.accMul(newItem.QTY_REFUND, subitem.PRICE_ACTUAL).toFixed(2); // 退货金额realAmt
               newItem.QTY_IN = 0;
               newItem.PRODUCT_MARK = '正品';
               newItem.skuId = subitem.PS_C_SKU_ID;
-              _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
+              // _this.reconstructionGetDetail(subitem, newItem, subitem.PS_C_PRO_ECODE);
               newItem.PRICE_SETTLE = subitem.PRICE_SETTLE; // 结算单价
               newItem.AMT_SETTLE_TOT = subitem.TOT_PRICE_SETTLE; // 结算金额
               newItem.OC_B_ORDER_ITEM_ID = subitem.OC_B_ORDER_ITEM_ID;
               newQueryList.push(newItem);
+              ecodeList.push(subitem.PS_C_PRO_ECODE);
             });
+            _this.reconstructionGetDetail(newQueryList, ecodeList);
             _this.jordanTableConfig.data = newQueryList;
             _this.refundDtoList.data = _this.jordanTableConfig.data;
             _this.amountReturned = _this
@@ -1230,6 +1283,13 @@ export default {
           })
           .then(async (res) => {
             if (res.data.code == 0) {
+              let search = [];
+              if (res.data.data.returnOrders.length !== 0) {
+                this.shopId = res.data.data.returnOrders.CP_C_SHOP_ID;
+                res.data.data.exchangeDtoList.forEach(item => {
+                  search.push(item.PS_C_SKU_ECODE)
+                })
+              }
               _this.jordanTableConfig.loading = false;
               _this.information.formValue.BILL_TYPE = String(res.data.data.returnOrders.BILL_TYPE);
               _this.selectSelectt();
@@ -1240,24 +1300,37 @@ export default {
                   document.getElementsByClassName('burgeon-select-selected-value')[1].className = 'burgeon-select-selected-value inputBgcolor';
                 }, 10);
               }
-              _this.status = res.data.data.returnOrders.RETURN_STATUS;
+              // _this.status = res.data.data.returnOrders.RETURN_STATUS;
               // 设置水印
-              _this.statusName = _this.waterMarkMap[_this.status]
-                ? _this.waterMarkMap[_this.status]
+              // _this.statusName = _this.waterMarkMap[_this.status]
+                ?_this.waterMarkMap[_this.status]
                 : 'Watermark to be added';
               _this.defectiveList = res.data.data.orderDefects;
+              const [refundDtoEcodeList, exchangeDtoEcodeList] = [[], []];
               for await (const tempItem of res.data.data.refundDtoList) {
                 tempItem.PRODUCT_MARK = tempItem.PRODUCT_MARK == 1 ? '正品' : '次品';
                 tempItem.amt_refund_single = tempItem.AMT_REFUND_SINGLE;
                 tempItem.SEX_NAME = tempItem.SEX_ENAME;
                 tempItem.PRICE = tempItem.PRICE_LIST;
-                await _this.reconstructionGetDetail(tempItem, tempItem, tempItem.PS_C_PRO_ECODE);
+                refundDtoEcodeList.push(tempItem.PS_C_PRO_ECODE);
+                // await _this.reconstructionGetDetail(tempItem, tempItem, tempItem.PS_C_PRO_ECODE);
               }
+              // await _this.reconstructionGetDetail(res.data.data.refundDtoList, refundDtoEcodeList);
               for await (const exchangeItem of res.data.data.exchangeDtoList) {
                 exchangeItem.SEX_NAME = exchangeItem.SEX_ENAME;
                 exchangeItem.PRICE = exchangeItem.PRICE_LIST;
-                await _this.reconstructionGetDetail(exchangeItem, exchangeItem, exchangeItem.PS_C_PRO_ECODE);
+                exchangeDtoEcodeList.push(exchangeItem.PS_C_PRO_ECODE);
+                // await _this.reconstructionGetDetail(exchangeItem, exchangeItem, exchangeItem.PS_C_PRO_ECODE);
               }
+              const detailList = {
+                refundDtoList: res.data.data.refundDtoList,
+                exchangeDtoList: res.data.data.exchangeDtoList
+              }
+              const detailEcodeList = [
+                ...refundDtoEcodeList,
+                ...exchangeDtoEcodeList
+              ]
+              await _this.reconstructionGetDetail(detailList, detailEcodeList);
               const replace = _this.replacement.formValue;
               replace.PLATFORM = res.data.data.returnOrders.PLATFORM; // 平台
 
@@ -1265,8 +1338,24 @@ export default {
                 item.QTY_EXCHANGE = item.QTY_REFUND;
               });
               _this.refundDtoList.data = res.data.data.refundDtoList;
-              _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
-
+              if (_this.exchangeDtoList.data.length !== 0) { // 判断有没有换货明细
+                // 获取可用库存
+                if (res.data.data.exchangeDtoList.length !== 0) {
+                  let search = [];
+                  this.shopId = res.data.data.returnOrders.CP_C_SHOP_ID;
+                  res.data.data.exchangeDtoList.forEach(item => {
+                    search.push(item.PS_C_SKU_ECODE)
+                  })
+                  const fromdata = new FormData();
+                  fromdata.append('param', JSON.stringify({ SkuEcodeList: search, shopId: this.shopId, isQuery: 'Y' }));
+                  const resData = await this.service.common.skuListQuery(fromdata);
+                  if (resData.data.code === 0) {
+                    resData.data.data.forEach((item, index) => {
+                      res.data.data.exchangeDtoList[index].AVAILABLE_QTY = item.AVAILABLE_QTY;
+                    })
+                  }
+                }
+              }
               _this.jordanTableConfig.data = res.data.data.refundDtoList;
               _this.onSelectData.push(res.data.data.returnOrders);
               _this.assignment(res.data.data.returnOrders);
@@ -1332,7 +1421,7 @@ export default {
       console.log(this.$route.query);
       this.information.formData[1].disabled = true;
       this.information.formData[1].icon = '';
-      this.information.formData[2].disabled = this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,单据类型可编辑
+      this.information.formData[2].disabled = this.$route.query.flag !== 'RefundToExchange'; // 如果为退货转换货过来的,换货平台单号可编辑
       this.information.formData[3].disabled = true;
       this.information.formData[4].disabled = true;
       this.information.formData[5].itemdata.readonly = true;
@@ -1430,6 +1519,7 @@ export default {
       }
       _this.service.orderCenter.findDetail(params).then(async (res) => {
         if (res.data.code === 0) {
+          this.shopId = res.data.data.returnOrders.ID;
           _this.jordanTableConfig.loading = false;
           _this.information.formValue.BILL_TYPE = res.data.data.returnOrders.BILL_TYPE.toString();
           _this.selectSelectt();
@@ -1463,7 +1553,20 @@ export default {
           }
           _this.refundDtoList.data = res.data.data.refundDtoList;
           _this.exchangeDtoList.data = res.data.data.exchangeDtoList;
-
+          // 获取可用库存
+          let SkuEcodeList = [];
+          res.data.data.exchangeDtoList.forEach(item => {
+            SkuEcodeList.push(item.PS_C_SKU_ECODE)
+          })
+          const fromdata = new FormData();
+          fromdata.append('param', JSON.stringify({ SkuEcodeList, shopId: this.shopId, isQuery: 'Y' }));
+          await this.service.orderCenter.skuListQuery(fromdata).then(res => {
+            if (res.data.code === 0) {
+              _this.exchangeDtoList.data.map((item, index) => {
+                _this.exchangeDtoList.data[index].AVAILABLE_QTY = res.data.data[index].AVAILABLE_QTY || 0;
+              })
+            }
+          })
           _this.jordanTableConfig.data = res.data.data.refundDtoList;
           _this.tId = res.data.data.returnOrders.TID;
           _this.onSelectData.push(res.data.data.returnOrders);
@@ -1557,7 +1660,7 @@ export default {
       }
     },
     // 赋值
-    assignment(data) {
+    async assignment(data) {
       const item = this.information.formValue;
       this.inventedStatus = data.INVENTED_STATUS; // 虚拟入库状态
       // 基本信息
@@ -1606,6 +1709,10 @@ export default {
         ? data.CP_C_STORE_ENAME
         : '';
       item.REMARK = data.REMARK ? data.REMARK : '';
+      item.TO_DRP_STATUS_NAME = data.TO_DRP_STATUS_NAME;
+      item.TO_DRP_COUNT = data.TO_DRP_COUNT;
+      item.TO_DRP_FAILED_REASON = data.TO_DRP_FAILED_REASON;
+      item.RETURN_DESC = data.RETURN_DESC ? data.RETURN_DESC : ''; // 平台退款原因
       this.information.formData[5].itemdata.valuedata = data.CP_C_SHOP_TITLE
         ? data.CP_C_SHOP_TITLE
         : '';
@@ -1627,9 +1734,25 @@ export default {
       this.information.formValue.CP_C_PHY_WAREHOUSE_ID =
         data.CP_C_PHY_WAREHOUSE_ID;
       // 换货人信息
+      // 解密
+      let objid = data.ORIG_ORDER_ID;
+      let searchdata = {
+        ID: objid,
+        isShowPii: true,
+      }
+      let decryptData = {};
+      await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata).then(res => {
+        if (res.data.code === 0) {
+          let resData = res.data.data;
+          this.shopId = resData.CP_C_SHOP_ID;
+          decryptData.RECEIVER_NAME = resData.RECEIVER_NAME; // 收货人姓名
+          decryptData.RECEIVER_MOBILE = resData.RECEIVER_MOBILE; // 收货人手机
+          decryptData.RECEIVER_ADDRESS = resData.RECEIVER_ADDRESS; // 收货人地址
+        }
+      })
       const replace = this.replacement.formValue;
-      replace.RECEIVE_NAME = data.RECEIVE_NAME ? data.RECEIVE_NAME : ''; // 收货人
-      replace.RECEIVE_MOBILE = data.RECEIVE_MOBILE ? data.RECEIVE_MOBILE : ''; // 收货人手机
+      replace.RECEIVE_NAME = decryptData.RECEIVER_NAME ? decryptData.RECEIVER_NAME : data.RECEIVE_NAME; // 收货人
+      replace.RECEIVE_MOBILE = decryptData.RECEIVER_MOBILE ? decryptData.RECEIVER_MOBILE : data.RECEIVE_MOBILE; // 收货人手机
       replace.RECEIVE_PHONE = data.RECEIVE_PHONE ? data.RECEIVE_PHONE : ''; // 收货人电话
       replace.RECEIVE_ZIP = data.RECEIVE_ZIP ? data.RECEIVE_ZIP : ''; // 收货人邮编
       replace.receiver_province_id = data.RECEIVER_PROVINCE_ID
@@ -1651,9 +1774,7 @@ export default {
         ? data.RECEIVER_AREA_NAME
         : ''; // 收货人县
       replace.SHIP_AMT = data.SHIP_AMT ? data.SHIP_AMT : ''; // 换货邮费
-      replace.RECEIVE_ADDRESS = data.RECEIVE_ADDRESS
-        ? data.RECEIVE_ADDRESS
-        : ''; // 收货人地址
+      replace.RECEIVE_ADDRESS = decryptData.RECEIVER_ADDRESS ? decryptData.RECEIVER_ADDRESS : data.RECEIVE_ADDRESS; // 收货人地址
       this.replacement.formData[5].itemdata.valuedata = data.RECEIVER_PROVINCE_NAME
         ? data.RECEIVER_PROVINCE_NAME
         : '';
@@ -1733,7 +1854,7 @@ export default {
       }, 100);
     },
     // 切换tab
-    labelClick(item, index) {
+    async labelClick(item, index) {
       const _this = this;
       if (index === 0) {
         _this.labelDefaultValue = 1;
@@ -2184,10 +2305,7 @@ export default {
                             }, 100);
                             return;
                           }
-                          params.row.AMT_REFUND = $utils.accMul(
-                            e.target.value,
-                            params.row.amt_refund_single == 0 ? params.row.PRICE ?? 0 : params.row.amt_refund_single
-                          );
+                          params.row.AMT_REFUND = $utils.accMul(e.target.value, params.row.AMT_REFUND);
                           // 计算结算金额
                           params.row.AMT_SETTLE_TOT = $utils.accMul(e.target.value, params.row.PRICE_SETTLE ?? 0);
                           params.row.QTY_REFUND = e.target.value;
@@ -2388,7 +2506,20 @@ export default {
               newArr.push(_this.exchangeDtoList.data[i]);
             }
           }
+          let SkuEcodeList = [];
           _this.exchangeDtoList.data = newArr;
+          newArr.forEach(item => {
+            SkuEcodeList.push(item.PS_C_SKU_ECODE)
+          })
+          const fromdata = new FormData();
+          fromdata.append('param', JSON.stringify({ SkuEcodeList, shopId: this.shopId, isQuery: 'Y' }));
+          await this.service.orderCenter.skuListQuery(fromdata).then(res => {
+            if (res.data.code === 0) {
+              _this.exchangeDtoList.data.map((item, index) => {
+                _this.exchangeDtoList.data[index].AVAILABLE_QTY = res.data.data[index].AVAILABLE_QTY || 0;
+              })
+            }
+          })
           this.exchangeDtoList.data.forEach((item) => {
             item.QTY_EXCHANGE = item.QTY_REFUND;
           });
@@ -2752,10 +2883,7 @@ export default {
                         // _this.jordanTableConfig.data[params.index].QTY_EXCHANGE = e.target.value;
                         // _this.jordanTableConfig.data[params.index].AMT_REFUND = $utils.accMul(e.target.value, _this.jordanTableConfig.data[params.index].PRICE);
                         params.row.QTY_EXCHANGE = e.target.value;
-                        params.row.AMT_REFUND = $utils.accMul(
-                          e.target.value,
-                          params.row.AMT_REFUND
-                        );
+                        params.row.AMT_REFUND = $utils.accMul(e.target.value || 0, params.row.PRICE);
                         _this.exchangeDtoList.data[params.index] = params.row;
                         _this.exchangeAmount = _this
                           .calculateMoney(_this.exchangeDtoList.data, 2)
@@ -2862,70 +2990,83 @@ export default {
                 columns: ['ECODE'],
                 AuotData: [], // 匹配的选项
                 dimChange: (val) => {
-                  // 模糊查询的方法
-                  const _this = this;
-                  _this.jordanTableConfig2.businessFormConfig.formValue.gbCode = val.trim();
-                  const fromdata = new FormData();
-                  const params = {
-                    GLOBAL: val.trim(),
-                    PAGENUM: 1,
-                    PAGESIZE: 10,
-                    CONDITION: {},
-                    TABLENAME: 'PS_C_PRO',
-                  };
-                  fromdata.append('param', JSON.stringify(params));
-                  _this.service.common.screenresult(fromdata).then((res) => {
-                    if (res.data.code === 0) {
-                      const dimList =
-                        _this.jordanTableConfig2.businessFormConfig.formData;
+                  if (this.shopId) {
+                    // 模糊查询的方法
+                    const _this = this;
+                    _this.jordanTableConfig2.businessFormConfig.formValue.gbCode = val.trim();
+                    const fromdata = new FormData();
+                    const params = {
+                      GLOBAL: val.trim(),
+                      PAGENUM: 1,
+                      PAGESIZE: 10,
+                      CONDITION: {},
+                      TABLENAME: 'PS_C_PRO',
+                    };
+                    fromdata.append('param', JSON.stringify(params));
+                    _this.service.common.screenresult(fromdata).then((res) => {
+                      if (res.data.code === 0) {
+                        const dimList =
+                          _this.jordanTableConfig2.businessFormConfig.formData;
 
-                      dimList.forEach((item) => {
-                        // 商品编码
-                        if (
-                          item.label === $it('table_label.productNo')
-                        ) {
-                          item.AuotData = res.data.data.list;
-                        }
-                      });
-                    }
-                  });
+                        dimList.forEach((item) => {
+                          // 商品编码
+                          if (
+                            item.label === $it('table_label.productNo')
+                          ) {
+                            item.AuotData = res.data.data.list;
+                          }
+                        });
+                      }
+                    });
+                  }
+                  else {
+                    this.$Message.warning('店铺名称不允许为空，请选择下单店铺！');
+                  }
                 },
                 dimEnter: (val) => {
-                  const self = this;
-                  if (!self.information.formData[14].itemdata.pid) {
-                    // 发货店仓，不能为空
-                    self.$Message.warning($it('modalTips.g0'));
-                    return;
+                  if (this.shopId) {
+                    const self = this;
+                    /* if (!self.information.formData[14].itemdata.pid) {
+                      // 发货店仓，不能为空
+                      self.$Message.warning($it('modalTips.g0'));
+                      return;
+                    } */
+                    self.matrixBox.componentData = {
+                      objid: -1,
+                      encode: val,
+                      distribIds: self.information.formData[14].itemdata.pid,
+                      tablename: 'OC_B_RETURN_ORDER',
+                      returnType: '2',
+                    };
+                    self.$children
+                      .find((item) => item.name === 'matrixBox')
+                      .openConfirm();
+                  } else {
+                    this.$Message.warning('店铺名称不允许为空，请选择下单店铺！');
                   }
-                  self.matrixBox.componentData = {
-                    objid: -1,
-                    encode: val,
-                    distribIds: self.information.formData[14].itemdata.pid,
-                    tablename: 'OC_B_RETURN_ORDER',
-                    returnType: '2',
-                  };
-                  self.$children
-                    .find((item) => item.name === 'matrixBox')
-                    .openConfirm();
                 },
                 dimSelect: (val) => {
-                  const self = this;
-                  if (!self.information.formData[14].itemdata.pid) {
-                    // 发货店仓，不能为空
-                    self.$Message.warning($it('modalTips.g0'));
-                    return;
+                  if (this.shopId) {
+                    const self = this;
+                    /* if (!self.information.formData[14].itemdata.pid) {
+                      // 发货店仓，不能为空
+                      self.$Message.warning($it('modalTips.g0'));
+                      return;
+                    } */
+                    self.matrixBox.componentData = {
+                      objid: -1,
+                      encode: val.label,
+                      distribIds: self.information.formData[14].itemdata.pid,
+                      tablename: 'OC_B_RETURN_ORDER',
+                      returnType: '2',
+                    };
+                    self.$children
+                      .find((item) => item.name === 'matrixBox')
+                      .openConfirm();
+                    // document.getElementById("Num").focus();
+                  } else {
+                    this.$Message.warning('店铺名称不允许为空，请选择下单店铺！');
                   }
-                  self.matrixBox.componentData = {
-                    objid: -1,
-                    encode: val.label,
-                    distribIds: self.information.formData[14].itemdata.pid,
-                    tablename: 'OC_B_RETURN_ORDER',
-                    returnType: '2',
-                  };
-                  self.$children
-                    .find((item) => item.name === 'matrixBox')
-                    .openConfirm();
-                  // document.getElementById("Num").focus();
                 },
               },
               {
@@ -2942,17 +3083,25 @@ export default {
                     ''
                   );
                   // 模糊查询的方法
-                  _this.getData(search, 2);
+                  if (this.shopId) {
+                    _this.getData(search, 2, 'Notpass');
+                  } else {
+                    this.$Message.warning('店铺名称不允许为空，请选择下单店铺！');
+                  }
                 },
                 dimEnter: () => {
                   _this.jordanTableConfig2.businessFormConfig.formValue.sku = _this.jordanTableConfig2.businessFormConfig.formValue.sku.replace(
                     /(^\s*)|(\s*$)/g,
                     ''
                   );
-                  _this.entry(
-                    _this.jordanTableConfig2.businessFormConfig.formValue.sku,
-                    2
-                  );
+                  if (this.shopId) {
+                    _this.entry(
+                      _this.jordanTableConfig2.businessFormConfig.formValue.sku,
+                      2
+                    );
+                  } else {
+                    this.$Message.warning('店铺名称不允许为空，请选择下单店铺！');
+                  }
                 },
                 dimSelect: (obj) => {
                   _this.jordanTableConfig2.businessFormConfig.formValue.sku =
@@ -3062,7 +3211,22 @@ export default {
         this.$Message.warning($it('modalTips.o0'));
         return; // 店铺名称不能为空!
       }
-
+      /* if (!_this.information.formValue.CP_C_LOGISTICS_ID) {
+        this.$Message.warning('退回物流公司不能为空');
+        return
+      } */
+      if (!_this.information.formValue.RETURN_REASON) {
+        this.$Message.warning('退款原因不能为空');
+        return
+      }
+      /* if (!_this.information.formValue.LOGISTICS_CODE) {
+        this.$Message.warning('退回物流单号不能为空');
+        return
+      } */
+      if (!_this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID) {
+        this.$Message.warning('入库实体仓库不能为空');
+        return
+      }
       if (_this.information.formValue.BILL_TYPE !== '1') {
         // 换货类型校验
         if (!_this.replacement.formValue.receiver_province_id || !_this.replacement.formValue.receiver_city_id) {
@@ -3380,7 +3544,7 @@ export default {
       return self.service.orderCenter.queryResionByName({ provinceName, cityName, areaName, });
     },
     // 获取list模糊数据
-    getData(search, index) {
+    getData(search, index, type) {
       const self = this;
       const param = {
         isBlur: 'Y',
@@ -3389,6 +3553,9 @@ export default {
           ECODE: search,
         },
       };
+      if (!type) {
+        param.isGift = 'Y';
+      }
       if (search === '') {
         return;
       }
@@ -3408,6 +3575,8 @@ export default {
       if (!search || search === '') return;
       const qty = 1;
       const param = {
+        shopId: this.shopId,
+        isQuery: 'Y',
         isBlur: 'N',
         psCSku: {
           ECODE: search,
@@ -3426,6 +3595,7 @@ export default {
             return;
           }
           const obj = lists.length > 0 ? lists[0] : {};
+          obj.AVAILABLE_QTY = obj.availableQty || 0;
           obj.ID = -1; // 明细id
           obj.QTY_CAN_REFUND = qty; // 退货数量
           obj.QTY_REFUND = qty; // 退货数量
@@ -3449,7 +3619,8 @@ export default {
           obj.amt_refund_single = 0; // 单件退货金额
           obj.PRODUCT_MARK = '正品'; // 商品标记
           obj.AMT_REFUND = 0; // 换货金额
-          await self.reconstructionGetDetail(obj, obj, obj.ECODE);
+          // await self.reconstructionGetDetail(obj, obj, obj.ECODE);
+          await self.reconstructionGetDetail([obj], [obj.PS_C_PRO_ECODE]);
           // await self.reconstructionGetDetail()
           //  obj.ECODE
           // obj.clrList = obj.selected.psCSpec1objList;
@@ -3475,8 +3646,8 @@ export default {
                 // 有 => 单件实际成交价 * 数量
                 // 无 => 吊牌价 * 数量
                 y.AMT_REFUND = $utils.accMul((y.amtRefundSingle || true) ? obj.PRICE : y.amtRefundSingle, obj.QTY_EXCHANGE);
-                y.QTY_EXCHANGE = parseInt(obj.QTY_EXCHANGE);
-                dataList.push(y);
+                // y.QTY_EXCHANGE = parseInt(obj.QTY_EXCHANGE);
+                // dataList.push(y);
               }
             } else {
               // 退货明细中无此商品编码 再验证换货明细中是否存在
@@ -3494,6 +3665,11 @@ export default {
                 obj.AMT_REFUND = $utils.accMul(obj.QTY_EXCHANGE, obj.PRICE); // 换货金额
               }
             }
+            dataList = dataList.map(em => {
+              em.sizeList = this.sizeListArr
+              em.clrList = this.clrListArr
+              return em
+            })
           } else {
             // 判断是否要新增一条明细=
             const data = dataList;
@@ -3789,13 +3965,33 @@ export default {
         return;
       }
       if (listData) { this.onSelectData = listData; }
+      // 解密()
+      let objid = this.onSelectData[0].ID;
+      let searchdata = {
+        ID: objid,
+        isShowPii: true,
+      }
+      let decryptData = {};
+      await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata).then(res => {
+        if (res.data.code === 0) {
+          let resData = res.data.data;
+          this.shopId = resData.CP_C_SHOP_ID;
+          decryptData.RECEIVER_NAME = resData.RECEIVER_NAME; // 收货人姓名
+          decryptData.RECEIVER_MOBILE = resData.RECEIVER_MOBILE; // 收货人手机
+          decryptData.RECEIVER_ADDRESS = resData.RECEIVER_ADDRESS; // 收货人地址
+        }
+      })
       this.information.formData.forEach((list) => {
         // 退回物流公司
         if (list.style === 'popInput' && list.itemdata.name === $it('form_label.returnLogisticsCompany')) {
           list.itemdata.pid = this.onSelectData[0].CP_C_LOGISTICS_ID;
           list.itemdata.valuedata = this.onSelectData[0].CP_C_LOGISTICS_ENAME;
+        } else if (list.style === 'popInput' && list.itemdata.name === '入库实体仓库') {
+          list.itemdata.pid = this.onSelectData[0].CP_C_WAREHOUSE_EXCHANGE_ID;
+          list.itemdata.valuedata = this.onSelectData[0].CP_C_WAREHOUSE_EXCHANGE_NAME;
         }
       });
+      this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = this.onSelectData[0].CP_C_WAREHOUSE_EXCHANGE_ID;
       this.information.formValue.CP_C_LOGISTICS_ID = this.onSelectData[0].CP_C_LOGISTICS_ID;
       this.information.formValue.CP_C_LOGISTICS_ENAME = this.onSelectData[0].CP_C_LOGISTICS_ENAME;
       this.information.formValue.SELLER_MEMO = this.onSelectData[0].SELLER_MEMO;
@@ -3820,9 +4016,9 @@ export default {
       this.information.formValue.ORIG_SOURCE_CODE = this.onSelectData[0].SOURCE_CODE;
       this.information.formValue.CP_C_SHOP_TITLE = this.onSelectData[0].CP_C_SHOP_TITLE;
       this.information.formValue.CP_C_SHOP_ID = this.onSelectData[0].CP_C_SHOP_ID;
-      this.replacement.formValue.RECEIVE_ADDRESS = this.onSelectData[0].RECEIVER_ADDRESS; // 收货人地址
-      this.replacement.formValue.RECEIVE_NAME = this.onSelectData[0].RECEIVER_NAME; // 收货人姓名
-      this.replacement.formValue.RECEIVE_MOBILE = this.onSelectData[0].RECEIVER_MOBILE; // 收货人电话
+      this.replacement.formValue.RECEIVE_ADDRESS = decryptData.RECEIVER_ADDRESS || this.onSelectData[0].RECEIVER_ADDRESS; // 收货人地址
+      this.replacement.formValue.RECEIVE_NAME = decryptData.RECEIVER_NAME || this.onSelectData[0].RECEIVER_NAME; // 收货人姓名
+      this.replacement.formValue.RECEIVE_MOBILE = decryptData.RECEIVER_MOBILE || this.onSelectData[0].RECEIVER_MOBILE; // 收货人电话
       this.settlementAmount = this.onSelectData[0].CONSIGN_AMT; // 代销结算金额
       replace.PLATFORM = this.onSelectData[0].PLATFORM; // 平台
       replace.orde_source = this.onSelectData[0].ORDER_SOURCE; // 订单来源
@@ -3870,7 +4066,7 @@ export default {
           queryListItem.QTY_EXCHANGE = selection.qty;
           queryListItem.SEX_NAME = selection.sexName;
           queryListItem.SEX = selection.sex;
-          queryListItem.PRICE = selection.price;
+          queryListItem.PRICE = selection.priceList; // 吊牌价
           queryListItem.SKU_SPEC = selection.skuSpec; // 原单带出的规格
           queryListItem.AMT_REFUND = $utils.accMul(selection.qty, selection.amtRefundSingle).toFixed(2); // 退货金额realAmt
           // queryList[i].AMT_REFUND = queryList[i].realAmt ? $utils.accMul(queryList[i].amtRefundSingle, queryList[i].qty) : $utils.accMul(queryList[i].price, queryList[i].qty); // 退货金额
@@ -3947,6 +4143,10 @@ export default {
         _this.returnTotal();
         _this.jordanTableConfig.businessFormConfig.formValue.gbCode = '';
       } else {
+        val.forEach(em => {
+          em.clrList = _this.clrListArr;
+          em.sizeList = _this.sizeListArr;
+        })
         if (_this.jordanTableConfig2.data.length) {
           val.forEach((item) => {
             const d = _this.jordanTableConfig2.data.find((list) => list.PS_C_SKU_ECODE === item.PS_C_SKU_ECODE);
@@ -4040,7 +4240,7 @@ export default {
     selectSelectt() {
       if (this.information.formValue.BILL_TYPE === '2') {
         this.labelList[1].isShow = true;
-        this.openDefault = ['1', '2', '3', '4'];
+        this.openDefault = ['1'];
         this.replacement.ruleValidate = {
           RECEIVE_NAME: [{ required: true, message: ' ', trigger: 'blur' }],
           RECEIVE_MOBILE: [{ required: true, message: ' ', trigger: 'blur' }],
@@ -4068,7 +4268,7 @@ export default {
       } else {
         this.labelList[1].isShow = false;
         this.DefaultValue = '1';
-        this.openDefault = ['1', '3', '4'];
+        this.openDefault = ['1'];
         this.labelClick({}, 0);
         this.exchangeDtoList.data = [];
         this.replacement.ruleValidate = {
@@ -4124,32 +4324,77 @@ export default {
       this.enterQuerySave(selection, '1');
     },
 
-    async reconstructionGetDetail(item, returnItem, ecode = '') {
+    /* async reconstructionGetDetail(item, returnItem, ecode = '') {
       // 重构明细拉取请求, 由于项目时间比较紧, 目前只修改了部分接口, 老接口结构保持不变;
       if (ecode != '') {
         await this.getDataByProinfo(ecode, 1);
       }
-
       returnItem.clrList = ecode != '' ? this.clrListArr : item.selected.psCSpec1objList;
       returnItem.sizeList = ecode != '' ? this.sizeListArr : item.selected.psCSpec2objList;
       // return returnItem;
+    }, */
+    async reconstructionGetDetail(list, ecodeList) {
+      if (ecodeList) {
+        await this.getDataByProinfo(ecodeList, 1);
+        if (Array.isArray(list)) {
+          if (this.labelDefaultValue === 1) { //退货明细
+            list.forEach(item => {
+              const name = item.PS_C_PRO_ECODE || item.ECODE || item.ecode;
+              item.clrList = this.detailSelectOptions[name].psCSpec1objList;
+              item.sizeList = this.detailSelectOptions[name].psCSpec2objList;
+            });
+          }
+        } else {
+          // 退换货明细同时调用
+          for (let key in list) {
+            const listItem = list[key];
+            listItem.forEach(item => {
+              const name = item.PS_C_PRO_ECODE || item.ECODE;
+              item.clrList = this.detailSelectOptions[name].psCSpec1objList;
+              item.sizeList = this.detailSelectOptions[name].psCSpec2objList;
+            });
+          }
+        }
+      } else {
+        list.forEach(item => {
+          item.clrList = item.selected.psCSpec1objList;
+          item.sizeList = item.selected.psCSpec2objList;
+        });
+      }
     },
     async getDataByProinfo(proEcode, dataType, sizeId, clrId) {
       const _this = this;
-      let param = { proEcode, };
+      let param = {
+        proCodeList: proEcode
+      };
       if (sizeId && clrId) {
         param = { proEcode, clrId, sizeId, };
       }
+      let url = (sizeId && clrId) ? '/p/cs/extInfoQuery' : '/p/cs/queryColorAndSize'
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      await this.service.common.extInfoQuery(formdata).then((res) => {
+      await this.$network.post(url, formdata).then(res => {
+        let resData = res.data.data;
         if (dataType === 1) {
-          _this.clrListArr = res.data.data.psCSpec1objList;
-          _this.sizeListArr = res.data.data.psCSpec2objList;
+          if (this.labelDefaultValue === 1) {
+            this.detailSelectOptions = resData;
+          } else {
+            // if(this.ECODE !== ''){
+            //   _this.clrListArr = res.data.data[this.ECODE].psCSpec1objList;
+            //   _this.sizeListArr = res.data.data[this.ECODE].psCSpec2objList;
+            // }else{
+            _this.clrListArr = res.data.data[proEcode].psCSpec1objList;
+            _this.sizeListArr = res.data.data[proEcode].psCSpec2objList;
+            // }
+          }
+        } else if (res.data.code === 0) {
+          _this.itemSkuEcode = res.data.data.ecode;
+          _this.itemSkuId = res.data.data.skuId;
+          _this.itemGbcode = res.data.data.gbcode;
         } else {
-          _this.itemSkuEcode = (res.data.code === 0) ? res.data.data.ecode : '';
-          _this.itemSkuId = (res.data.code === 0) ? res.data.data.skuId : '';
-          _this.itemGbcode = (res.data.code === 0) ? res.data.data.gbcode : '';
+          _this.itemSkuEcode = '';
+          _this.itemSkuId = '';
+          _this.itemGbcode = '';
         }
       });
     },
