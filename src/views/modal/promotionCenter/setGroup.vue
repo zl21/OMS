@@ -17,12 +17,12 @@
           v-model="itemdata.radio"
           label="1"
         >
-          {{ vmI18n.t('btn.set_groups') }}
+          {{ $it('btn.set_groups') }}
         </el-radio>
         <!-- <input class="groupInput" type="text" v-model="itemdata.setGroupName" >-->
         <div class="setGroupName">
           <!-- 分组名称： -->
-          <i class="labelTitle">{{ vmI18n.t('table_label.groupName') }}：</i><el-input
+          <i class="labelTitle">{{ $it('table_label.groupName') }}：</i><el-input
             v-model="itemdata.setGroupName"
             class="groupInput"
           />
@@ -33,7 +33,7 @@
           class="lastRadio"
           label="2"
         >
-          {{ vmI18n.t('btn.cancel_groups') }}
+          {{ $it('btn.cancel_groups') }}
         </el-radio>
       </div>
       <div class="table">
@@ -84,7 +84,7 @@
                 size="small"
                 @click="del(scope)"
               >
-                {{ vmI18n.t('btn.delete') }}
+                {{ $it('btn.delete') }}
               </el-button>
             </template>
           </el-table-column>

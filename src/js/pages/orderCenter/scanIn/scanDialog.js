@@ -37,7 +37,6 @@ export default {
   },
   data() {
     return {
-      vmI18n:$i18n,
       dilogList: [], // 存储选中的所有明细值
       // 按钮
       btnConfig: {

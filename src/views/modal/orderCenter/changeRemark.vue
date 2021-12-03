@@ -18,7 +18,7 @@
       :model="formItem"
     >
       <!-- <FormItem label="旗帜:"> -->
-      <FormItem :label="vmI18n.t('table_label.flag')">
+      <FormItem :label="$it('table_label.flag')">
         <RadioGroup
           v-model="formItem.flag"
           @on-change="radioChange"
@@ -38,12 +38,12 @@
       <!-- <FormItem label="当前备注:" v-if="componentData.SELLER_MEMO"> -->
       <FormItem
         v-if="componentData.SELLER_MEMO"
-        :label="vmI18n.t('form_label.current_remarks')"
+        :label="$it('form_label.current_remarks')"
       >
         <p>{{ componentData.SELLER_MEMO }}</p>
       </FormItem>
       <!-- <FormItem label="修改备注:"> -->
-      <FormItem :label="vmI18n.t('form_label.modify_remarks')">
+      <FormItem :label="$it('form_label.modify_remarks')">
         <Input
           v-model="formItem.textarea"
           :autosize="{ minRows: 2, maxRows: 5 }"
@@ -59,13 +59,13 @@
           <!-- <Radio label="true">覆盖原备注</Radio> -->
           <Radio :label='1'>
             {{
-              vmI18n.t("other.override_original_remarks")
+              $it("other.override_original_remarks")
             }}
           </Radio>
           <!-- <Radio label="false">追加到原备注</Radio> -->
           <Radio :label='0'>
             {{
-              vmI18n.t("other.addTo_original_remarks")
+              $it("other.addTo_original_remarks")
             }}
           </Radio>
         </RadioGroup>
@@ -86,7 +86,7 @@
       @on-cancel="cancel"
     >
       <!-- <p>是否确认修改备注！</p> -->
-      <p>{{ vmI18n.t("modalTips.zh") }}</p>
+      <p>{{ $it("modalTips.zh") }}</p>
     </Modal>
   </div>
 </template>

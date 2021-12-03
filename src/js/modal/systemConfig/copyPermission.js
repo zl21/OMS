@@ -4,7 +4,6 @@ export default {
   name: 'CopyPermission',
   data() {
     return {
-      vmI18n:$i18n,
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId != 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
       loading: false,
       filterDisabled: true,//控制目标角色是否禁用

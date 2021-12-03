@@ -7,7 +7,7 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- SKU基本信息 -->
-          {{vmI18n.t('panel_label.at')}}
+          {{$it('panel_label.at')}}
           <div slot="content" class="customized_Info_img">
             <arkImageUpload
               v-model="imageValue"
@@ -95,21 +95,21 @@
         </Panel>
         <Panel name="panel_wuli">
           <!-- 物理属性 -->
-          {{vmI18n.t('panel_label.aw')}}
+          {{$it('panel_label.aw')}}
           <div slot="content">
             <OmsForm :form-config="formConfigWuLi" @keyDown="keyDown" :key="formConfigWuLi.key"/>
           </div>
         </Panel>
         <Panel name="panel_fixAttr">
           <!-- 固定属性 -->
-          {{vmI18n.t('panel_label.b4')}}
+          {{$it('panel_label.b4')}}
           <div slot="content">
             <OmsForm :form-config="fixAttrFormConfig" @keyDown="keyDown" />
           </div>
         </Panel>
         <Panel name="panel_cusAttr">
           <!-- 自定义属性 -->
-          {{vmI18n.t('panel_label.b5')}}
+          {{$it('panel_label.b5')}}
           <div slot="content">
             <OmsForm :form-config="cusAttrFormConfig" @keyDown="keyDown" />
           </div>

@@ -206,7 +206,7 @@ export default {
                                 type: 'C',
                                 customizedModuleName: 'orderManageDetail',
                                 customizedModuleId: res.data.data,
-                                label: window.vmI18n.t('panel_label.retailInvoice_details')
+                                label: window.$it('panel_label.retailInvoice_details')
                               });
                             } else {
                               self.$Message.warning(res.data.message);

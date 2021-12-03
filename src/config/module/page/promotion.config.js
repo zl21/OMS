@@ -11,7 +11,6 @@
  * 营销中心
  *  */
 // ----------仓间调拨明细tab
-import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   PROMACTIQUERYLIST: {
     component: () => import(
@@ -19,7 +18,7 @@ export default {
       'allpages/promotionCenter/onlinePromotion/promotionlist.vue'
     ),
     // labelName: '促销活动',
-    labelName: i18n.t('menu.ad'),
+    labelName: $it('menu.ad'),
   },
   PM_C_PROM_ACTI: {
     component: () => import(

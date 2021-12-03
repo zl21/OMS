@@ -4,14 +4,14 @@
     <div class="title">
       <i class="iconfont icon-liuchengtiaojian" />
       <!-- <span>条件信息设置</span>  -->
-      <span>{{ vmI18n.t("other.info_set") }}</span>
+      <span>{{ $it("other.info_set") }}</span>
     </div>
     <div class="formList">
       <div v-if="!onlyShowRules">
         <!--商品参与方式-->
         <div class="row">
           <div class="form_label">
-            <i class="red">*</i> {{ vmI18n.t("form_label.goods_participation_mode") }}：
+            <i class="red">*</i> {{ $it("form_label.goods_participation_mode") }}：
           </div>
           <div class="form_content">
             <SingleBox
@@ -24,7 +24,7 @@
         <!--商品来源-->
         <div class="row">
           <div class="form_label">
-            <i class="red">*</i> {{ vmI18n.t("form_label.goods_source") }}：
+            <i class="red">*</i> {{ $it("form_label.goods_source") }}：
           </div>
           <div class="form_content">
             <SingleBox
@@ -37,7 +37,7 @@
         <!--选择商品方式-->
         <div class="row">
           <div class="form_label">
-            <i class="red">*</i> {{ vmI18n.t("form_label.choose_product_ways") }}：
+            <i class="red">*</i> {{ $it("form_label.choose_product_ways") }}：
           </div>
           <div class="form_content">
             <SingleBox
@@ -53,7 +53,7 @@
           class="row"
         >
           <div class="form_label">
-            <i class="red">*</i> {{ vmI18n.t("other.product_list") }}：
+            <i class="red">*</i> {{ $it("other.product_list") }}：
           </div>
           <div class="form_content">
             <detailtabs
@@ -86,7 +86,7 @@
           class="row"
         >
           <div class="form_label">
-            {{ vmI18n.t("other.product_list") }}：
+            {{ $it("other.product_list") }}：
           </div>
           <div class="form_content">
             <detailtable
@@ -115,14 +115,14 @@
                   class="white"
                   @click="addRowData"
                 >
-                  {{ vmI18n.t("btn.add") }}
+                  {{ $it("btn.add") }}
                 </button>
                 <!-- 导入 -->
                 <button
                   class="white"
                   @click="importData"
                 >
-                  {{ vmI18n.t("btn.import") }}
+                  {{ $it("btn.import") }}
                 </button>
               </div>
             </detailtable>
@@ -135,7 +135,7 @@
         class="row"
       >
         <div class="form_label">
-          <i class="red">*</i> {{ vmI18n.t("form_label.meet_conditions") }}：
+          <i class="red">*</i> {{ $it("form_label.meet_conditions") }}：
         </div>
         <div class="form_content">
           <meetConditions

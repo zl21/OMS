@@ -1,12 +1,12 @@
 /* eslint-disable */
 const path = require('path');
-// const { VueLoaderPlugin } = require('vue-loader');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
+// const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const { ESBuildPlugin, ESBuildMinifyPlugin } = require('esbuild-loader')
 
 const burgeonPlugins = [
   new webpack.DefinePlugin({
@@ -17,16 +17,17 @@ const burgeonPlugins = [
     filename: 'BurgeonMaterials.min.css',
     chunkFilename: 'MaterialsCenter/css/[name].min.css',
   }),
+  new ESBuildPlugin(),
   new VueLoaderPlugin(),
   new copyWebpackPlugin({
     patterns: [
       {
         from: path.resolve(__dirname, "./src/assets/css"),
-        to: path.resolve(__dirname, "./burgeon.publish/static/css"),
+        to: path.resolve(__dirname, './burgeon.publish/static/css'),
       },
       {
         from: path.resolve(__dirname, "./src/assets/img"),
-        to: path.resolve(__dirname, "./burgeon.publish/static/img"),
+        to: path.resolve(__dirname, './burgeon.publish/static/img'),
       },
     ],
   })
@@ -81,9 +82,13 @@ module.exports = () => ({
     },
     {
       test: /\.m?js$/,
-      use: {
-        loader: 'babel-loader'
-      },
+      // use: {
+      //   loader: 'babel-loader'
+      // },
+      loader: 'esbuild-loader',
+      options: {
+        target: 'es2018'
+      }
     },
     {
       test: /\.css$/,
@@ -146,7 +151,6 @@ module.exports = () => ({
     alias: {
       allpages: path.resolve(__dirname, './src/views/pages'),
       burgeonConfig: path.resolve(__dirname, './src/config'),
-      // burgeonComponents: path.resolve(__dirname, 'node_modules/@burgeon/business-components'),
       framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
       '@': path.resolve(__dirname, './src'),
@@ -154,8 +158,10 @@ module.exports = () => ({
     }
   },
   optimization: {
-    minimizer: [new TerserJSPlugin({
-      parallel: true,
-    }), new CssMinimizerPlugin()],
+
+    minimizer: [new ESBuildMinifyPlugin({
+      target: 'es2018',
+      css: true  // Syntax to compile to (see options below for possible values)
+    })],
   },
 });

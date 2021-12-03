@@ -13,7 +13,7 @@ export default {
       type: Array,
       default: () => [
         {
-          name: window.vmI18n.t('table_label.quantities'),
+          name: window.$it('table_label.quantities'),
           colname: 'QTY',
           defnum: 1
         }
@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       ID: this.$route.params.customizedModuleId && this.$route.params.customizedModuleId !== 'New' ? this.$route.params.customizedModuleId : '-1', // 记录主界面传入的ID
-      vmI18n: window.vmI18n,
       stopsave: false,
       refresh: Boolean, // 刷新
       save: Boolean, // 保存
@@ -65,11 +64,11 @@ export default {
       updateTypeArr: [
         {
           key: 0,
-          showName: window.vmI18n.t('table_label.discount') // 折扣
+          showName: window.$it('table_label.discount') // 折扣
         },
         {
           key: 1,
-          showName: window.vmI18n.t('form_label.price') // '价格'
+          showName: window.$it('form_label.price') // '价格'
         }
       ],
       loading: false, // 加载动态
@@ -85,12 +84,12 @@ export default {
       isDetailMatrix: true,
       tipsDialog: {
         show: false, // 控制警告弹框显示
-        title: window.vmI18n.t('modalTitle.warning'), // '警告', // 弹框标题
+        title: window.$it('modalTitle.warning'), // '警告', // 弹框标题
         type: 'warning', // 类型警告
         backBtn: true, // 是否显示返回按钮
         errorList: [
           {
-            message: window.vmI18n.t('modalTips.a0') // '是否保存已经修改的数据?'
+            message: window.$it('modalTips.a0') // '是否保存已经修改的数据?'
           }
         ] // 提示内容
       }, // 警告弹出框信息
@@ -494,7 +493,7 @@ export default {
       });
       if (arr.length === 0) {
         return this.$message({
-          message: window.vmI18n.t('modalTips.ct'), // '请选择要删除的明细',
+          message: window.$it('modalTips.ct'), // '请选择要删除的明细',
           type: 'warning'
         });
       }
@@ -516,7 +515,7 @@ export default {
         if (data.code === 0) {
           this.activeSub = false; // 改变高亮行
           this.$message({
-            message: window.vmI18n.t('modalTips.cz'), // '删除明细成功',
+            message: window.$it('modalTips.cz'), // '删除明细成功',
             type: 'success'
           });
           this.getData();
@@ -601,7 +600,7 @@ export default {
             this.discountLoading = false;
             this.updateSalePriceFlag = false;
             this.$message({
-              message: window.vmI18n.t('modalTips.da'), // '修改折扣成功',
+              message: window.$it('modalTips.da'), // '修改折扣成功',
               type: 'success'
             });
             this.discountLoading = false;
@@ -619,10 +618,10 @@ export default {
       let warnMsg = '';
       if (this.updateSalePriceModal.UPDATE_TYPE === 0) {
         if (!this.updateSalePriceModal.SALE_DISCOUNT) {
-          warnMsg = window.vmI18n.t('modalTips.db'); // '请维护折扣！';
+          warnMsg = window.$it('modalTips.db'); // '请维护折扣！';
         }
       } else if (!this.updateSalePriceModal.SALE_PRICE) {
-        warnMsg = window.vmI18n.t('modalTips.dc'); // '请维护价格！';
+        warnMsg = window.$it('modalTips.dc'); // '请维护价格！';
       }
       return warnMsg;
     },
@@ -744,7 +743,7 @@ export default {
                 {},
                 obj,
                 {
-                  label: (this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS') && obj.colname === 'QTY_BILL' ? window.vmI18n.t('table_label.quantities') : obj.name, // 名字
+                  label: (this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS') && obj.colname === 'QTY_BILL' ? window.$it('table_label.quantities') : obj.name, // 名字
                   name: obj.colname, // 字段
                   order: obj.isorder // 是否有排序
                 },

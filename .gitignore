@@ -1,4 +1,5 @@
 node_modules
-Burgeon.publish
+burgeon.publish
 package-lock.json
 directoryList.md
+yarn.lock

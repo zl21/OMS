@@ -54,13 +54,13 @@
     <!-- 导出 -->
     <Modal
       v-model="warningModal"
-      :title="vmI18n.t('modalTitle.warning')"
+      :title="$it('modalTitle.warning')"
       width="420"
       :mask="true"
       @on-ok="warningOk"
     >
       <!-- <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p> -->
-      <p>{{ vmI18n.t("modalTips.z0") }}</p>
+      <p>{{ $it("modalTips.z0") }}</p>
     </Modal>
     <!-- 确认责任方 dialog -->
     <OmsDialog

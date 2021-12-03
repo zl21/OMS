@@ -1,71 +1,66 @@
 <template>
-  <div v-loading="loading" class="customized-list">
-    <div class="customized-list-form"  :class="[Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '',tablename == 'OC_B_ORDER' && !isFolding ? 'returnChangeOrder' :'']">
-      <!-- form组件 -->
-      <OmsForm v-if="buttonInit" :form-config="formConfig" />
-      <div :class="[!isFolding ? 'dynamicSearch-content' : 'form-search']" ref="searchWarp">
-        <dynamicSearch
-          v-if="!isFolding && tablename == 'OC_B_ORDER'"
-          ref="dynamicSearch"
-          :dynamic-data="dynamicData"
-          @toggleDom="toggleDom"
-        />
-        <div v-if="tablename !== 'OC_B_ORDER'"></div>
-        <OmsButton class="searchBtn" :btn-config="searchBtn" />
-      </div>
-    </div>
-    <div class="custom-btn customized-list-btn">
+  <div v-loading="pageLoad" class="orderManager-box customized-list">
+    <div class="btn totalHeight">
       <OmsButton
         :btn-config="btnConfig"
-        @dropDownClick="val => eventGather.dropDownClickChange(val, extendBtn)"
+        @dropDownClick="
+          (val) => eventGather.dropDownClickChange(val, extendBtn)
+        "
       />
     </div>
-    <div class="customized-list-table">
-      <Tabs
-        :draggable="true"
-        type="card"
-        :value="labelValue"
-        @on-drag-drop="handleDragDrop"
-        @on-click="labelClick"
+    <div class="from totalHeight fromHeight">
+      <div v-show="isShowFromLoading" class="from_loading">
+        <!-- <loading :loading="agTableConfig.agLoading" /> -->
+      </div>
+      <!-- <IntegrateSearchFilter
+        v-show="isShowSeniorOrOrdinary"
+        id="IntegrateSearchFilter"
+        ref="integrateSearchFilter"
+        v-model="selectValue"
+        :drop-down-list="dropList"
+        :search-method="searchMethod"
+        :tag-list="tagList"
+        class="IntegrateSearchFilter"
+        @on-clear-all="clearAll"
+        @on-clear-item="clearItem"
+        @on-search="search"
+        @on-drop-change="onDropChange"
+      /> -->
+      <!-- trigger="click" -->
+      <OmsForm :form-config="formConfig" style="margin-top: 10px" />
+      <OmsButton :btn-config="btnsSearch" />
+      <div class="from-folding" @click="shutDownOrbounceOff">
+        <i :class="iconDownIcon" />
+      </div>
+    </div>
+    <div class="table">
+      <OmsLabel
+        :label-default-value="labelDefaultValue"
+        :label-list="labelList"
+        class="businessLabel totalHeight"
+        @labelClick="labelClick"
+      />
+      <div
+        class="aTable"
+        v-loading="agTableConfig.agLoading"
+        :class="{ loadingActive: isActive }"
       >
-        <TabPane
-          v-for="(item, index) in tabList"
-          :key="index"
-          :animated="false"
-          :label="item.label"
-          :name="item.value"
+        <OmsAgTable
+          ref="agGridChild"
+          :options="options"
+          :ag-table-config="agTableConfig"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+          @on-row-dblclick="onRowDblclick"
+          @on-sort-changed="onSortChanged"
+          @on-selection-change="onSelectionChange"
+          @on-column-pinned="colPinned"
+          @on-column-moved="colMoved"
         />
-      </Tabs>
-      <OmsAgTable
-        v-loading="agLoaing"
-        :ag-table-config="agTableConfig"
-        :options="options"
-        @on-row-dblclick="onRowDblclick"
-        @on-page-change="pageChange"
-        @on-page-size-change="pageSizeChange"
-        @on-selection-change="onSelectionChange"
-        @on-column-pinned="colPinned"
-        @on-column-moved="colMoved"
-        @on-sort-change="colSortChange"
-      />
+      </div>
     </div>
-    <Modal
-      v-model="modal"
-      class="ark-dialog"
-      title="自定义设置"
-      footer-hide
-      draggable
-      :closable="true"
-      :mask="true"
-    >
-      <p>
-        <formSetting
-          ref="formSetting"
-          :modal.sync="modal"
-          @success="initList(isFolding)"
-        />
-      </p>
-    </Modal>
+    <dir />
+    <!-- 公共弹框 -->
     <OmsDialog
       :batch-closed="publicBouncedConfig.batchClosed"
       :closable="publicBouncedConfig.closable"
@@ -78,11 +73,28 @@
       :name="publicBouncedConfig.name"
       :quit="publicBouncedConfig.quit"
       :scrollable="publicBouncedConfig.scrollable"
-      :title="publicBouncedConfig.confirmTitle || publicBouncedConfig.title"
+      :title="publicBouncedConfig.confirmTitle"
       :title-align="publicBouncedConfig.titleAlign"
       :transfer="publicBouncedConfig.transfer"
       :url="publicBouncedConfig.url"
       :width="publicBouncedConfig.width"
+    />
+    <!-- 修改内部备注-->
+    <OmsDialog
+      :title="changeInternalRemarksConfig.confirmTitle"
+      :title-align="changeInternalRemarksConfig.titleAlign"
+      :width="changeInternalRemarksConfig.width"
+      :scrollable="changeInternalRemarksConfig.scrollable"
+      :closable="changeInternalRemarksConfig.closable"
+      :draggable="changeInternalRemarksConfig.draggable"
+      :mask="changeInternalRemarksConfig.mask"
+      :mask-closable="changeInternalRemarksConfig.maskClosable"
+      :transfer="changeInternalRemarksConfig.transfer"
+      :name="changeInternalRemarksConfig.name"
+      :url="changeInternalRemarksConfig.url"
+      :keep-alive="changeInternalRemarksConfig.keepAlive"
+      :exclude-string="changeInternalRemarksConfig.excludeString"
+      :component-data="changeInternalRemarksConfig.componentData"
     />
     <!-- 导入 -->
     <OmsDialog
@@ -100,22 +112,60 @@
       :transfer="importTable.transfer"
       :url="importTable.url"
       :width="importTable.width"
-      :base-path-name="importTable.basePathName"
     />
+    <!-- 导出 -->
     <Modal
-      v-model="proDetailConfig.modal_proDetail"
-      class-name="ark-dialog"
-      :title="proDetailConfig.title"
-      :width="800"
-      mask
+      v-model="warningModal"
+      :mask="true"
+      :title="$it('common.warning')"
+      width="420"
+      @on-ok="warningOk"
     >
-      <proDetail :title="proDetailConfig.title" :itemid="proDetailConfig.ID" />
+      <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
+      <p>{{ $it("modalTips.e3") }}</p>
+    </Modal>
+    <Modal
+      v-model="distributeLogisticsModal"
+      :mask="true"
+      :title="$it('common.warning')"
+      width="420"
+      @on-ok="distributeLogistics"
+    >
+      <!-- 将对查询出的订单数据重新分配快递，是否继续? -->
+      <p>{{ $it("modalTips.e4") }}</p>
+    </Modal>
+    <Modal
+      v-model="distributeWarehouseModal"
+      :mask="true"
+      :title="$it('common.warning')"
+      width="420"
+      @on-ok="distributeWarehouse"
+    >
+      <!-- 将对查询出的订单数据重新分配仓库，是否继续? -->
+      <p>{{ $it("modalTips.e5") }}</p>
+    </Modal>
+    <!-- 警告 -->
+    <Modal
+      v-model="batchReturnOrderModal"
+      :mask="true"
+      :title="$it('common.warning')"
+      width="420"
+      class="customizedModal"
+      @on-cancel="onBatchReturnOrderCancel"
+      @on-ok="doBatchReturnOrder"
+    >
+      <!-- 批量生成退换货订单，是否继续? -->
+      <p>{{ $it("modalTips.e6") }}</p>
+      <div class="orderContent">
+        <OmsForm :form-config="batchReturnFormConfig" />
+      </div>
     </Modal>
   </div>
 </template>
 
 <script>
-import orderManager from "@/js/pages/orderCenter/orderManager/orderManager";
+import orderManager from '@/js/pages/orderCenter/orderManager/orderManager';
+
 export default orderManager;
 </script>
 

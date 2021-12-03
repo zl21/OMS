@@ -3,15 +3,15 @@
     <OmsForm :form-config="downLoadFormConfig" />
     <div class="timeBox">
       <!-- 修改时间 -->
-      <label>{{ vmI18n.t('table_label.modificationTime') }}:</label>
+      <label>{{ $it('table_label.modificationTime') }}:</label>
       <el-date-picker
         v-model="timeConfig.data"
         :default-time="timeConfig.config.defaultTime"
-        :end-placeholder="vmI18n.t('common.endDate')"
+        :end-placeholder="$it('common.endDate')"
         :format="timeConfig.config.format"
         :picker-options="timeConfig.config.pickerOptions"
-        :range-separator="vmI18n.t('common.to')"
-        :start-placeholder="vmI18n.t('common.startDate')"
+        :range-separator="$it('common.to')"
+        :start-placeholder="$it('common.startDate')"
         :unlink-panels="true"
         :value-format="timeConfig.config.valueFormat"
         class="timeBox-input"

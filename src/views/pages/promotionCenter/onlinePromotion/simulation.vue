@@ -9,7 +9,7 @@
         <div class="header_title">
           <span class="header_name">
             <!-- 模拟订单设置 -->
-            {{ vmI18n.t("other.simulation_order_setup") }}
+            {{ $it("other.simulation_order_setup") }}
           </span>
         </div>
         <div class="formList">
@@ -24,7 +24,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 时间类型 -->
-              <i class="red">*</i> {{ vmI18n.t("form_label.timeType") }}：
+              <i class="red">*</i> {{ $it("form_label.timeType") }}：
             </div>
             <div class="form_content">
               <SingleBox
@@ -34,7 +34,7 @@
               />
               <div class="form_item">
                 <!-- 时间范围 -->
-                <i class="red">*</i> {{ vmI18n.t("form_label.timeRange") }}：
+                <i class="red">*</i> {{ $it("form_label.timeRange") }}：
                 <DatePicker
                   v-model="basicData.time_limit"
                   format="yyyy/MM/dd HH:mm:ss"
@@ -49,7 +49,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 订单类型 -->
-              <i class="red">*</i> {{ vmI18n.t("form_label.orderType") }}：
+              <i class="red">*</i> {{ $it("form_label.orderType") }}：
             </div>
             <div class="form_content">
               <SingleBox
@@ -62,7 +62,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 平台标记 -->
-              <i class="red" />{{ vmI18n.t("form_label.platform_marking") }}：
+              <i class="red" />{{ $it("form_label.platform_marking") }}：
             </div>
             <div class="form_content">
               <SingleBox
@@ -75,7 +75,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 购买排名 -->
-              <i class="red" />{{ vmI18n.t("form_label.purchase_ranking") }}：
+              <i class="red" />{{ $it("form_label.purchase_ranking") }}：
             </div>
             <div class="form_content">
               <div class="form_el_input">
@@ -95,7 +95,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 卖家备注 -->
-              <i class="red" />{{ vmI18n.t("form_label.sellerNotes") }}：
+              <i class="red" />{{ $it("form_label.sellerNotes") }}：
             </div>
             <div class="form_content">
               <div class="form_el_input">
@@ -109,7 +109,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 买家留言 -->
-              <i class="red" />{{ vmI18n.t("form_label.buyer_message") }}：
+              <i class="red" />{{ $it("form_label.buyer_message") }}：
             </div>
             <div class="form_content">
               <div class="form_el_input">
@@ -132,7 +132,7 @@
         <div class="products_list">
           <div class="header_title">
             <!-- 商品列表 -->
-            <span class="header_name">{{ vmI18n.t("other.product_list") }}</span>
+            <span class="header_name">{{ $it("other.product_list") }}</span>
           </div>
           <!-- <div class="button_list">
                     <button class="btn add" @click="add_prolist">新增</button>
@@ -164,11 +164,11 @@
                 @click="add_prolist"
               >
                 <!-- 新增 -->
-                {{ vmI18n.t("btn.add") }}
+                {{ $it("btn.add") }}
               </button>
               <!-- <button class="btn" @click="importData">
                 
-                {{ vmI18n.t("btn.import") }}
+                {{ $it("btn.import") }}
               </button> -->
             </div>
           </detailtable>
@@ -178,7 +178,7 @@
         <div class="header_title">
           <span class="header_name">
             <!-- 试算执行结果 -->
-            {{ vmI18n.t("other.trialCalculation_results") }}
+            {{ $it("other.trialCalculation_results") }}
           </span>
         </div>
         <div class="table">

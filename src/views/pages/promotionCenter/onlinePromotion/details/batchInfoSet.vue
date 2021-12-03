@@ -4,13 +4,13 @@
     <div class="title">
       <i class="iconfont icon-liuchengtiaojian" />
       <!-- <span>条件信息设置</span>  -->
-      <span>{{ vmI18n.t("other.info_set") }}</span>
+      <span>{{ $it("other.info_set") }}</span>
     </div>
     <div class="formList">
       <!--商品来源-->
       <div class="row">
         <div class="form_label">
-          {{ vmI18n.t("form_label.goods_source") }}：
+          {{ $it("form_label.goods_source") }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -23,7 +23,7 @@
       <!--赠品翻倍-->
       <div class="row">
         <div class="form_label">
-          {{ vmI18n.t("form_label.double_gifts") }}：
+          {{ $it("form_label.double_gifts") }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -33,7 +33,7 @@
           />
           <!--最大翻倍次数 -->
           <div class="form_item">
-            {{ vmI18n.t("form_label.max_doubling_times") }}
+            {{ $it("form_label.max_doubling_times") }}
           </div>
           <div class="form_el_input form_item doubleNum">
             <input
@@ -47,7 +47,7 @@
       <!--选择商品方式 -- 赠送方式：-->
       <div class="row">
         <div class="form_label">
-          {{ vmI18n.t("form_label.giving_ways") }}：
+          {{ $it("form_label.giving_ways") }}：
         </div>
         <div class="form_content">
           <SingleBox

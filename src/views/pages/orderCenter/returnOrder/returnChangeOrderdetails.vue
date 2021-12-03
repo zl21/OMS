@@ -21,7 +21,7 @@
       v-model="tableConfig.modal"
       width="900"
       titleAlign="left"
-      :title="`${vmI18n.t('modalTitle.ac')}（${selectLen}）`"
+      :title="`${$it('modalTitle.ac')}（${selectLen}）`"
       :mask="true"
       footer-hide
       @on-ok="resetReturnMainTable"
@@ -42,7 +42,7 @@
       v-model="replaceProductTable.modal"
       width="900"
       titleAlign="left"
-      :title="vmI18n.t('btn.replaceDetail')"
+      :title="$it('btn.replaceDetail')"
       :mask="true"
       @on-ok="replaceOk"
       footer-hide

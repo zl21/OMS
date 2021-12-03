@@ -32,7 +32,7 @@
       <Collapse v-model="panelDefaultValue1">
         <Panel name="panel_baseInfo1">
           <!-- 满足条件 -->
-          {{ vmI18n.t('form_label.meet_conditions') }}
+          {{ $it('form_label.meet_conditions') }}
           <div slot="content">
             <OmsForm
               :form-config="formConfig"
@@ -57,7 +57,7 @@
 
             <div class="content-li-item">
               <!-- 指定商品 -->
-              <label style="width: 70px">{{ vmI18n.t('btn.designGoods')}}:</label> 
+              <label style="width: 70px">{{ $it('btn.designGoods')}}:</label> 
               <div class="content-li-item-left">
                 <Button type="info" @click="fnseek">添加商品</Button>
                 <div class="content-li-item-left-a">

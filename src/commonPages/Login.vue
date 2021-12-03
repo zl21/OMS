@@ -13,7 +13,7 @@
             v-for="item in langConfig"
             :key="item.type"
             @click.native="toggleLang(item.type)"
-            :disabled="vmI18n.locale == item.type"
+            :disabled="$i18n.locale == item.type"
             >{{ item.text }}</DropdownItem
           >
         </DropdownMenu>
@@ -28,14 +28,14 @@
         <!-- tabs -->
         <div class="loginTabs" v-if="isEnableLoginPro">
           <div class="tab" @click="toggleTab('pwd')">
-            <span>{{ vmI18n.t("other.vCodeLogin") }}</span>
+            <span>{{ $it("other.vCodeLogin") }}</span>
           </div>
           <div class="tab" @click="toggleTab('phone')">
-            <span>{{ vmI18n.t("other.pwdLogin") }}</span>
+            <span>{{ $it("other.pwdLogin") }}</span>
           </div>
         </div>
         <!-- 欢迎登录 -->
-        <div class="title" v-else>{{ vmI18n.t("welcome") }}</div>
+        <div class="title" v-else>{{ $it("welcome") }}</div>
         <!-- 表单 -->
         <R3Login :loginSucCbk="loginSucCbk" />
         <!-- bg -->
@@ -50,8 +50,7 @@
 <script>
 import R3 from "@syman/burgeon-r3";
 import service from '@/service/index';
-import i18n from "@burgeon/internationalization/i18n"; // 国际化
-window.$i18n = i18n;
+
 const langConfig = [
   {
     type: "zh",
@@ -73,7 +72,6 @@ export default {
   },
   data() {
     return {
-      vmI18n: i18n,
       langConfig,
       curLang: "", // 当前语言
       isEnableLoginPro: false, // 是否开启手机验证码登录
@@ -82,7 +80,7 @@ export default {
   created() {
     const _this = this;
     const browseLan = localStorage.getItem("locale") || "zh";
-    _this.vmI18n.locale = browseLan;
+    $i18n.locale = browseLan;
     this.curLang = langConfig.find((it) => it.type == browseLan).text;
     this.isEnableLoginPro = !!window.ProjectConfig.enableLoginPro
   },
@@ -101,31 +99,31 @@ export default {
       let r3ChangeLan = document.querySelectorAll(".loginCore .changeLang");
       r3ChangeLan[0] && (r3ChangeLan[0].style.display = "none");
       code &&
-        code.setAttribute("data-code", this.vmI18n.t("other.verticalCode"));
+        code.setAttribute("data-code", $it("other.verticalCode"));
       if (isPhone) {
         // 验证码登录
         account.setAttribute(
           "data-phone",
-          this.vmI18n.t("other.phoneNumber")
+          $it("other.phoneNumber")
         );
-        inputNodes[0].setAttribute("placeholder", this.vmI18n.t("pHolder.a6")); // 请输入手机号
-        inputNodes[1].setAttribute("placeholder", this.vmI18n.t("pHolder.a8")); // 请输入短信验证码
+        inputNodes[0].setAttribute("placeholder", $it("pHolder.a6")); // 请输入手机号
+        inputNodes[1].setAttribute("placeholder", $it("pHolder.a8")); // 请输入短信验证码
       } else {
         // 密码登录
         let pwd = document.querySelector(".divMima");
-        account.setAttribute("data-account", this.vmI18n.t("other.user"));
-        pwd.setAttribute("data-pwd", this.vmI18n.t("other.pwd"));
-        inputNodes[0].setAttribute("placeholder", this.vmI18n.t("pHolder.a2")); // 请输入用户名
-        inputNodes[1].setAttribute("placeholder", this.vmI18n.t("pHolder.a3")); // 请输入密码
+        account.setAttribute("data-account", $it("other.user"));
+        pwd.setAttribute("data-pwd", $it("other.pwd"));
+        inputNodes[0].setAttribute("placeholder", $it("pHolder.a2")); // 请输入用户名
+        inputNodes[1].setAttribute("placeholder", $it("pHolder.a3")); // 请输入密码
         if (this.isEnableLoginPro) {
           inputNodes[2].setAttribute(
             "placeholder",
-            this.vmI18n.t("pHolder.a7")
+            $it("pHolder.a7")
           ); // 请输入验证码
         }
       }
       let loginBtn = document.getElementById("btn");
-      loginBtn.innerHTML = `${this.vmI18n.t(
+      loginBtn.innerHTML = `${$it(
         "login"
       )} <img src="${require("assetsImg/arrow-right.png")}" />`;
     },
@@ -150,7 +148,7 @@ export default {
     toggleLang(lang) {
       const _this = this;
       let message = ["zh", "en"].includes(lang)
-        ? _this.vmI18n.messages[lang].tip_info
+        ? $i18n.messages[lang].tip_info
         : lang;
       switch (message) {
         case "ja":
@@ -164,7 +162,7 @@ export default {
       }
       localStorage.setItem("locale", lang);
       // _this.vmI18n.locale = localStorage.getItem('locale');
-      _this.vmI18n.locale = lang;
+      $i18n.locale = lang;
       this.curLang = langConfig.find((it) => it.type == lang).text;
       R3.store.commit(`customize/language`, lang || "zh");
       this.initDom();

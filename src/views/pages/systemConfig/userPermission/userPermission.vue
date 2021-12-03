@@ -6,7 +6,7 @@
         <input
           v-model="search"
           type="text"
-          :placeholder="vmI18n.t('pHolder.organizationCode_or_name')"
+          :placeholder="$it('pHolder.organizationCode_or_name')"
           @keyup.enter="searchNode"
         />
         <i class="iconfont icon-sousuo" @click="handleIconClick" />
@@ -25,7 +25,7 @@
         <input
           v-model="middleSearch"
           type="text"
-          :placeholder="vmI18n.t('pHolder.userName')"
+          :placeholder="$it('pHolder.userName')"
           @keyup.enter="searchMiddleData"
         />
         <i class="iconfont icon-sousuo" @click="handleMiddleIconClick" />
@@ -91,7 +91,7 @@
           <table>
             <thead>
               <tr>
-                <td>{{ vmI18n.t("table_label.serialNo") }}</td>
+                <td>{{ $it("table_label.serialNo") }}</td>
                 <td
                   v-for="(list, index) of rightListHead[activeName]"
                   :key="index"
@@ -147,8 +147,8 @@
               </tr>
               <tr>
                 <td colspan="5" style="color: red">
-                  {{ vmI18n.t("table_label.total") }}{{ rightListBody.length
-                  }}{{ vmI18n.t("table_label.rows") }}
+                  {{ $it("table_label.total") }}{{ rightListBody.length
+                  }}{{ $it("table_label.rows") }}
                 </td>
               </tr>
             </tbody>

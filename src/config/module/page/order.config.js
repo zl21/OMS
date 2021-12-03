@@ -6,7 +6,6 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/module/page/order.config.js
  */
-import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   OC_B_ORDER_VIRTUAL_TABLE: {
     component: () => import(
@@ -46,14 +45,14 @@ export default {
       // 'allpages/inventoryCenter/sourcstrategy/sourcstrategy.vue'
     ),
     // component: orderManager,
-    labelName: i18n.t('panel_label.retail_shipping_order')
+    labelName: $it('panel_label.retail_shipping_order')
   },
   OC_B_RETURN_ORDER: {
     component: () => import(
       /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManager/orderManager.vue'
     ),
-    labelName: i18n.t('panel_label.a1')
+    labelName: $it('panel_label.a1')
   },
   // 订单中心-列表-拆分订单
   MANUAL_SPLIT: {
@@ -78,7 +77,7 @@ export default {
       'allpages/orderCenter/returngood/returngoodmanagement.vue'
     ),
     // component: returnGood,
-    labelName: i18n.t('menu.b7'), //退货单详情
+    labelName: $it('menu.b7'), //退货单详情
   },
   // 订单中心-退换货单-列表
   RETURNGOODLIST: {
@@ -110,7 +109,7 @@ export default {
       'allpages/orderCenter/returngood/refundAfterShipment.vue'
     ),
     // component: refundAfterShipment,
-    labelName: i18n.t('menu.aw'), // 已发货退款单编辑
+    labelName: $it('menu.aw'), // 已发货退款单编辑
   },
   EXTRAREFUND: {
     component: () => import(
@@ -118,7 +117,7 @@ export default {
       'allpages/orderCenter/returngood/refundAfterShipment.vue'
     ),
     // component: refundAfterShipment,
-    labelName: i18n.t('menu.ax'), // 额外退款编辑
+    labelName: $it('menu.ax'), // 额外退款编辑
   },
   MANUALMATCHING: {
     // 退货入库-手工匹配
@@ -147,7 +146,7 @@ export default {
       /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/distribution/splitDistributionOrder.vue'
     ),
-    labelName: i18n.t('menu.ay'), // JIT配货单-换吊牌
+    labelName: $it('menu.ay'), // JIT配货单-换吊牌
   },
   //退货入库半定制
   MATCHINGDETAILS: { //_/views/pages/orderCenter/matchingDetails.vue
@@ -162,7 +161,7 @@ export default {
       /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/returnOrder/returnOrderAdd.vue'
     ),
-    labelName: i18n.t('menu.az'), // 退换货新增
+    labelName: $it('menu.az'), // 退换货新增
   },
   // 额外退款单
   E_PRODUCT_DETAILS: {

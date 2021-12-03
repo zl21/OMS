@@ -3,7 +3,6 @@
 export default {
   data() {
     return {
-      vmI18n:$i18n,
       tableItemUrl: '/p/cs/objectTableItem',
       tableConfig: {
         columns: [],

@@ -677,7 +677,6 @@ export default {
           ],
         },
       },
-      vmI18n: window.vmI18n,
     };
   },
   computed: {

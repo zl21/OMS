@@ -18,7 +18,7 @@
         </div>
         <div class="number-box">
           <!-- <label>数量:</label> -->
-          <label>{{ vmI18n.t("table_label.quantities") }}:</label>
+          <label>{{ $it("table_label.quantities") }}:</label>
           <Input
             v-model="qty"
             style="width: 80px"
@@ -31,7 +31,7 @@
             @click="search"
           >
             <!-- 搜索 -->
-            {{ vmI18n.t("btn.search") }}
+            {{ $it("btn.search") }}
           </Button>
         </div>
       </div>

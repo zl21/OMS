@@ -5,7 +5,6 @@ import comMethods from 'burgeonConfig/config/commonUtils.js'
 export default {
   data() {
     return {
-      vmI18n:$i18n,
       modal1: false,
       shopTitle:$it('modalTitle.af'),
       shopModal: true,

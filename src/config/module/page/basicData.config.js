@@ -12,7 +12,6 @@
 // import addAliasOrRegion from 'allpages/basicData/addAliasOrRegion.vue'; // 国家省市区-新增别名/新增区域
 // import nationalProvincialMunicipalEdit from 'allpages/basicData/nationalProvincialMunicipalEdit.vue'; // 国家省市区-详情
 // import channelStore from 'allpages/basicData/channelStore.vue'; // 渠道仓新增
-import i18n from '@burgeon/internationalization/i18n'; // 国际化
 export default {
   /* 2.0: */
   SHOPAUTHORIZE: {
@@ -20,7 +19,7 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/authorize.vue'
     ),
-    labelName: i18n.t('form_label.ap'),//店铺授权
+    labelName: $it('form_label.ap'),//店铺授权
   },
   SHOPAUTHORIZEDETAILS: {
     component: () => import(
@@ -34,7 +33,7 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/logisticsCompanyFilesAddOrEdit.vue'
     ),
-    labelName: i18n.t('menu.a0'), //物流公司档案
+    labelName: $it('menu.a0'), //物流公司档案
   },
   ADDLOGICSTORE: {
     // component: addLogicStore,
@@ -42,7 +41,7 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/addLogicStore.vue'
     ),
-    labelName: i18n.t('menu.a1'), //新增逻辑仓
+    labelName: $it('menu.a1'), //新增逻辑仓
   },
   ADDALIAS: {
     // component: addAliasOrRegion,
@@ -50,7 +49,7 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/addAliasOrRegion.vue'
     ),
-    labelName: i18n.t('menu.a2'), //新增别名
+    labelName: $it('menu.a2'), //新增别名
   },
   ADDREGION: {
     // component: addAliasOrRegion,
@@ -58,7 +57,7 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/addAliasOrRegion.vue'
     ),
-    labelName: i18n.t('menu.a3'), //新增区域
+    labelName: $it('menu.a3'), //新增区域
   },
   CP_C_ORG_CHANNEL: {
     // component: channelStore,
@@ -66,7 +65,7 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/channelStore.vue'
     ),
-    labelName: i18n.t('menu.a4'), //渠道仓档案  元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
+    labelName: $it('menu.a4'), //渠道仓档案  元数据若配置的是'网页链接'则需前端配置labelName，若是动作定义则不用配置
   },
   NATIONALPROVINCIALMUNICIPALEDIT: {
     // component: nationalProvincialMunicipalEdit,
@@ -74,6 +73,6 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/nationalProvincialMunicipalEdit.vue'
     ),
-    labelName: i18n.t('menu.a5'), //国家省市区编辑
+    labelName: $it('menu.a5'), //国家省市区编辑
   },
 }

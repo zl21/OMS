@@ -20,14 +20,14 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
-          {{ vmI18n.t("common.baseInformation") }}
+          {{ $it("common.baseInformation") }}
           <p slot="content">
             <OmsForm :form-config="formConfig" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="panel_commodityDimension">
           <!-- 商品维度 -->
-        {{vmI18n.t('panel_label.b6')}}
+        {{$it('panel_label.b6')}}
           <p slot="content">
             <OmsForm :form-config="formConfig2" @keyDown="keyDown" :key="fresh2"/>
           </p>

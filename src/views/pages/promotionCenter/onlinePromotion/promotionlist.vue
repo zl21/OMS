@@ -40,33 +40,33 @@
       <div class="promactiIcon">
         <div class="legend">
           <!-- 图例 -->
-          <span style="font-weight: bold">{{ vmI18n.t("other.legend") }}:</span>
+          <span style="font-weight: bold">{{ $it("other.legend") }}:</span>
           <p>
             <!-- 提交状态 -->
-            <span>{{ vmI18n.t("other.submission_status") }}:&nbsp;</span>
+            <span>{{ $it("other.submission_status") }}:&nbsp;</span>
             <!-- 已发布 -->
             <button class="color-blue">
-              {{ vmI18n.t("btn.published") }}
+              {{ $it("btn.published") }}
             </button>
           </p>
           <p>
             <!-- 草稿状态 -->
-            <span>{{ vmI18n.t("other.draft_status") }}:&nbsp;</span>
+            <span>{{ $it("other.draft_status") }}:&nbsp;</span>
             <!-- 草稿 -->
             <button class="color-italic-black">
-              {{ vmI18n.t("btn.draft") }}
+              {{ $it("btn.draft") }}
             </button>
           </p>
           <p>
             <!-- 下线/过期状态 -->
-            <span>{{ vmI18n.t("other.offline_expired_status") }}:&nbsp;</span>
+            <span>{{ $it("other.offline_expired_status") }}:&nbsp;</span>
             <!-- 下线 -->
             <button class="color-italic-grey">
-              {{ vmI18n.t("btn.offline") }}
+              {{ $it("btn.offline") }}
             </button>
             <!-- 过期 -->
             <button class="color-italic-grey">
-              {{ vmI18n.t("btn.overdue") }}
+              {{ $it("btn.overdue") }}
             </button>
           </p>
         </div>
@@ -91,7 +91,7 @@
       <Table :columns="logData.columns" :data="logData.data" :height="250" />
       <div slot="footer">
         <Button ghost @click="closeModal">
-          {{ vmI18n.t("common.close") }}
+          {{ $it("common.close") }}
         </Button>
       </div>
     </Modal>

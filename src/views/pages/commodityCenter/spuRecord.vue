@@ -15,7 +15,7 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- SPU基本信息 -->
-          SPU {{ vmI18n.t("common.baseInformation") }}
+          SPU {{ $it("common.baseInformation") }}
           <div slot="content" class="customized_Info_img">
             <arkImageUpload
               v-model="imageValue"
@@ -32,14 +32,14 @@
         </Panel>
         <Panel name="panel_fixAttr">
           <!-- 固定属性 -->
-          {{ vmI18n.t("panel_label.b4") }}
+          {{ $it("panel_label.b4") }}
           <div slot="content">
             <OmsForm :form-config="customAttr.fixFormConfig" />
           </div>
         </Panel>
         <Panel name="panel_cusAttr">
           <!-- 自定义属性 -->
-          {{ vmI18n.t("panel_label.b5") }}
+          {{ $it("panel_label.b5") }}
           <div slot="content">
             <OmsForm :form-config="customAttr.customFormConfig" />
           </div>

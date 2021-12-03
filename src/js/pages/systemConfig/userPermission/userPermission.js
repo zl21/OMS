@@ -3,7 +3,6 @@ import tree from 'framework/components/tree/tree2';
 export default {
   data() {
     return {
-      vmI18n:$i18n,
       loading: false, // 右边数据loading
       activeName: '/p/cs/chrstoregroupquery', // 激活的id
       treeList: [], // 树数据

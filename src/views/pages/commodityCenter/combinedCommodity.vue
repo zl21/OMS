@@ -14,7 +14,7 @@
           <Collapse v-model="value1">
             <Panel name="1">
               <!-- 基本信息 -->
-              {{ vmI18n.t('common.baseInformation') }}
+              {{ $it('common.baseInformation') }}
               <OmsForm
                 slot="content"
                 :form-config="formConfig1"
@@ -22,7 +22,7 @@
             </Panel>
             <Panel name="2">
               <!-- 日志 -->
-              {{ vmI18n.t('common.journal') }}
+              {{ $it('common.journal') }}
               <OmsForm
                 slot="content"
                 :form-config="formConfig2"
@@ -93,8 +93,8 @@
         on-click="changeTab"
       > -->
         <!-- <TabPane
-          :label="vmI18n.t('common.baseInformation')"
-          :name="vmI18n.t('common.baseInformation')"
+          :label="$it('common.baseInformation')"
+          :name="$it('common.baseInformation')"
           class="custom-label"
         > -->
           <div class="btn-operate custom-btn">
@@ -104,7 +104,7 @@
             <Collapse v-model="value1">
               <Panel name="1">
                 <!-- 基本信息 -->
-                {{ vmI18n.t('common.baseInformation') }}
+                {{ $it('common.baseInformation') }}
                 <OmsForm
                   slot="content"
                   :form-config="formConfig1"
@@ -112,7 +112,7 @@
               </Panel>
               <Panel name="2">
                 <!-- 日志 -->
-                {{ vmI18n.t('common.journal') }}
+                {{ $it('common.journal') }}
                 <OmsForm
                   slot="content"
                   :form-config="formConfig2"
@@ -180,7 +180,7 @@
     <Modal
       v-model="modal1"
       width="360"
-      :title="vmI18n.t('modalTitle.warning')"
+      :title="$it('modalTitle.warning')"
       class="customizedModal"
       @on-ok="ok"
       @on-cancel="cancel"

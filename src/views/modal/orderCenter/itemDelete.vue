@@ -41,7 +41,7 @@
             @click="search"
           >
             <!-- 搜索 -->
-            {{ vmI18n.t("btn.search") }}
+            {{ $it("btn.search") }}
           </Button>
         </div>
       </div>

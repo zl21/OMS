@@ -16,7 +16,7 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
-          {{ vmI18n.t('panel_label.basicData') }}
+          {{ $it('panel_label.basicData') }}
           <p
             slot="content"
             style="float: left; width: 250px; margin-top: 15px"
@@ -37,7 +37,7 @@
       </Collapse>
       <Modal
         v-model="isClearItem"
-        :title="vmI18n.t('modalTitle.tips')"
+        :title="$it('modalTitle.tips')"
         @on-ok="clearItem"
         @on-cancel="unClearItem"
       >

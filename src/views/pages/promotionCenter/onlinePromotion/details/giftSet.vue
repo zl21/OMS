@@ -4,7 +4,7 @@
     <div class="title">
       <i class="iconfont icon-zengpin" />
       <!-- <span>赠品信息设置</span> -->
-      <span>{{ vmI18n.t('other.gift_set') }}</span>
+      <span>{{ $it('other.gift_set') }}</span>
     </div>
     <div class="formList">
       <!--阶梯类型-->
@@ -13,7 +13,7 @@
         class="row"
       >
         <div class="form_label">
-          {{ vmI18n.t('form_label.ladderType') }}：
+          {{ $it('form_label.ladderType') }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -26,7 +26,7 @@
       <!--赠品翻倍-->
       <div class="row">
         <div class="form_label">
-          <i class="red">*</i>{{ vmI18n.t('form_label.double_gifts') }}：
+          <i class="red">*</i>{{ $it('form_label.double_gifts') }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -35,7 +35,7 @@
             @changeSingle="checkGiftDoublesChange"
           />
           <div class="form_item">
-            {{ vmI18n.t('form_label.max_doubling_times') }}
+            {{ $it('form_label.max_doubling_times') }}
           </div>
           <div class="form_el_input form_item limitinput">
             <input
@@ -49,7 +49,7 @@
       <!--赠送方式-->
       <div class="row">
         <div class="form_label">
-          <i class="red">*</i>{{ vmI18n.t('form_label.giving_ways') }}：
+          <i class="red">*</i>{{ $it('form_label.giving_ways') }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -82,7 +82,7 @@
       >
         <!-- 赠品列表： -->
         <div class="form_label">
-          {{ vmI18n.t('other.gift_list') }}：
+          {{ $it('other.gift_list') }}：
         </div>
         <div class="form_content">
           <detailtabs
@@ -116,7 +116,7 @@
       >
         <div class="form_label">
           <!-- 赠品列表 -->
-          <i class="red">*</i> {{ vmI18n.t('other.gift_list') }}：
+          <i class="red">*</i> {{ $it('other.gift_list') }}：
         </div>
         <div class="form_content">
           <detailtable
@@ -143,13 +143,13 @@
                 class="white"
                 @click="addRowData"
               >
-                {{ vmI18n.t('btn.add') }}
+                {{ $it('btn.add') }}
               </button>
               <button
                 class="white"
                 @click="importData"
               >
-                {{ vmI18n.t('btn.import') }}
+                {{ $it('btn.import') }}
               </button>
             </div>
           </detailtable>

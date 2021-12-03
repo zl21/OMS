@@ -8,7 +8,7 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ vmI18n.t('common.baseInformation') }}
+            {{ $it('common.baseInformation') }}
             <p slot="content">
               <OmsForm :form-config="information" />
             </p>
@@ -23,7 +23,7 @@
           <div class="tableLeft">
             <div class="retrieveBox">
               <!-- <span class="retrieveTitle">检索</span> -->
-              <span class="retrieveTitle">{{ vmI18n.t('common.searching') }}</span>
+              <span class="retrieveTitle">{{ $it('common.searching') }}</span>
               <Input v-model="name" :expand="false" class="retrieve" @on-enter="enter(name)">
                 <Icon slot="suffix" type="ios-search" @click="enter(name)" />
               </Input>
@@ -36,14 +36,14 @@
             <div class="setTree">
               <div class="retrieveBox">
                 <!-- <span class="retrieveTitle">检索</span> -->
-                <span class="retrieveTitle">{{ vmI18n.t('common.searching') }}</span>
+                <span class="retrieveTitle">{{ $it('common.searching') }}</span>
                 <Input v-model="name2" :expand="false" class="retrieve" @on-enter="enter2(name2)">
                   <Icon slot="suffix" type="ios-search" @click="enter2(name2)" />
                 </Input>
               </div>
               <Checkbox v-model="single" style="margin: 0 0 7px 32px" @on-change="checkAll(single)">
                 <!-- 全选 -->
-                {{ vmI18n.t('common.selectAll') }}
+                {{ $it('common.selectAll') }}
               </Checkbox>
               <div class="treeBox2">
                 <Tree id="tree2" :data="treeData2" :query="query2" show-checkbox @on-select-change="selectChange" @on-toggle-expand="toggleExpand" />
@@ -62,24 +62,24 @@
                     <tr>
                       <th class="paddingleft18" style="width: 18%">
                         <!-- 省 -->
-                        {{ vmI18n.t('common.province') }}
+                        {{ $it('common.province') }}
                       </th>
                       <th style="width: 18%">
                         <!-- 市 -->
-                        {{ vmI18n.t('common.city') }}
+                        {{ $it('common.city') }}
                       </th>
                       <th style="width: 18%">
                         <!-- 区 -->
-                        {{ vmI18n.t('common.region') }}
+                        {{ $it('common.region') }}
                       </th>
                       <th style="width: 19%">
                         <!-- 排除区域 -->
-                        {{ vmI18n.t('common.exclude_region') }}
+                        {{ $it('common.exclude_region') }}
                       </th>
                       <th style="width: 19%">
                         <input v-model="isDelivery" type="checkbox" @change="handleAllChange(isDelivery)" />
                         <!-- 是否送达 -->
-                        {{ vmI18n.t('common.delivered_or_not') }}
+                        {{ $it('common.delivered_or_not') }}
                       </th>
                     </tr>
                   </thead>
@@ -134,9 +134,9 @@
       :width="importTable.width"
     />
     <!-- 导出 -->
-    <Modal v-model="warningModal" :mask="true" :title="vmI18n.t('modalTitle.tips')" width="420" @on-ok="warningOk">
+    <Modal v-model="warningModal" :mask="true" :title="$it('modalTitle.tips')" width="420" @on-ok="warningOk">
       <!-- <p>是否确认导出？</p> -->
-      <p>{{ vmI18n.t('modalTips.y2') }}</p>
+      <p>{{ $it('modalTips.y2') }}</p>
     </Modal>
   </div>
 </template>

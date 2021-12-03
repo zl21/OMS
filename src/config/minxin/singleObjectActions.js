@@ -1,5 +1,3 @@
-import $i18n from '@burgeon/internationalization/i18n'; // 国际化
-
 export default () => ({
   updated() {
     const { itemId, tableId, tableName } = this.$router.currentRoute.params;
