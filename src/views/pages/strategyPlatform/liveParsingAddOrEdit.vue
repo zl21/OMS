@@ -62,7 +62,7 @@
                   <Input v-model="ruleItem.RULE_CONTEXT"
                     :disabled="ruleItem.RULE_TYPE == '' || isEnable"
                     :autosize="{minRows: 2,maxRows: 5}"
-                    :placeholder="$it('modalTips.jy')"
+                    :placeholder="$it('tip.jy')"
                     @on-change="rowData.item.inputChange(ruleItem)"
                     style="width: 250px;"
                   />

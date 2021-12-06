@@ -584,7 +584,7 @@ export default {
               ];
               // if (!flag) {
               // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-              // self.$Message.warning($it("modalTips.f9"));
+              // self.$Message.warning($it("tip.f9"));
               self.selectRegion(addressObj.province, addressObj.city, addressObj.area).then(res => {
                 let { data: { data: { provinceInfo, cityInfo, areaInfo } } } = res;
                 const queryData = self.formConfigRe.formData;

@@ -236,19 +236,19 @@ export default () => ({
       if (this.basic_info.activity_name === '') {
         return {
           code: -1,
-          message: $it('modalTips.s5')
+          message: $it('tip.s5')
         }; // 活动名称未填写！
       }
       if (!this.basic_info.stores.itemdata.valuedata) {
         return {
           code: -1,
-          message: $it('modalTips.s6')
+          message: $it('tip.s6')
         }; // 店铺名称未填写！
       }
       if (this.basic_info.order_type.length === 0) {
         return {
           code: -1,
-          message: $it('modalTips.s7')
+          message: $it('tip.s7')
         }; // 订单类型必选！
       }
       // if(this.basic_info.platform_mark.length === 0){
@@ -257,25 +257,25 @@ export default () => ({
       if (this.basic_info.time_limit === '' || this.basic_info.time_limit[0] === '' || this.basic_info.time_limit[1] === '') {
         return {
           code: -1,
-          message: $it('modalTips.t8')
+          message: $it('tip.t8')
         }; // 时间范围未填写！
       }
       if (this.basic_info.offline_time === '') {
         return {
           code: -1,
-          message: $it('modalTips.s8')
+          message: $it('tip.s8')
         }; // 下线时间未填写！
       }
       if (this.basic_info.buyer_limit_frequency === '1' && !this.basic_info.buyer_max_frequency) {
         return {
           code: -1,
-          message: $it('modalTips.s9')
+          message: $it('tip.s9')
         }; // 最大限制次数未填写！
       }
 
       return {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
     },
     initBtn() {

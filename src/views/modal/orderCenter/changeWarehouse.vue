@@ -160,7 +160,7 @@ const changeWarehouse = {
       const self = this;
       if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
         self.$Message.warning({
-          content: $it("modalTips.zi"), // 请选择仓库
+          content: $it("tip.zi"), // 请选择仓库
           duration: 5,
           top: 80,
         });

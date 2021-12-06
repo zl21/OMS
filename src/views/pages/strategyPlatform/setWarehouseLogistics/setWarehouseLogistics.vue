@@ -198,7 +198,7 @@
       @on-ok="warningOk"
     >
       <!-- <p>是否确认导出？</p> -->
-      <p>{{ $it('modalTips.y2') }}</p>
+      <p>{{ $it('tip.y2') }}</p>
     </Modal>
     <Modal
       v-model="saveModal"

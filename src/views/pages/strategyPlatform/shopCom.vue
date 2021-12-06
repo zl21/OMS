@@ -742,7 +742,7 @@ export default {
     // 删除明细
     deleteDetail() {
       const selectArr = this.tabConfig.selection
-      if (!selectArr.length) return this.$Message.warning($it('modalTips.hy'))
+      if (!selectArr.length) return this.$Message.warning($it('tip.hy'))
       const ITEM_IDS = selectArr.map(i => i.ID)
       this.service.strategyPlatform.deletePrice({ ID: this.ID, ITEM_IDS }).then(({ data: { code, message } }) => {
         if (code == 0) {
@@ -810,7 +810,7 @@ export default {
         this.$Modal.info({
           className: 'ark-dialog',
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定

@@ -63,7 +63,7 @@
       @on-ok="warningOk"
     >
       <!-- <p>当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？</p> -->
-      <p>{{ $it("modalTips.e3") }}</p>
+      <p>{{ $it("tip.e3") }}</p>
     </Modal>
   </div>
 </template>

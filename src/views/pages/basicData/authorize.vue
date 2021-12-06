@@ -2,7 +2,7 @@
   <div class="customized-detail">
     <div class="authorize-list">
       <div class="authorize-list-heard">
-        <div class="heard-tips">{{$it("modalTips.ha") }}</div>
+        <div class="heard-tips">{{$it("tip.ha") }}</div>
         <div class="search-input">
           <label>{{$it('btn.search') }} ：</label>
           <Input
@@ -80,7 +80,7 @@
       :class-name="'ark-dialog'"
     >
       <div class="customized-modal">
-        <p class="tips"><span class="iconfont"></span>{{$it('modalTips.hb') }}</p>
+        <p class="tips"><span class="iconfont"></span>{{$it('tip.hb') }}</p>
         <OmsButton class="modal-footer" :btn-config="authoriBtnConfig" />
       </div>
     </Modal>

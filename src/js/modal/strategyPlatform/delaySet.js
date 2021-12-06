@@ -64,7 +64,7 @@ export default {
     submit() {
       const self = this;
       if (this.formConfig.formValue.lockTime === '') {
-        return this.$Message.error($it('modalTips.en')); // 延期日期不能为空！
+        return this.$Message.error($it('tip.en')); // 延期日期不能为空！
       }
       const param = {
         delayDate: this.formConfig.formValue.lockTime.Format('yyyy-MM-dd hh:mm:ss'),

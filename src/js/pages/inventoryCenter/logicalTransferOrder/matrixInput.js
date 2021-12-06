@@ -213,7 +213,7 @@ export default {
         && !port[this.tablename].isStoreId
         && port[this.tablename].hasStock) { // 店仓id为空 或者 isStoreId参数为false
         return this.$message({
-          message: window.$it('modalTips.dh'), // '请先选择店仓',
+          message: window.$it('tip.dh'), // '请先选择店仓',
           center: true,
           type: 'warning'
         });
@@ -439,7 +439,7 @@ export default {
             const resData = res.data;
             if (resData.code === 0) {
               this.$message({
-                message: window.$it('modalTips.dg'),
+                message: window.$it('tip.dg'),
                 center: true,
                 type: 'success'
               });
@@ -480,7 +480,7 @@ export default {
           const resData = res.data;
           if (resData.code === 0) {
             this.$message({
-              message: window.$it('modalTips.dg'),
+              message: window.$it('tip.dg'),
               center: true,
               type: 'success'
             });

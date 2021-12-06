@@ -86,7 +86,7 @@
       @on-cancel="cancel"
     >
       <!-- <p>是否确认修改备注！</p> -->
-      <p>{{ $it("modalTips.zh") }}</p>
+      <p>{{ $it("tip.zh") }}</p>
     </Modal>
   </div>
 </template>

@@ -102,7 +102,7 @@ export default {
         _this.$parent.$parent.closeConfirm();
         _this.$Message.success(res.data.data.message);
       } else {
-        const err = res.data.data.message || $it('modalTips.z3');
+        const err = res.data.data.message || $it('tip.z3');
         _this.$Message.error(err);
       }
     },
@@ -141,7 +141,7 @@ export default {
           if (this.selectData[i].CP_C_LOGISTICS_ECODE === ecode) {
             this.selectData.splice(i, 1);
             this.total = this.selectData.length;
-            this.$Message.success($it('modalTips.ay'));
+            this.$Message.success($it('tip.ay'));
             break;
           }
         }
@@ -171,12 +171,12 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       const res = await this.service.common.delWarehouseLogistics(fromdata);
       if (res.data.data.code === 0) {
-        const ess = res.data.data.message || $it('modalTips.ay');
+        const ess = res.data.data.message || $it('tip.ay');
         this.getLogistics();
         this.$parent.$parent.$parent.refresh();
         this.$Message.success(ess);
       } else {
-        const err = res.data.data.message || $it('modalTips.z3');
+        const err = res.data.data.message || $it('tip.z3');
         this.$Message.error(err);
       }
       this.total = this.selectData.length;

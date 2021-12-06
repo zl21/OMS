@@ -116,12 +116,12 @@ export default {
       const formValue = this.generateFormConfig.formValue;
       if (!formValue.vendorId) {
         // 供应商ID不能为空!
-        this.$Message.warning($it('modalTips.bl'));
+        this.$Message.warning($it('tip.bl'));
         return false;
       }
       if (!formValue.billNumber) {
         // 账单编码不能为空!
-        this.$Message.warning($it('modalTips.bm'));
+        this.$Message.warning($it('tip.bm'));
         return false;
       }
       const params = {

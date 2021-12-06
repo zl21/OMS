@@ -63,7 +63,7 @@ export default {
               this.confirm();
             },
             onCancel: () => {
-              this.$Message.info($it('modalTips.ep')); // '点击了取消!'
+              this.$Message.info($it('tip.ep')); // '点击了取消!'
             }
           });
         } else {

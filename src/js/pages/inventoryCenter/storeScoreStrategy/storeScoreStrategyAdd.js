@@ -185,7 +185,7 @@ export default {
               name: 'STORESCORESTRATEGYDETAIL', // 文件名
               label: '店仓评分设置表', //  tab中文名
             });
-            this.$Message.success(window.$it('modalTips.z9')); // '保存成功'
+            this.$Message.success(window.$it('tip.z9')); // '保存成功'
           } else {
             // this.$Message.error(res.data.message);
           }

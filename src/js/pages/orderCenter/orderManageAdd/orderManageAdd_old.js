@@ -411,7 +411,7 @@ export default {
                 self.address.province == ''
               ) {
                 // "请填入完整信息,如:张三,17788888888,上海上海市闵行区黎安路999号"
-                self.$Message.warning($it('modalTips.f9'));
+                self.$Message.warning($it('tip.f9'));
               } else {
                 self.formConfig1.formValue.RECEIVER_NAME = self.address.name; // 收货人赋值
                 // self.formConfig1.formValue.RECEIVER_PHONE = self.address.phone;
@@ -694,7 +694,7 @@ export default {
               dimEnter: (val) => {
                 const self = this;
                 if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
-                  self.$Message.warning($it('modalTips.g0')); // 发货店仓，不能为空
+                  self.$Message.warning($it('tip.g0')); // 发货店仓，不能为空
                   return;
                 }
                 self.matrixBox.componentData = {
@@ -710,7 +710,7 @@ export default {
               dimSelect: (val) => {
                 const self = this;
                 if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
-                  self.$Message.warning($it('modalTips.g0')); // 发货店仓，不能为空
+                  self.$Message.warning($it('tip.g0')); // 发货店仓，不能为空
                   return;
                 }
                 self.matrixBox.componentData = {
@@ -1546,7 +1546,7 @@ export default {
       if (warnFlag) {
         self.$Modal.info({
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
+          content: $it('tip.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定
@@ -1576,7 +1576,7 @@ export default {
                 self.btnConfig.loading = false;
                 // 保存未成功
                 self.$Message.warning(
-                  res.data.message || $it('modalTips.g2')
+                  res.data.message || $it('tip.g2')
                 );
                 self.btnConfig.buttons[0].disabled = false;
               }
@@ -1611,7 +1611,7 @@ export default {
             self.btnConfig.loading = false;
             // 保存未成功
             self.$Message.warning(
-              res.data.message || $it('modalTips.g2')
+              res.data.message || $it('tip.g2')
             );
             self.btnConfig.buttons[0].disabled = false;
           }
@@ -1626,7 +1626,7 @@ export default {
       if (warnFlag) {
         self.$Modal.info({
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
+          content: $it('tip.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定
@@ -1654,7 +1654,7 @@ export default {
                 self.$destroy();
               } else {
                 self.$Message.warning(
-                  res.data.message || $it('modalTips.g2')
+                  res.data.message || $it('tip.g2')
                 );
                 self.btnConfig.buttons[0].disabled = false;
               }
@@ -1685,7 +1685,7 @@ export default {
           } else {
             // 保存未成功
             self.$Message.warning(
-              res.data.message || $it('modalTips.g2')
+              res.data.message || $it('tip.g2')
             );
             self.btnConfig.buttons[0].disabled = false;
           }
@@ -1882,19 +1882,19 @@ export default {
                   }
                 } else {
                   // 明细查询失败
-                  self.$Message.warning($it('modalTips.g3'));
+                  self.$Message.warning($it('tip.g3'));
                 }
               });
           } else {
             // 明细保存失败
             self.$Message.warning(
-              res.data.message || $it('modalTips.g4')
+              res.data.message || $it('tip.g4')
             );
           }
         });
       } else {
         // 请输入条码
-        self.$Message.warning($it('modalTips.g5'));
+        self.$Message.warning($it('tip.g5'));
       }
     },
     enterQuerySave1(val) {
@@ -1950,7 +1950,7 @@ export default {
             data.push(res.data.data.data[0]);
             const cloneArr = [];
             if (!data.length) {
-              return _this.$Message.error($it('modalTips.g6'));
+              return _this.$Message.error($it('tip.g6'));
             } // 不存在该条码！
             data.forEach((item) => {
               cloneArr.push({

@@ -469,7 +469,7 @@ export default {
     async addAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.businessFormConfig.formData[0].itemdata.valuedata.length) {
-        self.$Message.warning($it('modalTips.kk'));
+        self.$Message.warning($it('tip.kk'));
         return false;
       }
       this.loading = true;
@@ -497,7 +497,7 @@ export default {
     async deleteAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.selectionData.length) {
-        self.$Message.warning($it('modalTips.ka'));
+        self.$Message.warning($it('tip.ka'));
         return false;
       }
       const delIDS = [];
@@ -591,7 +591,7 @@ export default {
         this.$Modal.info({
           className: 'ark-dialog',
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定

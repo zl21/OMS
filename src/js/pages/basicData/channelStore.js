@@ -36,7 +36,7 @@ export default {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
                 title: $it('mT.tips'), // 提示
-                content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+                content: $it('tip.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
@@ -400,15 +400,15 @@ export default {
       const self = this;
       const ids = [];
       if (!self.selecData.length) {
-        self.$Message.warning($it('modalTips.ka')); // 请选择需要删除的内容
+        self.$Message.warning($it('tip.ka')); // 请选择需要删除的内容
         return;
       }
       if (self.jordanTableConfig.data.length == self.selecData.length) {
-        self.$Message.warning($it('modalTips.kb')); // 不可全部删除逻辑仓数据，请至少保留一条！
+        self.$Message.warning($it('tip.kb')); // 不可全部删除逻辑仓数据，请至少保留一条！
         return;
       }
       if (self.jordanTableConfig.data.length == 1) {
-        self.$Message.warning($it('modalTips.kc')); // 明细不能为空
+        self.$Message.warning($it('tip.kc')); // 明细不能为空
         return;
       }
       self.selecData.forEach(item => {
@@ -491,7 +491,7 @@ export default {
         return;
       }
       if (self.jordanTableConfig.data.some(item => item.CP_C_STORE_ID == id)) {
-        self.$Message.warning($it('modalTips.ia')); // 请勿重复添加
+        self.$Message.warning($it('tip.ia')); // 请勿重复添加
         return;
       }
       self.service.basicData
@@ -508,7 +508,7 @@ export default {
             const theSameStore = self.jordanTableConfig.data.filter(item => item.CP_C_PHY_WAREHOUSE_ID == data.CP_C_PHY_WAREHOUSE_ID);
             // 判断该实体仓下是否已存在该优先级
             if (theSameStore.some(item => item.SUPPLY_PRIORITY == self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY)) {
-              self.$Message.warning($it('modalTips.ib')); // 同一实体仓下优先级不能重复
+              self.$Message.warning($it('tip.ib')); // 同一实体仓下优先级不能重复
               return;
             }
             // end
@@ -568,11 +568,11 @@ export default {
         return;
       }
       if (!self.jordanTableConfig.data.length) {
-        self.$Message.warning($it('modalTips.ic')); // 请先添加明细
+        self.$Message.warning($it('tip.ic')); // 请先添加明细
         return;
       }
       if (self.jordanTableConfig.data.some(item => item.RATE == '')) {
-        self.$Message.warning($it('modalTips.id')); // 供货比例不能为空
+        self.$Message.warning($it('tip.id')); // 供货比例不能为空
         return;
       }
       const data = {

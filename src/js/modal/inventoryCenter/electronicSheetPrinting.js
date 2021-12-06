@@ -576,7 +576,7 @@ export default {
       this.$Modal.info({
         className: 'ark-dialog',
         title: $it('other.printing'), // 打印
-        content: $it('modalTips.ca'), // 正在打印中，请稍后。。。
+        content: $it('tip.ca'), // 正在打印中，请稍后。。。
         mask: true,
         onOk: () => {
           self.$emit('confirmView');

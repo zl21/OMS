@@ -234,7 +234,7 @@ export default {
       // 判断HOLD单原因
       if (!formValue.HOLD_ORDER_REASON) {
         // return { message: "HOLD单原因不能为空" };
-        return { message: $it('modalTips.zn') };
+        return { message: $it('tip.zn') };
       }
       params.HOLD_ORDER_REASON = formValue.HOLD_ORDER_REASON;
       // 判断是否有勾选自动释放
@@ -246,26 +246,26 @@ export default {
         if (formValue.RELEASE_TIME_TYPE === '1') {
           // 判断指定时点释放的时间
           if (!formValue.RELEASE_TIME) {
-            return { message: $it('modalTips.zo') }; // 指定时点释放的时间不能为空
+            return { message: $it('tip.zo') }; // 指定时点释放的时间不能为空
           }
           if (new Date(formValue.RELEASE_TIME).getTime() < Date.now()) {
-            return { message: $it('modalTips.zp') }; // 指定时点释放的时间不能小于当前时间
+            return { message: $it('tip.zp') }; // 指定时点释放的时间不能小于当前时间
           }
           params.RELEASE_TIME = $utils.dateFormat(formValue.RELEASE_TIME, 'yyyy-MM-dd hh:mm:ss');
         } else if (formValue.RELEASE_TIME_TYPE === '2') {
           // 判断固定时长后释放的相应参数
           if (formValue.DAY_TYPE && formValue.FIXED_DURATION && formValue.TIME_UNIT) {
             if (formValue.FIXED_DURATION.toString().indexOf('.') >= 0) {
-              return { message: $it('modalTips.zq') }; // 固定时长后释放的固定时长只能是整数
+              return { message: $it('tip.zq') }; // 固定时长后释放的固定时长只能是整数
             }
             params.RELEASE_DAY_TYPE = +formValue.DAY_TYPE;
             params.FIXED_DURATION = formValue.FIXED_DURATION;
             params.TIME_UNIT = +formValue.TIME_UNIT;
           } else {
-            return { message: $it('modalTips.zr') }; // 固定时长后释放的相关数据不能为空
+            return { message: $it('tip.zr') }; // 固定时长后释放的相关数据不能为空
           }
         } else {
-          return { message: $it('modalTips.zs') }; // 释放时点不能为空
+          return { message: $it('tip.zs') }; // 释放时点不能为空
         }
       } else {
         params.IS_AUTO_RELEASE = false;

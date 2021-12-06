@@ -64,7 +64,7 @@ export default {
     async okClick() {
       const _this = this;
       if (!_this.formConfig.formData[0].itemdata.pid || _this.formConfig.formData[0].itemdata.pid === undefined) {
-        _this.$Message.error($it('modalTips.ee')); // '入库实体仓库必填！'
+        _this.$Message.error($it('tip.ee')); // '入库实体仓库必填！'
         return;
       }
       const fromdata = new FormData();

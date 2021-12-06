@@ -88,12 +88,12 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.startEndTimes
     if (!(formValue.orderNum || start)) {
-      self.$Message.warning($it('modalTips.bs'));// 请选择输入的日期或输入订单编号
+      self.$Message.warning($it('tip.bs'));// 请选择输入的日期或输入订单编号
       return false;
     }
     const param = {

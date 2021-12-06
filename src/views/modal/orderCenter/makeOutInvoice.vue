@@ -51,7 +51,7 @@
           style="color: #fd6442"
         >
           <!-- 开专用发票必须跟开票专员确认 -->
-          {{ $it("modalTips.zv") }}
+          {{ $it("tip.zv") }}
         </span>
       </div>
       <OmsForm :form-config="formConfig" />

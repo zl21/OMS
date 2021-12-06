@@ -198,12 +198,12 @@ export default {
       const ECODE = this.selection && this.selection.ECODE ? this.selection.ECODE : '';
       if (ECODE === '') {
         // 请选择需要更换的商品
-        self.$Message.error($it('modalTips.eb'));
+        self.$Message.error($it('tip.eb'));
         return;
       }
       if (self.itemskuid === this.selection.skuId) {
         // 不可以选择更换当前商品！
-        self.$Message.error($it('modalTips.ec'));
+        self.$Message.error($it('tip.ec'));
         return;
       }
       const keys = {
@@ -255,7 +255,7 @@ export default {
       const isNull = Object.values(p).every(item => item === '' || item === null);
       if (isNull) {
         // 请填写筛选条件
-        self.$Message.warning($it('modalTips.ed'));
+        self.$Message.warning($it('tip.ed'));
         return;
       }
       if (p.IS_GIFT != '') {

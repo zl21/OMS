@@ -44,7 +44,7 @@ export default {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
                 title: $it('mT.tips'), // 提示
-                content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+                content: $it('tip.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
@@ -742,7 +742,7 @@ export default {
             const QTY = self.jordanTableConfigGenera.businessFormConfig.formValue.QTY;
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigGenera.data.some(item => item.ECODE == arr.ECODE)) {
-              $utils.msgTips(self, 'warning', $it('modalTips.jz'), 0); // 请勿重复添加该明细!
+              $utils.msgTips(self, 'warning', $it('tip.jz'), 0); // 请勿重复添加该明细!
               return;
             }
             arr.PS_C_SKU_ID = '-1';
@@ -753,7 +753,7 @@ export default {
           } else if (self.groupType == 1) {
             arr = res.data.data.filter(item => ename == item.ECODE)[0];
             if (self.jordanTableConfigLuck.data.some(item => item.ECODE == arr.ECODE)) {
-              $utils.msgTips(self, 'warning', $it('modalTips.jz'), 0); // 请勿重复添加该明细!
+              $utils.msgTips(self, 'warning', $it('tip.jz'), 0); // 请勿重复添加该明细!
               return;
             }
             arr.PS_C_SKU_ID = '-1';

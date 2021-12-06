@@ -920,7 +920,7 @@ export default {
               label: '寻源策略表', //  tab中文名
             });
           }
-          this.$Message.success(window.$it('modalTips.z9')); // '保存成功'
+          this.$Message.success(window.$it('tip.z9')); // '保存成功'
           this.tableData2PartNewLine = []
           this.sgChannelSourceStrategyRuleItemQueryFun()
         } else {

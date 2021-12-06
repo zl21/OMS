@@ -114,7 +114,7 @@ export default {
       const shopId = this.formConfig.formData[0].itemdata.pid;
       if (!shopId || !formValue.query_date[0]) {
         // 店铺和平台时间不能为空
-        this.$Message.warning($it('modalTips.bg'));
+        this.$Message.warning($it('tip.bg'));
         return;
       }
       const params = JSON.stringify({

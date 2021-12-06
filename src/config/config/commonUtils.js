@@ -288,7 +288,7 @@ class commonUtils {
   static modalShow(self, tips, okKey, data, ...callback) {
     self.$Modal.info({
       title: $it('mT.tips'), // 提示
-      content: $it(`modalTips.${tips}`),
+      content: $it(`tip.${tips}`),
       mask: true,
       showCancel: true,
       okText: $it('com.determine'), // 确定
@@ -326,7 +326,7 @@ class commonUtils {
   //  */
   // static msgTips(self, type, tips, tipsType = 1) {
   //   self.$Message[type]({
-  //     content: tipsType == 1 ? $it(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+  //     content: tipsType == 1 ? $it(`tip.${tips}`) : tips, // 请选择需要新增退单记录！
   //     duration: 5,
   //     top: 80,
   //   })
@@ -1331,7 +1331,7 @@ class commonUtils {
       id = selection[0].ID;
     }
     if ((selection.length != 1 && params.id !== '-1') || (selection.length != 1 && params.cloneReturnGoodId)) {
-      _self.$Message.warning($it('modalTips.zm'))
+      _self.$Message.warning($it('tip.zm'))
       return;
     }
     _self.$store.commit('customize/TabHref', {

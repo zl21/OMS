@@ -88,7 +88,7 @@ export default {
         backBtn: true, // 是否显示返回按钮
         errorList: [
           {
-            message: $it('modalTips.a0'), // '是否保存已经修改的数据?'
+            message: $it('tip.a0'), // '是否保存已经修改的数据?'
           },
         ], // 提示内容
       }, // 警告弹出框信息
@@ -542,7 +542,7 @@ export default {
       });
       if (arr.length === 0) {
         return this.$message({
-          message: $it('modalTips.ct'), // '请选择要删除的明细',
+          message: $it('tip.ct'), // '请选择要删除的明细',
           type: 'warning',
         });
       }
@@ -563,7 +563,7 @@ export default {
         if (data.code === 0) {
           this.activeSub = false; // 改变高亮行
           this.$message({
-            message: $it('modalTips.cz'), // '删除明细成功',
+            message: $it('tip.cz'), // '删除明细成功',
             type: 'success',
           });
           this.getData();
@@ -646,7 +646,7 @@ export default {
             this.discountLoading = false;
             this.updateSalePriceFlag = false;
             this.$message({
-              message: $it('modalTips.da'), // '修改折扣成功',
+              message: $it('tip.da'), // '修改折扣成功',
               type: 'success',
             });
             this.discountLoading = false;
@@ -664,10 +664,10 @@ export default {
       let warnMsg = '';
       if (this.updateSalePriceModal.UPDATE_TYPE === 0) {
         if (!this.updateSalePriceModal.SALE_DISCOUNT) {
-          warnMsg = $it('modalTips.db'); // '请维护折扣！';
+          warnMsg = $it('tip.db'); // '请维护折扣！';
         }
       } else if (!this.updateSalePriceModal.SALE_PRICE) {
-        warnMsg = $it('modalTips.dc'); // '请维护价格！';
+        warnMsg = $it('tip.dc'); // '请维护价格！';
       }
       return warnMsg;
     },

@@ -22,7 +22,7 @@ export default {
       type: 'LOGISTICCOMPANY',
       pageNum: 1,
       // dataEmptyMessage: "数据加载中...", // 无数据的提示
-      dataEmptyMessage: $it('modalTips.du'), // 无数据的提示
+      dataEmptyMessage: $it('tip.du'), // 无数据的提示
       columns: ['ename'], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
@@ -102,7 +102,7 @@ export default {
         if (!self.expressCode) {
           self.$Message.warning({
             // content: "请选择物流单号",
-            content: $it('modalTips.fn'),
+            content: $it('tip.fn'),
             duration: 5,
             top: 80,
           });
@@ -111,7 +111,7 @@ export default {
       } else if (!self.pid) {
         self.$Message.warning({
           // content: "请选择物流公司",
-          content: $it('modalTips.ye'),
+          content: $it('tip.ye'),
           duration: 5,
           top: 80,
         });

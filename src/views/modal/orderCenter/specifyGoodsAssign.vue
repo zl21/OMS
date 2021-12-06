@@ -6,11 +6,11 @@
         <RadioGroup v-model="radioValue" @on-change="radioChange">
           <Radio label="2">
             <!-- 按页面已勾选订单 -->
-            <span>{{ $it("modalTips.cd") }}</span>
+            <span>{{ $it("tip.cd") }}</span>
           </Radio>
           <Radio label="1">
             <!-- 按筛选条件选中订单 -->
-            <span>{{ $it("modalTips.ce") }}</span>
+            <span>{{ $it("tip.ce") }}</span>
           </Radio>
         </RadioGroup>
       </div>
@@ -190,14 +190,14 @@ export default {
 
       if (res.data.code == 0) {
         if (res.data.data.length == 0 || res.data.data[0] == null) {
-          self.$Message.warning($it("modalTips.r8")); // 查询数据为空!
+          self.$Message.warning($it("tip.r8")); // 查询数据为空!
           return;
         }
         // res.data.data[0].IS_GIFT =
         //   res.data.data[0].IS_GIFT == "0" ? "否" : "是";
         self.data.push(res.data.data[0]);
       } else {
-        // this.$Message.warning($it("modalTips.zt")); // sku查询失败!
+        // this.$Message.warning($it("tip.zt")); // sku查询失败!
       }
     }, */
     search: _.debounce(async function () {
@@ -210,18 +210,18 @@ export default {
       console.log(res);
       if (res.data.code == 0) {
         if (res.data.data.length == 0 || res.data.data[0] == null) {
-          self.$Message.warning($it("modalTips.r8")); // 查询数据为空!
+          self.$Message.warning($it("tip.r8")); // 查询数据为空!
           return;
         }
         self.data.push(res.data.data[0]);
       } else {
-        // this.$Message.warning($it("modalTips.zt")); // sku查询失败!
+        // this.$Message.warning($it("tip.zt")); // sku查询失败!
       }
     }, 100),
     confirm() {
       const self = this;
       if (self.data.length == 0) {
-        self.$Message.warning($it("modalTips.cg")); // sku不能为空!
+        self.$Message.warning($it("tip.cg")); // sku不能为空!
         return;
       }
       let result = {};
@@ -232,7 +232,7 @@ export default {
       //   // self.componentData.data['qty'] = self.qty;
       // } else if (self.radioValue == "2") {
       //   if (self.componentData.a_2.length == 0) {
-      //     self.$Message.warning($it("modalTips.zu")); // 请勾选订单数据!
+      //     self.$Message.warning($it("tip.zu")); // 请勾选订单数据!
       //     // return;
       //   }
       //   result.IDS = self.componentData.a_2;

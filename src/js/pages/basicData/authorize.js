@@ -821,7 +821,7 @@ export default {
       console.log('retrurnNick:>>>', this.shopdata.retrurnNick)
       if (this.shopdata.retrurnNick != 'Y') {
         if (!item.item.props.value) {
-          this.$Message.error($it('modalTips.gz') )
+          this.$Message.error($it('tip.gz') )
           return
         }
       }

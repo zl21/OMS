@@ -71,16 +71,16 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be')); // 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.startEndTimes
     if (!start && !(formValue.bill_no && formValue.service_no)) {
-      self.$Message.warning($it('modalTips.js')); // 退单修改时间不存在时, 平台单号、服务单号必须同时有！
+      self.$Message.warning($it('tip.js')); // 退单修改时间不存在时, 平台单号、服务单号必须同时有！
       return false;
     }
     if (start && (formValue.bill_no || formValue.service_no)) {
-      self.$Message.warning($it('modalTips.ku')); // 退单修改时间存在时,平台单号、服务单号必须为空!
+      self.$Message.warning($it('tip.ku')); // 退单修改时间存在时,平台单号、服务单号必须为空!
       return false;
     }
     const param = {

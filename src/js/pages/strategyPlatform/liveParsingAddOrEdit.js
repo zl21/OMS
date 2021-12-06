@@ -257,7 +257,7 @@ export default {
             colname: 'LIVE_ANCHOR_ID',
             width: '24',
             class: 'custom-width',
-            placeholder: $it('modalTips.hq'), // 请录入主播ID
+            placeholder: $it('tip.hq'), // 请录入主播ID
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_ID', 'master', 'formConfig3');
@@ -269,7 +269,7 @@ export default {
             colname: 'LIVE_ANCHOR_NAME',
             width: '24',
             class: 'custom-width',
-            placeholder: $it('modalTips.hr'), // 请录入主播昵称
+            placeholder: $it('tip.hr'), // 请录入主播昵称
             disabled: false,
             inputChange: () => {
               this.masterModifyData('LIVE_ANCHOR_NAME', 'master', 'formConfig3');
@@ -341,7 +341,7 @@ export default {
         this.$Modal.info({
           className: 'ark-dialog',
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定
@@ -524,7 +524,7 @@ export default {
         .map(({ RULE_CONTEXT, RULE_TYPE }) => Object.values({ RULE_CONTEXT, RULE_TYPE }).join(' '))
       let uniqRow = Array.from(new Set(allRow))
       if (allRow.length != uniqRow.length) {
-        self.$Message.warning($it('modalTips.hp')) // 请勿重复添加直播商品识别规则!
+        self.$Message.warning($it('tip.hp')) // 请勿重复添加直播商品识别规则!
         return
       }
 

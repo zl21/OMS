@@ -140,7 +140,7 @@ export default {
         IS_GIFT: item.IS_GIFT
       }));
       if (rows.length === 0) {
-        self.$Message.error($it('modalTips.eg')); // '无赠品可添加！'
+        self.$Message.error($it('tip.eg')); // '无赠品可添加！'
         return;
       }
 
@@ -156,7 +156,7 @@ export default {
         self.$parent.$parent.$parent.selection = [];
       } else {
         // let mes = message || "失败";
-        const mes = message || $it('modalTips.z3');
+        const mes = message || $it('tip.z3');
         self.$Message.error(mes);
       }
     },

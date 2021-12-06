@@ -9,7 +9,7 @@ export default {
       reason: '',
       ruleValidate: {
         reason: [
-          { required: true, message: $it('modalTips.ef'), trigger: 'blur' }
+          { required: true, message: $it('tip.ef'), trigger: 'blur' }
         ],
       },
       btnConfig: {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     determine() {
-      if (!this.reason) return this.$Message.warning($it('modalTips.ef')); // '拒绝打款原因不能为空!'
+      if (!this.reason) return this.$Message.warning($it('tip.ef')); // '拒绝打款原因不能为空!'
       this.service.orderCenter.refuseToPayOcBReturnAfSend({ ids: this.idArray, reason: this.reason }).then(res => {
         console.log(res);
         if (res.data.data.code == 0) {

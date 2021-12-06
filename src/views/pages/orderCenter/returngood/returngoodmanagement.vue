@@ -202,7 +202,7 @@
     >
       <!-- 。是否继续？ -->
       <p class="availableStock">
-        {{ availableStockMassage }}{{ $it('modalTips.n2') }}
+        {{ availableStockMassage }}{{ $it('tip.n2') }}
       </p>
     </Modal>
     <Modal

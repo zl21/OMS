@@ -770,7 +770,7 @@ export default {
       const beType = oV;
       if (oV && type != beType) {
         const panel = beType == '0' ? $it('pL.a0') : $it('pL.a1');
-        const msg = `${$it('modalTips.ge')}${panel}，${$it('modalTips.gf')}`
+        const msg = `${$it('tip.ge')}${panel}，${$it('tip.gf')}`
         this.$Modal.info({
           title: $it('mT.tips'), // 提示
           content: msg,
@@ -916,7 +916,7 @@ export default {
         self.$Message.warning('p/cs/QueryList catch !');
       });
       if (!res.data.data.row.length) {
-        self.$Message.error($it('modalTips.gh')); // 没有查询到当前平台单号！
+        self.$Message.error($it('tip.gh')); // 没有查询到当前平台单号！
         self.loading = false;
         return
       }
@@ -1002,20 +1002,20 @@ export default {
       const over = self.overLength(self.formConfig.formValue);
       if (over) return
       if (this.bT == '1') {
-        if (!tui.length) return this.$Message.warning($it('modalTips.gg')); // "退货明细不能为空！"
-        if (!huan.length) return this.$Message.warning($it('modalTips.gi')); // "换货明细不能为空！"
+        if (!tui.length) return this.$Message.warning($it('tip.gg')); // "退货明细不能为空！"
+        if (!huan.length) return this.$Message.warning($it('tip.gi')); // "换货明细不能为空！"
       } else if (this.bT == '0' && !tui.length) {
-        this.$Message.warning($it('modalTips.gg'));
+        this.$Message.warning($it('tip.gg'));
         return false;
       }
       // 校验最终应退总金额不能小于0
       if (this.FINAL_ACTUAL_AMT < 0) {
-        this.$Message.warning($it('modalTips.gj')); // 最终应退总金额不能小于0！
+        this.$Message.warning($it('tip.gj')); // 最终应退总金额不能小于0！
         return
       }
       // 校验换货金额是否等于退货金额；一致则保存成功，不一致则提示“换货金额与退货金额不一致请重新确认”
       if (this.bT == '1' && this.EX_ACTUAL_AMT != this.PRO_ACTUAL_AMT) {
-        this.$Message.warning($it('modalTips.gk')); // 换货金额与退货金额不一致请重新确认！
+        this.$Message.warning($it('tip.gk')); // 换货金额与退货金额不一致请重新确认！
         return
       }
       /* =========== 保存校验 end =========== */
@@ -1184,7 +1184,7 @@ export default {
     // 原始订单编号 - 确定
     queryorder() {
       if (!Object.keys(this.platformData).length) {
-        this.$Message.warning($it('modalTips.gl')); // 请选中一条单据！
+        this.$Message.warning($it('tip.gl')); // 请选中一条单据！
         return false
       }
       this.renderForm(this.platformData);
@@ -1206,7 +1206,7 @@ export default {
         this.$Modal.info({
           title: $it("mT.tips"), // 提示
           // content: "当前修改未保存，确定返回？",
-          content: $it('modalTips.gm'),
+          content: $it('tip.gm'),
           className: 'ark-dialog',
           mask: true,
           showCancel: true,

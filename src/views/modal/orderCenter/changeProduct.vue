@@ -75,10 +75,10 @@
     <div class="i_food">
       <span class="title">
         <!-- <span>将</span> -->
-        <span>{{ $it("modalTips.zf") }}</span>
+        <span>{{ $it("tip.zf") }}</span>
         <span style="color: #003200">{{ onRowClickText }}</span>
         <!-- <span>替换为</span> -->
-        <span>{{ $it("modalTips.zg") }}</span>
+        <span>{{ $it("tip.zg") }}</span>
         <span style="color: #003200">{{ onRowClickReplaceText }}</span>
       </span>
       <OmsButton class="modal-footer" :btn-config="btnConfig" />

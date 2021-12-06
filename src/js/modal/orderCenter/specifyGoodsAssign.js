@@ -74,19 +74,19 @@ export default {
       const res = await self.service.common.skuQuery(query);
       if (res.data.code == 0) {
         if (res.data.data.data.length == 0) {
-          this.$Message.warning($it('modalTips.r8'));// 查询数据为空!
+          this.$Message.warning($it('tip.r8'));// 查询数据为空!
           return;
         }
         res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
         self.data = res.data.data.data;
       } else {
-        this.$Message.warning($it('modalTips.zt'));// sku查询失败!
+        this.$Message.warning($it('tip.zt'));// sku查询失败!
       }
     },
     confirm() {
       const self = this;
       if (self.data.length == 0) {
-        self.$Message.warning($it('modalTips.cg'));// sku不能为空!
+        self.$Message.warning($it('tip.cg'));// sku不能为空!
         return;
       }
       let result = {};
@@ -100,7 +100,7 @@ export default {
         result = self.componentData.a_1;
       } else if (self.radioValue == '2') {
         if (self.componentData.a_2.length == 0) {
-          self.$Message.warning($it('modalTips.zu'));// 请勾选订单数据!
+          self.$Message.warning($it('tip.zu'));// 请勾选订单数据!
           return;
         }
         result.ids = self.componentData.a_2;

@@ -178,12 +178,12 @@ export default {
     async save() {
       const _this = this;
       if (_this.information.formData[0].itemdata.pid === undefined || !_this.information.formData[0].itemdata.pid) {
-        _this.$Message.warning($it('modalTips.em'));
+        _this.$Message.warning($it('tip.em'));
         return;
       }
       // if (_this.tableSize > 1000) return _this.$Message.error('数量过大，请使用导入功能设置是否到达');
       if (_this.tableSize > 1000) {
-        _this.$Message.error($it('modalTips.y3'));
+        _this.$Message.error($it('tip.y3'));
         return;
       }
       _this.dataArr.forEach(item => {
@@ -231,7 +231,7 @@ export default {
         });
         this.synchronous();
       } else {
-        const err = message || $it('modalTips.y0'); // '保存失败';
+        const err = message || $it('tip.y0'); // '保存失败';
         _this.$Message.error(err);
         this.synchronous();
       }
@@ -251,11 +251,11 @@ export default {
       console.log(code, message, data);
       _this.loading = false;
       if (code === 0) {
-        const ess = message || $it('modalTips.y4'); // 作废成功
+        const ess = message || $it('tip.y4'); // 作废成功
         _this.getTree('', _this._objid);
         _this.$Message.success(ess);
       } else {
-        const err = message || $it('modalTips.y5'); // 作废失败
+        const err = message || $it('tip.y5'); // 作废失败
         _this.$Message.error(err);
       }
     },
@@ -390,7 +390,7 @@ export default {
           }
         });
       } else {
-        // _this.$Message.error(message || $it('modalTips.z3')); // 失败
+        // _this.$Message.error(message || $it('tip.z3')); // 失败
       }
     },
     // 同步table数据
@@ -497,11 +497,11 @@ export default {
       } = await this.service.strategyPlatform.exportExpressAreaItem(param);
       console.log(code, message, data);
       if (code === 0) {
-        const ess = message || $it('modalTips.z2'); // 导出成功
+        const ess = message || $it('tip.z2'); // 导出成功
         _this.$Message.success(ess);
         $omsUtils.downloadUrlFile(data);
       } else {
-        // const err = message || $it('modalTips.y6'); // 导出失败
+        // const err = message || $it('tip.y6'); // 导出失败
         // _this.$Message.success(err);
         $omsUtils.downloadUrlFile(data);
       }

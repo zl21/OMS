@@ -132,12 +132,12 @@ export default {
       const self = this;
       if (self.tableConfig.data.length == 0) {
         // sku不能为空!
-        self.$Message.warning($it('modalTips.cg'));
+        self.$Message.warning($it('tip.cg'));
         return;
       }
       if (!this.currentSkuEcode) {
         // 请选中一条单据!
-        self.$Message.warning($it('modalTips.d8'));
+        self.$Message.warning($it('tip.d8'));
         return;
       }
       console.log(this.componentData);

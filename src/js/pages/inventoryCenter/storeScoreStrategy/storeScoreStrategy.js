@@ -219,7 +219,7 @@ export default {
         fromdata.append('phyWarehouseId', storeId.join(','));
         this.service.inventoryCenter.deleteByStoreIds(fromdata).then((res) => {
           if (res.data.code === 0) {
-            this.$Message.success(window.$it('modalTips.ay')); // '删除成功'
+            this.$Message.success(window.$it('tip.ay')); // '删除成功'
             this.queryByPhyWarehouseId()
           }
         })

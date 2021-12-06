@@ -89,7 +89,7 @@ export default {
             onOpenChange: (flag) => {
               const _this = this;
               if (flag && !_this.formConfig1.formValue.CP_C_SHOP_ID) {
-                _this.$Message.warning($it('modalTips.hz')); // 请先选择店铺
+                _this.$Message.warning($it('tip.hz')); // 请先选择店铺
                 return;
               }
             },
@@ -498,7 +498,7 @@ export default {
         this.$Modal.info({
           className: 'ark-dialog',
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定

@@ -168,7 +168,7 @@ export default {
         }
       }
       if (promptMessage) {
-        this.$Message.warning(promptMessage + $it('modalTips.y1')); // 不能为空
+        this.$Message.warning(promptMessage + $it('tip.y1')); // 不能为空
         return;
       }
       const fromdata = new FormData();

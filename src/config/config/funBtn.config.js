@@ -1382,7 +1382,7 @@ class BtnConfig {
         if (![1].includes(item.ORDER_STATUS)) {
           // 当前状态异常，不允许操作！
           // $utils.msgTips(self, 'warning', 'd9')
-          self.$Message.warning($it('modalTips.kh')) // 只允许待审核的订单进行取消合并！
+          self.$Message.warning($it('tip.kh')) // 只允许待审核的订单进行取消合并！
           self.btnConfig.loading = false
           return
         }
@@ -1430,7 +1430,7 @@ class BtnConfig {
       // 已取消，系统作废, // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
       if ([7, 8, 1, 2, 3, 4, 50, 21].includes(orderDetails.ORDER_STATUS)) {
         let tips = [7, 8].includes(orderDetails.ORDER_STATUS) ? 'b7' : 'b8'
-        let fixTips = `${orderDetails.ID}${$it(`modalTips.${tips}`)}`
+        let fixTips = `${orderDetails.ID}${$it(`tip.${tips}`)}`
         $utils.msgTips(self, 'warning', fixTips, 2)
       } else if ([5, 6].includes(orderDetails.ORDER_STATUS)) {
         $utils.msgTips(self, 'warning', 'h2') // "订单状态为仓库发货和平台发货才能新增退单!"
@@ -1532,7 +1532,7 @@ class BtnConfig {
           $utils.msgTips(self, 'sucess', res.data.message)
           self.getList(self.statusTab)
         } else {
-          const err = res.data.message || $it('modalTips.l9') // 虚拟仓库入库失败！
+          const err = res.data.message || $it('tip.l9') // 虚拟仓库入库失败！
           let renderInfo = {
             props: {
               columns: [

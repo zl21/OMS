@@ -404,7 +404,7 @@ export default {
       if (self.selection.length) {
         // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
         if (this.isExport) {
-          this.$Message.error($it('modalTips.f8'));
+          this.$Message.error($it('tip.f8'));
           return;
         }
         this.isExport = true;
@@ -418,17 +418,17 @@ export default {
         this.service.orderCenter.exportOcBRefundIn(idList).then(res => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || $it('modalTips.z2');
+            const mes = res.data.message || $it('tip.z2');
             self.$Message.success(mes);
             $omsUtils.downloadUrlFile(res.data.data);
           } else {
-            const err = res.data.message || $it('modalTips.z3');
+            const err = res.data.message || $it('tip.z3');
             self.$Message.error(err);
           }
         });
       } else {
         if (self.agTableConfig.rowData.length === 0) {
-          self.$Message.error($it('modalTips.z4'));
+          self.$Message.error($it('tip.z4'));
           return;
         }
         self.warningModal = true;
@@ -439,7 +439,7 @@ export default {
       const self = this;
       // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
       if (this.isExport) {
-        this.$Message.error($it('modalTips.f8'));
+        this.$Message.error($it('tip.f8'));
         return;
       }
       this.isExport = true;
@@ -450,13 +450,13 @@ export default {
         self.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
           // let mes = res.data.message || "导出成功！";
-          const mes = res.data.message || $it('modalTips.z2');
+          const mes = res.data.message || $it('tip.z2');
           self.$Message.success(mes);
           // return (window.location = res.data.data);
           $omsUtils.downloadUrlFile(res.data.data);
         } else {
           // let err = res.data.message || "失败！";
-          const err = res.data.message || $it('modalTips.z3');
+          const err = res.data.message || $it('tip.z3');
           self.$Message.error(err);
         }
       });

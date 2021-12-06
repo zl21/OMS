@@ -1047,13 +1047,13 @@ export default {
         _this.fromOrder(listData, true);
       } else {
         if (this.order.table.selectArr.length != 1) {
-          _this.$Message.warning(window.$it('modalTips.i7')); // 请选择一条数据！
+          _this.$Message.warning(window.$it('tip.i7')); // 请选择一条数据！
           return false;
         }
         _this.onSelectData = this.order.table.selectArr[0];
 
         // if (JSON.stringify(_this.onSelectData) == '{}') {
-        //   _this.$Message.warning(window.$it('modalTips.i7')); // 请选择一条数据！
+        //   _this.$Message.warning(window.$it('tip.i7')); // 请选择一条数据！
         //   return;
         // }
         console.log(_this.onSelectData.QUERYORDERITEMRESULTLIST);
@@ -1095,7 +1095,7 @@ export default {
       //   return;
       // }
       if (!lists.bill_no && !lists.source_code && !lists.receiver_name && !lists.user_nick && !lists.receiver_mobile && !lists.cp_c_store_ename && num === undefined) {
-        _this.$Message.error($it('modalTips.i8')); // 请输入查询条件！
+        _this.$Message.error($it('tip.i8')); // 请输入查询条件！
         return;
       }
       _this.order.table.loading = true;
@@ -1175,7 +1175,7 @@ export default {
           }
         })
         .catch(() => {
-          _this.$Message.info($it('modalTips.i9')); // 查询不到数据!
+          _this.$Message.info($it('tip.i9')); // 查询不到数据!
           _this.order.table.loading = false;
         });
     },
@@ -1183,14 +1183,14 @@ export default {
       const self = this;
       const flag = self.isNull();
       if (flag !== '') {
-        self.$Message.warning(`${flag},${$it('modalTips.y1')}`);
+        self.$Message.warning(`${flag},${$it('tip.y1')}`);
         return;
       }
       const data = {};
       data.objId = self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid ? -1 : self.$route.params.customizedModuleId;
       const AfSend = self.getForm();
       if (AfSend.VIP_PHONE && !/^1[3456789]\d{9}$/.test(AfSend.VIP_PHONE)) {
-        self.$Message.warning($it('modalTips.j0')); // 请输入正确的买家手机号
+        self.$Message.warning($it('tip.j0')); // 请输入正确的买家手机号
         return;
       }
       AfSend.ID = self.$route.query.cid || self.$route.params.customizedModuleId === 'New' ? '-1' : self.$route.params.customizedModuleId;
@@ -1379,7 +1379,7 @@ export default {
       for (let i = 0; i < this.reForm.config.length; i++) {
         if (self.reForm.config[i].item.label == '原始订单编号') {
           if (!self.reForm.config[i].item.props.value) {
-            self.$Message.warning($it('modalTips.j1')); // 原始订单编号不能为空!
+            self.$Message.warning($it('tip.j1')); // 原始订单编号不能为空!
             return;
           }
           requestData.highSearch[0].value = self.reForm.config[i].item.props.value;
@@ -1391,7 +1391,7 @@ export default {
         if (res.data.code == 0) {
           const arr = [];
           if (!res.data.data) {
-            return this.$Message.error($it('modalTips.j2'));
+            return this.$Message.error($it('tip.j2'));
           } // 没有明细可新增
           //  res.data.data.queryOrderResultList[0].QUERYORDERITEMRESULTLIST = self.filter( res.data.data.queryOrderResultList[0].QUERYORDERITEMRESULTLIST)
           res.data.data.queryOrderResultList[0].QUERYORDERITEMRESULTLIST.forEach(item => {
@@ -1566,11 +1566,11 @@ export default {
       // 删除明细
       const self = this;
       if (self.delTableData.length == 0) {
-        self.$Message.warning($it('modalTips.j3')); // 请选择需要删除的明细!
+        self.$Message.warning($it('tip.j3')); // 请选择需要删除的明细!
         return;
       }
       if (self.delTableData.length == self.tableConfig.data.length) {
-        self.$Message.warning($it('modalTips.j4')); // 至少保留一条明细,不允许全部删除
+        self.$Message.warning($it('tip.j4')); // 至少保留一条明细,不允许全部删除
         return;
       }
       if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid) {
@@ -1595,7 +1595,7 @@ export default {
         // 编辑状态,删除明细
         this.$Modal.fcError({
           title: $it('mT.deleteDetails'), // 删除明细
-          content: $it('modalTips.j5'), // 确定删除所选明细?
+          content: $it('tip.j5'), // 确定删除所选明细?
           onOk: () => {
             const data = {};
             const arr = [];
@@ -1820,7 +1820,7 @@ export default {
             }));
           });
         } else {
-          this.$Message.error($it('modalTips.j6')); // 退款描述请求失败
+          this.$Message.error($it('tip.j6')); // 退款描述请求失败
         }
       });
     },
@@ -1858,9 +1858,9 @@ export default {
       }
       // 卖家备注数据补偿
       this.sellerRemarkCompensation();
-      this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${$it('modalTips.j7')}${sellerRemarkData.SOURCE_CODE}${$it('modalTips.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${$it(
-        'modalTips.j9'
-      )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${$it('modalTips.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${$it('modalTips.k1')}`;
+      this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${$it('tip.j7')}${sellerRemarkData.SOURCE_CODE}${$it('tip.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${$it(
+        'tip.j9'
+      )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${$it('tip.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${$it('tip.k1')}`;
       // 亲，您好！您的订单号
       // 因为
       // 原因，给您申请
@@ -1924,9 +1924,9 @@ export default {
       sellerRemarkData.AMT_RETURN_APPLY = newValue;
       // 卖家备注数据补偿
       this.sellerRemarkCompensation();
-      this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${$it('modalTips.j7')}${sellerRemarkData.SOURCE_CODE}${$it('modalTips.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${$it(
-        'modalTips.j9'
-      )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${$it('modalTips.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${$it('modalTips.k1')}`;
+      this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${$it('tip.j7')}${sellerRemarkData.SOURCE_CODE}${$it('tip.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${$it(
+        'tip.j9'
+      )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${$it('tip.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${$it('tip.k1')}`;
       // 亲，您好！您的订单号
       // 因为
       // 原因，给您申请

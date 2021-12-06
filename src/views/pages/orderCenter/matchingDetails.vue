@@ -140,7 +140,7 @@ export default {
         let person = this.tableConfig.data.filter((em) => em._checked == true);
 
         if (person.length == 0) {
-          this.$Message.warning($it('modalTips.jt'));
+          this.$Message.warning($it('tip.jt'));
           //"未做任何修改！")
           return;
         }
@@ -183,11 +183,11 @@ export default {
                     props: {
                       columns: [
                         {
-                          title: $it('modalTips.jn'), //"失败明细", // '提示信息',
+                          title: $it('tip.jn'), //"失败明细", // '提示信息',
                           key: 'key',
                         },
                         {
-                          title: $it('modalTips.jv'), //'失败信息！', // '错误信息',
+                          title: $it('tip.jv'), //'失败信息！', // '错误信息',
                           key: 'message',
                         },
                       ],
@@ -244,7 +244,7 @@ export default {
     emptyTabledata() {
       //清楚退单逻辑
       if (this.tebdata.length == 0) {
-        this.$Message.warning($it('modalTips.gr'));
+        this.$Message.warning($it('tip.gr'));
         return;
       }
 
@@ -254,11 +254,11 @@ export default {
           errArr.push({
             id: v.ID,
             index: v.index,
-            message: $it('modalTips.gs'), //"已匹配退货单号，不允许清除！"
+            message: $it('tip.gs'), //"已匹配退货单号，不允许清除！"
           });
           continue;
         } else if (v.OC_B_RETURN_ORDER_BILL_NO == '' && v.IS_MATCH == '否') {
-          this.$Message.warning($it('modalTips.kp'));
+          this.$Message.warning($it('tip.kp'));
         } else {
           this.tableConfig.data.forEach((item) => {
             if (item.ID == v.ID) {
@@ -287,14 +287,14 @@ export default {
         //校验是否有退货单号
         if (v.OC_B_RETURN_ORDER_BILL_NO && !v._checked) {
           this.closetab(false);
-          this.$Message.warning($it('modalTips.gt'));
+          this.$Message.warning($it('tip.gt'));
           //'存在明细已经匹配退货单，请重新进行选择！');
           return;
         }
       }
       //存在已匹配的明细，请重新选择！
       if (this.tebdata.length == 0) {
-        this.$Message.warning($it('modalTips.gr'));
+        this.$Message.warning($it('tip.gr'));
         //'请选中一条数据！');
         return;
       }
@@ -400,7 +400,7 @@ export default {
                   errArr.push({
                     index: item.index,
                     code: item.PS_C_SKU_ECODE,
-                    message: $it('modalTips.hs'),
+                    message: $it('tip.hs'),
                     //"条码一致，请走手工匹配！"
                   });
                 }
@@ -421,7 +421,7 @@ export default {
                   errArr.push({
                     index: item.index,
                     code: item.PS_C_SKU_ECODE,
-                    message: $it('modalTips.gu'),
+                    message: $it('tip.gu'),
                     //"没有匹配到退货单明细"
                   });
                 }
@@ -444,15 +444,15 @@ export default {
         //1表示手工和强制的错误信息 2表示清楚的错误信息
         columns = [
           {
-            title: $it('modalTips.gx'), //"失败序号", // '提示信息',
+            title: $it('tip.gx'), //"失败序号", // '提示信息',
             key: 'index',
           },
           {
-            title: $it('modalTips.gy'), //"失败SKU", // '错误信息',
+            title: $it('tip.gy'), //"失败SKU", // '错误信息',
             key: 'code',
           },
           {
-            title: $it('modalTips.gw'), // "失败原因！", // '错误信息',
+            title: $it('tip.gw'), // "失败原因！", // '错误信息',
             key: 'message',
           },
         ];
@@ -460,11 +460,11 @@ export default {
       } else {
         columns = [
           {
-            title: $it('modalTips.gx'), //"失败序号", // '提示信息',
+            title: $it('tip.gx'), //"失败序号", // '提示信息',
             key: 'index',
           },
           {
-            title: $it('modalTips.gw'), //"失败原因！", // '错误信息',
+            title: $it('tip.gw'), //"失败原因！", // '错误信息',
             key: 'message',
           },
         ];

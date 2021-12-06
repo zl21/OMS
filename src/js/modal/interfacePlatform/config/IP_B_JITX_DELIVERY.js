@@ -99,17 +99,17 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.query_date
     if (!start) {
-      self.$Message.warning($it('modalTips.hd')); // 请选择下单时间
+      self.$Message.warning($it('tip.hd')); // 请选择下单时间
       return false;
     }
     const timeDiff = (end - start) > 1800000;
     if (timeDiff) {
-      self.$Message.warning($it('modalTips.he')); // 下单时间范围不能超过半小时，请重新设置！
+      self.$Message.warning($it('tip.he')); // 下单时间范围不能超过半小时，请重新设置！
       return false;
     }
     const param = {

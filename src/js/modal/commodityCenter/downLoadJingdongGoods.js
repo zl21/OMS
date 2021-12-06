@@ -133,8 +133,8 @@ export default {
     async download() {
       const self = this;
       const formValue = self.downLoadFormConfig.formValue;
-      if (!self.downLoadFormConfig.formData[0].itemdata.pid) return self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
-      if (formValue.shopID === '' && !self.timeConfig.data[0]) return self.$Message.warning($it('modalTips.bf'));// 商品ID和时间必填其中一个
+      if (!self.downLoadFormConfig.formData[0].itemdata.pid) return self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
+      if (formValue.shopID === '' && !self.timeConfig.data[0]) return self.$Message.warning($it('tip.bf'));// 商品ID和时间必填其中一个
       const param = {
         shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
         // item_num:formValue.articleNumber, // 货号

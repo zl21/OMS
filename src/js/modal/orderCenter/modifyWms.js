@@ -56,7 +56,7 @@ export default {
           }
         });
       } else {
-        self.$Message.warning($it('modalTips.el')); // '请输入传WMS拣货单字段!'
+        self.$Message.warning($it('tip.el')); // '请输入传WMS拣货单字段!'
       }
     }
   }

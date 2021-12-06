@@ -701,17 +701,17 @@ export default {
       const item = this.information.formValue;
       if (!item.OC_B_REFUND_BATCH_ID) {
         // this.$Message.warning("退货批次必填！");
-        this.$Message.warning($it('modalTips.p1'));
+        this.$Message.warning($it('tip.p1'));
         return;
       }
       if (!item.SPECIAL_TYPE) {
         // this.$Message.warning("特殊处理类型必填！");
-        this.$Message.warning($it('modalTips.p2'));
+        this.$Message.warning($it('tip.p2'));
         return;
       }
       if (!this.jordanTableConfig.data.length) {
         // this.$Message.warning("退货入库明细不能为空！");
-        this.$Message.warning($it('modalTips.p3'));
+        this.$Message.warning($it('tip.p3'));
         return;
       }
       const dataArr = JSON.parse(JSON.stringify(this.jordanTableConfig.data));
@@ -941,7 +941,7 @@ export default {
         !lists.logistics_code
       ) {
         // _this.$Message.error("请输入查询条件！");
-        _this.$Message.error($it('modalTips.i8'));
+        _this.$Message.error($it('tip.i8'));
         return;
       }
       _this.order.table.loading = true;
@@ -979,7 +979,7 @@ export default {
       _this.jordanTableConfig.data = [];
       if (!this.onSelectData.length) {
         // _this.$Message.error("请选择一条数据！");
-        _this.$Message.error($it('modalTips.i7'));
+        _this.$Message.error($it('tip.i7'));
         return;
       }
       const data = _this.information.formValue;

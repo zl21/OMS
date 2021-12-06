@@ -136,7 +136,7 @@
     <!-- 导出 -->
     <Modal v-model="warningModal" :mask="true" :title="$it('mT.tips')" width="420" @on-ok="warningOk">
       <!-- <p>是否确认导出？</p> -->
-      <p>{{ $it('modalTips.y2') }}</p>
+      <p>{{ $it('tip.y2') }}</p>
     </Modal>
   </div>
 </template>

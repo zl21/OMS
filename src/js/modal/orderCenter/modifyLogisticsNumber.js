@@ -56,7 +56,7 @@ export default {
           }
         });
       } else {
-        self.$Message.warning($it('modalTips.ek')); // '请输入物流单号!'
+        self.$Message.warning($it('tip.ek')); // '请输入物流单号!'
       }
     }
   }

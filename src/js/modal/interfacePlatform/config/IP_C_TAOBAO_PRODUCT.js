@@ -55,12 +55,12 @@ export default {
   determine: async (self) => {
     const formValue = self.downLoadFormConfig.formValue;
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.timeArr
     if (!(formValue.numNumber || start)) {
-      self.$Message.warning($it('modalTips.bx'));// 请输入需要下载的数字编号或修改时间中的一个
+      self.$Message.warning($it('tip.bx'));// 请输入需要下载的数字编号或修改时间中的一个
       return false;
     }
     const param = {

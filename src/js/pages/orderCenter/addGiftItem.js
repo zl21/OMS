@@ -99,14 +99,14 @@ export default {
               let reqdata = JSON.parse(JSON.stringify(this.tabdata))
               if (this.componentData.type == 2) {
                 if (!this.rowlist) {
-                  this.$Message.error($it('modalTips.gr'));
+                  this.$Message.error($it('tip.gr'));
                   return
                 }
                 reqdata.RETURN_ORDER_ITEM_LIST = this.rowlist
               }
 
               if (reqdata.length == 0) {
-                this.$Message.error($it('modalTips.gr'));
+                this.$Message.error($it('tip.gr'));
                 return
               }
 

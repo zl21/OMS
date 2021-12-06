@@ -229,7 +229,7 @@ export default {
       } catch (error) {
         // self.$message({ type: "error", message: "获取促销详情异常" });
         self.loading = false;
-        // self.$Message.error($it('modalTips.r4'));
+        // self.$Message.error($it('tip.r4'));
       }
     },
     /**
@@ -258,11 +258,11 @@ export default {
           data: { code, data, message }
         } = await this.service.promotionCenter.savePm(formData);
         if (code === 0) {
-          // this.$Message.message($it('modalTips.z9'));
+          // this.$Message.message($it('tip.z9'));
           $utils.msgTips(this, 'success', message, 0);
           /* this.$message({
             type: 'success',
-            message: $it('modalTips.z9') // 保存成功
+            message: $it('tip.z9') // 保存成功
           }); */
           // action never used
           // let action = 'customize/switchActiveTab';
@@ -390,13 +390,13 @@ export default {
         if (!o) {
           return {
             code: -1,
-            message: $it('modalTips.r5') // 【满足条件】至少要选中一项并且填写数量或金额条件
+            message: $it('tip.r5') // 【满足条件】至少要选中一项并且填写数量或金额条件
           };
         }
       }
       let rs = {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
       if (this.basic_info.activity_type === 'GA') {
         // 指定
@@ -406,7 +406,7 @@ export default {
           if (arrs.length === 0) {
             return {
               code: -1,
-              message: tablename + $it('modalTips.r6')
+              message: tablename + $it('tip.r6')
             };
           } // 无数据
           rs = this.checkTable(arrs);
@@ -417,7 +417,7 @@ export default {
           if (arrs.length === 0) {
             return {
               code: -1,
-              message: tablename + $it('modalTips.r6')
+              message: tablename + $it('tip.r6')
             };
           } // 无数据
           rs = this.checkTableTab(arrs, 'info');
@@ -432,7 +432,7 @@ export default {
       const tablename = $it('other.gift_list');
       let rs = {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 赠品列表
       if (this.basic_info.gradient_gift === '0') {
         // 不梯度
@@ -440,7 +440,7 @@ export default {
         if (arrs.length === 0) {
           return {
             code: -1,
-            message: tablename + $it('modalTips.r6')
+            message: tablename + $it('tip.r6')
           };
         }
         rs = this.checkTable(arrs);
@@ -450,7 +450,7 @@ export default {
         if (arrs.length === 0) {
           return {
             code: -1,
-            message: tablename + $it('modalTips.r6')
+            message: tablename + $it('tip.r6')
           };
         };
         for (const iterator of arrs) {
@@ -462,7 +462,7 @@ export default {
         if (flag) {
           return {
             code: -1,
-            message: tablename + $it('modalTips.r6')
+            message: tablename + $it('tip.r6')
           };
         }
         rs = this.checkTableTab(arrs, 'gift');
@@ -514,7 +514,7 @@ export default {
       }
       return {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       };
     },
     checkTable(rows) {
@@ -532,7 +532,7 @@ export default {
       }
       return {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       };
     },
   },

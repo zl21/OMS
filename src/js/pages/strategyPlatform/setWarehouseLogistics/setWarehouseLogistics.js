@@ -111,12 +111,12 @@ export default {
           if (this.$route.params.customizedModuleId !== 'New') {
             if (_this.listArr.length == 0) {
               // _this.$Message.warning("请选择物流区域!");
-              _this.$Message.warning($it('modalTips.y7'));
+              _this.$Message.warning($it('tip.y7'));
               return;
             }
             if (_this.theadArr.length == 0) {
               // _this.$Message.warning("请选择区域物流!");
-              _this.$Message.warning($it('modalTips.y7'));
+              _this.$Message.warning($it('tip.y7'));
               return;
             }
             if (_this.listArr.length > 0) {
@@ -134,7 +134,7 @@ export default {
               });
               if (text) {
                 // _this.saveModalText = `${text}的物流优先级为空,保存会导致该数据删除,是否确认保存?`;
-                _this.saveModalText = `${text}${$it('modalTips.y8')}`;
+                _this.saveModalText = `${text}${$it('tip.y8')}`;
                 _this.saveModal = true;
               } else {
                 _this.save();
@@ -299,7 +299,7 @@ export default {
         .then(res => {
 
           if (res.data.oK) {
-            _this.$Message.success($it('modalTips.z9')); // 保存成功
+            _this.$Message.success($it('tip.z9')); // 保存成功
             if (this.$route.params.customizedModuleId !== 'New') {
               this.refresh();
             } else {
@@ -317,7 +317,7 @@ export default {
           }
         })
         .catch(error => {
-          const err = error || $it('modalTips.y0'); // 保存失败
+          const err = error || $it('tip.y0'); // 保存失败
           _this.$Message.error(err);
           // _this.refresh();
         }).finally(() => {
@@ -464,7 +464,7 @@ export default {
           setTimeout(() => {
             item[index].rank = '';
             // this.$Message.info("优先级设置重复");
-            this.$Message.info($it('modalTips.y9'));
+            this.$Message.info($it('tip.y9'));
           }, 200);
           return;
         }
@@ -502,7 +502,7 @@ export default {
         });
       } else {
         _this.$Message.error(
-          data.message || $it('modalTips.z3') // 失败
+          data.message || $it('tip.z3') // 失败
         );
       }
     },
@@ -522,11 +522,11 @@ export default {
       } = await this.service.strategyPlatform.voidWarehouseLogistics(fromData);
       _this.loading = false;
       if (code === 0) {
-        const ess = data.message || $it('modalTips.y4'); // 作废成功
+        const ess = data.message || $it('tip.y4'); // 作废成功
         _this.getTreeData();
         _this.$Message.success(ess);
       } else {
-        const err = message || $it('modalTips.y4'); // 作废失败
+        const err = message || $it('tip.y4'); // 作废失败
         _this.$Message.success(err);
       }
     },
@@ -557,11 +557,11 @@ export default {
       } = await this.service.strategyPlatform.exportWarehouseLogisticsRank(param);
       console.log(code, data);
       if (code === 0) {
-        const ess = data.message || $it('modalTips.z2'); // 导出成功
+        const ess = data.message || $it('tip.z2'); // 导出成功
         _this.$Message.success(ess);
         $omsUtils.downloadUrlFile(data);
       } else {
-        const err = data.message || $it('modalTips.y6'); // 导出失败
+        const err = data.message || $it('tip.y6'); // 导出失败
         _this.$Message.success(err);
         $omsUtils.downloadUrlFile(data);
       }

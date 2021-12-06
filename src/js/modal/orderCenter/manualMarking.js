@@ -200,7 +200,7 @@ export default {
           if (res.data.code === 0) {
             // this.$Message.success(res.data.message || "会员加急发货打标成功");
             this.$Message.success(
-              res.data.message || $it('modalTips.yd')
+              res.data.message || $it('tip.yd')
             );
             this.$parent.$parent.$parent.selection = [];
             this.$parent.$parent.$parent.getData();

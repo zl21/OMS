@@ -845,11 +845,11 @@ export default {
               const self = this;
               self.address = parse(self.replacement.formValue.message);
               if (!self.information.formValue.ORIG_ORDER_ID) {
-                self.$Message.warning($it('modalTips.n3')); // 请先填入原订单信息
+                self.$Message.warning($it('tip.n3')); // 请先填入原订单信息
                 return;
               }
               if (Object.values(self.address).includes('')) {
-                self.$Message.warning($it('modalTips.f9')); // 请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX
+                self.$Message.warning($it('tip.f9')); // 请填入完整信息,如:XX,17788888888,上海上海市闵行区XXXXXXXXXXX
               } else {
                 self.replacement.formValue.RECEIVE_NAME = self.address.name; // 收货人赋值
                 self.replacement.formValue.RECEIVE_PHONE = self.address.phone;
@@ -860,7 +860,7 @@ export default {
                   if (res.data.code === 0) {
                     self.getQueryResionByName(res.data.data);
                   } else {
-                    self.$Message.warning($it('modalTips.n4')); // 省市区id获取失败
+                    self.$Message.warning($it('tip.n4')); // 省市区id获取失败
                   }
                 });
               }
@@ -1411,7 +1411,7 @@ export default {
               }
             } else {
               // 复制退单失败!
-              const err = res.data.message || $it('modalTips.n5');
+              const err = res.data.message || $it('tip.n5');
               _this.$Message.error(err);
             }
           });
@@ -1624,7 +1624,7 @@ export default {
           _this.setDisplayByReturnOrder(res.data.data.returnOrders);
         } else {
           // 获取详情失败!
-          const err = res.data.message || $it('modalTips.n6');
+          const err = res.data.message || $it('tip.n6');
           _this.$Message.error(err);
         }
       });
@@ -3028,7 +3028,7 @@ export default {
                     const self = this;
                     /* if (!self.information.formData[14].itemdata.pid) {
                       // 发货店仓，不能为空
-                      self.$Message.warning($it('modalTips.g0'));
+                      self.$Message.warning($it('tip.g0'));
                       return;
                     } */
                     self.matrixBox.componentData = {
@@ -3050,7 +3050,7 @@ export default {
                     const self = this;
                     /* if (!self.information.formData[14].itemdata.pid) {
                       // 发货店仓，不能为空
-                      self.$Message.warning($it('modalTips.g0'));
+                      self.$Message.warning($it('tip.g0'));
                       return;
                     } */
                     self.matrixBox.componentData = {
@@ -3184,18 +3184,18 @@ export default {
       // 传WMS成功的单据不允许修改
       if (_this.isTowwms == 2 && _this.$route.query.flag !== 'RefundToExchange') {
         // 传WMS成功状态的单据不可修改！
-        this.$Message.warning($it('modalTips.n7'));
+        this.$Message.warning($it('tip.n7'));
         return;
       }
       // 只有等待退货入库和等待售后确认状态的可以修改
       if (_this.$route.query.id !== '-1' && _this.$route.query.flag !== 'RefundToExchange') {
         if (![20, 30, 50].includes(_this.status) || (_this.status == 50 && _this.inventedStatus != 1)) {
           // "只有等待退货入库和等待售后确认状态的单据 或 完成状态且虚拟入库未入库状态的单据可修改!"
-          this.$Message.warning($it('modalTips.n8'));
+          this.$Message.warning($it('tip.n8'));
           return;
         }
         if (_this.status == 20 && _this.isTowwms == 2) {
-          this.$Message.warning($it('modalTips.n9')); // "等待退货入库且传WMS成功状态的单据不可修改！"
+          this.$Message.warning($it('tip.n9')); // "等待退货入库且传WMS成功状态的单据不可修改！"
           return;
         }
       }
@@ -3204,11 +3204,11 @@ export default {
       }
       if (!_this.information.formValue.ORIG_ORDER_ID) {
         // 原始订单编号不能为空!
-        this.$Message.warning($it('modalTips.j1'));
+        this.$Message.warning($it('tip.j1'));
         return;
       }
       if (!_this.information.formValue.CP_C_SHOP_ID) {
-        this.$Message.warning($it('modalTips.o0'));
+        this.$Message.warning($it('tip.o0'));
         return; // 店铺名称不能为空!
       }
       /* if (!_this.information.formValue.CP_C_LOGISTICS_ID) {
@@ -3230,56 +3230,56 @@ export default {
       if (_this.information.formValue.BILL_TYPE !== '1') {
         // 换货类型校验
         if (!_this.replacement.formValue.receiver_province_id || !_this.replacement.formValue.receiver_city_id) {
-          this.$Message.warning($it('modalTips.aa')); // 省市信息必填!
+          this.$Message.warning($it('tip.aa')); // 省市信息必填!
           return;
         }
         if (_this.replacement.formValue.RECEIVE_NAME.length > 50) {
-          this.$Message.warning($it('modalTips.ab')); // 收货人姓名不合法，请重新填写！
+          this.$Message.warning($it('tip.ab')); // 收货人姓名不合法，请重新填写！
           return;
         }
         if (!_this.replacement.formValue.RECEIVE_NAME) {
-          this.$Message.warning($it('modalTips.ac')); // 收货人必填!
+          this.$Message.warning($it('tip.ac')); // 收货人必填!
           return;
         }
         const phone = _this.replacement.formValue.RECEIVE_MOBILE;
         if (!phone) {
-          this.$Message.warning($it('modalTips.ad')); // 收货人手机必填!
+          this.$Message.warning($it('tip.ad')); // 收货人手机必填!
           return;
         }
         if (phone.indexOf(1) != 0 || phone.length != 11) {
-          this.$Message.warning($it('modalTips.ae')); // 电话号码不合法，请重新填写！
+          this.$Message.warning($it('tip.ae')); // 电话号码不合法，请重新填写！
           return;
         }
         if (!_this.replacement.formValue.RECEIVE_ADDRESS) {
-          this.$Message.warning($it('modalTips.af')); // 收货人地址必填!
+          this.$Message.warning($it('tip.af')); // 收货人地址必填!
           return;
         }
         if (!_this.refundDtoList.data.length) {
-          this.$Message.info($it('modalTips.ag')); // 退货明细必须有行数据！
+          this.$Message.info($it('tip.ag')); // 退货明细必须有行数据！
           return;
         }
         if (!_this.exchangeDtoList.data.length) {
-          this.$Message.info($it('modalTips.ah')); // 换货明细必须有行数据！
+          this.$Message.info($it('tip.ah')); // 换货明细必须有行数据！
           return;
         }
         if (_this.returnTotalAmount != 0) {
-          this.$Message.info($it('modalTips.ai')); // 换货金额必须等于退货金额！
+          this.$Message.info($it('tip.ai')); // 换货金额必须等于退货金额！
           return;
         }
       } else {
         if (!_this.refundDtoList.data.length) {
-          this.$Message.info($it('modalTips.ag')); // 退货明细必须有行数据！
+          this.$Message.info($it('tip.ag')); // 退货明细必须有行数据！
           return;
         }
         if (parseInt(_this.returnTotalAmount) < 0) {
-          this.$Message.info($it('modalTips.aj')); // 退货总金额不能小于0，请修改后重新保存！
+          this.$Message.info($it('tip.aj')); // 退货总金额不能小于0，请修改后重新保存！
           return;
         }
       }
       if (_this.replacement.formValue.SHIP_AMT) {
         const n = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
         if (!n.test(_this.replacement.formValue.SHIP_AMT)) {
-          this.$Message.warning($it('modalTips.ak')); // 请输入正确的换货邮费!
+          this.$Message.warning($it('tip.ak')); // 请输入正确的换货邮费!
           return;
         }
       }
@@ -3306,20 +3306,20 @@ export default {
       let item = (_this.returnSelectData.length) ? _this.returnSelectData : _this.refundDtoList.data;
       for (let i = 0; i < item.length; i++) {
         if (!item[i].QTY_REFUND) {
-          // _this.$Message.error($it('modalTips.al')); // 退货明细数量不能为空
+          // _this.$Message.error($it('tip.al')); // 退货明细数量不能为空
           _this.$Message.error('申请数量不能为空！'); // 退货明细数量不能为空
           return;
         }
         if (!item[i].PS_C_CLR_ID) {
-          _this.$Message.error($it('modalTips.am')); // 退货明细颜色不能为空
+          _this.$Message.error($it('tip.am')); // 退货明细颜色不能为空
           return;
         }
         if (!item[i].PS_C_SIZE_ID) {
-          _this.$Message.error($it('modalTips.an')); // 退货明细尺码不能为空
+          _this.$Message.error($it('tip.an')); // 退货明细尺码不能为空
           return;
         }
         if (!item[i].PS_C_SKU_ECODE) {
-          _this.$Message.error($it('modalTips.ao')); // 退货明细条码不能为空
+          _this.$Message.error($it('tip.ao')); // 退货明细条码不能为空
           return;
         }
         Rlist.push({
@@ -3366,19 +3366,19 @@ export default {
       const Eitem = _this.exchangeDtoList.data;
       for (let i = 0; i < Eitem.length; i++) {
         if (!Eitem[i].QTY_EXCHANGE) {
-          _this.$Message.error($it('modalTips.ap')); // 换货明细换货数量不能为空
+          _this.$Message.error($it('tip.ap')); // 换货明细换货数量不能为空
           return;
         }
         if (!Eitem[i].PS_C_CLR_ID && Eitem[i].IS_GROUP != 'Y') {
-          _this.$Message.error($it('modalTips.aq')); // 换货明细颜色不能为空
+          _this.$Message.error($it('tip.aq')); // 换货明细颜色不能为空
           return;
         }
         if (!Eitem[i].PS_C_SIZE_ID && Eitem[i].IS_GROUP != 'Y') {
-          _this.$Message.error($it('modalTips.ar')); // 换货明细尺码不能为空
+          _this.$Message.error($it('tip.ar')); // 换货明细尺码不能为空
           return;
         }
         if (!Eitem[i].PS_C_SKU_ECODE) {
-          _this.$Message.error($it('modalTips.as')); // 换货明细条码不能为空
+          _this.$Message.error($it('tip.as')); // 换货明细条码不能为空
           return;
         }
         Elist.push({
@@ -3445,7 +3445,7 @@ export default {
                 _this.save(params);
               }
             } else {
-              const err = res.data.message || $it('modalTips.at'); // 可用库存查询失败!
+              const err = res.data.message || $it('tip.at'); // 可用库存查询失败!
               _this.$Message.error(err);
             }
           });
@@ -3464,7 +3464,7 @@ export default {
               _this.save(params);
             }
           } else {
-            const err = res.data.message || $it('modalTips.at'); // 可用库存查询失败!
+            const err = res.data.message || $it('tip.at'); // 可用库存查询失败!
             _this.$Message.error(err);
           }
         });
@@ -3492,7 +3492,7 @@ export default {
             commonUtils.navigateMain(res.data.objid, 'TabOpen', 'RETURNGOOD', 'pL.ReturnOrderDetails', { statusName: res.data.RETURN_STATUS_NAME })
           });
         } else {
-          const err = res.data.message || $it('modalTips.au'); // 新增退换货订单失败
+          const err = res.data.message || $it('tip.au'); // 新增退换货订单失败
           _this.$Message.error(err);
         }
       });
@@ -3591,7 +3591,7 @@ export default {
           }
           const lists = res.data.data.data || [];
           if (lists.length === 0) {
-            this.$message.error($it('modalTips.g6')); // 不存在该条码！
+            this.$message.error($it('tip.g6')); // 不存在该条码！
             return;
           }
           const obj = lists.length > 0 ? lists[0] : {};
@@ -3752,9 +3752,9 @@ export default {
     returnDeleteDetail() {
       const _this = this;
       if (_this.exchangeSelectData.length ||= true) {
-        _this.$Message.error($it('modalTips.aw')); // 请选择一条需要删除的明细!
+        _this.$Message.error($it('tip.aw')); // 请选择一条需要删除的明细!
       } else if (_this.returnSelectData.length > 1) {
-        _this.$Message.error($it('modalTips.ax')); // 不允许批量删除明细!
+        _this.$Message.error($it('tip.ax')); // 不允许批量删除明细!
       } else {
         const item = _this.jordanTableConfig.data;
         for (let i = 0; i < item.length; i++) {
@@ -3767,7 +3767,7 @@ export default {
             _this.refundDtoList.data = _this.jordanTableConfig.data;
             _this.amountReturned = _this.calculateMoney(_this.refundDtoList.data, 1).toFixed(2);
             _this.returnTotal();
-            _this.$Message.success($it('modalTips.ay')); // 删除成功
+            _this.$Message.success($it('tip.ay')); // 删除成功
             return;
           }
         }
@@ -3777,9 +3777,9 @@ export default {
     returnDeleteDetail2() {
       const _this = this;
       if (_this.exchangeSelectData.length ||= true) {
-        _this.$Message.error($it('modalTips.aw')); // 请选择一条需要删除的明细!
+        _this.$Message.error($it('tip.aw')); // 请选择一条需要删除的明细!
       } else if (_this.exchangeSelectData.length > 1) {
-        _this.$Message.error($it('modalTips.ax')); // 不允许批量删除明细!
+        _this.$Message.error($it('tip.ax')); // 不允许批量删除明细!
       } else {
         const item = _this.jordanTableConfig2.data;
         for (let i = 0; i < item.length; i++) {
@@ -3789,7 +3789,7 @@ export default {
             _this.exchangeDtoList.data = _this.jordanTableConfig2.data;
             _this.exchangeAmount = _this.calculateMoney(_this.exchangeDtoList.data, 2).toFixed(2);
             _this.returnTotal();
-            _this.$Message.success($it('modalTips.ay')); // 删除成功
+            _this.$Message.success($it('tip.ay')); // 删除成功
             return;
           }
         }
@@ -3802,7 +3802,7 @@ export default {
       const lists = _this.order.orderform.formValue;
       if ((lists.ID ||= true) && (lists.BILL_NO ||= true) && (lists.source_code ||= true) && (lists.receiver_name || true) &&
         (lists.user_nick || true) && (lists.receiver_mobile || true) && (lists.cp_c_store_ename || true) && num == undefined) {
-        _this.$Message.error($it('modalTips.i8')); // 请输入查询条件！
+        _this.$Message.error($it('tip.i8')); // 请输入查询条件！
         return;
       }
       _this.order.table.loading = true;
@@ -3936,14 +3936,14 @@ export default {
       this.service.orderCenter.getOrderList(fromdata).then((res) => {
         if (res.data.data.queryOrderResultList.length != 1) {
           // 原始平台单号存在多条记录，请用订单编号查询！
-          _this.$Message.error($it('modalTips.az'));
+          _this.$Message.error($it('tip.az'));
           return;
         }
         if (res.data.code == 0) {
           _this.order.table.data = res.data.data.queryOrderResultList;
           _this.queryorder(_this.order.table.data);
         } else {
-          const err = res.data.message || $it('modalTips.ba'); // 未查询到数据！
+          const err = res.data.message || $it('tip.ba'); // 未查询到数据！
           _this.$Message.error(err);
         }
       })
@@ -3957,11 +3957,11 @@ export default {
       // 判断是否为回车精确查询
       if (isEnter) {
         if (!listData.length) {
-          _this.$Message.warning($it('modalTips.bb')); // 查询不到数据！
+          _this.$Message.warning($it('tip.bb')); // 查询不到数据！
           return;
         }
       } else if (!this.onSelectData.length) {
-        _this.$Message.warning($it('modalTips.bc')); // 请选择一条数据！
+        _this.$Message.warning($it('tip.bc')); // 请选择一条数据！
         return;
       }
       if (listData) { this.onSelectData = listData; }
@@ -4093,7 +4093,7 @@ export default {
       // console.log(e.length);
       if (e.length != 1) {
         // 只能选择一条订单记录
-        this.$Message.info($it('modalTips.b'));
+        this.$Message.info($it('tip.b'));
         return;
       }
       this.onSelectData = e;

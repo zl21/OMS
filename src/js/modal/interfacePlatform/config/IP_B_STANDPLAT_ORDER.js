@@ -73,13 +73,13 @@ export default {
     const formValue = _this.downLoadFormConfig.formValue;
     if (!_this.downLoadFormConfig.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning($it('modalTips.be'));
+      _this.$Message.warning($it('tip.be'));
       return;
     }
     const [start, end] = formValue.startEndTimes
     if (!(formValue.bill_no || start)) {
-      // _this.$Message.warning($it('modalTips.bp')); 
-      self.$Message.warning($it('modalTips.hf')); // 请输入平台修改时间或平台单号
+      // _this.$Message.warning($it('tip.bp')); 
+      self.$Message.warning($it('tip.hf')); // 请输入平台修改时间或平台单号
       return false;
     }
     const param = {

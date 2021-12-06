@@ -63,7 +63,7 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be')); // 请选择需要下载的店铺
       return false;
     }
     const param = {

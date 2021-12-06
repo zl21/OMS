@@ -80,7 +80,7 @@
       @on-ok="ok1"
     >
       <!-- 条码不在列表中,是否继续添加? -->
-      <p>{{ $it("modalTips.h4") }}</p>
+      <p>{{ $it("tip.h4") }}</p>
     </Modal>
     <!-- 退货单无头件提示 -->
     <Modal
@@ -91,7 +91,7 @@
       @on-ok="ok2"
     >
       <!-- 未能匹配相应的退换货单，是否继续? -->
-      <p>{{ $it("modalTips.h5") }}</p>
+      <p>{{ $it("tip.h5") }}</p>
     </Modal>
     <!-- 失败提示 -->
     <Modal v-model="isModal3" :title="$it('mT.tips')">
@@ -101,27 +101,27 @@
     <audio id="fm01">
       <!--以下所有 您的浏览器不支持 audio 与元素。 -->
       <source src="/views/pages/orderCenter/scanIn/MP3/fm01.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="fm02">
       <source src="/views/pages/orderCenter/scanIn/MP3/fm02.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="fm03">
       <source src="/views/pages/orderCenter/scanIn/MP3/fm03.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="fm04">
       <source src="/views/pages/orderCenter/scanIn/MP3/fm04.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="error01">
       <source src="/views/pages/orderCenter/scanIn/MP3/error01.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="error02">
       <source src="/views/pages/orderCenter/scanIn/MP3/error02.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
   </div>
 </template>

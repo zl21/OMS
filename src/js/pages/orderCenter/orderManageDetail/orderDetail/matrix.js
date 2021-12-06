@@ -267,7 +267,7 @@ export default {
             });
         });
       this.$message({
-        message: $it('modalTips.dd'), // '匹配成功',
+        message: $it('tip.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj); // 向上传递改变的数据
@@ -290,7 +290,7 @@ export default {
             });
         });
       this.$message({
-        message: $it('modalTips.dd'), // '匹配成功',
+        message: $it('tip.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj);
@@ -315,7 +315,7 @@ export default {
             });
         });
       this.$message({
-        message: $it('modalTips.dd'), // '匹配成功',
+        message: $it('tip.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj);
@@ -484,7 +484,7 @@ export default {
             arr.push(obj.PS_C_SKU_ECODE.trim());
           });
         // 请输入数量
-        if (!arr.length) return this.$Message.error($it('modalTips.de'));
+        if (!arr.length) return this.$Message.error($it('tip.de'));
       }
       if (this.tablename === 'OC_B_ORDER') {
         this.$emit('confirmOk', this.amendObj);
@@ -582,7 +582,7 @@ export default {
         this.$set(this, 'paramsObj', ''); // 初始化
         if (resData.code === 0) {
           this.$message({
-            message: $it('modalTips.z9'), // '保存成功',
+            message: $it('tip.z9'), // '保存成功',
             type: 'success'
           });
         } else {
@@ -1270,7 +1270,7 @@ export default {
             });
         });
       this.$message({
-        message: $it('modalTips.dd'), // '匹配成功',
+        message: $it('tip.dd'), // '匹配成功',
         type: 'success'
       });
       this.$emit('amendData', this.amendObj);

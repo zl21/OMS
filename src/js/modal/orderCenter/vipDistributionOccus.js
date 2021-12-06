@@ -66,7 +66,7 @@ export default {
               self.distributionIds = res.data.data.distributionIds.replace(/\[|]/g, '');
             }
           } else {
-            self.$Message.success($it('modalTips.cb'));// 手工占单成功!
+            self.$Message.success($it('tip.cb'));// 手工占单成功!
             self.$emit('closeActionDialog');
             self.$emit('confirmImport');
           }
@@ -99,7 +99,7 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.service.orderCenter.vipcomMergeDistribution(fromdata).then(res => {
         if (res.data.data.code === 0) {
-          self.$Message.success($it('modalTips.cc'));// 合并占单成功!
+          self.$Message.success($it('tip.cc'));// 合并占单成功!
           self.$emit('closeActionDialog');
         } else {
           self.corfirmMessage = res.data.data.message;

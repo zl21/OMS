@@ -488,7 +488,7 @@ export default {
           // 数据回显
           self.modify.master = {};
           if (data && data.ID) self.ID = data.ID
-          self.$Message.success(message || $it('modalTips.z9'));
+          self.$Message.success(message || $it('tip.z9'));
           $omsUtils.tabCloseAppoint(this);
           this.$destroy(true);
           this.$store.commit('global/tabOpen', {
@@ -515,7 +515,7 @@ export default {
         this.$Modal.info({
           className: 'ark-dialog',
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定

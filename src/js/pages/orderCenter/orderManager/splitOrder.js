@@ -12,21 +12,21 @@ export default {
                 this.$Modal.confirm({
                   className: 'ark-dialog',
                   title: $it('mT.tips'), // title:'提示',
-                  content: $it('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
+                  content: $it('tip.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
                   titleAlign: 'left',
                   mask: true, // 显示蒙层
                   draggable: true, // 拖拽
                   closable: true, // 右上角小叉
                   showCancel: true,
                   okText: '确认',
-                  // okText: $it('modalTips.ch'),
+                  // okText: $it('tip.ch'),
                   cancelText: $it('com.cancel'), // 取消
                   onOk: ()=> {
                     this.getData();
                   },
                 });
               } else {
-                this.$Message.warning($it('modalTips.ci')); // 已是原始状态，不执行操作!
+                this.$Message.warning($it('tip.ci')); // 已是原始状态，不执行操作!
               }
             },
           },
@@ -192,7 +192,7 @@ export default {
                     // this.canFresh = params.row.split_num != value.target.value;
                     params.row.split_num = value.target.value;
                     if (params.row.waiting_split_num - value.target.value < 0) {
-                      this.$Message.warning($it('modalTips.cj')); // 拆分数量不能大于待拆数量；不进行拆单
+                      this.$Message.warning($it('tip.cj')); // 拆分数量不能大于待拆数量；不进行拆单
                       this.$nextTick(() => {
                         params.row.split_num = params.row.waiting_split_num;
                         this.data[0][params.index] = params.row;
@@ -284,7 +284,7 @@ export default {
         self.data.push(res.data.data);
         self.switchList(0);
       } else {
-        self.$Message.error($it('modalTips.ck')); // 查询失败
+        self.$Message.error($it('tip.ck')); // 查询失败
       }
     },
     onSelect(selection) {
@@ -305,11 +305,11 @@ export default {
       let flag = true;
       let isIndex = true; // 主仓库第一条total是否已重置为0;
       if (self.onSelectData.length === 0) {
-        self.$Message.warning($it('modalTips.cl')); // 请选择需要拆分的明细
+        self.$Message.warning($it('tip.cl')); // 请选择需要拆分的明细
         return;
       }
       if ((self.data[0].length == 1 && self.data[0][0].split_num >= self.data[0][0].waiting_split_num) || self.data[0][0].total <= 1) {
-        self.$Message.warning($it('modalTips.cm')); // 没有可拆分的订单
+        self.$Message.warning($it('tip.cm')); // 没有可拆分的订单
         return;
       }
       if(self.onSelectData.length == self.data[0].length && self.data[0].every(item => item.waiting_split_num == item.split_num)){
@@ -326,7 +326,7 @@ export default {
         }
       });
       if (!flag) {
-        self.$Message.warning($it('modalTips.cn')); // 拆分数量不能为0
+        self.$Message.warning($it('tip.cn')); // 拆分数量不能为0
         return;
       }
       self.onSelectData[0].total = 0;
@@ -371,7 +371,7 @@ export default {
     async confirm() {
       const self = this;
       if (self.data.length <= 1) {
-        self.$Message.warning($it('modalTips.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
+        self.$Message.warning($it('tip.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
         return;
       }
       if(self.data[0].some(item=>item.waiting_split_num!=item.split_num)){

@@ -542,26 +542,26 @@ export default {
       // 非空效验
       if (String(a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.CP_C_PHY_WAREHOUSE_ID) {
         // self.$Message.warning("实体仓不能为空");
-        self.$message.warning($it('modalTips.x0'));
+        self.$message.warning($it('tip.x0'));
         return;
       }
       if (String(a.fixcolumn.ST_C_COMPENSATE.BEGIN_TIME) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.BEGIN_TIME) {
         // self.$Message.warning("生效日期不能为空");
-        self.$message.warning($it('modalTips.x1'));
+        self.$message.warning($it('tip.x1'));
         return;
       }
       if (String(a.fixcolumn.ST_C_COMPENSATE.END_TIME) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.END_TIME) {
         // self.$message.warning('结束日期不能为空');
-        self.$message.warning($it('modalTips.x2'));
+        self.$message.warning($it('tip.x2'));
         return;
       }
       if (String(a.fixcolumn.ST_C_COMPENSATE.ENAME) == 'undefined' || !a.fixcolumn.ST_C_COMPENSATE.ENAME) {
         // self.$message.warning('方案名称不能为空');
-        self.$message.warning($it('modalTips.x3'));
+        self.$message.warning($it('tip.x3'));
         return;
       }
       if (!self.jordanTableConfig.data.length) {
-        self.$message.error($it('modalTips.x4'));
+        self.$message.error($it('tip.x4'));
         return;
       }
       const formdata = new FormData();
@@ -741,17 +741,17 @@ export default {
       const valueType = self.jordanTableConfig.businessFormConfig.formValue;
       if ((valueType.COMPENSATE_TYPE === 1 || valueType.COMPENSATE_TYPE === 2) && (valueType.COMPENSATE_STANDARD === '' || valueType.MULTIPLE === '')) {
         self.$message.warning('赔付标准和倍数不能为空');
-        self.$message.warning($it('modalTips.x5'));
+        self.$message.warning($it('tip.x5'));
         return;
       }
       if (valueType.COMPENSATE_TYPE === 3 && valueType.SETTLEMENTPRICE === '') {
         self.$message.warning('结算价不能为空');
-        self.$message.warning($it('modalTips.x6'));
+        self.$message.warning($it('tip.x6'));
         return;
       }
       if (self.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid === '') {
         self.$message.warning('快递公司名称不能为空');
-        self.$message.warning($it('modalTips.x7'));
+        self.$message.warning($it('tip.x7'));
         return;
       }
       addList.CP_C_LOGISTICS_ENAME = self.jordanTableConfig.businessFormConfig.formData[0].itemdata.valuedata;

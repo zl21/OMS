@@ -78,11 +78,11 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId) {
-      self.$Message.warning($it('modalTips.do'));// 店铺不能为空
+      self.$Message.warning($it('tip.do'));// 店铺不能为空
       return;
     }
     if (!formValue.query_date[0] && !formValue.bill_no) {
-      self.$Message.warning($it('modalTips.bw'));// 请输入平台时间或退供单号
+      self.$Message.warning($it('tip.bw'));// 请输入平台时间或退供单号
       return;
     }
     self.dialogLoad = true;

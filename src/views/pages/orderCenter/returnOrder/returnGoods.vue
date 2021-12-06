@@ -282,7 +282,7 @@ export default {
     returnAddDetail() {
       if (!this.mainData.SOURCE_CODE) {
         // this.$Message.warning('原平台单号不能为空！');
-        this.$Message.warning($it('modalTips.ho'));
+        this.$Message.warning($it('tip.ho'));
         return
       }
       this.returnDetailAddTable.modal = true;

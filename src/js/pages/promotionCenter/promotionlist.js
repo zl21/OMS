@@ -755,7 +755,7 @@ export default {
       } = await this.service.promotionCenter.cpromLogQuery(formData);
       if (code === 0) {
         if (data.length === 0) {
-          self.$Message.warning($it('modalTips.r8')); // 查询数据为空
+          self.$Message.warning($it('tip.r8')); // 查询数据为空
         } else {
           self.logData.data = data;
           self.$Message.success(message);
@@ -784,7 +784,7 @@ export default {
         }
       }
       if (this.newList.length < 1) {
-        this.$Message.warning($it('modalTips.r9'));
+        this.$Message.warning($it('tip.r9'));
         return true;
       }
     },
@@ -794,7 +794,7 @@ export default {
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = this.newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning($it('modalTips.q0')); // 选择的促销活动已经下线/过期
+        this.$Message.warning($it('tip.q0')); // 选择的促销活动已经下线/过期
         return;
       }
       this.$Modal.info({
@@ -819,7 +819,7 @@ export default {
         const selAr = JSON.parse(JSON.stringify(this.selection));
         if (selAr.length) {
           if (selAr.length > 1) {
-            this.$Message.warning($it('modalTips.q2')); // 只能选取一条数据
+            this.$Message.warning($it('tip.q2')); // 只能选取一条数据
             return;
           }
           const ACTI_ID = selAr[0].ACTI_ID;
@@ -830,7 +830,7 @@ export default {
             $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'pL.addPromotion' }, { copy: ACTI_ID }, 0)
           }
         } else {
-          this.$Message.warning($it('modalTips.r9')); // 请至少选择一条
+          this.$Message.warning($it('tip.r9')); // 请至少选择一条
         }
       } else {
         const agGridChild = `agGridChild${Number(this.activeName) + 1}`;
@@ -838,7 +838,7 @@ export default {
         if (agGridTable.getSelect().length) {
           const selectedData = agGridTable.getSelect();
           if (selectedData.length > 1) {
-            this.$Message.warning($it('modalTips.q2')); // 只能选取一条数据
+            this.$Message.warning($it('tip.q2')); // 只能选取一条数据
             return;
           }
           const ACTI_ID = selectedData[0].ACTI_ID;
@@ -849,7 +849,7 @@ export default {
             $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'pL.addPromotion' }, { copy: ACTI_ID }, 0)
           }
         } else {
-          this.$Message.warning($it('modalTips.r9')); // 请至少选择一条
+          this.$Message.warning($it('tip.r9')); // 请至少选择一条
         }
       }
     },
@@ -866,7 +866,7 @@ export default {
       if (noSelect) return;
       flag = this.newList.every(item => item.STATUS === 1);
       if (!flag) {
-        // this.$Message.warning($it('modalTips.q3')); // 选择的促销活动已经发布
+        // this.$Message.warning($it('tip.q3')); // 选择的促销活动已经发布
         this.$Message.warning('存在【下线过期/已发布】的促销，请重新选择')
         return;
       }
@@ -915,7 +915,7 @@ export default {
       // STATUS === 1 草稿 ，STATUS === 2 已发布，STATUS === 3 下线过期
       const flag = this.newList.some(item => item.STATUS === 3);
       if (flag) {
-        this.$Message.warning($it('modalTips.q5')); // 存在【下线过期】的促销，请重新选择
+        this.$Message.warning($it('tip.q5')); // 存在【下线过期】的促销，请重新选择
       } else {
         this.checkList = this.newList;
         // 设置分组请求接口

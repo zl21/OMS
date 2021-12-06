@@ -182,7 +182,7 @@ export default {
           self.data = res.data.data.data;
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning($it('modalTips.zt'));
+          this.$Message.warning($it('tip.zt'));
         }
         self.tableLoad = false;
       } catch (e) {
@@ -195,7 +195,7 @@ export default {
       self.btnConfig.buttons[1].disabled = true;
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning($it('modalTips.zu'));
+        self.$Message.warning($it('tip.zu'));
         return;
       }
       result.ids = self.componentData.a_2;

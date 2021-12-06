@@ -47,7 +47,7 @@ class BurgeonValidate {
   static validatePhoneNumber(rule, value, callback) {
     const pNumver = value;
     if (!pNumver) {
-      // return callback(new Error($it('modalTips.fa'))); // '手机号不能为空!'
+      // return callback(new Error($it('tip.fa'))); // '手机号不能为空!'
       return callback(new Error(' ')); // '手机号不能为空!'
     }
     if (
@@ -57,7 +57,7 @@ class BurgeonValidate {
     ) {
       return callback();
     }
-    // return callback(new Error($it('modalTips.fb'))); // '手机号格式不正确!'
+    // return callback(new Error($it('tip.fb'))); // '手机号格式不正确!'
     return callback(new Error(' ')); // '手机号格式不正确!'
   };
   // 收货人地址校验：不能为纯数字
@@ -65,12 +65,12 @@ class BurgeonValidate {
     const rAddress = value;
     console.log('rAddress', rAddress);
     if (!rAddress) {
-      return callback(new Error($it('modalTips.fc'))); // '收货人地址不能为空!'
+      return callback(new Error($it('tip.fc'))); // '收货人地址不能为空!'
     }
     if (/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(rAddress)) {
       return callback();
     }
-    return callback(new Error($it('modalTips.fd'))); // '收货人地址格式不正确!'
+    return callback(new Error($it('tip.fd'))); // '收货人地址格式不正确!'
   };
   /* ------------ ruleValidate使输入框变色 end ------------- */
 
@@ -140,7 +140,7 @@ class BurgeonValidate {
       masterTable.RECEIVER_ADDRESS &&
       !/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(masterTable.RECEIVER_ADDRESS)
     ) {
-      promptMessage += `${$it('modalTips.fd')}`;
+      promptMessage += `${$it('tip.fd')}`;
     }
     BurgeonValidate.target.formConfig.formData.forEach((item) => {
       // 下单店铺
@@ -198,14 +198,14 @@ class BurgeonValidate {
     }
     if (promptMessage) {
       BurgeonValidate.target.$Message.warning(
-        `${promptMessage}${$it('modalTips.y1')}`
+        `${promptMessage}${$it('tip.y1')}`
       );
       return false;
     }
     if (Number.isNaN(masterTable.RECEIVER_MOBILE)) {
-      BurgeonValidate.target.$Message.warning($it('modalTips.ey'));
+      BurgeonValidate.target.$Message.warning($it('tip.ey'));
     } else if (masterTable.RECEIVER_MOBILE.length !== 11) {
-      BurgeonValidate.target.$Message.warning('modalTips.ez');
+      BurgeonValidate.target.$Message.warning('tip.ez');
     } else {
       return true;
     }

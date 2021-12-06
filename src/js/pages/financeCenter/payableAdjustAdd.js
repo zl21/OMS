@@ -60,7 +60,7 @@ export default {
               }
               if (promptMessage) {
                 // this.$Message.warning(promptMessage + "不能为空");
-                this.$Message.warning(promptMessage + $it('modalTips.y1'));
+                this.$Message.warning(promptMessage + $it('tip.y1'));
                 return;
               }
               if (masterForm.BILL_TYPE === '1' || masterForm.BILL_TYPE === '4') {
@@ -73,13 +73,13 @@ export default {
                 }
               }
               if (promptMessage) {
-                this.$Message.warning(promptMessage + $it('modalTips.y1'));
+                this.$Message.warning(promptMessage + $it('tip.y1'));
                 return;
               }
               // 2.特殊字段正则校验
               const telFlag = self.CheckRegx(/^1[34578]\d{9}$/, masterForm.CUSTOMER_TEL); // 电话校验
               if (!telFlag) {
-                self.$Message.error($it('modalTips.di')); // '顾客电话不合法!'
+                self.$Message.error($it('tip.di')); // '顾客电话不合法!'
                 return;
               }
 
@@ -752,7 +752,7 @@ export default {
                             const reg = /^[0-9]*$/;
                             if (!reg.test(e.target.value)) {
                               // self.$Message.warning("数量只能录入正整数！");
-                              self.$Message.warning($it('modalTips.z6'));
+                              self.$Message.warning($it('tip.z6'));
                               return;
                             }
                             // self.getTableAfterCalPayablePrice();
@@ -862,7 +862,7 @@ export default {
                             const reg = /^\d*\.{0,1}\d{0,4}$/;
                             if (!reg.test(changeAmt)) {
                               // self.$Message.warning("应付金额只能录入大于0的数字");
-                              self.$Message.warning($it('modalTips.z7'));
+                              self.$Message.warning($it('tip.z7'));
                               return;
                             }
                             // 计算总应付金额
@@ -1542,11 +1542,11 @@ export default {
         data: { code, data, message }
       } = await self.service.financeCenter.savePayableAdjustment(fromdata);
       if (code === 0) {
-        self.$Message.success(message || $it('modalTips.z9'));
+        self.$Message.success(message || $it('tip.z9'));
         self.ID = data.objid;
         self.getPayableAdjustment();
       } else {
-        // self.$Message.error(message || $it('modalTips.y0'));
+        // self.$Message.error(message || $it('tip.y0'));
       }
       // this.$R3loading.hide(customizedModuleName);
       this.loading = false
@@ -1563,9 +1563,9 @@ export default {
       };
       const res = await self.service.financeCenter.savePayableAdjustment(data);
       if (res.data.code === 0) {
-        self.$Message.success(res.data.message || $it('modalTips.z9'));
+        self.$Message.success(res.data.message || $it('tip.z9'));
       } else {
-        // self.$Message.error(res.data.message || $it('modalTips.z3')); // '失败！'
+        // self.$Message.error(res.data.message || $it('tip.z3')); // '失败！'
       }
     },
     onSelectCancel(selection, row) {
@@ -1650,7 +1650,7 @@ export default {
       const selection = [];
       // 判断是否有勾选明细
       if (selectArr.length === 0) {
-        this.$Message.warning($it('modalTips.dj')); // '请选择明细后再点击删除!'
+        this.$Message.warning($it('tip.dj')); // '请选择明细后再点击删除!'
         return;
       }
       // 明细删除对应记录

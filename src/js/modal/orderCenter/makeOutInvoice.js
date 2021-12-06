@@ -175,7 +175,7 @@ export default {
       }
     ];
 
-    this.formConfig.ruleValidate.HEADER_NAME.message = $it('modalTips.zw');
+    this.formConfig.ruleValidate.HEADER_NAME.message = $it('tip.zw');
     if (this.componentData.OC_B_ORDER_INVOICE_INFORM) {
       this.getFormValue(this.componentData.OC_B_ORDER_INVOICE_INFORM);
     } else if (this.invoiceTitleType === $it('fL.personal')) {
@@ -207,42 +207,42 @@ export default {
             HEADER_NAME: [
               {
                 required: true,
-                message: $it('modalTips.zw'),
+                message: $it('tip.zw'),
                 trigger: 'blur'
               }
             ], // 发票抬头
             TAXPAYER_NO: [
               {
                 required: true,
-                message: $it('modalTips.zx'),
+                message: $it('tip.zx'),
                 trigger: 'blur'
               }
             ], // 识别号
             COMPANY: [
               {
                 required: true,
-                message: $it('modalTips.zy'),
+                message: $it('tip.zy'),
                 trigger: 'blur'
               }
             ], // 公司地址
             PHONE_NO: [
               {
                 required: true,
-                message: $it('modalTips.zz'),
+                message: $it('tip.zz'),
                 trigger: 'blur'
               }
             ], // 电话号码
             OPENING_BANK: [
               {
                 required: true,
-                message: $it('modalTips.ya'),
+                message: $it('tip.ya'),
                 trigger: 'blur'
               }
             ], // 开户银行
             OPENING_BANK_ACCOUNT: [
               {
                 required: false,
-                message: $it('modalTips.yb'),
+                message: $it('tip.yb'),
                 trigger: 'blur'
               }
             ] // 开户行账号
@@ -253,35 +253,35 @@ export default {
             HEADER_NAME: [
               {
                 required: true,
-                message: $it('modalTips.zw'),
+                message: $it('tip.zw'),
                 trigger: 'blur'
               }
             ], // 发票抬头
             COMPANY: [
               {
                 required: true,
-                message: $it('modalTips.zy'),
+                message: $it('tip.zy'),
                 trigger: 'blur'
               }
             ], // 公司地址
             PHONE_NO: [
               {
                 required: true,
-                message: $it('modalTips.zz'),
+                message: $it('tip.zz'),
                 trigger: 'blur'
               }
             ], // 电话号码
             OPENING_BANK: [
               {
                 required: true,
-                message: $it('modalTips.ya'),
+                message: $it('tip.ya'),
                 trigger: 'blur'
               }
             ], // 开户银行
             OPENING_BANK_ACCOUNT: [
               {
                 required: false,
-                message: $it('modalTips.yb'),
+                message: $it('tip.yb'),
                 trigger: 'blur'
               }
             ] // 开户行账号
@@ -292,42 +292,42 @@ export default {
           HEADER_NAME: [
             {
               required: true,
-              message: $it('modalTips.zw'),
+              message: $it('tip.zw'),
               trigger: 'blur'
             }
           ], // 发票抬头
           TAXPAYER_NO: [
             {
               required: true,
-              message: $it('modalTips.zx'),
+              message: $it('tip.zx'),
               trigger: 'blur'
             }
           ], // 识别号
           COMPANY: [
             {
               required: true,
-              message: $it('modalTips.zy'),
+              message: $it('tip.zy'),
               trigger: 'blur'
             }
           ], // 公司地址
           PHONE_NO: [
             {
               required: true,
-              message: $it('modalTips.zz'),
+              message: $it('tip.zz'),
               trigger: 'blur'
             }
           ], // 电话号码
           OPENING_BANK: [
             {
               required: true,
-              message: $it('modalTips.ya'),
+              message: $it('tip.ya'),
               trigger: 'blur'
             }
           ], // 开户银行
           OPENING_BANK_ACCOUNT: [
             {
               required: true,
-              message: $it('modalTips.yb'),
+              message: $it('tip.yb'),
               trigger: 'blur'
             }
           ] // 开户行账号
@@ -349,35 +349,35 @@ export default {
           HEADER_NAME: [
             {
               required: true,
-              message: $it('modalTips.zw'),
+              message: $it('tip.zw'),
               trigger: 'blur'
             }
           ], // 发票抬头
           COMPANY: [
             {
               required: true,
-              message: $it('modalTips.zy'),
+              message: $it('tip.zy'),
               trigger: 'blur'
             }
           ], // 公司地址
           PHONE_NO: [
             {
               required: true,
-              message: $it('modalTips.zz'),
+              message: $it('tip.zz'),
               trigger: 'blur'
             }
           ], // 电话号码
           OPENING_BANK: [
             {
               required: true,
-              message: $it('modalTips.ya'),
+              message: $it('tip.ya'),
               trigger: 'blur'
             }
           ], // 开户银行
           OPENING_BANK_ACCOUNT: [
             {
               required: true,
-              message: $it('modalTips.yb'),
+              message: $it('tip.yb'),
               trigger: 'blur'
             }
           ] // 开户行账号
@@ -390,42 +390,42 @@ export default {
           HEADER_NAME: [
             {
               required: true,
-              message: $it('modalTips.zw'),
+              message: $it('tip.zw'),
               trigger: 'blur'
             }
           ], // 发票抬头
           TAXPAYER_NO: [
             {
               required: true,
-              message: $it('modalTips.zx'),
+              message: $it('tip.zx'),
               trigger: 'blur'
             }
           ], // 识别号
           COMPANY: [
             {
               required: true,
-              message: $it('modalTips.zy'),
+              message: $it('tip.zy'),
               trigger: 'blur'
             }
           ], // 公司地址
           PHONE_NO: [
             {
               required: true,
-              message: $it('modalTips.zz'),
+              message: $it('tip.zz'),
               trigger: 'blur'
             }
           ], // 电话号码
           OPENING_BANK: [
             {
               required: true,
-              message: $it('modalTips.ya'),
+              message: $it('tip.ya'),
               trigger: 'blur'
             }
           ], // 开户银行
           OPENING_BANK_ACCOUNT: [
             {
               required: true,
-              message: $it('modalTips.yb'),
+              message: $it('tip.yb'),
               trigger: 'blur'
             }
           ] // 开户行账号
@@ -513,7 +513,7 @@ export default {
           self.$parent.$parent.$parent.getData();
         } else {
           // self.$Message.warning(res.data.message || "保存未成功!");
-          self.$Message.warning(res.data.message || $it('modalTips.g2'));
+          self.$Message.warning(res.data.message || $it('tip.g2'));
         }
       });
     }

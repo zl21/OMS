@@ -201,7 +201,7 @@ export default {
         if (res.data.code == 0) {
           if (res.data.data.data.length == 0) {
             // this.$Message.warning("查询数据为空!");
-            this.$Message.warning($it('modalTips.r8'));
+            this.$Message.warning($it('tip.r8'));
             self.data = [];
             self.tableLoading = false;
             return;
@@ -214,7 +214,7 @@ export default {
           self.data = resData;
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning($it('modalTips.zt'));
+          this.$Message.warning($it('tip.zt'));
         }
         self.tableLoading = false;
       } catch (e) {
@@ -227,12 +227,12 @@ export default {
       const result = {};
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请选中订单数据!");
-        self.$Message.warning($it('modalTips.yz'));
+        self.$Message.warning($it('tip.yz'));
         return;
       }
       if (JSON.stringify(self.rowClickData) == '{}') {
         // self.$Message.warning("请选中需要新增的赠品!");
-        self.$Message.warning($it('modalTips.xa'));
+        self.$Message.warning($it('tip.xa'));
         return;
       }
       result.ids = self.componentData.a_2;

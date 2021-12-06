@@ -200,9 +200,9 @@ export default {
       // }
       const mainData = _this.formConfig.formValue;
       if (!mainData.CP_C_SHOP_ID) {
-        _this.$Message.error($it('modalTips.do')); // '店铺不能为空!');
+        _this.$Message.error($it('tip.do')); // '店铺不能为空!');
       } else if (!mainData.PS_C_SKU_ID) {
-        _this.$Message.error($it('modalTips.dp')); // '条码不能为空!');
+        _this.$Message.error($it('tip.dp')); // '条码不能为空!');
       } else {
         _this.jordanTableConfig.data = [];
         _this.jordanTableConfig.total = 0;
@@ -288,18 +288,18 @@ export default {
         const idList = { idList: ids };
         this.service.common.exportPayableAdjustment(idList).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
-            const mes = res.data.message || $it('modalTips.z2'); // '导出成功！';
+            const mes = res.data.message || $it('tip.z2'); // '导出成功！';
             _this.$Message.success(mes);
             $omsUtils.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
-            // const err = res.data.message || $it('modalTips.z3'); // '失败！';
+            // const err = res.data.message || $it('tip.z3'); // '失败！';
             // _this.$Message.error(err);
           }
         });
       } else {
         if (_this.jordanTableConfig.data.length === 0) {
-          _this.$Message.error($it('modalTips.z4')); // '列表没有数据,无法导出!';
+          _this.$Message.error($it('tip.z4')); // '列表没有数据,无法导出!';
           return;
         }
         if (_this.statusTab === '') {
@@ -318,12 +318,12 @@ export default {
       };
       this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
-          const mes = res.data.message || $it('modalTips.z2'); // '导出成功！';
+          const mes = res.data.message || $it('tip.z2'); // '导出成功！';
           _this.$Message.success(mes);
           $omsUtils.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
-          // const err = res.data.message || $it('modalTips.z3'); // '失败！';
+          // const err = res.data.message || $it('tip.z3'); // '失败！';
           // _this.$Message.error(err);
         }
       });

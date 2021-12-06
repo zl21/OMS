@@ -62,7 +62,7 @@ export default {
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0) {
                   // return self.$Message.error("至少选择一条订单明细");
-                  self.$Message.error($it('modalTips.zk'));
+                  self.$Message.error($it('tip.zk'));
                   return;
                 }
                 const param = {
@@ -125,7 +125,7 @@ export default {
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0) {
                   // return self.$Message.error("至少选择一条订单明细");
-                  self.$Message.error($it('modalTips.zk'));
+                  self.$Message.error($it('tip.zk'));
                   return;
                 }
                 const param = {
@@ -157,7 +157,7 @@ export default {
                 if (ids.length === 0) {
                   self.$Message.warning({
                     // content: "请选中其中一条记录",
-                    content: $it('modalTips.al'),
+                    content: $it('tip.al'),
                     duration: 5,
                     top: 80
                   });
@@ -166,7 +166,7 @@ export default {
                 if (ids.length > 1) {
                   self.$Message.warning({
                     // content: "请选中一条记录",
-                    content: $it('modalTips.am'),
+                    content: $it('tip.am'),
                     duration: 5,
                     top: 80
                   });
@@ -514,7 +514,7 @@ export default {
         }
       });
       if (!isExit) {
-        this.$Message.warning($it('modalTips.dy')); // '此商品中不存在该颜色和尺寸'
+        this.$Message.warning($it('tip.dy')); // '此商品中不存在该颜色和尺寸'
         return;
       }
       const ocBOrderItemId = data.ID || -1;

@@ -988,13 +988,13 @@ export default {
           this.queryLogisticsWarehousePages();
         });
       } else {
-        this.$Message.warning($it('modalTips.ja'));
+        this.$Message.warning($it('tip.ja'));
       }
     },
     //商品属性删除
     deleteSku(id) {
       if (this.isactive == 'Y') {
-        this.$Message.warning($it('modalTips.jb'));
+        this.$Message.warning($it('tip.jb'));
         return;
       }
       if (this.id == "-1") {
@@ -1017,7 +1017,7 @@ export default {
     //删除省市
     deleteAddress(id) {
       if (this.isactive == 'Y') {
-        this.$Message.warning($it('modalTips.jb'));
+        this.$Message.warning($it('tip.jb'));
         return;
       }
       let data = {
@@ -1225,7 +1225,7 @@ export default {
         for (let y in this.formConfig.formValue) {
           if (key == y) {
             if (!this.formConfig.formValue[key] && this.querfrom(this.formConfig.formData, key).style != null) {
-              this.$Message.warning($it('modalTips.hg') + this.querfrom(this.formConfig.formData, key).label + '!');
+              this.$Message.warning($it('tip.hg') + this.querfrom(this.formConfig.formData, key).label + '!');
               return;
             }
           }
@@ -1237,7 +1237,7 @@ export default {
         for (let y in this.formConfighead.formValue) {
           if (key == y) {
             if (!this.formConfighead.formValue[key] && this.querfrom(this.formConfighead.formData, key).style != null) {
-              this.$Message.warning($it('modalTips.hg') + this.querfrom(this.formConfighead.formData, key).label + '!');
+              this.$Message.warning($it('tip.hg') + this.querfrom(this.formConfighead.formData, key).label + '!');
               return;
             }
           }
@@ -1245,12 +1245,12 @@ export default {
       }
 
       if (this.formConfig.formValue.billType.length == 0) {
-        this.$Message.warning($it('modalTips.jc'));
+        this.$Message.warning($it('tip.jc'));
         return;
       }
 
       if (!this.formConfig.formValue.Time[0]) {
-        this.$Message.warning($it('modalTips.jd'));
+        this.$Message.warning($it('tip.jd'));
         return;
       }
 
@@ -1259,11 +1259,11 @@ export default {
       for (let v of listdata) {
         if (v.val) {
           if (!v.value || !v.value2) {
-            this.$Message.warning($it('modalTips.je'));
+            this.$Message.warning($it('tip.je'));
             return;
           }
           if (v.value2 < v.value) {
-            this.$Message.warning($it('modalTips.jf'));
+            this.$Message.warning($it('tip.jf'));
             return;
           }
         }
@@ -1391,7 +1391,7 @@ export default {
       //添加仓库物流
       for (const key in this.WarehouseItemListobj) {
         if (this.WarehouseItemListobj[key] == '') {
-          this.$Message.warning($it('modalTips.jg'));
+          this.$Message.warning($it('tip.jg'));
           return;
         }
       }
@@ -1463,7 +1463,7 @@ export default {
         }
         this.modal3 = false;
       } else {
-        this.$Message.warning($it('modalTips.jh'));
+        this.$Message.warning($it('tip.jh'));
       }
 
 
@@ -1521,7 +1521,7 @@ export default {
     },
     fntable() {
       if (this.isactive == 'Y') {
-        this.$Message.warning($it('modalTips.ji'));
+        this.$Message.warning($it('tip.ji'));
         return;
       }
       this.modal3 = true;
@@ -1542,7 +1542,7 @@ export default {
     },
     fnselect() {
       if (this.isactive == 'Y') {
-        this.$Message.warning($it('modalTips.ji'))
+        this.$Message.warning($it('tip.ji'))
         //'启用状态，不可编辑！');
         return;
       }
@@ -1570,7 +1570,7 @@ export default {
           this.$Modal.info({
             className: 'ark-dialog',
             title: $it('mT.tips'), // 提示
-            content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+            content: $it('tip.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $it('com.determine'), // 确定
@@ -1587,7 +1587,7 @@ export default {
           this.$Modal.info({
             className: 'ark-dialog',
             title: $it('mT.tips'), // 提示
-            content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+            content: $it('tip.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $it('com.determine'), // 确定

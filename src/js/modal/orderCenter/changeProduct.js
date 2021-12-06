@@ -438,7 +438,7 @@ export default {
       //     }
       //   } else {
       //     // this.$Message.warning("sku查询失败!");
-      //     this.$Message.warning($it('modalTips.zt'))
+      //     this.$Message.warning($it('tip.zt'))
       //   }
       //   this[loadName] = false
       // } catch (e) {
@@ -456,7 +456,7 @@ export default {
         orderList.push(obj)
       })
       if (!this.onRowData || !this.onRowData2) {
-        this.$Message.warning($it('modalTips.d8'))
+        this.$Message.warning($it('tip.d8'))
         return
       }
       skuEcodes.push(this.onRowData.skuEcode)
@@ -506,17 +506,17 @@ export default {
       /* const self = this
       if (JSON.stringify(self.onRowClickData) == '{}') {
         // self.$Message.warning("替换前商品sku不能为空!");
-        self.$Message.warning($it('modalTips.yf'))
+        self.$Message.warning($it('tip.yf'))
         return
       }
       if (JSON.stringify(self.onRowClickReplaceData) == '{}') {
         // self.$Message.warning("替换后商品sku码不能为空!");
-        self.$Message.warning($it('modalTips.yg'))
+        self.$Message.warning($it('tip.yg'))
         return
       }
       // if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
       //   // self.$Message.warning("替换商品与被替换商品不能相同!");
-      //   self.$Message.warning($it('modalTips.yh'));
+      //   self.$Message.warning($it('tip.yh'));
       //   return;
       // }
       const result = {}
@@ -534,7 +534,7 @@ export default {
       }
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning($it('modalTips.zu'))
+        self.$Message.warning($it('tip.zu'))
         return
       }
       result.ids = self.componentData.a_2

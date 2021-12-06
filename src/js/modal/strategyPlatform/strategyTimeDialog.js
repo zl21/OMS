@@ -110,7 +110,7 @@ export default {
         const res = await this.service.strategyPlatform.holdOrderUpdateStrategyEndTime(fromdata);
         this.dialogLoad = false;
         if (res.data.data.code === 0) {
-          this.$Message.success($it('modalTips.eo')); // '调整策略时间成功'
+          this.$Message.success($it('tip.eo')); // '调整策略时间成功'
           this.$emit('confirmImport');
           this.$emit('closeActionDialog');
         }

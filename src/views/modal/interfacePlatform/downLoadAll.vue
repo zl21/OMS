@@ -22,10 +22,10 @@
     >
       <p>
         <!-- 订单下载任务已经发送，任务ID： -->
-        {{ $it("modalTips.bn") }}
+        {{ $it("tip.bn") }}
         <span class="taskID" @click="taskIDClick">{{ taskId }}</span>
         <!-- ，请前往接口下载任务表查看下载进度！ -->
-        {{ $it("modalTips.bo") }}
+        {{ $it("tip.bo") }}
       </p>
     </Modal>
 

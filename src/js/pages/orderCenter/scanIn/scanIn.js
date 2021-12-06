@@ -13,21 +13,21 @@ export default {
       // 非空效验
       // if(a.LOGISTICS_CODE == '' || a.RECEIVE_NAME == '' || a.RECEIVE_MOBILE == ''){
       if (a.LOGISTICS_CODE == '') {
-        self.$Message.warning($it('modalTips.h8')); // 必须填写物流单号才能强制保存
+        self.$Message.warning($it('tip.h8')); // 必须填写物流单号才能强制保存
         return;
       }
       // 判断扫描数量不能为零
       const unQTYSCAN = a.ITEM_LIST.every((i) => i.QTY_SCAN === 0);
       if (unQTYSCAN) {
-        self.$Message.warning($it('modalTips.h9')); // 扫描数量不能为零！
+        self.$Message.warning($it('tip.h9')); // 扫描数量不能为零！
         return;
       }
       if (a.OC_B_REFUND_BATCH_ID == '' || !a.OC_B_REFUND_BATCH_ID) {
-        self.$Message.warning($it('modalTips.i0')); // 退货批次不能为空!
+        self.$Message.warning($it('tip.i0')); // 退货批次不能为空!
         return;
       }
       if (!self.formConfig2.formData[5].itemdata.pid) {
-        self.$Message.warning($it('modalTips.i0')); // 销退入库仓不能为空!
+        self.$Message.warning($it('tip.i0')); // 销退入库仓不能为空!
         return;
       }
 
@@ -71,7 +71,7 @@ export default {
           self.isSave = false;
         } else {
           self.errModelTitle =
-            res.data.message || $it('modalTips.i2'); // 强制入库失败
+            res.data.message || $it('tip.i2'); // 强制入库失败
           self.isModal3 = true;
           self.error_one();
           self.btnConfig.buttons[1].disabled = false;
@@ -509,7 +509,7 @@ export default {
             document.getElementById('toNo').focus();
             self.isNoHeader = false;
           } else if (res.data.code === -2) {
-            const err = res.data.message || $it('modalTips.h7'); // 退货入库单中存在此物流单号，不允许扫描入库！
+            const err = res.data.message || $it('tip.h7'); // 退货入库单中存在此物流单号，不允许扫描入库！
             self.$Message.error(err);
             self.removeData();
             if (sessionStorage.getItem('companyId') !== null) {
@@ -1439,16 +1439,16 @@ export default {
                   a.IS_FORCE = 0;
                   // 非空效验
                   if (a.LOGISTICS_CODE == '') {
-                    self.$Message.warning($it('modalTips.h8')); // 必须填写物流单号才能强制保存
+                    self.$Message.warning($it('tip.h8')); // 必须填写物流单号才能强制保存
                     return;
                   }
 
                   if (a.OC_B_REFUND_BATCH_ID == '' || !a.OC_B_REFUND_BATCH_ID) {
-                    self.$Message.warning($it('modalTips.i0')); // 退货批次不能为空!
+                    self.$Message.warning($it('tip.i0')); // 退货批次不能为空!
                     return;
                   }
                   if (!self.formConfig2.formData[5].itemdata.pid) {
-                    self.$Message.warning($it('modalTips.i1')); // 销退入库仓不能为空!
+                    self.$Message.warning($it('tip.i1')); // 销退入库仓不能为空!
                     return;
                   }
                   // if(a.RECEIVE_MOBILE == '' || !a.RECEIVE_MOBILE){
@@ -1605,7 +1605,7 @@ export default {
               const self = this;
               // if(self.onRowClickData !== ''){
               if (self.formConfig3.formValue.REAL_SKU_ECODE === '') {
-                self.$Message.warning($it('modalTips.i3')); // 实收条码不能为空
+                self.$Message.warning($it('tip.i3')); // 实收条码不能为空
                 self.error_two();
                 return;
               }
@@ -1614,7 +1614,7 @@ export default {
                   self.formConfig3.formValue.REAL_SKU_ECODE ===
                   self.onRowClickData.PS_C_SKU_ECODE
                 ) {
-                  self.$Message.warning($it('modalTips.i4')); // 实收条码与发出条码一致，请检查后重新扫描
+                  self.$Message.warning($it('tip.i4')); // 实收条码与发出条码一致，请检查后重新扫描
                   self.formConfig3.formValue.REAL_SKU_ECODE = '';
                   self.error_two();
                   return;
@@ -1644,14 +1644,14 @@ export default {
                       self.formConfig3.formValue.REAL_SKU_ECODE = '';
                       self.fm_three();
                     } else {
-                      self.$Message.warning($it('modalTips.i5')); // 本地条码档案中不存在此条码，请检查后重试
+                      self.$Message.warning($it('tip.i5')); // 本地条码档案中不存在此条码，请检查后重试
                       self.formConfig3.formValue.REAL_SKU_ECODE = '';
                       self.error_two();
                     }
                   });
                 return;
               } else {
-                self.$Message.warning($it('modalTips.i6')); // 请先选择一行记录进行扫描
+                self.$Message.warning($it('tip.i6')); // 请先选择一行记录进行扫描
                 self.formConfig3.formValue.REAL_SKU_ECODE = '';
                 self.error_two();
                 return;
@@ -1686,7 +1686,7 @@ export default {
                       // console.log(self.onRowClickIndex)
                       // self.fm_three();
                     } else {
-                      self.$Message.warning($it('modalTips.i5')); // 本地条码档案中不存在此条码，请检查后重试
+                      self.$Message.warning($it('tip.i5')); // 本地条码档案中不存在此条码，请检查后重试
                       self.formConfig3.formValue.REAL_SKU_ECODE = '';
                       self.error_two();
                     }
@@ -1704,7 +1704,7 @@ export default {
                         res.data.data.PS_C_SKU_ECODE ==
                         self.onRowClickData.PS_C_SKU_ECODE
                       ) {
-                        self.$Message.warning($it('modalTips.i4')); // 实收条码与发出条码一致，请检查后重新扫描
+                        self.$Message.warning($it('tip.i4')); // 实收条码与发出条码一致，请检查后重新扫描
                         self.formConfig3.formValue.REAL_SKU_ECODE = '';
                         self.error_two();
                         return;
@@ -1734,7 +1734,7 @@ export default {
                       self.formConfig3.formValue.REAL_SKU_ECODE = '';
                       self.fm_three();
                     } else {
-                      self.$Message.warning($it('modalTips.i5')); // 本地条码档案中不存在此条码，请检查后重试
+                      self.$Message.warning($it('tip.i5')); // 本地条码档案中不存在此条码，请检查后重试
                       self.formConfig3.formValue.REAL_SKU_ECODE = '';
                       self.error_two();
                     }

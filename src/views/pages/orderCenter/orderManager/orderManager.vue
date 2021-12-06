@@ -122,7 +122,7 @@
       @on-ok="warningOk"
     >
       <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
-      <p>{{ $it("modalTips.e3") }}</p>
+      <p>{{ $it("tip.e3") }}</p>
     </Modal>
     <Modal
       v-model="distributeLogisticsModal"
@@ -132,7 +132,7 @@
       @on-ok="distributeLogistics"
     >
       <!-- 将对查询出的订单数据重新分配快递，是否继续? -->
-      <p>{{ $it("modalTips.e4") }}</p>
+      <p>{{ $it("tip.e4") }}</p>
     </Modal>
     <Modal
       v-model="distributeWarehouseModal"
@@ -142,7 +142,7 @@
       @on-ok="distributeWarehouse"
     >
       <!-- 将对查询出的订单数据重新分配仓库，是否继续? -->
-      <p>{{ $it("modalTips.e5") }}</p>
+      <p>{{ $it("tip.e5") }}</p>
     </Modal>
     <!-- 警告 -->
     <Modal
@@ -155,7 +155,7 @@
       @on-ok="doBatchReturnOrder"
     >
       <!-- 批量生成退换货订单，是否继续? -->
-      <p>{{ $it("modalTips.e6") }}</p>
+      <p>{{ $it("tip.e6") }}</p>
       <div class="orderContent">
         <OmsForm :form-config="batchReturnFormConfig" />
       </div>

@@ -108,11 +108,11 @@
     <!-- 警告 -->
     <Modal v-model="warningModal" :title="$it('com.warning')" width="420" :mask="true" @on-ok="warningOk">
       <!-- 当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？ -->
-      <p>{{ $it('modalTips.e3') }}</p>
+      <p>{{ $it('tip.e3') }}</p>
     </Modal>
     <Modal v-model="virtualWarehouseModal" :title="$it('mT.manualWarehous')" width="420" :mask="true" @on-ok="virtualWarehouseLibrary">
       <!-- <p>当前的操作会执行手动入库，是否继续？</p> -->
-      <p>{{ $it('modalTips.k2') }}</p>
+      <p>{{ $it('tip.k2') }}</p>
     </Modal>
     <!-- 批量原退 提示 -->
     <Modal v-model="errModal" :title="$it('com.tips')" width="500" :mask="true" @on-keydown="keyenter">

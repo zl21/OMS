@@ -187,18 +187,18 @@ export default {
       }
       const mainData = _this.formConfig.formValue;
       if (!mainData.CREATIONDATE[0]) {
-        _this.$Message.error($it('modalTips.dk')); // '创建日期不能为空!'
+        _this.$Message.error($it('tip.dk')); // '创建日期不能为空!'
         return;
       }
       const endDate = new Date(mainData.CREATIONDATE[1]).getTime();
       const startDate = new Date(mainData.CREATIONDATE[0]).getTime();
       const oneDayTime = 24 * 60 * 60 * 1000;
       if (endDate - startDate > oneDayTime) {
-        _this.$Message.error($it('modalTips.dl')); // '时间范围不能超过24小时'
+        _this.$Message.error($it('tip.dl')); // '时间范围不能超过24小时'
         return;
       }
       if (!mainData.SKU_ID && !mainData.SKU_ECODE && !mainData.BATCH_NO) {
-        _this.$Message.error($it('modalTips.dm')); // '【平台条码id、条码、批次编码】不能同时为空！'
+        _this.$Message.error($it('tip.dm')); // '【平台条码id、条码、批次编码】不能同时为空！'
         return;
       }
       _this.jordanTableConfig.data = [];
@@ -287,18 +287,18 @@ export default {
         const idList = { idList: ids };
         this.service.common.exportPayableAdjustment(idList).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
-            const mes = res.data.message || $it('modalTips.z2'); // '导出成功！'
+            const mes = res.data.message || $it('tip.z2'); // '导出成功！'
             _this.$Message.success(mes);
             $omsUtils.downloadUrlFile(res.data.data);
             // return (window.location = res.data.data);
           } else {
-            // const err = res.data.message || $it('modalTips.z3'); // '失败！'
+            // const err = res.data.message || $it('tip.z3'); // '失败！'
             // _this.$Message.error(err);
           }
         });
       } else {
         if (_this.jordanTableConfig.data.length === 0) {
-          _this.$Message.error($it('modalTips.z4')); // '列表没有数据,无法导出!'
+          _this.$Message.error($it('tip.z4')); // '列表没有数据,无法导出!'
           return;
         }
         if (_this.statusTab === '') {
@@ -317,11 +317,11 @@ export default {
       };
       this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
-          const mes = res.data.message || $it('modalTips.z2'); // '导出成功！';
+          const mes = res.data.message || $it('tip.z2'); // '导出成功！';
           _this.$Message.success(mes);
           $omsUtils.downloadUrlFile(res.data.data);
         } else {
-          // const err = res.data.message || $it('modalTips.z3'); // '失败！';
+          // const err = res.data.message || $it('tip.z3'); // '失败！';
           // _this.$Message.error(err);
         }
       });

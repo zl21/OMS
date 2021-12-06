@@ -139,7 +139,7 @@
         </Modal>
         <Modal v-model="isModal" title="提示" @on-ok="deleteImgBySure">
           <!-- 点击后将删除凭证,是否继续? -->
-          <p>{{ $it("modalTips.z5") }}</p>
+          <p>{{ $it("tip.z5") }}</p>
         </Modal>
       </div>
     </div>

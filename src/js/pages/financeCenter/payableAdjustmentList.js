@@ -929,7 +929,7 @@ export default {
         data: { data }
       } = await this.service.financeCenter.cancelAuditPayableAdjustment(formdata);
       if (data.code === 0) {
-        self.$Message.success($it('modalTips.z1')); // 反客审成功!
+        self.$Message.success($it('tip.z1')); // 反客审成功!
         self.getList();
       } else {
         self.$Message.error(data.message);
@@ -1159,16 +1159,16 @@ export default {
           data: { code, data, message }
         } = await this.service.common.exportPayableAdjustment(idList);
         if (code === 0 && data !== null) {
-          const mes = message || $it('modalTips.z2'); // 导出成功！
+          const mes = message || $it('tip.z2'); // 导出成功！
           _this.$Message.success(mes);
           publicMethodsUtil.downloadUrlFile(data);
         } else {
-          // const err = message || $it('modalTips.z3'); // 失败！
+          // const err = message || $it('tip.z3'); // 失败！
           // _this.$Message.error(err);
         }
       } else {
         if (_this.agTableConfig.rowData.length === 0) {
-          _this.$Message.error($it('modalTips.z4')); // 列表没有数据,无法导出!
+          _this.$Message.error($it('tip.z4')); // 列表没有数据,无法导出!
           return;
         }
         _this.warningModal = true;
@@ -1224,11 +1224,11 @@ export default {
         data: { code, data, message }
       } = await this.service.common.exportPayableAdjustment(param);
       if (code === 0 && data !== null) {
-        const mes = message || $it('modalTips.z2'); // 导出成功！
+        const mes = message || $it('tip.z2'); // 导出成功！
         _this.$Message.success(mes);
         publicMethodsUtil.downloadUrlFile(data);
       } else {
-        // const err = message || $it('modalTips.z3'); // 失败！
+        // const err = message || $it('tip.z3'); // 失败！
         // _this.$Message.error(err);
       }
       _this.agTableConfig.loading = false;

@@ -1053,7 +1053,7 @@ export default {
       }
       self.$Modal.fcWarning({
         title: '加急打标',
-        content: $it('modalTips.yc'),
+        content: $it('tip.yc'),
         showCancel: true,
         onOk: () => {
           if (IDS.length == 1) {

@@ -162,7 +162,7 @@ export default {
     determine() {
       const formdata = new FormData();
       // if (!this.selectData.length && !this.defaultSelected.length) {
-      //   this.$Message.warning($it('modalTips.eh')); // '档案日程归属不能为空!'
+      //   this.$Message.warning($it('tip.eh')); // '档案日程归属不能为空!'
       //   return;
       // }
       let obj1 = JSON.parse(JSON.stringify(this.formConfig.formValue));

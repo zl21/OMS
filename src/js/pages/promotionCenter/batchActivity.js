@@ -113,18 +113,18 @@ export default {
     validate2() {
       let rs = {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
       if (this.batch_infos_setting.gift_doubles === '1' && this.batch_infos_setting.max_doubles_limits === '') {
         return {
           code: -1,
-          message: $it('modalTips.r0')
+          message: $it('tip.r0')
         }; // 最大翻倍数未填写！
       }
       if (this.batch_infos_setting.list.length === 0) {
         return {
           code: -1,
-          message: $it('modalTips.r1')
+          message: $it('tip.r1')
         }; // 请先添加商品和赠品！
       }
       for (let i = 0; i < this.batch_infos_setting.list.length; i++) {
@@ -133,7 +133,7 @@ export default {
         if (productArr.length === 0) {
           return {
             code: -1,
-            message: $it('modalTips.r2')
+            message: $it('tip.r2')
           }; // 商品列表无数据
         }
         rs = this.checkTableProducts(productArr, i);
@@ -144,7 +144,7 @@ export default {
         if (giftArr.length === 0) {
           return {
             code: -1,
-            message: $it('modalTips.r3')
+            message: $it('tip.r3')
           }; // 赠品列表无数据
         }
         rs = this.checkTableGift(giftArr, i);
@@ -169,7 +169,7 @@ export default {
       }
       return {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
     },
     checkTableGift(arr, index) {
@@ -187,7 +187,7 @@ export default {
       }
       return {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
     },
     /**

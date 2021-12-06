@@ -303,7 +303,7 @@ export default {
                 label: '配销仓库存梯度策略', //  tab中文名
               });
             }
-            this.$Message.success(window.$it('modalTips.z9')); // '保存成功'
+            this.$Message.success(window.$it('tip.z9')); // '保存成功'
             this.ID = res.data.data
             this.getLeftTableDetail(true, type)
             // 保存成功后处理

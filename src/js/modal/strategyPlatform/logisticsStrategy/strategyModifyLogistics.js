@@ -136,7 +136,7 @@ export default {
           if (this.selectData[i].CP_C_PHY_WAREHOUSE_ECODE === ecode) {
             this.selectData.splice(i, 1);
             this.total = this.selectData.length;
-            this.$Message.success($it('modalTips.ay')); // '删除成功'
+            this.$Message.success($it('tip.ay')); // '删除成功'
             return;
           }
         }

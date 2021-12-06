@@ -84,7 +84,7 @@ export default {
     const downData = _this.downLoadFormConfig;
     if (!downData.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning($it('modalTips.be'));
+      _this.$Message.warning($it('tip.be'));
       return;
     }
     if (
@@ -92,7 +92,7 @@ export default {
         .length === 0
       && self.downLoadFormConfig.formValue.sp_ids === ''
     ) {
-      self.$Message.warning($it('modalTips.bs'));// 请选择输入的日期或输入订单编号
+      self.$Message.warning($it('tip.bs'));// 请选择输入的日期或输入订单编号
       return false;
     }
     const param = {

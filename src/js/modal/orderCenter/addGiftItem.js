@@ -392,7 +392,7 @@ export default {
     async submit() {
       const self = this;
       if (!self.onRowData) {
-        self.$Message.error($it('modalTips.eg')) // '无赠品可添加！'
+        self.$Message.error($it('tip.eg')) // '无赠品可添加！'
         return
       }
       const ids = []

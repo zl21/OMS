@@ -114,7 +114,7 @@ export default {
                   !this.mainData.SOURCE_CODE
                 ) {
                   // this.$Message.warning("原平台单号不能为空！");
-                  this.$Message.warning($it('modalTips.ho'));
+                  this.$Message.warning($it('tip.ho'));
                   return;
                 }
                 this.tableConfig.modal = true;
@@ -130,7 +130,7 @@ export default {
               isShow: true,
               btnclick: (e) => {
                 if(this.detailsArrData.length > 1){
-                   this.$Message.warning($it('modalTips.dz'));
+                   this.$Message.warning($it('tip.dz'));
                    return false;
                 }
                 if (
@@ -138,7 +138,7 @@ export default {
                   !this.mainData.SOURCE_CODE
                 ) {
                   // this.$Message.warning("原平台单号不能为空！");
-                  this.$Message.warning($it('modalTips.ho'));
+                  this.$Message.warning($it('tip.ho'));
                   return;
                 }
                 this.getPlaceData(0,0);
@@ -994,39 +994,39 @@ export default {
       let msg, title, key;
       if (self.panelReturn) {
         // 删除退货商品
-        title = $it('modalTips.jk');
+        title = $it('tip.jk');
         key = "REFUND_ITEM_UNIQUE_KEY";
         if (haveGift) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
-          msg = `${$it('modalTips.jl')}：${haveGift.replace(
+          msg = `${$it('tip.jl')}：${haveGift.replace(
             /(，|,)$/,
             " "
           )} ？`;
         } else if (haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在组合/福袋下挂的其他关联商品
-          msg = `${$it('modalTips.jm')}：${haveGroup.replace(
+          msg = `${$it('tip.jm')}：${haveGroup.replace(
             /(，|,)$/,
             " "
           )} ？`;
         } else if (haveGift && haveGroup) {
           // 请确认是否删除当前选中的退货商品，还存在关联的挂靠赠品
           // 并且还存在组合/福袋下挂的其他关联商品
-          msg = `${$it('modalTips.jl')}：${haveGift.replace(
+          msg = `${$it('tip.jl')}：${haveGift.replace(
             /(，|,)$/,
             " "
-          )}，${$it('modalTips.jo')}：${haveGroup.replace(
+          )}，${$it('tip.jo')}：${haveGroup.replace(
             /，$/,
             ""
           )}。`;
         } else {
           // 请确认是否删除当前选中的退货商品？
-          msg = $it('modalTips.jp');
+          msg = $it('tip.jp');
         }
       } else {
-        title = $it('modalTips.jq');; // 删除换货商品
+        title = $it('tip.jq');; // 删除换货商品
         key = "PS_C_SKU_ECODE";
         // 请确认是否删除当前选中的换货商品？
-        msg = $it('modalTips.jr');
+        msg = $it('tip.jr');
       }
       self.$Modal.info({
         title,
@@ -1063,7 +1063,7 @@ export default {
       const tui = this.tableConfig.data;
       const addToList = tui.filter((i) => i._checked);
       if (!addToList.length) {
-        this.$Message.warning($it('modalTips.gn')); // 请选择一条明细！
+        this.$Message.warning($it('tip.gn')); // 请选择一条明细！
         return false
       } else {
         this.tableConfig.modal = false;
@@ -1142,7 +1142,7 @@ export default {
       let replaceArr = [] //替换
       let selectData = self.replaceProductTable.selectData; //新的对象换货明细
       if (JSON.stringify(selectData) == "{}") {
-        self.$Message.warning($it('modalTips.gl')); // 请选中一条明细！
+        self.$Message.warning($it('tip.gl')); // 请选中一条明细！
         return;
       }
       let params = {

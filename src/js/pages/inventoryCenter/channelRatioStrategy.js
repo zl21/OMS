@@ -455,7 +455,7 @@ export default {
     exportClick() {
       if (this.isExport) {
         // 有一项导出正在进行中
-        this.$Message.error(window.$it('modalTips.f8'));
+        this.$Message.error(window.$it('tip.f8'));
         return;
       }
       this.isExport = true;
@@ -508,7 +508,7 @@ export default {
             });
           }
         } else {
-          const err = res.data.message || window.$it('modalTips.z3'); // 失败！
+          const err = res.data.message || window.$it('tip.z3'); // 失败！
           this.$Message.error(err);
         }
       });
@@ -986,7 +986,7 @@ export default {
                 this.formConfig2.formValue.SG_C_SA_STORE_ID = ''
                 this.formConfig2.formValue.RATIO = ''
                 this.formConfig2.formValue.SG_C_SA_STORE_ORDERNO = ''
-                this.$Message.success(window.$it('modalTips.z9')); // '保存成功'
+                this.$Message.success(window.$it('tip.z9')); // '保存成功'
                 this.ID = objid
                 this.$nextTick(() => {
                   this.isChange = false

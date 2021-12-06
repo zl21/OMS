@@ -708,7 +708,7 @@ export default {
       }
 
       if (this.formConfig.formValue.type == 171897) {  //调用唯品会查询接口
-        this.placeholder = $it('modalTips.hi') //"请输入唯品会仓库名称"
+        this.placeholder = $it('tip.hi') //"请输入唯品会仓库名称"
         service.strategyPlatform
           .getWarehouseVipInfo({
             params: {
@@ -890,7 +890,7 @@ export default {
         for (const item in this.formConfig.ruleValidate) {
           if (em == item && this.qurefrom(em)[0].style != null) {
             if (this.formConfig.formValue[em] == '') {
-              this.$Message.error($it('modalTips.hg') + this.qurefrom(em)[0].label + '!');
+              this.$Message.error($it('tip.hg') + this.qurefrom(em)[0].label + '!');
               return;
             }
           }
@@ -904,7 +904,7 @@ export default {
 
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         if (this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.valuedata == '') {
-          this.$Message.error($it('modalTips.hg') + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
+          this.$Message.error($it('tip.hg') + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
           return;
         }
 
@@ -966,7 +966,7 @@ export default {
         return;
       }
       if (this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata == '') {
-        this.$Message.error($it('modalTips.hg') + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
+        this.$Message.error($it('tip.hg') + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
         return;
       }
 
@@ -1033,7 +1033,7 @@ export default {
           this.$Modal.info({
             className: 'ark-dialog',
             title: $it('mT.tips'), // 提示
-            content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+            content: $it('tip.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
             okText: $it('com.determine'), // 确定
@@ -1049,7 +1049,7 @@ export default {
         this.$Modal.info({
           className: 'ark-dialog',
           title: $it('mT.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定

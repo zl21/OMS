@@ -70,11 +70,11 @@ export default {
     const downData = _this.downLoadFormConfig;
     if (!downData.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning($$it('modalTips.be'));
+      _this.$Message.warning($$it('tip.be'));
       return;
     }
     if (downData.formValue.startEndTimes[0] === '' && downData.formValue.ware_id === '' && downData.formValue.item_num === '') {
-      _this.$Message.warning($$it('modalTips.bq')); // 修改时间、商品PID、商品编码必填其一
+      _this.$Message.warning($$it('tip.bq')); // 修改时间、商品PID、商品编码必填其一
       return;
     }
     const param = {

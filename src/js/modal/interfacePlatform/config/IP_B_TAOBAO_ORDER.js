@@ -95,11 +95,11 @@ export default {
   determine: async self => {
     let formValue =  self.downLoadFormConfig.formValue;
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be')); // 请选择需要下载的店铺
       return;
     }
     if (formValue.startEndTimes.length === 0 && formValue.orderNum === '') {
-      self.$Message.warning($it('modalTips.bs')); // 请选择输入的日期或输入订单编号
+      self.$Message.warning($it('tip.bs')); // 请选择输入的日期或输入订单编号
       return;
     }
     const param = {

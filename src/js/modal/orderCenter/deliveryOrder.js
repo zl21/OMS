@@ -159,7 +159,7 @@ export default {
         if (!records0.length) {
           this.dataEmptyMessage = $it('other.noDataAvailable'); // '暂无数据!';
         } else {
-          this.dataEmptyMessage = $it('modalTips.du'); // '数据加载中...';
+          this.dataEmptyMessage = $it('tip.du'); // '数据加载中...';
         }
         const hideColumns = [];
         for (const key in records0) {
@@ -226,7 +226,7 @@ export default {
       console.log(formdata);
       if (param.delivery_id === '' || param.delivery_no === '') {
         // self.$Message.warning("出仓单不能为空");
-        self.$Message.warning($it('modalTips.zj'));
+        self.$Message.warning($it('tip.zj'));
         return false;
       }
       const res = await this.service.orderCenter.matchingDelivery(formdata);

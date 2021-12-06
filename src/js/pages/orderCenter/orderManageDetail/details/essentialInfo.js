@@ -265,7 +265,7 @@ export default {
     modifyAddress() {
       // '待审核','缺货'
       if (![$it('com.toBeReviewed'), $it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
-        this.$Message.error($it('modalTips.fq')); //订单状态不满足，不允许修改地址！
+        this.$Message.error($it('tip.fq')); //订单状态不满足，不允许修改地址！
         return false;
       }
       this.dialogs.address.data = this.componentData.order;

@@ -65,12 +65,12 @@ export default {
     const formValue = _this.downLoadFormConfig.formValue;
     if (!_this.downLoadFormConfig.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning($it('modalTips.be'));
+      _this.$Message.warning($it('tip.be'));
       return;
     }
     const [start, end] = formValue.startEndTimes
     if (!(formValue.sp_ids || start)) {
-      _this.$Message.warning($it('modalTips.bp')); // 请选择输入日期或输入订单编号
+      _this.$Message.warning($it('tip.bp')); // 请选择输入日期或输入订单编号
       return;
     }
     const param = {

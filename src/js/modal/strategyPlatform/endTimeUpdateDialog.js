@@ -107,7 +107,7 @@ export default {
         }
       } catch (error) {
         $omsUtils.setLoading();
-        this.$Message.success($it('modalTips.z3')); // '修改时间失败'
+        this.$Message.success($it('tip.z3')); // '修改时间失败'
       }
     }
   }
