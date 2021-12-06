@@ -73,22 +73,37 @@ export default {
   },
   // 店仓权限
   storeWarehousePermissions: {
-    component: quanXian,
+    component:  () => import(
+      /* webpackChunkName: 'SystemCenterPage' */
+      'allpages/systemConfig/quanXian/quanXian.vue'
+    ),
   },
   //  敏感列权限
   sensitiveColumnPermissions: {
-    component: quanXian,
+    component:  () => import(
+      /* webpackChunkName: 'SystemCenterPage' */
+      'allpages/systemConfig/quanXian/quanXian.vue'
+    ),
   },
   // 实体仓权限
   physicalStorageAuthority: {
-    component: quanXian,
+    component:  () => import(
+      /* webpackChunkName: 'SystemCenterPage' */
+      'allpages/systemConfig/quanXian/quanXian.vue'
+    ),
   },
   // 品牌权限
   brandPermissions: {
-    component: quanXian,
+    component:  () => import(
+      /* webpackChunkName: 'SystemCenterPage' */
+      'allpages/systemConfig/quanXian/quanXian.vue'
+    ),
   },
   // 平台权限
   salesChannelAuthority: {
-    component: quanXian,
+    component:  () => import(
+      /* webpackChunkName: 'SystemCenterPage' */
+      'allpages/systemConfig/quanXian/quanXian.vue'
+    ),
   },
 };
