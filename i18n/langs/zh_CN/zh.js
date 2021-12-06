@@ -19,7 +19,7 @@ export default {
     'hello': '你好,世界'
   },
 
-  common: {
+  com: {
     total: '共',
     piece: '条',
     all: '全部', //全部
@@ -328,7 +328,7 @@ export default {
     hide: '隐藏',
   },
 
-  pHolder: {
+  pH: {
     a0: '（为空不做控制，关键字依次填写，用中文“；”隔开）',
     a1: '选择日期范围',
     a2: '请输入用户名',
@@ -437,7 +437,7 @@ export default {
     bz: '',
   },
 
-  panel_label: { // 面板title
+  pL: { // 面板title
     a0: '退货单',
     a1: '退换货单',
     a2: '退换货单详情',
@@ -572,7 +572,7 @@ export default {
     JITchangeBrand: 'JIT配货单换吊牌',
   },
 
-  form_label: { // 检索表单label
+  fL: { // 检索表单label
     // e------------------------------------------------------------------------
     e0: '失败原因',
     e1: '详细信息',
@@ -990,7 +990,7 @@ export default {
     payAccount: '支付账号',
   },
 
-  table_label: { // 表头、表脚、表统计
+  tL: { // 表头、表脚、表统计
     itemNo01: 'SPU编码',
     itemNo02: 'SPU名称',
     a0: '期初可售数',
@@ -1157,7 +1157,7 @@ export default {
     whetherGift: '是否赠品', //是否赠品
   },
 
-  modalTitle: { // 弹窗title
+  mT: { // 弹窗title
     ai: '其他平台',
     ah: '批量替换下挂商品',
     ag: '售后复制',
@@ -1207,5 +1207,5 @@ export default {
     z1: '商品按查询条件同步', // 商品按查询条件同步
   },
 
-  modalTips: tipsMessage,
+  tip: tipsMessage,
 }

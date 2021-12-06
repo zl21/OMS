@@ -19,7 +19,7 @@ export default {
     hello: 'Hello World',
   },
 
-  common: {
+  com: {
     total: 'Total',
     piece: 'items',
     all: 'All', //全部
@@ -328,7 +328,7 @@ export default {
     hide: 'Hide',
   },
 
-  pHolder: {
+  pH: {
     a0: '（For empty do not do control, the key words in turn to fill in the Chinese ";" separated）',
     a1: 'Select date range',
     a2: 'Username',
@@ -410,7 +410,7 @@ export default {
     b8: 'Exchange order Edit',
   },
 
-  panel_label: { // 面板title
+  pL: { // 面板title
     a0: 'Return Order',
     a1: 'Return or Exchange Order',
     a2: 'Return Order Details',
@@ -545,7 +545,7 @@ export default {
     JITchangeBrand: 'JIT Distribution sheet replacement ter',
   },
 
-  form_label: {     //检索表单label
+  fL: {     //检索表单label
     // e------------------------------------------------------------------------
     e0: 'Fail Reason',
     e1: 'detailed info',
@@ -963,7 +963,7 @@ export default {
     payAccount: 'Payment Account', //支付账号
   },
 
-  table_label: {//'Table Header, Table Footer, Table Statistics' // 表头、表脚、表统计
+  tL: {//'Table Header, Table Footer, Table Statistics' // 表头、表脚、表统计
     itemNo01: 'SPU Code', //SPU 编码
     itemNo02: 'SPU Name', //SPU 名称
     a0: 'Initial Salable Amount', //期初可售数
@@ -1130,7 +1130,7 @@ export default {
     whetherGift: 'Giveaway Or Whether', //是否赠品
   },
 
-  modalTitle: { // 弹窗title
+  mT: { // 弹窗title
     ai: 'Other platforms',
     ah: 'Batch replacement of hanging goods',
     ag: 'After sale copy',
@@ -1182,5 +1182,5 @@ export default {
     z1: 'The Goods Are Synchronized By The Query Conditions', // 商品按查询条件同步
   },
 
-  modalTips: tipsMessage,
+  tip: tipsMessage,
 }
