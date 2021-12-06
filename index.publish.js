@@ -56,7 +56,7 @@ import Burgeon from 'burgeonComponents'
     Vue.prototype.qs = qs;
     Vue.prototype.$lodash = window._;
     Vue.prototype.service = service;
-    // Vue.prototype.vmI18n = i18n;
+    Vue.prototype.vmI18n = i18n; // 暂时留着, for 组件库
     Vue.prototype.$it = (str) => {
       return i18n.t(str)
     }
