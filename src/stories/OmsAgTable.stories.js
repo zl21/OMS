@@ -118,10 +118,10 @@ export default {
 const Template = (args, { argTypes }) => ({
 	components: { OmsAgTable },
 	props: Object.keys(argTypes),
-	// template: '<OmsAgTable v-bind="$props" @on-row-dblclick="onRowDblclick" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-selection-change="onSelectionChange" @on-column-pinned="colPinned" @on-column-moved="colMoved" @on-sort-change="colSortChange" />',
-	template: '<OmsAgTable v-bind="$props" @on-row-dblclick="onRowDblclick" @on-page-change="pageChange" />',
+	// template: '<OmsAgTable v-bind="$props" @on-row-dblclick="dbClick" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-selection-change="onSelectionChange" @on-column-pinned="colPinned" @on-column-moved="colMoved" @on-sort-change="colSortChange" />',
+	template: '<OmsAgTable v-bind="$props" @on-row-dblclick="dbClick" @on-page-change="pageChange" />',
 	methods: {
-		onRowDblclick: action(""),
+		dbClick: action(""),
 		pageChange: action(""),
 	}
 })
