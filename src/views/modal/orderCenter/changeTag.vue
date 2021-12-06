@@ -55,7 +55,7 @@ export default {
               this.save();
             },
           }, {
-            text: $it('common.return'), // 返回
+            text: $it('com.return'), // 返回
             btnclick: () => {
               this.back();
             },
@@ -202,7 +202,7 @@ export default {
       this.loading = false;
       if (code === 0) {
         this.backable = true;
-        self.$Message.success(message || $it('modalTips.z9'));
+        self.$Message.success(message || $it('tip.z9'));
         self.tableConfig.updateData = [];
         // 数据回显
         if (data) self.ID = data;
@@ -221,13 +221,13 @@ export default {
       }
       if (self.tableConfig.updateData.length) {
         this.$Modal.info({
-          title: $it('modalTitle.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('mT.tips'), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.onOk();
           },

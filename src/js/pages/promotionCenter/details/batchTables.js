@@ -35,7 +35,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.a2'), // 批量新增条件信息导入
+        confirmTitle: $it('mT.a2'), // 批量新增条件信息导入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '572',
         scrollable: false, // 是否可以滚动

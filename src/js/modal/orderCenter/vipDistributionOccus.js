@@ -17,7 +17,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -28,7 +28,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -66,7 +66,7 @@ export default {
               self.distributionIds = res.data.data.distributionIds.replace(/\[|]/g, '');
             }
           } else {
-            self.$Message.success($it('modalTips.cb'));// 手工占单成功!
+            self.$Message.success($it('tip.cb'));// 手工占单成功!
             self.$emit('closeActionDialog');
             self.$emit('confirmImport');
           }
@@ -76,7 +76,7 @@ export default {
           self.confirmBtnConfig.buttons = [
             {
               type: '', // 按钮类型
-              text: $it('common.close'), // 关闭
+              text: $it('com.close'), // 关闭
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制
@@ -99,14 +99,14 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.service.orderCenter.vipcomMergeDistribution(fromdata).then(res => {
         if (res.data.data.code === 0) {
-          self.$Message.success($it('modalTips.cc'));// 合并占单成功!
+          self.$Message.success($it('tip.cc'));// 合并占单成功!
           self.$emit('closeActionDialog');
         } else {
           self.corfirmMessage = res.data.data.message;
           self.confirmBtnConfig.buttons = [
             {
               type: '', // 按钮类型
-              text: $it('common.close'), // 关闭
+              text: $it('com.close'), // 关闭
               icon: '', // 按钮图标
               size: '', // 按钮大小
               disabled: false, // 按钮禁用控制

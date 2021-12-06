@@ -48,7 +48,7 @@ export default {
         formData: [
           {
             style: "input",
-            label: $it('form_label.de'), // 别名名称
+            label: $it('fL.de'), // 别名名称
             value: "CPCREGIONALIAS",
             colname: "CPCREGIONALIAS",
             width: "6",
@@ -59,25 +59,25 @@ export default {
           },
           {
             style: "radio",
-            label: $it('form_label.df'), // 区域类型
+            label: $it('fL.df'), // 区域类型
             value: "REGION_TYPE", // 输入框的值
             colname: "REGION_TYPE", // 输入框的值
             width: "18", // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             options: [
               {
-                label: $it('form_label.dg'), // 国家
+                label: $it('fL.dg'), // 国家
                 value: "0",
               },
               {
-                label: $it('form_label.dh'), // 省份
+                label: $it('fL.dh'), // 省份
                 value: "1",
               },
               {
-                label: $it('form_label.di'), // 市级
+                label: $it('fL.di'), // 市级
                 value: "2",
               },
               {
-                label: $it('form_label.dj'), // 区级
+                label: $it('fL.dj'), // 区级
                 value: "3",
               },
             ],
@@ -143,7 +143,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $it('form_label.dm'), // 关联国家
+              name: $it('fL.dm'), // 关联国家
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -188,7 +188,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $it('form_label.dk'), // 关联省
+              name: $it('fL.dk'), // 关联省
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -230,7 +230,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $it('form_label.dl'), // 关联市
+              name: $it('fL.dl'), // 关联市
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -286,7 +286,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $it('form_label.dn'), // 关联区县
+              name: $it('fL.dn'), // 关联区县
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -335,7 +335,7 @@ export default {
         formData: [
           {
             style: "input",
-            label: $it('form_label.dc'), // 区域编码
+            label: $it('fL.dc'), // 区域编码
             value: "CP_C_REGION_ADD_ECODE",
             colname: "CP_C_REGION_ADD_ECODE",
             width: "8",
@@ -348,7 +348,7 @@ export default {
           },
           {
             style: "input",
-            label: $it('form_label.dd'), // 区域名称
+            label: $it('fL.dd'), // 区域名称
             value: "CP_C_REGION_ADD_ENAME",
             colname: "CP_C_REGION_ADD_ENAME",
             width: "8",
@@ -359,25 +359,25 @@ export default {
           },
           {
             style: "radio",
-            label: $it('form_label.df'), // 区域类型
+            label: $it('fL.df'), // 区域类型
             value: "REGION_TYPE", // 输入框的值
             colname: "REGION_TYPE", // 输入框的值
             width: "18", // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             options: [
               {
-                label: $it('form_label.dg'), // 国家
+                label: $it('fL.dg'), // 国家
                 value: "0",
               },
               {
-                label: $it('form_label.dh'), // 省份
+                label: $it('fL.dh'), // 省份
                 value: "1",
               },
               {
-                label: $it('form_label.di'), // 市级
+                label: $it('fL.di'), // 市级
                 value: "2",
               },
               {
-                label: $it('form_label.dj'), // 区级
+                label: $it('fL.dj'), // 区级
                 value: "3",
               },
             ],
@@ -436,7 +436,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: $it('form_label.dg'), // 国家
+              name: $it('fL.dg'), // 国家
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -487,7 +487,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $it('form_label.dk'), // 关联省
+              name: $it('fL.dk'), // 关联省
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -543,7 +543,7 @@ export default {
               fkdisplay: "drp", // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $it('form_label.dl'), // 关联市
+              name: $it('fL.dl'), // 关联市
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: "", // 这个是选择的值
               pid: "",
@@ -707,7 +707,7 @@ export default {
       this.loading = false;
       if (code === 0) {
         self.backable = true;
-        self.$Message.success(message || $it("modalTips.z9"));
+        self.$Message.success(message || $it("tip.z9"));
         $omsUtils.tabCloseAppoint(this);
         this.$store.commit("global/tabOpen", {
           url: `/CUSTOMIZED/NATIONALPROVINCIALMUNICIPALEDIT/${data}`,
@@ -812,7 +812,7 @@ export default {
       this.loading = false;
       if (code === 0) {
         self.backable = true;
-        self.$Message.success(message || $it("modalTips.z9"));
+        self.$Message.success(message || $it("tip.z9"));
         $omsUtils.tabCloseAppoint(this);
         this.$store.commit("global/tabOpen", {
           url: `/CUSTOMIZED/NATIONALPROVINCIALMUNICIPALEDIT/${data}`,
@@ -834,12 +834,12 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it("modalTitle.tips"), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it("mT.tips"), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it("common.determine"), // 确定
-          cancelText: $it("common.cancel"), // 取消
+          okText: $it("com.determine"), // 确定
+          cancelText: $it("com.cancel"), // 取消
           onOk: () => {
             self.onOk();
           },

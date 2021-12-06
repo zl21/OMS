@@ -11,7 +11,7 @@
         <!--商品参与方式-->
         <div class="row">
           <div class="form_label">
-            <i class="red">*</i> {{ $it("form_label.goods_participation_mode") }}：
+            <i class="red">*</i> {{ $it("fL.goods_participation_mode") }}：
           </div>
           <div class="form_content">
             <SingleBox
@@ -24,7 +24,7 @@
         <!--商品来源-->
         <div class="row">
           <div class="form_label">
-            <i class="red">*</i> {{ $it("form_label.goods_source") }}：
+            <i class="red">*</i> {{ $it("fL.goods_source") }}：
           </div>
           <div class="form_content">
             <SingleBox
@@ -37,7 +37,7 @@
         <!--选择商品方式-->
         <div class="row">
           <div class="form_label">
-            <i class="red">*</i> {{ $it("form_label.choose_product_ways") }}：
+            <i class="red">*</i> {{ $it("fL.choose_product_ways") }}：
           </div>
           <div class="form_content">
             <SingleBox
@@ -135,7 +135,7 @@
         class="row"
       >
         <div class="form_label">
-          <i class="red">*</i> {{ $it("form_label.meet_conditions") }}：
+          <i class="red">*</i> {{ $it("fL.meet_conditions") }}：
         </div>
         <div class="form_content">
           <meetConditions

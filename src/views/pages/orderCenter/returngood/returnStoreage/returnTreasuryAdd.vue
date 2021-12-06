@@ -11,7 +11,7 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ $it("common.baseInformation") }}
+            {{ $it("com.baseInformation") }}
             <p slot="content">
               <OmsForm :form-config="information" />
             </p>
@@ -45,7 +45,7 @@
           class="queryorder"
           :closable="true"
           :mask="true"
-          :title="$it('modalTitle.query_OriginalOrderNo')"
+          :title="$it('mT.query_OriginalOrderNo')"
           @on-ok="queryorder"
           @on-cancel="querycancel"
         >

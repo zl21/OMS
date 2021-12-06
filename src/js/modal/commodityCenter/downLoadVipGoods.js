@@ -25,7 +25,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -94,7 +94,7 @@ export default {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
             value: 'query_date',
-            label: $it('form_label.PlatformModifyTime'), // 平台修改时间
+            label: $it('fL.PlatformModifyTime'), // 平台修改时间
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: ''
@@ -114,7 +114,7 @@ export default {
       const shopId = this.formConfig.formData[0].itemdata.pid;
       if (!shopId || !formValue.query_date[0]) {
         // 店铺和平台时间不能为空
-        this.$Message.warning($it('modalTips.bg'));
+        this.$Message.warning($it('tip.bg'));
         return;
       }
       const params = JSON.stringify({

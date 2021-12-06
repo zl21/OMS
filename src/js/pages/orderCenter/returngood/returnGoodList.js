@@ -18,11 +18,11 @@ export default {
       eventGather: BurgeonEvent,
       errThData: [
         {
-          title: $it('form_label.chargebackNumber'), // 退单编号
+          title: $it('fL.chargebackNumber'), // 退单编号
           key: 'id'
         },
         {
-          title: $it('table_label.abnormalInfo'), // 异常信息
+          title: $it('tL.abnormalInfo'), // 异常信息
           key: 'error'
         }
       ],
@@ -33,7 +33,7 @@ export default {
       // 弹框配置
       changeRemarkConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
+        confirmTitle: $it('mT.modify_sellerNotes'), // 修改备注/修改卖家备注
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -51,7 +51,7 @@ export default {
       // 修改退回仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.modify_returnWarehouse'), // 修改退货仓库
+        confirmTitle: $it('mT.modify_returnWarehouse'), // 修改退货仓库
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -68,7 +68,7 @@ export default {
       },
       modifyReturnOrderLogistics: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.modify_logisticsCompany'), // 修改物流公司
+        confirmTitle: $it('mT.modify_logisticsCompany'), // 修改物流公司
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -114,27 +114,27 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $it('panel_label.all'), // 全部
+          label: $it('pL.all'), // 全部
           value: '',
           isShow: true
         },
         {
-          label: $it('form_label.waitFor_return_warehous'), // 等待退货入库
+          label: $it('fL.waitFor_return_warehous'), // 等待退货入库
           value: '20',
           isShow: true
         },
         {
-          label: $it('form_label.waitFor_afterSale_confirm'), // 等待售后确认
+          label: $it('fL.waitFor_afterSale_confirm'), // 等待售后确认
           value: '30',
           isShow: true
         },
         {
-          label: $it('form_label.complete'), // 完成
+          label: $it('fL.complete'), // 完成
           value: '50',
           isShow: true
         },
         {
-          label: $it('common.cancel'), // 取消
+          label: $it('com.cancel'), // 取消
           value: '60',
           isShow: true
         }
@@ -206,7 +206,7 @@ export default {
                                 type: 'C',
                                 customizedModuleName: 'orderManageDetail',
                                 customizedModuleId: res.data.data,
-                                label: window.$it('panel_label.retailInvoice_details')
+                                label: window.$it('pL.retailInvoice_details')
                               });
                             } else {
                               self.$Message.warning(res.data.message);
@@ -432,7 +432,7 @@ export default {
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       _this.formConfig.formData.forEach(item => {
         // '原始订单编号'
-        if (item.itemdata?.name == $it('form_label.originalOrderNo')) {
+        if (item.itemdata?.name == $it('fL.originalOrderNo')) {
           _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
         }
       });
@@ -741,11 +741,11 @@ export default {
       let tempObj = {
         'other.platForm': 'PLATFORM',
         'other.warehousingLogicalWarehouse': 'CP_C_STORE_ID',
-        'table_label.expressCompany': 'CP_C_LOGISTICS_ID',
-        'form_label.warehousingEntity': 'CP_C_PHY_WAREHOUSE_IN_ID',
-        'form_label.shipPhysicalWarehouse': 'CP_C_PHY_WAREHOUSE_ID',
-        'table_label.shopName': 'CP_C_SHOP_ID',
-        'table_label.creator': 'OWNERID'
+        'tL.expressCompany': 'CP_C_LOGISTICS_ID',
+        'fL.warehousingEntity': 'CP_C_PHY_WAREHOUSE_IN_ID',
+        'fL.shipPhysicalWarehouse': 'CP_C_PHY_WAREHOUSE_ID',
+        'tL.shopName': 'CP_C_SHOP_ID',
+        'tL.creator': 'OWNERID'
       };
       _this.formConfig.formData.forEach(item => {
         if (Object.keys(tempObj).includes(item.itemdata?.name)) {
@@ -755,7 +755,7 @@ export default {
     },
     // 双击时触发
     onRowDblclick(row) {
-      commonUtils.navigateMain(row.ID, 'TabHref', 'returngood', 'panel_label.ReturnOrderDetails', { statusName: row.RETURN_STATUS_NAME, statusNo: row.RETURN_STATUS });
+      commonUtils.navigateMain(row.ID, 'TabHref', 'returngood', 'pL.ReturnOrderDetails', { statusName: row.RETURN_STATUS_NAME, statusNo: row.RETURN_STATUS });
     },
     onSelectionChange(e) {
       this.selection = e;

@@ -4,40 +4,40 @@
   <div class="goodsTotalAmount">
     <!-- 商品总金额 -->
     <!-- <span class="title">商品总金额</span> -->
-    <span class="title" :title="$it('form_label.ai')">{{ $it('form_label.ai')}}</span>
+    <span class="title" :title="$it('fL.ai')">{{ $it('fL.ai')}}</span>
     <ul class="goodsTotalAmount-ul">
       <li>
         <!-- 零售价合计 -->
         <!-- <label>零售价合计</label> -->
-        <label :title="$it('form_label.b2')">{{$it('form_label.b2')}}</label>
+        <label :title="$it('fL.b2')">{{$it('fL.b2')}}</label>
         <p>{{ orderOrder.PRODUCT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
         <!-- 商品优惠 -->
         <!-- <label>商品优惠</label> -->
-        <label :title="$it('form_label.b3')">{{$it('form_label.b3')}}</label>
+        <label :title="$it('fL.b3')">{{$it('fL.b3')}}</label>
         <p>{{ orderOrder.PRODUCT_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">-</li>
       <li>
         <!-- 订单优惠金额 -->
         <!-- <label>订单优惠金额</label> -->
-        <label :title="$it('form_label.b4')">{{$it('form_label.b4')}}</label>
+        <label :title="$it('fL.b4')">{{$it('fL.b4')}}</label>
         <p>{{  orderOrder.ORDER_DISCOUNT_AMT }}</p>
       </li>
       <li class="symbol">+</li>
       <li>
         <!-- 调整金额 -->
         <!-- <label>调整金额</label> -->
-        <label title="$it('table_label.adjustment_amount')">{{$it('table_label.adjustment_amount')}}</label>
+        <label title="$it('tL.adjustment_amount')">{{$it('tL.adjustment_amount')}}</label>
         <p>{{ orderOrder.ADJUST_AMT }}</p>
       </li>
       <li class="symbol">=</li>
       <li>
         <!-- 商品总金额 -->
         <!-- <label>商品总金额</label> -->
-        <label :title="$it('form_label.ai')">{{ $it('form_label.ai')}}</label>
+        <label :title="$it('fL.ai')">{{ $it('fL.ai')}}</label>
         <p>{{retailPriceTotal}}</p>
       </li>
     </ul>

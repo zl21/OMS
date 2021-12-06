@@ -3,7 +3,7 @@
     <!-- 开票 -->
     <div class="invoice-header">
       <!-- <span>开票状态:</span> -->
-      <span>{{ $it("form_label.billing_status") }}:</span>
+      <span>{{ $it("fL.billing_status") }}:</span>
       <span>{{
         componentData.QUERYORDERRESULT.INVOICE_STATUS_NAME || "未登记"
       }}</span>
@@ -14,7 +14,7 @@
       </Divider>
       <div>
         <!-- <span>发票类型:</span> -->
-        <span>{{ $it('form_label.invoice_type') }}:</span>
+        <span>{{ $it('fL.invoice_type') }}:</span>
         <RadioGroup
           v-model="invoiceType"
           type="button"
@@ -22,18 +22,18 @@
           @on-change="invoiceTypeChange"
         >
           <!-- <Radio label="电子发票"></Radio> -->
-          <Radio :label="$it('form_label.electronic_invoice')" />
+          <Radio :label="$it('fL.electronic_invoice')" />
           <!-- <Radio label="纸质发票"></Radio> -->
-          <Radio :label="$it('form_label.paper_invoice')" />
+          <Radio :label="$it('fL.paper_invoice')" />
           <!-- <Radio label="专用发票"></Radio> -->
-          <Radio :label="$it('form_label.special_invoice')" />
+          <Radio :label="$it('fL.special_invoice')" />
         </RadioGroup>
         <span
           v-if="!specialInvoiceFlag"
           style="margin-left: 20px"
         >
           <!-- 抬头类型 -->
-          {{ $it("form_label.invoiceTitle_type") }}:</span>
+          {{ $it("fL.invoiceTitle_type") }}:</span>
         <RadioGroup
           v-if="!specialInvoiceFlag"
           v-model="invoiceTitleType"
@@ -42,16 +42,16 @@
           @on-change="invoiceTitleTypeChange"
         >
           <!-- <Radio label="个人"></Radio> -->
-          <Radio :label="$it('form_label.personal')" />
+          <Radio :label="$it('fL.personal')" />
           <!-- <Radio label="企业"></Radio> -->
-          <Radio :label="$it('form_label.enterprise')" />
+          <Radio :label="$it('fL.enterprise')" />
         </RadioGroup>
         <span
           v-if="specialInvoiceFlag"
           style="color: #fd6442"
         >
           <!-- 开专用发票必须跟开票专员确认 -->
-          {{ $it("modalTips.zv") }}
+          {{ $it("tip.zv") }}
         </span>
       </div>
       <OmsForm :form-config="formConfig" />
@@ -62,7 +62,7 @@
     >
       <Divider orientation="left">
         <!-- 收票信息 -->
-        {{ $it("form_label.ticket_info") }}
+        {{ $it("fL.ticket_info") }}
       </Divider>
       <OmsForm :form-config="formConfig2" />
     </div>

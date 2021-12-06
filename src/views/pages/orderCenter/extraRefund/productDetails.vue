@@ -101,7 +101,7 @@ export default {
             title: 'SKU编码'
           },{
             key: 'PS_C_SKU_ENAME',
-            title: $it('form_label.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
           },{
             key: 'PS_C_PRO_ECODE',
             title: 'SPU编码'
@@ -238,13 +238,13 @@ export default {
             title: 'SKU编码'
           },{
             key: 'PS_C_PRO_ENAME',
-            title: $it('form_label.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
           },{
             key: 'PS_C_PRO_ECODE',
             title: 'SPU编码'
           },{
             key: 'PS_C_PRO_ENAME',
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
           },{
             key: 'GIFT_TYPE',
             title: '赠品',

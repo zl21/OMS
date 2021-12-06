@@ -31,7 +31,7 @@ export default {
             {
               style: 'input',
               // label: '物流编号',
-              label: $it('form_label.logisticsNo'),
+              label: $it('fL.logisticsNo'),
               value: 'logistics_code',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -160,7 +160,7 @@ export default {
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: $it('table_label.shopName'), // 店铺名称
+              title: $it('tL.shopName'), // 店铺名称
             },
             {
               key: 'RECEIVE_NAME',
@@ -224,7 +224,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -233,7 +233,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {

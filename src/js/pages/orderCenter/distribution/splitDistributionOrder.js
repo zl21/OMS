@@ -13,7 +13,7 @@ export default {
             }
           },
           {
-            text: $it('common.return'), // 返回
+            text: $it('com.return'), // 返回
             btnclick: () => {
               $omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
@@ -31,7 +31,7 @@ export default {
         columns: [
           {
             type: 'index',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             width: 60,
             align: 'center'
           },
@@ -56,7 +56,7 @@ export default {
             key: 'TOT_QTY_OUT'
           },
           {
-            title: $it('table_label.operation'), // 操作
+            title: $it('tL.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -146,7 +146,7 @@ export default {
         columns: [
           {
             type: 'index',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             width: 60,
             align: 'center'
           },
@@ -169,7 +169,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             ghost: true,
             btnclick: () => {
               this.dialogConfig.visible = false;
@@ -177,7 +177,7 @@ export default {
           },
           {
             type: 'error',
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             ghost: true,
             btnclick: () => {
               // 校验

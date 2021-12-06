@@ -6,7 +6,7 @@
       <div class="order-tab-left order-tab-content">
         <div class="order-tab-title">
           <!-- 收货信息 -->
-          <span>{{ $it('table_label.receivingInfo') }}</span>
+          <span>{{ $it('tL.receivingInfo') }}</span>
           <div class="title-right">
             <p v-if="butArr[0]['isShow']"  @click="eyeClick">
               <span>
@@ -27,9 +27,9 @@
                     type="ios-create-outline"
                   />
                 </span>
-                <label :title = "$it('modalTitle.modify_shipping_address')">
+                <label :title = "$it('mT.modify_shipping_address')">
                   <!-- 修改收货地址 -->
-                  {{$it('modalTitle.modify_shipping_address')}} 
+                  {{$it('mT.modify_shipping_address')}} 
                 </label>
               </span>
             </p>
@@ -61,7 +61,7 @@
       <div class="order-tab-right order-tab-content">
         <div class="order-tab-title">
           <!-- 基础资料 -->
-          <span class="order-tab-title-span"> {{ $it('panel_label.basicData')}} </span>
+          <span class="order-tab-title-span"> {{ $it('pL.basicData')}} </span>
           <div class="title-sign">
             <span :title="item.text" v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
               {{item.text}}
@@ -99,7 +99,7 @@
                 <span
                   v-if="componentData.order.RESERVE_BIGINT05 == 1"
                   style="color: red;"
-                > {{ $it('form_label.an')}}</span>
+                > {{ $it('fL.an')}}</span>
                 <!-- (多包裹) -->
               </p>
               <p v-if="list.column === 'SELLER_MEMO'" :title="componentData.order[list.column]">
@@ -115,12 +115,12 @@
           <!-- 订单金额 -->
           <div class="order-money">
             <!-- 订单金额 -->
-            <span class="order-money-title" :title="$it('form_label.ah')"> {{ $it('form_label.ah')}}</span>
+            <span class="order-money-title" :title="$it('fL.ah')"> {{ $it('fL.ah')}}</span>
             <ul class="totalAmount">
               <li>
-                <label :title="$it('form_label.ai')">
+                <label :title="$it('fL.ai')">
                   <!-- 商品总金额  -->
-                  {{ $it('form_label.ai')}}
+                  {{ $it('fL.ai')}}
                     <Tooltip placement="top-start" max-width="800" theme="light">
                       <Icon type="ios-alert-outline" />
                       <div slot="content">
@@ -133,36 +133,36 @@
               <li class="symbol">+</li>
               <li>
                 <!-- 运费 -->
-                <label :title="$it('form_label.freight')">{{$it('form_label.freight')}}</label>
+                <label :title="$it('fL.freight')">{{$it('fL.freight')}}</label>
                 <p>{{componentData.order.SHIP_AMT || '0.00'}}</p>
               </li>
               <li class="symbol">+</li>
               <li>
                 <!-- 服务费 -->
-                <label :title="$it('form_label.service_charge')">{{$it('form_label.service_charge')}}</label>
+                <label :title="$it('fL.service_charge')">{{$it('fL.service_charge')}}</label>
                 <p>{{ componentData.order.SERVICE_AMT || '0.00' }}</p>
               </li>
               <li class="symbol">=</li>
               <li class="resulf-text">
                 <!-- 订单总金额 -->
-                <label :title="$it('form_label.aj')">{{$it('form_label.aj') }}</label>
+                <label :title="$it('fL.aj')">{{$it('fL.aj') }}</label>
                 <p>{{orderPriceTotal}}</p>
               </li>
             </ul>
             <ul class="amountActually">
               <li>
                 <!-- 实付金额 -->
-                <label :title="$it('form_label.ak')">{{$it('form_label.ak') }}</label>
+                <label :title="$it('fL.ak')">{{$it('fL.ak') }}</label>
                 <p>{{ componentData.order.RECEIVED_AMT  || '0.00'}}</p>
               </li>
               <li>
                 <!-- 红包 -->
-                <label :title="$it('form_label.al')">{{$it('form_label.al') }}</label>
+                <label :title="$it('fL.al')">{{$it('fL.al') }}</label>
                 <p>{{ componentData.order.al || '0.00'}}</p>
               </li>
               <li>
                 <!-- 代收COD金额 -->
-                <label :title="$it('form_label.am')">{{$it('form_label.am') }}</label>
+                <label :title="$it('fL.am')">{{$it('fL.am') }}</label>
                 <p>{{ componentData.order.COLLECT_AMT || '0.00'}}</p>
               </li>
             </ul>
@@ -176,7 +176,7 @@
         <div class="order-tab-content">
           <div class="order-tab-title border">
             <!-- 订单明细 -->
-            <span> {{$it('panel_label.order_detailed')}}</span>
+            <span> {{$it('pL.order_detailed')}}</span>
             <!-- 如果是组合商品不显示 -->
             <div v-if="is_combination" class="checkCombination">
               <span
@@ -185,7 +185,7 @@
               >
                 <Icon type="ios-repeat" />
                 <!-- 切换为sku商品显示 -->
-                {{$it('form_label.b0')}}
+                {{$it('fL.b0')}}
               </span>
               <span
                 v-if="!isQh && isQhChild"
@@ -193,7 +193,7 @@
               >
                 <Icon type="ios-repeat" />
                 <!-- 切换为平台商品明细 -->
-                {{$it('form_label.b1')}}
+                {{$it('fL.b1')}}
               </span>
             </div>
           </div>

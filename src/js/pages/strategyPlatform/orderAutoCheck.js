@@ -7,7 +7,7 @@ export default {
       TableData: [], // 日志数据
       TableColumns: [
         {
-          title: $it('table_label.revised_content'), // 修改内容
+          title: $it('tL.revised_content'), // 修改内容
           key: 'modcontent'
         },
         {
@@ -19,7 +19,7 @@ export default {
           key: 'AMOD'
         },
         {
-          title: $it('table_label.reviser'), // 修改人
+          title: $it('tL.reviser'), // 修改人
           key: 'modifierename'
         },
         {
@@ -148,7 +148,7 @@ export default {
             },
             {
               colname: 'ENAME',
-              name: window.$it('form_label.logisticsCompany'), // '物流公司',
+              name: window.$it('fL.logisticsCompany'), // '物流公司',
               show: true
             },
           ],

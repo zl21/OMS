@@ -11,7 +11,7 @@
   <div class="customized-detail" v-loading="loading">
     <div class="customized-detail-btn">
       <!-- <button @click="close">
-        {{ $it('common.cancel') }}
+        {{ $it('com.cancel') }}
       </button>
       <button v-if="showSaveButton" @click="saveDraft">
         {{ $it('btn.saveDraft') }}

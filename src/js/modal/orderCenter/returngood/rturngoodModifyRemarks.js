@@ -14,7 +14,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -25,7 +25,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制

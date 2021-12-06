@@ -147,17 +147,17 @@ export default {
     // const { customizedModuleName } = this.$route.params;
     this.sensitiveColumns = [
       {
-        title: $it('table_label.sensitiveColumn'),
+        title: $it('tL.sensitiveColumn'),
         // title: "敏感列",
         key: 'CP_C_COLUMN_ENAME'
       },
       {
-        title: $it('table_label.view'),
+        title: $it('tL.view'),
         // title: "查看",
         key: 'IS_READ'
       },
       {
-        title: $it('table_label.edit'),
+        title: $it('tL.edit'),
         // title: "编辑",
         key: 'IS_WRITE'
       }
@@ -179,7 +179,7 @@ export default {
       }
     };
     this.searchBtnConfig.buttons.push(btnSearchObj);
-    this.filterTreeConfig.placeholder = $it('pHolder.enter');
+    this.filterTreeConfig.placeholder = $it('pH.enter');
   },
   methods: {
     treeChange(val, obj) {
@@ -379,7 +379,7 @@ export default {
 
         this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
         if (refresh) {
-          this.$Message.success($it('common.refresh_succee')); // 刷新成功
+          this.$Message.success($it('com.refresh_succee')); // 刷新成功
         }
       }
       this.loading = false;
@@ -397,7 +397,7 @@ export default {
       } = await this.service.systemConfig.copyShopPermission(param);
       if (code === 0) {
         this.$Modal.success({
-          title: $it('modalTitle.tips'),
+          title: $it('mT.tips'),
           content: message,
           cancelType: true,
           titleAlign: 'left',

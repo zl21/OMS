@@ -175,7 +175,7 @@ export default {
             //     }
             // },
             {
-              text: $it('common.return'), // 返回
+              text: $it('com.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -302,7 +302,7 @@ export default {
               }
             },
             {
-              text: $it('common.return'), // 返回
+              text: $it('com.return'), // 返回
               btnclick: () => {
                 this.go_home = true;
               }
@@ -520,7 +520,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('table_label.remarks'), // 备注
+              label: $it('tL.remarks'), // 备注
               value: 'REMARK',
               dataAcessKey: 'SHIP_AMT',
               disabled: false,
@@ -819,11 +819,11 @@ export default {
       } else if (res.BILL_STATUS == 2) {
         self.setItemTableOperation('off');
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已审核';
-        self.statusName = $it('common.reviewed'); // '已审核';
+        self.statusName = $it('com.reviewed'); // '已审核';
       } else if (res.BILL_STATUS == 3) {
         self.setItemTableOperation('off');
         self.pickOrder.logFormConfig.formValue.BILL_STATUS = '已作废';
-        self.statusName = $it('common.voided'); // '已作废';
+        self.statusName = $it('com.voided'); // '已作废';
       }
       self.pickOrder.logFormConfig.formValue.STATUS_NAME = res.STATUS_NAME; // 审核人
       self.pickOrder.logFormConfig.formValue.STATUS_TIME = self.toDate(res.STATUS_TIME); // 审核时间

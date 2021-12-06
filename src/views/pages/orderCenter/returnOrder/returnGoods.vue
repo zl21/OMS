@@ -45,7 +45,7 @@ export default {
           },
           {
             key: 'PS_C_PRO_ECODE1',
-            title: $it('table_label.productNo') // 商品编码
+            title: $it('tL.productNo') // 商品编码
           },
           {
             key: 'PS_C_PRO_ECODE1',
@@ -282,7 +282,7 @@ export default {
     returnAddDetail() {
       if (!this.mainData.SOURCE_CODE) {
         // this.$Message.warning('原平台单号不能为空！');
-        this.$Message.warning($it('modalTips.ho'));
+        this.$Message.warning($it('tip.ho'));
         return
       }
       this.returnDetailAddTable.modal = true;

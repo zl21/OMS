@@ -39,7 +39,7 @@ export default {
             }
           },
           {
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$emit('closeActionDialog', false);
             } // 按钮点击事件
@@ -65,29 +65,29 @@ export default {
             },
             routingInfo: {
               consolidation: {
-                name: $it('common.address.placeName0'), // 杭州
+                name: $it('com.address.placeName0'), // 杭州
                 code: 'hangzhou'
               },
               origin: {
-                name: $it('common.address.placeName0'), // 杭州
+                name: $it('com.address.placeName0'), // 杭州
                 code: 'POSTB'
               },
               sortation: {
-                name: $it('common.address.placeName0') // 杭州
+                name: $it('com.address.placeName0') // 杭州
               },
               routeCode: '123A-456-789'
             },
             sender: {
               address: {
-                city: $it('common.address.city1'), // 杭州市
-                detail: $it('common.address.addressDetails1'), // 文一西路1001号阿里巴巴淘宝城5号小邮局
-                district: $it('common.address.erea1'), // 余杭区
-                province: $it('common.address.province1'), // 浙江省
+                city: $it('com.address.city1'), // 杭州市
+                detail: $it('com.address.addressDetails1'), // 文一西路1001号阿里巴巴淘宝城5号小邮局
+                district: $it('com.address.erea1'), // 余杭区
+                province: $it('com.address.province1'), // 浙江省
                 town: ''
               },
-              mobile: $it('common.address.mobile1'), // 13012345678
-              name: $it('common.address.name'), // 阿里巴巴
-              phone: $it('common.address.phone1') // 057112345678
+              mobile: $it('com.address.mobile1'), // 13012345678
+              name: $it('com.address.name'), // 阿里巴巴
+              phone: $it('com.address.phone1') // 057112345678
             },
             shippingOption: {
               code: 'COD',
@@ -576,7 +576,7 @@ export default {
       this.$Modal.info({
         className: 'ark-dialog',
         title: $it('other.printing'), // 打印
-        content: $it('modalTips.ca'), // 正在打印中，请稍后。。。
+        content: $it('tip.ca'), // 正在打印中，请稍后。。。
         mask: true,
         onOk: () => {
           self.$emit('confirmView');

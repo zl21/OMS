@@ -272,7 +272,7 @@ export default {
     exportClick(tableName, multipleSelection, objectIds, menu, isExport, type) {
       if (this[isExport]) {
         // 有一项导出正在进行中
-        this.$Message.error(window.$it('modalTips.f8'));
+        this.$Message.error(window.$it('tip.f8'));
         return;
       }
       this[isExport] = true;
@@ -328,7 +328,7 @@ export default {
             });
           }
         } else {
-          const err = res.data.message || window.$it('modalTips.z3'); // 失败！
+          const err = res.data.message || window.$it('tip.z3'); // 失败！
           this.$Message.error(err);
         }
       });
@@ -1021,12 +1021,12 @@ export default {
     back() {
       if (this.isChange) {
         this.$Modal.info({
-          title: window.$it('modalTitle.tips'), // 提示
+          title: window.$it('mT.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.$it('common.determine'), // 确定
-          cancelText: window.$it('common.cancel'), // 取消
+          okText: window.$it('com.determine'), // 确定
+          cancelText: window.$it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },

@@ -10,7 +10,7 @@
 const baseColumnDefs = [
 	{
 		headerName: '序号',
-		// headerName: $it("table_label.serialNo"),
+		// headerName: $it("tL.serialNo"),
 		field: 'SERIAL_NO',
 		pinned: 'left',
 		width: 90,
@@ -25,106 +25,106 @@ const baseColumnDefs = [
 	},
 	{
 		headerName: '促销编号',
-		// headerName: $it("table_label.serialNo"),
+		// headerName: $it("tL.serialNo"),
 		field: 'ACTI_NO'
 	},
 	{
 		headerName: '活动名称',
-		// headerName: $it("form_label.activityName"),
+		// headerName: $it("fL.activityName"),
 		field: 'ACTI_NAME'
 	},
 	{
 		headerName: '参与店铺',
-		// headerName: $it("table_label.participating_store"),
+		// headerName: $it("tL.participating_store"),
 		field: 'STORE_NAMES'
 	},
 	{
 		headerName: '活动时间段',
-		// headerName: $it("table_label.activity_period"),
+		// headerName: $it("tL.activity_period"),
 		field: 'ACTI_DATE'
 	},
 	{
 		headerName: '失效下线时间',
-		// headerName: $it("table_label.failure_offline_time"),
+		// headerName: $it("tL.failure_offline_time"),
 		field: 'DOWN_TIME'
 	},
 	{
 		headerName: '剩余可送',
-		// headerName: $it("table_label.rest_sent"),
+		// headerName: $it("tL.rest_sent"),
 		field: 'STOCK'
 	},
 	{
 		headerName: '已送数量',
-		// headerName: $it("table_label.delivered_quantity"),
+		// headerName: $it("tL.delivered_quantity"),
 		field: 'SEND'
 	},
 	{
 		headerName: '状态',
-		// headerName: $it("table_label.status"),
+		// headerName: $it("tL.status"),
 		field: 'status'
 	},
 	{
 		headerName: '分组名称',
-		// headerName: $it("table_label.groupName"),
+		// headerName: $it("tL.groupName"),
 		field: 'GROUP_NAME'
 	},
 	{
 		headerName: '优先级',
-		// headerName: $it("table_label.priority"),
+		// headerName: $it("tL.priority"),
 		field: 'LEVEL'
 	},
 	{
 		headerName: '创建人',
-		// headerName: $it("table_label.creator"),
+		// headerName: $it("tL.creator"),
 		field: 'OWNERENAME'
 	},
 	{
 		headerName: '创建时间',
-		// headerName: $it("table_label.creationTime"),
+		// headerName: $it("tL.creationTime"),
 		field: 'CREATIONDATE'
 	},
 	{
 		headerName: '修改人',
-		// headerName: $it("table_label.reviser"),
+		// headerName: $it("tL.reviser"),
 		field: 'OWNERENAME'
 	},
 	{
 		headerName: '修改时间',
-		// headerName: $it("table_label.modificationTime"),
+		// headerName: $it("tL.modificationTime"),
 		field: 'MODIFIEDDATE'
 	},
 	{
 		headerName: '备注',
-		// headerName: $it("table_label.remarks"),
+		// headerName: $it("tL.remarks"),
 		field: 'REMARK'
 	},
 	{
-		headerName: $it('table_label.operation'), // 操作
-		// headerName: $it("table_label.operation"),
+		headerName: $it('tL.operation'), // 操作
+		// headerName: $it("tL.operation"),
 		field: 'ACTION_LOG'
 	}
 ];
 const logDataCol = [
 	{
 		// title: "序号",
-		title: $it('table_label.serialNo'),
+		title: $it('tL.serialNo'),
 		type: 'index',
 		width: 60,
 		align: 'center'
 	},
 	{
 		// title: "操作时间",
-		title: $it('table_label.operatorTime'),
+		title: $it('tL.operatorTime'),
 		key: 'creationdate'
 	},
 	{
 		// title: "操作人",
-		title: $it('form_label.operator'),
+		title: $it('fL.operator'),
 		key: 'operator'
 	},
 	{
 		// title: "操作描述",
-		title: $it('table_label.operation_description'),
+		title: $it('tL.operation_description'),
 		key: 'describes'
 	}
 ];
@@ -155,7 +155,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -171,7 +171,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -187,7 +187,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -219,7 +219,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -251,7 +251,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -287,7 +287,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -323,7 +323,7 @@ const tableCols = {
 		},
 		{
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -345,7 +345,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -367,7 +367,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -389,7 +389,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -424,7 +424,7 @@ const tableCols = {
 		{
 			slot: 'OPERATE',
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],
@@ -473,7 +473,7 @@ const tableCols = {
 		{
 			align: 'center',
 			key: 'OPERATE',
-			title: $it('table_label.operation'), // 操作
+			title: $it('tL.operation'), // 操作
 			fun: ''
 		}
 	],

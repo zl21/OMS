@@ -104,7 +104,7 @@ export default {
         },
         {
           style: null,
-          label: $it('form_label.bg'), //  启用状态
+          label: $it('fL.bg'), //  启用状态
           value: 'STATUS',
           colname: 'STATUS',
           width: '8',
@@ -363,7 +363,7 @@ export default {
         value: 'PROPERTY',
       },
       {
-        label: $it('panel_label.operationLog'), // 操作日志
+        label: $it('pL.operationLog'), // 操作日志
         value: 'PS_C_CLASSIFY_LOG',
       },
       ],
@@ -469,7 +469,7 @@ export default {
     async addAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.businessFormConfig.formData[0].itemdata.valuedata.length) {
-        self.$Message.warning($it('modalTips.kk'));
+        self.$Message.warning($it('tip.kk'));
         return false;
       }
       this.loading = true;
@@ -497,7 +497,7 @@ export default {
     async deleteAttrValue() {
       const self = this;
       if (!self.cusAttrConfig.selectionData.length) {
-        self.$Message.warning($it('modalTips.ka'));
+        self.$Message.warning($it('tip.ka'));
         return false;
       }
       const delIDS = [];
@@ -590,12 +590,12 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('mT.tips'), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.onOk();
           },

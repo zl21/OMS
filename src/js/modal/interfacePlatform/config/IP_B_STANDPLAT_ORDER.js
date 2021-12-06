@@ -39,14 +39,14 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'startEndTimes',
-        label: $it('form_label.PlatformModifyTime'), // 平台修改时间
+        label: $it('fL.PlatformModifyTime'), // 平台修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.platform_billNo'), // 平台单号 输入框前文字
+        label: $it('fL.platform_billNo'), // 平台单号 输入框前文字
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -73,13 +73,13 @@ export default {
     const formValue = _this.downLoadFormConfig.formValue;
     if (!_this.downLoadFormConfig.formData[0].itemdata.pid) {
       // 请选择需要下载的店铺
-      _this.$Message.warning($it('modalTips.be'));
+      _this.$Message.warning($it('tip.be'));
       return;
     }
     const [start, end] = formValue.startEndTimes
     if (!(formValue.bill_no || start)) {
-      // _this.$Message.warning($it('modalTips.bp')); 
-      self.$Message.warning($it('modalTips.hf')); // 请输入平台修改时间或平台单号
+      // _this.$Message.warning($it('tip.bp')); 
+      self.$Message.warning($it('tip.hf')); // 请输入平台修改时间或平台单号
       return false;
     }
     const param = {

@@ -8,7 +8,7 @@
       <Collapse v-model="spreadPanel">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
-          {{ $it("common.baseInformation") }}
+          {{ $it("com.baseInformation") }}
           <p
             slot="content"
             style="float: left; width: 250px; margin-top: 15px"
@@ -31,7 +31,7 @@
         </Panel>
         <Panel name="panel_log">
           <!-- 日志 -->
-          {{ $it("common.journal") }}
+          {{ $it("com.journal") }}
           <p slot="content">
             <OmsForm :form-config="formConfigLog" />
           </p>
@@ -39,7 +39,7 @@
         <Modal
           v-model="detailAddTable.modal"
           class="detailAdd customizedModal"
-          :title="$it('modalTitle.add_adjustmentListDetails')"
+          :title="$it('mT.add_adjustmentListDetails')"
           @on-ok="resetMainTable"
           @on-cancel="detailAddCancel"
         >

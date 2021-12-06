@@ -1,7 +1,7 @@
 <template>
   <div style="width: 440px;">
     <!-- 是否打印选中行？ -->
-    <p>{{ $it("modalTips.bz") }}</p>
+    <p>{{ $it("tip.bz") }}</p>
     <OmsButton :btn-config="btnConfig" />
   </div>
 </template>

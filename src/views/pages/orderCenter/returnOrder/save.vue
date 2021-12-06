@@ -32,20 +32,20 @@
       let returnOrderChangeItem = R3.store.state.customize.returnOrderChangeItem;
       console.log(OC_B_RETURN_ORDER);
       if(route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.RECEIVER_MOBILE && OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.RECEIVER_MOBILE.includes('***')){
-        this.$Message.warning($it('modalTips.kn')); //换货人信息请切换为明文！
+        this.$Message.warning($it('tip.kn')); //换货人信息请切换为明文！
         return;
       }
       if (route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && !returnOrderChangeItem.tui.length && !returnOrderChangeItem.huan.length) {
-        this.$Message.warning($it('modalTips.ko')); // 退换货单明细都不能为空！
+        this.$Message.warning($it('tip.ko')); // 退换货单明细都不能为空！
         return;
       } 
       console.log('this.returnAmount:',this.returnAmount);
       if (route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && !(this.returnAmount.PRO_ACTUAL_AMT === this.returnAmount.EXCHANGE_AMT)) {
-        this.$Message.warning($it('modalTips.kl')); // 换货金额必须要和退货金额一致！
+        this.$Message.warning($it('tip.kl')); // 换货金额必须要和退货金额一致！
         return;
       } 
       if (returnOrderChangeItem.tui && !returnOrderChangeItem.tui.length) {
-        this.$Message.warning($it('modalTips.km')); // 退货单不能为空！
+        this.$Message.warning($it('tip.km')); // 退货单不能为空！
         return;
       }
       if(route.tableName === 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE' && OC_B_RETURN_ORDER.OC_B_RETURN_ORDER_ECXCHANGE_TABLE.AUDIT_ID){
@@ -68,11 +68,11 @@
         data: { code, data, message },
       } = await self.service.orderCenter.returnSaveBill(param);
       if (code === 0) {
-        this.$Message.success(message || $it('modalTips.z9')); // 保存成功！
+        this.$Message.success(message || $it('tip.z9')); // 保存成功！
         $omsUtils.tabCloseAppoint(this);
             this.$store.commit('global/tabOpen', {
               type: 'C',
-              label: $it('panel_label.a1'), // 退换货单
+              label: $it('pL.a1'), // 退换货单
               url: `/CUSTOMIZED/OC_B_RETURN_ORDER/2828`
             });
       }

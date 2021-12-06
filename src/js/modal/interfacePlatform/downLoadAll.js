@@ -38,7 +38,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     modalTitle() {
-      let title = modalConfig[this.tableName].modalTitle ? modalConfig[this.tableName].modalTitle : $it('modalTitle.orderDownload');
+      let title = modalConfig[this.tableName].modalTitle ? modalConfig[this.tableName].modalTitle : $it('mT.orderDownload');
       return title;
     },
   },
@@ -108,13 +108,13 @@ export default {
         id: this.taskId,
         type: 'singleView', // 类型action
         name: 'singleView',
-        label: $it('common.interface_download_taskTable_edit'), // 接口下载任务表编辑 tab中文名
+        label: $it('com.interface_download_taskTable_edit'), // 接口下载任务表编辑 tab中文名
         query: {
           id: this.taskId,
           pid: '24775',
-          ptitle: $it('common.interface_download_taskTable'), // 接口下载任务表
+          ptitle: $it('com.interface_download_taskTable'), // 接口下载任务表
           ptype: 'table',
-          tabTitle: $it('common.interface_download_taskTable_edit'), // 接口下载任务表编辑
+          tabTitle: $it('com.interface_download_taskTable_edit'), // 接口下载任务表编辑
           tableName: 'IP_T_CONSUMER_LOG',
         },
       });

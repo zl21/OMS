@@ -6,14 +6,14 @@
         :rules="ruleValidate"
       >
         <FormItem
-          label="拒绝打款原因"
+          :label="$it('fL.ea')"
           prop="reason"
         >
           <Input
             v-model="reason"
             type="textarea"
             :autosize="{minRows: 4,maxRows: 8}"
-            placeholder="请输入拒绝打款原因"
+            :placeholder="$it('pH.aa')"
           />
         </FormItem>
       </Form>

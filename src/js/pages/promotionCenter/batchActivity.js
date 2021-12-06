@@ -74,7 +74,7 @@ export default {
         this.basic_info.time_type = groups.timeTypes.find(item => item.title === $it('other.payment_date')).value; // 付款日期
         this.basic_info.activity_type = groups.actiTypes.find(item => item.title === $it('other.Designated_free_purchase')).value; // 指定买赠
         this.basic_info.buyer_limit_frequency = groups.buyerLimitFrequency.find(item => item.title === $it('other.unlimited')).value; // 不限制
-        this.basic_info.order_notes_type = groups.orderRemarks.find(item => item.title === $it('form_label.buyer_message')).value; // 买家留言
+        this.basic_info.order_notes_type = groups.orderRemarks.find(item => item.title === $it('fL.buyer_message')).value; // 买家留言
         // 条件设置
         this.batch_infos_setting.products_origin = groups.productsOrigin.find(item => item.title === $it('other.systemCommodity_SKU')).value; // 系统商品SKU
         this.batch_infos_setting.gift_doubles = groups.giftDoubles.find(item => item.title === $it('other.no_double')).value; // 不翻倍
@@ -113,18 +113,18 @@ export default {
     validate2() {
       let rs = {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
       if (this.batch_infos_setting.gift_doubles === '1' && this.batch_infos_setting.max_doubles_limits === '') {
         return {
           code: -1,
-          message: $it('modalTips.r0')
+          message: $it('tip.r0')
         }; // 最大翻倍数未填写！
       }
       if (this.batch_infos_setting.list.length === 0) {
         return {
           code: -1,
-          message: $it('modalTips.r1')
+          message: $it('tip.r1')
         }; // 请先添加商品和赠品！
       }
       for (let i = 0; i < this.batch_infos_setting.list.length; i++) {
@@ -133,7 +133,7 @@ export default {
         if (productArr.length === 0) {
           return {
             code: -1,
-            message: $it('modalTips.r2')
+            message: $it('tip.r2')
           }; // 商品列表无数据
         }
         rs = this.checkTableProducts(productArr, i);
@@ -144,7 +144,7 @@ export default {
         if (giftArr.length === 0) {
           return {
             code: -1,
-            message: $it('modalTips.r3')
+            message: $it('tip.r3')
           }; // 赠品列表无数据
         }
         rs = this.checkTableGift(giftArr, i);
@@ -169,7 +169,7 @@ export default {
       }
       return {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
     },
     checkTableGift(arr, index) {
@@ -187,7 +187,7 @@ export default {
       }
       return {
         code: 0,
-        message: $it('modalTips.s4')
+        message: $it('tip.s4')
       }; // 校验完成
     },
     /**
@@ -223,7 +223,7 @@ export default {
           // let action = this.objid == -1 ? 0 : 1;
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            $omsUtils.tabJump(3, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+            $omsUtils.tabJump(3, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'pL.batchAddPromotion' }, {}, 0)
           });
         }
         this.loading = false;

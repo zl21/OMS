@@ -21,7 +21,7 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 20, // 最大长度是多少
-            name: $it('form_label.warehousingEntity'), // '入库实体仓库'
+            name: $it('fL.warehousingEntity'), // '入库实体仓库'
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
             reftableid: 24486, // 对应的表ID
@@ -38,13 +38,13 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }
           },
           {
-            text: $it('common.determine'),
+            text: $it('com.determine'),
             btnclick: () => {
               const _this = this;
               _this.okClick();
@@ -64,7 +64,7 @@ export default {
     async okClick() {
       const _this = this;
       if (!_this.formConfig.formData[0].itemdata.pid || _this.formConfig.formData[0].itemdata.pid === undefined) {
-        _this.$Message.error($it('modalTips.ee')); // '入库实体仓库必填！'
+        _this.$Message.error($it('tip.ee')); // '入库实体仓库必填！'
         return;
       }
       const fromdata = new FormData();

@@ -10,21 +10,21 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ $it('common.baseInformation') }}
+            {{ $it('com.baseInformation') }}
             <p slot="content">
               <OmsForm :form-config="information" />
             </p>
           </Panel>
           <Panel name="2">
             <!-- 换货人信息 -->
-            {{ $it('panel_label.exchangeInfo') }}
+            {{ $it('pL.exchangeInfo') }}
             <p slot="content">
               <OmsForm :form-config="replacement" />
             </p>
           </Panel>
           <Panel name="3">
             <!-- 退货金额 -->
-            {{ $it('panel_label.returnAmount') }}
+            {{ $it('pL.returnAmount') }}
             <div slot="content">
               <div class="sales">
                 <ul>
@@ -152,7 +152,7 @@
           width="900"
           :closable="true" 
           :mask="true"
-          :title="$it('modalTitle.query_OriginalOrderNo')"
+          :title="$it('mT.query_OriginalOrderNo')"
           @on-ok="queryorder"
           @on-cancel="querycancel"
         >
@@ -193,7 +193,7 @@
     <Modal
       v-model="availableStock"
       class="available"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       width="400"
       :mask-closable="false"
       :mask="true"
@@ -202,13 +202,13 @@
     >
       <!-- 。是否继续？ -->
       <p class="availableStock">
-        {{ availableStockMassage }}{{ $it('modalTips.n2') }}
+        {{ availableStockMassage }}{{ $it('tip.n2') }}
       </p>
     </Modal>
     <Modal
       v-model="returnDetailAddTable.modal"
       class="detailAdd"
-      :title="$it('modalTitle.newReturnDetails')"
+      :title="$it('mT.newReturnDetails')"
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
     >

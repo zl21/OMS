@@ -96,14 +96,14 @@ export default {
           }
         },
         {
-          text: $it('common.return'), // 返回
+          text: $it('com.return'), // 返回
           webname: 'ST_C_AUTO_AUDIT_RETURN',
           btnclick: () => {
             if (this.isModify) {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
-                title: $it('modalTitle.tips'), // 提示
-                content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+                title: $it('mT.tips'), // 提示
+                content: $it('tip.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
@@ -136,14 +136,14 @@ export default {
         formData: [
           {
             style: '',
-            label: $it('form_label.bc'), // 策略ID
+            label: $it('fL.bc'), // 策略ID
             value: 'PLAN_ID',
             width: '6',
             disabled: true
           },
           {
             style: 'input',
-            label: $it('form_label.bd'), // 策略名称
+            label: $it('fL.bd'), // 策略名称
             value: 'PLAN_NAME',
             width: '6',
             inputChange: () => {
@@ -267,7 +267,7 @@ export default {
       },
       label: {
         labelList: [{
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'log',
         }],
         labelDefaultValue: 'log'

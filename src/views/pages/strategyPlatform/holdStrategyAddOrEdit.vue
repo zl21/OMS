@@ -15,14 +15,14 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
-          {{ $it('panel_label.basicData') }}
+          {{ $it('pL.basicData') }}
           <div slot="content" class="customized_Info_form">
             <OmsForm :form-config="formConfig1" @keyDown="keyDown"> </OmsForm>
           </div>
         </Panel>
         <Panel name="panel_condition">
           <!-- 满足条件（满足以下条件的单据会进行hold单） -->
-          {{ $it('form_label.meet_conditions') }}（{{ $it('modalTitle.ad') }}）
+          {{ $it('fL.meet_conditions') }}（{{ $it('mT.ad') }}）
           <p slot="content">
             <OmsForm :form-config="formConfig2" @keyDown="keyDown">
               <template #spec01="{ rowData }">
@@ -66,7 +66,7 @@
         </Panel>
         <Panel name="panel_action">
           <!-- 执行动作 -->
-          {{ $it("panel_label.ae") }}
+          {{ $it("pL.ae") }}
 
           
           

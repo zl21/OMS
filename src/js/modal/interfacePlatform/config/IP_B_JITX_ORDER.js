@@ -58,15 +58,15 @@ export default {
         // setRequired: "required", //必选标识,值不为required时无标识
         options: [
           {
-            label: $it('panel_label.all'), // 全部
+            label: $it('pL.all'), // 全部
             value: ''
           },
           {
-            label: $it('common.reviewed'), // 已审核
+            label: $it('com.reviewed'), // 已审核
             value: 'JITX_AUDIT'
           },
           {
-            label: $it('form_label.undeliveredCancel'), // 未发货取消
+            label: $it('fL.undeliveredCancel'), // 未发货取消
             value: 'JITX_CANCEL'
           }
         ]
@@ -82,7 +82,7 @@ export default {
       // },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.platform_billNo'), // 平台单号 输入框前文字
+        label: $it('fL.platform_billNo'), // 平台单号 输入框前文字
         value: 'orderNum', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -106,15 +106,15 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
       return false;
     }
     if (formValue.orderNum === '') {
-      self.$Message.warning($it('pHolder.z1'));// 请输入平台单号
+      self.$Message.warning($it('pH.z1'));// 请输入平台单号
       return;
     }
     if (formValue.orderStatus === undefined) {
-      self.$Message.warning($it('pHolder.z2'));// 请选择订单状态
+      self.$Message.warning($it('pH.z2'));// 请选择订单状态
       return;
     }
     const param = {

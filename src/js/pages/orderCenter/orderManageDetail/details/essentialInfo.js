@@ -43,13 +43,13 @@ export default {
       },
       queryList: [
         {
-          flag: false, // 需要加*
-          column: 'ID',
-          label: '订单编号:'
+          width: '6',
+          column: 'SOURCE_CODE',
+          label: $it('tL.platform_orderNo') + ':', // 平台单号 输入框前文字
         },
         {
           column: 'BILL_NO',
-          label: $it('form_label.billNo') + ':', //'单据编号:'
+          label: $it('fL.billNo') + ':', //'单据编号:'
         },
         // {
         //   flag: false, // 是否需要加 *
@@ -75,43 +75,33 @@ export default {
         },
         {
           flag: false,
-          column: 'ORDER_STATUS_NAME',
-          label: '单据状态:'
+          width: '6',
+          column: 'ORDER_TYPE',
+          label: $it('fL.billType') + ':', // 单据类型
+        },
+        {
+          flag: false,
+          width: '6',
+          column: 'PLATFORM_STATUS',
+          label: $it('fL.e8') + ':' //平台状态
         },
         {
           flag: false, // 需要加*
-          column: 'PLATFORM_NAME',
-          label: '平台:'
+          width: '6',
+          column: 'CP_C_PHY_WAREHOUSE_ENAME', //
+          label: $it('fL.delivery_warehouse') + ':' //发货仓库
         },
         {
           flag: false, // 需要加*
-          column: 'CP_C_PHY_WAREHOUSE_ENAME',
-          label: `${$it('form_label.delivery_warehouse')}:` //发货仓库
+          width: '6',
+          column: 'CP_C_LOGISTICS_ENAME', //
+          label: $it('fL.logisticsCompany') + ':' //物流公司
         },
         {
           flag: false, // 需要加*
-          column: 'USER_NICK',
-          label: '买家昵称:'
-        },
-        {
-          flag: false, // 需要加*
-          column: 'ORIG_RETURN_ORDER_ID',
-          label: '退换货单:'
-        },
-        {
-          flag: false, // 需要加*
-          column: 'ORDER_TIME',
-          label: '下单日期:'
-        },
-        {
-          flag: false, // 需要加*
-          column: 'PAY_NAME',
-          label: '付款方式:'
-        },
-        {
-          flag: false, // 需要加*
-          column: 'CP_C_LOGISTICS_ENAME',
-          label: window.vmI18n.t('form_label.logisticsCompany'), // '物流公司:'
+          width: '6',
+          column: 'EXPRESS_CODE',
+          label: $it('fL.logisticsOrder_No') + ':' // 物流单号
         },
         {
           flag: false, // 需要加*
@@ -139,14 +129,16 @@ export default {
         //   label: '传SAP状态:'
         // },
         {
-          flag: false, // 需要加*
-          column: 'ORDER_TYPE_NAME',
-          label: '单据类型:'
+          flag: false,
+          width: '12',
+          column: 'BUYER_MESSAGE',
+          label: $it('fL.buyerNotes') + ':', // 买家备注
         },
         {
-          flag: false, // 需要加*
-          column: 'STORE_DELIVERY_STATUS_NAME',
-          label: '门店接口状态:'
+          flag: false,
+          width: '12',
+          column: 'SELLER_MEMO',
+          label: $it('fL.sellerNotes') + ':', // 卖家备注
         },
         {
           flag: false, // 需要加*
@@ -163,37 +155,40 @@ export default {
         {
           flag: false,
           column: 'RECEIVER_NAME',
-          label: '收货人:'
+          label: $it('fL.consignee') + ':'//收货人
+        },
+        {
+          flag: false, // 需要加*
+          width: '12',
+          column: 'BUYER_NICK',
+          label: $it('tL.buyerNickname') + ':', // 买家昵称
         },
         {
           flag: false,
           column: 'RECEIVER_MOBILE',
-          label: '收货人手机:'
+          label: $it('fL.consignee_phone') + ':', // 收货人手机号
         },
         {
           flag: false,
           column: 'RECEIVER_PHONE',
-          label: '电话:'
-        },
-        {
-          flag: false,
-          column: 'RECEIVER_ZIP',
-          label: '邮编:'
+          label: $it('fL.e6') + ':', // 收货人电话
         },
         {
           flag: false,
           column: 'CP_C_REGION_PROVINCE_ENAME',
-          label: '省:'
+          label: $it('fL.aa') + ':'  //省市区
         },
         {
           flag: false,
-          column: 'CP_C_REGION_CITY_ENAME',
-          label: '市:'
+          width: '12',
+          column: 'RECEIVER_ZIP',
+          label: $it('fL.e7') + ':', // 收货人邮编
         },
         {
           flag: false,
-          column: 'CP_C_REGION_AREA_ENAME',
-          label: '区:'
+          width: '24',
+          column: 'RECEIVER_ADDRESS',
+          label: $it('fL.ab') + ':' // 详细地址
         },
         {
           flag: false,
@@ -276,18 +271,29 @@ export default {
       }
     },
     // 详情按钮替换商品弹框
-    replaceGoodsDetail(data) {
-      console.log(data);
-      const self = this;
-      self.publicBouncedConfig = Object.assign(
-        publicDialogConfig.replaceGoodsDetailConfig,
-        {
-          componentData: {
-            ids: [self.$route.params.customizedModuleId],
-            itemId: data[0].ID
-          }
-        }
-      );
+    replaceGoodsDetail(itemData) {
+      this.dialogs.changeSku.data = {
+        orderList: [{
+          orderId: this.componentData.order.ID,
+          billNo: this.componentData.order.BILL_NO
+        }],
+        oldSuk: itemData[0].PS_C_SKU_ECODE,
+        spuIds: itemData.map(row => row.ID)
+      };
+      this.dialogsConfig = this.dialogs.changeSku;
+      setTimeout(() => {
+        this.$children.find(item => item.name === 'changeSkuDialog').openConfirm();
+      }, 100);
+    },
+    // 修改地址
+    modifyAddress() {
+      // '待审核','缺货'
+      if (![$it('com.toBeReviewed'), $it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
+        this.$Message.error($it('tip.fq')); //订单状态不满足，不允许修改地址！
+        return false;
+      }
+      this.dialogs.address.data = this.componentData.order;
+      this.dialogsConfig = this.dialogs.address;
       setTimeout(() => {
         self.$children
           .find(item => item.name === 'replaceGoodsDetail')

@@ -25,7 +25,7 @@ export default {
             }
           },
           {
-            text: $it('common.return'), // 返回
+            text: $it('com.return'), // 返回
             btnclick: () => {
               // $omsUtils.tabCloseAppoint(this);
               //   this.$destroy(true);

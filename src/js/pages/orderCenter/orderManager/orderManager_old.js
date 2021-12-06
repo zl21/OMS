@@ -116,11 +116,11 @@ export default {
                           props: {
                             columns: [
                               {
-                                title: $it('table_label.serialNo'), // 序号
+                                title: $it('tL.serialNo'), // 序号
                                 key: 'index'
                               },
                               {
-                                title: $it('form_label.billNo'), // 单据编号
+                                title: $it('fL.billNo'), // 单据编号
                                 key: 'billNo'
                               },
                               {
@@ -168,11 +168,11 @@ export default {
                           props: {
                             columns: [
                               {
-                                title: $it('table_label.serialNo'), // 序号
+                                title: $it('tL.serialNo'), // 序号
                                 key: 'index'
                               },
                               {
-                                title: $it('form_label.billNo'), // 单据编号
+                                title: $it('fL.billNo'), // 单据编号
                                 key: 'billNo'
                               },
                               {
@@ -986,7 +986,7 @@ export default {
           this.$store.commit('global/tabOpen', {
             type: 'C',
             customizedModuleName: this.tablename,
-            label: $it('panel_label.retailInvoice_details'), //零售发货单详情
+            label: $it('pL.retailInvoice_details'), //零售发货单详情
             customizedModuleId: val.ID,
           });
           break;
@@ -1053,7 +1053,7 @@ export default {
       }
       self.$Modal.fcWarning({
         title: '加急打标',
-        content: $it('modalTips.yc'),
+        content: $it('tip.yc'),
         showCancel: true,
         onOk: () => {
           if (IDS.length == 1) {
@@ -1095,7 +1095,7 @@ export default {
         if (res.data.code == 0) {
           this.$Modal.confirm({
             className: 'ark-dialog',
-            title: $it('modalTitle.tips'),
+            title: $it('mT.tips'),
             content: res.data.message,
             showCancel: true,
             mask: true,

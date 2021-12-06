@@ -49,18 +49,18 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: $it('form_label.platformTime'), // 平台时间
+        label: $it('fL.platformTime'), // 平台时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.returnNo'), // 退供单号 输入框前文字
+        label: $it('fL.returnNo'), // 退供单号 输入框前文字
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
-        placeholder: $it('pHolder.z3'), // 多个退供单号，用逗号隔开 占位文本，默认为请输入
+        placeholder: $it('pH.z3'), // 多个退供单号，用逗号隔开 占位文本，默认为请输入
         ghost: false, // 是否关闭幽灵按钮，默认开启
       }
     ],
@@ -78,11 +78,11 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId) {
-      self.$Message.warning($it('modalTips.do'));// 店铺不能为空
+      self.$Message.warning($it('tip.do'));// 店铺不能为空
       return;
     }
     if (!formValue.query_date[0] && !formValue.bill_no) {
-      self.$Message.warning($it('modalTips.bw'));// 请输入平台时间或退供单号
+      self.$Message.warning($it('tip.bw'));// 请输入平台时间或退供单号
       return;
     }
     self.dialogLoad = true;

@@ -352,7 +352,7 @@ export default {
           tbodyWidth: '62px'
         },
         {
-          title: $it('table_label.edit'), // 编辑
+          title: $it('tL.edit'), // 编辑
           key: 'edit',
           editValue: false,
           tbodyWidth: '62px'
@@ -491,7 +491,7 @@ export default {
       this.getSaveData();
       if (this.tableSaveData.length > 0) {
         this.$Modal.fcWarning({
-          title: $it("modalTitle.tips"), // 提示
+          title: $it("mT.tips"), // 提示
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
@@ -752,7 +752,7 @@ export default {
               });
             } else {
               this.$Modal.fcWarning({
-                title: $it("modalTitle.tips"), // 提示
+                title: $it("mT.tips"), // 提示
                 className: 'ark-dialog',
                 mask: true,
                 content: res.data.message,

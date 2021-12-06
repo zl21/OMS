@@ -62,7 +62,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.warehouseName'), // 仓库名称 // 赔付类型
+              name: $it('tL.warehouseName'), // 仓库名称 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 169092, // 对应的表ID
@@ -88,7 +88,7 @@ export default {
           },
           {
             style: 'radio',
-            label: $it('panel_label.ar'), // 物流分配
+            label: $it('pL.ar'), // 物流分配
             value: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             colname: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             width: '6',
@@ -100,11 +100,11 @@ export default {
             options: [ // radio选项
               {
                 value: 1,
-                label: $it('panel_label.ao'), // 自动分配
+                label: $it('pL.ao'), // 自动分配
               },
               {
                 value: 2,
-                label: $it('panel_label.aj'), // 默认物流
+                label: $it('pL.aj'), // 默认物流
               }
             ]
           },
@@ -125,7 +125,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.logisticsCompany'), // 物流公司
+              name: $it('fL.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 171650, // 对应的表ID
@@ -145,7 +145,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             colname: 'REMARK',
             value: 'REMARK',
             width: '6',
@@ -157,7 +157,7 @@ export default {
           },
           {
             style: '',
-            label: $it('form_label.bg'), // 启用状态
+            label: $it('fL.bg'), // 启用状态
             colname: 'ISACTIVE',
             value: 'ISACTIVE',
             width: '6',
@@ -191,7 +191,7 @@ export default {
         gridBar: true,
         formData: [
           {
-            label: $it('form_label.logisticsCompany'), // 物流公司
+            label: $it('fL.logisticsCompany'), // 物流公司
             colname: 'CP_C_LOGISTICS_ID',
             defVal: 'CP_C_LOGISTICS_ID1',
             style: 'formCompile',
@@ -212,7 +212,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.logisticsCompany'), // 物流公司
+              name: $it('fL.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 171650, // 对应的表ID
@@ -304,7 +304,7 @@ export default {
         indexColumn: true, // 是否展示序号列
         columns: [
           {
-            title: $it('form_label.logisticsCompany'), // 物流公司
+            title: $it('fL.logisticsCompany'), // 物流公司
             key: 'CP_C_LOGISTICS_ENAME'
           }
         ]
@@ -312,17 +312,17 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('panel_label.aq'), // 启用物流
+          label: $it('pL.aq'), // 启用物流
           value: 'logistics',
           isShow: true
         },
         {
-          label: $it('panel_label.al'), // 物流信息
+          label: $it('pL.al'), // 物流信息
           value: 'logistics',
           isShow: false
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_WAREHOUSE_LOGISTICS_LOG',
           isShow: false
         }
@@ -401,12 +401,12 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('mT.tips'), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           }

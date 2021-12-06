@@ -57,7 +57,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: $it('form_label.queryTime'), // 查询时间
+        label: $it('fL.queryTime'), // 查询时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
@@ -75,11 +75,11 @@ export default {
   // 确定按钮
   determine: async self => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be')); // 请选择需要下载的店铺
       return;
     }
     if (!self.downLoadFormConfig.formValue.query_date[0]) {
-      self.$Message.warning($it('modalTips.br')); // 请选择需要下载的查询时间
+      self.$Message.warning($it('tip.br')); // 请选择需要下载的查询时间
       return;
     }
     let startTime = self.downLoadFormConfig.formValue.query_date[0];

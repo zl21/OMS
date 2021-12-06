@@ -95,7 +95,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -105,7 +105,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $it('common.downloadNow'), // 立即下载 按钮文本
+            text: $it('com.downloadNow'), // 立即下载 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -124,17 +124,17 @@ export default {
       const startTime = formValue.timerange[0];
       const endTime = formValue.timerange[1];
       if (this.downLoadFormConfig.formData[0].itemdata.pid == '') {
-        this.$Message.warning($it('modalTips.bg'));// 请输入需要下载的店铺!
+        this.$Message.warning($it('tip.bg'));// 请输入需要下载的店铺!
         return false;
       }
       if (startTime === '' && endTime === '' && !this.downLoadFormConfig.formValue.bill_numbere) {
-        this.$Message.warning($it('modalTips.bh'));// 账单时间账单编码不能同时为空!
+        this.$Message.warning($it('tip.bh'));// 账单时间账单编码不能同时为空!
         return false;
       }
       // 如果没填写账单编码,则对时间格式进行判断
       if (!this.downLoadFormConfig.formValue.bill_numbere) {
         if (startTime === '' && endTime === '') {
-          this.$Message.warning($it('modalTips.bi'));// 账单时间不能为空
+          this.$Message.warning($it('tip.bi'));// 账单时间不能为空
           return false;
         }
         // 账单时间不能跨月
@@ -142,7 +142,7 @@ export default {
           formValue.type === 'billDownload'
           && startTime.getMonth() != endTime.getMonth()
         ) {
-          this.$Message.warning($it('modalTips.bj'));// 账单时间不能跨月
+          this.$Message.warning($it('tip.bj'));// 账单时间不能跨月
           return false;
         }
         // 账单时间不能超过11天
@@ -150,7 +150,7 @@ export default {
           formValue.type === 'billDownload'
           && endTime - startTime > 1000 * 60 * 60 * 24 * 11
         ) {
-          this.$Message.warning($it('modalTips.bk'));// 账单时间段天数要小于等于11天
+          this.$Message.warning($it('tip.bk'));// 账单时间段天数要小于等于11天
           return false;
         }
       }

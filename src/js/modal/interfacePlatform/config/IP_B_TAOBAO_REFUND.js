@@ -43,24 +43,24 @@ export default {
       },
       {
         style: 'radio', // 输入框类型
-        label: $it('form_label.chargebackStatus'), // 退单状态输入框前文字
+        label: $it('fL.chargebackStatus'), // 退单状态输入框前文字
         value: 'status', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         options: [
           // radio选项
           {
-            label: $it('panel_label.all'), // 全部
+            label: $it('pL.all'), // 全部
             value: ''
           },
           {
-            label: $it('form_label.staySellerAgrees'), // 待卖家同意
+            label: $it('fL.staySellerAgrees'), // 待卖家同意
             value: 'WAIT_SELLER_AGREE'
           }
         ]
       },
       {
         style: 'date', // 输入框类型
-        label: $it('form_label.chargebackModifyTime'), // 退单修改时间 输入框前文字
+        label: $it('fL.chargebackModifyTime'), // 退单修改时间 输入框前文字
         value: 'timerange', // 输入框的值
         type: 'datetimerange',
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -68,7 +68,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.platform_returnOrder_no'), // 平台退货单号 输入框前文字
+        label: $it('fL.platform_returnOrder_no'), // 平台退货单号 输入框前文字
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -85,14 +85,14 @@ export default {
   // 确定按钮
   determine: async (self) => {
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
       return false;
     }
     if (
       self.downLoadFormConfig.formValue.bill_no === ''
       && self.downLoadFormConfig.formValue.timerange[0] === '' && self.downLoadFormConfig.formValue.timerange[1] === ''
     ) {
-      self.$Message.warning($it('modalTips.bv'));// 退单修改时间和退单单号不能同时为空
+      self.$Message.warning($it('tip.bv'));// 退单修改时间和退单单号不能同时为空
       return false;
     }
     const params = {

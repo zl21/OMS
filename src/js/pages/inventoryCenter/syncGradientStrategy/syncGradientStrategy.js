@@ -299,7 +299,7 @@ export default {
                 label: '共享池库存梯度策略', //  tab中文名
               });
             }
-            this.$Message.success(window.$it('modalTips.z9')); // '保存成功'
+            this.$Message.success(window.$it('tip.z9')); // '保存成功'
             this.ID = res.data.data
             this.getLeftTableDetail(true, type)
             // 保存成功后处理
@@ -661,12 +661,12 @@ export default {
     back() {
       if (this.isChange) {
         this.$Modal.info({
-          title: window.$it('modalTitle.tips'), // 提示
+          title: window.$it('mT.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.$it('common.determine'), // 确定
-          cancelText: window.$it('common.cancel'), // 取消
+          okText: window.$it('com.determine'), // 确定
+          cancelText: window.$it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },

@@ -17,7 +17,7 @@
     <div class="scan_info">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.scanInfo") }}
+        {{ $it("pL.scanInfo") }}
       </div>
       <OmsForm :form-config="formConfig1" />
     </div>
@@ -25,7 +25,7 @@
     <div class="scan_logg">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.enterInfo") }}
+        {{ $it("pL.enterInfo") }}
       </div>
       <OmsForm :form-config="formConfig2" />
     </div>
@@ -37,7 +37,7 @@
     <div class="scan_details">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.scanDetails") }}
+        {{ $it("pL.scanDetails") }}
       </div>
       <OmsTable
         :jordan-table-config="jordanTableConfig"
@@ -48,7 +48,7 @@
     <div class="scan_returngood">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.returnAndExchange_info") }}
+        {{ $it("pL.returnAndExchange_info") }}
       </div>
       <OmsForm :form-config="formConfig4" />
     </div>
@@ -74,54 +74,54 @@
     <!-- 扫描发出条码无对应明细时提示弹框 -->
     <Modal
       v-model="isModal"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       @on-cancel="cancel1"
       @on-keydown="keydown1"
       @on-ok="ok1"
     >
       <!-- 条码不在列表中,是否继续添加? -->
-      <p>{{ $it("modalTips.h4") }}</p>
+      <p>{{ $it("tip.h4") }}</p>
     </Modal>
     <!-- 退货单无头件提示 -->
     <Modal
       v-model="isModal2"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       @on-cancel="cancel2"
       @on-keydown="keydown2"
       @on-ok="ok2"
     >
       <!-- 未能匹配相应的退换货单，是否继续? -->
-      <p>{{ $it("modalTips.h5") }}</p>
+      <p>{{ $it("tip.h5") }}</p>
     </Modal>
     <!-- 失败提示 -->
-    <Modal v-model="isModal3" :title="$it('modalTitle.tips')">
+    <Modal v-model="isModal3" :title="$it('mT.tips')">
       <p>{{ errModelTitle }}</p>
     </Modal>
     <!-- 提示音 -->
     <audio id="fm01">
       <!--以下所有 您的浏览器不支持 audio 与元素。 -->
       <source src="/views/pages/orderCenter/scanIn/MP3/fm01.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="fm02">
       <source src="/views/pages/orderCenter/scanIn/MP3/fm02.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="fm03">
       <source src="/views/pages/orderCenter/scanIn/MP3/fm03.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="fm04">
       <source src="/views/pages/orderCenter/scanIn/MP3/fm04.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="error01">
       <source src="/views/pages/orderCenter/scanIn/MP3/error01.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
     <audio id="error02">
       <source src="/views/pages/orderCenter/scanIn/MP3/error02.mp3" type="audio/ogg" />
-      {{ $it("modalTips.h6") }}
+      {{ $it("tip.h6") }}
     </audio>
   </div>
 </template>

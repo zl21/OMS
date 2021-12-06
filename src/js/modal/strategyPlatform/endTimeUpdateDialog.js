@@ -22,7 +22,7 @@ export default {
         formData: [
           {
             style: 'select',
-            label: $it('form_label.order_time'), // '订单时间',
+            label: $it('fL.order_time'), // '订单时间',
             width: '24',
             value: 'BILL_TIME_TYPE',
             clearable: false,
@@ -31,7 +31,7 @@ export default {
           }, {
             style: 'date',
             type: 'datetime',
-            label: $it('form_label.adjustEndTime'), // '调整结束时间',
+            label: $it('fL.adjustEndTime'), // '调整结束时间',
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss',
             value: 'END_TIME',
@@ -44,12 +44,12 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.$emit('closeActionDialog');
             } // 按钮点击事件
           }, {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             btnclick: () => {
               this.confirmChange();
             }
@@ -70,7 +70,7 @@ export default {
     };
     console.log(tableInfo);
     // const timeType = '1';
-    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === $it('form_label.order_time'));
+    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === $it('fL.order_time'));
     console.log(item);
     this.formConfig.formData[0].options = item.combobox.forEach(val => {
       if (tableInfo.buttons.selectArr[0].BILL_TIME_TYPE.val === val.limitdesc) this.formConfig.formValue.BILL_TIME_TYPE = val.limitval;
@@ -107,7 +107,7 @@ export default {
         }
       } catch (error) {
         $omsUtils.setLoading();
-        this.$Message.success($it('modalTips.z3')); // '修改时间失败'
+        this.$Message.success($it('tip.z3')); // '修改时间失败'
       }
     }
   }

@@ -28,7 +28,7 @@ export default {
       },
       {
         style: 'date', // 输入框类型
-        label: $it('form_label.e5'), // 退款申请时间 输入框前文字
+        label: $it('fL.e5'), // 退款申请时间 输入框前文字
         colname: 'startEndTimes',
         type: 'datetimerange',
         value: 'startEndTimes', // 输入框的值
@@ -57,12 +57,12 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be')); // 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.startEndTimes
     if (!start) {
-      self.$Message.warning($it('modalTips.kv')); // 请输入退款申请时间
+      self.$Message.warning($it('tip.kv')); // 请输入退款申请时间
       return false;
     }
     const param = {

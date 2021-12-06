@@ -54,19 +54,19 @@ export default {
         options: [ // radio选项
           {
             value: 'NEW',
-            label: $it('form_label.newlyBuild'), // 新建
+            label: $it('fL.newlyBuild'), // 新建
           },
           {
             value: 'CONFIRMING',
-            label: $it('form_label.confirming'), // 确认中
+            label: $it('fL.confirming'), // 确认中
           },
           {
             value: 'CONFIRMED',
-            label: $it('form_label.confirmed_as_JITX'), // 确认为JITX
+            label: $it('fL.confirmed_as_JITX'), // 确认为JITX
           },
           {
             value: 'ROLLBACK',
-            label: $it('form_label.confirmed_as_non_JITX'), // 确认为非JITX
+            label: $it('fL.confirmed_as_non_JITX'), // 确认为非JITX
           }
         ]
       },
@@ -74,7 +74,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: $it('form_label.orderTime'), // 下单时间
+        label: $it('fL.orderTime'), // 下单时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
@@ -99,17 +99,17 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.query_date
     if (!start) {
-      self.$Message.warning($it('modalTips.hd')); // 请选择下单时间
+      self.$Message.warning($it('tip.hd')); // 请选择下单时间
       return false;
     }
     const timeDiff = (end - start) > 1800000;
     if (timeDiff) {
-      self.$Message.warning($it('modalTips.he')); // 下单时间范围不能超过半小时，请重新设置！
+      self.$Message.warning($it('tip.he')); // 下单时间范围不能超过半小时，请重新设置！
       return false;
     }
     const param = {

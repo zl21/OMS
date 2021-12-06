@@ -103,7 +103,7 @@ class BtnConfig {
       {
         webname: 'new_tuihuanhuo', // 退货换单 - 新增
         btnclick: () => {
-          commonUtils.navigateMain('-1', 'TabHref', 'returngood', 'panel_label.addReturnOrder', { statusName: false })
+          commonUtils.navigateMain('-1', 'TabHref', 'returngood', 'pL.addReturnOrder', { statusName: false })
         }, // 按钮点击事件
       },
       {
@@ -182,7 +182,7 @@ class BtnConfig {
             '-1',
             'TabHref',
             'returnTreasuryAdd',
-            'panel_label.returnTreasuryAdd'
+            'pL.returnTreasuryAdd'
           )
         },
       },
@@ -332,7 +332,7 @@ class BtnConfig {
       {
         webname: 'refund_return', // 退单返回
         btnclick: () => {
-          this.back('returngoodList', 2661, 'panel_label.forcedStorage') // 销毁当前实例
+          this.back('returngoodList', 2661, 'pL.forcedStorage') // 销毁当前实例
           BtnConfig.target.$destroy()
         }
       },
@@ -355,7 +355,7 @@ class BtnConfig {
       {
         webname: 'order_fund', // 返回
         btnclick: () => {
-          this.back('orderManager', 2627, 'panel_label.orderManager') // 销毁当前实例
+          this.back('orderManager', 2627, 'pL.orderManager') // 销毁当前实例
           BtnConfig.target.$destroy()
         },
       },
@@ -366,7 +366,7 @@ class BtnConfig {
       {
         webname: 'Mismatchingmandatorymatching_return',
         btnclick: () => {
-          this.back('returnStoreageList', 2809, 'panel_label.returnTreasury') // 销毁当前实例
+          this.back('returnStoreageList', 2809, 'pL.returnTreasury') // 销毁当前实例
           BtnConfig.target.$destroy()
         },
       },
@@ -663,11 +663,11 @@ class BtnConfig {
   }
   // 修改
   returnGoodsModifyHandler(self, id) {
-    commonUtils.navigateMain(id[0], 'TabOpen', 'returngood', 'panel_label.addReturnOrder', { statusName: true })
+    commonUtils.navigateMain(id[0], 'TabOpen', 'returngood', 'pL.addReturnOrder', { statusName: true })
   }
   // 退换货单复制
   returnGoodsCopyHandler() {
-    commonUtils.navigateMain(-1, 'TabOpen', 'returngood', 'panel_label.addReturnOrder', { cloneReturnGoodId: true, statusName: false })
+    commonUtils.navigateMain(-1, 'TabOpen', 'returngood', 'pL.addReturnOrder', { cloneReturnGoodId: true, statusName: false })
   }
   // 错发强制匹配
   forceMatchHandler(self, id) {
@@ -683,7 +683,7 @@ class BtnConfig {
               id,
               'TabOpen',
               'WARNSENDMATCHING',
-              'panel_label.return_warehousing_wrong_delivery_forced_matching',
+              'pL.return_warehousing_wrong_delivery_forced_matching',
               { source: 3, form: 'list' }
             )
           }
@@ -708,7 +708,7 @@ class BtnConfig {
                 id,
                 'TabOpen',
                 'WARNSENDMATCHING',
-                'panel_label.return_warehousing_wrong_delivery_forced_matching',
+                'pL.return_warehousing_wrong_delivery_forced_matching',
                 { source: 3, form: 'list' }
               )
             }
@@ -731,7 +731,7 @@ class BtnConfig {
               id,
               'TabOpen',
               'manualMatching',
-              'panel_label.return_warehousing_manual_matching',
+              'pL.return_warehousing_manual_matching',
               { source: 2, form: 'list' }
             )
           }
@@ -756,7 +756,7 @@ class BtnConfig {
                 id,
                 'TabOpen',
                 'manualMatching',
-                'panel_label.return_warehousing_manual_matching',
+                'pL.return_warehousing_manual_matching',
                 { source: 2, form: 'list' }
               )
             }
@@ -833,7 +833,7 @@ class BtnConfig {
           id,
           'TabOpen',
           'RETURNGOOD',
-          'panel_label.ReturnOrderDetails',
+          'pL.ReturnOrderDetails',
           { statusName: true, flag: 'RefundToExchange' }
         )
       } else {
@@ -868,7 +868,7 @@ class BtnConfig {
           ids[0],
           'TabHref',
           'RETURNGOOD',
-          'panel_label.ReturnOrderDetails',
+          'pL.ReturnOrderDetails',
           { statusName: true, flag: 'RefundToExchange' }
         )
       } else {
@@ -910,7 +910,7 @@ class BtnConfig {
         self,
         'changeRemarkConfig',
         'rturngoodModifyRemarks',
-        'modalTitle.modify_sellerNotes'
+        'mT.modify_sellerNotes'
       )
     }
   }
@@ -990,15 +990,15 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $it('table_label.serialNo'), // 序号
+                        title: $it('tL.serialNo'), // 序号
                         key: 'index',
                       },
                       {
-                        title: $it('form_label.billNo'), // 单据编号
+                        title: $it('fL.billNo'), // 单据编号
                         key: 'billNo',
                       },
                       {
-                        title: $it('form_label.e0'), // 失败原因
+                        title: $it('fL.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1010,7 +1010,7 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $it('form_label.e0'), // 失败原因
+                        title: $it('fL.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1191,7 +1191,7 @@ class BtnConfig {
           -1,
           'TabOpen',
           'invoiceNoticetAdd',
-          'panel_label.billingNoticeEdit',
+          'pL.billingNoticeEdit',
           extendObj
         )
       } else {
@@ -1287,7 +1287,7 @@ class BtnConfig {
             -1,
             'TabOpen',
             'scanIn',
-            'panel_label.scannAndWarehous',
+            'pL.scannAndWarehous',
             { returnId: recordID, isOrderHrefReturn: 'order' }
           )
         } else {
@@ -1308,7 +1308,7 @@ class BtnConfig {
       .then((res) => {
         console.log(res);
         if(res.data.code == 0){
-          commonUtils.navigateMain(selectItem.ID,'TabOpen','MANUAL_SPLIT','panel_label.orderSplit')
+          commonUtils.navigateMain(selectItem.ID,'TabOpen','MANUAL_SPLIT','pL.orderSplit')
         };
       })
   }
@@ -1382,7 +1382,7 @@ class BtnConfig {
         if (![1].includes(item.ORDER_STATUS)) {
           // 当前状态异常，不允许操作！
           // $utils.msgTips(self, 'warning', 'd9')
-          self.$Message.warning($it('modalTips.kh')) // 只允许待审核的订单进行取消合并！
+          self.$Message.warning($it('tip.kh')) // 只允许待审核的订单进行取消合并！
           self.btnConfig.loading = false
           return
         }
@@ -1407,7 +1407,7 @@ class BtnConfig {
                   title: 'ID',
                   key: 'objid',
                 },{
-                  title: $it('form_label.billNo'), // 单据编号
+                  title: $it('fL.billNo'), // 单据编号
                   key: 'objno',
                 },{
                   title: '详细信息', // TODO!
@@ -1430,7 +1430,7 @@ class BtnConfig {
       // 已取消，系统作废, // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
       if ([7, 8, 1, 2, 3, 4, 50, 21].includes(orderDetails.ORDER_STATUS)) {
         let tips = [7, 8].includes(orderDetails.ORDER_STATUS) ? 'b7' : 'b8'
-        let fixTips = `${orderDetails.ID}${$it(`modalTips.${tips}`)}`
+        let fixTips = `${orderDetails.ID}${$it(`tip.${tips}`)}`
         $utils.msgTips(self, 'warning', fixTips, 2)
       } else if ([5, 6].includes(orderDetails.ORDER_STATUS)) {
         $utils.msgTips(self, 'warning', 'h2') // "订单状态为仓库发货和平台发货才能新增退单!"
@@ -1443,7 +1443,7 @@ class BtnConfig {
           -1,
           'TabOpen',
           'returngood',
-          'panel_label.addReturnOrder',
+          'pL.addReturnOrder',
           extendObj
         )
       }
@@ -1532,7 +1532,7 @@ class BtnConfig {
           $utils.msgTips(self, 'sucess', res.data.message)
           self.getList(self.statusTab)
         } else {
-          const err = res.data.message || $it('modalTips.l9') // 虚拟仓库入库失败！
+          const err = res.data.message || $it('tip.l9') // 虚拟仓库入库失败！
           let renderInfo = {
             props: {
               columns: [
@@ -1541,7 +1541,7 @@ class BtnConfig {
                   key: 'objid',
                 },
                 {
-                  title: $it('modalTitle.du'), // 报错信息
+                  title: $it('mT.du'), // 报错信息
                   key: 'message',
                 },
               ],
@@ -1578,7 +1578,7 @@ class BtnConfig {
         -1,
         'TabOpen',
         'EXTRAREFUND',
-        'panel_label.extraRefundEdit',
+        'pL.extraRefundEdit',
         extendObj
       )
     } else {
@@ -1844,15 +1844,15 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $it('table_label.serialNo'), // 序号
+                        title: $it('tL.serialNo'), // 序号
                         key: 'INDEX',
                       },
                       {
-                        title: $it('form_label.billNo'), // 单据编号
+                        title: $it('fL.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: $it('form_label.e0'), // 失败原因
+                        title: $it('fL.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],

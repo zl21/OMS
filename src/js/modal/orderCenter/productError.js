@@ -53,7 +53,7 @@ export default {
           // },
           {
             key: 'CP_C_SHOP_TITLE',
-            title: $it('table_label.shopName') // 店铺名称
+            title: $it('tL.shopName') // 店铺名称
           },
           {
             key: 'SKU_NUMIID',
@@ -161,7 +161,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -171,7 +171,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制

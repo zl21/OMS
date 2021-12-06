@@ -24,7 +24,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 时间类型 -->
-              <i class="red">*</i> {{ $it("form_label.timeType") }}：
+              <i class="red">*</i> {{ $it("fL.timeType") }}：
             </div>
             <div class="form_content">
               <SingleBox
@@ -34,7 +34,7 @@
               />
               <div class="form_item">
                 <!-- 时间范围 -->
-                <i class="red">*</i> {{ $it("form_label.timeRange") }}：
+                <i class="red">*</i> {{ $it("fL.timeRange") }}：
                 <DatePicker
                   v-model="basicData.time_limit"
                   format="yyyy/MM/dd HH:mm:ss"
@@ -49,7 +49,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 订单类型 -->
-              <i class="red">*</i> {{ $it("form_label.orderType") }}：
+              <i class="red">*</i> {{ $it("fL.orderType") }}：
             </div>
             <div class="form_content">
               <SingleBox
@@ -62,7 +62,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 平台标记 -->
-              <i class="red" />{{ $it("form_label.platform_marking") }}：
+              <i class="red" />{{ $it("fL.platform_marking") }}：
             </div>
             <div class="form_content">
               <SingleBox
@@ -75,7 +75,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 购买排名 -->
-              <i class="red" />{{ $it("form_label.purchase_ranking") }}：
+              <i class="red" />{{ $it("fL.purchase_ranking") }}：
             </div>
             <div class="form_content">
               <div class="form_el_input">
@@ -95,7 +95,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 卖家备注 -->
-              <i class="red" />{{ $it("form_label.sellerNotes") }}：
+              <i class="red" />{{ $it("fL.sellerNotes") }}：
             </div>
             <div class="form_content">
               <div class="form_el_input">
@@ -109,7 +109,7 @@
           <div class="row">
             <div class="form_label">
               <!-- 买家留言 -->
-              <i class="red" />{{ $it("form_label.buyer_message") }}：
+              <i class="red" />{{ $it("fL.buyer_message") }}：
             </div>
             <div class="form_content">
               <div class="form_el_input">

@@ -22,7 +22,7 @@ export default {
       type: 'LOGISTICCOMPANY',
       pageNum: 1,
       // dataEmptyMessage: "数据加载中...", // 无数据的提示
-      dataEmptyMessage: $it('modalTips.du'), // 无数据的提示
+      dataEmptyMessage: $it('tip.du'), // 无数据的提示
       columns: ['ename'], // 展现的组
       AutoData: [],
       foreignKeyLink: {},
@@ -33,7 +33,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
           type: '', // 按钮类型
-          text: $it('common.cancel'), // 取消
+          text: $it('com.cancel'), // 取消
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -43,7 +43,7 @@ export default {
         },
         {
           type: '', // 按钮类型
-          text: $it('common.determine'), // 确定
+          text: $it('com.determine'), // 确定
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -102,7 +102,7 @@ export default {
         if (!self.expressCode) {
           self.$Message.warning({
             // content: "请选择物流单号",
-            content: $it('modalTips.fn'),
+            content: $it('tip.fn'),
             duration: 5,
             top: 80,
           });
@@ -111,7 +111,7 @@ export default {
       } else if (!self.pid) {
         self.$Message.warning({
           // content: "请选择物流公司",
-          content: $it('modalTips.ye'),
+          content: $it('tip.ye'),
           duration: 5,
           top: 80,
         });
@@ -137,7 +137,7 @@ export default {
               } else {
                 self.$Modal.error({
                   // title: "提示",
-                  title: $it('modalTitle.tips'),
+                  title: $it('mT.tips'),
                   render: h => h('div', {}, [
                     h(
                       'p',
@@ -229,19 +229,19 @@ export default {
             {
               colname: 'ename',
               // name: "快递名称",
-              name: $it('table_label.expressName'),
+              name: $it('tL.expressName'),
               show: true,
             },
             {
               colname: 'ecode',
               // name: "快递编码",
-              name: $it('table_label.expressCode'),
+              name: $it('tL.expressCode'),
               show: false,
             },
             {
               colname: 'shortName',
               // name: "简称",
-              name: $it('table_label.abbreviation'),
+              name: $it('tL.abbreviation'),
               show: false,
             },
           ],

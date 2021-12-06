@@ -17,7 +17,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $it('form_label.creationDate'), // '创建日期',
+            label: $it('fL.creationDate'), // '创建日期',
             width: '6',
             value: 'CREATIONDATE',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -26,36 +26,36 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.batch_number'), // '批次编号',
+            label: $it('fL.batch_number'), // '批次编号',
             value: 'BATCHNO',
             width: '6'
           },
           {
             style: 'input',
-            label: $it('form_label.bar_code'), // '条码编码',
+            label: $it('fL.bar_code'), // '条码编码',
             value: 'PS_C_SKU_ECODE',
             width: '6'
           },
           {
             style: 'input',
-            label: $it('form_label.platformCommodityID'), // '平台商品ID',
+            label: $it('fL.platformCommodityID'), // '平台商品ID',
             value: 'NUMIID',
             width: '6'
           },
           {
             style: 'input',
-            label: $it('table_label.platform_barcode_ID'), // '平台条码ID',
+            label: $it('tL.platform_barcode_ID'), // '平台条码ID',
             value: 'SKU_ID',
             width: '6'
           },
           {
             style: 'input',
-            label: $it('form_label.gBCode'), // '国标码',
+            label: $it('fL.gBCode'), // '国标码',
             value: 'GBCODE',
             width: '6'
           },
           {
-            label: $it('table_label.shopName'), // '店铺名称',
+            label: $it('tL.shopName'), // '店铺名称',
             value: 'CP_C_SHOP_TITLE',
             style: 'popInput', // 输入框弹框单多选
             width: '6',
@@ -66,13 +66,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: $it('table_label.shopName'), // '店铺名称',
+              fkdesc: $it('tL.shopName'), // '店铺名称',
               inputname: 'ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.shopName'), // '店铺名称',
+              name: $it('tL.shopName'), // '店铺名称',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               row: 1,
@@ -87,7 +87,7 @@ export default {
           },
           // {
           //   style: 'input',
-          //   label: $it('form_label.storeID'), // '店铺ID',
+          //   label: $it('fL.storeID'), // '店铺ID',
           //   value: 'CP_C_SHOP_ID',
           //   width: '6'
           // },
@@ -107,7 +107,7 @@ export default {
           //     isnotnull: false, // 是否必填
           //     isuppercase: false, // 是否转大写
           //     length: 65535, // 最大长度是多少
-          //     name: $it('form_label.storeID'), // '店铺ID',
+          //     name: $it('fL.storeID'), // '店铺ID',
           //     readonly: false, // 是否可编辑，对应input   readonly属性
           //     reftable: 'CP_C_SHOP', // 对应的表
           //     row: 1,
@@ -122,94 +122,94 @@ export default {
           // },
           {
             style: 'input',
-            label: $it('form_label.sourceNo'), // '来源单号',
+            label: $it('fL.sourceNo'), // '来源单号',
             value: 'SOURCE_NO',
             width: '6'
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.synchronizationStatus'), // '同步状态',
+            label: $it('fL.synchronizationStatus'), // '同步状态',
             width: '6', // 所占宽度宽度
             value: 'SYN_STATUS', // 输入框的值
             multiple: true,
             options: [
               {
-                label: $it('common.unAudit'), // '未审核',
+                label: $it('com.unAudit'), // '未审核',
                 value: '1'
               },
               {
-                label: $it('common.custAudited'), // '已客审',
+                label: $it('com.custAudited'), // '已客审',
                 value: '2'
               },
               {
-                label: $it('common.financeAudited'), // '已财审',
+                label: $it('com.financeAudited'), // '已财审',
                 value: '3'
               },
               {
-                label: $it('common.voided'), // '已作废',
+                label: $it('com.voided'), // '已作废',
                 value: '4'
               }
             ]
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.platformType'), // '平台类型',
+            label: $it('fL.platformType'), // '平台类型',
             width: '6', // 所占宽度宽度
             value: 'CP_C_PLATFORM_ID', // 输入框的值
             multiple: true,
             options: [
               {
-                label: $it('common.unAudit'), // '未审核',
+                label: $it('com.unAudit'), // '未审核',
                 value: '1'
               },
               {
-                label: $it('common.custAudited'), // '已客审',
+                label: $it('com.custAudited'), // '已客审',
                 value: '2'
               },
               {
-                label: $it('common.financeAudited'), // '已财审',
+                label: $it('com.financeAudited'), // '已财审',
                 value: '3'
               },
               {
-                label: $it('common.voided'), // '已作废',
+                label: $it('com.voided'), // '已作废',
                 value: '4'
               }
             ]
           },
           {
             style: 'input',
-            label: $it('table_label.seller_nickname'), // '卖家昵称',
+            label: $it('tL.seller_nickname'), // '卖家昵称',
             value: 'SELLER_NICK',
             width: '6'
           },
           // {
           //   style: 'select', // 下拉框类型
-          //   label: $it('form_label.wrongOrNot'), // '是否错误',
+          //   label: $it('fL.wrongOrNot'), // '是否错误',
           //   width: '6', // 所占宽度宽度
           //   value: 'IS_ERROR', // 输入框的值
           //   multiple: true,
           //   options: [
           //     {
-          //       label: $it('common.unAudit'), // '未审核',
+          //       label: $it('com.unAudit'), // '未审核',
           //       value: '1'
           //     },
           //     {
-          //       label: $it('common.custAudited'), // '已客审',
+          //       label: $it('com.custAudited'), // '已客审',
           //       value: '2'
           //     },
           //     {
-          //       label: $it('common.financeAudited'), // '已财审',
+          //       label: $it('com.financeAudited'), // '已财审',
           //       value: '3'
           //     },
           //     {
-          //       label: $it('common.voided'), // '已作废',
+          //       label: $it('com.voided'), // '已作废',
           //       value: '4'
           //     }
           //   ]
           // },
           // {
           //   style: 'input',
-          //   label: $it('form_label.synchronizedInventory'), // '同步库存数',
+          //   label: $it('fL.synchronizedInventory'), // '同步库存数',
           //   value: 'QTY_STORAGE',
           //   width: '6'
           // },
@@ -257,7 +257,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $it('common.all'), // '全部',
+          label: $it('com.all'), // '全部',
           value: '1',
           isShow: true
         }
@@ -266,67 +266,67 @@ export default {
       jordanTableConfig: {
         columns: [
           {
-            title: $it('table_label.creationTime'), // '创建时间',
+            title: $it('tL.creationTime'), // '创建时间',
             key: 'CREATIONDATE'
           },
           {
-            title: $it('table_label.shopName'), // '店铺名称',
+            title: $it('tL.shopName'), // '店铺名称',
             key: 'CP_C_SHOP_TITLE'
           },
           {
-            title: $it('form_label.bar_code'), // '条码编码',
+            title: $it('fL.bar_code'), // '条码编码',
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: $it('form_label.platformCommodityID'), // '平台商品ID',
+            title: $it('fL.platformCommodityID'), // '平台商品ID',
             key: 'NUMIID'
           },
           {
-            title: $it('table_label.platform_barcode_ID'), // '平台条码ID',
+            title: $it('tL.platform_barcode_ID'), // '平台条码ID',
             key: 'SKU_ID'
           },
           {
-            title: $it('form_label.synchronizationStatus'), // '同步状态',
+            title: $it('fL.synchronizationStatus'), // '同步状态',
             key: 'SYN_STATUS_NAME'
           },
           {
-            title: $it('form_label.returnInformation'), // '返回信息',
+            title: $it('fL.returnInformation'), // '返回信息',
             key: 'ERROR_MSG'
           },
           {
-            title: $it('form_label.synchronizedInventory'), // '同步库存数',
+            title: $it('fL.synchronizedInventory'), // '同步库存数',
             key: 'QTY_STORAGE'
           },
           {
-            title: $it('form_label.a9'), // '计算虚高库存前库存',
+            title: $it('fL.a9'), // '计算虚高库存前库存',
             key: 'QTY_STORAGE_REALY'
           },
           {
-            title: $it('form_label.sourceNo'), // '来源单号',
+            title: $it('fL.sourceNo'), // '来源单号',
             key: 'SOURCE_NO'
           },
           {
-            title: $it('form_label.batch_number'), // '批次编号',
+            title: $it('fL.batch_number'), // '批次编号',
             key: 'BATCHNO'
           },
           {
-            title: $it('table_label.extendedProperties'), // '扩展属性',
+            title: $it('tL.extendedProperties'), // '扩展属性',
             key: 'PROPERTIES'
           },
           {
-            title: $it('table_label.seller_nickname'), // '卖家昵称',
+            title: $it('tL.seller_nickname'), // '卖家昵称',
             key: 'SELLER_NICK'
           },
           {
-            title: $it('table_label.remarks'), // 备注
+            title: $it('tL.remarks'), // 备注
             key: 'REMARK'
           },
           // {
-          //   title: $it('form_label.wrongOrNot'), // '是否错误',
+          //   title: $it('fL.wrongOrNot'), // '是否错误',
           //   key: 'IS_ERROR'
           // },
           {
-            title: $it('form_label.gBCode'), // '国标码',
+            title: $it('fL.gBCode'), // '国标码',
             key: 'GBCODE'
           },
         ], // 表头
@@ -452,7 +452,7 @@ export default {
       }
       const mainData = _this.formConfig.formValue;
       if (!mainData.NUMIID && !mainData.BATCHNO && !mainData.SKU_ID && !mainData.PS_C_SKU_ECODE) {
-        // _this.$Message.error($it('modalTips.dn')); // '平台商品ID不能为空!'
+        // _this.$Message.error($it('tip.dn')); // '平台商品ID不能为空!'
         _this.$Message.error('批次编号,平台商品ID,平台条码ID,条码编码中需最少一项不为空!');
         return;
       }
@@ -463,7 +463,7 @@ export default {
         creationdateEnd = mainData.CREATIONDATE[1];
       }
       if (!creationdateStart || !creationdateEnd) {
-        _this.$Message.error($it('modalTips.dk')); // '创建日期不能为空!'
+        _this.$Message.error($it('tip.dk')); // '创建日期不能为空!'
         return;
       }
       _this.jordanTableConfig.data = [];
@@ -556,17 +556,17 @@ export default {
         const idList = { idList: ids };
         this.service.common.exportPayableAdjustment(idList).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
-            const mes = res.data.message || $it('modalTips.z2'); // '导出成功！';
+            const mes = res.data.message || $it('tip.z2'); // '导出成功！';
             _this.$Message.success(mes);
             $omsUtils.downloadUrlFile(res.data.data);
           } else {
-            // const err = res.data.message || $it('modalTips.z3'); // '失败！';
+            // const err = res.data.message || $it('tip.z3'); // '失败！';
             // _this.$Message.error(err);
           }
         });
       } else {
         if (_this.jordanTableConfig.data.length === 0) {
-          _this.$Message.error($it('modalTips.z4')); // '列表没有数据,无法导出!';
+          _this.$Message.error($it('tip.z4')); // '列表没有数据,无法导出!';
           return;
         }
         if (_this.statusTab === '') {
@@ -585,12 +585,12 @@ export default {
       };
       this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
-          const mes = res.data.message || $it('modalTips.z2'); // '导出成功！';
+          const mes = res.data.message || $it('tip.z2'); // '导出成功！';
           _this.$Message.success(mes);
           $omsUtils.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
-          // const err = res.data.message || $it('modalTips.z3'); // '失败！';
+          // const err = res.data.message || $it('tip.z3'); // '失败！';
           // _this.$Message.error(err);
         }
       });

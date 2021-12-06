@@ -9,7 +9,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -19,7 +19,7 @@ export default {
           },
           {
             type: '', // 按钮类
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -37,7 +37,7 @@ export default {
         formData: [
           {
             // label: "商品SKU",
-            label: $it('table_label.commoditySKU'),
+            label: $it('tL.commoditySKU'),
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -73,7 +73,7 @@ export default {
                   delete item.skuId;
                 });
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.commoditySKU')) {
+                  if (item.label === $it('tL.commoditySKU')) {
                     item.AuotData = data;
                     // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
@@ -92,7 +92,7 @@ export default {
           },
           {
             // label: "商品款号",
-            label: $it('table_label.itemNo'),
+            label: $it('tL.itemNo'),
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -116,7 +116,7 @@ export default {
                 const dimList = _this.formConfig.formData;
 
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.itemNo')) {
+                  if (item.label === $it('tL.itemNo')) {
                     item.AuotData = res.data.data.list;
                   }
                 });
@@ -144,22 +144,22 @@ export default {
       columns: [
         {
           // title: "商品SKU",
-          title: $it('table_label.commoditySKU'),
+          title: $it('tL.commoditySKU'),
           key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: $it('table_label.productName'),
+          title: $it('tL.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
           // title: "商品SKU名称",
-          title: $it('table_label.productSKUname'),
+          title: $it('tL.productSKUname'),
           key: 'SPEC',
         },
         {
           // title: "数量",
-          title: $it('table_label.quantities'),
+          title: $it('tL.quantities'),
           key: 'qty',
         },
       ],
@@ -201,7 +201,7 @@ export default {
         if (res.data.code == 0) {
           if (res.data.data.data.length == 0) {
             // this.$Message.warning("查询数据为空!");
-            this.$Message.warning($it('modalTips.r8'));
+            this.$Message.warning($it('tip.r8'));
             self.data = [];
             self.tableLoading = false;
             return;
@@ -214,7 +214,7 @@ export default {
           self.data = resData;
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning($it('modalTips.zt'));
+          this.$Message.warning($it('tip.zt'));
         }
         self.tableLoading = false;
       } catch (e) {
@@ -227,12 +227,12 @@ export default {
       const result = {};
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请选中订单数据!");
-        self.$Message.warning($it('modalTips.yz'));
+        self.$Message.warning($it('tip.yz'));
         return;
       }
       if (JSON.stringify(self.rowClickData) == '{}') {
         // self.$Message.warning("请选中需要新增的赠品!");
-        self.$Message.warning($it('modalTips.xa'));
+        self.$Message.warning($it('tip.xa'));
         return;
       }
       result.ids = self.componentData.a_2;
@@ -271,7 +271,7 @@ export default {
                   columns: [
                     {
                       // title: "提示信息",
-                      title: $it('modalTitle.tips'),
+                      title: $it('mT.tips'),
                       key: 'message',
                     },
                   ],

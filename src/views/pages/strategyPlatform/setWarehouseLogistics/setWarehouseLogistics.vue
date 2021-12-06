@@ -9,7 +9,7 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ $it("common.baseInformation") }}
+            {{ $it("com.baseInformation") }}
             <p slot="content">
               <OmsForm :form-config="information" />
             </p>
@@ -30,7 +30,7 @@
           <div class="tableLeft">
             <div class="retrieveBox">
               <!-- <span class="retrieveTitle">检索</span> -->
-              <span class="retrieveTitle">{{ $it('common.searching') }}</span>
+              <span class="retrieveTitle">{{ $it('com.searching') }}</span>
               <Input
                 v-model="name"
                 class="retrieve"
@@ -50,7 +50,7 @@
               @on-change="checkAll(single)"
             >
               <!-- 全选 -->
-              {{ $it('common.selectAll') }}
+              {{ $it('com.selectAll') }}
             </Checkbox>
             <div class="treeBox">
               <Tree
@@ -69,7 +69,7 @@
                 @click="synchronous"
               >
                 <!-- 市 -->
-                {{ $it('common.city') }}->
+                {{ $it('com.city') }}->
               </Button>
               <Button
                 style="margin-top:20px"
@@ -77,7 +77,7 @@
                 @click="provinceSynchronous"
               >
                 <!-- 省 -->
-                {{ $it('common.province') }}->
+                {{ $it('com.province') }}->
               </Button>
             </div>
           </div>
@@ -94,13 +94,13 @@
                       <tr>
                         <th style="min-width: 50px !important;">
                           <!-- 序号 -->
-                          {{ $it('table_label.serialNo') }}
+                          {{ $it('tL.serialNo') }}
                         </th>
                         <!-- <th>省</th> -->
-                        <th>{{ $it('common.province') }}</th>
+                        <th>{{ $it('com.province') }}</th>
                         <th v-if="cityThead">
                           <!-- 市 -->
-                          {{ $it('common.city') }}
+                          {{ $it('com.city') }}
                         </th>
                         <th
                           v-for="(item, index) in theadArr"
@@ -121,11 +121,11 @@
                     <thead style="display:none;">
                       <tr>
                         <th style="min-width: 50px !important;">
-                          {{ $it('table_label.serialNo') }}
+                          {{ $it('tL.serialNo') }}
                         </th>
-                        <th>{{ $it('common.province') }}</th>
+                        <th>{{ $it('com.province') }}</th>
                         <th v-if="cityThead">
-                          {{ $it('common.city') }}
+                          {{ $it('com.city') }}
                         </th>
                         <th
                           v-for="(item, index) in theadArr"
@@ -192,17 +192,17 @@
     <!-- 导出 -->
     <Modal
       v-model="warningModal"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       width="420"
       :mask="true"
       @on-ok="warningOk"
     >
       <!-- <p>是否确认导出？</p> -->
-      <p>{{ $it('modalTips.y2') }}</p>
+      <p>{{ $it('tip.y2') }}</p>
     </Modal>
     <Modal
       v-model="saveModal"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       width="420"
       :mask="true"
       @on-ok="saveOk"

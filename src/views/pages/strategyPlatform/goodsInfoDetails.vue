@@ -68,7 +68,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
           },
           {
             title: '商品类型', // 商品类型
@@ -175,7 +175,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_DELETE',
-              text: $it('modalTitle.deleteDetails'), // 删除明细
+              text: $it('mT.deleteDetails'), // 删除明细
               isShow: true,
               type: 'warning',
               disabled: false, // 按钮禁用控制
@@ -185,7 +185,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_IMPORT',
-              text: $it('modalTitle.import'), // 导入
+              text: $it('mT.import'), // 导入
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {

@@ -1536,7 +1536,7 @@ export default {
     exportFun() {
       if (this.isExport) {
         // 有一项导出正在进行中
-        this.$Message.error(window.$it('modalTips.f8'));
+        this.$Message.error(window.$it('tip.f8'));
         return;
       }
       this.isExport = true;
@@ -1587,7 +1587,7 @@ export default {
             // });
           }
         } else {
-          const err = res.data.message || window.$it('modalTips.z3'); // 失败！
+          const err = res.data.message || window.$it('tip.z3'); // 失败！
           this.$Message.error(err);
         }
       })

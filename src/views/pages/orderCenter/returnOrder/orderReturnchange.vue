@@ -22,7 +22,7 @@
       $omsUtils.tabCloseAppoint(this);
       this.$store.commit('global/tabOpen', {
         type: 'C',
-        label: $it('panel_label.a1'), // 退换货单
+        label: $it('pL.a1'), // 退换货单
         url: `/CUSTOMIZED/OC_B_RETURN_ORDER/2828`
       });
     },

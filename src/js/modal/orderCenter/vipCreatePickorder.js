@@ -6,14 +6,14 @@ export default {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$emit('closeActionDialog');
             }, // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.determine()
@@ -24,7 +24,7 @@ export default {
       pickorderFromConfig: {
         formData: [{
             style: 'radio', // 单选框
-            label: $it('form_label.downloadType'), // 下载类型前面字段
+            label: $it('fL.downloadType'), // 下载类型前面字段
             width: '24', // 宽度
             value: 'TYPE', // 绑定到formValue的值
             radioChange: () => {
@@ -36,12 +36,12 @@ export default {
               // radio选项
               {
                 value: '0',
-                label: $it('form_label.downloadOnly'), // 仅下载拣货单
+                label: $it('fL.downloadOnly'), // 仅下载拣货单
                 disabled: false,
               },
               {
                 value: '1',
-                label: $it('form_label.create_and_download'), // 创建并下载拣货单
+                label: $it('fL.create_and_download'), // 创建并下载拣货单
                 disabled: false,
               },
             ],
@@ -96,7 +96,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.pickingOrder_no'), // 拣货单号
+            label: $it('fL.pickingOrder_no'), // 拣货单号
             placeholder: '可录入多个拣货单号，用逗号分隔',
             value: 'PICK_NO',
             width: '24',
@@ -156,11 +156,11 @@ export default {
       if (!self.pickorderFromConfig.formData[1].itemdata.pid) {
         promptMessage = $it('other.shop'); // 店铺
       } else if (!self.pickorderFromConfig.formValue.TYPE) {
-        promptMessage = $it('form_label.distributionMode'); // 配送方式
+        promptMessage = $it('fL.distributionMode'); // 配送方式
       }
       if (self.pickorderFromConfig.formValue.TYPE === '0') {
         if (!self.pickorderFromConfig.formValue.PICK_NO) {
-          promptMessage = $it('form_label.pickingOrder_no'); // 拣货单号
+          promptMessage = $it('fL.pickingOrder_no'); // 拣货单号
         }
       } else if (self.pickorderFromConfig.formValue.TYPE === '1') {
         if (!self.pickorderFromConfig.formValue.PO_NO) {
@@ -168,7 +168,7 @@ export default {
         }
       }
       if (promptMessage) {
-        this.$Message.warning(promptMessage + $it('modalTips.y1')); // 不能为空
+        this.$Message.warning(promptMessage + $it('tip.y1')); // 不能为空
         return;
       }
       const fromdata = new FormData();

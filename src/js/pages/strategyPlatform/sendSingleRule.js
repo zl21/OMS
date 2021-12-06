@@ -19,7 +19,7 @@ export default {
       // 修改仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.a3'), // 请选择仓库
+        confirmTitle: $it('mT.a3'), // 请选择仓库
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '760',
         scrollable: false, // 是否可以滚动
@@ -37,7 +37,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.import'),
+        confirmTitle: $it('mT.import'),
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -61,13 +61,13 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.ruleName'),
+            label: $it('fL.ruleName'),
             value: 'ENAME',
             width: '6',
           },
           {
             style: 'select',
-            label: $it('form_label.type'),
+            label: $it('fL.type'),
             width: '6',
             value: 'ETYPE',
             selectChange: () => {
@@ -77,7 +77,7 @@ export default {
               // 下拉框选项值
               {
                 value: '1',
-                label: $it('form_label.a0'),
+                label: $it('fL.a0'),
               },
               // {
               //   value: "2",
@@ -85,13 +85,13 @@ export default {
               // },
               {
                 value: '3',
-                label: $it('form_label.a1'),
+                label: $it('fL.a1'),
               },
             ],
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'),
+            label: $it('tL.remarks'),
             value: 'REMARK',
             width: '6',
           },
@@ -222,7 +222,7 @@ export default {
                 isnotnull: true,
                 isuppercase: false,
                 length: 20,
-                name: $it('form_label.warehouse'), // '仓库',
+                name: $it('fL.warehouse'), // '仓库',
                 readonly: false,
                 reftable: 'CP_C_PHY_WAREHOUSE',
                 reftableid: 24486,
@@ -234,7 +234,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.a2'), // '仓库优先级',
+              label: $it('fL.a2'), // '仓库优先级',
               value: 'RANK',
               width: '6',
               inputenter: () => {
@@ -244,7 +244,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.a3'), // '发货比例',
+              label: $it('fL.a3'), // '发货比例',
               value: 'SEND_RATE',
               width: '6',
               inputenter: () => {
@@ -261,19 +261,19 @@ export default {
         columns: [
           {
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
-            title: $it('form_label.warehouse'), // '仓库'
+            title: $it('fL.warehouse'), // '仓库'
           },
           {
             key: 'RANK',
-            title: $it('form_label.a2'), // '仓库优先级'
+            title: $it('fL.a2'), // '仓库优先级'
           },
           {
             key: 'SEND_RATE',
-            title: $it('form_label.a3'), // '发货比例'
+            title: $it('fL.a3'), // '发货比例'
           },
           {
             key: 'QTY_SEND',
-            title: $it('form_label.a4'), // '发货数量'
+            title: $it('fL.a4'), // '发货数量'
           },
         ],
         isShowImportBtn: true,
@@ -292,7 +292,7 @@ export default {
       },
       labelList: [
         {
-          label: $it('form_label.a5'), // '按收货地址',
+          label: $it('fL.a5'), // '按收货地址',
           value: '1',
           isShow: true,
         },
@@ -317,8 +317,8 @@ export default {
     if (_this.$route.params.customizedModuleId !== 'New') {
       // [规则名称,类型]
       const formLabelArr = [
-        $it('form_label.ruleName'),
-        $it('form_label.type'),
+        $it('fL.ruleName'),
+        $it('fL.type'),
       ];
       _this.information.formData.forEach((item) => {
         if (formLabelArr.includes(item.label)) {
@@ -340,11 +340,11 @@ export default {
       const ETYPE = _this.information.formValue.ETYPE;
       if (_this.$route.params.customizedModuleId === 'New') {
         if (!_this.information.formValue.ENAME) {
-          _this.$Message.error($it('modalTips.cp')); // '规则名称必填'
+          _this.$Message.error($it('tip.cp')); // '规则名称必填'
           return;
         }
         if (!ETYPE) {
-          _this.$Message.error($it('modalTips.cq')); // '规则类型必填'
+          _this.$Message.error($it('tip.cq')); // '规则类型必填'
           return;
         }
       }
@@ -353,7 +353,7 @@ export default {
         ETYPE === '1' &&
         _this.$route.params.customizedModuleId !== 'New'
       ) {
-        _this.$Message.error($it('modalTips.cr')); // '请先设置仓库'
+        _this.$Message.error($it('tip.cr')); // '请先设置仓库'
         return;
       }
       _this.saveLoading = true;
@@ -391,7 +391,7 @@ export default {
       this.service.strategyPlatform.saveSendRule(formData).then((res) => {
         _this.saveLoading = false;
         if (res.data.data.code === 0) {
-          _this.$Message.success($it('modalTips.z9')); // '保存成功'
+          _this.$Message.success($it('tip.z9')); // '保存成功'
           if (_this.$route.params.customizedModuleId !== 'New') {
             if (ETYPE === '2') _this.getWarehouseRateResult();
             else if (ETYPE === '1' || ETYPE === '3') _this.getTree();
@@ -400,17 +400,17 @@ export default {
               id: res.data.data.data.objid, // 单据id
               type: 'action', // 类型action
               name: 'sendSingleRule', // 文件名
-              label: $it('panel_label.edit_order_dispatch_rule'), // '订单派单规则编辑', // tab中文名
+              label: $it('pL.edit_order_dispatch_rule'), // '订单派单规则编辑', // tab中文名
               query: Object.assign({
                 id: res.data.data.data.objid, // 单据id
                 tabTitle: $it(
-                  'panel_label.edit_order_dispatch_rule'
+                  'pL.edit_order_dispatch_rule'
                 ), // '订单派单规则编辑' // tab中文名
               }), // 带的参数
             });
           }
         } else {
-          // _this.$Message.success(res.data.data.message || $it('modalTips.y0')); // '保存失败'
+          // _this.$Message.success(res.data.data.message || $it('tip.y0')); // '保存失败'
         }
       });
     },
@@ -418,17 +418,17 @@ export default {
     saveWherehouseAdd() {
       const _this = this;
       if (_this.$route.params.customizedModuleId == 'New') {
-        _this.$Message.info($it('modalTips.cu')); // '请先保存主表信息'
+        _this.$Message.info($it('tip.cu')); // '请先保存主表信息'
         return;
       }
       if (
         !_this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid
       ) {
-        _this.$Message.error($it('modalTips.cv')); // '仓库必填'
+        _this.$Message.error($it('tip.cv')); // '仓库必填'
         return;
       }
       if (!_this.information.formValue.ETYPE) {
-        _this.$Message.error($it('modalTips.cw')); // '仓库优先级必填必填'
+        _this.$Message.error($it('tip.cw')); // '仓库优先级必填必填'
         return;
       }
 
@@ -458,7 +458,7 @@ export default {
       formData.append('param', JSON.stringify(param));
       this.service.strategyPlatform.saveSendRule(formData).then((res) => {
         if (res.data.data.code === 0) {
-          _this.$Message.success($it('modalTips.cx')); // '新增成功'
+          _this.$Message.success($it('tip.cx')); // '新增成功'
           _this.getWarehouseRateResult();
           _this.jordanTableConfig.businessFormConfig.formData[0].itemdata.pid =
             '';
@@ -467,7 +467,7 @@ export default {
           _this.jordanTableConfig.businessFormConfig.formValue.RANK = '';
           _this.jordanTableConfig.businessFormConfig.formValue.SEND_RATE = '';
         } else {
-          // _this.$Message.error(res.data.data.message || $it('modalTips.cy')); // '新增失败'
+          // _this.$Message.error(res.data.data.message || $it('tip.cy')); // '新增失败'
         }
       });
     },
@@ -489,7 +489,7 @@ export default {
             _this.information.formValue.ETYPE = res.data.data.ETYPE;
             _this.information.formValue.REMARK = res.data.data.REMARK;
             if (res.data.data.ISACTIVE === 'N') {
-              _this.statusName = $it('common.voided'); // '已作废';
+              _this.statusName = $it('com.voided'); // '已作废';
               _this.jordanTableConfig.isShowImportBtn = false;
               _this.jordanTableConfig.isShowExportBtn = false;
               _this.jordanTableConfig.isShowDeleteDetailBtn = false;
@@ -514,8 +514,8 @@ export default {
               // '按收货地址' : '派单规则明细'
               this.labelList[0].label =
                 _this.information.formValue.ETYPE === '1'
-                  ? $it('form_label.a5')
-                  : $it('form_label.a6');
+                  ? $it('fL.a5')
+                  : $it('fL.a6');
             } else if (_this.information.formValue.ETYPE === '2') {
               _this.showFlag = true;
               _this.getWarehouseRateResult();
@@ -527,7 +527,7 @@ export default {
                 }
               });
               // '分仓比例'
-              this.labelList[0].label = $it('form_label.a7');
+              this.labelList[0].label = $it('fL.a7');
             }
           }
         });
@@ -646,7 +646,7 @@ export default {
         ) {
           setTimeout(() => {
             item[index].rank = '';
-            this.$Message.info($it('modalTips.y9')); // '优先级设置重复'
+            this.$Message.info($it('tip.y9')); // '优先级设置重复'
           }, 200);
           return;
         }
@@ -684,7 +684,7 @@ export default {
             });
             _this.treeData = res.data.data.sendRuleTree;
           } else {
-            // _this.$Message.error(res.data.data.message || $it('modalTips.z3')); // '失败'
+            // _this.$Message.error(res.data.data.message || $it('tip.z3')); // '失败'
           }
         });
     },
@@ -703,11 +703,11 @@ export default {
       this.service.strategyPlatform.voidSendRule(fromdata).then((res) => {
         _this.saveLoading = false;
         if (res.data.data.code === 0) {
-          const ess = res.data.data.message || $it('modalTips.y4'); // '作废成功';
+          const ess = res.data.data.message || $it('tip.y4'); // '作废成功';
           _this.getMianTable();
           _this.$Message.success(ess);
         } else {
-          // const err = res.data.data.message || $it('modalTips.y5'); // '作废失败';
+          // const err = res.data.data.message || $it('tip.y5'); // '作废失败';
           // _this.$Message.error(err);
         }
       });
@@ -735,11 +735,11 @@ export default {
         .exportSendRuleWarehouseRate(param)
         .then((res) => {
           if (res.data.code === 0) {
-            const ess = res.data.message || $it('modalTips.z2'); // '导出成功';
+            const ess = res.data.message || $it('tip.z2'); // '导出成功';
             _this.$Message.success(ess);
             $omsUtils.downloadUrlFile(res.data.data);
           } else {
-            // const err = res.data.message || $it('modalTips.y6'); // '导出失败';
+            // const err = res.data.message || $it('tip.y6'); // '导出失败';
             // _this.$Message.error(err);
             $omsUtils.downloadUrlFile(res.data.data);
           }
@@ -751,7 +751,7 @@ export default {
       if (_this.selectAllList.length) {
         _this.selectAllList.forEach((item) => ids.push(item.ID));
       } else {
-        _this.$Message.error($it('modalTips.df')); // '请选择需要删除的数据'
+        _this.$Message.error($it('tip.df')); // '请选择需要删除的数据'
         return;
       }
       const fromdata = new FormData();
@@ -767,11 +767,11 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.service.strategyPlatform.delSendRule(fromdata).then((res) => {
         if (res.data.data.code === 0) {
-          const ess = res.data.data.message || $it('modalTips.ay'); // '删除成功';
+          const ess = res.data.data.message || $it('tip.ay'); // '删除成功';
           _this.getMianTable();
           _this.$Message.success(ess);
         } else {
-          // const err = res.data.data.message || $it('modalTips.cs'); // '删除失败';
+          // const err = res.data.data.message || $it('tip.cs'); // '删除失败';
           // _this.$Message.error(err);
         }
       });
@@ -799,11 +799,11 @@ export default {
         .exportSendRuleWarehouseRank(param)
         .then((res) => {
           if (res.data.code === 0) {
-            const ess = res.data.message || $it('modalTips.z2'); // '导出成功';
+            const ess = res.data.message || $it('tip.z2'); // '导出成功';
             _this.$Message.success(ess);
             $omsUtils.downloadUrlFile(res.data.data);
           } else {
-            // const err = res.data.message || $it('modalTips.y6'); // '导出失败';
+            // const err = res.data.message || $it('tip.y6'); // '导出失败';
             // _this.$Message.error(err);
             $omsUtils.downloadUrlFile(res.data.data);
           }

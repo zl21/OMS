@@ -18,7 +18,7 @@
       :model="formItem"
     >
       <!-- <FormItem label="旗帜:"> -->
-      <FormItem :label="$it('table_label.flag')">
+      <FormItem :label="$it('tL.flag')">
         <RadioGroup
           v-model="formItem.flag"
           @on-change="radioChange"
@@ -38,12 +38,12 @@
       <!-- <FormItem label="当前备注:" v-if="componentData.SELLER_MEMO"> -->
       <FormItem
         v-if="componentData.SELLER_MEMO"
-        :label="$it('form_label.current_remarks')"
+        :label="$it('fL.current_remarks')"
       >
         <p>{{ componentData.SELLER_MEMO }}</p>
       </FormItem>
       <!-- <FormItem label="修改备注:"> -->
-      <FormItem :label="$it('form_label.modify_remarks')">
+      <FormItem :label="$it('fL.modify_remarks')">
         <Input
           v-model="formItem.textarea"
           :autosize="{ minRows: 2, maxRows: 5 }"
@@ -86,7 +86,7 @@
       @on-cancel="cancel"
     >
       <!-- <p>是否确认修改备注！</p> -->
-      <p>{{ $it("modalTips.zh") }}</p>
+      <p>{{ $it("tip.zh") }}</p>
     </Modal>
   </div>
 </template>

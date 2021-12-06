@@ -68,7 +68,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.ds'), // 物流公司编码
+            label: $it('fL.ds'), // 物流公司编码
             value: 'ECODE',
             colname: 'ECODE',
             width: '6',
@@ -79,7 +79,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.dt'), // 物流公司名称
+            label: $it('fL.dt'), // 物流公司名称
             value: 'ENAME',
             colname: 'ENAME',
             width: '6',
@@ -132,11 +132,11 @@ export default {
             key: 'CP_C_PLATFORM_ENAME',
           },
           {
-            title: $it('form_label.dq'), // 平台物流编号
+            title: $it('fL.dq'), // 平台物流编号
             key: 'CP_C_LOGISTICS_ECODE',
           },
           {
-            title: $it('form_label.dr'), // 平台物流名称
+            title: $it('fL.dr'), // 平台物流名称
             key: 'CP_C_LOGISTICS_ENAME',
           },
         ],
@@ -196,7 +196,7 @@ export default {
           },
           formData: [
             {
-              label: $it('form_label.do'), // 前缀
+              label: $it('fL.do'), // 前缀
               style: 'input',
               width: '6',
               value: 'PREFIX',
@@ -213,7 +213,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $it('form_label.dp'), // 后缀
+              label: $it('fL.dp'), // 后缀
               style: 'input',
               width: '6',
               value: 'SUFFIX',
@@ -230,11 +230,11 @@ export default {
         }, // 表单配置
         columns: [
           {
-            title: $it('form_label.do'), // 前缀
+            title: $it('fL.do'), // 前缀
             key: 'PREFIX',
           },
           {
-            title: $it('form_label.dp'), // 后缀
+            title: $it('fL.dp'), // 后缀
             key: 'SUFFIX',
           }
         ],
@@ -248,15 +248,15 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('panel_label.b1'), // 平台物流对应
+          label: $it('pL.b1'), // 平台物流对应
           value: 'PROPERTYVALUES',
         },
         {
-          label: $it('panel_label.b2'), // 物流单号解析配置
+          label: $it('pL.b2'), // 物流单号解析配置
           value: 'CP_C_LOGISTICS_FIX',
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'CP_LOGISTICS_LOG',
         },
       ],
@@ -488,7 +488,7 @@ export default {
           // 数据回显
           self.modify.master = {};
           if (data && data.ID) self.ID = data.ID
-          self.$Message.success(message || $it('modalTips.z9'));
+          self.$Message.success(message || $it('tip.z9'));
           $omsUtils.tabCloseAppoint(this);
           this.$destroy(true);
           this.$store.commit('global/tabOpen', {
@@ -514,12 +514,12 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('mT.tips'), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.onOk()
           },

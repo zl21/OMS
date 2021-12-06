@@ -10,21 +10,21 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ $it('common.baseInformation') }}
+            {{ $it('com.baseInformation') }}
             <p slot="content">
               <OmsForm :form-config="formConfig" :key="formConfig.key"/>
             </p>
           </Panel>
           <Panel v-show="showEx" name="2">
             <!-- 换货人信息 -->
-            {{ $it('panel_label.exchangeInfo') }}
+            {{ $it('pL.exchangeInfo') }}
             <p slot="content">
               <OmsForm :form-config="formConfigEx" :key="exFormKey"/>
             </p>
           </Panel>
           <Panel name="3">
             <!-- 退款金额 -->
-            {{ $it('form_label.refundAmount') }}
+            {{ $it('fL.refundAmount') }}
             <p slot="content">
               <ul class="calculation-main">
                 <li>
@@ -40,7 +40,7 @@
                   <div class="calculation-item">
                     <!-- 正数，选填项 -->
                     <!-- <span>应退运费</span> -->
-                    <span :title="$it('form_label.ad')">{{ $it('form_label.ad') }}</span>
+                    <span :title="$it('fL.ad')">{{ $it('fL.ad') }}</span>
                     <Input
                       v-model="SHIP_AMT"
                       type="text"
@@ -56,7 +56,7 @@
                   <div class="calculation-item">
                     <!-- 可正可负，选填项 -->
                     <!-- <span>调整金额</span> -->
-                    <span :title="$it('table_label.adjustment_amount')">{{ $it('table_label.adjustment_amount') }}</span>
+                    <span :title="$it('tL.adjustment_amount')">{{ $it('tL.adjustment_amount') }}</span>
                     <Input
                       v-model="ADJUST_AMT"
                       type="text"
@@ -81,7 +81,7 @@
                   <div class="calculation-item">
                     <!-- 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，只读展示 -->
                     <!-- <span class="black">最终应退总金额</span> -->
-                    <span class="black" :title="$it('form_label.ae')">{{ $it('form_label.ae') }}</span>
+                    <span class="black" :title="$it('fL.ae')">{{ $it('fL.ae') }}</span>
                     <label>{{FINAL_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -103,7 +103,7 @@
       </div>
     </div>
     <!-- 查询原始订单编号 -->
-    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="$it('form_label.cv')">
+    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="$it('fL.cv')">
         <div class="modal-footer" slot="footer">
             <OmsButton :btn-config="btnConfigMo" />
         </div>
@@ -188,14 +188,14 @@ export default {
         buttons: [
           {
             // text: "取消",
-            text: $it("common.cancel"),
+            text: $it("com.cancel"),
             btnclick: () => {
               this.orderModal = false;
             },
           },
           {
             // text: '确定',
-            text: $it("common.determine"),
+            text: $it("com.determine"),
             type: 'primary',
             btnclick: () => {
               this.queryorder();
@@ -248,7 +248,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               isnotnull: false,
-              name: $it('form_label.warehousingEntity'), // 入库实体仓库 
+              name: $it('fL.warehousingEntity'), // 入库实体仓库 
               readonly: false,
               pid: '',
               valuedata: '',
@@ -271,11 +271,11 @@ export default {
           {
             style: 'input',
             colname: 'SOURCE_CODE',
-            // label: $it('form_label.originalOrderNo'), // 原始订单编号输入框前文字
+            // label: $it('fL.originalOrderNo'), // 原始订单编号输入框前文字
             width: '6',
             icon: 'ios-search',
             // placeholder: '输入后请按Enter',
-            placeholder: $it("pHolder.a4"),
+            placeholder: $it("pH.a4"),
             rules: true,
             ghost: false, // 是否关闭幽灵按钮，默认开启
             inputenter: () => {
@@ -302,7 +302,7 @@ export default {
               isfk: true,
               isnotnull: false,
               // name: '店铺名称', // 店铺名称
-              name: $it('table_label.shopName'),
+              name: $it('tL.shopName'),
               readonly: false,
               reftable: 'CP_C_SHOP',
               reftableid: 10348,
@@ -344,7 +344,7 @@ export default {
           },
           {
             style: 'input',
-            // label: $it('form_label.reasonRefund'), // 退货原因
+            // label: $it('fL.reasonRefund'), // 退货原因
             colname: 'REFUND_REASON',
             width: '6',
             options: [],
@@ -381,7 +381,7 @@ export default {
               colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: $it('form_label.warehousingEntity'), // 入库实体仓
+              name: $it('fL.warehousingEntity'), // 入库实体仓
               // name: '入库实体仓',
               pid: '',
               valuedata: '',
@@ -410,7 +410,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '发货实体仓', // 发货实体仓
-              name: $it('form_label.af'),
+              name: $it('fL.af'),
               pid: '',
               valuedata: '',
             },
@@ -436,7 +436,7 @@ export default {
               colname: 'CP_C_LOGISTICS_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: $it('form_label.returnLogisticsCompany'), // 退回物流公司
+              name: $it('fL.returnLogisticsCompany'), // 退回物流公司
               valuedata: '',
             },
             oneObj: (e) => {
@@ -453,7 +453,7 @@ export default {
           },
           {
             style: 'input',
-            // label: $it('form_label.returnLogisticsNumber'), // 退回物流单号
+            // label: $it('fL.returnLogisticsNumber'), // 退回物流单号
             colname: 'EXPRESS_CODE',
             width: '6',
             inputChange: () => {
@@ -543,7 +543,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '收货人省份',
-              name: $it('form_label.consignee_province'),
+              name: $it('fL.consignee_province'),
               valuedata: '',
             },
             oneObj: (val) => {
@@ -584,7 +584,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '收货人市',
-              name: $it('form_label.consignee_city'),
+              name: $it('fL.consignee_city'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -630,7 +630,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '收货人区',
-              name: $it('form_label.aconsignee_area'),
+              name: $it('fL.aconsignee_area'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -651,7 +651,7 @@ export default {
           },
           {
             style: 'input',
-            // label: $it('form_label.platformType'), // 换货邮费
+            // label: $it('fL.platformType'), // 换货邮费
             regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
             colname: 'EXCHANGE_SHIP_AMT',
             width: '6',
@@ -673,13 +673,13 @@ export default {
       // label
       labelList: [
         {
-          label: $it('form_label.returnDetails'), // 退货明细
+          label: $it('fL.returnDetails'), // 退货明细
           value: '0',
           isShow: true,
         },
         {
           // label: '换货明细',
-          label: $it('form_label.exchangeDetails'), // 换货明细
+          label: $it('fL.exchangeDetails'), // 换货明细
           value: '1',
           isShow: false,
         },
@@ -769,16 +769,16 @@ export default {
       const type = nV;
       const beType = oV;
       if (oV && type != beType) {
-        const panel = beType == '0' ? $it('panel_label.a0') : $it('panel_label.a1');
-        const msg = `${$it('modalTips.ge')}${panel}，${$it('modalTips.gf')}`
+        const panel = beType == '0' ? $it('pL.a0') : $it('pL.a1');
+        const msg = `${$it('tip.ge')}${panel}，${$it('tip.gf')}`
         this.$Modal.info({
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: msg,
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             if (type == '1') {
               this.$nextTick(() => {
@@ -916,7 +916,7 @@ export default {
         self.$Message.warning('p/cs/QueryList catch !');
       });
       if (!res.data.data.row.length) {
-        self.$Message.error($it('modalTips.gh')); // 没有查询到当前平台单号！
+        self.$Message.error($it('tip.gh')); // 没有查询到当前平台单号！
         self.loading = false;
         return
       }
@@ -1002,20 +1002,20 @@ export default {
       const over = self.overLength(self.formConfig.formValue);
       if (over) return
       if (this.bT == '1') {
-        if (!tui.length) return this.$Message.warning($it('modalTips.gg')); // "退货明细不能为空！"
-        if (!huan.length) return this.$Message.warning($it('modalTips.gi')); // "换货明细不能为空！"
+        if (!tui.length) return this.$Message.warning($it('tip.gg')); // "退货明细不能为空！"
+        if (!huan.length) return this.$Message.warning($it('tip.gi')); // "换货明细不能为空！"
       } else if (this.bT == '0' && !tui.length) {
-        this.$Message.warning($it('modalTips.gg'));
+        this.$Message.warning($it('tip.gg'));
         return false;
       }
       // 校验最终应退总金额不能小于0
       if (this.FINAL_ACTUAL_AMT < 0) {
-        this.$Message.warning($it('modalTips.gj')); // 最终应退总金额不能小于0！
+        this.$Message.warning($it('tip.gj')); // 最终应退总金额不能小于0！
         return
       }
       // 校验换货金额是否等于退货金额；一致则保存成功，不一致则提示“换货金额与退货金额不一致请重新确认”
       if (this.bT == '1' && this.EX_ACTUAL_AMT != this.PRO_ACTUAL_AMT) {
-        this.$Message.warning($it('modalTips.gk')); // 换货金额与退货金额不一致请重新确认！
+        this.$Message.warning($it('tip.gk')); // 换货金额与退货金额不一致请重新确认！
         return
       }
       /* =========== 保存校验 end =========== */
@@ -1026,7 +1026,7 @@ export default {
         PRO_ACTUAL_AMT: this.PRO_ACTUAL_AMT,
         EX_ACTUAL_AMT: this.EX_ACTUAL_AMT,
         // info: bT == '0' ? '退货金额' : '换货金额',
-        info: bT == '0' ? $it('panel_label.returnAmount') : $it('other.exchangeAmounts'),
+        info: bT == '0' ? $it('pL.returnAmount') : $it('other.exchangeAmounts'),
       }
       if (bT == '0') delete EXCHANGE_PRICE.EX_ACTUAL_AMT;
       mainTable.ID = '-1';
@@ -1052,7 +1052,7 @@ export default {
         self.modify.tui = [];
         self.modify.huan = [];
         // 跳转详情
-        // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
+        // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'pL.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
           $omsUtils.tabCloseAppoint(this);
@@ -1061,7 +1061,7 @@ export default {
             type: 'V',
             tableName: bT == 0 ? 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' : 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
             // label: '退换货单详情',
-            label: $it('panel_label.a2'),
+            label: $it('pL.a2'),
             tableId: bT == 0 ? 10728 : 10754,
             id: `${self.ID}?RETURN_SOURCE=手工新增&SOURCE_CODE=${mainTable.SOURCE_CODE}`,
           });
@@ -1152,13 +1152,13 @@ export default {
         if (data[0].WHETHER_VIRTUAL_PRODUCTION) {
           // 虚拟字段的处理
           self.$Modal.info({
-            title: $it("modalTitle.tips"), // 提示
+            title: $it("mT.tips"), // 提示
             // content: `${skuCode}条码为虚拟条码，是否继续添加？`,
             content: data[0].VIRTUAL_GOODS_NOTICE,
             mask: true,
             showCancel: true,
             okText: $it("btn.increase"), // 添加
-            cancelText: $it("common.cancel"), // 取消
+            cancelText: $it("com.cancel"), // 取消
             onOk: () => {
               self.insertOrderDetail(data);
             },
@@ -1184,7 +1184,7 @@ export default {
     // 原始订单编号 - 确定
     queryorder() {
       if (!Object.keys(this.platformData).length) {
-        this.$Message.warning($it('modalTips.gl')); // 请选中一条单据！
+        this.$Message.warning($it('tip.gl')); // 请选中一条单据！
         return false
       }
       this.renderForm(this.platformData);
@@ -1204,14 +1204,14 @@ export default {
       console.log('self.modify.master::', self.modify.master);
       if (masterArr.length > 1) {
         this.$Modal.info({
-          title: $it("modalTitle.tips"), // 提示
+          title: $it("mT.tips"), // 提示
           // content: "当前修改未保存，确定返回？",
-          content: $it('modalTips.gm'),
+          content: $it('tip.gm'),
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $it("common.determine"), // 确定
-          cancelText: $it("common.cancel"), // 取消
+          okText: $it("com.determine"), // 确定
+          cancelText: $it("com.cancel"), // 取消
           onOk: () => {
             self.onOk();
           },
@@ -1227,7 +1227,7 @@ export default {
         url: '/CUSTOMIZED/OC_B_RETURN_ORDER/2624?isBack=true',
         type: "C",
         // label: "退换货单",
-        label: $it('panel_label.a1'),
+        label: $it('pL.a1'),
       });
     },
   },

@@ -80,7 +80,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $it('form_label.skuName'), // SKU名称
+              label: $it('fL.skuName'), // SKU名称
               style: 'dimSearch',
               width: '8',
               value: 'skuEname',
@@ -107,7 +107,7 @@ export default {
             },
             {
               style: 'dimSearch', //输入框类型
-              label: $it('table_label.itemNo01'), // SPU编码 输入框前文字
+              label: $it('tL.itemNo01'), // SPU编码 输入框前文字
               value: 'spuEcode', //输入框的值
               columns: ['ENAME'],
               width: '8',
@@ -136,13 +136,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.$emit('closeActionDialog', false);
             },
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               if (!this.tableConfig.selectData.length) {

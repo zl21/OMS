@@ -10,7 +10,7 @@ export default {
 				btnsite: "right",
 				buttons: [
 					{
-						text: $it('common.cancel'), // 取消
+						text: $it('com.cancel'), // 取消
 						class: "white",
 						isShow: false,
 						disabled: false,

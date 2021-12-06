@@ -71,7 +71,7 @@ export default {
       const isNum = /^[0-9]*$/.test(value); // 判断输入的是否是数字
       this.$set(this, 'count', (event.target.value = isNum && Number(value) !== 0 ? Number(value) : ''));
       if (this.objid == -1) {
-        const index = this.inputList.findIndex(n => n.name === $it('table_label.quantities'));
+        const index = this.inputList.findIndex(n => n.name === $it('tL.quantities'));
         if (index != -1) {
           this.inputList[index].valuedata = this.count;
           this.$emit('getChangeItem', this.inputList[index]);
@@ -214,7 +214,7 @@ export default {
       if ((this.distribId === '' || this.distribId === undefined) && (this.cp_c_phy_warehouse_id === '' || this.cp_c_phy_warehouse_id === undefined) && !port[this.tablename].isStoreId) {
         // 店仓id为空 或者 isStoreId参数为false
         return this.$message({
-          message: $it('modalTips.dh'), // '请先选择店仓',
+          message: $it('tip.dh'), // '请先选择店仓',
           center: true,
           type: 'warning'
         });
@@ -449,7 +449,7 @@ export default {
             const resData = res.data;
             if (resData.code === 0) {
               this.$message({
-                message: $it('modalTips.dg'),
+                message: $it('tip.dg'),
                 center: true,
                 type: 'success'
               });
@@ -492,7 +492,7 @@ export default {
           const resData = res.data;
           if (resData.code === 0) {
             this.$message({
-              message: $it('modalTips.dg'),
+              message: $it('tip.dg'),
               center: true,
               type: 'success'
             });
@@ -531,7 +531,7 @@ export default {
   },
   mounted() {
     this.inputList.forEach(obj => {
-      if (obj.name === $it('table_label.quantities')) {
+      if (obj.name === $it('tL.quantities')) {
         this.matrixcoll = obj.colname;
         this.matrixnum = obj.defnum; // 默认数量
         this.isInputShow = obj.qtyisshow;

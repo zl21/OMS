@@ -30,7 +30,7 @@ export default {
           {
             style: "input",
             colname: "activity_no", // 促销编号,y
-            label: $it("form_label.promotionNo"),
+            label: $it("fL.promotionNo"),
             width: "18",
             inputChange: () => {
               const an = this.formConBasic.formValue.activity_no;
@@ -41,7 +41,7 @@ export default {
           {
             style: "input",
             colname: "activity_name", // y
-            label: $it("form_label.activityName"),
+            label: $it("fL.activityName"),
             width: "18",
             inputChange: () => {
               const an = this.formConBasic.formValue.activity_name;
@@ -75,7 +75,7 @@ export default {
             hasCheckAll: true,
             indeterminate: false, // true:展示小横线
             checkAll: true,
-            label: $it("form_label.orderType"),
+            label: $it("fL.orderType"),
             colname: "order_type", // y
             width: "18",
             options: [],
@@ -94,7 +94,7 @@ export default {
           },
           {
             style: "checkbox",
-            label: $it("form_label.platform_marking"),
+            label: $it("fL.platform_marking"),
             colname: "platform_mark",
             width: "18",
             hasCheckAll: true,
@@ -116,7 +116,7 @@ export default {
           },
           {
             style: "radio",
-            label: $it("form_label.timeType"),
+            label: $it("fL.timeType"),
             colname: "time_type", // y
             width: "8",
             options: [],
@@ -130,7 +130,7 @@ export default {
           {
             style: "date",
             type: "datetimerange",
-            label: $it("form_label.timeRange"),
+            label: $it("fL.timeRange"),
             colname: "time_limit", // y
             format: "yyyy/MM/dd HH:mm:ss",
             width: "12",
@@ -149,7 +149,7 @@ export default {
           {
             style: "date",
             type: "datetime",
-            label: $it("form_label.offlineTime"),
+            label: $it("fL.offlineTime"),
             colname: "offline_time", // y
             format: "yyyy/MM/dd HH:mm:ss",
             width: "18",
@@ -166,7 +166,7 @@ export default {
           },
           {
             style: "radio",
-            label: $it("form_label.activityType"),
+            label: $it("fL.activityType"),
             colname: "activity_type", // y
             width: "18",
             options: [],
@@ -180,7 +180,7 @@ export default {
           },
           {
             style: "radio",
-            label: $it("form_label.gradient_gift"),
+            label: $it("fL.gradient_gift"),
             colname: "gradient_gift", // y
             width: "18",
             options: [],
@@ -194,7 +194,7 @@ export default {
           },
           {
             style: "radio",
-            label: $it("form_label.order_notes"),
+            label: $it("fL.order_notes"),
             colname: "order_notes_type",
             width: "8",
             options: [],
@@ -209,9 +209,9 @@ export default {
           {
             style: "input",
             colname: "order_note_content",
-            label: $it("form_label.remarks_content"),
+            label: $it("fL.remarks_content"),
             width: "12",
-            placeholder: $it('pHolder.a0'),
+            placeholder: $it('pH.a0'),
             inputChange: () => {
               const onc = this.formConBasic.formValue.order_note_content.replace(/ /g, '');
               this.basicData.order_note_content = onc;
@@ -225,7 +225,7 @@ export default {
               version: '1.4',
               colid: 180257,
               colname: "CP_C_PROVINCE_IDS",
-              name: $it('common.exclude_province'),
+              name: $it('com.exclude_province'),
               valuedata: "",
               fkdisplay: "mrp",
               isfk: true,
@@ -239,7 +239,7 @@ export default {
           },
           {
             style: "radio",
-            label: $it("form_label.one_participation_times"),
+            label: $it("fL.one_participation_times"),
             colname: "buyer_limit_frequency",
             width: "8",
             options: [],
@@ -255,7 +255,7 @@ export default {
             style: "inputNumber",
             colname: "buyer_max_frequency",
             min: 0,
-            label: $it("form_label.max_times"),
+            label: $it("fL.max_times"),
             width: "6",
             inputChange: () => {
               const bmf = this.formConBasic.formValue.buyer_max_frequency;

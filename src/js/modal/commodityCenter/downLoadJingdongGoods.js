@@ -49,7 +49,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: $it('form_label.commodityID'), // 商品ID 输入框前文字
+            label: $it('fL.commodityID'), // 商品ID 输入框前文字
             value: 'shopID', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -77,7 +77,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -133,8 +133,8 @@ export default {
     async download() {
       const self = this;
       const formValue = self.downLoadFormConfig.formValue;
-      if (!self.downLoadFormConfig.formData[0].itemdata.pid) return self.$Message.warning($it('modalTips.be'));// 请选择需要下载的店铺
-      if (formValue.shopID === '' && !self.timeConfig.data[0]) return self.$Message.warning($it('modalTips.bf'));// 商品ID和时间必填其中一个
+      if (!self.downLoadFormConfig.formData[0].itemdata.pid) return self.$Message.warning($it('tip.be'));// 请选择需要下载的店铺
+      if (formValue.shopID === '' && !self.timeConfig.data[0]) return self.$Message.warning($it('tip.bf'));// 商品ID和时间必填其中一个
       const param = {
         shop_id: self.downLoadFormConfig.formData[0].itemdata.pid, // 店铺id 必传
         // item_num:formValue.articleNumber, // 货号

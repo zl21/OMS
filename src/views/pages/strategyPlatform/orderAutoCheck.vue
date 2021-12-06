@@ -9,7 +9,7 @@
           <Form ref="formValidate" :label-width="130" :model="info">
             <Collapse v-model="collapseShow">
               <Panel name="1">
-                {{ $it("panel_label.basicData") }}
+                {{ $it("pL.basicData") }}
                 <div slot="content" class="content">
                   <Row>
                     <Col span="6">

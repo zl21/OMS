@@ -6,24 +6,24 @@ export default {
   data() {
     return {
       modal1: false,
-      shopTitle:$it('modalTitle.af'),
+      shopTitle:$it('mT.af'),
       shopModal: true,
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
       plantName: '', // 用户输入的
       active: 0, // 步骤进度
       steps: [
         {
-          name:  $it('form_label.ap'), //'店铺授权',
+          name:  $it('fL.ap'), //'店铺授权',
           icon: 'iconfont icon-qian',
           status: 'finish', // wait、process、finish、error
         },
         {
-          name:  $it('form_label.aq'), //'店铺昵称',
+          name:  $it('fL.aq'), //'店铺昵称',
           icon: 'iconfont icon-dingdan',
           status: 'wait',
         },
         {
-          name:  $it('form_label.ar'),//'完善信息',
+          name:  $it('fL.ar'),//'完善信息',
           icon: 'iconfont icon-weibiaoti-4',
           status: 'wait',
         },
@@ -35,7 +35,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
@@ -52,7 +52,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
@@ -85,7 +85,7 @@ export default {
             },
           },
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: this.fnclose,
           },
           {
@@ -99,7 +99,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: this.fnclose,
           },
           {
@@ -130,7 +130,7 @@ export default {
             type: 'Input', // 组件类型
             required: true, // 是否必填
             field: 'CP_C_PLATFORM_NAME',
-            label: $it('form_label.platformType'),
+            label: $it('fL.platformType'),
             props: {
               placeholder: '',
               value: '',
@@ -187,7 +187,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('table_label.shopName'), // 店铺名称
+            label: $it('tL.shopName'), // 店铺名称
             value: 'CP_C_SHOP_TITLE',
             colname: 'CP_C_SHOP_TITLE',
             width: '12',
@@ -440,7 +440,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.shopName'),
+            label: $it('tL.shopName'),
             value: 'CP_C_SHOP_TITLE',
             colname: 'CP_C_SHOP_TITLE',
             width: '12',
@@ -457,7 +457,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.cellPhone_number'),
+            label: $it('fL.cellPhone_number'),
             value: 'SELLER_PHONE',
             colname: 'SELLER_PHONE',
             class: 'beizu',
@@ -743,7 +743,7 @@ export default {
       this.REQUEST_ID = ''
     },
     fnMessage(msg) {
-      this.$Message.error($it('pHolder.enter')+`${msg}!`)
+      this.$Message.error($it('pH.enter')+`${msg}!`)
     },
     fnSave() {
       let str = ''
@@ -821,7 +821,7 @@ export default {
       console.log('retrurnNick:>>>', this.shopdata.retrurnNick)
       if (this.shopdata.retrurnNick != 'Y') {
         if (!item.item.props.value) {
-          this.$Message.error($it('modalTips.gz') )
+          this.$Message.error($it('tip.gz') )
           return
         }
       }
@@ -853,7 +853,7 @@ export default {
       } else if (res.type == 'otherPlatform') {
         this.fnSteps(4)
         this.formconfig.formValue.CP_C_PLATFORM_ECODE = 'otherPlatform'
-        this.formconfig.formValue.CP_C_PLATFORM_NAME = $it('modalTitle.ai') //'其他平台'
+        this.formconfig.formValue.CP_C_PLATFORM_NAME = $it('mT.ai') //'其他平台'
       } else {
         let data = {
           params: {
@@ -870,7 +870,7 @@ export default {
             if (this.shopdata.authTips) {
               let obj = {
                 style: 'formCompile',
-                label:  $it('form_label.ay') ,//'授权指引',
+                label:  $it('fL.ay') ,//'授权指引',
                 colname: 'authTips',
                 slotName: 'formCompile',
                 class: 'beizu',

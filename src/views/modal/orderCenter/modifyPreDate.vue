@@ -24,7 +24,7 @@ export default {
         formData: [
           {
             style: 'date',
-            label: $it('form_label.e2'), // 预计发货时间
+            label: $it('fL.e2'), // 预计发货时间
             colname: 'dateTime',
             type: 'datetime',
             width: '24',
@@ -47,14 +47,14 @@ export default {
         btnsite: "right", // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it("common.cancel"), // 取消
+            text: $it("com.cancel"), // 取消
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: $it("common.determine"), // 确定
+            text: $it("com.determine"), // 确定
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;

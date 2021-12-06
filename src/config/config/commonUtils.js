@@ -226,15 +226,15 @@ class commonUtils {
                   props: {
                     columns: [
                       {
-                        title: $it('table_label.serialNo'), // 序号
+                        title: $it('tL.serialNo'), // 序号
                         key: 'INDEX',
                       },
                       {
-                        title: $it('form_label.billNo'), // 单据编号
+                        title: $it('fL.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: $it('form_label.e0'), // 失败原因
+                        title: $it('fL.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],
@@ -260,7 +260,7 @@ class commonUtils {
   //  */
   // static tipShow(type, self, res, isTitle, renderFun) {
   //   self.$Modal[type]({
-  //     title: isTitle ?? $it('modalTitle.tips'), // 提示
+  //     title: isTitle ?? $it('mT.tips'), // 提示
   //     content: renderFun ?? res.data.message,
   //     cancelType: true,
   //     titleAlign: 'left',
@@ -287,12 +287,12 @@ class commonUtils {
   //  */
   static modalShow(self, tips, okKey, data, ...callback) {
     self.$Modal.info({
-      title: $it('modalTitle.tips'), // 提示
-      content: $it(`modalTips.${tips}`),
+      title: $it('mT.tips'), // 提示
+      content: $it(`tip.${tips}`),
       mask: true,
       showCancel: true,
-      okText: $it('common.determine'), // 确定
-      cancelText: $it('common.cancel'), // 取消
+      okText: $it('com.determine'), // 确定
+      cancelText: $it('com.cancel'), // 取消
       onOk: () => {
         let [callbackType, callbackFun] = callback
         this.serviceHandler(self, okKey, data, callbackType, callbackFun)
@@ -326,7 +326,7 @@ class commonUtils {
   //  */
   // static msgTips(self, type, tips, tipsType = 1) {
   //   self.$Message[type]({
-  //     content: tipsType == 1 ? $it(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+  //     content: tipsType == 1 ? $it(`tip.${tips}`) : tips, // 请选择需要新增退单记录！
   //     duration: 5,
   //     top: 80,
   //   })
@@ -380,7 +380,7 @@ class commonUtils {
   /**
    * 9个参数
    * eg:
-        $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+        $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'pL.batchAddPromotion' }, {}, 0)
    */
   static tabJump(
     mutationType, // 对应mutationArr的数组下标
@@ -1331,7 +1331,7 @@ class commonUtils {
       id = selection[0].ID;
     }
     if ((selection.length != 1 && params.id !== '-1') || (selection.length != 1 && params.cloneReturnGoodId)) {
-      _self.$Message.warning($it('modalTips.zm'))
+      _self.$Message.warning($it('tip.zm'))
       return;
     }
     _self.$store.commit('customize/TabHref', {

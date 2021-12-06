@@ -51,7 +51,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: $it('form_label.PlatformModifyTime'), // 平台修改时间
+        label: $it('fL.PlatformModifyTime'), // 平台修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
@@ -68,7 +68,7 @@ export default {
     const formValue = self.downLoadFormConfig.formValue;
     const shopId = self.downLoadFormConfig.formData[0].itemdata.pid;
     if (!shopId || !formValue.query_date[0]) {
-      self.$Message.warning($it('modalTips.bt'));// 店铺和平台时间不能为空
+      self.$Message.warning($it('tip.bt'));// 店铺和平台时间不能为空
       return;
     }
     const params = JSON.stringify({

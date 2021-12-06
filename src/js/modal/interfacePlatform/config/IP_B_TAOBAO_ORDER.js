@@ -56,7 +56,7 @@ export default {
         // setRequired: "required", //必选标识,值不为required时无标识
         options: [
           {
-            label: $it('panel_label.all'), // 全部
+            label: $it('pL.all'), // 全部
             value: ''
           },
           {
@@ -69,14 +69,14 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'startEndTimes',
-        label: $it('form_label.PlatformModifyTime'), // 平台修改时间
+        label: $it('fL.PlatformModifyTime'), // 平台修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
       },
       {
         style: 'input', // 输入框类型
-        label: $it('table_label.platform_orderNo'), // 平台单号 输入框前文字
+        label: $it('tL.platform_orderNo'), // 平台单号 输入框前文字
         value: 'orderNum', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -95,11 +95,11 @@ export default {
   determine: async self => {
     let formValue =  self.downLoadFormConfig.formValue;
     if (!self.downLoadFormConfig.formData[0].itemdata.pid) {
-      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be')); // 请选择需要下载的店铺
       return;
     }
     if (formValue.startEndTimes.length === 0 && formValue.orderNum === '') {
-      self.$Message.warning($it('modalTips.bs')); // 请选择输入的日期或输入订单编号
+      self.$Message.warning($it('tip.bs')); // 请选择输入的日期或输入订单编号
       return;
     }
     const param = {

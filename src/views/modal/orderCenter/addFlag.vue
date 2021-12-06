@@ -105,14 +105,14 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'), // 返回
+            text: $it('com.cancel'), // 返回
             btnclick: () => {
               this.$destroy(false);
               this.$parent.$parent.closeConfirm();
             }
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             btnclick: () => {
               this.determine()
             }
@@ -124,13 +124,13 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.modal = false;
             }
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             btnclick: () => {
               this.asyncOK()
             }
@@ -163,14 +163,14 @@ export default {
         current: 1,
         columns: [
           {
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             key: 'index',
             render: (h, params) => {
               return h('span', {}, (this.table.current - 1) * this.table.pageSize + params.index + 1)
             }
           },
           {
-            title: $it('table_label.operation'), // 操作
+            title: $it('tL.operation'), // 操作
             key: 'action',
             render: (h, params) => {
               if (params.row.IS_SYSTEM == 0) {
@@ -269,7 +269,7 @@ export default {
             }
           },
           {
-            title: $it('table_label.remarks'), // 备注
+            title: $it('tL.remarks'), // 备注
             key: 'REMARK',
             render: (h, params) => {
               if (params.row.IS_SYSTEM == 0) {
@@ -351,15 +351,15 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: $it('table_label.serialNo'), // 序号
+                        title: $it('tL.serialNo'), // 序号
                         key: 'index'
                       },
                       {
-                        title: $it('form_label.billNo'), // 单据编号
+                        title: $it('fL.billNo'), // 单据编号
                         key: 'billNo'
                       },
                       {
-                        title: $it('modalTitle.a6'), // '提示信息',
+                        title: $it('mT.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],

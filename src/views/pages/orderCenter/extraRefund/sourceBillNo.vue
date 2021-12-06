@@ -88,13 +88,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.orderModal = false;
             },
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               if (!this.table.selectionArr.length) {
@@ -174,7 +174,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.platform_billNo'), // 平台单号
+              label: $it('fL.platform_billNo'), // 平台单号
               colname: 'SOURCE_CODE',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),
@@ -188,21 +188,21 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.consignee'), // 收货人
+              label: $it('fL.consignee'), // 收货人
               colname: 'RECEIVER_NAME',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),
             },
             {
               style: 'input',
-              label: $it('table_label.buyerNickname'), // 买家昵称
+              label: $it('tL.buyerNickname'), // 买家昵称
               colname: 'BUYER_NICK',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),
             },
             {
               style: 'input',
-              label: $it('form_label.consignee_phone'), // 收货人手机
+              label: $it('fL.consignee_phone'), // 收货人手机
               colname: 'RECEIVER_MOBILE',
               width: '8',
               inputenter: () => this.queryEnter(1, this.table.pageSize),

@@ -32,7 +32,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             btnclick: () => {
               this.submit();
             }
@@ -46,7 +46,7 @@ export default {
           //   }
           // },
           {
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
@@ -198,12 +198,12 @@ export default {
       const ECODE = this.selection && this.selection.ECODE ? this.selection.ECODE : '';
       if (ECODE === '') {
         // 请选择需要更换的商品
-        self.$Message.error($it('modalTips.eb'));
+        self.$Message.error($it('tip.eb'));
         return;
       }
       if (self.itemskuid === this.selection.skuId) {
         // 不可以选择更换当前商品！
-        self.$Message.error($it('modalTips.ec'));
+        self.$Message.error($it('tip.ec'));
         return;
       }
       const keys = {
@@ -255,11 +255,11 @@ export default {
       const isNull = Object.values(p).every(item => item === '' || item === null);
       if (isNull) {
         // 请填写筛选条件
-        self.$Message.warning($it('modalTips.ed'));
+        self.$Message.warning($it('tip.ed'));
         return;
       }
       if (p.IS_GIFT != '') {
-        p.IS_GIFT = p.IS_GIFT === $it('common.yes') ? 'Y' : 'N';
+        p.IS_GIFT = p.IS_GIFT === $it('com.yes') ? 'Y' : 'N';
       } else {
         p.IS_GIFT = '';
       }

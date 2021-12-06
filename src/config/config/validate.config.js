@@ -47,7 +47,7 @@ class BurgeonValidate {
   static validatePhoneNumber(rule, value, callback) {
     const pNumver = value;
     if (!pNumver) {
-      // return callback(new Error($it('modalTips.fa'))); // '手机号不能为空!'
+      // return callback(new Error($it('tip.fa'))); // '手机号不能为空!'
       return callback(new Error(' ')); // '手机号不能为空!'
     }
     if (
@@ -57,7 +57,7 @@ class BurgeonValidate {
     ) {
       return callback();
     }
-    // return callback(new Error($it('modalTips.fb'))); // '手机号格式不正确!'
+    // return callback(new Error($it('tip.fb'))); // '手机号格式不正确!'
     return callback(new Error(' ')); // '手机号格式不正确!'
   };
   // 收货人地址校验：不能为纯数字
@@ -65,12 +65,12 @@ class BurgeonValidate {
     const rAddress = value;
     console.log('rAddress', rAddress);
     if (!rAddress) {
-      return callback(new Error($it('modalTips.fc'))); // '收货人地址不能为空!'
+      return callback(new Error($it('tip.fc'))); // '收货人地址不能为空!'
     }
     if (/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(rAddress)) {
       return callback();
     }
-    return callback(new Error($it('modalTips.fd'))); // '收货人地址格式不正确!'
+    return callback(new Error($it('tip.fd'))); // '收货人地址格式不正确!'
   };
   /* ------------ ruleValidate使输入框变色 end ------------- */
 
@@ -140,72 +140,72 @@ class BurgeonValidate {
       masterTable.RECEIVER_ADDRESS &&
       !/^[^\d#\$\*\+@!%\^&-=]{1,}/.test(masterTable.RECEIVER_ADDRESS)
     ) {
-      promptMessage += `${$it('modalTips.fd')}`;
+      promptMessage += `${$it('tip.fd')}`;
     }
     BurgeonValidate.target.formConfig.formData.forEach((item) => {
       // 下单店铺
       if (
         item.itemdata &&
-        item.itemdata.name === $it('form_label.orderShop') &&
+        item.itemdata.name === $it('fL.orderShop') &&
         !item.itemdata.pid
       ) {
-        promptMessage += `${$it('form_label.orderShop')},`;
+        promptMessage += `${$it('fL.orderShop')},`;
       }
     });
     if (masterTable.SHIP_AMT === '') {
-      promptMessage += `${$it('form_label.distribution_costs')},`; // 配送费用
+      promptMessage += `${$it('fL.distribution_costs')},`; // 配送费用
     }
     if (!masterTable.SOURCE_CODE) {
-      promptMessage += `${$it('form_label.platform_billNo')},`; // 平台单号
+      promptMessage += `${$it('fL.platform_billNo')},`; // 平台单号
     }
     if (!masterTable.PAY_TYPE) {
-      promptMessage += `${$it('form_label.paymentMethod')},`; // 付款方式
+      promptMessage += `${$it('fL.paymentMethod')},`; // 付款方式
     }
     if (masterTable.PAY_TYPE == 2) {
       if (masterTable.COD_AMT !== 0) {
         if (!masterTable.COD_AMT || masterTable.COD_AMT === '') {
           promptMessage += `${$it(
-            'form_label.collection_amount'
+            'fL.collection_amount'
           )},`; // 代收金额
         }
       }
     }
     if (!masterTable.RECEIVER_NAME) {
-      promptMessage += $it('form_label.consignee'); // 收货人
+      promptMessage += $it('fL.consignee'); // 收货人
     }
     if (!masterTable.RECEIVER_MOBILE && !masterTable.RECEIVER_PHONE) {
-      promptMessage += `${$it('form_label.consignee_phone')},`; // 收货人手机
+      promptMessage += `${$it('fL.consignee_phone')},`; // 收货人手机
     }
     BurgeonValidate.target.formConfig1.formData.forEach((item) => {
       // 收货人省份 收货人市 收货人地址
       if (
         item.itemdata &&
         item.itemdata.name ===
-        $it('form_label.consignee_province') &&
+        $it('fL.consignee_province') &&
         !item.itemdata.pid
       ) {
-        promptMessage += `${$it('form_label.consignee_province')},`;
+        promptMessage += `${$it('fL.consignee_province')},`;
       } else if (
         item.itemdata &&
-        item.itemdata.name === $it('form_label.consignee_city') &&
+        item.itemdata.name === $it('fL.consignee_city') &&
         !item.itemdata.pid
       ) {
-        promptMessage += `${$it('form_label.consignee_city')},`;
+        promptMessage += `${$it('fL.consignee_city')},`;
       }
     });
     if (!masterTable.RECEIVER_ADDRESS) {
-      promptMessage += `${$it('form_label.aconsignee_address')},`;
+      promptMessage += `${$it('fL.aconsignee_address')},`;
     }
     if (promptMessage) {
       BurgeonValidate.target.$Message.warning(
-        `${promptMessage}${$it('modalTips.y1')}`
+        `${promptMessage}${$it('tip.y1')}`
       );
       return false;
     }
     if (Number.isNaN(masterTable.RECEIVER_MOBILE)) {
-      BurgeonValidate.target.$Message.warning($it('modalTips.ey'));
+      BurgeonValidate.target.$Message.warning($it('tip.ey'));
     } else if (masterTable.RECEIVER_MOBILE.length !== 11) {
-      BurgeonValidate.target.$Message.warning('modalTips.ez');
+      BurgeonValidate.target.$Message.warning('tip.ez');
     } else {
       return true;
     }

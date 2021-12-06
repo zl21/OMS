@@ -87,19 +87,19 @@ export default {
       labelDefaultValue: 'OC_B_ORDER_ITEM',
       labelList: [
         {
-          label: $it('common.baseInformation'), // 基本信息
+          label: $it('com.baseInformation'), // 基本信息
           value: 'OC_B_ORDER_ITEM'
         },
         {
-          label: $it('form_label.preferential_info'), // 优惠信息
+          label: $it('fL.preferential_info'), // 优惠信息
           value: 'OC_B_ORDER_PROMOTION'
         },
         {
-          label: $it('form_label.shipping_info'), // 发货信息
+          label: $it('fL.shipping_info'), // 发货信息
           value: 'OC_B_ORDER_DELIVERY'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'OC_B_ORDER_LOG'
         }
       ],
@@ -124,21 +124,21 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $it('common.return'), // 返回
+            text: $it('com.return'), // 返回
             btnclick: () => {
               $omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
                 type: 'C',
                 dynamicRoutingForCustomizePage: true,
-                label: $it('panel_label.retail_shipping_order'),//'零售发货单',
+                label: $it('pL.retail_shipping_order'),//'零售发货单',
               });
-              // $omsUtils.tabJump(0, '2307', 1, 'ORDERMANAGER', { i8n: 0, tip: `${$it('panel_label.retail_shipping_order')}` }, {}, 1, 1)
+              // $omsUtils.tabJump(0, '2307', 1, 'ORDERMANAGER', { i8n: 0, tip: `${$it('pL.retail_shipping_order')}` }, {}, 1, 1)
               /* this.$store.commit('customize/TabOpen', {
                 id: '2307',
                 type: 'action',
                 name: 'ORDERMANAGER',
-                label: $it('panel_label.retail_shipping_order'),//'零售发货单',
+                label: $it('pL.retail_shipping_order'),//'零售发货单',
                 back: true,
               }); */
             }

@@ -10,13 +10,13 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm()
             }, // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             btnclick: () => {
               this.confirm()
             },
@@ -34,7 +34,7 @@ export default {
           },
           formData: [
             {
-              label: $it('table_label.code_SKU'), // '商品SKU',
+              label: $it('tL.code_SKU'), // '商品SKU',
               style: 'dimSearch',
               width: '12',
               value: 'searchValue',
@@ -51,7 +51,7 @@ export default {
               },
             },
             {
-              label: $it('table_label.itemNo01'), // '商品款号',
+              label: $it('tL.itemNo01'), // '商品款号',
               style: 'dimSearch',
               width: '12',
               value: 'psCProEcode',
@@ -70,7 +70,7 @@ export default {
               },
             },
             {
-              label: $it("table_label.itemNo02"),
+              label: $it("tL.itemNo02"),
               style: 'dimSearch',
               width: '12',
               value: 'proName',
@@ -113,19 +113,19 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: $it('table_label.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $it('table_label.itemNo01'), // SPU编码
+            title: $it('tL.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: $it('form_label.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
@@ -158,7 +158,7 @@ export default {
           },
           formData: [
             {
-              label: $it('table_label.code_SKU'), // '商品SKU',
+              label: $it('tL.code_SKU'), // '商品SKU',
               style: 'dimSearch',
               width: '12',
               value: 'searchValue',
@@ -176,7 +176,7 @@ export default {
               },
             },
             {
-              label: $it('table_label.itemNo01'), // '商品款号',
+              label: $it('tL.itemNo01'), // '商品款号',
               style: 'dimSearch',
               width: '12',
               value: 'psCProEcode',
@@ -194,7 +194,7 @@ export default {
               },
             },
             {
-              label: $it("table_label.itemNo02"),
+              label: $it("tL.itemNo02"),
               style: 'dimSearch',
               width: '12',
               value: 'proName',
@@ -238,19 +238,19 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: $it('table_label.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $it('table_label.itemNo01'), // SPU编码
+            title: $it('tL.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
-            title: $it('form_label.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
@@ -438,7 +438,7 @@ export default {
       //     }
       //   } else {
       //     // this.$Message.warning("sku查询失败!");
-      //     this.$Message.warning($it('modalTips.zt'))
+      //     this.$Message.warning($it('tip.zt'))
       //   }
       //   this[loadName] = false
       // } catch (e) {
@@ -456,7 +456,7 @@ export default {
         orderList.push(obj)
       })
       if (!this.onRowData || !this.onRowData2) {
-        this.$Message.warning($it('modalTips.d8'))
+        this.$Message.warning($it('tip.d8'))
         return
       }
       skuEcodes.push(this.onRowData.skuEcode)
@@ -489,7 +489,7 @@ export default {
                         key: 'billNo',
                       },
                       {
-                        title: $it('modalTitle.a6'), // '提示信息',
+                        title: $it('mT.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -506,23 +506,23 @@ export default {
       /* const self = this
       if (JSON.stringify(self.onRowClickData) == '{}') {
         // self.$Message.warning("替换前商品sku不能为空!");
-        self.$Message.warning($it('modalTips.yf'))
+        self.$Message.warning($it('tip.yf'))
         return
       }
       if (JSON.stringify(self.onRowClickReplaceData) == '{}') {
         // self.$Message.warning("替换后商品sku码不能为空!");
-        self.$Message.warning($it('modalTips.yg'))
+        self.$Message.warning($it('tip.yg'))
         return
       }
       // if (self.onRowClickData.ECODE == self.onRowClickReplaceData.ECODE) {
       //   // self.$Message.warning("替换商品与被替换商品不能相同!");
-      //   self.$Message.warning($it('modalTips.yh'));
+      //   self.$Message.warning($it('tip.yh'));
       //   return;
       // }
       const result = {}
       const needParam = {
         IS_GIFT:
-          self.onRowClickReplaceData.IS_GIFT == $it('common.yes')
+          self.onRowClickReplaceData.IS_GIFT == $it('com.yes')
             ? '0'
             : '1',
         PS_C_PRO_ECODE: self.onRowClickReplaceData.PS_C_PRO_ECODE,
@@ -534,7 +534,7 @@ export default {
       }
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning($it('modalTips.zu'))
+        self.$Message.warning($it('tip.zu'))
         return
       }
       result.ids = self.componentData.a_2
@@ -561,7 +561,7 @@ export default {
                 columns: [
                   {
                     // title: "提示信息",
-                    title: $it('modalTitle.tips'),
+                    title: $it('mT.tips'),
                     key: 'message',
                   },
                 ],

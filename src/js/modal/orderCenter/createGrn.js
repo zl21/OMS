@@ -23,7 +23,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
           type: '', // 按钮类型
-          text: $it('common.cancel'), // 取消
+          text: $it('com.cancel'), // 取消
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
           disabled: false, // 按钮禁用控制
@@ -43,7 +43,7 @@ export default {
       //     },
       //     {
       //       colname: 'ENAME',
-      //       name: $it('table_label.a3'), // '日程归属名称',
+      //       name: $it('tL.a3'), // '日程归属名称',
       //       show: true,
       //       isak: true
       //     },
@@ -162,7 +162,7 @@ export default {
     determine() {
       const formdata = new FormData();
       // if (!this.selectData.length && !this.defaultSelected.length) {
-      //   this.$Message.warning($it('modalTips.eh')); // '档案日程归属不能为空!'
+      //   this.$Message.warning($it('tip.eh')); // '档案日程归属不能为空!'
       //   return;
       // }
       let obj1 = JSON.parse(JSON.stringify(this.formConfig.formValue));
@@ -199,7 +199,7 @@ export default {
           // this.selectData = this.defaultSelected;
           this.btnConfig.buttons.push({
             type: '', // 按钮类型
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制

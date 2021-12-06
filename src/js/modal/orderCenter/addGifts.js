@@ -12,7 +12,7 @@ export default {
           {
             key: 'ECODE',
             // title: "条码"
-            title: $it('form_label.barCode')
+            title: $it('fL.barCode')
           },
           {
             key: 'sizeName',
@@ -27,17 +27,17 @@ export default {
           {
             key: 'QTY',
             // title: "数量",
-            title: $it('table_label.quantities')
+            title: $it('tL.quantities')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: $it('table_label.productName')
+            title: $it('tL.productName')
           },
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: $it('table_label.whetherGift'),
+            title: $it('tL.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -46,7 +46,7 @@ export default {
           {
             key: 'IS_DELETE',
             // title: "操作",
-            title: $it('table_label.operation'),
+            title: $it('tL.operation'),
             render: (h, params) => h(
               'a',
               {
@@ -87,13 +87,13 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             btnclick: () => {
               this.submit();
             }
@@ -140,7 +140,7 @@ export default {
         IS_GIFT: item.IS_GIFT
       }));
       if (rows.length === 0) {
-        self.$Message.error($it('modalTips.eg')); // '无赠品可添加！'
+        self.$Message.error($it('tip.eg')); // '无赠品可添加！'
         return;
       }
 
@@ -156,7 +156,7 @@ export default {
         self.$parent.$parent.$parent.selection = [];
       } else {
         // let mes = message || "失败";
-        const mes = message || $it('modalTips.z3');
+        const mes = message || $it('tip.z3');
         self.$Message.error(mes);
       }
     },
@@ -170,27 +170,27 @@ export default {
         {
           key: 'ECODE',
           // title: "条码",
-          title: $it('form_label.barCode')
+          title: $it('fL.barCode')
         },
         {
           key: 'QTY',
           // title: "数量",
-          title: $it('table_label.quantities')
+          title: $it('tL.quantities')
         },
         {
           key: 'PS_C_PRO_ENAME',
           // title: "商品名称",
-          title: $it('table_label.productName')
+          title: $it('tL.productName')
         },
         {
           key: 'GBCODE',
           // title: "国标码",
-          title: $it('form_label.gBCode')
+          title: $it('fL.gBCode')
         },
         {
           key: 'IS_GIFT',
           // title: "是否赠品",
-          title: $it('table_label.whetherGift')
+          title: $it('tL.whetherGift')
         }
       ];
       this.columns = cols;

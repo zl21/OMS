@@ -9,7 +9,7 @@
         <Collapse v-model="value">
           <Panel name="1">
             <!-- 基础资料 -->
-            {{ $it("panel_label.basicData") }}
+            {{ $it("pL.basicData") }}
             <p slot="content" class="basic-message">
               <ImageUpload
                 :dataitem="imageUploadConfig"
@@ -25,12 +25,12 @@
                 <div slot="CBX" class="cbx">
                   <i style="color: #ff9900; padding: 0 6px">*</i>
                   <!-- 退款类型 -->
-                  {{ $it("form_label.refundType") }}
+                  {{ $it("fL.refundType") }}
                   :&nbsp;&nbsp;&nbsp;&nbsp;
                   <RadioGroup v-model="BILL_TYPE" @on-change="billTypeChange">
                     <!-- 仅退款 -->
                     <Radio label="1">
-                      {{ $it("form_label.refundOnly") }}
+                      {{ $it("fL.refundOnly") }}
                     </Radio>
                     <!-- 退货退款 -->
                     <Radio
@@ -40,7 +40,7 @@
                       "
                       label="0"
                     >
-                      {{ $it("form_label.returnRefund") }}
+                      {{ $it("fL.returnRefund") }}
                     </Radio>
                   </RadioGroup>
                 </div>
@@ -55,7 +55,7 @@
           </Panel>
           <Panel v-if="!$route.query.new" name="2">
             <!-- 日志 -->
-            {{ $it("panel_label.log") }}
+            {{ $it("pL.log") }}
             <div slot="content">
               <OmsForm :form-config="logFormConfig" />
             </div>
@@ -66,7 +66,7 @@
         <div class="tab-content-navTab">
           <p :class="navStatus === 0 ? 'action' : ''" @click="navStatus = 0">
             <!-- 退款单详情 -->
-            {{ $it("panel_label.refundSlipDetails") }}
+            {{ $it("pL.refundSlipDetails") }}
           </p>
           <p
             v-if="$route.query.customizedModuleId !== 'New'"
@@ -102,7 +102,7 @@
         <Modal
           v-model="order.modal"
           :mask="true"
-          :title="$it('panel_label.refundSlipDetails')"
+          :title="$it('pL.refundSlipDetails')"
           :width="800"
           class="queryorder"
           @on-cancel="querycancel"
@@ -124,7 +124,7 @@
         <Modal
           v-model="addItem.modal"
           :mask="true"
-          :title="$it('modalTitle.originalChargebackDetails')"
+          :title="$it('mT.originalChargebackDetails')"
           :width="800"
           @on-cancel="addItemCancel"
           @on-ok="onAddItem"
@@ -139,7 +139,7 @@
         </Modal>
         <Modal v-model="isModal" title="提示" @on-ok="deleteImgBySure">
           <!-- 点击后将删除凭证,是否继续? -->
-          <p>{{ $it("modalTips.z5") }}</p>
+          <p>{{ $it("tip.z5") }}</p>
         </Modal>
       </div>
     </div>

@@ -18,7 +18,7 @@
         </div>
         <div class="number-box">
           <!-- <label>数量:</label> -->
-          <label>{{ $it("table_label.quantities") }}:</label>
+          <label>{{ $it("tL.quantities") }}:</label>
           <Input
             v-model="qty"
             style="width: 80px"

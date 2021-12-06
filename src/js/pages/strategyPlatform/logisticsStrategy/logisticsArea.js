@@ -11,7 +11,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         // confirmTitle: '导入',
-        confirmTitle: $it('modalTitle.import'),
+        confirmTitle: $it('mT.import'),
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '652',
         scrollable: false, // 是否可以滚动
@@ -87,7 +87,7 @@ export default {
                 type: 'S',
                 tableId: 24639,
                 tableName: 'ST_C_EXPRESS_AREA',
-                label: $it('panel_label.logisticsAreaSetting'), // label: '物流区域设置',
+                label: $it('pL.logisticsAreaSetting'), // label: '物流区域设置',
                 back: true
               });
             }
@@ -116,7 +116,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.logisticsCompany'), // 物流公司
+              name: $it('fL.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 24411, // 对应的表ID
@@ -129,7 +129,7 @@ export default {
           {
             style: 'input',
             // label: '备注',
-            label: $it('table_label.remarks'),
+            label: $it('tL.remarks'),
             value: 'REMARK',
             width: '6'
           }
@@ -141,7 +141,7 @@ export default {
       labelList: [
         {
           // label: '区域明细',
-          label: $it('form_label.region_details'),
+          label: $it('fL.region_details'),
           value: '1',
           isShow: true
         }
@@ -178,12 +178,12 @@ export default {
     async save() {
       const _this = this;
       if (_this.information.formData[0].itemdata.pid === undefined || !_this.information.formData[0].itemdata.pid) {
-        _this.$Message.warning($it('modalTips.em'));
+        _this.$Message.warning($it('tip.em'));
         return;
       }
       // if (_this.tableSize > 1000) return _this.$Message.error('数量过大，请使用导入功能设置是否到达');
       if (_this.tableSize > 1000) {
-        _this.$Message.error($it('modalTips.y3'));
+        _this.$Message.error($it('tip.y3'));
         return;
       }
       _this.dataArr.forEach(item => {
@@ -223,15 +223,15 @@ export default {
           id: data.objid, // 单据id
           type: 'action', // 类型action
           name: 'logisticsArea', // 文件名
-          label: $it('panel_label.logisticsAreaSetting'), // 物流区域设置
+          label: $it('pL.logisticsAreaSetting'), // 物流区域设置
           query: Object.assign({
             id: data.objid, // 单据id
-            tabTitle: $it('panel_label.logisticsAreaSetting') // 物流区域设置
+            tabTitle: $it('pL.logisticsAreaSetting') // 物流区域设置
           }) // 带的参数
         });
         this.synchronous();
       } else {
-        const err = message || $it('modalTips.y0'); // '保存失败';
+        const err = message || $it('tip.y0'); // '保存失败';
         _this.$Message.error(err);
         this.synchronous();
       }
@@ -251,11 +251,11 @@ export default {
       console.log(code, message, data);
       _this.loading = false;
       if (code === 0) {
-        const ess = message || $it('modalTips.y4'); // 作废成功
+        const ess = message || $it('tip.y4'); // 作废成功
         _this.getTree('', _this._objid);
         _this.$Message.success(ess);
       } else {
-        const err = message || $it('modalTips.y5'); // 作废失败
+        const err = message || $it('tip.y5'); // 作废失败
         _this.$Message.error(err);
       }
     },
@@ -390,7 +390,7 @@ export default {
           }
         });
       } else {
-        // _this.$Message.error(message || $it('modalTips.z3')); // 失败
+        // _this.$Message.error(message || $it('tip.z3')); // 失败
       }
     },
     // 同步table数据
@@ -497,11 +497,11 @@ export default {
       } = await this.service.strategyPlatform.exportExpressAreaItem(param);
       console.log(code, message, data);
       if (code === 0) {
-        const ess = message || $it('modalTips.z2'); // 导出成功
+        const ess = message || $it('tip.z2'); // 导出成功
         _this.$Message.success(ess);
         $omsUtils.downloadUrlFile(data);
       } else {
-        // const err = message || $it('modalTips.y6'); // 导出失败
+        // const err = message || $it('tip.y6'); // 导出失败
         // _this.$Message.success(err);
         $omsUtils.downloadUrlFile(data);
       }

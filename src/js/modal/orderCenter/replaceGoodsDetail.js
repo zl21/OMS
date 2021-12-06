@@ -9,19 +9,19 @@ export default {
         indexColumn: true,
         columns: [{
           key: 'skuEcode',
-          title: $it('table_label.code_SKU'), // SKU编码
+          title: $it('tL.code_SKU'), // SKU编码
         },
         {
           key: 'spuEcode',
-          title: $it('table_label.itemNo01'), // SPU编码
+          title: $it('tL.itemNo01'), // SPU编码
         },
         {
           key: 'spuEname',
-          title: $it("table_label.itemNo02"), // SPU名称
+          title: $it("tL.itemNo02"), // SPU名称
         },
         {
           key: 'skuEname',
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
         },
         {
           key: 'brandEname',
@@ -52,14 +52,14 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             } // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.confirm();
@@ -132,12 +132,12 @@ export default {
       const self = this;
       if (self.tableConfig.data.length == 0) {
         // sku不能为空!
-        self.$Message.warning($it('modalTips.cg'));
+        self.$Message.warning($it('tip.cg'));
         return;
       }
       if (!this.currentSkuEcode) {
         // 请选中一条单据!
-        self.$Message.warning($it('modalTips.d8'));
+        self.$Message.warning($it('tip.d8'));
         return;
       }
       console.log(this.componentData);

@@ -8,7 +8,7 @@
           <thead>
             <tr>
               <!-- <th>序号</th> -->
-              <th>{{ $it("table_label.serialNo") }}</th>
+              <th>{{ $it("tL.serialNo") }}</th>
               <template v-for="(column, index) in columns">
                 <th
                   v-if="column.key === 'IS_READ'"

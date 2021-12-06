@@ -18,7 +18,7 @@ class DropDownConfig {
         break
       }
       case 'manualReturnCreation': {
-        // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'panel_label.addReturnOrder')
+        // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'pL.addReturnOrder')
         R3.store.commit('global/tabOpen', {
           type: 'C',
           label: $it('menu.b0'), // 退货单新增
@@ -171,7 +171,7 @@ class DropDownConfig {
       self.$store.commit('global/tabOpen', {
         url: `/CUSTOMIZED/OC_B_ORDER_VIRTUAL_TABLE/2307?copyType=1&sourceId=${self.selection[0].ID}`,
         type: 'C',
-        label: $it('panel_label.add_retail_shipping_order'), // 零售发货单新增
+        label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
       })
     } else {
       console.log(message)
@@ -196,7 +196,7 @@ class DropDownConfig {
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) {
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
-      self.publicBouncedConfig.confirmTitle = $it('modalTitle.ah') // 批量替换下挂商品
+      self.publicBouncedConfig.confirmTitle = $it('mT.ah') // 批量替换下挂商品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
         type: 'replace',
@@ -302,7 +302,7 @@ class DropDownConfig {
       self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE'
       // self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
       self.publicBouncedConfig.url = require('@/views/modal/orderCenter/afterSaleCopy.vue').default
-      self.publicBouncedConfig.confirmTitle = $it('modalTitle.ag') // 售后复制
+      self.publicBouncedConfig.confirmTitle = $it('mT.ag') // 售后复制
       self.publicBouncedConfig.componentData = { id: self.selection[0].ID }
       self.publicBouncedConfig.width = 400
       setTimeout(() => {
@@ -320,7 +320,7 @@ class DropDownConfig {
     self.$store.commit('global/tabOpen', {
       type: 'C',
       customizedModuleName: 'OC_B_ORDER_VIRTUAL_TABLE',
-      label: $it('panel_label.add_retail_shipping_order'), // 零售发货单新增
+      label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
       customizedModuleId: 'New',
     })
   }
@@ -328,7 +328,7 @@ class DropDownConfig {
   static newOrderHander() {
     R3.store.commit('global/tabOpen', {
       type: 'C',
-      label: $it('panel_label.add_retail_shipping_order'), // 零售发货单新增
+      label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
       customizedModuleName: 'orderManageAdd',
       customizedModuleId: '-1',
     })
@@ -695,15 +695,15 @@ class DropDownConfig {
                 props: {
                   columns: [
                     {
-                      title: $it('table_label.serialNo'), // 序号
+                      title: $it('tL.serialNo'), // 序号
                       key: 'INDEX',
                     },
                     {
-                      title: $it('form_label.billNo'), // 单据编号
+                      title: $it('fL.billNo'), // 单据编号
                       key: 'BILL_NO',
                     },
                     {
-                      title: $it('form_label.e0'), // 失败原因
+                      title: $it('fL.e0'), // 失败原因
                       key: 'RESULT_MSG',
                     },
                   ],
@@ -752,7 +752,7 @@ class DropDownConfig {
           selectItem.ID,
           'TabOpen',
           type,
-          'panel_label.add_retail_shipping_order',
+          'pL.add_retail_shipping_order',
           extendObj
         )
       }

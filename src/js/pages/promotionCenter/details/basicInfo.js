@@ -21,7 +21,7 @@ export default {
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: $it('table_label.shopName'), // 店铺名称
+          name: $it('tL.shopName'), // 店铺名称
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           // reftableid: 24475, //对应的表ID
@@ -47,7 +47,7 @@ export default {
           isnotnull: false,
           isuppercase: false,
           length: 65535,
-          name: $it('common.exclude_province'), // 排除省
+          name: $it('com.exclude_province'), // 排除省
           readonly: false,
           reftable: 'CP_C_PROVINCE',
           reftableid: 23862,

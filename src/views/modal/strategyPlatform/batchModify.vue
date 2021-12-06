@@ -194,13 +194,13 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'), // 取消,
+            text: $it('com.cancel'), // 取消,
             btnclick: () => {
               this.$parent.close();
             },
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -264,7 +264,7 @@ export default {
                   props: {
                     columns: [
                       {
-                        title: $it('modalTitle.a6'), // '提示信息',
+                        title: $it('mT.a6'), // '提示信息',
                         key: 'message'
                       }
                     ],

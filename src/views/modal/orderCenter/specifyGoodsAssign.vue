@@ -6,17 +6,17 @@
         <RadioGroup v-model="radioValue" @on-change="radioChange">
           <Radio label="2">
             <!-- 按页面已勾选订单 -->
-            <span>{{ $it("modalTips.cd") }}</span>
+            <span>{{ $it("tip.cd") }}</span>
           </Radio>
           <Radio label="1">
             <!-- 按筛选条件选中订单 -->
-            <span>{{ $it("modalTips.ce") }}</span>
+            <span>{{ $it("tip.ce") }}</span>
           </Radio>
         </RadioGroup>
       </div>
       <!-- 商品SKU -->
       <div style="float: right" class="searchForm">
-        <!-- {{ $it("table_label.commoditySKU") }}: -->
+        <!-- {{ $it("tL.commoditySKU") }}: -->
         <!-- <Input
           v-model="searchValue"
           icon="ios-search"
@@ -63,14 +63,14 @@ export default {
         btnsite: "right", // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it("common.cancel"), // 取消
+            text: $it("com.cancel"), // 取消
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: $it("common.determine"), // 确定
+            text: $it("com.determine"), // 确定
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.confirm();
@@ -107,11 +107,11 @@ export default {
           key: "ecode",
         },
         {
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
           key: "ename",
         },
         {
-          title: $it("table_label.productName"), // 商品名称
+          title: $it("tL.productName"), // 商品名称
           key: "psCProEname",
         },
         {
@@ -182,7 +182,7 @@ export default {
       // sku查询
       const self = this;
       if (!self.itemdata.valuedata && !self.searchValue) {
-        self.$Message.warning($it("pHolder.z4")); // 请输入商品SKU
+        self.$Message.warning($it("pH.z4")); // 请输入商品SKU
         return;
       }
       const res = await self.service.common.selSku({ ECODE: self.itemdata.valuedata });
@@ -190,38 +190,38 @@ export default {
 
       if (res.data.code == 0) {
         if (res.data.data.length == 0 || res.data.data[0] == null) {
-          self.$Message.warning($it("modalTips.r8")); // 查询数据为空!
+          self.$Message.warning($it("tip.r8")); // 查询数据为空!
           return;
         }
         // res.data.data[0].IS_GIFT =
         //   res.data.data[0].IS_GIFT == "0" ? "否" : "是";
         self.data.push(res.data.data[0]);
       } else {
-        // this.$Message.warning($it("modalTips.zt")); // sku查询失败!
+        // this.$Message.warning($it("tip.zt")); // sku查询失败!
       }
     }, */
     search: _.debounce(async function () {
       const self = this;
       if (!self.itemdata.valuedata && !self.searchValue) {
-        self.$Message.warning($it("pHolder.z4")); // 请输入商品SKU
+        self.$Message.warning($it("pH.z4")); // 请输入商品SKU
         return;
       }
       const res = await self.service.common.selSku({ ECODE: self.itemdata.valuedata });
       console.log(res);
       if (res.data.code == 0) {
         if (res.data.data.length == 0 || res.data.data[0] == null) {
-          self.$Message.warning($it("modalTips.r8")); // 查询数据为空!
+          self.$Message.warning($it("tip.r8")); // 查询数据为空!
           return;
         }
         self.data.push(res.data.data[0]);
       } else {
-        // this.$Message.warning($it("modalTips.zt")); // sku查询失败!
+        // this.$Message.warning($it("tip.zt")); // sku查询失败!
       }
     }, 100),
     confirm() {
       const self = this;
       if (self.data.length == 0) {
-        self.$Message.warning($it("modalTips.cg")); // sku不能为空!
+        self.$Message.warning($it("tip.cg")); // sku不能为空!
         return;
       }
       let result = {};
@@ -232,7 +232,7 @@ export default {
       //   // self.componentData.data['qty'] = self.qty;
       // } else if (self.radioValue == "2") {
       //   if (self.componentData.a_2.length == 0) {
-      //     self.$Message.warning($it("modalTips.zu")); // 请勾选订单数据!
+      //     self.$Message.warning($it("tip.zu")); // 请勾选订单数据!
       //     // return;
       //   }
       //   result.IDS = self.componentData.a_2;
@@ -262,15 +262,15 @@ export default {
                     props: {
                       columns: [
                         {
-                          title: $it('table_label.serialNo'), // 序号
+                          title: $it('tL.serialNo'), // 序号
                           key: 'index'
                         },
                         {
-                          title: $it('form_label.billNo'), // 单据编号
+                          title: $it('fL.billNo'), // 单据编号
                           key: 'bollNo',
                         },
                         {
-                          title: $it('form_label.e0'), // 失败原因
+                          title: $it('fL.e0'), // 失败原因
                           key: 'message'
                         }
                       ],

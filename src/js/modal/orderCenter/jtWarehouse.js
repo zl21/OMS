@@ -10,7 +10,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -20,7 +20,7 @@ export default {
           },
           {
             type: '', // 按钮类型
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             icon: '', // 按钮图标
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -33,19 +33,19 @@ export default {
                 promptMessage = $it('other.shop');
               } else if (!formData[1].itemdata.pid) {
                 // promptMessage = "档期日程归属";
-                promptMessage = $it('form_label.scheduleOwnership');
+                promptMessage = $it('fL.scheduleOwnership');
               } else if (!formData[2].itemdata.pid) {
                 // promptMessage = "实体仓库";
-                promptMessage = $it('table_label.physical_warehouse');
+                promptMessage = $it('tL.physical_warehouse');
               } else if (
                 !self.warehouseManagementFromConfig.formValue.DELIVERYTYPE
               ) {
                 // promptMessage = "配送方式";
-                promptMessage = $it('form_label.distributionMode');
+                promptMessage = $it('fL.distributionMode');
               }
               if (promptMessage) {
                 // this.$Message.warning(promptMessage + "不能为空");
-                this.$Message.warning(promptMessage + $it('modalTips.y1'));
+                this.$Message.warning(promptMessage + $it('tip.y1'));
                 return;
               }
               const fromdata = new FormData();
@@ -140,7 +140,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.ownership'), // 日程归属
+              name: $it('fL.ownership'), // 日程归属
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'ST_C_VIPCOM_PROJECT_ITEM',
               reftableid: 24583,
@@ -166,7 +166,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.physical_warehouse'), // 实体仓库
+              name: $it('tL.physical_warehouse'), // 实体仓库
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE',
               reftableid: 24486,
@@ -178,7 +178,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.distributionMode'), // 配送方式
+            label: $it('fL.distributionMode'), // 配送方式
             width: '24', // 所占宽度宽度
             value: 'DELIVERYTYPE', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -216,7 +216,7 @@ export default {
         let arr = '';
         res.data.datas.tabth.forEach((item) => {
           // '配送方式'
-          if (item.name === $it('form_label.distributionMode')) {
+          if (item.name === $it('fL.distributionMode')) {
             arr = item.combobox;
           }
         });

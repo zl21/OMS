@@ -17,7 +17,7 @@ export default {
         },
         formData: [
           {
-            label: $it('form_label.returnOrder_no'),
+            label: $it('fL.returnOrder_no'),
             //'退换货单号',
             style: 'input',
             width: '7',
@@ -28,7 +28,7 @@ export default {
           },
           {
             style: 'input', //输入框类型
-            label: $it('form_label.platform_billNo'), // 平台单号 输入框前文字
+            label: $it('fL.platform_billNo'), // 平台单号 输入框前文字
             value: 'SOURCE_CODE', //输入框的值
             columns: ['SOURCE_CODE'],
             width: '7',
@@ -36,7 +36,7 @@ export default {
             //regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
           {
-            label: $it('form_label.logisticsOrder_No'),
+            label: $it('fL.logisticsOrder_No'),
             //'物流单号',
             style: 'input',
             width: '7',
@@ -51,7 +51,7 @@ export default {
 
           {
             style: 'input', //输入框类型
-            label: $it('table_label.buyerNickname'),
+            label: $it('tL.buyerNickname'),
             // '买家昵称', //输入框前文字
             value: 'BUYER_NICK', //输入框的值
             columns: ['BUYER_NICK'],
@@ -87,7 +87,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm()
             }, // 按钮点击事件
@@ -99,14 +99,14 @@ export default {
               let reqdata = JSON.parse(JSON.stringify(this.tabdata))
               if (this.componentData.type == 2) {
                 if (!this.rowlist) {
-                  this.$Message.error($it('modalTips.gr'));
+                  this.$Message.error($it('tip.gr'));
                   return
                 }
                 reqdata.RETURN_ORDER_ITEM_LIST = this.rowlist
               }
 
               if (reqdata.length == 0) {
-                this.$Message.error($it('modalTips.gr'));
+                this.$Message.error($it('tip.gr'));
                 return
               }
 
@@ -188,7 +188,7 @@ export default {
           }
         },
         {
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
           width: 50,
           key: "index"
         }
@@ -233,7 +233,7 @@ export default {
           } else {
             let typeArr = [{
               type: 'index',
-              title: $it('table_label.serialNo'), // 序号
+              title: $it('tL.serialNo'), // 序号
               width: 60,
               align: 'center'
             }]

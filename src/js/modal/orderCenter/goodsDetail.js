@@ -36,12 +36,12 @@ export default {
       islackstock: [
         {
           // label: "是",
-          label: $it('common.yes'),
+          label: $it('com.yes'),
           value: '1'
         },
         {
           // label: "否",
-          label: $it('common.no'),
+          label: $it('com.no'),
           value: '0'
         }
       ],
@@ -62,7 +62,7 @@ export default {
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0) {
                   // return self.$Message.error("至少选择一条订单明细");
-                  self.$Message.error($it('modalTips.zk'));
+                  self.$Message.error($it('tip.zk'));
                   return;
                 }
                 const param = {
@@ -125,7 +125,7 @@ export default {
                 const ids = this.selection.map(row => row.ID);
                 if (ids.length === 0) {
                   // return self.$Message.error("至少选择一条订单明细");
-                  self.$Message.error($it('modalTips.zk'));
+                  self.$Message.error($it('tip.zk'));
                   return;
                 }
                 const param = {
@@ -157,7 +157,7 @@ export default {
                 if (ids.length === 0) {
                   self.$Message.warning({
                     // content: "请选中其中一条记录",
-                    content: $it('modalTips.al'),
+                    content: $it('tip.al'),
                     duration: 5,
                     top: 80
                   });
@@ -166,7 +166,7 @@ export default {
                 if (ids.length > 1) {
                   self.$Message.warning({
                     // content: "请选中一条记录",
-                    content: $it('modalTips.am'),
+                    content: $it('tip.am'),
                     duration: 5,
                     top: 80
                   });
@@ -238,7 +238,7 @@ export default {
           {
             key: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: $it('table_label.productNo')
+            title: $it('tL.productNo')
           },
           {
             // title: "颜色",
@@ -344,12 +344,12 @@ export default {
           {
             key: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: $it('form_label.barCode')
+            title: $it('fL.barCode')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: $it('table_label.productName'),
+            title: $it('tL.productName'),
             width: 200,
             ellipsis: true
           },
@@ -361,22 +361,22 @@ export default {
           {
             key: 'QTY',
             // title: "数量",
-            title: $it('table_label.quantities')
+            title: $it('tL.quantities')
           },
           {
             key: 'QTY_LOST',
             // title: "缺货数量",
-            title: $it('table_label.outOfStock_quantit')
+            title: $it('tL.outOfStock_quantit')
           },
           {
             key: 'STOCK',
             // title: "库存",
-            title: $it('table_label.stock')
+            title: $it('tL.stock')
           },
           {
             key: 'IS_LACKSTOCK',
             // title: "实物报缺",
-            title: $it('table_label.materialShortage'),
+            title: $it('tL.materialShortage'),
             width: 80,
             render: (h, params) => {
               // 订单状态为未确认或者缺货状态时,实物报缺为可修改
@@ -431,7 +431,7 @@ export default {
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: $it('table_label.whetherGift'),
+            title: $it('tL.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT === 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -440,53 +440,53 @@ export default {
           {
             key: 'PRICE_LIST',
             // title: "吊牌价",
-            title: $it('table_label.tagPrice')
+            title: $it('tL.tagPrice')
           },
           {
             key: 'PRICE_ACTUAL',
             // title: "成交单价",
-            title: $it('table_label.unitPrice')
+            title: $it('tL.unitPrice')
           },
           {
             key: 'REAL_AMT',
             // title: "成交金额",
-            title: $it('table_label.transactionAmount')
+            title: $it('tL.transactionAmount')
           },
           {
             key: 'PRICE_SETTLE',
             // title: "结算单价",
-            title: $it('table_label.unitPriceSettlement')
+            title: $it('tL.unitPriceSettlement')
           },
           {
             key: 'TOT_PRICE_SETTLE',
             // title: "结算总额",
-            title: $it('table_label.totalSettlement')
+            title: $it('tL.totalSettlement')
           },
           {
             key: 'AMT_DISCOUNT',
             // title: "优惠金额",
-            title: $it('table_label.preferential_amount')
+            title: $it('tL.preferential_amount')
           },
           {
             key: 'ADJUST_AMT',
             // title: "调整金额",
-            title: $it('table_label.adjustment_amount')
+            title: $it('tL.adjustment_amount')
           },
           {
             key: 'ORDER_SPLIT_AMT',
             // title: "平摊金额",
-            title: $it('table_label.equal_amount'),
+            title: $it('tL.equal_amount'),
             render: (h, params) => h('span', {}, Number(params.row.ORDER_SPLIT_AMT).toFixed(2))
           },
           {
             key: 'REFUND_STATUS_EXT',
             // title: "退款状态",
-            title: $it('table_label.refund_status')
+            title: $it('tL.refund_status')
           },
           {
             key: 'DISTRIBUTION_PRICE',
             // title: "分销金额",
-            title: $it('table_label.distribution_amount')
+            title: $it('tL.distribution_amount')
           }
         ],
         data: []
@@ -514,7 +514,7 @@ export default {
         }
       });
       if (!isExit) {
-        this.$Message.warning($it('modalTips.dy')); // '此商品中不存在该颜色和尺寸'
+        this.$Message.warning($it('tip.dy')); // '此商品中不存在该颜色和尺寸'
         return;
       }
       const ocBOrderItemId = data.ID || -1;

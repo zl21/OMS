@@ -8,17 +8,17 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
-          {{ $it('panel_label.basicData') }}
+          {{ $it('pL.basicData') }}
           <div slot="content" class="customized_Info_form">
             <OmsForm :form-config="formConfig1" />
           </div>
         </Panel>
         <Panel name="panel_condition" class="wrap">
           <!-- 满足条件 -->
-          {{ $it('form_label.meet_conditions') }}
+          {{ $it('fL.meet_conditions') }}
           <p slot="content">
             <!-- 自动同意换货 -->
-            <label>{{ $it('form_label.e3') }}:</label>
+            <label>{{ $it('fL.e3') }}:</label>
             <OmsForm :form-config="formConfig2">
               <template #exchangeDesc="{ rowData }">
                 <div class="changeForm">
@@ -61,7 +61,7 @@
                       v-model="rowData.value.AOTU_APPROVE_DEVIATION_PRICE"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange"
                       :regx="rowData.item.regx"
                       style="width: 150px;"
@@ -71,7 +71,7 @@
               </template>
             </OmsForm>
             <!-- 自动拒绝换货 -->
-            <label style="position: relative; top: 12px;">{{ $it('form_label.e4') }}:</label>
+            <label style="position: relative; top: 12px;">{{ $it('fL.e4') }}:</label>
             <OmsForm :form-config="formConfig2">
               <template #stockout="{ rowData }">
                 <div class="changeForm">
@@ -118,7 +118,7 @@
                       :maxlength="250"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange"
                       style="width: 150px;"
                     />
@@ -152,7 +152,7 @@
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
                       :regx="rowData.item.regx"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange"
                       style="width: 150px;"
                     />
@@ -186,7 +186,7 @@
                       :maxlength="250"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange2"
                       style="width: 400px;"
                     />

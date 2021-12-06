@@ -41,7 +41,7 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
-            name: $it('table_label.supplierName'), // 供应商名称
+            name: $it('tL.supplierName'), // 供应商名称
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_SUPPLIER', // 对应的表
             reftableid: 10222, // 对应的表ID
@@ -80,33 +80,33 @@ export default {
           type: 'index',
           width: 60,
           align: 'center',
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
         },
         {
-          title: $it('table_label.code_SKU'), // SKU编码
+          title: $it('tL.code_SKU'), // SKU编码
           key: 'ECODE'
         },
         {
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
           key: 'ENAME'
         },
         {
-          title: $it('form_label.d4'), // 销售状态
+          title: $it('fL.d4'), // 销售状态
           key: 'SALES_STATUS',
           render: (h, params) => {
             return h('span', {}, params.row.SALES_STATUS ? params.row.SALES_STATUS == 'Y' ? '正常销售' : '暂停销售' : '')
           }
         },
         {
-          title: $it('form_label.cu'), // 零售价
+          title: $it('fL.cu'), // 零售价
           key: 'PRICE_RETAIL',
         },
         {
-          title: $it('form_label.d5'), // 采购价
+          title: $it('fL.d5'), // 采购价
           key: 'PRICE_PURCHASE'
         },
         {
-          title: $it('form_label.d6'), // 成本价
+          title: $it('fL.d6'), // 成本价
           key: 'PRICE_COST'
         },
         {
@@ -126,7 +126,7 @@ export default {
           key: 'UNIT'
         },
         {
-          title: $it('table_label.remarks'), // 备注
+          title: $it('tL.remarks'), // 备注
           key: 'SPEC_REMARK'
         }
         ],
@@ -205,14 +205,14 @@ export default {
           type: 'index',
           width: 60,
           align: 'left',
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
         },
         {
-          title: $it('table_label.supplierName'), // 供应商名称
+          title: $it('tL.supplierName'), // 供应商名称
           key: 'cpCSupplierName'
         },
         {
-          title: $it('form_label.d7'), // 默认供应商
+          title: $it('fL.d7'), // 默认供应商
           key: 'IS_DEFAULT',
           render: (h, params) => h('Checkbox', {
             props: {
@@ -274,8 +274,8 @@ export default {
             if (this.isModify) {
               this.$Modal.fcWarning({
                 className: 'ark-dialog',
-                title: $it('modalTitle.tips'), // 提示
-                content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+                title: $it('mT.tips'), // 提示
+                content: $it('tip.hu'), // 当前修改未保存，确定返回？
                 mask: true,
                 showCancel: true,
                 onOk: () => {
@@ -321,7 +321,7 @@ export default {
       formConfig: {
         formData: [{
           style: 'input',
-          label: $it('table_label.itemNo01'), // SPU编码
+          label: $it('tL.itemNo01'), // SPU编码
           value: 'ECODE',
           width: '8',
           disabled: false,
@@ -331,7 +331,7 @@ export default {
         },
         {
           style: 'input',
-          label: $it("table_label.itemNo02"), // SPU名称
+          label: $it("tL.itemNo02"), // SPU名称
           value: 'ENAME',
           width: '16',
           disabled: false,
@@ -342,7 +342,7 @@ export default {
         {
           colname: 'TYPE',
           style: 'select', // 下拉框类型
-          label: $it("form_label.type"), // 类型
+          label: $it("fL.type"), // 类型
           width: '8', // 所占宽度宽度
           value: 'TYPE', // 输入框的值
           clearable: true,
@@ -378,7 +378,7 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
-            name: $it('table_label.brand'), // 品牌
+            name: $it('tL.brand'), // 品牌
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'PS_C_BRAND', // 对应的表
             reftableid: 166035, // 对应的表ID
@@ -431,7 +431,7 @@ export default {
         },
         {
           style: 'textarea',
-          label: $it('form_label.d8'), // 产品介绍
+          label: $it('fL.d8'), // 产品介绍
           value: 'REMARK',
           width: '24',
           maxlength: 255,
@@ -482,11 +482,11 @@ export default {
       },
       // tab切换配置
       labelList: [{
-        label: $it('panel_label.ay'), // SKU信息
+        label: $it('pL.ay'), // SKU信息
         value: 'skuInfo',
       },
       {
-        label: $it('panel_label.az'), // 供应商
+        label: $it('pL.az'), // 供应商
         value: 'supplier',
       },
       // {
@@ -494,7 +494,7 @@ export default {
       //   value: 'customAttr',
       // },
       {
-        label: $it('panel_label.operationLog'), // 操作日志
+        label: $it('pL.operationLog'), // 操作日志
         value: 'logTable',
       },
       ],
@@ -945,15 +945,15 @@ export default {
       const data = self.formConfig.formValue;
       let str = '';
       if (!data.ECODE) {
-        str += `${$it('table_label.itemNo01')} `; // SPU编码
+        str += `${$it('tL.itemNo01')} `; // SPU编码
       } else if (!data.ENAME) {
-        str += `${$it('table_label.itemNo02')} `; // SPU名称
+        str += `${$it('tL.itemNo02')} `; // SPU名称
       } else if (!data.TYPE) {
-        str += `${$it('form_label.type')} `; // 类型
+        str += `${$it('fL.type')} `; // 类型
       }
       self.formConfig.formData.forEach(item => {
         if (item.colname == 'PS_C_BRAND_ID' && !item.itemdata.pid) {
-          str += `${$it('table_label.brand')} `; // 品牌
+          str += `${$it('tL.brand')} `; // 品牌
         } else if (item.colname == 'PS_C_PRO_CLASSIFY_ID' && !item.itemdata.pid) {
           str += `${$it('menu.ac')} `; // 商品分类
         }

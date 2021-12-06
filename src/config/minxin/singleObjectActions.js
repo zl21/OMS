@@ -64,8 +64,8 @@ export default () => ({
           main.ID = ID;
         }
         // 必填校验
-        if (!main.CP_C_PHY_WAREHOUSE_ID) return this.$Message.warning($it('modalTips.ks')) //'实体仓库为必填项，请填写后保存！'
-        if (ID != '-1' && !main.ACTUAL_COMPENSATE_FEE) return this.$Message.warning($it('modalTips.kt')) //'实际赔付金额为必填项，请填写后保存！'
+        if (!main.CP_C_PHY_WAREHOUSE_ID) return this.$Message.warning($it('tip.ks')) //'实体仓库为必填项，请填写后保存！'
+        if (ID != '-1' && !main.ACTUAL_COMPENSATE_FEE) return this.$Message.warning($it('tip.kt')) //'实际赔付金额为必填项，请填写后保存！'
         const payData = R3.store.state.customize.COMPENSATE;
         main.REDUNDANT_ORDER_ID = payData.other.orderId;
         const OC_B_COMPENSATE_ORDER_ITEM = payData.detail;
@@ -165,13 +165,13 @@ export default () => ({
       for( let key in mainOrder){
         if (regxArr.includes(key) && !mainOrder[key]) {
           if (key === 'PAY_TYPE') {
-            this.$Message.error($it('modalTips.kq')) //支付方式不能为空！
+            this.$Message.error($it('tip.kq')) //支付方式不能为空！
             return;
           }else if(key === 'SOURCE_CODE'){
-            this.$Message.error($it('modalTips.ho')) //原平台单号不能为空！
+            this.$Message.error($it('tip.ho')) //原平台单号不能为空！
             return;
           }else if(key === 'PAY_NO'){
-            this.$Message.error($it('modalTips.kr')) //支付账号不能为空！
+            this.$Message.error($it('tip.kr')) //支付账号不能为空！
             return;
           }
         }

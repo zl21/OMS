@@ -29,17 +29,17 @@ export default {
               {
                 value: 1,
                 label: "丢件复制",
-                // label: $it('form_label.live_HOLD')
+                // label: $it('fL.live_HOLD')
               },
               {
                 value: 2,
                 label: "错漏发复制",
-                // label: $it('form_label.buyer_HOLD')
+                // label: $it('fL.buyer_HOLD')
               },
               {
                 value: 3,
                 label: "赠品复制",
-                // label: $it('form_label.live_HOLD')
+                // label: $it('fL.live_HOLD')
               },
             ],
           },
@@ -56,13 +56,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $it("common.cancel"), // 取消
+            text: $it("com.cancel"), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             },
           },
           {
-            text: $it("common.determine"), // 确定
+            text: $it("com.determine"), // 确定
             btnclick: () => {
               this.confirmChange();
             },

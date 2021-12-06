@@ -10,11 +10,11 @@ export default {
       collapse: 'panel_baseInfo',
       changeCount: 0, //判断数据是否修改过
       value: [1, 2],
-      baseInformation: $it('common.baseInformation'),
+      baseInformation: $it('com.baseInformation'),
       id: '',
       defaultColumn: 2,
       startindex: 0, //分页
-      modalTitle: $it('form_label.za'), //'添加排除区域', // 弹出窗标题！
+      modalTitle: $it('fL.za'), //'添加排除区域', // 弹出窗标题！
       modal1: false, // 弹窗开关
       btnSave: $it('btn.save'),
       btnBack: $it('btn.back'),
@@ -43,7 +43,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $it('common.exclude_region'),
+            text: $it('com.exclude_region'),
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_addArea",
             disabled: false, // 按钮禁用控制
@@ -202,7 +202,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'remark',
             colname: 'remark',
             width: '8',
@@ -210,7 +210,7 @@ export default {
           },
           {
             style: '',
-            label: $it('form_label.bg'), // 启用状态
+            label: $it('fL.bg'), // 启用状态
             colname: 'isActive',
             width: '8',
             disabled: true,
@@ -434,7 +434,7 @@ export default {
           align: 'center'
         },
         {
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
           key: 'index'
         },
         {
@@ -505,11 +505,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('form_label.e9'),//'基本信息',
+          label: $it('fL.e9'),//'基本信息',
           value: 'jiben'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_DELIVERY_AREA_LOG'
         }
       ],
@@ -545,7 +545,7 @@ export default {
       this.id = '-1';
       this.tableshow = true;
       this.labelList = [{
-        label: $it('form_label.e9'),//'基本信息',
+        label: $it('fL.e9'),//'基本信息',
         value: 'jiben'
       },]
     } else {
@@ -779,12 +779,12 @@ export default {
         if (this.changeCount > 0) {
           this.$Modal.info({
             className: 'ark-dialog',
-            title: $it('modalTitle.tips'), // 提示
-            content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+            title: $it('mT.tips'), // 提示
+            content: $it('tip.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
-            okText: $it('common.determine'), // 确定
-            cancelText: $it('common.cancel'), // 取消
+            okText: $it('com.determine'), // 确定
+            cancelText: $it('com.cancel'), // 取消
             onOk: () => {
               this.pageback();
             }
@@ -795,12 +795,12 @@ export default {
       } else if (this.changeCount > 1) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('mT.tips'), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.pageback();
           }

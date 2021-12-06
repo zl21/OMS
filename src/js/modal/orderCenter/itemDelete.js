@@ -8,7 +8,7 @@ export default {
         buttons: [
           {
             type: '', // 按钮类型
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             icon: '', // 按钮图标
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -17,7 +17,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -34,7 +34,7 @@ export default {
         formData: [
           {
             // label: "SKU编码",
-            label: $it('table_label.code_SKU'),
+            label: $it('tL.code_SKU'),
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -70,7 +70,7 @@ export default {
                   delete item.skuId;
                 });
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.code_SKU')) {
+                  if (item.label === $it('tL.code_SKU')) {
                     item.AuotData = data;
                     // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
@@ -86,7 +86,7 @@ export default {
           },
           {
             // label: "商品编码",
-            label: $it('table_label.productNo'),
+            label: $it('tL.productNo'),
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -110,7 +110,7 @@ export default {
                 const dimList = _this.formConfig.formData;
 
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.productNo')) {
+                  if (item.label === $it('tL.productNo')) {
                     item.AuotData = res.data.data.list;
                   }
                 });
@@ -132,17 +132,17 @@ export default {
       columns: [
         {
           // title: "SKU编码",
-          title: $it('table_label.code_SKU'),
+          title: $it('tL.code_SKU'),
           key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: $it('table_label.productName'),
+          title: $it('tL.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
           // title: "SKU名称",
-          title: $it('form_label.skuName'),
+          title: $it('fL.skuName'),
           key: 'SPEC',
         },
       ],
@@ -182,7 +182,7 @@ export default {
           self.data = res.data.data.data;
         } else {
           // this.$Message.warning("sku查询失败!");
-          this.$Message.warning($it('modalTips.zt'));
+          this.$Message.warning($it('tip.zt'));
         }
         self.tableLoad = false;
       } catch (e) {
@@ -195,7 +195,7 @@ export default {
       self.btnConfig.buttons[1].disabled = true;
       if (self.componentData.a_2.length == 0) {
         // self.$Message.warning("请勾选订单数据!");
-        self.$Message.warning($it('modalTips.zu'));
+        self.$Message.warning($it('tip.zu'));
         return;
       }
       result.ids = self.componentData.a_2;
@@ -216,7 +216,7 @@ export default {
                 columns: [
                   {
                     // title: "提示信息",
-                    title: $it('modalTitle.tips'),
+                    title: $it('mT.tips'),
                     key: 'message',
                   },
                 ],

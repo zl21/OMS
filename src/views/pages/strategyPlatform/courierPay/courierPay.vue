@@ -21,21 +21,21 @@
       <Collapse v-model="value1">
         <Panel name="1">
           <!-- 基本信息 -->
-          {{ $it("common.baseInformation") }}
+          {{ $it("com.baseInformation") }}
           <p slot="content">
             <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
         <Panel name="2">
           <!-- 日志 -->
-          {{ $it("common.journal") }}
+          {{ $it("com.journal") }}
           <p slot="content">
             <OmsForm :form-config="formConfig1" />
           </p>
         </Panel>
         <Panel name="3">
           <!-- 明细信息 -->
-          {{ $it("common.detailed_info") }}
+          {{ $it("com.detailed_info") }}
           <p slot="content">
             <OmsTable
               :jordan-table-config="jordanTableConfig"

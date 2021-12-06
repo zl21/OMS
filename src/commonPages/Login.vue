@@ -106,19 +106,19 @@ export default {
           "data-phone",
           $it("other.phoneNumber")
         );
-        inputNodes[0].setAttribute("placeholder", $it("pHolder.a6")); // 请输入手机号
-        inputNodes[1].setAttribute("placeholder", $it("pHolder.a8")); // 请输入短信验证码
+        inputNodes[0].setAttribute("placeholder", $it("pH.a6")); // 请输入手机号
+        inputNodes[1].setAttribute("placeholder", $it("pH.a8")); // 请输入短信验证码
       } else {
         // 密码登录
         let pwd = document.querySelector(".divMima");
         account.setAttribute("data-account", $it("other.user"));
         pwd.setAttribute("data-pwd", $it("other.pwd"));
-        inputNodes[0].setAttribute("placeholder", $it("pHolder.a2")); // 请输入用户名
-        inputNodes[1].setAttribute("placeholder", $it("pHolder.a3")); // 请输入密码
+        inputNodes[0].setAttribute("placeholder", $it("pH.a2")); // 请输入用户名
+        inputNodes[1].setAttribute("placeholder", $it("pH.a3")); // 请输入密码
         if (this.isEnableLoginPro) {
           inputNodes[2].setAttribute(
             "placeholder",
-            $it("pHolder.a7")
+            $it("pH.a7")
           ); // 请输入验证码
         }
       }

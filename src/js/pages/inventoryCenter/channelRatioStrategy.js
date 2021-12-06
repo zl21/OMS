@@ -58,7 +58,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: window.$it('table_label.remarks'), // 备注
+            label: window.$it('tL.remarks'), // 备注
             value: 'REMARK', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -455,7 +455,7 @@ export default {
     exportClick() {
       if (this.isExport) {
         // 有一项导出正在进行中
-        this.$Message.error(window.$it('modalTips.f8'));
+        this.$Message.error(window.$it('tip.f8'));
         return;
       }
       this.isExport = true;
@@ -508,7 +508,7 @@ export default {
             });
           }
         } else {
-          const err = res.data.message || window.$it('modalTips.z3'); // 失败！
+          const err = res.data.message || window.$it('tip.z3'); // 失败！
           this.$Message.error(err);
         }
       });
@@ -880,12 +880,12 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
-          title: window.$it('modalTitle.tips'), // 提示
+          title: window.$it('mT.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.$it('common.determine'), // 确定
-          cancelText: window.$it('common.cancel'), // 取消
+          okText: window.$it('com.determine'), // 确定
+          cancelText: window.$it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },
@@ -986,7 +986,7 @@ export default {
                 this.formConfig2.formValue.SG_C_SA_STORE_ID = ''
                 this.formConfig2.formValue.RATIO = ''
                 this.formConfig2.formValue.SG_C_SA_STORE_ORDERNO = ''
-                this.$Message.success(window.$it('modalTips.z9')); // '保存成功'
+                this.$Message.success(window.$it('tip.z9')); // '保存成功'
                 this.ID = objid
                 this.$nextTick(() => {
                   this.isChange = false

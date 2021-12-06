@@ -98,7 +98,7 @@ export default {
           itemdata: {
             colid: '165990',
             colname: 'PS_C_PRO_ID',
-            name: $it('table_label.itemNo01'), // SPU编码
+            name: $it('tL.itemNo01'), // SPU编码
             valuedata: '',
             pid: '',
             fkdisplay: 'drp',
@@ -402,11 +402,11 @@ export default {
               value: 'PROPERTY',
             }, */
         {
-          label: $it('panel_label.as'), // 备用条码
+          label: $it('pL.as'), // 备用条码
           value: 'PS_C_ALTERNATE_SKU',
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'PS_C_SKU_LOG',
         },
       ],
@@ -752,7 +752,7 @@ export default {
       this.loading = false;
       if (code === 0) {
         this.backable = true;
-        self.$Message.success(message || $it('modalTips.z9'));
+        self.$Message.success(message || $it('tip.z9'));
         self.modify.master = {};
         self.modify.exAttr = {};
         // 数据回显
@@ -802,12 +802,12 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('mT.tips'), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.onOk()
           },

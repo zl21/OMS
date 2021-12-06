@@ -19,8 +19,8 @@ export default {
                 // 判断条件是否符合
                 const self = this;
                 // '缺货','待审核'
-                if(![$it('common.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
-                  self.$Message.error($it('modalTips.gd')); //只有状态为待审核和缺货才能添加赠品！
+                if(![$it('com.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
+                  self.$Message.error($it('tip.gd')); //只有状态为待审核和缺货才能添加赠品！
                   return;
                 };
                 this.$emit('addGiftHandler')
@@ -93,11 +93,11 @@ export default {
       options: {}, // 自定义属性（选填）
       islackstock: [
         {
-          label: $it('common.yes'), //是
+          label: $it('com.yes'), //是
           value: '1'
         },
         {
-          label: $it('common.no'), //否
+          label: $it('com.no'), //否
           value: '0'
         }
       ],
@@ -154,8 +154,8 @@ export default {
       const self = this;
       const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
       // 非赠品 缺货 待审核
-      if(GIFT_TYPES.includes($it('form_label.ac')) && ![$it('common.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
-        self.$Message.error($it('modalTips.fr')); //勾选明细含有非赠品禁止删除！
+      if(GIFT_TYPES.includes($it('fL.ac')) && ![$it('com.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
+        self.$Message.error($it('tip.fr')); //勾选明细含有非赠品禁止删除！
         return;
       }
       const PS_C_SKU_CODES = this.checkSelection.map(row => row.PS_C_SKU_ECODE);
@@ -198,7 +198,7 @@ export default {
         itemIds: this.checkSelection.map(row => row.ID), 
       });
       if (code === 0) {
-        self.$Message.success(message || $it('modalTips.er')); //成功！
+        self.$Message.success(message || $it('tip.er')); //成功！
       }
     },
     // 标记退款
@@ -207,7 +207,7 @@ export default {
     //   const ids = this.checkSelection.map(row => row.ID);
     //   if (ids.length === 0) {
     //     // 至少选择一条订单明细
-    //     self.$Message.error($it('modalTips.zk'));
+    //     self.$Message.error($it('tip.zk'));
     //     return;
     //   }
     //   const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
@@ -215,7 +215,7 @@ export default {
     //     self.$parent.$parent.load();
     //     self.$Message.success(message);
     //   } else {
-    //     self.$Message.error($it('modalTips.z3'));
+    //     self.$Message.error($it('tip.z3'));
     //   }
     // },
     // 标记取消退款
@@ -224,7 +224,7 @@ export default {
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
         // 至少选择一条订单明细
-        self.$Message.error($it('modalTips.z3'));
+        self.$Message.error($it('tip.z3'));
         return;
       }
       const { data: { data: { code, message } } } = await this.service.orderCenter.markRefundCancel({ itemIds: ids.join(','), orderId: this.$route.params.customizedModuleId });
@@ -239,12 +239,12 @@ export default {
     replaceGoodsDetail() {
       if (this.checkSelection.length !== 1) {
         // 请选择一条需要替换的明细!
-        this.$Message.warning($it('modalTips.dv'));
+        this.$Message.warning($it('tip.dv'));
         return;
       }
       // 缺货 待审核
-      if(![$it('other.outOfStock'),$it('common.toBeReviewed')].includes(this.componentData.order.ORDER_STATUS)){
-        this.$Message.error($it('modalTips.gc')); //只允许缺货或待审核状态的订单进行替换！
+      if(![$it('other.outOfStock'),$it('com.toBeReviewed')].includes(this.componentData.order.ORDER_STATUS)){
+        this.$Message.error($it('tip.gc')); //只允许缺货或待审核状态的订单进行替换！
         return;
       }
       this.$emit('replaceGoodsDetail', this.checkSelection);

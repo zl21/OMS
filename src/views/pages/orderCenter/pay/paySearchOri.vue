@@ -82,13 +82,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.destroyVm();
             },
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               if (!this.isChecked) {
@@ -148,7 +148,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.platform_billNo'), // 平台单号
+              label: $it('fL.platform_billNo'), // 平台单号
               colname: 'sourceCode',
               width: '8',
               regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
@@ -164,14 +164,14 @@ export default {
             },
             /* {
               style: 'input',
-              label: $it('form_label.consignee'), // 收货人
+              label: $it('fL.consignee'), // 收货人
               colname: 'receiverName',
               width: '8',
               inputenter: () => this.queryEnter(1, 10)
             }, */
             {
               style: 'input',
-              label: $it('table_label.buyerNickname'), // 买家昵称
+              label: $it('tL.buyerNickname'), // 买家昵称
               colname: 'buyerNick',
               width: '8',
               regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_@#$%^&*+=-><~“”‘’。.，,：；/、\\`\|!！……\(\)\（\）《》?？·]+)$/,
@@ -179,7 +179,7 @@ export default {
             },
             /* {
               style: 'input',
-              label: $it('form_label.consignee_phone'), // 收货人手机
+              label: $it('fL.consignee_phone'), // 收货人手机
               colname: 'receiverMobile',
               width: '8',
               // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,

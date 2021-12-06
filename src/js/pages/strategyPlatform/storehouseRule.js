@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       baseInformation: $it('other.basic_info'),
-      placeholder: $it('form_label.bb'),// '省市搜索',//省市搜索
+      placeholder: $it('fL.bb'),// '省市搜索',//省市搜索
       loading: false,
       pageShow: false,
       seachVal: '',
@@ -20,11 +20,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('form_label.a5'),
+          label: $it('fL.a5'),
           value: 'PROPERTY'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -48,7 +48,7 @@ export default {
             btnclick: this.back
           },
           {
-            text: $it('common.copy'),//'复制',
+            text: $it('com.copy'),//'复制',
             isShow: false,
             webname: "copy",
             disabled: false, // 按钮禁用控制
@@ -94,7 +94,7 @@ export default {
         formData: [
           {
             style: null,
-            label: $it('form_label.bc'), // 策略ID
+            label: $it('fL.bc'), // 策略ID
             value: 'ecode',
             colname: 'ecode',
             width: '8',
@@ -103,7 +103,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.bd'), // 策略名称
+            label: $it('fL.bd'), // 策略名称
             value: 'ename',
             colname: 'ename',
             width: '8',
@@ -114,7 +114,7 @@ export default {
           {
             style: 'date',
             type: "datetime",
-            label: $it('form_label.be'), // 生效开始时间
+            label: $it('fL.be'), // 生效开始时间
             value: 'beginTime',
             colname: 'beginTime',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -127,7 +127,7 @@ export default {
           },
           {
             style: 'date',
-            label: $it('form_label.bf'), // 生效结束时间
+            label: $it('fL.bf'), // 生效结束时间
             type: "datetime",
             value: 'endTime',
             colname: 'endTime',
@@ -231,7 +231,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.shopName'), // 店铺名称
+              name: $it('tL.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
               reftableid: 10285, // 对应的表ID
@@ -277,7 +277,7 @@ export default {
           },
           {
             style: null,
-            label: $it('form_label.bg'), // 启用状态
+            label: $it('fL.bg'), // 启用状态
             value: 'isactive',
             colname: 'isactive',
             width: '8',
@@ -291,7 +291,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'remark',
             colname: 'remark',
             width: '16',
@@ -327,7 +327,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.ab'),//'分仓策略-导入',
+        confirmTitle: $it('mT.ab'),//'分仓策略-导入',
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -426,7 +426,7 @@ export default {
 
       //ST_C_ORDER_WAREHOUSE  分仓规则
       if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
-        this.labelList[0].label = $it('form_label.a5')//'按收货地址';
+        this.labelList[0].label = $it('fL.a5')//'按收货地址';
         this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
@@ -454,7 +454,7 @@ export default {
           }
         } else if (query.saveType && query.saveType == 2) {
           const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: $it('panel_label.a6'), name: keepAliveModuleName }; //当前界面模块名称 
+          const data = { label: $it('pL.a6'), name: keepAliveModuleName }; //当前界面模块名称 
 
           this.fninit(this.id);
 
@@ -497,7 +497,7 @@ export default {
         //CP_C_SHOP_IDS  type
         this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
         this.qurefrom('type')[0].style = null;
-        this.labelList[0].label = $it('form_label.region_details')//'区域明细';
+        this.labelList[0].label = $it('fL.region_details')//'区域明细';
         this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
         // 表示分物流策略》分物流规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
@@ -678,7 +678,7 @@ export default {
     fntableData(id) {
 
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
-        this.placeholder = $it('form_label.bb') //"省市搜索"
+        this.placeholder = $it('fL.bb') //"省市搜索"
         service.strategyPlatform
           .assignLogisticsqueryDetailById({
             ID: this.$route.query.copy || id,
@@ -695,7 +695,7 @@ export default {
             if (columns.length > 0) {
               this.tableConfig.columns = [
                 {
-                  title: $it('table_label.serialNo'), // 序号
+                  title: $it('tL.serialNo'), // 序号
                   key: 'index'
                 }
               ];
@@ -708,7 +708,7 @@ export default {
       }
 
       if (this.formConfig.formValue.type == 171897) {  //调用唯品会查询接口
-        this.placeholder = $it('modalTips.hi') //"请输入唯品会仓库名称"
+        this.placeholder = $it('tip.hi') //"请输入唯品会仓库名称"
         service.strategyPlatform
           .getWarehouseVipInfo({
             params: {
@@ -729,7 +729,7 @@ export default {
               if (columns.length > 0) {
                 this.tableConfig.columns = [
                   {
-                    title: $it('table_label.serialNo'), // 序号
+                    title: $it('tL.serialNo'), // 序号
                     key: 'index'
                   }
                 ];
@@ -760,7 +760,7 @@ export default {
               if (columns.length > 0) {
                 this.tableConfig.columns = [
                   {
-                    title: $it('table_label.serialNo'), // 序号
+                    title: $it('tL.serialNo'), // 序号
                     key: 'index'
                   }
                 ];
@@ -890,7 +890,7 @@ export default {
         for (const item in this.formConfig.ruleValidate) {
           if (em == item && this.qurefrom(em)[0].style != null) {
             if (this.formConfig.formValue[em] == '') {
-              this.$Message.error($it('modalTips.hg') + this.qurefrom(em)[0].label + '!');
+              this.$Message.error($it('tip.hg') + this.qurefrom(em)[0].label + '!');
               return;
             }
           }
@@ -904,7 +904,7 @@ export default {
 
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
         if (this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.valuedata == '') {
-          this.$Message.error($it('modalTips.hg') + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
+          this.$Message.error($it('tip.hg') + this.qurefrom('cpCPhyWarehouseEname')[0].itemdata.name + '!');
           return;
         }
 
@@ -966,7 +966,7 @@ export default {
         return;
       }
       if (this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.valuedata == '') {
-        this.$Message.error($it('modalTips.hg') + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
+        this.$Message.error($it('tip.hg') + this.qurefrom('CP_C_SHOP_IDS')[0].itemdata.name + '!');
         return;
       }
 
@@ -1032,12 +1032,12 @@ export default {
         if (this.changeCount > 0) {
           this.$Modal.info({
             className: 'ark-dialog',
-            title: $it('modalTitle.tips'), // 提示
-            content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+            title: $it('mT.tips'), // 提示
+            content: $it('tip.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
-            okText: $it('common.determine'), // 确定
-            cancelText: $it('common.cancel'), // 取消
+            okText: $it('com.determine'), // 确定
+            cancelText: $it('com.cancel'), // 取消
             onOk: () => {
               this.pageback();
             }
@@ -1048,12 +1048,12 @@ export default {
       } else if (this.changeCount > 3) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
-          content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
+          title: $it('mT.tips'), // 提示
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.pageback();
           }

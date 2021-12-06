@@ -124,7 +124,7 @@ export default {
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: $it('table_label.shopName') // 店铺名称
+              title: $it('tL.shopName') // 店铺名称
             }
           ], // 表头
           data: [], // 数据配置
@@ -147,7 +147,7 @@ export default {
               // console.log(this.returnPostage);
             } // 按钮点击事件
           }, {
-            text: $it('common.return'), // 返回 按钮文本
+            text: $it('com.return'), // 返回 按钮文本
             webname: 'Mismatchingmandatorymatching_return',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -280,7 +280,7 @@ export default {
               isnotnull: false,
               isuppercase: false,
               length: 20,
-              name: $it('form_label.logisticsCompany'), // '物流公司',
+              name: $it('fL.logisticsCompany'), // '物流公司',
               readonly: true,
               reftable: 'ST_C_EWAYBILL_LOGISTICS',
               reftableid: 24633,
@@ -324,7 +324,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'REMARK',
             width: '12'
           },
@@ -355,7 +355,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      if (params.row.IS_MATCH == $it('common.yes')) {
+                      if (params.row.IS_MATCH == $it('com.yes')) {
                         _this.$Message.error('此明细已经匹配，不允许修改退换货单号！');
                         return;
                       }
@@ -595,7 +595,7 @@ export default {
     returnArr(data) {
       const tmpArr = this.returnSelectData.map(item => item.ID);
       this.jordanTableConfig.data.forEach(item => {
-        if (tmpArr.includes(item.ID) && item.IS_WITHOUT_ORIG === $it('common.yes')) {
+        if (tmpArr.includes(item.ID) && item.IS_WITHOUT_ORIG === $it('com.yes')) {
           item.OC_B_RETURN_ORDER_ID = data;
         }
       });
@@ -624,14 +624,14 @@ export default {
       const dataArr = JSON.parse(JSON.stringify(this.jordanTableConfig.data));
       dataArr.forEach((item) => {
         // 是否无原单条码
-        if (item.IS_WITHOUT_ORIG == $it('common.yes')) item.IS_WITHOUT_ORIG = 1;
-        else if (item.IS_WITHOUT_ORIG == $it('common.no')) item.IS_WITHOUT_ORIG = 0;
+        if (item.IS_WITHOUT_ORIG == $it('com.yes')) item.IS_WITHOUT_ORIG = 1;
+        else if (item.IS_WITHOUT_ORIG == $it('com.no')) item.IS_WITHOUT_ORIG = 0;
         // 是否匹配
-        if (item.IS_MATCH == $it('common.yes')) item.IS_MATCH = 1;
-        else if (item.IS_MATCH == $it('common.no')) item.IS_MATCH = 0;
+        if (item.IS_MATCH == $it('com.yes')) item.IS_MATCH = 1;
+        else if (item.IS_MATCH == $it('com.no')) item.IS_MATCH = 0;
         // 是否生成调整单
-        if (item.IS_GEN_ADJUST == $it('common.yes')) item.IS_GEN_ADJUST = 1;
-        else if (item.IS_GEN_ADJUST == $it('common.no')) item.IS_GEN_ADJUST = 0;
+        if (item.IS_GEN_ADJUST == $it('com.yes')) item.IS_GEN_ADJUST = 1;
+        else if (item.IS_GEN_ADJUST == $it('com.no')) item.IS_GEN_ADJUST = 0;
       });
       const params = {
         OC_B_REFUND_IN_PRODUCT_ITEM: dataArr, // 退货入库明细
@@ -743,9 +743,9 @@ export default {
       fromdata.append('objid', -1);
       const res = await this.service.common.getObject(fromdata);
       this.information.formData.forEach((value) => {
-        if (value.label === $it('form_label.specialTreatmentType')) { // '特殊处理类型'
+        if (value.label === $it('fL.specialTreatmentType')) { // '特殊处理类型'
           res.data.data.addcolums.forEach((item) => {
-            if (item.parentdesc === $it('common.baseInformation')) { // '基本信息'
+            if (item.parentdesc === $it('com.baseInformation')) { // '基本信息'
               const childItem = item.childs;
               childItem.forEach((item) => {
                 if (item.colname === 'SPECIAL_TYPE') {
@@ -949,7 +949,7 @@ export default {
       this.returnSelectData = e;
     },
     oneObjs(val) {
-      if (val.name == $it('form_label.logisticsCompany')) { // '物流公司'
+      if (val.name == $it('fL.logisticsCompany')) { // '物流公司'
         this.information.formValue.CP_C_LOGISTICS_ID = val.pid;
         this.information.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
       }

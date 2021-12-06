@@ -30,7 +30,7 @@ export default {
       },
       {
         style: 'date', // 输入框类型
-        label: $it('form_label.chargebackModifyTime'), // 退单修改时间 输入框前文字
+        label: $it('fL.chargebackModifyTime'), // 退单修改时间 输入框前文字
         colname: 'startEndTimes',
         type: 'datetimerange',
         value: 'startEndTimes', // 输入框的值
@@ -40,7 +40,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.platform_billNo'), // 平台单号
+        label: $it('fL.platform_billNo'), // 平台单号
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         ghost: false, // 是否关闭幽灵按钮，默认开启
@@ -48,7 +48,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.ao'), // 服务单号
+        label: $it('fL.ao'), // 服务单号
         value: 'service_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         ghost: false, // 是否关闭幽灵按钮，默认开启
@@ -71,16 +71,16 @@ export default {
     if (
       !self.downLoadFormConfig.formData[0].itemdata.pid
     ) {
-      self.$Message.warning($it('modalTips.be')); // 请选择需要下载的店铺
+      self.$Message.warning($it('tip.be')); // 请选择需要下载的店铺
       return false;
     }
     const [start, end] = formValue.startEndTimes
     if (!start && !(formValue.bill_no && formValue.service_no)) {
-      self.$Message.warning($it('modalTips.js')); // 退单修改时间不存在时, 平台单号、服务单号必须同时有！
+      self.$Message.warning($it('tip.js')); // 退单修改时间不存在时, 平台单号、服务单号必须同时有！
       return false;
     }
     if (start && (formValue.bill_no || formValue.service_no)) {
-      self.$Message.warning($it('modalTips.ku')); // 退单修改时间存在时,平台单号、服务单号必须为空!
+      self.$Message.warning($it('tip.ku')); // 退单修改时间存在时,平台单号、服务单号必须为空!
       return false;
     }
     const param = {

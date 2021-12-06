@@ -49,7 +49,7 @@ export default {
             {
               style: 'input',
               // label: "物流编号",
-              label: $it('form_label.logisticsNo'),
+              label: $it('fL.logisticsNo'),
               value: 'logistics_code',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -57,7 +57,7 @@ export default {
             {
               style: 'input',
               // label: "退换货单号",
-              label: $it('form_label.returnOrder_no'),
+              label: $it('fL.returnOrder_no'),
               value: 'id',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -65,7 +65,7 @@ export default {
             {
               style: 'input',
               // label: "平台单号",
-              label: $it('form_label.platform_billNo'),
+              label: $it('fL.platform_billNo'),
               value: 'tid',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -73,7 +73,7 @@ export default {
             {
               style: 'input',
               // label: "收货人",
-              label: $it('form_label.consignee'),
+              label: $it('fL.consignee'),
               value: 'receive_name',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -81,7 +81,7 @@ export default {
             {
               style: 'input',
               // label: "买家昵称",
-              label: $it('table_label.buyerNickname'),
+              label: $it('tL.buyerNickname'),
               value: 'buyer_nick',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -89,7 +89,7 @@ export default {
             {
               style: 'input',
               // label: "收货人手机",
-              label: $it('form_label.consignee_phone'),
+              label: $it('fL.consignee_phone'),
               value: 'receive_mobile',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -101,47 +101,47 @@ export default {
             {
               key: 'ID',
               // title: "退换货单号",
-              title: $it('form_label.returnOrder_no'),
+              title: $it('fL.returnOrder_no'),
             },
             {
               key: 'ORIG_ORDER_NO',
               // title: "原单单号",
-              title: $it('form_label.originalOrder_No'),
+              title: $it('fL.originalOrder_No'),
             },
             {
               key: 'BUYER_NICK',
               // title: "买家昵称",
-              title: $it('table_label.buyerNickname'),
+              title: $it('tL.buyerNickname'),
             },
             {
               key: 'LOGISTICS_CODE',
               // title: "物流单号",
-              title: $it('form_label.logisticsOrder_No'),
+              title: $it('fL.logisticsOrder_No'),
             },
             {
               key: 'RECEIVE_NAME',
               // title: "收货人",
-              title: $it('form_label.consignee'),
+              title: $it('fL.consignee'),
             },
             {
               key: 'RECEIVE_MOBILE',
               // title: "收货人手机号",
-              title: $it('form_label.consignee_phone'),
+              title: $it('fL.consignee_phone'),
             },
             {
               key: 'shopName',
               // title: "实体仓库",
-              title: $it('table_label.physical_warehouse'),
+              title: $it('tL.physical_warehouse'),
             },
             {
               key: 'IS_ADD',
               // title: "是否手工新增",
-              title: $it('table_label.add_manually'),
+              title: $it('tL.add_manually'),
             },
             {
               key: 'CP_C_SHOP_TITLE',
               // title: "店铺名称",
-              title: $it('table_label.shopName'),
+              title: $it('tL.shopName'),
             },
           ], // 表头
           data: [], // 数据配置
@@ -186,7 +186,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "原单单号", //输入框前文字
-            label: $it('form_label.originalOrder_No'),
+            label: $it('fL.originalOrder_No'),
             value: 'ORIG_ORDER_NO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: 'ios-search', // 输入框后带的图标,暂只有输入框支持
@@ -208,7 +208,7 @@ export default {
           {
             style: 'input',
             // label: "原平台单号",
-            label: $it('form_label.originalOrderPlatform'),
+            label: $it('fL.originalOrderPlatform'),
             disabled: false, // 按钮禁用控制
             value: 'SOURCE_CODE',
             dataAcessKey: 'SOURCE_CODE',
@@ -217,7 +217,7 @@ export default {
           {
             style: 'input',
             // label: "买家昵称",
-            label: $it('table_label.buyerNickname'),
+            label: $it('tL.buyerNickname'),
             disabled: false, // 按钮禁用控制
             value: 'USER_NICK',
             dataAcessKey: 'USER_NICK',
@@ -226,7 +226,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "退货批次", //下拉框前的值
-            label: $it('form_label.returnBatch'),
+            label: $it('fL.returnBatch'),
             width: '6', // 所占宽度宽度
             value: 'OC_B_REFUND_BATCH_ID',
             dataAcessKey: 'OC_B_REFUND_BATCH_ID',
@@ -239,7 +239,7 @@ export default {
           {
             style: 'input', // 下拉框类型
             // label: "入库仓库", //下拉框前的值
-            label: $it('form_label.in_warehouse'),
+            label: $it('fL.in_warehouse'),
             width: '6', // 所占宽度宽度
             disabled: true, // 按钮禁用控制
             value: 'IN_STORE_ENAME',
@@ -263,7 +263,7 @@ export default {
               isnotnull: false,
               isuppercase: false,
               length: 20,
-              name: $it('form_label.logisticsCompany'), // 物流公司
+              name: $it('fL.logisticsCompany'), // 物流公司
               readonly: false,
               reftable: 'CP_C_LOGISTICS',
               // reftableid: 24633,
@@ -281,7 +281,7 @@ export default {
             style: 'input',
             dataAcessKey: 'LOGISTIC_NUMBER',
             // label: "物流单号",
-            label: $it('form_label.logisticsOrder_No'),
+            label: $it('fL.logisticsOrder_No'),
             value: 'LOGISTIC_NUMBER',
             disabled: false, // 按钮禁用控制
             width: '6',
@@ -289,7 +289,7 @@ export default {
           {
             style: 'input',
             // label: "手机号",
-            label: $it('form_label.cellPhone_number'),
+            label: $it('fL.cellPhone_number'),
             dataAcessKey: 'RECEIVER_MOBILE',
             value: 'RECEIVER_MOBILE',
             disabled: false, // 按钮禁用控制
@@ -298,7 +298,7 @@ export default {
           {
             style: 'input',
             // label: "姓名",
-            label: $it('form_label.fullName'),
+            label: $it('fL.fullName'),
             dataAcessKey: 'RECEIVER_NAME',
             value: 'RECEIVER_NAME',
             disabled: false, // 按钮禁用控制
@@ -308,7 +308,7 @@ export default {
             style: 'select', // 下拉框类型
             dataAcessKey: 'SPECIAL_TYPE',
             // label: "特殊处理类型", //下拉框前的值
-            label: $it('form_label.specialTreatmentType'),
+            label: $it('fL.specialTreatmentType'),
             width: '6', // 所占宽度宽度
             value: 'SPECIAL_TYPE',
             disabled: false, // 按钮禁用控制
@@ -320,7 +320,7 @@ export default {
           {
             style: 'input',
             // label: "备注",
-            label: $it('table_label.remarks'),
+            label: $it('tL.remarks'),
             dataAcessKey: 'REMARK',
             value: 'REMARK',
             disabled: false, // 按钮禁用控制
@@ -329,7 +329,7 @@ export default {
           {
             style: 'input',
             // label: "发件地址",
-            label: $it('form_label.sending_address'),
+            label: $it('fL.sending_address'),
             dataAcessKey: 'RECEIVER_ADDRESS',
             disabled: false, // 按钮禁用控制
             value: 'RECEIVER_ADDRESS',
@@ -338,7 +338,7 @@ export default {
           {
             style: 'checkbox', // 勾选框类型
             // label: "是否关闭匹配", //前面的文字
-            label: $it('table_label.turnOff_match'),
+            label: $it('tL.turnOff_match'),
             dataAcessKey: 'IS_OFF_MATCH',
             width: '6', // 所占的宽度
             value: 'IS_OFF_MATCH',
@@ -353,7 +353,7 @@ export default {
             key: 'PS_C_PRO_ECODE',
             dataAcessKey: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: $it('table_label.productNo'),
+            title: $it('tL.productNo'),
           },
           {
             key: 'PS_C_CLR_ENAME',
@@ -371,31 +371,31 @@ export default {
             key: 'QTY',
             dataAcessKey: 'QTY',
             // title: "数量",
-            title: $it('table_label.quantities'),
+            title: $it('tL.quantities'),
           },
           {
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: $it('form_label.barCode'),
+            title: $it('fL.barCode'),
           },
           {
             key: 'GBCODE',
             dataAcessKey: 'GBCODE',
             // title: "国标码",
-            title: $it('form_label.gBCode'),
+            title: $it('fL.gBCode'),
           },
           // {
           //   key: 'OC_B_RETURN_ORDER_ID',
           //   dataAcessKey: 'OC_B_RETURN_ORDER_ID',
           //   // title: "退单编号",
-          //   title: $it('form_label.chargebackNumber')
+          //   title: $it('fL.chargebackNumber')
           // },
           {
             key: 'OC_B_RETURN_ORDER_ID',
             dataAcessKey: 'OC_B_RETURN_ORDER_ID',
             // title: "退单编号",
-            title: $it('form_label.chargebackNumber'),
+            title: $it('fL.chargebackNumber'),
             render: (h, params) =>
               h(
                 'a',
@@ -423,19 +423,19 @@ export default {
           {
             key: 'PS_C_SKU_ECODE_ACTUAL',
             // title: "实际发出条码",
-            title: $it('table_label.actual_barcode'),
+            title: $it('tL.actual_barcode'),
           },
           {
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: $it('table_label.productName'),
+            title: $it('tL.productName'),
           },
           {
             key: 'PRODUCT_MARK',
             dataAcessKey: 'PRODUCT_MARK',
             // title: "商品标记",
-            title: $it('form_label.goodsMark'),
+            title: $it('fL.goodsMark'),
             render: (h, params) => {
               const _this = this;
               const list = [
@@ -479,38 +479,38 @@ export default {
             key: 'IS_MATCH',
             dataAcessKey: 'IS_MATCH',
             // title: "是否匹配",
-            title: $it('table_label.match_or_not'),
+            title: $it('tL.match_or_not'),
           },
           {
             key: 'IS_GEN_ADJUST',
             dataAcessKey: 'IS_GEN_ADJUST',
             // title: "是否生成调整单",
-            title: $it('table_label.generate_adjustment'),
+            title: $it('tL.generate_adjustment'),
           },
           {
             key: 'IS_WITHOUT_ORIG',
             dataAcessKey: 'IS_WITHOUT_ORIG',
             // title: "是否无原单条码",
-            title: $it('table_label.no_original_barcode'),
+            title: $it('tL.no_original_barcode'),
           },
           {
             key: 'IS_GEN_IN_ORDER',
             dataAcessKey: 'IS_GEN_IN_ORDER',
             // title: "是否生成入库单",
-            title: $it('table_label.generate_stock'),
+            title: $it('tL.generate_stock'),
           },
           {
             key: 'IS_GEN_WRO_ADJUST',
             dataAcessKey: 'IS_GEN_WRO_ADJUST',
             // title: "是否生成错发调整单",
-            title: $it('table_label.generate_error_adjustment'),
+            title: $it('tL.generate_error_adjustment'),
           },
           {
             key: 'IS_GEN_MINUS_ADJUST',
             dataAcessKey: 'IS_GEN_MINUS_ADJUST',
             // title: "是否生成冲无头件调整单",
             title: $it(
-              'table_label.generate_punching_headless_adjustment'
+              'tL.generate_punching_headless_adjustment'
             ),
           },
         ],
@@ -532,13 +532,13 @@ export default {
       labelList: [
         {
           // label: "入库单商品明细",
-          label: $it('table_label.in_warehouse_goods_details'),
+          label: $it('tL.in_warehouse_goods_details'),
           value: '1',
           isShow: true,
         },
         {
           // label: "退货入库日志",
-          label: $it('table_label.return_warehousing_log'),
+          label: $it('tL.return_warehousing_log'),
           value: '2',
           isShow: true,
         },
@@ -627,7 +627,7 @@ export default {
         {
           style: 'input',
           // label: "处理人",
-          label: $it('form_label.handler'),
+          label: $it('fL.handler'),
           disabled: false, // 按钮禁用控制
           dataAcessKey: 'HANDLER',
           value: 'HANDLER',
@@ -636,7 +636,7 @@ export default {
         {
           style: 'input',
           // label: "处理人备注",
-          label: $it('form_label.processor_remarks'),
+          label: $it('fL.processor_remarks'),
           dataAcessKey: 'REMARK_HANDLE',
           disabled: false, // 按钮禁用控制
           value: 'REMARK_HANDLE',
@@ -645,7 +645,7 @@ export default {
         {
           style: 'input',
           // label: "入库单单号",
-          label: $it('form_label.in_order_stockNo'),
+          label: $it('fL.in_order_stockNo'),
           dataAcessKey: 'ID',
           disabled: true, // 按钮禁用控制
           value: 'ID',
@@ -654,7 +654,7 @@ export default {
         {
           style: 'input',
           // label: "下单店铺",
-          label: $it('form_label.orderShop'),
+          label: $it('fL.orderShop'),
           dataAcessKey: 'CP_C_SHOP_TITLE',
           disabled: true, // 按钮禁用控制
           value: 'CP_C_SHOP_TITLE',
@@ -663,7 +663,7 @@ export default {
         {
           style: 'input',
           // label: "WMS单据编号",
-          label: $it('form_label.wMS_billNo'),
+          label: $it('fL.wMS_billNo'),
           dataAcessKey: 'WMS_BILL_NO',
           disabled: true, // 按钮禁用控制
           value: 'WMS_BILL_NO',
@@ -701,40 +701,40 @@ export default {
       const item = this.information.formValue;
       if (!item.OC_B_REFUND_BATCH_ID) {
         // this.$Message.warning("退货批次必填！");
-        this.$Message.warning($it('modalTips.p1'));
+        this.$Message.warning($it('tip.p1'));
         return;
       }
       if (!item.SPECIAL_TYPE) {
         // this.$Message.warning("特殊处理类型必填！");
-        this.$Message.warning($it('modalTips.p2'));
+        this.$Message.warning($it('tip.p2'));
         return;
       }
       if (!this.jordanTableConfig.data.length) {
         // this.$Message.warning("退货入库明细不能为空！");
-        this.$Message.warning($it('modalTips.p3'));
+        this.$Message.warning($it('tip.p3'));
         return;
       }
       const dataArr = JSON.parse(JSON.stringify(this.jordanTableConfig.data));
       dataArr.forEach((item) => {
         // 商品标记
         item.PRODUCT_MARK =
-          item.PRODUCT_MARK == $it('form_label.qualityGoods')
+          item.PRODUCT_MARK == $it('fL.qualityGoods')
             ? 1
             : 0;
         // 是否无原单条码
         item.IS_WITHOUT_ORIG =
-          item.IS_WITHOUT_ORIG == $it('common.yes') ? 1 : 0;
+          item.IS_WITHOUT_ORIG == $it('com.yes') ? 1 : 0;
         // 是否匹配
-        item.IS_MATCH = item.IS_MATCH == $it('common.yes') ? 1 : 0;
+        item.IS_MATCH = item.IS_MATCH == $it('com.yes') ? 1 : 0;
         // 是否生成调整单
         item.IS_GEN_ADJUST =
-          item.IS_GEN_ADJUST == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_ADJUST == $it('com.yes') ? 1 : 0;
         item.IS_GEN_IN_ORDER =
-          item.IS_GEN_IN_ORDER == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_IN_ORDER == $it('com.yes') ? 1 : 0;
         item.IS_GEN_WRO_ADJUST =
-          item.IS_GEN_WRO_ADJUST == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_WRO_ADJUST == $it('com.yes') ? 1 : 0;
         item.IS_GEN_MINUS_ADJUST =
-          item.IS_GEN_MINUS_ADJUST == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_MINUS_ADJUST == $it('com.yes') ? 1 : 0;
       });
       const params = {
         ocBRefundInProductItem: dataArr, // 退货入库明细
@@ -774,11 +774,11 @@ export default {
             type: 'action',
             name: 'returnStoreageList',
             // label: "退货入库",
-            label: $it('panel_label.returnTreasury'),
+            label: $it('pL.returnTreasury'),
             query: Object.assign({
               id: 2809,
               // tabTitle: "退货入库",
-              tabTitle: $it('panel_label.returnTreasury'),
+              tabTitle: $it('pL.returnTreasury'),
             }),
             back: true,
           });
@@ -865,11 +865,11 @@ export default {
       this.information.formData.forEach((value) => {
         // if (value.label === "特殊处理类型") {
         if (
-          value.label === $it('form_label.specialTreatmentType')
+          value.label === $it('fL.specialTreatmentType')
         ) {
           res.data.data.addcolums.forEach((item) => {
             // if (item.parentdesc === "基本信息") {
-            if (item.parentdesc === $it('common.baseInformation')) {
+            if (item.parentdesc === $it('com.baseInformation')) {
               const childItem = item.childs;
               childItem.forEach((item) => {
                 if (item.colname === 'SPECIAL_TYPE') {
@@ -941,7 +941,7 @@ export default {
         !lists.logistics_code
       ) {
         // _this.$Message.error("请输入查询条件！");
-        _this.$Message.error($it('modalTips.i8'));
+        _this.$Message.error($it('tip.i8'));
         return;
       }
       _this.order.table.loading = true;
@@ -979,7 +979,7 @@ export default {
       _this.jordanTableConfig.data = [];
       if (!this.onSelectData.length) {
         // _this.$Message.error("请选择一条数据！");
-        _this.$Message.error($it('modalTips.i7'));
+        _this.$Message.error($it('tip.i7'));
         return;
       }
       const data = _this.information.formValue;
@@ -1067,7 +1067,7 @@ export default {
         if (item.itemdata) {
           switch (item.itemdata.name) {
             // case "物流公司":logisticsCompany
-            case $it('form_label.logisticsCompany'):
+            case $it('fL.logisticsCompany'):
               this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
               this.information.formValue.CP_C_LOGISTICS_ENAME =
                 item.itemdata.valuedata;
