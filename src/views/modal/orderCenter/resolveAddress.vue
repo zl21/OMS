@@ -11,11 +11,11 @@
   <div class="order_address customized-modal" v-loading="loading">
     <Form :model="data" :label-width="100" :rules="ruleValidate">
       <!-- <FormItem label="收货信息"> -->
-      <FormItem :label="$it('table_label.receivingInfo')">
+      <FormItem :label="$it('tL.receivingInfo')">
         <span v-html="ORDER_ADDRESS" />
       </FormItem>
       <!-- 新收货信息 -->
-      <FormItem :label="$it('table_label.new_receivingInfo')">
+      <FormItem :label="$it('tL.new_receivingInfo')">
         <Input
           ref="newReceivAddress"
           v-model="newReceivAddress"
@@ -46,7 +46,7 @@
         />
       </FormItem>
        <!-- 新详细地址 -->
-      <FormItem :label="$it('table_label.new_detailed_address')" prop="receiver_address">
+      <FormItem :label="$it('tL.new_detailed_address')" prop="receiver_address">
         <Input
           v-model="data.receiver_address"
           placeholder

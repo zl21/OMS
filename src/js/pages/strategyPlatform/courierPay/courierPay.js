@@ -171,7 +171,7 @@ export default {
           isnotnull: true,
           fkdesc: '实体仓档案',
           // name: "实体仓",
-          name: $it('table_label.physicalWarehouse'),
+          name: $it('tL.physicalWarehouse'),
           fkdisplay: 'mrp',
           row: 1,
           inputname: 'CP_C_PHY_WAREHOUSE_ID:ENAME',
@@ -231,7 +231,7 @@ export default {
       {
         style: 'input',
         // label: "创建人",
-        label: $it('table_label.creator'),
+        label: $it('tL.creator'),
         value: 'OWNERENAME',
         width: '6',
         disabled: true
@@ -239,7 +239,7 @@ export default {
       {
         style: 'input',
         // label: "创建时间",
-        label: $it('table_label.creationTime'),
+        label: $it('tL.creationTime'),
         value: 'CREATIONDATE',
         width: '6',
         disabled: true
@@ -247,7 +247,7 @@ export default {
       {
         style: 'input',
         // label: "修改人",
-        label: $it('table_label.reviser'),
+        label: $it('tL.reviser'),
         value: 'MODIFIERENAME',
         width: '6',
         disabled: true
@@ -255,7 +255,7 @@ export default {
       {
         style: 'input',
         // label: "修改时间",
-        label: $it('table_label.modificationTime'),
+        label: $it('tL.modificationTime'),
         value: 'MODIFIEDDATE',
         width: '6',
         disabled: true
@@ -263,7 +263,7 @@ export default {
       {
         style: 'input',
         // label: "作废人",
-        label: $it('table_label.voidMan'),
+        label: $it('tL.voidMan'),
         value: 'DELENAME',
         width: '6',
         disabled: true
@@ -271,7 +271,7 @@ export default {
       {
         style: 'input',
         // label: "作废时间",
-        label: $it('table_label.voidTime'),
+        label: $it('tL.voidTime'),
         value: 'DEL_TIME',
         width: '6',
         disabled: true
@@ -287,7 +287,7 @@ export default {
       {
         style: 'input',
         // label: "审核时间",
-        label: $it('table_label.auditTime'),
+        label: $it('tL.auditTime'),
         value: 'CHECKTIME',
         width: '6',
         disabled: true
@@ -436,7 +436,7 @@ export default {
           },
           {
             // label: "标准价",
-            label: $it('table_label.standardPrice'),
+            label: $it('tL.standardPrice'),
             value: 2,
             disabled: false
           },
@@ -475,7 +475,7 @@ export default {
     this.jordanTableConfig.columns = [
       {
         // title: "快递名称",
-        title: $it('table_label.expressName'),
+        title: $it('tL.expressName'),
         sortable: true,
         key: 'CP_C_LOGISTICS_ENAME',
         width: '',

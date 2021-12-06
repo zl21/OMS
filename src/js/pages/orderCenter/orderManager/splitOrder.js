@@ -52,17 +52,17 @@ export default {
           type: 'selection'
         },
         {
-          title: $it('table_label.whetherGift'), // 是否赠品
+          title: $it('tL.whetherGift'), // 是否赠品
           key: 'is_gift_name',
           draggable:true
         },
         {
-          title: $it('table_label.commoditySKU'), // 商品SKU
+          title: $it('tL.commoditySKU'), // 商品SKU
           key: 'ps_c_sku_ecode',
           draggable:true
         },
         {
-          title: $it('table_label.productName'), // 商品名称
+          title: $it('tL.productName'), // 商品名称
           key: 'ps_c_pro_ename',
           draggable:true
         },
@@ -71,17 +71,17 @@ export default {
         //   key: 'ps_c_clr_ename'
         // },
         {
-          title: $it('table_label.productSKUname'), // 商品SKU名称
+          title: $it('tL.productSKUname'), // 商品SKU名称
           key: 'ps_c_sku_name',
           draggable:true
         },
         {
-          title: $it('table_label.original_deliveryWarehouse'), // 原发货仓库
+          title: $it('tL.original_deliveryWarehouse'), // 原发货仓库
           key: 'cp_c_phy_warehouse_ename',
           draggable:true
         },
         {
-          title: $it('table_label.suggested_deliveryWarehouse'), // 建议发货仓库
+          title: $it('tL.suggested_deliveryWarehouse'), // 建议发货仓库
           key: 'advise_phy_warehouse_id',
           draggable:true,
           render: (h, params) => {
@@ -153,7 +153,7 @@ export default {
           draggable:true
         },
         {
-          title:$it('table_label.a4'),  // 实体可用数量
+          title:$it('tL.a4'),  // 实体可用数量
           key: 'total_qty_available',
           draggable:true,
           render:(h , params) => {
@@ -169,12 +169,12 @@ export default {
           }
         },
         {
-          title: $it('table_label.quantity_demolished'), // 待拆数量
+          title: $it('tL.quantity_demolished'), // 待拆数量
           key: 'waiting_split_num',
           draggable:true
         },
         {
-          title: $it('table_label.quantity_split'), // 拆分数量
+          title: $it('tL.quantity_split'), // 拆分数量
           key: 'split_num',
           draggable:true,
           width: 100,

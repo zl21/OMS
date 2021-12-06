@@ -128,7 +128,7 @@ export default {
           fkdisplay: 'mrp',
           isfk: true,
           isnotnull: false,
-          name: $it('table_label.shopName'), // 店铺名称
+          name: $it('tL.shopName'), // 店铺名称
           readonly: false,
           reftable: 'CP_C_SHOP',
           reftableid: 10348,
@@ -177,7 +177,7 @@ export default {
           cusurl: 'custompage/matrix',
           display: 'text',
           // name: "商品编码",
-          name: $it('table_label.productNo'),
+          name: $it('tL.productNo'),
           pid: '',
           tablename: 'DL_B_TRAN_PLAN_ITEM',
           type: 'STRING',

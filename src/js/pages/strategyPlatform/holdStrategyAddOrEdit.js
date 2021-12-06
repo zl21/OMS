@@ -152,7 +152,7 @@ export default {
             itemdata: {
               colid: '172070',
               colname: 'CP_C_SHOP_IDS',
-              name: $it('table_label.shopName'), // 店铺名称
+              name: $it('tL.shopName'), // 店铺名称
               valuedata: '',
               pid: '',
               fkdisplay: 'mrp',

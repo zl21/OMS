@@ -38,7 +38,7 @@
       <li>
         <div class="calculation-item">
           <!-- 调整金额 -->
-          <span :title="$it('table_label.adjustment_amount')">{{$it('table_label.adjustment_amount')}}</span>
+          <span :title="$it('tL.adjustment_amount')">{{$it('tL.adjustment_amount')}}</span>
           <label>
             <Input v-if="type && status" v-model="editData.ADJUST_AMT"  :regx="/^-?\d*\.{0,1}\d{0,2}$/"  @on-change="inputChange()" @on-blur="inputBlur"/>
             <span v-else>

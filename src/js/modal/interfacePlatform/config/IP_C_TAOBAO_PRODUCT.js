@@ -41,7 +41,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'timeArr',
-        label: $it('table_label.modificationTime'), // 修改时间
+        label: $it('tL.modificationTime'), // 修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''

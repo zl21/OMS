@@ -112,7 +112,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('table_label.buyerNickname'), // 买家昵称
+              label: $it('tL.buyerNickname'), // 买家昵称
               colname: 'BUYER_NICK',
               width: '8',
               // inputenter: () => this.queryBounced(),

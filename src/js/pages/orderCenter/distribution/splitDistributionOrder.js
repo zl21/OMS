@@ -31,7 +31,7 @@ export default {
         columns: [
           {
             type: 'index',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             width: 60,
             align: 'center'
           },
@@ -56,7 +56,7 @@ export default {
             key: 'TOT_QTY_OUT'
           },
           {
-            title: $it('table_label.operation'), // 操作
+            title: $it('tL.operation'), // 操作
             key: 'demo5',
             render: (h, params) => h('div', [
               h(
@@ -146,7 +146,7 @@ export default {
         columns: [
           {
             type: 'index',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             width: 60,
             align: 'center'
           },

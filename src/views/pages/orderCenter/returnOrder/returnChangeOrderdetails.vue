@@ -254,7 +254,7 @@ export default {
           },
           formData: [
             {
-              label: $it('table_label.code_SKU'),//SKU编码
+              label: $it('tL.code_SKU'),//SKU编码
               style: "dimSearch",
               width: "8",
               value: "ECODE",
@@ -291,7 +291,7 @@ export default {
             },
             {
               style: "dimSearch", //输入框类型
-              label: $it('table_label.itemNo01'), //输入框前文字 SPU编码
+              label: $it('tL.itemNo01'), //输入框前文字 SPU编码
               value: "PS_C_PRO_ECODE", //输入框的值
               columns: ["ENAME"],
               width: "8",

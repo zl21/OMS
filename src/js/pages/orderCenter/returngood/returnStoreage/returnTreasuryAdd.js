@@ -81,7 +81,7 @@ export default {
             {
               style: 'input',
               // label: "买家昵称",
-              label: $it('table_label.buyerNickname'),
+              label: $it('tL.buyerNickname'),
               value: 'buyer_nick',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -111,7 +111,7 @@ export default {
             {
               key: 'BUYER_NICK',
               // title: "买家昵称",
-              title: $it('table_label.buyerNickname'),
+              title: $it('tL.buyerNickname'),
             },
             {
               key: 'LOGISTICS_CODE',
@@ -131,17 +131,17 @@ export default {
             {
               key: 'shopName',
               // title: "实体仓库",
-              title: $it('table_label.physical_warehouse'),
+              title: $it('tL.physical_warehouse'),
             },
             {
               key: 'IS_ADD',
               // title: "是否手工新增",
-              title: $it('table_label.add_manually'),
+              title: $it('tL.add_manually'),
             },
             {
               key: 'CP_C_SHOP_TITLE',
               // title: "店铺名称",
-              title: $it('table_label.shopName'),
+              title: $it('tL.shopName'),
             },
           ], // 表头
           data: [], // 数据配置
@@ -217,7 +217,7 @@ export default {
           {
             style: 'input',
             // label: "买家昵称",
-            label: $it('table_label.buyerNickname'),
+            label: $it('tL.buyerNickname'),
             disabled: false, // 按钮禁用控制
             value: 'USER_NICK',
             dataAcessKey: 'USER_NICK',
@@ -320,7 +320,7 @@ export default {
           {
             style: 'input',
             // label: "备注",
-            label: $it('table_label.remarks'),
+            label: $it('tL.remarks'),
             dataAcessKey: 'REMARK',
             value: 'REMARK',
             disabled: false, // 按钮禁用控制
@@ -338,7 +338,7 @@ export default {
           {
             style: 'checkbox', // 勾选框类型
             // label: "是否关闭匹配", //前面的文字
-            label: $it('table_label.turnOff_match'),
+            label: $it('tL.turnOff_match'),
             dataAcessKey: 'IS_OFF_MATCH',
             width: '6', // 所占的宽度
             value: 'IS_OFF_MATCH',
@@ -353,7 +353,7 @@ export default {
             key: 'PS_C_PRO_ECODE',
             dataAcessKey: 'PS_C_PRO_ECODE',
             // title: "商品编码",
-            title: $it('table_label.productNo'),
+            title: $it('tL.productNo'),
           },
           {
             key: 'PS_C_CLR_ENAME',
@@ -371,7 +371,7 @@ export default {
             key: 'QTY',
             dataAcessKey: 'QTY',
             // title: "数量",
-            title: $it('table_label.quantities'),
+            title: $it('tL.quantities'),
           },
           {
             key: 'PS_C_SKU_ECODE',
@@ -423,13 +423,13 @@ export default {
           {
             key: 'PS_C_SKU_ECODE_ACTUAL',
             // title: "实际发出条码",
-            title: $it('table_label.actual_barcode'),
+            title: $it('tL.actual_barcode'),
           },
           {
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: $it('table_label.productName'),
+            title: $it('tL.productName'),
           },
           {
             key: 'PRODUCT_MARK',
@@ -479,38 +479,38 @@ export default {
             key: 'IS_MATCH',
             dataAcessKey: 'IS_MATCH',
             // title: "是否匹配",
-            title: $it('table_label.match_or_not'),
+            title: $it('tL.match_or_not'),
           },
           {
             key: 'IS_GEN_ADJUST',
             dataAcessKey: 'IS_GEN_ADJUST',
             // title: "是否生成调整单",
-            title: $it('table_label.generate_adjustment'),
+            title: $it('tL.generate_adjustment'),
           },
           {
             key: 'IS_WITHOUT_ORIG',
             dataAcessKey: 'IS_WITHOUT_ORIG',
             // title: "是否无原单条码",
-            title: $it('table_label.no_original_barcode'),
+            title: $it('tL.no_original_barcode'),
           },
           {
             key: 'IS_GEN_IN_ORDER',
             dataAcessKey: 'IS_GEN_IN_ORDER',
             // title: "是否生成入库单",
-            title: $it('table_label.generate_stock'),
+            title: $it('tL.generate_stock'),
           },
           {
             key: 'IS_GEN_WRO_ADJUST',
             dataAcessKey: 'IS_GEN_WRO_ADJUST',
             // title: "是否生成错发调整单",
-            title: $it('table_label.generate_error_adjustment'),
+            title: $it('tL.generate_error_adjustment'),
           },
           {
             key: 'IS_GEN_MINUS_ADJUST',
             dataAcessKey: 'IS_GEN_MINUS_ADJUST',
             // title: "是否生成冲无头件调整单",
             title: $it(
-              'table_label.generate_punching_headless_adjustment'
+              'tL.generate_punching_headless_adjustment'
             ),
           },
         ],
@@ -532,13 +532,13 @@ export default {
       labelList: [
         {
           // label: "入库单商品明细",
-          label: $it('table_label.in_warehouse_goods_details'),
+          label: $it('tL.in_warehouse_goods_details'),
           value: '1',
           isShow: true,
         },
         {
           // label: "退货入库日志",
-          label: $it('table_label.return_warehousing_log'),
+          label: $it('tL.return_warehousing_log'),
           value: '2',
           isShow: true,
         },

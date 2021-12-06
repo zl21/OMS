@@ -36,7 +36,7 @@ export default {
                 promptMessage = $it('fL.scheduleOwnership');
               } else if (!formData[2].itemdata.pid) {
                 // promptMessage = "实体仓库";
-                promptMessage = $it('table_label.physical_warehouse');
+                promptMessage = $it('tL.physical_warehouse');
               } else if (
                 !self.warehouseManagementFromConfig.formValue.DELIVERYTYPE
               ) {
@@ -166,7 +166,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.physical_warehouse'), // 实体仓库
+              name: $it('tL.physical_warehouse'), // 实体仓库
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE',
               reftableid: 24486,

@@ -56,7 +56,7 @@
                   <div class="calculation-item">
                     <!-- 可正可负，选填项 -->
                     <!-- <span>调整金额</span> -->
-                    <span :title="$it('table_label.adjustment_amount')">{{ $it('table_label.adjustment_amount') }}</span>
+                    <span :title="$it('tL.adjustment_amount')">{{ $it('tL.adjustment_amount') }}</span>
                     <Input
                       v-model="ADJUST_AMT"
                       type="text"
@@ -302,7 +302,7 @@ export default {
               isfk: true,
               isnotnull: false,
               // name: '店铺名称', // 店铺名称
-              name: $it('table_label.shopName'),
+              name: $it('tL.shopName'),
               readonly: false,
               reftable: 'CP_C_SHOP',
               reftableid: 10348,

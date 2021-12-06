@@ -35,7 +35,7 @@ export default {
         formData: [
           {
             style: 'input', // 输入框类型
-            label: $it('table_label.productNo'), // 商品编码
+            label: $it('tL.productNo'), // 商品编码
             value: 'ECODE', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             disabled: false,
@@ -45,7 +45,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: $it('table_label.productName'), // 商品名称
+            label: $it('tL.productName'), // 商品名称
             value: 'ENAME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: '', // 占位文本，默认为请输入
@@ -72,7 +72,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.brand'), // 品牌
+              name: $it('tL.brand'), // 品牌
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_BRAND', // 对应的表
               reftableid: 23051, // 对应的表ID
@@ -152,7 +152,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'REMARK', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: '', // 占位文本，默认为请输入
@@ -179,14 +179,14 @@ export default {
         formData: [
           {
             style: 'input', // 输入框类型
-            label: $it('table_label.creator'), // 创建人
+            label: $it('tL.creator'), // 创建人
             value: 'OWNERNAME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             disabled: true
           },
           {
             style: 'date', // 输入框类型
-            label: $it('table_label.creationTime'), // 创建时间
+            label: $it('tL.creationTime'), // 创建时间
             value: 'CREATIONDATE', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss', // 时间格式
@@ -194,14 +194,14 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: $it('table_label.reviser'), // 修改人
+            label: $it('tL.reviser'), // 修改人
             value: 'MODIFIERNAME', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             disabled: true
           },
           {
             style: 'date', // 输入框类型
-            label: $it('table_label.modificationTime'), // 修改时间
+            label: $it('tL.modificationTime'), // 修改时间
             value: 'MODIFIEDDATE', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -251,7 +251,7 @@ export default {
             },
             {
               style: 'input', // 输入框类型
-              label: $it('table_label.productName'), // 商品名称
+              label: $it('tL.productName'), // 商品名称
               value: 'PS_C_PRO_ENAME', // 输入框的值
               width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
               disabled: false,
@@ -346,7 +346,7 @@ export default {
             }
           },
           {
-            title: $it('table_label.productName'), // 商品名称
+            title: $it('tL.productName'), // 商品名称
             key: 'PS_C_PRO_ENAME',
             render: (h, params) => {
               if (params.row.ID && this.statusMark === 'Y') {
@@ -545,11 +545,11 @@ export default {
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: $it('table_label.productNo'), // 商品编码
+            title: $it('tL.productNo'), // 商品编码
             key: 'PS_C_PRO_ECODE'
           },
           {
-            title: $it('table_label.productName'), // 商品名称
+            title: $it('tL.productName'), // 商品名称
             key: 'PS_C_PRO_ENAME'
           },
           {
@@ -740,23 +740,23 @@ export default {
         pageSize: 10, // 每页条数
         columns: [
           {
-            title: $it('table_label.revised_content'), // 修改内容
+            title: $it('tL.revised_content'), // 修改内容
             key: ''
           },
           {
-            title: $it('table_label.before_modification'), // 修改前
+            title: $it('tL.before_modification'), // 修改前
             key: ''
           },
           {
-            title: $it('table_label.after_modification'), // 修改后
+            title: $it('tL.after_modification'), // 修改后
             key: ''
           },
           {
-            title: $it('table_label.reviser'), // 修改人
+            title: $it('tL.reviser'), // 修改人
             key: ''
           },
           {
-            title: $it('table_label.modificationTime'), // 修改时间
+            title: $it('tL.modificationTime'), // 修改时间
             key: ''
           }
         ],
@@ -811,11 +811,11 @@ export default {
       if (type === 2) {
         // 普通类型
         this.jordanTableConfig1.businessFormConfig.formData.forEach(item => {
-          if (item.label === $it('table_label.number_of_rows_per_group')) {
+          if (item.label === $it('tL.number_of_rows_per_group')) {
             this.$set(item, 'style', '');
             this.$delete(item, 'inputenter');
           }
-          if (item.label === $it('table_label.productName')) {
+          if (item.label === $it('tL.productName')) {
             if (!item.inputenter) {
               this.$set(item, 'inputenter', () => {
                 this.codedetailEvent();
@@ -831,7 +831,7 @@ export default {
           this.$delete(this.jordanTableConfig1.columns, table1Index);
         }
         this.jordanTableConfig2.businessFormConfig.formData.forEach(item => {
-          if (item.label === $it('table_label.grouping')) {
+          if (item.label === $it('tL.grouping')) {
             this.$set(item, 'style', '');
             this.$delete(item, 'inputenter');
           }
@@ -856,7 +856,7 @@ export default {
           const tab1index = this.jordanTableConfig1.businessFormConfig.formData.length;
           this.$set(this.jordanTableConfig1.businessFormConfig.formData, tab1index, {
             style: 'input', // 输入框类型
-            label: $it('table_label.number_of_rows_per_group'), // 每组抽取行数
+            label: $it('tL.number_of_rows_per_group'), // 每组抽取行数
             value: 'GROUP_EXTRACT_NUM', // 输入框的值
             id: 'extract',
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)})
@@ -866,14 +866,14 @@ export default {
           });
           this.jordanTableConfig1.businessFormConfig.formData.forEach(item => {
             this.$set(item, 'width', '8');
-            if (item.label === $it('table_label.productName')) {
+            if (item.label === $it('tL.productName')) {
               this.$delete(item, 'inputenter');
             }
           });
         } else {
           this.jordanTableConfig1.businessFormConfig.formData.forEach(item => {
             this.$set(item, 'width', '8');
-            if (item.label === $it('table_label.number_of_rows_per_group')) {
+            if (item.label === $it('tL.number_of_rows_per_group')) {
               this.$set(item, 'style', 'input');
               if (!item.inputenter) {
                 this.$set(item, 'inputenter', () => {
@@ -891,7 +891,7 @@ export default {
           const ciluIndex = this.jordanTableConfig1.columns.length;
           this.$set(this.jordanTableConfig1.columns, ciluIndex, {
             // title: "每组抽取行数",
-            title: $it('table_label.number_of_rows_per_group'),
+            title: $it('tL.number_of_rows_per_group'),
             key: 'GROUP_EXTRACT_NUM',
             render: (h, params) => {
               if (params.row.ID && this.statusMark === 'Y') {
@@ -952,7 +952,7 @@ export default {
           const table2col = this.jordanTableConfig2.businessFormConfig.formData.length;
           this.$set(this.jordanTableConfig2.businessFormConfig.formData, table2col, {
             style: 'input', // 输入框类型
-            label: $it('table_label.grouping'), // 分组
+            label: $it('tL.grouping'), // 分组
             value: 'GROUPNUM', // 输入框的值
             id: 'groupnum',
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)})
@@ -979,7 +979,7 @@ export default {
             if (item.label === $it('other.goods_quantit')) {
               this.$set(item, 'width', '7');
             }
-            if (item.label === $it('table_label.grouping') && item.style === '') {
+            if (item.label === $it('tL.grouping') && item.style === '') {
               this.$set(item, 'width', '8');
               this.$set(item, 'style', 'input');
               if (!item.inputenter) {
@@ -997,7 +997,7 @@ export default {
           // 不存在分组 就添加一个
           const currentIndex = this.jordanTableConfig2.columns.length;
           this.$set(this.jordanTableConfig2.columns, currentIndex, {
-            title: $it('table_label.grouping'), // 分组
+            title: $it('tL.grouping'), // 分组
             key: 'GROUPNUM',
             render: (h, params) => {
               if (params.row.ID && this.statusMark === 'Y') {
@@ -1339,13 +1339,13 @@ export default {
       let msg = '';
       switch (type) {
         case 'ECODE':
-          msg = $it('table_label.productNo'); // 商品编码
+          msg = $it('tL.productNo'); // 商品编码
           break;
         case 'ENAME':
-          msg = $it('table_label.productName'); // 商品名称
+          msg = $it('tL.productName'); // 商品名称
           break;
         case 'PS_C_BRAND_ID':
-          msg = $it('table_label.brand'); // 品牌
+          msg = $it('tL.brand'); // 品牌
           break;
         case 'PRICELIST':
           msg = $it('fL.price'); // 价格
@@ -1357,7 +1357,7 @@ export default {
           msg = $it('other.goods_quantit'); // 商品数量
           break;
         case 'GROUPNUM':
-          msg = $it('table_label.grouping'); // 分组
+          msg = $it('tL.grouping'); // 分组
           break;
       }
       return msg;
@@ -2073,7 +2073,7 @@ export default {
             this.statusName = $it('com.voided'); // '已作废';
             this.statusMark = 'N'; // 作废状态
             this.formConfig1.formData.forEach(item => {
-              if (item.label === $it('table_label.productNo')) {
+              if (item.label === $it('tL.productNo')) {
                 item.disabled = true;
               }
             });

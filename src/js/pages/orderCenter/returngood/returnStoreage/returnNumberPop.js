@@ -160,7 +160,7 @@ export default {
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: $it('table_label.shopName'), // 店铺名称
+              title: $it('tL.shopName'), // 店铺名称
             },
             {
               key: 'RECEIVE_NAME',

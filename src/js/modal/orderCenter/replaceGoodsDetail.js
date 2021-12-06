@@ -9,15 +9,15 @@ export default {
         indexColumn: true,
         columns: [{
           key: 'skuEcode',
-          title: $it('table_label.code_SKU'), // SKU编码
+          title: $it('tL.code_SKU'), // SKU编码
         },
         {
           key: 'spuEcode',
-          title: $it('table_label.itemNo01'), // SPU编码
+          title: $it('tL.itemNo01'), // SPU编码
         },
         {
           key: 'spuEname',
-          title: $it("table_label.itemNo02"), // SPU名称
+          title: $it("tL.itemNo02"), // SPU名称
         },
         {
           key: 'skuEname',

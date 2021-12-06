@@ -102,12 +102,12 @@ export default {
           options1: [
             {
               // label: "下单时间",
-              label: $it('table_label.orderTime'),
+              label: $it('tL.orderTime'),
               value: '1'
             },
             {
               // label: "付款时间",
-              label: $it('table_label.paymentTime'),
+              label: $it('tL.paymentTime'),
               value: '2'
             },
             {
@@ -205,7 +205,7 @@ export default {
             props: {
               columns: [
                 {
-                  title: $it('table_label.serialNo'), // 序号
+                  title: $it('tL.serialNo'), // 序号
                   key: 'INDEX'
                 },
                 {

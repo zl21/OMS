@@ -514,31 +514,31 @@ export default {
             field: 'ADJUST_TYPE_NAME'
           },
           {
-            headerName: $it('table_label.shopName'), // 店铺名称
+            headerName: $it('tL.shopName'), // 店铺名称
             field: 'CP_C_SHOP_TITLE'
           },
           {
-            headerName: $it('table_label.physicalWarehouse'), // 实体仓
+            headerName: $it('tL.physicalWarehouse'), // 实体仓
             field: 'CP_C_PHY_WAREHOUSE_ENAME'
           },
           {
-            headerName: $it('table_label.compensation_expressCompany'), // 赔付快递公司
+            headerName: $it('tL.compensation_expressCompany'), // 赔付快递公司
             field: 'CP_C_LOGISTICS_ENAME'
           },
           {
-            headerName: $it('table_label.expressNo'), // 快递单号
+            headerName: $it('tL.expressNo'), // 快递单号
             field: 'LOGISTICS_NO'
           },
           {
-            headerName: $it('table_label.total_amountDue'), // 总应付金额
+            headerName: $it('tL.total_amountDue'), // 总应付金额
             field: 'PAYABLE_PRICE'
           },
           {
-            headerName: $it('table_label.paymentWay'), // 支付方式
+            headerName: $it('tL.paymentWay'), // 支付方式
             field: 'PAY_TYPE_NAME'
           },
           {
-            headerName: $it('table_label.remarks'), // 备注
+            headerName: $it('tL.remarks'), // 备注
             field: 'REMARK'
           },
           {
@@ -546,67 +546,67 @@ export default {
             field: 'ORDER_NO'
           },
           {
-            headerName: $it('table_label.custTelephone'), // 顾客电话
+            headerName: $it('tL.custTelephone'), // 顾客电话
             field: 'CUSTOMER_TEL'
           },
           {
-            headerName: $it('table_label.custName'), // 顾客姓名
+            headerName: $it('tL.custName'), // 顾客姓名
             field: 'CUSTOMER_NAME'
           },
           {
-            headerName: $it('table_label.alipay'), // 支付宝号
+            headerName: $it('tL.alipay'), // 支付宝号
             field: 'ALIPAY_ACCOUNT'
           },
           {
-            headerName: $it('table_label.vip_nickname'), // 会员昵称
+            headerName: $it('tL.vip_nickname'), // 会员昵称
             field: 'CUSTOMER_NICK'
           },
           {
-            headerName: $it('table_label.paymentTime'), // 付款时间
+            headerName: $it('tL.paymentTime'), // 付款时间
             field: 'PAY_TIME'
           },
           {
-            headerName: $it('table_label.creationTime'), // 创建时间
+            headerName: $it('tL.creationTime'), // 创建时间
             field: 'CREATIONDATE'
           },
           {
-            headerName: $it('table_label.creator'), // 创建人
+            headerName: $it('tL.creator'), // 创建人
             field: 'OWNERENAME'
           },
           {
-            headerName: $it('table_label.modificationTime'), // 修改时间
+            headerName: $it('tL.modificationTime'), // 修改时间
             field: 'MODIFIEDDATE'
           },
           {
-            headerName: $it('table_label.reviser'), // 修改人
+            headerName: $it('tL.reviser'), // 修改人
             field: 'MODIFIERENAME'
           },
           {
-            headerName: $it('table_label.custAuditTime'), // 客审时间
+            headerName: $it('tL.custAuditTime'), // 客审时间
             field: 'GUEST_TRIAL_TIME'
           },
           {
-            headerName: $it('table_label.custAuditMan'), // 客审人
+            headerName: $it('tL.custAuditMan'), // 客审人
             field: 'GUEST_TRIAL_ENAME'
           },
           {
-            headerName: $it('table_label.financeAuditTime'), // 财审时间
+            headerName: $it('tL.financeAuditTime'), // 财审时间
             field: 'FINANCIAL_TRIAL_TIME'
           },
           {
-            headerName: $it('table_label.financeAuditMan'), // 财审人
+            headerName: $it('tL.financeAuditMan'), // 财审人
             field: 'FINANCIAL_TRIAL_ENAME'
           },
           {
-            headerName: $it('table_label.voidTime'), // 作废时间
+            headerName: $it('tL.voidTime'), // 作废时间
             field: 'DEL_TIME'
           },
           {
-            headerName: $it('table_label.voidMan'), // 作废人
+            headerName: $it('tL.voidMan'), // 作废人
             field: 'DELENAME'
           },
           {
-            headerName: $it('table_label.usable'), // 可用
+            headerName: $it('tL.usable'), // 可用
             field: 'ISACTIVE'
           },
           {

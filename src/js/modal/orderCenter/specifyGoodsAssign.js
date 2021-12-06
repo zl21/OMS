@@ -32,15 +32,15 @@ export default {
       qty: '1',
       columns: [
         {
-          title: $it('table_label.commoditySKU'), // 商品SKU
+          title: $it('tL.commoditySKU'), // 商品SKU
           key: 'ECODE'
         },
         {
-          title: $it('table_label.productName'), // 商品名称
+          title: $it('tL.productName'), // 商品名称
           key: 'PS_C_PRO_ENAME'
         },
         {
-          title: $it('table_label.productSKUname'), // 商品SKU名称
+          title: $it('tL.productSKUname'), // 商品SKU名称
           key: 'SPEC'
         },
         // {

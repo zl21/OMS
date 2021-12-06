@@ -38,7 +38,7 @@ export default () => ({
             fkdisplay: 'drp', // 外键关联类型
             isfk: true, // 是否有fk键
             isnotnull: true, // 是否必填
-            name: $it('table_label.shopName'),
+            name: $it('tL.shopName'),
             readonly: false, // 是否可编辑，对应input   readonly属性
             isOneData: true,
             valuedata: '', // 这个是选择的值

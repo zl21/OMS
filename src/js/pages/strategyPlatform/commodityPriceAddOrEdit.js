@@ -87,7 +87,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               istooltip: true,
-              name: $it('table_label.shopName'), // 店铺名称
+              name: $it('tL.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -137,7 +137,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.priority'), // 优先级
+            label: $it('tL.priority'), // 优先级
             colname: 'PRIORITY',
             width: '6',
             disabled: false,
@@ -148,7 +148,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             colname: 'REMARK',
             width: '6',
             disabled: false,
@@ -214,10 +214,10 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
           },
           {
-            title: $it('table_label.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
             key: "PS_C_SKU_ID",
             align: "center",
             required: false,
@@ -312,7 +312,7 @@ export default {
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $it('table_label.itemNo01'), // SPU编码
+                name: $it('tL.itemNo01'), // SPU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171667, // 对应的表ID
@@ -345,7 +345,7 @@ export default {
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $it('table_label.code_SKU'), // SKU编码
+                name: $it('tL.code_SKU'), // SKU编码
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 171666, // 对应的表ID
@@ -728,7 +728,7 @@ export default {
       for (let key of validFields) {
         if (!obj[key]) {
           // TODO! `明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : 'SPU编码'}不能为空`
-          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $it('table_label.itemNo01')}不能为空`)
+          this.$Message.error(`明细中${key == 'MIN_REAL_AMT' ? '最低成交价格' : $it('tL.itemNo01')}不能为空`)
           valid = false;
           break;
         }
@@ -811,7 +811,7 @@ export default {
         mes2 += $it('fL.bh') // 最低成交单价
       }
       if (!(PS_C_SPU_ID || PS_C_SKU_ID)) {
-        mes2 += ` SPU/${$it('table_label.code_SKU')}` // i18n SPU/SKU编码
+        mes2 += ` SPU/${$it('tL.code_SKU')}` // i18n SPU/SKU编码
       }
       mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
       if ((!(PS_C_SPU_ID || PS_C_SKU_ID)) && this.isMasterRequired && !isSaveAll) {

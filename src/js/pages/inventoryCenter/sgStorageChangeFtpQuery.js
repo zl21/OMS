@@ -31,7 +31,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.platform_store_title'), // '平台店铺标题',
+              name: $it('tL.platform_store_title'), // '平台店铺标题',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               row: 1,
@@ -76,7 +76,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.productNo'), // '商品编码',
+            label: $it('tL.productNo'), // '商品编码',
             value: 'PS_C_SKU_ECODE',
             width: '6'
           },
@@ -107,19 +107,19 @@ export default {
       jordanTableConfig: {
         columns: [
           {
-            title: $it('table_label.platform_store_title'), // '平台店铺标题',
+            title: $it('tL.platform_store_title'), // '平台店铺标题',
             key: 'CP_C_SHOP_TITLE'
           },
           {
-            title: $it('table_label.a0'), // '期初可售数',
+            title: $it('tL.a0'), // '期初可售数',
             key: 'QTY_BEGIN'
           },
           {
-            title: $it('table_label.a1'), // '变化数量',
+            title: $it('tL.a1'), // '变化数量',
             key: 'QTY_CHANGE'
           },
           {
-            title: $it('table_label.a2'), // '期末可售数',
+            title: $it('tL.a2'), // '期末可售数',
             key: 'QTY_END'
           },
           {
@@ -127,11 +127,11 @@ export default {
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: $it('table_label.productNo'), // '商品编码',
+            title: $it('tL.productNo'), // '商品编码',
             key: 'PS_C_PRO_ECODE'
           },
           {
-            title: $it('table_label.productName'), // '商品名称',
+            title: $it('tL.productName'), // '商品名称',
             key: 'PS_C_PRO_ENAME'
           },
           {
@@ -139,7 +139,7 @@ export default {
             key: 'GBCODE'
           },
           {
-            title: $it('table_label.creationTime'), // '创建时间',
+            title: $it('tL.creationTime'), // '创建时间',
             key: 'CREATIONDATE'
           }
         ], // 表头

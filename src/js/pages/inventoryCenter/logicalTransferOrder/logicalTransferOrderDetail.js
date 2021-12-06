@@ -13,7 +13,7 @@ export default {
       type: Array,
       default: () => [
         {
-          name: window.$it('table_label.quantities'),
+          name: window.$it('tL.quantities'),
           colname: 'QTY',
           defnum: 1
         }
@@ -64,7 +64,7 @@ export default {
       updateTypeArr: [
         {
           key: 0,
-          showName: window.$it('table_label.discount') // 折扣
+          showName: window.$it('tL.discount') // 折扣
         },
         {
           key: 1,
@@ -743,7 +743,7 @@ export default {
                 {},
                 obj,
                 {
-                  label: (this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS') && obj.colname === 'QTY_BILL' ? window.$it('table_label.quantities') : obj.name, // 名字
+                  label: (this.tablename === 'DL_B_INV_ADJ_WORK_PICK' || this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS') && obj.colname === 'QTY_BILL' ? window.$it('tL.quantities') : obj.name, // 名字
                   name: obj.colname, // 字段
                   order: obj.isorder // 是否有排序
                 },

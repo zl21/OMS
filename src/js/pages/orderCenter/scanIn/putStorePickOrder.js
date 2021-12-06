@@ -488,7 +488,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('table_label.remarks'), // 备注
+              label: $it('tL.remarks'), // 备注
               value: 'REMARK',
               dataAcessKey: 'SHIP_AMT',
               disabled: false,

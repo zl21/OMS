@@ -30,7 +30,7 @@ export default {
         ]
       },
       itemdata: {
-        name: `${$it('table_label.groupName')}：`, // '分组名称：'
+        name: `${$it('tL.groupName')}：`, // '分组名称：'
         setGroupName: '',
         radio: '1'
       },
@@ -41,15 +41,15 @@ export default {
           name: 'ENAME'
         },
         {
-          label: $it('table_label.participating_stores'), // '参与店铺',
+          label: $it('tL.participating_stores'), // '参与店铺',
           name: 'SHOP_NAME'
         },
         {
-          label: $it('table_label.original_groupName'), // '原分组名称',
+          label: $it('tL.original_groupName'), // '原分组名称',
           name: 'PM_GROUP'
         },
         {
-          label: $it('table_label.priority'), // '优先级',
+          label: $it('tL.priority'), // '优先级',
           name: 'PM_PRIORITY'
         }
       ],
@@ -58,11 +58,11 @@ export default {
           name: 'ENAME'
         },
         {
-          label: $it('table_label.participating_stores'), // '参与店铺',
+          label: $it('tL.participating_stores'), // '参与店铺',
           name: 'SHOP_NAME'
         },
         {
-          label: $it('table_label.original_groupName'), // '原分组名称',
+          label: $it('tL.original_groupName'), // '原分组名称',
           name: 'PM_GROUP'
         }
       ],
@@ -71,15 +71,15 @@ export default {
           name: 'ENAME'
         },
         {
-          label: $it('table_label.participating_stores'), // '参与店铺',
+          label: $it('tL.participating_stores'), // '参与店铺',
           name: 'SHOP_NAME'
         },
         {
-          label: $it('table_label.original_groupName'), // '原分组名称',
+          label: $it('tL.original_groupName'), // '原分组名称',
           name: 'PM_GROUP'
         },
         {
-          label: $it('table_label.priority'), // '优先级',
+          label: $it('tL.priority'), // '优先级',
           name: 'PM_PRIORITY'
         }
       ]

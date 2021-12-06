@@ -352,7 +352,7 @@ export default {
           tbodyWidth: '62px'
         },
         {
-          title: $it('table_label.edit'), // 编辑
+          title: $it('tL.edit'), // 编辑
           key: 'edit',
           editValue: false,
           tbodyWidth: '62px'

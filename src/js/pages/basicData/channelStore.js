@@ -163,7 +163,7 @@ export default {
                 isnotnull: true, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $it("table_label.logicWarehouse"), // 逻辑仓
+                name: $it("tL.logicWarehouse"), // 逻辑仓
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
                 reftableid: 10091, // 对应的表ID
@@ -192,7 +192,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('table_label.priority'), // 优先级
+              label: $it('tL.priority'), // 优先级
               value: 'SUPPLY_PRIORITY',
               disabled: false,
               dataAcessKey: 'SUPPLY_PRIORITY',
@@ -237,11 +237,11 @@ export default {
         },
         columns: [
           {
-            title: $it("table_label.logicWarehouse"), // 逻辑仓
+            title: $it("tL.logicWarehouse"), // 逻辑仓
             key: 'CP_C_STORE_ENAME'
           },
           {
-            title: $it('table_label.physicalWarehouse'), // 实体仓
+            title: $it('tL.physicalWarehouse'), // 实体仓
             key: 'CP_C_PHY_WAREHOUSE_ENAME'
           },
           {
@@ -293,7 +293,7 @@ export default {
             })
           },
           {
-            title: $it('table_label.priority'), // 优先级
+            title: $it('tL.priority'), // 优先级
             key: 'SUPPLY_PRIORITY',
             render: (h, params) => h(
               'div',
@@ -480,11 +480,11 @@ export default {
       const id = self.jordanTableConfig.businessFormConfig.formValue.CP_C_STORE_ID;
       let str = '';
       if (!id) {
-        str += `${$it("table_label.logicWarehouse")} `; // 逻辑仓
+        str += `${$it("tL.logicWarehouse")} `; // 逻辑仓
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.RATE) {
         str += `${$it("fL.db")} `; // 供货比例
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY) {
-        str += `${$it('table_label.priority')} `; // 优先级
+        str += `${$it('tL.priority')} `; // 优先级
       }
       if (str) {
         self.$Message.warning(`${str}不能为空!`);

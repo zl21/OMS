@@ -14,7 +14,7 @@ export default {
       type: Array,
       default: () => [
         {
-          name: $it('table_label.quantities'),
+          name: $it('tL.quantities'),
           colname: 'QTY',
           defnum: 1,
         },
@@ -64,7 +64,7 @@ export default {
       updateTypeArr: [
         {
           key: 0,
-          showName: $it('table_label.discount'), // 折扣
+          showName: $it('tL.discount'), // 折扣
         },
         {
           key: 1,
@@ -798,7 +798,7 @@ export default {
                     (this.tablename === 'DL_B_INV_ADJ_WORK_PICK' ||
                       this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS') &&
                     obj.colname === 'QTY_BILL'
-                      ? $it('table_label.quantities')
+                      ? $it('tL.quantities')
                       : obj.name, // 名字
                   name: obj.colname, // 字段
                   order: obj.isorder, // 是否有排序

@@ -34,10 +34,10 @@ export default {
         type: 'index',
         width: 60,
         align: 'center',
-        title: $it('table_label.serialNo'), // 序号
+        title: $it('tL.serialNo'), // 序号
       },
       {
-        title: $it('table_label.code_SKU'), // SKU编码
+        title: $it('tL.code_SKU'), // SKU编码
         key: 'ECODE'
       },
       {

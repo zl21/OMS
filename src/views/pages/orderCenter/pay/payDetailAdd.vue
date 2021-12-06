@@ -107,7 +107,7 @@ export default {
             },
             {
               style: 'dimSearch', //输入框类型
-              label: $it('table_label.itemNo01'), // SPU编码 输入框前文字
+              label: $it('tL.itemNo01'), // SPU编码 输入框前文字
               value: 'spuEcode', //输入框的值
               columns: ['ENAME'],
               width: '8',

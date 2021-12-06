@@ -45,7 +45,7 @@ export default {
           },
           {
             key: 'PS_C_PRO_ECODE1',
-            title: $it('table_label.productNo') // 商品编码
+            title: $it('tL.productNo') // 商品编码
           },
           {
             key: 'PS_C_PRO_ECODE1',

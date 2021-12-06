@@ -60,21 +60,21 @@ export default {
           formData: [
             {
               style: 'input',
-              label: window.$it('table_label.orderNo'), // 订单编号
+              label: window.$it('tL.orderNo'), // 订单编号
               value: 'bill_no',
               width: '8',
               inputenter: () => this.queryBounced()
             },
             {
               style: 'input',
-              label: window.$it('table_label.platform_orderNo'), // 平台订单号
+              label: window.$it('tL.platform_orderNo'), // 平台订单号
               value: 'source_code',
               width: '8',
               inputenter: () => this.queryBounced()
             },
             {
               style: 'input',
-              label: window.$it('table_label.buyerNickname'), // 买家昵称
+              label: window.$it('tL.buyerNickname'), // 买家昵称
               value: 'user_nick',
               width: '8',
               inputenter: () => this.queryBounced()
@@ -111,13 +111,13 @@ export default {
                 ],
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: window.$it('table_label.shopName'), // 店铺名称
+                fkdesc: window.$it('tL.shopName'), // 店铺名称
                 inputname: 'SELLER_NICK:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: window.$it('table_label.shopName'), // 店铺名称input前面显示的lable值
+                name: window.$it('tL.shopName'), // 店铺名称input前面显示的lable值
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'OC_B_RETURN_ORDER', // 对应的表
                 reftableid: 24578, // 对应的表ID
@@ -136,19 +136,19 @@ export default {
           columns: [
             {
               key: 'SOURCE_CODE',
-              title: window.$it('table_label.platformInfo') // 平台信息
+              title: window.$it('tL.platformInfo') // 平台信息
             },
             {
               key: 'ID',
-              title: window.$it('table_label.orderNo') // 订单编号
+              title: window.$it('tL.orderNo') // 订单编号
             },
             {
               key: 'USER_NICK',
-              title: window.$it('table_label.buyerNickname') // 买家昵称
+              title: window.$it('tL.buyerNickname') // 买家昵称
             },
             {
               key: 'ORDER_AMT',
-              title: window.$it('table_label.totalOrderAmount') // 订单总额
+              title: window.$it('tL.totalOrderAmount') // 订单总额
             },
             {
               key: 'RECEIVER_NAME',
@@ -256,7 +256,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('table_label.shopName'), // 店铺名称
+              label: window.$it('tL.shopName'), // 店铺名称
               required: true,
               props: {
                 value: '',
@@ -291,7 +291,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('table_label.buyerNickname'), // 买家昵称
+              label: window.$it('tL.buyerNickname'), // 买家昵称
               props: {
                 value: '',
                 disabled: true
@@ -329,7 +329,7 @@ export default {
           {
             item: {
               type: 'Select',
-              label: window.$it('table_label.paymentWay'), // 支付方式
+              label: window.$it('tL.paymentWay'), // 支付方式
               props: {
                 value: '1',
                 options: []
@@ -432,7 +432,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('table_label.remarks'), // 备注
+              label: window.$it('tL.remarks'), // 备注
               props: {
                 value: ''
               },
@@ -616,7 +616,7 @@ export default {
             key: 'PS_C_SKU_PT_ECODE'
           },
           {
-            title: window.$it('table_label.code_SKU'), // SKU编码
+            title: window.$it('tL.code_SKU'), // SKU编码
             key: 'skuEcode'
           },
           // {
@@ -632,7 +632,7 @@ export default {
             key: 'PT_PRO_NAME'
           },
           {
-            title: window.$it('table_label.productName'), // 商品名称
+            title: window.$it('tL.productName'), // 商品名称
             key: 'proEname'
           },
           {
@@ -1004,17 +1004,17 @@ export default {
         // 原始订单编号
         if (item.item.label == $it('fL.originalOrderNo')) item.item.props.value = data.ID;
         // 店铺名称
-        if (item.item.label == $it('table_label.shopName')) item.item.props.value = data.CP_C_SHOP_TITLE;
+        if (item.item.label == $it('tL.shopName')) item.item.props.value = data.CP_C_SHOP_TITLE;
         // 原始平台单号
         if (item.item.label == $it('fL.originalPlatformNo')) item.item.props.value = data.SOURCE_CODE;
         // 买家昵称
-        if (item.item.label == $it('table_label.buyerNickname')) item.item.props.value = data.USER_NICK;
+        if (item.item.label == $it('tL.buyerNickname')) item.item.props.value = data.USER_NICK;
         // 买家手机号;
         if (item.item.label == $it('fL.BuyerPhoneNumber')) item.item.props.value = data.VIP_PHONE;
         // if (item.item.label == '平台退款单号') item.item.props.value = '5';
         // if (item.item.label == '退款原因') item.item.props.value = '6';
         // 支付方式
-        if (item.item.label == $it('table_label.paymentWay')) item.item.props.value = String(data.PAY_TYPE) || '1';
+        if (item.item.label == $it('tL.paymentWay')) item.item.props.value = String(data.PAY_TYPE) || '1';
         // if (item.item.label == '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
         // if (item.item.label == '支付账号') item.item.props.value = data.BUYER_ALIPAY_NO;
         // 收款人姓名
@@ -1071,7 +1071,7 @@ export default {
       const _this = this;
       _this.order.orderform.formData.forEach(item => {
         // 店铺名称
-        if (item && item.itemdata && item.itemdata.name === $it('table_label.shopName')) {
+        if (item && item.itemdata && item.itemdata.name === $it('tL.shopName')) {
           this.order.orderform.formValue.cp_c_store_id = item.itemdata.pid;
           this.order.orderform.formValue.cp_c_store_ename = item.itemdata.valuedata;
         }
@@ -1448,17 +1448,17 @@ export default {
             // 原始订单编号
             if (configItemLabel === $it('fL.originalOrderNo')) configItem.props.value = data.ID;
             // 店铺名称
-            if (configItemLabel === $it('table_label.shopName')) configItem.props.value = data.CP_C_SHOP_TITLE;
+            if (configItemLabel === $it('tL.shopName')) configItem.props.value = data.CP_C_SHOP_TITLE;
             // 原始平台单号
             if (configItemLabel === $it('fL.originalPlatformNo')) configItem.props.value = data.SOURCE_CODE;
             // 买家昵称
-            if (configItemLabel === $it('table_label.buyerNickname')) configItem.props.value = data.USER_NICK;
+            if (configItemLabel === $it('tL.buyerNickname')) configItem.props.value = data.USER_NICK;
             // 买家手机号
             if (configItemLabel === $it('fL.BuyerPhoneNumber')) configItem.props.value = decryptData.RECEIVER_MOBILE || data.VIP_PHONE;
             // if (item.item.label == '平台退款单号') item.item.props.value = '5';
             // if (item.item.label == '退款原因') item.item.props.value = '6';
             // 支付方式
-            if (configItemLabel === $it('table_label.paymentWay')) configItem.props.value = String(data.PAY_TYPE) || '1';
+            if (configItemLabel === $it('tL.paymentWay')) configItem.props.value = String(data.PAY_TYPE) || '1';
             // if (item.item.label === '判责方') item.item.props.value = data.RESPONSIBLE_PARTY;
             // if (configItemLabel === '支付账号') configItem.props.value = data.BUYER_ALIPAY_NO;
             // 收款人姓名;
@@ -1781,7 +1781,7 @@ export default {
         };
         self.reForm.config.forEach(item => {
           // 支付方式
-          if (item.item.label == $it('table_label.paymentWay')) {
+          if (item.item.label == $it('tL.paymentWay')) {
             item.item.props.options = payType;
           }
           // 判责方

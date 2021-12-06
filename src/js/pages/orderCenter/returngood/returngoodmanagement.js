@@ -127,7 +127,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('table_label.buyerNickname'), // 买家昵称
+              label: $it('tL.buyerNickname'), // 买家昵称
               value: 'user_nick',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -156,13 +156,13 @@ export default {
                 ],
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: $it('table_label.shopName'), // 店铺名称
+                fkdesc: $it('tL.shopName'), // 店铺名称
                 inputname: 'SELLER_NICK:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $it('table_label.shopName'), // 店铺名称
+                name: $it('tL.shopName'), // 店铺名称
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'OC_B_RETURN_ORDER', // 对应的表
                 reftableid: 24578, // 对应的表ID
@@ -185,15 +185,15 @@ export default {
             },
             {
               key: 'ID',
-              title: $it('table_label.orderNo'), // 订单编号
+              title: $it('tL.orderNo'), // 订单编号
             },
             {
               key: 'USER_NICK',
-              title: $it('table_label.buyerNickname'), // 买家昵称
+              title: $it('tL.buyerNickname'), // 买家昵称
             },
             {
               key: 'ORDER_AMT',
-              title: $it('table_label.totalOrderAmount'), // 订单总额
+              title: $it('tL.totalOrderAmount'), // 订单总额
             },
             {
               key: 'RECEIVER_NAME',
@@ -385,17 +385,17 @@ export default {
               // 下拉框选项值
               {
                 value: '1',
-                label: $it('table_label.returnGood'), // 退货
+                label: $it('tL.returnGood'), // 退货
               },
               {
                 value: '2',
-                label: $it('table_label.returnGoods'), // 退换货
+                label: $it('tL.returnGoods'), // 退换货
               },
             ],
           },
           {
             style: 'input',
-            label: $it('table_label.buyerNickname'), // 买家昵称
+            label: $it('tL.buyerNickname'), // 买家昵称
             value: 'BUYER_NICK',
             dataAcessKey: 'BUYER_NICK',
             disabled: true, // 按钮禁用控制
@@ -424,13 +424,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $it('table_label.shopName'), // 店铺名称
+              fkdesc: $it('tL.shopName'), // 店铺名称
               inputname: 'SELLER_NICK:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.shopName'), // 店铺名称 input前面显示的lable值
+              name: $it('tL.shopName'), // 店铺名称 input前面显示的lable值
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'OC_B_RETURN_ORDER', // 对应的表
               reftableid: 24578, // 对应的表ID
@@ -662,7 +662,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             dataAcessKey: 'REMARK',
             value: 'REMARK',
             disabled: false, // 按钮禁用控制
@@ -726,7 +726,7 @@ export default {
           columns: [
             {
               key: 'PS_C_PRO_ECODE',
-              title: $it('table_label.productNo'), // 商品编码
+              title: $it('tL.productNo'), // 商品编码
               dataAcessKey: 'PS_C_PRO_ECODE',
             },
             {
@@ -741,7 +741,7 @@ export default {
             },
             {
               key: 'QTY_REFUND',
-              title: $it('table_label.appleNumber'), // 申请数量
+              title: $it('tL.appleNumber'), // 申请数量
               dataAcessKey: 'QTY_REFUND',
             },
             {
@@ -766,27 +766,27 @@ export default {
             },
             {
               key: 'SEX_NAME',
-              title: $it('table_label.gender'), // 性别
+              title: $it('tL.gender'), // 性别
               dataAcessKey: 'SEX',
             },
             {
               key: 'QTY_IN',
-              title: $it('table_label.storageQuantity'), // 入库数量
+              title: $it('tL.storageQuantity'), // 入库数量
               dataAcessKey: 'QTY_IN',
             },
             {
               key: 'QTY_CAN_REFUND',
-              title: $it('table_label.orderQuantity'), // 订单数量
+              title: $it('tL.orderQuantity'), // 订单数量
               dataAcessKey: 'QTY_CAN_REFUND',
             },
             {
               key: 'PRICE',
-              title: $it('table_label.tagPrice'), // 吊牌价
+              title: $it('tL.tagPrice'), // 吊牌价
               dataAcessKey: 'PRICE_LIST',
             },
             {
               key: 'amt_refund_single',
-              title: $it('table_label.unitReturnAmount'), // 单件退货金额
+              title: $it('tL.unitReturnAmount'), // 单件退货金额
               dataAcessKey: 'AMT_REFUND_SINGLE',
             },
             {
@@ -797,12 +797,12 @@ export default {
             {
               key: 'PRICE_SETTLE',
               dataAcessKey: 'PRICE_SETTLE',
-              title: $it('table_label.unitPriceSettlement'), // 结算单价
+              title: $it('tL.unitPriceSettlement'), // 结算单价
             },
             {
               key: 'AMT_SETTLE_TOT',
               dataAcessKey: 'AMT_SETTLE_TOT',
-              title: $it('table_label.settlementAmount'), // 结算金额
+              title: $it('tL.settlementAmount'), // 结算金额
             },
             {
               key: 'PRODUCT_MARK',
@@ -1940,7 +1940,7 @@ export default {
           },
           {
             key: 'PS_C_PRO_ECODE',
-            title: $it('table_label.productNo'), // 商品编码
+            title: $it('tL.productNo'), // 商品编码
             dataAcessKey: 'PS_C_PRO_ECODE',
           },
           {
@@ -2266,7 +2266,7 @@ export default {
           },
           {
             key: 'QTY_REFUND',
-            title: $it('table_label.appleNumber'), // 申请数量
+            title: $it('tL.appleNumber'), // 申请数量
             dataAcessKey: 'QTY_REFUND',
             render: (h, params) => {
               const _this = this;
@@ -2375,27 +2375,27 @@ export default {
           },
           {
             key: 'SEX_NAME',
-            title: $it('table_label.gender'), // 性别
+            title: $it('tL.gender'), // 性别
             dataAcessKey: 'SEX',
           },
           {
             key: 'QTY_IN',
-            title: $it('table_label.storageQuantity'), // 入库数量
+            title: $it('tL.storageQuantity'), // 入库数量
             dataAcessKey: 'QTY_IN',
           },
           {
             key: 'QTY_CAN_REFUND',
-            title: $it('table_label.orderQuantity'), // 订单数量
+            title: $it('tL.orderQuantity'), // 订单数量
             dataAcessKey: 'QTY_CAN_REFUND',
           },
           {
             key: 'PRICE',
-            title: $it('table_label.tagPrice'), // 吊牌价
+            title: $it('tL.tagPrice'), // 吊牌价
             dataAcessKey: 'PRICE_LIST',
           },
           {
             key: 'amt_refund_single',
-            title: $it('table_label.unitReturnAmount'), // 单件退货金额
+            title: $it('tL.unitReturnAmount'), // 单件退货金额
             dataAcessKey: 'AMT_REFUND_SINGLE',
           },
           {
@@ -2406,12 +2406,12 @@ export default {
           {
             key: 'PRICE_SETTLE',
             dataAcessKey: 'PRICE_SETTLE',
-            title: $it('table_label.unitPriceSettlement'), // 结算单价
+            title: $it('tL.unitPriceSettlement'), // 结算单价
           },
           {
             key: 'AMT_SETTLE_TOT',
             dataAcessKey: 'AMT_SETTLE_TOT',
-            title: $it('table_label.settlementAmount'), // 结算金额
+            title: $it('tL.settlementAmount'), // 结算金额
           },
           {
             key: 'PRODUCT_MARK',
@@ -2532,7 +2532,7 @@ export default {
         this.jordanTableConfig2.columns = [
           {
             key: 'PS_C_PRO_ECODE',
-            title: $it('table_label.productNo'), // 商品编码
+            title: $it('tL.productNo'), // 商品编码
             dataAcessKey: 'PS_C_PRO_ECODE',
           },
           {
@@ -2851,7 +2851,7 @@ export default {
           },
           {
             key: 'QTY_EXCHANGE',
-            title: $it('table_label.exchangeQuantity'), // 换货数量
+            title: $it('tL.exchangeQuantity'), // 换货数量
             render: (h, params) => {
               const _this = this;
               return h(
@@ -2914,12 +2914,12 @@ export default {
           {
             key: 'SEX_NAME',
             dataAcessKey: 'SEX',
-            title: $it('table_label.gender'), // 性别
+            title: $it('tL.gender'), // 性别
           },
           {
             key: 'PRICE',
             dataAcessKey: 'PRICE_LIST',
-            title: $it('table_label.tagPrice'), // 吊牌价
+            title: $it('tL.tagPrice'), // 吊牌价
           },
           {
             key: 'AMT_REFUND',
@@ -2983,7 +2983,7 @@ export default {
             },
             formData: [
               {
-                label: $it('table_label.productNo'), // 商品编码
+                label: $it('tL.productNo'), // 商品编码
                 style: 'dimSearch',
                 width: '6',
                 value: 'gbCode',
@@ -3011,7 +3011,7 @@ export default {
                         dimList.forEach((item) => {
                           // 商品编码
                           if (
-                            item.label === $it('table_label.productNo')
+                            item.label === $it('tL.productNo')
                           ) {
                             item.AuotData = res.data.data.list;
                           }
@@ -3136,7 +3136,7 @@ export default {
           {
             key: 'PS_C_PRO_ECODE',
             dataAcessKey: 'PS_C_PRO_ECODE',
-            title: $it('table_label.productNo'), // 商品编码
+            title: $it('tL.productNo'), // 商品编码
           },
           {
             key: 'PS_C_CLR_ENAME',
@@ -3166,7 +3166,7 @@ export default {
           {
             key: 'QTY_IN',
             dataAcessKey: 'QTY_IN',
-            title: $it('table_label.storageQuantity'), // 入库数量
+            title: $it('tL.storageQuantity'), // 入库数量
           },
         ];
         // 处理页面权限
@@ -4182,7 +4182,7 @@ export default {
           // 店铺名称
           if (item.itemdata.name == e.name) {
             switch (item.itemdata.name) {
-              case $it('table_label.shopName'):
+              case $it('tL.shopName'):
                 this.information.formValue.CP_C_SHOP_ID = item.itemdata.pid;
                 this.information.formValue.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                 break;

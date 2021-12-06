@@ -11,11 +11,11 @@ export default {
         columns: [
           {
             key: 'ENAME',
-            title: $it('table_label.warehouseName'), // '仓库名称',
+            title: $it('tL.warehouseName'), // '仓库名称',
           },
           {
             key: 'ECODE',
-            title: $it('table_label.warehouseNo'), // '仓库编号',
+            title: $it('tL.warehouseNo'), // '仓库编号',
           },
         ],
         data: [], // 数据配置

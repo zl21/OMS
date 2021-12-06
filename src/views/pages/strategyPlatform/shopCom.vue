@@ -173,7 +173,7 @@ export default {
             // type: 'index',
             width: 60,
             align: 'left',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             render: (h, params) => {
               return h('span', {}, (this.tabConfigQu.pageIndex - 1) * this.tabConfigQu.pageSize + params.index + 1)
             }
@@ -257,7 +257,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
           },
           {
             title: '店铺名称', // 
@@ -354,7 +354,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
-              name: $it('table_label.itemNo01'), // SPU编码
+              name: $it('tL.itemNo01'), // SPU编码
               readonly: false, // 是否可编辑，对应input   readonly属性
               valuedata: '', // 这个是选择的值
               pid: '',
@@ -430,7 +430,7 @@ export default {
                 fkdisplay: 'drp', // 外键关联类型
                 isfk: true, // 是否有fk键
                 isnotnull: true, // 是否必填
-                name: $it('table_label.shopName'), // 店铺名称
+                name: $it('tL.shopName'), // 店铺名称
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 valuedata: '', // 这个是选择的值
                 pid: '',
@@ -922,7 +922,7 @@ export default {
       for (let key of validFields) {
         if (!obj[key]) {
           // TODO! `明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : 'SPU编码'}不能为空`
-          this.$Message.error(`明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : $it('table_label.itemNo01')}不能为空`)
+          this.$Message.error(`明细中${key == 'CP_C_ORG_CHANNEL_ID' ? '最低成交价格' : $it('tL.itemNo01')}不能为空`)
           valid = false;
           break;
         }
@@ -1005,7 +1005,7 @@ export default {
     //     mes2 += $it('fL.bh') // 最低成交单价
     //   }
     //   if (!(CP_C_SHOP_ID || CP_C_ORG_CHANNEL_ID)) {
-    //     mes2 += ` SPU/${$it('table_label.code_SKU')}` // i18n SPU/SKU编码
+    //     mes2 += ` SPU/${$it('tL.code_SKU')}` // i18n SPU/SKU编码
     //   }
     //   mes2 = !mes2 ? '' : `${mes2} 不能为空` // TODO!
     //   if ((!(CP_C_SHOP_ID || CP_C_ORG_CHANNEL_ID)) && this.isMasterRequired && !isSaveAll) {

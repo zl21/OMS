@@ -18,7 +18,7 @@
       :model="formItem"
     >
       <!-- <FormItem label="旗帜:"> -->
-      <FormItem :label="$it('table_label.flag')">
+      <FormItem :label="$it('tL.flag')">
         <RadioGroup
           v-model="formItem.flag"
           @on-change="radioChange"

@@ -34,7 +34,7 @@ export default {
         formData: [
           {
             // label: "SKU编码",
-            label: $it('table_label.code_SKU'),
+            label: $it('tL.code_SKU'),
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -70,7 +70,7 @@ export default {
                   delete item.skuId;
                 });
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.code_SKU')) {
+                  if (item.label === $it('tL.code_SKU')) {
                     item.AuotData = data;
                     // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
@@ -86,7 +86,7 @@ export default {
           },
           {
             // label: "商品编码",
-            label: $it('table_label.productNo'),
+            label: $it('tL.productNo'),
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -110,7 +110,7 @@ export default {
                 const dimList = _this.formConfig.formData;
 
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.productNo')) {
+                  if (item.label === $it('tL.productNo')) {
                     item.AuotData = res.data.data.list;
                   }
                 });
@@ -132,12 +132,12 @@ export default {
       columns: [
         {
           // title: "SKU编码",
-          title: $it('table_label.code_SKU'),
+          title: $it('tL.code_SKU'),
           key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: $it('table_label.productName'),
+          title: $it('tL.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {

@@ -171,7 +171,7 @@ export default {
             }, */
             {
               style: 'input',
-              label: $it('table_label.buyerNickname'), // 买家昵称
+              label: $it('tL.buyerNickname'), // 买家昵称
               colname: 'buyerNick',
               width: '8',
               regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_@#$%^&*+=-><~“”‘’。.，,：；/、\\`\|!！……\(\)\（\）《》?？·]+)$/,

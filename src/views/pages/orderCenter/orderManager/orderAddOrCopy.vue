@@ -986,13 +986,13 @@ export default {
             align: 'center',
           },
           {
-            title: $it("table_label.serialNo"), // "序号",
+            title: $it("tL.serialNo"), // "序号",
             key: "index",
             type: "index",
             align: 'center',
           },
           {
-            title: $it("table_label.code_SKU"), // SKU编码
+            title: $it("tL.code_SKU"), // SKU编码
             key: "PS_C_SKU_ECODE",
             dataAcessKey: "PS_C_SKU_ECODE",
           },
@@ -1002,12 +1002,12 @@ export default {
             dataAcessKey: "PS_C_SKU_ENAME",
           },
           {
-            title: $it("table_label.itemNo01"), // SPU编码
+            title: $it("tL.itemNo01"), // SPU编码
             key: "PS_C_PRO_ECODE",
             dataAcessKey: "PS_C_PRO_ECODE",
           },
           {
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
             key: "PS_C_PRO_ENAME",
             dataAcessKey: "PS_C_PRO_ENAME",
           },
@@ -1017,7 +1017,7 @@ export default {
             dataAcessKey: "PRICE",
           },
           {
-            title: $it("table_label.unitPrice"), // 成交单价
+            title: $it("tL.unitPrice"), // 成交单价
             key: "PRICE_ACTUAL",
             /* render: (h, params) => {
               const self = this;
@@ -1101,7 +1101,7 @@ export default {
             }, */
           },
           {
-            title: $it("table_label.quantities"), // 数量
+            title: $it("tL.quantities"), // 数量
             key: "QTY",
             dataAcessKey: "QTY",
             render: (h, params) => {
@@ -1155,7 +1155,7 @@ export default {
             }
           },
           {
-            title: $it("table_label.transactionAmount"), // 成交金额
+            title: $it("tL.transactionAmount"), // 成交金额
             key: "REAL_AMT",
             dataAcessKey: "REAL_AMT",
             render: (h, params) => {
@@ -1233,7 +1233,7 @@ export default {
             },
           },
           {
-            title: $it("table_label.adjustment_amount"), // 调整金额
+            title: $it("tL.adjustment_amount"), // 调整金额
             key: "ADJUST_AMT",
             dataAcessKey: "ADJUST_AMT",
             render: (h, params) =>

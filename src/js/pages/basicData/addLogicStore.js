@@ -102,7 +102,7 @@
             },
             {
               style: 'textarea',
-              label: $it('table_label.remarks'), // 备注
+              label: $it('tL.remarks'), // 备注
               value: 'REMARK',
               width: '24',
               disabled: false,

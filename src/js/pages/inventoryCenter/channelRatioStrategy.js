@@ -58,7 +58,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: window.$it('table_label.remarks'), // 备注
+            label: window.$it('tL.remarks'), // 备注
             value: 'REMARK', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持

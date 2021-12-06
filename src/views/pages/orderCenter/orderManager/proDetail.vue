@@ -51,7 +51,7 @@
         tableConfig: {
           columns: [
             {
-              title: $it('table_label.operation'), // 操作
+              title: $it('tL.operation'), // 操作
               key: 'OPARATE_BUTTON',
               render: (h, params)=> h('a', {
                 on: {
@@ -67,7 +67,7 @@
                         props: {
                           columns: [
                             {
-                              title: $it('table_label.serialNo'), // 序号
+                              title: $it('tL.serialNo'), // 序号
                               key: 'Index',
                               type: 'index',
                             },

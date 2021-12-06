@@ -73,7 +73,7 @@ export default {
       const isNum = /^[0-9]*$/.test(value);// 判断输入的是否是数字
       this.$set(this, 'count', event.target.value = (isNum && Number(value) !== 0) ? Number(value) : '');
       if (this.objid == -1) {
-        const index = this.inputList.findIndex(n => n.name === window.$it('table_label.quantities'));
+        const index = this.inputList.findIndex(n => n.name === window.$it('tL.quantities'));
         if (index != -1) {
           this.inputList[index].valuedata = this.count;
           this.$emit('getChangeItem', this.inputList[index]);
@@ -517,7 +517,7 @@ export default {
   },
   mounted() {
     this.inputList.map((obj) => {
-      if (obj.name === window.$it('table_label.quantities')) {
+      if (obj.name === window.$it('tL.quantities')) {
         this.matrixcoll = obj.colname;
         this.matrixnum = obj.defnum;// 默认数量
         this.isInputShow = obj.qtyisshow;

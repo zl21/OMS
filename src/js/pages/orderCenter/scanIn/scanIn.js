@@ -817,7 +817,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'REAL_REMARK',
             width: '6',
           },
@@ -933,13 +933,13 @@ export default {
             type: 'asc',
           },
           {
-            title: $it('table_label.productNo'), // 商品编码
+            title: $it('tL.productNo'), // 商品编码
             key: 'PS_C_PRO_ECODE',
             width: '',
             type: 'asc',
           },
           {
-            title: $it('table_label.productName'), // 商品名称
+            title: $it('tL.productName'), // 商品名称
             key: 'PS_C_PRO_ENAME',
             width: '',
             type: 'asc',
@@ -998,7 +998,7 @@ export default {
             type: 'asc',
           },
           {
-            title: $it('table_label.quantities'), // 数量
+            title: $it('tL.quantities'), // 数量
             key: 'QTY',
             width: '',
             type: 'asc',
@@ -1768,7 +1768,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.buyerNickname'), // 买家昵称
+            label: $it('tL.buyerNickname'), // 买家昵称
             width: '6',
             value: 'BUYER_NICK',
           },

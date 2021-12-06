@@ -22,7 +22,7 @@ export default {
           key: 'id'
         },
         {
-          title: $it('table_label.abnormalInfo'), // 异常信息
+          title: $it('tL.abnormalInfo'), // 异常信息
           key: 'error'
         }
       ],
@@ -741,11 +741,11 @@ export default {
       let tempObj = {
         'other.platForm': 'PLATFORM',
         'other.warehousingLogicalWarehouse': 'CP_C_STORE_ID',
-        'table_label.expressCompany': 'CP_C_LOGISTICS_ID',
+        'tL.expressCompany': 'CP_C_LOGISTICS_ID',
         'fL.warehousingEntity': 'CP_C_PHY_WAREHOUSE_IN_ID',
         'fL.shipPhysicalWarehouse': 'CP_C_PHY_WAREHOUSE_ID',
-        'table_label.shopName': 'CP_C_SHOP_ID',
-        'table_label.creator': 'OWNERID'
+        'tL.shopName': 'CP_C_SHOP_ID',
+        'tL.creator': 'OWNERID'
       };
       _this.formConfig.formData.forEach(item => {
         if (Object.keys(tempObj).includes(item.itemdata?.name)) {

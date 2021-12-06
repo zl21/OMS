@@ -264,13 +264,13 @@ const changeWarehouse = {
             {
               colname: "ename",
               // name: "发货仓库名称",
-              name: $it("table_label.deliveryWarehouse_name"),
+              name: $it("tL.deliveryWarehouse_name"),
               show: true,
             },
             {
               colname: "ecode",
               // name: "发货仓库编码",
-              name: $it("table_label.deliveryWarehouse_code"),
+              name: $it("tL.deliveryWarehouse_code"),
               show: false,
             },
           ],
@@ -313,13 +313,13 @@ const changeWarehouse = {
           {
             colname: "ename",
             // name: "发货仓库名称",
-            name: $it("table_label.deliveryWarehouse_name"),
+            name: $it("tL.deliveryWarehouse_name"),
             show: true,
           },
           {
             colname: "ecode",
             // name: "发货仓库编码",
-            name: $it("table_label.deliveryWarehouse_code"),
+            name: $it("tL.deliveryWarehouse_code"),
             show: false,
           },
         ],

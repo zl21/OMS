@@ -44,7 +44,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.platform_barcode_ID'), // '平台条码ID',
+            label: $it('tL.platform_barcode_ID'), // '平台条码ID',
             value: 'SKU_ID',
             width: '6'
           },
@@ -55,7 +55,7 @@ export default {
             width: '6'
           },
           {
-            label: $it('table_label.shopName'), // '店铺名称',
+            label: $it('tL.shopName'), // '店铺名称',
             value: 'CP_C_SHOP_TITLE',
             style: 'popInput', // 输入框弹框单多选
             width: '6',
@@ -66,13 +66,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: $it('table_label.shopName'), // '店铺名称',
+              fkdesc: $it('tL.shopName'), // '店铺名称',
               inputname: 'ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.shopName'), // '店铺名称',
+              name: $it('tL.shopName'), // '店铺名称',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               row: 1,
@@ -178,7 +178,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.seller_nickname'), // '卖家昵称',
+            label: $it('tL.seller_nickname'), // '卖家昵称',
             value: 'SELLER_NICK',
             width: '6'
           },
@@ -266,11 +266,11 @@ export default {
       jordanTableConfig: {
         columns: [
           {
-            title: $it('table_label.creationTime'), // '创建时间',
+            title: $it('tL.creationTime'), // '创建时间',
             key: 'CREATIONDATE'
           },
           {
-            title: $it('table_label.shopName'), // '店铺名称',
+            title: $it('tL.shopName'), // '店铺名称',
             key: 'CP_C_SHOP_TITLE'
           },
           {
@@ -282,7 +282,7 @@ export default {
             key: 'NUMIID'
           },
           {
-            title: $it('table_label.platform_barcode_ID'), // '平台条码ID',
+            title: $it('tL.platform_barcode_ID'), // '平台条码ID',
             key: 'SKU_ID'
           },
           {
@@ -310,15 +310,15 @@ export default {
             key: 'BATCHNO'
           },
           {
-            title: $it('table_label.extendedProperties'), // '扩展属性',
+            title: $it('tL.extendedProperties'), // '扩展属性',
             key: 'PROPERTIES'
           },
           {
-            title: $it('table_label.seller_nickname'), // '卖家昵称',
+            title: $it('tL.seller_nickname'), // '卖家昵称',
             key: 'SELLER_NICK'
           },
           {
-            title: $it('table_label.remarks'), // 备注
+            title: $it('tL.remarks'), // 备注
             key: 'REMARK'
           },
           // {

@@ -68,7 +68,7 @@ export default {
             type: 'index',
             width: 60,
             align: 'left',
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
           },
           {
             title: '商品类型', // 商品类型

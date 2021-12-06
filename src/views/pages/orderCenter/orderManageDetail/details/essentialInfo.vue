@@ -6,7 +6,7 @@
       <div class="order-tab-left order-tab-content">
         <div class="order-tab-title">
           <!-- 收货信息 -->
-          <span>{{ $it('table_label.receivingInfo') }}</span>
+          <span>{{ $it('tL.receivingInfo') }}</span>
           <div class="title-right">
             <p v-if="butArr[0]['isShow']"  @click="eyeClick">
               <span>

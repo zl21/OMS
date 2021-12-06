@@ -91,7 +91,7 @@
           <table>
             <thead>
               <tr>
-                <td>{{ $it("table_label.serialNo") }}</td>
+                <td>{{ $it("tL.serialNo") }}</td>
                 <td
                   v-for="(list, index) of rightListHead[activeName]"
                   :key="index"
@@ -147,8 +147,8 @@
               </tr>
               <tr>
                 <td colspan="5" style="color: red">
-                  {{ $it("table_label.total") }}{{ rightListBody.length
-                  }}{{ $it("table_label.rows") }}
+                  {{ $it("tL.total") }}{{ rightListBody.length
+                  }}{{ $it("tL.rows") }}
                 </td>
               </tr>
             </tbody>

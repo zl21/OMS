@@ -39,7 +39,7 @@ export default {
         {
           width: '6',
           column: 'SOURCE_CODE',
-          label: $it('table_label.platform_orderNo') + ':', // 平台单号 输入框前文字
+          label: $it('tL.platform_orderNo') + ':', // 平台单号 输入框前文字
         },
         {
           flag: false, // 需要加*
@@ -109,7 +109,7 @@ export default {
           flag: false, // 需要加*
           width: '12',
           column: 'BUYER_NICK',
-          label: $it('table_label.buyerNickname') + ':', // 买家昵称
+          label: $it('tL.buyerNickname') + ':', // 买家昵称
         },
         {
           flag: false,

@@ -98,7 +98,7 @@ export default {
           itemdata: {
             colid: '165990',
             colname: 'PS_C_PRO_ID',
-            name: $it('table_label.itemNo01'), // SPU编码
+            name: $it('tL.itemNo01'), // SPU编码
             valuedata: '',
             pid: '',
             fkdisplay: 'drp',

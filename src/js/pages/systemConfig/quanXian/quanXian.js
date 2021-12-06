@@ -147,17 +147,17 @@ export default {
     // const { customizedModuleName } = this.$route.params;
     this.sensitiveColumns = [
       {
-        title: $it('table_label.sensitiveColumn'),
+        title: $it('tL.sensitiveColumn'),
         // title: "敏感列",
         key: 'CP_C_COLUMN_ENAME'
       },
       {
-        title: $it('table_label.view'),
+        title: $it('tL.view'),
         // title: "查看",
         key: 'IS_READ'
       },
       {
-        title: $it('table_label.edit'),
+        title: $it('tL.edit'),
         // title: "编辑",
         key: 'IS_WRITE'
       }

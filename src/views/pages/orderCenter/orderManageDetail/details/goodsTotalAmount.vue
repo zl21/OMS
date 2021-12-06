@@ -30,7 +30,7 @@
       <li>
         <!-- 调整金额 -->
         <!-- <label>调整金额</label> -->
-        <label title="$it('table_label.adjustment_amount')">{{$it('table_label.adjustment_amount')}}</label>
+        <label title="$it('tL.adjustment_amount')">{{$it('tL.adjustment_amount')}}</label>
         <p>{{ orderOrder.ADJUST_AMT }}</p>
       </li>
       <li class="symbol">=</li>

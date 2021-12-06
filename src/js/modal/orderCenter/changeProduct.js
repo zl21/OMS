@@ -34,7 +34,7 @@ export default {
           },
           formData: [
             {
-              label: $it('table_label.code_SKU'), // '商品SKU',
+              label: $it('tL.code_SKU'), // '商品SKU',
               style: 'dimSearch',
               width: '12',
               value: 'searchValue',
@@ -51,7 +51,7 @@ export default {
               },
             },
             {
-              label: $it('table_label.itemNo01'), // '商品款号',
+              label: $it('tL.itemNo01'), // '商品款号',
               style: 'dimSearch',
               width: '12',
               value: 'psCProEcode',
@@ -70,7 +70,7 @@ export default {
               },
             },
             {
-              label: $it("table_label.itemNo02"),
+              label: $it("tL.itemNo02"),
               style: 'dimSearch',
               width: '12',
               value: 'proName',
@@ -113,15 +113,15 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: $it('table_label.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $it('table_label.itemNo01'), // SPU编码
+            title: $it('tL.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
@@ -158,7 +158,7 @@ export default {
           },
           formData: [
             {
-              label: $it('table_label.code_SKU'), // '商品SKU',
+              label: $it('tL.code_SKU'), // '商品SKU',
               style: 'dimSearch',
               width: '12',
               value: 'searchValue',
@@ -176,7 +176,7 @@ export default {
               },
             },
             {
-              label: $it('table_label.itemNo01'), // '商品款号',
+              label: $it('tL.itemNo01'), // '商品款号',
               style: 'dimSearch',
               width: '12',
               value: 'psCProEcode',
@@ -194,7 +194,7 @@ export default {
               },
             },
             {
-              label: $it("table_label.itemNo02"),
+              label: $it("tL.itemNo02"),
               style: 'dimSearch',
               width: '12',
               value: 'proName',
@@ -238,15 +238,15 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: $it('table_label.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $it('table_label.itemNo01'), // SPU编码
+            title: $it('tL.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',

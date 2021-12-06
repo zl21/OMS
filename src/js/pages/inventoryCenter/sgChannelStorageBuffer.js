@@ -54,7 +54,7 @@ export default {
           },
           {
             style: 'input', // 文本录入
-            label: $it('table_label.platform_barcode_ID'), // '平台条码ID',
+            label: $it('tL.platform_barcode_ID'), // '平台条码ID',
             value: 'SKU_ID',
             width: '6'
           },
@@ -104,7 +104,7 @@ export default {
             key: 'CP_C_SHOP_TITLE'
           },
           {
-            title: $it('table_label.platform_barcode_ID'), // '平台条码ID',
+            title: $it('tL.platform_barcode_ID'), // '平台条码ID',
             key: 'SKU_ID'
           },
           {
@@ -124,7 +124,7 @@ export default {
             key: 'DEL_STATUS'
           },
           {
-            title: $it('table_label.creationTime'), // '创建时间',
+            title: $it('tL.creationTime'), // '创建时间',
             key: 'CREATIONDATE'
           } /* ,
             {

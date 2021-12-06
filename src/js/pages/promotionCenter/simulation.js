@@ -66,7 +66,7 @@ export default {
             isfk: true,
             isnotnull: true,
             // name: "店铺名称",
-            name: $it('table_label.shopName'),
+            name: $it('tL.shopName'),
             readonly: false,
             refobjid: '',
             valuedata: '',

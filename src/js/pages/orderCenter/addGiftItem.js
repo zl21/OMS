@@ -51,7 +51,7 @@ export default {
 
           {
             style: 'input', //输入框类型
-            label: $it('table_label.buyerNickname'),
+            label: $it('tL.buyerNickname'),
             // '买家昵称', //输入框前文字
             value: 'BUYER_NICK', //输入框的值
             columns: ['BUYER_NICK'],
@@ -188,7 +188,7 @@ export default {
           }
         },
         {
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
           width: 50,
           key: "index"
         }
@@ -233,7 +233,7 @@ export default {
           } else {
             let typeArr = [{
               type: 'index',
-              title: $it('table_label.serialNo'), // 序号
+              title: $it('tL.serialNo'), // 序号
               width: 60,
               align: 'center'
             }]

@@ -134,7 +134,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               istooltip: true,
-              name: $it('table_label.shopName'), // 店铺名称
+              name: $it('tL.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID
@@ -186,7 +186,7 @@ export default {
             options: [
               {
                 value: 1,
-                label: $it('table_label.product_title'), // 商品标题
+                label: $it('tL.product_title'), // 商品标题
               },
               {
                 value: 2,

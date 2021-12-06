@@ -62,7 +62,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.warehouseName'), // 仓库名称 // 赔付类型
+              name: $it('tL.warehouseName'), // 仓库名称 // 赔付类型
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 169092, // 对应的表ID
@@ -145,7 +145,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             colname: 'REMARK',
             value: 'REMARK',
             width: '6',

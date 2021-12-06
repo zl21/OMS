@@ -229,19 +229,19 @@ export default {
             {
               colname: 'ename',
               // name: "快递名称",
-              name: $it('table_label.expressName'),
+              name: $it('tL.expressName'),
               show: true,
             },
             {
               colname: 'ecode',
               // name: "快递编码",
-              name: $it('table_label.expressCode'),
+              name: $it('tL.expressCode'),
               show: false,
             },
             {
               colname: 'shortName',
               // name: "简称",
-              name: $it('table_label.abbreviation'),
+              name: $it('tL.abbreviation'),
               show: false,
             },
           ],

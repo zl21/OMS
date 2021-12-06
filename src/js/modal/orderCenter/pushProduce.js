@@ -37,7 +37,7 @@ export default {
         formData: [
           {
             // label: "商品SKU",
-            label: $it('table_label.commoditySKU'),
+            label: $it('tL.commoditySKU'),
             style: 'dimSearch',
             width: '12',
             value: 'searchValue',
@@ -73,7 +73,7 @@ export default {
                   delete item.skuId;
                 });
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.commoditySKU')) {
+                  if (item.label === $it('tL.commoditySKU')) {
                     item.AuotData = data;
                     // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
                   }
@@ -92,7 +92,7 @@ export default {
           },
           {
             // label: "商品款号",
-            label: $it('table_label.itemNo'),
+            label: $it('tL.itemNo'),
             style: 'dimSearch',
             width: '12',
             value: 'psCProEcode',
@@ -116,7 +116,7 @@ export default {
                 const dimList = _this.formConfig.formData;
 
                 dimList.forEach((item) => {
-                  if (item.label === $it('table_label.itemNo')) {
+                  if (item.label === $it('tL.itemNo')) {
                     item.AuotData = res.data.data.list;
                   }
                 });
@@ -144,22 +144,22 @@ export default {
       columns: [
         {
           // title: "商品SKU",
-          title: $it('table_label.commoditySKU'),
+          title: $it('tL.commoditySKU'),
           key: 'ECODE',
         },
         {
           // title: "商品名称",
-          title: $it('table_label.productName'),
+          title: $it('tL.productName'),
           key: 'PS_C_PRO_ENAME',
         },
         {
           // title: "商品SKU名称",
-          title: $it('table_label.productSKUname'),
+          title: $it('tL.productSKUname'),
           key: 'SPEC',
         },
         {
           // title: "数量",
-          title: $it('table_label.quantities'),
+          title: $it('tL.quantities'),
           key: 'qty',
         },
       ],

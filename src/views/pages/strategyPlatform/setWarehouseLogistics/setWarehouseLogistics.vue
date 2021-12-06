@@ -94,7 +94,7 @@
                       <tr>
                         <th style="min-width: 50px !important;">
                           <!-- 序号 -->
-                          {{ $it('table_label.serialNo') }}
+                          {{ $it('tL.serialNo') }}
                         </th>
                         <!-- <th>省</th> -->
                         <th>{{ $it('com.province') }}</th>
@@ -121,7 +121,7 @@
                     <thead style="display:none;">
                       <tr>
                         <th style="min-width: 50px !important;">
-                          {{ $it('table_label.serialNo') }}
+                          {{ $it('tL.serialNo') }}
                         </th>
                         <th>{{ $it('com.province') }}</th>
                         <th v-if="cityThead">

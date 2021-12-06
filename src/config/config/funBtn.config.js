@@ -990,7 +990,7 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $it('table_label.serialNo'), // 序号
+                        title: $it('tL.serialNo'), // 序号
                         key: 'index',
                       },
                       {
@@ -1844,7 +1844,7 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $it('table_label.serialNo'), // 序号
+                        title: $it('tL.serialNo'), // 序号
                         key: 'INDEX',
                       },
                       {

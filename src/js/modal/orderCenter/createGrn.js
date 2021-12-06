@@ -43,7 +43,7 @@ export default {
       //     },
       //     {
       //       colname: 'ENAME',
-      //       name: $it('table_label.a3'), // '日程归属名称',
+      //       name: $it('tL.a3'), // '日程归属名称',
       //       show: true,
       //       isak: true
       //     },

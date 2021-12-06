@@ -54,7 +54,7 @@ const waterMarkMap = {
 const addDetailModalTableColumns = [
 	{
 		key: 'PS_C_PRO_ECODE',
-		title: $it('table_label.productNo'), // 商品编码
+		title: $it('tL.productNo'), // 商品编码
 	},
 	{
 		key: 'PS_C_PRO_ENAME',

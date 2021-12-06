@@ -132,7 +132,7 @@ export default {
             version: '1.4',
             colname: 'cpCShopTitle',
             style: 'popInput', // 输入框弹框单多选
-            label: $it('table_label.shopName'), // 店铺名称
+            label: $it('tL.shopName'), // 店铺名称
             width: '10',
             itemdata: {
               col: 1,
@@ -145,7 +145,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('table_label.shopName'), // 店铺名称
+              name: $it('tL.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_PRO_CLASSIFY', // 对应的表
               reftableid: 10285, // 对应的表ID
@@ -500,11 +500,11 @@ export default {
       },
       columns2: [
         {
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
           key: 'index'
         },
         {
-          title: $it('table_label.itemNo01'), // SPU编码
+          title: $it('tL.itemNo01'), // SPU编码
           key: 'psCProEcode'
         },
         {
@@ -512,7 +512,7 @@ export default {
           key: 'psCSkuEcode'
         },
         {
-          title: $it("table_label.itemNo02"), // SPU名称
+          title: $it("tL.itemNo02"), // SPU名称
           key: 'psCProEname'
         },
         {
@@ -520,7 +520,7 @@ export default {
           key: 'psCSkuEname'
         },
         {
-          title: $it('table_label.operation'), // 操作
+          title: $it('tL.operation'), // 操作
           key: 'action',
           fixed: 'right',
           render: (h, params) => {
@@ -719,7 +719,7 @@ export default {
             align: 'center'
           },
           {
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             key: 'index'
           },
           {
@@ -748,11 +748,11 @@ export default {
         isShowSelection: false,
         columns: [
           {
-            title: $it('table_label.serialNo'), // 序号
+            title: $it('tL.serialNo'), // 序号
             key: 'index'
           },
           {
-            title: $it('table_label.itemNo01'), // SPU编码
+            title: $it('tL.itemNo01'), // SPU编码
             key: 'psCProEcode'
           },
           {
@@ -760,7 +760,7 @@ export default {
             key: 'psCSkuEcode'
           },
           {
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
             key: 'psCProEname'
           },
           {
@@ -768,7 +768,7 @@ export default {
             key: 'psCSkuEname'
           },
           {
-            title: $it('table_label.operation'), // 操作
+            title: $it('tL.operation'), // 操作
             key: 'action',
             fixed: 'right',
             render: (h, params) => {
@@ -814,7 +814,7 @@ export default {
           key: 'cpCRegionCityEname'
         },
         {
-          title: $it('table_label.operation'), // 操作
+          title: $it('tL.operation'), // 操作
           key: 'action',
           fixed: 'right',
           render: (h, params) => {

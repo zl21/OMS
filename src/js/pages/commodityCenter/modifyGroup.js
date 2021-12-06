@@ -121,7 +121,7 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
-            name: $it('table_label.brand'), // 品牌
+            name: $it('tL.brand'), // 品牌
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'PS_C_BRAND', // 对应的表
             reftableid: 166035, // 对应的表ID
@@ -303,7 +303,7 @@ export default {
             }
           },
           {
-            label: $it('table_label.code_SKU'), // SKU编码
+            label: $it('tL.code_SKU'), // SKU编码
             style: 'dimSearch',
             width: '6',
             value: 'gbCode',
@@ -330,7 +330,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.grouping'), // 分组
+            label: $it('tL.grouping'), // 分组
             value: 'GROUPNUM',
             disabled: false,
             dataAcessKey: 'GROUPNUM',
@@ -354,7 +354,7 @@ export default {
           align: 'center',
         },
         {
-          title: $it('table_label.code_SKU'), // SKU编码
+          title: $it('tL.code_SKU'), // SKU编码
           key: 'ECODE'
         },
         {
@@ -366,7 +366,7 @@ export default {
           key: 'PRICE_RETAIL'
         },
         {
-          title: $it('table_label.grouping'), // 分组
+          title: $it('tL.grouping'), // 分组
           key: 'GROUPNUM'
         },
         {
@@ -420,7 +420,7 @@ export default {
         },
         businessFormConfig: {
           formData: [{
-            label: $it('table_label.code_SKU'), // SKU编码
+            label: $it('tL.code_SKU'), // SKU编码
             style: 'dimSearch',
             width: '6',
             value: 'gbCode',
@@ -472,7 +472,7 @@ export default {
           align: 'center',
         },
         {
-          title: $it('table_label.code_SKU'), // SKU编码
+          title: $it('tL.code_SKU'), // SKU编码
           key: 'ECODE'
         },
         {
@@ -649,7 +649,7 @@ export default {
       } else if (!self.formConfig.formValue.price_retail) {
         str += `${$it('fL.cu')} `; // 零售价
       } else if (!self.formConfig.formData.filter(item => item.colname == 'PS_C_BRAND_ID')[0].itemdata.pid) {
-        str += `${$it('table_label.brand')} `; // 品牌
+        str += `${$it('tL.brand')} `; // 品牌
       } else if (!self.formConfig.formData.filter(item => item.colname == 'PS_C_PRO_CLASSIFY_ID')[0].itemdata.pid) {
         str += $it('menu.ac') // 商品分类
       }

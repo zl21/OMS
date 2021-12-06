@@ -24,11 +24,11 @@ export default {
       // 以上为模糊搜索测试数据
       theadTitle: [
         {
-          LOGISTICS_NO: $it('table_label.expressNo'),
-          CP_C_LOGISTICS_ENAME: $it('table_label.expressCompany'),
-          BILL_NO: $it('table_label.orderNo'),
+          LOGISTICS_NO: $it('tL.expressNo'),
+          CP_C_LOGISTICS_ENAME: $it('tL.expressCompany'),
+          BILL_NO: $it('tL.orderNo'),
           SOURCE_CODE: $it('fL.platform_billNo'),
-          CP_C_PHY_WAREHOUSE_ENAME: $it('table_label.warehouseName')
+          CP_C_PHY_WAREHOUSE_ENAME: $it('tL.warehouseName')
         }
       ],
       isActive: true, // 商品编码搜索框是否显示 true为显示,false隐藏
@@ -69,7 +69,7 @@ export default {
                 } else if (!masterForm.CP_C_PHY_WAREHOUSE_ID) {
                   promptMessage += $it('fL.physicalWarehouseName');
                 } else if (!masterForm.LOGISTICS_NO) {
-                  promptMessage += $it('table_label.expressNo');
+                  promptMessage += $it('tL.expressNo');
                 }
               }
               if (promptMessage) {
@@ -122,11 +122,11 @@ export default {
         table: {
           columns: [
             {
-              title: $it('table_label.productNo'), // 商品编码
+              title: $it('tL.productNo'), // 商品编码
               key: 'PS_C_PRO_ECODE'
             },
             {
-              title: $it('table_label.productName'), // 商品名称
+              title: $it('tL.productName'), // 商品名称
               sortable: true,
               key: 'PS_C_PRO_ENAME',
               width: '',
@@ -145,19 +145,19 @@ export default {
               key: 'PS_C_SKU_ECODE'
             },
             {
-              title: $it('table_label.quantities'), // 数量
+              title: $it('tL.quantities'), // 数量
               key: 'QTY'
             },
             {
-              title: $it('table_label.standardPrice'), // 标准价
+              title: $it('tL.standardPrice'), // 标准价
               key: 'STANDARD_PRICE'
             },
             {
-              title: $it('table_label.actual_transactionPrice'), // 实际成交价
+              title: $it('tL.actual_transactionPrice'), // 实际成交价
               key: 'TRUE_PRICE'
             },
             {
-              title: $it('table_label.amountDue'), // 应付金额
+              title: $it('tL.amountDue'), // 应付金额
               key: 'PAYABLE_PRICE'
             }
           ], // 表头
@@ -235,7 +235,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.expressNo'), // 快递单号
+            label: $it('tL.expressNo'), // 快递单号
             value: 'LOGISTICS_NO',
             width: '8',
             inputenter: () => {
@@ -334,7 +334,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: window.$it('table_label.paymentWay'), // 支付方式
+            label: window.$it('tL.paymentWay'), // 支付方式
             width: '8', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             options: [
@@ -350,7 +350,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: $it('table_label.paymentTime'), // 付款时间
+            label: $it('tL.paymentTime'), // 付款时间
             value: 'PAY_TIME', // 输入框的值
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -367,27 +367,27 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.custName'), // 顾客姓名
+            label: $it('tL.custName'), // 顾客姓名
             value: 'CUSTOMER_NAME',
             width: '8',
             disabled: true
           },
           {
             style: 'input',
-            label: $it('table_label.custTelephone'), // 顾客电话
+            label: $it('tL.custTelephone'), // 顾客电话
             value: 'CUSTOMER_TEL',
             width: '8'
           },
           {
             style: 'input',
-            label: $it('table_label.alipay'), // 支付宝号
+            label: $it('tL.alipay'), // 支付宝号
             value: 'ALIPAY_ACCOUNT',
             width: '8',
             disabled: true
           },
           {
             style: 'input', // 文本录入
-            label: $it('table_label.vip_nickname'), // 会员昵称
+            label: $it('tL.vip_nickname'), // 会员昵称
             value: 'CUSTOMER_NICK',
             width: '8',
             disabled: true
@@ -401,7 +401,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.total_amountDue'), // 总应付金额
+            label: $it('tL.total_amountDue'), // 总应付金额
             value: 'PAYABLE_PRICE',
             width: '8',
             disabled: true
@@ -479,7 +479,7 @@ export default {
           {
             style: 'input',
             type: 'textarea',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'REMARK',
             width: '16'
           },
@@ -536,7 +536,7 @@ export default {
         formData: [
           {
             style: 'input', // 文本录入
-            label: $it('table_label.creator'), // 创建人
+            label: $it('tL.creator'), // 创建人
             value: 'OWNERENAME',
             width: '6',
             disabled: true
@@ -544,7 +544,7 @@ export default {
           {
             style: 'date',
             type: '',
-            label: $it('table_label.creationTime'), // 创建时间
+            label: $it('tL.creationTime'), // 创建时间
             value: 'CREATIONDATE',
             width: '6',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -552,14 +552,14 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.reviser'), // 修改人
+            label: $it('tL.reviser'), // 修改人
             value: 'MODIFIERNAME',
             width: '6',
             disabled: true
           },
           {
             style: 'date', // 输入框类型
-            label: $it('table_label.modificationTime'), // 修改时间
+            label: $it('tL.modificationTime'), // 修改时间
             value: 'MODIFIEDDATE',
             width: '6',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -600,11 +600,11 @@ export default {
             align: 'center'
           },
           {
-            title: $it('table_label.productNo'), // 商品编码
+            title: $it('tL.productNo'), // 商品编码
             key: 'PS_C_PRO_ECODE'
           },
           {
-            title: $it('table_label.productName'), // 商品名称
+            title: $it('tL.productName'), // 商品名称
             sortable: true,
             key: 'PS_C_PRO_ENAME',
             width: '',
@@ -627,7 +627,7 @@ export default {
             key: 'GBCODE'
           },
           {
-            title: $it('table_label.logicWarehouse'), // 逻辑仓
+            title: $it('tL.logicWarehouse'), // 逻辑仓
             key: 'LOGICAL_STORE_ID',
             render: (h, params) => {
               if (this.unAutitFlag) {
@@ -717,7 +717,7 @@ export default {
             }
           },
           {
-            title: $it('table_label.quantities'), // 数量
+            title: $it('tL.quantities'), // 数量
             key: 'QTY',
             render: (h, params) => {
               if (this.unAutitFlag) {
@@ -806,19 +806,19 @@ export default {
             }
           },
           {
-            title: $it('table_label.orderQuantity'), // 订单数量
+            title: $it('tL.orderQuantity'), // 订单数量
             key: 'ORDER_QTY'
           },
           {
-            title: $it('table_label.standardPrice'), // 标准价
+            title: $it('tL.standardPrice'), // 标准价
             key: 'STANDARD_PRICE'
           },
           {
-            title: $it('table_label.unitPrice'), // 成交单价
+            title: $it('tL.unitPrice'), // 成交单价
             key: 'DEAL_AMT'
           },
           {
-            title: $it('table_label.actual_transactionPrice'), // 实际成交价
+            title: $it('tL.actual_transactionPrice'), // 实际成交价
             key: 'TRUE_PRICE'
           },
           {
@@ -941,15 +941,15 @@ export default {
         pageSize: 5, // 每页条数
         columns: [
           {
-            title: $it('table_label.logContent'), // 日志内容
+            title: $it('tL.logContent'), // 日志内容
             key: 'LOG_CONTENT'
           },
           {
-            title: $it('table_label.operatorName'), // 操作姓名
+            title: $it('tL.operatorName'), // 操作姓名
             key: 'OWNERENAME'
           },
           {
-            title: $it('table_label.operatorTime'), // 操作时间
+            title: $it('tL.operatorTime'), // 操作时间
             key: 'CREATIONDATE'
           }
         ],

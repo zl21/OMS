@@ -18,7 +18,7 @@ export default {
           },
           formData: [
             {
-              label: $it('table_label.code_SKU'), // SKU编码
+              label: $it('tL.code_SKU'), // SKU编码
               style: 'dimSearch',
               width: '8',
               value: 'SKU_CODE',
@@ -35,7 +35,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $it('table_label.itemNo01'), // SPU编码
+              label: $it('tL.itemNo01'), // SPU编码
               style: 'dimSearch',
               width: '8',
               value: 'SPU_CODE',
@@ -50,7 +50,7 @@ export default {
             },
             {
               style: 'dimSearch', //输入框类型
-              label: $it("table_label.itemNo02"), // SPU名称 输入框前文字
+              label: $it("tL.itemNo02"), // SPU名称 输入框前文字
               value: 'SPU_NAE', //输入框的值
               columns: ['ENAME'],
               width: '8',
@@ -87,15 +87,15 @@ export default {
         columns: [
           {
             key: 'skuEcode',
-            title: $it('table_label.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $it('table_label.itemNo01'), // SPU编码
+            title: $it('tL.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',
@@ -488,15 +488,15 @@ export default {
           // },
           {
             key: 'skuEcode',
-            title: $it('table_label.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
           },
           {
             key: 'spuEcode',
-            title: $it('table_label.itemNo01'), // SPU编码
+            title: $it('tL.itemNo01'), // SPU编码
           },
           {
             key: 'spuEname',
-            title: $it("table_label.itemNo02"), // SPU名称
+            title: $it("tL.itemNo02"), // SPU名称
           },
           {
             key: 'skuEname',

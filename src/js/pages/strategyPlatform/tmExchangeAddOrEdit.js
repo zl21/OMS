@@ -66,7 +66,7 @@ export default {
               fkdisplay: 'drp', // 外键关联类型
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
-              name: $it('table_label.shopName'), // 店铺名称
+              name: $it('tL.shopName'), // 店铺名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 171534, // 对应的表ID

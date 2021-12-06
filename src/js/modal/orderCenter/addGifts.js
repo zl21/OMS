@@ -27,17 +27,17 @@ export default {
           {
             key: 'QTY',
             // title: "数量",
-            title: $it('table_label.quantities')
+            title: $it('tL.quantities')
           },
           {
             key: 'PS_C_PRO_ENAME',
             // title: "商品名称",
-            title: $it('table_label.productName')
+            title: $it('tL.productName')
           },
           {
             key: 'IS_GIFT',
             // title: "是否赠品",
-            title: $it('table_label.whetherGift'),
+            title: $it('tL.whetherGift'),
             render: (h, params) => {
               const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
               return h('span', {}, IS_GIFT);
@@ -46,7 +46,7 @@ export default {
           {
             key: 'IS_DELETE',
             // title: "操作",
-            title: $it('table_label.operation'),
+            title: $it('tL.operation'),
             render: (h, params) => h(
               'a',
               {
@@ -175,12 +175,12 @@ export default {
         {
           key: 'QTY',
           // title: "数量",
-          title: $it('table_label.quantities')
+          title: $it('tL.quantities')
         },
         {
           key: 'PS_C_PRO_ENAME',
           // title: "商品名称",
-          title: $it('table_label.productName')
+          title: $it('tL.productName')
         },
         {
           key: 'GBCODE',
@@ -190,7 +190,7 @@ export default {
         {
           key: 'IS_GIFT',
           // title: "是否赠品",
-          title: $it('table_label.whetherGift')
+          title: $it('tL.whetherGift')
         }
       ];
       this.columns = cols;

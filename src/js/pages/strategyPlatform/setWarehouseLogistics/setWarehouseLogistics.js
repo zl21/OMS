@@ -238,7 +238,7 @@ export default {
       },
       {
         style: 'input',
-        label: $it('table_label.remarks'),
+        label: $it('tL.remarks'),
         value: 'REMARK',
         width: '6'
       }

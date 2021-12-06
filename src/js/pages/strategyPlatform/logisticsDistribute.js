@@ -202,7 +202,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('table_label.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'remark',
             colname: 'remark',
             width: '8',
@@ -434,7 +434,7 @@ export default {
           align: 'center'
         },
         {
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
           key: 'index'
         },
         {

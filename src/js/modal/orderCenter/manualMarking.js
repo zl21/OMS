@@ -38,7 +38,7 @@ export default {
             {
               style: 'input',
               // label: "买家昵称",
-              label: $it('table_label.buyerNickname'),
+              label: $it('tL.buyerNickname'),
               value: 'demo4',
               width: '8',
             },
@@ -142,7 +142,7 @@ export default {
           },
           {
             // title: "卖家昵称",
-            title: $it('table_label.seller_nickname'),
+            title: $it('tL.seller_nickname'),
             key: 'demo3',
           },
           {

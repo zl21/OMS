@@ -116,7 +116,7 @@ export default {
             type: 'asc'
           },
           {
-            title: $it('table_label.shopName'), // 店铺名称
+            title: $it('tL.shopName'), // 店铺名称
             key: 'CP_C_SHOP_TITLE',
             width: '',
             type: 'asc'

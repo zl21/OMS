@@ -41,7 +41,7 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
-            name: $it('table_label.supplierName'), // 供应商名称
+            name: $it('tL.supplierName'), // 供应商名称
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'CP_C_SUPPLIER', // 对应的表
             reftableid: 10222, // 对应的表ID
@@ -80,10 +80,10 @@ export default {
           type: 'index',
           width: 60,
           align: 'center',
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
         },
         {
-          title: $it('table_label.code_SKU'), // SKU编码
+          title: $it('tL.code_SKU'), // SKU编码
           key: 'ECODE'
         },
         {
@@ -126,7 +126,7 @@ export default {
           key: 'UNIT'
         },
         {
-          title: $it('table_label.remarks'), // 备注
+          title: $it('tL.remarks'), // 备注
           key: 'SPEC_REMARK'
         }
         ],
@@ -205,10 +205,10 @@ export default {
           type: 'index',
           width: 60,
           align: 'left',
-          title: $it('table_label.serialNo'), // 序号
+          title: $it('tL.serialNo'), // 序号
         },
         {
-          title: $it('table_label.supplierName'), // 供应商名称
+          title: $it('tL.supplierName'), // 供应商名称
           key: 'cpCSupplierName'
         },
         {
@@ -321,7 +321,7 @@ export default {
       formConfig: {
         formData: [{
           style: 'input',
-          label: $it('table_label.itemNo01'), // SPU编码
+          label: $it('tL.itemNo01'), // SPU编码
           value: 'ECODE',
           width: '8',
           disabled: false,
@@ -331,7 +331,7 @@ export default {
         },
         {
           style: 'input',
-          label: $it("table_label.itemNo02"), // SPU名称
+          label: $it("tL.itemNo02"), // SPU名称
           value: 'ENAME',
           width: '16',
           disabled: false,
@@ -378,7 +378,7 @@ export default {
             isnotnull: true, // 是否必填
             isuppercase: false, // 是否转大写
             length: 65535, // 最大长度是多少
-            name: $it('table_label.brand'), // 品牌
+            name: $it('tL.brand'), // 品牌
             readonly: false, // 是否可编辑，对应input   readonly属性
             reftable: 'PS_C_BRAND', // 对应的表
             reftableid: 166035, // 对应的表ID
@@ -945,15 +945,15 @@ export default {
       const data = self.formConfig.formValue;
       let str = '';
       if (!data.ECODE) {
-        str += `${$it('table_label.itemNo01')} `; // SPU编码
+        str += `${$it('tL.itemNo01')} `; // SPU编码
       } else if (!data.ENAME) {
-        str += `${$it('table_label.itemNo02')} `; // SPU名称
+        str += `${$it('tL.itemNo02')} `; // SPU名称
       } else if (!data.TYPE) {
         str += `${$it('fL.type')} `; // 类型
       }
       self.formConfig.formData.forEach(item => {
         if (item.colname == 'PS_C_BRAND_ID' && !item.itemdata.pid) {
-          str += `${$it('table_label.brand')} `; // 品牌
+          str += `${$it('tL.brand')} `; // 品牌
         } else if (item.colname == 'PS_C_PRO_CLASSIFY_ID' && !item.itemdata.pid) {
           str += `${$it('menu.ac')} `; // 商品分类
         }

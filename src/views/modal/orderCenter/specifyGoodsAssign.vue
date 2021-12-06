@@ -16,7 +16,7 @@
       </div>
       <!-- 商品SKU -->
       <div style="float: right" class="searchForm">
-        <!-- {{ $it("table_label.commoditySKU") }}: -->
+        <!-- {{ $it("tL.commoditySKU") }}: -->
         <!-- <Input
           v-model="searchValue"
           icon="ios-search"
@@ -111,7 +111,7 @@ export default {
           key: "ename",
         },
         {
-          title: $it("table_label.productName"), // 商品名称
+          title: $it("tL.productName"), // 商品名称
           key: "psCProEname",
         },
         {
@@ -262,7 +262,7 @@ export default {
                     props: {
                       columns: [
                         {
-                          title: $it('table_label.serialNo'), // 序号
+                          title: $it('tL.serialNo'), // 序号
                           key: 'index'
                         },
                         {

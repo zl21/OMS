@@ -379,7 +379,7 @@ export default {
           },
           {
             style: 'input', // 输入框弹框单多选
-            label: window.$it('table_label.buyerNickname'), // 买家昵称
+            label: window.$it('tL.buyerNickname'), // 买家昵称
             value: 'USER_NICK',
             dataAcessKey: 'USER_NICK',
             disabled: false,
@@ -425,7 +425,7 @@ export default {
           {
             style: 'date', // 输入框类型
             type: 'datetime', // 文本框类型的input
-            label: window.$it('table_label.paymentTime'), // 付款时间 输入框前文字
+            label: window.$it('tL.paymentTime'), // 付款时间 输入框前文字
             value: 'PAY_TIME', // 输入框的值
             dataAcessKey: 'PAY_TIME',
             disabled: false,
@@ -752,7 +752,7 @@ export default {
             gbCode: '',
           },
           formData: [{
-            label: window.$it('table_label.productNo'), // 商品编码
+            label: window.$it('tL.productNo'), // 商品编码
             style: 'dimSearch',
             width: '6',
             value: 'gbCode',
@@ -782,7 +782,7 @@ export default {
                       const dimList = _this.jordanTableConfig.businessFormConfig.formData;
                       dimList.forEach((item) => {
                         if (
-                          item.label === $it('table_label.productNo')
+                          item.label === $it('tL.productNo')
                         ) {
                           item.AuotData = res.data.data.list;
                         }
@@ -925,7 +925,7 @@ export default {
           align: 'center',
         },
         {
-          title: window.$it('table_label.productNo'), // 商品编码
+          title: window.$it('tL.productNo'), // 商品编码
           key: 'PS_C_PRO_ECODE',
           dataAcessKey: 'PS_C_PRO_ECODE',
         },
@@ -947,7 +947,7 @@ export default {
           dataAcessKey: 'PS_C_SKU_ECODE',
         },
         {
-          title: window.$it('table_label.productName'), // 商品名称
+          title: window.$it('tL.productName'), // 商品名称
           key: 'PS_C_PRO_ENAME',
           dataAcessKey: 'PS_C_PRO_ENAME',
           width: 100,
@@ -984,18 +984,18 @@ export default {
         },
         // 性别
         {
-          title: window.$it('table_label.gender'), // 性别
+          title: window.$it('tL.gender'), // 性别
           key: 'SEX_NAME',
           dataAcessKey: 'SEX',
         },
         // 性别
         {
-          title: window.$it('table_label.tagPrice'), // 吊牌价
+          title: window.$it('tL.tagPrice'), // 吊牌价
           key: 'RESERVE_DECIMAL02',
           dataAcessKey: 'RESERVE_DECIMAL02',
         },
         {
-          title: window.$it('table_label.unitPrice'), // 成交单价
+          title: window.$it('tL.unitPrice'), // 成交单价
           key: 'PRICE_ACTUAL',
           render: (h, params) => {
             const self = this;
@@ -1043,7 +1043,7 @@ export default {
           },
         },
         {
-          title: window.$it('table_label.quantities'), // 数量
+          title: window.$it('tL.quantities'), // 数量
           key: 'QTY',
           dataAcessKey: 'QTY',
           render: (h, params) => {
@@ -1098,7 +1098,7 @@ export default {
           dataAcessKey: 'AVAILABLE_QTY'
         },
         {
-          title: window.$it('table_label.transactionAmount'), // 成交金额
+          title: window.$it('tL.transactionAmount'), // 成交金额
           key: 'REAL_AMT',
           dataAcessKey: 'REAL_AMT',
           render: (h, params) => {
@@ -1147,7 +1147,7 @@ export default {
           },
         },
         {
-          title: window.$it('table_label.whetherGift'), // 是否赠品
+          title: window.$it('tL.whetherGift'), // 是否赠品
           key: 'IS_GIFT',
           dataAcessKey: 'IS_GIFT',
           render: (h, params) => h(
@@ -1179,13 +1179,13 @@ export default {
           ),
         },
         {
-          title: window.$it('table_label.adjustment_amount'),
+          title: window.$it('tL.adjustment_amount'),
           key: 'ADJUST_AMT',
           dataAcessKey: 'ADJUST_AMT',
           render: (h, params) => h('span', {}, Number(params.row.ADJUST_AMT).toFixed(2)),
         },
         {
-          title: window.$it('table_label.preferential_amount'),
+          title: window.$it('tL.preferential_amount'),
           key: 'AMT_DISCOUNT',
           dataAcessKey: 'AMT_DISCOUNT',
           render: (h, params) => h('span', {}, Number(params.row.AMT_DISCOUNT).toFixed(2)),

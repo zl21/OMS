@@ -22,7 +22,7 @@
         <!-- <input class="groupInput" type="text" v-model="itemdata.setGroupName" >-->
         <div class="setGroupName">
           <!-- 分组名称： -->
-          <i class="labelTitle">{{ $it('table_label.groupName') }}：</i><el-input
+          <i class="labelTitle">{{ $it('tL.groupName') }}：</i><el-input
             v-model="itemdata.setGroupName"
             class="groupInput"
           />
