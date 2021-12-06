@@ -148,7 +148,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.platform_billNo'), // 平台单号
+              label: $it('fL.platform_billNo'), // 平台单号
               colname: 'sourceCode',
               width: '8',
               regx: /^(\s*|[\u4E00-\u9FA5A-Za-z0-9_]+)$/,
@@ -164,7 +164,7 @@ export default {
             },
             /* {
               style: 'input',
-              label: $it('form_label.consignee'), // 收货人
+              label: $it('fL.consignee'), // 收货人
               colname: 'receiverName',
               width: '8',
               inputenter: () => this.queryEnter(1, 10)
@@ -179,7 +179,7 @@ export default {
             },
             /* {
               style: 'input',
-              label: $it('form_label.consignee_phone'), // 收货人手机
+              label: $it('fL.consignee_phone'), // 收货人手机
               colname: 'receiverMobile',
               width: '8',
               // regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,

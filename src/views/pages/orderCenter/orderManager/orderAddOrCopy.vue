@@ -997,7 +997,7 @@ export default {
             dataAcessKey: "PS_C_SKU_ECODE",
           },
           {
-            title: $it("form_label.skuName"), // SKU名称
+            title: $it("fL.skuName"), // SKU名称
             key: "PS_C_SKU_ENAME",
             dataAcessKey: "PS_C_SKU_ENAME",
           },
@@ -1012,7 +1012,7 @@ export default {
             dataAcessKey: "PS_C_PRO_ENAME",
           },
           {
-            title: $it("form_label.cu"), // 零售价
+            title: $it("fL.cu"), // 零售价
             key: "PRICE",
             dataAcessKey: "PRICE",
           },
@@ -1507,11 +1507,11 @@ export default {
         // 子表初始化（加两列
         if (self.copyType == '2') {
           const exCol = [{
-            title: $it("form_label.b3"), // 商品优惠
+            title: $it("fL.b3"), // 商品优惠
             key: "AMT_DISCOUNT",
           },
           {
-            title: $it("form_label.ct"), // 订单优惠
+            title: $it("fL.ct"), // 订单优惠
             key: "ORDER_SPLIT_AMT",
           },]
           self.jordanTableConfig.columns = self.jordanTableConfig.columns.concat(exCol);

@@ -214,7 +214,7 @@ const changeWarehouse = {
                     key: "BILL_NO",
                   },
                   {
-                    title: $it('form_label.e0'), // 失败原因
+                    title: $it('fL.e0'), // 失败原因
                     key: "RESULT_MSG",
                   },
                 ],

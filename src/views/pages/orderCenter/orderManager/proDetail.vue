@@ -17,7 +17,7 @@
       >
         <Icon type="ios-repeat" />
         <!-- 切换为sku商品显示 -->
-         {{$it('form_label.b0')}}
+         {{$it('fL.b0')}}
       </div>
       <div
         v-show="!isQh"
@@ -26,7 +26,7 @@
       >
         <Icon type="ios-repeat" />
         <!-- 切换平台商品明细 -->
-         {{$it('form_label.b1')}}
+         {{$it('fL.b1')}}
       </div>
     </div>
     <OmsTable

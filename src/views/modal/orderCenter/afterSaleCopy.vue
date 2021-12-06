@@ -29,17 +29,17 @@ export default {
               {
                 value: 1,
                 label: "丢件复制",
-                // label: $it('form_label.live_HOLD')
+                // label: $it('fL.live_HOLD')
               },
               {
                 value: 2,
                 label: "错漏发复制",
-                // label: $it('form_label.buyer_HOLD')
+                // label: $it('fL.buyer_HOLD')
               },
               {
                 value: 3,
                 label: "赠品复制",
-                // label: $it('form_label.live_HOLD')
+                // label: $it('fL.live_HOLD')
               },
             ],
           },

@@ -25,12 +25,12 @@
                 <div slot="CBX" class="cbx">
                   <i style="color: #ff9900; padding: 0 6px">*</i>
                   <!-- 退款类型 -->
-                  {{ $it("form_label.refundType") }}
+                  {{ $it("fL.refundType") }}
                   :&nbsp;&nbsp;&nbsp;&nbsp;
                   <RadioGroup v-model="BILL_TYPE" @on-change="billTypeChange">
                     <!-- 仅退款 -->
                     <Radio label="1">
-                      {{ $it("form_label.refundOnly") }}
+                      {{ $it("fL.refundOnly") }}
                     </Radio>
                     <!-- 退货退款 -->
                     <Radio
@@ -40,7 +40,7 @@
                       "
                       label="0"
                     >
-                      {{ $it("form_label.returnRefund") }}
+                      {{ $it("fL.returnRefund") }}
                     </Radio>
                   </RadioGroup>
                 </div>

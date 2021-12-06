@@ -107,7 +107,7 @@ export default {
           key: "ecode",
         },
         {
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
           key: "ename",
         },
         {
@@ -266,11 +266,11 @@ export default {
                           key: 'index'
                         },
                         {
-                          title: $it('form_label.billNo'), // 单据编号
+                          title: $it('fL.billNo'), // 单据编号
                           key: 'bollNo',
                         },
                         {
-                          title: $it('form_label.e0'), // 失败原因
+                          title: $it('fL.e0'), // 失败原因
                           key: 'message'
                         }
                       ],

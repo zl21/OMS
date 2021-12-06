@@ -10,7 +10,7 @@
       <!--商品来源-->
       <div class="row">
         <div class="form_label">
-          {{ $it("form_label.goods_source") }}：
+          {{ $it("fL.goods_source") }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -23,7 +23,7 @@
       <!--赠品翻倍-->
       <div class="row">
         <div class="form_label">
-          {{ $it("form_label.double_gifts") }}：
+          {{ $it("fL.double_gifts") }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -33,7 +33,7 @@
           />
           <!--最大翻倍次数 -->
           <div class="form_item">
-            {{ $it("form_label.max_doubling_times") }}
+            {{ $it("fL.max_doubling_times") }}
           </div>
           <div class="form_el_input form_item doubleNum">
             <input
@@ -47,7 +47,7 @@
       <!--选择商品方式 -- 赠送方式：-->
       <div class="row">
         <div class="form_label">
-          {{ $it("form_label.giving_ways") }}：
+          {{ $it("fL.giving_ways") }}：
         </div>
         <div class="form_content">
           <SingleBox

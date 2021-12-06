@@ -38,12 +38,12 @@
       <!-- <FormItem label="当前备注:" v-if="componentData.SELLER_MEMO"> -->
       <FormItem
         v-if="componentData.SELLER_MEMO"
-        :label="$it('form_label.current_remarks')"
+        :label="$it('fL.current_remarks')"
       >
         <p>{{ componentData.SELLER_MEMO }}</p>
       </FormItem>
       <!-- <FormItem label="修改备注:"> -->
-      <FormItem :label="$it('form_label.modify_remarks')">
+      <FormItem :label="$it('fL.modify_remarks')">
         <Input
           v-model="formItem.textarea"
           :autosize="{ minRows: 2, maxRows: 5 }"

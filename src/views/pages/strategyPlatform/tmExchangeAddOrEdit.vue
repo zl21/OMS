@@ -15,10 +15,10 @@
         </Panel>
         <Panel name="panel_condition" class="wrap">
           <!-- 满足条件 -->
-          {{ $it('form_label.meet_conditions') }}
+          {{ $it('fL.meet_conditions') }}
           <p slot="content">
             <!-- 自动同意换货 -->
-            <label>{{ $it('form_label.e3') }}:</label>
+            <label>{{ $it('fL.e3') }}:</label>
             <OmsForm :form-config="formConfig2">
               <template #exchangeDesc="{ rowData }">
                 <div class="changeForm">
@@ -71,7 +71,7 @@
               </template>
             </OmsForm>
             <!-- 自动拒绝换货 -->
-            <label style="position: relative; top: 12px;">{{ $it('form_label.e4') }}:</label>
+            <label style="position: relative; top: 12px;">{{ $it('fL.e4') }}:</label>
             <OmsForm :form-config="formConfig2">
               <template #stockout="{ rowData }">
                 <div class="changeForm">

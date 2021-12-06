@@ -80,7 +80,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $it('form_label.skuName'), // SKU名称
+              label: $it('fL.skuName'), // SKU名称
               style: 'dimSearch',
               width: '8',
               value: 'skuEname',

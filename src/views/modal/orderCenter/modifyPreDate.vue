@@ -24,7 +24,7 @@ export default {
         formData: [
           {
             style: 'date',
-            label: $it('form_label.e2'), // 预计发货时间
+            label: $it('fL.e2'), // 预计发货时间
             colname: 'dateTime',
             type: 'datetime',
             width: '24',

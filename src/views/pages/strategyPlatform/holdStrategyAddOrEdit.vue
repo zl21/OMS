@@ -22,7 +22,7 @@
         </Panel>
         <Panel name="panel_condition">
           <!-- 满足条件（满足以下条件的单据会进行hold单） -->
-          {{ $it('form_label.meet_conditions') }}（{{ $it('modalTitle.ad') }}）
+          {{ $it('fL.meet_conditions') }}（{{ $it('modalTitle.ad') }}）
           <p slot="content">
             <OmsForm :form-config="formConfig2" @keyDown="keyDown">
               <template #spec01="{ rowData }">

@@ -12,7 +12,7 @@
       <li>
         <div class="calculation-item bg">
           <!-- 商品实退金额 -->
-          <span :title="$it('form_label.cr')">{{ $it('form_label.cr') }}</span>
+          <span :title="$it('fL.cr')">{{ $it('fL.cr') }}</span>
           <label>{{ data.PRO_REAL_AMT }}</label>
         </div>
         <div class="calculation-item">
@@ -25,7 +25,7 @@
       <li>
         <div class="calculation-item">
           <!-- 应退运费 -->
-          <span :title="$it('form_label.cr')">{{ $it('form_label.ad') }}</span>
+          <span :title="$it('fL.cr')">{{ $it('fL.ad') }}</span>
           <label>
             <Input v-if="type && status" v-model="editData.SHIP_AMT" :regx="/^\d*\.{0,1}\d{0,2}$/" @on-change="inputChange()"/>
             <span v-else>
@@ -59,12 +59,12 @@
       <li>
         <div class="calculation-item">
           <!-- 最终应退总金额 -->
-          <span class="black" :title="$it('form_label.ae')">{{ $it('form_label.ae') }}</span>
+          <span class="black" :title="$it('fL.ae')">{{ $it('fL.ae') }}</span>
           <label>{{ data.FINAL_ACTUAL_AMT }}</label>
         </div>
         <div class="calculation-item bg">
           <!-- 最终实退总金额 -->
-          <span class="black" :title="$it('form_label.cs')">{{ $it('form_label.cs') }}</span>
+          <span class="black" :title="$it('fL.cs')">{{ $it('fL.cs') }}</span>
           <label>{{ data.FINAL_REAL_AMT }}</label>
         </div>
       </li>

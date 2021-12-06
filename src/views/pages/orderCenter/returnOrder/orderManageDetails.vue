@@ -91,11 +91,11 @@ export default {
           value: 'OC_B_ORDER_ITEM'
         },
         {
-          label: $it('form_label.preferential_info'), // 优惠信息
+          label: $it('fL.preferential_info'), // 优惠信息
           value: 'OC_B_ORDER_PROMOTION'
         },
         {
-          label: $it('form_label.shipping_info'), // 发货信息
+          label: $it('fL.shipping_info'), // 发货信息
           value: 'OC_B_ORDER_DELIVERY'
         },
         {

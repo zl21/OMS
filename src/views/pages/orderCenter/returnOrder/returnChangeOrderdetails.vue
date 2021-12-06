@@ -273,7 +273,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $it('form_label.skuName'), //sku名称
+              label: $it('fL.skuName'), //sku名称
               style: "dimSearch",
               width: "8",
               value: "ENAME",
@@ -371,7 +371,7 @@ export default {
       this.getBtn().then((res) => {
         let BtnConfig = this.actionTableCon.businessButtonConfig.buttons;
         // 换货明细
-        if (this.$parent.$parent.panelRef === $it('form_label.exchangeDetails')) {
+        if (this.$parent.$parent.panelRef === $it('fL.exchangeDetails')) {
           BtnConfig[0].isShow = false;
           BtnConfig[1].isShow = true;
           BtnConfig[2].isShow = false;
@@ -389,7 +389,7 @@ export default {
           }
           this.actionTableCon.data = this.toMainData.huan;
           // 退货明细
-        } else if (this.$parent.$parent.panelRef === $it('form_label.returnDetails')) {
+        } else if (this.$parent.$parent.panelRef === $it('fL.returnDetails')) {
           // 平台
           if (this.$route.query.RETURN_SOURCE == $it('other.platForm')) {
             BtnConfig[0].isShow = false;
@@ -515,12 +515,12 @@ export default {
       this.orderStatus = OC_B_RETURN_ORDER.RETURN_STATUS;
       this.actionTableCon.columns =
         // 退货明细
-        this.$parent.$parent.panelRef === $it('form_label.returnDetails')
+        this.$parent.$parent.panelRef === $it('fL.returnDetails')
           ? REFUND_ITEM_TABTH
           : EXCHANGE_ITEM_TABTH; //表头
       this.renderColumn =
         // 退货明细
-        this.$parent.$parent.panelRef === $it('form_label.returnDetails')
+        this.$parent.$parent.panelRef === $it('fL.returnDetails')
           ? REFUND_ITEM_TABTH
           : EXCHANGE_ITEM_TABTH; // render
       // 退款金额
@@ -555,7 +555,7 @@ export default {
         // 初始赋值
         let renderArr =
           // 退货明细
-          this.$parent.$parent.panelRef === $it('form_label.returnDetails')
+          this.$parent.$parent.panelRef === $it('fL.returnDetails')
             ? ["REFUND_ID", "QTY_REFUND"]
             : ["QTY_EXCHANGE", "AMT_EXCHANGE"]; // render
         // 手工新增
@@ -565,7 +565,7 @@ export default {
         this.renderHandle(renderArr);
         this.actionTableCon.data =
           // 退货明细
-          this.$parent.$parent.panelRef === $it('form_label.returnDetails')
+          this.$parent.$parent.panelRef === $it('fL.returnDetails')
             ? OC_B_RETURN_ORDER_REFUND_ITEMS
             : OC_B_RETURN_ORDER_EXCHANGE_ITEMS; // 数据
 

@@ -31,7 +31,7 @@
       <!-- 新地址 -->
       <OmsForm :form-config="formConfig" />
       <!-- 收货人 -->
-      <FormItem :label="$it('form_label.consignee')" prop="receiver_name">
+      <FormItem :label="$it('fL.consignee')" prop="receiver_name">
         <Input
           v-model="data.receiver_name"
           placeholder
@@ -39,7 +39,7 @@
         />
       </FormItem>
       <!-- 收货人手机 -->
-      <FormItem :label="$it('form_label.consignee_phone')" prop="receiver_mobile">
+      <FormItem :label="$it('fL.consignee_phone')" prop="receiver_mobile">
         <Input
           v-model="data.receiver_mobile"
           placeholder
@@ -53,25 +53,25 @@
         />
       </FormItem>
       <!-- 收货人电话 -->
-      <FormItem :label="$it('form_label.consignee_tel')">
+      <FormItem :label="$it('fL.consignee_tel')">
         <Input
           v-model="data.receiver_phone"
           placeholder
         />
       </FormItem>
       <!-- 收货人邮编 -->
-      <FormItem :label="$it('form_label.consignee_postcode')">
+      <FormItem :label="$it('fL.consignee_postcode')">
         <Input
           v-model="data.receiver_zip"
           placeholder
         />
       </FormItem>
       <!-- 买家备注 -->
-      <FormItem :label="$it('form_label.buyerNotes')">
+      <FormItem :label="$it('fL.buyerNotes')">
         <span>{{ componentData.BUYER_MESSAGE }}</span>
       </FormItem>
       <!-- 卖家备注 -->
-      <FormItem :label="$it('form_label.sellerNotes')">
+      <FormItem :label="$it('fL.sellerNotes')">
         <span>{{ componentData.SELLER_MEMO }}</span>
       </FormItem>
       <!-- 系统备注 -->

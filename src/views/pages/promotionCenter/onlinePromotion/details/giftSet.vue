@@ -13,7 +13,7 @@
         class="row"
       >
         <div class="form_label">
-          {{ $it('form_label.ladderType') }}：
+          {{ $it('fL.ladderType') }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -26,7 +26,7 @@
       <!--赠品翻倍-->
       <div class="row">
         <div class="form_label">
-          <i class="red">*</i>{{ $it('form_label.double_gifts') }}：
+          <i class="red">*</i>{{ $it('fL.double_gifts') }}：
         </div>
         <div class="form_content">
           <SingleBox
@@ -35,7 +35,7 @@
             @changeSingle="checkGiftDoublesChange"
           />
           <div class="form_item">
-            {{ $it('form_label.max_doubling_times') }}
+            {{ $it('fL.max_doubling_times') }}
           </div>
           <div class="form_el_input form_item limitinput">
             <input
@@ -49,7 +49,7 @@
       <!--赠送方式-->
       <div class="row">
         <div class="form_label">
-          <i class="red">*</i>{{ $it('form_label.giving_ways') }}：
+          <i class="red">*</i>{{ $it('fL.giving_ways') }}：
         </div>
         <div class="form_content">
           <SingleBox

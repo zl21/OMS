@@ -32,7 +32,7 @@
       <Collapse v-model="panelDefaultValue1">
         <Panel name="panel_baseInfo1">
           <!-- 满足条件 -->
-          {{ $it('form_label.meet_conditions') }}
+          {{ $it('fL.meet_conditions') }}
           <div slot="content">
             <OmsForm
               :form-config="formConfig"

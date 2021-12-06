@@ -1002,7 +1002,7 @@ export default {
     //   const { CP_C_SHOP_ID, CP_C_ORG_CHANNEL_ID, CP_C_ORG_CHANNEL_ID } = formConfig.formValue
     //   let mes2 = ''
     //   if (!CP_C_ORG_CHANNEL_ID) {
-    //     mes2 += $it('form_label.bh') // 最低成交单价
+    //     mes2 += $it('fL.bh') // 最低成交单价
     //   }
     //   if (!(CP_C_SHOP_ID || CP_C_ORG_CHANNEL_ID)) {
     //     mes2 += ` SPU/${$it('table_label.code_SKU')}` // i18n SPU/SKU编码

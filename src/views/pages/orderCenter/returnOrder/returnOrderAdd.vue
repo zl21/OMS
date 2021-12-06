@@ -24,7 +24,7 @@
           </Panel>
           <Panel name="3">
             <!-- 退款金额 -->
-            {{ $it('form_label.refundAmount') }}
+            {{ $it('fL.refundAmount') }}
             <p slot="content">
               <ul class="calculation-main">
                 <li>
@@ -40,7 +40,7 @@
                   <div class="calculation-item">
                     <!-- 正数，选填项 -->
                     <!-- <span>应退运费</span> -->
-                    <span :title="$it('form_label.ad')">{{ $it('form_label.ad') }}</span>
+                    <span :title="$it('fL.ad')">{{ $it('fL.ad') }}</span>
                     <Input
                       v-model="SHIP_AMT"
                       type="text"
@@ -81,7 +81,7 @@
                   <div class="calculation-item">
                     <!-- 最终应退总额=商品应退金额+应退运费+/-调整金额-换货金额，自动算出，只读展示 -->
                     <!-- <span class="black">最终应退总金额</span> -->
-                    <span class="black" :title="$it('form_label.ae')">{{ $it('form_label.ae') }}</span>
+                    <span class="black" :title="$it('fL.ae')">{{ $it('fL.ae') }}</span>
                     <label>{{FINAL_ACTUAL_AMT}}</label>
                   </div>
                 </li>
@@ -103,7 +103,7 @@
       </div>
     </div>
     <!-- 查询原始订单编号 -->
-    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="$it('form_label.cv')">
+    <Modal v-model="orderModal" width="900" titleAlign="left" :closable="true" :mask="true" class-name="ark-dialog" :title="$it('fL.cv')">
         <div class="modal-footer" slot="footer">
             <OmsButton :btn-config="btnConfigMo" />
         </div>
@@ -248,7 +248,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               isnotnull: false,
-              name: $it('form_label.warehousingEntity'), // 入库实体仓库 
+              name: $it('fL.warehousingEntity'), // 入库实体仓库 
               readonly: false,
               pid: '',
               valuedata: '',
@@ -271,7 +271,7 @@ export default {
           {
             style: 'input',
             colname: 'SOURCE_CODE',
-            // label: $it('form_label.originalOrderNo'), // 原始订单编号输入框前文字
+            // label: $it('fL.originalOrderNo'), // 原始订单编号输入框前文字
             width: '6',
             icon: 'ios-search',
             // placeholder: '输入后请按Enter',
@@ -344,7 +344,7 @@ export default {
           },
           {
             style: 'input',
-            // label: $it('form_label.reasonRefund'), // 退货原因
+            // label: $it('fL.reasonRefund'), // 退货原因
             colname: 'REFUND_REASON',
             width: '6',
             options: [],
@@ -381,7 +381,7 @@ export default {
               colname: 'CP_C_PHY_WAREHOUSE_IN_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: $it('form_label.warehousingEntity'), // 入库实体仓
+              name: $it('fL.warehousingEntity'), // 入库实体仓
               // name: '入库实体仓',
               pid: '',
               valuedata: '',
@@ -410,7 +410,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '发货实体仓', // 发货实体仓
-              name: $it('form_label.af'),
+              name: $it('fL.af'),
               pid: '',
               valuedata: '',
             },
@@ -436,7 +436,7 @@ export default {
               colname: 'CP_C_LOGISTICS_ID',
               fkdisplay: 'drp',
               isfk: true,
-              name: $it('form_label.returnLogisticsCompany'), // 退回物流公司
+              name: $it('fL.returnLogisticsCompany'), // 退回物流公司
               valuedata: '',
             },
             oneObj: (e) => {
@@ -453,7 +453,7 @@ export default {
           },
           {
             style: 'input',
-            // label: $it('form_label.returnLogisticsNumber'), // 退回物流单号
+            // label: $it('fL.returnLogisticsNumber'), // 退回物流单号
             colname: 'EXPRESS_CODE',
             width: '6',
             inputChange: () => {
@@ -543,7 +543,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '收货人省份',
-              name: $it('form_label.consignee_province'),
+              name: $it('fL.consignee_province'),
               valuedata: '',
             },
             oneObj: (val) => {
@@ -584,7 +584,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '收货人市',
-              name: $it('form_label.consignee_city'),
+              name: $it('fL.consignee_city'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -630,7 +630,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               // name: '收货人区',
-              name: $it('form_label.aconsignee_area'),
+              name: $it('fL.aconsignee_area'),
               valuedata: '',
               refcolval: {
                 fixcolumn: "C_UP_ID",
@@ -651,7 +651,7 @@ export default {
           },
           {
             style: 'input',
-            // label: $it('form_label.platformType'), // 换货邮费
+            // label: $it('fL.platformType'), // 换货邮费
             regx: /^(\s*|([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
             colname: 'EXCHANGE_SHIP_AMT',
             width: '6',
@@ -673,13 +673,13 @@ export default {
       // label
       labelList: [
         {
-          label: $it('form_label.returnDetails'), // 退货明细
+          label: $it('fL.returnDetails'), // 退货明细
           value: '0',
           isShow: true,
         },
         {
           // label: '换货明细',
-          label: $it('form_label.exchangeDetails'), // 换货明细
+          label: $it('fL.exchangeDetails'), // 换货明细
           value: '1',
           isShow: false,
         },

@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       IS_COMBINATION:0,//4 代表组合商品
-      switchText: $it('form_label.b0'), //切换为sku商品展示
+      switchText: $it('fL.b0'), //切换为sku商品展示
       returnArr: [],
       changeArr: [],
       loading: false,
@@ -243,7 +243,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $it('form_label.skuName'), //sku名称
+              label: $it('fL.skuName'), //sku名称
               style: "dimSearch",
               width: "8",
               value: "ENAME",
@@ -407,7 +407,7 @@ export default {
     // 切换商品展示类型
     onSitch(){
       // 切换为sku商品展示 切换为平台商品展示
-      this.isSku ? this.switchText = $it('form_label.b0') : this.switchText = $it('form_label.b1');
+      this.isSku ? this.switchText = $it('fL.b0') : this.switchText = $it('fL.b1');
       this.isSku = !this.isSku;
       this.getDetailsData(!this.isSku);
     },
