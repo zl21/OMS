@@ -24,7 +24,7 @@ export default {
         formData: [
           {
             style: 'select',
-            label: $it('form_label.order_time'), // '订单时间',
+            label: $it('fL.order_time'), // '订单时间',
             width: '24',
             value: 'DAY_TYPE',
             clearable: false,
@@ -34,7 +34,7 @@ export default {
           }, {
             style: 'date',
             type: 'datetime',
-            label: $it('form_label.startTime'), // '开始时间',
+            label: $it('fL.startTime'), // '开始时间',
             width: '24',
             format: 'yyyy-MM-dd HH:mm:ss',
             transfer: true,
@@ -44,7 +44,7 @@ export default {
           }, {
             style: 'date',
             type: 'datetime',
-            label: $it('form_label.endTime'), // '结束时间',
+            label: $it('fL.endTime'), // '结束时间',
             width: '24',
             transfer: true,
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -86,7 +86,7 @@ export default {
       table: this.$route.params.tableName
     };
     // let timeType = '1'
-    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === $it('form_label.order_time'));
+    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === $it('fL.order_time'));
     this.formConfig.formData[0].options = item.combobox.map(val => {
       if (tableInfo.buttons.selectArr[0].DAY_TYPE.val === val.limitdesc) this.formConfig.formValue.DAY_TYPE = val.limitval;
       return {

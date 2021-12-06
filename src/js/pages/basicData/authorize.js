@@ -13,17 +13,17 @@ export default {
       active: 0, // 步骤进度
       steps: [
         {
-          name:  $it('form_label.ap'), //'店铺授权',
+          name:  $it('fL.ap'), //'店铺授权',
           icon: 'iconfont icon-qian',
           status: 'finish', // wait、process、finish、error
         },
         {
-          name:  $it('form_label.aq'), //'店铺昵称',
+          name:  $it('fL.aq'), //'店铺昵称',
           icon: 'iconfont icon-dingdan',
           status: 'wait',
         },
         {
-          name:  $it('form_label.ar'),//'完善信息',
+          name:  $it('fL.ar'),//'完善信息',
           icon: 'iconfont icon-weibiaoti-4',
           status: 'wait',
         },
@@ -130,7 +130,7 @@ export default {
             type: 'Input', // 组件类型
             required: true, // 是否必填
             field: 'CP_C_PLATFORM_NAME',
-            label: $it('form_label.platformType'),
+            label: $it('fL.platformType'),
             props: {
               placeholder: '',
               value: '',
@@ -457,7 +457,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.cellPhone_number'),
+            label: $it('fL.cellPhone_number'),
             value: 'SELLER_PHONE',
             colname: 'SELLER_PHONE',
             class: 'beizu',
@@ -870,7 +870,7 @@ export default {
             if (this.shopdata.authTips) {
               let obj = {
                 style: 'formCompile',
-                label:  $it('form_label.ay') ,//'授权指引',
+                label:  $it('fL.ay') ,//'授权指引',
                 colname: 'authTips',
                 slotName: 'formCompile',
                 class: 'beizu',

@@ -43,7 +43,7 @@ export default {
       },
       {
         style: 'radio', // 输入框类型
-        label: $it('form_label.chargebackStatus'), // 退单状态输入框前文字
+        label: $it('fL.chargebackStatus'), // 退单状态输入框前文字
         value: 'status', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         options: [
@@ -53,14 +53,14 @@ export default {
             value: ''
           },
           {
-            label: $it('form_label.staySellerAgrees'), // 待卖家同意
+            label: $it('fL.staySellerAgrees'), // 待卖家同意
             value: 'WAIT_SELLER_AGREE'
           }
         ]
       },
       {
         style: 'date', // 输入框类型
-        label: $it('form_label.chargebackModifyTime'), // 退单修改时间 输入框前文字
+        label: $it('fL.chargebackModifyTime'), // 退单修改时间 输入框前文字
         value: 'timerange', // 输入框的值
         type: 'datetimerange',
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -68,7 +68,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.platform_returnOrder_no'), // 平台退货单号 输入框前文字
+        label: $it('fL.platform_returnOrder_no'), // 平台退货单号 输入框前文字
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持

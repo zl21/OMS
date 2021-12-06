@@ -13,11 +13,11 @@ export default {
         columns: [
           {
             key: 'ENAME',
-            title: $it('form_label.logisticsCompany'), // '物流公司'
+            title: $it('fL.logisticsCompany'), // '物流公司'
           },
           {
             key: 'ECODE',
-            title: $it('form_label.logisticsNo'), // '物流编号'
+            title: $it('fL.logisticsNo'), // '物流编号'
           }
         ],
         data: [], // 数据配置

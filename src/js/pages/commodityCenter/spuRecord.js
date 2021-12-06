@@ -87,26 +87,26 @@ export default {
           key: 'ECODE'
         },
         {
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
           key: 'ENAME'
         },
         {
-          title: $it('form_label.d4'), // 销售状态
+          title: $it('fL.d4'), // 销售状态
           key: 'SALES_STATUS',
           render: (h, params) => {
             return h('span', {}, params.row.SALES_STATUS ? params.row.SALES_STATUS == 'Y' ? '正常销售' : '暂停销售' : '')
           }
         },
         {
-          title: $it('form_label.cu'), // 零售价
+          title: $it('fL.cu'), // 零售价
           key: 'PRICE_RETAIL',
         },
         {
-          title: $it('form_label.d5'), // 采购价
+          title: $it('fL.d5'), // 采购价
           key: 'PRICE_PURCHASE'
         },
         {
-          title: $it('form_label.d6'), // 成本价
+          title: $it('fL.d6'), // 成本价
           key: 'PRICE_COST'
         },
         {
@@ -212,7 +212,7 @@ export default {
           key: 'cpCSupplierName'
         },
         {
-          title: $it('form_label.d7'), // 默认供应商
+          title: $it('fL.d7'), // 默认供应商
           key: 'IS_DEFAULT',
           render: (h, params) => h('Checkbox', {
             props: {
@@ -342,7 +342,7 @@ export default {
         {
           colname: 'TYPE',
           style: 'select', // 下拉框类型
-          label: $it("form_label.type"), // 类型
+          label: $it("fL.type"), // 类型
           width: '8', // 所占宽度宽度
           value: 'TYPE', // 输入框的值
           clearable: true,
@@ -431,7 +431,7 @@ export default {
         },
         {
           style: 'textarea',
-          label: $it('form_label.d8'), // 产品介绍
+          label: $it('fL.d8'), // 产品介绍
           value: 'REMARK',
           width: '24',
           maxlength: 255,
@@ -949,7 +949,7 @@ export default {
       } else if (!data.ENAME) {
         str += `${$it('table_label.itemNo02')} `; // SPU名称
       } else if (!data.TYPE) {
-        str += `${$it('form_label.type')} `; // 类型
+        str += `${$it('fL.type')} `; // 类型
       }
       self.formConfig.formData.forEach(item => {
         if (item.colname == 'PS_C_BRAND_ID' && !item.itemdata.pid) {

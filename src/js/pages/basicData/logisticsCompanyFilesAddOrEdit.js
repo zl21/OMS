@@ -68,7 +68,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.ds'), // 物流公司编码
+            label: $it('fL.ds'), // 物流公司编码
             value: 'ECODE',
             colname: 'ECODE',
             width: '6',
@@ -79,7 +79,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.dt'), // 物流公司名称
+            label: $it('fL.dt'), // 物流公司名称
             value: 'ENAME',
             colname: 'ENAME',
             width: '6',
@@ -132,11 +132,11 @@ export default {
             key: 'CP_C_PLATFORM_ENAME',
           },
           {
-            title: $it('form_label.dq'), // 平台物流编号
+            title: $it('fL.dq'), // 平台物流编号
             key: 'CP_C_LOGISTICS_ECODE',
           },
           {
-            title: $it('form_label.dr'), // 平台物流名称
+            title: $it('fL.dr'), // 平台物流名称
             key: 'CP_C_LOGISTICS_ENAME',
           },
         ],
@@ -196,7 +196,7 @@ export default {
           },
           formData: [
             {
-              label: $it('form_label.do'), // 前缀
+              label: $it('fL.do'), // 前缀
               style: 'input',
               width: '6',
               value: 'PREFIX',
@@ -213,7 +213,7 @@ export default {
               dimblur: () => { },
             },
             {
-              label: $it('form_label.dp'), // 后缀
+              label: $it('fL.dp'), // 后缀
               style: 'input',
               width: '6',
               value: 'SUFFIX',
@@ -230,11 +230,11 @@ export default {
         }, // 表单配置
         columns: [
           {
-            title: $it('form_label.do'), // 前缀
+            title: $it('fL.do'), // 前缀
             key: 'PREFIX',
           },
           {
-            title: $it('form_label.dp'), // 后缀
+            title: $it('fL.dp'), // 后缀
             key: 'SUFFIX',
           }
         ],

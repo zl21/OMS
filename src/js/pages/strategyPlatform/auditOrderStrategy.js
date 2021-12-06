@@ -136,14 +136,14 @@ export default {
         formData: [
           {
             style: '',
-            label: $it('form_label.bc'), // 策略ID
+            label: $it('fL.bc'), // 策略ID
             value: 'PLAN_ID',
             width: '6',
             disabled: true
           },
           {
             style: 'input',
-            label: $it('form_label.bd'), // 策略名称
+            label: $it('fL.bd'), // 策略名称
             value: 'PLAN_NAME',
             width: '6',
             inputChange: () => {

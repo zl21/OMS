@@ -29,7 +29,7 @@ export default {
       },
       {
         style: 'radio', // 输入框类型
-        label: $it('form_label.changeOrderStatus'), // 换货单状态 输入框前文字
+        label: $it('fL.changeOrderStatus'), // 换货单状态 输入框前文字
         value: 'status', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         options: [
@@ -39,14 +39,14 @@ export default {
             value: ''
           },
           {
-            label: $it('form_label.exchangePending'), // 换货待处理
+            label: $it('fL.exchangePending'), // 换货待处理
             value: '1'
           }
         ]
       },
       {
         style: 'date', // 输入框类型
-        label: $it('form_label.changeOrderModify_time'), // 换货单修改时间 输入框前文字
+        label: $it('fL.changeOrderModify_time'), // 换货单修改时间 输入框前文字
         value: 'timerange', // 输入框的值
         type: 'datetimerange',
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -54,7 +54,7 @@ export default {
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.platformExchangeOrder_no'), // 平台换货单号 输入框前文字
+        label: $it('fL.platformExchangeOrder_no'), // 平台换货单号 输入框前文字
         value: 'bill_no', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持

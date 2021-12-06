@@ -18,7 +18,7 @@ export default {
       eventGather: BurgeonEvent,
       errThData: [
         {
-          title: $it('form_label.chargebackNumber'), // 退单编号
+          title: $it('fL.chargebackNumber'), // 退单编号
           key: 'id'
         },
         {
@@ -119,17 +119,17 @@ export default {
           isShow: true
         },
         {
-          label: $it('form_label.waitFor_return_warehous'), // 等待退货入库
+          label: $it('fL.waitFor_return_warehous'), // 等待退货入库
           value: '20',
           isShow: true
         },
         {
-          label: $it('form_label.waitFor_afterSale_confirm'), // 等待售后确认
+          label: $it('fL.waitFor_afterSale_confirm'), // 等待售后确认
           value: '30',
           isShow: true
         },
         {
-          label: $it('form_label.complete'), // 完成
+          label: $it('fL.complete'), // 完成
           value: '50',
           isShow: true
         },
@@ -432,7 +432,7 @@ export default {
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       _this.formConfig.formData.forEach(item => {
         // '原始订单编号'
-        if (item.itemdata?.name == $it('form_label.originalOrderNo')) {
+        if (item.itemdata?.name == $it('fL.originalOrderNo')) {
           _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
         }
       });
@@ -742,8 +742,8 @@ export default {
         'other.platForm': 'PLATFORM',
         'other.warehousingLogicalWarehouse': 'CP_C_STORE_ID',
         'table_label.expressCompany': 'CP_C_LOGISTICS_ID',
-        'form_label.warehousingEntity': 'CP_C_PHY_WAREHOUSE_IN_ID',
-        'form_label.shipPhysicalWarehouse': 'CP_C_PHY_WAREHOUSE_ID',
+        'fL.warehousingEntity': 'CP_C_PHY_WAREHOUSE_IN_ID',
+        'fL.shipPhysicalWarehouse': 'CP_C_PHY_WAREHOUSE_ID',
         'table_label.shopName': 'CP_C_SHOP_ID',
         'table_label.creator': 'OWNERID'
       };

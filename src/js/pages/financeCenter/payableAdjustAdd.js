@@ -27,7 +27,7 @@ export default {
           LOGISTICS_NO: $it('table_label.expressNo'),
           CP_C_LOGISTICS_ENAME: $it('table_label.expressCompany'),
           BILL_NO: $it('table_label.orderNo'),
-          SOURCE_CODE: $it('form_label.platform_billNo'),
+          SOURCE_CODE: $it('fL.platform_billNo'),
           CP_C_PHY_WAREHOUSE_ENAME: $it('table_label.warehouseName')
         }
       ],
@@ -52,11 +52,11 @@ export default {
               // 1.非空判断
               let promptMessage = ''; // 非空提示信息
               if (!masterForm.BILL_TYPE) {
-                promptMessage += $it('form_label.billType'); // '单据类型'
+                promptMessage += $it('fL.billType'); // '单据类型'
               } else if (!masterForm.CP_C_SHOP_ID) {
                 promptMessage += $it('other.shop');
               } else if (!masterForm.SOURCE_OUTSOURCE_DATE) {
-                promptMessage += $it('form_label.out_date'); // '出库日期'
+                promptMessage += $it('fL.out_date'); // '出库日期'
               }
               if (promptMessage) {
                 // this.$Message.warning(promptMessage + "不能为空");
@@ -65,9 +65,9 @@ export default {
               }
               if (masterForm.BILL_TYPE === '1' || masterForm.BILL_TYPE === '4') {
                 if (!masterForm.CP_C_LOGISTICS_ID) {
-                  promptMessage += $it('form_label.expressCompanyName');
+                  promptMessage += $it('fL.expressCompanyName');
                 } else if (!masterForm.CP_C_PHY_WAREHOUSE_ID) {
-                  promptMessage += $it('form_label.physicalWarehouseName');
+                  promptMessage += $it('fL.physicalWarehouseName');
                 } else if (!masterForm.LOGISTICS_NO) {
                   promptMessage += $it('table_label.expressNo');
                 }
@@ -141,7 +141,7 @@ export default {
               key: 'PS_C_SIZE_ENAME'
             },
             {
-              title: $it('form_label.commodityCode'), // 商品条码
+              title: $it('fL.commodityCode'), // 商品条码
               key: 'PS_C_SKU_ECODE'
             },
             {
@@ -172,14 +172,14 @@ export default {
         formData: [
           {
             style: 'input', // 文本录入
-            label: $it('form_label.billNo'), // 单据编号
+            label: $it('fL.billNo'), // 单据编号
             value: 'BILL_NO',
             width: '8',
             disabled: true
           },
           {
             style: 'dimSearch',
-            label: $it('form_label.platform_billNo'), // 平台单号
+            label: $it('fL.platform_billNo'), // 平台单号
             value: 'TID',
             width: '8',
             columns: ['SOURCE_CODE'],
@@ -221,7 +221,7 @@ export default {
                   CP_C_PHY_WAREHOUSE_ENAME: item.CP_C_PHY_WAREHOUSE_ENAME
                 }));
                 dimList.forEach(item => {
-                  if (item.label === $it('form_label.platform_billNo') || item.label === 'platform_billNo') {
+                  if (item.label === $it('fL.platform_billNo') || item.label === 'platform_billNo') {
                     item.AuotData = self.theadTitle.concat(filterData);
                   }
                 });
@@ -245,13 +245,13 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.expressOutlets'), // 快递网点
+            label: $it('fL.expressOutlets'), // 快递网点
             value: 'EXPRESS_OUTLETS',
             width: '8'
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.billType'), // 单据类型
+            label: $it('fL.billType'), // 单据类型
             width: '8', // 所占宽度宽度
             value: 'BILL_TYPE', // 输入框的值
             selectChange: () => {
@@ -343,7 +343,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.source_billNo'), // 来源单据编号
+            label: $it('fL.source_billNo'), // 来源单据编号
             value: 'ORDER_NO',
             width: '8',
             disabled: true
@@ -358,7 +358,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.adjustmentType'), // 调整类型
+            label: $it('fL.adjustmentType'), // 调整类型
             width: '8', // 所占宽度宽度
             value: 'ADJUST_TYPE', // 输入框的值
             options: [
@@ -422,7 +422,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.physicalWarehouseName'), // 实体仓名称
+              name: $it('fL.physicalWarehouseName'), // 实体仓名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 23451, // 对应的表ID
@@ -454,7 +454,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.expressCompanyName'), // 快递公司名称
+              name: $it('fL.expressCompanyName'), // 快递公司名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               row: 1,
@@ -471,7 +471,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: $it('form_label.original_out_date'), // 原始出库日期
+            label: $it('fL.original_out_date'), // 原始出库日期
             value: 'SOURCE_OUTSOURCE_DATE', // 输入框的值
             width: '8', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             format: 'yyyy-MM-dd HH:mm:ss'
@@ -619,11 +619,11 @@ export default {
             key: 'PS_C_SIZE_ENAME'
           },
           {
-            title: $it('form_label.commodityCode'), // 商品条码
+            title: $it('fL.commodityCode'), // 商品条码
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: $it('form_label.gBCode'), // 国标码
+            title: $it('fL.gBCode'), // 国标码
             key: 'GBCODE'
           },
           {
@@ -1008,7 +1008,7 @@ export default {
           arr.push(obj);
         });
         this.formConfig.formData.forEach(item => {
-          if (item.label == $it('form_label.payableAdjustReason') || item.label == 'payableAdjustReason') {
+          if (item.label == $it('fL.payableAdjustReason') || item.label == 'payableAdjustReason') {
             item.options = arr;
           }
         });
@@ -1099,7 +1099,7 @@ export default {
       const self = this;
       let sourceCode = '';
       if (obj) sourceCode = obj.tem.SOURCE_CODE;
-      if (sourceCode === $it('form_label.platform_billNo') || sourceCode === 'platform_billNo') {
+      if (sourceCode === $it('fL.platform_billNo') || sourceCode === 'platform_billNo') {
         self.formConfig.formValue.TID = '';
         return;
       }
@@ -1179,7 +1179,7 @@ export default {
         }
         const queryData = self.formConfig.formData;
         queryData.forEach(formItem => {
-          if (formItem.itemdata && (formItem.itemdata.name === $it('form_label.expressCompanyName') || formItem.itemdata.name === 'expressCompanyName')) {
+          if (formItem.itemdata && (formItem.itemdata.name === $it('fL.expressCompanyName') || formItem.itemdata.name === 'expressCompanyName')) {
             formItem.itemdata.valuedata = item.CP_C_LOGISTICS_ENAME;
             formItem.itemdata.pid = item.CP_C_LOGISTICS_ID;
             this.formConfig.formValue.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ID;
@@ -1189,7 +1189,7 @@ export default {
             formItem.itemdata.pid = item.CP_C_SHOP_ID;
             this.formConfig.formValue.CP_C_SHOP_ID = item.CP_C_SHOP_ID;
             this.formConfig.formValue.CP_C_SHOP_TITLE = item.CP_C_SHOP_TITLE;
-          } else if (formItem.itemdata && formItem.itemdata.name === $it('form_label.physicalWarehouseName')) {
+          } else if (formItem.itemdata && formItem.itemdata.name === $it('fL.physicalWarehouseName')) {
             formItem.itemdata.valuedata = item.CP_C_PHY_WAREHOUSE_ENAME;
             formItem.itemdata.pid = item.CP_C_PHY_WAREHOUSE_ID;
             this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.CP_C_PHY_WAREHOUSE_ID;
@@ -1234,7 +1234,7 @@ export default {
       const billType = self.formConfig.formValue.BILL_TYPE;
       if (billType === '1' || billType === '4') {
         self.formConfig.formData.forEach(item => {
-          if (item.itemdata && (item.itemdata.name === $it('form_label.physicalWarehouseName') || item.itemdata.name === $it('form_label.expressCompanyName'))) {
+          if (item.itemdata && (item.itemdata.name === $it('fL.physicalWarehouseName') || item.itemdata.name === $it('fL.expressCompanyName'))) {
             item.itemdata.isnotnull = true;
           }
         });
@@ -1280,7 +1280,7 @@ export default {
         }
       } else {
         self.formConfig.formData.forEach(item => {
-          if (item.itemdata && (item.itemdata.name === $it('form_label.physicalWarehouseName') || item.itemdata.name === $it('form_label.expressCompanyName'))) {
+          if (item.itemdata && (item.itemdata.name === $it('fL.physicalWarehouseName') || item.itemdata.name === $it('fL.expressCompanyName'))) {
             item.itemdata.isnotnull = false;
           }
         });
@@ -1359,19 +1359,19 @@ export default {
         });
       }, 300);
       self.formConfig.formData.forEach(item => {
-        if (item.itemdata && item.itemdata.name === $it('form_label.expressCompanyName')) {
+        if (item.itemdata && item.itemdata.name === $it('fL.expressCompanyName')) {
           item.itemdata.valuedata = mainData.CP_C_LOGISTICS_ENAME;
           item.itemdata.pid = mainData.CP_C_LOGISTICS_ID;
         } else if (item.itemdata && item.itemdata.name === $it('other.shop')) {
           item.itemdata.valuedata = mainData.CP_C_SHOP_TITLE;
           item.itemdata.pid = mainData.CP_C_SHOP_ID;
-        } else if (item.itemdata && item.itemdata.name === $it('form_label.physicalWarehouseName')) {
+        } else if (item.itemdata && item.itemdata.name === $it('fL.physicalWarehouseName')) {
           item.itemdata.valuedata = mainData.CP_C_PHY_WAREHOUSE_ENAME;
           item.itemdata.pid = mainData.CP_C_PHY_WAREHOUSE_ID;
-        } else if (item.itemdata && item.itemdata.name === $it('form_label.payableAdjustType')) {
+        } else if (item.itemdata && item.itemdata.name === $it('fL.payableAdjustType')) {
           item.itemdata.valuedata = mainData.COMPENSATION_TYPE_ENAME;
           item.itemdata.pid = mainData.AC_F_COMPENSATION_TYPE_ID;
-        } else if (item.label === $it('form_label.payableAdjustReason')) {
+        } else if (item.label === $it('fL.payableAdjustReason')) {
           item.options = [
             {
               value: mainData.AC_F_COMPENSATION_REASON_ID,

@@ -19,7 +19,7 @@ export default {
       /* webpackChunkName: 'BasicDataCenterPage' */
       'allpages/basicData/authorize.vue'
     ),
-    labelName: $it('form_label.ap'),//店铺授权
+    labelName: $it('fL.ap'),//店铺授权
   },
   SHOPAUTHORIZEDETAILS: {
     component: () => import(

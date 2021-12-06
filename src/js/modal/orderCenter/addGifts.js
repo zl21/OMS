@@ -12,7 +12,7 @@ export default {
           {
             key: 'ECODE',
             // title: "条码"
-            title: $it('form_label.barCode')
+            title: $it('fL.barCode')
           },
           {
             key: 'sizeName',
@@ -170,7 +170,7 @@ export default {
         {
           key: 'ECODE',
           // title: "条码",
-          title: $it('form_label.barCode')
+          title: $it('fL.barCode')
         },
         {
           key: 'QTY',
@@ -185,7 +185,7 @@ export default {
         {
           key: 'GBCODE',
           // title: "国标码",
-          title: $it('form_label.gBCode')
+          title: $it('fL.gBCode')
         },
         {
           key: 'IS_GIFT',

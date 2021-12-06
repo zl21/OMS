@@ -48,7 +48,7 @@ export default {
           {
             style: 'date',
             type: 'datetime', // 日期组件类型,默认为data  (daterange)为双日期区间选择
-            label: $it('form_label.delayDate'), // '延期日期'
+            label: $it('fL.delayDate'), // '延期日期'
             width: '24',
             value: 'lockTime',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui

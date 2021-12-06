@@ -78,7 +78,7 @@ export default {
     this.labelList = [
       {
         // label: "区域明细",
-        label: $it('form_label.region_details'),
+        label: $it('fL.region_details'),
         value: '1',
         isShow: true
       }
@@ -225,7 +225,7 @@ export default {
           isnotnull: true,
           isuppercase: false,
           length: 20,
-          name: $it('form_label.warehouse'),
+          name: $it('fL.warehouse'),
           readonly: false,
           refobjid: '14',
           reftable: 'CP_C_PHY_WAREHOUSE',

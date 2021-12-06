@@ -390,7 +390,7 @@ export default {
         formData: [
           {
             style: 'checkbox', // 勾选框类型
-            label: $it('form_label.whether_returned'), // 前面的文字
+            label: $it('fL.whether_returned'), // 前面的文字
             value: 'IS_BACK', // 输入框的值
             width: '6', // 所占的宽度
             checked: false // 是否勾选控制

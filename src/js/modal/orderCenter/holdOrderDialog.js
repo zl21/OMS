@@ -21,7 +21,7 @@ export default {
           {
             style: 'select',
             // label: 'HOLD单原因',
-            label: $it('form_label.hOLD_reason'),
+            label: $it('fL.hOLD_reason'),
             width: '24',
             value: 'HOLD_ORDER_REASON',
             setRequired: 'required',
@@ -29,7 +29,7 @@ export default {
               {
                 value: '1',
                 // label: '直播HOLD单'
-                label: $it('form_label.live_HOLD')
+                label: $it('fL.live_HOLD')
               },
               {
                 value: '2',
@@ -41,7 +41,7 @@ export default {
           {
             style: 'checkbox',
             // label: "自动释放",
-            label: $it('form_label.automaticRelease'),
+            label: $it('fL.automaticRelease'),
             value: 'IS_AUTO_RELEASE',
             width: 24
           }
@@ -54,18 +54,18 @@ export default {
         {
           style: 'select',
           // label: "释放时点",
-          label: $it('form_label.release_timePoint'),
+          label: $it('fL.release_timePoint'),
           width: 24,
           value: 'RELEASE_TIME_TYPE',
           options: [
             {
               // label: "指定时点释放",
-              label: $it('form_label.release_specified_timePoint'),
+              label: $it('fL.release_specified_timePoint'),
               value: '1'
             },
             {
               // label: "固定时长后释放",
-              label: $it('form_label.release_after_fixedTime'),
+              label: $it('fL.release_after_fixedTime'),
               value: '2'
             }
           ],
@@ -209,11 +209,11 @@ export default {
                   key: 'INDEX'
                 },
                 {
-                  title: $it('form_label.billNo'), // 单据编号
+                  title: $it('fL.billNo'), // 单据编号
                   key: 'BILL_NO'
                 },
                 {
-                  title: $it('form_label.e0'), // 失败原因
+                  title: $it('fL.e0'), // 失败原因
                   key: 'RESULT_MSG'
                 }
               ],

@@ -28,7 +28,7 @@ export default {
       },
       {
         style: 'date', // 输入框类型
-        label: $it('form_label.e5'), // 退款申请时间 输入框前文字
+        label: $it('fL.e5'), // 退款申请时间 输入框前文字
         colname: 'startEndTimes',
         type: 'datetimerange',
         value: 'startEndTimes', // 输入框的值

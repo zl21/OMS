@@ -19,7 +19,7 @@ export default {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
             value: 'CREATIONDATE',
-            label: $it('form_label.creationDate'), // '创建日期',
+            label: $it('fL.creationDate'), // '创建日期',
             width: '6',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: ''
@@ -60,19 +60,19 @@ export default {
           },
           {
             style: 'input', // 文本录入
-            label: $it('form_label.sourceNo'), // '来源单号',
+            label: $it('fL.sourceNo'), // '来源单号',
             value: 'SOURCE_NO',
             width: '6'
           },
           {
             style: 'input', // 文本录入
-            label: $it('form_label.barCode'), // '条码',
+            label: $it('fL.barCode'), // '条码',
             value: 'SKU_ECODE',
             width: '6'
           },
           {
             style: 'input', // 文本录入
-            label: $it('form_label.batchNumber'), // '批次号',
+            label: $it('fL.batchNumber'), // '批次号',
             value: 'BATCH_NO',
             width: '6'
           }
@@ -91,7 +91,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $it('form_label.creationDate'), // '全部',
+          label: $it('fL.creationDate'), // '全部',
           value: '1',
           isShow: true
         }
@@ -108,19 +108,19 @@ export default {
             key: 'SKU_ID'
           },
           {
-            title: $it('form_label.sourceNo'), // '来源单号',
+            title: $it('fL.sourceNo'), // '来源单号',
             key: 'SOURCE_NO'
           },
           {
-            title: $it('form_label.barCode'), // '条码',
+            title: $it('fL.barCode'), // '条码',
             key: 'SKU_ECODE'
           },
           {
-            title: $it('form_label.batchNumber'), // '批次号',
+            title: $it('fL.batchNumber'), // '批次号',
             key: 'BATCH_NO'
           },
           {
-            title: $it('form_label.processing_status'), // '处理状态',
+            title: $it('fL.processing_status'), // '处理状态',
             key: 'DEL_STATUS'
           },
           {

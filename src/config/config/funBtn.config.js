@@ -994,11 +994,11 @@ class BtnConfig {
                         key: 'index',
                       },
                       {
-                        title: $it('form_label.billNo'), // 单据编号
+                        title: $it('fL.billNo'), // 单据编号
                         key: 'billNo',
                       },
                       {
-                        title: $it('form_label.e0'), // 失败原因
+                        title: $it('fL.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1010,7 +1010,7 @@ class BtnConfig {
                   props: {
                     columns: [
                       {
-                        title: $it('form_label.e0'), // 失败原因
+                        title: $it('fL.e0'), // 失败原因
                         key: 'message',
                       },
                     ],
@@ -1407,7 +1407,7 @@ class BtnConfig {
                   title: 'ID',
                   key: 'objid',
                 },{
-                  title: $it('form_label.billNo'), // 单据编号
+                  title: $it('fL.billNo'), // 单据编号
                   key: 'objno',
                 },{
                   title: '详细信息', // TODO!
@@ -1848,11 +1848,11 @@ class BtnConfig {
                         key: 'INDEX',
                       },
                       {
-                        title: $it('form_label.billNo'), // 单据编号
+                        title: $it('fL.billNo'), // 单据编号
                         key: 'BILL_NO',
                       },
                       {
-                        title: $it('form_label.e0'), // 失败原因
+                        title: $it('fL.e0'), // 失败原因
                         key: 'RESULT_MSG',
                       },
                     ],

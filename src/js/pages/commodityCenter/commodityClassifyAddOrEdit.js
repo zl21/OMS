@@ -104,7 +104,7 @@ export default {
         },
         {
           style: null,
-          label: $it('form_label.bg'), //  启用状态
+          label: $it('fL.bg'), //  启用状态
           value: 'STATUS',
           colname: 'STATUS',
           width: '8',

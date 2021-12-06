@@ -62,14 +62,14 @@ export default {
           {
             colname: 'ECODE',
             width: '6',
-            label: $it('form_label.bc'), // 策略ID
+            label: $it('fL.bc'), // 策略ID
             style: null,
             regx: /^(\s*|[A-Za-z0-9]+)$/,
           },
           {
             colname: 'ENAME',
             width: '6',
-            label: $it('form_label.bd'), // 策略名称
+            label: $it('fL.bd'), // 策略名称
             style: 'input',
             inputChange: () => {
               this.masterModifyData('ENAME', 'formConfig1')
@@ -78,7 +78,7 @@ export default {
           {
             colname: 'ISACTIVE',
             width: '6',
-            label: $it('form_label.bg'), // 启用状态
+            label: $it('fL.bg'), // 启用状态
             style: null,
             // inputChange: () => {
             //   this.masterModifyData('ISACTIVE', 'formConfig1')
@@ -94,7 +94,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: $it('form_label.be'), // 生效开始时间
+            label: $it('fL.be'), // 生效开始时间
             colname: 'VALID_BEGIN_TIME',
             value: '',
             width: '6',
@@ -112,7 +112,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: $it('form_label.bf'), // 生效结束时间
+            label: $it('fL.bf'), // 生效结束时间
             colname: 'VALID_END_TIME',
             value: '',
             width: '6',
@@ -174,7 +174,7 @@ export default {
             colname: 'TIME',
             style: 'formCompile',
             class: 'soltDom',
-            label: $it('form_label.timeType'), // 时间类型
+            label: $it('fL.timeType'), // 时间类型
             format: 'yyyy-MM-dd HH:mm:ss',
             slotName: 'spec01',
             width: '24',
@@ -353,7 +353,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: $it('form_label.timeType'), // 时间类型
+            label: $it('fL.timeType'), // 时间类型
             slotName: 'spec03',
             width: '10',
             disabled: false,
@@ -483,7 +483,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: $it('form_label.timeType'), // 时间类型
+            label: $it('fL.timeType'), // 时间类型
             slotName: 'spec04',
             width: '10',
             disabled: false,
@@ -599,7 +599,7 @@ export default {
             style: '',
             colname: 'TIME_TYPE',
             class: 'soltDom',
-            label: $it('form_label.timeType'), // 时间类型
+            label: $it('fL.timeType'), // 时间类型
             slotName: 'spec05',
             width: '10',
             disabled: false,

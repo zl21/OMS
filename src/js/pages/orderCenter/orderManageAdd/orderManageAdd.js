@@ -81,13 +81,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.$it('form_label.consignee_province'), // 收货人省份
+          fkdesc: window.$it('fL.consignee_province'), // 收货人省份
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.$it('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
+          name: window.$it('fL.consignee_province'), // 收货人省份 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_PROVINCE', // 对应的表
           reftableid: 10010, // 对应的表ID
@@ -104,13 +104,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.$it('form_label.consignee_city'), // 收货人市
+          fkdesc: window.$it('fL.consignee_city'), // 收货人市
           inputname: 'RECEIVER_CITY:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.$it('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
+          name: window.$it('fL.consignee_city'), // 收货人市 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_CITY', // 对应的表
           reftableid: 23864, // 对应的表ID
@@ -132,13 +132,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: window.$it('form_label.orderShop'), // 下单店铺
+          fkdesc: window.$it('fL.orderShop'), // 下单店铺
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: window.$it('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+          name: window.$it('fL.orderShop'), // 下单店铺 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           reftableid: 24475, // 对应的表ID
@@ -197,14 +197,14 @@ export default {
               self.formConfig.formData.forEach((item) => {
                 if (
                   item.itemdata
-                  && item.itemdata.name === $it('form_label.orderShop')
+                  && item.itemdata.name === $it('fL.orderShop')
                 ) {
                   ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                   ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
                 } else if (
                   item.itemdata
                   && item.itemdata.name
-                  === $it('form_label.distribution_logistics')
+                  === $it('fL.distribution_logistics')
                 ) {
                   ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -215,21 +215,21 @@ export default {
                 if (
                   item.itemdata
                   && item.itemdata.name
-                  === $it('form_label.consignee_province')
+                  === $it('fL.consignee_province')
                 ) {
                   ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
                 } else if (
                   item.itemdata
                   && item.itemdata.name
-                  === $it('form_label.consignee_city')
+                  === $it('fL.consignee_city')
                 ) {
                   ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
                 }
                 if (
                   item.itemdata
-                  && item.itemdata.name === $it('form_label.aconsignee_area')
+                  && item.itemdata.name === $it('fL.aconsignee_area')
                 ) {
                   ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
                   ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -282,7 +282,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_SHOP_TITLE',
-            label: window.$it('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+            label: window.$it('fL.orderShop'), // 下单店铺 // input前面显示的lable值
             itemdata: {},
             oneObj: (val) => {
               this.shopId = val.pid;
@@ -296,7 +296,7 @@ export default {
           },
           // {
           //   style: 'select', // 下拉框类型
-          //   label: window.$it('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
+          //   label: window.$it('fL.delivery_warehouse'), // 发货仓库 下拉框前的值
           //   width: '6', // 所占宽度宽度
           //   dataAcessKey: 'CP_C_PHY_WAREHOUSE_ENAME',
           //   value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
@@ -304,7 +304,7 @@ export default {
           //     const _this = this;
           //     // _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME
           //     // const optionsArr = _this.formConfig.formData[8].options;
-          //     const optionsArr = _this.queryFormItem(_this.formConfig.formData, window.$it('form_label.delivery_warehouse')).options;
+          //     const optionsArr = _this.queryFormItem(_this.formConfig.formData, window.$it('fL.delivery_warehouse')).options;
           //     for (let i = 0; i < optionsArr.length; i++) {
           //       if (
           //         optionsArr[i].value
@@ -312,7 +312,7 @@ export default {
           //       ) {
           //         _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ENAME = optionsArr[i].label;
           //         // this.formConfig.formData[1].inputList = [
-          //           this.queryFormItem(this.formConfig.formData, window.$it('form_label.distribution_logistics')).inputList = [
+          //           this.queryFormItem(this.formConfig.formData, window.$it('fL.distribution_logistics')).inputList = [
           //           {
           //             childs: [
           //               { colname: 'CP_C_PLATFORM_ID', refobjid: _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID, valuedata: optionsArr[i].label }
@@ -331,7 +331,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_LOGISTICS_ENAME',
-            label: window.$it('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
+            label: window.$it('fL.distribution_logistics'), // 配送物流 input前面显示的lable值
             // inputList: [
             //   {
             //     childs: [
@@ -353,13 +353,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: window.$it('form_label.distribution_logistics'), // 配送物流
+              fkdesc: window.$it('fL.distribution_logistics'), // 配送物流
               inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.$it('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
+              name: window.$it('fL.distribution_logistics'), // 配送物流 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 24411, // 对应的表ID
@@ -371,7 +371,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.$it('form_label.distribution_costs'), // 配送费用
+            label: window.$it('fL.distribution_costs'), // 配送费用
             value: 'SHIP_AMT',
             dataAcessKey: 'SHIP_AMT',
             disabled: false,
@@ -388,14 +388,14 @@ export default {
           {
             style: 'input', // 输入框弹框单多选
             value: 'SOURCE_CODE',
-            label: window.$it('form_label.platform_billNo'), // 平台单号
+            label: window.$it('fL.platform_billNo'), // 平台单号
             disabled: false,
             dataAcessKey: 'SOURCE_CODE',
             width: '6',
           },
           {
             style: 'select', // 下拉框类型
-            label: window.$it('form_label.paymentMethod'), // 付款方式 下拉框前的值
+            label: window.$it('fL.paymentMethod'), // 付款方式 下拉框前的值
             width: '6', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             disabled: false,
@@ -410,14 +410,14 @@ export default {
           },
           {
             style: 'input',
-            label: window.$it('form_label.collection_amount'), // 代收金额
+            label: window.$it('fL.collection_amount'), // 代收金额
             value: 'COD_AMT',
             disabled: false,
             width: '6',
           },
           {
             style: 'input',
-            label: window.$it('form_label.service_charge'), // 服务费
+            label: window.$it('fL.service_charge'), // 服务费
             value: 'SERVICE_AMT',
             disabled: false,
             width: '6',
@@ -442,14 +442,14 @@ export default {
           {
             style: '', // 输入框弹框单多选
             value: 'EXPRESS_CODE',
-            label: window.$it('form_label.logisticsOrder_No'), // 物流单号
+            label: window.$it('fL.logisticsOrder_No'), // 物流单号
             disabled: false,
             dataAcessKey: 'EXPRESS_CODE',
             width: '6',
           },
           {
             style: 'checkbox',
-            label: window.$it('form_label.invoice_or_not'), // 是否开票
+            label: window.$it('fL.invoice_or_not'), // 是否开票
             value: 'is_kaip',
             disabled: false,
             dataAcessKey: 'IS_INVOICE',
@@ -457,7 +457,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.$it('form_label.internalRemarks'), // 内部备注
+            label: window.$it('fL.internalRemarks'), // 内部备注
             value: 'INSIDE_REMARK',
             disabled: false,
             dataAcessKey: 'INSIDE_REMARK',
@@ -513,7 +513,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: window.$it('form_label.match_smart_address'), // 智能匹配地址
+            label: window.$it('fL.match_smart_address'), // 智能匹配地址
             value: 'site',
             disabled: false,
             dataAcessKey: 'RECEIVER_NAME',
@@ -559,7 +559,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.$it('form_label.consignee'), // 收货人
+            label: window.$it('fL.consignee'), // 收货人
             disabled: false,
             value: 'RECEIVER_NAME',
             dataAcessKey: 'RECEIVER_NAME',
@@ -568,7 +568,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.$it('form_label.consignee_phone'), // 收货人手机
+            label: window.$it('fL.consignee_phone'), // 收货人手机
             disabled: false,
             value: 'RECEIVER_MOBILE',
             dataAcessKey: 'RECEIVER_MOBILE',
@@ -576,7 +576,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.$it('form_label.consignee_tel'), // 收货人电话
+            label: window.$it('fL.consignee_tel'), // 收货人电话
             disabled: false,
             value: 'RECEIVER_PHONE',
             dataAcessKey: 'RECEIVER_PHONE',
@@ -584,7 +584,7 @@ export default {
           },
           {
             style: 'input',
-            label: window.$it('form_label.consignee_postcode'), // 收货人邮编
+            label: window.$it('fL.consignee_postcode'), // 收货人邮编
             disabled: false,
             value: 'RECEIVER_ZIP',
             dataAcessKey: 'RECEIVER_ZIP',
@@ -594,21 +594,21 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_PROVINCE_ENAME',
-            label: window.$it('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
+            label: window.$it('fL.consignee_province'), // 收货人省份 // input前面显示的lable值
             itemdata: {},
             oneObj: () => {
               // 点击选中事件
               // 市 区/县值为空
               // this.formConfig1.formData[6].itemdata.pid = '';
               // this.formConfig1.formData[6].itemdata.valuedata = '';
-              this.queryFormItem(this.formConfig1.formData, window.$it('form_label.consignee_city')).itemdata.pid = '';
-              this.queryFormItem(this.formConfig1.formData, window.$it('form_label.consignee_city')).itemdata.valuedata = '';
+              this.queryFormItem(this.formConfig1.formData, window.$it('fL.consignee_city')).itemdata.pid = '';
+              this.queryFormItem(this.formConfig1.formData, window.$it('fL.consignee_city')).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ID = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ENAME = '';
               // this.formConfig1.formData[7].itemdata.pid = '';
               // this.formConfig1.formData[7].itemdata.valuedata = '';
-              this.queryFormItem(this.formConfig1.formData, window.$it('form_label.aconsignee_area')).itemdata.pid = '';
-              this.queryFormItem(this.formConfig1.formData, window.$it('form_label.aconsignee_area')).itemdata.valuedata = '';
+              this.queryFormItem(this.formConfig1.formData, window.$it('fL.aconsignee_area')).itemdata.pid = '';
+              this.queryFormItem(this.formConfig1.formData, window.$it('fL.aconsignee_area')).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
           },
@@ -616,7 +616,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_CITY_ENAME',
-            label: window.$it('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
+            label: window.$it('fL.consignee_city'), // 收货人市 // input前面显示的lable值
             inputList: [],
             objList: [],
             itemdata: {},
@@ -624,8 +624,8 @@ export default {
               // 市 区/县值为空
               // this.formConfig1.formData[7].itemdata.pid = '';
               // this.formConfig1.formData[7].itemdata.valuedata = '';
-              this.queryFormItem(this.formConfig1.formData, window.$it('form_label.aconsignee_area')).itemdata.pid = '';
-              this.queryFormItem(this.formConfig1.formData, window.$it('form_label.aconsignee_area')).itemdata.valuedata = '';
+              this.queryFormItem(this.formConfig1.formData, window.$it('fL.aconsignee_area')).itemdata.pid = '';
+              this.queryFormItem(this.formConfig1.formData, window.$it('fL.aconsignee_area')).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
           },
@@ -634,7 +634,7 @@ export default {
             width: '6',
             inputList: [],
             dataAcessKey: 'CP_C_REGION_AREA_ENAME',
-            label: window.$it('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
+            label: window.$it('fL.aconsignee_area'), // 收货人区 input前面显示的lable值
             itemdata: {
               col: 1,
               colid: 167816,
@@ -642,13 +642,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: window.$it('form_label.aconsignee_area'), // 收货人区
+              fkdesc: window.$it('fL.aconsignee_area'), // 收货人区
               inputname: 'RECEIVER_AREA:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: window.$it('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
+              name: window.$it('fL.aconsignee_area'), // 收货人区 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_DISTAREA', // 对应的表
               reftableid: 23863, // 对应的表ID
@@ -672,7 +672,7 @@ export default {
           // },
           {
             style: 'input',
-            label: window.$it('form_label.aconsignee_address'), // 收货人地址
+            label: window.$it('fL.aconsignee_address'), // 收货人地址
             value: 'RECEIVER_ADDRESS',
             dataAcessKey: 'RECEIVER_ADDRESS',
             width: '12',
@@ -721,7 +721,7 @@ export default {
       formConfig2: {
         formData: [{
           style: 'input',
-          label: window.$it('form_label.buyerNotes'), // 买家备注
+          label: window.$it('fL.buyerNotes'), // 买家备注
           value: 'BUYER_MESSAGE',
           disabled: false,
           dataAcessKey: 'BUYER_MESSAGE',
@@ -729,7 +729,7 @@ export default {
         },
         {
           style: 'input',
-          label: window.$it('form_label.sellerNotes'), // 卖家备注
+          label: window.$it('fL.sellerNotes'), // 卖家备注
           value: 'SELLER_MEMO',
           disabled: false,
           dataAcessKey: 'SELLER_MEMO',
@@ -828,7 +828,7 @@ export default {
             },
           },
           {
-            label: window.$it('form_label.barCode'), // 条码
+            label: window.$it('fL.barCode'), // 条码
             style: 'dimSearch',
             width: '6',
             value: 'dimData',
@@ -871,7 +871,7 @@ export default {
                         dimList.forEach((item) => {
                           // 条码
                           if (
-                            item.label === $it('form_label.barCode')
+                            item.label === $it('fL.barCode')
                           ) {
                             item.AuotData = data;
                             // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
@@ -942,7 +942,7 @@ export default {
           dataAcessKey: 'PS_C_SIZE_ENAME',
         },
         {
-          title: window.$it('form_label.barCode'), // 条码
+          title: window.$it('fL.barCode'), // 条码
           key: 'PS_C_SKU_ECODE',
           dataAcessKey: 'PS_C_SKU_ECODE',
         },
@@ -1317,7 +1317,7 @@ export default {
     async getWarehouse(id, cid) {
       const _this = this;
       // _this.formConfig.formData[8].options = [];
-      _this.queryFormItem(_this.formConfig.formData, window.$it('form_label.delivery_warehouse')).options = [];
+      _this.queryFormItem(_this.formConfig.formData, window.$it('fL.delivery_warehouse')).options = [];
       const formData = new FormData();
       if (id) {
         formData.append(
@@ -1332,12 +1332,12 @@ export default {
           'param',
           JSON.stringify({
             // shopId: _this.formConfig.formData[0].itemdata.pid
-            shopId: _this.queryFormItem(_this.formConfig.formData, window.$it('form_label.orderShop')).itemdata.pid
+            shopId: _this.queryFormItem(_this.formConfig.formData, window.$it('fL.orderShop')).itemdata.pid
           })
         );
       }
       // if (_this.formConfig.formData[0].itemdata.pid) {
-      if (_this.queryFormItem(_this.formConfig.formData, window.$it('form_label.orderShop')).itemdata.pid) {
+      if (_this.queryFormItem(_this.formConfig.formData, window.$it('fL.orderShop')).itemdata.pid) {
         const res = await _this.service.common.queryPhyWareHouseList(formData);
         if (res.data.code === 0) {
           _this.formConfig.formData.forEach((item) => {
@@ -1463,7 +1463,7 @@ export default {
             this.shopId = res.data.data.baseInfo.CP_C_SHOP_ID;
             // 配置初始化页面时'配送物流'的默认项
             // this.formConfig.formData[1].inputList = [
-            this.queryFormItem(this.formConfig.formData, window.$it('form_label.distribution_logistics')).inputList = [
+            this.queryFormItem(this.formConfig.formData, window.$it('fL.distribution_logistics')).inputList = [
               {
                 childs: [
                   {
@@ -1799,14 +1799,14 @@ export default {
           // 下单店铺 配送物流 收货人省份 收货人市 收货人区
           if (
             item.itemdata
-            && item.itemdata.name === $it('form_label.orderShop')
+            && item.itemdata.name === $it('fL.orderShop')
           ) {
             ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
             ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
           } else if (
             item.itemdata
             && item.itemdata.name
-            === $it('form_label.distribution_logistics')
+            === $it('fL.distribution_logistics')
           ) {
             ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -1816,20 +1816,20 @@ export default {
           if (
             item.itemdata
             && item.itemdata.name
-            === $it('form_label.consignee_province')
+            === $it('fL.consignee_province')
           ) {
             ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
           } else if (
             item.itemdata
-            && item.itemdata.name === $it('form_label.consignee_city')
+            && item.itemdata.name === $it('fL.consignee_city')
           ) {
             ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
           }
           if (
             item.itemdata
-            && item.itemdata.name === $it('form_label.aconsignee_area')
+            && item.itemdata.name === $it('fL.aconsignee_area')
           ) {
             ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -2017,7 +2017,7 @@ export default {
           // 发货仓库
           if (
             item.itemdata.name == e.name
-            && item.itemdata.name == window.$it('form_label.delivery_warehouse')
+            && item.itemdata.name == window.$it('fL.delivery_warehouse')
           ) {
             _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid;
           }
@@ -2193,10 +2193,10 @@ export default {
         // 下单店铺
         if (
           item.itemdata
-          && item.itemdata.name === window.$it('form_label.orderShop')
+          && item.itemdata.name === window.$it('fL.orderShop')
           && !item.itemdata.pid
         ) {
-          promptMessage += `${window.$it('form_label.orderShop')},`;
+          promptMessage += `${window.$it('fL.orderShop')},`;
         }
         // if (
         //   item.itemdata &&
@@ -2207,32 +2207,32 @@ export default {
         // }
       });
       if (masterTable.SHIP_AMT === '') {
-        promptMessage += `${window.$it('form_label.distribution_costs')},`; // 配送费用
+        promptMessage += `${window.$it('fL.distribution_costs')},`; // 配送费用
       }
       // if (!masterTable.CP_C_PHY_WAREHOUSE_ID || !masterTable.CP_C_PHY_WAREHOUSE_ENAME) promptMessage += "发货仓库,";
       if (!masterTable.SOURCE_CODE) {
-        promptMessage += `${window.$it('form_label.platform_billNo')},`; // 平台单号
+        promptMessage += `${window.$it('fL.platform_billNo')},`; // 平台单号
       }
       // if (!masterTable.USER_NICK) {
       //   promptMessage += "买家昵称,";
       // }
       if (!masterTable.PAY_TYPE) {
-        promptMessage += `${window.$it('form_label.paymentMethod')},`; // 付款方式
+        promptMessage += `${window.$it('fL.paymentMethod')},`; // 付款方式
       }
       if (masterTable.PAY_TYPE == 2) {
         if (masterTable.COD_AMT !== 0) {
           if (!masterTable.COD_AMT || masterTable.COD_AMT === '') {
             promptMessage += `${window.$it(
-              'form_label.collection_amount'
+              'fL.collection_amount'
             )},`; // 代收金额
           }
         }
       }
       if (!masterTable.RECEIVER_NAME) {
-        promptMessage += window.$it('form_label.consignee'); // 收货人
+        promptMessage += window.$it('fL.consignee'); // 收货人
       }
       if (!masterTable.RECEIVER_MOBILE && !masterTable.RECEIVER_PHONE) {
-        promptMessage += `${window.$it('form_label.consignee_phone')},`; // 收货人手机
+        promptMessage += `${window.$it('fL.consignee_phone')},`; // 收货人手机
       }
       // if (!masterTable.CP_C_REGION_PROVINCE_ENAME) {
       //   promptMessage += "收货人省份,";
@@ -2245,20 +2245,20 @@ export default {
         if (
           item.itemdata
           && item.itemdata.name
-          === window.$it('form_label.consignee_province')
+          === window.$it('fL.consignee_province')
           && !item.itemdata.pid
         ) {
-          promptMessage += `${window.$it('form_label.consignee_province')},`;
+          promptMessage += `${window.$it('fL.consignee_province')},`;
         } else if (
           item.itemdata
-          && item.itemdata.name === window.$it('form_label.consignee_city')
+          && item.itemdata.name === window.$it('fL.consignee_city')
           && !item.itemdata.pid
         ) {
-          promptMessage += `${window.$it('form_label.consignee_city')},`;
+          promptMessage += `${window.$it('fL.consignee_city')},`;
         }
       });
       if (!masterTable.RECEIVER_ADDRESS) {
-        promptMessage += `${window.$it('form_label.aconsignee_address')},`;
+        promptMessage += `${window.$it('fL.aconsignee_address')},`;
       }
       if (promptMessage) {
         this.$Message.warning(
@@ -2298,14 +2298,14 @@ export default {
         // 下单店铺 配送物流
         if (
           item.itemdata
-          && item.itemdata.name === $it('form_label.orderShop')
+          && item.itemdata.name === $it('fL.orderShop')
         ) {
           item.itemdata.valuedata = data.CP_C_SHOP_TITLE;
           item.itemdata.pid = data.CP_C_SHOP_ID;
         } else if (
           item.itemdata
           && item.itemdata.name
-          === $it('form_label.distribution_logistics')
+          === $it('fL.distribution_logistics')
         ) {
           item.itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
           item.itemdata.pid = data.CP_C_LOGISTICS_ID;
@@ -2332,19 +2332,19 @@ export default {
         // 收货人省份 收货人市 收货人区
         if (
           item.itemdata
-          && item.itemdata.name === $it('form_label.consignee_province')
+          && item.itemdata.name === $it('fL.consignee_province')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
           item.itemdata.pid = data.CP_C_REGION_PROVINCE_ID;
         } else if (
           item.itemdata
-          && item.itemdata.name === $it('form_label.consignee_city')
+          && item.itemdata.name === $it('fL.consignee_city')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
           item.itemdata.pid = data.CP_C_REGION_CITY_ID;
         } else if (
           item.itemdata
-          && item.itemdata.name === $it('form_label.aconsignee_area')
+          && item.itemdata.name === $it('fL.aconsignee_area')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
           item.itemdata.pid = data.CP_C_REGION_AREA_ID;
@@ -2358,17 +2358,17 @@ export default {
     // 过滤条件
     relationShip() {
       // this.formConfig1.formData[5].itemdata = this.fkcolumn.PROV;
-      this.queryFormItem(this.formConfig1.formData, window.$it('form_label.consignee_province')).itemdata = this.fkcolumn.PROV;
+      this.queryFormItem(this.formConfig1.formData, window.$it('fL.consignee_province')).itemdata = this.fkcolumn.PROV;
       // this.formConfig1.formData[6].inputList.push(this.fkcolumn.PROV);
-      this.queryFormItem(this.formConfig1.formData, window.$it('form_label.consignee_city')).inputList.push(this.fkcolumn.PROV);
+      this.queryFormItem(this.formConfig1.formData, window.$it('fL.consignee_city')).inputList.push(this.fkcolumn.PROV);
 
       // this.formConfig1.formData[6].itemdata = this.fkcolumn.CITY;
-      this.queryFormItem(this.formConfig1.formData, window.$it('form_label.consignee_city')).itemdata = this.fkcolumn.CITY;
+      this.queryFormItem(this.formConfig1.formData, window.$it('fL.consignee_city')).itemdata = this.fkcolumn.CITY;
       // this.formConfig1.formData[7].inputList.push(this.fkcolumn.CITY);
-      this.queryFormItem(this.formConfig1.formData, window.$it('form_label.aconsignee_area')).inputList.push(this.fkcolumn.CITY);
+      this.queryFormItem(this.formConfig1.formData, window.$it('fL.aconsignee_area')).inputList.push(this.fkcolumn.CITY);
 
       // this.formConfig.formData[0].itemdata = this.fkcolumn.STORE;
-      this.queryFormItem(this.formConfig.formData, window.$it('form_label.orderShop')).itemdata = this.fkcolumn.STORE;
+      this.queryFormItem(this.formConfig.formData, window.$it('fL.orderShop')).itemdata = this.fkcolumn.STORE;
       // this.formConfig.formData[8].inputList.push(this.fkcolumn.STORE);
       // this.formConfig1.formData[6].objList.push(this.fkcolumn.PROV);
     },

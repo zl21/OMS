@@ -49,7 +49,7 @@ export default {
             {
               style: 'input',
               // label: "物流编号",
-              label: $it('form_label.logisticsNo'),
+              label: $it('fL.logisticsNo'),
               value: 'logistics_code',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -57,7 +57,7 @@ export default {
             {
               style: 'input',
               // label: "退换货单号",
-              label: $it('form_label.returnOrder_no'),
+              label: $it('fL.returnOrder_no'),
               value: 'id',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -65,7 +65,7 @@ export default {
             {
               style: 'input',
               // label: "平台单号",
-              label: $it('form_label.platform_billNo'),
+              label: $it('fL.platform_billNo'),
               value: 'tid',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -73,7 +73,7 @@ export default {
             {
               style: 'input',
               // label: "收货人",
-              label: $it('form_label.consignee'),
+              label: $it('fL.consignee'),
               value: 'receive_name',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -89,7 +89,7 @@ export default {
             {
               style: 'input',
               // label: "收货人手机",
-              label: $it('form_label.consignee_phone'),
+              label: $it('fL.consignee_phone'),
               value: 'receive_mobile',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -101,12 +101,12 @@ export default {
             {
               key: 'ID',
               // title: "退换货单号",
-              title: $it('form_label.returnOrder_no'),
+              title: $it('fL.returnOrder_no'),
             },
             {
               key: 'ORIG_ORDER_NO',
               // title: "原单单号",
-              title: $it('form_label.originalOrder_No'),
+              title: $it('fL.originalOrder_No'),
             },
             {
               key: 'BUYER_NICK',
@@ -116,17 +116,17 @@ export default {
             {
               key: 'LOGISTICS_CODE',
               // title: "物流单号",
-              title: $it('form_label.logisticsOrder_No'),
+              title: $it('fL.logisticsOrder_No'),
             },
             {
               key: 'RECEIVE_NAME',
               // title: "收货人",
-              title: $it('form_label.consignee'),
+              title: $it('fL.consignee'),
             },
             {
               key: 'RECEIVE_MOBILE',
               // title: "收货人手机号",
-              title: $it('form_label.consignee_phone'),
+              title: $it('fL.consignee_phone'),
             },
             {
               key: 'shopName',
@@ -186,7 +186,7 @@ export default {
           {
             style: 'input', // 输入框类型
             // label: "原单单号", //输入框前文字
-            label: $it('form_label.originalOrder_No'),
+            label: $it('fL.originalOrder_No'),
             value: 'ORIG_ORDER_NO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: 'ios-search', // 输入框后带的图标,暂只有输入框支持
@@ -208,7 +208,7 @@ export default {
           {
             style: 'input',
             // label: "原平台单号",
-            label: $it('form_label.originalOrderPlatform'),
+            label: $it('fL.originalOrderPlatform'),
             disabled: false, // 按钮禁用控制
             value: 'SOURCE_CODE',
             dataAcessKey: 'SOURCE_CODE',
@@ -226,7 +226,7 @@ export default {
           {
             style: 'select', // 下拉框类型
             // label: "退货批次", //下拉框前的值
-            label: $it('form_label.returnBatch'),
+            label: $it('fL.returnBatch'),
             width: '6', // 所占宽度宽度
             value: 'OC_B_REFUND_BATCH_ID',
             dataAcessKey: 'OC_B_REFUND_BATCH_ID',
@@ -239,7 +239,7 @@ export default {
           {
             style: 'input', // 下拉框类型
             // label: "入库仓库", //下拉框前的值
-            label: $it('form_label.in_warehouse'),
+            label: $it('fL.in_warehouse'),
             width: '6', // 所占宽度宽度
             disabled: true, // 按钮禁用控制
             value: 'IN_STORE_ENAME',
@@ -263,7 +263,7 @@ export default {
               isnotnull: false,
               isuppercase: false,
               length: 20,
-              name: $it('form_label.logisticsCompany'), // 物流公司
+              name: $it('fL.logisticsCompany'), // 物流公司
               readonly: false,
               reftable: 'CP_C_LOGISTICS',
               // reftableid: 24633,
@@ -281,7 +281,7 @@ export default {
             style: 'input',
             dataAcessKey: 'LOGISTIC_NUMBER',
             // label: "物流单号",
-            label: $it('form_label.logisticsOrder_No'),
+            label: $it('fL.logisticsOrder_No'),
             value: 'LOGISTIC_NUMBER',
             disabled: false, // 按钮禁用控制
             width: '6',
@@ -289,7 +289,7 @@ export default {
           {
             style: 'input',
             // label: "手机号",
-            label: $it('form_label.cellPhone_number'),
+            label: $it('fL.cellPhone_number'),
             dataAcessKey: 'RECEIVER_MOBILE',
             value: 'RECEIVER_MOBILE',
             disabled: false, // 按钮禁用控制
@@ -298,7 +298,7 @@ export default {
           {
             style: 'input',
             // label: "姓名",
-            label: $it('form_label.fullName'),
+            label: $it('fL.fullName'),
             dataAcessKey: 'RECEIVER_NAME',
             value: 'RECEIVER_NAME',
             disabled: false, // 按钮禁用控制
@@ -308,7 +308,7 @@ export default {
             style: 'select', // 下拉框类型
             dataAcessKey: 'SPECIAL_TYPE',
             // label: "特殊处理类型", //下拉框前的值
-            label: $it('form_label.specialTreatmentType'),
+            label: $it('fL.specialTreatmentType'),
             width: '6', // 所占宽度宽度
             value: 'SPECIAL_TYPE',
             disabled: false, // 按钮禁用控制
@@ -329,7 +329,7 @@ export default {
           {
             style: 'input',
             // label: "发件地址",
-            label: $it('form_label.sending_address'),
+            label: $it('fL.sending_address'),
             dataAcessKey: 'RECEIVER_ADDRESS',
             disabled: false, // 按钮禁用控制
             value: 'RECEIVER_ADDRESS',
@@ -377,25 +377,25 @@ export default {
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: $it('form_label.barCode'),
+            title: $it('fL.barCode'),
           },
           {
             key: 'GBCODE',
             dataAcessKey: 'GBCODE',
             // title: "国标码",
-            title: $it('form_label.gBCode'),
+            title: $it('fL.gBCode'),
           },
           // {
           //   key: 'OC_B_RETURN_ORDER_ID',
           //   dataAcessKey: 'OC_B_RETURN_ORDER_ID',
           //   // title: "退单编号",
-          //   title: $it('form_label.chargebackNumber')
+          //   title: $it('fL.chargebackNumber')
           // },
           {
             key: 'OC_B_RETURN_ORDER_ID',
             dataAcessKey: 'OC_B_RETURN_ORDER_ID',
             // title: "退单编号",
-            title: $it('form_label.chargebackNumber'),
+            title: $it('fL.chargebackNumber'),
             render: (h, params) =>
               h(
                 'a',
@@ -435,7 +435,7 @@ export default {
             key: 'PRODUCT_MARK',
             dataAcessKey: 'PRODUCT_MARK',
             // title: "商品标记",
-            title: $it('form_label.goodsMark'),
+            title: $it('fL.goodsMark'),
             render: (h, params) => {
               const _this = this;
               const list = [
@@ -627,7 +627,7 @@ export default {
         {
           style: 'input',
           // label: "处理人",
-          label: $it('form_label.handler'),
+          label: $it('fL.handler'),
           disabled: false, // 按钮禁用控制
           dataAcessKey: 'HANDLER',
           value: 'HANDLER',
@@ -636,7 +636,7 @@ export default {
         {
           style: 'input',
           // label: "处理人备注",
-          label: $it('form_label.processor_remarks'),
+          label: $it('fL.processor_remarks'),
           dataAcessKey: 'REMARK_HANDLE',
           disabled: false, // 按钮禁用控制
           value: 'REMARK_HANDLE',
@@ -645,7 +645,7 @@ export default {
         {
           style: 'input',
           // label: "入库单单号",
-          label: $it('form_label.in_order_stockNo'),
+          label: $it('fL.in_order_stockNo'),
           dataAcessKey: 'ID',
           disabled: true, // 按钮禁用控制
           value: 'ID',
@@ -654,7 +654,7 @@ export default {
         {
           style: 'input',
           // label: "下单店铺",
-          label: $it('form_label.orderShop'),
+          label: $it('fL.orderShop'),
           dataAcessKey: 'CP_C_SHOP_TITLE',
           disabled: true, // 按钮禁用控制
           value: 'CP_C_SHOP_TITLE',
@@ -663,7 +663,7 @@ export default {
         {
           style: 'input',
           // label: "WMS单据编号",
-          label: $it('form_label.wMS_billNo'),
+          label: $it('fL.wMS_billNo'),
           dataAcessKey: 'WMS_BILL_NO',
           disabled: true, // 按钮禁用控制
           value: 'WMS_BILL_NO',
@@ -718,7 +718,7 @@ export default {
       dataArr.forEach((item) => {
         // 商品标记
         item.PRODUCT_MARK =
-          item.PRODUCT_MARK == $it('form_label.qualityGoods')
+          item.PRODUCT_MARK == $it('fL.qualityGoods')
             ? 1
             : 0;
         // 是否无原单条码
@@ -865,7 +865,7 @@ export default {
       this.information.formData.forEach((value) => {
         // if (value.label === "特殊处理类型") {
         if (
-          value.label === $it('form_label.specialTreatmentType')
+          value.label === $it('fL.specialTreatmentType')
         ) {
           res.data.data.addcolums.forEach((item) => {
             // if (item.parentdesc === "基本信息") {
@@ -1067,7 +1067,7 @@ export default {
         if (item.itemdata) {
           switch (item.itemdata.name) {
             // case "物流公司":logisticsCompany
-            case $it('form_label.logisticsCompany'):
+            case $it('fL.logisticsCompany'):
               this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
               this.information.formValue.CP_C_LOGISTICS_ENAME =
                 item.itemdata.valuedata;

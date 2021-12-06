@@ -41,7 +41,7 @@ export default {
         key: 'ECODE'
       },
       {
-        title: $it('form_label.skuName'), // SKU名称
+        title: $it('fL.skuName'), // SKU名称
         key: 'ENAME'
       },
       {

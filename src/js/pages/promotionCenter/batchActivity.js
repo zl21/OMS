@@ -74,7 +74,7 @@ export default {
         this.basic_info.time_type = groups.timeTypes.find(item => item.title === $it('other.payment_date')).value; // 付款日期
         this.basic_info.activity_type = groups.actiTypes.find(item => item.title === $it('other.Designated_free_purchase')).value; // 指定买赠
         this.basic_info.buyer_limit_frequency = groups.buyerLimitFrequency.find(item => item.title === $it('other.unlimited')).value; // 不限制
-        this.basic_info.order_notes_type = groups.orderRemarks.find(item => item.title === $it('form_label.buyer_message')).value; // 买家留言
+        this.basic_info.order_notes_type = groups.orderRemarks.find(item => item.title === $it('fL.buyer_message')).value; // 买家留言
         // 条件设置
         this.batch_infos_setting.products_origin = groups.productsOrigin.find(item => item.title === $it('other.systemCommodity_SKU')).value; // 系统商品SKU
         this.batch_infos_setting.gift_doubles = groups.giftDoubles.find(item => item.title === $it('other.no_double')).value; // 不翻倍

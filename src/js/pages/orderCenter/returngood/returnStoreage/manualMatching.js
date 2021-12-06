@@ -280,7 +280,7 @@ export default {
               isnotnull: false,
               isuppercase: false,
               length: 20,
-              name: $it('form_label.logisticsCompany'), // '物流公司',
+              name: $it('fL.logisticsCompany'), // '物流公司',
               readonly: true,
               reftable: 'ST_C_EWAYBILL_LOGISTICS',
               reftableid: 24633,
@@ -743,7 +743,7 @@ export default {
       fromdata.append('objid', -1);
       const res = await this.service.common.getObject(fromdata);
       this.information.formData.forEach((value) => {
-        if (value.label === $it('form_label.specialTreatmentType')) { // '特殊处理类型'
+        if (value.label === $it('fL.specialTreatmentType')) { // '特殊处理类型'
           res.data.data.addcolums.forEach((item) => {
             if (item.parentdesc === $it('com.baseInformation')) { // '基本信息'
               const childItem = item.childs;
@@ -949,7 +949,7 @@ export default {
       this.returnSelectData = e;
     },
     oneObjs(val) {
-      if (val.name == $it('form_label.logisticsCompany')) { // '物流公司'
+      if (val.name == $it('fL.logisticsCompany')) { // '物流公司'
         this.information.formValue.CP_C_LOGISTICS_ID = val.pid;
         this.information.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
       }

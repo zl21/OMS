@@ -17,21 +17,21 @@ export default {
             {
               style: 'input',
               // label: "押金订单号",
-              label: $it('form_label.depositOrderNo'),
+              label: $it('fL.depositOrderNo'),
               value: 'demo1',
               width: '8',
             },
             {
               style: 'input',
               // label: "收货人",
-              label: $it('form_label.consignee'),
+              label: $it('fL.consignee'),
               value: 'demo2',
               width: '8',
             },
             {
               style: 'input',
               // label: "收货人手机号",
-              label: $it('form_label.consignee_phone'),
+              label: $it('fL.consignee_phone'),
               value: 'demo3',
               width: '8',
             },
@@ -58,7 +58,7 @@ export default {
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: $it('form_label.orderShop'), // 下单店铺
+                name: $it('fL.orderShop'), // 下单店铺
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'CP_C_SHOP', // 对应的表
                 reftableid: 24475, // 对应的表ID
@@ -83,7 +83,7 @@ export default {
             },
             {
               style: 'select', // 下拉框类型
-              label: $it('form_label.delivery_warehouse'), // 发货仓库
+              label: $it('fL.delivery_warehouse'), // 发货仓库
               width: '8', // 所占宽度宽度
               value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
               selectChange: () => {
@@ -132,12 +132,12 @@ export default {
         columns: [
           {
             // title: "押金订单号",
-            title: $it('form_label.depositOrderNo'),
+            title: $it('fL.depositOrderNo'),
             key: 'demo1',
           },
           {
             // title: "收货人",
-            title: $it('form_label.consignee'),
+            title: $it('fL.consignee'),
             key: 'demo2',
           },
           {
@@ -147,22 +147,22 @@ export default {
           },
           {
             // title: "收货人手机",
-            title: $it('form_label.consignee_phone'),
+            title: $it('fL.consignee_phone'),
             key: 'demo4',
           },
           {
             // title: "发货仓库",
-            title: $it('form_label.delivery_warehouse'),
+            title: $it('fL.delivery_warehouse'),
             key: 'demo5',
           },
           {
             // title: "物流单号",
-            title: $it('form_label.logisticsOrder_No'),
+            title: $it('fL.logisticsOrder_No'),
             key: 'demo6',
           },
           {
             // title: "下单店铺",
-            title: $it('form_label.orderShop'),
+            title: $it('fL.orderShop'),
             key: 'demo7',
           },
         ],
@@ -226,7 +226,7 @@ export default {
         if (res.data.code === 0) {
           this.depositConfig.jordanFormConfig.formData.forEach((item) => {
             // 发货仓库
-            if (item.label === $it('form_label.delivery_warehouse'))
+            if (item.label === $it('fL.delivery_warehouse'))
               item.options = res.data.data;
           });
         }

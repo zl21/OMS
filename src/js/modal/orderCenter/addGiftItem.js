@@ -99,7 +99,7 @@ export default {
           },
           {
             key: 'skuEname',
-            title: $it('form_label.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
           },
           {
             key: 'brandEname',
@@ -500,7 +500,7 @@ export default {
           },
           {
             key: 'skuEname',
-            title: $it('form_label.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
           },
           {
             key: 'brandEname',

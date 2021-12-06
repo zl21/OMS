@@ -144,7 +144,7 @@ export default {
       {
         style: 'input',
         // label: "单据编号",
-        label: $it('form_label.billNo'),
+        label: $it('fL.billNo'),
         value: 'BILL_NO',
         width: '6',
         disabled: true,
@@ -186,7 +186,7 @@ export default {
         style: 'date',
         type: '', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         // label: "生效日期",
-        label: $it('form_label.effectiveDate'),
+        label: $it('fL.effectiveDate'),
         value: 'BEGIN_TIME',
         width: '6',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -197,7 +197,7 @@ export default {
         style: 'date',
         type: '', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         // label: "结束日期",
-        label: $it('form_label.endDate'),
+        label: $it('fL.endDate'),
         value: 'END_TIME',
         width: '6',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -207,7 +207,7 @@ export default {
       {
         style: 'input',
         // label: "方案名称",
-        label: $it('form_label.schemeName'),
+        label: $it('fL.schemeName'),
         value: 'ENAME',
         width: '6',
         inputenter: () => {
@@ -218,7 +218,7 @@ export default {
       {
         style: 'input',
         // label: "方案描述",
-        label: $it('form_label.schemeDescription'),
+        label: $it('fL.schemeDescription'),
         value: 'PLAN_DESC',
         width: '6',
         inputenter: () => {
@@ -279,7 +279,7 @@ export default {
       {
         style: 'input',
         // label: "审核人",
-        label: $it('form_label.reviewer'),
+        label: $it('fL.reviewer'),
         value: 'CHECKENAME',
         width: '6',
         disabled: true
@@ -295,7 +295,7 @@ export default {
       {
         style: 'input',
         // label: "结案人",
-        label: $it('form_label.closingMan'),
+        label: $it('fL.closingMan'),
         value: 'FINISHENAME',
         width: '6',
         disabled: true
@@ -303,7 +303,7 @@ export default {
       {
         style: 'input',
         // label: "结案时间",
-        label: $it('form_label.closingTime'),
+        label: $it('fL.closingTime'),
         value: 'FINISHTIME',
         width: '6',
         disabled: true
@@ -327,7 +327,7 @@ export default {
           isuppercase: false,
           isnotnull: true,
           fkdesc: '物流公司档案',
-          name: $it('form_label.expressCompanyName'), // 快递公司名称
+          name: $it('fL.expressCompanyName'), // 快递公司名称
           fkdisplay: 'drp',
           row: 1,
           inputname: 'CP_C_LOGISTICS_ID:ENAME',
@@ -345,7 +345,7 @@ export default {
       {
         style: 'select', // 下拉框类型
         // label: "赔付类型", // 下拉框前的值
-        label: $it('form_label.payableAdjustType'),
+        label: $it('fL.payableAdjustType'),
         width: '6', // 所占宽度宽度
         value: 'COMPENSATE_TYPE', // 输入框的值
         selectChange: () => {
@@ -421,7 +421,7 @@ export default {
       {
         style: 'select', // 下拉框类型
         // label: "赔付标准", // 下拉框前的值
-        label: $it('form_label.payableAdjustStandard'),
+        label: $it('fL.payableAdjustStandard'),
         width: '6', // 所占宽度宽度
         value: 'COMPENSATE_STANDARD', // 输入框的值
         disabled: false,
@@ -451,7 +451,7 @@ export default {
       {
         style: 'input', // 输入框类型
         // label: "倍数", // 输入框前文字
-        label: $it('form_label.multiple'),
+        label: $it('fL.multiple'),
         value: 'MULTIPLE', // 输入框的值
         width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         disabled: false,
@@ -463,7 +463,7 @@ export default {
       {
         style: 'input', // 输入框类型
         // label: "结算价", // 输入框前文字
-        label: $it('form_label.settlement_price'),
+        label: $it('fL.settlement_price'),
         value: 'SETTLEMENTPRICE', // 输入框的值
         width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         inputenter: () => {
@@ -486,22 +486,22 @@ export default {
       },
       {
         // title: "赔付类型",
-        title: $it('form_label.payableAdjustType'),
+        title: $it('fL.payableAdjustType'),
         key: 'COMPENSATE_TYPE'
       },
       {
         // title: "赔付标准",
-        title: $it('form_label.payableAdjustStandard'),
+        title: $it('fL.payableAdjustStandard'),
         key: 'COMPENSATE_STANDARD'
       },
       {
         // title: "倍数",
-        title: $it('form_label.multiple'),
+        title: $it('fL.multiple'),
         key: 'MULTIPLE'
       },
       {
         // title: "结算价",
-        title: $it('form_label.settlement_price'),
+        title: $it('fL.settlement_price'),
         key: 'SETTLEMENTPRICE'
       }
     ];

@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       baseInformation: $it('other.basic_info'),
-      placeholder: $it('form_label.bb'),// '省市搜索',//省市搜索
+      placeholder: $it('fL.bb'),// '省市搜索',//省市搜索
       loading: false,
       pageShow: false,
       seachVal: '',
@@ -20,7 +20,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('form_label.a5'),
+          label: $it('fL.a5'),
           value: 'PROPERTY'
         },
         {
@@ -94,7 +94,7 @@ export default {
         formData: [
           {
             style: null,
-            label: $it('form_label.bc'), // 策略ID
+            label: $it('fL.bc'), // 策略ID
             value: 'ecode',
             colname: 'ecode',
             width: '8',
@@ -103,7 +103,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.bd'), // 策略名称
+            label: $it('fL.bd'), // 策略名称
             value: 'ename',
             colname: 'ename',
             width: '8',
@@ -114,7 +114,7 @@ export default {
           {
             style: 'date',
             type: "datetime",
-            label: $it('form_label.be'), // 生效开始时间
+            label: $it('fL.be'), // 生效开始时间
             value: 'beginTime',
             colname: 'beginTime',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -127,7 +127,7 @@ export default {
           },
           {
             style: 'date',
-            label: $it('form_label.bf'), // 生效结束时间
+            label: $it('fL.bf'), // 生效结束时间
             type: "datetime",
             value: 'endTime',
             colname: 'endTime',
@@ -277,7 +277,7 @@ export default {
           },
           {
             style: null,
-            label: $it('form_label.bg'), // 启用状态
+            label: $it('fL.bg'), // 启用状态
             value: 'isactive',
             colname: 'isactive',
             width: '8',
@@ -426,7 +426,7 @@ export default {
 
       //ST_C_ORDER_WAREHOUSE  分仓规则
       if (customizedModuleName == 'ST_C_ORDER_WAREHOUSE') {
-        this.labelList[0].label = $it('form_label.a5')//'按收货地址';
+        this.labelList[0].label = $it('fL.a5')//'按收货地址';
         this.labelList[1].value = "ST_C_ORDER_WAREHOUSE_LOG"
         this.qurefrom('cpCPhyWarehouseEname')[0].style = null;
         // 表示分仓策略》分仓规则
@@ -497,7 +497,7 @@ export default {
         //CP_C_SHOP_IDS  type
         this.qurefrom('CP_C_SHOP_IDS')[0].style = null;
         this.qurefrom('type')[0].style = null;
-        this.labelList[0].label = $it('form_label.region_details')//'区域明细';
+        this.labelList[0].label = $it('fL.region_details')//'区域明细';
         this.labelList[1].value = "ST_ASSIGN_LOGISTICS_LOG"
         // 表示分物流策略》分物流规则
         if (customizedModuleId == 'New' || customizedModuleId == '-1' || customizedModuleId == 'NEW') {
@@ -678,7 +678,7 @@ export default {
     fntableData(id) {
 
       if (this.customizedModuleName == 'ST_C_ASSIGN_LOGISTICS') {
-        this.placeholder = $it('form_label.bb') //"省市搜索"
+        this.placeholder = $it('fL.bb') //"省市搜索"
         service.strategyPlatform
           .assignLogisticsqueryDetailById({
             ID: this.$route.query.copy || id,

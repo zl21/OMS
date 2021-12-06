@@ -49,7 +49,7 @@ export default {
             isfk: true,
             isnotnull: true,
             // name: "收货省份",
-            name: $it('form_label.receiving_province'),
+            name: $it('fL.receiving_province'),
             readonly: false,
             valuedata: '',
             notForm: true,

@@ -142,7 +142,7 @@ export default {
         },
         {
           // title: "SKU名称",
-          title: $it('form_label.skuName'),
+          title: $it('fL.skuName'),
           key: 'SPEC',
         },
       ],

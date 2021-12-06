@@ -69,7 +69,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.d9'), // 渠道仓编码
+            label: $it('fL.d9'), // 渠道仓编码
             value: 'ECODE',
             width: '8',
             disabled: false,
@@ -80,7 +80,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.da'), // 渠道仓名称
+            label: $it('fL.da'), // 渠道仓名称
             value: 'ENAME',
             width: '8',
             maxlength: 225,
@@ -180,7 +180,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.db'), // 供货比例
+              label: $it('fL.db'), // 供货比例
               value: 'RATE',
               disabled: false,
               dataAcessKey: '',
@@ -245,7 +245,7 @@ export default {
             key: 'CP_C_PHY_WAREHOUSE_ENAME'
           },
           {
-            title: $it('form_label.db'), // 供货比例
+            title: $it('fL.db'), // 供货比例
             key: 'RATE',
             render: (h, params) => h(
               'div',
@@ -482,7 +482,7 @@ export default {
       if (!id) {
         str += `${$it("table_label.logicWarehouse")} `; // 逻辑仓
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.RATE) {
-        str += `${$it("form_label.db")} `; // 供货比例
+        str += `${$it("fL.db")} `; // 供货比例
       } else if (!self.jordanTableConfig.businessFormConfig.formValue.SUPPLY_PRIORITY) {
         str += `${$it('table_label.priority')} `; // 优先级
       }
@@ -559,9 +559,9 @@ export default {
       const self = this;
       let str = '';
       if (!self.formConfig.formValue.ECODE) {
-        str += `${$it('form_label.d9')} `; // 渠道仓编码
+        str += `${$it('fL.d9')} `; // 渠道仓编码
       } else if (!self.formConfig.formValue.ENAME) {
-        str += `${$it('form_label.da')} `; // 渠道仓名称
+        str += `${$it('fL.da')} `; // 渠道仓名称
       }
       if (str) {
         self.$Message.warning(`${str}不能为空!`);

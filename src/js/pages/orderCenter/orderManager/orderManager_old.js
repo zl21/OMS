@@ -120,7 +120,7 @@ export default {
                                 key: 'index'
                               },
                               {
-                                title: $it('form_label.billNo'), // 单据编号
+                                title: $it('fL.billNo'), // 单据编号
                                 key: 'billNo'
                               },
                               {
@@ -172,7 +172,7 @@ export default {
                                 key: 'index'
                               },
                               {
-                                title: $it('form_label.billNo'), // 单据编号
+                                title: $it('fL.billNo'), // 单据编号
                                 key: 'billNo'
                               },
                               {

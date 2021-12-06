@@ -116,7 +116,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.logisticsCompany'), // 物流公司
+              name: $it('fL.logisticsCompany'), // 物流公司
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 24411, // 对应的表ID
@@ -141,7 +141,7 @@ export default {
       labelList: [
         {
           // label: '区域明细',
-          label: $it('form_label.region_details'),
+          label: $it('fL.region_details'),
           value: '1',
           isShow: true
         }

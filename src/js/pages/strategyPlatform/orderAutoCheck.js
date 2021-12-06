@@ -148,7 +148,7 @@ export default {
             },
             {
               colname: 'ENAME',
-              name: window.$it('form_label.logisticsCompany'), // '物流公司',
+              name: window.$it('fL.logisticsCompany'), // '物流公司',
               show: true
             },
           ],

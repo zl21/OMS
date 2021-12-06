@@ -68,7 +68,7 @@ export default {
         },
         {
           key: 1,
-          showName: window.$it('form_label.price') // '价格'
+          showName: window.$it('fL.price') // '价格'
         }
       ],
       loading: false, // 加载动态

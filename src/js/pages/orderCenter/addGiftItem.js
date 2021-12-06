@@ -17,7 +17,7 @@ export default {
         },
         formData: [
           {
-            label: $it('form_label.returnOrder_no'),
+            label: $it('fL.returnOrder_no'),
             //'退换货单号',
             style: 'input',
             width: '7',
@@ -28,7 +28,7 @@ export default {
           },
           {
             style: 'input', //输入框类型
-            label: $it('form_label.platform_billNo'), // 平台单号 输入框前文字
+            label: $it('fL.platform_billNo'), // 平台单号 输入框前文字
             value: 'SOURCE_CODE', //输入框的值
             columns: ['SOURCE_CODE'],
             width: '7',
@@ -36,7 +36,7 @@ export default {
             //regx: /^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$/
           },
           {
-            label: $it('form_label.logisticsOrder_No'),
+            label: $it('fL.logisticsOrder_No'),
             //'物流单号',
             style: 'input',
             width: '7',

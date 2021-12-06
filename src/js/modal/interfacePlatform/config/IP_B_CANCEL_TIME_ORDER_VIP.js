@@ -49,7 +49,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: $it('form_label.queryTime'), // 查询时间
+        label: $it('fL.queryTime'), // 查询时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''

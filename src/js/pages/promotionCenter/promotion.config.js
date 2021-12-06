@@ -30,7 +30,7 @@ const baseColumnDefs = [
 	},
 	{
 		headerName: '活动名称',
-		// headerName: $it("form_label.activityName"),
+		// headerName: $it("fL.activityName"),
 		field: 'ACTI_NAME'
 	},
 	{
@@ -119,7 +119,7 @@ const logDataCol = [
 	},
 	{
 		// title: "操作人",
-		title: $it('form_label.operator'),
+		title: $it('fL.operator'),
 		key: 'operator'
 	},
 	{

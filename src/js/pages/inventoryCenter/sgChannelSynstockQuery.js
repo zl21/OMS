@@ -17,7 +17,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $it('form_label.creationDate'), // '创建日期',
+            label: $it('fL.creationDate'), // '创建日期',
             width: '6',
             value: 'CREATIONDATE',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -26,19 +26,19 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.batch_number'), // '批次编号',
+            label: $it('fL.batch_number'), // '批次编号',
             value: 'BATCHNO',
             width: '6'
           },
           {
             style: 'input',
-            label: $it('form_label.bar_code'), // '条码编码',
+            label: $it('fL.bar_code'), // '条码编码',
             value: 'PS_C_SKU_ECODE',
             width: '6'
           },
           {
             style: 'input',
-            label: $it('form_label.platformCommodityID'), // '平台商品ID',
+            label: $it('fL.platformCommodityID'), // '平台商品ID',
             value: 'NUMIID',
             width: '6'
           },
@@ -50,7 +50,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.gBCode'), // '国标码',
+            label: $it('fL.gBCode'), // '国标码',
             value: 'GBCODE',
             width: '6'
           },
@@ -87,7 +87,7 @@ export default {
           },
           // {
           //   style: 'input',
-          //   label: $it('form_label.storeID'), // '店铺ID',
+          //   label: $it('fL.storeID'), // '店铺ID',
           //   value: 'CP_C_SHOP_ID',
           //   width: '6'
           // },
@@ -107,7 +107,7 @@ export default {
           //     isnotnull: false, // 是否必填
           //     isuppercase: false, // 是否转大写
           //     length: 65535, // 最大长度是多少
-          //     name: $it('form_label.storeID'), // '店铺ID',
+          //     name: $it('fL.storeID'), // '店铺ID',
           //     readonly: false, // 是否可编辑，对应input   readonly属性
           //     reftable: 'CP_C_SHOP', // 对应的表
           //     row: 1,
@@ -122,13 +122,13 @@ export default {
           // },
           {
             style: 'input',
-            label: $it('form_label.sourceNo'), // '来源单号',
+            label: $it('fL.sourceNo'), // '来源单号',
             value: 'SOURCE_NO',
             width: '6'
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.synchronizationStatus'), // '同步状态',
+            label: $it('fL.synchronizationStatus'), // '同步状态',
             width: '6', // 所占宽度宽度
             value: 'SYN_STATUS', // 输入框的值
             multiple: true,
@@ -153,7 +153,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.platformType'), // '平台类型',
+            label: $it('fL.platformType'), // '平台类型',
             width: '6', // 所占宽度宽度
             value: 'CP_C_PLATFORM_ID', // 输入框的值
             multiple: true,
@@ -184,7 +184,7 @@ export default {
           },
           // {
           //   style: 'select', // 下拉框类型
-          //   label: $it('form_label.wrongOrNot'), // '是否错误',
+          //   label: $it('fL.wrongOrNot'), // '是否错误',
           //   width: '6', // 所占宽度宽度
           //   value: 'IS_ERROR', // 输入框的值
           //   multiple: true,
@@ -209,7 +209,7 @@ export default {
           // },
           // {
           //   style: 'input',
-          //   label: $it('form_label.synchronizedInventory'), // '同步库存数',
+          //   label: $it('fL.synchronizedInventory'), // '同步库存数',
           //   value: 'QTY_STORAGE',
           //   width: '6'
           // },
@@ -274,11 +274,11 @@ export default {
             key: 'CP_C_SHOP_TITLE'
           },
           {
-            title: $it('form_label.bar_code'), // '条码编码',
+            title: $it('fL.bar_code'), // '条码编码',
             key: 'PS_C_SKU_ECODE'
           },
           {
-            title: $it('form_label.platformCommodityID'), // '平台商品ID',
+            title: $it('fL.platformCommodityID'), // '平台商品ID',
             key: 'NUMIID'
           },
           {
@@ -286,27 +286,27 @@ export default {
             key: 'SKU_ID'
           },
           {
-            title: $it('form_label.synchronizationStatus'), // '同步状态',
+            title: $it('fL.synchronizationStatus'), // '同步状态',
             key: 'SYN_STATUS_NAME'
           },
           {
-            title: $it('form_label.returnInformation'), // '返回信息',
+            title: $it('fL.returnInformation'), // '返回信息',
             key: 'ERROR_MSG'
           },
           {
-            title: $it('form_label.synchronizedInventory'), // '同步库存数',
+            title: $it('fL.synchronizedInventory'), // '同步库存数',
             key: 'QTY_STORAGE'
           },
           {
-            title: $it('form_label.a9'), // '计算虚高库存前库存',
+            title: $it('fL.a9'), // '计算虚高库存前库存',
             key: 'QTY_STORAGE_REALY'
           },
           {
-            title: $it('form_label.sourceNo'), // '来源单号',
+            title: $it('fL.sourceNo'), // '来源单号',
             key: 'SOURCE_NO'
           },
           {
-            title: $it('form_label.batch_number'), // '批次编号',
+            title: $it('fL.batch_number'), // '批次编号',
             key: 'BATCHNO'
           },
           {
@@ -322,11 +322,11 @@ export default {
             key: 'REMARK'
           },
           // {
-          //   title: $it('form_label.wrongOrNot'), // '是否错误',
+          //   title: $it('fL.wrongOrNot'), // '是否错误',
           //   key: 'IS_ERROR'
           // },
           {
-            title: $it('form_label.gBCode'), // '国标码',
+            title: $it('fL.gBCode'), // '国标码',
             key: 'GBCODE'
           },
         ], // 表头

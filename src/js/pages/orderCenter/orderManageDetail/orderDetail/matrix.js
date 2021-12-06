@@ -161,7 +161,7 @@ export default {
       noZeroShwoFlag: true,
       isStoreFlag: true,
       saveLoading: false, // 保存loading
-      store: $it('form_label.a8'), // '杭州店仓', // 店仓名字
+      store: $it('fL.a8'), // '杭州店仓', // 店仓名字
       saleType: '', // 销售类型
       tHead: [], // 码数集合
       tColor: [], // color集合

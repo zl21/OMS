@@ -47,7 +47,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.dc'), // 区域编码
+            label: $it('fL.dc'), // 区域编码
             value: 'CP_C_REGION_AREA_ECODE',
             colname: 'CP_C_REGION_AREA_ECODE',
             width: '8',
@@ -59,7 +59,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.dd'), // 区域名称
+            label: $it('fL.dd'), // 区域名称
             value: 'CP_C_REGION_AREA_ENAME',
             colname: 'CP_C_REGION_AREA_ENAME',
             width: '8',
@@ -70,7 +70,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.de'), // 别名名称
+            label: $it('fL.de'), // 别名名称
             value: 'CP_C_REGION_ALIAS',
             colname: 'CP_C_REGION_ALIAS',
             width: '8',
@@ -81,28 +81,28 @@ export default {
           },
           {
             style: 'radio',
-            label: $it('form_label.df'), // 区域类型
+            label: $it('fL.df'), // 区域类型
             value: 'REGION_TYPE', // 输入框的值
             colname: 'REGION_TYPE', // 输入框的值
             width: '18', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             options: [
               {
-                label: $it('form_label.dg'), // 国家
+                label: $it('fL.dg'), // 国家
                 value: '0',
                 disabled: true,
               },
               {
-                label: $it('form_label.dh'), // 省份
+                label: $it('fL.dh'), // 省份
                 value: '1',
                 disabled: true,
               },
               {
-                label: $it('form_label.di'), // 市级
+                label: $it('fL.di'), // 市级
                 value: '2',
                 disabled: true,
               },
               {
-                label: $it('form_label.dj'), // 区级
+                label: $it('fL.dj'), // 区级
                 value: '3',
                 disabled: true,
               },
@@ -153,7 +153,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
-              name: $it('form_label.dg'), // 国家
+              name: $it('fL.dg'), // 国家
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_COUNTRY', // 对应的表
               reftableid: 10283, // 对应的表ID
@@ -181,7 +181,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
-              name: $it('form_label.dk'), // 关联省
+              name: $it('fL.dk'), // 关联省
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PROVINCE', // 对应的表
               reftableid: 10286, // 对应的表ID
@@ -214,7 +214,7 @@ export default {
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
-              name: $it('form_label.dl'), // 关联市
+              name: $it('fL.dl'), // 关联市
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_CITY', // 对应的表
               reftableid: 10285, // 对应的表ID
@@ -231,7 +231,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.bg'), //  启用状态
+            label: $it('fL.bg'), //  启用状态
             value: 'ISACTIVE',
             colname: 'ISACTIVE',
             width: '8',

@@ -88,7 +88,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.combinedCommodityType'), // 组合商品类型
+            label: $it('fL.combinedCommodityType'), // 组合商品类型
             width: '6', // 所占宽度宽度
             value: 'GROUP_TYPE', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -112,7 +112,7 @@ export default {
 
           {
             style: 'input', // 输入框类型
-            label: $it('form_label.price'), // 价格
+            label: $it('fL.price'), // 价格
             value: 'PRICELIST', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             placeholder: '', // 占位文本，默认为请输入
@@ -136,7 +136,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.logic_warehouse'), // 逻辑仓库
+              name: $it('fL.logic_warehouse'), // 逻辑仓库
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'SG_B_STORAGE', // 对应的表
               reftableid: 24610, // 对应的表ID
@@ -241,7 +241,7 @@ export default {
           formData: [
             {
               style: 'input', // 输入框类型
-              label: $it('form_label.virtual_barcode'), // 虚拟条码
+              label: $it('fL.virtual_barcode'), // 虚拟条码
               value: 'ECODE', // 输入框的值
               width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
               disabled: false,
@@ -289,7 +289,7 @@ export default {
         columns: [
           {
             // title: "虚拟条码",
-            title: $it('form_label.virtual_barcode'),
+            title: $it('fL.virtual_barcode'),
             key: 'ECODE',
             render: (h, params) => {
               if (params.row.ID) {
@@ -415,7 +415,7 @@ export default {
           },
           formData: [
             {
-              label: $it('form_label.commodityCode'), // 商品条码
+              label: $it('fL.commodityCode'), // 商品条码
               style: 'dimSearch', // 模糊搜索组件类型  具体数据详情见burgeonUI
               width: '12',
               value: 'dimdata',
@@ -506,7 +506,7 @@ export default {
             },
             {
               style: 'input', // 输入框类型
-              label: $it('form_label.free_quantity'), // 赠送数量
+              label: $it('fL.free_quantity'), // 赠送数量
               value: 'NUM', // 输入框的值
               width: '12', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
               id: 'Num',
@@ -541,7 +541,7 @@ export default {
         columns: [
           // 表头
           {
-            title: $it('form_label.barCode'), // 条码
+            title: $it('fL.barCode'), // 条码
             key: 'PS_C_SKU_ECODE'
           },
           {
@@ -561,7 +561,7 @@ export default {
             key: 'PS_C_SIZE_ENAME'
           },
           {
-            title: $it('form_label.free_quantity'), // 赠送数量
+            title: $it('fL.free_quantity'), // 赠送数量
             key: 'NUM',
             render: (h, params) => {
               if (params.row.ID && this.statusMark === 'Y') {
@@ -796,7 +796,7 @@ export default {
           });
           dimList.forEach(item => {
             // '商品条码'
-            if (item.label === $it('form_label.commodityCode')) {
+            if (item.label === $it('fL.commodityCode')) {
               item.AuotData = arr;
             }
           });
@@ -961,7 +961,7 @@ export default {
             } // 表单回车事件
           });
           this.jordanTableConfig2.businessFormConfig.formData.forEach(item => {
-            if (item.label === $it('form_label.commodityCode')) {
+            if (item.label === $it('fL.commodityCode')) {
               this.$set(item, 'width', '9');
             }
             if (item.label === $it('other.goods_quantit')) {
@@ -973,7 +973,7 @@ export default {
           });
         } else {
           this.jordanTableConfig2.businessFormConfig.formData.forEach(item => {
-            if (item.label === $it('form_label.commodityCode')) {
+            if (item.label === $it('fL.commodityCode')) {
               this.$set(item, 'width', '9');
             }
             if (item.label === $it('other.goods_quantit')) {
@@ -1348,7 +1348,7 @@ export default {
           msg = $it('table_label.brand'); // 品牌
           break;
         case 'PRICELIST':
-          msg = $it('form_label.price'); // 价格
+          msg = $it('fL.price'); // 价格
           break;
         case 'dimData':
           msg = $it('other.product_related_info'); // 商品相关信息

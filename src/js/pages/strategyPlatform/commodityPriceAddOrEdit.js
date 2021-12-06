@@ -57,7 +57,7 @@ export default {
         formData: [
           {
             style: '',
-            label: $it('form_label.bc'), // 策略ID
+            label: $it('fL.bc'), // 策略ID
             colname: 'PLAN_ID',
             width: '6',
             disabled: false,
@@ -67,7 +67,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.bd'), // 策略名称
+            label: $it('fL.bd'), // 策略名称
             colname: 'PLAN_NAME',
             width: '6',
             disabled: false,
@@ -103,7 +103,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: $it('form_label.be'), // 生效开始时间 // 输入框前文字
+            label: $it('fL.be'), // 生效开始时间 // 输入框前文字
             colname: 'BEGIN_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -120,7 +120,7 @@ export default {
           },
           {
             style: 'date', // 输入框类型
-            label: $it('form_label.bf'), // 生效结束时间 输入框前文字
+            label: $it('fL.bf'), // 生效结束时间 输入框前文字
             colname: 'END_TIME',
             type: 'datetime',
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -158,7 +158,7 @@ export default {
           },
           {
             style: '',
-            label: $it('form_label.bg'), //  启用状态
+            label: $it('fL.bg'), //  启用状态
             colname: 'ISACTIVE',
             width: '6',
             disabled: true,
@@ -262,7 +262,7 @@ export default {
             },
           },
           {
-            title: $it('form_label.cw'), // 最低成交价格
+            title: $it('fL.cw'), // 最低成交价格
             key: 'PEAK_VALUE',
             align: "center",
             render: (h, params) => {
@@ -362,7 +362,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.bh'), // 最低成交单价
+              label: $it('fL.bh'), // 最低成交单价
               colname: 'MIN_REAL_AMT',
               width: '6',
               disabled: false,
@@ -808,7 +808,7 @@ export default {
       const { PS_C_SPU_ID, PS_C_SKU_ID, MIN_REAL_AMT } = formConfig.formValue
       let mes2 = ''
       if (!MIN_REAL_AMT) {
-        mes2 += $it('form_label.bh') // 最低成交单价
+        mes2 += $it('fL.bh') // 最低成交单价
       }
       if (!(PS_C_SPU_ID || PS_C_SKU_ID)) {
         mes2 += ` SPU/${$it('table_label.code_SKU')}` // i18n SPU/SKU编码

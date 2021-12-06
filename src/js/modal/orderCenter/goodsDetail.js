@@ -344,7 +344,7 @@ export default {
           {
             key: 'PS_C_SKU_ECODE',
             // title: "条码",
-            title: $it('form_label.barCode')
+            title: $it('fL.barCode')
           },
           {
             key: 'PS_C_PRO_ENAME',

@@ -37,14 +37,14 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'startEndTimes',
-        label: $it('form_label.PlatformModifyTime'), // 平台修改时间
+        label: $it('fL.PlatformModifyTime'), // 平台修改时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.platformRefundNo'), // 平台退款单号 输入框前文字
+        label: $it('fL.platformRefundNo'), // 平台退款单号 输入框前文字
         value: 'sp_ids', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持

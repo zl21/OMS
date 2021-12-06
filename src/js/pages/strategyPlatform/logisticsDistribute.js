@@ -14,7 +14,7 @@ export default {
       id: '',
       defaultColumn: 2,
       startindex: 0, //分页
-      modalTitle: $it('form_label.za'), //'添加排除区域', // 弹出窗标题！
+      modalTitle: $it('fL.za'), //'添加排除区域', // 弹出窗标题！
       modal1: false, // 弹窗开关
       btnSave: $it('btn.save'),
       btnBack: $it('btn.back'),
@@ -210,7 +210,7 @@ export default {
           },
           {
             style: '',
-            label: $it('form_label.bg'), // 启用状态
+            label: $it('fL.bg'), // 启用状态
             colname: 'isActive',
             width: '8',
             disabled: true,
@@ -505,7 +505,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('form_label.e9'),//'基本信息',
+          label: $it('fL.e9'),//'基本信息',
           value: 'jiben'
         },
         {
@@ -545,7 +545,7 @@ export default {
       this.id = '-1';
       this.tableshow = true;
       this.labelList = [{
-        label: $it('form_label.e9'),//'基本信息',
+        label: $it('fL.e9'),//'基本信息',
         value: 'jiben'
       },]
     } else {

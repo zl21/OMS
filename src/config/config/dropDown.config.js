@@ -699,11 +699,11 @@ class DropDownConfig {
                       key: 'INDEX',
                     },
                     {
-                      title: $it('form_label.billNo'), // 单据编号
+                      title: $it('fL.billNo'), // 单据编号
                       key: 'BILL_NO',
                     },
                     {
-                      title: $it('form_label.e0'), // 失败原因
+                      title: $it('fL.e0'), // 失败原因
                       key: 'RESULT_MSG',
                     },
                   ],

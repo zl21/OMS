@@ -146,55 +146,55 @@ class BurgeonValidate {
       // 下单店铺
       if (
         item.itemdata &&
-        item.itemdata.name === $it('form_label.orderShop') &&
+        item.itemdata.name === $it('fL.orderShop') &&
         !item.itemdata.pid
       ) {
-        promptMessage += `${$it('form_label.orderShop')},`;
+        promptMessage += `${$it('fL.orderShop')},`;
       }
     });
     if (masterTable.SHIP_AMT === '') {
-      promptMessage += `${$it('form_label.distribution_costs')},`; // 配送费用
+      promptMessage += `${$it('fL.distribution_costs')},`; // 配送费用
     }
     if (!masterTable.SOURCE_CODE) {
-      promptMessage += `${$it('form_label.platform_billNo')},`; // 平台单号
+      promptMessage += `${$it('fL.platform_billNo')},`; // 平台单号
     }
     if (!masterTable.PAY_TYPE) {
-      promptMessage += `${$it('form_label.paymentMethod')},`; // 付款方式
+      promptMessage += `${$it('fL.paymentMethod')},`; // 付款方式
     }
     if (masterTable.PAY_TYPE == 2) {
       if (masterTable.COD_AMT !== 0) {
         if (!masterTable.COD_AMT || masterTable.COD_AMT === '') {
           promptMessage += `${$it(
-            'form_label.collection_amount'
+            'fL.collection_amount'
           )},`; // 代收金额
         }
       }
     }
     if (!masterTable.RECEIVER_NAME) {
-      promptMessage += $it('form_label.consignee'); // 收货人
+      promptMessage += $it('fL.consignee'); // 收货人
     }
     if (!masterTable.RECEIVER_MOBILE && !masterTable.RECEIVER_PHONE) {
-      promptMessage += `${$it('form_label.consignee_phone')},`; // 收货人手机
+      promptMessage += `${$it('fL.consignee_phone')},`; // 收货人手机
     }
     BurgeonValidate.target.formConfig1.formData.forEach((item) => {
       // 收货人省份 收货人市 收货人地址
       if (
         item.itemdata &&
         item.itemdata.name ===
-        $it('form_label.consignee_province') &&
+        $it('fL.consignee_province') &&
         !item.itemdata.pid
       ) {
-        promptMessage += `${$it('form_label.consignee_province')},`;
+        promptMessage += `${$it('fL.consignee_province')},`;
       } else if (
         item.itemdata &&
-        item.itemdata.name === $it('form_label.consignee_city') &&
+        item.itemdata.name === $it('fL.consignee_city') &&
         !item.itemdata.pid
       ) {
-        promptMessage += `${$it('form_label.consignee_city')},`;
+        promptMessage += `${$it('fL.consignee_city')},`;
       }
     });
     if (!masterTable.RECEIVER_ADDRESS) {
-      promptMessage += `${$it('form_label.aconsignee_address')},`;
+      promptMessage += `${$it('fL.aconsignee_address')},`;
     }
     if (promptMessage) {
       BurgeonValidate.target.$Message.warning(

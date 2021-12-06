@@ -74,7 +74,7 @@ export default {
       formConfig: {
         formData: [{
           style: 'input',
-          label: $it('form_label.cy'), // 组合商品编码
+          label: $it('fL.cy'), // 组合商品编码
           value: 'ecode',
           width: '8',
           disabled: false,
@@ -84,7 +84,7 @@ export default {
         },
         {
           style: 'input',
-          label: $it('form_label.cz'), // 组合商品名称
+          label: $it('fL.cz'), // 组合商品名称
           value: 'ename',
           width: '16',
           disabled: false,
@@ -95,7 +95,7 @@ export default {
         {
           colname: 'TYPE',
           style: 'select', // 下拉框类型
-          label: $it('form_label.type'), // 类型
+          label: $it('fL.type'), // 类型
           width: '8', // 所占宽度宽度
           value: 'type', // 输入框的值
           clearable: true,
@@ -171,14 +171,14 @@ export default {
         },
         {
           style: 'input',
-          label: $it('form_label.bg'), //  启用状态
+          label: $it('fL.bg'), //  启用状态
           value: 'ISACTIVE',
           width: '8',
           disabled: true
         },
         {
           style: 'input',
-          label: $it('form_label.cu'), // 零售价
+          label: $it('fL.cu'), // 零售价
           value: 'price_retail',
           width: '8',
           inputChange: () => {
@@ -188,7 +188,7 @@ export default {
         {
           colname: 'group_type',
           style: 'select', // 下拉框类型
-          label: $it('form_label.d0'), // 组合类型
+          label: $it('fL.d0'), // 组合类型
           width: '8', // 所占宽度宽度
           value: 'group_type', // 输入框的值
           clearable: true,
@@ -247,7 +247,7 @@ export default {
       },
       label: {
         labelList: [{
-          label: $it('form_label.d1'), // 普通组合明细
+          label: $it('fL.d1'), // 普通组合明细
           value: 'generalGroupItem',
         },
         {
@@ -256,7 +256,7 @@ export default {
         }
         ],
         labelTagList: [{
-          label: $it('form_label.d2'), // 福袋组合明细
+          label: $it('fL.d2'), // 福袋组合明细
           value: 'luckbagGroupItem',
         },
         {
@@ -293,7 +293,7 @@ export default {
         businessFormConfig: {
           formData: [{
             style: 'input',
-            label: $it('form_label.d3'), // 每组抽取数
+            label: $it('fL.d3'), // 每组抽取数
             value: 'NUM',
             disabled: false,
             dataAcessKey: 'NUM',
@@ -358,11 +358,11 @@ export default {
           key: 'ECODE'
         },
         {
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
           key: 'ENAME'
         },
         {
-          title: $it('form_label.cu'), // 零售价
+          title: $it('fL.cu'), // 零售价
           key: 'PRICE_RETAIL'
         },
         {
@@ -476,11 +476,11 @@ export default {
           key: 'ECODE'
         },
         {
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
           key: 'ENAME'
         },
         {
-          title: $it('form_label.cu'), // 零售价
+          title: $it('fL.cu'), // 零售价
           key: 'PRICE_RETAIL'
         },
         {
@@ -551,11 +551,11 @@ export default {
     if (self.id == -1) {
       self.formConfig.formData.filter(item => item.value && item.value == 'ISACTIVE')[0].style = '';
       this.label.labelList = [{
-        label: $it('form_label.d1'), // 普通组合明细
+        label: $it('fL.d1'), // 普通组合明细
         value: 'generalGroupItem',
       }];
       this.label.labelTagList = [{
-        label: $it('form_label.d2'), // 福袋组合明细
+        label: $it('fL.d2'), // 福袋组合明细
         value: 'luckbagGroupItem',
       }];
     } else {
@@ -641,13 +641,13 @@ export default {
       const self = this;
       let str = '';
       if (!self.formConfig.formValue.ecode) {
-        str += `${$it('form_label.cy')} `; // 组合商品编码
+        str += `${$it('fL.cy')} `; // 组合商品编码
       } else if (!self.formConfig.formValue.ename) {
-        str += `${$it('form_label.cz')} `; // 组合商品名称
+        str += `${$it('fL.cz')} `; // 组合商品名称
       } else if (!self.formConfig.formValue.group_type) {
-        str += `${$it('form_label.d0')} `; // 组合类型
+        str += `${$it('fL.d0')} `; // 组合类型
       } else if (!self.formConfig.formValue.price_retail) {
-        str += `${$it('form_label.cu')} `; // 零售价
+        str += `${$it('fL.cu')} `; // 零售价
       } else if (!self.formConfig.formData.filter(item => item.colname == 'PS_C_BRAND_ID')[0].itemdata.pid) {
         str += `${$it('table_label.brand')} `; // 品牌
       } else if (!self.formConfig.formData.filter(item => item.colname == 'PS_C_PRO_CLASSIFY_ID')[0].itemdata.pid) {

@@ -37,7 +37,7 @@ export default {
       visible: true,
       tableData: [],
       headOne: [{
-          label: $it('form_label.activityName'), // '活动名称',
+          label: $it('fL.activityName'), // '活动名称',
           name: 'ENAME'
         },
         {
@@ -54,7 +54,7 @@ export default {
         }
       ],
       headTwo: [{
-          label: $it('form_label.activityName'), // '活动名称',
+          label: $it('fL.activityName'), // '活动名称',
           name: 'ENAME'
         },
         {
@@ -67,7 +67,7 @@ export default {
         }
       ],
       tHead: [{
-          label: $it('form_label.activityName'), // '活动名称',
+          label: $it('fL.activityName'), // '活动名称',
           name: 'ENAME'
         },
         {

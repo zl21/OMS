@@ -45,7 +45,7 @@ export default {
           flag: false, // 需要加*
           width: '6',
           column: 'BILL_NO',
-          label: $it('form_label.billNo') + ':', //'单据编号:'
+          label: $it('fL.billNo') + ':', //'单据编号:'
         },
         {
           flag: false, // 需要加*
@@ -57,44 +57,44 @@ export default {
           flag: false,
           width: '6',
           column: 'ORDER_TYPE',
-          label: $it('form_label.billType') + ':', // 单据类型
+          label: $it('fL.billType') + ':', // 单据类型
         },
         {
           flag: false,
           width: '6',
           column: 'PLATFORM_STATUS',
-          label: $it('form_label.e8') + ':' //平台状态
+          label: $it('fL.e8') + ':' //平台状态
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_PHY_WAREHOUSE_ENAME', //
-          label: $it('form_label.delivery_warehouse') + ':' //发货仓库
+          label: $it('fL.delivery_warehouse') + ':' //发货仓库
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'CP_C_LOGISTICS_ENAME', //
-          label: $it('form_label.logisticsCompany') + ':' //物流公司
+          label: $it('fL.logisticsCompany') + ':' //物流公司
         },
         {
           flag: false, // 需要加*
           width: '6',
           column: 'EXPRESS_CODE',
-          label: $it('form_label.logisticsOrder_No') + ':' // 物流单号
+          label: $it('fL.logisticsOrder_No') + ':' // 物流单号
         },
         // {
         {
           flag: false,
           width: '12',
           column: 'BUYER_MESSAGE',
-          label: $it('form_label.buyerNotes') + ':', // 买家备注
+          label: $it('fL.buyerNotes') + ':', // 买家备注
         },
         {
           flag: false,
           width: '12',
           column: 'SELLER_MEMO',
-          label: $it('form_label.sellerNotes') + ':', // 卖家备注
+          label: $it('fL.sellerNotes') + ':', // 卖家备注
         },
 
       ],
@@ -103,7 +103,7 @@ export default {
           flag: false,
           width: '12',
           column: 'RECEIVER_NAME',
-          label: $it('form_label.consignee') + ':'//收货人
+          label: $it('fL.consignee') + ':'//收货人
         },
         {
           flag: false, // 需要加*
@@ -115,31 +115,31 @@ export default {
           flag: false,
           width: '12',
           column: 'RECEIVER_MOBILE',
-          label: $it('form_label.consignee_phone') + ':', // 收货人手机号
+          label: $it('fL.consignee_phone') + ':', // 收货人手机号
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_PHONE',
-          label: $it('form_label.e6') + ':', // 收货人电话
+          label: $it('fL.e6') + ':', // 收货人电话
         },
         {
           flag: false,
           width: '12',
           column: 'CP_C_REGION_PROVINCE_ENAME',
-          label: $it('form_label.aa') + ':'  //省市区
+          label: $it('fL.aa') + ':'  //省市区
         },
         {
           flag: false,
           width: '12',
           column: 'RECEIVER_ZIP',
-          label: $it('form_label.e7') + ':', // 收货人邮编
+          label: $it('fL.e7') + ':', // 收货人邮编
         },
         {
           flag: false,
           width: '24',
           column: 'RECEIVER_ADDRESS',
-          label: $it('form_label.ab') + ':' // 详细地址
+          label: $it('fL.ab') + ':' // 详细地址
         },
         {
           flag: false,

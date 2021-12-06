@@ -33,7 +33,7 @@ export default {
                 promptMessage = $it('other.shop');
               } else if (!formData[1].itemdata.pid) {
                 // promptMessage = "档期日程归属";
-                promptMessage = $it('form_label.scheduleOwnership');
+                promptMessage = $it('fL.scheduleOwnership');
               } else if (!formData[2].itemdata.pid) {
                 // promptMessage = "实体仓库";
                 promptMessage = $it('table_label.physical_warehouse');
@@ -41,7 +41,7 @@ export default {
                 !self.warehouseManagementFromConfig.formValue.DELIVERYTYPE
               ) {
                 // promptMessage = "配送方式";
-                promptMessage = $it('form_label.distributionMode');
+                promptMessage = $it('fL.distributionMode');
               }
               if (promptMessage) {
                 // this.$Message.warning(promptMessage + "不能为空");
@@ -140,7 +140,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.ownership'), // 日程归属
+              name: $it('fL.ownership'), // 日程归属
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'ST_C_VIPCOM_PROJECT_ITEM',
               reftableid: 24583,
@@ -178,7 +178,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.distributionMode'), // 配送方式
+            label: $it('fL.distributionMode'), // 配送方式
             width: '24', // 所占宽度宽度
             value: 'DELIVERYTYPE', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
@@ -216,7 +216,7 @@ export default {
         let arr = '';
         res.data.datas.tabth.forEach((item) => {
           // '配送方式'
-          if (item.name === $it('form_label.distributionMode')) {
+          if (item.name === $it('fL.distributionMode')) {
             arr = item.combobox;
           }
         });

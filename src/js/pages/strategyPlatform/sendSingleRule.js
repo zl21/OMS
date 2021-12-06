@@ -61,13 +61,13 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.ruleName'),
+            label: $it('fL.ruleName'),
             value: 'ENAME',
             width: '6',
           },
           {
             style: 'select',
-            label: $it('form_label.type'),
+            label: $it('fL.type'),
             width: '6',
             value: 'ETYPE',
             selectChange: () => {
@@ -77,7 +77,7 @@ export default {
               // 下拉框选项值
               {
                 value: '1',
-                label: $it('form_label.a0'),
+                label: $it('fL.a0'),
               },
               // {
               //   value: "2",
@@ -85,7 +85,7 @@ export default {
               // },
               {
                 value: '3',
-                label: $it('form_label.a1'),
+                label: $it('fL.a1'),
               },
             ],
           },
@@ -222,7 +222,7 @@ export default {
                 isnotnull: true,
                 isuppercase: false,
                 length: 20,
-                name: $it('form_label.warehouse'), // '仓库',
+                name: $it('fL.warehouse'), // '仓库',
                 readonly: false,
                 reftable: 'CP_C_PHY_WAREHOUSE',
                 reftableid: 24486,
@@ -234,7 +234,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.a2'), // '仓库优先级',
+              label: $it('fL.a2'), // '仓库优先级',
               value: 'RANK',
               width: '6',
               inputenter: () => {
@@ -244,7 +244,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.a3'), // '发货比例',
+              label: $it('fL.a3'), // '发货比例',
               value: 'SEND_RATE',
               width: '6',
               inputenter: () => {
@@ -261,19 +261,19 @@ export default {
         columns: [
           {
             key: 'CP_C_PHY_WAREHOUSE_ENAME',
-            title: $it('form_label.warehouse'), // '仓库'
+            title: $it('fL.warehouse'), // '仓库'
           },
           {
             key: 'RANK',
-            title: $it('form_label.a2'), // '仓库优先级'
+            title: $it('fL.a2'), // '仓库优先级'
           },
           {
             key: 'SEND_RATE',
-            title: $it('form_label.a3'), // '发货比例'
+            title: $it('fL.a3'), // '发货比例'
           },
           {
             key: 'QTY_SEND',
-            title: $it('form_label.a4'), // '发货数量'
+            title: $it('fL.a4'), // '发货数量'
           },
         ],
         isShowImportBtn: true,
@@ -292,7 +292,7 @@ export default {
       },
       labelList: [
         {
-          label: $it('form_label.a5'), // '按收货地址',
+          label: $it('fL.a5'), // '按收货地址',
           value: '1',
           isShow: true,
         },
@@ -317,8 +317,8 @@ export default {
     if (_this.$route.params.customizedModuleId !== 'New') {
       // [规则名称,类型]
       const formLabelArr = [
-        $it('form_label.ruleName'),
-        $it('form_label.type'),
+        $it('fL.ruleName'),
+        $it('fL.type'),
       ];
       _this.information.formData.forEach((item) => {
         if (formLabelArr.includes(item.label)) {
@@ -514,8 +514,8 @@ export default {
               // '按收货地址' : '派单规则明细'
               this.labelList[0].label =
                 _this.information.formValue.ETYPE === '1'
-                  ? $it('form_label.a5')
-                  : $it('form_label.a6');
+                  ? $it('fL.a5')
+                  : $it('fL.a6');
             } else if (_this.information.formValue.ETYPE === '2') {
               _this.showFlag = true;
               _this.getWarehouseRateResult();
@@ -527,7 +527,7 @@ export default {
                 }
               });
               // '分仓比例'
-              this.labelList[0].label = $it('form_label.a7');
+              this.labelList[0].label = $it('fL.a7');
             }
           }
         });

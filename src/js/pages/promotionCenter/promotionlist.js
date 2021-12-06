@@ -149,7 +149,7 @@ export default {
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: $it('form_label.offline_stores'), // 线下门店 input前面显示的lable值
+          name: $it('fL.offline_stores'), // 线下门店 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_RSTORE', // 对应的表
           // reftableid: 23296, //对应的表ID

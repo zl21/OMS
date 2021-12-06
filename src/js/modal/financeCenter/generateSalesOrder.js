@@ -13,7 +13,7 @@ export default {
         formData: [
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.supplierID'), // 供应商ID 下拉框前的值
+            label: $it('fL.supplierID'), // 供应商ID 下拉框前的值
             width: '24', // 所占宽度宽度
             value: 'vendorId', // 输入框的值
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启

@@ -60,7 +60,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.barCode'), // '条码',
+              name: $it('fL.barCode'), // '条码',
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_SKU', // 对应的表
               row: 1,
@@ -83,7 +83,7 @@ export default {
 
           {
             style: 'input', // 文本录入
-            label: $it('form_label.gBCode'), // '国标码',
+            label: $it('fL.gBCode'), // '国标码',
             value: 'GBCODE',
             width: '6'
           }
@@ -123,7 +123,7 @@ export default {
             key: 'QTY_END'
           },
           {
-            title: $it('form_label.bar_code'), // '条码编码',
+            title: $it('fL.bar_code'), // '条码编码',
             key: 'PS_C_SKU_ECODE'
           },
           {
@@ -135,7 +135,7 @@ export default {
             key: 'PS_C_PRO_ENAME'
           },
           {
-            title: $it('form_label.gBCode'), // '国标码',
+            title: $it('fL.gBCode'), // '国标码',
             key: 'GBCODE'
           },
           {

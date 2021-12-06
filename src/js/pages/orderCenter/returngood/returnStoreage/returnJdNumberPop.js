@@ -30,7 +30,7 @@ export default {
             {
               style: 'input',
               // label: '物流编号',
-              label: $it('form_label.logisticsNo'),
+              label: $it('fL.logisticsNo'),
               value: 'logistics_code',
               width: '8',
               inputenter: () => this.queryBounced()

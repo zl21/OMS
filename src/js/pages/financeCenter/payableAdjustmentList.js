@@ -225,19 +225,19 @@ export default {
         formData: [
           {
             style: 'input', // 文本录入
-            label: $it('form_label.billNo'), // 单据编号
+            label: $it('fL.billNo'), // 单据编号
             value: 'BILL_NO',
             width: '6'
           },
           {
             style: 'input', // 文本录入
-            label: $it('form_label.platform_billNo'), // 平台单号
+            label: $it('fL.platform_billNo'), // 平台单号
             value: 'TID',
             width: '6'
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.billStatus'), // 单据状态
+            label: $it('fL.billStatus'), // 单据状态
             width: '6', // 所占宽度宽度
             value: 'BILL_STATUS', // 输入框的值
             multiple: true,
@@ -266,7 +266,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.source_billNo'), // 来源单据编号
+            label: $it('fL.source_billNo'), // 来源单据编号
             value: 'ORDER_NO',
             width: '6'
           },
@@ -286,7 +286,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.physicalWarehouseName'), // 实体仓名称
+              name: $it('fL.physicalWarehouseName'), // 实体仓名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 23451, // 对应的表ID
@@ -317,7 +317,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.expressCompanyName'), // 快递公司名称
+              name: $it('fL.expressCompanyName'), // 快递公司名称
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               row: 1,
@@ -347,7 +347,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.commodityCode'), // 商品条码
+              name: $it('fL.commodityCode'), // 商品条码
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'PS_C_SKU', // 对应的表
               row: 1,
@@ -363,13 +363,13 @@ export default {
           },
           {
             style: 'input', // 文本录入
-            label: $it('form_label.gBCode'), // 国标码
+            label: $it('fL.gBCode'), // 国标码
             value: 'GBCODE',
             width: '6'
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.adjustmentType'), // 调整类型
+            label: $it('fL.adjustmentType'), // 调整类型
             width: '6', // 所占宽度宽度
             value: 'ADJUST_TYPE', // 输入框的值
             multiple: true,
@@ -379,7 +379,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.billType'), // 单据类型
+            label: $it('fL.billType'), // 单据类型
             width: '6', // 所占宽度宽度
             value: 'BILL_TYPE', // 输入框的值
             multiple: true,
@@ -389,7 +389,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.channelType'), // 渠道类型
+            label: $it('fL.channelType'), // 渠道类型
             width: '6', // 所占宽度宽度
             value: 'RESERVE_BIGINT01', // 输入框的值
             multiple: true,
@@ -400,7 +400,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $it('form_label.creationDate'), // 创建日期
+            label: $it('fL.creationDate'), // 创建日期
             width: '6',
             value: 'CREATIONDATE',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -410,7 +410,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $it('form_label.custAuditDate'), // 客审日期
+            label: $it('fL.custAuditDate'), // 客审日期
             width: '6',
             value: 'GUEST_TRIAL_TIME',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -420,7 +420,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            label: $it('form_label.financeAuditDate'), // 财审日期
+            label: $it('fL.financeAuditDate'), // 财审日期
             width: '6',
             value: 'FINANCIAL_TRIAL_TIME',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
@@ -494,23 +494,23 @@ export default {
         tableHeight: '412px',
         columnDefs: [
           {
-            headerName: $it('form_label.billStatus'), // 单据状态
+            headerName: $it('fL.billStatus'), // 单据状态
             field: 'BILL_STATUS_NAME'
           },
           {
-            headerName: $it('form_label.billNo'), // 单据编号
+            headerName: $it('fL.billNo'), // 单据编号
             field: 'BILL_NO'
           },
           {
-            headerName: $it('form_label.platform_billNo'), // 平台单号
+            headerName: $it('fL.platform_billNo'), // 平台单号
             field: 'TID'
           },
           {
-            headerName: $it('form_label.billType'), // 单据类型
+            headerName: $it('fL.billType'), // 单据类型
             field: 'BILL_TYPE_NAME'
           },
           {
-            headerName: $it('form_label.adjustmentType'), // 调整类型
+            headerName: $it('fL.adjustmentType'), // 调整类型
             field: 'ADJUST_TYPE_NAME'
           },
           {
@@ -542,7 +542,7 @@ export default {
             field: 'REMARK'
           },
           {
-            headerName: $it('form_label.source_billNo'), // 来源单据编号
+            headerName: $it('fL.source_billNo'), // 来源单据编号
             field: 'ORDER_NO'
           },
           {

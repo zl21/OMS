@@ -49,14 +49,14 @@ export default {
       },
       // invoiceType: "电子发票", // 发票类型
       invoiceType: '',
-      invoiceTitleType: $it('form_label.personal'), // '个人', // 抬头类型
+      invoiceTitleType: $it('fL.personal'), // '个人', // 抬头类型
       invoiceFooterFlag: false, // 控制收票信息显示
       identificationFlag: false, // 根据抬头类型控制识别号显示
       specialInvoiceFlag: false // 专用发票标识，用来隐藏抬头类型和邮箱
     };
   },
   mounted() {
-    this.invoiceType = $it('form_label.electronic_invoice');
+    this.invoiceType = $it('fL.electronic_invoice');
     this.btnConfig.buttons = [
       {
         type: '', // 按钮类型
@@ -107,49 +107,49 @@ export default {
     this.formConfig.formData = [
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.invoiceTitle'),
+        label: $it('fL.invoiceTitle'),
         value: 'HEADER_NAME', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.identificationNo'),
+        label: $it('fL.identificationNo'),
         value: 'TAXPAYER_NO', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.mailbox'),
+        label: $it('fL.mailbox'),
         value: 'EMAIL', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.companyAddress'),
+        label: $it('fL.companyAddress'),
         value: 'COMPANY', // 输入框的值
         width: '24' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.telephoneNumber'),
+        label: $it('fL.telephoneNumber'),
         value: 'PHONE_NO', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.bankOFdeposit'),
+        label: $it('fL.bankOFdeposit'),
         value: 'OPENING_BANK', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.bankAccountNo'),
+        label: $it('fL.bankAccountNo'),
         value: 'OPENING_BANK_ACCOUNT', // 输入框的值
         width: '24' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.invoice_remarks'),
+        label: $it('fL.invoice_remarks'),
         value: 'INVOICE_REMARK', // 输入框的值
         width: '24' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       }
@@ -157,19 +157,19 @@ export default {
     this.formConfig2.formData = [
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.consignee'),
+        label: $it('fL.consignee'),
         value: 'RECEIVE_NAME', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.cellPhone_number'),
+        label: $it('fL.cellPhone_number'),
         value: 'RECEIVER_MOBILE', // 输入框的值
         width: '12' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       },
       {
         style: 'input', // 输入框类型
-        label: $it('form_label.receiptAddress'),
+        label: $it('fL.receiptAddress'),
         value: 'RECEIVER_ADDRESS', // 输入框的值
         width: '24' // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
       }
@@ -178,7 +178,7 @@ export default {
     this.formConfig.ruleValidate.HEADER_NAME.message = $it('modalTips.zw');
     if (this.componentData.OC_B_ORDER_INVOICE_INFORM) {
       this.getFormValue(this.componentData.OC_B_ORDER_INVOICE_INFORM);
-    } else if (this.invoiceTitleType === $it('form_label.personal')) {
+    } else if (this.invoiceTitleType === $it('fL.personal')) {
       this.formConfig.formValue.HEADER_NAME = this.componentData.QUERYORDERRESULT.RECEIVER_NAME;
     }
     this.controlFormData();
@@ -188,20 +188,20 @@ export default {
     invoiceTypeChange(value) {
       const self = this;
       // '电子发票'
-      if (value === $it('form_label.electronic_invoice')) {
+      if (value === $it('fL.electronic_invoice')) {
         self.invoiceFooterFlag = false; // 不显示收票信息
         self.specialInvoiceFlag = false; // 不是专用发票
       } else {
         self.invoiceFooterFlag = true;
         // '专用发票'
-        if (value === $it('form_label.special_invoice')) {
+        if (value === $it('fL.special_invoice')) {
           self.specialInvoiceFlag = true;
         } else {
           self.specialInvoiceFlag = false;
         }
       }
       self.formConfig.ruleValidate = {};
-      if (value !== $it('form_label.special_invoice')) {
+      if (value !== $it('fL.special_invoice')) {
         if (self.identificationFlag) {
           self.formConfig.ruleValidate = {
             HEADER_NAME: [
@@ -340,7 +340,7 @@ export default {
       const self = this;
       self.formConfig.ruleValidate = {};
       // === 个人
-      if (value === $it('form_label.personal')) {
+      if (value === $it('fL.personal')) {
         self.identificationFlag = false;
         if (!self.componentData.OC_B_ORDER_INVOICE_INFORM) {
           self.formConfig.formValue.HEADER_NAME = self.componentData.QUERYORDERRESULT.RECEIVER_NAME;
@@ -468,22 +468,22 @@ export default {
       this.formConfig.formData.forEach(item => {
         if (this.specialInvoiceFlag) {
           // '识别号'
-          if (item.label === $it('form_label.identificationNo')) {
+          if (item.label === $it('fL.identificationNo')) {
             item.style = 'input';
           }
           // '邮箱'
-          if (item.label === $it('form_label.mailbox')) {
+          if (item.label === $it('fL.mailbox')) {
             item.style = '';
           }
         } else {
           if (this.identificationFlag) {
-            if (item.label === $it('form_label.identificationNo')) {
+            if (item.label === $it('fL.identificationNo')) {
               item.style = 'input';
             }
-          } else if (item.label === $it('form_label.identificationNo')) {
+          } else if (item.label === $it('fL.identificationNo')) {
             item.style = '';
           }
-          if (item.label === $it('form_label.mailbox') && item.style === '') {
+          if (item.label === $it('fL.mailbox') && item.style === '') {
             item.style = 'input';
           }
         }

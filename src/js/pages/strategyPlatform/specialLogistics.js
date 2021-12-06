@@ -58,7 +58,7 @@ export default {
         objid: '',
       },
       baseInformation: $it('com.baseInformation'),
-      meet_conditions: $it('form_label.meet_conditions'),
+      meet_conditions: $it('fL.meet_conditions'),
       increase: $it('btn.increase'),
       cancel: $it('com.cancel'),
       // tab切换配置
@@ -272,7 +272,7 @@ export default {
         formData: [
           {
             style: null,
-            label: $it('form_label.bc'), // 策略ID
+            label: $it('fL.bc'), // 策略ID
             colname: 'ecode',
             width: '6',
             disabled: true,
@@ -280,7 +280,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.bd'), // 策略名称
+            label: $it('fL.bd'), // 策略名称
             value: 'ename',
             colname: 'ename',
             width: '6',
@@ -291,7 +291,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: $it('form_label.be'), // 生效开始时间
+            label: $it('fL.be'), // 生效开始时间
             colname: 'validTime',
             width: '6',
             disabled: false,
@@ -303,7 +303,7 @@ export default {
           {
             style: 'date',
             type: 'datetime',
-            label: $it('form_label.bf'), // 生效结束时间
+            label: $it('fL.bf'), // 生效结束时间
             colname: 'invalidTime',
             value: '',
             width: '6',
@@ -516,7 +516,7 @@ export default {
           key: 'psCProEname'
         },
         {
-          title: $it('form_label.skuName'), // SKU名称
+          title: $it('fL.skuName'), // SKU名称
           key: 'psCSkuEname'
         },
         {
@@ -764,7 +764,7 @@ export default {
             key: 'psCProEname'
           },
           {
-            title: $it('form_label.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
             key: 'psCSkuEname'
           },
           {

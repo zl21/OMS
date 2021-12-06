@@ -154,7 +154,7 @@ export default {
       const self = this;
       const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
       // 非赠品 缺货 待审核
-      if(GIFT_TYPES.includes($it('form_label.ac')) && ![$it('com.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
+      if(GIFT_TYPES.includes($it('fL.ac')) && ![$it('com.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
         self.$Message.error($it('modalTips.fr')); //勾选明细含有非赠品禁止删除！
         return;
       }

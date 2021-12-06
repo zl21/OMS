@@ -57,13 +57,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: $it('form_label.consignee_province'), // 收货人省份
+          fkdesc: $it('fL.consignee_province'), // 收货人省份
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: $it('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
+          name: $it('fL.consignee_province'), // 收货人省份 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_PROVINCE', // 对应的表
           reftableid: 10010, // 对应的表ID
@@ -80,13 +80,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: $it('form_label.consignee_city'), // 收货人市
+          fkdesc: $it('fL.consignee_city'), // 收货人市
           inputname: 'RECEIVER_CITY:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: $it('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
+          name: $it('fL.consignee_city'), // 收货人市 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_CITY', // 对应的表
           reftableid: 23864, // 对应的表ID
@@ -108,13 +108,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: $it('form_label.orderShop'), // 下单店铺
+          fkdesc: $it('fL.orderShop'), // 下单店铺
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: $it('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+          name: $it('fL.orderShop'), // 下单店铺 // input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_SHOP', // 对应的表
           reftableid: 24475, // 对应的表ID
@@ -141,7 +141,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_SHOP_TITLE',
-            label: $it('form_label.orderShop'), // 下单店铺 // input前面显示的lable值
+            label: $it('fL.orderShop'), // 下单店铺 // input前面显示的lable值
             itemdata: {},
             oneObj: () => {
               // 点击选中事件
@@ -154,7 +154,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.delivery_warehouse'), // 发货仓库 下拉框前的值
+            label: $it('fL.delivery_warehouse'), // 发货仓库 下拉框前的值
             width: '6', // 所占宽度宽度
             dataAcessKey: 'CP_C_PHY_WAREHOUSE_ENAME',
             value: 'CP_C_PHY_WAREHOUSE_ID', // 输入框的值
@@ -164,7 +164,7 @@ export default {
               // const optionsArr = _this.formConfig.formData[8].options;
               const optionsArr = _this.queryFormItem(
                 _this.formConfig.formData,
-                $it('form_label.delivery_warehouse')
+                $it('fL.delivery_warehouse')
               ).options;
               for (let i = 0; i < optionsArr.length; i++) {
                 if (
@@ -176,7 +176,7 @@ export default {
                   // this.formConfig.formData[1].inputList = [
                   this.queryFormItem(
                     this.formConfig.formData,
-                    $it('form_label.distribution_logistics')
+                    $it('fL.distribution_logistics')
                   ).inputList = [
                       {
                         childs: [
@@ -201,7 +201,7 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_LOGISTICS_ENAME',
-            label: $it('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
+            label: $it('fL.distribution_logistics'), // 配送物流 input前面显示的lable值
             inputList: [
               {
                 childs: [
@@ -226,13 +226,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $it('form_label.distribution_logistics'), // 配送物流
+              fkdesc: $it('fL.distribution_logistics'), // 配送物流
               inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.distribution_logistics'), // 配送物流 input前面显示的lable值
+              name: $it('fL.distribution_logistics'), // 配送物流 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_LOGISTICS', // 对应的表
               reftableid: 24411, // 对应的表ID
@@ -244,7 +244,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.distribution_costs'), // 配送费用
+            label: $it('fL.distribution_costs'), // 配送费用
             value: 'SHIP_AMT',
             dataAcessKey: 'SHIP_AMT',
             disabled: false,
@@ -261,14 +261,14 @@ export default {
           {
             style: 'input', // 输入框弹框单多选
             value: 'SOURCE_CODE',
-            label: $it('form_label.platform_billNo'), // 平台单号
+            label: $it('fL.platform_billNo'), // 平台单号
             disabled: false,
             dataAcessKey: 'SOURCE_CODE',
             width: '6',
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.paymentMethod'), // 付款方式 下拉框前的值
+            label: $it('fL.paymentMethod'), // 付款方式 下拉框前的值
             width: '6', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             disabled: false,
@@ -283,14 +283,14 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.collection_amount'), // 代收金额
+            label: $it('fL.collection_amount'), // 代收金额
             value: 'COD_AMT',
             disabled: false,
             width: '6',
           },
           {
             style: 'input',
-            label: $it('form_label.service_charge'), // 服务费
+            label: $it('fL.service_charge'), // 服务费
             value: 'SERVICE_AMT',
             disabled: false,
             width: '6',
@@ -315,14 +315,14 @@ export default {
           {
             style: '', // 输入框弹框单多选
             value: 'EXPRESS_CODE',
-            label: $it('form_label.logisticsOrder_No'), // 物流单号
+            label: $it('fL.logisticsOrder_No'), // 物流单号
             disabled: false,
             dataAcessKey: 'EXPRESS_CODE',
             width: '6',
           },
           {
             style: 'checkbox',
-            label: $it('form_label.invoice_or_not'), // 是否开票
+            label: $it('fL.invoice_or_not'), // 是否开票
             value: 'is_kaip',
             disabled: false,
             dataAcessKey: 'IS_INVOICE',
@@ -330,7 +330,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.internalRemarks'), // 内部备注
+            label: $it('fL.internalRemarks'), // 内部备注
             value: 'INSIDE_REMARK',
             disabled: false,
             dataAcessKey: 'INSIDE_REMARK',
@@ -394,7 +394,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.match_smart_address'), // 智能匹配地址
+            label: $it('fL.match_smart_address'), // 智能匹配地址
             value: 'site',
             disabled: false,
             dataAcessKey: 'RECEIVER_NAME',
@@ -447,7 +447,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee'), // 收货人
+            label: $it('fL.consignee'), // 收货人
             disabled: false,
             value: 'RECEIVER_NAME',
             dataAcessKey: 'RECEIVER_NAME',
@@ -456,7 +456,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee_phone'), // 收货人手机
+            label: $it('fL.consignee_phone'), // 收货人手机
             disabled: false,
             value: 'RECEIVER_MOBILE',
             dataAcessKey: 'RECEIVER_MOBILE',
@@ -464,7 +464,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee_tel'), // 收货人电话
+            label: $it('fL.consignee_tel'), // 收货人电话
             disabled: false,
             value: 'RECEIVER_PHONE',
             dataAcessKey: 'RECEIVER_PHONE',
@@ -472,7 +472,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee_postcode'), // 收货人邮编
+            label: $it('fL.consignee_postcode'), // 收货人邮编
             disabled: false,
             value: 'RECEIVER_ZIP',
             dataAcessKey: 'RECEIVER_ZIP',
@@ -482,26 +482,26 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_PROVINCE_ENAME',
-            label: $it('form_label.consignee_province'), // 收货人省份 // input前面显示的lable值
+            label: $it('fL.consignee_province'), // 收货人省份 // input前面显示的lable值
             itemdata: {},
             oneObj: () => {
               this.queryFormItem(
                 this.formConfig1.formData,
-                $it('form_label.consignee_city')
+                $it('fL.consignee_city')
               ).itemdata.pid = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                $it('form_label.consignee_city')
+                $it('fL.consignee_city')
               ).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ID = '';
               this.formConfig1.formValue.CP_C_REGION_CITY_ENAME = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                $it('form_label.aconsignee_area')
+                $it('fL.aconsignee_area')
               ).itemdata.pid = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                $it('form_label.aconsignee_area')
+                $it('fL.aconsignee_area')
               ).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
@@ -510,18 +510,18 @@ export default {
             style: 'popInput', // 输入框弹框单多选
             width: '6',
             dataAcessKey: 'CP_C_REGION_CITY_ENAME',
-            label: $it('form_label.consignee_city'), // 收货人市 // input前面显示的lable值
+            label: $it('fL.consignee_city'), // 收货人市 // input前面显示的lable值
             inputList: [],
             objList: [],
             itemdata: {},
             oneObj: () => {
               this.queryFormItem(
                 this.formConfig1.formData,
-                $it('form_label.aconsignee_area')
+                $it('fL.aconsignee_area')
               ).itemdata.pid = '';
               this.queryFormItem(
                 this.formConfig1.formData,
-                $it('form_label.aconsignee_area')
+                $it('fL.aconsignee_area')
               ).itemdata.valuedata = '';
               this.formConfig1.formValue.CP_C_REGION_AREA_ID = '';
             },
@@ -531,7 +531,7 @@ export default {
             width: '6',
             inputList: [],
             dataAcessKey: 'CP_C_REGION_AREA_ENAME',
-            label: $it('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
+            label: $it('fL.aconsignee_area'), // 收货人区 input前面显示的lable值
             itemdata: {
               col: 1,
               colid: 167816,
@@ -539,13 +539,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $it('form_label.aconsignee_area'), // 收货人区
+              fkdesc: $it('fL.aconsignee_area'), // 收货人区
               inputname: 'RECEIVER_AREA:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.aconsignee_area'), // 收货人区 input前面显示的lable值
+              name: $it('fL.aconsignee_area'), // 收货人区 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_DISTAREA', // 对应的表
               reftableid: 23863, // 对应的表ID
@@ -569,7 +569,7 @@ export default {
           // },
           {
             style: 'input',
-            label: $it('form_label.aconsignee_address'), // 收货人地址
+            label: $it('fL.aconsignee_address'), // 收货人地址
             value: 'RECEIVER_ADDRESS',
             dataAcessKey: 'RECEIVER_ADDRESS',
             width: '12',
@@ -625,7 +625,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('form_label.buyerNotes'), // 买家备注
+            label: $it('fL.buyerNotes'), // 买家备注
             value: 'BUYER_MESSAGE',
             disabled: false,
             dataAcessKey: 'BUYER_MESSAGE',
@@ -633,7 +633,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.sellerNotes'), // 卖家备注
+            label: $it('fL.sellerNotes'), // 卖家备注
             value: 'SELLER_MEMO',
             disabled: false,
             dataAcessKey: 'SELLER_MEMO',
@@ -725,7 +725,7 @@ export default {
               },
             },
             {
-              label: $it('form_label.barCode'), // 条码
+              label: $it('fL.barCode'), // 条码
               style: 'dimSearch',
               width: '6',
               value: 'dimData',
@@ -766,7 +766,7 @@ export default {
                       dimList.forEach((item) => {
                         // 条码
                         if (
-                          item.label === $it('form_label.barCode')
+                          item.label === $it('fL.barCode')
                         ) {
                           item.AuotData = data;
                           // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
@@ -836,7 +836,7 @@ export default {
             dataAcessKey: 'PS_C_SIZE_ENAME',
           },
           {
-            title: $it('form_label.barCode'), // 条码
+            title: $it('fL.barCode'), // 条码
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
           },
@@ -1226,7 +1226,7 @@ export default {
       const _this = this;
       _this.queryFormItem(
         _this.formConfig.formData,
-        $it('form_label.delivery_warehouse')
+        $it('fL.delivery_warehouse')
       ).options = [];
       const formData = new FormData();
       if (id) {
@@ -1243,7 +1243,7 @@ export default {
           JSON.stringify({
             shopId: _this.queryFormItem(
               _this.formConfig.formData,
-              $it('form_label.orderShop')
+              $it('fL.orderShop')
             ).itemdata.pid,
           })
         );
@@ -1251,7 +1251,7 @@ export default {
       if (
         _this.queryFormItem(
           _this.formConfig.formData,
-          $it('form_label.orderShop')
+          $it('fL.orderShop')
         ).itemdata.pid
       ) {
         const res = await _this.service.common.queryPhyWareHouseList(formData);
@@ -1311,14 +1311,14 @@ export default {
       self.formConfig.formData.forEach((item) => {
         if (
           item.itemdata &&
-          item.itemdata.name === $it('form_label.orderShop')
+          item.itemdata.name === $it('fL.orderShop')
         ) {
           ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
           ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
         } else if (
           item.itemdata &&
           item.itemdata.name ===
-          $it('form_label.distribution_logistics')
+          $it('fL.distribution_logistics')
         ) {
           ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -1328,20 +1328,20 @@ export default {
       self.formConfig1.formData.forEach((item) => {
         if (
           item.itemdata &&
-          item.itemdata.name === $it('form_label.consignee_province')
+          item.itemdata.name === $it('fL.consignee_province')
         ) {
           ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
         } else if (
           item.itemdata &&
-          item.itemdata.name === $it('form_label.consignee_city')
+          item.itemdata.name === $it('fL.consignee_city')
         ) {
           ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
         }
         if (
           item.itemdata &&
-          item.itemdata.name === $it('form_label.aconsignee_area')
+          item.itemdata.name === $it('fL.aconsignee_area')
         ) {
           ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
           ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -1413,8 +1413,8 @@ export default {
       if (selectData === 1) {
         showNo.forEach((item) => {
           if (
-            item.label === $it('form_label.collection_amount') ||
-            item.label === $it('form_label.service_charge')
+            item.label === $it('fL.collection_amount') ||
+            item.label === $it('fL.service_charge')
           ) {
             item.style = '';
           }
@@ -1422,8 +1422,8 @@ export default {
       } else {
         showNo.forEach((item) => {
           if (
-            item.label === $it('form_label.collection_amount') ||
-            item.label === $it('form_label.service_charge')
+            item.label === $it('fL.collection_amount') ||
+            item.label === $it('fL.service_charge')
           ) {
             item.style = 'input';
           }
@@ -1477,7 +1477,7 @@ export default {
             // this.formConfig.formData[1].inputList = [
             this.queryFormItem(
               this.formConfig.formData,
-              $it('form_label.distribution_logistics')
+              $it('fL.distribution_logistics')
             ).inputList = [
                 {
                   childs: [
@@ -1789,14 +1789,14 @@ export default {
           // 下单店铺 配送物流 收货人省份 收货人市 收货人区
           if (
             item.itemdata &&
-            item.itemdata.name === $it('form_label.orderShop')
+            item.itemdata.name === $it('fL.orderShop')
           ) {
             ocBorderDto.CP_C_SHOP_TITLE = item.itemdata.valuedata;
             ocBorderDto.CP_C_SHOP_ID = item.itemdata.pid;
           } else if (
             item.itemdata &&
             item.itemdata.name ===
-            $it('form_label.distribution_logistics')
+            $it('fL.distribution_logistics')
           ) {
             ocBorderDto.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_LOGISTICS_ID = item.itemdata.pid;
@@ -1806,20 +1806,20 @@ export default {
           if (
             item.itemdata &&
             item.itemdata.name ===
-            $it('form_label.consignee_province')
+            $it('fL.consignee_province')
           ) {
             ocBorderDto.CP_C_REGION_PROVINCE_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_PROVINCE_ID = item.itemdata.pid;
           } else if (
             item.itemdata &&
-            item.itemdata.name === $it('form_label.consignee_city')
+            item.itemdata.name === $it('fL.consignee_city')
           ) {
             ocBorderDto.CP_C_REGION_CITY_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_CITY_ID = item.itemdata.pid;
           }
           if (
             item.itemdata &&
-            item.itemdata.name === $it('form_label.aconsignee_area')
+            item.itemdata.name === $it('fL.aconsignee_area')
           ) {
             ocBorderDto.CP_C_REGION_AREA_ENAME = item.itemdata.valuedata;
             ocBorderDto.CP_C_REGION_AREA_ID = item.itemdata.pid;
@@ -2001,7 +2001,7 @@ export default {
           if (
             item.itemdata.name == e.name &&
             item.itemdata.name ==
-            $it('form_label.delivery_warehouse')
+            $it('fL.delivery_warehouse')
           ) {
             _this.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID =
               item.itemdata.pid;
@@ -2184,10 +2184,10 @@ export default {
 
       self.formConfig.formData.forEach((item) => {
         // 下单店铺 配送物流
-        if (item.itemdata?.name === $it('form_label.orderShop')) {
+        if (item.itemdata?.name === $it('fL.orderShop')) {
           item.itemdata.valuedata = data.CP_C_SHOP_TITLE;
           item.itemdata.pid = data.CP_C_SHOP_ID;
-        } else if (item.itemdata?.name === $it('form_label.distribution_logistics')) {
+        } else if (item.itemdata?.name === $it('fL.distribution_logistics')) {
           item.itemdata.valuedata = data.CP_C_LOGISTICS_ENAME;
           item.itemdata.pid = data.CP_C_LOGISTICS_ID;
         }
@@ -2209,19 +2209,19 @@ export default {
         // 收货人省份 收货人市 收货人区
         if (
           item.itemdata &&
-          item.itemdata.name === $it('form_label.consignee_province')
+          item.itemdata.name === $it('fL.consignee_province')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
           item.itemdata.pid = data.CP_C_REGION_PROVINCE_ID;
         } else if (
           item.itemdata &&
-          item.itemdata.name === $it('form_label.consignee_city')
+          item.itemdata.name === $it('fL.consignee_city')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
           item.itemdata.pid = data.CP_C_REGION_CITY_ID;
         } else if (
           item.itemdata &&
-          item.itemdata.name === $it('form_label.aconsignee_area')
+          item.itemdata.name === $it('fL.aconsignee_area')
         ) {
           item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
           item.itemdata.pid = data.CP_C_REGION_AREA_ID;
@@ -2234,11 +2234,11 @@ export default {
     },
     // 过滤条件
     relationShip() {
-      this.queryFormItem(this.formConfig1.formData, $it('form_label.consignee_province')).itemdata = this.fkcolumn.PROV;
-      this.queryFormItem(this.formConfig1.formData, $it('form_label.consignee_city')).inputList.push(this.fkcolumn.PROV);
-      this.queryFormItem(this.formConfig1.formData, $it('form_label.consignee_city')).itemdata = this.fkcolumn.CITY;
-      this.queryFormItem(this.formConfig1.formData, $it('form_label.aconsignee_area')).inputList.push(this.fkcolumn.CITY);
-      this.queryFormItem(this.formConfig.formData, $it('form_label.orderShop')).itemdata = this.fkcolumn.STORE;
+      this.queryFormItem(this.formConfig1.formData, $it('fL.consignee_province')).itemdata = this.fkcolumn.PROV;
+      this.queryFormItem(this.formConfig1.formData, $it('fL.consignee_city')).inputList.push(this.fkcolumn.PROV);
+      this.queryFormItem(this.formConfig1.formData, $it('fL.consignee_city')).itemdata = this.fkcolumn.CITY;
+      this.queryFormItem(this.formConfig1.formData, $it('fL.aconsignee_area')).inputList.push(this.fkcolumn.CITY);
+      this.queryFormItem(this.formConfig.formData, $it('fL.orderShop')).itemdata = this.fkcolumn.STORE;
     },
     queryFormItem(arr, name) {
       // 根据label遍历查询formData子项

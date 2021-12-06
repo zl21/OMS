@@ -46,9 +46,9 @@ const valiObj = {
 };
 const waterMarkMap = {
 	// 单据状态为等待退货入库（20）、等待售后确认（30）、完成（50）、取消（60）时，显示水印
-	20: $it('form_label.waitFor_return_warehous'), // '等待退货入库',
-	30: $it('form_label.waitFor_afterSale_review'), // '等待售后审核',
-	50: $it('form_label.complete'), // '完成',
+	20: $it('fL.waitFor_return_warehous'), // '等待退货入库',
+	30: $it('fL.waitFor_afterSale_review'), // '等待售后审核',
+	50: $it('fL.complete'), // '完成',
 	60: $it('com.cancelled'), // '已取消',
 };
 const addDetailModalTableColumns = [
@@ -66,7 +66,7 @@ const addDetailModalTableColumns = [
 	},
 	{
 		key: 'PS_C_SKU_ENAME',
-		title: $it('form_label.skuName'), // SKU名称
+		title: $it('fL.skuName'), // SKU名称
 	},
 	{
 		key: 'GIFT_TYPE_STR',

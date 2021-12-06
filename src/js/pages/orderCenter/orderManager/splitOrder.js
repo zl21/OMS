@@ -148,7 +148,7 @@ export default {
           }
         },
         {
-          title: $it('form_label.purchaseQuantity'), // 购买数量
+          title: $it('fL.purchaseQuantity'), // 购买数量
           key: 'qty',
           draggable:true
         },

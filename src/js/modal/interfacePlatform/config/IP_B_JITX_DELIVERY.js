@@ -54,19 +54,19 @@ export default {
         options: [ // radio选项
           {
             value: 'NEW',
-            label: $it('form_label.newlyBuild'), // 新建
+            label: $it('fL.newlyBuild'), // 新建
           },
           {
             value: 'CONFIRMING',
-            label: $it('form_label.confirming'), // 确认中
+            label: $it('fL.confirming'), // 确认中
           },
           {
             value: 'CONFIRMED',
-            label: $it('form_label.confirmed_as_JITX'), // 确认为JITX
+            label: $it('fL.confirmed_as_JITX'), // 确认为JITX
           },
           {
             value: 'ROLLBACK',
-            label: $it('form_label.confirmed_as_non_JITX'), // 确认为非JITX
+            label: $it('fL.confirmed_as_non_JITX'), // 确认为非JITX
           }
         ]
       },
@@ -74,7 +74,7 @@ export default {
         style: 'date',
         type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
         value: 'query_date',
-        label: $it('form_label.orderTime'), // 下单时间
+        label: $it('fL.orderTime'), // 下单时间
         width: '24',
         format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
         placeholder: ''

@@ -24,9 +24,9 @@ export default {
       // 水印标识集合
       waterMarkMap: {
         // 单据状态为等待退货入库（20）、等待售后确认（30）、完成（50）、取消（60）时，显示水印
-        20: $it('form_label.waitFor_return_warehous'), // '等待退货入库',
-        30: $it('form_label.waitFor_afterSale_review'), // '等待售后审核',
-        50: $it('form_label.complete'), // '完成',
+        20: $it('fL.waitFor_return_warehous'), // '等待退货入库',
+        30: $it('fL.waitFor_afterSale_review'), // '等待售后审核',
+        50: $it('fL.complete'), // '完成',
         60: $it('com.cancelled'), // '已取消',
       },
       // 可用库存不足弹窗提示
@@ -99,28 +99,28 @@ export default {
           formData: [
             {
               style: 'input',
-              label: $it('form_label.orderNumber'), // 订单号
+              label: $it('fL.orderNumber'), // 订单号
               value: 'ID',
               width: '8',
               inputenter: () => this.queryBounced(),
             },
             {
               style: 'input',
-              label: $it('form_label.billNo'), // 订单编号
+              label: $it('fL.billNo'), // 订单编号
               value: 'BILL_NO',
               width: '8',
               inputenter: () => this.queryBounced(),
             },
             {
               style: 'input',
-              label: $it('form_label.platform_billNo'), // 平台单号
+              label: $it('fL.platform_billNo'), // 平台单号
               value: 'source_code',
               width: '8',
               inputenter: () => this.queryBounced(),
             },
             {
               style: 'input',
-              label: $it('form_label.consignee'), // 收货人
+              label: $it('fL.consignee'), // 收货人
               value: 'receiver_name',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -134,7 +134,7 @@ export default {
             },
             {
               style: 'input',
-              label: $it('form_label.consignee_phone'), // 收货人手机
+              label: $it('fL.consignee_phone'), // 收货人手机
               value: 'receiver_mobile',
               width: '8',
               inputenter: () => this.queryBounced(),
@@ -197,11 +197,11 @@ export default {
             },
             {
               key: 'RECEIVER_NAME',
-              title: $it('form_label.consignee'), // 收货人
+              title: $it('fL.consignee'), // 收货人
             },
             {
               key: 'RECEIVER_MOBILE',
-              title: $it('form_label.consignee_phone'), // 收货人手机号
+              title: $it('fL.consignee_phone'), // 收货人手机号
             },
             {
               key: 'CP_C_PHY_WAREHOUSE_ENAME',
@@ -213,11 +213,11 @@ export default {
             // },
             {
               key: 'EXPRESSCODE',
-              title: $it('form_label.logisticsOrder_No'), // 物流单号
+              title: $it('fL.logisticsOrder_No'), // 物流单号
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: $it('form_label.orderShop'), // 下单店铺
+              title: $it('fL.orderShop'), // 下单店铺
             },
           ], // 表头
           data: [], // 数据配置
@@ -236,13 +236,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: $it('form_label.consignee_province'), // 收货人省份
+          fkdesc: $it('fL.consignee_province'), // 收货人省份
           inputname: 'CP_C_STORE_IDS:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: $it('form_label.consignee_province'), // 收货人省份 input前面显示的lable值
+          name: $it('fL.consignee_province'), // 收货人省份 input前面显示的lable值
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_PROVINCE', // 对应的表
           reftableid: 10010, // 对应的表ID
@@ -259,13 +259,13 @@ export default {
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
-          fkdesc: $it('form_label.consignee_city'), // 收货人市
+          fkdesc: $it('fL.consignee_city'), // 收货人市
           inputname: 'RECEIVER_CITY:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
           isfk: true, // 是否有fk键
           isnotnull: false, // 是否必填
           isuppercase: false, // 是否转大写
           length: 65535, // 最大长度是多少
-          name: $it('form_label.consignee_city'), // 收货人市
+          name: $it('fL.consignee_city'), // 收货人市
           readonly: false, // 是否可编辑，对应input   readonly属性
           reftable: 'CP_C_CITY', // 对应的表
           reftableid: 23864, // 对应的表ID
@@ -336,7 +336,7 @@ export default {
         formData: [
           {
             style: '',
-            label: $it('form_label.chargebackNumber'), // 退单编号
+            label: $it('fL.chargebackNumber'), // 退单编号
             disabled: true,
             value: 'ID',
             width: '6',
@@ -344,7 +344,7 @@ export default {
           {
             style: 'input', // 输入框类型
             dataAcessKey: 'ORIG_ORDER_ID',
-            label: $it('form_label.originalOrderNo'), // 原始订单编号输入框前文字
+            label: $it('fL.originalOrderNo'), // 原始订单编号输入框前文字
             value: 'ORIG_ORDER_ID', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: 'ios-search', // 输入框后带的图标,暂只有输入框支持
@@ -372,7 +372,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.billType'), // 单据类型 下拉框前的值
+            label: $it('fL.billType'), // 单据类型 下拉框前的值
             dataAcessKey: 'BILL_TYPE',
             width: '6', // 所占宽度宽度
             disabled: false, // 按钮禁用控制
@@ -403,7 +403,7 @@ export default {
           },
           {
             style: '',
-            label: $it('form_label.originalPlatformNo'), // 原始平台单号
+            label: $it('fL.originalPlatformNo'), // 原始平台单号
             value: 'ORIG_SOURCE_CODE',
             dataAcessKey: 'ORIG_SOURCE_CODE',
             disabled: true, // 按钮禁用控制
@@ -445,7 +445,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.platformRefundNo'), // 平台退款单号
+            label: $it('fL.platformRefundNo'), // 平台退款单号
             dataAcessKey: 'RETURN_ID',
             disabled: false, // 按钮禁用控制
             value: 'RETURN_ID',
@@ -463,13 +463,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $it('form_label.returnLogisticsCompany'), // 退回物流公司
+              fkdesc: $it('fL.returnLogisticsCompany'), // 退回物流公司
               inputname: 'CP_C_LOGISTICS_ENAME:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.returnLogisticsCompany'), // 退回物流公司input前面显示的lable值
+              name: $it('fL.returnLogisticsCompany'), // 退回物流公司input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'OC_B_RETURN_ORDER', // 对应的表
               reftableid: 24578, // 对应的表ID
@@ -484,7 +484,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: $it('form_label.reasonRefund'), // 退款原因 下拉框前的值
+            label: $it('fL.reasonRefund'), // 退款原因 下拉框前的值
             dataAcessKey: 'RETURN_REASON',
             width: '6', // 所占宽度宽度
             value: 'RETURN_REASON',
@@ -494,7 +494,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.returnLogisticsNumber'), // 退回物流单号
+            label: $it('fL.returnLogisticsNumber'), // 退回物流单号
             dataAcessKey: 'LOGISTICS_CODE',
             value: 'LOGISTICS_CODE',
             disabled: false, // 按钮禁用控制
@@ -503,7 +503,7 @@ export default {
           },
           {
             style: '', // 勾选框类型
-            label: $it('form_label.reservedStockExchange'), // 换货预留库存前面的文字
+            label: $it('fL.reservedStockExchange'), // 换货预留库存前面的文字
             dataAcessKey: 'IS_RESERVED',
             width: '6', // 所占的宽度
             value: 'IS_RESERVED',
@@ -544,7 +544,7 @@ export default {
           },
           {
             style: 'checkbox', // 勾选框类型
-            label: $it('form_label.whether_returned'), // 是否原退 前面的文字
+            label: $it('fL.whether_returned'), // 是否原退 前面的文字
             dataAcessKey: 'IS_BACK',
             width: '6', // 所占的宽度
             value: 'IS_BACK',
@@ -569,7 +569,7 @@ export default {
                     _this.information.formValue.CP_C_LOGISTICS_ID = arrList.CP_C_LOGISTICS_ID;
                     _this.information.formData.forEach(list => {
                       // 退回物流公司
-                      if (list.style === 'popInput' && list.itemdata.name === $it('form_label.returnLogisticsCompany')) {
+                      if (list.style === 'popInput' && list.itemdata.name === $it('fL.returnLogisticsCompany')) {
                         list.itemdata.pid = arrList.CP_C_LOGISTICS_ID;
                         list.itemdata.valuedata = arrList.CP_C_LOGISTICS_ENAME;
                       }
@@ -609,13 +609,13 @@ export default {
               // ],
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $it('form_label.physicalWarehouseFile'), // 实体仓档案
+              fkdesc: $it('fL.physicalWarehouseFile'), // 实体仓档案
               inputname: 'CP_C_PHY_WAREHOUSE_IN_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: $it('form_label.warehousingEntity'), // 入库实体仓库 input前面显示的lable值
+              name: $it('fL.warehousingEntity'), // 入库实体仓库 input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 24486, // 对应的表ID
@@ -640,13 +640,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $it('form_label.physicalWarehouseFile'), // 实体仓档案
+              fkdesc: $it('fL.physicalWarehouseFile'), // 实体仓档案
               inputname: 'CP_C_PHY_WAREHOUSE_ID:ENAME:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: $it('form_label.shipPhysicalWarehouse'), // 发货实体仓库input前面显示的lable值
+              name: $it('fL.shipPhysicalWarehouse'), // 发货实体仓库input前面显示的lable值
               readonly: true, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 24486, // 对应的表ID
@@ -670,21 +670,21 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.sellerNotes'), // 卖家备注
+            label: $it('fL.sellerNotes'), // 卖家备注
             value: 'SELLER_MEMO',
             disabled: true, // 按钮禁用控制
             width: '12',
           },
           {
             style: 'input',
-            label: $it('form_label.proReturnStatus'), // 退货状态,
+            label: $it('fL.proReturnStatus'), // 退货状态,
             disabled: true,
             value: 'PRO_RETURN_STATUS',
             width: '6',
           },
           {
             style: 'input',
-            label: $it('form_label.billNo'), // 单据编号,
+            label: $it('fL.billNo'), // 单据编号,
             disabled: true,
             value: 'BILL_NO',
             width: '6',
@@ -751,17 +751,17 @@ export default {
             },
             {
               key: 'PS_C_SKU_ECODE',
-              title: $it('form_label.barCode'), // 条码
+              title: $it('fL.barCode'), // 条码
               dataAcessKey: 'PS_C_SKU_ECODE',
             },
             {
               key: 'BARCODE',
-              title: $it('form_label.gBCode'), // 国标码
+              title: $it('fL.gBCode'), // 国标码
               dataAcessKey: 'BARCODE',
             },
             {
               key: 'PS_C_PRO_ENAME',
-              title: $it('form_label.goodsName'), // 商品名称
+              title: $it('fL.goodsName'), // 商品名称
               dataAcessKey: 'PS_C_PRO_ENAME',
             },
             {
@@ -806,7 +806,7 @@ export default {
             },
             {
               key: 'PRODUCT_MARK',
-              title: $it('form_label.goodsMark'), // 商品标记
+              title: $it('fL.goodsMark'), // 商品标记
               dataAcessKey: 'PRODUCT_MARK',
             },
           ], // 表头
@@ -868,7 +868,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee'), // 收货人
+            label: $it('fL.consignee'), // 收货人
             dataAcessKey: 'RECEIVE_NAME',
             value: 'RECEIVE_NAME',
             disabled: false, // 按钮禁用控制
@@ -877,7 +877,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee_phone'), // 收货人手机
+            label: $it('fL.consignee_phone'), // 收货人手机
             dataAcessKey: 'RECEIVE_MOBILE',
             value: 'RECEIVE_MOBILE',
             disabled: false, // 按钮禁用控制
@@ -886,7 +886,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee_tel'), // 收货人电话
+            label: $it('fL.consignee_tel'), // 收货人电话
             dataAcessKey: 'RECEIVE_PHONE',
             value: 'RECEIVE_PHONE',
             disabled: false, // 按钮禁用控制
@@ -894,7 +894,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.consignee_postcode'), // 收货人邮编
+            label: $it('fL.consignee_postcode'), // 收货人邮编
             dataAcessKey: 'RECEIVE_ZIP',
             value: 'RECEIVE_ZIP',
             disabled: false, // 按钮禁用控制
@@ -943,13 +943,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: $it('form_label.aconsignee_area'), // 收货人区
+              fkdesc: $it('fL.aconsignee_area'), // 收货人区
               inputname: 'RECEIVER_AREA:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('form_label.aconsignee_area'), // 收货人区input前面显示的lable值
+              name: $it('fL.aconsignee_area'), // 收货人区input前面显示的lable值
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_DISTAREA', // 对应的表
               reftableid: 23863, // 对应的表ID
@@ -970,7 +970,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.exchangePostage'), // 换货邮费
+            label: $it('fL.exchangePostage'), // 换货邮费
             dataAcessKey: 'SHIP_AMT',
             disabled: false, // 按钮禁用控制
             value: 'SHIP_AMT',
@@ -978,7 +978,7 @@ export default {
           },
           {
             style: 'input',
-            label: $it('form_label.aconsignee_address'), // 收货人地址
+            label: $it('fL.aconsignee_address'), // 收货人地址
             dataAcessKey: 'RECEIVE_ADDRESS',
             value: 'RECEIVE_ADDRESS',
             disabled: false, // 按钮禁用控制
@@ -989,22 +989,22 @@ export default {
       }, // 换货人信
       labelList: [
         {
-          label: $it('form_label.returnDetails'), // 退货明细
+          label: $it('fL.returnDetails'), // 退货明细
           value: '1',
           isShow: true,
         },
         {
-          label: $it('form_label.exchangeDetails'), // 换货明细
+          label: $it('fL.exchangeDetails'), // 换货明细
           value: '2',
           isShow: false,
         },
         {
-          label: $it('form_label.returnOrderLog'), // 退货单日志
+          label: $it('fL.returnOrderLog'), // 退货单日志
           value: '3',
           isShow: true,
         },
         {
-          label: $it('form_label.defectiveProductRecord'), // 次品记录
+          label: $it('fL.defectiveProductRecord'), // 次品记录
           value: '4',
           isShow: true,
         },
@@ -1164,7 +1164,7 @@ export default {
               this.onSelectData.push(item);
               this.information.formData.forEach((list) => {
                 // '退回物流公司'
-                if (list.style === 'popInput' && list.itemdata.name === $it('form_label.returnLogisticsCompany')) {
+                if (list.style === 'popInput' && list.itemdata.name === $it('fL.returnLogisticsCompany')) {
                   list.itemdata.pid = item.CP_C_LOGISTICS_ID;
                   list.itemdata.valuedata = item.CP_C_LOGISTICS_ENAME;
                   this.information.formValue.CP_C_LOGISTICS_ID = item.CP_C_LOGISTICS_ID;
@@ -1432,7 +1432,7 @@ export default {
       const informationArr = [
         {
           style: 'input',
-          label: $it('form_label.exchangePlatform_no'), // 换货平台单号
+          label: $it('fL.exchangePlatform_no'), // 换货平台单号
           disabled: this.$route.query.flag !== 'RefundToExchange',
           dataAcessKey: 'TB_DISPUTE_ID',
           value: 'TB_DISPUTE_ID',
@@ -1440,7 +1440,7 @@ export default {
         },
         {
           style: 'input',
-          label: $it('form_label.defectiveProduct_allocation_status'), // 次品调拨状态
+          label: $it('fL.defectiveProduct_allocation_status'), // 次品调拨状态
           disabled: true,
           dataAcessKey: 'RESERVE_BIGINT07_type',
           value: 'RESERVE_BIGINT07_type',
@@ -1489,16 +1489,16 @@ export default {
       queryData.forEach((item) => {
         if (item.itemdata) {
           // 收货人省份
-          if (item.itemdata.name === $it('form_label.consignee_province')) {
+          if (item.itemdata.name === $it('fL.consignee_province')) {
             item.itemdata.valuedata = data.CP_C_REGION_PROVINCE_ENAME;
             _this.replacement.formValue.receiver_province_id = data.CP_C_REGION_PROVINCE_ID;
             _this.replacement.formValue.receiver_province_name = data.CP_C_REGION_PROVINCE_ENAME;// 收货人市
-          } else if (item.itemdata.name === $it('form_label.consignee_city')) {
+          } else if (item.itemdata.name === $it('fL.consignee_city')) {
             item.itemdata.valuedata = data.CP_C_REGION_CITY_ENAME;
             _this.replacement.formValue.receiver_city_id = data.CP_C_REGION_CITY_ID;
             _this.replacement.formValue.receiver_city_name = data.CP_C_REGION_CITY_ENAME;
             // 收货人区
-          } else if (item.itemdata.name === $it('form_label.aconsignee_area')) {
+          } else if (item.itemdata.name === $it('fL.aconsignee_area')) {
             item.itemdata.valuedata = data.CP_C_REGION_AREA_ENAME;
             _this.replacement.formValue.receiver_area_id = data.CP_C_REGION_AREA_ID;
             _this.replacement.formValue.receiver_area_name = data.CP_C_REGION_AREA_ENAME;
@@ -1863,7 +1863,7 @@ export default {
         this.jordanTableConfig.columns = [
           {
             key: 'REFUND_BILL_NO',
-            title: $it('form_label.platformRefundNo'), // 平台退款单号
+            title: $it('fL.platformRefundNo'), // 平台退款单号
             dataAcessKey: 'REFUND_BILL_NO',
             render: (h, params) => {
               const _this = this;
@@ -2360,17 +2360,17 @@ export default {
           },
           {
             key: 'PS_C_SKU_ECODE',
-            title: $it('form_label.barCode'), // 条码
+            title: $it('fL.barCode'), // 条码
             dataAcessKey: 'PS_C_SKU_ECODE',
           },
           {
             key: 'BARCODE',
-            title: $it('form_label.gBCode'), // 国标码
+            title: $it('fL.gBCode'), // 国标码
             dataAcessKey: 'BARCODE',
           },
           {
             key: 'PS_C_PRO_ENAME',
-            title: $it('form_label.goodsName'), // 商品名称
+            title: $it('fL.goodsName'), // 商品名称
             dataAcessKey: 'PS_C_PRO_ENAME',
           },
           {
@@ -2415,7 +2415,7 @@ export default {
           },
           {
             key: 'PRODUCT_MARK',
-            title: $it('form_label.goodsMark'), // 商品标记
+            title: $it('fL.goodsMark'), // 商品标记
             dataAcessKey: 'PRODUCT_MARK',
             render: (h, params) => {
               const list = [
@@ -2899,17 +2899,17 @@ export default {
           {
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
-            title: $it('form_label.barCode'), // 条码
+            title: $it('fL.barCode'), // 条码
           },
           {
             key: 'BARCODE',
             dataAcessKey: 'BARCODE',
-            title: $it('form_label.gBCode'), // 国标码
+            title: $it('fL.gBCode'), // 国标码
           },
           {
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
-            title: $it('form_label.goodsName'), // 商品名称
+            title: $it('fL.goodsName'), // 商品名称
           },
           {
             key: 'SEX_NAME',
@@ -3071,7 +3071,7 @@ export default {
               },
               {
                 style: 'dimSearch', // 输入框类型
-                label: $it('form_label.barCode'), // 条码 输入框前文字
+                label: $it('fL.barCode'), // 条码 输入框前文字
                 value: 'sku', // 输入框的值
                 placeholder: '请输入sku、款号',
                 width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -3151,17 +3151,17 @@ export default {
           {
             key: 'PS_C_SKU_ECODE',
             dataAcessKey: 'PS_C_SKU_ECODE',
-            title: $it('form_label.barCode'), // 条码
+            title: $it('fL.barCode'), // 条码
           },
           {
             key: 'GBCODE',
             dataAcessKey: 'BARCODE',
-            title: $it('form_label.gBCode'), // 国标码
+            title: $it('fL.gBCode'), // 国标码
           },
           {
             key: 'PS_C_PRO_ENAME',
             dataAcessKey: 'PS_C_PRO_ENAME',
-            title: $it('form_label.goodsName'), // 商品名称
+            title: $it('fL.goodsName'), // 商品名称
           },
           {
             key: 'QTY_IN',
@@ -3344,7 +3344,7 @@ export default {
           amt_refund: item[i].AMT_REFUND,
           qty_in: item[i].QTY_IN,
           product_mark:
-            item[i].PRODUCT_MARK == $it('form_label.qualityGoods')
+            item[i].PRODUCT_MARK == $it('fL.qualityGoods')
               ? '1'
               : '0', // '正品'
           ps_c_sku_id: item[i].skuId ? item[i].skuId : item[i].PS_C_SKU_ID,
@@ -3401,7 +3401,7 @@ export default {
           qty_exchange: parseInt(Eitem[i].QTY_EXCHANGE),
           qty_in: Eitem[i].QTY_IN,
           product_mark:
-            Eitem[i].PRODUCT_MARK == $it('form_label.qualityGoods')
+            Eitem[i].PRODUCT_MARK == $it('fL.qualityGoods')
               ? '1'
               : '0', // '正品'
           ps_c_sku_id: Eitem[i].skuId ? Eitem[i].skuId : Eitem[i].PS_C_SKU_ID,
@@ -3520,11 +3520,11 @@ export default {
         if (res.data.code == 0) {
           this.information.formData.forEach((value) => {
             // 退款原因
-            if (value.label === $it('form_label.reasonRefund')) {
+            if (value.label === $it('fL.reasonRefund')) {
               let arr = [];
               res.data.data.addcolums.find((item) => item.parentdesc && item.parentdesc == $it('com.baseInformation'))
                 .childs.forEach((item) => {
-                  if (item.name == $it('form_label.reasonRefund')) {
+                  if (item.name == $it('fL.reasonRefund')) {
                     arr = item.combobox;
                   }
                 });
@@ -3917,7 +3917,7 @@ export default {
         queryInfo: [
           {
             type: 'Input',
-            displayName: $it('form_label.platform_billNo'), // 平台单号
+            displayName: $it('fL.platform_billNo'), // 平台单号
             queryName: 'SOURCE_CODE',
             value: this.information.formValue.ORIG_SOURCE_CODE,
             list: [],
@@ -3983,7 +3983,7 @@ export default {
       })
       this.information.formData.forEach((list) => {
         // 退回物流公司
-        if (list.style === 'popInput' && list.itemdata.name === $it('form_label.returnLogisticsCompany')) {
+        if (list.style === 'popInput' && list.itemdata.name === $it('fL.returnLogisticsCompany')) {
           list.itemdata.pid = this.onSelectData[0].CP_C_LOGISTICS_ID;
           list.itemdata.valuedata = this.onSelectData[0].CP_C_LOGISTICS_ENAME;
         } else if (list.style === 'popInput' && list.itemdata.name === '入库实体仓库') {
@@ -4035,7 +4035,7 @@ export default {
       this.replacement.formData[7].itemdata.valuedata = this.onSelectData[0].CP_C_REGION_AREA_ENAME; // 区
       this.information.formData.forEach((item) => {
         // 是否原退
-        if (item.label === $it('form_label.whether_returned') && this.information.formValue.IS_BACK) {
+        if (item.label === $it('fL.whether_returned') && this.information.formValue.IS_BACK) {
           this.information.formValue.LOGISTICS_CODE = _this.onSelectData[0].EXPRESSCODE;
         }
       });
@@ -4186,14 +4186,14 @@ export default {
                 this.information.formValue.CP_C_SHOP_ID = item.itemdata.pid;
                 this.information.formValue.CP_C_SHOP_TITLE = item.itemdata.valuedata;
                 break;
-              case $it('form_label.returnLogisticsCompany'):
+              case $it('fL.returnLogisticsCompany'):
                 this.information.formValue.CP_C_LOGISTICS_ID = item.itemdata.pid;
                 this.information.formValue.CP_C_LOGISTICS_ENAME = item.itemdata.valuedata;
                 break;
-              case $it('form_label.warehousingEntity'):
+              case $it('fL.warehousingEntity'):
                 this.information.formValue.CP_C_PHY_WAREHOUSE_IN_ID = item.itemdata.pid;
                 break;
-              case $it('form_label.shipPhysicalWarehouse'):
+              case $it('fL.shipPhysicalWarehouse'):
                 this.information.formValue.CP_C_PHY_WAREHOUSE_ID = item.itemdata.pid;
                 break;
             }
@@ -4206,15 +4206,15 @@ export default {
       _this.replacement.formData.forEach((item) => {
         if (item.itemdata) {
           // 收货人省份
-          if (item.itemdata.name == $it('form_label.consignee_province') && item.itemdata.name == e.name) {
+          if (item.itemdata.name == $it('fL.consignee_province') && item.itemdata.name == e.name) {
             this.replacement.formValue.receiver_province_id = item.itemdata.pid;
             this.replacement.formValue.receiver_province_name = item.itemdata.valuedata;
-          } else if (item.itemdata.name == $it('form_label.consignee_city') && item.itemdata.name == e.name) {
+          } else if (item.itemdata.name == $it('fL.consignee_city') && item.itemdata.name == e.name) {
             // 收货人市
             this.replacement.formValue.receiver_city_id = item.itemdata.pid;
             this.replacement.formValue.receiver_city_name = item.itemdata.valuedata;
           } else if (
-            item.itemdata.name == $it('form_label.aconsignee_area') && item.itemdata.name == e.name
+            item.itemdata.name == $it('fL.aconsignee_area') && item.itemdata.name == e.name
           ) {
             // 收货人区
             this.replacement.formValue.receiver_area_id = item.itemdata.pid;
