@@ -64,12 +64,12 @@ export default {
     },
     agTableConfig: {
       type: Object,
-      default: {}
+      default: () => { }
     },
     options: {
       type: Object,
-      default: {
-        datas: {}
+      default: () => {
+        return { datas: {} }
       }
     }
   },
