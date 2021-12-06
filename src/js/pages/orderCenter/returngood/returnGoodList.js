@@ -1,7 +1,6 @@
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
-import unzipXv from '@/assets/js/dataToSmall';
 import commonUtils from 'burgeonConfig/config/commonUtils';
 import BurgeonEvent from 'burgeonConfig/config/event.config';
 import BC from 'burgeonComponents';
@@ -455,7 +454,7 @@ export default {
         _this.loadingActive = false;
         document.getElementById('content').style.overflow = 'auto';
         document.getElementById('content').style.position = 'relative';
-        res.data.data = JSON.parse(unzipXv(res.data.data));
+        res.data.data = JSON.parse(BC.Utils.unzip(res.data.data));
         console.log(res.data.data);
         if (res.data.code == 0 && res.data.data.queryResult.length) {
           _this.agTableConfig.rowData = res.data.data.queryResult;
@@ -596,7 +595,7 @@ export default {
         } // 入库实体仓库
       }
       this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue)).then(res => {
-        res.data.data = JSON.parse(unzipXv(res.data.data));
+        res.data.data = JSON.parse(BC.Utils.unzip(res.data.data));
         if (res.data.code == 0 && res.data.data.queryResult.length) {
           _this.agTableConfig.agLoading = false;
           const rowDa = res.data.data.queryResult;

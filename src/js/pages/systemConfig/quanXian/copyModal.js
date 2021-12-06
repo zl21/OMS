@@ -41,7 +41,7 @@ export default {
               totalRowCount: 0,
               pageSize: 10,
               showColnameKey: 'show',
-              dataEmptyMessage: '数据加载中...', // 无数据的提示
+              dataEmptyMessage: $it('tip.du'), // 数据加载中...
               columns: ['INDEX', 'NAME'], // 展现的组
               AutoData: []
             },

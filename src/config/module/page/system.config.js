@@ -58,17 +58,37 @@ export default {
     ),
   },
   //功能权限
-  JURISDICTIONDATA:{
-    component:() => import(
-      /* webpackChunkName: 'SystemCenterPage' */
-      'allpages/systemConfig/quanXian/FunctionPowerNew.vue'
-    ),
-  },
+  // JURISDICTIONDATA:{
+  //   component:() => import(
+  //     /* webpackChunkName: 'SystemCenterPage' */
+  //     'allpages/systemConfig/quanXian/FunctionPowerNew.vue'
+  //   ),
+  // },
   //数据权限
   DATAJURISDICTION:{
     component:  () => import(
       /* webpackChunkName: 'SystemCenterPage' */
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
-  }
+  },
+  // 店仓权限
+  storeWarehousePermissions: {
+    component: quanXian,
+  },
+  //  敏感列权限
+  sensitiveColumnPermissions: {
+    component: quanXian,
+  },
+  // 实体仓权限
+  physicalStorageAuthority: {
+    component: quanXian,
+  },
+  // 品牌权限
+  brandPermissions: {
+    component: quanXian,
+  },
+  // 平台权限
+  salesChannelAuthority: {
+    component: quanXian,
+  },
 };

@@ -78,7 +78,6 @@ export default {
                   }, param.value)
                 }
               }
-              break;
             case 'SOURCE_CODE':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -109,7 +108,6 @@ export default {
                   }, param.value)
                 }
               }
-              break;
             default:
               break;
           }

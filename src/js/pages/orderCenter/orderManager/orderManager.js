@@ -2,7 +2,6 @@ import BurgeonEvent from 'burgeonConfig/config/event.config';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import unzipXv from '@/assets/js/dataToSmall';
 import formatData from '@/assets/js/__utils__/date';
 import labelListConfig from './publicConfig/labelList';
 import orderLogo from './publicConfig/orderLogo';
@@ -1616,7 +1615,7 @@ export default {
             });
             return;
           }
-          res.data.data = JSON.parse(unzipXv(res.data.data));
+          res.data.data = JSON.parse(BC.Utils.unzip(res.data.data));
           if (res.data.code === 0) {
             if (!res.data.data) {
               self.agTableConfig.pagenation.total = 0;

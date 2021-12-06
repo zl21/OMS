@@ -1,18 +1,18 @@
 <!--
  * @Author: your name
- * @Date: 2021-06-07 20:40:41
- * @LastEditTime: 2021-06-30 19:55:28
+ * @Date: 2021-05-21 19:33:00
+ * @LastEditTime: 2021-09-26 16:26:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /burgeon-project-logic/views/pages/systemConfig/quanXian/quanXian.vue
+ * @FilePath: /r3-web/src/views/pages/systemConfig/quanXian/quanXian.vue
 -->
 <template>
-  <div class="jurisdiction custom-main functionPower" v-loading="spinShow || loading">
-    <div class="custom-btn">
-      <OmsButton :btn-config="buttonConfig" />
-    </div>
+  <div class="jurisdiction">
+    <loading :loading="spinShow"></loading>
+
+    <OmsButton :btn-config="buttonConfig" />
     <div class="content">
-      <div class="contentLeft">
+      <div class="FilterTree_box left_col">
         <FilterTree
           class="FilterTree"
           :tree-attribute="filterTreeConfig.treeAttribute"
@@ -21,16 +21,12 @@
           :placeholder="filterTreeConfig.placeholder"
         />
       </div>
-
-      <div class="contentLeft contentRight">
-        <div class="tree-center ">
-          <Tree ref="tree" :data="treeData" @on-select-change="treeChange" />
-        </div>
-      </div>
-
       <div class="right_col">
         <div class="SearchForm_Table">
-          <div  class="fromHeight">
+          <div
+            v-if="permissionType !== 'sensitive'"
+            class="fromHeight"
+          >
             <SearchForm
               class="SearchForm"
               :set-height="searchFormConfig.setHeight"
@@ -48,7 +44,9 @@
               :rows="tableArr.rows"
               :columns="tableArr.columns"
               :table-arr="tableArr"
+              :old-table-arr="oldTableArr"
               @isChangeFun="isChangeFun"
+              @handScroll="handScroll"
             />
           </div>
         </div>
@@ -61,20 +59,23 @@
     />
     <Modal
       v-model="saveModal"
-      :title="$it('mT.tips')"
+      :title="vmI18n.t('modalTitle.tips')"
       @on-ok="saveOk"
       @on-cancel="saveCancel"
     >
       <!-- <p>是否保存已经修改的数据?</p> -->
-      <p>{{ $it("tip.a0") }}</p>
+      <p>{{ vmI18n.t('modalTips.a0') }}</p>
     </Modal>
   </div>
 </template>
 <script>
-import quanXian from "@/js/pages/systemConfig/quanXian/quanXian";
+  import quanXian from '@/js/pages/systemConfig/quanXian/quanXian';
 
-export default quanXian;
+  export default quanXian;
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import "~@/css/pages/systemConfig/quanXian/quanXian.less";
+.fromHeight{
+  overflow: inherit;
+}
 </style>

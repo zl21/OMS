@@ -1,5 +1,6 @@
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
 import dateUtil from '@/assets/js/__utils__/date';
+import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
   components: {
@@ -766,7 +767,7 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: $it('modalTitle.tips'), // 提示
+                        title: $it('tip.tips'), // 提示
                         content: $it('tip.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
@@ -798,7 +799,7 @@ export default {
                 if (!this.pickingTableConfig.data.length) return;
                 this.$Modal.info({
                   className: 'ark-dialog',
-                  title: $it('modalTitle.tips'), // 提示
+                  title: $it('tip.tips'), // 提示
                   content: $it('tip.hx'), // 当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？
                   mask: true,
                   showCancel: true,
@@ -976,7 +977,7 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: $it('modalTitle.tips'), // 提示
+                        title: $it('tip.tips'), // 提示
                         content: $it('tip.ht'), // 确定删除？
                         mask: true,
                         showCancel: true,
@@ -1179,6 +1180,16 @@ export default {
     }
   },
   methods: {
+    // 获取按钮权限
+    getBtn() {
+      $omsUtils.getPermissions(this, 'btnConfig', { table: 'ST_C_VIPCOM_PROJECT', type: 'OBJ', serviceId: 'r3-oc-oms' }, true).then(res => {
+        const { ACTIONS, SUB_ACTIONS } = res;
+        console.log('buttons::', this.btnConfig.buttons, 'res::', res);
+        const webArr = $utils.sonList(SUB_ACTIONS, 'webname');
+        this.jordanTableConfig.isShowDeleteDetailBtn = webArr.includes($it('btn.delete')); // 删除
+        this.jordanTableConfig.isShowImportBtn = webArr.includes($it('btn.import')); // 导入
+      });
+    },
     // 时间戳格式化
     formatDate(time, format) {
       const date = new Date(time);
@@ -1188,7 +1199,7 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('tip.tips'), // 提示
           content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
