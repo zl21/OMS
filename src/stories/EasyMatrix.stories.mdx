@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="BASIC/EasyMatrix" />
+
+<style>{`
+	.subheading {
+		font-weight: 900;
+		font-size: 13px;
+		line-height: 24px;
+		margin: 40px 0 12px 0;
+	}
+`}</style>
+
+<!-- # 安装
+
+<div className="subheading">NPM 安装</div> -->
+
+## EasyMatrix
+
+### 一、组件说明
+#### 1. 概述
+ 简单矩阵，其中只是封装了`businessForm`组件。
+
+#### 2. 应用场景
+比如添加赠品弹窗，二维的表单，私仓业务组件库中，需三维，故此组件尚未在业务组件库中使用。
+
+### 二、使用说明
+> 引用
+
+```js
+import easyMatrix from 'professionalComponents/easyMatrix';
+```
+
+> 应用
+
+```js
+<easyMatrix :componentData="componentData" />
+```
+
+```js
+export default {
+  components: {
+    easyMatrix
+  },
+  data() {
+    return {
+      componentData: {
+        fun: obj => {
+          console.log(obj~~~~)
+        }
+      }
+    }
+  }
+}
+```
+![easyMatrix.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9e6c94ce11404b5789283a5f9823dd24~tplv-k3u1fbpfcp-watermark.image?)
+
+### 三、API
+
+#### easyMatrix.componentData Props
+
+属性 | 说明 | 类型 | 默认值
+---|---|---|---
+| fun | 数据渲染的回调 | Function |  - |
