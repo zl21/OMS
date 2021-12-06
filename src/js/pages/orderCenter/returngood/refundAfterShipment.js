@@ -89,7 +89,7 @@ export default {
             {
               style: 'popInput',
               width: '8',
-              colname: 'cp_c_store'
+              colname: 'cp_c_store',
               itemdata: {
                 col: 1,
                 colid: 168210,
