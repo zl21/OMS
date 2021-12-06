@@ -31,19 +31,11 @@ export default {
           typeAll: 'error', // 按钮统一风格样式
           buttons: [
             {
-              text: window.$it('btn.find'), // 查找 按钮文本
+              text: $it('btn.find'), // 查找 按钮文本
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.queryBounced();
-                this.$nextTick(() => {
-                  this.reForm.config.forEach((val, index) => {
-                    if (val.item.label === '单据来源') {
-                      this.reForm.config[index].item.props.value = '手动';
-                    } else if (val.item.label === '单据日期') {
-                      this.reForm.config[index].item.props.value = $utils.dateFormat(new Date(), 'yyyy-MM-dd');
-                    }
-                  });
-                });
+                this.changeForm();
               } // 按钮点击事件
             }
           ]
@@ -60,35 +52,35 @@ export default {
           formData: [
             {
               style: 'input',
-              label: window.$it('tL.orderNo'), // 订单编号
+              label: $it('tL.orderNo'), // 订单编号
               value: 'bill_no',
               width: '8',
               inputenter: () => this.queryBounced()
             },
             {
               style: 'input',
-              label: window.$it('tL.platform_orderNo'), // 平台订单号
+              label: $it('tL.platform_orderNo'), // 平台订单号
               value: 'source_code',
               width: '8',
               inputenter: () => this.queryBounced()
             },
             {
               style: 'input',
-              label: window.$it('tL.buyerNickname'), // 买家昵称
+              label: $it('tL.buyerNickname'), // 买家昵称
               value: 'user_nick',
               width: '8',
               inputenter: () => this.queryBounced()
             },
             {
               style: 'input',
-              label: window.$it('fL.consignee'), // 收货人
+              label: $it('fL.consignee'), // 收货人
               value: 'receiver_name',
               width: '8',
               inputenter: () => this.queryBounced()
             },
             {
               style: 'input',
-              label: window.$it('fL.consignee_phone'), // 收货人手机
+              label: $it('fL.consignee_phone'), // 收货人手机
               value: 'receiver_mobile',
               width: '8',
               regx: /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/,
@@ -97,6 +89,7 @@ export default {
             {
               style: 'popInput',
               width: '8',
+              colname: 'cp_c_store'
               itemdata: {
                 col: 1,
                 colid: 168210,
@@ -111,13 +104,13 @@ export default {
                 ],
                 display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
                 fkdisplay: 'drp', // 外键关联类型
-                fkdesc: window.$it('tL.shopName'), // 店铺名称
+                fkdesc: $it('tL.shopName'), // 店铺名称
                 inputname: 'SELLER_NICK:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
                 isfk: true, // 是否有fk键
                 isnotnull: false, // 是否必填
                 isuppercase: false, // 是否转大写
                 length: 65535, // 最大长度是多少
-                name: window.$it('tL.shopName'), // 店铺名称input前面显示的lable值
+                name: $it('tL.shopName'), // 店铺名称input前面显示的lable值
                 readonly: false, // 是否可编辑，对应input   readonly属性
                 reftable: 'OC_B_RETURN_ORDER', // 对应的表
                 reftableid: 24578, // 对应的表ID
@@ -136,31 +129,31 @@ export default {
           columns: [
             {
               key: 'SOURCE_CODE',
-              title: window.$it('tL.platformInfo') // 平台信息
+              title: $it('tL.platformInfo') // 平台信息
             },
             {
               key: 'ID',
-              title: window.$it('tL.orderNo') // 订单编号
+              title: $it('tL.orderNo') // 订单编号
             },
             {
               key: 'USER_NICK',
-              title: window.$it('tL.buyerNickname') // 买家昵称
+              title: $it('tL.buyerNickname') // 买家昵称
             },
             {
               key: 'ORDER_AMT',
-              title: window.$it('tL.totalOrderAmount') // 订单总额
+              title: $it('tL.totalOrderAmount') // 订单总额
             },
             {
               key: 'RECEIVER_NAME',
-              title: window.$it('fL.consignee') // 收货人
+              title: $it('fL.consignee') // 收货人
             },
             {
               key: 'RECEIVER_MOBILE',
-              title: window.$it('fL.consignee_phone') // 收货人手机号
+              title: $it('fL.consignee_phone') // 收货人手机号
             },
             {
               key: 'CP_C_PHY_WAREHOUSE_ENAME',
-              title: window.$it('fL.delivery_warehouse') // 发货仓库
+              title: $it('fL.delivery_warehouse') // 发货仓库
             },
             // {
             //   key: "PLATFORM",
@@ -168,11 +161,11 @@ export default {
             // },
             {
               key: 'EXPRESSCODE',
-              title: window.$it('fL.logisticsOrder_No') // 物流单号
+              title: $it('fL.logisticsOrder_No') // 物流单号
             },
             {
               key: 'CP_C_SHOP_TITLE',
-              title: window.$it('fL.orderShop') // 下单店铺
+              title: $it('fL.orderShop') // 下单店铺
             }
           ], // 表头
           data: [], // 数据配置
@@ -185,7 +178,7 @@ export default {
         value: ''
       },
       imageUploadConfig: {
-        name: window.$it('other.uploadVoucher'),
+        name: $it('other.uploadVoucher'),
         url: '/p/cs/upload2', // 上传地址
         sendData: {
           path: `${this.$route.params.customizedModuleName}/${this.$route.params.customizedModuleId}/`
@@ -209,7 +202,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.billNo'), // 单据编号
+              label: $it('fL.billNo'), // 单据编号
               props: {
                 value: ''
               }
@@ -218,7 +211,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.sourceDocuments'), // 单据来源
+              colname: 'sourceDocuments',
+              label: $it('fL.sourceDocuments'), // 单据来源
               props: {
                 value: '',
                 disabled: true
@@ -238,7 +232,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.originalOrderNo'), // 原始订单编号
+              colname: 'ID',
+              label: $it('fL.originalOrderNo'), // 原始订单编号
               required: true,
               props: {
                 icon: 'ios-search',
@@ -256,7 +251,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('tL.shopName'), // 店铺名称
+              colname: 'CP_C_SHOP_TITLE',
+              label: $it('tL.shopName'), // 店铺名称
               required: true,
               props: {
                 value: '',
@@ -268,7 +264,8 @@ export default {
           // {
           //   item: {
           //     type: 'Input',
-          //     label: window.$it('fL.originalOrderNo'), // 原始平台单号
+          // colname: 'SOURCE_CODE',
+          //     label: $it('fL.originalOrderNo'), // 原始平台单号
           //     required: true,
           //     props: {
           //       value: '',
@@ -280,7 +277,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.originalPlatformNo'), // 平台退款单号
+              // colname: 'CP_C_SHOP_TITLE',
+              label: $it('fL.originalPlatformNo'), // 平台退款单号
               // required: true,
               props: {
                 value: ''
@@ -291,7 +289,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('tL.buyerNickname'), // 买家昵称
+              colname: 'USER_NICK',
+              label: $it('tL.buyerNickname'), // 买家昵称
               props: {
                 value: '',
                 disabled: true
@@ -302,7 +301,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.BuyerPhoneNumber'), // 买家手机号
+              colname: 'VIP_PHONE',
+              label: $it('fL.BuyerPhoneNumber'), // 买家手机号
               // required: true,
               props: {
                 value: '',
@@ -319,7 +319,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.reasonRefund'), // 退款原因
+              // colname: 'VIP_PHONE',
+              label: $it('fL.reasonRefund'), // 退款原因
               props: {
                 value: ''
               },
@@ -329,7 +330,8 @@ export default {
           {
             item: {
               type: 'Select',
-              label: window.$it('tL.paymentWay'), // 支付方式
+              colname: 'PAY_TYPE',
+              label: $it('tL.paymentWay'), // 支付方式
               props: {
                 value: '1',
                 options: []
@@ -344,7 +346,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: '支付账号',
+              label: $it('fL.payAccount'), // 支付账号
               required: true,
               props: {
                 value: ''
@@ -360,7 +362,8 @@ export default {
           {
             item: {
               type: 'DatePicker',
-              label: window.$it('fL.documentDate'), // 单据日期
+              colname: 'documentDate',
+              label: $it('fL.documentDate'), // 单据日期
               required: true,
               props: {
                 value: ''
@@ -370,7 +373,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.refundAmount'), // 申请退款金额
+              colname: 'RETURNABLE_AMOUNT',
+              label: $it('fL.refundAmount'), // 申请退款金额
               props: {
                 value: '',
                 disabled: true
@@ -381,7 +385,7 @@ export default {
           {
             item: {
               type: 'Select',
-              label: window.$it('fL.responsibleParty'), // 判责方
+              label: $it('fL.responsibleParty'), // 判责方
               props: {
                 value: '',
                 options: []
@@ -392,7 +396,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.remarksResponsibleParty'), // 判责方备注
+              label: $it('fL.remarksResponsibleParty'), // 判责方备注
               props: {
                 value: ''
               },
@@ -402,8 +406,9 @@ export default {
           {
             show: true, // 是否显示隐藏
             col: 1, // 列宽
+            colname: 'refundClass',
             item: {
-              label: window.$it('fL.refundClass'), // 退款分类
+              label: $it('fL.refundClass'), // 退款分类
               soltName: 'returnType', // 组件类型
               props: {},
               event: {}
@@ -412,8 +417,9 @@ export default {
           {
             show: true, // 是否显示隐藏
             col: 1, // 列宽
+            colname: 'refundDescription',
             item: {
-              label: window.$it('fL.refundDescription'), // 退款描述
+              label: $it('fL.refundDescription'), // 退款描述
               soltName: 'returnTypeItem', // 组件类型
               props: {},
               event: {}
@@ -422,7 +428,8 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.namePayee'), // 收款人姓名
+              colname: 'RECEIVER_NAME',
+              label: $it('fL.namePayee'), // 收款人姓名
               required: true,
               props: {
                 value: ''
@@ -432,7 +439,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('tL.remarks'), // 备注
+              label: $it('tL.remarks'), // 备注
               props: {
                 value: ''
               },
@@ -442,7 +449,7 @@ export default {
           {
             item: {
               type: 'Input',
-              label: window.$it('fL.sellerNotes'), // 卖家备注
+              label: $it('fL.sellerNotes'), // 卖家备注
               props: {
                 value: ''
               },
@@ -475,7 +482,7 @@ export default {
               fkdisplay: 'drp',
               isfk: true,
               length: 100,
-              name: window.$it('fL.refundClass'), // 退款分类
+              name: $it('fL.refundClass'), // 退款分类
               isnotnull: true,
               reftable: 'OC_B_RETURN_TYPE', // 对应的表
               reftableid: 249230473, // 对应的表ID
@@ -499,7 +506,7 @@ export default {
         formData: [
           {
             style: 'select', // 下拉框类型
-            label: window.$it('fL.refundDescription'), // 退款描述
+            label: $it('fL.refundDescription'), // 退款描述
             width: '24', // 所占宽度宽度
             value: 'OC_B_RETURN_TYPE_ITEM_ID', // 输入框的值
             // clearable: true, //下拉选中是否显示清空按钮,默认为false
@@ -514,7 +521,7 @@ export default {
         typeAll: 'error',
         buttons: [
           {
-            text: window.$it('btn.save'), // 保存
+            text: $it('btn.save'), // 保存
             // class: 'save',
             // icon: 'md-download',
             btnclick: () => {
@@ -522,7 +529,7 @@ export default {
             }
           },
           {
-            text: window.$it('btn.back'), // 返回
+            text: $it('btn.back'), // 返回
             // class: 'cancel',
             // icon: 'md-arrow-round-back',
             btnclick: () => {
@@ -533,7 +540,7 @@ export default {
                   tableId: 249230545,
                   tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
                   back: true,
-                  label: window.$it('btn.additionalRefund') // 额外退款
+                  label: $it('btn.additionalRefund') // 额外退款
                 });
               } else if (this.$route.query.fromOrder === 'true') {
                 // 返回零售发货单详情
@@ -550,7 +557,7 @@ export default {
                   tableId: 249130393,
                   tableName: 'OC_B_RETURN_AF_SEND',
                   back: true,
-                  label: window.$it('fL.refundNoteDelivered') // 已发货退款单
+                  label: $it('fL.refundNoteDelivered') // 已发货退款单
                 });
               }
               // 销毁当前实例
@@ -560,7 +567,7 @@ export default {
         ]
       },
       auditBtn: {
-        text: window.$it('btn.audit'), // 审核
+        text: $it('btn.audit'), // 审核
         // class: 'save',
         // icon: 'md-download',
         disabled: this.$route.params.customizedModuleId === 'New',
@@ -604,19 +611,19 @@ export default {
           //   key: 'BILL_TYPE'
           // },
           {
-            title: window.$it('fL.billNo'), // 单据编号
+            title: $it('fL.billNo'), // 单据编号
             key: 'BILL_NO'
           },
           {
-            title: window.$it('fL.gift'), // 赠品
+            title: $it('fL.gift'), // 赠品
             key: 'IS_GIFT_NAME'
           },
           {
-            title: window.$it('fL.gift'), // 平台商品编码
+            title: $it('fL.gift'), // 平台商品编码
             key: 'PS_C_SKU_PT_ECODE'
           },
           {
-            title: window.$it('tL.code_SKU'), // SKU编码
+            title: $it('tL.code_SKU'), // SKU编码
             key: 'skuEcode'
           },
           // {
@@ -624,19 +631,19 @@ export default {
           //   key: 'skuEcode'
           // },
           {
-            title: window.$it('fL.platformProductsCode'), // 商品编码
+            title: $it('fL.platformProductsCode'), // 商品编码
             key: 'ecode'
           },
           {
-            title: window.$it('fL.platformProductsName'), // 平台商品名称
+            title: $it('fL.platformProductsName'), // 平台商品名称
             key: 'PT_PRO_NAME'
           },
           {
-            title: window.$it('tL.productName'), // 商品名称
+            title: $it('tL.productName'), // 商品名称
             key: 'proEname'
           },
           {
-            title: window.$it('fL.skuName'), // SKU名称
+            title: $it('fL.skuName'), // SKU名称
             key: 'PS_C_SKU_ENAME'
           },
 
@@ -645,15 +652,15 @@ export default {
           //   key: 'skuSpec'
           // },
           {
-            title: window.$it('fL.purchaseQuantity'), // 购买数量
+            title: $it('fL.purchaseQuantity'), // 购买数量
             key: 'qty'
           },
           {
-            title: window.$it('fL.transactionAmount'), // 成交金额
+            title: $it('fL.transactionAmount'), // 成交金额
             key: 'realAmt'
           },
           {
-            title: window.$it('fL.returnQuantity'), // 退货数量
+            title: $it('fL.returnQuantity'), // 退货数量
             key: 'QTY_IN',
             render: (h, params) => {
               const self = this;
@@ -696,7 +703,7 @@ export default {
             }
           },
           {
-            title: window.$it('fL.refundAmount'), // 退款金额
+            title: $it('fL.refundAmount'), // 退款金额
             key: 'c',
             render: (h, params) => {
               const self = this;
@@ -758,7 +765,7 @@ export default {
           //   key: 'RETURNABLE_AMOUNT'
           // },
           {
-            title: window.$it('fL.freight'), // 运费
+            title: $it('fL.freight'), // 运费
             key: 'FREIGHT',
             width: 60,
             render: (h, params) => {
@@ -853,21 +860,14 @@ export default {
       if (this.$route.query.fromOrder) {
         // 该类型从订单详情跳转过来的查询方式
         this.queryBounced(this.$route.query.oid);
-        this.$nextTick(() => {
-          this.reForm.config.forEach((val, index) => {
-            if (val.item.label === '单据来源') {
-              this.reForm.config[index].item.props.value = '手动';
-            } else if (val.item.label === '单据日期') {
-              this.reForm.config[index].item.props.value = $utils.dateFormat(new Date(), 'yyyy-MM-dd');
-            }
-          });
-        });
+        this.changeForm();
       } else if (this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT' || this.$route.params.customizedModuleName === 'EXTRAREFUND') {
         // 已发货退款单详情跳转
         this.reForm.config.splice(14, 0, {
           item: {
             type: 'Input',
-            label: window.$it('fL.actualRefundAmount'), // 实际退款金额
+            colname: 'AMT_RETURN',
+            label: $it('fL.actualRefundAmount'), // 实际退款金额
             props: {
               value: '',
               disabled: this.$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT'
@@ -878,15 +878,7 @@ export default {
         this.query();
       }
     } else {
-      this.$nextTick(() => {
-        this.reForm.config.forEach((val, index) => {
-          if (val.item.label === '单据来源') {
-            this.reForm.config[index].item.props.value = '手动';
-          } else if (val.item.label === '单据日期') {
-            this.reForm.config[index].item.props.value = $utils.dateFormat(new Date(), 'yyyy-MM-dd');
-          }
-        });
-      });
+      this.changeForm();
     }
     if (this.$route.params.customizedModuleId !== 'New') {
       this.logTableInfo();
@@ -894,6 +886,17 @@ export default {
     this.getDownUp();
   },
   methods: {
+    changeForm() {
+      this.$nextTick(() => {
+        this.reForm.config.forEach((val, index) => {
+          if (val.item.colname === 'sourceDocuments') {
+            this.reForm.config[index].item.props.value = '手动';
+          } else if (val.item.colname === 'documentDate') {
+            this.reForm.config[index].item.props.value = $utils.dateFormat(new Date(), 'yyyy-MM-dd');
+          }
+        });
+      });
+    },
     // 处理审核按钮的展示 已发货退款单-审核按钮隐藏
     handleAuditBtnDisplay() {
       if (this.$store.state.global.activeTab.label.indexOf('已发货退款单') < 0) {
@@ -1000,8 +1003,26 @@ export default {
       _this.addItem.table.data = _this.filter(QUERYORDERITEMRESULTLIST);
 
       const data = _this.onSelectData;
+      const setVal = ['ID', 'CP_C_SHOP_TITLE', 'SOURCE_CODE', 'USER_NICK', 'VIP_PHONE', 'RECEIVER_NAME'];
       _this.reForm.config.forEach(item => {
-        // 原始订单编号
+        if (setVal.includes(item.item.colname)) {
+          item.item.props.value = data[item.item.colname]
+        } else {
+          switch (item.item.colname) {
+            case 'PAY_TYPE':
+              item.item.props.value = String(data.PAY_TYPE) || '1';
+              break;
+            case 'RETURNABLE_AMOUNT':
+              if (initStatus && _this.addItem.addList.length === 0) {
+                item.item.props.value = _this.addItem.table.data.reduce((sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0), 0);
+              } else {
+                item.item.props.value = _this.addItem.addList.reduce((sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0), 0);
+              }
+            default:
+              break;
+          }
+        }
+        /* // 原始订单编号
         if (item.item.label == $it('fL.originalOrderNo')) item.item.props.value = data.ID;
         // 店铺名称
         if (item.item.label == $it('tL.shopName')) item.item.props.value = data.CP_C_SHOP_TITLE;
@@ -1029,7 +1050,7 @@ export default {
           } else {
             item.item.props.value = _this.addItem.addList.reduce((sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0), 0);
           }
-        }
+        } */
       });
       QUERYORDERITEMRESULTLIST.forEach(item => {
         item.returnPrice = item.RETURNABLE_AMOUNT;
@@ -1047,13 +1068,13 @@ export default {
         _this.fromOrder(listData, true);
       } else {
         if (this.order.table.selectArr.length != 1) {
-          _this.$Message.warning(window.$it('tip.i7')); // 请选择一条数据！
+          _this.$Message.warning($it('tip.i7')); // 请选择一条数据！
           return false;
         }
         _this.onSelectData = this.order.table.selectArr[0];
 
         // if (JSON.stringify(_this.onSelectData) == '{}') {
-        //   _this.$Message.warning(window.$it('tip.i7')); // 请选择一条数据！
+        //   _this.$Message.warning($it('tip.i7')); // 请选择一条数据！
         //   return;
         // }
         console.log(_this.onSelectData.QUERYORDERITEMRESULTLIST);
@@ -1071,7 +1092,7 @@ export default {
       const _this = this;
       _this.order.orderform.formData.forEach(item => {
         // 店铺名称
-        if (item && item.itemdata && item.itemdata.name === $it('tL.shopName')) {
+        if (item && item.colname === 'cp_c_store') {
           this.order.orderform.formValue.cp_c_store_id = item.itemdata.pid;
           this.order.orderform.formValue.cp_c_store_ename = item.itemdata.valuedata;
         }
@@ -1230,7 +1251,7 @@ export default {
             //   id: 249230545,
             //   type: 'table',
             //   name: 'OC_B_RETURN_AF_SEND_MANUAL',
-            //   label: window.$it('btn.additionalRefund'), // 额外退款
+            //   label: $it('btn.additionalRefund'), // 额外退款
             //   back: true,
             // });
             R3.store.commit('global/tabOpen', {
@@ -1248,14 +1269,14 @@ export default {
             //   id: 249130393,
             //   type: 'table',
             //   name: 'OC_B_RETURN_AF_SEND',
-            //   label: window.$it('fL.refundNoteDelivered'), // 已发货退款单
+            //   label: $it('fL.refundNoteDelivered'), // 已发货退款单
             //   back: true,
             // });
           }
           // 销毁当前实例
           this.$destroy();
         } else {
-          self.$Message.error(res.data.message || '保存出错');
+          self.$Message.error(res.data.message || 'save error !');
         }
       });
     },
@@ -1276,7 +1297,7 @@ export default {
                     key: 'objid'
                   },
                   {
-                    title: '报错信息',
+                    title: $it('mT.a5'), // 报错信息
                     key: 'message'
                   }
                 ],
@@ -1301,13 +1322,13 @@ export default {
       const dataConfig = self.reFormDataConfig;
       const AfSend = {};
       self.reForm.config.forEach(item => {
-        const itemLabel = item.item.label;
+        const colname = item.item.colname;
         AfSend[dataConfig[itemLabel]] = item.item.props.value;
-        if (itemLabel == '单据来源') {
+        if (colname == 'sourceDocuments') {
           AfSend[dataConfig[itemLabel]] = item.item.props.value == '手动' ? 1 : 2;
         }
         // 实际退款金额如果没值的话,取明细中的退款金额
-        if (itemLabel == '实际退款金额') {
+        if (colname == 'AMT_RETURN') {
           let total = 0;
           self.tableConfig.data.forEach(item => {
             total += item.AMT_RETURN || 0;
@@ -1377,7 +1398,7 @@ export default {
         ]
       };
       for (let i = 0; i < this.reForm.config.length; i++) {
-        if (self.reForm.config[i].item.label == '原始订单编号') {
+        if (self.reForm.config[i].item.colname == 'ID') {
           if (!self.reForm.config[i].item.props.value) {
             self.$Message.warning($it('tip.j1')); // 原始订单编号不能为空!
             return;
@@ -1406,13 +1427,13 @@ export default {
             let tempStr = '';
             switch (item.GIFT_TYPE) {
               case 1:
-                tempStr = '系统赠品';
+                tempStr = $it('fL.eb'); // 系统赠品
                 break;
               case 2:
-                tempStr = '平台赠品';
+                tempStr = $it('fL.ec'); // 平台赠品
                 break;
               default:
-                tempStr = '否';
+                tempStr = $it('com.no'); // 否
             }
             item.IS_GIFT_NAME = tempStr;
             item.IS_GIFT = item.GIFT_TYPE;
@@ -1482,13 +1503,13 @@ export default {
             let tempStr = '';
             switch (item.GIFT_TYPE) {
               case 1:
-                tempStr = '系统赠品';
+                tempStr = $it('fL.eb'); // 系统赠品
                 break;
               case 2:
-                tempStr = '平台赠品';
+                tempStr = $it('fL.ec'); // 平台赠品
                 break;
               default:
-                tempStr = '否';
+                tempStr = $it('com.no'); // 否
             }
             item.IS_GIFT_NAME = tempStr;
             item.IS_GIFT = item.GIFT_TYPE;
@@ -1677,6 +1698,7 @@ export default {
         const itemLabel = item.item.label;
         // 单据日期 退款分类 退款描述 单据来源
         const itemLabelArr = [$it('fL.documentDate'), $it('fL.refundClass'), $it('fL.refundDescription'), $it('fL.sourceDocuments')];
+        // const itemLabelArr = ['documentDate', 'refundClass', 'refundDescription', 'sourceDocuments'];
         if (!itemLabelArr.includes(itemLabel)) {
           item.item.props.value = data[dataConfig[itemLabel]];
           // 退款分类
