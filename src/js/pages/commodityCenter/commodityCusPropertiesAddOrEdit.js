@@ -383,7 +383,7 @@ export default {
         value: 'PROPERTYVALUES',
       },
       {
-        label: $it('panel_label.operationLog'), // 操作日志
+        label: $it('pL.operationLog'), // 操作日志
         value: 'BS_EXTRA_ATTRIBUTE_DEF_LOG',
       },
       ],

@@ -480,7 +480,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $it('panel_label.all'), // 全部
+          label: $it('pL.all'), // 全部
           value: '1',
           isShow: true
         }

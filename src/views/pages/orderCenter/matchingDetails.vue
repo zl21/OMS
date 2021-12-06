@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      tuiDanChaXun: $it('panel_label.a3'),
+      tuiDanChaXun: $it('pL.a3'),
       modal6: false,
       loading: true,
       width: '1000',

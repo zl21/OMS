@@ -251,7 +251,7 @@ export default {
           value: 'generalGroupItem',
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'logTable'
         }
         ],
@@ -260,7 +260,7 @@ export default {
           value: 'luckbagGroupItem',
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'logTable'
         }],
         labelValue: 'generalGroupItem'

@@ -400,11 +400,11 @@ export default {
               id: res.data.data.data.objid, // 单据id
               type: 'action', // 类型action
               name: 'sendSingleRule', // 文件名
-              label: $it('panel_label.edit_order_dispatch_rule'), // '订单派单规则编辑', // tab中文名
+              label: $it('pL.edit_order_dispatch_rule'), // '订单派单规则编辑', // tab中文名
               query: Object.assign({
                 id: res.data.data.data.objid, // 单据id
                 tabTitle: $it(
-                  'panel_label.edit_order_dispatch_rule'
+                  'pL.edit_order_dispatch_rule'
                 ), // '订单派单规则编辑' // tab中文名
               }), // 带的参数
             });

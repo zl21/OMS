@@ -1196,7 +1196,7 @@ export default {
       },
       // tab切换配置
       labelList: [{
-        label: window.$it('panel_label.order_detailed'), // 订单明细
+        label: window.$it('pL.order_detailed'), // 订单明细
         value: '1',
         isShow: true,
       },],
@@ -1371,11 +1371,11 @@ export default {
         id: 2627,
         type: 'action',
         name: 'orderManager',
-        label: window.$it('panel_label.orderManager'), // 订单管理
+        label: window.$it('pL.orderManager'), // 订单管理
         back: true,
         query: Object.assign({
           id: 2627,
-          tabTitle: window.$it('panel_label.orderManager'), // 订单管理
+          tabTitle: window.$it('pL.orderManager'), // 订单管理
         }),
       });
     },
@@ -1559,10 +1559,10 @@ export default {
                     id: res.data.data,
                     type: 'action',
                     name: 'orderManageDetail',
-                    label: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                    label: $it('pL.orderManager_edit'), // 订单管理编辑
                     query: Object.assign({
                       id: res.data.data,
-                      tabTitle: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                      tabTitle: $it('pL.orderManager_edit'), // 订单管理编辑
                     }),
                   });
                   // 销毁当前实例
@@ -1595,10 +1595,10 @@ export default {
                 id: res.data.data,
                 type: 'action',
                 name: 'orderManageDetail',
-                label: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                label: $it('pL.orderManager_edit'), // 订单管理编辑
                 query: Object.assign({
                   id: res.data.data,
-                  tabTitle: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                  tabTitle: $it('pL.orderManager_edit'), // 订单管理编辑
                 }),
               });
               // 销毁当前实例
@@ -1647,10 +1647,10 @@ export default {
                     id: res.data.data,
                     type: 'action',
                     name: 'orderManageDetail',
-                    label: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                    label: $it('pL.orderManager_edit'), // 订单管理编辑
                     query: Object.assign({
                       id: res.data.data,
-                      tabTitle: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                      tabTitle: $it('pL.orderManager_edit'), // 订单管理编辑
                     }),
                   });
                   // 销毁当前实例
@@ -1684,10 +1684,10 @@ export default {
                 id: res.data.data,
                 type: 'action',
                 name: 'orderManageDetail',
-                label: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                label: $it('pL.orderManager_edit'), // 订单管理编辑
                 query: Object.assign({
                   id: res.data.data,
-                  tabTitle: $it('panel_label.orderManager_edit'), // 订单管理编辑
+                  tabTitle: $it('pL.orderManager_edit'), // 订单管理编辑
                 }),
               });
               // 销毁当前实例

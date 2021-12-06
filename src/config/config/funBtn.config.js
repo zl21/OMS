@@ -103,7 +103,7 @@ class BtnConfig {
       {
         webname: 'new_tuihuanhuo', // 退货换单 - 新增
         btnclick: () => {
-          commonUtils.navigateMain('-1', 'TabHref', 'returngood', 'panel_label.addReturnOrder', { statusName: false })
+          commonUtils.navigateMain('-1', 'TabHref', 'returngood', 'pL.addReturnOrder', { statusName: false })
         }, // 按钮点击事件
       },
       {
@@ -182,7 +182,7 @@ class BtnConfig {
             '-1',
             'TabHref',
             'returnTreasuryAdd',
-            'panel_label.returnTreasuryAdd'
+            'pL.returnTreasuryAdd'
           )
         },
       },
@@ -332,7 +332,7 @@ class BtnConfig {
       {
         webname: 'refund_return', // 退单返回
         btnclick: () => {
-          this.back('returngoodList', 2661, 'panel_label.forcedStorage') // 销毁当前实例
+          this.back('returngoodList', 2661, 'pL.forcedStorage') // 销毁当前实例
           BtnConfig.target.$destroy()
         }
       },
@@ -355,7 +355,7 @@ class BtnConfig {
       {
         webname: 'order_fund', // 返回
         btnclick: () => {
-          this.back('orderManager', 2627, 'panel_label.orderManager') // 销毁当前实例
+          this.back('orderManager', 2627, 'pL.orderManager') // 销毁当前实例
           BtnConfig.target.$destroy()
         },
       },
@@ -366,7 +366,7 @@ class BtnConfig {
       {
         webname: 'Mismatchingmandatorymatching_return',
         btnclick: () => {
-          this.back('returnStoreageList', 2809, 'panel_label.returnTreasury') // 销毁当前实例
+          this.back('returnStoreageList', 2809, 'pL.returnTreasury') // 销毁当前实例
           BtnConfig.target.$destroy()
         },
       },
@@ -663,11 +663,11 @@ class BtnConfig {
   }
   // 修改
   returnGoodsModifyHandler(self, id) {
-    commonUtils.navigateMain(id[0], 'TabOpen', 'returngood', 'panel_label.addReturnOrder', { statusName: true })
+    commonUtils.navigateMain(id[0], 'TabOpen', 'returngood', 'pL.addReturnOrder', { statusName: true })
   }
   // 退换货单复制
   returnGoodsCopyHandler() {
-    commonUtils.navigateMain(-1, 'TabOpen', 'returngood', 'panel_label.addReturnOrder', { cloneReturnGoodId: true, statusName: false })
+    commonUtils.navigateMain(-1, 'TabOpen', 'returngood', 'pL.addReturnOrder', { cloneReturnGoodId: true, statusName: false })
   }
   // 错发强制匹配
   forceMatchHandler(self, id) {
@@ -683,7 +683,7 @@ class BtnConfig {
               id,
               'TabOpen',
               'WARNSENDMATCHING',
-              'panel_label.return_warehousing_wrong_delivery_forced_matching',
+              'pL.return_warehousing_wrong_delivery_forced_matching',
               { source: 3, form: 'list' }
             )
           }
@@ -708,7 +708,7 @@ class BtnConfig {
                 id,
                 'TabOpen',
                 'WARNSENDMATCHING',
-                'panel_label.return_warehousing_wrong_delivery_forced_matching',
+                'pL.return_warehousing_wrong_delivery_forced_matching',
                 { source: 3, form: 'list' }
               )
             }
@@ -731,7 +731,7 @@ class BtnConfig {
               id,
               'TabOpen',
               'manualMatching',
-              'panel_label.return_warehousing_manual_matching',
+              'pL.return_warehousing_manual_matching',
               { source: 2, form: 'list' }
             )
           }
@@ -756,7 +756,7 @@ class BtnConfig {
                 id,
                 'TabOpen',
                 'manualMatching',
-                'panel_label.return_warehousing_manual_matching',
+                'pL.return_warehousing_manual_matching',
                 { source: 2, form: 'list' }
               )
             }
@@ -833,7 +833,7 @@ class BtnConfig {
           id,
           'TabOpen',
           'RETURNGOOD',
-          'panel_label.ReturnOrderDetails',
+          'pL.ReturnOrderDetails',
           { statusName: true, flag: 'RefundToExchange' }
         )
       } else {
@@ -868,7 +868,7 @@ class BtnConfig {
           ids[0],
           'TabHref',
           'RETURNGOOD',
-          'panel_label.ReturnOrderDetails',
+          'pL.ReturnOrderDetails',
           { statusName: true, flag: 'RefundToExchange' }
         )
       } else {
@@ -1191,7 +1191,7 @@ class BtnConfig {
           -1,
           'TabOpen',
           'invoiceNoticetAdd',
-          'panel_label.billingNoticeEdit',
+          'pL.billingNoticeEdit',
           extendObj
         )
       } else {
@@ -1287,7 +1287,7 @@ class BtnConfig {
             -1,
             'TabOpen',
             'scanIn',
-            'panel_label.scannAndWarehous',
+            'pL.scannAndWarehous',
             { returnId: recordID, isOrderHrefReturn: 'order' }
           )
         } else {
@@ -1308,7 +1308,7 @@ class BtnConfig {
       .then((res) => {
         console.log(res);
         if(res.data.code == 0){
-          commonUtils.navigateMain(selectItem.ID,'TabOpen','MANUAL_SPLIT','panel_label.orderSplit')
+          commonUtils.navigateMain(selectItem.ID,'TabOpen','MANUAL_SPLIT','pL.orderSplit')
         };
       })
   }
@@ -1443,7 +1443,7 @@ class BtnConfig {
           -1,
           'TabOpen',
           'returngood',
-          'panel_label.addReturnOrder',
+          'pL.addReturnOrder',
           extendObj
         )
       }
@@ -1578,7 +1578,7 @@ class BtnConfig {
         -1,
         'TabOpen',
         'EXTRAREFUND',
-        'panel_label.extraRefundEdit',
+        'pL.extraRefundEdit',
         extendObj
       )
     } else {

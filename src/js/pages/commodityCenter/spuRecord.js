@@ -482,11 +482,11 @@ export default {
       },
       // tab切换配置
       labelList: [{
-        label: $it('panel_label.ay'), // SKU信息
+        label: $it('pL.ay'), // SKU信息
         value: 'skuInfo',
       },
       {
-        label: $it('panel_label.az'), // 供应商
+        label: $it('pL.az'), // 供应商
         value: 'supplier',
       },
       // {
@@ -494,7 +494,7 @@ export default {
       //   value: 'customAttr',
       // },
       {
-        label: $it('panel_label.operationLog'), // 操作日志
+        label: $it('pL.operationLog'), // 操作日志
         value: 'logTable',
       },
       ],

@@ -17,7 +17,7 @@
           </Panel>
           <Panel v-show="showEx" name="2">
             <!-- 换货人信息 -->
-            {{ $it('panel_label.exchangeInfo') }}
+            {{ $it('pL.exchangeInfo') }}
             <p slot="content">
               <OmsForm :form-config="formConfigEx" :key="exFormKey"/>
             </p>
@@ -769,7 +769,7 @@ export default {
       const type = nV;
       const beType = oV;
       if (oV && type != beType) {
-        const panel = beType == '0' ? $it('panel_label.a0') : $it('panel_label.a1');
+        const panel = beType == '0' ? $it('pL.a0') : $it('pL.a1');
         const msg = `${$it('modalTips.ge')}${panel}，${$it('modalTips.gf')}`
         this.$Modal.info({
           title: $it('modalTitle.tips'), // 提示
@@ -1026,7 +1026,7 @@ export default {
         PRO_ACTUAL_AMT: this.PRO_ACTUAL_AMT,
         EX_ACTUAL_AMT: this.EX_ACTUAL_AMT,
         // info: bT == '0' ? '退货金额' : '换货金额',
-        info: bT == '0' ? $it('panel_label.returnAmount') : $it('other.exchangeAmounts'),
+        info: bT == '0' ? $it('pL.returnAmount') : $it('other.exchangeAmounts'),
       }
       if (bT == '0') delete EXCHANGE_PRICE.EX_ACTUAL_AMT;
       mainTable.ID = '-1';
@@ -1052,7 +1052,7 @@ export default {
         self.modify.tui = [];
         self.modify.huan = [];
         // 跳转详情
-        // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
+        // this.$OMS2.omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'pL.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
           $omsUtils.tabCloseAppoint(this);
@@ -1061,7 +1061,7 @@ export default {
             type: 'V',
             tableName: bT == 0 ? 'OC_B_RETURN_ORDER_VIRTUAL_TABLE' : 'OC_B_RETURN_ORDER_ECXCHANGE_TABLE',
             // label: '退换货单详情',
-            label: $it('panel_label.a2'),
+            label: $it('pL.a2'),
             tableId: bT == 0 ? 10728 : 10754,
             id: `${self.ID}?RETURN_SOURCE=手工新增&SOURCE_CODE=${mainTable.SOURCE_CODE}`,
           });
@@ -1227,7 +1227,7 @@ export default {
         url: '/CUSTOMIZED/OC_B_RETURN_ORDER/2624?isBack=true',
         type: "C",
         // label: "退换货单",
-        label: $it('panel_label.a1'),
+        label: $it('pL.a1'),
       });
     },
   },

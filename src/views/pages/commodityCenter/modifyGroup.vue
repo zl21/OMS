@@ -16,7 +16,7 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
-          {{ $it('panel_label.basicData') }}
+          {{ $it('pL.basicData') }}
           <p
             slot="content"
             style="float: left; width: 250px; margin-top: 15px"

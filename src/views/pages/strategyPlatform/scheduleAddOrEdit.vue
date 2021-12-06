@@ -13,13 +13,13 @@
           </p>
         </Panel>
         <Panel v-show="ID != -1 || isMasterRequired" name="panel_pickInfo">
-          {{ $it('panel_label.au') }}
+          {{ $it('pL.au') }}
           <p slot="content">
             <OmsTable :jordan-table-config="pickingTableConfig" />
           </p>
         </Panel>
         <Panel v-show="ID != -1 || isMasterRequired" name="panel_warehouseInfo">
-          {{ $it('panel_label.av') }}
+          {{ $it('pL.av') }}
           <p slot="content">
             <OmsTable :jordan-table-config="warehouseWarrantConfig" />
           </p>

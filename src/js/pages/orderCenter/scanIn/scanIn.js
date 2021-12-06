@@ -542,7 +542,7 @@ export default {
           id: 2776, // 单据id
           type: 'action', // 类型action
           name: 'scanIn', // 文件名
-          label: $it('panel_label.scannAndWarehous'), // tab中文名
+          label: $it('pL.scannAndWarehous'), // tab中文名
           query: Object.assign({
             id: 2776,
           }), // 带的参数
@@ -1465,11 +1465,11 @@ export default {
                           id: 2661,
                           type: 'action',
                           name: 'returngoodList',
-                          label: $it('panel_label.forcedStorage'), // 退换货订单
+                          label: $it('pL.forcedStorage'), // 退换货订单
                           query: Object.assign({
                             id: 2661,
                             tabTitle: $it(
-                              'panel_label.forcedStorage'
+                              'pL.forcedStorage'
                             ), // 退换货订单
                           }),
                           back: true,

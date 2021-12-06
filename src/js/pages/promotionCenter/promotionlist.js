@@ -825,9 +825,9 @@ export default {
           const ACTI_ID = selAr[0].ACTI_ID;
           const IS_BATCH = selAr[0].IS_BATCH;
           if (IS_BATCH) {
-            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'pL.batchAddPromotion' }, { copy: ACTI_ID }, 0)
           } else {
-            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'pL.addPromotion' }, { copy: ACTI_ID }, 0)
           }
         } else {
           this.$Message.warning($it('modalTips.r9')); // 请至少选择一条
@@ -844,9 +844,9 @@ export default {
           const ACTI_ID = selectedData[0].ACTI_ID;
           const IS_BATCH = selectedData[0].IS_BATCH;
           if (IS_BATCH) {
-            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, { copy: ACTI_ID }, 0)
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'pL.batchAddPromotion' }, { copy: ACTI_ID }, 0)
           } else {
-            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, { copy: ACTI_ID }, 0)
+            $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'pL.addPromotion' }, { copy: ACTI_ID }, 0)
           }
         } else {
           this.$Message.warning($it('modalTips.r9')); // 请至少选择一条
@@ -854,11 +854,11 @@ export default {
       }
     },
     promotionClick() {
-      $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.addPromotion' }, {}, 0)
+      $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'pL.addPromotion' }, {}, 0)
     },
     promotionBlukClick() {
       // 【批量新增】
-      $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+      $omsUtils.tabJump(0, -1, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'pL.batchAddPromotion' }, {}, 0)
     },
     async publish() {
       let flag = false;
@@ -990,9 +990,9 @@ export default {
         // let scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
         // 存储种类id保存草稿时需要
         if (IS_BATCH) {
-          $omsUtils.tabJump(0, ACTI_ID, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+          $omsUtils.tabJump(0, ACTI_ID, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'pL.batchAddPromotion' }, {}, 0)
         } else {
-          $omsUtils.tabJump(0, ACTI_ID, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.editPromotion' }, {}, 0)
+          $omsUtils.tabJump(0, ACTI_ID, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'pL.editPromotion' }, {}, 0)
         }
       }
     },

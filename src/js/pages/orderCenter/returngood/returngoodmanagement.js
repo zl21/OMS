@@ -526,7 +526,7 @@ export default {
           },
           {
             style: '',
-            label: $it('panel_label.generate_replacement_order'), // 是否生成换货单
+            label: $it('pL.generate_replacement_order'), // 是否生成换货单
             dataAcessKey: '',
             disabled: false, // 按钮禁用控制
             value: 'IS_RETURN_ORDER_EXCHANGE',
@@ -792,7 +792,7 @@ export default {
             {
               key: 'AMT_REFUND',
               dataAcessKey: 'AMT_REFUND',
-              title: $it('panel_label.returnAmount'), // 退货金额
+              title: $it('pL.returnAmount'), // 退货金额
             },
             {
               key: 'PRICE_SETTLE',
@@ -2401,7 +2401,7 @@ export default {
           {
             key: 'AMT_REFUND',
             dataAcessKey: 'AMT_REFUND',
-            title: $it('panel_label.returnAmount'), // 退货金额
+            title: $it('pL.returnAmount'), // 退货金额
           },
           {
             key: 'PRICE_SETTLE',
@@ -3487,9 +3487,9 @@ export default {
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           $omsUtils.tabCloseAppoint(_this);
-          commonUtils.navigateMain('-1', 'TabHref', 'RETURNGOOD', 'panel_label.ReturnOrderDetails')
+          commonUtils.navigateMain('-1', 'TabHref', 'RETURNGOOD', 'pL.ReturnOrderDetails')
           _this.$nextTick(() => {
-            commonUtils.navigateMain(res.data.objid, 'TabOpen', 'RETURNGOOD', 'panel_label.ReturnOrderDetails', { statusName: res.data.RETURN_STATUS_NAME })
+            commonUtils.navigateMain(res.data.objid, 'TabOpen', 'RETURNGOOD', 'pL.ReturnOrderDetails', { statusName: res.data.RETURN_STATUS_NAME })
           });
         } else {
           const err = res.data.message || $it('modalTips.au'); // 新增退换货订单失败

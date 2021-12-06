@@ -15,14 +15,14 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
-          {{ $it('panel_label.basicData') }}
+          {{ $it('pL.basicData') }}
           <p slot="content">
             <OmsForm :form-config="formConfig" />
           </p>
         </Panel>
         <Panel name="panel_businessInfo">
           <!-- 业务信息 -->
-          {{ $it('panel_label.ax') }}
+          {{ $it('pL.ax') }}
           <p slot="content">
             <OmsForm :form-config="businessFormConfig" />
           </p>

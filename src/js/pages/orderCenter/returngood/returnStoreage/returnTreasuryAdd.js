@@ -774,11 +774,11 @@ export default {
             type: 'action',
             name: 'returnStoreageList',
             // label: "退货入库",
-            label: $it('panel_label.returnTreasury'),
+            label: $it('pL.returnTreasury'),
             query: Object.assign({
               id: 2809,
               // tabTitle: "退货入库",
-              tabTitle: $it('panel_label.returnTreasury'),
+              tabTitle: $it('pL.returnTreasury'),
             }),
             back: true,
           });

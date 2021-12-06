@@ -114,7 +114,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $it('panel_label.all'), // 全部
+          label: $it('pL.all'), // 全部
           value: '',
           isShow: true
         },
@@ -206,7 +206,7 @@ export default {
                                 type: 'C',
                                 customizedModuleName: 'orderManageDetail',
                                 customizedModuleId: res.data.data,
-                                label: window.$it('panel_label.retailInvoice_details')
+                                label: window.$it('pL.retailInvoice_details')
                               });
                             } else {
                               self.$Message.warning(res.data.message);
@@ -755,7 +755,7 @@ export default {
     },
     // 双击时触发
     onRowDblclick(row) {
-      commonUtils.navigateMain(row.ID, 'TabHref', 'returngood', 'panel_label.ReturnOrderDetails', { statusName: row.RETURN_STATUS_NAME, statusNo: row.RETURN_STATUS });
+      commonUtils.navigateMain(row.ID, 'TabHref', 'returngood', 'pL.ReturnOrderDetails', { statusName: row.RETURN_STATUS_NAME, statusNo: row.RETURN_STATUS });
     },
     onSelectionChange(e) {
       this.selection = e;

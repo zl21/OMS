@@ -1244,7 +1244,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it("panel_label.order_detailed"), // 订单明细
+          label: $it("pL.order_detailed"), // 订单明细
           value: "1",
           isShow: true,
         },
@@ -1518,7 +1518,7 @@ export default {
         }
       } else {
         self.$Message.warning(res.data.message);
-        // BtnConfig.back('orderManager', 2627, 'panel_label.orderManager');
+        // BtnConfig.back('orderManager', 2627, 'pL.orderManager');
       }
       // });
     },
@@ -1687,7 +1687,7 @@ export default {
         self.modify.master = {};
         self.jordanTableConfig.data = [];
         // 跳转详情
-        // $omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'panel_label.addReturnOrder')
+        // $omsUtils.navigateMain(data.ID, 'TabOpen', 'ORDERMANAGEDETAILS', 'pL.addReturnOrder')
         if (data) self.ID = data;
         setTimeout(() => {
           $omsUtils.tabCloseAppoint(this);
@@ -2026,13 +2026,13 @@ export default {
         this.$store.commit("global/tabOpen", {
           url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
           type: "C",
-          label: $it('panel_label.retail_shipping_order'),//"零售发货单",
+          label: $it('pL.retail_shipping_order'),//"零售发货单",
         });
       } else {
         this.$store.commit("global/tabOpen", {
           url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
           type: "C",
-          label: $it('panel_label.retail_shipping_order'),// "零售发货单",
+          label: $it('pL.retail_shipping_order'),// "零售发货单",
         });
       }
     },

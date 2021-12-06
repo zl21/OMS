@@ -87,7 +87,7 @@ export default {
                 type: 'S',
                 tableId: 24639,
                 tableName: 'ST_C_EXPRESS_AREA',
-                label: $it('panel_label.logisticsAreaSetting'), // label: '物流区域设置',
+                label: $it('pL.logisticsAreaSetting'), // label: '物流区域设置',
                 back: true
               });
             }
@@ -223,10 +223,10 @@ export default {
           id: data.objid, // 单据id
           type: 'action', // 类型action
           name: 'logisticsArea', // 文件名
-          label: $it('panel_label.logisticsAreaSetting'), // 物流区域设置
+          label: $it('pL.logisticsAreaSetting'), // 物流区域设置
           query: Object.assign({
             id: data.objid, // 单据id
-            tabTitle: $it('panel_label.logisticsAreaSetting') // 物流区域设置
+            tabTitle: $it('pL.logisticsAreaSetting') // 物流区域设置
           }) // 带的参数
         });
         this.synchronous();

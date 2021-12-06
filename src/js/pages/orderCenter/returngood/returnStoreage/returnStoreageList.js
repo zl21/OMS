@@ -98,7 +98,7 @@ export default {
                               type: 'C',
                               customizedModuleName: 'orderManageDetail',
                               customizedModuleId: res.data.data,
-                              label: window.$it('panel_label.retailInvoice_details')
+                              label: window.$it('pL.retailInvoice_details')
                             });
                           } else {
                             this.$Message.warning(res.data.message);
@@ -376,11 +376,11 @@ export default {
         type: 'action',
         name: 'returnTreasuryAdd',
         // label: "退货入库详情",
-        label: $it('panel_label.returnTreasuryDetails'),
+        label: $it('pL.returnTreasuryDetails'),
         query: Object.assign({
           id: row.ID, // 单据id
           // tabTitle: "退货入库详情",
-          tabTitle: $it('panel_label.returnTreasuryDetails'),
+          tabTitle: $it('pL.returnTreasuryDetails'),
           statusName: row.INVALIDSTATE
         })
       });

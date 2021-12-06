@@ -205,7 +205,7 @@ export default {
             },
             // {
             //   style: 'checkbox',
-            //   label: $it('panel_label.ao'), // 自动分配
+            //   label: $it('pL.ao'), // 自动分配
             //   value: 'IS_AUTO_ASSIGN',
             //   disabled: false,
             //   dataAcessKey: 'IS_AUTO_ASSIGN',
@@ -275,7 +275,7 @@ export default {
             )
           },
           {
-            title: $it('panel_label.ao'), // 自动分配
+            title: $it('pL.ao'), // 自动分配
             key: 'IS_AUTO_ASSIGN',
             render: (h, params) => h('Checkbox', {
               props: {
@@ -329,11 +329,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('panel_label.b0'), // 供货逻辑仓
+          label: $it('pL.b0'), // 供货逻辑仓
           value: 'supplyStore'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'CP_ORG_CHANNEL_LOG'
         }
       ],
@@ -374,7 +374,7 @@ export default {
       if (self.id == '-1') {
         self.labelList = [
           {
-            label: $it('panel_label.b0'), // 供货逻辑仓
+            label: $it('pL.b0'), // 供货逻辑仓
             value: 'supplyStore'
           }
         ];

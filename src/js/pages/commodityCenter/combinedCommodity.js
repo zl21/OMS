@@ -214,7 +214,7 @@ export default {
         labelDefaultValue: '1', // 设置tabs默认值
         labelList: [
           {
-            label: $it('panel_label.barCode_details'), // 条码明细
+            label: $it('pL.barCode_details'), // 条码明细
             value: '1',
             isShow: true
           }
@@ -224,7 +224,7 @@ export default {
         labelDefaultValue: '1', // 设置默认选中的
         labelList: [
           {
-            label: $it('panel_label.combinedCommodity_details'), // 组合商品明细
+            label: $it('pL.combinedCommodity_details'), // 组合商品明细
             value: '1',
             isShow: true
           }
@@ -1106,7 +1106,7 @@ export default {
                 tableId: 24525,
                 type: 'S',
                 tableName: 'PS_C_PRO_GROUP',
-                label: $it('panel_label.combinedCommodity'), // 组合商品档案
+                label: $it('pL.combinedCommodity'), // 组合商品档案
                 back: true,
               });
             }
@@ -1127,10 +1127,10 @@ export default {
                 id: -1,
                 type: 'action',
                 name: 'combinedCommodity',
-                label: $it('panel_label.combinedCommodity_edit'), // 组合商品档案编辑
+                label: $it('pL.combinedCommodity_edit'), // 组合商品档案编辑
                 query: Object.assign({
                   id: -1,
-                  tabTitle: $it('panel_label.combinedCommodity_edit') // 组合商品档案编辑
+                  tabTitle: $it('pL.combinedCommodity_edit') // 组合商品档案编辑
                 })
               });
             }
@@ -1184,7 +1184,7 @@ export default {
                 tableId: 24525,
                 type: 'S',
                 tableName: 'PS_C_PRO_GROUP',
-                label: $it('panel_label.combinedCommodity') // 组合商品档案
+                label: $it('pL.combinedCommodity') // 组合商品档案
               });
             }
           }

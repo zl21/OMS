@@ -9,7 +9,7 @@
         <Collapse v-model="value">
           <Panel name="1">
             <!-- 基础资料 -->
-            {{ $it("panel_label.basicData") }}
+            {{ $it("pL.basicData") }}
             <p slot="content" class="basic-message">
               <ImageUpload
                 :dataitem="imageUploadConfig"
@@ -55,7 +55,7 @@
           </Panel>
           <Panel v-if="!$route.query.new" name="2">
             <!-- 日志 -->
-            {{ $it("panel_label.log") }}
+            {{ $it("pL.log") }}
             <div slot="content">
               <OmsForm :form-config="logFormConfig" />
             </div>
@@ -66,7 +66,7 @@
         <div class="tab-content-navTab">
           <p :class="navStatus === 0 ? 'action' : ''" @click="navStatus = 0">
             <!-- 退款单详情 -->
-            {{ $it("panel_label.refundSlipDetails") }}
+            {{ $it("pL.refundSlipDetails") }}
           </p>
           <p
             v-if="$route.query.customizedModuleId !== 'New'"
@@ -102,7 +102,7 @@
         <Modal
           v-model="order.modal"
           :mask="true"
-          :title="$it('panel_label.refundSlipDetails')"
+          :title="$it('pL.refundSlipDetails')"
           :width="800"
           class="queryorder"
           @on-cancel="querycancel"

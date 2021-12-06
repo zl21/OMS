@@ -8,7 +8,7 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
-          {{ $it('panel_label.basicData') }}
+          {{ $it('pL.basicData') }}
           <div slot="content" class="customized_Info_form">
             <OmsForm :form-config="formConfig1" />
           </div>

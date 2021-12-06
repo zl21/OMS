@@ -243,7 +243,7 @@ export default {
         id: 2307,
         type: 'action',
         name: 'orderManager',
-        label: $it('panel_label.retail_shipping_order'), // label: '零售发货单',
+        label: $it('pL.retail_shipping_order'), // label: '零售发货单',
         back: true,
         query: {} // row.id
       });

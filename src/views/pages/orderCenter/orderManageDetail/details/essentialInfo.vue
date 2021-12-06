@@ -61,7 +61,7 @@
       <div class="order-tab-right order-tab-content">
         <div class="order-tab-title">
           <!-- 基础资料 -->
-          <span class="order-tab-title-span"> {{ $it('panel_label.basicData')}} </span>
+          <span class="order-tab-title-span"> {{ $it('pL.basicData')}} </span>
           <div class="title-sign">
             <span :title="item.text" v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
               {{item.text}}
@@ -176,7 +176,7 @@
         <div class="order-tab-content">
           <div class="order-tab-title border">
             <!-- 订单明细 -->
-            <span> {{$it('panel_label.order_detailed')}}</span>
+            <span> {{$it('pL.order_detailed')}}</span>
             <!-- 如果是组合商品不显示 -->
             <div v-if="is_combination" class="checkCombination">
               <span

@@ -64,11 +64,11 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it("panel_label.ae"), // 执行动作
+          label: $it("pL.ae"), // 执行动作
           value: 'PROPERTY'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_SPECIAL_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -1374,7 +1374,7 @@ export default {
               this.$store.commit('global/tabOpen', {
                 type: 'C',
                 url: `/CUSTOMIZED/${this.customizedModuleName}/${res.data.data.objId}`,
-                label: $it('panel_label.an'), //"特殊物流方案新增",
+                label: $it('pL.an'), //"特殊物流方案新增",
                 customizedModuleName: this.customizedModuleName,
                 customizedModuleId: res.data.data.objId
               })

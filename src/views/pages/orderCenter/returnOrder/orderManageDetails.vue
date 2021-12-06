@@ -99,7 +99,7 @@ export default {
           value: 'OC_B_ORDER_DELIVERY'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'OC_B_ORDER_LOG'
         }
       ],
@@ -131,14 +131,14 @@ export default {
                 url: '/CUSTOMIZED/ORDERMANAGER/2307?isBack=true',
                 type: 'C',
                 dynamicRoutingForCustomizePage: true,
-                label: $it('panel_label.retail_shipping_order'),//'零售发货单',
+                label: $it('pL.retail_shipping_order'),//'零售发货单',
               });
-              // $omsUtils.tabJump(0, '2307', 1, 'ORDERMANAGER', { i8n: 0, tip: `${$it('panel_label.retail_shipping_order')}` }, {}, 1, 1)
+              // $omsUtils.tabJump(0, '2307', 1, 'ORDERMANAGER', { i8n: 0, tip: `${$it('pL.retail_shipping_order')}` }, {}, 1, 1)
               /* this.$store.commit('customize/TabOpen', {
                 id: '2307',
                 type: 'action',
                 name: 'ORDERMANAGER',
-                label: $it('panel_label.retail_shipping_order'),//'零售发货单',
+                label: $it('pL.retail_shipping_order'),//'零售发货单',
                 back: true,
               }); */
             }

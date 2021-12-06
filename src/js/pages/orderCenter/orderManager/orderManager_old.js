@@ -986,7 +986,7 @@ export default {
           this.$store.commit('global/tabOpen', {
             type: 'C',
             customizedModuleName: this.tablename,
-            label: $it('panel_label.retailInvoice_details'), //零售发货单详情
+            label: $it('pL.retailInvoice_details'), //零售发货单详情
             customizedModuleId: val.ID,
           });
           break;

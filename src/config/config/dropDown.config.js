@@ -18,7 +18,7 @@ class DropDownConfig {
         break
       }
       case 'manualReturnCreation': {
-        // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'panel_label.addReturnOrder')
+        // commonUtils.navigateMain(-1, 'TabOpen', 'OC_B_RETURN_ORDER_VIRTUAL_TABLE', 'pL.addReturnOrder')
         R3.store.commit('global/tabOpen', {
           type: 'C',
           label: $it('menu.b0'), // 退货单新增
@@ -171,7 +171,7 @@ class DropDownConfig {
       self.$store.commit('global/tabOpen', {
         url: `/CUSTOMIZED/OC_B_ORDER_VIRTUAL_TABLE/2307?copyType=1&sourceId=${self.selection[0].ID}`,
         type: 'C',
-        label: $it('panel_label.add_retail_shipping_order'), // 零售发货单新增
+        label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
       })
     } else {
       console.log(message)
@@ -320,7 +320,7 @@ class DropDownConfig {
     self.$store.commit('global/tabOpen', {
       type: 'C',
       customizedModuleName: 'OC_B_ORDER_VIRTUAL_TABLE',
-      label: $it('panel_label.add_retail_shipping_order'), // 零售发货单新增
+      label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
       customizedModuleId: 'New',
     })
   }
@@ -328,7 +328,7 @@ class DropDownConfig {
   static newOrderHander() {
     R3.store.commit('global/tabOpen', {
       type: 'C',
-      label: $it('panel_label.add_retail_shipping_order'), // 零售发货单新增
+      label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
       customizedModuleName: 'orderManageAdd',
       customizedModuleId: '-1',
     })
@@ -752,7 +752,7 @@ class DropDownConfig {
           selectItem.ID,
           'TabOpen',
           type,
-          'panel_label.add_retail_shipping_order',
+          'pL.add_retail_shipping_order',
           extendObj
         )
       }

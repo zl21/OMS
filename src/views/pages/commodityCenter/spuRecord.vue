@@ -32,14 +32,14 @@
         </Panel>
         <Panel name="panel_fixAttr">
           <!-- 固定属性 -->
-          {{ $it("panel_label.b4") }}
+          {{ $it("pL.b4") }}
           <div slot="content">
             <OmsForm :form-config="customAttr.fixFormConfig" />
           </div>
         </Panel>
         <Panel name="panel_cusAttr">
           <!-- 自定义属性 -->
-          {{ $it("panel_label.b5") }}
+          {{ $it("pL.b5") }}
           <div slot="content">
             <OmsForm :form-config="customAttr.customFormConfig" />
           </div>

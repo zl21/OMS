@@ -402,11 +402,11 @@ export default {
               value: 'PROPERTY',
             }, */
         {
-          label: $it('panel_label.as'), // 备用条码
+          label: $it('pL.as'), // 备用条码
           value: 'PS_C_ALTERNATE_SKU',
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'PS_C_SKU_LOG',
         },
       ],

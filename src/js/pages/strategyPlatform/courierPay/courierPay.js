@@ -113,7 +113,7 @@ export default {
       labelList: [
         {
           // label: "订单明细",
-          label: $it('panel_label.order_detailed'),
+          label: $it('pL.order_detailed'),
           value: '1',
           isShow: true
         }
@@ -525,7 +525,7 @@ export default {
             type: 'S',
             tableId: 24613,
             tableName: 'ST_C_COMPENSATE',
-            label: $it('panel_label.express_compensation_scheme'),
+            label: $it('pL.express_compensation_scheme'),
             back: true
           });
         }
@@ -771,11 +771,11 @@ export default {
               type: 'action',
               name: 'courierPay',
               // label: "快递赔付方案",
-              label: $it('panel_label.express_compensation_scheme'),
+              label: $it('pL.express_compensation_scheme'),
               query: Object.assign({
                 id: res.data.data.data.objid,
                 // tabTitle: "快递赔付方案",
-                tabTitle: $it('panel_label.express_compensation_scheme')
+                tabTitle: $it('pL.express_compensation_scheme')
               })
             });
           }

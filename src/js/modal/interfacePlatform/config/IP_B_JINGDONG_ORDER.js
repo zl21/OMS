@@ -47,11 +47,11 @@ export default {
         // setRequired: "required", //必选标识,值不为required时无标识
         options: [
           {
-            label: $it('panel_label.all'), // 全部
+            label: $it('pL.all'), // 全部
             value: ''
           },
           {
-            label: $it('panel_label.a4'), // 等待出库
+            label: $it('pL.a4'), // 等待出库
             value: 'WAIT_SELLER_STOCK_OUT'
           }
         ]

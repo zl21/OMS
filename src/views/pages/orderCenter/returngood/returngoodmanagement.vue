@@ -17,14 +17,14 @@
           </Panel>
           <Panel name="2">
             <!-- 换货人信息 -->
-            {{ $it('panel_label.exchangeInfo') }}
+            {{ $it('pL.exchangeInfo') }}
             <p slot="content">
               <OmsForm :form-config="replacement" />
             </p>
           </Panel>
           <Panel name="3">
             <!-- 退货金额 -->
-            {{ $it('panel_label.returnAmount') }}
+            {{ $it('pL.returnAmount') }}
             <div slot="content">
               <div class="sales">
                 <ul>

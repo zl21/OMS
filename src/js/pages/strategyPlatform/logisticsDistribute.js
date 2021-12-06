@@ -509,7 +509,7 @@ export default {
           value: 'jiben'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_DELIVERY_AREA_LOG'
         }
       ],

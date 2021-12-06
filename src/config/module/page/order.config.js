@@ -45,14 +45,14 @@ export default {
       // 'allpages/inventoryCenter/sourcstrategy/sourcstrategy.vue'
     ),
     // component: orderManager,
-    labelName: $it('panel_label.retail_shipping_order')
+    labelName: $it('pL.retail_shipping_order')
   },
   OC_B_RETURN_ORDER: {
     component: () => import(
       /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManager/orderManager.vue'
     ),
-    labelName: $it('panel_label.a1')
+    labelName: $it('pL.a1')
   },
   // 订单中心-列表-拆分订单
   MANUAL_SPLIT: {

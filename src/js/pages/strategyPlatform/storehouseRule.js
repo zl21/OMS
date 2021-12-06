@@ -24,7 +24,7 @@ export default {
           value: 'PROPERTY'
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_ASSIGN_LOGISTICS_LOG'
         }
       ],
@@ -454,7 +454,7 @@ export default {
           }
         } else if (query.saveType && query.saveType == 2) {
           const keepAliveModuleName = `C.${customizedModuleName}.${customizedModuleId}`;//拼接当前定制界面模块名称 
-          const data = { label: $it('panel_label.a6'), name: keepAliveModuleName }; //当前界面模块名称 
+          const data = { label: $it('pL.a6'), name: keepAliveModuleName }; //当前界面模块名称 
 
           this.fninit(this.id);
 

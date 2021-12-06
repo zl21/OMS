@@ -1872,7 +1872,7 @@ export default {
         type: 'C',
         customizedModuleName: 'orderManageDetail',
         customizedModuleId: row.ID,
-        label: $it('panel_label.retailInvoice_details')
+        label: $it('pL.retailInvoice_details')
       });
     },
     // 返回置换两行索引

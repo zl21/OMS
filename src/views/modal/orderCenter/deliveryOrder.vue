@@ -7,7 +7,7 @@
     <div class="Modal-Form">
       <div class="Modal-Form-Item">
         <!-- 唯品会入库单 -->
-        <label>{{ $it("panel_label.vipshopWarehouseEntry") }}:</label>
+        <label>{{ $it("pL.vipshopWarehouseEntry") }}:</label>
         <DropDownSelectFilter
           :single="true"
           :data="datas"

@@ -17,7 +17,7 @@
     <div class="scan_info">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.scanInfo") }}
+        {{ $it("pL.scanInfo") }}
       </div>
       <OmsForm :form-config="formConfig1" />
     </div>
@@ -25,7 +25,7 @@
     <div class="scan_logg">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.enterInfo") }}
+        {{ $it("pL.enterInfo") }}
       </div>
       <OmsForm :form-config="formConfig2" />
     </div>
@@ -37,7 +37,7 @@
     <div class="scan_details">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.scanDetails") }}
+        {{ $it("pL.scanDetails") }}
       </div>
       <OmsTable
         :jordan-table-config="jordanTableConfig"
@@ -48,7 +48,7 @@
     <div class="scan_returngood">
       <div class="titles">
         <Icon size="18" style="margin-right: 5px" type="md-paper" />
-        {{ $it("panel_label.returnAndExchange_info") }}
+        {{ $it("pL.returnAndExchange_info") }}
       </div>
       <OmsForm :form-config="formConfig4" />
     </div>

@@ -88,7 +88,7 @@ export default {
           },
           {
             style: 'radio',
-            label: $it('panel_label.ar'), // 物流分配
+            label: $it('pL.ar'), // 物流分配
             value: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             colname: 'IS_AUTO_LOGISTICS_DISTRIBUTION',
             width: '6',
@@ -100,11 +100,11 @@ export default {
             options: [ // radio选项
               {
                 value: 1,
-                label: $it('panel_label.ao'), // 自动分配
+                label: $it('pL.ao'), // 自动分配
               },
               {
                 value: 2,
-                label: $it('panel_label.aj'), // 默认物流
+                label: $it('pL.aj'), // 默认物流
               }
             ]
           },
@@ -312,17 +312,17 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('panel_label.aq'), // 启用物流
+          label: $it('pL.aq'), // 启用物流
           value: 'logistics',
           isShow: true
         },
         {
-          label: $it('panel_label.al'), // 物流信息
+          label: $it('pL.al'), // 物流信息
           value: 'logistics',
           isShow: false
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_WAREHOUSE_LOGISTICS_LOG',
           isShow: false
         }

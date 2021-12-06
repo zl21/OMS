@@ -97,7 +97,7 @@ export default {
                 id: 2986,
                 type: 'CUSTOMIZED',
                 name: 'payableAdjustmentList',
-                label: $it('panel_label.payableAdjustmentList'), // 赔付单
+                label: $it('pL.payableAdjustmentList'), // 赔付单
                 back: true,
               });
             }
@@ -958,7 +958,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('panel_label.payableAdjust_details'), // 赔付单明细
+          label: $it('pL.payableAdjust_details'), // 赔付单明细
           value: '1',
           isShow: true
         }
@@ -1033,12 +1033,12 @@ export default {
       if (code === 0) {
         self.labelList = [
           {
-            label: $it('panel_label.payableAdjust_details'), // 赔付单明细
+            label: $it('pL.payableAdjust_details'), // 赔付单明细
             value: '1',
             isShow: true
           },
           {
-            label: $it('panel_label.operationLog'), // 操作日志
+            label: $it('pL.operationLog'), // 操作日志
             value: '2'
           }
         ];

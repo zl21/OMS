@@ -81,7 +81,7 @@
         </Panel>
         <Panel name="panel_action">
           <!-- 执行动作 -->
-          {{ $it("panel_label.ae") }}
+          {{ $it("pL.ae") }}
           <p slot="content">
             <OmsForm :form-config="formConfig3" />
           </p>

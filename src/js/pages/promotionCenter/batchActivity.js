@@ -223,7 +223,7 @@ export default {
           // let action = this.objid == -1 ? 0 : 1;
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
-            $omsUtils.tabJump(3, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'panel_label.batchAddPromotion' }, {}, 0)
+            $omsUtils.tabJump(3, this.objid, 1, 'PM_C_PROM_ACTI_BATCH_ADD', { i8n: 1, tip: 'pL.batchAddPromotion' }, {}, 0)
           });
         }
         this.loading = false;

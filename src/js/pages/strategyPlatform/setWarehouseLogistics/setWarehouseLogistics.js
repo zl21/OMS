@@ -94,11 +94,11 @@ export default {
       //       type: 'action', // 类型action
       //       name: 'setWarehouseLogistics', // 文件名
       //       // label: "仓库物流优先级设置", // tab中文名
-      //       label: $it('panel_label.setWarehouseLogistics'),
+      //       label: $it('pL.setWarehouseLogistics'),
       //       query: Object.assign({
       //         id: -1, // 单据id
       //         // tabTitle: "仓库物流优先级设置", // tab中文名
-      //         tabTitle: $it('panel_label.setWarehouseLogistics')
+      //         tabTitle: $it('pL.setWarehouseLogistics')
       //       }) // 带的参数
       //     });
       //   }
@@ -307,10 +307,10 @@ export default {
                 id: res.data.data.data.objid, // 单据id
                 type: 'action', // 类型action
                 name: 'setWarehouseLogistics', // 文件名
-                label: $it('panel_label.setWarehouseLogistics'), // 仓库物流优先级设置
+                label: $it('pL.setWarehouseLogistics'), // 仓库物流优先级设置
                 query: Object.assign({
                   id: res.data.data.data.objid, // 单据id
-                  tabTitle: $it('panel_label.setWarehouseLogistics') // 仓库物流优先级设置
+                  tabTitle: $it('pL.setWarehouseLogistics') // 仓库物流优先级设置
                 }) // 带的参数
               });
             }

@@ -307,7 +307,7 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'ST_C_LIVE_CAST_STRATEGY_LOG'
         }
       ],

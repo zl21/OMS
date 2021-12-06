@@ -90,7 +90,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 65535, // 最大长度是多少
-              name: $it('panel_label.warehouse_receipt'), // 出仓单
+              name: $it('pL.warehouse_receipt'), // 出仓单
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'OC_B_VIPCOM_DELIVERY', // 对应的表
               reftableid: 24652, // 对应的表ID

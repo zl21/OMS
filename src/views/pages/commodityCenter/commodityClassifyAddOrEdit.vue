@@ -27,7 +27,7 @@
         </Panel>
         <Panel name="panel_commodityDimension">
           <!-- 商品维度 -->
-        {{$it('panel_label.b6')}}
+        {{$it('pL.b6')}}
           <p slot="content">
             <OmsForm :form-config="formConfig2" @keyDown="keyDown" :key="fresh2"/>
           </p>

@@ -541,7 +541,7 @@ export default {
                   type: 'C',
                   customizedModuleName: 'ORDERMANAGEDETAIL',
                   customizedModuleId: this.$route.query.oid,
-                  label: $it('panel_label.retailInvoice_details'),
+                  label: $it('pL.retailInvoice_details'),
                   dynamicRoutingForCustomizePage: true
                 });
               } else {

@@ -30,7 +30,7 @@ export default {
         id: this.idArray[0],
         type: 'CUSTOMIZED',
         name: 'splitDistributionOrder',
-        label: $it('panel_label.JITchangeBrand'), // 'JIT配货单换吊牌',
+        label: $it('pL.JITchangeBrand'), // 'JIT配货单换吊牌',
       });
     }
   },

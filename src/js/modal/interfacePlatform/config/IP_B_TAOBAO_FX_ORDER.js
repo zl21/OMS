@@ -45,7 +45,7 @@ export default {
         // setRequired: "required", //必选标识,值不为required时无标识
         options: [
           {
-            label: $it('panel_label.all'), // 全部
+            label: $it('pL.all'), // 全部
             value: ''
           },
           {

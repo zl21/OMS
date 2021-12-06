@@ -272,7 +272,7 @@ export default {
           this.objid = String(data.objid) || -1;
           this.$nextTick(() => {
             // this.getData(data.objid);
-            $omsUtils.tabJump(0, data.objid, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'panel_label.editPromotion' }, {}, 0)
+            $omsUtils.tabJump(0, data.objid, 1, 'PM_C_PROM_ACTI', { i8n: 1, tip: 'pL.editPromotion' }, {}, 0)
             // $store.commit(action, {
             //   type: 'C', // 类型action
             //   customizedModuleId: this.objid, // id
@@ -280,10 +280,10 @@ export default {
             //   // id: this.objid, // id
             //   // type: 'action', // 类型action
             //   // name: 'addOrEditActi', // 文件名
-            //   label: $it('panel_label.editPromotion'), // 编辑促销活动
+            //   label: $it('pL.editPromotion'), // 编辑促销活动
             //   query: Object.assign({
             //     id: this.objid, // id
-            //     // tabTitle: $it('panel_label.editPromotion') // 编辑促销活动
+            //     // tabTitle: $it('pL.editPromotion') // 编辑促销活动
             //   }) // 带的参数
             // });
           });

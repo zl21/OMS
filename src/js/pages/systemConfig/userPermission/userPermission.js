@@ -49,31 +49,31 @@ export default {
   mounted() {
     this.tabsList = [
       {
-        label: $it('panel_label.warehouse_authority'),
+        label: $it('pL.warehouse_authority'),
         url: '/p/cs/chrstoregroupquery'
       },
       {
-        label: $it('panel_label.supplier_authority'),
+        label: $it('pL.supplier_authority'),
         url: '/p/cs/chrsuppgroupquery'
       },
       {
-        label: $it('panel_label.distributionCenter_authority'),
+        label: $it('pL.distributionCenter_authority'),
         url: '/p/cs/chrgroupsdistrib/query'
       },
       {
-        label: $it('panel_label.brand_authority'),
+        label: $it('pL.brand_authority'),
         url: '/p/cs/cgroupsbrand/query'
       },
       {
-        label: $it('panel_label.commodity_authority'),
+        label: $it('pL.commodity_authority'),
         url: '/p/cs/cgrouppro/query'
       },
       {
-        label: $it('panel_label.company_authority'),
+        label: $it('pL.company_authority'),
         url: '/p/cs/chrgroupscompany/query'
       },
       {
-        label: $it('panel_label.role_authority'),
+        label: $it('pL.role_authority'),
         url: '/p/cs/cusergroupquery'
       }
     ];

@@ -248,15 +248,15 @@ export default {
       // tab切换配置
       labelList: [
         {
-          label: $it('panel_label.b1'), // 平台物流对应
+          label: $it('pL.b1'), // 平台物流对应
           value: 'PROPERTYVALUES',
         },
         {
-          label: $it('panel_label.b2'), // 物流单号解析配置
+          label: $it('pL.b2'), // 物流单号解析配置
           value: 'CP_C_LOGISTICS_FIX',
         },
         {
-          label: $it('panel_label.operationLog'), // 操作日志
+          label: $it('pL.operationLog'), // 操作日志
           value: 'CP_LOGISTICS_LOG',
         },
       ],

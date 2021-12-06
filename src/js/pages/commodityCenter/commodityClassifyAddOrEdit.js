@@ -363,7 +363,7 @@ export default {
         value: 'PROPERTY',
       },
       {
-        label: $it('panel_label.operationLog'), // 操作日志
+        label: $it('pL.operationLog'), // 操作日志
         value: 'PS_C_CLASSIFY_LOG',
       },
       ],

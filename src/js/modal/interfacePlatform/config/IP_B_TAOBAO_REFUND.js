@@ -49,7 +49,7 @@ export default {
         options: [
           // radio选项
           {
-            label: $it('panel_label.all'), // 全部
+            label: $it('pL.all'), // 全部
             value: ''
           },
           {
