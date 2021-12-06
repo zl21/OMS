@@ -134,19 +134,19 @@ export default {
             multiple: true,
             options: [
               {
-                label: $it('common.unAudit'), // '未审核',
+                label: $it('com.unAudit'), // '未审核',
                 value: '1'
               },
               {
-                label: $it('common.custAudited'), // '已客审',
+                label: $it('com.custAudited'), // '已客审',
                 value: '2'
               },
               {
-                label: $it('common.financeAudited'), // '已财审',
+                label: $it('com.financeAudited'), // '已财审',
                 value: '3'
               },
               {
-                label: $it('common.voided'), // '已作废',
+                label: $it('com.voided'), // '已作废',
                 value: '4'
               }
             ]
@@ -159,19 +159,19 @@ export default {
             multiple: true,
             options: [
               {
-                label: $it('common.unAudit'), // '未审核',
+                label: $it('com.unAudit'), // '未审核',
                 value: '1'
               },
               {
-                label: $it('common.custAudited'), // '已客审',
+                label: $it('com.custAudited'), // '已客审',
                 value: '2'
               },
               {
-                label: $it('common.financeAudited'), // '已财审',
+                label: $it('com.financeAudited'), // '已财审',
                 value: '3'
               },
               {
-                label: $it('common.voided'), // '已作废',
+                label: $it('com.voided'), // '已作废',
                 value: '4'
               }
             ]
@@ -190,19 +190,19 @@ export default {
           //   multiple: true,
           //   options: [
           //     {
-          //       label: $it('common.unAudit'), // '未审核',
+          //       label: $it('com.unAudit'), // '未审核',
           //       value: '1'
           //     },
           //     {
-          //       label: $it('common.custAudited'), // '已客审',
+          //       label: $it('com.custAudited'), // '已客审',
           //       value: '2'
           //     },
           //     {
-          //       label: $it('common.financeAudited'), // '已财审',
+          //       label: $it('com.financeAudited'), // '已财审',
           //       value: '3'
           //     },
           //     {
-          //       label: $it('common.voided'), // '已作废',
+          //       label: $it('com.voided'), // '已作废',
           //       value: '4'
           //     }
           //   ]
@@ -257,7 +257,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $it('common.all'), // '全部',
+          label: $it('com.all'), // '全部',
           value: '1',
           isShow: true
         }

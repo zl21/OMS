@@ -489,7 +489,7 @@ export default {
             _this.information.formValue.ETYPE = res.data.data.ETYPE;
             _this.information.formValue.REMARK = res.data.data.REMARK;
             if (res.data.data.ISACTIVE === 'N') {
-              _this.statusName = $it('common.voided'); // '已作废';
+              _this.statusName = $it('com.voided'); // '已作废';
               _this.jordanTableConfig.isShowImportBtn = false;
               _this.jordanTableConfig.isShowExportBtn = false;
               _this.jordanTableConfig.isShowDeleteDetailBtn = false;

@@ -27,7 +27,7 @@ export default {
         20: $it('form_label.waitFor_return_warehous'), // '等待退货入库',
         30: $it('form_label.waitFor_afterSale_review'), // '等待售后审核',
         50: $it('form_label.complete'), // '完成',
-        60: $it('common.cancelled'), // '已取消',
+        60: $it('com.cancelled'), // '已取消',
       },
       // 可用库存不足弹窗提示
       availableStock: false,
@@ -836,7 +836,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: $it('common.consigneeInformation'), // 收货人信息
+            label: $it('com.consigneeInformation'), // 收货人信息
             dataAcessKey: '',
             value: 'message',
             disabled: false, // 按钮禁用控制
@@ -3522,7 +3522,7 @@ export default {
             // 退款原因
             if (value.label === $it('form_label.reasonRefund')) {
               let arr = [];
-              res.data.data.addcolums.find((item) => item.parentdesc && item.parentdesc == $it('common.baseInformation'))
+              res.data.data.addcolums.find((item) => item.parentdesc && item.parentdesc == $it('com.baseInformation'))
                 .childs.forEach((item) => {
                   if (item.name == $it('form_label.reasonRefund')) {
                     arr = item.combobox;

@@ -19,7 +19,7 @@ export default {
                 // 判断条件是否符合
                 const self = this;
                 // '缺货','待审核'
-                if(![$it('common.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
+                if(![$it('com.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
                   self.$Message.error($it('modalTips.gd')); //只有状态为待审核和缺货才能添加赠品！
                   return;
                 };
@@ -93,11 +93,11 @@ export default {
       options: {}, // 自定义属性（选填）
       islackstock: [
         {
-          label: $it('common.yes'), //是
+          label: $it('com.yes'), //是
           value: '1'
         },
         {
-          label: $it('common.no'), //否
+          label: $it('com.no'), //否
           value: '0'
         }
       ],
@@ -154,7 +154,7 @@ export default {
       const self = this;
       const GIFT_TYPES = this.checkSelection.map(row => row.GIFT_TYPE);
       // 非赠品 缺货 待审核
-      if(GIFT_TYPES.includes($it('form_label.ac')) && ![$it('common.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
+      if(GIFT_TYPES.includes($it('form_label.ac')) && ![$it('com.toBeReviewed'),$it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)){
         self.$Message.error($it('modalTips.fr')); //勾选明细含有非赠品禁止删除！
         return;
       }
@@ -243,7 +243,7 @@ export default {
         return;
       }
       // 缺货 待审核
-      if(![$it('other.outOfStock'),$it('common.toBeReviewed')].includes(this.componentData.order.ORDER_STATUS)){
+      if(![$it('other.outOfStock'),$it('com.toBeReviewed')].includes(this.componentData.order.ORDER_STATUS)){
         this.$Message.error($it('modalTips.gc')); //只允许缺货或待审核状态的订单进行替换！
         return;
       }

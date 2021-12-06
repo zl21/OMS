@@ -45,10 +45,10 @@ export default {
               id: 2661,
               type: 'action',
               name: 'returngoodList',
-              label: $it('common.preferential_info'), // 退换货订单
+              label: $it('com.preferential_info'), // 退换货订单
               query: Object.assign({
                 id: 2661,
-                tabTitle: $it('common.preferential_info'), // 退换货订单
+                tabTitle: $it('com.preferential_info'), // 退换货订单
               }),
               back: true,
             });

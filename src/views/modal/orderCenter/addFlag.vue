@@ -105,14 +105,14 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'), // 返回
+            text: $it('com.cancel'), // 返回
             btnclick: () => {
               this.$destroy(false);
               this.$parent.$parent.closeConfirm();
             }
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             btnclick: () => {
               this.determine()
             }
@@ -124,13 +124,13 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.modal = false;
             }
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             btnclick: () => {
               this.asyncOK()
             }

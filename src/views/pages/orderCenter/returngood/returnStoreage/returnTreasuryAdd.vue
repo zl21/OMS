@@ -11,7 +11,7 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ $it("common.baseInformation") }}
+            {{ $it("com.baseInformation") }}
             <p slot="content">
               <OmsForm :form-config="information" />
             </p>

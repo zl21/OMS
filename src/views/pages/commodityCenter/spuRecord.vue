@@ -15,7 +15,7 @@
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- SPU基本信息 -->
-          SPU {{ $it("common.baseInformation") }}
+          SPU {{ $it("com.baseInformation") }}
           <div slot="content" class="customized_Info_img">
             <arkImageUpload
               v-model="imageValue"

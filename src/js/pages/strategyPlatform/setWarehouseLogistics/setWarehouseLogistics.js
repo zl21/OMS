@@ -342,7 +342,7 @@ export default {
             _this.information.formValue.REMARK = res.data.data.warehouseLogistics.REMARK;
             if (res.data.data.warehouseLogistics.ISACTIVE === 'N') {
               // _this.statusName = "已作废";
-              _this.statusName = $it('common.voided');
+              _this.statusName = $it('com.voided');
               const btnTxetArr = [$it('btn.modify_logistics'), $it('btn.void'), $it('btn.import'), $it('btn.export'), $it('btn.save')];
               _this.btnConfig.buttons.forEach(item => {
                 // ["修改物流" || "作废" || "导入" || "导出" || "保存"]

@@ -35,7 +35,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
@@ -52,7 +52,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             disabled: false, // 按钮禁用控制
             btnclick: this.fnclose,
           },
@@ -85,7 +85,7 @@ export default {
             },
           },
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: this.fnclose,
           },
           {
@@ -99,7 +99,7 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: this.fnclose,
           },
           {

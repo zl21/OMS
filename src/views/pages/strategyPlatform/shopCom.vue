@@ -73,7 +73,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'), // 取消 按钮文本
+            text: $it('com.cancel'), // 取消 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.quDao.modal = false;
@@ -82,7 +82,7 @@ export default {
           },
           {
             type: 'primary', // 按钮类型
-            text: $it('common.determine'), // 确定 按钮文本
+            text: $it('com.determine'), // 确定 按钮文本
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.quDaoOk();
@@ -813,8 +813,8 @@ export default {
           content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },
@@ -881,7 +881,7 @@ export default {
       let isEdit = this.ID != -1
       let tableBtnConfig = this.tabConfig.businessButtonConfig
       let isShowTableBtn = this.isEnable ? false : !this.isCopy
-      let addBtn = this.queryBtn(this.btnConfig, $it('common.copy'))
+      let addBtn = this.queryBtn(this.btnConfig, $it('com.copy'))
       let delBtn = this.queryBtn(tableBtnConfig, $it('btn.deleteDetail'))
       let importBtn = this.queryBtn(tableBtnConfig, $it('modalTitle.import'))
       addBtn && (addBtn.isShow = isEdit) // 复制

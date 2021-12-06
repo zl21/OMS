@@ -38,13 +38,13 @@ export default {
         btnsite: 'right',
         buttons: [
           {
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }
           },
           {
-            text: $it('common.determine'),
+            text: $it('com.determine'),
             btnclick: () => {
               const _this = this;
               _this.okClick();

@@ -57,11 +57,11 @@ export default {
       }, // 退单编号查询
       ORDER_TYPE: '', // 丢单的值
       isgift: [{
-        label: window.$it('common.yes'),
+        label: window.$it('com.yes'),
         value: '1',
       },
       {
-        label: window.$it('common.no'),
+        label: window.$it('com.no'),
         value: '0',
       },
       ],
@@ -185,9 +185,9 @@ export default {
               const ocBorderItemDto = self.jordanTableConfig.data;
               // 将是否赠品,实物或缺是否转化为YN
               ocBorderItemDto.forEach((item) => {
-                if (item.IS_GIFT === $it('common.yes')) {
+                if (item.IS_GIFT === $it('com.yes')) {
                   item.IS_GIFT = 1;
-                } else if (item.IS_GIFT === $it('common.no')) {
+                } else if (item.IS_GIFT === $it('com.no')) {
                   item.IS_GIFT = 0;
                 }
                 item.PRICE_LIST = item.RESERVE_DECIMAL02;
@@ -1543,8 +1543,8 @@ export default {
           content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
             self.btnConfig.loading = true;
@@ -1625,8 +1625,8 @@ export default {
           content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
             this.btnConfig.loading = true;
@@ -2097,7 +2097,7 @@ export default {
         }
       }
       delarr.forEach((item) => {
-        if (item.IS_GIFT === $it('common.yes')) {
+        if (item.IS_GIFT === $it('com.yes')) {
           item.IS_GIFT = 1;
         } else {
           item.IS_GIFT = 0;
@@ -2125,9 +2125,9 @@ export default {
                     // 对是否赠品,实物报缺进行映射
                     result.data.data.records.forEach((item) => {
                       if (item.IS_GIFT === 1) {
-                        item.IS_GIFT = $it('common.yes'); // 是
+                        item.IS_GIFT = $it('com.yes'); // 是
                       } else if (item.IS_GIFT === 0) {
-                        item.IS_GIFT = $it('common.no'); // 否
+                        item.IS_GIFT = $it('com.no'); // 否
                       }
                     });
                     // result.data.data.records.forEach(item => {

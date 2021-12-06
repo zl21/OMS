@@ -723,18 +723,18 @@ export default {
             : 0;
         // 是否无原单条码
         item.IS_WITHOUT_ORIG =
-          item.IS_WITHOUT_ORIG == $it('common.yes') ? 1 : 0;
+          item.IS_WITHOUT_ORIG == $it('com.yes') ? 1 : 0;
         // 是否匹配
-        item.IS_MATCH = item.IS_MATCH == $it('common.yes') ? 1 : 0;
+        item.IS_MATCH = item.IS_MATCH == $it('com.yes') ? 1 : 0;
         // 是否生成调整单
         item.IS_GEN_ADJUST =
-          item.IS_GEN_ADJUST == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_ADJUST == $it('com.yes') ? 1 : 0;
         item.IS_GEN_IN_ORDER =
-          item.IS_GEN_IN_ORDER == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_IN_ORDER == $it('com.yes') ? 1 : 0;
         item.IS_GEN_WRO_ADJUST =
-          item.IS_GEN_WRO_ADJUST == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_WRO_ADJUST == $it('com.yes') ? 1 : 0;
         item.IS_GEN_MINUS_ADJUST =
-          item.IS_GEN_MINUS_ADJUST == $it('common.yes') ? 1 : 0;
+          item.IS_GEN_MINUS_ADJUST == $it('com.yes') ? 1 : 0;
       });
       const params = {
         ocBRefundInProductItem: dataArr, // 退货入库明细
@@ -869,7 +869,7 @@ export default {
         ) {
           res.data.data.addcolums.forEach((item) => {
             // if (item.parentdesc === "基本信息") {
-            if (item.parentdesc === $it('common.baseInformation')) {
+            if (item.parentdesc === $it('com.baseInformation')) {
               const childItem = item.childs;
               childItem.forEach((item) => {
                 if (item.colname === 'SPECIAL_TYPE') {

@@ -134,7 +134,7 @@ export default {
           isShow: true
         },
         {
-          label: $it('common.cancel'), // 取消
+          label: $it('com.cancel'), // 取消
           value: '60',
           isShow: true
         }

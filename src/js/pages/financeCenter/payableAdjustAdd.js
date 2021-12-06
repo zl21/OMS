@@ -1411,13 +1411,13 @@ export default {
       }
       switch (billStatus) {
         case 2:
-          self.statusName = $it('common.custAudited');
+          self.statusName = $it('com.custAudited');
           break;
         case 3:
-          self.statusName = $it('common.financeAudited');
+          self.statusName = $it('com.financeAudited');
           break;
         case 4:
-          self.statusName = $it('common.voided');
+          self.statusName = $it('com.voided');
           break;
       }
       // 去除新增与删除明细按钮
@@ -1452,7 +1452,7 @@ export default {
       const arrBillType = [];
       const ArrRESPONSIBLEType = [];
 
-      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), ['PAY_TYPE', 'ADJUST_TYPE', 'BILL_TYPE', 'RESPONSIBLE_PARTY']);
+      await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('com.baseInformation'), ['PAY_TYPE', 'ADJUST_TYPE', 'BILL_TYPE', 'RESPONSIBLE_PARTY']);
       self.selectData.PAY_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
@@ -1460,14 +1460,14 @@ export default {
         arrPayType.push(obj);
       });
       // 调整类型
-      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'ADJUST_TYPE');
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('com.baseInformation'), 'ADJUST_TYPE');
       self.selectData.ADJUST_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
         obj.value = item.limitval;
         arrAdjustType.push(obj);
       });
-      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'BILL_TYPE');
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('com.baseInformation'), 'BILL_TYPE');
       self.selectData.BILL_TYPE.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;
@@ -1475,7 +1475,7 @@ export default {
         arrBillType.push(obj);
       });
       // 责任方options
-      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('common.baseInformation'), 'RESPONSIBLE_PARTY');
+      // await this.getColOption('AC_F_PAYABLE_ADJUSTMENT', $it('com.baseInformation'), 'RESPONSIBLE_PARTY');
       self.selectData.RESPONSIBLE_PARTY.forEach(item => {
         const obj = {};
         obj.label = item.limitdesc;

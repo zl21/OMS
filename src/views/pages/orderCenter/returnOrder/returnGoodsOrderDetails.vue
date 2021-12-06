@@ -1035,8 +1035,8 @@ export default {
         className: 'ark-dialog',
         mask: true,
         showCancel: true,
-        okText: $it("common.determine"), // 确定
-        cancelText: $it("common.cancel"), // 取消
+        okText: $it("com.determine"), // 确定
+        cancelText: $it("com.cancel"), // 取消
         onOk: () => {
           self.$nextTick(() => {
             // 取差集展示：

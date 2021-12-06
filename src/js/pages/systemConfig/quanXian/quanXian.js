@@ -379,7 +379,7 @@ export default {
 
         this.oldTableArr = JSON.parse(JSON.stringify(this.tableArr.rows));
         if (refresh) {
-          this.$Message.success($it('common.refresh_succee')); // 刷新成功
+          this.$Message.success($it('com.refresh_succee')); // 刷新成功
         }
       }
       this.loading = false;

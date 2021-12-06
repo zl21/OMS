@@ -292,7 +292,7 @@ export default {
       clearFromListValue: false,
       // 状态json
       statusData: {
-        label: $it('common.toBeReviewed'), // 全部
+        label: $it('com.toBeReviewed'), // 全部
         value: '1',
         isShow: true
       },
@@ -570,8 +570,8 @@ export default {
               content: res.data.message, // 零售发货单/JIT订单中间表存在可合并的订单还未参与合并，仍要继续次操作吗？
               mask: true,
               showCancel: true,
-              okText: $it('common.determine'), // 确定
-              cancelText: $it('common.cancel'), // 取消
+              okText: $it('com.determine'), // 确定
+              cancelText: $it('com.cancel'), // 取消
               onOk: () => {
                 self[type]();
               },

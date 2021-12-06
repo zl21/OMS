@@ -91,7 +91,7 @@
       <Table :columns="logData.columns" :data="logData.data" :height="250" />
       <div slot="footer">
         <Button ghost @click="closeModal">
-          {{ $it("common.close") }}
+          {{ $it("com.close") }}
         </Button>
       </div>
     </Modal>

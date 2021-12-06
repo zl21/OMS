@@ -64,7 +64,7 @@ export default () => ({
             fkdisplay: 'mrp',
             isfk: true,
             isnotnull: false,
-            name: $it('common.exclude_province'),
+            name: $it('com.exclude_province'),
             readonly: false,
             valuedata: '',
             notForm: true,

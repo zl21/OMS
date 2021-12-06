@@ -721,7 +721,7 @@ export default {
         }
       },
       tab: {
-        activeName: $it('common.baseInformation') // 基本信息
+        activeName: $it('com.baseInformation') // 基本信息
       },
       oprateLogTableConfig: {
         // 操作日志表格配置数据
@@ -2065,12 +2065,12 @@ export default {
       if (CurrentData) {
         if (CurrentData.psCPro) {
           if (CurrentData.psCPro.ISACTIVE === 'Y') {
-            this.statusName = $it('common.submitted'); // '已提交';
+            this.statusName = $it('com.submitted'); // '已提交';
             this.statusMark = 'Y'; // 提交状态
             this.changeReadStatus();
           }
           if (CurrentData.psCPro.ISACTIVE === 'N') {
-            this.statusName = $it('common.voided'); // '已作废';
+            this.statusName = $it('com.voided'); // '已作废';
             this.statusMark = 'N'; // 作废状态
             this.formConfig1.formData.forEach(item => {
               if (item.label === $it('table_label.productNo')) {

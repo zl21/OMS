@@ -98,7 +98,7 @@ export default {
       }, // form表单
       labelList: [
         {
-          label: $it('common.all'), // '全部',
+          label: $it('com.all'), // '全部',
           value: '1',
           isShow: true
         }

@@ -35,7 +35,7 @@ export default {
         options: [
           // radio选项
           {
-            label: $it('common.all'), // 全部
+            label: $it('com.all'), // 全部
             value: ''
           },
           {

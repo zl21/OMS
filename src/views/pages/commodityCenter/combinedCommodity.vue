@@ -14,7 +14,7 @@
           <Collapse v-model="value1">
             <Panel name="1">
               <!-- 基本信息 -->
-              {{ $it('common.baseInformation') }}
+              {{ $it('com.baseInformation') }}
               <OmsForm
                 slot="content"
                 :form-config="formConfig1"
@@ -22,7 +22,7 @@
             </Panel>
             <Panel name="2">
               <!-- 日志 -->
-              {{ $it('common.journal') }}
+              {{ $it('com.journal') }}
               <OmsForm
                 slot="content"
                 :form-config="formConfig2"
@@ -93,8 +93,8 @@
         on-click="changeTab"
       > -->
         <!-- <TabPane
-          :label="$it('common.baseInformation')"
-          :name="$it('common.baseInformation')"
+          :label="$it('com.baseInformation')"
+          :name="$it('com.baseInformation')"
           class="custom-label"
         > -->
           <div class="btn-operate custom-btn">
@@ -104,7 +104,7 @@
             <Collapse v-model="value1">
               <Panel name="1">
                 <!-- 基本信息 -->
-                {{ $it('common.baseInformation') }}
+                {{ $it('com.baseInformation') }}
                 <OmsForm
                   slot="content"
                   :form-config="formConfig1"
@@ -112,7 +112,7 @@
               </Panel>
               <Panel name="2">
                 <!-- 日志 -->
-                {{ $it('common.journal') }}
+                {{ $it('com.journal') }}
                 <OmsForm
                   slot="content"
                   :form-config="formConfig2"

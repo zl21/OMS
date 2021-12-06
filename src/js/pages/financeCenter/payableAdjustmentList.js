@@ -243,11 +243,11 @@ export default {
             multiple: true,
             options: [
               {
-                label: $it('common.unAudit'), // 未审核
+                label: $it('com.unAudit'), // 未审核
                 value: '1'
               },
               {
-                label: $it('common.custAudited'), // 已客审
+                label: $it('com.custAudited'), // 已客审
                 value: '2'
               },
               {
@@ -255,11 +255,11 @@ export default {
                 value: '3'
               },
               {
-                label: $it('common.financeAudited'), // 已财审
+                label: $it('com.financeAudited'), // 已财审
                 value: '4'
               },
               {
-                label: $it('common.voided'), // 已作废
+                label: $it('com.voided'), // 已作废
                 value: '5'
               }
             ]
@@ -749,31 +749,31 @@ export default {
       // const arrBillType = await this.getColOption(
       //   'AC_F_PAYABLE_ADJUSTMENT',
       //   // "基本信息",
-      //   $it('common.baseInformation'),
+      //   $it('com.baseInformation'),
       //   'BILL_TYPE'
       // );
       // const arrAdjustType = await this.getColOption(
       //   'AC_F_PAYABLE_ADJUSTMENT',
       //   // "基本信息",
-      //   $it('common.baseInformation'),
+      //   $it('com.baseInformation'),
       //   'ADJUST_TYPE'
       // );
       // const arrChannel = await this.getColOption(
       //   'AC_F_PAYABLE_ADJUSTMENT',
       //   // "基本信息",
-      //   $it('common.baseInformation'),
+      //   $it('com.baseInformation'),
       //   'RESERVE_BIGINT01'
       // );
       // // 责任方窗口options
       // const arrResponsibility = await this.getColOption(
       //   'AC_F_PAYABLE_ADJUSTMENT',
       //   // "基本信息",
-      //   $it('common.baseInformation'),
+      //   $it('com.baseInformation'),
       //   'RESPONSIBLE_PARTY'
       // );
       const formOptions = await this.getColOption(
         'AC_F_PAYABLE_ADJUSTMENT',
-        $it('common.baseInformation'),
+        $it('com.baseInformation'),
         ['BILL_TYPE', 'ADJUST_TYPE', 'RESERVE_BIGINT01', 'RESPONSIBLE_PARTY', 'TO_DRP_STATUS']
       );
       this.formOptions = formOptions;

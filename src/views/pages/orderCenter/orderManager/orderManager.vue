@@ -117,7 +117,7 @@
     <Modal
       v-model="warningModal"
       :mask="true"
-      :title="$it('common.warning')"
+      :title="$it('com.warning')"
       width="420"
       @on-ok="warningOk"
     >
@@ -127,7 +127,7 @@
     <Modal
       v-model="distributeLogisticsModal"
       :mask="true"
-      :title="$it('common.warning')"
+      :title="$it('com.warning')"
       width="420"
       @on-ok="distributeLogistics"
     >
@@ -137,7 +137,7 @@
     <Modal
       v-model="distributeWarehouseModal"
       :mask="true"
-      :title="$it('common.warning')"
+      :title="$it('com.warning')"
       width="420"
       @on-ok="distributeWarehouse"
     >
@@ -148,7 +148,7 @@
     <Modal
       v-model="batchReturnOrderModal"
       :mask="true"
-      :title="$it('common.warning')"
+      :title="$it('com.warning')"
       width="420"
       class="customizedModal"
       @on-cancel="onBatchReturnOrderCancel"

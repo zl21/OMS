@@ -33,11 +33,11 @@ export default {
       ORDER_TYPE: '', // 丢单的值
       isgift: [
         {
-          label: $it('common.yes'),
+          label: $it('com.yes'),
           value: '1',
         },
         {
-          label: $it('common.no'),
+          label: $it('com.no'),
           value: '0',
         },
       ],
@@ -1207,7 +1207,7 @@ export default {
     self.service.common.getObject(fromdata).then((res) => {
       res.data.data.addcolums.forEach((item) => {
         // '基本信息'
-        if (item.parentdesc === $it('common.baseInformation')) {
+        if (item.parentdesc === $it('com.baseInformation')) {
           const selectData = item.childs;
           selectData.forEach((item) => {
             // '支付类型'
@@ -1299,9 +1299,9 @@ export default {
       const ocBorderItemDto = self.jordanTableConfig.data;
       // 将是否赠品,实物或缺是否转化为YN
       ocBorderItemDto.forEach((item) => {
-        if (item.IS_GIFT === $it('common.yes')) {
+        if (item.IS_GIFT === $it('com.yes')) {
           item.IS_GIFT = 1;
-        } else if (item.IS_GIFT === $it('common.no')) {
+        } else if (item.IS_GIFT === $it('com.no')) {
           item.IS_GIFT = 0;
         }
         item.PRICE_LIST = item.RESERVE_DECIMAL02;
@@ -1549,8 +1549,8 @@ export default {
           content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
             self.btnConfig.loading = true;
@@ -1629,8 +1629,8 @@ export default {
           content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.isShowFromLoading = true;
             this.btnConfig.loading = true;
@@ -2084,7 +2084,7 @@ export default {
         }
       }
       delarr.forEach((item) => {
-        if (item.IS_GIFT === $it('common.yes')) {
+        if (item.IS_GIFT === $it('com.yes')) {
           item.IS_GIFT = 1;
         } else {
           item.IS_GIFT = 0;
@@ -2112,9 +2112,9 @@ export default {
                   // 对是否赠品,实物报缺进行映射
                   result.data.data.records.forEach((item) => {
                     if (item.IS_GIFT === 1) {
-                      item.IS_GIFT = $it('common.yes'); // 是
+                      item.IS_GIFT = $it('com.yes'); // 是
                     } else if (item.IS_GIFT === 0) {
-                      item.IS_GIFT = $it('common.no'); // 否
+                      item.IS_GIFT = $it('com.no'); // 否
                     }
                   });
                   self.jordanTableConfig.data = self.filterRfundStatus(

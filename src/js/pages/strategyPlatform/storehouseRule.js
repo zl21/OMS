@@ -48,7 +48,7 @@ export default {
             btnclick: this.back
           },
           {
-            text: $it('common.copy'),//'复制',
+            text: $it('com.copy'),//'复制',
             isShow: false,
             webname: "copy",
             disabled: false, // 按钮禁用控制
@@ -1036,8 +1036,8 @@ export default {
             content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
-            okText: $it('common.determine'), // 确定
-            cancelText: $it('common.cancel'), // 取消
+            okText: $it('com.determine'), // 确定
+            cancelText: $it('com.cancel'), // 取消
             onOk: () => {
               this.pageback();
             }
@@ -1052,8 +1052,8 @@ export default {
           content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.pageback();
           }

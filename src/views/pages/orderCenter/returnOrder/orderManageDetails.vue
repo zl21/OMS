@@ -87,7 +87,7 @@ export default {
       labelDefaultValue: 'OC_B_ORDER_ITEM',
       labelList: [
         {
-          label: $it('common.baseInformation'), // 基本信息
+          label: $it('com.baseInformation'), // 基本信息
           value: 'OC_B_ORDER_ITEM'
         },
         {
@@ -124,7 +124,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $it('common.return'), // 返回
+            text: $it('com.return'), // 返回
             btnclick: () => {
               $omsUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {

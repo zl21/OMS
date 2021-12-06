@@ -134,7 +134,7 @@ export default {
   mounted() {
     const self = this;
     // console.log('self.$route.query.id',self.$route.params.customizedModuleId);
-    this.statusName = $it('common.voided'); // '已作废';
+    this.statusName = $it('com.voided'); // '已作废';
     if (self.$route.params.customizedModuleId == 'New') {
       self.objid = -1;
     } else {

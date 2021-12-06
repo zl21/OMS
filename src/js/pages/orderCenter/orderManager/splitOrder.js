@@ -20,7 +20,7 @@ export default {
                   showCancel: true,
                   okText: '确认',
                   // okText: $it('modalTips.ch'),
-                  cancelText: $it('common.cancel'), // 取消
+                  cancelText: $it('com.cancel'), // 取消
                   onOk: ()=> {
                     this.getData();
                   },

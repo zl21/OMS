@@ -129,13 +129,13 @@ export default {
         buttons: [
           {
             disabled: false,
-            text: $it('common.cancel'),
+            text: $it('com.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
             }, // 按钮点击事件
           },
           {
-            text: $it('common.determine'),
+            text: $it('com.determine'),
             disabled: false,
             btnclick: () => {
               if (!this.skuEcodes) {

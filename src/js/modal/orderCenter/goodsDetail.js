@@ -36,12 +36,12 @@ export default {
       islackstock: [
         {
           // label: "是",
-          label: $it('common.yes'),
+          label: $it('com.yes'),
           value: '1'
         },
         {
           // label: "否",
-          label: $it('common.no'),
+          label: $it('com.no'),
           value: '0'
         }
       ],

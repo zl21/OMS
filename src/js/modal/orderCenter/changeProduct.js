@@ -10,13 +10,13 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.$parent.$parent.closeConfirm()
             }, // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             btnclick: () => {
               this.confirm()
             },
@@ -522,7 +522,7 @@ export default {
       const result = {}
       const needParam = {
         IS_GIFT:
-          self.onRowClickReplaceData.IS_GIFT == $it('common.yes')
+          self.onRowClickReplaceData.IS_GIFT == $it('com.yes')
             ? '0'
             : '1',
         PS_C_PRO_ECODE: self.onRowClickReplaceData.PS_C_PRO_ECODE,

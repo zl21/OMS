@@ -769,8 +769,8 @@ export default {
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
-                        okText: window.$it('common.determine'), // 确定
-                        cancelText: window.$it('common.cancel'), // 取消
+                        okText: window.$it('com.determine'), // 确定
+                        cancelText: window.$it('com.cancel'), // 取消
                         onOk: () => {
                           this.subTableDelete(params.row.ID, 'pickingTableConfig');
                         },
@@ -801,8 +801,8 @@ export default {
                   content: '当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？',
                   mask: true,
                   showCancel: true,
-                  okText: window.$it('common.determine'), // 确定
-                  cancelText: window.$it('common.cancel'), // 取消
+                  okText: window.$it('com.determine'), // 确定
+                  cancelText: window.$it('com.cancel'), // 取消
                   onOk: () => {
                     this.initPickTable();
                     this.subTableDelete(-1, 'pickingTableConfig');
@@ -979,8 +979,8 @@ export default {
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
-                        okText: window.$it('common.determine'), // 确定
-                        cancelText: window.$it('common.cancel'), // 取消
+                        okText: window.$it('com.determine'), // 确定
+                        cancelText: window.$it('com.cancel'), // 取消
                         onOk: () => {
                           this.subTableDelete(params.row.ID, 'warehouseWarrantConfig');
                         },
@@ -1191,8 +1191,8 @@ export default {
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.$it('common.determine'), // 确定
-          cancelText: window.$it('common.cancel'), // 取消
+          okText: window.$it('com.determine'), // 确定
+          cancelText: window.$it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },

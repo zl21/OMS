@@ -49,7 +49,7 @@ const waterMarkMap = {
 	20: $it('form_label.waitFor_return_warehous'), // '等待退货入库',
 	30: $it('form_label.waitFor_afterSale_review'), // '等待售后审核',
 	50: $it('form_label.complete'), // '完成',
-	60: $it('common.cancelled'), // '已取消',
+	60: $it('com.cancelled'), // '已取消',
 };
 const addDetailModalTableColumns = [
 	{

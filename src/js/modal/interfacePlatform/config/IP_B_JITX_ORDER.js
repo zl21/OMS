@@ -62,7 +62,7 @@ export default {
             value: ''
           },
           {
-            label: $it('common.reviewed'), // 已审核
+            label: $it('com.reviewed'), // 已审核
             value: 'JITX_AUDIT'
           },
           {

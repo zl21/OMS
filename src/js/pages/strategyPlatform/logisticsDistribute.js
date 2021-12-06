@@ -10,7 +10,7 @@ export default {
       collapse: 'panel_baseInfo',
       changeCount: 0, //判断数据是否修改过
       value: [1, 2],
-      baseInformation: $it('common.baseInformation'),
+      baseInformation: $it('com.baseInformation'),
       id: '',
       defaultColumn: 2,
       startindex: 0, //分页
@@ -43,7 +43,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $it('common.exclude_region'),
+            text: $it('com.exclude_region'),
             isShow: false,
             webname: "ST_C_DELIVERY_AREA_addArea",
             disabled: false, // 按钮禁用控制
@@ -783,8 +783,8 @@ export default {
             content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
-            okText: $it('common.determine'), // 确定
-            cancelText: $it('common.cancel'), // 取消
+            okText: $it('com.determine'), // 确定
+            cancelText: $it('com.cancel'), // 取消
             onOk: () => {
               this.pageback();
             }
@@ -799,8 +799,8 @@ export default {
           content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.pageback();
           }

@@ -291,8 +291,8 @@ class commonUtils {
       content: $it(`modalTips.${tips}`),
       mask: true,
       showCancel: true,
-      okText: $it('common.determine'), // 确定
-      cancelText: $it('common.cancel'), // 取消
+      okText: $it('com.determine'), // 确定
+      cancelText: $it('com.cancel'), // 取消
       onOk: () => {
         let [callbackType, callbackFun] = callback
         this.serviceHandler(self, okKey, data, callbackType, callbackFun)

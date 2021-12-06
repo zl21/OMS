@@ -17,7 +17,7 @@ export default {
         typeAll: 'default',
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.close();
             }

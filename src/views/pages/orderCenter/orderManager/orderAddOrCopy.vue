@@ -7,21 +7,21 @@
       <Collapse v-model="panelDefaultValue">
         <Panel name="1">
           <!-- 基本信息 -->
-          {{ $it("common.baseInformation") }}
+          {{ $it("com.baseInformation") }}
           <p slot="content">
             <OmsForm :form-config="formConfigBase" @keyDown="keyDown" />
           </p>
         </Panel>
         <Panel name="2" v-show="showRe">
           <!-- 收货人信息 -->
-          {{ $it("common.consigneeInformation") }}
+          {{ $it("com.consigneeInformation") }}
           <p slot="content">
             <OmsForm :form-config="formConfigRe" />
           </p>
         </Panel>
         <!-- 备注信息 -->
         <!-- <Panel name="3">
-          {{ $it('common.remarksInfo') }}
+          {{ $it('com.remarksInfo') }}
           <p slot="content">
             <OmsForm :form-config="" />
           </p>
@@ -1875,7 +1875,7 @@ export default {
             mask: true,
             showCancel: true,
             okText: $it("btn.increase"), // 添加
-            cancelText: $it("common.cancel"), // 取消
+            cancelText: $it("com.cancel"), // 取消
             onOk: () => {
               self.insertOrderDetail(data);
             },
@@ -2008,8 +2008,8 @@ export default {
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $it("common.determine"), // 确定
-          cancelText: $it("common.cancel"), // 取消
+          okText: $it("com.determine"), // 确定
+          cancelText: $it("com.cancel"), // 取消
           onOk: () => {
             self.onOk();
           },

@@ -47,7 +47,7 @@ export default {
           isnotnull: false,
           isuppercase: false,
           length: 65535,
-          name: $it('common.exclude_province'), // 排除省
+          name: $it('com.exclude_province'), // 排除省
           readonly: false,
           reftable: 'CP_C_PROVINCE',
           reftableid: 23862,

@@ -246,7 +246,7 @@ export default {
       },
       tabConfig: [
         {
-          label: $it('common.all'), // 全部
+          label: $it('com.all'), // 全部
           total: 0,
           /* agTableConfig: {
             isIndex: true,
@@ -458,7 +458,7 @@ export default {
           }
         },
         {
-          // text: $it('common.copy'), // 复制,
+          // text: $it('com.copy'), // 复制,
           webname: 'copy_cuxiaohuodomg',
           btnclick: () => {
             this.copy();
@@ -803,8 +803,8 @@ export default {
         content: '确定执行下线操作？',
         mask: true,
         showCancel: true,
-        okText: $it('common.determine'), // 确定
-        cancelText: $it('common.cancel'), // 取消
+        okText: $it('com.determine'), // 确定
+        cancelText: $it('com.cancel'), // 取消
         onOk: () => {
           this.$emit('closeActionDialog', false);
           this.downLine();

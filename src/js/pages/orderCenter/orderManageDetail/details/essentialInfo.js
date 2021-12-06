@@ -264,7 +264,7 @@ export default {
     // 修改地址
     modifyAddress() {
       // '待审核','缺货'
-      if (![$it('common.toBeReviewed'), $it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
+      if (![$it('com.toBeReviewed'), $it('other.outOfStock')].includes(this.componentData.order.ORDER_STATUS)) {
         this.$Message.error($it('modalTips.fq')); //订单状态不满足，不允许修改地址！
         return false;
       }

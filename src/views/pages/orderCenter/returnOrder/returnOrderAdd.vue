@@ -10,7 +10,7 @@
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
-            {{ $it('common.baseInformation') }}
+            {{ $it('com.baseInformation') }}
             <p slot="content">
               <OmsForm :form-config="formConfig" :key="formConfig.key"/>
             </p>
@@ -188,14 +188,14 @@ export default {
         buttons: [
           {
             // text: "取消",
-            text: $it("common.cancel"),
+            text: $it("com.cancel"),
             btnclick: () => {
               this.orderModal = false;
             },
           },
           {
             // text: '确定',
-            text: $it("common.determine"),
+            text: $it("com.determine"),
             type: 'primary',
             btnclick: () => {
               this.queryorder();
@@ -777,8 +777,8 @@ export default {
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             if (type == '1') {
               this.$nextTick(() => {
@@ -1158,7 +1158,7 @@ export default {
             mask: true,
             showCancel: true,
             okText: $it("btn.increase"), // 添加
-            cancelText: $it("common.cancel"), // 取消
+            cancelText: $it("com.cancel"), // 取消
             onOk: () => {
               self.insertOrderDetail(data);
             },
@@ -1210,8 +1210,8 @@ export default {
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $it("common.determine"), // 确定
-          cancelText: $it("common.cancel"), // 取消
+          okText: $it("com.determine"), // 确定
+          cancelText: $it("com.cancel"), // 取消
           onOk: () => {
             self.onOk();
           },

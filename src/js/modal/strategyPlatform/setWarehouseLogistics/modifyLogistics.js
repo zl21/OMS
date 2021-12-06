@@ -33,7 +33,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -41,7 +41,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {

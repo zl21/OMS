@@ -57,10 +57,10 @@ export default {
         tablename: '',
         objid: '',
       },
-      baseInformation: $it('common.baseInformation'),
+      baseInformation: $it('com.baseInformation'),
       meet_conditions: $it('form_label.meet_conditions'),
       increase: $it('btn.increase'),
-      cancel: $it('common.cancel'),
+      cancel: $it('com.cancel'),
       // tab切换配置
       labelList: [
         {
@@ -118,7 +118,7 @@ export default {
           },
           {
             type: 'warning',
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             disabled: false,
             btnclick: this.fncancel
           }
@@ -1573,8 +1573,8 @@ export default {
             content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
-            okText: $it('common.determine'), // 确定
-            cancelText: $it('common.cancel'), // 取消
+            okText: $it('com.determine'), // 确定
+            cancelText: $it('com.cancel'), // 取消
             onOk: () => {
               this.pageback();
             }
@@ -1590,8 +1590,8 @@ export default {
             content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
-            okText: $it('common.determine'), // 确定
-            cancelText: $it('common.cancel'), // 取消
+            okText: $it('com.determine'), // 确定
+            cancelText: $it('com.cancel'), // 取消
             onOk: () => {
               this.pageback();
             }

@@ -96,7 +96,7 @@ export default {
           }
         },
         {
-          text: $it('common.return'), // 返回
+          text: $it('com.return'), // 返回
           webname: 'ST_C_AUTO_AUDIT_RETURN',
           btnclick: () => {
             if (this.isModify) {

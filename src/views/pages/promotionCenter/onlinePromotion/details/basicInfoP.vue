@@ -225,7 +225,7 @@ export default {
               version: '1.4',
               colid: 180257,
               colname: "CP_C_PROVINCE_IDS",
-              name: $it('common.exclude_province'),
+              name: $it('com.exclude_province'),
               valuedata: "",
               fkdisplay: "mrp",
               isfk: true,

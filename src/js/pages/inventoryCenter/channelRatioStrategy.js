@@ -884,8 +884,8 @@ export default {
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.$it('common.determine'), // 确定
-          cancelText: window.$it('common.cancel'), // 取消
+          okText: window.$it('com.determine'), // 确定
+          cancelText: window.$it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },

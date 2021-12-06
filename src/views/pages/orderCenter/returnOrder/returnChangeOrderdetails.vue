@@ -82,13 +82,13 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               this.detailAddCancel();
             },
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               this.resetReturnMainTable();
@@ -101,7 +101,7 @@ export default {
         btnsite: "right",
         buttons: [
           {
-            text: $it('common.cancel'), // 取消
+            text: $it('com.cancel'), // 取消
             btnclick: () => {
               // this.$emit("closeActionDialog", false);
               this.replaceProductTable.modal = false;
@@ -109,7 +109,7 @@ export default {
             },
           },
           {
-            text: $it('common.determine'), // 确定
+            text: $it('com.determine'), // 确定
             type: 'primary',
             btnclick: () => {
               this.replaceOk();
@@ -1006,8 +1006,8 @@ export default {
         mask: true,
         className: 'ark-dialog errTip',
         showCancel: true,
-        okText: $it("common.determine"), // 确定
-        cancelText: $it("common.cancel"), // 取消
+        okText: $it("com.determine"), // 确定
+        cancelText: $it("com.cancel"), // 取消
         onOk: () => {
           this.$nextTick(() => {
             // 取差集展示：

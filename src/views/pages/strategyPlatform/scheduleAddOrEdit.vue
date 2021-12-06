@@ -7,7 +7,7 @@
     <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          {{ $it('common.baseInformation') }}
+          {{ $it('com.baseInformation') }}
           <p slot="content">
             <OmsForm :form-config="formConfig" />
           </p>

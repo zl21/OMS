@@ -55,7 +55,7 @@ export default {
               this.save();
             },
           }, {
-            text: $it('common.return'), // 返回
+            text: $it('com.return'), // 返回
             btnclick: () => {
               this.back();
             },
@@ -226,8 +226,8 @@ export default {
           className: 'ark-dialog',
           mask: true,
           showCancel: true,
-          okText: $it('common.determine'), // 确定
-          cancelText: $it('common.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             self.onOk();
           },
