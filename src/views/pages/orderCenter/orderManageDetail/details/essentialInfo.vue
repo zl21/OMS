@@ -27,9 +27,9 @@
                     type="ios-create-outline"
                   />
                 </span>
-                <label :title = "$it('modalTitle.modify_shipping_address')">
+                <label :title = "$it('mT.modify_shipping_address')">
                   <!-- 修改收货地址 -->
-                  {{$it('modalTitle.modify_shipping_address')}} 
+                  {{$it('mT.modify_shipping_address')}} 
                 </label>
               </span>
             </p>

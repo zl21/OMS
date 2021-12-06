@@ -910,7 +910,7 @@ class BtnConfig {
         self,
         'changeRemarkConfig',
         'rturngoodModifyRemarks',
-        'modalTitle.modify_sellerNotes'
+        'mT.modify_sellerNotes'
       )
     }
   }
@@ -1541,7 +1541,7 @@ class BtnConfig {
                   key: 'objid',
                 },
                 {
-                  title: $it('modalTitle.du'), // 报错信息
+                  title: $it('mT.du'), // 报错信息
                   key: 'message',
                 },
               ],

@@ -271,7 +271,7 @@ export default {
                   columns: [
                     {
                       // title: "提示信息",
-                      title: $it('modalTitle.tips'),
+                      title: $it('mT.tips'),
                       key: 'message',
                     },
                   ],

@@ -772,7 +772,7 @@ export default {
         const panel = beType == '0' ? $it('pL.a0') : $it('pL.a1');
         const msg = `${$it('modalTips.ge')}${panel}，${$it('modalTips.gf')}`
         this.$Modal.info({
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: msg,
           className: 'ark-dialog',
           mask: true,
@@ -1152,7 +1152,7 @@ export default {
         if (data[0].WHETHER_VIRTUAL_PRODUCTION) {
           // 虚拟字段的处理
           self.$Modal.info({
-            title: $it("modalTitle.tips"), // 提示
+            title: $it("mT.tips"), // 提示
             // content: `${skuCode}条码为虚拟条码，是否继续添加？`,
             content: data[0].VIRTUAL_GOODS_NOTICE,
             mask: true,
@@ -1204,7 +1204,7 @@ export default {
       console.log('self.modify.master::', self.modify.master);
       if (masterArr.length > 1) {
         this.$Modal.info({
-          title: $it("modalTitle.tips"), // 提示
+          title: $it("mT.tips"), // 提示
           // content: "当前修改未保存，确定返回？",
           content: $it('modalTips.gm'),
           className: 'ark-dialog',

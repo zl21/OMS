@@ -1594,7 +1594,7 @@ export default {
       } else {
         // 编辑状态,删除明细
         this.$Modal.fcError({
-          title: $it('modalTitle.deleteDetails'), // 删除明细
+          title: $it('mT.deleteDetails'), // 删除明细
           content: $it('modalTips.j5'), // 确定删除所选明细?
           onOk: () => {
             const data = {};

@@ -180,7 +180,7 @@
     <Modal
       v-model="modal1"
       width="360"
-      :title="$it('modalTitle.warning')"
+      :title="$it('mT.warning')"
       class="customizedModal"
       @on-ok="ok"
       @on-cancel="cancel"

@@ -11,7 +11,7 @@ export default {
               if (this.canFresh && this.data.length > 1) {
                 this.$Modal.confirm({
                   className: 'ark-dialog',
-                  title: $it('modalTitle.tips'), // title:'提示',
+                  title: $it('mT.tips'), // title:'提示',
                   content: $it('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
                   titleAlign: 'left',
                   mask: true, // 显示蒙层

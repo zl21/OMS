@@ -30,7 +30,7 @@ class DialogConfig {
     },
     // 零售发货单详情
     address: {
-      title: $it('modalTitle.modify_shipping_address'), // 修改收货地址
+      title: $it('mT.modify_shipping_address'), // 修改收货地址
       width: 650,
       // url: 'modal/orderCenter/resolveAddress',
       url: require('@/views/modal/orderCenter/resolveAddress.vue').default,
@@ -38,7 +38,7 @@ class DialogConfig {
       excludeString: 'addressDialog',
     },
     blacklist: {
-      title: $it('modalTitle.blacklist'), // 加入黑名单
+      title: $it('mT.blacklist'), // 加入黑名单
       width: 400,
       // url: 'order/joinBlackList',
       url: require('@/views/modal/orderCenter/resolveAddress.vue').default,

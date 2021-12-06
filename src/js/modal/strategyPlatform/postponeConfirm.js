@@ -40,7 +40,7 @@ export default {
     },
     confirm() {
       const data = {
-        title: $it('modalTitle.epostponep'), // '延期',
+        title: $it('mT.epostponep'), // '延期',
         tablename: 'ST_C_SHOP_ITEM_VIRTUAL_HIGH_STOCK',
         objids: this.idArray,
         newEndTime: this.renderTime(this.time)

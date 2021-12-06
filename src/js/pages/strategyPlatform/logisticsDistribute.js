@@ -779,7 +779,7 @@ export default {
         if (this.changeCount > 0) {
           this.$Modal.info({
             className: 'ark-dialog',
-            title: $it('modalTitle.tips'), // 提示
+            title: $it('mT.tips'), // 提示
             content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
@@ -795,7 +795,7 @@ export default {
       } else if (this.changeCount > 1) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,

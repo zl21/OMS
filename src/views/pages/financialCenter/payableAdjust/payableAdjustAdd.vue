@@ -39,7 +39,7 @@
         <Modal
           v-model="detailAddTable.modal"
           class="detailAdd customizedModal"
-          :title="$it('modalTitle.add_adjustmentListDetails')"
+          :title="$it('mT.add_adjustmentListDetails')"
           @on-ok="resetMainTable"
           @on-cancel="detailAddCancel"
         >

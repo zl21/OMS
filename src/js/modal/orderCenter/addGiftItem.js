@@ -249,7 +249,7 @@ export default {
                         key: 'billNo',
                       },
                       {
-                        title: $it('modalTitle.a6'), // '提示信息',
+                        title: $it('mT.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -306,7 +306,7 @@ export default {
                         key: 'billNo',
                       },
                       {
-                        title: $it('modalTitle.a6'), // '提示信息',
+                        title: $it('mT.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],
@@ -427,7 +427,7 @@ export default {
                         key: 'billNo',
                       },
                       {
-                        title: $it('modalTitle.a6'), // '提示信息',
+                        title: $it('mT.a6'), // '提示信息',
                         key: 'message',
                       },
                     ],

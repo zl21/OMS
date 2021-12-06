@@ -256,8 +256,8 @@ export default {
         }
       });
     }
-    this.importTable.confirmTitle = $it('modalTitle.import');
-    this.modifyLogistics.confirmTitle = $it('modalTitle.select_logisticsCompany');
+    this.importTable.confirmTitle = $it('mT.import');
+    this.modifyLogistics.confirmTitle = $it('mT.select_logisticsCompany');
   },
   methods: {
     // 保存

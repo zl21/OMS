@@ -566,7 +566,7 @@ export default {
             this[type]();
           } else if (res.data.code === -3) {
             this.$Modal.info({
-              title: $it('modalTitle.tips'), // 提示
+              title: $it('mT.tips'), // 提示
               content: res.data.message, // 零售发货单/JIT订单中间表存在可合并的订单还未参与合并，仍要继续次操作吗？
               mask: true,
               showCancel: true,
@@ -605,7 +605,7 @@ export default {
           .then(res => {
             if (res.data.code === 0) {
               self.$Modal.success({
-                title: $it('modalTitle.tips'), // 提示
+                title: $it('mT.tips'), // 提示
                 content: res.data.message,
                 cancelType: true,
                 titleAlign: 'left',
@@ -621,7 +621,7 @@ export default {
               self.getData();
             } else {
               self.$Modal.error({
-                title: $it('modalTitle.tips'), // 提示
+                title: $it('mT.tips'), // 提示
                 content: res.data.message,
                 cancelType: true,
                 titleAlign: 'left',
@@ -1742,7 +1742,7 @@ export default {
           });
         } else {
           self.$Modal.error({
-            title: $it('modalTitle.tips'), // 提示
+            title: $it('mT.tips'), // 提示
             content: res.data.message,
             cancelType: true,
             titleAlign: 'left',

@@ -21,7 +21,7 @@
       v-model="tableConfig.modal"
       width="900"
       titleAlign="left"
-      :title="`${$it('modalTitle.ac')}（${selectLen}）`"
+      :title="`${$it('mT.ac')}（${selectLen}）`"
       :mask="true"
       footer-hide
       @on-ok="resetReturnMainTable"

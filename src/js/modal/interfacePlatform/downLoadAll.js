@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     modalTitle() {
-      let title = modalConfig[this.tableName].modalTitle ? modalConfig[this.tableName].modalTitle : $it('modalTitle.orderDownload');
+      let title = modalConfig[this.tableName].modalTitle ? modalConfig[this.tableName].modalTitle : $it('mT.orderDownload');
       return title;
     },
   },

@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       modal1: false,
-      shopTitle:$it('modalTitle.af'),
+      shopTitle:$it('mT.af'),
       shopModal: true,
       panelDefaultValue: 'panel_baseInfo', // 设置默认打开'基本信息'
       plantName: '', // 用户输入的
@@ -853,7 +853,7 @@ export default {
       } else if (res.type == 'otherPlatform') {
         this.fnSteps(4)
         this.formconfig.formValue.CP_C_PLATFORM_ECODE = 'otherPlatform'
-        this.formconfig.formValue.CP_C_PLATFORM_NAME = $it('modalTitle.ai') //'其他平台'
+        this.formconfig.formValue.CP_C_PLATFORM_NAME = $it('mT.ai') //'其他平台'
       } else {
         let data = {
           params: {

@@ -668,7 +668,7 @@ export default {
       // 弹框数据
       changeWarehouseConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.data'), // 数据
+        confirmTitle: $it('mT.data'), // 数据
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '800',
         scrollable: false, // 是否可以滚动

@@ -146,7 +146,7 @@ export default {
       ],
       matrixBox: {
         refFuns: "confirmFun",
-        confirmTitle: $it("modalTitle.matrixEntry"), // 矩阵录入
+        confirmTitle: $it("mT.matrixEntry"), // 矩阵录入
         titleAlign: "left", // 设置标题是否居中 center left
         width: "860",
         scrollable: false, // 是否可以滚动
@@ -1252,7 +1252,7 @@ export default {
       labelDefaultValue: "1", // 设置tab默认值
       orderNo: {
         refFuns: "confirmFun",
-        confirmTitle: $it("modalTitle.matrixEntry"), // 矩阵录入
+        confirmTitle: $it("mT.matrixEntry"), // 矩阵录入
         titleAlign: "left", // 设置标题是否居中 center left
         width: "800",
         scrollable: false, // 是否可以滚动
@@ -1869,7 +1869,7 @@ export default {
         if (data[0].WHETHER_VIRTUAL_PRODUCTION) {
           // 虚拟字段的处理
           self.$Modal.info({
-            title: $it("modalTitle.tips"), // 提示
+            title: $it("mT.tips"), // 提示
             // content: `${skuCode}条码为虚拟条码，是否继续添加？`,
             content: data[0].VIRTUAL_GOODS_NOTICE,
             mask: true,
@@ -2003,7 +2003,7 @@ export default {
       const masterArr = Object.keys(self.modify.master);
       if (masterArr.length) {
         this.$Modal.info({
-          title: $it("modalTitle.tips"), // 提示
+          title: $it("mT.tips"), // 提示
           content: "当前修改未保存，确定返回？",
           className: 'ark-dialog',
           mask: true,

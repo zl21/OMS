@@ -124,7 +124,7 @@
         <Modal
           v-model="addItem.modal"
           :mask="true"
-          :title="$it('modalTitle.originalChargebackDetails')"
+          :title="$it('mT.originalChargebackDetails')"
           :width="800"
           @on-cancel="addItemCancel"
           @on-ok="onAddItem"

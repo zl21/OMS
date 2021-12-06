@@ -55,9 +55,9 @@ export default {
         return;
       }
       // 库存按查询条件同步
-      // if (self.$parent.title === $it('modalTitle.z0')) url = '/p/cs/storage/manualSynchChannelStorageByQuery';
+      // if (self.$parent.title === $it('mT.z0')) url = '/p/cs/storage/manualSynchChannelStorageByQuery';
       // // 商品按查询条件同步
-      // else if (self.$parent.title === $it('modalTitle.z1')) url = '/p/cs/storage/manualCalcAndSynchChannelProduct';
+      // else if (self.$parent.title === $it('mT.z1')) url = '/p/cs/storage/manualCalcAndSynchChannelProduct';
       // let paramsObj = self.$parent.$parent.formObj.fixedcolumns;
       // 获取搜索form表单的对象
       const param = {};

@@ -60,7 +60,7 @@ export default {
                     key: 'objid'
                   },
                   {
-                    title: $it('modalTitle.a5'), // '报错信息'
+                    title: $it('mT.a5'), // '报错信息'
                     key: 'message'
                   }
                 ],

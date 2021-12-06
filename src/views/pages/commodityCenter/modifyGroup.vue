@@ -37,7 +37,7 @@
       </Collapse>
       <Modal
         v-model="isClearItem"
-        :title="$it('modalTitle.tips')"
+        :title="$it('mT.tips')"
         @on-ok="clearItem"
         @on-cancel="unClearItem"
       >

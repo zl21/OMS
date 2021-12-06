@@ -11,7 +11,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         // confirmTitle: '导入',
-        confirmTitle: $it('modalTitle.import'),
+        confirmTitle: $it('mT.import'),
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '652',
         scrollable: false, // 是否可以滚动

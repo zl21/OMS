@@ -880,7 +880,7 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
-          title: window.$it('modalTitle.tips'), // 提示
+          title: window.$it('mT.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,

@@ -19,7 +19,7 @@ export default {
       // 修改仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.a3'), // 请选择仓库
+        confirmTitle: $it('mT.a3'), // 请选择仓库
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '760',
         scrollable: false, // 是否可以滚动
@@ -37,7 +37,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.import'),
+        confirmTitle: $it('mT.import'),
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动

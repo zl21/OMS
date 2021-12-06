@@ -15,7 +15,7 @@ export default {
       isShowFromLoading: false, // 加载
       matrixBox: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.matrixEntry'), // 矩阵录入
+        confirmTitle: $it('mT.matrixEntry'), // 矩阵录入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '860',
         scrollable: false, // 是否可以滚动
@@ -1108,7 +1108,7 @@ export default {
       labelDefaultValue: '1', // 设置tab默认值
       orderNo: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.matrixEntry'), // 矩阵录入
+        confirmTitle: $it('mT.matrixEntry'), // 矩阵录入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '800',
         scrollable: false, // 是否可以滚动
@@ -1545,7 +1545,7 @@ export default {
       const warnFlag = self.saveWarnCheck(data);
       if (warnFlag) {
         self.$Modal.info({
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,
@@ -1625,7 +1625,7 @@ export default {
       const warnFlag = self.saveWarnCheck(data);
       if (warnFlag) {
         self.$Modal.info({
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: $it('modalTips.g1'), // 订单存在非赠品的成交金额为0， 是否确定保存订单？
           mask: true,
           showCancel: true,

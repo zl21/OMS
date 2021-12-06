@@ -439,7 +439,7 @@ export default {
     },
     fnerrtab(data, type) {
       let columns = [];
-      let title = $it('modalTitle.a7'); //"提示框"
+      let title = $it('mT.a7'); //"提示框"
       if (type == 1) {
         //1表示手工和强制的错误信息 2表示清楚的错误信息
         columns = [
@@ -456,7 +456,7 @@ export default {
             key: 'message',
           },
         ];
-        title = $it('modalTitle.a9'); //"匹配失败提示框"
+        title = $it('mT.a9'); //"匹配失败提示框"
       } else {
         columns = [
           {
@@ -468,7 +468,7 @@ export default {
             key: 'message',
           },
         ];
-        title = $it('modalTitle.aa'); //"清除失败提示框"
+        title = $it('mT.aa'); //"清除失败提示框"
       }
 
       this.$Modal.confirm({

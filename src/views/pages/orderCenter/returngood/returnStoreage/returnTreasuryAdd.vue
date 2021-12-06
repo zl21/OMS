@@ -45,7 +45,7 @@
           class="queryorder"
           :closable="true"
           :mask="true"
-          :title="$it('modalTitle.query_OriginalOrderNo')"
+          :title="$it('mT.query_OriginalOrderNo')"
           @on-ok="queryorder"
           @on-cancel="querycancel"
         >

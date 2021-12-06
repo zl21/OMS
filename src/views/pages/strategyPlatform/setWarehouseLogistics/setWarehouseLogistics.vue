@@ -192,7 +192,7 @@
     <!-- 导出 -->
     <Modal
       v-model="warningModal"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       width="420"
       :mask="true"
       @on-ok="warningOk"
@@ -202,7 +202,7 @@
     </Modal>
     <Modal
       v-model="saveModal"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       width="420"
       :mask="true"
       @on-ok="saveOk"

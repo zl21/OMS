@@ -221,7 +221,7 @@ export default {
       }
       if (self.tableConfig.updateData.length) {
         this.$Modal.info({
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           className: 'ark-dialog',
           mask: true,

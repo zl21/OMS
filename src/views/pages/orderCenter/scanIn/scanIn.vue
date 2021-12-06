@@ -74,7 +74,7 @@
     <!-- 扫描发出条码无对应明细时提示弹框 -->
     <Modal
       v-model="isModal"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       @on-cancel="cancel1"
       @on-keydown="keydown1"
       @on-ok="ok1"
@@ -85,7 +85,7 @@
     <!-- 退货单无头件提示 -->
     <Modal
       v-model="isModal2"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       @on-cancel="cancel2"
       @on-keydown="keydown2"
       @on-ok="ok2"
@@ -94,7 +94,7 @@
       <p>{{ $it("modalTips.h5") }}</p>
     </Modal>
     <!-- 失败提示 -->
-    <Modal v-model="isModal3" :title="$it('modalTitle.tips')">
+    <Modal v-model="isModal3" :title="$it('mT.tips')">
       <p>{{ errModelTitle }}</p>
     </Modal>
     <!-- 提示音 -->

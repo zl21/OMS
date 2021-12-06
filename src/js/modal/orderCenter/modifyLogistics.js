@@ -137,7 +137,7 @@ export default {
               } else {
                 self.$Modal.error({
                   // title: "提示",
-                  title: $it('modalTitle.tips'),
+                  title: $it('mT.tips'),
                   render: h => h('div', {}, [
                     h(
                       'p',

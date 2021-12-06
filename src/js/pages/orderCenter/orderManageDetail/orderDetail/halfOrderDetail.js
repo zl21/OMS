@@ -83,7 +83,7 @@ export default {
       isDetailMatrix: true,
       tipsDialog: {
         show: false, // 控制警告弹框显示
-        title: $it('modalTitle.warning'), // '警告', // 弹框标题
+        title: $it('mT.warning'), // '警告', // 弹框标题
         type: 'warning', // 类型警告
         backBtn: true, // 是否显示返回按钮
         errorList: [

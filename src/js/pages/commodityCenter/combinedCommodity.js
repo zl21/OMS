@@ -634,7 +634,7 @@ export default {
       // 弹框配置 导入
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.import'), // 导入
+        confirmTitle: $it('mT.import'), // 导入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -936,7 +936,7 @@ export default {
                           self.jordanTableConfig1.data[`${params.index}`].GROUP_EXTRACT_NUM = e.target.value;
                           const reg = /^[0-9]*$/;
                           if (!reg.test(e.target.value)) {
-                            self.$Message.warning($it('modalTitle.w1')); // 每组抽取行数只能录入正整数
+                            self.$Message.warning($it('mT.w1')); // 每组抽取行数只能录入正整数
                           }
                         }
                       }

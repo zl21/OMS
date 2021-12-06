@@ -397,7 +397,7 @@ export default {
       } = await this.service.systemConfig.copyShopPermission(param);
       if (code === 0) {
         this.$Modal.success({
-          title: $it('modalTitle.tips'),
+          title: $it('mT.tips'),
           content: message,
           cancelType: true,
           titleAlign: 'left',

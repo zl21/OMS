@@ -12,7 +12,7 @@
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
-        <p>{{ $it("modalTitle.th1") }}</p>
+        <p>{{ $it("mT.th1") }}</p>
         <!-- <div class="search">
           <div class="skuBox">
             <re-form :form-config="formConfig" />
@@ -46,7 +46,7 @@
       </div>
       <div class="i_body1">
         <!-- <p>替换后商品SKU</p> -->
-        <p>{{ $it("modalTitle.th2") }}</p>
+        <p>{{ $it("mT.th2") }}</p>
         <!-- <div class="search">
           <div class="skuBox">
             <re-form :form-config="replaceFormConfig" />

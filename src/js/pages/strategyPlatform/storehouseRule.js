@@ -327,7 +327,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.ab'),//'分仓策略-导入',
+        confirmTitle: $it('mT.ab'),//'分仓策略-导入',
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -1032,7 +1032,7 @@ export default {
         if (this.changeCount > 0) {
           this.$Modal.info({
             className: 'ark-dialog',
-            title: $it('modalTitle.tips'), // 提示
+            title: $it('mT.tips'), // 提示
             content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
             mask: true,
             showCancel: true,
@@ -1048,7 +1048,7 @@ export default {
       } else if (this.changeCount > 3) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,

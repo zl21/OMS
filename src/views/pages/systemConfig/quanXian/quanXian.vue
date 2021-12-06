@@ -61,7 +61,7 @@
     />
     <Modal
       v-model="saveModal"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       @on-ok="saveOk"
       @on-cancel="saveCancel"
     >

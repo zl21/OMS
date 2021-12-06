@@ -14,7 +14,7 @@
         </Panel>
         <Panel name="panel_conds">
           <!-- 满足条件（满足以下条件的单据打“播”标） -->
-          {{ $it('fL.meet_conditions') }}（{{ $it('modalTitle.ae') }}）
+          {{ $it('fL.meet_conditions') }}（{{ $it('mT.ae') }}）
           <p slot="content">
             <OmsForm :form-config="formConfig2">
               <template #timeType="{ rowData }">

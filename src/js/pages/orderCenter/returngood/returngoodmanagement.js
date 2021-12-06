@@ -39,7 +39,7 @@ export default {
       isModalSave: false, // 是否弹窗保存
       matrixBox: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.matrixEntry'), // 矩阵录入
+        confirmTitle: $it('mT.matrixEntry'), // 矩阵录入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '860',
         scrollable: false, // 是否可以滚动

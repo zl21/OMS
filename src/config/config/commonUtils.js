@@ -260,7 +260,7 @@ class commonUtils {
   //  */
   // static tipShow(type, self, res, isTitle, renderFun) {
   //   self.$Modal[type]({
-  //     title: isTitle ?? $it('modalTitle.tips'), // 提示
+  //     title: isTitle ?? $it('mT.tips'), // 提示
   //     content: renderFun ?? res.data.message,
   //     cancelType: true,
   //     titleAlign: 'left',
@@ -287,7 +287,7 @@ class commonUtils {
   //  */
   static modalShow(self, tips, okKey, data, ...callback) {
     self.$Modal.info({
-      title: $it('modalTitle.tips'), // 提示
+      title: $it('mT.tips'), // 提示
       content: $it(`modalTips.${tips}`),
       mask: true,
       showCancel: true,

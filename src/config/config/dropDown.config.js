@@ -196,7 +196,7 @@ class DropDownConfig {
     if (self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 1) {
       self.publicBouncedConfig.name = 'addGiftDialog'
       self.publicBouncedConfig.url = require('@/views/modal/orderCenter/addGiftItem.vue').default
-      self.publicBouncedConfig.confirmTitle = $it('modalTitle.ah') // 批量替换下挂商品
+      self.publicBouncedConfig.confirmTitle = $it('mT.ah') // 批量替换下挂商品
       self.publicBouncedConfig.componentData = {
         data: self.selection,
         type: 'replace',
@@ -302,7 +302,7 @@ class DropDownConfig {
       self.publicBouncedConfig.name = 'ORDER_COPY_AF_SALE'
       // self.publicBouncedConfig.url = 'modal/orderCenter/afterSaleCopy'
       self.publicBouncedConfig.url = require('@/views/modal/orderCenter/afterSaleCopy.vue').default
-      self.publicBouncedConfig.confirmTitle = $it('modalTitle.ag') // 售后复制
+      self.publicBouncedConfig.confirmTitle = $it('mT.ag') // 售后复制
       self.publicBouncedConfig.componentData = { id: self.selection[0].ID }
       self.publicBouncedConfig.width = 400
       setTimeout(() => {

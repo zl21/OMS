@@ -765,7 +765,7 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: window.$it('modalTitle.tips'), // 提示
+                        title: window.$it('mT.tips'), // 提示
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
@@ -797,7 +797,7 @@ export default {
                 if (!this.pickingTableConfig.data.length) return;
                 this.$Modal.info({
                   className: 'ark-dialog',
-                  title: window.$it('modalTitle.tips'), // 提示
+                  title: window.$it('mT.tips'), // 提示
                   content: '当前切换操作会清空已录入的按时间点创建/按未拣货数创建内容，确定继续吗？',
                   mask: true,
                   showCancel: true,
@@ -975,7 +975,7 @@ export default {
                   on: {
                     click: () => {
                       this.$Modal.info({
-                        title: window.$it('modalTitle.tips'), // 提示
+                        title: window.$it('mT.tips'), // 提示
                         content: '确定删除？',
                         mask: true,
                         showCancel: true,
@@ -1187,7 +1187,7 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
-          title: window.$it('modalTitle.tips'), // 提示
+          title: window.$it('mT.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,

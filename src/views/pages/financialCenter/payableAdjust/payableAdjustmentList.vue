@@ -54,7 +54,7 @@
     <!-- 导出 -->
     <Modal
       v-model="warningModal"
-      :title="$it('modalTitle.warning')"
+      :title="$it('mT.warning')"
       width="420"
       :mask="true"
       @on-ok="warningOk"

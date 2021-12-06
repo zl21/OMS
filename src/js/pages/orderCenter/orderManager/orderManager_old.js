@@ -1095,7 +1095,7 @@ export default {
         if (res.data.code == 0) {
           this.$Modal.confirm({
             className: 'ark-dialog',
-            title: $it('modalTitle.tips'),
+            title: $it('mT.tips'),
             content: res.data.message,
             showCancel: true,
             mask: true,

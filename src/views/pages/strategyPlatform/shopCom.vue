@@ -522,7 +522,7 @@ export default {
             },
             {
               webname: 'ST_C_PRICE_SUB_IMPORT',
-              text: $it('modalTitle.import'), // 导入
+              text: $it('mT.import'), // 导入
               isShow: true,
               disabled: false, // 按钮禁用控制
               btnclick: () => {
@@ -543,7 +543,7 @@ export default {
       },
       importTable: {
         refFuns: 'confirmFun',
-        confirmTitle: $it('modalTitle.import'), // 导入
+        confirmTitle: $it('mT.import'), // 导入
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
@@ -809,7 +809,7 @@ export default {
       if (this.isModify) {
         this.$Modal.info({
           className: 'ark-dialog',
-          title: $it('modalTitle.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: $it('modalTips.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
@@ -883,7 +883,7 @@ export default {
       let isShowTableBtn = this.isEnable ? false : !this.isCopy
       let addBtn = this.queryBtn(this.btnConfig, $it('com.copy'))
       let delBtn = this.queryBtn(tableBtnConfig, $it('btn.deleteDetail'))
-      let importBtn = this.queryBtn(tableBtnConfig, $it('modalTitle.import'))
+      let importBtn = this.queryBtn(tableBtnConfig, $it('mT.import'))
       addBtn && (addBtn.isShow = isEdit) // 复制
       delBtn && (delBtn.isShow = isShowTableBtn) // 删除明细
       importBtn && (importBtn.isShow = isShowTableBtn) // 导入

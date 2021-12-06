@@ -7,7 +7,7 @@
         @click="importData"
       >
         <!-- 批量导入 -->
-        {{ $it("modalTitle.batchImport") }}
+        {{ $it("mT.batchImport") }}
       </Button>
     </div>
     <div

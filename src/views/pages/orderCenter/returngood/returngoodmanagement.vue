@@ -152,7 +152,7 @@
           width="900"
           :closable="true" 
           :mask="true"
-          :title="$it('modalTitle.query_OriginalOrderNo')"
+          :title="$it('mT.query_OriginalOrderNo')"
           @on-ok="queryorder"
           @on-cancel="querycancel"
         >
@@ -193,7 +193,7 @@
     <Modal
       v-model="availableStock"
       class="available"
-      :title="$it('modalTitle.tips')"
+      :title="$it('mT.tips')"
       width="400"
       :mask-closable="false"
       :mask="true"
@@ -208,7 +208,7 @@
     <Modal
       v-model="returnDetailAddTable.modal"
       class="detailAdd"
-      :title="$it('modalTitle.newReturnDetails')"
+      :title="$it('mT.newReturnDetails')"
       @on-ok="resetReturnMainTable"
       @on-cancel="detailAddCancel"
     >

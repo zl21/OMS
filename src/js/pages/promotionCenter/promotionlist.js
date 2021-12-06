@@ -799,7 +799,7 @@ export default {
       }
       this.$Modal.info({
         className: 'ark-dialog',
-        title: $it('modalTitle.tips'), // 提示
+        title: $it('mT.tips'), // 提示
         content: '确定执行下线操作？',
         mask: true,
         showCancel: true,
