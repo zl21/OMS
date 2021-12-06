@@ -6,7 +6,7 @@
         <input
           v-model="search"
           type="text"
-          :placeholder="$it('pHolder.organizationCode_or_name')"
+          :placeholder="$it('pH.organizationCode_or_name')"
           @keyup.enter="searchNode"
         />
         <i class="iconfont icon-sousuo" @click="handleIconClick" />
@@ -25,7 +25,7 @@
         <input
           v-model="middleSearch"
           type="text"
-          :placeholder="$it('pHolder.userName')"
+          :placeholder="$it('pH.userName')"
           @keyup.enter="searchMiddleData"
         />
         <i class="iconfont icon-sousuo" @click="handleMiddleIconClick" />

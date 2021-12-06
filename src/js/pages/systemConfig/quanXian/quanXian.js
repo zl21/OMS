@@ -179,7 +179,7 @@ export default {
       }
     };
     this.searchBtnConfig.buttons.push(btnSearchObj);
-    this.filterTreeConfig.placeholder = $it('pHolder.enter');
+    this.filterTreeConfig.placeholder = $it('pH.enter');
   },
   methods: {
     treeChange(val, obj) {

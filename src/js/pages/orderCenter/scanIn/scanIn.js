@@ -1820,7 +1820,7 @@ export default {
         {
           label: $it('form_label.chargebackNumber'), // 退单编号
           column: 'docno',
-          placeholder: $it('pHolder.chargebackNumber'), // 请输入退单编号
+          placeholder: $it('pH.chargebackNumber'), // 请输入退单编号
           type: 'Input',
           componentAttribute: {},
           value: '',
@@ -1834,7 +1834,7 @@ export default {
         {
           label: $it('form_label.phone_number'), // 手机号码
           column: 'test1',
-          placeholder: $it('pHolder.phone_number'), // 请输入手机号码
+          placeholder: $it('pH.phone_number'), // 请输入手机号码
           type: 'Input',
           componentAttribute: {},
           value: '',
@@ -1848,7 +1848,7 @@ export default {
         {
           label: $it('form_label.consignee'), // 收货人
           column: 'test2',
-          placeholder: $it('pHolder.consignee'), // 请输入收货人
+          placeholder: $it('pH.consignee'), // 请输入收货人
           type: 'Input',
           componentAttribute: {},
           value: '',

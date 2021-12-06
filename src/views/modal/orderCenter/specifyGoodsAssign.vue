@@ -182,7 +182,7 @@ export default {
       // sku查询
       const self = this;
       if (!self.itemdata.valuedata && !self.searchValue) {
-        self.$Message.warning($it("pHolder.z4")); // 请输入商品SKU
+        self.$Message.warning($it("pH.z4")); // 请输入商品SKU
         return;
       }
       const res = await self.service.common.selSku({ ECODE: self.itemdata.valuedata });
@@ -203,7 +203,7 @@ export default {
     search: _.debounce(async function () {
       const self = this;
       if (!self.itemdata.valuedata && !self.searchValue) {
-        self.$Message.warning($it("pHolder.z4")); // 请输入商品SKU
+        self.$Message.warning($it("pH.z4")); // 请输入商品SKU
         return;
       }
       const res = await self.service.common.selSku({ ECODE: self.itemdata.valuedata });

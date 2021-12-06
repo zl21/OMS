@@ -110,11 +110,11 @@ export default {
       return false;
     }
     if (formValue.orderNum === '') {
-      self.$Message.warning($it('pHolder.z1'));// 请输入平台单号
+      self.$Message.warning($it('pH.z1'));// 请输入平台单号
       return;
     }
     if (formValue.orderStatus === undefined) {
-      self.$Message.warning($it('pHolder.z2'));// 请选择订单状态
+      self.$Message.warning($it('pH.z2'));// 请选择订单状态
       return;
     }
     const param = {

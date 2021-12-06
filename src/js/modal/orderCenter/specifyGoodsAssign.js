@@ -67,7 +67,7 @@ export default {
     async search() { // sku查询
       const self = this;
       if (!self.searchValue) {
-        self.$Message.warning($it('pHolder.z4'));// 请输入商品SKU
+        self.$Message.warning($it('pH.z4'));// 请输入商品SKU
         return;
       }
       const query = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };

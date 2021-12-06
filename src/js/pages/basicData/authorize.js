@@ -743,7 +743,7 @@ export default {
       this.REQUEST_ID = ''
     },
     fnMessage(msg) {
-      this.$Message.error($it('pHolder.enter')+`${msg}!`)
+      this.$Message.error($it('pH.enter')+`${msg}!`)
     },
     fnSave() {
       let str = ''

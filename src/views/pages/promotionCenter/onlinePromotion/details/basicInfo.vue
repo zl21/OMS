@@ -158,7 +158,7 @@
             <Input
               v-model="basicData.order_note_content"
               oninput="this.value=this.value.replace(/ /g,'')"
-              :placeholder="$it('pHolder.a0')"
+              :placeholder="$it('pH.a0')"
             />
           </div>
         </div>

@@ -61,7 +61,7 @@
                       v-model="rowData.value.AOTU_APPROVE_DEVIATION_PRICE"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange"
                       :regx="rowData.item.regx"
                       style="width: 150px;"
@@ -118,7 +118,7 @@
                       :maxlength="250"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange"
                       style="width: 150px;"
                     />
@@ -152,7 +152,7 @@
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
                       :regx="rowData.item.regx"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange"
                       style="width: 150px;"
                     />
@@ -186,7 +186,7 @@
                       :maxlength="250"
                       :disabled="isEnable"
                       :autosize="{minRows: 2,maxRows: 5}"
-                      :placeholder="$it('pHolder.enter')"
+                      :placeholder="$it('pH.enter')"
                       @on-change="rowData.item.inputChange2"
                       style="width: 400px;"
                     />

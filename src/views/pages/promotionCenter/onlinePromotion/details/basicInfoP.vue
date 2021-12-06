@@ -211,7 +211,7 @@ export default {
             colname: "order_note_content",
             label: $it("form_label.remarks_content"),
             width: "12",
-            placeholder: $it('pHolder.a0'),
+            placeholder: $it('pH.a0'),
             inputChange: () => {
               const onc = this.formConBasic.formValue.order_note_content.replace(/ /g, '');
               this.basicData.order_note_content = onc;

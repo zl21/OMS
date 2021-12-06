@@ -275,7 +275,7 @@ export default {
             width: '6',
             icon: 'ios-search',
             // placeholder: '输入后请按Enter',
-            placeholder: $it("pHolder.a4"),
+            placeholder: $it("pH.a4"),
             rules: true,
             ghost: false, // 是否关闭幽灵按钮，默认开启
             inputenter: () => {

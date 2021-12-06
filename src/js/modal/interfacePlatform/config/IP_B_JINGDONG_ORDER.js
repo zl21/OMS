@@ -71,7 +71,7 @@ export default {
         value: 'orderNum', // 输入框的值
         width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
         icon: '', // 输入框后带的图标,暂只有输入框支持
-        placeholder: $it('pHolder.z0'), // 多个平台单号，用逗号分隔 占位文本，默认为请输入
+        placeholder: $it('pH.z0'), // 多个平台单号，用逗号分隔 占位文本，默认为请输入
         ghost: false, // 是否关闭幽灵按钮，默认开启
         inputenter: () => { }, // 表单回车事件
         iconclick: () => { } // 点击icon图标事件
