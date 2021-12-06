@@ -35,23 +35,23 @@ export default {
       objid: -1,
       lists: [
         {
-          label: '品牌',
+          label: $it('tL.brand'), // 品牌
           click: () => this.setVariable('品牌'),
         },
         {
-          label: '订单号',
+          label: $it('fL.orderNumber'), // 订单号
           click: () => this.setVariable('订单号'),
         },
         {
-          label: '入库单号',
+          label: '入库单号', // 入库单号
           click: () => this.setVariable('入库单号'),
         },
         {
-          label: '到货仓',
+          label: '到货仓', // 到货仓
           click: () => this.setVariable('到货仓'),
         },
         {
-          label: '商品总数量',
+          label: '商品总数量', // 商品总数量
           click: () => this.setVariable('商品总数量'),
         },
       ],
@@ -117,8 +117,19 @@ export default {
       //      })
       //    }
       // });
-
-      const rows = ['平台单号', '收货人', '买家昵称', '本单件数', '原单件数', '快递公司', '物流单号', '支付时间', '入库日期', '出库日期'];
+      // '平台单号', '收货人', '买家昵称', '本单件数', '原单件数', '快递公司', '物流单号', '支付时间', '入库日期', '出库日期'
+      const rows = [
+        $it('fL.platform_billNo'), // 平台单号
+        $it('fL.consignee'), // 收货人
+        $it('tL.buyerNickname'), // 买家昵称
+        $it('tL.buyerNickname'), // 本单件数
+        '原单件数', 
+        $it('tL.expressCompany'), // 快递公司
+        $it('fL.logisticsOrder_No'), // 物流单号
+        $it('fL.bj'), // 支付时间
+        '入库日期', 
+        $it('fL.out_date') // 出库日期
+      ];
       self.lists = rows.map((row) => ({
         label: row,
         click: () => self.setVariable(row),
@@ -196,7 +207,7 @@ export default {
       params.append('param', JSON.stringify(obj));
       const { data } = await this.service.strategyPlatform.saveCurrent(params);
       if (data.code !== 0) {
-        self.$Message.error('保存失败');
+        self.$Message.error($it('tip.y0')); // 保存失败
       }
 
       // return axios({

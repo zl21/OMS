@@ -292,17 +292,23 @@ export default {
         if (data.add[this.tablename].CP_C_STORE_ID) id = data.add[this.tablename].CP_C_STORE_ID;
         if (!id && data.add[this.tablename].CP_C_DEST_ID) id = data.add[this.tablename].CP_C_DEST_ID;
         if (!id && data.add[this.tablename].CP_C_ORIG_ID) id = data.add[this.tablename].CP_C_ORIG_ID;
+        if (!id && data.add[this.tablename].SEND_STORE_ID) id = data.add[this.tablename].SEND_STORE_ID;
+        if (!id && data.add[this.tablename].GET_STORE_ID) id = data.add[this.tablename].GET_STORE_ID;
         if (!id && data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.add[this.tablename].CP_C_PHY_WAREHOUSE_ID;
       } else if (Object.keys(data.modify).length !== 0) {
         if (Object.keys(data.default).length && data.modify[this.tablename].CP_C_STORE_ID) id = data.modify[this.tablename].CP_C_STORE_ID;
         if (!id && data.modify[this.tablename].CP_C_DEST_ID) id = data.modify[this.tablename].CP_C_DEST_ID;
         if (!id && data.modify[this.tablename].CP_C_ORIG_ID) id = data.modify[this.tablename].CP_C_ORIG_ID;
+        if (!id && data.modify[this.tablename].SEND_STORE_ID) id = data.modify[this.tablename].SEND_STORE_ID;
+        if (!id && data.modify[this.tablename].GET_STORE_ID) id = data.modify[this.tablename].GET_STORE_ID;
         if (!id == '' && data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.modify[this.tablename].CP_C_PHY_WAREHOUSE_ID;
       }
       if (!id && Object.keys(data.default).length !== 0) {
         if (data.default[this.tablename].CP_C_STORE_ID) id = data.default[this.tablename].CP_C_STORE_ID;
         if (!id && data.default[this.tablename].CP_C_DEST_ID) id = data.default[this.tablename].CP_C_DEST_ID;
         if (!id && data.default[this.tablename].CP_C_ORIG_ID) id = data.default[this.tablename].CP_C_ORIG_ID;
+        if (!id && data.default[this.tablename].SEND_STORE_ID) id = data.default[this.tablename].SEND_STORE_ID;
+        if (!id && data.default[this.tablename].GET_STORE_ID) id = data.default[this.tablename].GET_STORE_ID;
         if (!id && data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID) this.cp_c_phy_warehouse_id = data.default[this.tablename].CP_C_PHY_WAREHOUSE_ID;
       }
 

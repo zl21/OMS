@@ -7,23 +7,23 @@ export default {
       TableData: [], // 日志数据
       TableColumns: [
         {
-          title: '修改内容',
+          title: $it('table_label.revised_content'), // 修改内容
           key: 'modcontent'
         },
         {
-          title: '修改前',
+          title: $it('tL.before_modification'), // 修改前
           key: 'BMOD'
         },
         {
-          title: '修改后',
+          title: $it('tL.after_modification'), // 修改后
           key: 'AMOD'
         },
         {
-          title: '修改人',
+          title: $it('table_label.reviser'), // 修改人
           key: 'modifierename'
         },
         {
-          title: '修改时间',
+          title: $it('tL.modificationTime'), // 修改时间
           key: 'modifieddate',
           sortable: true
         }
@@ -36,14 +36,14 @@ export default {
         typeAll: 'error', // 按钮统一风格样式
         buttons: [
           {
-            text: '保存', // 查找 按钮文本
+            text: $it('btn.save'), // 保存
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.save();
             } // 按钮点击事件
           },
           {
-            text: '刷新',
+            text: $it('btn.refresh'), // '刷新',
             btnclick: async () => {
               this.loading = true;
               await this.queryLogisticsCompany();
@@ -53,7 +53,7 @@ export default {
             }
           },
           {
-            text: '返回', // 查找 按钮文本
+            text: $it('btn.back'), // 返回
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               R3.store.commit('global/tabOpen', {
@@ -80,7 +80,7 @@ export default {
       pageSize: 10, // c
       defaultSelected: [],
       AutoData: [],
-      dataEmptyMessage: '数据加载中...', // c
+      dataEmptyMessage: $it('tip.du'), // 数据加载中...
       columns: ['name', 'value'], // 展现的组
       IS_AUTOCHECK_ORDER: false,
       IS_AUTOCHECK_PAY: false,

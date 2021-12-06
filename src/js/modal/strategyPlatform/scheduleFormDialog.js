@@ -40,6 +40,7 @@ export default {
           },
           {
             text: $it('common.determine'), // 确定
+            type: 'posdefault',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
