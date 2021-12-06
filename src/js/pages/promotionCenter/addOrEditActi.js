@@ -116,14 +116,14 @@ export default {
       const tablename = '商品池';
       let rs = {
         code: 0,
-        message: '校验完成'
+        message: $it('tip.s4')
       };
       rs = this.checkTable(this.gift_info_setting.gift_commoditylist);
       if (rs.code === -1) {
         rs.message = `${tablename},${rs.message}`;
         // return this.$Message.error(rs.message);
       }
-      rs.message = `${tablename},保存成功`;
+      rs.message = `${tablename},${$it('tip.z9')}}`;
       this.$Message.success(rs.message);
       this.closeDialog();
     },
@@ -489,7 +489,7 @@ export default {
           if (rows.length === 0) {
             return {
               code: -1,
-              message: `表格【${tab.group}】,无数据`
+              message: `表格【${tab.group}】,${$it('tip.r6')}`
             };
           }
         } else {
@@ -508,7 +508,7 @@ export default {
         if (giftRows.length === 0) {
           return {
             code: -1,
-            message: '无数据'
+            message: $it('tip.r6')
           };
         }
       }
