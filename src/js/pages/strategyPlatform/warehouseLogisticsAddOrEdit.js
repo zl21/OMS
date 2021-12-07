@@ -615,7 +615,7 @@ export default {
     // 删除明细
     async deleteLogisticsCorp() {
       let partArrs = this.logisticsTableConfig.selectionData;
-      if (!partArrs.length) return this.$Message.warning('请先选择需要删除的记录！');
+      if (!partArrs.length) return this.$Message.warning($it('tip.hy')); // 请先选择需要删除的记录！
       let allArrs = this.logisticsTableConfig.data;
       const ids = partArrs.map(i => i.ID).join(',');
       const {

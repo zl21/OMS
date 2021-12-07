@@ -159,7 +159,9 @@ export default {
      * 作废
      */
     deleteAuthority() {
-      this.$confirm('确认执行作废？', $it('mT.warning'), {
+      this.$confirm(
+        $it('tip.lk'), // 确认执行作废？
+        $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
@@ -340,10 +342,12 @@ export default {
      */
     delFun2(multipleSelection, tableName, type) {
       if (!multipleSelection.length) {
-        this.$Message.warning('请先选择需要删除的记录！');
+        this.$Message.warning($it('tip.hy')); // 请先选择需要删除的记录！
         return
       }
-      this.$confirm('确认执行删除?', $it('mT.warning'), {
+      this.$confirm(
+        $it('tip.lk'), // 确认执行作废？
+        $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
@@ -627,7 +631,7 @@ export default {
       if (this.isChange) {
         this.$Modal.info({
           title: $it('mT.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定

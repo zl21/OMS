@@ -647,8 +647,8 @@ export default {
       }
       if (this.isChange2) {
         this.$confirm('当前页有未保存数据，是否需要保存？', $it('mT.warning'), {
-          confirmButtonText: '需要',
-          cancelButtonText: '取消',
+          confirmButtonText: $it('com.determine'), // 确定
+          cancelButtonText: $it('com.cancel'), // 取消
           confirmButtonClass: '',
           customClass: 'warning-alert',
           type: 'warning'
@@ -728,7 +728,9 @@ export default {
      * 作废
      */
     deleteAuthority() {
-      this.$confirm('确认执行作废？', $it('mT.warning'), {
+      this.$confirm(
+        $it('tip.lk'), // 确认执行作废？
+        $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
@@ -1012,7 +1014,7 @@ export default {
       if (this.isChange) {
         this.$Modal.info({
           title: $it('mT.tips'), // 提示
-          content: '当前修改未保存，确定返回？',
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           mask: true,
           showCancel: true,
           okText: $it('com.determine'), // 确定
