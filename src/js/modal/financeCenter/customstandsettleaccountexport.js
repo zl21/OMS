@@ -48,11 +48,14 @@
               btnclick: async () => {
                 const self = this;
                 const param = {
-                  id: self.$route.params.itemId
+                  id: self.$route.params.itemId,
                 };
                 const formdata = new FormData();
                 formdata.append('param', JSON.stringify(param));
-                const res = await self.service.financeCenter.settleAccountExport(formdata);
+                formdata.append('menu', 'o2o结算对账汇总主表',);
+                const res = await self.service.financeCenter.settleAccountExport(
+                  formdata,
+                );
                 if (res.data.code === 0) {
                   publicMethodsUtil.downloadUrlFile(res.data.data);
                   self.$emit('closeActionDialog', true);
