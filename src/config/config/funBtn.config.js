@@ -1754,8 +1754,13 @@ class BtnConfig {
       'all',
       function (res) {
         if (res.data.code === 0) {
+          const { shopId, skuIds } = res.data.data;
           self.publicBouncedConfig = DialogConfig.config().changeWarehouseConfig
-          self.publicBouncedConfig.componentData = tempObj
+          self.publicBouncedConfig.componentData = {
+            ...tempObj,
+            shopId,
+            skuIdList: skuIds
+          }
           setTimeout(() => {
             self.$children
               .find((item) => item.name === 'changeWarehouse')

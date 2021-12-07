@@ -1,5 +1,3 @@
-  // import comUtils from '@/assets/js/__utils__/common.js';
-
   export default {
     data() {
       return {

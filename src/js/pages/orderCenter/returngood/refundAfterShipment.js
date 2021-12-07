@@ -1488,7 +1488,7 @@ export default {
             //   a = a + Number(item.RETURNABLE_AMOUNT);
             // });
             // 申请退款金额
-            if (configItemLabel === $it('fL.apply_refundAmount')) {
+            if (configItemLabel === $it('fL.refundAmount')) {
               configItem.props.value = self.addItem.addList.reduce((sum, n) => sum + Number(n.RETURNABLE_AMOUNT || 0), 0);
             }
             // 退款金额

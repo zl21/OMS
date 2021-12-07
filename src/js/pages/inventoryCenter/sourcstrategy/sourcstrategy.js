@@ -1,4 +1,4 @@
-import { isFavoriteMixin } from "@/assets/js/mixins/isFavorite";
+import isFavoriteMixin from "@/assets/js/mixins/isFavorite";
 
 export default {
   components: {},
