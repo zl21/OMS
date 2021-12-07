@@ -59,7 +59,7 @@ export default {
             itemdata: {
               colid: 172220,
               colname: "CP_C_PHY_WAREHOUSE_ID",
-              name: "发货实体仓",
+              name: $it('fL.af'), // 发货实体仓
               valuedata: "",
               pid: "",
               fkdisplay: "mrp",
@@ -75,7 +75,7 @@ export default {
           },
           {
             style: 'select',
-            label: '承运商',
+            label: $it('fL.bz'), // 承运商
             value: 'CARRIER_CODE',
             width: '24',
             disabled: true,
@@ -94,7 +94,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: '航空禁运',
+            label: $it('fL.c0'), // 航空禁运
             colname: 'IS_AIR_EMBARGO_TEXT',
             value: 'IS_AIR_EMBARGO_TEXT', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -113,7 +113,7 @@ export default {
           },
           {
             style: 'time', // 输入框类型
-            label: '入库单结单时间',
+            label: $it('fL.c7'), // 入库单结单时间
             colname: 'STATEMENT_TIME',
             type: 'time',
             value: 'STATEMENT_TIME', // 输入框的值
@@ -223,33 +223,5 @@ export default {
         }
       });
     },
-    // getData(row) {
-    //   const arr = [];
-    //   row.forEach(item=>{
-    //     const obj = {};
-    //     for (const key in item) {
-    //       const val = {};
-    //       val.val = item[key];
-    //       obj[key] = val;
-    //     }
-    //     arr.push(obj);
-    //   });
-    //   return arr;
-    // },
-    // fkrpSelected(e) {
-    //   this.selectData = e;
-    //   this.getDeliveryMethod(e);
-    // },
-    // clear() {
-    //   this.defaultSelected = [];
-    //   this.selectData = [];
-    //   this.transportStyle.value = '';
-    //   this.transportStyle.text = '';
-    // },
-    // getDeliveryMethod(e) {
-    //   const val = this.list.filter(item => item.ID == e[0].ID)[0];
-    //   this.transportStyle.value = val.DELIVERY_METHOD;
-    //   this.transportStyle.text = val.DELIVERY_METHOD_NAME;
-    // }
   }
 };

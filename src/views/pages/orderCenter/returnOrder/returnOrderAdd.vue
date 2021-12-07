@@ -409,8 +409,7 @@ export default {
               colname: 'CP_C_PHY_WAREHOUSE_ID',
               fkdisplay: 'drp',
               isfk: true,
-              // name: '发货实体仓', // 发货实体仓
-              name: $it('fL.af'),
+              name: $it('fL.af'), // 发货实体仓
               pid: '',
               valuedata: '',
             },

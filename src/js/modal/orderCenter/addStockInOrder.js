@@ -31,7 +31,7 @@ export default {
         formData: [
           {
             style: 'input', // 输入框类型
-            label: '发货实体仓', // 输入框前文字
+            label: $it('fL.af'), // 发货实体仓
             colname: 'CP_C_PHY_WAREHOUSE_ENAME',
             value: 'CP_C_PHY_WAREHOUSE_ENAME', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)

@@ -39,7 +39,7 @@ export default {
             // title: "是否赠品",
             title: $it('tL.whetherGift'),
             render: (h, params) => {
-              const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
+              const IS_GIFT = params.row.IS_GIFT == 1 ? $it('com.yes') : $it('com.no');
               return h('span', {}, IS_GIFT);
             }
           },

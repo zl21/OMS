@@ -153,9 +153,9 @@ export default {
             render:(h,params)=>{
               let PRO_TYPE = ''
               if([1,2].includes(params.row.PRO_TYPE)){
-                  PRO_TYPE = '是'
+                  PRO_TYPE = $it('com.yes') // 是
               }else{
-                  PRO_TYPE = '否'
+                  PRO_TYPE = $it('com.no') // 否
               }
               return h('span', {}, PRO_TYPE);
             }

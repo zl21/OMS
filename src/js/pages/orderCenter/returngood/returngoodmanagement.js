@@ -534,11 +534,11 @@ export default {
             options: [
               {
                 value: 1,
-                label: '是',
+                label: $it('com.yes') // 是
               },
               {
                 value: 0,
-                label: '否',
+                label: $it('com.no') // 否
               },
             ],
           },
