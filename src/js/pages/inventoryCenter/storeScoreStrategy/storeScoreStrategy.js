@@ -91,7 +91,7 @@ export default {
           {
             webname: 'lookup_dianchangpingfen',
             type: 'posdefault',
-            text: window.$it('btn.find'), // 查找
+            text: $it('btn.find'), // 查找
             btnclick: () => {
               this.queryByPhyWarehouseId();
             }
@@ -99,7 +99,7 @@ export default {
           {
             webname: 'Newlyadded_dianchangpingfen',
             type: 'default',
-            text: window.$it('btn.add'), // 新增
+            text: $it('btn.add'), // 新增
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
                 id: 'New', // id
@@ -112,14 +112,14 @@ export default {
           {
             webname: 'del_dianchangpingfen',
             type: 'default',
-            text: window.$it('btn.delete'), // 删除
+            text: $it('btn.delete'), // 删除
             btnclick: () => {
               this.delFun()
             }
           },
           {
             webname: 'import_dianchangpingfen',
-            text: window.$it('btn.import'), // 导入
+            text: $it('btn.import'), // 导入
             btnclick: () => {
               this.importData()
             },
@@ -127,7 +127,7 @@ export default {
           {
             icon: `iconfont ${this.isFavorite ? 'iconbj_alrcol' : 'iconbj_col'} font-size-12`, // 按钮图标
             size: 'small', // 按钮大小
-            name: window.$it('btn.collection'), // 收藏
+            name: $it('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.setFavorite2();
@@ -185,7 +185,7 @@ export default {
               data.forEach((item) => {
                 if (item.colname === 'CONTENT') {
                   this.$confirm(item.valuedata, '成功', {
-                    confirmButtonText: '确定',
+                    confirmButtonText: $it('com.determine'), /*确定*/
                     showCancelButton: false,
                     customClass: 'success-alert',
                     type: 'success'
@@ -219,7 +219,7 @@ export default {
         fromdata.append('phyWarehouseId', storeId.join(','));
         this.service.inventoryCenter.deleteByStoreIds(fromdata).then((res) => {
           if (res.data.code === 0) {
-            this.$Message.success(window.$it('tip.ay')); // '删除成功'
+            this.$Message.success($it('tip.ay')); // '删除成功'
             this.queryByPhyWarehouseId()
           }
         })

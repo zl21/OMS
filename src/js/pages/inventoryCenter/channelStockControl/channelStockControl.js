@@ -1,24 +1,159 @@
 import CustomTable from 'framework/components/table/customTable.vue';
 import pageNation from 'framework/components/page/pagenation.vue';
-import propSelect from '@/commonPages/AutoForm/propSelect';
-import actionForm from '@/commonPages/AutoForm/actionForm';
-import selectTag from '@/commonPages/AutoForm/selectTag'
+import businessButton from 'professionalComponents/businessButton';
+import businessForm from 'professionalComponents/businessForm';
+import propSelect from '@/component/AutoForm/propSelect';
+import actionForm from '@/component/AutoForm/actionForm';
+import selectTag from '@/component/AutoForm/selectTag'
 import tableHeaderCustom from "allpages/inventoryCenter/channelStockControl/tableHeaderCustom.vue";
-import { setFormDataFunMixin } from "@/assets/js/mixins/setFormData";
-import { setActionFormMixin } from "@/assets/js/mixins/setActionFormData";
+import loading from '@/component/loading.vue';
+import {get, post} from '/src/service/request-for-mock';
+
+import {setFormDataFunMixin} from "@/assets/js/mixins/setFormData";
+import {setActionFormMixin} from "@/assets/js/mixins/setActionFormData";
+import dateUtil from "@/assets/js/__utils__/date";
 import copy from 'copy-to-clipboard';
+// import {debounce, throttle} from 'lodash'
 
 export default {
   mixins: [setFormDataFunMixin, setActionFormMixin],
   components: {
+    loading,
     selectTag,
     propSelect,
     actionForm,
     CustomTable,
+    businessForm,
+    businessButton,
     pageNation
   },
   data() {
     return {
+      btnList: [],
+      actionFunList: {
+        // 下载全店在售库存
+        downloadAllShopSaleStorage: () => {
+          this.downloadAllShopSaleStorageFun()
+        },
+        // 下载平台商品
+        itemDownload: () => {
+          this.downDialogFun('下载平台商品')
+        },
+        // 下载平台库存
+        platformInventory: () => {
+          this.downDialogFun2('下载平台库存')
+        },
+        // 同步库存
+        saveDevOpsInfo: () => {
+          this.hasSelectionData(() => {
+            this.dialogObj1.show = true
+          })
+        },
+        // 是否转仓
+        'channel/saveDevOpsInfo': () => {
+          this.hasSelectionData(() => {
+            this.dialogObj2.show = true
+          })
+        },
+        // 修改商品类型
+        updateBySaStoreType: () => {
+          this.hasSelectionData(() => {
+            this.modifyTypeDialogObjShow = true
+          })
+        },
+        // 设定安全库存
+        '/sg/channel/saveDevOpsInfo': () => {
+          this.hasSelectionData(() => {
+            this.dialogObj3.show = true
+          })
+        },
+        // 全量库存同步
+        'syncChannelStorage': () => {
+          this.hasSelectionData(() => {
+            this.$confirm('是否确定全量库存同步？', $it('mT.warning'), {
+              confirmButtonText: $it('com.determine'),/*确定*/
+              cancelButtonText: $it('com.cancel'), /*取消*/
+              confirmButtonClass: '',
+              customClass: 'warning-alert',
+              type: 'warning'
+            }).then(() => {
+              this.syncChannelStorageFun()
+            });
+          })
+        },
+        // 手动增量同步库存
+        IncSyncStorage: () => {
+          this.hasSelectionData(() => {
+            this.debounceFun(() => {
+              const itemList = []
+              let allIsZere = true
+              let allLessThanTen = true // 都大于10分钟
+              this.multipleSelection.forEach((item) => {
+                if (`${item.qtyDifferences}` !== '0') {
+                  allIsZere = false
+                }
+                itemList.push({
+                  id: item.id,
+                  qtyInc: item.qtyDifferences, //差异数
+                })
+
+                // 平台库存下载时间 和 系统时间 判断
+                const currentTime = item.currentTime // 服务器库时间 - 时间戳
+                const currentTimeNum = currentTime ? currentTime : Date.parse(new Date()) // 服务器库时间 - 转时间戳
+                const transTime = item.transTime // 平台库存下载时间 - 时间戳
+                const differenceNum = Math.abs(currentTimeNum - transTime) / 1000 / 60
+                if (differenceNum > 10) {
+                  allLessThanTen = false // 只要存在一个大于10分钟的就提示
+                }
+              })
+              if (allIsZere) {
+                this.$Message.warning('当前选中记录无差异数，无需同步'); // 选中的都是0 时候不需要同步
+              } else {
+                if (allLessThanTen) {
+                  // 所有的都小于10min：走之前逻辑
+                  this.$confirm('是否确认增量同步库存', $it('mT.warning'), {
+                    confirmButtonText: $it('com.determine'),/*确定*/
+                    cancelButtonText: $it('com.cancel'),
+                    confirmButtonClass: '',
+                    customClass: 'warning-alert',
+                    type: 'warning'
+                  }).then(() => {
+                    this.incSyncStorageFun(itemList)
+                  });
+                } else {
+                  // 只要存在一个大于的 就提示
+                  this.$confirm('需要重新下载最新库存，不能产生增量同步', $it('mT.warning'), {
+                    confirmButtonText: $it('btn.download'),/*下载*/
+                    cancelButtonText: $it('com.cancel'),
+                    confirmButtonClass: '',
+                    customClass: 'warning-alert',
+                    type: 'warning'
+                  }).then(() => {
+                    this.downDialogFun2()
+                  });
+                }
+              }
+            })
+          })
+        },
+        // 修改同步比例
+        checkSkuStorage: () => {
+          this.hasSelectionData(() => {
+            this.$confirm('是否确定修改同步比例？', $it('mT.warning'), {
+              confirmButtonText:$it('com.determine'),/*确定*/
+              cancelButtonText: $it('com.cancel'),
+              confirmButtonClass: '',
+              customClass: 'warning-alert',
+              type: 'warning'
+            }).then(() => {
+              this.dialogObj4.show = true
+            });
+          })
+        },
+        download: () => { // 导出
+          this.exportFun()
+        },
+      },
       agTableConfig: {
         gridApi: {},
         columnApi: {},
@@ -241,9 +376,9 @@ export default {
                 let val = ''
                 const data = params.row.islock
                 if (data === 'Y') {
-                  val = '是'
-                } else if (data === 'N') {
                   val = '否'
+                } else if (data === 'N') {
+                  val = '是'
                 }
                 return h('div', {}, val);
               }
@@ -381,7 +516,7 @@ export default {
       },
       tableTotal: [
         {
-          index: "合计",
+          index: $it('other.total'),
           qtyChannel: "0", // 店铺库存
           qtyPlatform: "0", // 平台库存
           qtyDifferences: "0", // 差异数
@@ -466,6 +601,7 @@ export default {
         formValue: {},
       }, // 查询区域
       formConfig2: {
+        loading: false,
         formData: [
           {
             displayType: "selectTag",
@@ -507,6 +643,7 @@ export default {
       leftCheckValue: null, // 左侧选择的店铺
       leftCheckData: {}, // 左侧选择的店铺数据
       leftShopList: [], // 左侧列表数据
+      expirationTime: 0, // 倒计时
 
       // searchForm: {
       //   aaa: [],
@@ -840,7 +977,32 @@ export default {
       })
       return numiidArr
     },
-    btnConfig() {
+    btnConfig2() {
+      const buttons = [
+        {
+          type: 'posdefault',
+          text: $it('btn.query'), // 查询
+          btnclick: () => {
+            this.throttleFun(() => {
+              this.searchFun(true)
+            })
+          }
+        },
+        {
+          type: 'default',
+          text: '清空条件',
+          btnclick: () => {
+            this.reset()
+          }
+        },
+        ...this.btnList
+      ]
+      return {
+        typeAll: 'default',
+        buttons
+      }
+    },
+   /* btnConfig() {
       const btns = this.data1 && this.data1.length ? [
         {
           type: 'default',
@@ -920,20 +1082,21 @@ export default {
               } else {
                 if (allLessThanTen) {
                   // 所有的都小于10min：走之前逻辑
-                  this.$confirm('先下载平台库存,在进行同步库存。', '警告', {
+                  this.$confirm('是否确认增量同步库存', $it('mT.warning'), {
                     confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                    cancelButtonText: $it('com.cancel'),
                     confirmButtonClass: '',
                     customClass: 'warning-alert',
                     type: 'warning'
                   }).then(() => {
+                    this.countDownFun('IncSyncStorage')
                     this.incSyncStorageFun(itemList)
                   });
                 } else {
                   // 只要存在一个大于的 就提示
-                  this.$confirm('需要重新下载最新库存，不能产生增量同步', '警告', {
+                  this.$confirm('需要重新下载最新库存，不能产生增量同步', $it('mT.warning'), {
                     confirmButtonText: '下载',
-                    cancelButtonText: '取消',
+                    cancelButtonText: $it('com.cancel'),
                     confirmButtonClass: '',
                     customClass: 'warning-alert',
                     type: 'warning'
@@ -954,9 +1117,9 @@ export default {
             if (!this.multipleSelection.length) {
               this.$Message.warning('未勾选记录，不允许继续操作!');
             } else {
-              this.$confirm('是否确定全量库存同步？', '警告', {
+              this.$confirm('是否确定全量库存同步？', $it('mT.warning'), {
                 confirmButtonText: '确定',
-                cancelButtonText: '取消',
+                cancelButtonText: $it('com.cancel'),
                 confirmButtonClass: '',
                 customClass: 'warning-alert',
                 type: 'warning'
@@ -974,9 +1137,9 @@ export default {
             if (!this.multipleSelection.length) {
               this.$Message.warning('未勾选记录，不允许继续操作!');
             } else {
-              this.$confirm('是否确定修改同步比例？', '警告', {
+              this.$confirm('是否确定修改同步比例？', $it('mT.warning'), {
                 confirmButtonText: '确定',
-                cancelButtonText: '取消',
+                cancelButtonText: $it('com.cancel'),
                 confirmButtonClass: '',
                 customClass: 'warning-alert',
                 type: 'warning'
@@ -1033,7 +1196,7 @@ export default {
         typeAll: 'default',
         buttons
       }
-    },
+    },*/
     // 标签颜色
     tagColorObj() {
       let tagColorObj = {}
@@ -1182,7 +1345,7 @@ export default {
                 }
               }, [
                 h(
-                  'span', column.title,
+                    'span', column.title,
                 ),
                 h('i', {
                   class: 'iconfont iconios-information-circle-outline color-primary mg-lf-3 pull-right font-size-14',
@@ -1223,7 +1386,7 @@ export default {
                 }
               }, [
                 h(
-                  'span', column.title,
+                    'span', column.title,
                 ),
                 h('i', {
                   class: 'iconfont iconios-information-circle-outline color-primary mg-lf-3 pull-right font-size-14',
@@ -1261,7 +1424,7 @@ export default {
                 }
               }, [
                 h(
-                  'span', column.title,
+                    'span', column.title,
                 ),
                 h('i', {
                   class: 'iconfont iconios-information-circle-outline color-primary mg-lf-3 pull-right font-size-14',
@@ -1290,7 +1453,7 @@ export default {
                 }
               }, [
                 h(
-                  'span', column.title,
+                    'span', column.title,
                 ),
                 h('i', {
                   class: 'iconfont iconios-information-circle-outline color-primary mg-lf-3 pull-right font-size-14',
@@ -1319,7 +1482,7 @@ export default {
                 }
               }, [
                 h(
-                  'span', column.title,
+                    'span', column.title,
                 ),
                 h('i', {
                   class: 'iconfont iconios-information-circle-outline color-primary mg-lf-3 pull-right font-size-14',
@@ -1400,6 +1563,7 @@ export default {
     }
   },
   mounted() {
+    this.queryMenuPermissionFun()
     this.setTableHeightFun()
     this.getSearchFormData()
     let alReadyLoady = false // 初始已经请求过
@@ -1416,6 +1580,50 @@ export default {
     }
   },
   methods: {
+    /**
+     * 先判断是否勾选了记录
+     * @param fn
+     */
+    hasSelectionData(fn) {
+      if (!this.multipleSelection.length) {
+        this.$Message.warning('未勾选记录，不允许继续操作!');
+      } else {
+        if (fn) {
+          fn()
+        }
+      }
+    },
+    /**
+     * 获取按钮权限
+     */
+    queryMenuPermissionFun() {
+      this.service.common.queryMenuPermission({
+        param: `{query: {AD_SUBSYSTEM_ID: 218, AD_TABLECATE_ID: 5088, GROUP_ID: 10}}`
+      }).then((res) => {
+        if (res.data.code === 0) {
+          // 各个按钮对应的方法调用入口
+          const data = res.data.data || []
+          data.forEach((item) => {
+            if (item.name === 'shopStorageManager') { // 平台店铺库存管理
+              const actionList = item.actionList || []
+              actionList.forEach((item2) => {
+                if (item2.id > 0 && item2.name !== 'queryDevOpsInfoList') {
+                  this.btnList.push({
+                    type: 'default',
+                    text: item2.description,
+                    description: item2.description,
+                    name: item2.name,
+                    btnclick: () => {
+                      typeof this.actionFunList[item2.name] === 'function' ? this.actionFunList[item2.name]() : ''
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
+      });
+    },
     /**
      * 重组列的顺序
      * @param val
@@ -1536,7 +1744,7 @@ export default {
     exportFun() {
       if (this.isExport) {
         // 有一项导出正在进行中
-        this.$Message.error(window.$it('tip.f8'));
+        this.$Message.error(window.vmI18n.t('modalTips.f8'));
         return;
       }
       this.isExport = true;
@@ -1562,7 +1770,7 @@ export default {
             this.$store.dispatch('customize/timingCalcAsyncTask', {id: data}); // 直接下载
             // this.$confirm('本次操作已后台处理，是否至[我的任务]查看?', '提醒', {
             //   confirmButtonText: '确定',
-            //   cancelButtonText: '取消',
+            //   cancelButtonText: $it('com.cancel'),
             //   confirmButtonClass: '',
             //   type: 'warning'
             // }).then(() => {
@@ -1570,15 +1778,15 @@ export default {
             //   R3.store.commit('global/tabOpen', {
             //     type: 'V',
             //     tableName: 'CP_C_TASK',
-            //     label: window.$it('other.myMission'),
+            //     label: window.vmI18n.t('other.myMission'),
             //     tableId: 24386,
             //     id: data,
             //     query: {
             //       id: data,
             //       pid: '10010',
-            //       ptitle: window.$it('other.myMission'),
+            //       ptitle: window.vmI18n.t('other.myMission'),
             //       ptype: 'table',
-            //       tabTitle: window.$it('other.myMission'),
+            //       tabTitle: window.vmI18n.t('other.myMission'),
             //       tableName: 'CP_C_TASK'
             //     }
             //   });
@@ -1587,8 +1795,22 @@ export default {
             // });
           }
         } else {
-          const err = res.data.message || window.$it('tip.z3'); // 失败！
+          const err = res.data.message || window.vmI18n.t('modalTips.z3'); // 失败！
           this.$Message.error(err);
+        }
+      })
+    },
+    /**
+     * 下载全店在售库存
+     */
+    downloadAllShopSaleStorageFun() {
+      const params = {
+        cpCShopId: this.leftCheckData.id, //店铺id
+        cpCPlatformId: this.leftCheckData.cpCPlatformId,
+      }
+      this.service.inventoryCenter.downloadAllShopSaleStorage(params).then((res) => {
+        if (res.data.code === 0) {
+          this.$Message.success(res.data.message);
         }
       })
     },
@@ -1679,6 +1901,25 @@ export default {
       }, 0)
 
 
+    },
+    /**
+     * 倒计时
+     */
+    countDownFun(name) {
+      let expirationTime = Number(JSON.stringify(this.expirationTime))
+      let timer = setInterval(() => {
+        this.btnList.forEach((item, index) => {
+          if (item.name === name) {
+            if (expirationTime >= 0) {
+              this.btnList[index].text = `${this.btnList[index].description}${expirationTime > 0 ? `(${expirationTime})` : ''}`
+              expirationTime--
+            } else {
+              clearInterval(timer);
+            }
+            this.btnList[index].disabled = expirationTime >= 0
+          }
+        })
+      }, 1000)
     },
     /**
      * 手动增量库存同步
@@ -1856,7 +2097,7 @@ export default {
       return [
         {
           name: '复制',
-          action: function() {
+          action: function () {
             copy(params.value);
           },
         },
@@ -1901,7 +2142,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     /**
      * 调入库存
@@ -1992,6 +2233,7 @@ export default {
      * 修改商品类型
      */
     modifyTypeFun() {
+      this.formConfig2.loading = true
       const saStoreType = this.formConfig2.formValue.brandLabels
       const saveInfoRequestList = []
       this.multipleSelection.forEach((item) => {
@@ -2014,6 +2256,7 @@ export default {
           this.$Message.success('修改成功！');
           this.getTable1Data() //更新表格数据
         }
+        this.formConfig2.loading = false
       })
     },
     /**
@@ -2077,7 +2320,7 @@ export default {
             /*const taskId = res.data.message.match(/\d+(.\d+)?/g)
             this.$confirm(`商品下载任务已经发送，任务ID：${taskId}，是否前往接口下载任务表查看下载进度！`, '提示', {
               confirmButtonText: '前往',
-              cancelButtonText: '取消',
+              cancelButtonText: $it('com.cancel'),
               confirmButtonClass: '',
               customClass: 'warning-alert',
               type: 'warning'
@@ -2137,6 +2380,7 @@ export default {
         const params = {
           shopId: this.leftCheckValue, // 店铺id
           itemNums: itemNums.split(','), // 平台商品ID
+          userId: this.userIdInfo, // 用户id
         }
         this.service.inventoryCenter.platformInventory(params).then(res => {
           if (res.data.code === 0) {
@@ -2256,6 +2500,19 @@ export default {
         if (sortObj.order === 'desc') {
           params.ruleDesc = true
         }
+      } else {
+        // 分页时带上排序的功能
+        this.agTableConfig.columnDefs.forEach((item, index) => {
+          if (this.agTableConfig.columnDefs[index].field === 'qtyDifferences') {
+            const sortType = this.agTableConfig.columnDefs[index].headerComponentParams.sortType
+            if (sortType === 'asc') {
+              params.ruleAsc = true
+            }
+            if (sortType === 'desc') {
+              params.ruleDesc = true
+            }
+          }
+        })
       }
       //查询条件
       const searchParams = this.searchParamsFun()
@@ -2355,6 +2612,7 @@ export default {
           this.page.range++
           this.page.total = data.totalRowCount
           this.leftShopList = res.data.data.cpCShopList || []
+          this.expirationTime = res.data.data.expirationTime || 0
           if (this.leftShopList.length) {
             this.leftCheckData = this.leftShopList[0]
             this.leftCheckValue = this.leftShopList[0].id

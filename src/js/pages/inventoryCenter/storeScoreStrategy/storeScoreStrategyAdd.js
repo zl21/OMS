@@ -20,7 +20,7 @@ export default {
         formData: [
           {
             style: 'input', // 输入框类型
-            label: '创建人',
+            label: $it('tL.creator'), // 创建人
             value: 'ownerename', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -29,7 +29,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: '创建时间',
+            label: $it('tL.creationTime'), // 创建时间
             value: 'creationdate', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -38,7 +38,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: '修改人',
+            label: $it('tL.reviser'), // 创建时间
             value: 'modifierename', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -47,7 +47,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: '修改时间',
+            label: $it('tL.modificationTime'), // 创建时间
             value: 'modifieddate', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -73,13 +73,13 @@ export default {
           {
             webname: 'lookup_dianchangpingfen',
             type: 'posdefault',
-            text: window.$it('btn.save'), // 保存
+            text: $it('btn.save'), // 保存
             btnclick: () => {
               this.save()
             }
           },
           {
-            text: window.$it('btn.back'), // 返回
+            text: $it('btn.back'), // 返回
             btnclick: () => {
               $utils.tabCloseAppoint(this);
               this.$store.commit('customize/TabHref', {
@@ -185,7 +185,7 @@ export default {
               name: 'STORESCORESTRATEGYDETAIL', // 文件名
               label: '店仓评分设置表', //  tab中文名
             });
-            this.$Message.success(window.$it('tip.z9')); // '保存成功'
+            this.$Message.success($it('tip.z9')); // '保存成功'
           } else {
             // this.$Message.error(res.data.message);
           }

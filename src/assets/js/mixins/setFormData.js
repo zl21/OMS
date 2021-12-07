@@ -76,7 +76,7 @@ export const setFormDataFunMixin = {
             width: width,
             disabled: item.readonly,
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
-            placeholder: item.placeholder || `请选择${item.name}`, // 占位文本，默认为请输入
+            placeholder: item.placeholder || '', // 占位文本，默认为请输入
           },
           input: {
             style: 'input', // 输入框类型
@@ -85,7 +85,7 @@ export const setFormDataFunMixin = {
             value: item.colname, // 输入框的值
             width: width, // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
-            placeholder: item.placeholder || `请输入${item.name}`, // 占位文本，默认为请输入
+            placeholder: item.placeholder || `${$it('table_label.enter')}${item.name}`, // 占位文本，默认为请输入
             ghost: false, // 是否关闭幽灵按钮，默认开启
             id: `${formName}${item.colname}`,
             disabled: item.readonly, // 禁用控制
@@ -106,7 +106,7 @@ export const setFormDataFunMixin = {
             width: width,
             disabled: item.readonly,
             colname: item.colname,
-            placeholder: item.placeholder || `请选择${item.name}`, // 占位文本，默认为请输入
+            placeholder: item.placeholder || '', // 占位文本，默认为请输入
             multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启
             clearable: true, // 下拉选中是否显示清空按钮,默认为false
             filterable: true,
@@ -162,7 +162,7 @@ export const setFormDataFunMixin = {
               this.isActive = item.valuedata ? item.valuedata !== 'N' : true
             }
             this[formConfigName].formValue[item.colname] = item.defval || item.valuedata || ''
-            this[formConfigName].ruleValidate[item.colname] = [{required: item.isnotnull, message: `请输入${item.name}`}]
+            this[formConfigName].ruleValidate[item.colname] = [{required: item.isnotnull, message: `${$it('table_label.enter')}${item.name}`}]
             let type = 'input'
             if (item.isfk) {
               this[formConfigName].formValue[item.colname] = item.pid || item.defval || item.refobjid || ''

@@ -12,8 +12,8 @@ export default {
       multipleSelection: [], // 表格选中的列表
       detailsData: {info: {}, log: {}}, // 详情数据
       buttonText: {
-        Y: '是',
-        N: '否',
+        Y: $it('com.yes'), // 是
+        N: $it('com.no'), // 否
       },
       tableName: 'SG_C_CHANNEL_RATIO_STRATEGY',
       tab1tableName: '', // 配销仓明细的表名
@@ -35,7 +35,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '店铺',
+              fkdesc: $it('other.shop'),
               inputname: 'CP_C_SHOP_ID:CP_C_SHOP_TITLE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
@@ -58,7 +58,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: window.$it('tL.remarks'), // 备注
+            label: $it('tL.remarks'), // 备注
             value: 'REMARK', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -120,7 +120,7 @@ export default {
           {
             style: 'input', // 输入框类型
             regx: /^[0-9]*$/,
-            label: '优先级',
+            label: $it("tL.priority"), // 优先级
             value: 'SG_C_SA_STORE_ORDERNO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -310,7 +310,7 @@ export default {
         buttons: [
           ...baocun,
           {
-            text: window.$it('btn.refresh'), // 刷新
+            text: $it('btn.refresh'), // 刷新
             webname: '',
             btnclick: () => {
               this.refresh();
@@ -319,7 +319,7 @@ export default {
           ...invalid,
           {
             webname: 'lookup_return', // 返回
-            text: window.$it('btn.back'),
+            text: $it('btn.back'),
             btnclick: () => {
               this.back();
             },
@@ -339,9 +339,9 @@ export default {
       console.log(row, index)
       const oldVal = row.ISACTIVE === '是' ? 'Y' : 'N'
       const newVal = oldVal === 'Y' ? 'N' : 'Y'
-      this.$confirm(oldVal === 'Y' ? '确认停用吗？' : '确认启用吗？', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(oldVal === 'Y' ? '确认停用吗？' : '确认启用吗？', $it('mT.warning'), {
+        confirmButtonText:  $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
         type: 'warning'
       }).then(() => {
@@ -366,7 +366,7 @@ export default {
       formdata.append('param', JSON.stringify(param));
       this.service.common.exeAction(formdata).then((res) => {
         if (res.data.code === 0) {
-          this.$Message.success(res.data.message || '同步成功！');
+          this.$Message.success(res.data.message);
           this.isChange = false
           this.refresh()
         } else {
@@ -378,9 +378,9 @@ export default {
      * 作废
      */
     deleteAuthority() {
-      this.$confirm('确认执行作废？', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('确认执行作废？', $it('mT.warning'), {
+        confirmButtonText: $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), // 取消
         confirmButtonClass: '',
         customClass: 'warning-alert',
         type: 'warning'
@@ -390,7 +390,7 @@ export default {
         formdata.append('objid', this.ID);
         this.service.common.objectVoid(formdata).then((res) => {
           if (res.data.code === 0) {
-            this.$Message.success(res.data.message || '作废成功！');
+            this.$Message.success(res.data.message);
             this.isChange = false
             this.refresh()
           } else {
@@ -408,9 +408,9 @@ export default {
         this.getObject()
       }
       if (this.isChange) {
-        this.$confirm('修改的数据未保存,确定刷新？', '警告', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm('修改的数据未保存,确定刷新？', $it('mT.warning'), {
+          confirmButtonText: $it('com.determine'), // 确定
+          cancelButtonText: $it('com.cancel'), //取消
           confirmButtonClass: '',
           type: 'warning'
         }).then(() => {
@@ -455,7 +455,7 @@ export default {
     exportClick() {
       if (this.isExport) {
         // 有一项导出正在进行中
-        this.$Message.error(window.$it('tip.f8'));
+        this.$Message.error($it('tip.f8'));
         return;
       }
       this.isExport = true;
@@ -481,9 +481,9 @@ export default {
           const data = res.data.data
           if (data !== null) {
             // res.data.data
-            this.$confirm('本次操作已后台处理，是否至[我的任务]查看?', '提醒', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
+            this.$confirm('本次操作已后台处理，是否至[我的任务]查看?',  $it('mT.warning'), {
+              confirmButtonText: $it('com.determine'), // 确定
+              cancelButtonText: $it('com.cancel'), //取消
               confirmButtonClass: '',
               type: 'warning'
             }).then(() => {
@@ -491,15 +491,15 @@ export default {
               R3.store.commit('global/tabOpen', {
                 type: 'V',
                 tableName: 'CP_C_TASK',
-                label: window.$it('other.myMission'),
+                label: $it('other.myMission'),
                 tableId: 24386,
                 id: data,
                 query: {
                   id: data,
                   pid: '10010',
-                  ptitle: window.$it('other.myMission'),
+                  ptitle: $it('other.myMission'),
                   ptype: 'table',
-                  tabTitle: window.$it('other.myMission'),
+                  tabTitle: $it('other.myMission'),
                   tableName: 'CP_C_TASK'
                 }
               });
@@ -508,7 +508,7 @@ export default {
             });
           }
         } else {
-          const err = res.data.message || window.$it('tip.z3'); // 失败！
+          const err = res.data.message || $it('tip.z3'); // 失败！
           this.$Message.error(err);
         }
       });
@@ -592,7 +592,7 @@ export default {
             this.service.common.objectSave(formdata).then((res) => {
               if (res.data.code === 0) {
                 this.getExclusiveStockData() // 更新表格数据
-                this.$Message.success(res.data.message || '保存成功！');
+                this.$Message.success(res.data.message || $it('tip.z9'));
                 this.formConfig2.formData[0].itemdata.valuedata = ''
                 this.formConfig2.formData[0].itemdata.pid = ''
                 this.formConfig2.formValue.SG_C_SA_STORE_ID = ''
@@ -880,12 +880,12 @@ export default {
     back() {
       if (this.isModify) {
         this.$Modal.info({
-          title: window.$it('mT.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.$it('com.determine'), // 确定
-          cancelText: window.$it('com.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },
@@ -986,7 +986,7 @@ export default {
                 this.formConfig2.formValue.SG_C_SA_STORE_ID = ''
                 this.formConfig2.formValue.RATIO = ''
                 this.formConfig2.formValue.SG_C_SA_STORE_ORDERNO = ''
-                this.$Message.success(window.$it('tip.z9')); // '保存成功'
+                this.$Message.success($it('tip.z9')); // '保存成功'
                 this.ID = objid
                 this.$nextTick(() => {
                   this.isChange = false

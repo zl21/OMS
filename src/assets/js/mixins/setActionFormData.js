@@ -36,7 +36,7 @@ export const setActionFormMixin = {
             columnName: item.colname,
             labelName: item.coldesc,
             optionArr: item.combobox, //下拉框列表
-            placeholder: item.placeholder || `请选择${item.coldesc}`, // 占位文本，默认为请输入
+            placeholder: item.placeholder || '', // 占位文本，默认为请输入
             changeFun: (v) => {
               if (typeof item.changeFun == 'function') {
                 item.changeFun(v)
@@ -51,7 +51,7 @@ export const setActionFormMixin = {
             labelName: item.coldesc,
             optionArr: item.combobox, //下拉框列表
             colorObj: item.colorObj, // 映射对应颜色的对象
-            placeholder: item.placeholder || `请选择${item.coldesc}`, // 占位文本，默认为请输入
+            placeholder: item.placeholder || '', // 占位文本，默认为请输入
             changeFun: (v) => {
               if (typeof item.changeFun == 'function') {
                 item.changeFun(v)
@@ -64,7 +64,7 @@ export const setActionFormMixin = {
             regx: item.regx ? item.regx : (item.type === 'NUMBER' ? /^[0-9]*$/ : ''),// 校验规则
             columnName: item.colname,
             labelName: item.coldesc,
-            placeholder: item.placeholder || `请输入${item.coldesc}`, // 占位文本，默认为请输入
+            placeholder: item.placeholder || '', // 占位文本，默认为请输入
             changeFun: (v) => {
               if (typeof item.changeFun == 'function') {
                 item.changeFun(v)
