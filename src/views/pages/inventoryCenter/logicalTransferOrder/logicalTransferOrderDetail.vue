@@ -233,24 +233,24 @@
           </FormItem>
           <!--折扣-->
           <FormItem
-            :label="$it('table_label.discount')"
+            :label="$it('tL.discount')"
             prop="SALE_DISCOUNT"
           >
             <Input
               v-model="updateSalePriceModal.SALE_DISCOUNT"
-              :placeholder="$it('table_label.enter')"
+              :placeholder="$it('tL.enter')"
               :regx="/^\d*\.{0,1}\d{0,2}$/"
               @on-change="saleDiscountChange"
             />
           </FormItem>
           <!--价格-->
           <FormItem
-            :label="$it('form_label.price')"
+            :label="$it('fL.price')"
             prop="SALE_PRICE"
           >
             <Input
               v-model="updateSalePriceModal.SALE_PRICE"
-              :placeholder="$it('table_label.enter')"
+              :placeholder="$it('tL.enter')"
               :regx="/^\d*\.{0,1}\d{0,2}$/"
               @on-change="salePriceChange"
             />

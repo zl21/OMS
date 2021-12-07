@@ -59,12 +59,12 @@
     />
     <Modal
       v-model="saveModal"
-      :title="vmI18n.t('modalTitle.tips')"
+      :title="$it('mT.tips')"
       @on-ok="saveOk"
       @on-cancel="saveCancel"
     >
       <!-- <p>是否保存已经修改的数据?</p> -->
-      <p>{{ vmI18n.t('modalTips.a0') }}</p>
+      <p>{{ $it('tip.a0') }}</p>
     </Modal>
   </div>
 </template>

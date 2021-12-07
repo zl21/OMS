@@ -9,40 +9,40 @@ export default {
         typeAll: 'error',
         buttons: [
           {
-            text: window.vmI18n.t('btn.refresh'), // text: '刷新',
+            text: $it('btn.refresh'), // text: '刷新',
             btnclick: () => {
               if (this.canFresh) {
                 this.$Modal.confirm({
-                  title: window.vmI18n.t('modalTitle.tips'), // title:'提示',
-                  content: window.vmI18n.t('modalTips.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
+                  title: $it('mT.tips'), // title:'提示',
+                  content: $it('tip.ch'), // content:'当前操作未确认拆单，是否确认刷新？'
                   titleAlign: 'center',
                   mask: true, // 显示蒙层
                   draggable: true, // 拖拽
                   closable: true, // 右上角小叉
                   showCancel: true,
                   okText: '确认',
-                  // okText: window.vmI18n.t('modalTips.ch'),
-                  cancelText: window.vmI18n.t('common.cancel'), // 取消
+                  // okText: $it('tip.ch'),
+                  cancelText: $it('common.cancel'), // 取消
                   onOk: () => {
                     this.getData();
                   },
                 });
               } else {
-                this.$Message.warning(window.vmI18n.t('modalTips.ci')); // 已是原始状态，不执行操作!
+                this.$Message.warning($it('tip.ci')); // 已是原始状态，不执行操作!
               }
             },
           },
           {
-            text: window.vmI18n.t('btn.back'), // 返回
+            text: $it('btn.back'), // 返回
             btnclick: this.back,
           },
           {
-            text: window.vmI18n.t('btn.add_splitOrder'), // 添加到待拆单
+            text: $it('btn.add_splitOrder'), // 添加到待拆单
             btnclick: this.addPendingOrder,
             // icon: 'ios-add-circle-outline',
           },
           {
-            text: window.vmI18n.t('btn.confirm_splitOrder'), // 确认拆单
+            text: $it('btn.confirm_splitOrder'), // 确认拆单
             btnclick: this.confirm,
             // icon: 'ios-photos-outline',
           },
@@ -54,27 +54,27 @@ export default {
           type: 'selection'
         },
         {
-          title: window.vmI18n.t('table_label.whetherGift'), // 是否赠品
+          title: $it('tL.whetherGift'), // 是否赠品
           key: 'is_gift_name'
         },
         {
-          title: window.vmI18n.t('table_label.commoditySKU'), // 商品SKU
+          title: $it('tL.commoditySKU'), // 商品SKU
           key: 'ps_c_sku_ecode'
         },
         {
-          title: window.vmI18n.t('table_label.productName'), // 商品名称
+          title: $it('tL.productName'), // 商品名称
           key: 'ps_c_pro_ename'
         },
         {
-          title: '平台单号',
+          title: $it('fL.platform_billNo'), // 平台单号
           key: 'tid'
         },
         // {
-        //   title: window.vmI18n.t('table_label.productSKUname'), // 商品SKU名称
+        //   title: $it('tL.productSKUname'), // 商品SKU名称
         //   key: 'ps_c_sku_ename'
         // },
         {
-          title: window.vmI18n.t('table_label.original_deliveryWarehouse'), // 原发货仓库
+          title: $it('tL.original_deliveryWarehouse'), // 原发货仓库
           key: 'cp_c_phy_warehouse_ename'
         },
         {
@@ -160,7 +160,7 @@ export default {
           }
         },
         {
-          title: window.vmI18n.t('table_label.suggested_deliveryWarehouse'), // 建议发货仓库
+          title: $it('tL.suggested_deliveryWarehouse'), // 建议发货仓库
           key: 'advise_phy_warehouse_id',
           render: (h, params) => {
             const options = params.row.sgBPhyInStorageItemExt.map(item => h('Option', {
@@ -220,19 +220,19 @@ export default {
           }
         },
         {
-          title: window.vmI18n.t('form_label.purchaseQuantity'), // 购买数量
+          title: $it('fL.purchaseQuantity'), // 购买数量
           key: 'qty'
         },
         {
-          title: window.vmI18n.t('table_label.quantity_availableSale'), // 可售数量
+          title: $it('tL.quantity_availableSale'), // 可售数量
           key: 'total_qty_available'
         },
         {
-          title: window.vmI18n.t('table_label.quantity_demolished'), // 待拆数量
+          title: $it('tL.quantity_demolished'), // 待拆数量
           key: 'waiting_split_num'
         },
         {
-          title: window.vmI18n.t('table_label.quantity_split'), // 拆分数量
+          title: $it('tL.quantity_split'), // 拆分数量
           key: 'split_num',
           width: 100,
           render: (h, params) =>
@@ -249,7 +249,7 @@ export default {
                     // this.canFresh = params.row.split_num != value.target.value;
                     params.row.split_num = value.target.value;
                     if (params.row.waiting_split_num - value.target.value < 0) {
-                      this.$Message.warning(window.vmI18n.t('modalTips.cj')); // 拆分数量不能大于待拆数量；不进行拆单
+                      this.$Message.warning($it('tip.cj')); // 拆分数量不能大于待拆数量；不进行拆单
                       this.$nextTick(() => {
                         params.row.split_num = params.row.waiting_split_num;
                         this.data[0][params.index] = params.row;
@@ -300,7 +300,7 @@ export default {
         id: 2627,
         type: 'action',
         name: 'orderManager',
-        label: window.vmI18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
+        label: $it('pL.retail_shipping_order'), // label: '零售发货单',
         back: true,
         query: {} // row.id
       });
@@ -336,7 +336,7 @@ export default {
         self.switchList(0);
         // self.cpdata = JSON.parse(JSON.stringify(self.data))
       } else {
-        self.$Message.error(window.vmI18n.t('modalTips.ck')); // 查询失败
+        self.$Message.error($it('tip.ck')); // 查询失败
       }
     },
     onSelect(selection) {
@@ -362,7 +362,7 @@ export default {
       let flag = true;
       let isIndex = true; // 主仓库第一条total是否已重置为0;
       if (self.onSelectData.length === 0) {
-        self.$Message.warning(window.vmI18n.t('modalTips.cl')); // 请选择需要拆分的明细
+        self.$Message.warning($it('tip.cl')); // 请选择需要拆分的明细
         return;
       }
       let isok = true;
@@ -427,7 +427,7 @@ export default {
         }
       }*/
       if ((self.data[0].length == 1 && self.data[0][0].split_num >= self.data[0][0].waiting_split_num) || self.data[0][0].total <= 1) {
-        self.$Message.warning(window.vmI18n.t('modalTips.cm')); // 没有可拆分的订单
+        self.$Message.warning($it('tip.cm')); // 没有可拆分的订单
         return;
       }
       if (self.data[0].length > 1 && this.platformdata[0].platform === 19) {
@@ -435,7 +435,7 @@ export default {
           return item.tid === self.data[0][0].tid;
         })
         if (state) {
-          self.$Message.warning(window.vmI18n.t('modalTips.cm')); // 没有可拆分的订单
+          self.$Message.warning($it('tip.cm')); // 没有可拆分的订单
           return;
         }
         // 如果是JITX订单，并且“建议发货仓库”与原单仓库不一致则 点击“添加到带拆单”时，报错提示：“JITX订单目前暂不允许在该界面进行修改仓库，请保持原单拆单后，至零售发货单界面进行修改仓库！”
@@ -455,7 +455,7 @@ export default {
         }
       });
       if (!flag) {
-        self.$Message.warning(window.vmI18n.t('modalTips.cn')); // 拆分数量不能为0
+        self.$Message.warning($it('tip.cn')); // 拆分数量不能为0
         return;
       }
       self.onSelectData[0].total = 0;
@@ -509,7 +509,7 @@ export default {
     async confirm() {
       const self = this;
       if (self.data.length <= 1) {
-        self.$Message.warning(window.vmI18n.t('modalTips.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
+        self.$Message.warning($it('tip.co')); // 请先选择拆单明细添加到待拆单，再进行拆单
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.saveSplitOrderInfo({ data: self.data });
