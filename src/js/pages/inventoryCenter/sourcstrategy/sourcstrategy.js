@@ -66,7 +66,7 @@ export default {
           {
             webname: 'lookup_xunyuancelue',
             type: 'posdefault',
-            text: window.$it('btn.find'), // 查找
+            text: $it('btn.find'), // 查找
             btnclick: () => {
               this.getTableData();
             }
@@ -74,7 +74,7 @@ export default {
           {
             webname: 'Newlyadded_xunyuancelue',
             type: 'default',
-            text: window.$it('btn.add'), // 新增
+            text: $it('btn.add'), // 新增
             btnclick: () => {
               this.$store.commit('customize/TabHref', {
                 id: 'New', // id
@@ -99,14 +99,14 @@ export default {
           },
           {
             webname: 'jiean_xunyuancelue',
-            text: window.$it('btn.void'), // 作废
+            text: $it('btn.void'), // 作废
             btnclick: () => {
             },
           },
           {
             icon: `iconfont ${this.isFavorite ? 'iconbj_alrcol' : 'iconbj_col'} font-size-12`, // 按钮图标
             size: 'small', // 按钮大小
-            name: window.$it('btn.collection'), // 收藏
+            name: $it('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.setFavorite2();

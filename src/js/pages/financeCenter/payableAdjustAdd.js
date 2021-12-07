@@ -334,7 +334,7 @@ export default {
           },
           {
             style: 'select', // 下拉框类型
-            label: window.$it('tL.paymentWay'), // 支付方式
+            label: $it('tL.paymentWay'), // 支付方式
             width: '8', // 所占宽度宽度
             value: 'PAY_TYPE', // 输入框的值
             options: [

@@ -59,7 +59,7 @@
         </Panel>
         <Panel name="share_baseInfo">
           <!-- 共享库存 -->
-          {{ $it('pL.bg') }} 
+          {{ $it('pL.bg') }}
           <div slot="content">
             <OmsForm v-if="canEdit" :form-config="formConfig3"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
