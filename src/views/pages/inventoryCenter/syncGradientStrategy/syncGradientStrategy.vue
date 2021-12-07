@@ -4,13 +4,15 @@
     <OmsButton :btn-config="btnConfig" class="top-btns"/>
     <Collapse v-model="collapse">
       <Panel name="panel_baseInfo">
-        基本信息
+        <!-- 基本信息 -->
+        {{ $it('com.baseInformation') }}
         <div slot="content">
           <OmsForm class=""  :form-config="formConfig1"/>
         </div>
       </Panel>
       <Panel name="log" v-if="ID!=='-1'">
-        日志
+        <!-- 日志 -->
+        {{ $it('pL.log') }}
         <div slot="content">
           <OmsForm class="" :form-config="formConfig4"/>
         </div>

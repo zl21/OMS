@@ -5,7 +5,8 @@
         <div class="itemContent">
           <div class="labelContent">
             <div class="labelTip">*</div>
-            <div>原角色:</div>
+            <!-- 原角色 -->
+            <div>{{ $it('fL.eq') }}:</div>
           </div>
           <DropDownSelectFilter
             class="itemCom"
@@ -26,7 +27,8 @@
         <div class="itemContent">
           <div class="labelContent">
             <div class="labelTip">*</div>
-            <div>目的角色:</div>
+            <!-- 目的角色 -->
+            <div>{{ $it('fL.er') }}:</div>
           </div>
           <DropDownSelectFilter
             :single="false"
@@ -49,15 +51,22 @@
         <div class="itemContent">
           <div class="labelContent">
             <div class="labelTip">*</div>
-            <div>复制方式:</div>
+            <!-- 复制方式 -->
+            <div>{{ $it('fL.et') }}:</div>
           </div>
           <Select
             v-model="copyType"
             class="itemCom"
-            placeholder="请选择复制方式"
+            :placeholder="$it('tip.ir')"
           >
-            <Option value="cover"> 覆盖原有权限 </Option>
-            <Option value="copy"> 保留原有权限 </Option>
+            <Option value="cover"> 
+              <!-- 覆盖原有权限  -->
+              {{ $it('fL.eu') }}
+            </Option>
+            <Option value="copy"> 
+              <!-- 保留原有权限 -->
+              {{ $it('fL.ev') }}
+            </Option>
           </Select>
         </div>
       </div>

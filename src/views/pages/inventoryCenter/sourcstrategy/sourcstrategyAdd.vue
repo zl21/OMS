@@ -6,7 +6,10 @@
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-1">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
           <span class="iconfont icon-item icon-jibenxinxi font-size-24 color-primary"></span>
-          <span class="pd-lf-15 font-size-18 font-weight-bold">基础信息</span>
+          <span class="pd-lf-15 font-size-18 font-weight-bold">
+            <!-- 基础信息 -->
+            {{ $it('other.basic_info') }}
+          </span>
         </div>
         <OmsForm :form-config="formConfig1"/>
       </div>
@@ -124,7 +127,10 @@
           <div class="icon-box flex flex-direction-column justify-content-center">
             <span class="iconfont icon-item icon-jibenxinxi  "></span>
           </div>
-          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">基础信息</div>
+          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">
+            <!-- 基础信息 -->
+            {{ $it('other.basic_info') }}
+          </div>
         </li>
         <li class="">
           <div class="icon-box flex flex-direction-column justify-content-center">

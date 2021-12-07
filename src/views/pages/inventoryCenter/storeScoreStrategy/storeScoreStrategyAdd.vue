@@ -5,13 +5,15 @@
     <div class="public-content">
       <Collapse v-model="collapse">
         <Panel name="baseInfo1">
-          基本信息
+          <!-- 基本信息 -->
+          {{ $it('com.baseInformation') }}
           <div slot="content">
             <OmsForm :form-config="formConfig" />
           </div>
         </Panel>
         <Panel name="baseInfo2" v-if="ID !== '-1'">
-          基础信息
+          <!-- 基础信息 -->
+          {{ $it('other.basic_info') }}
           <div slot="content">
             <OmsForm :form-config="formConfig2" />
           </div>

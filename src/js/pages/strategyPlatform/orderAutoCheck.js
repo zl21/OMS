@@ -436,37 +436,37 @@ export default {
       const effectiveCondition = this.effectiveCondition;
       if (effectiveCondition[8].value) {
         if (this.info.ORDER_DISCOUNT_DOWN === '' || this.info.ORDER_DISCOUNT_UP === '') {
-          this.$Message.error('已启用订单折扣限制，订单折扣范围不可为空!');
+          this.$Message.error($it('tip.ih')); // 已启用订单折扣限制，订单折扣范围不可为空!
           return false;
         }
       }
       if (this.info.ORDER_DISCOUNT_DOWN > this.info.ORDER_DISCOUNT_UP) {
-        this.$Message.error('起始折扣应小于或等于截止折扣!');
+        this.$Message.error($it('tip.ii')); // 起始折扣应小于或等于截止折扣!
         return false;
       }
       if (effectiveCondition[1].value) {
         if (this.info.beginTime === '' || this.info.endTime === '') {
-          this.$Message.error('付款时间为必填项,没有选择值!');
+          this.$Message.error($it('tip.ij')); // 付款时间为必填项,没有选择值!
           return false;
         }
       }
       if (this.info.beginTime > this.info.endTime) {
-        this.$Message.error('付款时间范围有误!');
+        this.$Message.error($it('tip.ik')); // 付款时间范围有误!
         return false;
       }
       if (effectiveCondition[2].value) {
         if (this.info.LIMIT_PRICE_DOWN === '' || this.info.LIMIT_PRICE_UP === '') {
-          this.$Message.error('已启用订单金额限制，订单金额不可为空!');
+          this.$Message.error($it('tip.il')); // 已启用订单金额限制，订单金额不可为空!
           return false;
         }
       }
       if (this.info.LIMIT_PRICE_DOWN > this.info.LIMIT_PRICE_UP) {
-        this.$Message.error('起始金额应小于或等于截止金额!');
+        this.$Message.error($it('tip.im')); // 起始金额应小于或等于截止金额!
         return false;
       }
       if (effectiveCondition[4].value) {
         if (this.info.RECEIVER_ADDRESS === '') {
-          this.$Message.error('收货地址为必填项,没有输入值!');
+          this.$Message.error($it('tip.in')); // 收货地址为必填项,没有输入值!
           return false;
         }
       }

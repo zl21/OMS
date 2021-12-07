@@ -71,7 +71,7 @@ export default {
             title: $it('tL.serialNo'), // 序号
           },
           {
-            title: '商品类型', // 商品类型
+            title: $it('fL.f6'), // 商品类型
             key: "SKU_TYPE",
             align: "center",
           },
@@ -86,7 +86,7 @@ export default {
           formData: [
             {
               style: 'select',
-              label: '商品类型', // 商品类型
+              label: $it('fL.f6'), // 商品类型
               value: 'PICK_FLAG',
               width: '6',
               disabled: false,

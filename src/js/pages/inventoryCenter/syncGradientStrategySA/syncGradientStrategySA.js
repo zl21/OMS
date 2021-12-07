@@ -548,7 +548,7 @@ export default {
           const tabth = []
           const tittleName = {
             CPCSHOPTITLE: '店铺',
-            RATIO: '同步比例',
+            RATIO: $it('tL.a7'), // 同步比例
           } // 表头中文名
           datas.forEach((item) => {
             const obj = {}

@@ -69,7 +69,7 @@ export default {
       }
       if (this.copyType === '') {
         this.$Message.warning({
-          content: '请选择复制方式！'
+          content: $it('tip.ir') // 请选择复制方式！
         });
         return;
       }

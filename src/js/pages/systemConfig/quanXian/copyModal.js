@@ -111,7 +111,7 @@ export default {
             required: true,
             label: $it('fL.et'), // 复制方式
             props: {
-              placeholder: '请选择复制方式',
+              placeholder: $it('tip.ir'), // 请选择复制方式
               options: [
                 {
                   value: 'cover',
@@ -163,7 +163,7 @@ export default {
       if (res.data.code === 0) {
         this.config[0].item.props.AuotData = res.data.data;
       } else {
-        this.$Message.warning('原角色请求失败!');
+        this.$Message.warning($it('tip.is')); // 原角色请求失败!
       }
     }
   },

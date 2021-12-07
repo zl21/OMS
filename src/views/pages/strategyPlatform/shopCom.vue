@@ -265,7 +265,7 @@ export default {
             align: "center",
           },
           {
-            title: '商品类型', // 
+            title: $it('fL.f6'), // 商品类型
             key: "SKU_TYPE",
             align: "center",
           },
@@ -443,7 +443,7 @@ export default {
             },
             {
               style: 'select', // 下拉框类型
-              label: '商品类型', // 商品类型
+              label: $it('fL.f6'), // 商品类型
               width: '6', // 所占宽度宽度
               value: 'SKU_TYPE', // 输入框的值
               multiple: false, // 布尔值,下拉框是否开启多选,默认为不开启

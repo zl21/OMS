@@ -150,7 +150,7 @@
                             "
                             :page-size="CP_C_LOGISTICS_ID_SELECT.pageSize"
                             :show-colname-key="'show'"
-                            :data-empty-message="'暂无数据'"
+                            :data-empty-message="$it('other.noDataAvailable')"
                             :columns="CP_C_LOGISTICS_ID_SELECT.datas.tabth"
                             :auto-data="CP_C_LOGISTICS_ID_SELECT.autoData"
                             :defaultSelected="
@@ -562,7 +562,8 @@
             </Collapse>
           </Form>
         </TabPane>
-        <TabPane label="操作日志" name="name2">
+        <!-- 操作日志 -->
+        <TabPane :label="$it('pL.operationLog')" name="name2">
           <Table
             border
             height="550"

@@ -204,7 +204,8 @@
       v-if="tBody.length === 0"
       class="ff-custom--no-data"
     >
-      暂无数据
+      <!-- 暂无数据 -->
+      {{ $it('other.noDataAvailable') }}
     </p>
 
     <div

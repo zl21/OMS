@@ -147,9 +147,9 @@
       </div>
     </div>
     <!--停止/开启平台库存同步-->
-    <el-dialog title="停止/开启平台库存同步" :visible.sync="dialogObj1.show" width="500px">
+    <el-dialog :title="$it('mT.ak')" :visible.sync="dialogObj1.show" width="500px">
       <Form ref="formCustom4" :model="dialogObj1.formData" :label-width="155">
-        <FormItem label="同步库存:" prop="qty">
+        <FormItem :label="`${$it('btn.a9')}:`" prop="qty">
           <!-- 这个后端让取反-->
           <Select v-model="dialogObj1.formData.islock" clearable style="width:200px">
             <Option value="Y">{{$it('com.no')}}</Option> <!--否-->
@@ -166,9 +166,9 @@
     </el-dialog>
 
     <!--是否转仓-->
-    <el-dialog title="是否转仓" :visible.sync="dialogObj2.show" width="500px">
+    <el-dialog :title="$it('btn.aa')" :visible.sync="dialogObj2.show" width="500px">
       <Form ref="formCustom3" :model="dialogObj2.formData" :label-width="155">
-        <FormItem label="是否转仓:" prop="qty">
+        <FormItem :label="`${$it('btn.aa')}:`" prop="qty">
           <Select v-model="dialogObj2.formData.istrans" clearable style="width:200px">
             <Option value="Y">{{$it('com.yes')}}</Option>
             <Option value="N">{{$it('com.no')}}</Option>
@@ -184,9 +184,9 @@
     </el-dialog>
 
     <!--设定安全库存-->
-    <el-dialog title="设定安全库存" :visible.sync="dialogObj3.show" width="500px">
+    <el-dialog :title="$it('btn.a7')" :visible.sync="dialogObj3.show" width="500px">
       <Form ref="formCustom2" :model="dialogObj3.formData" :label-width="155">
-        <FormItem label="设定安全库存:" prop="qty">
+        <FormItem :label="`${$it('btn.a7')}:`" prop="qty">
           <Input v-model="dialogObj3.formData.qtySafety" clearable :regx="/^[0-9]*$/" style="width: 200px"/>
         </FormItem>
       </Form>
@@ -198,8 +198,8 @@
       </div>
     </el-dialog>
 
-
-    <el-dialog title="调入库存" :visible.sync="showTransferInventory" width="500px">
+    <!-- 调入库存 -->
+    <el-dialog :title="$it('btn.a8')" :visible.sync="showTransferInventory" width="500px">
       <Form ref="formCustom" :model="transferInventoryForm" :rules="ruleCustom" :label-width="155"
             v-if="rightTableCurrRowData && rightTable2CurrRowData">
         <!-- 商家条码id -->
@@ -238,7 +238,7 @@
     </el-dialog>
 
     <!--下载平台库存-->
-    <el-dialog title="下载平台库存" width="500px" :visible.sync="downDialogObjShow2">
+    <el-dialog :title="$it('btn.a4')" width="500px" :visible.sync="downDialogObjShow2">
       <FormLayout :defaultColumn="1" ref="downDialogForm2"
                   :defaultconfig="downConfig2">
         <div slot="shopSlot">
@@ -274,7 +274,7 @@
 
 
     <!-- 修改同步比例-->
-    <el-dialog title="修改同步比例" :visible.sync="dialogObj4.show" width="500px">
+    <el-dialog :title="$it('btn.a6')" :visible.sync="dialogObj4.show" width="500px">
       <Form  :model="dialogObj4.formData" :label-width="155">
         <FormItem label="比例:" prop="qty">
           <Input v-model="dialogObj4.formData.ratio" clearable :regx="/^[0-9]*$/" style="width: 200px"/>

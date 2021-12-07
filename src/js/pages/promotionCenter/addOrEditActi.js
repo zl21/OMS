@@ -481,7 +481,7 @@ export default {
             if (rule.value === '') {
               return {
                 code: -1,
-                message: `表格【${tab.group}】,数量规则未填写`
+                message: `${$it('tip.ip')}【${tab.group}】,${$it('tip.io')}` // 表格 ??,数量规则未填写
               };
             }
           }
@@ -489,7 +489,7 @@ export default {
           if (rows.length === 0) {
             return {
               code: -1,
-              message: `表格【${tab.group}】,${$it('tip.r6')}`
+              message: `${$it('tip.ip')}【${tab.group}】,${$it('tip.r6')}` // 表格 ??,
             };
           }
         } else {

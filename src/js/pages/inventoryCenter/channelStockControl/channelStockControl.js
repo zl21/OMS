@@ -63,7 +63,7 @@ export default {
         'syncChannelStorage': () => {
           this.hasSelectionData(() => {
             this.$confirm(
-              '是否确定全量库存同步？', 
+              $it('tip.ky'), // 是否确定全量库存同步？
               $it('mT.warning'), {
               confirmButtonText: $it('com.determine'),/*确定*/
               cancelButtonText: $it('com.cancel'), /*取消*/
@@ -101,11 +101,14 @@ export default {
                 }
               })
               if (allIsZere) {
-                this.$Message.warning('当前选中记录无差异数，无需同步'); // 选中的都是0 时候不需要同步
+                // 选中的都是0 时候不需要同步
+                this.$Message.warning($it('tip.kz')); // 当前选中记录无差异数，无需同步 
               } else {
                 if (allLessThanTen) {
                   // 所有的都小于10min：走之前逻辑
-                  this.$confirm('是否确认增量同步库存', $it('mT.warning'), {
+                  this.$confirm(
+                    $it('tip.ie'), // 是否确认增量同步库存
+                    $it('mT.warning'), {
                     confirmButtonText: $it('com.determine'),/*确定*/
                     cancelButtonText: $it('com.cancel'),
                     confirmButtonClass: '',
@@ -116,7 +119,9 @@ export default {
                   });
                 } else {
                   // 只要存在一个大于的 就提示
-                  this.$confirm('需要重新下载最新库存，不能产生增量同步', $it('mT.warning'), {
+                  this.$confirm(
+                    $it('tip.if'), // 需要重新下载最新库存，不能产生增量同步
+                    $it('mT.warning'), {
                     confirmButtonText: $it('btn.download'),/*下载*/
                     cancelButtonText: $it('com.cancel'),
                     confirmButtonClass: '',
@@ -133,7 +138,9 @@ export default {
         // 修改同步比例
         checkSkuStorage: () => {
           this.hasSelectionData(() => {
-            this.$confirm('是否确定修改同步比例？', $it('mT.warning'), {
+            this.$confirm(
+              $it('tip.ig'), // 是否确定修改同步比例？
+              $it('mT.warning'), {
               confirmButtonText:$it('com.determine'),/*确定*/
               cancelButtonText: $it('com.cancel'),
               confirmButtonClass: '',
@@ -184,7 +191,7 @@ export default {
             isagfilter: true,
           },
           {
-            headerName: '平台商品',
+            headerName: $it('tL.a5'), // 平台商品
             field: 'numiid',
             width: 120,
             tdAlign: 'left',
@@ -203,7 +210,7 @@ export default {
             isagfilter: true,
           },
           {
-            headerName: '是否转仓',
+            headerName: $it('btn.aa'), // 是否转仓
             field: 'istrans',
             tdAlign: 'left',
             isagfilter: true,
@@ -215,19 +222,19 @@ export default {
             isagfilter: true,
           },
           {
-            headerName: '上架状态',
+            headerName: $it('tL.a6'), // 上架状态
             field: 'saleStatus',
             tdAlign: 'left',
             isagfilter: true,
           },
           {
-            headerName: '商品类型',
+            headerName: $it('fL.f6'), // 商品类型
             field: 'brandLabel',
             tdAlign: 'left',
             isagfilter: true,
           },
           {
-            headerName: '同步比例',
+            headerName: $it('tL.a7'), // 同步比例
             field: 'specialRadio',
             tdAlign: 'left',
             isagfilter: true,
@@ -260,13 +267,13 @@ export default {
             },
           },
           {
-            headerName: '平台库存下载时间',
+            headerName: $it('tL.a8'), // 平台库存下载时间
             field: 'transTime',
             tdAlign: 'left',
             isagfilter: true,
           },
           {
-            headerName: '差异数(>=)',
+            headerName: `${$it('tL.a9')}(>=)`, // 差异数(>=)
             field: 'qtyDifferences',
             tdAlign: 'left',
             isagfilter: true,
@@ -490,8 +497,8 @@ export default {
               renderContainer: 'CellRenderByFunction',
               renderComponent: (h, params) => {
                 const obj = {
-                  '0': '计算完成',
-                  '1': '计算中',
+                  '0': $it('fL.f4'), // 计算完成
+                  '1': $it('fL.f5'), // 计算中
                 }
                 const calcStatus = params.row.calcStatus // 计算状态
                 return h('div', {}, obj[calcStatus] || '');
@@ -602,7 +609,7 @@ export default {
             multiple: false,
             clearable: true,
             columnName: "brandLabels",
-            labelName: "商品类型",
+            labelName: $it('fL.f6'), // 商品类型
             optionArr: [
               {
                 label: $it('fL.ek'), // 活动
@@ -703,7 +710,7 @@ export default {
           key: 'qtyAvailable'
         },
         {
-          title: '同步比例',
+          title: $it('tL.a7'), // 同步比例
           key: 'ratio'
         },
         {
@@ -770,7 +777,7 @@ export default {
                     this.rightTable2CurrRowData = params.row
                   }
                 }
-              }, '调入库存')
+              }, $it('btn.a8')) // 调入库存
             ]);
           }
         }
@@ -789,7 +796,7 @@ export default {
           key: 'qtyAvailable'
         },
         {
-          title: '同步比例',
+          title: $it('tL.a7'), // 同步比例
           key: 'ratio'
         },
         {
@@ -984,7 +991,7 @@ export default {
         },
         {
           type: 'default',
-          text: '清空条件',
+          text: $it('btn.ae'), // 清空条件
           btnclick: () => {
             this.reset()
           }
@@ -1031,7 +1038,7 @@ export default {
           key: 'cpCShopEname',
         },
         {
-          title: '平台商品',
+          title: $it('tL.a5'), // 平台商品
           key: 'numiid',
           tooltip: true,
           render: (h, params) => {
@@ -1073,7 +1080,7 @@ export default {
           slot: 'islock',
         },
         {
-          title: '上架状态',
+          title: $it('tL.a6'), // 上架状态
           key: 'saleStatus',
           render: (h, params) => {
             let limitdesc = ''
@@ -1087,7 +1094,7 @@ export default {
           }
         },
         {
-          title: '商品类型',
+          title: $it('fL.f6'), // 商品类型
           key: 'brandLabel',
           width: 76,
           align: 'center',
@@ -1121,7 +1128,7 @@ export default {
         //   key: 'psCSkuEcode'
         // },
         {
-          title: '同步比例',
+          title: $it('tL.a7'), // 同步比例
           key: 'specialRadio'
         },
         {
@@ -1158,8 +1165,8 @@ export default {
           key: 'calcStatus', // 0 计算完成   1计算中
           render: (h, params) => {
             const obj = {
-              '0': '计算完成',
-              '1': '计算中',
+              '0': $it('fL.f4'), // 计算完成
+              '1': $it('fL.f5'), // 计算中
             }
             const calcStatus = params.row.calcStatus // 计算状态
             return h('div', {}, obj[calcStatus] || '');
@@ -1195,7 +1202,7 @@ export default {
           }
         },
         {
-          title: '平台库存下载时间',
+          title: $it('tL.a8'), // 平台库存下载时间
           key: 'transTime',
           render: (h, params) => {
             const transTime = params.row.transTime ? this.formatDate(params.row.transTime) : '' // 平台库存下载时间
@@ -1203,7 +1210,7 @@ export default {
           }
         },
         {
-          title: '差异数(>=)',
+          title: `${$it('tL.a9')}(>=)`, // 差异数(>=)
           key: 'qtyDifferences',
           width: 100,
           sortable: 'custom',

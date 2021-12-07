@@ -78,9 +78,10 @@
         :style="{ overflow: loading ? 'hidden' : 'auto' }"
         :class="{ 'ff-popper-class-box-full': !listShow }"
       >
+        <!-- 收起/显示列表 -->
         <div
           class="ff-list-hidden-show"
-          :title="listShow ? '收起列表' : '显示列表'"
+          :title="listShow ? $it('btn.a0') : $it('btn.a1')"
           @click="
             listShow = !listShow;
             matrixShow = true;
@@ -135,13 +136,15 @@
             @loadChange="revealLoadChange"
           />
           <div v-if="tBody.length === 0" class="ff-matrix--nodata">
-            暂无数据
+            <!-- 暂无数据 -->
+            {{ $it('other.noDataAvailable') }}
           </div>
         </div>
       </div>
+      <!-- 收起/显示矩阵 -->
       <div
         class="ff-matrix-hidden-show"
-        :title="matrixShow ? '收起矩阵' : '显示矩阵'"
+        :title="matrixShow ? $it('btn.a2') : $it('btn.a3')"
         @click="
           matrixShow = !matrixShow;
           listShow = true;
@@ -170,12 +173,13 @@
         @refreshbizlines="errorDialogClose"
       />
     </drag-dialog>
+    <!-- 批量修改折扣 -->
     <Modal
       v-model="updateSalePriceFlag"
       class="orderDetailModal"
       :mask="true"
       :loading="discountLoading"
-      :title="'批量修改折扣'"
+      :title="$it('mT.aj')"
       @on-ok="updateDiscountCorfirm"
       @on-cancel="updateDiscountCancel"
     >

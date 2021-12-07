@@ -73,7 +73,8 @@
             :class="navStatus === 1 ? 'action' : ''"
             @click="navStatus = 1"
           >
-            日志
+            <!-- 日志 -->
+            {{ $it('pL.log') }}
           </p>
         </div>
         <div v-show="navStatus === 0" class="re_table">

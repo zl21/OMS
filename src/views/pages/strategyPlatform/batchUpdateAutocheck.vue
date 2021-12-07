@@ -131,7 +131,7 @@
                         "
                         :page-size="CP_C_LOGISTICS_ID_SELECT.pageSize"
                         :show-colname-key="'show'"
-                        :data-empty-message="'暂无数据'"
+                        :data-empty-message="$it('other.noDataAvailable')"
                         :columns="CP_C_LOGISTICS_ID_SELECT.datas.tabth"
                         :auto-data="CP_C_LOGISTICS_ID_SELECT.autoData"
                         :defaultSelected="
