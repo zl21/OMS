@@ -1,5 +1,4 @@
 import scheduleFormDialog from '@/views/modal/strategyPlatform/scheduleFormDialog';
-import dateUtil from '@/assets/js/__utils__/date';
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
 
 export default {
@@ -1193,7 +1192,7 @@ export default {
     // 时间戳格式化
     formatDate(time, format) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, format || 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, format || 'yyyy-MM-dd HH:mm:ss');
     },
     // 返回
     back() {

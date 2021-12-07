@@ -1,5 +1,3 @@
-import formatData from '@/assets/js/__utils__/date';
-
 export default {
   components: {},
   data() {
@@ -517,7 +515,7 @@ export default {
         if (res.data.code === 0) {
           let resData = res.data.data;
           resData.forEach(item => {
-            item.modifieddate = formatData.standardTimeConversiondateToStr(item.modifieddate);
+            item.modifieddate = $utils.standardTimeConversiondateToStr(item.modifieddate);
           })
           this.TableData = resData;
         }

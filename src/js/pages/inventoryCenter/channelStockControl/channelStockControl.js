@@ -7,7 +7,6 @@ import tableHeaderCustom from "allpages/inventoryCenter/channelStockControl/tabl
 
 import {setFormDataFunMixin} from "@/assets/js/mixins/setFormData";
 import {setActionFormMixin} from "@/assets/js/mixins/setActionFormData";
-import dateUtil from "@/assets/js/__utils__/date";
 import copy from 'copy-to-clipboard';
 
 export default {
@@ -1948,7 +1947,7 @@ export default {
     // 时间戳格式化
     formatDate(time) {
       const date = new Date(time);
-      return dateUtil.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
+      return $utils.getFormatDate(date, 'yyyy-MM-dd HH:mm:ss');
     },
     /**
      * 调入库存

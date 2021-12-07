@@ -2,7 +2,6 @@ import BurgeonEvent from 'burgeonConfig/config/event.config';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
-import formatData from '@/assets/js/__utils__/date';
 import labelListConfig from './publicConfig/labelList';
 import orderLogo from './publicConfig/orderLogo';
 import BC from 'burgeonComponents'
@@ -84,7 +83,7 @@ export default {
                 renderComponent: (h, params) => {
                   return h('div', {
                     domProps: {
-                      innerHTML: `${params.row[field] ? formatData.standardTimeConversiondateToStr(params.row[field]) : ''}`
+                      innerHTML: `${params.row[field] ? $utils.standardTimeConversiondateToStr(params.row[field]) : ''}`
                     }
                   })
                 }
@@ -1641,28 +1640,28 @@ export default {
                   item.isColorGray = false;
                 }
                 if (item.PAY_TIME) { // 付款时间
-                  item.PAY_TIME = formatData.standardTimeConversiondateToStr(item.PAY_TIME);
+                  item.PAY_TIME = $utils.standardTimeConversiondateToStr(item.PAY_TIME);
                 }
                 if (item.CREATIONDATE) { // 创建时间
-                  item.CREATIONDATE = formatData.standardTimeConversiondateToStr(item.CREATIONDATE);
+                  item.CREATIONDATE = $utils.standardTimeConversiondateToStr(item.CREATIONDATE);
                 }
                 if (item.HOLD_RELEASE_TIME) { // Hold单释放时间
-                  item.HOLD_RELEASE_TIME = formatData.standardTimeConversiondateToStr(item.HOLD_RELEASE_TIME);
+                  item.HOLD_RELEASE_TIME = $utils.standardTimeConversiondateToStr(item.HOLD_RELEASE_TIME);
                 }
                 if (item.PLATFORM_DELIVERY_TIME) { // 平台发货时间
-                  item.PLATFORM_DELIVERY_TIME = formatData.standardTimeConversiondateToStr(item.PLATFORM_DELIVERY_TIME);
+                  item.PLATFORM_DELIVERY_TIME = $utils.standardTimeConversiondateToStr(item.PLATFORM_DELIVERY_TIME);
                 }
                 if (item.WAREHOUSE_DELIVERY_TIME) { // 仓库发货时间
-                  item.WAREHOUSE_DELIVERY_TIME = formatData.standardTimeConversiondateToStr(item.WAREHOUSE_DELIVERY_TIME);
+                  item.WAREHOUSE_DELIVERY_TIME = $utils.standardTimeConversiondateToStr(item.WAREHOUSE_DELIVERY_TIME);
                 }
                 if (item.SCAN_TIME) { // 出库时间
-                  item.SCAN_TIME = formatData.standardTimeConversiondateToStr(item.SCAN_TIME);
+                  item.SCAN_TIME = $utils.standardTimeConversiondateToStr(item.SCAN_TIME);
                 }
                 if (item.DISTRIBUTION_TIME) { // 配货时间
-                  item.DISTRIBUTION_TIME = formatData.standardTimeConversiondateToStr(item.DISTRIBUTION_TIME);
+                  item.DISTRIBUTION_TIME = $utils.standardTimeConversiondateToStr(item.DISTRIBUTION_TIME);
                 }
                 if (item.ESTIMATE_CON_TIME) { //预计发货时间
-                  item.ESTIMATE_CON_TIME = formatData.standardTimeConversiondateToStr(item.ESTIMATE_CON_TIME);
+                  item.ESTIMATE_CON_TIME = $utils.standardTimeConversiondateToStr(item.ESTIMATE_CON_TIME);
                 }
               });
               // 统计商品总数

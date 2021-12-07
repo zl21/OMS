@@ -1,5 +1,4 @@
 import BurgeonEvent from 'burgeonConfig/config/event.config';
-import dateUtil from '@/assets/js/__utils__/date.js';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dynamicSearch from 'allpages/orderCenter/orderManager/dynamicSearch.vue';
 import formSetting from 'allpages/orderCenter/orderManager/formSetting.vue';
@@ -840,7 +839,7 @@ export default {
             } else {
               const obj = {
                 NAME: key,
-                VAL: self.getFormStyle(key) == 'date' ? `${dateUtil.getFormatDate(new Date(formValue[key][0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(formValue[key][1]), 'yyyy-MM-dd HH:mm:ss')}` : self.getFormStyle(key) == 'bothInput' ? `${formValue[key][0]}~${formValue[key][1]}` : `${formValue[key].join(',')}`,
+                VAL: self.getFormStyle(key) == 'date' ? `${$utils.getFormatDate(new Date(formValue[key][0]), 'yyyy-MM-dd HH:mm:ss')}~${$utils.getFormatDate(new Date(formValue[key][1]), 'yyyy-MM-dd HH:mm:ss')}` : self.getFormStyle(key) == 'bothInput' ? `${formValue[key][0]}~${formValue[key][1]}` : `${formValue[key].join(',')}`,
               };
               ADVANCE.push(obj);
             }
@@ -855,7 +854,7 @@ export default {
           } else if (formValue[key][0]) {
             const obj = {
               NAME: key,
-              VAL: typeof formValue[key][0] == 'object' ? `${dateUtil.getFormatDate(new Date(formValue[key][0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(formValue[key][1]), 'yyyy-MM-dd HH:mm:ss')}` : `${formValue[key][0]}~${formValue[key][1]}`,
+              VAL: typeof formValue[key][0] == 'object' ? `${$utils.getFormatDate(new Date(formValue[key][0]), 'yyyy-MM-dd HH:mm:ss')}~${$utils.getFormatDate(new Date(formValue[key][1]), 'yyyy-MM-dd HH:mm:ss')}` : `${formValue[key][0]}~${formValue[key][1]}`,
             };
             ADVANCE.push(obj);
           }
@@ -877,9 +876,9 @@ export default {
           if (it.DISPLAY == 'OBJ_DATE') {
             if (it.VAL instanceof Array) {
               // 日期范围类型
-              it.VAL = typeof it.VAL[0] == 'string' ? `${dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${dateUtil.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
+              it.VAL = typeof it.VAL[0] == 'string' ? `${$utils.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss')}~${$utils.getFormatDate(new Date(it.VAL[1]), 'yyyy-MM-dd HH:mm:ss')}` : `${it.VAL[0]}~${it.VAL[1]}`
             } else {
-              it.VAL = dateUtil.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss');
+              it.VAL = $utils.getFormatDate(new Date(it.VAL[0]), 'yyyy-MM-dd HH:mm:ss');
             }
           }
           if (it.DISPLAY == 'RANGE') {

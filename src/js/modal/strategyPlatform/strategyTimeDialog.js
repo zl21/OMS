@@ -77,7 +77,6 @@ export default {
     };
   },
   mounted() {
-    console.log(format.standardTimeConversion);
     const tableInfo = this.$store.state[getModuleName()];
     this.infoParams = {
       // objid: this.idArr[0],

@@ -57,11 +57,11 @@ export default {
       }, // 退单编号查询
       ORDER_TYPE: '', // 丢单的值
       isgift: [{
-        label: $it('com.yes'),
+        label: $it('com.yes'), // 是
         value: '1',
       },
       {
-        label: $it('com.no'),
+        label: $it('com.no'), // 否
         value: '0',
       },
       ],
@@ -929,15 +929,13 @@ export default {
           key: 'PS_C_PRO_ECODE',
           dataAcessKey: 'PS_C_PRO_ECODE',
         },
-        // 颜色
         {
           title: $it('other.color'), // 颜色
           key: 'PS_C_CLR_ENAME',
           dataAcessKey: 'PS_C_CLR_ENAME',
         },
-        // 尺寸
         {
-          title: $it('other.sizes'),
+          title: $it('other.sizes'), // 尺寸
           key: 'PS_C_SIZE_ENAME',
           dataAcessKey: 'PS_C_SIZE_ENAME',
         },
@@ -982,13 +980,11 @@ export default {
             ),
           ]),
         },
-        // 性别
         {
           title: $it('tL.gender'), // 性别
           key: 'SEX_NAME',
           dataAcessKey: 'SEX',
         },
-        // 性别
         {
           title: $it('tL.tagPrice'), // 吊牌价
           key: 'RESERVE_DECIMAL02',
