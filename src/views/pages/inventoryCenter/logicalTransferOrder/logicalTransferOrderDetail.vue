@@ -207,8 +207,9 @@
           :label-width="70"
           inline
         >
+          <!-- 修改类型 -->
           <FormItem
-            label="修改类型"
+            :label="$it('pL.b7')"
             prop="UPDATE_TYPE"
           >
             <Select

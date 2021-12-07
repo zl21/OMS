@@ -43,15 +43,15 @@ export default {
           click: () => this.setVariable('订单号')
         },
         {
-          label: '入库单号',
+          label: $it('fL.ed'), // 入库单号
           click: () => this.setVariable('入库单号')
         },
         {
-          label: '到货仓',
+          label: $it('fL.ee'), // 到货仓
           click: () => this.setVariable('到货仓')
         },
         {
-          label: '商品总数量',
+          label: $it('fL.ef'), // 商品总数量
           click: () => this.setVariable('商品总数量')
         }
       ],

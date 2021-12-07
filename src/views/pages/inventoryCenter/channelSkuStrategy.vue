@@ -7,13 +7,15 @@
     <div class="public-content">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
-          基本信息
+          <!-- 基本信息 -->
+          {{ $it('com.baseInformation') }}
           <div slot="content">
             <OmsForm :form-config="formConfig1"/>
           </div>
         </Panel>
         <Panel name="exclusive_stock">
-          独享库存
+          <!-- 独享库存 -->
+          {{ $it('pL.bg') }}
           <div slot="content">
             <OmsForm v-if="canEdit" ref="exclusiveStock" :form-config="formConfig2"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
@@ -56,7 +58,8 @@
           </div>
         </Panel>
         <Panel name="share_baseInfo">
-          共享库存
+          <!-- 共享库存 -->
+          {{ $it('pL.bg') }} 
           <div slot="content">
             <OmsForm v-if="canEdit" :form-config="formConfig3"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
@@ -102,7 +105,8 @@
         </Panel>
 
         <Panel name="log" v-if="ID!=='-1'">
-          日志
+          <!-- 日志 -->
+          {{ $it('pL.log') }}
           <div slot="content">
             <OmsForm :form-config="formConfig4"/>
           </div>

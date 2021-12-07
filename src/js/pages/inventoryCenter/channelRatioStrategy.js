@@ -102,7 +102,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '配销仓',
+              name: $it('pL.b8'), // 配销仓,
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'SG_C_SA_STORE', // 对应的表
               reftableid: 249230796, // 对应的表ID
@@ -183,7 +183,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '共享池',
+              name: $it('pL.b9'), // 共享池,
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'SG_C_SHARE_POOL', // 对应的表
               reftableid: 249230846, // 对应的表ID

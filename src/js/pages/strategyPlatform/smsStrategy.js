@@ -43,15 +43,15 @@ export default {
           click: () => this.setVariable('订单号'),
         },
         {
-          label: '入库单号', // 入库单号
+          label: $it('fL.ed'), // 入库单号
           click: () => this.setVariable('入库单号'),
         },
         {
-          label: '到货仓', // 到货仓
+          label: $it('fL.ee'), // 到货仓
           click: () => this.setVariable('到货仓'),
         },
         {
-          label: '商品总数量', // 商品总数量
+          label: $it('fL.ef'), // 商品总数量
           click: () => this.setVariable('商品总数量'),
         },
       ],
@@ -122,12 +122,12 @@ export default {
         $it('fL.platform_billNo'), // 平台单号
         $it('fL.consignee'), // 收货人
         $it('tL.buyerNickname'), // 买家昵称
-        $it('tL.buyerNickname'), // 本单件数
-        '原单件数', 
+        $it('fL.eg'), // 本单件数
+        $it('fL.eh'), // 原单件数
         $it('tL.expressCompany'), // 快递公司
         $it('fL.logisticsOrder_No'), // 物流单号
         $it('fL.bj'), // 支付时间
-        '入库日期', 
+        $it('fL.ei'), // 入库日期
         $it('fL.out_date') // 出库日期
       ];
       self.lists = rows.map((row) => ({

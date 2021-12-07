@@ -40,12 +40,11 @@
                 :span="6"
             />
           </div>
-          <businessButton :btn-config="btnConfig2" class="top-btns"/>
-          <!--<businessButton :btn-config="btnConfig" class="top-btns"/>-->
+          <OmsButton :btn-config="btnConfig2" class="top-btns"/>
+          <!--<OmsButton :btn-config="btnConfig" class="top-btns"/>-->
           <!--库存查询与选择区-->
           <div class="pd-rt-5">
-            <div class="relative">
-              <loading :loading="table1Loading"></loading>
+            <div class="relative" v-loading="table1Loading">
               <arkCommonTableByAgGrid
                   class="br-d3d3d3"
                   ref="agGrid"
@@ -203,10 +202,14 @@
     <el-dialog title="调入库存" :visible.sync="showTransferInventory" width="500px">
       <Form ref="formCustom" :model="transferInventoryForm" :rules="ruleCustom" :label-width="155"
             v-if="rightTableCurrRowData && rightTable2CurrRowData">
-        <FormItem label="商家条码id:">{{ rightTableCurrRowData.psCSkuId }}</FormItem>
-        <FormItem label="来源聚合仓名称:">{{ rightTable2CurrRowData.sgCShareStoreEname }}</FormItem>
-        <FormItem label="来源配销仓名称:">{{ rightTableCurrRowData.cpCShopEname }}</FormItem>
-        <FormItem label="调入量:" prop="qty">
+        <!-- 商家条码id -->
+        <FormItem :label="`${$it('pL.bb')}:`">{{ rightTableCurrRowData.psCSkuId }}</FormItem>
+        <!-- 来源聚合仓名称 -->
+        <FormItem :label="`${$it('pL.bc')}:`">{{ rightTable2CurrRowData.sgCShareStoreEname }}</FormItem>
+        <!-- 来源配销仓名称 -->
+        <FormItem :label="`${$it('pL.bi')}:`">{{ rightTableCurrRowData.cpCShopEname }}</FormItem>
+        <!-- 调入量 -->
+        <FormItem :label="`${$it('pL.bd')}:`" prop="qty">
           <Input type="text" v-model="transferInventoryForm.qty" :regx="/^[0-9]*$/" clearable
                  style="width: 225px"></Input>
         </FormItem>

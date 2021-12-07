@@ -1,30 +1,22 @@
 import CustomTable from 'framework/components/table/customTable.vue';
 import pageNation from 'framework/components/page/pagenation.vue';
-import businessButton from 'professionalComponents/businessButton';
-import businessForm from 'professionalComponents/businessForm';
-import propSelect from '@/component/AutoForm/propSelect';
-import actionForm from '@/component/AutoForm/actionForm';
-import selectTag from '@/component/AutoForm/selectTag'
+import propSelect from '@/commonPages/AutoForm/propSelect';
+import actionForm from '@/commonPages/AutoForm/actionForm';
+import selectTag from '@/commonPages/AutoForm/selectTag'
 import tableHeaderCustom from "allpages/inventoryCenter/channelStockControl/tableHeaderCustom.vue";
-import loading from '@/component/loading.vue';
-import {get, post} from '/src/service/request-for-mock';
 
 import {setFormDataFunMixin} from "@/assets/js/mixins/setFormData";
 import {setActionFormMixin} from "@/assets/js/mixins/setActionFormData";
 import dateUtil from "@/assets/js/__utils__/date";
 import copy from 'copy-to-clipboard';
-// import {debounce, throttle} from 'lodash'
 
 export default {
   mixins: [setFormDataFunMixin, setActionFormMixin],
   components: {
-    loading,
     selectTag,
     propSelect,
     actionForm,
     CustomTable,
-    businessForm,
-    businessButton,
     pageNation
   },
   data() {
@@ -70,7 +62,9 @@ export default {
         // 全量库存同步
         'syncChannelStorage': () => {
           this.hasSelectionData(() => {
-            this.$confirm('是否确定全量库存同步？', $it('mT.warning'), {
+            this.$confirm(
+              '是否确定全量库存同步？', 
+              $it('mT.warning'), {
               confirmButtonText: $it('com.determine'),/*确定*/
               cancelButtonText: $it('com.cancel'), /*取消*/
               confirmButtonClass: '',
@@ -173,7 +167,7 @@ export default {
           //   cellStyle: {color: 'rgb(15, 142, 233)'},
           // },
           {
-            headerName: "序号",
+            headerName: $it('tL.serialNo'), // 序号
             width: 90,
             field: "index",
             checkboxSelection: true,
@@ -184,7 +178,7 @@ export default {
             cellStyle: {color: 'rgb(15, 142, 233)'},
           },
           {
-            headerName: '店铺',
+            headerName: $it('other.shop'), // 店铺
             field: 'cpCShopEname',
             tdAlign: 'left',
             isagfilter: true,
@@ -197,13 +191,13 @@ export default {
             isagfilter: true,
           },
           {
-            headerName: '条码',
+            headerName: $it('fL.barCode'), // 条码
             field: 'psCSkuEcode',
             tdAlign: 'left',
             isagfilter: true,
           },
           {
-            headerName: '商品编码',
+            headerName: $it('tL.productNo'), // 商品编码
             field: 'psCProEcode',
             tdAlign: 'left',
             isagfilter: true,
@@ -215,7 +209,7 @@ export default {
             isagfilter: true,
           },
           {
-            headerName: '同步库存',
+            headerName: $it('btn.a9'), // 同步库存
             field: 'islock',
             tdAlign: 'left',
             isagfilter: true,
@@ -361,9 +355,9 @@ export default {
                 let val = ''
                 const data = params.row.istrans
                 if (data === 'Y') {
-                  val = '是'
+                  val = $it('com.yes')
                 } else if (data === 'N') {
-                  val = '否'
+                  val = $it('com.no')
                 }
                 return h('div', {}, val);
               }
@@ -376,9 +370,9 @@ export default {
                 let val = ''
                 const data = params.row.islock
                 if (data === 'Y') {
-                  val = '否'
+                  val = $it('com.no')
                 } else if (data === 'N') {
-                  val = '是'
+                  val = $it('com.yes')
                 }
                 return h('div', {}, val);
               }
@@ -611,11 +605,11 @@ export default {
             labelName: "商品类型",
             optionArr: [
               {
-                label: "活动",
+                label: $it('fL.ek'), // 活动
                 value: "1"
               },
               {
-                label: "普通",
+                label: $it('other.common'), // 普通
                 value: "2"
               }
             ],
@@ -669,7 +663,7 @@ export default {
       columns2: [
         {
           type: 'index',
-          title: '序号',
+          title: $it('tL.serialNo'), // 序号
           fixed: 'left',
           indexMethod: (row) => {
             return (this.page2.current - 1) * this.page2.pageSize + row._index + 1;
@@ -689,8 +683,8 @@ export default {
           key: 'type',
           render: (h, params) => {
             const obj = {
-              '1': '活动',
-              '2': ' 普通',
+              '1': $it('fL.ek'), // 活动
+              '2': $it('other.common'), // 普通
             }
             const type = params.row.type // 同步状态
             return h('div', {}, obj[type] || '');
@@ -713,7 +707,7 @@ export default {
           key: 'ratio'
         },
         {
-          title: '同步库存',
+          title: $it('btn.a9'), // 同步库存
           key: 'qtysync'
         },
         {
@@ -723,11 +717,11 @@ export default {
           tooltip: true,
         },
         {
-          title: '优先级',
+          title: $it('tL.priority'), // 优先级
           key: 'priority'
         },
         {
-          title: '操作',
+          title: $it('tL.operation'), // 操作
           key: 'action',
           align: 'center',
           render: (h, params) => {
@@ -799,11 +793,11 @@ export default {
           key: 'ratio'
         },
         {
-          title: '同步库存数',
+          title: $it('fL.synchronizedInventory'), // 同步库存数
           key: 'qtysync'
         },
         {
-          title: '优先级',
+          title: $it('tL.priority'), // 优先级
           key: 'priority'
         },
         /*{
@@ -862,7 +856,7 @@ export default {
             type: 'Input', // 组件类型
             required: false, // 是否必填
             field: 'numiid',
-            label: '商品ID',
+            label: $it('fL.commodityID'), // 商品ID
             props: {
               class: 'width-230',
               clearable: true,
@@ -879,7 +873,7 @@ export default {
             type: 'DatePicker', // 组件类型
             required: false, // 是否必填
             field: 'time',
-            label: '修改时间',
+            label: $it('tL.modificationTime'), // 修改时间
             props: {
               class: 'width-230',
               type: 'datetimerange',
@@ -905,7 +899,7 @@ export default {
             type: 'Input', // 组件类型
             required: true, // 是否必填
             field: 'numiid',
-            label: '商品ID',
+            label: $it('fL.commodityID'), // 商品ID
             props: {
               class: 'width-230',
               clearable: true,
@@ -1002,201 +996,6 @@ export default {
         buttons
       }
     },
-   /* btnConfig() {
-      const btns = this.data1 && this.data1.length ? [
-        {
-          type: 'default',
-          text: '同步库存',
-          btnclick: () => {
-            if (!this.multipleSelection.length) {
-              this.$Message.warning('未勾选记录，不允许继续操作!');
-            } else {
-              this.dialogObj1.show = true
-            }
-          }
-        },
-        {
-          type: 'default',
-          text: '是否转仓',
-          btnclick: () => {
-            if (!this.multipleSelection.length) {
-              this.$Message.warning('未勾选记录，不允许继续操作!');
-            } else {
-              this.dialogObj2.show = true
-            }
-          }
-        },
-        {
-          type: 'default',
-          text: '修改商品类型',
-          btnclick: () => {
-            if (!this.multipleSelection.length) {
-              this.$Message.warning('未勾选记录，不允许继续操作!');
-            } else {
-              this.modifyTypeDialogObjShow = true
-            }
-
-          }
-        },
-        {
-          type: 'default',
-          text: '设定安全库存',
-          btnclick: () => {
-            if (!this.multipleSelection.length) {
-              this.$Message.warning('未勾选记录，不允许继续操作!');
-            } else {
-              this.dialogObj3.show = true
-            }
-          }
-        },
-        {
-          type: 'default',
-          text: '手动增量同步库存',
-          btnclick: () => {
-            if (!this.multipleSelection.length) {
-              this.$Message.warning('未勾选记录，不允许继续操作!');
-            } else {
-              const itemList = []
-              let allIsZere = true
-              let allLessThanTen = true // 都大于10分钟
-              this.multipleSelection.forEach((item) => {
-                if (`${item.qtyDifferences}` !== '0') {
-                  allIsZere = false
-                }
-                itemList.push({
-                  id: item.id,
-                  qtyInc: item.qtyDifferences, //差异数
-                })
-
-                // 平台库存下载时间 和 系统时间 判断
-                const currentTime = item.currentTime // 服务器库时间 - 时间戳
-                const currentTimeNum = currentTime ? currentTime : Date.parse(new Date()) // 服务器库时间 - 转时间戳
-                const transTime = item.transTime // 平台库存下载时间 - 时间戳
-                const differenceNum = Math.abs(currentTimeNum - transTime) / 1000 / 60
-                if (differenceNum > 10) {
-                  allLessThanTen = false // 只要存在一个大于10分钟的就提示
-                }
-              })
-              if (allIsZere) {
-                this.$Message.warning('当前选中记录无差异数，无需同步'); // 选中的都是0 时候不需要同步
-              } else {
-                if (allLessThanTen) {
-                  // 所有的都小于10min：走之前逻辑
-                  this.$confirm('是否确认增量同步库存', $it('mT.warning'), {
-                    confirmButtonText: '确定',
-                    cancelButtonText: $it('com.cancel'),
-                    confirmButtonClass: '',
-                    customClass: 'warning-alert',
-                    type: 'warning'
-                  }).then(() => {
-                    this.countDownFun('IncSyncStorage')
-                    this.incSyncStorageFun(itemList)
-                  });
-                } else {
-                  // 只要存在一个大于的 就提示
-                  this.$confirm('需要重新下载最新库存，不能产生增量同步', $it('mT.warning'), {
-                    confirmButtonText: '下载',
-                    cancelButtonText: $it('com.cancel'),
-                    confirmButtonClass: '',
-                    customClass: 'warning-alert',
-                    type: 'warning'
-                  }).then(() => {
-                    this.downDialogFun2()
-                  });
-                }
-              }
-
-
-            }
-          }
-        },
-        {
-          type: 'default',
-          text: '全量库存同步',
-          btnclick: () => {
-            if (!this.multipleSelection.length) {
-              this.$Message.warning('未勾选记录，不允许继续操作!');
-            } else {
-              this.$confirm('是否确定全量库存同步？', $it('mT.warning'), {
-                confirmButtonText: '确定',
-                cancelButtonText: $it('com.cancel'),
-                confirmButtonClass: '',
-                customClass: 'warning-alert',
-                type: 'warning'
-              }).then(() => {
-                this.syncChannelStorageFun()
-              });
-            }
-
-          }
-        },
-        {
-          type: 'default',
-          text: '修改同步比例',
-          btnclick: () => {
-            if (!this.multipleSelection.length) {
-              this.$Message.warning('未勾选记录，不允许继续操作!');
-            } else {
-              this.$confirm('是否确定修改同步比例？', $it('mT.warning'), {
-                confirmButtonText: '确定',
-                cancelButtonText: $it('com.cancel'),
-                confirmButtonClass: '',
-                customClass: 'warning-alert',
-                type: 'warning'
-              }).then(() => {
-                this.dialogObj4.show = true
-              });
-            }
-
-          }
-        },
-      ] : []
-      const buttons = [
-        {
-          type: 'posdefault',
-          text: '查询',
-          btnclick: () => {
-            this.throttleFun(() => {
-              this.searchFun(true)
-            })
-          }
-        },
-        {
-          type: 'default',
-          text: '清空条件',
-          btnclick: () => {
-            this.reset()
-          }
-        },
-        {
-          type: 'default',
-          text: '下载平台商品',
-          btnclick: () => {
-            this.downDialogFun('下载平台商品')
-          }
-        },
-        {
-          type: 'default',
-          text: '下载平台库存',
-          btnclick: () => {
-            this.downDialogFun2('下载平台库存')
-          }
-        },
-        ...btns,
-        {
-          type: 'default',
-          text: '导出',
-          btnclick: () => {
-            this.exportFun()
-          }
-        },
-
-      ]
-      return {
-        typeAll: 'default',
-        buttons
-      }
-    },*/
     // 标签颜色
     tagColorObj() {
       let tagColorObj = {}
@@ -1218,7 +1017,7 @@ export default {
         {
           type: 'index',
           key: 'index',
-          title: '序号',
+          title: $it('tL.serialNo'), // 序号
           fixed: 'left',
           indexMethod: (row) => {
             return (this.page1.current - 1) * this.page1.pageSize + row._index + 1;
@@ -1227,7 +1026,7 @@ export default {
           align: 'center'
         },
         {
-          title: '店铺', // 渠道仓
+          title: $it('other.shop'), // 店铺
           fixed: 'left',
           key: 'cpCShopEname',
         },
@@ -1254,21 +1053,21 @@ export default {
           }
         },
         {
-          title: '条码',
+          title: $it('fL.barCode'), // 条码
           key: 'psCSkuEcode',
         },
         {
-          title: '商品编码',
+          title: $it('tL.productNo'), // 商品编码
           key: 'psCProEcode',
         },
         {
-          title: '是否转仓',
+          title: $it('btn.aa'), // 是否转仓
           key: 'istrans',
           align: 'center',
           slot: 'switch',
         },
         {
-          title: '同步库存',
+          title: $it('btn.a9'), // 同步库存
           key: 'islock',
           align: 'center',
           slot: 'islock',
@@ -1586,7 +1385,7 @@ export default {
      */
     hasSelectionData(fn) {
       if (!this.multipleSelection.length) {
-        this.$Message.warning('未勾选记录，不允许继续操作!');
+        this.$Message.warning($it('tip.kx')); // 未勾选记录，不允许继续操作!
       } else {
         if (fn) {
           fn()
@@ -2096,7 +1895,7 @@ export default {
     getContextMenuItemsFun(params) {
       return [
         {
-          name: '复制',
+          name: $it('com.copy'), // 复制
           action: function () {
             copy(params.value);
           },

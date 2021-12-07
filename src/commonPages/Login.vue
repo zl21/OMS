@@ -37,8 +37,8 @@
         <!-- 欢迎登录 -->
         <div class="title" v-else>{{ $it("welcome") }}</div>
         <!-- 表单 -->
-        <!-- <R3Login/> -->
-        <R3Login :loginSucCbk="loginSucCbk" />
+        <R3Login/>
+        <!-- <R3Login :loginSucCbk="loginSucCbk" /> -->
         <!-- bg -->
         <span class="login-bg-img">
           <img :src="require('assetsImg/login-bg-img.png')" />
@@ -176,6 +176,7 @@ export default {
     async loginSucCbk() {
       const pa = new FormData();
       pa.append('language', localStorage.getItem("locale") || 'zh');
+      console.log(service.common);
       const { status, data } = await service.common.langSwitcher(pa)
       return status === 200 && data.code === 0
     }

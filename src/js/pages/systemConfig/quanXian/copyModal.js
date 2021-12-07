@@ -15,7 +15,7 @@ export default {
           item: {
             type: 'AttachFilter', // 组件类型
             required: true, // 是否必填
-            label: '原角色',
+            label: $it('fL.eq'), // 原角色
             props: {
               placeholder: '气泡弹框',
               value: '',
@@ -35,7 +35,7 @@ export default {
         {
           item: {
             type: 'DropMultiSelectFilter', // 组件类型
-            label: '目的角色',
+            label: $it('fL.er'), // 目的角色
             props: {
               data: {},
               totalRowCount: 0,
@@ -109,17 +109,17 @@ export default {
           item: {
             type: 'Select', // 组件类型
             required: true,
-            label: '复制方式',
+            label: $it('fL.et'), // 复制方式
             props: {
               placeholder: '请选择复制方式',
               options: [
                 {
                   value: 'cover',
-                  label: '覆盖原有权限'
+                  label: $it('fL.eu'), // 覆盖原有权限
                 },
                 {
                   value: 'copy',
-                  label: '保留原有权限'
+                  label: $it('fL.ev'), // 保留原有权限
                 }
               ]
             },

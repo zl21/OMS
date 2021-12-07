@@ -94,7 +94,7 @@ export default {
           },
           {
             style: 'input', // 输入框类型
-            label: '航空禁运', // 输入框前文字
+            label: '航空禁运',
             colname: 'IS_AIR_EMBARGO_TEXT',
             value: 'IS_AIR_EMBARGO_TEXT', // 输入框的值
             width: '24', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
@@ -102,7 +102,7 @@ export default {
           },
           {
             style: 'time', // 输入框类型
-            label: '发货时间', // 输入框前文字
+            label: $it('fL.c4'), // 发货时间
             colname: 'SENDTIME',
             type: 'time',
             value: 'SENDTIME', // 输入框的值
@@ -113,7 +113,7 @@ export default {
           },
           {
             style: 'time', // 输入框类型
-            label: '入库单结单时间', // 输入框前文字
+            label: '入库单结单时间',
             colname: 'STATEMENT_TIME',
             type: 'time',
             value: 'STATEMENT_TIME', // 输入框的值

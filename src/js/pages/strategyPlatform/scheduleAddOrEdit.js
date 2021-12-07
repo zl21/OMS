@@ -144,9 +144,9 @@ export default {
             // regx: /^(-|\\+)?[1-9]{0,1}$/,
             disabled: false,
             options: [
-              { value: '1', label: '大促' },
-              { value: '2', label: '活动' },
-              { value: '3', label: '日常' }
+              { value: '1', label: $it('fL.ej') }, // 大促
+              { value: '2', label: $it('pL.be') }, // 活动
+              { value: '3', label: $it('fL.el') } // 日常
             ],
             selectChange: () => {
               this.masterModifyData('RANK', 'master');
@@ -167,7 +167,7 @@ export default {
           },
           {
             style: 'input',
-            label: '自动补货数量限制',
+            label: $it('fL.em'), // 自动补货数量限制
             colname: 'AUTO_ADD_GOODS_LIMIT',
             value: 'AUTO_ADD_GOODS_LIMIT',
             width: '6',
@@ -200,7 +200,7 @@ export default {
       pickingForDate: {
         formData: [{
           style: 'time', // 输入框类型
-          label: '拣货单创建时间', //
+          label: $it('fL.en'), // 拣货单创建时间
           colname: 'CREATE_TIME',
           type: 'time',
           placement: 'bottom',
@@ -855,7 +855,7 @@ export default {
       },
       pickTableHeaders: [
         [{
-          title: '拣货单创建时间',
+          title: $it('fL.en'), // 拣货单创建时间
           key: 'CREATE_TIME',
         },
         {

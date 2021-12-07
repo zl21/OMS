@@ -53,7 +53,7 @@ export default {
       
       let fullUpdate = this.isFullUpdate;
       if (!fullUpdate.IS_READ.flag && !fullUpdate.IS_WRITE.flag && !this.saveTableArr.length) {
-        this.$Message.info('没有更改');
+        this.$Message.info($it('tip.it')); // 没有更改
         return;
       }
 
