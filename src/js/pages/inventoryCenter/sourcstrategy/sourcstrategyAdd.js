@@ -920,7 +920,7 @@ export default {
               label: '寻源策略表', //  tab中文名
             });
           }
-          this.$Message.success(window.$it('tip.z9')); // '保存成功'
+          this.$Message.success($it('tip.z9')); // '保存成功'
           this.tableData2PartNewLine = []
           this.sgChannelSourceStrategyRuleItemQueryFun()
         } else {
@@ -1011,12 +1011,12 @@ export default {
     back() {
       if (this.isChange) {
         this.$Modal.info({
-          title: window.$it('mT.tips'), // 提示
+          title: $it('mT.tips'), // 提示
           content: '当前修改未保存，确定返回？',
           mask: true,
           showCancel: true,
-          okText: window.$it('com.determine'), // 确定
-          cancelText: window.$it('com.cancel'), // 取消
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
           onOk: () => {
             this.onOk();
           },

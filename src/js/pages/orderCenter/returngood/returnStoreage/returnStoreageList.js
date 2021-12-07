@@ -97,7 +97,7 @@ export default {
                               type: 'C',
                               customizedModuleName: 'orderManageDetail',
                               customizedModuleId: res.data.data,
-                              label: window.$it('pL.retailInvoice_details')
+                              label: $it('pL.retailInvoice_details')
                             });
                           } else {
                             this.$Message.warning(res.data.message);
