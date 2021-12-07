@@ -37,6 +37,7 @@
         <!-- 欢迎登录 -->
         <div class="title" v-else>{{ $it("welcome") }}</div>
         <!-- 表单 -->
+        <!-- <R3Login/> -->
         <R3Login :loginSucCbk="loginSucCbk" />
         <!-- bg -->
         <span class="login-bg-img">
@@ -78,7 +79,6 @@ export default {
     };
   },
   created() {
-    const _this = this;
     const browseLan = localStorage.getItem("locale") || "zh";
     $i18n.locale = browseLan;
     this.curLang = langConfig.find((it) => it.type == browseLan).text;
@@ -98,8 +98,7 @@ export default {
       let inputNodes = document.querySelectorAll(".loginCore .container input");
       let r3ChangeLan = document.querySelectorAll(".loginCore .changeLang");
       r3ChangeLan[0] && (r3ChangeLan[0].style.display = "none");
-      code &&
-        code.setAttribute("data-code", $it("other.verticalCode"));
+      code && code.setAttribute("data-code", $it("other.verticalCode"));
       if (isPhone) {
         // 验证码登录
         account.setAttribute(
@@ -340,7 +339,7 @@ export default {
       width: 100%;
       height: auto;
       position: relative;
-      /deep/ .container{
+      /deep/ .container {
         width: 340px;
         margin: 0 auto;
         height: auto;
@@ -372,7 +371,10 @@ export default {
             text-align: right;
             padding-left: 80px;
             margin-bottom: 24px;
-            &::-webkit-input-placeholder,&::-webkit-input-placeholder,&::-moz-input-placeholder,&::-ms-input-placeholder {
+            &::-webkit-input-placeholder,
+            &::-webkit-input-placeholder,
+            &::-moz-input-placeholder,
+            &::-ms-input-placeholder {
               color: #c3c6d2;
               font-size: 12px;
             }
@@ -385,7 +387,7 @@ export default {
             }
           }
           // 验证码长度
-          .code.pwd{
+          .code.pwd {
             width: calc(100% - 116px);
           }
           // codeimg
@@ -394,16 +396,16 @@ export default {
             right: 0;
             bottom: 62px;
             width: 100px;
-            border-color:#dcdee2;
+            border-color: #dcdee2;
           }
-          .erCodeBtn{
+          .erCodeBtn {
             margin-bottom: 3px;
             margin-left: 0;
             border-radius: 4px;
             vertical-align: top;
             margin-left: 16px;
             width: 100px;
-            &:hover{
+            &:hover {
               border-color: @base-color;
               color: @base-color;
             }

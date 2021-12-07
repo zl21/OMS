@@ -190,24 +190,6 @@ export default {
           // pageShow:true,
           height: 300,
           columns: [
-            // {
-            //   title: "图片",
-            //   key: "IMAGE",
-            //   align: "center",
-            //   render: (h, params) => {
-            //     console.log(params);
-            //     return h(
-            //       "img", {
-            //       style: {
-            //         height: '27px'
-            //       },
-            //       attrs: {
-            //         src: params.row.IMAGE ? JSON.parse(params.row.IMAGE)[0].URL : '',
-            //       }
-            //     }
-            //     )
-            //   }
-            // },
             {
               title: '是否箱',
               key: 'IS_TEUS',
