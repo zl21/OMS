@@ -30,10 +30,10 @@
                       @on-change="pageChange1"
                       @on-page-size-change="pageSizeChange1"
                 />
-                <a v-if="canEdit && ID !== '-1'" @click="addSubmit('-1','formConfig2',tab1tableName,1)">【添加】</a>
-                <a v-if="canEdit && ID !== '-1'" @click="delFun(multipleSelection,tab1tableName,1)">【删除明细】</a>
-                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab1tableName,'独享库存明细',1)">【导入】</a>
-                <a v-if="ID !== '-1'" @click="exportClick(tab1tableName,multipleSelection,table1Refcolid,'独享库存明细',isExport,1)">【导出】</a>
+                <a v-if="canEdit && ID !== '-1'" @click="addSubmit('-1','formConfig2',tab1tableName,1)">【{{$it('btn.increase')}}】</a> <!--添加-->
+                <a v-if="canEdit && ID !== '-1'" @click="delFun(multipleSelection,tab1tableName,1)">【{{$it('btn.deleteDetail')}}】</a> <!--删除明细-->
+                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab1tableName,'独享库存明细',1)">【{{$it('btn.import')}}】</a> <!--导入-->
+                <a v-if="ID !== '-1'" @click="exportClick(tab1tableName,multipleSelection,table1Refcolid,'独享库存明细',isExport,1)">【{{$it('btn.export')}}】</a><!--导出-->
               </div>
               <div class="flex flex-direction-row align-items-center ">
                 <Select v-model="exclusiveStockFilterValue" class="width-120" placeholder="查询条件" clearable>
@@ -42,10 +42,10 @@
                     }}
                   </Option>
                 </Select>
-                <el-input placeholder="请输入查询内容" v-model="exclusiveStockFilterInputValue"
+                <el-input :placeholder="$it('table_label.enter')" v-model="exclusiveStockFilterInputValue"
                           class="input-with-search-style font-size-12 mg-lf-10"
                           size="mini">
-                  <el-button slot="prepend" class="font-size-12" @click="getExclusiveStockData(true)">搜索</el-button>
+                  <el-button slot="prepend" class="font-size-12" @click="getExclusiveStockData(true)"> {{$it('btn.search')}} <!--搜索--></el-button>
                   <i slot="suffix" class="el-input__icon el-icon-search cursor-pointer"
                      @click="getExclusiveStockData(true)"></i>
                 </el-input>
@@ -76,10 +76,10 @@
 
                 />
 
-                <a v-if="canEdit && ID !== '-1'" @click="addSubmit('-1','formConfig3',tab2tableName,2)">【添加】</a>
-                <a v-if="canEdit && ID !== '-1'" @click="delFun(multipleSelection2,tab2tableName,2)">【删除明细】</a>
-                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab2tableName,'共享库存明细',2)">【导入】</a>
-                <a v-if="ID !== '-1'" @click="exportClick(tab2tableName,multipleSelection2,table2Refcolid,'共享库存明细',isExport2,2)">【导出】</a>
+                <a v-if="canEdit && ID !== '-1'" @click="addSubmit('-1','formConfig3',tab2tableName,2)">【{{$it('btn.increase')}}】</a> <!--添加-->
+                <a v-if="canEdit && ID !== '-1'" @click="delFun(multipleSelection2,tab2tableName,2)">【{{$it('btn.deleteDetail')}}】</a> <!--删除明细-->
+                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab2tableName,'共享库存明细',2)">【{{$it('btn.import')}}】</a> <!--导入-->
+                <a v-if="ID !== '-1'" @click="exportClick(tab2tableName,multipleSelection2,table2Refcolid,'共享库存明细',isExport2,2)">【{{$it('btn.export')}}】</a><!--导出-->
               </div>
               <div class="flex flex-direction-row align-items-center ">
                 <Select v-model="sharedInventoryFilterValue" class="width-120" placeholder="查询条件" clearable>
@@ -88,10 +88,10 @@
                     }}
                   </Option>
                 </Select>
-                <el-input placeholder="请输入查询内容" v-model="sharedInventoryFilterInputValue"
+                <el-input :placeholder="$it('table_label.enter')" v-model="sharedInventoryFilterInputValue"
                           class="input-with-search-style font-size-12 mg-lf-10"
                           size="mini">
-                  <el-button slot="prepend" class="font-size-12" @click="getSharedInventoryData()">搜索</el-button>
+                  <el-button slot="prepend" class="font-size-12" @click="getSharedInventoryData()"> {{$it('btn.search')}} <!--搜索--></el-button>
                   <i slot="suffix" class="el-input__icon el-icon-search cursor-pointer"
                      @click="getSharedInventoryData()"></i>
                 </el-input>

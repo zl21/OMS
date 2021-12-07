@@ -5,15 +5,13 @@
     <OmsButton :btn-config="btnConfig" class="top-btns"/>
     <Collapse v-model="collapse">
       <Panel name="panel_baseInfo">
-        <!-- 基本信息 -->
-        {{ $it('com.baseInformation') }}
+        {{$it('com.baseInformation')}}<!--基本信息-->
         <div slot="content">
           <OmsForm class="" :form-config="formConfig1"/>
         </div>
       </Panel>
       <Panel name="log" v-if="ID!=='-1'">
-        <!-- 日志 -->
-        {{ $it('pL.log') }}
+        {{$it('pL.log')}} <!--日志-->
         <div slot="content">
           <OmsForm class="" :form-config="formConfig4"/>
         </div>
@@ -26,8 +24,8 @@
           <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
             <div v-if="isActive" class="flex flex-direction-row align-items-center">
               <a
-                 @click="delFun2(multipleSelection1,tab1tableName,1)">【删除明细】</a>
-              <a  @click="saveFun(2)">【保存】</a>
+                  @click="delFun2(multipleSelection1,tab1tableName,1)">【【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
+              <a  @click="saveFun(2)">【{{$it('btn.saveDraft')}}】</a> <!--保存-->
             </div>
           </div>
           <Table ref="table1" border highlight-row
@@ -55,8 +53,8 @@
                     @on-page-size-change="pageSizeChange1"
               />
               <a v-if="isActive"
-                 @click="delFun2(multipleSelection2,tab2tableName,2)">【删除明细】</a>
-              <a v-if="isActive"  @click="saveFun(3)">【保存】</a>
+                 @click="delFun2(multipleSelection2,tab2tableName,2)">【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
+              <a v-if="isActive"  @click="saveFun(3)">【{{$it('btn.saveDraft')}}】</a> <!--保存-->
             </div>
           </div>
           <Table ref="table1" border
@@ -71,7 +69,7 @@
 </template>
 
 <script>
-import sgStorageChangeFtpQuery from '@/js/pages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySA';
+import sgStorageChangeFtpQuery from 'src/js/pages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySA';
 
 export default sgStorageChangeFtpQuery;
 </script>

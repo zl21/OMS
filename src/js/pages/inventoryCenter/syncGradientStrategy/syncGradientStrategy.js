@@ -156,9 +156,9 @@ export default {
      * 作废
      */
     deleteAuthority() {
-      this.$confirm('确认执行作废？', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('确认执行作废？', $it('mT.warning'), {
+        confirmButtonText:  $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
         customClass: 'warning-alert',
         type: 'warning'
@@ -168,7 +168,7 @@ export default {
         formdata.append('objid', this.ID);
         this.service.common.objectVoid(formdata).then((res) => {
           if (res.data.code === 0) {
-            this.$Message.success(res.data.message || '作废成功！');
+            this.$Message.success(res.data.message || $it('tip.y4'));
             this.isChange = false
             this.refresh()
           } else {
@@ -339,9 +339,9 @@ export default {
         this.$Message.warning('请先选择需要删除的记录！');
         return
       }
-      this.$confirm('确认执行删除?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('确认执行删除?', $it('mT.warning'), {
+        confirmButtonText:  $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
         customClass: 'warning-alert',
         type: 'warning'
@@ -357,7 +357,7 @@ export default {
         if (type === 1) {// 判断条件的删除
           this.service.inventoryCenter.SgSyncGradientStrategyCondItemDelete(params).then((res) => {
             if (res.data.code === 0) {
-              this.$Message.success(res.data.message || '删除成功！');
+              this.$Message.success(res.data.message || $it('tip.ay'));
               this.$nextTick(() => {
                 this.getLeftTableDetail()
               });
@@ -368,7 +368,7 @@ export default {
         } else if (type === 2) { // 店铺的删除
           this.service.inventoryCenter.SgSyncGradientStrategyShopItemDelete(params).then((res) => {
             if (res.data.code === 0) {
-              this.$Message.success(res.data.message || '删除成功！');
+              this.$Message.success(res.data.message || $it('tip.ay'));
               this.$nextTick(() => {
                 this.getRightTableDetail()
               });
@@ -392,9 +392,9 @@ export default {
         this.$Message.warning('请先选择需要删除的记录！');
         return
       }
-      this.$confirm('确认执行删除?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('确认执行删除?', $it('mT.warning'), {
+        confirmButtonText:  $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
         customClass: 'warning-alert',
         type: 'warning'
@@ -412,7 +412,7 @@ export default {
         formdata.append('data', JSON.stringify(data));
         this.service.common.objectDelete(formdata).then((res) => {
           if (res.data.code === 0) {
-            this.$Message.success(res.data.message || '删除成功！');
+            this.$Message.success(res.data.message || $it('tip.ay'));
             this.getObjectTab()
           } else {
             console.log('数据加载失败');
@@ -582,8 +582,8 @@ export default {
           const row = []
           const tabth = []
           const tittleName = {
-            CPCSHOPTITLE: '店铺',
-            RATIO: $it('tL.a7'), // 同步比例
+            CPCSHOPTITLE: $it('other.shop'),
+            RATIO: '同步比例',
           } // 表头中文名
           datas.forEach((item) => {
             const obj = {}

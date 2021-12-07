@@ -14,9 +14,9 @@ export default {
       tableData1Detail: [],
       tableName: 'SG_C_CHANNEL_SOURCE_STRATEGY',
       statusObj: {
-        2: '已提交',
-        3: '已作废',
-        4: '已结案',
+        2: $it('com.submitted'), // 已提交
+        3: $it('com.voided'), // 已作废
+        4: '已结案', // 已结案
       },
       status: 1, //  1： 未提交,2：已提交,3：已作废,4:已结案
       page: {
@@ -646,7 +646,7 @@ export default {
         }
       }
       if (this.isChange2) {
-        this.$confirm('当前页有未保存数据，是否需要保存？', '警告', {
+        this.$confirm('当前页有未保存数据，是否需要保存？', $it('mT.warning'), {
           confirmButtonText: '需要',
           cancelButtonText: '取消',
           confirmButtonClass: '',
@@ -720,7 +720,7 @@ export default {
         itemId: itemId
       }).then((res) => {
         if (res.data.code === 0) {
-          this.$Message.success(res.data.message || '删除成功！');
+          this.$Message.success(res.data.message || $it('tip.ay'));
         }
       })
     },
@@ -728,9 +728,9 @@ export default {
      * 作废
      */
     deleteAuthority() {
-      this.$confirm('确认执行作废？', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('确认执行作废？', $it('mT.warning'), {
+        confirmButtonText:  $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
         customClass: 'warning-alert',
         type: 'warning'
@@ -740,7 +740,7 @@ export default {
         formdata.append('objid', this.ID);
         this.service.common.objectVoid(formdata).then((res) => {
           if (res.data.code === 0) {
-            this.$Message.success(res.data.message || '作废成功！');
+            this.$Message.success(res.data.message || $it('tip.y4'));
             this.isChange = false
             this.refresh()
           } else {
@@ -753,9 +753,9 @@ export default {
      * 结案
      */
     exeActionFun() {
-      this.$confirm('确认执行结案？', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('确认执行结案？', $it('mT.warning'), {
+        confirmButtonText:  $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
         customClass: 'warning-alert',
         type: 'warning'
@@ -785,9 +785,9 @@ export default {
      * 提交
      */
     submitFun() {
-      this.$confirm('确认执行提交？', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('确认执行提交？', $it('mT.warning'), {
+        confirmButtonText:  $it('com.determine'), // 确定
+        cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
         customClass: 'warning-alert',
         type: 'warning'
@@ -968,7 +968,7 @@ export default {
         }).then((res) => {
           this.addLineLoading = false
           if (res.data.code === 0) {
-            this.$Message.success(res.data.message || '删除成功！');
+            this.$Message.success(res.data.message || $it('tip.ay'));
             commonFun()
           }
         })
