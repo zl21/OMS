@@ -67,6 +67,7 @@ module.exports = () => ({
       amd: 'vue-router',
       root: 'VueRouter'
     },
+    '$R3_CPS' : '$R3_CPS',
   },
   module: {
     exprContextCritical: false,
@@ -146,7 +147,7 @@ module.exports = () => ({
     },
     alias: {
       burgeonComponents: path.resolve(__dirname, './src/'),
-      framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
+      // framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
     }
   },

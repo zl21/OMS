@@ -1,9 +1,9 @@
 /* type="ecmascript-6" */
 // import i18n from "@burgeon/internationalization/i18n";
-import MyDialog from "framework/components/dialog/mydialog.vue";
-import DragDialog from "framework/components/dialog/mydialog.vue";
-import tree from "framework/components/tablelist/tree.vue";
-import ShowTableData from "framework/components/views/custompage/ShowTableData.vue";
+// import MyDialog from "framework/components/dialog/mydialog.vue";
+// import DragDialog from "framework/components/dialog/mydialog.vue";
+// import tree from "framework/components/tablelist/tree.vue";
+// import ShowTableData from "framework/components/views/custompage/ShowTableData.vue";
 // window.$i18n = i18n;
 
 export default {
@@ -160,11 +160,11 @@ export default {
     };
   },
   components: {
-    tree,
-    ShowTableData,
-    MyDialog,
+    tree: $R3_CPS.components.tree,
+    ShowTableData:$R3_CPS.components.ShowTableData,
+    MyDialog: $R3_CPS.components.mydialog,
     // errorMessage,
-    DragDialog,
+    DragDialog:$R3_CPS.components.mydialog,
   },
   methods: {
     MyDialogClose() {

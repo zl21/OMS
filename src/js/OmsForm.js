@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-04-27 10:38:48
- * @LastEditTime: 2021-11-03 13:46:44
+ * @LastEditTime: 2021-12-07 20:05:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/js/OmsForm.js
  */
-import myInputLd from 'framework/components/element/input.vue' //为多选+导入组件专属引入
+// import myInputLd from 'framework/components/element/input.vue' //为多选+导入组件专属引入
 // 兼容fktable1.4数据格式（云雀1.0）
 import myInput from "burgeonComponents/view/Fkinput.vue";
 import fkinputPlus from "burgeonComponents/view/FkinputPlus.vue";
@@ -15,7 +15,7 @@ export default {
   components: {
     fkinputPlus,
     myInput,
-    myInputLd
+    myInputLd:$R3_CPS.components.input
   },
   data() {
     return {
