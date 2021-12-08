@@ -136,7 +136,7 @@ export default {
       formdata.append('param', JSON.stringify(param));
       this.service.common.exeAction(formdata).then((res) => {
         if (res.data.code === 0) {
-          this.$Message.success(res.data.message || '同步成功！');
+          this.$Message.success(res.data.message || `${$it('fL.f2')}!`); // 同步成功
           this.isChange = false
           this.refresh()
         } else {
@@ -527,8 +527,8 @@ export default {
           const row = []
           const tabth = []
           const tittleName = {
-            CONDTION: '判断条件',
-            QTYBEGIN: '开始值',
+            CONDTION:$it('tL.ao'), // 判断条件
+            QTYBEGIN: $it('tL.ap'), // 开始值
           } // 表头中文名
           datas.forEach((item) => {
             const obj = {}
@@ -589,7 +589,7 @@ export default {
           const tabth = []
           const tittleName = {
             CPCSHOPTITLE: $it('other.shop'),
-            RATIO: '同步比例',
+            RATIO: $it('tL.a7'), // 同步比例
           } // 表头中文名
           datas.forEach((item) => {
             const obj = {}

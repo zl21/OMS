@@ -191,7 +191,10 @@
           :label-width="70"
           inline
         >
-          <FormItem label="修改类型" prop="UPDATE_TYPE">
+          <!-- 修改类型 -->
+          <FormItem
+              :label="$it('pL.b7')"
+              prop="UPDATE_TYPE">
             <Select
               v-model="updateSalePriceModal.UPDATE_TYPE"
               style="width: 160px"

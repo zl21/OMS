@@ -86,7 +86,7 @@ export default {
                 id: 41460458, // id
                 type: 'action', // 类型action
                 name: 'STORESCORESTRATEGY', // 文件名
-                label: '店仓评分设置表', //  tab中文名
+                label: $it('mT.am'), // 店仓评分设置表
               });
               this.$destroy();
             }
@@ -109,13 +109,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '实体店仓',
+              fkdesc: $it('fL.ew'), // // 实体店仓
               inputname: 'CP_C_PHY_WAREHOUSE_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '实体店仓',
+              name: $it('fL.ew'), // // 实体店仓
               readonly: this.ID !== '-1', // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 24486, // 对应的表ID
@@ -140,7 +140,7 @@ export default {
         },
         // 表单非空提示
         ruleValidate: {
-          CP_C_PHY_WAREHOUSE_ID: [{ required: true, message: '请输入实体店仓', trigger: 'blur' }],
+          CP_C_PHY_WAREHOUSE_ID: [{ required: true, message: $it('tip.la'), trigger: 'blur' }], // 请输入实体店仓
         }
       }
       return formConfig
@@ -183,7 +183,7 @@ export default {
               id: res.data.data, // id
               type: 'action', // 类型action
               name: 'STORESCORESTRATEGYDETAIL', // 文件名
-              label: '店仓评分设置表', //  tab中文名
+              label: $it('mT.am'), // 店仓评分设置表
             });
             this.$Message.success($it('tip.z9')); // '保存成功'
           } else {

@@ -16,7 +16,7 @@ export default {
       statusObj: {
         2: $it('com.submitted'), // 已提交
         3: $it('com.voided'), // 已作废
-        4: '已结案', // 已结案
+        4: $it('pL.bl'),// 已结案
       },
       status: 1, //  1： 未提交,2：已提交,3：已作废,4:已结案
       page: {
@@ -79,7 +79,7 @@ export default {
           slot: 'level'
         },
         {
-          title: '寻源规则',
+          title: $it('pL.bj'), // 寻源规则
           align: 'center',
           key: 'rulers',
           slot: 'rulers',
@@ -102,7 +102,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '策略名称',
+            label:  $it('fL.bd'), // 策略名称
             value: 'ENAME',
             width: '12',
             disabled: false,
@@ -154,13 +154,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '平台店铺档案',
+              fkdesc: $it('fL.fc'), // 平台店铺档案
               inputname: 'CP_C_SHOP_ID:CP_C_SHOP_TITLE', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '平台店铺',
+              name: $it('fL.ex'), // 平台店铺
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 24475, // 对应的表ID
@@ -179,7 +179,7 @@ export default {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
             value: 'query_date',
-            label: '范围时间',
+            label: $it('fL.fd'), // 范围时间
             width: '12',
             format: 'yyyy-MM-dd HH:mm:ss', // 格式参照burgeonui
             placeholder: '',
@@ -197,8 +197,8 @@ export default {
         },
         // 表单非空提示
         ruleValidate: {
-          ENAME: [{required: true, message: '请输入策略名称', trigger: 'blur'}],
-          query_date: [{required: true, message: '请输入范围时间', trigger: 'blur'}],
+          ENAME: [{required: true, message: $it('tip.lx'), trigger: 'blur'}], // 请输入策略名称
+          query_date: [{required: true, message: $it('tip.ly'), trigger: 'blur'}], // 请输入范围时间
         }
       }, // 基本信息
       formConfig2: {
@@ -214,13 +214,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '评分策略',
+              fkdesc: $it('pL.bk'), // 评分策略
               inputname: 'SG_C_SHARE_SCORE_STRATEGY_ID:ID', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '评分策略',
+              name: $it('pL.bk'), // 评分策略
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'SG_C_SHARE_SCORE_STRATEGY', // 对应的表
               reftableid: 249230886, // 对应的表ID
@@ -250,14 +250,14 @@ export default {
         colname: "CP_C_STORE_ID",
         datelimit: "all",
         display: "xml",
-        fkdesc: "店仓档案",
+        fkdesc: $it('fL.fe'), // 店仓档案
         fkdisplay: "mop",
         inputname: "CP_C_STORE_ID:ENAME",
         isfk: true,
         isnotnull: false,
         isuppercase: false,
         length: 65535,
-        name: "逻辑仓",
+        name: $it('tL.logicWarehouse'), // 逻辑仓
         readonly: false,
         reftable: "CP_C_STORE",
         reftableid: 23296,
@@ -755,7 +755,8 @@ export default {
      * 结案
      */
     exeActionFun() {
-      this.$confirm('确认执行结案？', $it('mT.warning'), {
+      // '确认执行结案？'
+      this.$confirm(`${$it('tip.lo')}?`, $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
@@ -773,7 +774,7 @@ export default {
         formdata.append('param', JSON.stringify(param));
         this.service.inventoryCenter.exeAction(formdata).then((res) => {
           if (res.data.code === 0) {
-            this.$Message.success(res.data.message || '提交成功！');
+            this.$Message.success(res.data.message || `${$it('tip.lz')}!`); // 提交成功
             this.isChange = false
             this.refresh()
           } else {
@@ -787,7 +788,8 @@ export default {
      * 提交
      */
     submitFun() {
-      this.$confirm('确认执行提交？', $it('mT.warning'), {
+      // 确认执行提交
+      this.$confirm(`${$it('tip.lp')}?`, $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
@@ -801,7 +803,7 @@ export default {
         this.service.common.objectSubmit(formdata).then((res) => {
           this.submitLoading = false
           if (res.data.code === 0) {
-            this.$Message.success('提交成功！');
+            this.$Message.success(`${$it('tip.lz')}!`); // 提交成功
             this.isChange = false
             this.refresh()
           }
@@ -839,9 +841,8 @@ export default {
       if (this.ID === '-1' ? formValue1.CP_C_PLATFORM_ID : `${formValue1.CP_C_PLATFORM_ID}` !== `${this.detailData.cpCPlatformEcode}`) {
         SG_C_CHANNEL_SOURCE_STRATEGY.CP_C_PLATFORM_ID = formValue1.CP_C_PLATFORM_ID
       }
-      console.log(222, formValue1)
       if (!formValue1.CP_C_SHOP_ID && !formValue1.CP_C_PLATFORM_ID) {
-        this.$Message.warning('来源平台和平台店铺不能均为空!');
+        this.$Message.warning(`${$it('tip.ma')}`); // 来源平台和平台店铺不能均为空
         return
       }
 

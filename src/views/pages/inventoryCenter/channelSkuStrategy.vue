@@ -32,8 +32,8 @@
                 />
                 <a v-if="canEdit && ID !== '-1'" @click="addSubmit('-1','formConfig2',tab1tableName,1)">【{{$it('btn.increase')}}】</a> <!--添加-->
                 <a v-if="canEdit && ID !== '-1'" @click="delFun(multipleSelection,tab1tableName,1)">【{{$it('btn.deleteDetail')}}】</a> <!--删除明细-->
-                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab1tableName,'独享库存明细',1)">【{{$it('btn.import')}}】</a> <!--导入-->
-                <a v-if="ID !== '-1'" @click="exportClick(tab1tableName,multipleSelection,table1Refcolid,'独享库存明细',isExport,1)">【{{$it('btn.export')}}】</a><!--导出-->
+                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab1tableName,$it('fL.f7'),1)">【{{$it('btn.import')}}】</a> <!--导入-->
+                <a v-if="ID !== '-1'" @click="exportClick(tab1tableName,multipleSelection,table1Refcolid,$it('fL.f7'),isExport,1)">【{{$it('btn.export')}}】</a><!--导出-->
               </div>
               <div class="flex flex-direction-row align-items-center ">
                 <Select v-model="exclusiveStockFilterValue" class="width-120" placeholder="查询条件" clearable>
@@ -78,8 +78,8 @@
 
                 <a v-if="canEdit && ID !== '-1'" @click="addSubmit('-1','formConfig3',tab2tableName,2)">【{{$it('btn.increase')}}】</a> <!--添加-->
                 <a v-if="canEdit && ID !== '-1'" @click="delFun(multipleSelection2,tab2tableName,2)">【{{$it('btn.deleteDetail')}}】</a> <!--删除明细-->
-                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab2tableName,'共享库存明细',2)">【{{$it('btn.import')}}】</a> <!--导入-->
-                <a v-if="ID !== '-1'" @click="exportClick(tab2tableName,multipleSelection2,table2Refcolid,'共享库存明细',isExport2,2)">【{{$it('btn.export')}}】</a><!--导出-->
+                <a v-if="canEdit && ID !== '-1'" @click="importFun(tab2tableName,$it('fL.f9'),2)">【{{$it('btn.import')}}】</a> <!--导入-->
+                <a v-if="ID !== '-1'" @click="exportClick(tab2tableName,multipleSelection2,table2Refcolid,$it('fL.f9'),isExport2,2)">【{{$it('btn.export')}}】</a><!--导出-->
               </div>
               <div class="flex flex-direction-row align-items-center ">
                 <Select v-model="sharedInventoryFilterValue" class="width-120" placeholder="查询条件" clearable>

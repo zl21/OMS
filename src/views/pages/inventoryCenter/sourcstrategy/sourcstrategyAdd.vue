@@ -16,7 +16,7 @@
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-2">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
           <span class="iconfont icon-item icon-liuchengtiaojian font-size-24 color-primary"></span>
-          <span class="pd-lf-15 font-size-18 font-weight-bold">强制寻源规则</span>
+          <span class="pd-lf-15 font-size-18 font-weight-bold">{{$it('pL.bf')}}<!--强制寻源规则--></span>
         </div>
         <div>
           <!--弹窗多选-->
@@ -55,12 +55,12 @@
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-3">
         <div class="flex flex-direction-row align-items-center">
           <span class="iconfont icon-item icon-zengpin font-size-24 color-primary"></span>
-          <span class="pd-lf-15 font-size-18 font-weight-bold">寻源规则</span>
+          <span class="pd-lf-15 font-size-18 font-weight-bold">{{$it('pL.bj')}}<!--寻源规则--></span>
         </div>
         <div :class="{'pd-tp-15':!canEdit}">
           <div v-if="canEdit" class="flex flex-direction-row justify-content-end pd-bt-5">
             <Button :loading="addLineLoading" type="fcdefault" @click="addRowFun" size="small"
-                    class="pd-tp-3 pd-bt-3">新增行
+                    class="pd-tp-3 pd-bt-3">{{$it('btn.af')}}<!--新增行-->
             </Button>
           </div>
           <Table border size="small" :columns="columns2" :data="tableData2ForFrontEndPage"
@@ -80,7 +80,7 @@
             </template>
             <template slot-scope="{ row, index }" slot="action">
               <Button :disabled="!canEdit" type="fcdefault" @click="delRowFun(index,row)" size="small"
-                      class="pd-tp-3 pd-bt-3">删除行
+                      class="pd-tp-3 pd-bt-3">{{$it('btn.ag')}}<!--删除行-->
               </Button>
             </template>
 
@@ -112,7 +112,7 @@
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-4">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
           <span class="iconfont icon-item icon-huodong font-size-24 color-primary"></span>
-          <span class="pd-lf-15 font-size-18 font-weight-bold">评分策略</span>
+          <span class="pd-lf-15 font-size-18 font-weight-bold">{{$it('pL.bk')}}<!--评分策略--></span>
         </div>
         <div>
           <OmsForm :form-config="formConfig2"/>
@@ -136,21 +136,21 @@
           <div class="icon-box flex flex-direction-column justify-content-center">
             <span class="iconfont icon-item icon-liuchengtiaojian  "></span>
           </div>
-          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">强制寻源规则</div>
+          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">{{$it('pL.bf')}}<!--强制寻源规则--></div>
         </li>
         <li class="">
           <div class="icon-box flex flex-direction-column justify-content-center">
             <span
               class="iconfont icon-item icon-sousou font-size-30 br-primary border-radius-5  mg-auto width-40 height-40 line-height-35 display-block text-center li"></span>
           </div>
-          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">寻源规则</div>
+          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">{{$it('pL.bj')}}<!--寻源规则--></div>
         </li>
         <li class="">
           <div class="icon-box flex flex-direction-column justify-content-center">
             <span
               class="iconfont icon-item icon-liebiao-yishoucang font-size-30 bg-primary border-radius-5 color-white mg-auto width-40 height-40 line-height-40 display-block text-center li"></span>
           </div>
-          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">评分策略</div>
+          <div class="fs-12 color-gray pd-tp-8 pd-bt-30 des">{{$it('pL.bk')}}<!--评分策略--></div>
         </li>
       </ul>
     </div>

@@ -118,7 +118,7 @@ export default {
     } = await self.service.interfacePlatform.tbOrderDownLoad(param);
     if (code === 0) {
       self.$emit('closeActionDialog', false);
-      self.$Message.success(message || '成功！');
+      self.$Message.success(message || `${$it('mT.al')}!`);
       formValue.orderNum = '';
       formValue.startEndTimes = '';
       formValue.orderStatus = 'WAIT_SELLER_SEND_GOODS';

@@ -215,7 +215,8 @@ export default {
         this.isChange = false
       }
       if (this.isChange) {
-        this.$confirm('修改的数据未保存,确定刷新？', $it('mT.warning'), {
+        // 修改的数据未保存,确定刷新?
+        this.$confirm(`${$it('tip.ll')}?`, $it('mT.warning'), {
           confirmButtonText:  $it('com.determine'), // 确定
           cancelButtonText: $it('com.cancel'), //取消
           confirmButtonClass: '',
@@ -302,8 +303,8 @@ export default {
             // 取消选择
             this.$refs[`table${type}`].selectAll(false);
 
-            // res.data.data
-            this.$confirm('本次操作已后台处理，是否至[我的任务]查看?',  $it('mT.warning'), {
+            // 本次操作已后台处理，是否至[我的任务]查看?
+            this.$confirm($it('tip.lm'),  $it('mT.warning'), {
               confirmButtonText:  $it('com.determine'), // 确定
               cancelButtonText: $it('com.cancel'), //取消
               confirmButtonClass: '',
@@ -466,7 +467,8 @@ export default {
      * 结案
      */
     exeActionFun() {
-      this.$confirm('确认执行结案？', $it('mT.warning'), {
+      // 确认执行结案
+      this.$confirm(`${$it('tip.lo')}?`, $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
@@ -476,7 +478,7 @@ export default {
         const param = {
           objid: this.ID,
           table: this.tableName,
-          menu: "特殊条码按比例同步策略",
+          menu: $it('fL.fa'), // 特殊条码按比例同步策略
         }
         const formdata = new FormData();
         formdata.append('actionid', 41460446);
@@ -622,7 +624,7 @@ export default {
                 id: objid, // id
                 type: 'action', // 类型action
                 name: 'CHANNELSKUSTRATEGY', // 文件名
-                label: '特殊条码按比例同步策略',
+                label: $it('fL.fa'), // 特殊条码按比例同步策略
               });
               this.isChange = false
               this.$Message.success($it('tip.z9'));
@@ -661,7 +663,8 @@ export default {
 
       }
       if (type === 'submit') { // 提交
-        this.$confirm('确认执行提交？', $it('mT.warning'), {
+        // 确认执行提交?
+        this.$confirm(`${$it('tip.lp')}?`, $it('mT.warning'), {
           confirmButtonText:  $it('com.determine'), // 确定
           cancelButtonText: $it('com.cancel'), //取消
           confirmButtonClass: '',

@@ -130,7 +130,7 @@ export default {
       const param = {
         objid: this.ID,
         table: this.tableName,
-        menu: "配销仓库存梯度策略",
+        menu: $it('pL.be'), //  配销仓库存梯度策略
         subParam: subParam
       }
       const formdata = new FormData();
@@ -139,7 +139,7 @@ export default {
       formdata.append('param', JSON.stringify(param));
       this.service.common.exeAction(formdata).then((res) => {
         if (res.data.code === 0) {
-          this.$Message.success(res.data.message || '同步成功！');
+          this.$Message.success(res.data.message || `${$it('fL.f2')}!`); // 同步成功
           this.isChange = false
           this.refresh()
         } else {
@@ -302,7 +302,7 @@ export default {
                 id: res.data.data, // id
                 type: 'action', // 类型action
                 name: 'SYNCGRADIENTSTRATEGYSA', // 文件名
-                label: '配销仓库存梯度策略', //  tab中文名
+                label: $it('pL.be'), //  配销仓库存梯度策略
               });
             }
             this.$Message.success($it('tip.z9')); // '保存成功'
@@ -490,8 +490,8 @@ export default {
           const row = []
           const tabth = []
           const tittleName = {
-            CONDTION: '判断条件',
-            QTYBEGIN: '开始值',
+            CONDTION: $it('tL.ao'), // 判断条件
+            QTYBEGIN: $it('tL.ap'), // 开始值
           } // 表头中文名
           datas.forEach((item) => {
             const obj = {}
@@ -552,7 +552,7 @@ export default {
           const tabth = []
           const tittleName = {
             CPCSHOPTITLE: $it('other.shop'),
-            RATIO: '同步比例',
+            RATIO:  $it('tL.a7'), // 同步比例
           } // 表头中文名
           datas.forEach((item) => {
             const obj = {}

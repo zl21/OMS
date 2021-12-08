@@ -339,7 +339,7 @@ export default {
           buttons: [{
             webname: 'CLASSIFY_AddDetailBtn',
             type: 'primary',
-            text: $it('btn.increase'), //'添加',
+            text: $it('btn.increase'), //'添加'
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               this.addAttrValue();

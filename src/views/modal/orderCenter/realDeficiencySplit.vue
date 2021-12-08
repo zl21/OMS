@@ -105,7 +105,7 @@ export default {
           typeAll: 'default',
           buttons: [
             {
-              text: '添加',
+              text: $it('btn.increase'), //'添加'
               btnclick: () => { },
             },
             {

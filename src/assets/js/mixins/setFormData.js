@@ -3,9 +3,9 @@ export const setFormDataFunMixin = {
   data() {
     return {
       statusObj: {
-        2: '已提交',
-        3: '已作废',
-        4: '已结案',
+        2: $it('com.submitted'),// 已提交
+        3: $it('com.voided'),// 已作废
+        4: $it('pL.bl'),// 已结案
       },
       isActive: true, //  是否可用
       status: null, //  1： 未提交,2：已提交,3：已作废,4:已结案

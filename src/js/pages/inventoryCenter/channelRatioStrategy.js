@@ -41,7 +41,7 @@ export default {
               isnotnull: true, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '平台店铺',
+              name: $it('fL.ex'), // 平台店铺
               readonly: this.$route.params.customizedModuleId !== 'New', // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_SHOP', // 对应的表
               reftableid: 24475, // 对应的表ID
@@ -79,8 +79,8 @@ export default {
           REMARK: '', // 备注
         },
         ruleValidate: {
-          CP_C_SHOP_ID: [{required: true, message: '请输入平台店铺'}],
-          REMARK: [{required: false, message: '请输入备注'}],
+          CP_C_SHOP_ID: [{required: true, message: $it('tip.lb')}], // 请输入平台店铺
+          REMARK: [{required: false, message:  $it('tip.lc')}],// 请输入备注
         }
       }, // 基本信息
       formConfig2: {
@@ -137,7 +137,7 @@ export default {
           {
             style: 'input', // 输入框类型
             regx: /^[0-9]*$/,
-            label: '比例（%）',
+            label: `${'pL.ba'}（%）`, // 比例
             value: 'RATIO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -177,7 +177,7 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'drp', // 外键关联类型
-              fkdesc: '共享池档案',
+              fkdesc: $it('fL.ey'),// 共享池档案
               inputname: 'SG_C_SHARE_POOL_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
@@ -201,7 +201,7 @@ export default {
           {
             style: 'input', // 输入框类型
             regx: /^[0-9]*$/,
-            label: '比例（%）',
+            label: `${'pL.ba'}（%）`, // 比例
             value: 'SG_C_SHARE_POOL_RATIO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -223,8 +223,8 @@ export default {
           SG_C_SHARE_POOL_RATIO: null, // 共享池比例
         },
         ruleValidate: {
-          SG_C_SHARE_POOL_ID: [{required: false, message: '请输入共享池'}],
-          SG_C_SHARE_POOL_RATIO: [{required: false, message: '请输入共享池比例'}],
+          SG_C_SHARE_POOL_ID: [{required: false, message: $it('tip.lg')}], // 请输入共享池
+          SG_C_SHARE_POOL_RATIO: [{required: false, message: $it('tip.lh')}], // 请输入共享池比例
         }
       }, // 共享库存
       formConfig4: {
@@ -339,7 +339,8 @@ export default {
       console.log(row, index)
       const oldVal = row.ISACTIVE === '是' ? 'Y' : 'N'
       const newVal = oldVal === 'Y' ? 'N' : 'Y'
-      this.$confirm(oldVal === 'Y' ? '确认停用吗？' : '确认启用吗？', $it('mT.warning'), {
+      // 确认停用吗\确认启用吗
+      this.$confirm(oldVal === 'Y' ? `${$it('tip.li')}?` : `${$it('tip.lj')}?`, $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
         confirmButtonClass: '',
@@ -410,7 +411,8 @@ export default {
         this.getObject()
       }
       if (this.isChange) {
-        this.$confirm('修改的数据未保存,确定刷新？', $it('mT.warning'), {
+        // 修改的数据未保存,确定刷新？
+        this.$confirm(`${$it('tip.ll')}?`, $it('mT.warning'), {
           confirmButtonText: $it('com.determine'), // 确定
           cancelButtonText: $it('com.cancel'), //取消
           confirmButtonClass: '',
@@ -433,7 +435,7 @@ export default {
         mainId: this.ID,
         table: this.tab1tableName,
         mainTable: this.tableName,
-        menu: '配销仓明细',
+        menu: $it('fL.f0'), // 配销仓明细
         downloadObj: {
           url: '/p/cs/downloadImportTemplate',
           method: 'GET',
@@ -472,8 +474,8 @@ export default {
         range: 10
       }
       formdata.append('searchdata', JSON.stringify(searchdata));
-      formdata.append('menu', '配销仓明细');
-      formdata.append('filename', '配销仓明细');
+      formdata.append('menu', $it('fL.f0'));  // 配销仓明细
+      formdata.append('filename', $it('fL.f0'))// 配销仓明细
       formdata.append('filetype', '.xlsx');
       formdata.append('showColumnName', true);
 
@@ -482,8 +484,8 @@ export default {
         if (res.data.code == 0) {
           const data = res.data.data
           if (data !== null) {
-            // res.data.data
-            this.$confirm('本次操作已后台处理，是否至[我的任务]查看?',  $it('mT.warning'), {
+            // 本次操作已后台处理，是否至[我的任务]查看?
+            this.$confirm($it('tip.lm'),  $it('mT.warning'), {
               confirmButtonText: $it('com.determine'), // 确定
               cancelButtonText: $it('com.cancel'), //取消
               confirmButtonClass: '',
@@ -794,7 +796,7 @@ export default {
                         transfer: true,
                         trigger: 'hover',
                         // title: 'Title',
-                        content: '数值越大，优先级越高',
+                        content: $it('tip.ln'), // 数值越大，优先级越高
                         width: '200px'
                       }
                     }, [

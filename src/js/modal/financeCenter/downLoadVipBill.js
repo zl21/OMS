@@ -166,7 +166,7 @@ export default {
       formdata.append('param', JSON.stringify(param));
       const { data: { oK } } = await this.service.financeCenter.triggerVipBill(formdata);
       if (oK) {
-        this.$Message.success('成功!');
+        this.$Message.success(`${$it('mT.al')}!`);
       } else {
         this.$Message.error('失败!');
       }

@@ -29,7 +29,7 @@
                 <a @click="exportClick()">【{{$it('btn.export')}}】</a><!--导出-->
               </div>
               <div class="flex flex-direction-row align-items-center mg-bt-6">
-                <Select v-model="exclusiveStockFilterValue" class="width-120" placeholder="查询条件" clearable>
+                <Select v-model="exclusiveStockFilterValue" class="width-120" :placeholder="$it('fL.f8')" clearable>
                   <Option v-for="item in exclusiveStockFilterList" :value="item.value" :key="item.value">{{
                       item.label
                     }}

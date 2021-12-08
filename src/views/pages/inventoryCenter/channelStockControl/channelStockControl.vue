@@ -99,7 +99,7 @@
           <!--库存来源配置区-->
           <Collapse v-model="collapseShow" class="mg-tp-15">
             <Panel name="1">
-              配销仓
+              {{$it('pL.b8')}}<!--配销仓-->
               <div slot="content" class="">
                 <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>
                 <div class="pd-tp-10">
@@ -118,7 +118,7 @@
               </div>
             </Panel>
             <Panel name="2">
-              共享池
+              {{$it('pL.b9')}}<!--共享池-->
               <div slot="content" class="">
                 <Table border :columns="columns3" :data="data3"></Table>
               </div>
@@ -255,7 +255,7 @@
     </el-dialog>
 
     <!--修改商品标签-->
-    <el-dialog title="修改商品标签" width="500px" :visible.sync="modifyTypeDialogObjShow">
+    <el-dialog :title="$it('btn.ad')" width="500px" :visible.sync="modifyTypeDialogObjShow">
       <action-form
           ref="actionFormModifyType"
           :form-items="formConfig2.formData"

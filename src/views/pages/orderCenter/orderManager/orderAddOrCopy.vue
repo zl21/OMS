@@ -1923,7 +1923,7 @@ export default {
       if (masterArr.length) {
         this.$Modal.info({
           title: $it("mT.tips"), // 提示
-          content: "当前修改未保存，确定返回？",
+          content: $it('tip.hu'), // 当前修改未保存，确定返回？
           className: 'ark-dialog',
           mask: true,
           showCancel: true,

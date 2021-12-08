@@ -96,7 +96,7 @@ export default {
       if (res) {
         this.spinShow = false;
         this.$Modal.fcSuccess({
-          title: '成功',
+          title: $it('mT.al'),
           content: res.data.message
         });
         this.dataindex = 1;

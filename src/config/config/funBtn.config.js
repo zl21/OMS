@@ -1360,7 +1360,7 @@ class BtnConfig {
     commonUtils.modalShow(self, 'fz', 'orderCenter.mergeOrderOne', param, 'all', function (res) {
       let { data } = res;
       if (data.code === 0) {
-        self.$Message.success(data.message || '成功！');
+        self.$Message.success(data.message || `${$it('mT.al')}!`);
         self.query();
       }
     })
@@ -1396,7 +1396,7 @@ class BtnConfig {
       let { data } = res;
       console.log(data);
       if(data.code === 0){
-        self.$Message.success(data.message || '成功！');
+        self.$Message.success(data.message || `${$it('mT.al')}!`);
         self.query();
       }else{
         $utils.tipShow('confirm' , self , res ,data.message, function(h){

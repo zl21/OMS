@@ -55,13 +55,13 @@ export default {
               datelimit: 'all',
               display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
               fkdisplay: 'mrp', // 外键关联类型
-              fkdesc: '实体店仓',
+              fkdesc: $it('fL.ew'),// 实体店仓
               inputname: 'CP_C_PHY_WAREHOUSE_ID:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
               isfk: true, // 是否有fk键
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '实体店仓',
+              name: $it('fL.ew'), // // 实体店仓
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 24486, // 对应的表ID
@@ -105,7 +105,7 @@ export default {
                 id: 'New', // id
                 type: 'action', // 类型action
                 name: 'STORESCORESTRATEGYDETAIL', // 文件名
-                label: '店仓评分设置表', //  tab中文名
+                label: $it('mT.am'), //  店仓评分设置表
               });
             }
           },
@@ -168,7 +168,7 @@ export default {
         okParm: {
           table: 'SG_C_STORE_SCORE_STRATEGY',
           mainId: 249230897,
-          menu: '店仓评分设置表',
+          menu: $it('mT.am'), // 店仓评分设置表
           isUpdate: 'N',
           startRow: 2
         },
@@ -184,7 +184,7 @@ export default {
               const data = res.data.data.addcolums[0].childs || []
               data.forEach((item) => {
                 if (item.colname === 'CONTENT') {
-                  this.$confirm(item.valuedata, '成功', {
+                  this.$confirm(item.valuedata, $it('mT.al'), {
                     confirmButtonText: $it('com.determine'), /*确定*/
                     showCancelButton: false,
                     customClass: 'success-alert',
@@ -242,7 +242,7 @@ export default {
           });
           columnDefs.unshift({
             field: "storeName",
-            headerName: '实体店仓',
+            headerName: $it('fL.ew'), // 实体店仓
             tdAlign: 'left',
             isagfilter: true,
             // isorder: true,
@@ -340,7 +340,7 @@ export default {
         id: row.storeId, // id
         type: 'action', // 类型action
         name: 'STORESCORESTRATEGYDETAIL', // 文件名
-        label: '店仓评分设置表', //  tab中文名
+        label: $it('mT.am'), // 店仓评分设置表
       });
     },
     // 分页change 事件

@@ -648,7 +648,7 @@ export default {
                             colname: 'LOGICAL_STORE_ID',
                             datelimit: 'all',
                             display: 'text',
-                            fkdesc: '逻辑仓',
+                            fkdesc: $it('tL.logicWarehouse'), // 逻辑仓
                             fkdisplay: 'drp',
                             inputname: 'ENAME',
                             isfk: true,
@@ -690,7 +690,7 @@ export default {
                           colname: 'LOGICAL_STORE_ID',
                           datelimit: 'all',
                           display: 'text',
-                          fkdesc: '逻辑仓',
+                          fkdesc: $it('tL.logicWarehouse'), // 逻辑仓
                           fkdisplay: 'drp',
                           inputname: 'ENAME',
                           isfk: true,

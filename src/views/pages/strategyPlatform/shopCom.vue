@@ -502,7 +502,7 @@ export default {
           buttons: [
             {
               webname: 'ST_C_PRICE_SUB_IMPORT',
-              text: '添加', // 
+              text: $it('btn.increase'), // 添加
               isShow: true,
               type: 'primary',
               disabled: false, // 按钮禁用控制

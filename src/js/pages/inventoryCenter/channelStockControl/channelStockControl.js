@@ -28,11 +28,11 @@ export default {
         },
         // 下载平台商品
         itemDownload: () => {
-          this.downDialogFun('下载平台商品')
+          this.downDialogFun($it('btn.a5')) // 下载平台商品
         },
         // 下载平台库存
         platformInventory: () => {
-          this.downDialogFun2('下载平台库存')
+          this.downDialogFun2($it('btn.a4')) // 下载平台库存
         },
         // 同步库存
         saveDevOpsInfo: () => {
@@ -483,9 +483,9 @@ export default {
               renderContainer: 'CellRenderByFunction',
               renderComponent: (h, params) => {
                 const obj = {
-                  '0': '未同步',
-                  '2': '同步成功',
-                  '3': '同步失败',
+                  '0': $it('fL.f1'), // 未同步
+                  '2': $it('fL.f2'), // 同步成功
+                  '3':  $it('fL.f3'), // 同步失败
                 }
                 const syncStatus = params.row.syncStatus // 同步状态
                 return h('div', {}, obj[syncStatus] || '');
@@ -564,7 +564,7 @@ export default {
           {
             validator: (rule, value, callback) => {
               if (value === '') {
-                const mes = '请输入调入量!'
+                const mes = `${$it('tip.iv')}!` // 请输入调入量
                 this.$Message.error(mes);
                 callback(new Error(mes));
               } else {
@@ -579,7 +579,7 @@ export default {
           {
             validator: (rule, value, callback) => {
               if (value === '') {
-                const mes = '请输入调入量!'
+                const mes = `${$it('tip.iv')}!` // 请输入调入量
                 this.$Message.error(mes);
                 callback(new Error(mes));
               } else {
@@ -1340,9 +1340,9 @@ export default {
           key: 'syncStatus', // 同步状态： 0 未同步  2 同步成功 3 同步失败
           render: (h, params) => {
             const obj = {
-              '0': '未同步',
-              '2': '同步成功',
-              '3': '同步失败',
+              '0': $it('fL.f1'), // 未同步
+              '2': $it('fL.f2'), // 同步成功
+              '3':  $it('fL.f3'), // 同步失败
             }
             const syncStatus = params.row.syncStatus // 同步状态
             return h('div', {}, obj[syncStatus] || '');
@@ -1797,7 +1797,7 @@ export default {
       this.service.inventoryCenter.syncChannelStorage(params).then((res) => {
         if (res.data.code === 0) {
           // this.$refs.selectionTable.selectAll(false); // 取消全选
-          this.$Message.success('操作成功！');
+          this.$Message.success(`${$it('tip.ix')}!`); // 操作成功！
           // this.searchFun() //更新表格数据
         } else {
           this.$Message.error(res.data.message);
@@ -1832,7 +1832,7 @@ export default {
           for (let key in this[dialogName].formData) {
             this[dialogName].formData[key] = ''
           }
-          this.$Message.success('操作成功！');
+          this.$Message.success(`${$it('tip.ix')}!`); // 操作成功！
           if (isReload) {
             this.searchFun() //更新表格数据
           }
@@ -1873,7 +1873,7 @@ export default {
           for (let key in this[dialogName].formData) {
             this[dialogName].formData[key] = ''
           }
-          this.$Message.success('操作成功！');
+          this.$Message.success(`${$it('tip.ix')}!`); // 操作成功！
           if (isReload) {
             this.searchFun() //更新表格数据
           }
@@ -2058,7 +2058,7 @@ export default {
         if (res.data.code === 0) {
           // this.$refs.selectionTable.selectAll(false); // 取消全选
           this.modifyTypeDialogObjShow = false
-          this.$Message.success('修改成功！');
+          this.$Message.success(`${$it('tip.iy')}!`); // 修改成功！
           this.getTable1Data() //更新表格数据
         }
         this.formConfig2.loading = false

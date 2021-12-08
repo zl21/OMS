@@ -36,7 +36,7 @@ export default {
               isnotnull: false, // 是否必填
               isuppercase: false, // 是否转大写
               length: 20, // 最大长度是多少
-              name: '平台店铺',
+              name: $it('fL.ex'), // 平台店铺
               readonly: false, // 是否可编辑，对应input   readonly属性
               reftable: 'CP_C_PHY_WAREHOUSE', // 对应的表
               reftableid: 24486, // 对应的表ID
