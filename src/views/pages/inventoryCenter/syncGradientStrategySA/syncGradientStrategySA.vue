@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import sgStorageChangeFtpQuery from 'src/js/pages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySA';
+import sgStorageChangeFtpQuery from '@/js/pages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySA';
 
 export default sgStorageChangeFtpQuery;
 </script>
