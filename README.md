@@ -335,3 +335,4 @@
 | v1.2.99-skx | businessForm add arkDropMultiSelectFilter |
 | v1.3.0-skx | fix: businessActionTable columns not iteratable |
 | v1.3.1-skx | businessTable loading |
+| v1.3.2-skx | 兼容老ag的列移动处理-调接口记录列位置信息 |
