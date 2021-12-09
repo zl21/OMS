@@ -34,7 +34,7 @@ if (!omsTheme) {
 }
 const { components } = R3
 Vue.component('WaterMark', components.WaterMark)
-require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
+// require(`@burgeon/oms-theme/skin/${omsTheme}/index.less`).default;
 import Burgeon from 'burgeonComponents'
 
 // export default ImportCDNJS('//cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/businessComponents.min.js', 'Burgeon')
