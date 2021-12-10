@@ -1,0 +1,135 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="BASIC/SwitchList" />
+
+<style>{`
+	.subheading {
+		font-weight: 900;
+		font-size: 13px;
+		line-height: 24px;
+		margin: 40px 0 12px 0;
+	}
+`}</style>
+
+<!-- # 安装
+
+<div className="subheading">NPM 安装</div> -->
+
+## SwitchList
+
+### 一、组件说明
+
+#### 1. 概述
+
+多条件组合的组件，包含 switch 和 两个 input 控件的组合表单控件。
+
+#### 2. 应用场景
+
+用于多条件的组合表单控件。
+
+### 二、使用说明
+
+1. 引用
+
+```js
+import switchList from 'professionalComponents/switchList';
+```
+
+2. 应用
+
+```js
+<switchList :switchList="switchListdata" />
+```
+
+```js
+export default {
+  components: {
+    switchList
+  },
+  data() {
+    return {
+      switchListdata: {
+        label: '包裹属性',
+        list: [
+          {
+            style: 'width: 150px;',
+            isok: true,
+            val: false,
+            value: '',
+            value2: '',
+            disabled: false,
+            placeholder: '开始值  大于等于',
+            placeholder1: '结束值',
+            label: '区间范围',
+            name: '商品数量',
+            symbol: '至',
+            pkgAttributeType: 1,
+            regx: /^[1-9]\d*$/,
+            regx2: /^[1-9]\d*$/,
+            maxlength: 18,
+            type: '件'
+          },
+          {
+            style: 'width: 150px;',
+            isok: true,
+            val: false,
+            value: '',
+            value2: '',
+            disabled: false,
+            placeholder: '开始值  大于等于',
+            placeholder1: '结束值',
+            label: '区间范围',
+            name: '单据金额',
+            pkgAttributeType: 2,
+            symbol: '至',
+            regx: /^\d+(\.\d{0,2})?$/,
+            regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength: 18,
+            type: '元'
+          },
+          {
+            style: 'width: 150px;',
+            isok: true,
+            val: false,
+            value: '',
+            value2: '',
+            disabled: false,
+            placeholder: '开始值  大于等于',
+            placeholder1: '结束值',
+            label: '区间范围',
+            pkgAttributeType: 3,
+            name: '包裹重量',
+            symbol: '至',
+            regx: /^\d+(\.\d{0,2})?$/,
+            regx2: /^\d+(\.\d{0,2})?$/,
+            maxlength: 18,
+            type: 'kg'
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+![switchList-1.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae8620b85aad4a489304b139b054fe98~tplv-k3u1fbpfcp-watermark.image?)
+
+### 三、API
+
+#### switchList Props
+
+| 属性         | 说明                                  | 类型    | 默认值 |
+| ------------ | ------------------------------------- | ------- | ------ |
+| isok         | 是否必填                              | Boolean | -      |
+| name         | 开关的标题                            | String  | -      |
+| label        | 字段名称                              | String  | -      |
+| symbol       | 两个 input 控件之间的描述文字，如`至` | String  | -      |
+| type         | 第二个 input 控件后的描述文字，如`元` | String  | -      |
+| value        | 第一个 input 控件的值                 | String  | -      |
+| value2       | 第二个 input 控件的值                 | String  | -      |
+| placeholder  | 第一个 input 控件的占位文本           | String  | -      |
+| placeholder1 | 第二个 input 控件的占位文本           | String  | -      |
+| regx         | 第一个 input 控件的正则               | Reg     | -      |
+| regx2        | 第二个 input 控件的正则               | Reg     | -      |
+| style        | 两个 input 控件的样式                 | String  | -      |
+| maxlength    | 最大输入长度                          | Number  | -      |

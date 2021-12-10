@@ -1,0 +1,152 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="BASIC/TableInput" />
+
+<style>{`
+	.subheading {
+		font-weight: 900;
+		font-size: 13px;
+		line-height: 24px;
+		margin: 40px 0 12px 0;
+	}
+`}</style>
+
+<!-- # 安装
+
+<div className="subheading">NPM 安装</div> -->
+
+## TableInput
+
+### 一、组件说明
+
+#### 1. 概述
+
+table 表格中使用的表单控件，支持的控件类型有日期控件、时间控件、外键关联下拉单多选、下拉选择、单选框`date`,`dateTime`,`popInput`,`select`,`checkbox`。
+
+#### 2. 应用场景
+
+适用于表格数据编辑。
+
+### 二、配置说明
+
+> 引用
+
+```js
+import tableInput from 'professionalComponents/businessTableInput';
+```
+
+```js
+props: {
+  tableFormConfig: {
+    formData: [
+      {
+        style: 'checkbox', //勾选框类型
+        width: '24', //所占的宽度
+        value: params.row.IS_DOWNLOAD,
+        radioChange: (e) => {
+          console.log(e);
+        },
+      },
+    ];
+  }
+}
+```
+
+### 三、代码示例
+
+##### 场景一： 表格 render 字段
+
+> js
+
+```js
+import tableInput from 'professionalComponents/businessTableInput';
+import businessActionTable from 'professionalComponents/businessActionTable';
+export default {
+  components: {
+    businessActionTable,
+  },
+};
+```
+
+> html
+
+```js
+<businessActionTable
+    :jordan-table-config="logisticsTableConfig"
+/>
+```
+
+```js
+  logisticsTableConfig: {
+    data: [
+      { DOWNLOAD_TIME: '2021-02-03', IS_DOWNLOAD: true },
+      { DOWNLOAD_TIME: '2021-06-08', IS_DOWNLOAD: false }
+    ],
+    columns: [
+      {
+        key: "IS_DOWNLOAD",
+        title: "是否下载",
+        render: (h, params) => {
+          const _this = this;
+          return h(tableInput, {
+            style: {
+              width: '100%'
+            },
+            props: {
+              tableFormConfig: {
+                formData: [
+                  {
+                    style: "checkbox", //勾选框类型
+                    width: "24", //所占的宽度
+                    value: params.row.IS_DOWNLOAD,
+                    radioChange: (e) => {
+                      console.log(e)
+                    }
+                  }
+                ]
+              }
+            }
+          })
+        }
+      },
+      {
+        key: "DOWNLOAD_TIME",
+        title: "下载时间",
+        render: (h, params) => {
+          const _this = this;
+          return h(tableInput, {
+            style: {
+              width: '100%'
+            },
+            props: {
+              tableFormConfig: {
+                formData: [
+                  {
+                    style: "date",
+                    value: params.row.DOWNLOAD_TIME,
+                    format: "yyyy-MM-dd",
+                    width: "24",
+                    transfer: true,
+                    onChange: (e) => {
+                      console.log(e)
+                    }
+                  }
+                ]
+              }
+            }
+          })
+        }
+      }
+    ]
+  }
+```
+
+![ TableInput -1.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e3fbc8976be3457cb97a41a94c4fc71e~tplv-k3u1fbpfcp-watermark.image?)
+
+### 四、API
+
+#### businessTableInput Props
+
+| 属性            | 说明                                                                          | 类型   | 默认值 |
+| --------------- | ----------------------------------------------------------------------------- | ------ | ------ |
+| tableFormConfig | 渲染配置，两个属性，`formData`、`formValue`，具体配置可参考`businessForm`组件 | Object | -      |
