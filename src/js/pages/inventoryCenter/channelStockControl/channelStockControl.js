@@ -7,7 +7,6 @@ import tableHeaderCustom from "allpages/inventoryCenter/channelStockControl/tabl
 
 import {setFormDataFunMixin} from "@/assets/js/mixins/setFormData";
 import {setActionFormMixin} from "@/assets/js/mixins/setActionFormData";
-import copy from 'copy-to-clipboard';
 
 export default {
   mixins: [setFormDataFunMixin, setActionFormMixin],

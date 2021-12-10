@@ -106,4 +106,8 @@ export default {
       'allpages/systemConfig/quanXian/quanXian.vue'
     ),
   },
+  // 系统配置-异常处理
+  dealException: {
+    component: () => import('allpages/systemConfig/dealException/basicSet')
+  },
 };
