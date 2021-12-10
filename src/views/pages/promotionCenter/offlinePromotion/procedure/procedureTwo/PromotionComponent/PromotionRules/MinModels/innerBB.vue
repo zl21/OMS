@@ -76,13 +76,13 @@
          width:18px;
          height:24px;
          padding:0 5px;
-         background: url("/static/img/error.png") no-repeat;
+         background: url("~assetsImg/error.png") no-repeat;
       }
       .correct{
          width:18px;
          height:24px;
          padding:0 5px;
-         background: url("/static/img/add.png") no-repeat
+         background: url("~assetsImg/add.png") no-repeat
       }
    }
 </style>

@@ -155,7 +155,7 @@ export default {
         objid: _this.componentData.id,
         logisticsInfo: name === undefined ? "" : name,
       };
-      const res = await _this.service.common.getWarehouseLogisticsInfo(param);
+      const res = await _this.service.com.getWarehouseLogisticsInfo(param);
       _this.removeLoading = false;
       if (res.data.code === 0) {
         _this.jordanTableConfig.data = res.data.data.cpLogisticsList;
@@ -294,7 +294,7 @@ export default {
         },
       };
       fromdata.append("param", JSON.stringify(param));
-      const res = await this.service.common.delWarehouseLogistics(fromdata);
+      const res = await this.service.com.delWarehouseLogistics(fromdata);
       if (res.data.data.code === 0) {
         const ess = res.data.data.message || $it("tip.ay");
         this.getLogistics();

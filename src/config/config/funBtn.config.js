@@ -922,7 +922,7 @@ class BtnConfig {
         $utils.msgTips(self, 'warning', 'l6');// 此退换单状态不允许换货先发!
         return;
       }
-      commonUtils.modalShow(self, 'kw', 'common.updateVirtualLibrary', { ID: id, }, 'part',
+      commonUtils.modalShow(self, 'kw', 'com.updateVirtualLibrary', { ID: id, }, 'part',
         function (res) {
           if (res.data.code === 0) {
             self.$Message.success(res.data.message)
@@ -941,7 +941,7 @@ class BtnConfig {
       if (id) {
         let formdata = new FormData();
         formdata.append('id' , id[0]);
-        commonUtils.modalShow(self, 'kw', 'common.updateVirtualLibrary', formdata)
+        commonUtils.modalShow(self, 'kw', 'com.updateVirtualLibrary', formdata)
       }
     }
   }
@@ -1039,7 +1039,7 @@ class BtnConfig {
       checkData.forEach((item) => {
         if (item.QTY_REFUND !== item.QTY_IN) unMatchFlag = true;
       });
-      commonUtils.modalShow(self, unMatchFlag ? 'av' : 'k7', 'common.chargebackcheck', { ID: id }, 'part',
+      commonUtils.modalShow(self, unMatchFlag ? 'av' : 'k7', 'com.chargebackcheck', { ID: id }, 'part',
         function (res) {
           if (res.data.code === 0) {
             self.$Message.success(res.data.message)
@@ -1054,7 +1054,7 @@ class BtnConfig {
       let ids = this.orderStatusRule(self, { type: 'check', statusCode: '30', statusTips: 'dt', })
       if (ids) {
         let params = { ID: ids.join(',') }
-        commonUtils.serviceHandler(self, 'common.chargebackcheck', params, 'part',
+        commonUtils.serviceHandler(self, 'com.chargebackcheck', params, 'part',
           function (res) {
             if (res.data.code === 0) {
               self.$Message.success(res.data.message)

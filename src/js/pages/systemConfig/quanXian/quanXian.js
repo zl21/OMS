@@ -409,7 +409,7 @@ export default {
 
     // 获取角色id
     async getRoleData() {
-      const res = await this.service.common.groupTreeload({});
+      const res = await this.service.com.groupTreeload({});
       if (res.data.code === 0) {
         this.groupId = res.data.data[0].ID;
         this.newGroupId = res.data.data[0].ID;
@@ -574,7 +574,7 @@ export default {
         };
 
         if (refresh) {
-          this.$Message.success($it('common.refresh_succee')); // 刷新成功
+          this.$Message.success($it('com.refresh_succee')); // 刷新成功
         }
       }
       this.spinShow = false;

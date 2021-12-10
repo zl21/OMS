@@ -510,7 +510,7 @@ export default {
         })
       );
       const delUrl = port[this.tablename].delUrl || '/p/cs/prodel'
-      this.service.common.publicUrlParams(delUrl, formdata).then((res) => {
+      this.service.com.publicUrlParams(delUrl, formdata).then((res) => {
         const data = res.data;
         if (data.code === 0) {
           this.activeSub = false; // 改变高亮行
@@ -727,7 +727,7 @@ export default {
           orderby: this.orderby // 按什么排序
         })
       );
-      return this.service.common.QueryList(query).then(res => {
+      return this.service.com.QueryList(query).then(res => {
         const data = res.data;
         if (data.code === 0) {
           this.changeMatrix(this.objSave) // 更新右侧数据

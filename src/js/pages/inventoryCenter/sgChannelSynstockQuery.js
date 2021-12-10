@@ -408,7 +408,7 @@ export default {
       fromdata.append('objid', -1);
       return new Promise(resolve => {
         let optionData = [];
-        this.service.common.getObject(fromdata).then(res => {
+        this.service.com.getObject(fromdata).then(res => {
           const selectData = res.data.data.addcolums;
           selectData.forEach(item => {
             if (item.parentdesc === parentColName) {
@@ -554,7 +554,7 @@ export default {
           ids.push(_this.returnSelectData[i].ID);
         }
         const idList = { idList: ids };
-        this.service.common.exportPayableAdjustment(idList).then(res => {
+        this.service.com.exportPayableAdjustment(idList).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
             const mes = res.data.message || $it('tip.z2'); // '导出成功！';
             _this.$Message.success(mes);
@@ -583,7 +583,7 @@ export default {
         start: _this.jordanTableConfig.current,
         count: 999999
       };
-      this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
+      this.service.com.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
           const mes = res.data.message || $it('tip.z2'); // '导出成功！';
           _this.$Message.success(mes);

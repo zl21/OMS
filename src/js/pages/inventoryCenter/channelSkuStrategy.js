@@ -194,7 +194,7 @@ export default {
         const formdata = new FormData();
         formdata.append('table', this.tableName);
         formdata.append('objid', this.ID);
-        this.service.common.objectVoid(formdata).then((res) => {
+        this.service.com.objectVoid(formdata).then((res) => {
           if (res.data.code === 0) {
             this.$Message.success(res.data.message);
             this.isChange = false
@@ -372,7 +372,7 @@ export default {
       formdata.append('objid', this.ID);
       formdata.append('isdelmtable', false); // false:代表删除明细；
       formdata.append('data', JSON.stringify(data));
-      this.service.common.objectDelete(formdata).then((res) => {
+      this.service.com.objectDelete(formdata).then((res) => {
         if (res.data.code === 0) {
           this.$Message.success(res.data.message);
           if (delType === 1) {
@@ -433,7 +433,7 @@ export default {
             formdata.append('before', JSON.stringify(before));
             formdata.append('after', JSON.stringify(after));
           }
-          this.service.common.objectSave(formdata).then((res) => {
+          this.service.com.objectSave(formdata).then((res) => {
             if (res.data.code === 0) {
               if (type === 1) {
                 this.getExclusiveStockData() // 更新表格数据
@@ -633,7 +633,7 @@ export default {
             }
           });
         } else { // 修改 or 提交
-          this.service.common.objectSave(formdata).then((res) => {
+          this.service.com.objectSave(formdata).then((res) => {
             this.loading = false
             if (res.data.code === 0) {
               if (type === 'submit') {
@@ -641,7 +641,7 @@ export default {
                 const formdata2 = new FormData();
                 formdata2.append('table', this.tableName);
                 formdata2.append('objid', this.ID);
-                this.service.common.objectSubmit(formdata2).then((res) => {
+                this.service.com.objectSubmit(formdata2).then((res) => {
                   if (res.data.code === 0) {
                     this.$Message.success($it('tip.z9'));
                     this.isChange = false
@@ -688,7 +688,7 @@ export default {
       const formdata = new FormData();
       formdata.append('table', this.tableName);
       formdata.append('objid', this.ID);
-      this.service.common.getObject(formdata).then(res => {
+      this.service.com.getObject(formdata).then(res => {
         this.loading = false
         const addcolums = res.data.data.addcolums
         if (res.data.code === 0) {
@@ -749,7 +749,7 @@ export default {
       const formdata = new FormData();
       formdata.append('table', this.tab1tableName);
       formdata.append('inlinemode', 'Y');
-      this.service.common.inputForitem(formdata).then((res) => {
+      this.service.com.inputForitem(formdata).then((res) => {
         if (res.data.code === 0) {
           this.formConfig2 = {
             formData: [],
@@ -772,7 +772,7 @@ export default {
       const formdata = new FormData();
       formdata.append('table', this.tab2tableName);
       formdata.append('inlinemode', 'Y');
-      this.service.common.inputForitem(formdata).then((res) => {
+      this.service.com.inputForitem(formdata).then((res) => {
         if (res.data.code === 0) {
           this.formConfig3 = {
             formData: [],
@@ -831,7 +831,7 @@ export default {
       formdata.append('refcolid', this.table1Refcolid);
       formdata.append('searchdata', JSON.stringify(searchdata));
       this.table1Loading = true
-      this.service.common.objectTableItem(formdata).then(res => {
+      this.service.com.objectTableItem(formdata).then(res => {
         if (res.data.code === 0) {
           const datas = res.data.datas
           this.loading = false
@@ -948,7 +948,7 @@ export default {
       formdata.append('refcolid', this.table2Refcolid);
       formdata.append('searchdata', JSON.stringify(searchdata));
       this.table2Loading = true
-      this.service.common.objectTableItem(formdata).then(res => {
+      this.service.com.objectTableItem(formdata).then(res => {
         this.loading = false
         this.table2Loading = false
         const datas = res.data.datas

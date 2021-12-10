@@ -444,7 +444,7 @@ export default {
                     ECODE: code
                   }
                 };
-                _this.service.common.skuQuery(data).then(res => {
+                _this.service.com.skuQuery(data).then(res => {
                   if (res.status === 200) {
                     const data = res.data.data.data;
                     const arr = []; // 展示的数据
@@ -479,7 +479,7 @@ export default {
                     ECODE: code
                   }
                 };
-                _this.service.common.skuQuery(data).then(res => {
+                _this.service.com.skuQuery(data).then(res => {
                   if (res.status === 200) {
                     const data = res.data.data.data;
                     const arr = []; // 展示的数据
@@ -783,7 +783,7 @@ export default {
           ECODE: str
         }
       };
-      self.service.common.skuQuery(data).then(res => {
+      self.service.com.skuQuery(data).then(res => {
         if (res.status === 200) {
           const data = res.data.data.data;
           const dimList = self.jordanTableConfig2.businessFormConfig.formData;

@@ -656,7 +656,7 @@ export default {
       const formData = new FormData()
       formData.append('ak', v)
       formData.append('colid', 166974)
-      const { data: { data } } = await service.common.fuzzyquerybyak(formData)
+      const { data: { data } } = await service.com.fuzzyquerybyak(formData)
 
       item.item.props.AutoData = data
       console.log(item.item.props.AutoData);
@@ -896,7 +896,7 @@ export default {
       let id = itemda.id;
       var formdata = new FormData();
       formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167091, fixedcolumns: { C_UP_ID: `=${id}` }, startindex: this.startindex, range: 10 }));
-      service.common.QueryList(formdata).then(res => {
+      service.com.QueryList(formdata).then(res => {
         let item = this.queryForm('排除地区');
         item.item.props.data.forEach(item => {
           if (item.id == id) {
@@ -933,7 +933,7 @@ export default {
 
       var formdata = new FormData();
       formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 166974, fixedcolumns, startindex: this.startindex, range: 10 }));
-      service.common.QueryList(formdata).then(res => {
+      service.com.QueryList(formdata).then(res => {
         let item = this.queryForm('排除省份');
         let prodata = this.queryForm('支持省份');
         item.item.props.totalRowCount = res.data.data.totalRowCount;
@@ -987,7 +987,7 @@ export default {
       let cityitem = this.queryForm('排除地区');
       var formdata = new FormData();
       formdata.append('searchdata', JSON.stringify({ isdroplistsearch: true, refcolid: 167077, fixedcolumns: { C_UP_ID: `=${citId}` }, startindex: 0, range: 100 }));
-      service.common.QueryList(formdata).then(res => {
+      service.com.QueryList(formdata).then(res => {
         let citarr = res.data.data.row;
         cityitem.item.props.data = [];
         citarr.forEach((item, index) => {

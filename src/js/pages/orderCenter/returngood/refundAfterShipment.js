@@ -1407,7 +1407,7 @@ export default {
         }
       }
       formData.append('param', JSON.stringify(requestData));
-      this.service.common.queryOrderList(formData).then(res => {
+      this.service.com.queryOrderList(formData).then(res => {
         console.log(res);
         if (res.data.code == 0) {
           const arr = [];
@@ -1775,7 +1775,7 @@ export default {
       const formdata = new FormData();
       formdata.append('table', 'OC_B_RETURN_AF_SEND');
       formdata.append('objid', -1);
-      const res = await self.service.common.getObject(formdata);
+      const res = await self.service.com.getObject(formdata);
       console.log(res);
       if (res.data.code == 0) {
         let payType = [];
@@ -1830,7 +1830,7 @@ export default {
           fixedcolumns: {}
         })
       );
-      this.service.common.objectTableItem(formdata).then(res => {
+      this.service.com.objectTableItem(formdata).then(res => {
         const resData = res.data;
         if (resData.code === 0) {
           const row = resData.datas.row || [];

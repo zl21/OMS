@@ -211,7 +211,7 @@ export default {
         'searchdata',
         '{"column_include_uicontroller":true,"startindex":0,"fixedcolumns":{}}'
       );
-      const res = await this.service.common.objectTableItem(fromdata);
+      const res = await this.service.com.objectTableItem(fromdata);
       if (res.data.code === 0) {
         let arr = '';
         res.data.datas.tabth.forEach((item) => {

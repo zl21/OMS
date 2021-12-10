@@ -206,7 +206,7 @@ export default {
               fromdata.append('param', JSON.stringify(param));
               const {
                 data: { code, data }
-              } = await this.service.common.queryOrderList(fromdata);
+              } = await this.service.com.queryOrderList(fromdata);
               if (code === 0) {
                 const resData = data || {};
                 const dataBySourceCode = resData.queryOrderResultList || [];
@@ -1136,7 +1136,7 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       const {
         data: { code, data }
-      } = await this.service.common.queryOrderList(fromdata);
+      } = await this.service.com.queryOrderList(fromdata);
       if (code === 0) {
         const dataByBillNo = data.queryOrderResultList;
         // 解密
@@ -1510,7 +1510,7 @@ export default {
       childColName.forEach(item => {
         self.selectData[item] = [];
       });
-      const res = await self.service.common.getObject(fromdata);
+      const res = await self.service.com.getObject(fromdata);
       const selectData = res.data.data.addcolums;
       selectData.forEach(item => {
         if (item.parentdesc === parentColName) {

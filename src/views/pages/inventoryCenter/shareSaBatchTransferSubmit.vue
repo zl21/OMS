@@ -10,7 +10,7 @@ export default {
     const fromdata = new FormData();
     fromdata.append('table', this.$route.params.tableName);
     fromdata.append('mainId', this.$route.params.itemId);
-    this.service.common.publicUrlParams('/p/cs/sg/share/batchSubmitTransfer', fromdata).then((res) => {
+    this.service.com.publicUrlParams('/p/cs/sg/share/batchSubmitTransfer', fromdata).then((res) => {
       if (res.data.code === 0) {
         this.$Message.success(res.data.message);
       }

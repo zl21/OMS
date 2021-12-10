@@ -177,7 +177,7 @@ export default {
       const pa = new FormData();
       pa.append('language', localStorage.getItem("locale") || 'zh');
       console.log(service.common);
-      const { status, data } = await service.common.langSwitcher(pa)
+      const { status, data } = await service.com.langSwitcher(pa)
       return status === 200 && data.code === 0
     }
   },

@@ -130,7 +130,7 @@ export default {
       const _self = this;
       const param = new URLSearchParams();
       param.append('param', JSON.stringify({ GROUPS_ID: Number(_self.userId) }));
-      const res = await this.service.common.groupQueryName(param);
+      const res = await this.service.com.groupQueryName(param);
       if (res.data.data) _self.userQuery = res.data.data.name;
       _self.axiosGroup();
     },
@@ -166,7 +166,7 @@ export default {
       const param = new URLSearchParams();
       param.append('param', JSON.stringify({ GROUPS_ID: _self.userId }));
       try {
-        const res = await this.service.common.cuserspro(param);
+        const res = await this.service.com.cuserspro(param);
         if (res.data.code === 0) {
           const result = res.data.data;
           for (const g of result) {
@@ -215,7 +215,7 @@ export default {
         if (u.checked) param.data.CP_C_HRUSERS_PRO.push(u.ID);
       }
       if (param.data.CP_C_HRUSERS_PRO.length > 0) {
-        const res = await this.service.common.objectDelete(param);
+        const res = await this.service.com.objectDelete(param);
         if (res.data.code >= 0) {
           _self.$message({ message: res.data.message, type: 'success' });
           _self.axiosUserAuthority();
@@ -231,7 +231,7 @@ export default {
       } else {
         const param = new URLSearchParams();
         param.append('query', `{'query':'${queryString}'}`);
-        const res = await this.service.common.cprolikequery(param);
+        const res = await this.service.com.cprolikequery(param);
         if (res.data.code === 0) {
           const result = res.data.data;
           cb(result);
@@ -266,7 +266,7 @@ export default {
       }
       const param = new URLSearchParams();
       param.append('param', JSON.stringify(result.value));
-      const res = await this.service.common.screenresult(param);
+      const res = await this.service.com.screenresult(param);
       if (res.data.code === 0) {
         const searchResult = res.data.data.list;
         if (searchResult.length <= 0) return;
@@ -294,7 +294,7 @@ export default {
       param.append('objid', insertParam.objid);
       param.append('data', JSON.stringify(insertParam.data));
       try {
-        const res = await _self.service.common.objectSave(param);
+        const res = await _self.service.com.objectSave(param);
         _self.page.disabled = false;
         if (res.data.code === 0) {
           _self.$message({ message: res.data.message, type: 'success' });
@@ -345,7 +345,7 @@ export default {
           PAGESIZE: _self.loadSize
         })
       );
-      const res = await this.service.common.chrusersquery(param);
+      const res = await this.service.com.chrusersquery(param);
       const result = res.data.data;
       if (!_self.loadFlag) {
         for (const user of result.list) {

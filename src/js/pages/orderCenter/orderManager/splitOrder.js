@@ -22,7 +22,7 @@ export default {
                   showCancel: true,
                   okText: '确认',
                   // okText: $it('tip.ch'),
-                  cancelText: $it('common.cancel'), // 取消
+                  cancelText: $it('com.cancel'), // 取消
                   onOk: () => {
                     this.getData();
                   },
@@ -147,7 +147,7 @@ export default {
                     let obj = { "isdroplistsearch": true, "refcolid": 1700823730, "range": 10, "startindex": 0, "fixedcolumns": { "ID": "in (" + ids + ")" } }
                     fordata.append("searchdata", JSON.stringify(obj))
 
-                    this.service.common.QueryList(fordata).then(res => {
+                    this.service.com.QueryList(fordata).then(res => {
                       if (res.data.code == 0) {
                         this.drpdata = res.data.datas
                       }

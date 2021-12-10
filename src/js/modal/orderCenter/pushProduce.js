@@ -53,7 +53,7 @@ export default {
                   ECODE: val.trim(),
                 },
               };
-              const res = await _this.service.common.skuQuery(query);
+              const res = await _this.service.com.skuQuery(query);
               if (res.status === 200) {
                 const data = res.data.data.data;
                 const dimList = _this.formConfig.formData;
@@ -111,7 +111,7 @@ export default {
                 TABLENAME: 'PS_C_PRO',
               };
               fromdata.append('param', JSON.stringify(params));
-              const res = await _this.service.common.screenresult(fromdata);
+              const res = await _this.service.com.screenresult(fromdata);
               if (res.data.code === 0) {
                 const dimList = _this.formConfig.formData;
 
@@ -196,7 +196,7 @@ export default {
       };
 
       try {
-        const res = await self.service.common.skuQuery(query);
+        const res = await self.service.com.skuQuery(query);
         console.log(res);
         if (res.data.code == 0) {
           if (res.data.data.data.length == 0) {
@@ -251,7 +251,7 @@ export default {
       }
       self.loading = true;
       self.btnConfig.buttons[1].disabled = true;
-      this.service.common.publicUrlParams(url, result).then((res) => {
+      this.service.com.publicUrlParams(url, result).then((res) => {
         this.btnConfig.buttons[1].disabled = false;
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);

@@ -190,7 +190,7 @@ export default {
       // formdata.append('ak', e);
       // formdata.append('colid', 173684);
       // formdata.append('fixedcolumns', JSON.stringify({ whereKeys: { STATUS: '=0' } }));
-      // this.service.common.fuzzyquerybyak(formdata).then(res=>{
+      // this.service.com.fuzzyquerybyak(formdata).then(res=>{
       //   console.log(res);
       //   if (res.data.code === 0) {
       //     this.autoData = res.data.data;

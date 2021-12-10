@@ -363,7 +363,7 @@ export default {
         formData.append('fixedcolumns', JSON.stringify(fixedcolumns))
         const {
           data: { data },
-        } = await this.service.common.fuzzyquerybyak(formData)
+        } = await this.service.com.fuzzyquerybyak(formData)
         this.tableConfig.businessFormConfig.formData[0].AuotData = data
       }
     },

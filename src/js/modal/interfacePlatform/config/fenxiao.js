@@ -89,7 +89,7 @@ export default {
     fromdata.append('param', JSON.stringify(param));
     const {
       data: { code, message }
-    } = await _this.service.common.publicUrlParams('/p/cs/itemDownload', fromdata);
+    } = await _this.service.com.publicUrlParams('/p/cs/itemDownload', fromdata);
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);

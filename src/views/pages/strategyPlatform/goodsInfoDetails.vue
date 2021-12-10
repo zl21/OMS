@@ -228,7 +228,7 @@ export default {
       const fo = new FormData();
       fo.append('table', 'SG_B_SHOP_SKU_LOCK_STRATEGY_ITEM');
       fo.append('inlinemode', 'Y');
-      const { data: { code, data } } = await this.service.common.inputForitem(fo);
+      const { data: { code, data } } = await this.service.com.inputForitem(fo);
       if (code == 0) {
         const item = data.inpubobj[0];
         const options = item.combobox.map((i) => ({
@@ -277,7 +277,7 @@ export default {
         'searchdata',
         '{"column_include_uicontroller":true,"startindex":0,"range":10,"fixedcolumns":{}}'
       );
-      const { data: { code, data, message }} = await this.service.common.objectTableItem(fromdata)
+      const { data: { code, data, message }} = await this.service.com.objectTableItem(fromdata)
       if (code == 0) {
         let result = data.row.map(i => ({
           ID: i.ID.val,
@@ -323,7 +323,7 @@ export default {
         0: { ID: "28" },
         table: "SG_B_SHOP_SKU_LOCK_STRATEGY"
       }
-      const { data } = await this.service.common.objectDelete(params)
+      const { data } = await this.service.com.objectDelete(params)
       
     },
     handleImport() {

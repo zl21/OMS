@@ -104,7 +104,7 @@ export default {
     };
     const {
       data: { code, message }
-    } = await _this.service.common.publicUrlParams('/p/cs/ip/v1/order/download/orderExchangeDownLoad', param);
+    } = await _this.service.com.publicUrlParams('/p/cs/ip/v1/order/download/orderExchangeDownLoad', param);
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);

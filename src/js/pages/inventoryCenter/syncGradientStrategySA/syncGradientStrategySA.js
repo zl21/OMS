@@ -137,7 +137,7 @@ export default {
       formdata.append('actionid', actionid);
       formdata.append('webaction', null);
       formdata.append('param', JSON.stringify(param));
-      this.service.common.exeAction(formdata).then((res) => {
+      this.service.com.exeAction(formdata).then((res) => {
         if (res.data.code === 0) {
           this.$Message.success(res.data.message || `${$it('fL.f2')}!`); // 同步成功
           this.isChange = false
@@ -171,7 +171,7 @@ export default {
         const formdata = new FormData();
         formdata.append('table', this.tableName);
         formdata.append('objid', this.ID);
-        this.service.common.objectVoid(formdata).then((res) => {
+        this.service.com.objectVoid(formdata).then((res) => {
           if (res.data.code === 0) {
             this.$Message.success(res.data.message || '作废成功！');
             this.isChange = false
@@ -410,7 +410,7 @@ export default {
       const formdata = new FormData();
       formdata.append('table', table);
       formdata.append('inlinemode', 'Y');
-      this.service.common.inputForitem(formdata).then((res) => {
+      this.service.com.inputForitem(formdata).then((res) => {
         if (res.data.code === 0) {
           const inpubobj = res.data.data.inpubobj
           this[`${formConfigName}Data`] = inpubobj
@@ -583,7 +583,7 @@ export default {
       const formdata = new FormData();
       formdata.append('table', this.tableName);
       formdata.append('objid', this.ID);
-      this.service.common.getObject(formdata).then(res => {
+      this.service.com.getObject(formdata).then(res => {
         this.loading = false
         if (res.data.code === 0) {
           const addcolums = res.data.data.addcolums

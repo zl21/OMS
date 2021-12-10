@@ -573,7 +573,7 @@ export default {
     async waitObjSave() {
       console.log('waitObjSave');
       try {
-        const { data } = await this.service.common.publicUrlParams(port[this.tablename].amendBody, {
+        const { data } = await this.service.com.publicUrlParams(port[this.tablename].amendBody, {
           table: this.tablename === 'DL_B_TRAN_OUT_POS' ? this.tablename.replace('_POS', '') : this.tablename, // 表名
           objid: this.objid, // 主表ID
           data: JSON.stringify(this.paramsObj)
@@ -937,7 +937,7 @@ export default {
       };
       // 修改后已验证
       console.log('port.matrix: ', port.matrix);
-      const res = await this.service.common.publicUrlParamsGet(port.matrix, { params });
+      const res = await this.service.com.publicUrlParamsGet(port.matrix, { params });
       const data = res.data;
       if (data.code === -1) {
         this.$Message.error(data.message);
@@ -979,7 +979,7 @@ export default {
             let tempPath = this.tablename === 'OC_B_SALE' && this.saleType === 'NOR'
             ? 'oc/v1/sale':'sg/storage';
             let url= `/p/cs/${tempPath}/queryCommonStorageByPro`;
-            await this.service.common.publicUrlParams(url, {
+            await this.service.com.publicUrlParams(url, {
               storeId: this.distribId,
               proEcode: this.encode,
               phyWarehouseId: this.cp_c_phy_warehouse_id,
@@ -1000,7 +1000,7 @@ export default {
           formData.append('proEcode', this.encode);
           formData.append('RETAIL_BEGIN_TIME', this.retailBeginTime);
           formData.append('RETAIL_END_TIME', this.retailEndTime);
-          const res = await this.service.common.queryCommonStorageByPro(formData);
+          const res = await this.service.com.queryCommonStorageByPro(formData);
           const data = res.data;
           if (data.code === 0) {
             this.receivingData = data.data;
@@ -1033,7 +1033,7 @@ export default {
             fixcolumn: paramObj,
           }
         };
-        return this.service.common.publicUrlParamsGet(port[this.tablename].getBody, { params });
+        return this.service.com.publicUrlParamsGet(port[this.tablename].getBody, { params });
       }
       if (this.edit && port[this.tablename]) { // 可编辑矩阵(不同页面不同接口)
         let paramObj = { PS_C_PRO_ECODE: this.encode };
@@ -1064,11 +1064,11 @@ export default {
             fixcolumn: paramObj,
           }
         };
-        return this.service.common.publicUrlParamsGet(port[this.tablename].getBody, { params });
+        return this.service.com.publicUrlParamsGet(port[this.tablename].getBody, { params });
       }
       if (this.reveal) { // 纯展示的是库存
         console.log('this.reveal', this.reveal);
-        return this.service.common.queryCommonStorageByPro({
+        return this.service.com.queryCommonStorageByPro({
           storeId: this.takeStock,
           proEcode: this.encode
         }).then((res) => {

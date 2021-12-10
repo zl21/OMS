@@ -232,7 +232,7 @@ export default {
         fromdata.append('objid', _this.ID);
         const {
           data: { code, data, message },
-        } = await _this.service.common.getObject(fromdata).catch(e => {
+        } = await _this.service.com.getObject(fromdata).catch(e => {
           _this.tableConfig.loading = false;
           if (code != '-1') return _this.$Message.error('查询详情接口（/p/cs/getObject）报错！')
         })

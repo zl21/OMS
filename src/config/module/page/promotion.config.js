@@ -41,4 +41,35 @@ export default {
   // ORDERDETAIL2: {
   //   component: orderDetail2
   // }
+  PROMOTION: {
+    component: () => import(
+      /* webpackChunkName: 'PromotionCenterPage' */
+      'allpages/promotionCenter/offlinePromotion/promotion.vue'
+    )
+  },
+  ONLINEPROMOTION: {
+    component: () => import(
+      /* webpackChunkName: 'PromotionCenterPage' */
+      'allpages/promotionCenter/onlinePromotion/promotionlist.vue'
+    ),
+    labelName: '线上促销活动',
+},
+  ADDOREDITACTI: {
+    component: () => import(
+      /* webpackChunkName: 'PromotionCenterPage' */
+      'allpages/promotionCenter/onlinePromotion/addOrEditActi.vue'
+    )
+  },
+  BATCHACTIVITY: {
+    component: () => import(
+      /* webpackChunkName: 'PromotionCenterPage' */
+      'allpages/promotionCenter/onlinePromotion/batchActivity.vue'
+    )
+  },
+  SIMULATION: {
+    component: () => import(
+      /* webpackChunkName: 'PromotionCenterPage' */
+      'allpages/promotionCenter/onlinePromotion/simulation.vue'
+    )
+  }
 };

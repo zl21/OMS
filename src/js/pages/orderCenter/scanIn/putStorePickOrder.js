@@ -681,7 +681,7 @@ export default {
       const formdata = new FormData();
       formdata.append('objid', this.orderID);
 
-      const { data } = await this.service.common.querySgBInPickorder(formdata);
+      const { data } = await this.service.com.querySgBInPickorder(formdata);
       if (data.code === 0) {
         data.data.sgBInPickorderItemList.forEach(item => {
           // 计算总数

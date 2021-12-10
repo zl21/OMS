@@ -332,7 +332,7 @@ export default {
       _this.loading = true;
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
 
-      this.service.common.getWarehouseLogisticsTree(param).then(res => {
+      this.service.com.getWarehouseLogisticsTree(param).then(res => {
         _this.loading = false;
         if (res.data.code == 0) {
           _this.treeData = res.data.data.warehouseLogisticsTree;
@@ -393,7 +393,7 @@ export default {
       // 接口
       const {
         data: { oK, data }
-      } = await this.service.common.getLogisticsRankResultTable(params);
+      } = await this.service.com.getLogisticsRankResultTable(params);
       if (oK) {
         _this.tableLoading = false;
         // this.$R3loading.hide(customizedModuleName);
@@ -428,7 +428,7 @@ export default {
       }
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, cityleave: 'PROV', treeNode: treeList };
       // 接口
-      this.service.common.getLogisticsRankResultTable(params).then(res => {
+      this.service.com.getLogisticsRankResultTable(params).then(res => {
         _this.tableLoading = false;
         // this.$R3loading.hide(customizedModuleName);
         if (res.data.oK) {

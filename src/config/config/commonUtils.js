@@ -189,7 +189,7 @@ class commonUtils {
   /**
    * 统一发请求
    * @self {Object} 当前实例
-   * @serviceUrl {String} eg."common.queryList"
+   * @serviceUrl {String} eg."com.queryList"
    * @params {Object} 该接口的请求参数
    * @callback  {Array} 其余参数解构成的数组
    * @callbackType {String} 用于判断何时走回调函数
@@ -280,7 +280,7 @@ class commonUtils {
   //  * 复杂的$Modal类型的提示弹窗
   //  * @self {*} this
   //  * @tips {*} modalTitle[tips]
-  //  * @okKey {*} {String} 点击确定要调用的接口，eg."common.queryList"
+  //  * @okKey {*} {String} 点击确定要调用的接口，eg."com.queryList"
   //  * @data {*} {Object} 点击确定调用的接口的入参
   //  * @callback  {Object} 什么鬼？反正里面存了callbackType、callbackFun（具体处理接口返回的res的方法？）
   //  * @param  {...any} callback
@@ -489,7 +489,7 @@ class commonUtils {
     if (self[array] != undefined) btnArr = self[array].buttons || [];
     const show_iconbj_setup = ['ORDERMANAGER' , 'OC_B_RETURN_ORDER']; //储存允许设置按钮展示的页面集;
     return new Promise(async (resolve) => {
-      const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
+      const res = await self.service.com.fetchActionsInCustomizePage(query, { serviceId });
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
       data = JSON.parse(JSON.stringify(result))
       if (res.data.code === 0) {
@@ -546,7 +546,7 @@ class commonUtils {
     }).finally(e => {
       console.log('butConfig::', self[array]);
     });
-    /*  self.service.common.fetchActionsInCustomizePage(query).then((res) => {
+    /*  self.service.com.fetchActionsInCustomizePage(query).then((res) => {
        let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
        independent = result
        if (isIndependent) {
@@ -610,7 +610,7 @@ class commonUtils {
     let data, btnArr = [];
     if (!isIndependent && self[array] == undefined) return
     return new Promise(async (resolve) => {
-      const res = await self.service.common.fetchActionsInCustomizePage(query, { serviceId });
+      const res = await self.service.com.fetchActionsInCustomizePage(query, { serviceId });
       let result = res.data.data.ZIP || res.data.data.DATA || [] //未压缩情况下数据获取
       if (isIndependent) {
         result = result.ACTIONS;
@@ -710,7 +710,7 @@ class commonUtils {
     fromdata.append('table', table)
     fromdata.append('objid', -1)
     fromdata.append('omsT', +new Date())
-    const res = await service.common.getObject(fromdata)
+    const res = await service.com.getObject(fromdata)
     res.data.data.addcolums.forEach((item) => {
       if (item.parentdesc == foldingName) {
         item.childs.forEach((it) => {
@@ -794,7 +794,7 @@ class commonUtils {
     fromdata.append('omsT', +new Date())
     const {
       data: { code, data, message },
-    } = await service.common.getObject(fromdata)
+    } = await service.com.getObject(fromdata)
     if (code != 0) {
       console.error('p/cs/getObject no data!')
       return false
@@ -978,7 +978,7 @@ class commonUtils {
     formdata.append('searchdata', JSON.stringify(searchdatas))
     formdata.append('refcolid', refcolid)
     formdata.append('omsT', +new Date())
-    const res = await service.common.objectTableItem(formdata)
+    const res = await service.com.objectTableItem(formdata)
     if (res.data.code === 0) {
       let rowData = [];
       let columns = [];

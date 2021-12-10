@@ -344,7 +344,7 @@ export default {
             width: '6',
             itemdata: {
               isCustom: true,
-              api: 'common.selProLike',
+              api: 'com.selProLike',
               serviceId: 'r3-ps',
               params: { 'ECODE': 1 },
               dataEmptyMessage: '请输入值查询',
@@ -375,7 +375,7 @@ export default {
             width: '6',
             itemdata: {
               isCustom: true,
-              api: 'common.selSkuLike',
+              api: 'com.selSkuLike',
               params: { "ECODE": "1", "pageNumber": 1, "pageSize": 10 },
               colname: 'PS_C_PRO_ID', // 当前字段的名称
               fkdisplay: 'drp', // 外键关联类型
@@ -730,7 +730,7 @@ export default {
       const fo = new FormData();
       fo.append('table', 'SG_B_SHOP_PRO_SPECIAL_STRATEGY_ITEM');
       fo.append('inlinemode', 'Y');
-      const { data: { data } } = await this.service.common.inputForitem(fo);
+      const { data: { data } } = await this.service.com.inputForitem(fo);
       // const item = data.inpubobj.filter(it => it.colname == "SKU_TYPE");
       const item = data.inpubobj[1];
       const options = item.combobox.map((i) => ({

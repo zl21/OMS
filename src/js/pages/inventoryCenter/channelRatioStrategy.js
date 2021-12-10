@@ -365,7 +365,7 @@ export default {
       formdata.append('actionid', 41460447);
       formdata.append('webaction', null);
       formdata.append('param', JSON.stringify(param));
-      this.service.common.exeAction(formdata).then((res) => {
+      this.service.com.exeAction(formdata).then((res) => {
         if (res.data.code === 0) {
           this.$Message.success(res.data.message);
           this.isChange = false
@@ -391,7 +391,7 @@ export default {
         const formdata = new FormData();
         formdata.append('table', this.tableName);
         formdata.append('objid', this.ID);
-        this.service.common.objectVoid(formdata).then((res) => {
+        this.service.com.objectVoid(formdata).then((res) => {
           if (res.data.code === 0) {
             this.$Message.success(res.data.message);
             this.isChange = false
@@ -593,7 +593,7 @@ export default {
               formdata.append('before', JSON.stringify(before));
               formdata.append('after', JSON.stringify(after));
             }
-            this.service.common.objectSave(formdata).then((res) => {
+            this.service.com.objectSave(formdata).then((res) => {
               if (res.data.code === 0) {
                 this.getExclusiveStockData() // 更新表格数据
                 this.$Message.success(res.data.message || $it('tip.z9'));
@@ -618,7 +618,7 @@ export default {
       const formdata = new FormData();
       formdata.append('table', this.tableName);
       formdata.append('objid', this.ID);
-      this.service.common.getObject(formdata).then(res => {
+      this.service.com.getObject(formdata).then(res => {
         this.loading = false
         const addcolums = res.data.data.addcolums
         if (res.data.code === 0) {
@@ -672,7 +672,7 @@ export default {
       formdata.append('refcolid', this.table2Refcolid);
       formdata.append('searchdata', JSON.stringify(searchdata));
 
-      this.service.common.objectTableItem(formdata).then(res => {
+      this.service.com.objectTableItem(formdata).then(res => {
         const datas = res.data.datas
         if (res.data.code === 0) {
           // 表头和表格数据
@@ -725,7 +725,7 @@ export default {
       formdata.append('objid', this.ID);
       formdata.append('refcolid', this.table1Refcolid);
       formdata.append('searchdata', JSON.stringify(searchdata));
-      this.service.common.objectTableItem(formdata).then(res => {
+      this.service.com.objectTableItem(formdata).then(res => {
         const datas = res.data.datas
         if (res.data.code === 0) {
           // 表头和表格数据

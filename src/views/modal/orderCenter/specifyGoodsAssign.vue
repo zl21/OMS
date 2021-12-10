@@ -185,7 +185,7 @@ export default {
         self.$Message.warning($it("pH.z4")); // 请输入商品SKU
         return;
       }
-      const res = await self.service.common.selSku({ ECODE: self.itemdata.valuedata });
+      const res = await self.service.com.selSku({ ECODE: self.itemdata.valuedata });
       console.log(res);
 
       if (res.data.code == 0) {
@@ -206,7 +206,7 @@ export default {
         self.$Message.warning($it("pH.z4")); // 请输入商品SKU
         return;
       }
-      const res = await self.service.common.selSku({ ECODE: self.itemdata.valuedata });
+      const res = await self.service.com.selSku({ ECODE: self.itemdata.valuedata });
       console.log(res);
       if (res.data.code == 0) {
         if (res.data.data.length == 0 || res.data.data[0] == null) {

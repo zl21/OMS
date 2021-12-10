@@ -676,7 +676,7 @@ export default {
                   TABLENAME: 'PS_C_PRO',
                 };
                 fromdata.append('param', JSON.stringify(params));
-                this.service.common.screenresult(fromdata).then((res) => {
+                this.service.com.screenresult(fromdata).then((res) => {
                   if (res.data.code === 0) {
                     const dimList =
                       _this.jordanTableConfig.businessFormConfig.formData;
@@ -1204,7 +1204,7 @@ export default {
     const fromdata = new FormData();
     fromdata.append('table', 'OC_B_ORDER');
     fromdata.append('objid', -1);
-    self.service.common.getObject(fromdata).then((res) => {
+    self.service.com.getObject(fromdata).then((res) => {
       res.data.data.addcolums.forEach((item) => {
         // '基本信息'
         if (item.parentdesc === $it('com.baseInformation')) {
@@ -1254,7 +1254,7 @@ export default {
           $it('fL.orderShop')
         ).itemdata.pid
       ) {
-        const res = await _this.service.common.queryPhyWareHouseList(formData);
+        const res = await _this.service.com.queryPhyWareHouseList(formData);
         if (res.data.code === 0) {
           _this.formConfig.formData.forEach((item) => {
             if (item.dataAcessKey === 'CP_C_PHY_WAREHOUSE_ENAME')

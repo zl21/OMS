@@ -50,7 +50,7 @@ export default {
                   ECODE: val.trim(),
                 },
               };
-              const res = await _this.service.common.skuQuery(query);
+              const res = await _this.service.com.skuQuery(query);
               if (res.status === 200) {
                 const data = res.data.data.data;
                 const dimList = _this.formConfig.formData;
@@ -105,7 +105,7 @@ export default {
                 TABLENAME: 'PS_C_PRO',
               };
               fromdata.append('param', JSON.stringify(params));
-              const res = await this.service.common.screenresult(fromdata);
+              const res = await this.service.com.screenresult(fromdata);
               if (res.data.code === 0) {
                 const dimList = _this.formConfig.formData;
 
@@ -175,7 +175,7 @@ export default {
         },
       };
       try {
-        const res = await self.service.common.skuQuery(query);
+        const res = await self.service.com.skuQuery(query);
         if (res.data.code == 0) {
           // res.data.data.data[0].IS_GIFT =
           //   res.data.data.data[0].IS_GIFT == "0" ? "否" : "否";

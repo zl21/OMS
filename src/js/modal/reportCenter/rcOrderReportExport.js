@@ -66,7 +66,7 @@ export default {
       fromdata.append('filetype', ' .xlsx');
       fromdata.append('showColumnName', true);
       fromdata.append('menu', self.tableList[tableMark].menu);
-      this.service.common.publicUrlParams(url, fromdata).then((res) => {
+      this.service.com.publicUrlParams(url, fromdata).then((res) => {
         console.log(res);
         self.$emit('closeActionDialog');
         if (res.data.code === 0) {
