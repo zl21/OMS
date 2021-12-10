@@ -346,5 +346,3 @@
 | v2.0.2 | fix warning 'There are multiple modules with names that only differ in casing.' |
 | v2.0.3 | unZip方法 |
 | v2.0.4 | change version |
-
-<!-- 往第一行写 -->
