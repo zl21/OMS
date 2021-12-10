@@ -81,11 +81,11 @@ export default {
     try {
       const { data: { code, message } } = await self.service.strategyPlatform.vipItemGet({ param: params });
       if (code === 0) {
-        this.$Message.success(message);
-        this.$emit('confirmImport');
-        this.$emit('closeActionDialog');
+        self.$Message.success(message);
+        self.$emit('confirmImport');
+        self.$emit('closeActionDialog');
       } else {
-        this.$Message.error(message);
+        self.$Message.error(message);
       }
     } catch {
       console.log(err);
