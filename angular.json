@@ -1,0 +1,14 @@
+{
+  "storybook": {
+    "builder": "@storybook/angular:start-storybook",
+    "options": {
+      "tsConfig": ".storybook/tsconfig.json",
+      "browserTarget": "angular13:build",
+      "compodoc": false,
+      "port": 6008
+    },
+    "assets": [
+      "src/favicon.ico"
+    ]
+  }
+}
