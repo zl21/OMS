@@ -1,6 +1,4 @@
 // 其他配置信息
-import '../theme.css'
-
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
