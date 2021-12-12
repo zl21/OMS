@@ -5,7 +5,7 @@ import { Meta } from '@storybook/addon-docs';
 <style>{`
 	.subheading {
 		font-weight: 900;
-		font-size: 13px;
+		font-size: 14px;
 		line-height: 24px;
 		margin: 40px 0 12px 0;
 	}
@@ -17,4 +17,22 @@ import { Meta } from '@storybook/addon-docs';
 
 ```js
 $ npm install @burgeon/business-components
+```
+
+<div className="subheading">CDN 引入</div>
+
+```js
+// 样式
+  <link href="https://cdn.jsdelivr.net/npm/@alanh/oms-ui@1.0.0/burgeon.publish/businessComponents.min.css" rel="stylesheet">
+```
+
+```js
+<script src="https://cdn.jsdelivr.net/npm/@alanh/oms-ui@1.0.0/burgeon.publish/businessComponents.min.js"></script>
+```
+
+```js
+// webpack.config.js
+externals: {
+  burgeonComponents: 'Burgeon',
+}
 ```
