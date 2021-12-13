@@ -57,6 +57,7 @@ export default {
 						pinned: 'left',
 						suppressMovable: true, //禁止该列拖拽
 						suppressFilter: true,
+						floatingFilter: this.options.floatingFilter ?  this.options.floatingFilter : true,
 						isorder: true, // checkboxSelection为true时排序不生效！？
 						sort: 'desc',
 						maxWidth: 125, //最大宽度
