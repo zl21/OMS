@@ -336,3 +336,4 @@
 | v1.3.0-skx | fix: businessActionTable columns not iteratable |
 | v1.3.1-skx | businessTable loading |
 | v1.3.2-skx | 兼容老ag的列移动处理-调接口记录列位置信息 |
+| v1.3.3-skx | 调接口记录列位置信息-新账号接口为空处理 |

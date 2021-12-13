@@ -86,8 +86,10 @@ export default {
 			// this.row = [];
 			const self = this;
 			console.log('--::', this.columnState);
-			let th = self.setColumn(this.columnState, self.agTableConfig.columnDefs)
-			this.agTableConfig.columnDefs = th;
+      if (self.columnState != '') {
+        let th = self.setColumn(this.columnState, self.agTableConfig.columnDefs)
+        this.agTableConfig.columnDefs = th;
+      }
 		},
 		tableRowDbclick(data) {
 			this.$emit('on-row-dblclick', data.data);
