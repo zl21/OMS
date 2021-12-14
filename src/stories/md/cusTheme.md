@@ -1,0 +1,159 @@
+### 注：
+- 如必要不用过度嵌套标签
+- 如布局相同，可在原有的class上面加上这些类名
+		例：<div class="customized-list otherClass"></div>
+- 仅针对于规范的定制页面
+- 定制页面样式,请用主题库变量
+		import 'omsTheme/public.less';
+		.color{
+			 background: @base-color;
+		}
+####   定制页面 - 列表
+		<div class="otherClass customized-list">
+ 		 	<!-- 表单类 -->
+			<div class="customized-list-form">
+ 			</div>
+  			<!-- 按钮类 -->
+			<div class="customized-list-btn">
+			</div>
+			<!-- 主要内容（table）包括tab和table（ag-table / Table:ark） -->
+			<div class="customized-list-table">
+			</div>
+		</<div>
+####   定制页面 - 详情
+		//样式修改  添加class ==> steps-content"
+		<div class="otherClass customized-detail">
+ 			 <!-- 按钮 -->
+			<div class="customized-detail-btn"></div>
+			<!-- 内容 -->
+			<div class="customized-detail-main">
+			<!-- 保持原有不动 单个模块如必要不用嵌套标签 例-->
+	 		<!-- 定制组件 -->
+			<EssentialInfo></EssentialInfo>
+			<!-- ark 组件 -->
+			<Collapse  v-model="value">
+				<Panel name="1">111</Panel>
+ 				<Panel name="2">222</Panel>
+			</Collapse>
+			<!-- tab切换 -->
+			<div class="customized-detail-table">
+					<business-label
+						class="jordanLabel"
+						:label-list="labelList"
+						:label-default-value="labelDefaultValue"
+					 />
+					<business-action-table
+						:jordan-table-config="jordanTableConfig"
+						@on-select="returnOnSelect"
+						@table-import="returnImport"
+						@table-export="returnExport"
+						@on-select-cancel="returnCancel"
+						@on-select-all="returnSelectAll"
+						  @on-select-all-cancel="returnSelectAllCancel"
+						@on-page-change="pageChange"
+						@on-page-size-change="pageSizeChange"
+					 />
+				</div>
+			</div>
+ 		<!-- 各类弹窗 -->
+		</<div>
+####   定制 - 弹窗
+		 <!-- customized-modal -->
+		<div class="customized-modal" style="width:400px">
+			<businessForm :form-config="formConfig" />
+			<businessButton :btn-config="buttonConfig" />
+		</div>
+		 <!-- ark Modal -->
+		<Modal class-name="ark-dialog">
+		<!-- 随意发挥 样式自己定-->
+		</Modal>
+		<!-- customized-modal -->
+		<div class="customized-modal" style="width:400px">
+			<!-- businessForm And businessButton 用于表单搜索-->
+    		<businessForm :form-config="formConfig" />
+    		<businessButton :btn-config="buttonConfig" />
+			<!--底部按钮-->
+			<businessButton class="modal-footer"  :btn-config="buttonConfig"  />
+		</div>
+ 		<!-- ark Modal -->
+		<Modal class-name="ark-dialog">
+		    <!-- 随意发挥 样式自己定-->
+		</Modal>
+#### loading
+		<template>
+			<div>
+				<loading :loading="loading"></loading>
+			</div>
+		</template>
+		<script>
+		import loading from '@/component/loading.vue';
+			export default {
+				components:{
+					loading
+				}
+				data() {
+					 loading:false
+				}
+			}
+		</script>
+#### button （businessButton组件）功能按钮分类
+		需接口（fetchActionsInCustomizePage）返回数据加个按钮类型字段 如下：：default、primary、warning
+		{
+			type:"default/primary/warning",
+			//ghost: true,(暂时不放开)
+		 	text: '默认/主要/谨慎',
+			disabled:true, // 是否禁止操作
+		}
+		btnConfig: {
+				typeAll: 'default', // 按钮统一风格样式
+				loading: false, // 按钮加载
+				buttons: [
+				  {
+					type: 'default',
+					// ghost: true,
+					text: '默认',
+				  },
+				  {
+					type: 'primary',
+					text: '主要',
+					disabled:true,
+				  },
+				  {
+					type: 'warning',
+					text: '谨慎',
+					disabled:false,
+				  }
+				]
+		}
+#### steps 步骤条
+		<Steps class="steps-content">
+			<Step v-for="(item,index) in steps" 
+				:key="index"
+				:title="item.name"
+				:icon="item.icon"
+				:content="item.date ? item.date : item.content" 
+				:status="item.status">
+			</Step>
+		</Steps>
+		// 状态条数据格式
+		<script>
+			export default {
+			data(){
+					steps: [{
+						name: '平台付款',
+						date: '2021-01-01 00:00:00',
+						icon: 'iconfont icon-qian',
+						status: 'finish', // wait、process、finish、error
+					}, {
+						name: '订单审单',
+						content: '排队中,请耐心等候',
+						icon: 'iconfont icon-dingdan',
+						status: 'process',
+					}, {
+						name: '推送仓库',
+						icon: 'iconfont icon-weibiaoti-4',
+						status: 'wait',
+					}],
+				}
+			}
+		</script>

@@ -18,7 +18,8 @@ export const parameters = {
       order: [
         'Introduction', ['Introduction', 'Install'],
         'BASIC', ['ButtonFkDialog', 'DownLoad', '*'],
-        'TABLE', ['OmsTable', '*']
+        'TABLE', ['OmsTable', '*'],
+        'OTHER',
       ],
     },
   },

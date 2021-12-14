@@ -1,6 +1,17 @@
 // 入口文件，配置插件，webpack等
 
 const path = require('path');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const cusPlugin = [
+  // new HtmlWebpackPlugin({
+    // chunksSortMode: 'none',
+    // title: 'OMS-Ui',
+    // template: envFlag ? './index.pro.html' : './index.html',
+    // inject: true,
+    // favicon: path.join(__dirname, '../favicon.ico'),
+    // favicon: 'favicon.ico',
+  // }),
+// ]
 
 module.exports = {
   "stories": [
@@ -68,6 +79,26 @@ module.exports = {
         root: '_'
       },
     }
+    // console.log('config.plugins::', config.plugins);
+    // config.plugins = [
+    //   ...config.plugins,
+    //   ...cusPlugin,
+    //   // new HtmlWebpackPlugin({
+    //   //   // chunksSortMode: 'none',
+    //   //   title: 'OMS-Ui',
+    //   //   // template: envFlag ? './index.pro.html' : './index.html',
+    //   //   // inject: true,
+    //   //   favicon: path.join(__dirname, '../favicon.ico')
+    //   // }),
+    // ]
+    for (const it of config.plugins) {
+      if (it.options && it.options.favicon != undefined) {
+        // console.log('it::', it);
+        // it.options.title = 'OMS-Ui';
+        // it.options.favicon = path.join(__dirname, '../favicon.ico');
+      }
+    }
+    // console.log('config.plugins::', config.plugins);
     return config;
   },
 }
