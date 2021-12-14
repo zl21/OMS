@@ -35,7 +35,7 @@
                     }}
                   </Option>
                 </Select>
-                <el-input :placeholder="$it('table_label.enter')" v-model="exclusiveStockFilterInputValue"
+                <el-input :placeholder="$it('tL.enter')" v-model="exclusiveStockFilterInputValue"
                           class="input-with-search-style font-size-12 mg-lf-10"
                           size="mini">
                   <el-button slot="prepend" class="font-size-12" @click="getExclusiveStockData()">

@@ -81,25 +81,15 @@ export default {
           title: "建议发货聚合仓", // 建议发货聚合仓
           key: 'shareStoreIds',
           render: (h, params) => {
-            let defaultObj = { ID: "", Label: "" };
-            const _keys = Object.keys(params.row.shareStoreIds);
-            if(_keys && _keys.length) {
-              defaultObj.ID  = _keys[0];
-              defaultObj.Label  = params.row.shareStoreIds[_keys[0]];
-            };
-            // params.row.shareStoreIds?.forEach((item, index) => {
-            //   console.log('item: ', index, item);
-            // })
             return h('DropDownSelectFilter', {
               props: {
                 data: this.drpdata,
                 disabled: this.dataIndex !== 0,
                 defaultSelected: [
-                  // {
-                  //   ID: params.row.share_storage_id,
-                  //   Label: params.row.share_storage_ename
-                  // }
-                  defaultObj
+                  {
+                    ID: params.row.share_storage_id,
+                    Label: params.row.share_storage_ename
+                  }
                 ]
               },
               on: {
@@ -193,10 +183,10 @@ export default {
                         this.data[0][params.index].value = value
                         params.row.value = value
                         const opt = params.row.sgBPhyInStorageItemExt.filter(item => item.advise_phy_warehouse_id == value)[0];
-                        console.log(opt);
-                        params.row.cp_c_phy_warehouse_id = value;
-                        params.row.cp_c_phy_warehouse_ecode = opt.advise_phy_warehouse_ecode;
-                        params.row.advise_phy_warehouse_ename = opt.advise_phy_warehouse_ename;
+                        const {advise_phy_warehouse_ecode:code,advise_phy_warehouse_ename:name} = opt;
+                        params.row.cp_c_phy_warehouse_id = params.row.advise_phy_warehouse_id = value;
+                        params.row.cp_c_phy_warehouse_ecode = params.row.advise_phy_warehouse_ecode = code;
+                        params.row.advise_phy_warehouse_ename = name;
                         params.row.total_qty_available = opt.total_qty_available;
                         // params.row.total_qty_available = params.row.sgBPhyInStorageItemExt.filter(item => { return item.advise_phy_warehouse_id == value })[0].total_qty_available;
                         // 如果勾选了,同时更新勾选数据
@@ -320,6 +310,7 @@ export default {
         self.old_cp_c_phy_warehouse_ename = res.data.data[0].cp_c_phy_warehouse_ename;
         self.platformdata = res.data.data
         res.data.data.forEach((item, index) => {
+          const _keys = Object.keys(item.shareStoreIds);
           item.waiting_split_num = Number(item.waiting_split_num || 0);
           item.split_num = item.waiting_split_num;
           total += item.waiting_split_num;
@@ -327,6 +318,13 @@ export default {
           item.is_gift_name = item.is_gift == 0 ? '否' : '是';
           item.share_storage_id = ''
           item.share_storage_ename = ''
+          if(_keys && _keys.length) {
+            item.share_storage_id  = _keys[0];
+            item.share_storage_ename  = item.shareStoreIds[_keys[0]];
+            item.advise_phy_warehouse_ename = item.cp_c_phy_warehouse_ename;
+            item.advise_phy_warehouse_ecode = item.cp_c_phy_warehouse_ecode;
+            item.advise_phy_warehouse_id = item.cp_c_phy_warehouse_id;
+          };
           item.initIndex = index
           if (!this.tableDataTidNumber[item.tid]) this.tableDataTidNumber[item.tid] = 0;
           this.tableDataTidNumber[item.tid]++
@@ -393,7 +391,7 @@ export default {
         return
       }
 
-      /*if (this.platformdata[0].platform === 50) {
+      if (this.platformdata[0].platform === 19) {
         let resule = false;
         if (this.onSelectData.length === 1) {
           let newdat = this.platformdata.filter(item => {
@@ -425,7 +423,7 @@ export default {
           self.$Message.warning("JITX订单 仅支持整单拆单，不支持单明细拆单！");
           return;
         }
-      }*/
+      }
       if ((self.data[0].length == 1 && self.data[0][0].split_num >= self.data[0][0].waiting_split_num) || self.data[0][0].total <= 1) {
         self.$Message.warning($it('tip.cm')); // 没有可拆分的订单
         return;

@@ -1417,7 +1417,7 @@ export default {
     watchPlatform(platform, expressCode) {
       const self = this;
       const formData = self.formConfig.formData;
-      if (platform === 50) {
+      if (platform === 19) {
         formData.forEach((item) => {
           if (item.value === 'EXPRESS_CODE') {
             item.style = 'input';

@@ -242,7 +242,7 @@ export default {
             ids[0] = this.$route.params.customizedModuleId;
             this.$Modal.info({
               title: $it('mT.tips'), // 提示
-              content: window.vmI18n.t('tip.g7'), // 是否确定反审核订单？
+              content: $it('tip.g7'), // 是否确定反审核订单？
               mask: true,
               showCancel: true,
               okText: $it('com.determine'), // 确定
@@ -411,10 +411,10 @@ export default {
                 id: self.$route.params.customizedModuleId,
                 type: 'action',
                 name: 'splitOrder',
-                label: $it('panel_label.orderSplit'), // 订单拆分
+                label: $it('pL.orderSplit'), // 订单拆分
                 query: {
                   id: self.$route.params.customizedModuleId,
-                  tabTitle: $it('panel_label.orderSplit') // 订单拆分
+                  tabTitle: $it('pL.orderSplit') // 订单拆分
                 }
               });
             } else {
@@ -600,11 +600,11 @@ export default {
             const self = this;
             const status = self.tab1.order.ORDER_STATUS || '';
             if (status === 3) {
-              self.$Message.warning(window.vmI18n.t('tip.g8')); // 订单状态已审核，建议反审核再修改地址
+              self.$Message.warning($it('tip.g8')); // 订单状态已审核，建议反审核再修改地址
               return;
             }
             if (![1, 2, 3, 4].includes(status)) {
-              self.$Message.warning(window.vmI18n.t('tip.g9')); // "订单状态非未确认、缺货、已审核、配货中，不允许修改地址"
+              self.$Message.warning($it('tip.g9')); // "订单状态非未确认、缺货、已审核、配货中，不允许修改地址"
               return;
             }
             this.service.orderCenter.getDetail({ ID: this.objId, isShowPii: true }).then(res => {
@@ -632,13 +632,13 @@ export default {
                 }
               } else {
                 this.tab1 = this.tab1_default;
-                this.$message.error(window.vmI18n.t('tip.h0')); // 地址信息获取失败
+                this.$message.error($it('tip.h0')); // 地址信息获取失败
               }
             });
           } // 按钮点击事件
         },
         {
-          text: window.vmI18n.t('btn.orderBlocking'), // 订单拦截
+          text: $it('btn.orderBlocking'), // 订单拦截
           btnclick: () => {
             const self = this;
             const id = self.tab1.order.ID || -1;
@@ -659,7 +659,7 @@ export default {
           } // 按钮点击事件
         },
         {
-          text: window.vmI18n.t('btn.cancelBlocking'), // 取消拦截
+          text: $it('btn.cancelBlocking'), // 取消拦截
           btnclick: () => {
             const self = this;
             const id = self.tab1.order.ID || -1;
@@ -676,7 +676,7 @@ export default {
           } // 按钮点击事件
         },
         {
-          text: window.vmI18n.t('mT.blacklist'), // 加入黑名单
+          text: $it('mT.blacklist'), // 加入黑名单
           btnclick: () => {
             this.dialogs.blacklist.data = {
               ID: this.tab1.order.ID || -1
@@ -687,7 +687,7 @@ export default {
           } // 按钮点击事件
         },
         {
-          text: window.vmI18n.t('btn.new_workOrder'), // 新增工单
+          text: $it('btn.new_workOrder'), // 新增工单
           btnclick: () => {} // 按钮点击事件
         },
         {
@@ -699,16 +699,16 @@ export default {
                 id: -1,
                 type: 'action',
                 name: 'EXTRAREFUND',
-                label: window.vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
+                label: $it('pL.extraRefundEdit'), // 额外退款编辑
                 query: Object.assign({
                   oid: this.$route.params.customizedModuleId,
-                  tabTitle: window.vmI18n.t('panel_label.extraRefundEdit'), // 额外退款编辑
+                  tabTitle: $it('pL.extraRefundEdit'), // 额外退款编辑
                   fromOrder: true,
                   new: true
                 })
               });
             } else {
-              this.$Message.warning(window.vmI18n.t('tip.h1')); // "只有仓库发货或者平台发货的订单才能操作!"
+              this.$Message.warning($it('tip.h1')); // "只有仓库发货或者平台发货的订单才能操作!"
             }
           } // 按钮点击事件
         },
@@ -718,19 +718,19 @@ export default {
             const orderDetails = this.tab1.order;
             // “仓库发货”、“平台发货”
             if (![5, 6].includes(orderDetails.ORDER_STATUS)) {
-              this.$Message.warning(window.vmI18n.t('tip.h2')); // "订单状态为仓库发货和平台发货才能新增退单!"
+              this.$Message.warning($it('tip.h2')); // "订单状态为仓库发货和平台发货才能新增退单!"
               return;
             }
             this.$store.commit('customize/TabOpen', {
               id: -1,
               type: 'action',
               name: 'returngood',
-              label: window.vmI18n.t('panel_label.addReturnOrder'), // 退换货单新增
+              label: $it('pL.addReturnOrder'), // 退换货单新增
               query: {
                 id: -1,
                 orderHrefReturnid: orderDetails.ID,
                 isOrderHrefReturn: 'order',
-                tabTitle: window.vmI18n.t('panel_label.addReturnOrder') // 退换货单新增
+                tabTitle: $it('pL.addReturnOrder') // 退换货单新增
               }
             });
           }
@@ -749,20 +749,20 @@ export default {
               id: 2627,
               type: 'action',
               name: 'orderManager',
-              label: window.vmI18n.t('panel_label.retail_shipping_order'), // label: '零售发货单',
+              label: $it('pL.retail_shipping_order'), // label: '零售发货单',
               back: true,
               query: Object.assign({
                 id: 2627,
-                tabTitle: window.vmI18n.t('panel_label.retail_shipping_order'), // tabTitle: '零售发货单'
+                tabTitle: $it('pL.retail_shipping_order'), // tabTitle: '零售发货单'
               })
             });
           } // 按钮点击事件
         },
         /* {
-          text: window.vmI18n.t('btn.copyOrder') // 复制订单
+          text: $it('btn.copyOrder') // 复制订单
         }, */
         {
-          // text: window.vmI18n.t('btn.orderCancel'), //
+          // text: $it('btn.orderCancel'), //
           webname: 'Order Cancellation', // 订单取消
           btnclick: () => {
             const self = this;

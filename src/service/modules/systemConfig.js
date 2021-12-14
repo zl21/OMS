@@ -19,11 +19,6 @@ export default {
    * /p/cs/cusergroupquery  角色权限
    * */
 
-   groupTreeload: params => $network.post('/p/cs/groupTreeload', params.params).then(res => {
-    if (typeof params.success === 'function') {
-      params.success(res);
-    }
-  }),
 
    getMenuTree: params => $network.post('/p/cs/getMenuTree', params.params).then(res => {
     if (typeof params.success === 'function') {

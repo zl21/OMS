@@ -41,7 +41,7 @@ export default {
                   this.$Message.error('当前状态异常，不允许添加赠品！');
                   return;
                 }
-                if (self.componentData.order.PLATFORM === 50) {
+                if (self.componentData.order.PLATFORM === 19) {
                   this.$Message.error('该订单为JITX订单, 不允许添加赠品！');
                   return;
                 }

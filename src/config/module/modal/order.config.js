@@ -134,5 +134,9 @@ export default {
       /* webpackChunkName: 'OrderCenterModal' */
       '@/views/modal/orderCenter/remitFail.vue'
     ) //
+  },
+  // 唯品会入库单-列表详情-修改发货时间button
+  EDITCONSIGNMENTTIME: {
+    component: () => import('@/views/modal/orderCenter/editConsignmentTime.vue')
   }
 };

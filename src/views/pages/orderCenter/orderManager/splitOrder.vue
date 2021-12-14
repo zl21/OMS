@@ -20,22 +20,18 @@
       <div class="list_right">
         <ul>
           <li
-            v-for="(item , index) in data"
-            :key="index"
-            @click="switchList(index)"
+              v-for="(item , index) in data"
+              :key="index"
+              @click="switchList(index)"
           >
             <Icon
-              v-if="index"
-              type="ios-close-circle-outline"
-              @click.stop="undo(index)"
+                v-if="index"
+                type="ios-close-circle-outline"
+                @click.stop="undo(index)"
             />
-            {{ item[0]?item[0].cp_c_phy_warehouse_ename:old_cp_c_phy_warehouse_ename }}: 共{{ item[0]?item[0].total:0 }}件
-            <div
-              v-if="isOutStore && index==0"
-              class="subscript"
-            >
-              缺货
-            </div>
+            <p  v-if="index == 0">{{ item[0]?item[0].cp_c_phy_warehouse_ename:old_cp_c_phy_warehouse_ename }}: 共{{ item[0]?item[0].total:0 }}件</p>
+
+            <p  v-if="index">{{ item[0]?item[0].advise_phy_warehouse_ename:old_cp_c_phy_warehouse_ename }}: 共{{ item[0]?item[0].total:0 }}件</p>
           </li>
         </ul>
       </div>

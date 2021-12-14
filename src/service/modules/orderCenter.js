@@ -182,8 +182,6 @@ export default {
     $network.post(port[tableName].amendBody, params),
   objectAdd: (params) => $network.post('/p/cs/objectAdd', params),
   prodel: (params) => $network.post('/p/cs/prodel', params),
-  orderDeliveryUrgent: (params) =>
-    $network.get('/api/cs/oc/oms/v1/orderDeliveryUrgent', params),
   updateDicunot: (params) =>
     $network.post('/p/cs/oc/v1/sale/updateDicunot', params),
   updateLogisticsBeforePacking: (params) =>
@@ -419,4 +417,6 @@ export default {
     retailBusinessTargetDetailQuery: (params) => $network.post('/p/cs/retailBusinessTargetDetailQuery', params), // 营业指标明细(天)-查询
     retailBusinessTargetSalerQuery: (params) => $network.post('/p/cs/retailBusinessTargetSalerQuery', params), // 营业指标明细(店员)-查询
     retailBusinessTargetSave: (params) => $network.post('/p/cs/retailBusinessTargetDetailQuery', params), // 营业指标明细(天/店员)-保存
+
+    updateSendTime: params => network.post('/api/cs/vip/delivery/v1/updateSendTime', params), // 唯品会入库单-详情-修改发货时间
 }

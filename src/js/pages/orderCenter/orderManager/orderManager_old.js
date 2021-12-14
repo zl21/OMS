@@ -57,8 +57,6 @@ export default {
         componentData: {}
       },
 
-      isFolding: true, // 高级搜索是否折叠
-      labelValue: '',
       selection: [],
       extendBtn: [
         {

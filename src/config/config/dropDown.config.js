@@ -441,7 +441,7 @@ class DropDownConfig {
           break
         case 3:
           self.selection.forEach((item, index) => {
-            if (item.PLATFORM === 50) {
+            if (item.PLATFORM === 19) {
               $utils.msgTips(self, 'warning', 'ex')
               self.btnConfig.loading = false
             }

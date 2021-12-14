@@ -76,7 +76,7 @@ export default {
     },
     setupByDeliver() {
       const platform = this.componentData.platform;
-      if (platform === 50) {
+      if (platform === 19) {
         this.logisticsFlag = true;
         this.expressCodeFlag = false;
         this.type = 'EXPRESSCODE';
