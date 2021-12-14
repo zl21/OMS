@@ -1,10 +1,10 @@
 <template>
   <!-- 发货后退款 -->
-  <div id="cbx" class="refundAfterShipment public-main custom-main">
-    <div class="re_button custom-btn">
+  <div id="cbx" class="refundAfterShipment customized-detail">
+    <div class="re_button customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="public-content customized-detail-main">
       <div class="re_form">
         <Collapse v-model="value">
           <Panel name="1">
@@ -62,10 +62,15 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="tab-content custom-table">
-        <div class="tab-content-navTab">
+      <div class="tab-content customized-detail-table">
+        <OmsLabel
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+          class="businessLabel totalHeight"
+          @labelClick="labelClick"
+        />
+        <!-- <div class="tab-content-navTab">
           <p :class="navStatus === 0 ? 'action' : ''" @click="navStatus = 0">
-            <!-- 退款单详情 -->
             {{ $it("pL.refundSlipDetails") }}
           </p>
           <p
@@ -73,11 +78,10 @@
             :class="navStatus === 1 ? 'action' : ''"
             @click="navStatus = 1"
           >
-            <!-- 日志 -->
             {{ $it('pL.log') }}
           </p>
-        </div>
-        <div v-show="navStatus === 0" class="re_table">
+        </div> -->
+        <div v-show="navStatus === '0'" class="re_table">
           <OmsTable
             :jordan-table-config="tableConfig"
             @on-page-change="tabllePageChange"
@@ -91,7 +95,7 @@
           />
         </div>
         <!-- 日志 -->
-        <div v-show="navStatus === 1" class="re_table">
+        <div v-show="navStatus === '1'" class="re_table">
           <OmsTable
             v-loading="returnLogTableLoad"
             :jordanTableConfig="returnLogTableConfig"

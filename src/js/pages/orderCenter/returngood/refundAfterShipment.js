@@ -5,6 +5,17 @@ export default {
   components: {},
   data() {
     return {
+      labelList: [{
+        label: '退款单详情',
+        value: '0',
+        isShow: true
+      },
+      {
+        label: '日志',
+        value: '1',
+        isShow: true
+      },],
+      labelDefaultValue: '0',
       sessionStorageData: '',
       IMAGE: '', // 图片
       imgIndex: 0, // 当前操作图片位置
@@ -886,6 +897,9 @@ export default {
     this.getDownUp();
   },
   methods: {
+    labelClick(item) {
+      this.navStatus = item;
+    },
     changeForm() {
       this.$nextTick(() => {
         this.reForm.config.forEach((val, index) => {
