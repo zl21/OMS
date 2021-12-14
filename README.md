@@ -48,12 +48,6 @@
 
 | Version | Description                                                                                                                            |
 | ------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| v2.0.0 | 重构后第一版-修改版本号 |
-| v2.0.1 | 暴露包版本信息 |
-| v2.0.2 | fix warning 'There are multiple modules with names that only differ in casing.' |
-| v2.0.3 | unZip方法 |
-| …… | …… |
-| …… | …… |
 | v1.0.1  | 重构组件库项目架构                                                                                                                     |
 | v1.0.2  | 添加使用说明                                                                                                                           |
 | v1.0.3  | 解决 input 框重叠问题                                                                                                                  |
@@ -346,4 +340,11 @@
 | v1.3.42 | businessForm、fktable优化 |
 | v1.3.43 | fktable优化 |
 | v1.3.44 | 修改版本号 |
-<!-- 往第一行写 -->
+| …========================================… | …========================================… |
+| v2.0.0 | 重构后第一版-修改版本号 |
+| v2.0.1 | 暴露包版本信息 |
+| v2.0.2 | fix warning 'There are multiple modules with names that only differ in casing.' |
+| v2.0.3 | unZip方法 |
+| v2.0.4 | change version |
+| v2.0.5~6 | change version |
+| v2.0.7 | style：delete table.less |
