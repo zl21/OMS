@@ -339,3 +339,4 @@
 | v1.3.3-skx | 调接口记录列位置信息-新账号接口为空处理 |
 | v1.3.4-skx | change version |
 | v1.3.5-skx | ag的floatingFilter,默认true |
+| v1.3.6-skx | 列排序信息-同框架-不取交集 |

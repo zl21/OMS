@@ -153,8 +153,8 @@ export default {
 		}, 1000),
 		setColumn(val, th) {
 			let arr = val.split(',')
-			let thArr = []
-			arr.forEach((item) => {
+			let thArr = [], eXArr = []
+			/* arr.forEach((item) => {
 				let head = th.find((i) => {
 					return i.field == item
 				})
@@ -162,7 +162,19 @@ export default {
 					thArr.push(head)
 				}
 			})
-			return thArr
+			return thArr */
+			th.forEach((i) => {
+				arr.forEach((item) => {
+					if (item == i.field) {
+						thArr.push(i)
+					}
+
+				})
+				if (!arr.includes(i.field)) {
+					eXArr.push(i)
+				}
+			})
+			return thArr.concat(eXArr)
 		},
 		getUserConfig() {
 			//请求用户表头排列顺序
