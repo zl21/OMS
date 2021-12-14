@@ -163,17 +163,18 @@ export default {
 				}
 			})
 			return thArr */
-			th.forEach((i) => {
-				arr.forEach((item) => {
+			arr.forEach((item) => {
+        th.forEach((i) => {
 					if (item == i.field) {
 						thArr.push(i)
 					}
-
 				})
-				if (!arr.includes(i.field)) {
+			})
+      th.forEach((i) => {
+        if (!arr.includes(i.field)) {
 					eXArr.push(i)
 				}
-			})
+      })
 			return thArr.concat(eXArr)
 		},
 		getUserConfig() {
