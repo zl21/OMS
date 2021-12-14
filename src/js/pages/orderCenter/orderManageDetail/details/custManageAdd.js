@@ -1,7 +1,7 @@
 // 零售发货单-详情-订单明细
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
-import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
-import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
+import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
+import dataAccessMixin  from '@/assets/js/mixins/dataAccess';
 import dateUtil from '@/assets/js/__utils__/date';
 
 export default {
