@@ -347,3 +347,4 @@
 | v2.0.3 | unZip方法 |
 | v2.0.4 | change version |
 | v2.0.5~6 | change version |
+| v2.0.7 | style：delete table.less |
