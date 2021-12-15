@@ -1581,12 +1581,12 @@ export default {
               self.selection = [];
               self.getData();
             } else {
-              const err = res.data.message || '错误信息' // 虚拟仓库入库失败！
-              const columns = res.data.columns || '表头未返回'
+              const err = res.data.message || '错误信息'
+              const columns = res.data.data.columns || '表头未返回'
               let renderInfo = {
                 props: {
                   columns: columns,
-                  data: res.data.prompt_data,
+                  data: res.data.data.prompt_data,
                 },
               }
               this.$Modal.confirm({
