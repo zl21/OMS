@@ -427,7 +427,7 @@ export default {
         // 已修改未验证
         const {
           data: { code, data, message }
-        } = await this.service.com.publicUrlParams(port[this.tablename].amendBody, param);
+        } = await this.service.common.publicUrlParams(port[this.tablename].amendBody, param);
         this.$set(this, 'paramsObj', ''); // 初始化
         if (code === 0) {
           this.$message({
@@ -587,7 +587,7 @@ export default {
         }
         /* 需更改配销中心获取 */
       };
-      const res = await this.service.com.publicUrlParamsGet(port.matrix, { params });
+      const res = await this.service.common.publicUrlParamsGet(port.matrix, { params });
       const data = res.data;
       if (data.code === 0) {
         const tHead = data.data.SIZE.map(obj => Object.assign(obj, { id: obj.ID, name: obj.ENAME }));
@@ -606,7 +606,7 @@ export default {
           console.log('修改后未验证');
           const {
             data: { code, data }
-          } = await this.service.com.queryCommonStorageByPro({
+          } = await this.service.common.queryCommonStorageByPro({
             storeId: this.distribId,
             proEcode: this.encode,
             phyWarehouseId: this.cp_c_phy_warehouse_id
@@ -622,7 +622,7 @@ export default {
           formData.append('proEcode', this.encode);
           const {
             data: { code, data }
-          } = await this.service.com.queryCommonStorageByPro(formData);
+          } = await this.service.common.queryCommonStorageByPro(formData);
           if (code === 0) {
             this.receivingData = data;
           }
@@ -654,7 +654,7 @@ export default {
           };
           formData.append('param', JSON.stringify(obj));
           // 修改后未验证（没有逻辑）
-          return this.service.com.publicUrlParams(port[this.tablename].getBody, formData);
+          return this.service.common.publicUrlParams(port[this.tablename].getBody, formData);
         }
         // 修改后已验证
         const params = {
@@ -664,7 +664,7 @@ export default {
             fixcolumn: paramObj
           }
         };
-        return this.service.com.publicUrlParamsGet(port[this.tablename].getBody, { params });
+        return this.service.common.publicUrlParamsGet(port[this.tablename].getBody, { params });
         // 不同页面不同接口  ------------------------------乔丹使用get请求,千百度改为post 这块代码暂时弃用
       }
       if (this.edit && port[this.tablename]) {
@@ -692,7 +692,7 @@ export default {
           }
         };
         console.log('可编辑：', port[this.tablename].getBody);
-        return this.service.com.publicUrlParamsGet(port[this.tablename].getBody, { params });
+        return this.service.common.publicUrlParamsGet(port[this.tablename].getBody, { params });
         //
       }
       if (this.reveal) {

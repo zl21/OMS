@@ -555,7 +555,7 @@ export default {
               const phy = _this.information.formData[13].itemdata;
               const phyIn = _this.information.formData[14].itemdata;
               if (!e) {
-                _this.service.com.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID }).then(res => {
+                _this.service.common.queryOcBOrder({ id: _this.information.formValue.ORIG_ORDER_ID }).then(res => {
                   if (res.data.code === 0) {
                     phy.pid = phyIn.pid;
                     phy.valuedata = phyIn.valuedata;
@@ -1348,7 +1348,7 @@ export default {
                   })
                   const fromdata = new FormData();
                   fromdata.append('param', JSON.stringify({ SkuEcodeList: search, shopId: this.shopId, isQuery: 'Y' }));
-                  const resData = await this.service.com.skuListQuery(fromdata);
+                  const resData = await this.service.common.skuListQuery(fromdata);
                   if (resData.data.code === 0) {
                     resData.data.data.forEach((item, index) => {
                       res.data.data.exchangeDtoList[index].AVAILABLE_QTY = item.AVAILABLE_QTY;
@@ -3003,7 +3003,7 @@ export default {
                       TABLENAME: 'PS_C_PRO',
                     };
                     fromdata.append('param', JSON.stringify(params));
-                    _this.service.com.screenresult(fromdata).then((res) => {
+                    _this.service.common.screenresult(fromdata).then((res) => {
                       if (res.data.code === 0) {
                         const dimList =
                           _this.jordanTableConfig2.businessFormConfig.formData;
@@ -3434,7 +3434,7 @@ export default {
       if (_this.$route.query.cloneReturnGoodId) params.copytype = 1;
       if (_this.$route.query.id == -1) {
         if (_this.information.formValue.BILL_TYPE === '2' && !_this.isModalSave) {
-          this.service.com.checkAllStroreStock(params).then((res) => {
+          this.service.common.checkAllStroreStock(params).then((res) => {
             if (res.data.code === 0) {
               // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
               if (!res.data.data) {
@@ -3453,7 +3453,7 @@ export default {
           _this.save(params);
         }
       } else if (_this.status == 20 && !_this.information.formValue.IS_RESERVED && !_this.isModalSave && _this.information.formValue.BILL_TYPE === '2') {
-        this.service.com.checkAllStroreStock(params).then((res) => {
+        this.service.common.checkAllStroreStock(params).then((res) => {
           if (res.data.code === 0) {
             // 换货明细的商品换货数量小于可用库存，弹窗提示,否则执行保存操作
             if (!res.data.data) {
@@ -3479,7 +3479,7 @@ export default {
       // const { customizedModuleName } = this.$router.currentRoute.params;
       _this.loading = true;
       // this.$R3loading.show(customizedModuleName);
-      _this.service.com.returnOrder(params).then((res) => {
+      _this.service.common.returnOrder(params).then((res) => {
         _this.availableStock = false;
         _this.isModalSave = false;
         _this.loading = false;
@@ -3516,7 +3516,7 @@ export default {
       const fromdata = new FormData();
       fromdata.append('table', 'OC_B_RETURN_ORDER');
       fromdata.append('objid', -1);
-      _this.service.com.getObject(fromdata).then((res) => {
+      _this.service.common.getObject(fromdata).then((res) => {
         if (res.data.code == 0) {
           this.information.formData.forEach((value) => {
             // 退款原因
@@ -3559,7 +3559,7 @@ export default {
       if (search === '') {
         return;
       }
-      this.service.com.skuQuery(param).then((res) => {
+      this.service.common.skuQuery(param).then((res) => {
         if (res.data.code === 0 && index) {
           self.jordanTableConfig2.businessFormConfig.formData[1].AuotData = res.data.data.data.map((row) => ({
             ECODE: row.ECODE,
@@ -3582,7 +3582,7 @@ export default {
           ECODE: search,
         },
       };
-      this.service.com.skuQuery(param).then(async (res) => {
+      this.service.common.skuQuery(param).then(async (res) => {
         if (res.data.code === 0) {
           let dataList = [];
           if (index === 2) {
@@ -3863,7 +3863,7 @@ export default {
         detailType: 2, // 退换货订单使用
       };
       fromdata.append('param', JSON.stringify(param));
-      this.service.com.queryOrderList(fromdata).then((res) => {
+      this.service.common.queryOrderList(fromdata).then((res) => {
         if (res.data.data) {
           res.data.data.queryOrderResultList.forEach((item) => {
             item.USER_NICK = `${item.USER_NICK}(${item.CP_C_SHOP_TITLE})`;

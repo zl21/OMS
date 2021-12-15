@@ -53,7 +53,7 @@ export default {
   created() {
     const pa = new FormData();
     pa.append('language', localStorage.getItem("locale") || 'zh');
-    service.com.langSwitcher(pa).then((r) => {
+    service.common.langSwitcher(pa).then((r) => {
       if (r.status === 200 && r.data.code === 0) {
         console.log('langSwitcher success!');
       }

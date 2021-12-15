@@ -94,7 +94,7 @@ export default {
         params.param.CP_C_STORE_ID = this.distribId
       }
       this.generalLoading = true
-      const {data: {code, data}} = await this.service.com.publicUrlParamsGet(port.judgePro, {params});
+      const {data: {code, data}} = await this.service.common.publicUrlParamsGet(port.judgePro, {params});
       if (code === 0) {
         return data;
       }
@@ -143,7 +143,7 @@ export default {
         TABLENAME: 'PS_C_PRO'
       };
       formdata.append('param', JSON.stringify(param));
-      const res = await this.service.com.screenresult(formdata);
+      const res = await this.service.common.screenresult(formdata);
       const data = res.data;
       if (data.code === 0) {
         this.lists = data.data.list;
@@ -401,7 +401,7 @@ export default {
           };
           try {
             // 修改后未验证
-            const res = await this.service.com.publicUrlParams(port[this.tablename].amendBody, params);
+            const res = await this.service.common.publicUrlParams(port[this.tablename].amendBody, params);
             const data = res.data;
             if (data.code === 0) {
               this.customData = {};
@@ -435,7 +435,7 @@ export default {
             fixcolumn: JSON.stringify(this.singleData)
           };
           try {
-            const res = await this.service.com.publicUrlParams(port[this.tablename].singleCode, params);
+            const res = await this.service.common.publicUrlParams(port[this.tablename].singleCode, params);
             const resData = res.data;
             if (resData.code === 0) {
               this.$message({
@@ -472,7 +472,7 @@ export default {
       if (this.judgeSingle && val) {
         this.judgeSingle = false;// 初始化
         try {
-          const res = await this.service.com.publicUrlParams(port[this.tablename].singleCode, {
+          const res = await this.service.common.publicUrlParams(port[this.tablename].singleCode, {
             table: this.tablename, // 表名
             objid: this.objid, // 主表ID
             fixcolumn: JSON.stringify(this.singleData)

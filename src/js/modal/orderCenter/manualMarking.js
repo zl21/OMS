@@ -222,7 +222,7 @@ export default {
         })
       );
       if (this.depositConfig.jordanFormConfig.formValue.CP_C_SHOP_ID) {
-        const res = await this.service.com.queryPhyWareHouseList(formData);
+        const res = await this.service.common.queryPhyWareHouseList(formData);
         if (res.data.code === 0) {
           this.depositConfig.jordanFormConfig.formData.forEach((item) => {
             // 发货仓库

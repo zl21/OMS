@@ -409,7 +409,7 @@ export default {
 
     // 获取角色id
     async getRoleData() {
-      const res = await this.service.com.groupTreeload({});
+      const res = await this.service.common.groupTreeload({});
       if (res.data.code === 0) {
         this.groupId = res.data.data[0].ID;
         this.newGroupId = res.data.data[0].ID;

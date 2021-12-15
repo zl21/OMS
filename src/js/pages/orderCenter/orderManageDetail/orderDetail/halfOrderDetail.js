@@ -777,7 +777,7 @@ export default {
           orderby: this.orderby, // 按什么排序
         })
       );
-      return this.service.com.QueryList(query).then((res) => {
+      return this.service.common.QueryList(query).then((res) => {
         const data = res.data;
         if (data.code === 0) {
           const arrTh = []; // 表头

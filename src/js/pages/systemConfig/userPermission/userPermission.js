@@ -251,7 +251,7 @@ export default {
         this.dataLoading = true;
         const query = new FormData();
         query.append('searchdata', JSON.stringify(this.obj));
-        const res = await this.service.com.QueryList(query);
+        const res = await this.service.common.QueryList(query);
         const data = res.data;
         if (data.code === 0) {
           const arr = data.datas.row.map(obj => {
@@ -285,7 +285,7 @@ export default {
       this.dataLoading = true;
       const query = new FormData();
       query.append('searchdata', JSON.stringify(this.obj));
-      return this.service.com.QueryList(query).then(res => {
+      return this.service.common.QueryList(query).then(res => {
         const data = res.data;
         if (data.code === 0) {
           this.$refs.middleware_table.scrollTop = 0; // 初始scrollTop

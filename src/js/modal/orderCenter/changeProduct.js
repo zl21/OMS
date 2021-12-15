@@ -422,7 +422,7 @@ export default {
       //   },
       // }
       // try {
-      //   const res = await self.service.com.skuQuery(query)
+      //   const res = await self.service.common.skuQuery(query)
       //   if (res.data.code == 0) {
       //     res.data.data.data.forEach((item) => {
       //       item.IS_GIFT = item.IS_GIFT == '0' ? '否' : '是'

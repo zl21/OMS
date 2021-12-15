@@ -270,7 +270,7 @@ export default {
         psCSku: p,
         IS_GIFT: p.IS_GIFT
       };
-      const res = await self.service.com.skuQuery(param);
+      const res = await self.service.common.skuQuery(param);
       if (res.data.code === 0) {
         const lists = res.data.data.data;
         self.tableConfig.data = lists;

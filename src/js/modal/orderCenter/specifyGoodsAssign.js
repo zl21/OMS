@@ -71,7 +71,7 @@ export default {
         return;
       }
       const query = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };
-      const res = await self.service.com.skuQuery(query);
+      const res = await self.service.common.skuQuery(query);
       if (res.data.code == 0) {
         if (res.data.data.data.length == 0) {
           this.$Message.warning($it('tip.r8'));// 查询数据为空!

@@ -54,7 +54,7 @@ export default {
                     id: this.copyModalConfig.originalRole
                   }
                 };
-                const res = await this.service.com.getCopyTargetGroups(qs.stringify(query));
+                const res = await this.service.common.getCopyTargetGroups(qs.stringify(query));
                 if (res.data.code === 0) {
                   this.config[1].item.props.totalRowCount = res.data.data.length;
                   const cc = [];
@@ -158,7 +158,7 @@ export default {
       const query = {
         param: '%7B%7D'
       };
-      const res = await this.service.com.cgroupsquery(qs.stringify(query));
+      const res = await this.service.common.cgroupsquery(qs.stringify(query));
       console.log(res);
       if (res.data.code === 0) {
         this.config[0].item.props.AuotData = res.data.data;

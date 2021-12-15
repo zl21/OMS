@@ -2,6 +2,13 @@
 export default {
   rcOrderReportExportApiObj: () => {
     const obj = {
+      RETURN_ORDER_EXPORTVIEW: {
+        table: 'RETURN_ORDER_EXPORTVIEW',
+        url: '/p/cs/exportReturnOrder',
+        filename: '退换货单导出报表',
+        menu: '退换货单导出报表',
+        type: ''
+      },
       V_OC_B_VIPCOM_DISTRIBUTION: {
         table: 'V_OC_B_VIPCOM_DISTRIBUTION',
         url: '/p/cs/exportVipcomDistribution',

@@ -266,7 +266,7 @@ export default {
       let formData = new FormData();
       formData.append("table", 'OC_B_ORIG_ORDER');
       formData.append("getcmd", 'y');
-      const res = await this.service.com.getTableQuery(formData);
+      const res = await this.service.common.getTableQuery(formData);
       // let base = res?.data?.data?.datas?.dataarry || [];
       let base = res.data.data.datas.dataarry || [];
       base.map(it => {
@@ -318,7 +318,7 @@ export default {
       let formData = new FormData();
       formData.append("searchdata", JSON.stringify(searchdata));
       // 调用查询接口
-      const { data: { code, data } } = await self.service.com.QueryList(formData, { serviceId: "r3-oc-oms" });
+      const { data: { code, data } } = await self.service.common.QueryList(formData, { serviceId: "r3-oc-oms" });
       this.table.loading = false;
       if (code === 0) {
         // 处理表头和数据

@@ -267,7 +267,7 @@ export default {
       if (lists.receive_mobile) param.receive_mobile = lists.receive_mobile;
       if (lists.logistics_code) param.logistics_code = lists.logistics_code;
       try {
-        const res = await _this.service.com.searchButtonsInJdDetail(param);
+        const res = await _this.service.common.searchButtonsInJdDetail(param);
         if (res.data.code == 0 && res.data.data !== null) {
           for (let i = 0, list = res.data.data.length; i < list; i++) {
             res.data.data[i].ORIG_ORDER_NO = res.data.data[i].ORIG_ORDER_ID;
@@ -288,7 +288,7 @@ export default {
         id: _this.selectData[0].ID,
         refundInId: this.$route.query.id
       };
-      const res = await this.service.com.manualJdMatchingConfirmationButton(param);
+      const res = await this.service.common.manualJdMatchingConfirmationButton(param);
       if (res.data.code == 0) {
         _this.$parent.$parent.$parent.returnArr(_this.selectData[0].ID);
         _this.$parent.$parent.closeConfirm();
@@ -308,7 +308,7 @@ export default {
           refundInId: this.$route.query.id,
           returnItem: _this.selectData[0].PRODUCTITEMS[0].ID
         };
-        const res = await this.service.com.seachJdForced(param);
+        const res = await this.service.common.seachJdForced(param);
         if (res.data.code == 0) {
           _this.$parent.$parent.$parent.returnArr1(_this.selectData[0].ID, res.data.data.REAL_SEND_SKU, _this.selectData[0].PRODUCTITEMS[0].ID);
           // _this.$parent.$parent.$parent.getList();

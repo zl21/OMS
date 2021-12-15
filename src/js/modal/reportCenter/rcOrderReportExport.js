@@ -31,7 +31,37 @@ export default {
   },
   created() {
     const self = this;
-    self.getBatchNumber();
+    self.$Modal.info({
+      className: 'ark-dialog',
+      title: '警告',
+      // content: '当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出?',
+      render: (h) => {
+        return h('div', {
+          style: {
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            lineHeight: 1.5,
+            padding: '10px 6px 0',
+          },
+        }, [
+          h('Icon', {style: {color: '#fd6442', 'font-size': '28px', 'margin-right': '6px'}, props: {type: 'ios-alert-outline'}}),
+          h('div', {style: {}}, '当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出?'),
+        ])
+      },
+      mask: true,
+      iconClass: 'ios-alert-outline',
+      showCancel: true,
+      okText: $it('com.determine'), // 确定
+      cancelText: $it('com.cancel'), // 取消
+      onOk: () => {
+        self.getBatchNumber();
+      },
+      onCancel: () => {
+        self.$emit('closeActionDialog', false);
+      },
+    })
   },
   methods: {
     getBatchNumber() {
@@ -66,7 +96,7 @@ export default {
       fromdata.append('filetype', ' .xlsx');
       fromdata.append('showColumnName', true);
       fromdata.append('menu', self.tableList[tableMark].menu);
-      this.service.com.publicUrlParams(url, fromdata).then((res) => {
+      this.service.common.publicUrlParams(url, fromdata).then((res) => {
         console.log(res);
         self.$emit('closeActionDialog');
         if (res.data.code === 0) {
@@ -86,7 +116,7 @@ export default {
               tableName: 'CP_C_TASK'
             }
           });
-          $omsUtils.downloadUrlFile(res.data.data);
+          $utils.downloadUrlFile(res.data.data);
         } else {
           // const err = res.data.message || '失败！';
           // self.$Message.error(err);

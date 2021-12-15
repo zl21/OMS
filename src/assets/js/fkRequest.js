@@ -12,7 +12,7 @@ import service from '@/service/index';
 export const fkQueryList = function fkQueryList(params) {
   const query = new FormData();
   query.append('searchdata', JSON.stringify(params.searchObject));
-  service.com.QueryList(query).then((res) => {
+  service.common.QueryList(query).then((res) => {
     if (typeof params.success === 'function') {
       params.success(res);
     }
@@ -22,5 +22,5 @@ export const fkQueryList = function fkQueryList(params) {
 
 
 export const fkFuzzyquerybyak = function fkFuzzyquerybyak(params) {
-  service.com.fuzzyquerybyak(R3.urlSearchParams(params));
+  service.common.fuzzyquerybyak(R3.urlSearchParams(params));
 };

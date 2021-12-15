@@ -428,7 +428,7 @@ export default {
         isdroplistsearch: true,
       }
       params.append('searchdata', JSON.stringify(searchdata));
-      this.service.com.QueryList(params).then(({data: res}) => {
+      this.service.common.QueryList(params).then(({data: res}) => {
         if (res.code === 0) {
           const data = res.datas.row || []
           this.typeList = data.map((item) => {
@@ -740,7 +740,7 @@ export default {
         const formdata = new FormData();
         formdata.append('table', this.tableName);
         formdata.append('objid', this.ID);
-        this.service.com.objectVoid(formdata).then((res) => {
+        this.service.common.objectVoid(formdata).then((res) => {
           if (res.data.code === 0) {
             this.$Message.success(res.data.message || $it('tip.y4'));
             this.isChange = false
@@ -800,7 +800,7 @@ export default {
         const formdata = new FormData();
         formdata.append('table', this.tableName);
         formdata.append('objid', this.ID);
-        this.service.com.objectSubmit(formdata).then((res) => {
+        this.service.common.objectSubmit(formdata).then((res) => {
           this.submitLoading = false
           if (res.data.code === 0) {
             this.$Message.success(`${$it('tip.lz')}!`); // 提交成功

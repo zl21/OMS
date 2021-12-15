@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     async print() {
-      const res = await this.service.com.SgOutNoticePrint({ ids: this.idArray });
+      const res = await this.service.common.SgOutNoticePrint({ ids: this.idArray });
       const self = this;
       console.log(res);
       if (res.data.code === 0) {

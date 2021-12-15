@@ -408,7 +408,7 @@ export default {
       fromdata.append('objid', -1);
       return new Promise(resolve => {
         let optionData = [];
-        this.service.com.getObject(fromdata).then(res => {
+        this.service.common.getObject(fromdata).then(res => {
           const selectData = res.data.data.addcolums;
           selectData.forEach(item => {
             if (item.parentdesc === parentColName) {
@@ -554,11 +554,11 @@ export default {
           ids.push(_this.returnSelectData[i].ID);
         }
         const idList = { idList: ids };
-        this.service.com.exportPayableAdjustment(idList).then(res => {
+        this.service.common.exportPayableAdjustment(idList).then(res => {
           if (res.data.code === 0 && res.data.data !== null) {
             const mes = res.data.message || $it('tip.z2'); // '导出成功！';
             _this.$Message.success(mes);
-            $omsUtils.downloadUrlFile(res.data.data);
+            $utils.downloadUrlFile(res.data.data);
           } else {
             // const err = res.data.message || $it('tip.z3'); // '失败！';
             // _this.$Message.error(err);
@@ -583,11 +583,11 @@ export default {
         start: _this.jordanTableConfig.current,
         count: 999999
       };
-      this.service.com.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
+      this.service.common.exportPayableAdjustment(Object.assign(param, _this.formConfig.formValue)).then(res => {
         if (res.data.code === 0 && res.data.data !== null) {
           const mes = res.data.message || $it('tip.z2'); // '导出成功！';
           _this.$Message.success(mes);
-          $omsUtils.downloadUrlFile(res.data.data);
+          $utils.downloadUrlFile(res.data.data);
           // return (window.location = res.data.data);
         } else {
           // const err = res.data.message || $it('tip.z3'); // '失败！';

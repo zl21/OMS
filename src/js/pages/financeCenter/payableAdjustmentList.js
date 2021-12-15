@@ -813,7 +813,7 @@ export default {
         let optionData = [];
         let selectData = [];
         const valueObject = {};
-        const res = await this.service.com.getObject(fromdata);
+        const res = await this.service.common.getObject(fromdata);
         if (res.data.data) {
           selectData = res.data.data.addcolums;
           selectData.forEach(item => {
@@ -868,7 +868,7 @@ export default {
       };
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      const res = await this.service.com.voidPayableAdjustment(formdata);
+      const res = await this.service.common.voidPayableAdjustment(formdata);
       if (res.data.data.code === 0) {
         self.$Message.success(res.data.data.message);
         self.getList();
@@ -1157,7 +1157,7 @@ export default {
         const idList = { idList: ids };
         const {
           data: { code, data, message }
-        } = await this.service.com.exportPayableAdjustment(idList);
+        } = await this.service.common.exportPayableAdjustment(idList);
         if (code === 0 && data !== null) {
           const mes = message || $it('tip.z2'); // 导出成功！
           _this.$Message.success(mes);
@@ -1222,7 +1222,7 @@ export default {
       };
       const {
         data: { code, data, message }
-      } = await this.service.com.exportPayableAdjustment(param);
+      } = await this.service.common.exportPayableAdjustment(param);
       if (code === 0 && data !== null) {
         const mes = message || $it('tip.z2'); // 导出成功！
         _this.$Message.success(mes);

@@ -137,7 +137,7 @@ export default {
                     let obj = { "isdroplistsearch": true, "refcolid": 1700823730, "range": 10, "startindex": 0, "fixedcolumns": { "ID": "in (" + ids + ")" } }
                     fordata.append("searchdata", JSON.stringify(obj))
 
-                    this.service.com.QueryList(fordata).then(res => {
+                    this.service.common.QueryList(fordata).then(res => {
                       if (res.data.code == 0) {
                         this.drpdata = res.data.datas
                       }

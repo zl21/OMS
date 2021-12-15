@@ -652,8 +652,8 @@ export default {
       }
 
       const { data: { code, data } } = isFilter
-        ? await this.service.com.fuzzyquerybyak(formdata)
-        : await this.service.com.QueryList(formdata);
+        ? await this.service.common.fuzzyquerybyak(formdata)
+        : await this.service.common.QueryList(formdata);
       if (code == 0) {
         if (isFilter) {
           const autoData = data.map(item => ({ ID: item.ID || item.id, value: item.ENAME }));

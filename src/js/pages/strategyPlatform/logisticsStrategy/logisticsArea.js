@@ -499,11 +499,11 @@ export default {
       if (code === 0) {
         const ess = message || $it('tip.z2'); // 导出成功
         _this.$Message.success(ess);
-        $omsUtils.downloadUrlFile(data);
+        $utils.downloadUrlFile(data);
       } else {
         // const err = message || $it('tip.y6'); // 导出失败
         // _this.$Message.success(err);
-        $omsUtils.downloadUrlFile(data);
+        $utils.downloadUrlFile(data);
       }
     },
     // 设置表格高度

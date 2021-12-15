@@ -12,10 +12,10 @@ const isFavoriteMixin = {
       fromdata.append('id', self.$route.params.customizedModuleId);
       fromdata.append('type', 'action');
       if (self.btnConfig.buttons.find(item => item.webname === 'isFavorite').icon !== 'iconfont icon-liebiao-yishoucang') {
-        const res = await this.service.com.addToFavorite(fromdata);
+        const res = await this.service.common.addToFavorite(fromdata);
         this.changeBtnStatus(res, self);
       } else {
-        const res = await this.service.com.removeFromFavorite(fromdata);
+        const res = await this.service.common.removeFromFavorite(fromdata);
         this.changeBtnStatus(res, self);
       }
     },
@@ -34,7 +34,7 @@ const isFavoriteMixin = {
       const fromdata = new FormData();
       fromdata.append('id', self.$route.params.customizedModuleId);
       fromdata.append('type', 'action');
-      const res = await this.service.com.getUserConfig(fromdata);
+      const res = await this.service.common.getUserConfig(fromdata);
       const styleStr = res.data.data.isFavorite ? 'iconfont icon-liebiao-yishoucang' : 'iconfont iconbj_col';
       if (self.btnConfig.buttons.every(i => i.webname != 'isFavorite')) return
       self.btnConfig.buttons.find(item => item.webname === 'isFavorite').icon = styleStr;

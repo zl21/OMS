@@ -730,7 +730,7 @@ export default {
       const fo = new FormData();
       fo.append('table', 'SG_B_SHOP_PRO_SPECIAL_STRATEGY_ITEM');
       fo.append('inlinemode', 'Y');
-      const { data: { data } } = await this.service.com.inputForitem(fo);
+      const { data: { data } } = await this.service.common.inputForitem(fo);
       // const item = data.inpubobj.filter(it => it.colname == "SKU_TYPE");
       const item = data.inpubobj[1];
       const options = item.combobox.map((i) => ({

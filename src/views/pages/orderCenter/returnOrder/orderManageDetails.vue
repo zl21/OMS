@@ -943,10 +943,10 @@ export default {
     BtnConfig.target = this;
     BtnConfig.singleType = 1;
 
-    // self.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
+    self.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
     const buttons = self.$OMS2.BtnConfig.config();
     self.btnConfig.buttons = [...buttons.buttons, ...self.extendBtn];
-    // $omsUtils.getPermissions(self, 'btnConfig');
+    $omsUtils.getPermissions(self, 'btnConfig');
     await this.getDetailsData();
   },
 };

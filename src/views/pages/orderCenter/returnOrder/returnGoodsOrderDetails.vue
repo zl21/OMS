@@ -564,7 +564,7 @@ export default {
       // 调用查询接口
       const {
         data: { code, data },
-      } = await self.service.com.QueryList(formData, { serviceId: "r3-ps" });
+      } = await self.service.common.QueryList(formData, { serviceId: "r3-ps" });
       this.replaceProductTable.loading = false;
       if (code === 0) {
         // 处理表头和数据
@@ -598,7 +598,7 @@ export default {
       formData.append('fixedcolumns', JSON.stringify(fixedcolumns))
       const {
         data: { data },
-      } = await this.service.com.fuzzyquerybyak(formData);
+      } = await this.service.common.fuzzyquerybyak(formData);
       colid === 171332 ? this.replaceProductTable.businessFormConfig.formData[0].AuotData = data : this.replaceProductTable.businessFormConfig.formData[2].AuotData = data
     },
     // 获取新增明细数据

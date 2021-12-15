@@ -178,7 +178,7 @@ export default {
           const fromdata = new FormData();
           fromdata.append('table', 'CP_C_TASK');
           fromdata.append('objid', objid);
-          this.service.com.getObject(fromdata).then((res) => {
+          this.service.common.getObject(fromdata).then((res) => {
             if (res.data.code === 0) {
               console.log(222, res.data)
               const data = res.data.data.addcolums[0].childs || []

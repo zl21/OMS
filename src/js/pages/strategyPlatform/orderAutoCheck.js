@@ -180,7 +180,7 @@ export default {
         fixedcolumns: {},
         multiple: [],
       }));
-      const res = await this.service.com.QueryList(query);
+      const res = await this.service.common.QueryList(query);
       this.$nextTick(() => {
         console.log('CP_C_LOGISTICS_ID_SELECT::res', res);
         this.CP_C_LOGISTICS_ID_SELECT.datas.row = res.data.datas.row;
@@ -264,7 +264,7 @@ export default {
           range: this.pageSize
         })
       );
-      this.service.com.QueryList(params).then(({ data }) => {
+      this.service.common.QueryList(params).then(({ data }) => {
         if (data.code == 0) {
           this.loading = false;
           this.totalRowCount = data.datas.totalRowCount;
@@ -410,7 +410,7 @@ export default {
       formdata.append('ak', e.trim());
       formdata.append('colid', 169275);
       formdata.append('fixedcolumns', JSON.stringify({}));
-      const res = await this.service.com.fuzzyquerybyak(formdata);
+      const res = await this.service.common.fuzzyquerybyak(formdata);
       if (res.data.code == 0) {
         this.CP_C_LOGISTICS_ID_SELECT.autoData = res.data.data;
       } else {

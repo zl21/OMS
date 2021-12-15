@@ -418,7 +418,7 @@ export default {
           if (res.data.code == 0 && res.data.data !== null) {
             const mes = res.data.message || $it('tip.z2');
             self.$Message.success(mes);
-            $omsUtils.downloadUrlFile(res.data.data);
+            $utils.downloadUrlFile(res.data.data);
           } else {
             const err = res.data.message || $it('tip.z3');
             self.$Message.error(err);
@@ -451,7 +451,7 @@ export default {
           const mes = res.data.message || $it('tip.z2');
           self.$Message.success(mes);
           // return (window.location = res.data.data);
-          $omsUtils.downloadUrlFile(res.data.data);
+          $utils.downloadUrlFile(res.data.data);
         } else {
           // let err = res.data.message || "失败！";
           const err = res.data.message || $it('tip.z3');

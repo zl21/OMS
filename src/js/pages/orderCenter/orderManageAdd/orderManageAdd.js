@@ -774,7 +774,7 @@ export default {
                   TABLENAME: 'PS_C_PRO',
                 };
                 fromdata.append('param', JSON.stringify(params));
-                this.service.com.screenresult(fromdata)
+                this.service.common.screenresult(fromdata)
                   // this.$network
                   //   .post("/p/cs/screenresult", fromdata)
                   .then((res) => {
@@ -839,7 +839,7 @@ export default {
               const _this = this;
               _this.jordanTableConfig.businessFormConfig.formValue.dimData = val.trim();
               if (this.shopId) {
-                this.service.com.skuQuery({
+                this.service.common.skuQuery({
                   shopId: this.shopId,
                   isQuery: 'N',
                   isBlur: 'Y', // N为精确匹配
@@ -1293,7 +1293,7 @@ export default {
     const fromdata = new FormData();
     fromdata.append('table', 'OC_B_ORDER');
     fromdata.append('objid', -1);
-    self.service.com.getObject(fromdata)
+    self.service.common.getObject(fromdata)
       .then((res) => {
         res.data.data.addcolums.forEach((item) => {
           if (item.parentdesc === '基本信息') {
@@ -1334,7 +1334,7 @@ export default {
       }
       // if (_this.formConfig.formData[0].itemdata.pid) {
       if (_this.queryFormItem(_this.formConfig.formData, $it('fL.orderShop')).itemdata.pid) {
-        const res = await _this.service.com.queryPhyWareHouseList(formData);
+        const res = await _this.service.common.queryPhyWareHouseList(formData);
         if (res.data.code === 0) {
           _this.formConfig.formData.forEach((item) => {
             if (item.label === '发货仓库') item.options = res.data.data;
@@ -1499,7 +1499,7 @@ export default {
             }
             const fromdata = new FormData();
             fromdata.append('param', JSON.stringify({ SkuEcodeList: search, shopId: this.shopId, isQuery: 'Y' }));
-            const resData = await self.service.com.skuListQuery(fromdata);
+            const resData = await self.service.common.skuListQuery(fromdata);
             resData.data.data.forEach((item, index) => {
               res.data.data.records[index].AVAILABLE_QTY = item.AVAILABLE_QTY;
             })
@@ -1942,7 +1942,7 @@ export default {
     querySave(val) {
       const _this = this;
       if (this.shopId) {
-        _this.service.com.skuQuery({
+        _this.service.common.skuQuery({
           shopId: this.shopId,
           isQuery: 'Y', //是否查询可用库存
           isBlur: 'Y', // N为精确匹配

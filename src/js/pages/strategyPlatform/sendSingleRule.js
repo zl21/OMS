@@ -737,11 +737,11 @@ export default {
           if (res.data.code === 0) {
             const ess = res.data.message || $it('tip.z2'); // '导出成功';
             _this.$Message.success(ess);
-            $omsUtils.downloadUrlFile(res.data.data);
+            $utils.downloadUrlFile(res.data.data);
           } else {
             // const err = res.data.message || $it('tip.y6'); // '导出失败';
             // _this.$Message.error(err);
-            $omsUtils.downloadUrlFile(res.data.data);
+            $utils.downloadUrlFile(res.data.data);
           }
         });
     },
@@ -801,11 +801,11 @@ export default {
           if (res.data.code === 0) {
             const ess = res.data.message || $it('tip.z2'); // '导出成功';
             _this.$Message.success(ess);
-            $omsUtils.downloadUrlFile(res.data.data);
+            $utils.downloadUrlFile(res.data.data);
           } else {
             // const err = res.data.message || $it('tip.y6'); // '导出失败';
             // _this.$Message.error(err);
-            $omsUtils.downloadUrlFile(res.data.data);
+            $utils.downloadUrlFile(res.data.data);
           }
         });
     },

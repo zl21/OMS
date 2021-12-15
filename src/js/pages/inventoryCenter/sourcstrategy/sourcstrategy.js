@@ -149,7 +149,7 @@ export default {
         searchdata.fixedcolumns = {CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID}
       }
       params.append('searchdata', JSON.stringify(searchdata));
-      this.service.com.QueryList(params).then(({data: res}) => {
+      this.service.common.QueryList(params).then(({data: res}) => {
         this.agTableConfig.agLoading = false;
         if (res.code === 0) {
           const data = res.datas || {};

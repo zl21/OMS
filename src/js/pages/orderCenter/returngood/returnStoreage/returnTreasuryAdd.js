@@ -861,7 +861,7 @@ export default {
       const fromdata = new FormData();
       fromdata.append('table', 'OC_B_REFUND_IN');
       fromdata.append('objid', -1);
-      const res = await this.service.com.getObject(fromdata);
+      const res = await this.service.common.getObject(fromdata);
       this.information.formData.forEach((value) => {
         // if (value.label === "特殊处理类型") {
         if (

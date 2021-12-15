@@ -1058,7 +1058,7 @@ export default {
                     // formdata.append('colid', colid);
                     formdata.append('colid', item.selectTab.tabth.colid);
                     formdata.append('fixedcolumns', JSON.stringify({}));
-                    const res = await this.service.com.fuzzyquerybyak(formdata);
+                    const res = await this.service.common.fuzzyquerybyak(formdata);
                     if (res.data.code == 0) {
                       this.dropList.filter(key => key.label == item.displayName)[0].componentAttribute.AutoData = res.data.data;
                     } else {
@@ -1922,7 +1922,7 @@ export default {
         if (res.data.code == 0 && res.data.data !== null) {
           const mes = res.data.message || $it('tip.z2'); // 导出成功！
           this.$Message.success(mes);
-          $omsUtils.downloadUrlFile(res.data.data);
+          $utils.downloadUrlFile(res.data.data);
         } else {
           const err = res.data.message || $it('tip.z3'); // 失败！
           this.$Message.error(err);
@@ -1975,7 +1975,7 @@ export default {
         if (res.data.code == 0 && res.data.data !== null) {
           const mes = res.data.message || $it('tip.z2'); // 导出成功！
           _this.$Message.success(mes);
-          $omsUtils.downloadUrlFile(res.data.data);
+          $utils.downloadUrlFile(res.data.data);
         } else {
           const err = res.data.message || $it('tip.z3'); // 失败！
           _this.$Message.error(err);

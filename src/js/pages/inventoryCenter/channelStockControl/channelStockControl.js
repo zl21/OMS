@@ -1401,7 +1401,7 @@ export default {
      * 获取按钮权限
      */
     queryMenuPermissionFun() {
-      this.service.com.queryMenuPermission({
+      this.service.common.queryMenuPermission({
         param: `{query: {AD_SUBSYSTEM_ID: 218, AD_TABLECATE_ID: 5088, GROUP_ID: 10}}`
       }).then((res) => {
         if (res.data.code === 0) {
@@ -1454,7 +1454,7 @@ export default {
       const formData = new FormData();
       formData.append('type', 'type'); // V_SG_CHANNEL_PRO_INFO
       formData.append('id', '41460534');
-      this.service.com.getUserConfig(formData).then((res) => {
+      this.service.common.getUserConfig(formData).then((res) => {
         if (res.data.code === 0) {
           if (res.data.data.colPosition && res.data.data.colPosition.length) {
             this.agTableConfig.columnDefs = this.setColumn(res.data.data.colPosition, this.agTableConfig.columnDefs)
@@ -1476,7 +1476,7 @@ export default {
         const formData = new FormData();
         formData.append('tableid', '41460534'); // V_SG_CHANNEL_PRO_INFO
         formData.append('colposition', colposition);
-        this.service.com.setColPosition(formData).then((res) => {
+        this.service.common.setColPosition(formData).then((res) => {
         });
       })
     },
@@ -2010,7 +2010,7 @@ export default {
       const formData = new FormData();
       formData.append('table', 'V_SG_CHANNEL_PRO_INFO');
       formData.append('getcmd', 'y');
-      this.service.com.getTableQuery(formData).then((res) => {
+      this.service.common.getTableQuery(formData).then((res) => {
         if (res.data.code === 0) {
           const dataarry = res.data.datas.dataarry || []
           dataarry.forEach((item) => {
@@ -2116,7 +2116,7 @@ export default {
           ...params[storeName]
         }
         fromdata.append('param', JSON.stringify(params2));
-        this.service.com.publicUrlParams(url[storeName], fromdata).then(res => {
+        this.service.common.publicUrlParams(url[storeName], fromdata).then(res => {
           this.downDialogObjShow = false
           if (res.data.code === 0) {
             this.$Message.success(res.data.message);

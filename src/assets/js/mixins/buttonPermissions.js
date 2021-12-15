@@ -12,7 +12,7 @@
       };
       // console.log('this[arrry].buttons===', this[arrry].buttons)
       if (this[arrry] == undefined) return;
-      this.service.com.fetchActionsInCustomizePage(query).then(res => {
+      this.service.common.fetchActionsInCustomizePage(query).then(res => {
         const result = res.data.data || [];
         // if (DATA in result) result = result.DATA;
         independent = result;

@@ -332,7 +332,7 @@ export default {
       _this.loading = true;
       const param = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId };
 
-      this.service.com.getWarehouseLogisticsTree(param).then(res => {
+      this.service.common.getWarehouseLogisticsTree(param).then(res => {
         _this.loading = false;
         if (res.data.code == 0) {
           _this.treeData = res.data.data.warehouseLogisticsTree;
@@ -393,7 +393,7 @@ export default {
       // 接口
       const {
         data: { oK, data }
-      } = await this.service.com.getLogisticsRankResultTable(params);
+      } = await this.service.common.getLogisticsRankResultTable(params);
       if (oK) {
         _this.tableLoading = false;
         // this.$R3loading.hide(customizedModuleName);
@@ -428,7 +428,7 @@ export default {
       }
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, cityleave: 'PROV', treeNode: treeList };
       // 接口
-      this.service.com.getLogisticsRankResultTable(params).then(res => {
+      this.service.common.getLogisticsRankResultTable(params).then(res => {
         _this.tableLoading = false;
         // this.$R3loading.hide(customizedModuleName);
         if (res.data.oK) {
@@ -559,11 +559,11 @@ export default {
       if (code === 0) {
         const ess = data.message || $it('tip.z2'); // 导出成功
         _this.$Message.success(ess);
-        $omsUtils.downloadUrlFile(data);
+        $utils.downloadUrlFile(data);
       } else {
         const err = data.message || $it('tip.y6'); // 导出失败
         _this.$Message.success(err);
-        $omsUtils.downloadUrlFile(data);
+        $utils.downloadUrlFile(data);
       }
     },
     saveOk() {
