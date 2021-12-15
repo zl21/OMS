@@ -8,6 +8,7 @@ export default {
   /**
    * 零售发货单
    */
+  batchBillCopy: params => network.post('/api/cs/oc/oms/v1/batch/billCopy', params), // 零售-批量复制
   pullBackSearchOrder: params => network.post('/api/cs/oc/oms/v1/pullBackSearchOrder', params), // 零售-撤回重新分仓
   checkWmsWithdrawSplit: params => network.post('/api/cs/oc/oms/v1/checkWmsWithdrawSplit', params), // 零售-撤回单拆单-校验
   saveWmsWithdrawSplit: params => network.post('/api/cs/oc/oms/v1/saveWmsWithdrawSplit', params), // 零售-撤回单拆单-确定
