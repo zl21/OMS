@@ -67,7 +67,7 @@ module.exports = () => ({
       amd: 'vue-router',
       root: 'VueRouter'
     },
-    '$R3_CPS' : '$R3_CPS',
+
   },
   module: {
     exprContextCritical: false,
