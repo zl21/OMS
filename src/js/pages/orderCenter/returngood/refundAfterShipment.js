@@ -529,6 +529,7 @@ export default {
         }
       },
       btnConfig: {
+        btnsite: 'right',
         typeAll: 'error',
         buttons: [
           {
