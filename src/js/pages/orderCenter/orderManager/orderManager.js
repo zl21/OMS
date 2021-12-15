@@ -1574,7 +1574,7 @@ export default {
           this.pageLoad = true;
           const ids = self.selection.map(item => item.ID);
           const type = val == 'ReleaseTagCancel' ? 0 : 1;
-          this.service.orderCenter.cancelOversoldMarking({ ids, type}).then(res => {
+          this.service.orderCenter.handleReleaseTag({ ids, type}).then(res => {
             this.pageLoad = false;
             if (res.data.code == 0) {
               self.$Message.success(res.data.message);
