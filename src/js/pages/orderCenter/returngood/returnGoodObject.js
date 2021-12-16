@@ -49,7 +49,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'matrixBox', // 组件名称
-        url: 'modal/orderCenter/matrixBox',
+        url: require('@/views/modal/orderCenter/matrixBox.vue').default,
         keepAlive: true,
         excludeString: 'matrixBox', // 将name传进去，确认不缓存
         componentData: {},
@@ -68,7 +68,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'rturngoodModifyRemarks', // 组件名称
-        url: 'pages/orderCenter/returngood/rturngoodModifyRemarks',
+        url: require('@/views/modal/orderCenter/returngood/rturngoodModifyRemarks.vue').default,
         keepAlive: true,
         excludeString: 'rturngoodModifyRemarks', // 将name传进去，确认不缓存
         componentData: {},
