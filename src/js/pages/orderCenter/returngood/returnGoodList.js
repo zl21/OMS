@@ -223,7 +223,7 @@ export default {
           }
         },
         tableHeight: '425px',
-        pagenation: comUtils.pageConfig
+        pagenation: $omsUtils.pageConfig
       },
       options: {
         oldMoved: true,

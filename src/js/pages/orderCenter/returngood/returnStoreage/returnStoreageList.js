@@ -113,7 +113,7 @@ export default {
           }
         },
         tableHeight: '560px',
-        pagenation: comUtils.pageConfig
+        pagenation: $omsUtils.pageConfig
       },
       options: {
         rowHeight: 40,
