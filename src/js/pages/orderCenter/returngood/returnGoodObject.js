@@ -294,7 +294,7 @@ export default {
       itemSkuEcode: '',
       itemSkuId: '',
       itemGbcode: '',
-      btnConfig: BtnConfig.config(),
+      btnConfig: BtnConfig.config('right'),
       // btnConfig: {
       //   typeAll: 'default', // 按钮统一风格样式
       //   buttons: [],
