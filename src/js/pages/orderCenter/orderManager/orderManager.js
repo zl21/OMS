@@ -710,6 +710,12 @@ export default {
             webname: 'OversoldMarkingOpen', // 超卖打标
           },
           {
+            webname: 'ReleaseMakingTag', // 手工打标 - 释放库存标
+          },
+          {
+            webname: 'ReleaseTagCancel', // 取消打标 - 释放库存标
+          },
+          {
             webname: 'OversoldMarkingCancel', // 取消打标-超卖打标
           },
           {
@@ -1578,6 +1584,44 @@ export default {
               self.getData();
             } else {
               self.$Message.error(res.data.message);
+            }
+          });
+          break;
+        }
+        case 'ReleaseTagCancel':
+        case 'ReleaseMakingTag': {
+          if (self.selection.length === 0) {
+            self.$Message.warning({
+              content: '请选择需要释放库存标的记录！',
+              duration: 5,
+              top: 80
+            });
+            return;
+          }
+          this.pageLoad = true;
+          const ids = self.selection.map(item => item.ID);
+          const type = val == 'ReleaseTagCancel' ? 0 : 1;
+          this.service.orderCenter.handleReleaseTag({ ids, type}).then(res => {
+            this.pageLoad = false;
+            if (res.data.code == 0) {
+              self.$Message.success(res.data.message);
+              self.selection = [];
+              self.getData();
+            } else {
+              const err = res.data.message || '错误信息'
+              const columns = res.data.data.columns || '表头未返回'
+              let renderInfo = {
+                props: {
+                  columns: columns,
+                  data: res.data.data.prompt_data,
+                },
+              }
+              this.$Modal.confirm({
+                width: 500,
+                title: err,
+                mask: true,
+                render: (h) => h('Table', renderInfo),
+              })
             }
           });
           break;
