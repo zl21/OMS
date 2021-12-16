@@ -1,8 +1,10 @@
 <!--店仓评分设置表 新增/详情 -->
 <template>
-  <div class="auto-check storeScoreStrategy">
-    <OmsButton :btn-config="btnConfig" class="top-btns" />
-    <div class="public-content">
+  <div class="auto-check storeScoreStrategy customized-detail">
+    <div class="customized-detail-btn">
+      <OmsButton :btn-config="btnConfig" class="top-btns" />
+    </div>
+    <div class="public-content customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="baseInfo1">
           <!-- 基本信息 -->

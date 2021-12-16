@@ -1,9 +1,9 @@
 <template>
-  <div class="financialManageCenter public-main custom-main" v-loading="loading">
-    <div class="buttons custom-btn">
+  <div class="financialManageCenter public-main custom-main customized-detail" v-loading="loading">
+    <div class="buttons custom-btn customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="public-content customized-detail-main">
       <WaterMark v-if="showStatusFlag && statusName" class="omsWaterMark" :text="statusName"></WaterMark>
       <Collapse v-model="spreadPanel">
         <Panel name="panel_baseInfo">
@@ -52,35 +52,37 @@
           />
         </Modal>
       </Collapse>
-      <!-- tab切换 -->
-      <OmsLabel
-        :label-list="labelList"
-        :label-default-value="labelDefaultValue"
-        @labelClick="labelClick"
-        class="custom-label"
-      />
-      <!-- 表格 -->
-      <div class="table">
-        <!-- 赔付单明细 -->
-        <div class="barcodeDetails">
-          <OmsTable
-            v-show="labelDefaultValue === '1'"
-            :jordan-table-config="jordanTableConfig"
-            @table-delete-detail="delTableDetail"
-            @table-add-detail="addTableDetail"
-            @on-select="onSelect"
-            @on-select-cancel="onSelectCancel"
-            @on-select-all="onSelectAll"
-            @on-select-all-cancel="onSelectAllCancel"
-            @on-page-change="pageChange"
-            @on-page-size-change="pageSizeChange"
-          />
-          <OmsTable
-            v-show="labelDefaultValue === '2'"
-            :jordan-table-config="payableAdjustLog"
-            @on-page-change="logPageChange"
-            @on-page-size-change="logPageSizeChange"
-          />
+      <div class="customized-detail-table">
+        <!-- tab切换 -->
+        <OmsLabel
+            :label-list="labelList"
+            :label-default-value="labelDefaultValue"
+            @labelClick="labelClick"
+            class="custom-label"
+        />
+        <!-- 表格 -->
+        <div class="table">
+          <!-- 赔付单明细 -->
+          <div class="barcodeDetails">
+            <OmsTable
+                v-show="labelDefaultValue === '1'"
+                :jordan-table-config="jordanTableConfig"
+                @table-delete-detail="delTableDetail"
+                @table-add-detail="addTableDetail"
+                @on-select="onSelect"
+                @on-select-cancel="onSelectCancel"
+                @on-select-all="onSelectAll"
+                @on-select-all-cancel="onSelectAllCancel"
+                @on-page-change="pageChange"
+                @on-page-size-change="pageSizeChange"
+            />
+            <OmsTable
+                v-show="labelDefaultValue === '2'"
+                :jordan-table-config="payableAdjustLog"
+                @on-page-change="logPageChange"
+                @on-page-size-change="logPageSizeChange"
+            />
+          </div>
         </div>
       </div>
     </div>

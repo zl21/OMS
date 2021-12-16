@@ -8,12 +8,14 @@
 -->
 <!--店仓评分设置表 列表-->
 <template>
-  <div class="storeScoreStrategy">
-    <OmsButton :btn-config="btnConfig" class="top-btns" />
-    <div class="br-dfdfdf">
+  <div class="storeScoreStrategy customized-list">
+    <div class="customized-list-btn">
+      <OmsButton :btn-config="btnConfig" class="top-btns" />
+    </div>
+    <div class="br-dfdfdf customized-list-form">
       <OmsForm :form-config="formConfig" />
     </div>
-    <div class="tableContent mg-tp-20" v-loading="agTableConfig.agLoading">
+    <div class="tableContent mg-tp-20 customized-list-table" v-loading="agTableConfig.agLoading">
       <OmsAgTable
         ref="agGridChild"
         :options="options"

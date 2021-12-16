@@ -1,8 +1,8 @@
 <!--寻源策略表-->
 <template>
-  <div class="sourcstrategy pd-tp-20 relative pd-bt-50" v-loading="loading">
+  <div class="sourcstrategy pd-tp-20 relative pd-bt-50 customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
-    <div class="pd-rt-100">
+    <div class="pd-rt-100 customized-detail-main">
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-1">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
           <span class="iconfont icon-item icon-jibenxinxi font-size-24 color-primary"></span>
@@ -18,7 +18,7 @@
           <span class="iconfont icon-item icon-liuchengtiaojian font-size-24 color-primary"></span>
           <span class="pd-lf-15 font-size-18 font-weight-bold">{{$it('pL.bf')}}<!--强制寻源规则--></span>
         </div>
-        <div>
+        <div class="customized-detail-table">
           <!--弹窗多选-->
           <Fkdialog
             class="flex align-items-center justify-content-center"
@@ -155,7 +155,7 @@
       </ul>
     </div>
     <div class="fixed bottom-0 right-0" ref="rightBox" style="z-index: 999">
-      <div class="flex flex-direction-row justify-content-end bg-base">
+      <div class="flex flex-direction-row justify-content-end bg-base customized-detail-btn">
         <OmsButton :btn-config="btnConfig" class="top-btns"/>
       </div>
     </div>

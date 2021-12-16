@@ -1,5 +1,5 @@
 <template>
-  <div class="auto-check  height-percent-100 relative channelStockControl">
+  <div class="auto-check  height-percent-100 relative channelStockControl customized-list">
     <div class="flex flex-direction-row height-percent-100 pd-tp-15 relative pd-bt-10">
       <!--      <Spin size="large" fix v-if="leftLoading || !leftCheckValue"></Spin>-->
       <!-- 平台店铺选择区(渠道仓选择) -->
@@ -32,7 +32,7 @@
       <div class="flex-1  overflow-y-auto ">
         <template>
           <!--平台商品查询条件区域-->
-          <div class="br-d3d3d3 pd-tp-10">
+          <div class="br-d3d3d3 pd-tp-10 customized-list-form">
             <action-form
                 ref="actionFormFilter"
                 :form-items="formConfig1.formData"
@@ -40,70 +40,98 @@
                 :span="6"
             />
           </div>
-          <OmsButton :btn-config="btnConfig2" class="top-btns"/>
-          <!--<OmsButton :btn-config="btnConfig" class="top-btns"/>-->
-          <!--库存查询与选择区-->
-          <div class="pd-rt-5">
-            <div class="relative" v-loading="table1Loading">
-              <arkCommonTableByAgGrid
-                  class="br-d3d3d3"
-                  ref="agGrid"
-                  height="300px"
-                  :columns="agTableConfig.columnDefs"
-                  :data="agTableConfig.rowData"
-                  :height="tableHeight"
-                  :renderParams="agTableConfig.renderParams"
-                  @on-selection-change="handleSelectionChange"
-                  @grid-ready="onGridReady"
-                  :options="{getContextMenuItems: getContextMenuItemsFun}"
-                  @on-column-moved="columnmovedFun"
-                  @on-row-click="tableRowClick"
-              ></arkCommonTableByAgGrid>
-            </div>
-            <!--<Table ref="selectionTable" class="mg-tp-15" border :loading="table1Loading" multiple
-                   :row-class-name="rowClassName"
-                   @on-sort-change="sortChange"
-                   :columns="columns1"
-                   :data="data1"
-                   :height="tableHeight"
-                   @on-row-click="tableRowClick"
-                   @on-selection-change="handleSelectionChange"
-                   :totalData="tableTotal"
-            >
-              <template slot-scope="{ row, index }" slot="switch">
-                <span>{{ row.istrans === 'Y' ? '是' : '否' }}</span>
-                &lt;!&ndash;<i-switch value="row.istrans === 'Y'" @on-change="">
-                  <span slot="open">开</span>
-                  <span slot="close">关</span>
-                </i-switch>&ndash;&gt;
-              </template>
-              <template slot-scope="{ row, index }" slot="islock">
-                &lt;!&ndash; 这个后端让取反&ndash;&gt;
-                <span>{{ row.islock === 'Y' ? '否' : '是' }}</span>
-              </template>
-            </Table>-->
-            <div class="pd-tp-10">
-              <Page :total="page1.total" show-total
-                    :current="page1.current"
-                    :page-size="page1.pageSize"
-                    :page-size-opts="page1.pageSizeOpts"
-                    size="small"
-                    show-elevator show-sizer
-                    class-name=" flex flex-direction-row align-items-center justify-content-center"
-                    :transfer="true"
-                    @on-change="pageChange1"
-                    @on-page-size-change="pageSizeChange1"
-              />
-            </div>
+          <div class="customized-list-btn">
+            <OmsButton :btn-config="btnConfig2" class="top-btns"/>
+            <!--<OmsButton :btn-config="btnConfig" class="top-btns"/>-->
           </div>
-          <!--库存来源配置区-->
-          <Collapse v-model="collapseShow" class="mg-tp-15">
-            <Panel name="1">
-              {{$it('pL.b8')}}<!--配销仓-->
-              <div slot="content" class="">
+          <div class="customized-list-table">
+            <!--库存查询与选择区-->
+            <div class="pd-rt-5">
+              <div class="relative" v-loading="table1Loading">
+                <arkCommonTableByAgGrid
+                    class="br-d3d3d3"
+                    ref="agGrid"
+                    height="300px"
+                    :columns="agTableConfig.columnDefs"
+                    :data="agTableConfig.rowData"
+                    :height="tableHeight"
+                    :renderParams="agTableConfig.renderParams"
+                    @on-selection-change="handleSelectionChange"
+                    @grid-ready="onGridReady"
+                    :options="{getContextMenuItems: getContextMenuItemsFun}"
+                    @on-column-moved="columnmovedFun"
+                    @on-row-click="tableRowClick"
+                ></arkCommonTableByAgGrid>
+              </div>
+              <!--<Table ref="selectionTable" class="mg-tp-15" border :loading="table1Loading" multiple
+                     :row-class-name="rowClassName"
+                     @on-sort-change="sortChange"
+                     :columns="columns1"
+                     :data="data1"
+                     :height="tableHeight"
+                     @on-row-click="tableRowClick"
+                     @on-selection-change="handleSelectionChange"
+                     :totalData="tableTotal"
+              >
+                <template slot-scope="{ row, index }" slot="switch">
+                  <span>{{ row.istrans === 'Y' ? '是' : '否' }}</span>
+                  &lt;!&ndash;<i-switch value="row.istrans === 'Y'" @on-change="">
+                    <span slot="open">开</span>
+                    <span slot="close">关</span>
+                  </i-switch>&ndash;&gt;
+                </template>
+                <template slot-scope="{ row, index }" slot="islock">
+                  &lt;!&ndash; 这个后端让取反&ndash;&gt;
+                  <span>{{ row.islock === 'Y' ? '否' : '是' }}</span>
+                </template>
+              </Table>-->
+              <div class="pd-tp-10">
+                <Page :total="page1.total" show-total
+                      :current="page1.current"
+                      :page-size="page1.pageSize"
+                      :page-size-opts="page1.pageSizeOpts"
+                      size="small"
+                      show-elevator show-sizer
+                      class-name=" flex flex-direction-row align-items-center justify-content-center"
+                      :transfer="true"
+                      @on-change="pageChange1"
+                      @on-page-size-change="pageSizeChange1"
+                />
+              </div>
+            </div>
+            <!--库存来源配置区-->
+            <Collapse v-model="collapseShow" class="mg-tp-15">
+              <Panel name="1">
+                {{$it('pL.b8')}}<!--配销仓-->
+                <div slot="content" class="">
+                  <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>
+                  <div class="pd-tp-10">
+                    <Page :total="page2.total" show-total
+                          :current="page2.current"
+                          :page-size="page2.pageSize"
+                          :page-size-opts="page2.pageSizeOpts"
+                          size="small"
+                          show-elevator show-sizer
+                          class-name=" flex flex-direction-row align-items-center justify-content-center"
+                          :transfer="true"
+                          @on-change="pageChange2"
+                          @on-page-size-change="pageSizeChange2"
+                    />
+                  </div>
+                </div>
+              </Panel>
+              <Panel name="2">
+                {{$it('pL.b9')}}<!--共享池-->
+                <div slot="content" class="">
+                  <Table border :columns="columns3" :data="data3"></Table>
+                </div>
+              </Panel>
+            </Collapse>
+            <!--<div class="br-d3d3d3 mg-tp-15 pd-10">
+              <div>
                 <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>
                 <div class="pd-tp-10">
-                  <Page :total="page2.total" show-total
+                  <Page :total="page2.total"
                         :current="page2.current"
                         :page-size="page2.pageSize"
                         :page-size-opts="page2.pageSizeOpts"
@@ -116,33 +144,9 @@
                   />
                 </div>
               </div>
-            </Panel>
-            <Panel name="2">
-              {{$it('pL.b9')}}<!--共享池-->
-              <div slot="content" class="">
-                <Table border :columns="columns3" :data="data3"></Table>
-              </div>
-            </Panel>
-          </Collapse>
-          <!--<div class="br-d3d3d3 mg-tp-15 pd-10">
-            <div>
-              <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>
-              <div class="pd-tp-10">
-                <Page :total="page2.total"
-                      :current="page2.current"
-                      :page-size="page2.pageSize"
-                      :page-size-opts="page2.pageSizeOpts"
-                      size="small"
-                      show-elevator show-sizer
-                      class-name=" flex flex-direction-row align-items-center justify-content-center"
-                      :transfer="true"
-                      @on-change="pageChange2"
-                      @on-page-size-change="pageSizeChange2"
-                />
-              </div>
-            </div>
-            <Table class="mg-tp-10" border :columns="columns3" :data="data3"></Table>
-          </div>-->
+              <Table class="mg-tp-10" border :columns="columns3" :data="data3"></Table>
+            </div>-->
+          </div>
         </template>
       </div>
     </div>

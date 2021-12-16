@@ -1,17 +1,17 @@
 <template>
   <div
-    class="payableAdjustmentList custom-main"
+    class="payableAdjustmentList custom-main customized-list"
     v-loading="agTableConfig.loading"
   >
-    <div class="returnBtn totalHeight custom-btn">
+    <div class="returnBtn totalHeight custom-btn customized-list-btn">
       <!-- 按钮 -->
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="returnForm totalHeight custom-form">
+    <div class="returnForm totalHeight custom-form customized-list-form">
       <!-- form表单 -->
       <OmsForm maxHeight="120" :form-config="formConfig" />
     </div>
-    <div class="salesTable custom-table">
+    <div class="salesTable custom-table customized-list-table">
       <!-- tab切换 -->
       <OmsLabel
         class="businessLabel totalHeight"
