@@ -62,21 +62,7 @@ console.log('CustomConfig.subTableConfig::', CustomConfig.subTableConfig);
 
 ### 三. 使用说明
 
-1.引入组件：
-
-```js
-import subTable from 'professionalComponents/subTable';
-```
-
-2.注册：
-
-```js
-components: {
-    subTable,
-},
-```
-
-3.data 中定义 subTableConfig：
+1.data 中定义 subTableConfig：
 
 ```js
 subTableConfig: {
@@ -87,8 +73,8 @@ subTableConfig: {
 },
 ```
 
-4.使用组件：
+2.使用组件：
 
 ```js
-<subTable :component-data="subTableConfig"></subTable>
+<SubTable :component-data="subTableConfig" />
 ```

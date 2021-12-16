@@ -29,16 +29,10 @@ import { Meta } from '@storybook/addon-docs';
 
 ### 二、使用说明
 
-> 引用
-
-```js
-import multipleBox from 'professionalComponents/multipleBox';
-```
-
 > 应用
 
 ```js
-<multipleBox
+<MultipleBox
   :values="values"
   :options="options"
   @changeOptions="checkOrderTypeChange"
@@ -47,9 +41,6 @@ import multipleBox from 'professionalComponents/multipleBox';
 
 ```js
 export default {
-  components: {
-    multipleBox,
-  },
   data() {
     return {
       options: [
