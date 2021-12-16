@@ -1,10 +1,10 @@
 <template>
-  <div class="auto-check channelRatioStrategyAddOrEdit public-main" v-loading="loading">
+  <div class="auto-check channelRatioStrategyAddOrEdit public-main customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&& !isActive" :text="$it('com.voided')"/> <!--已作废-->
-    <div class="operate left">
+    <div class="operate left customized-detail-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
-    <div class="public-content">
+    <div class="public-content customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
            {{$it('com.baseInformation')}}<!--基本信息-->
@@ -46,22 +46,24 @@
                 </el-input>
               </div>
             </div>
-            <Table :height="exclusiveStockData.length>10?'500px':''" border ref="selection"
-                   :columns="exclusiveStockColumns"
-                   :data="exclusiveStockData" @on-selection-change="handleSelectionChange">
-              <template slot-scope="{ row, index }" slot="switch">
-                <i-switch v-if="canEdit" :value="row.ISACTIVE==='是'" @on-change="switchFun(row, index)">
-                  <span slot="open">{{$it('com.yes')}}</span> <!--是-->
-                  <span slot="close">{{$it('com.no')}}</span><!--否-->
-                </i-switch>
-                <span v-else>row.ISACTIVE</span>
-              </template>
-            </Table>
+            <div class="customized-detail-table">
+              <Table :height="exclusiveStockData.length>10?'500px':''" border ref="selection"
+                     :columns="exclusiveStockColumns"
+                     :data="exclusiveStockData" @on-selection-change="handleSelectionChange">
+                <template slot-scope="{ row, index }" slot="switch">
+                  <i-switch v-if="canEdit" :value="row.ISACTIVE==='是'" @on-change="switchFun(row, index)">
+                    <span slot="open">{{$it('com.yes')}}</span> <!--是-->
+                    <span slot="close">{{$it('com.no')}}</span><!--否-->
+                  </i-switch>
+                  <span v-else>row.ISACTIVE</span>
+                </template>
+              </Table>
+            </div>
           </div>
         </Panel>
         <Panel name="operation_log" v-if="ID!=='-1'">
           {{$it('pL.operationLog')}} <!--操作日志-->
-          <div slot="content">
+          <div slot="content customized-detail-table">
             <Table :height="shareBaseInfoData.length>10?'500px':''" border :columns="shareBaseInfoColumns"
                    :data="shareBaseInfoData"></Table>
           </div>
