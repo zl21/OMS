@@ -241,11 +241,11 @@
 </template>
 
 <script>
-  import returngoodmanagement from '@/js/pages/orderCenter/returngood/returngoodmanagement';
+  import returnGoodObject from '@/js/pages/orderCenter/returngood/returnGoodObject';
 
-  export default returngoodmanagement;
+  export default returnGoodObject;
 </script>
 
 <style lang="less">
-@import '~@/css/pages/orderCenter/returngood/returngoodmanagement.less';
+@import '~@/css/pages/orderCenter/returngood/returnGoodObject.less';
 </style>

@@ -10,7 +10,7 @@ const { parse, parseArea } = require('@/assets/js/address/address-parse');
 
 parseArea(areaList);
 export default {
-  name: 'returngoodmanagement',
+  name: 'returnGoodObject',
   components: {
     OrderItem,
   },
