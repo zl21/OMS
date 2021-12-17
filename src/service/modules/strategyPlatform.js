@@ -266,4 +266,7 @@ export default {  //
     $network.post('/p/cs/ps/sku/v1/selSkuLike', params), // SKU查询
   dropDownSPUList: (params) =>
     $network.post('/p/cs/ps/pro/v1/selProLike', params), // SPU查询
+
+  queryAutoCheckLog: params =>
+    $network.post('/p/cs/st/v1/queryAutoCheckLog', params),
 }

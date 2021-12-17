@@ -1,17 +1,18 @@
 <template>
-  <div class="batchUpdateAutocheck">
-    <Spin v-show="loading" fix>
-      <Icon type="ios-loading" size="18" class="demo-spin-icon-load" />
-      <div>Loading</div>
-    </Spin>
-    <p style="margin-bottom: 5px">
-      已选中批量修改记录数: {{ idArray.length }}行
-    </p>
-    <div class="public-content">
+  <!-- TODO 待重构 -->
+  <div class="customized-detail" v-loading="loading">
+    <div class="customized-detail-btn">
+      <OmsButton :btn-config="btnConfig" />
+    </div>
+    <div class="customized-detail-main">
+      <p style="margin-bottom: 5px">
+        已选中批量修改记录数: {{ idArray.length }}行
+      </p>
       <Form ref="formValidate" :label-width="120" :model="info">
         <Collapse v-model="collapseShow">
           <Panel name="1">
-            基础资料
+            <!-- 基础资料 -->
+            {{ $it('pL.basicData') }}
             <div slot="content" class="content">
               <Row :gutter="1">
                 <Col span="6">
@@ -169,7 +170,8 @@
                 >
               </Row>
               <Row>
-                <Col span="2" style="padding-top: 8px">订单类型: </Col>
+                <!-- 订单类型 -->
+                <Col span="2" style="padding-top: 8px">{{ $it('fL.orderType') }}: </Col>
                 <Col span="5">
                   <FormItem label="是否正常订单：">
                     <Select
@@ -240,7 +242,8 @@
                     v-show="effectiveCondition[1].value == 'Y'"
                     >*</i
                   >
-                  <FormItem label="付款时间：">
+                  <!-- 付款时间 -->
+                  <FormItem :label="`${ $it('tL.paymentTime') }:`">
                     <Row>
                       <Col span="11">
                         <DatePicker
@@ -336,7 +339,8 @@
                     v-show="effectiveCondition[4].value == 'Y'"
                     >*</i
                   >
-                  <FormItem label="收货地址:">
+                  <!-- 收货地址 -->
+                  <FormItem :label="`${ $it('tL.shippingAddress') }:`">
                     <Input
                       v-model="info.RECEIVER_ADDRESS"
                       placeholder="包含关键字进行人工审核；多个关键字可依次填写，使用中文“，”隔开"
@@ -361,7 +365,8 @@
                   </Select>
                 </Col>
                 <Col span="11">
-                  <FormItem label="买家留言:">
+                  <!-- 买家留言 -->
+                  <FormItem :label="`${ $it('fL.buyer_message') }:`">
                     <Input
                       v-model="info.BUYER_REMARK"
                       placeholder="为空默认为有备注信息进行人工审核；多个关键字可依次填写，使用中文“，”隔开。"
@@ -400,9 +405,6 @@
           </Panel>
         </Collapse>
       </Form>
-    </div>
-    <div class="operate left">
-      <OmsButton :btn-config="btnConfig" />
     </div>
   </div>
 </template>

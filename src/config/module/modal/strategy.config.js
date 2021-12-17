@@ -44,4 +44,22 @@ export default {
       '@/views/modal/strategyPlatform/tablelist_copy.vue'
     ), // 复制
   },
+  SYNCSTOCKSTRATEGYIMPORT: {
+    component: () => import(
+      /* webpackChunkName: 'StrategyCenterModal' */
+      '@/views/modal/strategyPlatform/syncStockStrategyImport.vue'
+    ),
+  },
+  PRODUCTSTRATEGYSHOPSCALEIMPORT: {
+    component: () => import(
+      /* webpackChunkName: 'StrategyCenterModal' */
+      '@/views/modal/strategyPlatform/productStrategyShopScaleImport.vue'
+    ), // 店铺商品特殊设置-编辑-多店铺比例-明细导入
+  },
+  BATCHUPDATEAUTOCHECK: {
+    component: () => import(
+      /* webpackChunkName: 'StrategyCenterModal' */
+      '@/views/modal/strategyPlatform/batchUpdateAutocheck.vue'
+    ), //订单自动审核列表->批量修改
+  }
 };
