@@ -1,6 +1,6 @@
 {
-  "name": "oms-i18n",
-  "version": "1.1.19",
+  "name": "@alanh/oms-i18n",
+  "version": "1.0.0",
   "description": "burgeon company's internationalization lib for private npm",
   "files": [
     "burgeon.publish"
