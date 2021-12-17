@@ -1,5 +1,5 @@
 <template>
-  <div class="sendSingleRule public-main custom-main" v-loading="saveLoading">
+  <div class="sendSingleRule custom-main" v-loading="saveLoading">
     <div class="custom-btn">
       <OmsButton
       :btn-config="btnConfig"

@@ -1,6 +1,6 @@
 <!--组合商品编码新增和编辑页面-->
 <template>
-  <div class="jq-combined-commodity public-main custom-main">
+  <div class="jq-combined-commodity custom-main">
     <div
       v-if="objid == '-1'"
       class="jq-combined-commodity-new"

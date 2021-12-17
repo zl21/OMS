@@ -1,6 +1,6 @@
 <template>
-  <div class="financialManageCenter public-main custom-main customized-detail" v-loading="loading">
-    <div class="buttons custom-btn customized-detail-btn">
+  <div class="financialManageCenter customized-detail" v-loading="loading">
+    <div class="buttons customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content customized-detail-main">

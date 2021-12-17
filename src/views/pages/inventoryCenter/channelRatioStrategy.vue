@@ -1,5 +1,5 @@
 <template>
-  <div class="auto-check channelRatioStrategyAddOrEdit public-main customized-detail" v-loading="loading">
+  <div class="auto-check channelRatioStrategyAddOrEdit customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&& !isActive" :text="$it('com.voided')"/> <!--已作废-->
     <div class="operate left customized-detail-btn">
       <OmsButton :btn-config="btnConfig"/>

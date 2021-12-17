@@ -1,5 +1,5 @@
 <template>
-  <div class="logisticsArea public-main custom-main" v-loading="loading">
+  <div class="logisticsArea custom-main" v-loading="loading">
     <div class="custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>

@@ -1,8 +1,8 @@
 <template>
   <!-- 退换货订单新增 -->
-  <div class="returngood public-main custom-main customized-detail" v-loading="loading">
+  <div class="returngood customized-detail" v-loading="loading">
     <!--按钮块-->
-    <div class="returnAddBtn custom-btn customized-detail-btn">
+    <div class="returnAddBtn customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="public-content customized-detail-main">
@@ -101,7 +101,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="salesTable custom-table customized-detail-table">
+      <div class="salesTable customized-detail-table">
         <!-- tab切换 -->
         <OmsLabel
           class="businessLabel"
