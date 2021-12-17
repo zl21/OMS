@@ -31,53 +31,42 @@ import { Meta } from '@storybook/addon-docs';
 
 ```js
 props: {
-    version:"1.4"
-    colname:"CP_C_SHOP_ID"
-    fkid:169130
-    single:true
-    inputBox:false
-    itemdata: {
-        col:1,
-        "colid":169130,
-        "colname":"CP_C_SHOP_ID",
-        "datelimit":"all",
-        "display":"text",
-        "fkdisplay":"drp",
-        "fkdesc":"店铺",
-        "inputname":"CP_C_SHOP_ID:ECODE",
-        "isfk":true,
-        "isnotnull":true,
-        "isuppercase":false,
-        "length":65535,
-        "name":"店铺","readonly":false,
-        "reftable":"CP_C_SHOP",
-        "reftableid":10348,
-        "row":1,
-        "statsize":-1,
-        "type":"STRING",
-        "valuedata":"Mini巴拉唯品会童鞋店",
-        "pid":"75"
-    }
+  version:"1.4"
+  colname:"CP_C_SHOP_ID"
+  fkid:169130
+  single:true
+  inputBox:false
+  itemdata: {
+    col:1,
+    "colid":169130,
+    "colname":"CP_C_SHOP_ID",
+    "datelimit":"all",
+    "display":"text",
+    "fkdisplay":"drp",
+    "fkdesc":"店铺",
+    "inputname":"CP_C_SHOP_ID:ECODE",
+    "isfk":true,
+    "isnotnull":true,
+    "isuppercase":false,
+    "length":65535,
+    "name":"店铺","readonly":false,
+    "reftable":"CP_C_SHOP",
+    "reftableid":10348,
+    "row":1,
+    "statsize":-1,
+    "type":"STRING",
+    "valuedata":"Mini巴拉唯品会童鞋店",
+    "pid":"75"
+  }
 }
 ```
 
 ### 三、使用说明
 
-> js
+> xxx.vue
 
 ```js
-import fktable from 'professionalComponents/fktable';
-export default {
-  components: {
-    fktable,
-  },
-};
-```
-
-> html
-
-```js
- <fk-table
+ <Fktable
     :version="version"
     :input-box="inputbox"
     :fkid="itemdata.colid"

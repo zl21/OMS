@@ -53,61 +53,53 @@ on: {
 1. 引入组件：
 
 ```js
-import myInput from 'professionalComponents/fkinput.vue';
-import Vue from 'vue';
-Vue.component('drpInput', myInput);
+import BC from 'burgeonComponents';
+const { Components } = BC;
+Vue.component('drpInput', Components.Fkinput);
 ```
 
-2. 注册：
-
-```js
-components: {
-    	myInput,
-},
-```
-
-3. render：
+2. render：
 
 ```js
 tableConfig: {
-        pageShow: true,
-        total: 0,
-        pageSize: 10,
-        current: 1,
-        isShowSelection: true, // 展示select列
-        indexColumn: true, // 展示序号列
-        columns: [
-          {
-            title: '换吊牌后条码',
-            key: 'OLD_BARCODE',
-            render: (h, params) => h('drpInput', {
-              props: {
-                colname: 'OLD_BARCODE',
-                style: 'popInput',
-                version: '1.4',
-                isActive: true,
-                itemdata: this.itemdata,
-              },
-              style: {
-                marginRight: '5px',
-              },
-              on: {
-                getFkChooseItem: (val) => {
-                  console.log('val:', val);
-                  console.log('params:', params);
-                  this.getFkChooseItem(val, params);
-                },
-              },
-            }),
+  pageShow: true,
+  total: 0,
+  pageSize: 10,
+  current: 1,
+  isShowSelection: true, // 展示select列
+  indexColumn: true, // 展示序号列
+  columns: [
+    {
+      title: '换吊牌后条码',
+      key: 'OLD_BARCODE',
+      render: (h, params) => h('drpInput', {
+        props: {
+          colname: 'OLD_BARCODE',
+          style: 'popInput',
+          version: '1.4',
+          isActive: true,
+          itemdata: this.itemdata,
+        },
+        style: {
+          marginRight: '5px',
+        },
+        on: {
+          getFkChooseItem: (val) => {
+            console.log('val:', val);
+            console.log('params:', params);
+            this.getFkChooseItem(val, params);
           },
-        ],
-        data: [{
-          PICK_NO: 1, PS_C_SKU_ECODE: 1, TOT_QTY_OUT: 1, OLD_BARCODE: ''
-        }],
-      },
+        },
+      }),
+    },
+  ],
+  data: [{
+    PICK_NO: 1, PS_C_SKU_ECODE: 1, TOT_QTY_OUT: 1, OLD_BARCODE: ''
+  }],
+},
 ```
 
-4. 可能要写的样式：
+3. 可能要写的样式：
 
 ```js
 <style lang="less" scoped>

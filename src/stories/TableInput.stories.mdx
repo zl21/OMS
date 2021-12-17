@@ -29,11 +29,7 @@ table 表格中使用的表单控件，支持的控件类型有日期控件、�
 
 ### 二、配置说明
 
-> 引用
-
-```js
-import tableInput from 'professionalComponents/businessTableInput';
-```
+> 应用
 
 ```js
 props: {
@@ -56,96 +52,84 @@ props: {
 
 ##### 场景一： 表格 render 字段
 
-> js
+> xxx.vue
 
 ```js
-import tableInput from 'professionalComponents/businessTableInput';
-import businessActionTable from 'professionalComponents/businessActionTable';
-export default {
-  components: {
-    businessActionTable,
-  },
-};
-```
-
-> html
-
-```js
-<businessActionTable
+<OmsTable
     :jordan-table-config="logisticsTableConfig"
 />
 ```
 
 ```js
-  logisticsTableConfig: {
-    data: [
-      { DOWNLOAD_TIME: '2021-02-03', IS_DOWNLOAD: true },
-      { DOWNLOAD_TIME: '2021-06-08', IS_DOWNLOAD: false }
-    ],
-    columns: [
-      {
-        key: "IS_DOWNLOAD",
-        title: "是否下载",
-        render: (h, params) => {
-          const _this = this;
-          return h(tableInput, {
-            style: {
-              width: '100%'
-            },
-            props: {
-              tableFormConfig: {
-                formData: [
-                  {
-                    style: "checkbox", //勾选框类型
-                    width: "24", //所占的宽度
-                    value: params.row.IS_DOWNLOAD,
-                    radioChange: (e) => {
-                      console.log(e)
-                    }
+logisticsTableConfig: {
+  data: [
+    { DOWNLOAD_TIME: '2021-02-03', IS_DOWNLOAD: true },
+    { DOWNLOAD_TIME: '2021-06-08', IS_DOWNLOAD: false }
+  ],
+  columns: [
+    {
+      key: "IS_DOWNLOAD",
+      title: "是否下载",
+      render: (h, params) => {
+        const _this = this;
+        return h(tableInput, {
+          style: {
+            width: '100%'
+          },
+          props: {
+            tableFormConfig: {
+              formData: [
+                {
+                  style: "checkbox", //勾选框类型
+                  width: "24", //所占的宽度
+                  value: params.row.IS_DOWNLOAD,
+                  radioChange: (e) => {
+                    console.log(e)
                   }
-                ]
-              }
+                }
+              ]
             }
-          })
-        }
-      },
-      {
-        key: "DOWNLOAD_TIME",
-        title: "下载时间",
-        render: (h, params) => {
-          const _this = this;
-          return h(tableInput, {
-            style: {
-              width: '100%'
-            },
-            props: {
-              tableFormConfig: {
-                formData: [
-                  {
-                    style: "date",
-                    value: params.row.DOWNLOAD_TIME,
-                    format: "yyyy-MM-dd",
-                    width: "24",
-                    transfer: true,
-                    onChange: (e) => {
-                      console.log(e)
-                    }
-                  }
-                ]
-              }
-            }
-          })
-        }
+          }
+        })
       }
-    ]
-  }
+    },
+    {
+      key: "DOWNLOAD_TIME",
+      title: "下载时间",
+      render: (h, params) => {
+        const _this = this;
+        return h(tableInput, {
+          style: {
+            width: '100%'
+          },
+          props: {
+            tableFormConfig: {
+              formData: [
+                {
+                  style: "date",
+                  value: params.row.DOWNLOAD_TIME,
+                  format: "yyyy-MM-dd",
+                  width: "24",
+                  transfer: true,
+                  onChange: (e) => {
+                    console.log(e)
+                  }
+                }
+              ]
+            }
+          }
+        })
+      }
+    }
+  ]
+}
 ```
 
 ![ TableInput -1.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e3fbc8976be3457cb97a41a94c4fc71e~tplv-k3u1fbpfcp-watermark.image?)
 
 ### 四、API
 
-#### businessTableInput Props
+#### TableInput Props
 
 | 属性            | 说明                                                                          | 类型   | 默认值 |
 | --------------- | ----------------------------------------------------------------------------- | ------ | ------ |

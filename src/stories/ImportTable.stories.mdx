@@ -28,8 +28,8 @@ import { Meta } from '@storybook/addon-docs';
  *               tempApi:"", // 下载模板的Api，必须
  *               tempUrl:"", // 下载模板的Url（后端直接给了个下载链接，不需要请求接口的情况）
  *               tempParm:"", // 下载模板的传参数，默认无
- *               downApi:"", // 上传Handel的Api，必须
- *               downParm:"", // 上传Handel的Api，默认无
+ *               okApi:"", // 上传Handel的Api，必须
+ *               okParm:"", // 上传Handel的入参，默认无
  *               downErrorInfo:false, // 是否以表格的形式下载错误信息，默认false
  *               showErrorInfo:false, // 是否在当前导入弹框内展示错误信息，默认false
  *               buttonPermission:false, // 是否要控制按钮的disable属性
@@ -57,7 +57,7 @@ const importConfig = {
     tableName: 'V_CP_C_REGION_ALIAS',
     webname: 'regionImport',
     tempApi: '/r3-cp/p/cs/cp/import/v1/region/template',
-    downApi: '/r3-cp/p/cs/cp/import/v1/region/import',
+    okApi: '/r3-cp/p/cs/cp/import/v1/region/import',
     downErrorInfo: true,
   },
 };
@@ -73,71 +73,60 @@ CustomConfig.editCusImport(importTableConfig);
 - #### 使用场景二：全定制页面的导入
   `组件文件中（A.vue）`
 
-1. 引入组件：
+1. data 中定义 importTable：
 
 ```js
-import businessDialog from 'professionalComponents/businessDialog';
-```
+import BC from 'burgeonComponents';
+const { Components } = BC;
 
-2. 注册：
-
-```js
-components: {
-    businessDialog,
+importTable: {
+  refFuns: 'confirmFun',
+  confirmTitle: '条件信息导入',
+  titleAlign: 'center', // 设置标题是否居中 center left
+  width: '600',
+  scrollable: false, // 是否可以滚动
+  closable: true, // 是否可以按esc关闭
+  draggable: true, // 是否可以拖动
+  mask: true, // 是否显示遮罩层
+  maskClosable: true, // 是否可以点击叉号关闭
+  transfer: true, // 是否将弹层放在body内
+  name: 'importTable', // 组件名称
+  url: Components.ImportTable,
+  keepAlive: true,
+  excludeString: 'importTable', // 将name传进去，确认不缓存
+  componentData: {},
 },
 ```
 
-3. data 中定义 importTable：
-
-```js
-importTable: {
-    refFuns: 'confirmFun',
-    confirmTitle: '条件信息导入',
-    titleAlign: 'center', // 设置标题是否居中 center left
-    width: '600',
-    scrollable: false, // 是否可以滚动
-    closable: true, // 是否可以按esc关闭
-    draggable: true, // 是否可以拖动
-    mask: true, // 是否显示遮罩层
-    maskClosable: true, // 是否可以点击叉号关闭
-    transfer: true, // 是否将弹层放在body内
-    name: 'importTable', // 组件名称
-    basePathName: 'business-components',
-    url: 'importTable',
-    keepAlive: true,
-    excludeString: 'importTable', // 将name传进去，确认不缓存
-    componentData: {},
- },
-```
-
-4. method 中定义按钮点击事件：
+2. method 中定义按钮点击事件：
 
 ```js
 methods: {
-    importData() {
-      const componentData = {
-        isAction: false,
-        tableName: 'ORDER',
-        webname: 'import',
-        tempApi: '/p/cs/ps/import/v1/sku/template',
-        tempParm: null,
-        downApi: '/p/cs/ps/import/v1/sku/update',
-        downParm: null,
-        downErrorInfo: true,
-        showErrorInfo: false,
-        // freshPage: Fn,
-        importNotes: false,
-        dontShowDownloadA: false,
-      }
-      this.importTable.componentData = componentData;
-      this.$children.find((item) => item.name === 'importTable').openConfirm();
-    },
+  importData() {
+    const componentData = {
+      isAction: false,
+      tableName: 'ORDER',
+      webname: 'import',
+      tempApi: '/p/cs/ps/import/v1/sku/template',
+      tempParm: null,
+      okApi: '/p/cs/ps/import/v1/sku/update',
+      okParm: null,
+      downErrorInfo: true,
+      showErrorInfo: false,
+      // freshPage: Fn,
+      importNotes: false,
+      dontShowDownloadA: false,
+    }
+    this.importTable.componentData = componentData;
+    this.$children.find((item) => item.name === 'importTable').openConfirm();
+  },
+}
 ```
 
-5. 使用组件：
+3. 使用组件：
 
 ```js
-<businessDialog
+<OmsDialog
   :closable="importTable.closable"
   :component-data="importTable.componentData"
   :draggable="importTable.draggable"

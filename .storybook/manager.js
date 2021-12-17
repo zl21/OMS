@@ -3,7 +3,7 @@ import { addons } from '@storybook/addons';
 import { create } from '@storybook/theming';
 import { themes } from '@storybook/theming';
 import img from '../static/img/icon.svg'
-import logo from '../favicon.ico'
+import logo from '../public/favicon.ico'
 // import '../theme.less'
 import '!style-loader!css-loader!less-loader!../theme.less';
 

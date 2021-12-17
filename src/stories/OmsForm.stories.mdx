@@ -15,7 +15,7 @@ import { Meta } from '@storybook/addon-docs';
 
 <div className="subheading">NPM 安装</div> -->
 
-## businessForm 组件的使用说明
+## OmsForm 组件的使用说明
 
 ### 一. 介绍
 
@@ -97,23 +97,23 @@ import { Meta } from '@storybook/addon-docs';
 	width: '6',
 	inputList: [], // 用于联动查询
 	// rules: true, //必选标识,值不为required时无标识
-itemdata: {
-	colid: 166758, // 字段id
-	colname: 'PS_C_BRAND', // 当前字段的名称 用来显示的
-	display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
-	fkdisplay: 'drp', // 外键关联类型
-	fkdesc: '品牌',
-	inputname: 'PS_C_BRAND:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
-	isfk: true, // 是否有fk键
-	isnotnull: true, // 是否必填
-	name: window.vmI18n.t('table_label.brand'), // 品牌
-	readonly: false, // 是否可编辑，对应input readonly属性
-	reftable: 'PS_C_BRAND', // 关联的表
-	reftableid: 23051, // 关联的表ID
-	pid: '', // 选择后选中数据的ID
-	valuedata: '' // 选择后用于展示的值
-	refcolval: {}, // 用于联动查询
-},
+	itemdata: {
+		colid: 166758, // 字段id
+		colname: 'PS_C_BRAND', // 当前字段的名称 用来显示的
+		display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+		fkdisplay: 'drp', // 外键关联类型
+		fkdesc: '品牌',
+		inputname: 'PS_C_BRAND:ENAME', // 这个是做中文类型的模糊查询字段，例如ENAME
+		isfk: true, // 是否有fk键
+		isnotnull: true, // 是否必填
+		name: window.vmI18n.t('table_label.brand'), // 品牌
+		readonly: false, // 是否可编辑，对应input readonly属性
+		reftable: 'PS_C_BRAND', // 关联的表
+		reftableid: 23051, // 关联的表ID
+		pid: '', // 选择后选中数据的ID
+		valuedata: '' // 选择后用于展示的值
+		refcolval: {}, // 用于联动查询
+	},
 	oneObj: val => {}// 选中触发事件
 },
 ```
@@ -140,31 +140,32 @@ refcolval: {
 
 `参考：addAliasOrRegion.vue 的relationShip()方法`
 
-```javascript
 如.
-	{
-		style: 'popInput',
-		width: '6',
-		inputList: [], // 用于联动查询，若当前为‘市’的配置，则此inputList里面要push的是‘省’的itemdata
-		itemdata: {
-			colid: 166758,
-			colname: 'CITY',
-			fkdisplay: 'drp',
-			isnotnull: true,
-			name: '市',
-			readonly: false,
-			reftable: 'CITY_TABLE',
-			reftableid: 23051,
-			pid: '',
-			valuedata: ''
-			refcolval: {
-				fixcolumn: "C_UP_ID",
-				expre: "equal", // 相等
-				srccol: "PROVINCE", // ‘省’字段
-			}, // 用于联动查询
-		},
-		oneObj: val => {}
+
+```javascript
+{
+	style: 'popInput',
+	width: '6',
+	inputList: [], // 用于联动查询，若当前为‘市’的配置，则此inputList里面要push的是‘省’的itemdata
+	itemdata: {
+		colid: 166758,
+		colname: 'CITY',
+		fkdisplay: 'drp',
+		isnotnull: true,
+		name: '市',
+		readonly: false,
+		reftable: 'CITY_TABLE',
+		reftableid: 23051,
+		pid: '',
+		valuedata: ''
+		refcolval: {
+			fixcolumn: "C_UP_ID",
+			expre: "equal", // 相等
+			srccol: "PROVINCE", // ‘省’字段
+		}, // 用于联动查询
 	},
+	oneObj: val => {}
+},
 ```
 
 ---
@@ -183,26 +184,26 @@ refcolval: {
 
 ```javascript
 formData: [
-          {
-            colname: 'PS_C_SPEC_GROUP_ID1',
-            style: 'DropDownSelectFilter', // ark里的弹框单多选
-            label: '规格名称二',
-            width: '6',
-            single:true, // 是否是单选，可选值为 true、false
-            pageSize: 10, // 每页条数
-            columns:['name','value'],// 展现的组???
-            showColnameKey:"'show'",
-            itemdata: {
-              totalRowCount: 39, // 数据总条数
-              AutoData: [], // 模糊搜索的数据
-              data:this.popData, // 下拉气泡表格里数据
-            },
-            changePage:()=>{}, // 页码改变时触发
-            InputValueChange:()=>{}, // 输入框输入时触发，模糊查询
-			fkrpSelected:()=>{}, // 选中值时触发
-			clearInput:()=>{}, // 点击清空的小叉号icon时触发
-          },
-        ],
+	{
+		colname: 'PS_C_SPEC_GROUP_ID1',
+		style: 'DropDownSelectFilter', // ark里的弹框单多选
+		label: '规格名称二',
+		width: '6',
+		single:true, // 是否是单选，可选值为 true、false
+		pageSize: 10, // 每页条数
+		columns:['name','value'],// 展现的组???
+		showColnameKey:"'show'",
+		itemdata: {
+			totalRowCount: 39, // 数据总条数
+			AutoData: [], // 模糊搜索的数据
+			data:this.popData, // 下拉气泡表格里数据
+		},
+		changePage:()=>{}, // 页码改变时触发
+		InputValueChange:()=>{}, // 输入框输入时触发，模糊查询
+		fkrpSelected:()=>{}, // 选中值时触发
+		clearInput:()=>{}, // 点击清空的小叉号icon时触发
+	},
+],
 ```
 
 ##### 2) 图例：

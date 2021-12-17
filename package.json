@@ -10,8 +10,8 @@
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js",
     "report": "npm run build --report",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "repository": {
     "type": "git",
