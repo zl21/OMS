@@ -1,12 +1,21 @@
 /* eslint-disable */
 const path = require('path');
 const webpack = require('webpack');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 const burgeonPlugins = [
   new webpack.DefinePlugin({
     'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
   }),
   new webpack.HotModuleReplacementPlugin(),
+  new copyWebpackPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, "./src/langs/zh_CN"),
+        to: path.resolve(__dirname, "./burgeon.publish/langs/zh_CN")
+      },
+    ],
+  })
 ]
 if (process.env.npm_config_report) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
