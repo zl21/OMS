@@ -1,11 +1,11 @@
 <template>
   <!-- 退换货订单新增 -->
-  <div class="returngood public-main custom-main" v-loading="loading">
+  <div class="returngood public-main custom-main customized-detail" v-loading="loading">
     <!--按钮块-->
-    <div class="returnAddBtn custom-btn">
+    <div class="returnAddBtn custom-btn customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="public-content customized-detail-main">
       <div class="returnAddColl">
         <Collapse v-model="openDefault">
           <Panel name="1">
@@ -101,7 +101,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="salesTable custom-table">
+      <div class="salesTable custom-table customized-detail-table">
         <!-- tab切换 -->
         <OmsLabel
           class="businessLabel"
@@ -241,11 +241,11 @@
 </template>
 
 <script>
-  import returngoodmanagement from '@/js/pages/orderCenter/returngood/returngoodmanagement';
+  import returnGoodObject from '@/js/pages/orderCenter/returngood/returnGoodObject';
 
-  export default returngoodmanagement;
+  export default returnGoodObject;
 </script>
 
 <style lang="less">
-@import '~@/css/pages/orderCenter/returngood/returngoodmanagement.less';
+@import '~@/css/pages/orderCenter/returngood/returnGoodObject.less';
 </style>

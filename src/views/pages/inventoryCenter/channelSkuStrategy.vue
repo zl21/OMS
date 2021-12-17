@@ -1,10 +1,10 @@
 <template>
-  <div class="auto-check channelSkuStrategyAddOrEdit public-main" v-loading="loading">
+  <div class="auto-check channelSkuStrategyAddOrEdit public-main customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
-    <div class="operate left">
+    <div class="operate left customized-detail-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
-    <div class="public-content">
+    <div class="public-content customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
@@ -16,7 +16,7 @@
         <Panel name="exclusive_stock">
           <!-- 独享库存 -->
           {{ $it('pL.bg') }}
-          <div slot="content">
+          <div slot="content" class="customized-detail-table">
             <OmsForm v-if="canEdit" ref="exclusiveStock" :form-config="formConfig2"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
               <div class="flex flex-direction-row align-items-center">
@@ -60,7 +60,7 @@
         <Panel name="share_baseInfo">
           <!-- 共享库存 -->
           {{ $it('pL.bg') }}
-          <div slot="content">
+          <div slot="content" class="customized-detail-table">
             <OmsForm v-if="canEdit" :form-config="formConfig3"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
               <div class="flex flex-direction-row align-items-center ">

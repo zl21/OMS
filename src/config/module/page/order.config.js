@@ -74,7 +74,7 @@ export default {
   RETURNGOOD: {
     component: () => import(
       /* webpackChunkName: 'OrderCenterPage' */
-      'allpages/orderCenter/returngood/returngoodmanagement.vue'
+      'allpages/orderCenter/returngood/returnGoodObject.vue'
     ),
     // component: returnGood,
     labelName: $it('menu.b7'), //退货单详情

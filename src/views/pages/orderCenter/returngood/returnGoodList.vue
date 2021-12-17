@@ -1,14 +1,14 @@
 <template>
-  <div class="returnGoodList custom-main">
-    <div class="returnBtn totalHeight custom-btn">
+  <div class="returnGoodList custom-main customized-list">
+    <div class="returnBtn totalHeight custom-btn customized-list-btn">
       <!-- 按钮 -->
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="returnForm totalHeight custom-form">
+    <div class="returnForm totalHeight custom-form customized-list-form">
       <!-- form表单 -->
       <OmsForm maxHeight="120" v-if="resetForm" :form-config="formConfig" />
     </div>
-    <div class="salesTable custom-table">
+    <div class="salesTable custom-table customized-list-table">
       <!-- tab切换 -->
       <OmsLabel class="businessLabel totalHeight" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
       <!-- 列表组件 -->

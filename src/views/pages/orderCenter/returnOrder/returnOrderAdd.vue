@@ -1235,7 +1235,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "~@/css/pages/orderCenter/returngood/returngoodmanagement.less";
+@import "~@/css/pages/orderCenter/returngood/returnGoodObject.less";
 .returnOrderAdd {
   /deep/ .returnChangeOrderdetails {
     .businessButtons-box .button-combina .button-content {

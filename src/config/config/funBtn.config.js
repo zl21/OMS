@@ -7,7 +7,9 @@ class BtnConfig {
   //是否单对象界面: 0否1是;
   static singleType = 0;
   static btnKey = '';
-  constructor() { }
+  constructor(site) {
+    this.customConfig.btnsite = site || 'left'
+  }
 
   customConfig = {
     typeAll: 'default', // 按钮统一风格样式
@@ -373,8 +375,8 @@ class BtnConfig {
     ],
   }
 
-  static config() {
-    return new BtnConfig().customConfig;
+  static config(a) {
+    return new BtnConfig(a).customConfig;
   }
   // 单对象直接调方法;
 

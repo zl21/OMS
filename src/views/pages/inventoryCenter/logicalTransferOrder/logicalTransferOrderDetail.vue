@@ -1,7 +1,7 @@
 <template>
   <div
     v-loading="fileImport"
-    class="ff-order-detail"
+    class="ff-order-detail customized-modal"
   >
     <div class="ff-order-detail-search-box">
       <matrix-input
@@ -196,7 +196,7 @@
     <!-- 批量修改折扣 -->
     <Modal
       v-model="updateSalePriceFlag"
-      class="orderDetailModal"
+      class="orderDetailModal ark-dialog"
       :mask="true"
       :loading="discountLoading"
       :title="$it('mT.aj')"

@@ -1,11 +1,11 @@
 <!-- 退货入库新增、详情 -->
 <template>
-  <div class="returnTreasurys public-main custom-main" v-loading="loading">
+  <div class="returnTreasurys public-main custom-main customized-detail" v-loading="loading">
     <!--按钮块-->
-    <div class="returnTreasurysBtn custom-btn">
+    <div class="returnTreasurysBtn custom-btn customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="public-content customized-detail-main">
       <!-- form表单 -->
       <div class="TreasuryDefault">
         <Collapse v-model="openDefault">
@@ -18,7 +18,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="salesTable custom-table">
+      <div class="salesTable custom-table customized-detail-table">
         <!-- tab切换 -->
         <OmsLabel
           class="businessLabel"
