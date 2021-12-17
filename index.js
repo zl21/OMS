@@ -6,13 +6,9 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/src/index.js
  */
-
-const Utils = {}
-let Components
-let install
-
 let comJS = require.context('burgeonComponents/common/js/', false, /\.js$/);
 
+const Utils = {}
 comJS.keys().forEach(key => {
 	if (key == './utils.js') {
 		Utils.CM = comJS(key).default
@@ -24,12 +20,12 @@ comJS.keys().forEach(key => {
 Utils.unZip = require('./src/common/js/zip/index').default
 
 const context = require.context('burgeonComponents/view/', false, /\.vue$/);
-Components = Utils.CM.exportModules(context);
+const Components = Utils.CM.exportModules(context);
 
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/);
 const Directives = Utils.CM.exportModules(directiveFiles)
 
-install = function (Vue, opts = {}) {
+const install = function (Vue, opts = {}) {
 	context.keys().forEach((key) => {
 		const component = context(key).default;
 		Vue.component(component.name, component)
@@ -43,10 +39,16 @@ install = function (Vue, opts = {}) {
 	Vue.prototype.$utils = Utils.CM;
 }
 
-
-export default {
+const BC = {
 	install,
 	Components,
 	Utils,
 	version: require('./package.json').version,
-};
+}
+ 
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
+	window.BC = BC;
+}
+
+export default BC;
