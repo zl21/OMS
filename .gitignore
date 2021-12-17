@@ -9,4 +9,5 @@ dist/
 *.tgz
 __ignore__/
 project.config.js
+burgeon.publish
 

@@ -1,27 +1,22 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import zh from './langs/zh_CN/zh'
-import en from './langs/en_US/en'
-import ja from './langs/ja-JP/ja'
+import zh from '@/langs/zh_CN/zh'
+import en from '@/langs/en_US/en'
+import ja from '@/langs/ja-JP/ja'
 // import ja from './langs/ja'
-import ChineseDictionary from './langs/ChineseDictionary'
+import ChineseDictionary from '@/langs/ChineseDictionary'
 
 Vue.use(VueI18n)
 
 const messages = {
-  en: Object.assign(en,ChineseDictionary),
-  zh: Object.assign(zh,ChineseDictionary),
-  ja: Object.assign(ja,ChineseDictionary),
+  en: Object.assign(en, ChineseDictionary),
+  zh: Object.assign(zh, ChineseDictionary),
+  ja: Object.assign(ja, ChineseDictionary),
 }
 
 if (!localStorage.getItem('locale')) {
   localStorage.setItem('locale', 'zh');
 }
-
-var i18n = new VueI18n({
-  locale: localStorage.getItem('locale') || 'zh',
-  messages 
-})
 
 VueI18n.prototype.editI18n = function (obj) {
   const lan = i18n.locale;
@@ -40,7 +35,10 @@ VueI18n.prototype.editI18n = function (obj) {
       }
     }
   }
-  // i18n.messages[lan] = lanData;
 }
+VueI18n.prototype.version = require('./package.json').version
 
-export default i18n
+export default new VueI18n({
+  locale: localStorage.getItem('locale') || 'zh',
+  messages
+})
