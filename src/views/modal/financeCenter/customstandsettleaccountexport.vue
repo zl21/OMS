@@ -1,6 +1,6 @@
 <template>
   <div style="width:400px">
-    <p>当前导出较慢，请耐心等待!</p>
+    <p>本次操作已后台处理，是否至<a href="/SYSTEM/TABLE/CP_C_TASK/24386">[我的任务]</a>查看</p>
     <jordanBtn :btnConfig="exportBtnConfig"></jordanBtn>
   </div>
 </template>
