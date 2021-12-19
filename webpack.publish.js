@@ -41,7 +41,7 @@ module.exports = () => ({
     filename: 'businessComponents.min.js',
     path: path.join(__dirname, './burgeon.publish'),
     globalObject: 'this',
-    library: 'Burgeon',
+    library: '$BC',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     clean: true,
