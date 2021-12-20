@@ -95,6 +95,7 @@
 
 <style lang="less">
 // @import '~burgeonComponents/burgeon.publish/common/css/theme.less';
-@import url(https://cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/common/css/theme.less);
+@import url(https://unpkg.zhimg.com/@alanh/oms-ui@2.0.7/burgeon.publish/common/css/theme.less);
+
 
 </style>
