@@ -932,7 +932,7 @@ export default {
       this.returnLogTableLoad = false;
       if (res.data.code === 0) {
         const resData = res.data.data;
-        const dateFormat = this.$comUtils.dateFormat;
+        const dateFormat = $utils.dateFormat;
         resData.forEach(val => {
           val.CREATIONDATE = dateFormat(new Date(val.CREATIONDATE || ''), 'yyyy-MM-dd hh:mm:ss');
         });
@@ -951,7 +951,7 @@ export default {
       //   this.returnLogTableLoad = false;
       //   if (res.data.code === 0) {
       //     const resData = res.data.data;
-      //     const dateFormat = this.$comUtils.dateFormat;
+      //     const dateFormat = $utils.dateFormat;
       //     resData.forEach(val => {
       //       val.CREATIONDATE = dateFormat(new Date(val.CREATIONDATE || ''), 'yyyy-MM-dd hh:mm:ss');
       //     });
