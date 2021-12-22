@@ -22,7 +22,7 @@
         </Panel>
       </Collapse>
 
-      <div v-if="pageShow" class="customized-detail-table">
+      <div v-if="pageShow" class="obj-table">
         <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

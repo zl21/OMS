@@ -46,7 +46,7 @@
                 </el-input>
               </div>
             </div>
-            <div class="customized-detail-table">
+            <div class="obj-table">
               <Table :height="exclusiveStockData.length>10?'500px':''" border ref="selection"
                      :columns="exclusiveStockColumns"
                      :data="exclusiveStockData" @on-selection-change="handleSelectionChange">
@@ -63,7 +63,7 @@
         </Panel>
         <Panel name="operation_log" v-if="ID!=='-1'">
           {{$it('pL.operationLog')}} <!--操作日志-->
-          <div slot="content customized-detail-table">
+          <div slot="content obj-table">
             <Table :height="shareBaseInfoData.length>10?'500px':''" border :columns="shareBaseInfoColumns"
                    :data="shareBaseInfoData"></Table>
           </div>

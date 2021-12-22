@@ -18,7 +18,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="salesTable customized-detail-table">
+      <div class="salesTable obj-table">
         <!-- tab切换 -->
         <OmsLabel
           class="businessLabel"

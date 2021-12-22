@@ -88,7 +88,7 @@
         </Panel>
       </Collapse>
 
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel
           v-show="ID != -1"

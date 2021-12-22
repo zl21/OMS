@@ -76,7 +76,7 @@
       </Collapse>
 
 
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

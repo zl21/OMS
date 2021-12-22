@@ -328,7 +328,7 @@
           </div>
         </Panel>
       </Collapse>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <div v-show="id != '-1'">
           <OmsLabel
             :label-list="label.labelList"

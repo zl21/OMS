@@ -22,7 +22,7 @@
         </Panel>
       </Collapse>
       <div class="flex flex-direction-row">
-        <div class="br-d3d3d3 mg-rt-5 flex-1 pd-tp-5 pd-rt-5 customized-detail-table">
+        <div class="br-d3d3d3 mg-rt-5 flex-1 pd-tp-5 pd-rt-5 obj-table">
           <OmsForm v-if="isActive" :form-config="formConfig2" class="bg-form pd-tp-0"/>
           <div class="pd-lf-5 pd-rt-5 pd-bt-5">
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
@@ -40,7 +40,7 @@
           </div>
 
         </div>
-        <div class="br-d3d3d3 mg-lf-5 flex-1 pd-tp-5  pd-rt-5 customized-detail-table">
+        <div class="br-d3d3d3 mg-lf-5 flex-1 pd-tp-5  pd-rt-5 obj-table">
           <OmsForm v-if="isActive"  :form-config="formConfig3" class="bg-form pd-tp-0"/>
           <div class="pd-lf-5 pd-rt-5 pd-bt-5">
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">

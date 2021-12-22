@@ -45,7 +45,7 @@
         <p>切换类型会清空当前类型明细,是否继续?</p>
       </Modal>
       <!-- tab切换 -->
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsLabel
           :label-list="formConfig.formValue.group_type == '2' ? label.labelList : label.labelTagList"
           :label-default-value="label.labelValue"

@@ -39,7 +39,7 @@
           @freshLoad="freshLoad"
         />
         <!-- 子表 -->
-        <div class="customized-detail-table">
+        <div class="obj-table">
           <OrderItem
             v-show="labelDefaultValue !== 'OC_B_ORDER_ITEM'"
             class="custom-table"

@@ -28,7 +28,7 @@
         </Panel> -->
       </Collapse>
       <!-- tab切换 -->
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsLabel
           class="jordanLabel"
           :label-default-value="labelDefaultValue"

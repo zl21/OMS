@@ -90,7 +90,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel class="jordanLabel" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick"/>
         <div class="tableBox returnChangeOrderdetails">

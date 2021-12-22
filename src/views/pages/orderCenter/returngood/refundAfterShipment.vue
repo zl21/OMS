@@ -66,7 +66,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="tab-content customized-detail-table">
+      <div class="tab-content obj-table">
         <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

@@ -16,7 +16,7 @@
         <Panel name="exclusive_stock">
           <!-- 独享库存 -->
           {{ $it('pL.bg') }}
-          <div slot="content" class="customized-detail-table">
+          <div slot="content" class="obj-table">
             <OmsForm v-if="canEdit" ref="exclusiveStock" :form-config="formConfig2"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
               <div class="flex flex-direction-row align-items-center">
@@ -60,7 +60,7 @@
         <Panel name="share_baseInfo">
           <!-- 共享库存 -->
           {{ $it('pL.bg') }}
-          <div slot="content" class="customized-detail-table">
+          <div slot="content" class="obj-table">
             <OmsForm v-if="canEdit" :form-config="formConfig3"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
               <div class="flex flex-direction-row align-items-center ">

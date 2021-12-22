@@ -24,7 +24,7 @@
       <Modal v-model="showAddPlatformLogisticsCompany" footer-hide width="830" mask>
         <addPlatformLogisticsCompany @getData="getTableData"></addPlatformLogisticsCompany>
       </Modal>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick" />
         <!-- 子表Part -->

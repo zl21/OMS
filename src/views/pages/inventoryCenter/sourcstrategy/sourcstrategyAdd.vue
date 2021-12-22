@@ -18,7 +18,7 @@
           <span class="iconfont icon-item icon-liuchengtiaojian font-size-24 color-primary"></span>
           <span class="pd-lf-15 font-size-18 font-weight-bold">{{$it('pL.bf')}}<!--强制寻源规则--></span>
         </div>
-        <div class="customized-detail-table">
+        <div class="obj-table">
           <!--弹窗多选-->
           <Fkdialog
             class="flex align-items-center justify-content-center"
