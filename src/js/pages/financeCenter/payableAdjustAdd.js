@@ -559,7 +559,11 @@ export default {
           CP_C_PHY_WAREHOUSE_ID: '',
           IMAGE: '',
           PAYABLE_PRICE: '',
-          SOURCE_OUTSOURCE_DATE: ''
+          SOURCE_OUTSOURCE_DATE: '',
+          ORIGIN_LOGISTICS_NO:'',
+          ORIGIN_CP_C_LOGISTICS_ENAME:'',
+          ORIGIN_BILL_NO:'',
+          ORIGIN_CP_C_PHY_WAREHOUSE_ENAME:''
         },
         ruleValidate: {
           BILL_TYPE: [{ required: true, message: ' ' }],
@@ -1401,6 +1405,10 @@ export default {
       self.formConfig.formValue.CUSTOMER_NICK = mainData.CUSTOMER_NICK ? mainData.CUSTOMER_NICK : '';
       self.formConfig.formValue.LOGISTICS_NO = mainData.LOGISTICS_NO ? mainData.LOGISTICS_NO : '';
       self.formConfig.formValue.EXPRESS_OUTLETS = mainData.EXPRESS_OUTLETS ? mainData.EXPRESS_OUTLETS : '';
+      self.formConfig.formValue.ORIGIN_LOGISTICS_NO = mainData.ORIGIN_LOGISTICS_NO ? mainData.ORIGIN_LOGISTICS_NO : '';
+      self.formConfig.formValue.ORIGIN_CP_C_LOGISTICS_ENAME = mainData.ORIGIN_CP_C_LOGISTICS_ENAME ? mainData.ORIGIN_CP_C_LOGISTICS_ENAME : '';
+      self.formConfig.formValue.ORIGIN_BILL_NO = mainData.ORIGIN_BILL_NO ? mainData.ORIGIN_BILL_NO : '';
+      self.formConfig.formValue.ORIGIN_CP_C_PHY_WAREHOUSE_ENAME = mainData.ORIGIN_CP_C_PHY_WAREHOUSE_ENAME ? mainData.ORIGIN_CP_C_PHY_WAREHOUSE_ENAME : '';
       self.formConfig.formValue.PAYABLE_PRICE = mainData.PAYABLE_PRICE ? mainData.PAYABLE_PRICE : '';
       self.formConfig.formValue.REMARK = mainData.REMARK ? mainData.REMARK : '';
       self.formConfig.formValue.PAY_TIME = this.formatDate(mainData.PAY_TIME);
