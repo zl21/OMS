@@ -12,7 +12,7 @@
     <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="addOrEditActi">
         <div class="steps_content">
           <div ref="basicSteps" class="basicSteps">

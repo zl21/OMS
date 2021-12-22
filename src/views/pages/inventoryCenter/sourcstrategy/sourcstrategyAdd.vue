@@ -2,7 +2,7 @@
 <template>
   <div class="sourcstrategy pd-tp-20 relative pd-bt-50 customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
-    <div class="pd-rt-100 customized-detail-main">
+    <div class="pd-rt-100 obj-main">
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-1">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
           <span class="iconfont icon-item icon-jibenxinxi font-size-24 color-primary"></span>

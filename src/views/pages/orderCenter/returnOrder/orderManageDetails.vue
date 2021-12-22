@@ -11,7 +11,7 @@
     <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="Step-Box">
         <Steps class="steps-content">
           <Step

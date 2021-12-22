@@ -3,7 +3,7 @@
     <div class="operate custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Tabs value="name1">
         <TabPane label="基本信息" name="name1">
           <Form ref="formValidate" :label-width="130" :model="info">

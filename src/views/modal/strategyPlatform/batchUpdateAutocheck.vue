@@ -4,7 +4,7 @@
     <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <p style="margin-bottom: 5px">
         已选中批量修改记录数: {{ idArray.length }}行
       </p>

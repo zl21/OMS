@@ -3,7 +3,7 @@
     <div class="orderButtons custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="value1">
         <Panel name="1">
           <!-- 基本信息 -->

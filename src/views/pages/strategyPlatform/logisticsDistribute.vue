@@ -14,7 +14,7 @@
     </div>
 
     <!-- 内容 -->
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           {{ baseInformation }}

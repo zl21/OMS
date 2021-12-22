@@ -4,7 +4,7 @@
     <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" class="top-btns"/>
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->

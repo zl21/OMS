@@ -4,7 +4,7 @@
     <div class="re_button obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="re_form">
         <Collapse v-model="value">
           <Panel name="1">

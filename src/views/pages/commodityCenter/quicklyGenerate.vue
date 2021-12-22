@@ -3,7 +3,7 @@
     <div class="quick_header obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="quick_body customized-detail-main">
+    <div class="quick_body obj-main">
       <Tabs value="name1">
         <TabPane label="规格维度信息" name="name1">
           <div>

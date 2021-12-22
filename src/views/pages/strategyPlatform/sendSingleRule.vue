@@ -5,7 +5,7 @@
       :btn-config="btnConfig"
     />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="openDefault">
         <Panel name="1">
           <!-- 基本信息 -->

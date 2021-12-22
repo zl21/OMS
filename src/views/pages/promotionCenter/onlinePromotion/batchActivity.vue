@@ -21,7 +21,7 @@
       </button> -->
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="batchActivity">
         <div class="steps_content">
           <div ref="basicSteps" class="basicSteps">
