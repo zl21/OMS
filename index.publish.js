@@ -11,8 +11,8 @@ import R3 from '@syman/burgeon-r3';
 import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 
-import cus from 'burgeonConfig'
-import pageNote from '@/config/config/pageNote'
+// import cus from 'burgeonConfig'
+// import pageNote from '@/config/config/pageNote'
 
 import qs from 'qs';
 import i18n from '@burgeon/internationalization/i18n'; // 国际化
@@ -35,6 +35,8 @@ class InitAppConfig {
   constructor() {
     // -------------引入框架项目配置文件;
     // const customizedTheme = require(`@burgeon/oms-theme/skin/${omsSkinTheme}/index.min.css`).default;
+    let pageNote = require('@/config/config/pageNote').default;
+    console.log(pageNote);
     window.$store = store;
     window.$pageNote = pageNote;
     window.R3 = R3; // 暴露R3为全局变量
@@ -52,13 +54,14 @@ class InitAppConfig {
       return i18n.t(str)
     }
 
+    let cus = require('@/config').default;
     window.OMS = cus;
     window.$omsUtils = cus.omsUtils;
     Vue.prototype.$omsUtils = cus.omsUtils;
-
+    
     window.version = {
       '@burgeon/project-logic': proVersion.version,
-      '@burgeon/business-components': BC.version,
+      '@burgeon/business-components': $BC.default.version,
       '@burgeon/oms-theme': omsThemecConfig.version,
       '@burgeon/internationalization': internationalizationConfig.version,
       '@syman/burgeon-r3': R3.version,
@@ -85,8 +88,8 @@ class InitAppConfig {
     clientWidthsFun();
     // 屏幕变化
     window.onresize = () => clientWidthsFun();
-//   }
-// }
+  }
+}
 
 export default new InitAppConfig();
 // export default {}

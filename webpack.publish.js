@@ -32,10 +32,10 @@ const burgeonPlugins = [
     ],
   })
 ]
-if (process.env.npm_config_report) {
-  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-  burgeonPlugins.push(new BundleAnalyzerPlugin());
-}
+// if (process.env.npm_config_report) {
+//   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//   burgeonPlugins.push(new BundleAnalyzerPlugin());
+// }
 
 module.exports = () => ({
   entry: './index.publish.js',

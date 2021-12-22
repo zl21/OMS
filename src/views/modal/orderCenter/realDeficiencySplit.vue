@@ -19,7 +19,7 @@
 <script>
 import Vue from 'vue';
 // import BC from 'burgeonComponents'
-Vue.component('drpInput', $BC.Components.Fkinput);
+Vue.component('drpInput', $BC.default.Components.Fkinput);
 
 export default {
   name: 'realDeficiencySplit',

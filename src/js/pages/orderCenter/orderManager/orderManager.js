@@ -258,7 +258,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: BC.Components.ImportTable,
+        url: $BC.default.Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
@@ -1591,7 +1591,7 @@ export default {
             });
             return;
           }
-          res.data.data = JSON.parse(BC.Utils.unzip(res.data.data));
+          res.data.data = JSON.parse($BC.default.Utils.unzip(res.data.data));
           if (res.data.code === 0) {
             if (!res.data.data) {
               self.agTableConfig.pagenation.total = 0;
