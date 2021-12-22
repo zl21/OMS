@@ -509,6 +509,34 @@ export default {
           },
           {
             style: 'input',
+            label: '原单物流单号', // 原单物流单号
+            value: 'ORIGIN_LOGISTICS_NO',
+            width: '8',
+            disabled: true
+          },
+          {
+            style: 'input',
+            label: '原单快递公司名称', // 原单快递公司名称
+            value: 'ORIGIN_CP_C_LOGISTICS_ENAME',
+            width: '8',
+            disabled: true
+          },
+          {
+            style: 'input',
+            label: '原单单号', // 原单单号
+            value: 'ORIGIN_BILL_NO',
+            width: '8',
+            disabled: true
+          },
+          {
+            style: 'input',
+            label: '实体仓名称', // 原单快递公司名称
+            value: 'ORIGIN_CP_C_PHY_WAREHOUSE_ENAME',
+            width: '8',
+            disabled: true
+          },
+          {
+            style: 'input',
             type: 'textarea',
             label: window.vmI18n.t('table_label.remarks'), // 备注
             value: 'REMARK',
