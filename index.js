@@ -43,12 +43,13 @@ const BC = {
 	install,
 	Components,
 	Utils,
+	name: 'burgeon-business-components',
 	version: require('./package.json').version,
 }
  
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
-	window.BC = BC;
+	window.$BC = BC;
 }
 
 export default BC;
