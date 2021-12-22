@@ -22,10 +22,11 @@ export default {
     }
   },
   data() {
+    const pageName = this.$route.params.tableName;
     return {
       componentData: {
-        tableName: 'PS_C_SAMECITY_DETRIMENT_REF'
+        tableName: pageName,
       }
     };
-  }
+  },
 };
