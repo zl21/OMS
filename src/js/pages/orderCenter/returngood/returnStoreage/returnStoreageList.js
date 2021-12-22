@@ -3,8 +3,8 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 
 const getCurrentTime = (() => {
   return $utils.Format(new Date(), 'yyyy-MM-dd 23:59:59');

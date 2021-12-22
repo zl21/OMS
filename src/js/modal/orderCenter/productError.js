@@ -1,5 +1,5 @@
-import BC from 'burgeonComponents'
-const { Components } = BC
+// import BC from 'burgeonComponents'
+const { Components } = $BC
 Vue.component('drpInputPro', Components.Fkinput)
 
 export default {

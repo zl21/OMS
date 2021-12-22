@@ -1,10 +1,10 @@
 // 半定制页面。eg.销售单详情 - 商品明细
-import CustomTable from 'framework/components/table/customTable.vue';
 import matrix from 'allpages/orderCenter/orderManageDetail/orderDetail/matrix.vue';
-import DragDialog from 'framework/components/dialog/dragDialog.vue';
-import ErrorTips from 'framework/components/tablelist/error.vue';
 import matrixInput from 'allpages/orderCenter/orderManageDetail/orderDetail/matrixInput2.vue';
-import pageNation from 'framework/components/page/pagenation.vue';
+// import pageNation from 'framework/components/page/pagenation.vue';
+// import DragDialog from 'framework/components/dialog/dragDialog.vue';
+// import ErrorTips from 'framework/components/tablelist/error.vue';
+// import CustomTable from 'framework/components/table/customTable.vue';
 import R3 from '@syman/burgeon-r3';
 import port from '@/config/config/orderDetailConnector.js';
 
@@ -343,14 +343,13 @@ export default {
       this.activeSub = false; // 改变高亮行
       this.orderby = [
         {
-          column: `${
-            this.tablename === 'DL_B_PAND' ||
+          column: `${this.tablename === 'DL_B_PAND' ||
             this.tablename === 'DL_B_INV_ADJ' ||
             this.tablename === 'DL_B_INV_ADJ_WORK_PICK' ||
             this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
-              ? port[this.tablename].virtualName
-              : port[this.tablename].tableName
-          }.${this.tHead[index].name}`,
+            ? port[this.tablename].virtualName
+            : port[this.tablename].tableName
+            }.${this.tHead[index].name}`,
           asc: true,
         },
       ];
@@ -360,14 +359,13 @@ export default {
       this.activeSub = false; // 改变高亮行
       this.orderby = [
         {
-          column: `${
-            this.tablename === 'DL_B_PAND' ||
+          column: `${this.tablename === 'DL_B_PAND' ||
             this.tablename === 'DL_B_INV_ADJ' ||
             this.tablename === 'DL_B_INV_ADJ_WORK_PICK' ||
             this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
-              ? port[this.tablename].virtualName
-              : port[this.tablename].tableName
-          }.${this.tHead[index].name}`,
+            ? port[this.tablename].virtualName
+            : port[this.tablename].tableName
+            }.${this.tHead[index].name}`,
           asc: false,
         },
       ];
@@ -417,11 +415,10 @@ export default {
       } // 无变化
       const data = {};
       data[
-        `${
-          this.tablename === 'DL_B_TRAN_OUT' ||
+        `${this.tablename === 'DL_B_TRAN_OUT' ||
           this.tablename === 'DL_B_TRAN_OUT_POS'
-            ? port[this.tablename].special
-            : port[this.tablename].tableName
+          ? port[this.tablename].special
+          : port[this.tablename].tableName
         }`
       ] = [];
       /* 右边矩阵保存参数 */
@@ -445,11 +442,10 @@ export default {
             }
           }
           data[
-            `${
-              this.tablename === 'DL_B_TRAN_OUT' ||
+            `${this.tablename === 'DL_B_TRAN_OUT' ||
               this.tablename === 'DL_B_TRAN_OUT_POS'
-                ? port[this.tablename].special
-                : port[this.tablename].tableName
+              ? port[this.tablename].special
+              : port[this.tablename].tableName
             }`
           ].push(tableObj);
         });
@@ -464,11 +460,10 @@ export default {
             obj[list] = this.bodyChangeData[keys][list];
           });
           data[
-            `${
-              this.tablename === 'DL_B_TRAN_OUT' ||
+            `${this.tablename === 'DL_B_TRAN_OUT' ||
               this.tablename === 'DL_B_TRAN_OUT_POS'
-                ? port[this.tablename].special
-                : port[this.tablename].tableName
+              ? port[this.tablename].special
+              : port[this.tablename].tableName
             }`
           ].push(obj);
         });
@@ -484,11 +479,10 @@ export default {
         ].PS_C_SKU_ID;
         obj.QTY = 1;
         data[
-          `${
-            this.tablename === 'DL_B_TRAN_OUT' ||
+          `${this.tablename === 'DL_B_TRAN_OUT' ||
             this.tablename === 'DL_B_TRAN_OUT_POS'
-              ? port[this.tablename].special
-              : port[this.tablename].tableName
+            ? port[this.tablename].special
+            : port[this.tablename].tableName
           }`
         ].push(obj);
       }
@@ -606,7 +600,7 @@ export default {
     salePriceChange() {
       this.loadingClose();
     },
-    loadingClose() {},
+    loadingClose() { },
     updateDiscountCorfirm() {
       const arr = [];
       this.discountLoading = true;
@@ -805,10 +799,10 @@ export default {
                 },
                 obj.ismodify
                   ? {
-                      type: 'input',
-                      genre: obj.type,
-                      fixed: obj.scale, // 保留几位小数
-                    }
+                    type: 'input',
+                    genre: obj.type,
+                    fixed: obj.scale, // 保留几位小数
+                  }
                   : {}
               )
             );
@@ -877,12 +871,12 @@ export default {
     }, // 匹配
   },
   components: {
-    CustomTable,
-    matrix,
-    DragDialog,
-    ErrorTips,
+    CustomTable: $R3_CPS.components.customTable,
+    pageNation: $R3_CPS.components.pagenation,
+    DragDialog: $R3_CPS.components.dragDialog,
+    ErrorTips: $R3_CPS.components.error,
     matrixInput,
-    pageNation
+    matrix,
   },
   created() {
     window.addEventListener('customizeClick', this.bigSave);
@@ -894,14 +888,13 @@ export default {
     this.isUpdateDiscountBtn = port[this.tablename].isUpdateDiscountBtn; // 是否有修改折扣按钮
     this.hasMatch = port[this.tablename].hasMatch;
     this.orderby.push({
-      column: `${
-        this.tablename === 'DL_B_PAND' ||
+      column: `${this.tablename === 'DL_B_PAND' ||
         this.tablename === 'DL_B_INV_ADJ' ||
         this.tablename === 'DL_B_INV_ADJ_WORK_PICK' ||
         this.tablename === 'DL_B_INV_ADJ_WORK_PICK_POS'
-          ? port[this.tablename].virtualName
-          : port[this.tablename].tableName
-      }.ID`,
+        ? port[this.tablename].virtualName
+        : port[this.tablename].tableName
+        }.ID`,
       asc: true,
     });
     this.getData()

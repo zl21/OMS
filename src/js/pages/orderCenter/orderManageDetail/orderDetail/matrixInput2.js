@@ -1,6 +1,6 @@
 import R3 from '@syman/burgeon-r3';
 import matrix from 'allpages/orderCenter/orderManageDetail/orderDetail/matrixPop.vue';
-import DragDialog from 'framework/components/dialog/dragDialog.vue';
+// import DragDialog from 'framework/components/dialog/dragDialog.vue';
 
 const { store } = R3;
 const port = require('@/config/config/orderDetailConnector').default;
@@ -527,7 +527,7 @@ export default {
   },
   components: {
     matrix,
-    DragDialog
+    DragDialog:$R3_CPS.components.dragDialog
   },
   mounted() {
     this.inputList.forEach(obj => {

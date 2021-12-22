@@ -473,7 +473,7 @@ export default {
       let data = res.data.data;
       if (res.data.code === 0) {
         if (url == '/p/cs/permission/v1/selectDataPermission') {
-          data = JSON.parse(BC.Utils.unzip(data));
+          data = JSON.parse($BC.default.Utils.unzip(data));
           console.log('解压数据：', data);
           console.log('总计：', data.rowSize);
         }

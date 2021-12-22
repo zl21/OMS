@@ -18,8 +18,8 @@
 
 <script>
 import Vue from 'vue';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 Vue.component('drpInput', Components.Fkinput);
 export default {
   name: 'changeTag',

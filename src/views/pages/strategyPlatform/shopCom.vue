@@ -56,8 +56,8 @@
 /**
  * 店铺商品特殊策略 - 商品信息 - 半定制
  */
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 
 
 export default {

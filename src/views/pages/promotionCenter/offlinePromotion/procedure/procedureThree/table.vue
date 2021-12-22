@@ -269,10 +269,10 @@
     isTotal：true，表示有合计
     type: popup 表示是弹框
     type: input 表示是输入框 */
-  import matrix from 'framework/components/views/custompage/procedureMatrix.vue';
-  import DragDialog from 'framework/components/dialog/dragDialog.vue';
-  import matrixInput from 'framework/components/input/procedureMatrixInput.vue';
-  import { httpFormdata } from 'framework/__utils__/request.js';
+  // import matrix from 'framework/components/views/custompage/procedureMatrix.vue';
+  // import DragDialog from 'framework/components/dialog/dragDialog.vue';
+  // import matrixInput from 'framework/components/input/procedureMatrixInput.vue';
+  // import { httpFormdata } from 'framework/__utils__/request.js';
 
   Array.prototype.distinct = function () {
     const arr = this;
@@ -294,9 +294,9 @@
 
   export default {
     components: {
-      matrixInput,
-      DragDialog,
-      matrix
+      matrixInput: $R3_CPS.components.procedureMatrixInput,
+      DragDialog: $R3_CPS.components.dragDialog,
+      matrix: $R3_CPS.components.procedureMatrix
     },
 
     props: {
@@ -466,7 +466,7 @@
           };
           const params = new URLSearchParams();
           params.append('param', JSON.stringify(queryjson));
-          httpFormdata({
+          $R3_CPS.utils.httpFormdata({
             method: 'post',
             url: '/p/cs/promtrailproitemtest',
             data: params

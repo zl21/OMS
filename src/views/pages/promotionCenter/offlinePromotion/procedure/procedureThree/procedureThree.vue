@@ -106,7 +106,7 @@
   // import { debug } from 'util';
   import mTable from './table';
   import myInput from '../procedureTwo/input';
-  import { httpFormdata } from 'framework/__utils__/request.js';
+  // import { httpFormdata } from 'framework/__utils__/request.js';
 
   Array.prototype.remove = function (val) {
     const index = this.indexOf(val);
@@ -430,7 +430,7 @@
           // console.log("表格2");
           const params = new URLSearchParams();
           params.append('param', JSON.stringify(queryjjson));
-          httpFormdata({
+          $R3_CPS.utils.httpFormdata({
             method: 'post',
             url: '/p/cs/promstrategylisttest',
             data: params
