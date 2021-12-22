@@ -5,7 +5,7 @@
 import port from '@/config/config/orderDetailConnector.js';
 import matrixInput from './matrixInput';
 import matrix from './matrix';
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 
 export default {
   props: {

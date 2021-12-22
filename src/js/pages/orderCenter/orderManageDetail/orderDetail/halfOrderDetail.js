@@ -5,7 +5,7 @@ import matrixInput from 'allpages/orderCenter/orderManageDetail/orderDetail/matr
 // import DragDialog from 'framework/components/dialog/dragDialog.vue';
 // import ErrorTips from 'framework/components/tablelist/error.vue';
 // import CustomTable from 'framework/components/table/customTable.vue';
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 import port from '@/config/config/orderDetailConnector.js';
 
 export default {

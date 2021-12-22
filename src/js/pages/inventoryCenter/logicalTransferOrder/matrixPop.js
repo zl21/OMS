@@ -1,4 +1,4 @@
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 // import chineseDiction from 'framework/assets/js/ChineseDictionary.js';
 import port from '@/config/config/orderDetailConnector.js';
 

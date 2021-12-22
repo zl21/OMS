@@ -1,4 +1,4 @@
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 import jordanStore from './jordanStore'
 
 

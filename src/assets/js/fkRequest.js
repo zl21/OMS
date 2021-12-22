@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/assets/js/fkRequest.js
  */
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 import service from '@/service/index';
 
 export const fkQueryList = function fkQueryList(params) {

@@ -1,4 +1,4 @@
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 import matrix from 'allpages/orderCenter/orderManageDetail/orderDetail/matrixPop.vue';
 // import DragDialog from 'framework/components/dialog/dragDialog.vue';
 

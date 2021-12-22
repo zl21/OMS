@@ -19,7 +19,7 @@ import ReportCenter from '../module/modal/report.config.js'; // ----------报表
 import basicDataConfig from '../module/modal/basicData.config'; // -----------基础数据
 
 // import BC from 'burgeonComponents'
-const { Components } = $BC.default;
+const { Components } = $BC;
 
 const common = {
   /** ---------------------- 下载：---------------------- */

@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/config/config/init.config.js
  */
 import Vue from 'vue';
-import R3 from '@syman/burgeon-r3';
+// // import R3 from '@syman/burgeon-r3';
 import '@/assets/css/css_1_3/custom.less'; // 框架 主题文件（变量）
 import '@/assets/css/css_1_3/oms_index.less'; // 定制公共界面样式
 
@@ -39,7 +39,7 @@ class InitAppConfig {
     console.log(pageNote);
     window.$store = store;
     window.$pageNote = pageNote;
-    window.R3 = R3; // 暴露R3为全局变量
+    // window.R3 = R3; // 暴露R3为全局变量
     window.$i18n = i18n; // 挂载国际化
     console.log(i18n);
     window.$it = (str) => {
@@ -61,7 +61,7 @@ class InitAppConfig {
     
     window.version = {
       '@burgeon/project-logic': proVersion.version,
-      '@burgeon/business-components': $BC.default.version,
+      '@burgeon/business-components': $BC.version,
       '@burgeon/oms-theme': omsThemecConfig.version,
       '@burgeon/internationalization': internationalizationConfig.version,
       '@syman/burgeon-r3': R3.version,

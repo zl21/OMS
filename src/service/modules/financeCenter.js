@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/service/modules/financeCenter.js
  */
 // 财务中心
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 
 const { network } = R3;
 export default {

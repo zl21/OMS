@@ -1,5 +1,5 @@
 // import BC from 'burgeonComponents';
-const { getLodop } = $BC.default.Utils;
+const { getLodop } = $BC.Utils;
 
 export default {
   components: {},
