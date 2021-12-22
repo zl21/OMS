@@ -530,7 +530,7 @@ export default {
           },
           {
             style: 'input',
-            label: '实体仓名称', // 原单快递公司名称
+            label: '原实体仓名称', // 原单快递公司名称
             value: 'ORIGIN_CP_C_PHY_WAREHOUSE_ENAME',
             width: '8',
             disabled: true
