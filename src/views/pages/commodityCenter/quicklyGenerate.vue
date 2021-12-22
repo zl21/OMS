@@ -1,6 +1,6 @@
 <template>
   <div class="quicklyGenerate customized-detail">
-    <div class="quick_header customized-detail-btn">
+    <div class="quick_header obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="quick_body customized-detail-main">

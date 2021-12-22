@@ -9,7 +9,7 @@
 <template>
   <div class="customized-detail logistics">
     <!-- 按钮 -->
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="auto-check channelSkuStrategyAddOrEdit customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
-    <div class="operate left customized-detail-btn">
+    <div class="operate left obj-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
     <div class="customized-detail-main">

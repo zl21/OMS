@@ -2,7 +2,7 @@
 <template>
   <div class="returnTreasurys customized-detail" v-loading="loading">
     <!--按钮块-->
-    <div class="returnTreasurysBtn customized-detail-btn">
+    <div class="returnTreasurysBtn obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

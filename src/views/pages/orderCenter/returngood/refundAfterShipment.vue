@@ -1,7 +1,7 @@
 <template>
   <!-- 发货后退款 -->
   <div id="cbx" class="refundAfterShipment customized-detail">
-    <div class="re_button customized-detail-btn">
+    <div class="re_button obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

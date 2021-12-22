@@ -5,7 +5,7 @@
     :id="this.customizedModuleName"
     v-loading="loading"
   >
-    <div class="buttons customized-detail-btn">
+    <div class="buttons obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

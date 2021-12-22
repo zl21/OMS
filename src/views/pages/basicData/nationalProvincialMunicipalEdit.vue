@@ -9,7 +9,7 @@
 <template>
   <!-- 基础信息-国家省市区-编辑 -->
   <div :id="this.customizedModuleName" class="customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

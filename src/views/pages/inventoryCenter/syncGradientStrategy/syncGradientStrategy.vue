@@ -1,7 +1,7 @@
 <template>
   <div class="auto-check syncGradientStrategy customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" class="top-btns"/>
     </div>
     <div class="customized-detail-main">

@@ -155,7 +155,7 @@
       </ul>
     </div>
     <div class="fixed bottom-0 right-0" ref="rightBox" style="z-index: 999">
-      <div class="flex flex-direction-row justify-content-end bg-base customized-detail-btn">
+      <div class="flex flex-direction-row justify-content-end bg-base obj-btn">
         <OmsButton :btn-config="btnConfig" class="top-btns"/>
       </div>
     </div>

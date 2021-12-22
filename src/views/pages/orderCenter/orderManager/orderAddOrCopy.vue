@@ -1,6 +1,6 @@
 <template>
   <div class="orderAddorCopy customized-detail" v-loading="loading">
-    <div class="orderButtons customized-detail-btn">
+    <div class="orderButtons obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

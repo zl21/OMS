@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="spuRecord customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

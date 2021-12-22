@@ -9,7 +9,7 @@
 <!-- 批量新增、编辑、复制促销活动-->
 <template>
   <div class="customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <!-- <button @click="close">
         {{ $it('com.cancel') }}
       </button>

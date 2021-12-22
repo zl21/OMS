@@ -9,7 +9,7 @@
 <template>
   <!-- 组合商品编辑 -->
   <div class="modifyGroup customized-detail">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">

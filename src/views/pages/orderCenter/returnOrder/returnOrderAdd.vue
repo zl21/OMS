@@ -2,7 +2,7 @@
   <!-- 退换货订单新增 -->
   <div class="customized-detail returnOrderAdd" v-loading="loading">
     <!--按钮块-->
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="customized-detail-main">
