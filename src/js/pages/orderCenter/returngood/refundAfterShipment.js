@@ -436,7 +436,7 @@ export default {
               label: $it('fL.refundDescription'), // 退款描述
               // soltName: 'returnTypeItem', // 组件类型
               props: {
-                value: this.returnTypeItemConfig.formValue.OC_B_RETURN_TYPE_ITEM_ID
+                value: this.returnTypeItemConfig.formValue.OC_B_RETURN_TYPE_ITEM_ID,
                 options: this.returnTypeItemConfig.formData[0].options
               },
               event: {}
