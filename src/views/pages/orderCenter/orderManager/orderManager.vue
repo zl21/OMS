@@ -8,7 +8,7 @@
         "
       />
     </div>
-    <div class="from totalHeight fromHeight">
+    <div class="from totalHeight">
       <div v-show="isShowFromLoading" class="from_loading">
         <!-- <loading :loading="agTableConfig.agLoading" /> -->
       </div>
@@ -27,11 +27,11 @@
         @on-drop-change="onDropChange"
       /> -->
       <!-- trigger="click" -->
-      <OmsForm :form-config="formConfig" style="margin-top: 10px" />
-      <OmsButton :btn-config="btnsSearch" />
+      <OmsForm :form-config="formConfig" />
+      <!-- <OmsButton :btn-config="btnsSearch" />
       <div class="from-folding" @click="shutDownOrbounceOff">
         <i :class="iconDownIcon" />
-      </div>
+      </div> -->
     </div>
     <div class="table">
       <OmsLabel

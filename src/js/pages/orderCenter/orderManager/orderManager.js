@@ -376,6 +376,26 @@ export default {
       },
       // 高级搜索表单
       formConfig: {
+        btn: {
+          typeAll: 'error', // 按钮统一风格样式
+          buttons: [
+            {
+              text: '查找', // 按钮文本
+              btnclick: () => {
+                // this.loadData();
+              } // 按钮点击事件
+            },
+            {
+              text: '重置', // 按钮文本
+              type: 'default',
+              btnclick: () => {} // 按钮点击事件
+            }
+          ]
+        },
+        iconSite: 'bottomCenter', // 'bottomCenter'
+        flodClick: true,
+        // setColnum: 4, // 4列
+        // setRow: 3, // 3行
         formValue: {},
         formData: []
       },
