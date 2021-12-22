@@ -47,9 +47,9 @@ const BC = {
 	version: require('./package.json').version,
 }
  
+// auto install
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
-	window.$BC = BC;
 }
 
 export default BC;

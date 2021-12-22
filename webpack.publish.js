@@ -43,6 +43,7 @@ module.exports = () => ({
     globalObject: 'this',
     library: '$BC',
     libraryTarget: 'umd',
+    libraryExport: 'default',
     umdNamedDefine: true,
     clean: true,
     publicPath: './'
