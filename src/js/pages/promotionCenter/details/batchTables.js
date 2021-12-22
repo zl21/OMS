@@ -1,6 +1,7 @@
 import detailtable from 'allpages/promotionCenter/onlinePromotion/details/table.vue';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
+
 export default {
   name: 'batchTables',
   components: {

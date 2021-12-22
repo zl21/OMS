@@ -1,10 +1,10 @@
-import Fkdialog from 'framework/components/tablelist/fkdialog.vue';
+// import Fkdialog from 'framework/components/tablelist/fkdialog.vue';
 import { checkRuleFunMixin } from "@/assets/js/mixins/checkFormRule";
 
 
 export default {
   components: {
-    Fkdialog,
+    Fkdialog: $R3_CPS.components.fkdialog,
   },
   mixins: [checkRuleFunMixin],
   data() {

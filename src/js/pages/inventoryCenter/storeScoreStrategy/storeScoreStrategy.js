@@ -1,6 +1,6 @@
 import isFavoriteMixin from "@/assets/js/mixins/isFavorite";
 import R3 from "@syman/burgeon-r3";
-import BC from 'burgeonComponents'
+// import BC from 'burgeonComponents'
 
 export default {
   components: {},

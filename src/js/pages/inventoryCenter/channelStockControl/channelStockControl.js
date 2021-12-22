@@ -1,5 +1,5 @@
-import CustomTable from 'framework/components/table/customTable.vue';
-import pageNation from 'framework/components/page/pagenation.vue';
+// import CustomTable from 'framework/components/table/customTable.vue';
+// import pageNation from 'framework/components/page/pagenation.vue';
 import propSelect from '@/commonPages/AutoForm/propSelect';
 import actionForm from '@/commonPages/AutoForm/actionForm';
 import selectTag from '@/commonPages/AutoForm/selectTag'
@@ -14,7 +14,7 @@ export default {
     selectTag,
     propSelect,
     actionForm,
-    CustomTable,
+    CustomTable: $R3_CPS.components.customTable,
     pageNation
   },
   data() {

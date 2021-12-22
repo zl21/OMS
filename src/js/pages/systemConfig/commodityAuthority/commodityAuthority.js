@@ -1,7 +1,7 @@
-import Buttonmap from 'framework/assets/js/buttonmap'; // 实际上没用到
-import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
-import FkDialog from 'framework/components/tablelist/fkdialog';
-import GroupTree from 'framework/components/tree/groupTree';
+// import Buttonmap from 'framework/assets/js/buttonmap'; // 实际上没用到
+// import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
+// import FkDialog from '$R3_CPS.components.fkdialog';
+// import GroupTree from '$R3_CPS.components.groupTree';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 /* import Vue from 'vue' */
 
@@ -9,8 +9,8 @@ export default {
   mixins: [buttonPermissionsMixin],
   props: {},
   components: {
-    FkDialog,
-    GroupTree,
+    FkDialog:$R3_CPS.components.fkdialog,
+    GroupTree:$R3_CPS.components.groupTree,
   },
   data() {
     return {
@@ -73,8 +73,8 @@ export default {
   },
   created() {
     this.axiosAction();
-    this.Buttonmap = Buttonmap;
-    this.ChineseDictionary = ChineseDictionary;
+    this.Buttonmap = $R3_CPS.Buttonmap;
+    this.ChineseDictionary = $R3_CPS.ChineseDictionary;
   },
   watch: {
     userAuthorityList: {

@@ -1,7 +1,7 @@
 import CustomConfig from 'burgeonConfig';
 const modalConfig = CustomConfig.cusDownLoadAllConfig;
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 // const formConfig = (file) => require(`./config/${file}.js`).default;
 
 export default {

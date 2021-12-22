@@ -1,7 +1,7 @@
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import BC from 'burgeonComponents'
-const { Components } = BC
+// import BC from 'burgeonComponents'
+const { Components } = $BC
 Vue.component('tableInput', Components.TableInput)
 
 export default {

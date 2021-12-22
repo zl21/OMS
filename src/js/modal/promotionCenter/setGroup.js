@@ -1,4 +1,4 @@
-import myInputLd from 'framework/components/element/input';
+// import myInputLd from 'framework/components/element/input';
 
 export default {
   name: 'DialogVisible',
@@ -88,7 +88,7 @@ export default {
   },
   props: ['dialogVisible', 'checkList', 'setGroupTableData'],
   components: {
-    myInputLd,
+    myInputLd:$R3_CPS.components.input,
   },
   computed: {},
   watch: {

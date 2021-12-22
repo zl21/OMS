@@ -5,8 +5,8 @@ import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import unzipXv from '@/assets/js/dataToSmall';
 import strUtil from '@/assets/js/__utils__/util';
 import BurgeonEvent from 'burgeonConfig/config/event.config';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 export default {
   // mixins: [isFavoriteMixin],
   mixins: [isFavoriteMixin, buttonPermissionsMixin],

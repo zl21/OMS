@@ -339,14 +339,14 @@
 </template>
 
 <script> /* type="ecmascript-6" */
-  import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
-  import MyDialog from 'framework/components/dialog/mydialog.vue';
-  import DragDialog from 'framework/components/dialog/mydialog.vue';
-  import tree from 'framework/components/tablelist/tree.vue';
-  import axios from 'framework/__utils__/request';
-  import ShowTableData from 'framework/components/views/custompage/ShowTableData.vue';
+  // import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
+  // import MyDialog from 'framework/components/dialog/mydialog.vue';
+  // import DragDialog from 'framework/components/dialog/mydialog.vue';
+  // import tree from 'framework/components/tablelist/tree.vue';
+  // import axios from 'framework/__utils__/request';
+  // import ShowTableData from 'framework/components/views/custompage/ShowTableData.vue';
   // ../../views/custompage/ShowTableData.vue
-  import errorMessage from 'framework/components/tablelist/error.vue';
+  // import errorMessage from 'framework/components/tablelist/error.vue';
 
   export default {
     props: {
@@ -490,11 +490,11 @@
       };
     },
     components: {
-      tree,
-      ShowTableData,
-      MyDialog,
-      errorMessage,
-      DragDialog
+      tree: $R3_CPS.components.tree,
+      ShowTableData: $R3_CPS.components.ShowTableData,
+      MyDialog: $R3_CPS.components.mydialog,
+      errorMessage: $R3_CPS.components.error,
+      // DragDialog: $R3_CPS.components.mydialog
     },
     methods: {
       MyDialogClose() {
@@ -582,7 +582,7 @@
       }, // 左边列表勾选变化时
       screen_request() {
         this.l_screenLoading = true;
-        axios({
+        $R3_CPS.utils.axios({
           url: '/p/cs/screenresult',
           method: 'post',
           data: {
@@ -614,7 +614,7 @@
       }, // 左边列表勾选变化获取数据
       screen_request_initialize() {
         this.l_screenLoading = true;
-        return axios({
+        return $R3_CPS.utils.axios({
           url: '/p/cs/screenresult',
           method: 'post',
           data: {
@@ -745,7 +745,7 @@
           return obj;
         });// 清空选中的
         this.l_screenLoading = true;
-        axios({
+        $R3_CPS.utils.axios({
           url: '/p/cs/screenresult',
           method: 'post',
           data: {
@@ -1014,7 +1014,7 @@
       }, // 右边列表的数据处理
       request_total() {
         this.request_param.GLOBAL = '';
-        axios({
+        $R3_CPS.utils.axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
           data: {
@@ -1034,7 +1034,7 @@
       right_dispose_request() {
         this.confirmLoading = true;
         this.r_screenLoading = true;
-        axios({
+        $R3_CPS.utils.axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
           data: {
@@ -1108,7 +1108,7 @@
         this.r_center_data.r_currentPage = 1;// 初始化当前页
         this.right_dispose();// 只有每次点击second时在处理数据
         this.r_screenLoading = true;
-        axios({
+        $R3_CPS.utils.axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
           data: {
@@ -1217,7 +1217,7 @@
           /!*condition: this.r_send_result//条件集合*!/
         })
       })); */
-        axios({
+        $R3_CPS.utils.axios({
           method: 'post',
           url: '/p/cs/setMultiQuery',
           data: {
@@ -1281,7 +1281,7 @@
         }
         if (true) {
           this.confirmLoading = true;
-          axios({
+          $R3_CPS.utils.axios({
             url: '/p/cs/screenresultcheck',
             method: 'post',
             data: {
@@ -1359,7 +1359,7 @@
         /* this.r_result_checked = this.rightList.map((obj) => {
         if(obj.checked)return obj.ID
       });//勾选选中的 */
-        axios({
+        $R3_CPS.utils.axios({
           url: '/p/cs/screen',
           method: 'post',
           data: {
@@ -1512,7 +1512,7 @@
     created() {
       const _self = this;
       this.t_dialog_show = this.fkshow;
-      _self.ChineseDictionary = ChineseDictionary;
+      _self.ChineseDictionary = $R3_CPS.components.ChineseDictionary;
     }
   };
 </script>

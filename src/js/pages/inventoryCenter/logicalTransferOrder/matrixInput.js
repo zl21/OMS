@@ -1,5 +1,5 @@
 import R3 from '@syman/burgeon-r3';
-import DragDialog from 'framework/components/dialog/dragDialog.vue';
+// import DragDialog from 'framework/components/dialog/dragDialog.vue';
 import matrix from './matrixPop';
 
 const {store} = R3;
@@ -513,7 +513,7 @@ export default {
   },
   components: {
     matrix,
-    DragDialog
+    DragDialog: $R3_CPS.components.dragDialog
   },
   mounted() {
     this.inputList.map((obj) => {

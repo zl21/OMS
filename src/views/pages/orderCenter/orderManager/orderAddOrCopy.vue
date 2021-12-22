@@ -110,8 +110,8 @@
 import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import axios from "axios";
-import BC from 'burgeonComponents'
-const { Components } = BC
+// import BC from 'burgeonComponents'
+const { Components } = $BC
 
 const areaList = require("@/assets/js/address/area-list");
 const { parse, parseArea } = require("@/assets/js/address/address-parse");

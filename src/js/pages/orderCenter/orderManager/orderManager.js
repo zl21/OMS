@@ -4,8 +4,6 @@ import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import labelListConfig from './publicConfig/labelList';
 import orderLogo from './publicConfig/orderLogo';
-import BC from 'burgeonComponents'
-const { Components } = BC
 
 export default {
   components: {},

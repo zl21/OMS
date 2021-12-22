@@ -1,7 +1,7 @@
-import CustomTable from 'framework/components/table/customTable.vue';
-import DragDialog from 'framework/components/dialog/dragDialog.vue';
-import ErrorTips from 'framework/components/tablelist/error.vue';
-import pageNation from 'framework/components/page/pagenation.vue';
+// import CustomTable from 'framework/components/table/customTable.vue';
+// import DragDialog from 'framework/components/dialog/dragDialog.vue';
+// import ErrorTips from 'framework/components/tablelist/error.vue';
+// import pageNation from 'framework/components/page/pagenation.vue';
 import port from '@/config/config/orderDetailConnector.js';
 import matrixInput from './matrixInput';
 import matrix from './matrix';
@@ -811,12 +811,12 @@ export default {
     } // 匹配
   },
   components: {
-    CustomTable,
+    CustomTable: $R3_CPS.components.customTable,
     matrix,
-    DragDialog,
-    ErrorTips,
+    DragDialog: $R3_CPS.components.dragDialog,
+    ErrorTips: $R3_CPS.components.error,
     matrixInput,
-    pageNation
+    pageNation: $R3_CPS.components.pagenation
   },
   created() {
     window.addEventListener('customizeClick', this.bigSave);
