@@ -2,6 +2,17 @@
 <template>
   <!-- orderManagEdit -->
   <div class="business-form-main" :ref="formConfig.flodClick">
+    <!-- 右上角/下中 小箭头 -->
+    <div
+      v-if="formConfig.flodClick"
+      :class="['tag-close', formConfig.iconSite || '']"
+    >
+      <i
+        :class="[flodData]"
+        @click="flodClick(formConfig.flodClick ? formConfig.flodClick : '')"
+      ></i>
+    </div>
+
     <div
       class="imgRight"
       v-if="formConfig.img && formConfig.img.type === 'imgRight'"
@@ -13,9 +24,10 @@
         alt=""
       />
     </div>
+
     <!-- businessForm_a -->
     <Form
-      class="businessForm"
+      class="businessForm cusForm-content"
       :label-width="95"
       style="width: 100%"
       ref="businessForm_a"
@@ -601,13 +613,23 @@
       />
     </div>
 
-    <!-- 右上角小箭头 -->
-    <i
-      class="flodBtn"
-      v-if="formConfig.flodClick"
-      :class="flodData"
-      @click="flodClick(formConfig.flodClick ? formConfig.flodClick : '')"
-    ></i>
+    <div v-if="formConfig.btn" class="cusForm-button">
+      <Button
+        v-for="(item, index) in formConfig.btn.buttons"
+        :key="`fb_${index}`"
+        @click.native="item.btnclick"
+        :ref="item.ref"
+        :type="item.type ? item.type : formConfig.btn.typeAll"
+        :size="item.size ? item.size : 'small'"
+        :custom-icon="item.customIcon ? item.customIcon : ''"
+        :icon="item.icon ? item.icon : ''"
+        :disabled="item.disabled ? item.disabled : false"
+        :ghost="item.ghost ? true : false"
+        :shape="item.shape ? item.shape : undefined"
+        :class="item.class"
+        >{{ item.text }}</Button
+      >
+    </div>
   </div>
 </template>
 
