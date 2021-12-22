@@ -6,7 +6,7 @@
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="obj-main">
-      <div class="returnAddColl">
+      <div class="obj-form">
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
