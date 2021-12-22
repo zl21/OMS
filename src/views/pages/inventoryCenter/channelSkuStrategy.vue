@@ -4,7 +4,7 @@
     <div class="operate left customized-detail-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->

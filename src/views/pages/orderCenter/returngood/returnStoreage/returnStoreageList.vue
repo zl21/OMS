@@ -5,7 +5,7 @@
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="form totalHeight customized-list-form" v-loading="isShowFromLoading">
-      <OmsForm maxHeight="120" :form-config="formConfig" class="searchList" />
+      <OmsForm :form-config="formConfig" class="searchList" />
     </div>
     <div class="tableContent customized-list-table" v-loading="agTableConfig.agLoading">
       <!-- loading -->

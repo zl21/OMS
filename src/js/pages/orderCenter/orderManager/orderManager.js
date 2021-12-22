@@ -392,7 +392,7 @@ export default {
             }
           ]
         },
-        iconSite: 'bottomCenter', // 'bottomCenter'
+        iconSite: 'bottomCenter', // rightTop
         flodClick: (v) => {},
         // setColnum: 4, // 4列
         // setRow: 3, // 3行

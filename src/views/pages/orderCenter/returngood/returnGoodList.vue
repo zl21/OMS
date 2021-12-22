@@ -6,7 +6,7 @@
     </div>
     <div class="returnForm totalHeight customized-list-form">
       <!-- form表单 -->
-      <OmsForm maxHeight="120" v-if="resetForm" :form-config="formConfig" />
+      <OmsForm v-if="resetForm" :form-config="formConfig" />
     </div>
     <div class="salesTable customized-list-table">
       <!-- tab切换 -->

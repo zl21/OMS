@@ -9,7 +9,7 @@
       <div class="btn-operate custom-btn">
         <OmsButton :btn-config="btnConfig" />
       </div>
-      <div class="public-content">
+      <div class="customized-detail-main">
         <div class="item-collapse">
           <Collapse v-model="value1">
             <Panel name="1">

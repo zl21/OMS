@@ -4,7 +4,7 @@
     <div class="custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="customized-detail-main">
       <div class="tableTop">
         <Collapse v-model="openDefault">
           <Panel name="1">

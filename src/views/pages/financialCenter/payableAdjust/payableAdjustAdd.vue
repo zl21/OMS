@@ -3,7 +3,7 @@
     <div class="buttons customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <WaterMark v-if="showStatusFlag && statusName" class="omsWaterMark" :text="statusName"></WaterMark>
       <Collapse v-model="spreadPanel">
         <Panel name="panel_baseInfo">

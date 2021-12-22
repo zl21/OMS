@@ -5,7 +5,7 @@
     <div class="returnTreasurysBtn customized-detail-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="customized-detail-main">
       <!-- form表单 -->
       <div class="TreasuryDefault">
         <Collapse v-model="openDefault">

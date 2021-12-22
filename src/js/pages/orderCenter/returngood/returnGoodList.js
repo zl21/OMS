@@ -347,7 +347,6 @@ export default {
       ],
       // }, // 按钮数据
       formConfig: {
-        // flodClickMsg: 'a', // 展开按钮 参数任意字符串
         btn: {
           buttons: [
             {
@@ -369,7 +368,7 @@ export default {
             },
           ]
         },
-        iconSite: 'bottomCenter', // 'bottomCenter'
+        iconSite: 'bottomCenter',
         // setColnum: 4, // 4列
         // setRow: 3, // 3行
         formValue: {},
