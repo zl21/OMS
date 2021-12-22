@@ -45,13 +45,6 @@
     &.unFlodStyle{
       padding-right:0;
     }
-    .businessForm_a{
-      .ark-row{
-        .ark-col{
-          // margin-top: 0;
-        }
-      }
-    }
   }
 }
 </style>

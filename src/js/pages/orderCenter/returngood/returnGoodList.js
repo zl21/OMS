@@ -107,7 +107,7 @@ export default {
       // btnConfig: {
       //   typeAll: 'default', // 按钮统一风格样式
       extendBtn: [
-        {
+        /* {
           text: $it('btn.find'), // 查找
           webname: 'lookup_tuihuanhuo',
           type: 'error',
@@ -123,7 +123,7 @@ export default {
           btnclick: () => {
             this.reset();
           } // 按钮点击事件
-        },
+        }, */
         {
           text: $it('btn.add'), // 新增
           webname: 'new_tuihuanhuo',
@@ -347,11 +347,35 @@ export default {
       ],
       // }, // 按钮数据
       formConfig: {
-        flodClickMsg: 'a', // 展开按钮 参数任意字符串
+        // flodClickMsg: 'a', // 展开按钮 参数任意字符串
+        btn: {
+          buttons: [
+            {
+              text: $it('btn.find'), // 查找
+              webname: 'lookup_tuihuanhuo',
+              type: 'error',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.find();
+              } // 按钮点击事件
+            },
+            {
+              text: $it('btn.reset'), // 重置
+              webname: 'lookup_chongzhi',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.reset();
+              } // 按钮点击事件
+            },
+          ]
+        },
+        iconSite: 'bottomCenter', // 'bottomCenter'
+        // setColnum: 4, // 4列
+        // setRow: 3, // 3行
         formValue: {},
         formData: [],
         flodClick: (v) => {
-          strUtil.flodClick(v);
+          // strUtil.flodClick(v);
         }
       }, // form表单
       labelList: [
