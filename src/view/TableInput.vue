@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-26 18:32:29
- * @LastEditTime: 2021-11-02 17:57:42
- * @LastEditors: your name
+ * @LastEditTime: 2021-12-07 19:51:09
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/src/view/TableInput.vue
 -->
@@ -103,11 +103,11 @@
 </template>
 
 <script>
-import myInput from "framework/components/input/objinput_dz.vue";
+// import myInput from "framework/components/input/objinput_dz.vue";
 export default {
   name: 'TableInput',
   components: {
-    myInput
+    myInput:$R3_CPS.components.objinput_dz
   },
   data() {
     return {};

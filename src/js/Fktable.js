@@ -1,4 +1,4 @@
-import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
+// import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 
@@ -381,7 +381,7 @@ export default {
   },
   created() {
     let _self = this
-    _self.ChineseDictionary = ChineseDictionary
+    _self.ChineseDictionary = $R3_CPS.ChineseDictionary
     // 判断是否是外键关联
     if (_self.fkid) {
       _self.formObj.refcolid = _self.fkid
