@@ -24,9 +24,9 @@
 		//样式修改  添加class ==> steps-content"
 		<div class="otherClass customized-detail">
  			 <!-- 按钮 -->
-			<div class="customized-detail-btn"></div>
+			<div class="obj-btn"></div>
 			<!-- 内容 -->
-			<div class="customized-detail-main">
+			<div class="obj-main">
 			<!-- 保持原有不动 单个模块如必要不用嵌套标签 例-->
 	 		<!-- 定制组件 -->
 			<EssentialInfo></EssentialInfo>
@@ -36,7 +36,7 @@
  				<Panel name="2">222</Panel>
 			</Collapse>
 			<!-- tab切换 -->
-			<div class="customized-detail-table">
+			<div class="obj-table">
 					<business-label
 						class="jordanLabel"
 						:label-list="labelList"
