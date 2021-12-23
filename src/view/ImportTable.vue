@@ -15,7 +15,7 @@
     </div>
     <div class="text">
       <!-- <span>注意：上传文件中，不要放置宏或图标，不要更改列的顺序，数据中不要使用公式。</span> -->
-      <span>{{ vmI18n.t('modalTips.za') }}</span>
+      <span>{{ vmI18n.t('tip.za') }}</span>
       <!-- (下载模版) -->
       <a v-if="!dontShowDownloadA" @click="downloadTemplate">({{ vmI18n.t('other.download_template') }})</a>
     </div>
@@ -26,7 +26,7 @@
         <input id="xFile" type="file" style="position: absolute; clip: rect(0 0 0 0)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" @change="handleFiles($event)" />
       </form>
       <!-- 文件最大64M -->
-      <span>{{ vmI18n.t('modalTips.zb') }}</span>
+      <span>{{ vmI18n.t('tip.zb') }}</span>
     </div>
     <!--备注导入专用-->
     <div v-if="importNotes">
@@ -43,7 +43,7 @@
     </p>
     <!-- 数据正在导入中，请稍候... -->
     <span v-if="loading" class="uploadmessage">
-      {{ vmI18n.t('modalTips.zc') }}
+      {{ vmI18n.t('tip.zc') }}
       <Icon class="loading" type="ios-loading" />
     </span>
     <div v-if="isError" class="error-message">

@@ -40,7 +40,7 @@ export default {
     title: {
       type: String,
       default: "弹框多选",
-      // default: $i18n.t('modalTitle.a7')
+      // default: $i18n.t('mT.a7')
     }, // 标题
     canChinese: {
       type: Boolean,
@@ -501,7 +501,7 @@ export default {
           this.$Message.warning($i18n.t("modalTips.go"));
           // this.$message({
           //   // message: '该记录已在已选中列表中',
-          //   message: $i18n.t('modalTips.go'),
+          //   message: $i18n.t('tip.go'),
           //   center: true,
           //   type: 'warning'
           // });
@@ -751,7 +751,7 @@ export default {
             return this.$Message.warning($i18n.t("modalTips.q2"));
             // this.$message({
             //   // message: '查询数量已超过上限，请修改查询条件!',
-            //   message: $i18n.t('modalTips.gq'),
+            //   message: $i18n.t('tip.gq'),
             //   center: true,
             //   type: 'warning'
             // });

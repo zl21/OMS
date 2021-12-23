@@ -691,7 +691,7 @@ export default {
           }
         } else {
           self.$Message.warning({
-            content: `${$i18n.t('modalTips.hn')}${tipsname[key].name}`// 请先选择
+            content: `${$i18n.t('tip.hn')}${tipsname[key].name}`// 请先选择
           });
           setTimeout(() => {
             $(`.el-autocomplete.${itemdata.colname}`)

@@ -12,7 +12,7 @@ export default {
     title: {
       type: String,
       // default: () => "标题"
-      default: () => $i18n.t('modalTitle.title')
+      default: () => $i18n.t('mT.title')
     }, // 设置标题title
     titleAlign: {
       type: String,
@@ -65,12 +65,12 @@ export default {
     okText: {
       type: String,
       // default: () => "确定"
-      default: () => $i18n.t('common.determine')
+      default: () => $i18n.t('com.determine')
     },
     cancelText: {
       type: String,
       // default: () => "取消"
-      default: () => $i18n.t('common.cancel')
+      default: () => $i18n.t('com.cancel')
     },
     confirm: {
       type: Function
