@@ -1,6 +1,6 @@
 {
   "name": "@burgeon/business-components",
-  "version": "2.0.7",
+  "version": "2.0.9",
   "description": "burgeon company's business-components lib for private npm",
   "main": "burgeon.publish/businessComponents.min.js",
   "files": [
@@ -9,7 +9,13 @@
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js",
-    "report": "npm run build --report"
+    "report": "npm run build --report",
+    "push": "npm run build && yalc push",
+    "watch": "nodemon --ignore burgeon.publish/ --ignore node_modules/ -C -e js,vue,less,scss --debug -x 'npm run push'"
+  },
+  "scriptsComments": {
+    "push": "本地调试组件库包体并执行自动化",
+    "watch": "自动监听本地化类库代码变更后同步调试信息"
   },
   "repository": {
     "type": "git",
@@ -55,8 +61,6 @@
   },
   "dependencies": {
     "@burgeon/internationalization": "^1.1.1",
-    "@syman/ark-ui": "1.2.5",
-    "@syman/burgeon-r3-components": "2.1.2",
     "awe-dnd": "^0.3.4",
     "compressing": "^1.5.1",
     "cross-env": "^7.0.3",
