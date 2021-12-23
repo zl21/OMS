@@ -1339,8 +1339,6 @@ export default {
           item.options = [];
         }
       });
-      this.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = '';
-      this.formConfig.formValue.AC_F_COMPENSATION_REASON_ID = '';
       if (!this.formConfig.formValue.BILL_TYPE) return
       const formdata = new FormData();
       formdata.append('code', this.formConfig.formValue.BILL_TYPE);
@@ -1368,6 +1366,8 @@ export default {
     // 填充表单数据
     setPayableAdjustData(mainData, itemData, logData) {
       const self = this;
+      self.formConfig.formValue.AC_F_COMPENSATION_TYPE_ID = '';
+      self.formConfig.formValue.AC_F_COMPENSATION_REASON_ID = '';
       console.log('mainData, itemData, logData', mainData, itemData, logData);
       let billType = mainData.BILL_TYPE;
       if (billType) {
