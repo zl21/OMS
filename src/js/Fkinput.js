@@ -160,7 +160,7 @@ export default {
     },
   },
   components: {
-    SelectDialog:$R3_CPS.components.SelectDialog,
+    SelectDialog:$R3_CPS.components.selectDialog,
     FkTable
   },
   mounted() {
