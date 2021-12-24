@@ -3,7 +3,7 @@
 // import ErrorTips from 'framework/components/tablelist/error.vue';
 // import pageNation from 'framework/components/page/pagenation.vue';
 import port from '@/config/config/orderDetailConnector.js';
-import matrixInput from './matrixInput';
+import matrixInput from '@/views/pages/inventoryCenter/logicalTransferOrder/matrixInput';
 import matrix from './matrix';
 // import R3 from '@syman/burgeon-r3';
 

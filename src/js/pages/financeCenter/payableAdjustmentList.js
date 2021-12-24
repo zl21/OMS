@@ -1,6 +1,7 @@
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import customPagingMixins from '@/assets/js/mixins/customPaging';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
 
 export default {
   components: {},
@@ -64,7 +65,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: Components.ImportTable,
+        url: $BC.Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}

@@ -1,6 +1,7 @@
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-// import BC from 'burgeonComponents'
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import Vue from "vue";
 const { Components } = $BC
 Vue.component('tableInput', Components.TableInput)
 
@@ -632,7 +633,7 @@ export default {
             render: (h, params) => {
               if (this.unAutitFlag) {
                 const self = this;
-                return h(tableInput, {
+                return h('tableInput', {
                   style: {
                     width: '100%'
                   },
@@ -674,7 +675,7 @@ export default {
                 });
               }
               const self = this;
-              return h(tableInput, {
+              return h('tableInput', {
                 style: {
                   width: '100%'
                 },

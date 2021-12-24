@@ -103,5 +103,6 @@ import channelRatioStrategy from '@/js/pages/inventoryCenter/channelRatioStrateg
 export default channelRatioStrategy;
 </script>
 <style lang="less">
+@import '~@/css/pages/inventoryCenter/index.less';
 @import '~@/css/pages/inventoryCenter/channelRatioStrategy.less';
 </style>

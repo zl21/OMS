@@ -46,7 +46,7 @@ export default {
         formData: [
           {
             colname: 'CP_C_PHY_WAREHOUSE_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,

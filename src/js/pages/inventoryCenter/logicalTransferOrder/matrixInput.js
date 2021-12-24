@@ -1,6 +1,6 @@
 // import R3 from '@syman/burgeon-r3';
 // import DragDialog from 'framework/components/dialog/dragDialog.vue';
-import matrix from './matrixPop';
+import matrix from '@/views/pages/inventoryCenter/logicalTransferOrder/matrixPop';
 
 const {store} = R3;
 const port = require('@/config/config/orderDetailConnector').default;

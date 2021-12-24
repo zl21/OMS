@@ -7,15 +7,13 @@ import tableHeaderCustom from "allpages/inventoryCenter/channelStockControl/tabl
 
 import {setFormDataFunMixin} from "@/assets/js/mixins/setFormData";
 import {setActionFormMixin} from "@/assets/js/mixins/setActionFormData";
-
 export default {
   mixins: [setFormDataFunMixin, setActionFormMixin],
   components: {
     selectTag,
     propSelect,
     actionForm,
-    CustomTable: $R3_CPS.components.customTable,
-    pageNation
+    CustomTable: $R3_CPS.components.P_customTable,
   },
   data() {
     return {

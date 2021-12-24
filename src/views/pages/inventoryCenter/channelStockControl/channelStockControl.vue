@@ -21,7 +21,7 @@
               </div>
             </RadioGroup>
             <div v-else class="fs-12 color-999 text-center line-height-30">
-              {{$it('other.noDataAvailable')}}
+              {{ $it('other.noDataAvailable') }}
               <!--暂无数据-->
             </div>
           </Scroll>
@@ -102,7 +102,7 @@
             <!--库存来源配置区-->
             <Collapse v-model="collapseShow" class="mg-tp-15">
               <Panel name="1">
-                {{$it('pL.b8')}}<!--配销仓-->
+                {{ $it('pL.b8') }}<!--配销仓-->
                 <div slot="content" class="">
                   <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>
                   <div class="pd-tp-10">
@@ -121,7 +121,7 @@
                 </div>
               </Panel>
               <Panel name="2">
-                {{$it('pL.b9')}}<!--共享池-->
+                {{ $it('pL.b9') }}<!--共享池-->
                 <div slot="content" class="">
                   <Table border :columns="columns3" :data="data3"></Table>
                 </div>
@@ -156,15 +156,16 @@
         <FormItem :label="`${$it('btn.a9')}:`" prop="qty">
           <!-- 这个后端让取反-->
           <Select v-model="dialogObj1.formData.islock" clearable style="width:200px">
-            <Option value="Y">{{$it('com.no')}}</Option> <!--否-->
-            <Option value="N">{{$it('com.yes')}}</Option> <!--是-->
+            <Option value="Y">{{ $it('com.no') }}</Option> <!--否-->
+            <Option value="N">{{ $it('com.yes') }}</Option> <!--是-->
           </Select>
         </FormItem>
       </Form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogObj1.show = false">{{$it('com.cancel')}}<!--取 消--></el-button>
+        <el-button @click="dialogObj1.show = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
         <el-button type="primary" :disabled="!dialogObj1.formData.islock" :loading="dialogObj1.loading"
-                   @click="saveDevOpsInfoFun({islock:dialogObj1.formData.islock},'dialogObj1',true)">{{$it('com.determine')}}<!--确 定-->
+                   @click="saveDevOpsInfoFun({islock:dialogObj1.formData.islock},'dialogObj1',true)">
+          {{ $it('com.determine') }}<!--确 定-->
         </el-button>
       </div>
     </el-dialog>
@@ -174,15 +175,16 @@
       <Form ref="formCustom3" :model="dialogObj2.formData" :label-width="155">
         <FormItem :label="`${$it('btn.aa')}:`" prop="qty">
           <Select v-model="dialogObj2.formData.istrans" clearable style="width:200px">
-            <Option value="Y">{{$it('com.yes')}}</Option>
-            <Option value="N">{{$it('com.no')}}</Option>
+            <Option value="Y">{{ $it('com.yes') }}</Option>
+            <Option value="N">{{ $it('com.no') }}</Option>
           </Select>
         </FormItem>
       </Form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogObj2.show = false">{{$it('com.cancel')}}<!--取 消--></el-button>
+        <el-button @click="dialogObj2.show = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
         <el-button type="primary" :disabled="!dialogObj2.formData.istrans" :loading="dialogObj2.loading"
-                   @click="saveDevOpsInfoFun({istrans:dialogObj2.formData.istrans},'dialogObj2',true)">{{$it('com.determine')}}<!--确 定-->
+                   @click="saveDevOpsInfoFun({istrans:dialogObj2.formData.istrans},'dialogObj2',true)">
+          {{ $it('com.determine') }}<!--确 定-->
         </el-button>
       </div>
     </el-dialog>
@@ -195,9 +197,10 @@
         </FormItem>
       </Form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogObj3.show = false">{{$it('com.cancel')}}<!--取 消--></el-button>
+        <el-button @click="dialogObj3.show = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
         <el-button type="primary" :disabled="!dialogObj3.formData.qtySafety" :loading="dialogObj3.loading"
-                   @click="saveDevOpsInfoFun({qtySafety:dialogObj3.formData.qtySafety},'dialogObj3')">{{$it('com.determine')}}<!--确 定-->
+                   @click="saveDevOpsInfoFun({qtySafety:dialogObj3.formData.qtySafety},'dialogObj3')">
+          {{ $it('com.determine') }}<!--确 定-->
         </el-button>
       </div>
     </el-dialog>
@@ -219,8 +222,8 @@
         </FormItem>
       </Form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="showTransferInventory = false">{{$it('com.cancel')}}<!--取 消--></el-button>
-        <el-button type="primary" @click="transferInventoryFun">{{$it('com.determine')}}<!--确 定--></el-button>
+        <el-button @click="showTransferInventory = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
+        <el-button type="primary" @click="transferInventoryFun">{{ $it('com.determine') }}<!--确 定--></el-button>
       </div>
     </el-dialog>
 
@@ -230,14 +233,14 @@
                   :defaultconfig="downConfig">
         <div slot="shopSlot">
           <div class="clearfix line-height-33">
-            <div class="pull-left width-120 pd-rt-6 text-right">{{$it('other.shop')}}：</div><!--店铺-->
+            <div class="pull-left width-120 pd-rt-6 text-right">{{ $it('other.shop') }}：</div><!--店铺-->
             <div class="pull-left">{{ leftCheckData.cpCShopEname }}</div>
           </div>
         </div>
       </FormLayout>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="downDialogObjShow = false">{{$it('com.cancel')}}<!--取 消--></el-button>
-        <el-button type="primary" @click="downDialogSubmit()"> {{$it('btn.download')}}<!--下 载--></el-button>
+        <el-button @click="downDialogObjShow = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
+        <el-button type="primary" @click="downDialogSubmit()"> {{ $it('btn.download') }}<!--下 载--></el-button>
       </div>
     </el-dialog>
 
@@ -247,14 +250,14 @@
                   :defaultconfig="downConfig2">
         <div slot="shopSlot">
           <div class="clearfix line-height-33">
-            <div class="pull-left width-120 pd-rt-6 text-right">{{$it('other.shop')}}：</div><!--店铺-->
+            <div class="pull-left width-120 pd-rt-6 text-right">{{ $it('other.shop') }}：</div><!--店铺-->
             <div class="pull-left">{{ leftCheckData.cpCShopEname }}</div>
           </div>
         </div>
       </FormLayout>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="downDialogObjShow2 = false">{{$it('com.cancel')}}<!--取 消--></el-button>
-        <el-button type="primary" @click="downDialogSubmit2()"> {{$it('btn.download')}}<!--下 载--></el-button>
+        <el-button @click="downDialogObjShow2 = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
+        <el-button type="primary" @click="downDialogSubmit2()"> {{ $it('btn.download') }}<!--下 载--></el-button>
       </div>
     </el-dialog>
 
@@ -267,27 +270,27 @@
           :span="18"
       />
       <div slot="footer" class="dialog-footer">
-        <el-button @click="modifyTypeDialogObjShow = false">{{$it('com.cancel')}}<!--取 消--></el-button>
+        <el-button @click="modifyTypeDialogObjShow = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
         <el-button type="primary" :disabled="!formConfig2.formValue.brandLabels"
                    :loading="formConfig2.loading"
-                   @click="modifyTypeFun">{{$it('com.determine')}}<!--确 定-->
+                   @click="modifyTypeFun">{{ $it('com.determine') }}<!--确 定-->
         </el-button>
       </div>
     </el-dialog>
 
 
-
     <!-- 修改同步比例-->
     <el-dialog :title="$it('btn.a6')" :visible.sync="dialogObj4.show" width="500px">
-      <Form  :model="dialogObj4.formData" :label-width="155">
+      <Form :model="dialogObj4.formData" :label-width="155">
         <FormItem label="比例:" prop="qty">
           <Input v-model="dialogObj4.formData.ratio" clearable :regx="/^[0-9]*$/" style="width: 200px"/>
         </FormItem>
       </Form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogObj4.show = false">{{$it('com.cancel')}}<!--取 消--></el-button>
+        <el-button @click="dialogObj4.show = false">{{ $it('com.cancel') }}<!--取 消--></el-button>
         <el-button type="primary" :disabled="!dialogObj4.formData.ratio" :loading="dialogObj4.loading"
-                   @click="checkSkuStorageFun({ratio:dialogObj4.formData.ratio},'dialogObj4',true)">{{$it('com.determine')}}<!--确 定-->
+                   @click="checkSkuStorageFun({ratio:dialogObj4.formData.ratio},'dialogObj4',true)">
+          {{ $it('com.determine') }}<!--确 定-->
         </el-button>
       </div>
     </el-dialog>
@@ -300,6 +303,7 @@ import channelStockControl from '@/js/pages/inventoryCenter/channelStockControl/
 export default channelStockControl;
 </script>
 <style lang="less" type="text/less">
+@import '~@/css/pages/inventoryCenter/index.less'; // 库存中心通用样式
 .channelStockControl {
   .ark-table-tfoot tr:first-child td {
     border-top: 1px solid #e8eaec;
