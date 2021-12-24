@@ -643,12 +643,14 @@ export default {
         refcolid: 1700816190, // 
         isdroplistsearch: true,
         startindex: 0, 
+        range: 999, // 页数
       }, 'ENAME', 'ID');
       // 赔付原因
       const arrCompensationReason = await this.handleQueryList({
         refcolid: 1700815423, // 
         isdroplistsearch: true,
         startindex: 0, 
+        range: 999, // 页数
       }, 'AC_F_COMPENSATION_TYPE_ENAME', 'ID');
       this.formConfig.formData.forEach(item => {
         if (item.value === 'AC_F_COMPENSATION_TYPE') {
