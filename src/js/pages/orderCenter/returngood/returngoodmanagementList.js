@@ -18,11 +18,11 @@ export default {
       eventGather: BurgeonEvent,
       errThData: [
         {
-          title: $i18n.t('form_label.chargebackNumber'), // 退单编号
+          title: $i18n.t('fL.chargebackNumber'), // 退单编号
           key: 'id'
         },
         {
-          title: $i18n.t('table_label.abnormalInfo'), // 异常信息
+          title: $i18n.t('tL.abnormalInfo'), // 异常信息
           key: 'error'
         }
       ],
@@ -119,17 +119,17 @@ export default {
           isShow: true
         },
         {
-          label: $i18n.t('form_label.waitFor_return_warehous'), // 等待退货入库
+          label: $i18n.t('fL.waitFor_return_warehous'), // 等待退货入库
           value: '20',
           isShow: true
         },
         {
-          label: $i18n.t('form_label.waitFor_afterSale_confirm'), // 等待售后确认
+          label: $i18n.t('fL.waitFor_afterSale_confirm'), // 等待售后确认
           value: '30',
           isShow: true
         },
         {
-          label: $i18n.t('form_label.complete'), // 完成
+          label: $i18n.t('fL.complete'), // 完成
           value: '50',
           isShow: true
         },
@@ -206,14 +206,14 @@ export default {
               const goodsThead = [
                 {
                   key: 'id',
-                  title: $i18n.t('table_label.code') // 编号
+                  title: $i18n.t('tL.code') // 编号
                 },
                 {
                   key: 'return',
-                  title: $i18n.t('table_label.returnGoods') // 退换货
+                  title: $i18n.t('tL.returnGoods') // 退换货
                 },
                 {
-                  title: $i18n.t('table_label.articleNumber'), // 货号
+                  title: $i18n.t('tL.articleNumber'), // 货号
                   key: 'ps_c_pro_ecode'
                 },
                 // {
@@ -229,15 +229,15 @@ export default {
                   key: 'ps_c_size_ename'
                 },
                 {
-                  title: $i18n.t('form_label.refundAmount'), // 退款金额
+                  title: $i18n.t('fL.refundAmount'), // 退款金额
                   key: 'refund_amt'
                 },
                 {
-                  title: $i18n.t('table_label.appleNumber'), // 申请数量
+                  title: $i18n.t('tL.appleNumber'), // 申请数量
                   key: 'qty_refund'
                 },
                 {
-                  title: $i18n.t('table_label.storageQuantity'), // 入库数量
+                  title: $i18n.t('tL.storageQuantity'), // 入库数量
                   key: 'qty_in'
                 }
               ]; // 浮框表头
@@ -547,7 +547,7 @@ export default {
       _this.formConfig.formValue.RECEIVE_PROVINCE_ID = '';
       _this.formConfig.formData.forEach(item => {
         // '原始订单编号'
-        if (item.itemdata?.name == $i18n.t('form_label.originalOrderNo')) {
+        if (item.itemdata?.name == $i18n.t('fL.originalOrderNo')) {
           _this.formConfig.formValue.ORIG_ORDER_ID = item.itemdata.valuedata;
         }
       });
@@ -665,11 +665,11 @@ export default {
       let tempObj = {
         'other.platForm': 'PLATFORM',
         'other.warehousingLogicalWarehouse': 'CP_C_STORE_ID',
-        'table_label.expressCompany': 'CP_C_LOGISTICS_ID',
-        'form_label.warehousingEntity': 'CP_C_PHY_WAREHOUSE_IN_ID',
-        'form_label.shipPhysicalWarehouse': 'CP_C_PHY_WAREHOUSE_ID',
-        'table_label.shopName': 'CP_C_SHOP_ID',
-        'table_label.creator': 'OWNERID'
+        'tL.expressCompany': 'CP_C_LOGISTICS_ID',
+        'fL.warehousingEntity': 'CP_C_PHY_WAREHOUSE_IN_ID',
+        'fL.shipPhysicalWarehouse': 'CP_C_PHY_WAREHOUSE_ID',
+        'tL.shopName': 'CP_C_SHOP_ID',
+        'tL.creator': 'OWNERID'
       };
       _this.formConfig.formData.forEach(item => {
         if (Object.keys(tempObj).includes(item.itemdata?.name)) {
