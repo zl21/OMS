@@ -26,7 +26,7 @@ export default {
         formData: [
           {
             colname: 'CP_C_SHOP_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -87,7 +87,7 @@ export default {
         formData: [
           {
             colname: 'SG_C_SA_STORE_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -137,7 +137,7 @@ export default {
           {
             style: 'input', // 输入框类型
             regx: /^[0-9]*$/,
-            label: `${'pL.ba'}（%）`, // 比例
+            label: `${$it('pL.ba')}（%）`, // 比例
             value: 'RATIO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -168,7 +168,7 @@ export default {
         formData: [
           {
             colname: 'SG_C_SHARE_POOL_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -201,7 +201,7 @@ export default {
           {
             style: 'input', // 输入框类型
             regx: /^[0-9]*$/,
-            label: `${'pL.ba'}（%）`, // 比例
+            label: `${$it('pL.ba')}（%）`, // 比例
             value: 'SG_C_SHARE_POOL_RATIO', // 输入框的值
             width: '6', // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
@@ -308,6 +308,7 @@ export default {
       ] : []
       const btns = {
         typeAll: 'default',
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           ...baocun,
           {

@@ -79,6 +79,7 @@ export default sgStorageChangeFtpQuery;
 </script>
 
 <style scoped lang="less">
+@import '~@/css/pages/inventoryCenter/index.less';
 .syncGradientStrategy {
   .bg-form {
     &.unFlodStyle {

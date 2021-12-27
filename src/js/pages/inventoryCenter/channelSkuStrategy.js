@@ -93,7 +93,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: 'modal/publicDialog/importTable',
+        url: $BC.Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
@@ -154,6 +154,7 @@ export default {
 
       const btns = {
         typeAll: 'default',
+        btnsite: 'right',
         buttons: [
           ...invalid,
           ...jiean,

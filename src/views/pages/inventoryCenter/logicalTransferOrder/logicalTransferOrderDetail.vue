@@ -238,7 +238,7 @@
           >
             <Input
               v-model="updateSalePriceModal.SALE_DISCOUNT"
-              :placeholder="$it('tL.enter')"
+              :placeholder="$it('pH.enter')"
               :regx="/^\d*\.{0,1}\d{0,2}$/"
               @on-change="saleDiscountChange"
             />
@@ -250,7 +250,7 @@
           >
             <Input
               v-model="updateSalePriceModal.SALE_PRICE"
-              :placeholder="$it('tL.enter')"
+              :placeholder="$it('pH.enter')"
               :regx="/^\d*\.{0,1}\d{0,2}$/"
               @on-change="salePriceChange"
             />
