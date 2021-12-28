@@ -1,11 +1,11 @@
 <template>
   <div class="auto-check channelSkuStrategyAddOrEdit customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
     <div class="operate left obj-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
     <div class="obj-main">
-      <Collapse v-model="collapse">
+      <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
+      <Collapse v-model="collapse" class="obj-form">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
           {{ $it('com.baseInformation') }}

@@ -7,18 +7,18 @@
  * @FilePath: /burgeon-project-logic/views/pages/strategyPlatform/courierPay/courierPay.vue
 -->
 <template>
-  <div class="courierPay public-main">
-    <div
-      v-if="identifying === 3"
-      class="img"
-    >
-      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
-    </div>
-    <div class="buttons">
+  <div class="courierPay customized-detail">
+    <div class="buttons obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="obj-main">
-      <Collapse v-model="value1">
+      <div
+      v-if="identifying === 3"
+      class="img"
+    >
+      <WaterMark v-if="statusName !== ''" :text="statusName"/>
+    </div>
+      <Collapse v-model="value1" class="obj-form">
         <Panel name="1">
           <!-- 基本信息 -->
           {{ $it("com.baseInformation") }}

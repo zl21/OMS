@@ -7,7 +7,7 @@
     </div>
     <div class="obj-main">
       <!-- form表单 -->
-      <div class="TreasuryDefault">
+      <div class="TreasuryDefault obj-form">
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
@@ -63,7 +63,7 @@
         </Modal>
       </div>
       <!-- 水印图片 -->
-      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" :text="statusName"/>
     </div>
   </div>
 </template>

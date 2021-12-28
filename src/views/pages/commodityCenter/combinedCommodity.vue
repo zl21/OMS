@@ -10,7 +10,7 @@
         <OmsButton :btn-config="btnConfig" />
       </div>
       <div class="obj-main">
-        <div class="item-collapse">
+        <div class="item-collapse obj-form">
           <Collapse v-model="value1">
             <Panel name="1">
               <!-- 基本信息 -->
@@ -31,7 +31,7 @@
           </Collapse>
         </div>
         <div class="commodity-detail-box">
-          <div class="bar-code-detail">
+          <div class="bar-code-detail obj-table">
             <OmsLabel
               :label-default-value="tabconfig1.labelDefaultValue"
               :label-list="tabconfig1.labelList"
@@ -81,7 +81,7 @@
           </div>
         </div> 
         <!-- 水印 -->
-        <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"></WaterMark>
+        <WaterMark v-if="statusName !== ''" :text="statusName"></WaterMark>
       </div>
     </div>
     <div
@@ -100,70 +100,71 @@
           <div class="btn-operate custom-btn">
             <OmsButton :btn-config="btnConfig" />
           </div>
-          <div class="item-collapse">
-            <Collapse v-model="value1">
-              <Panel name="1">
-                <!-- 基本信息 -->
-                {{ $it('com.baseInformation') }}
-                <OmsForm
-                  slot="content"
-                  :form-config="formConfig1"
-                />
-              </Panel>
-              <Panel name="2">
-                <!-- 日志 -->
-                {{ $it('com.journal') }}
-                <OmsForm
-                  slot="content"
-                  :form-config="formConfig2"
-                />
-              </Panel>
-            </Collapse>
-          </div>
-          <div class="commodity-detail-box">
-            <div class="bar-code-detail">
-              <OmsLabel
-                :label-default-value="tabconfig1.labelDefaultValue"
-                :label-list="tabconfig1.labelList"
-              />
-              <div class="tab-content">
-                <OmsTable
-                  ref="codeTable"
-                  :jordan-table-config="jordanTableConfig1"
-                  @on-select="onSelect"
-                  @on-row-click="onRowClick"
-                  @table-delete-detail="tableDeleteDetail"
-                  @on-page-change="pageChange"
-                  @on-page-size-change="pageSizeChange"
-                  @on-select-cancel="onSelectCancel"
-                  @on-select-all="onSelectAll"
-                  @on-select-all-cancel="onSelectAllCancel"
-                />
-              </div>
+          <div class="obj-main">
+            <div class="item-collapse obj-form">
+              <Collapse v-model="value1">
+                <Panel name="1">
+                  <!-- 基本信息 -->
+                  {{ $it('com.baseInformation') }}
+                  <OmsForm
+                    slot="content"
+                    :form-config="formConfig1"
+                  />
+                </Panel>
+                <Panel name="2">
+                  <!-- 日志 -->
+                  {{ $it('com.journal') }}
+                  <OmsForm
+                    slot="content"
+                    :form-config="formConfig2"
+                  />
+                </Panel>
+              </Collapse>
             </div>
-            <div class="combined-commodity-detail">
-              <OmsLabel
-                :label-default-value="tabconfig2.labelDefaultValue"
-                :label-list="tabconfig2.labelList"
-              />
-              <div class="tab-content">
-                <div class="wrap">
+            <div class="commodity-detail-box">
+              <div class="bar-code-detail obj-table">
+                <OmsLabel
+                  :label-default-value="tabconfig1.labelDefaultValue"
+                  :label-list="tabconfig1.labelList"
+                />
+                <div class="tab-content">
                   <OmsTable
-                    :jordan-table-config="jordanTableConfig2"
-                    @table-delete-detail="commodityDeleteDetail"
-                    @on-select="RightonSelect"
-                    @on-page-change="commodityPageChange"
-                    @on-page-size-change="commodityPageSizeChange"
-                    @on-select-cancel="onSelectCancelCommodity"
-                    @on-select-all="onSelectAllCommodity"
-                    @on-select-all-cancel="onSelectAllCancelCommodity"
-                    @table-import="commodityDetailImport"
-                    @table-export="commodityDetailExport"
+                    ref="codeTable"
+                    :jordan-table-config="jordanTableConfig1"
+                    @on-select="onSelect"
+                    @on-row-click="onRowClick"
+                    @table-delete-detail="tableDeleteDetail"
+                    @on-page-change="pageChange"
+                    @on-page-size-change="pageSizeChange"
+                    @on-select-cancel="onSelectCancel"
+                    @on-select-all="onSelectAll"
+                    @on-select-all-cancel="onSelectAllCancel"
                   />
                 </div>
               </div>
+              <div class="combined-commodity-detail obj-table">
+                <OmsLabel
+                  :label-default-value="tabconfig2.labelDefaultValue"
+                  :label-list="tabconfig2.labelList"
+                />
+                <div class="tab-content">
+                  <div class="wrap">
+                    <OmsTable
+                      :jordan-table-config="jordanTableConfig2"
+                      @table-delete-detail="commodityDeleteDetail"
+                      @on-select="RightonSelect"
+                      @on-page-change="commodityPageChange"
+                      @on-page-size-change="commodityPageSizeChange"
+                      @on-select-cancel="onSelectCancelCommodity"
+                      @on-select-all="onSelectAllCommodity"
+                      @on-select-all-cancel="onSelectAllCancelCommodity"
+                      @table-import="commodityDetailImport"
+                      @table-export="commodityDetailExport"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
         <!-- </TabPane> -->
         <!--<TabPane label="修改日志" :name="'日志'">-->
         <!--<OmsTable-->
@@ -173,8 +174,8 @@
         <!--@on-page-size-change="operateLogPageSizeChange"-->
         <!--&gt;</OmsTable>-->
         <!--</TabPane>-->
-        <!-- 水印 -->
-        <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"></WaterMark>
+            <WaterMark v-if="statusName !== ''" :text="statusName"></WaterMark>
+          </div>
       <!-- </Tabs> -->
     </div>
     <Modal
