@@ -54,7 +54,6 @@ export default {
         ]
       },
       btnConfig: {
-        typeAll: 'error',
         btnsite: 'right',
         buttons: [
           {
@@ -64,6 +63,7 @@ export default {
             } // 按钮点击事件
           }, {
             text: $it('com.determine'), // 确定
+            type: 'error',
             btnclick: () => {
               this.confirmChange();
             }
