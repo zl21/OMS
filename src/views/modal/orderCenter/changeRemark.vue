@@ -7,7 +7,7 @@
  * @FilePath: /project-logic/views/modal/orderCenter/changeRemark.vue
 -->
 <template>
-  <div class="jordanModal-- customized-modal">
+  <div class="jordanModal-- cus-modal">
     <Spin
       v-if="spinShow"
       size="large"

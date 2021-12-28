@@ -1,5 +1,5 @@
 <template>
-  <div class="jordanModal customized-modal" v-loading="loading">
+  <div class="jordanModal cus-modal" v-loading="loading">
     <!-- 修改物流 -->
     <div class="Modal-Form">
       <OmsForm :form-config="formConfig" />

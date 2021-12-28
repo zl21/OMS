@@ -1,6 +1,6 @@
 <template>
   <!-- 异常处理 -->
-  <div class="exceptionHandle customized-modal" v-loading="loading">
+  <div class="exceptionHandle cus-modal" v-loading="loading">
     <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"

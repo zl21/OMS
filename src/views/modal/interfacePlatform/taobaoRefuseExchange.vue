@@ -8,7 +8,7 @@
 -->
 <template>
   <!-- 淘宝换货单接口-拒绝换货 -->
-  <div class="customized-modal" style="width: 430px">
+  <div class="cus-modal" style="width: 430px">
     <OmsForm :form-config="formConfig" />
     <OmsButton  class="modal-footer" :btn-config="btnConfig" />
   </div>

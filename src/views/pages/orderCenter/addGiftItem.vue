@@ -8,7 +8,7 @@
 -->
 
 <template>
-  <div class="customized-modal matchingDetails">
+  <div class="cus-modal matchingDetails">
     <!-- <EasyMatrix :component-data="matrixData" /> -->
     <OmsForm :form-config="formConfig"></OmsForm>
     <!-- businessButton -->
@@ -56,7 +56,7 @@ export default addGiftItem;
     top: 22px !important;
   }
 }
-.customized-modal {
+.cus-modal {
   .absolute {
     position: absolute;
     right: 0;

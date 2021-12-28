@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/views/modal/orderCenter/addFlag.vue
 -->
 <template>
-  <div class="OC_ORDER_ADD_LABEL customized-modal">
+  <div class="OC_ORDER_ADD_LABEL cus-modal">
     <div class="tbody">
       <CheckboxGroup v-model="social">
         <Checkbox

@@ -1,6 +1,6 @@
 <template>
   <!-- 订单管理 - 售后复制 -->
-  <div class="customized-modal afterSaleCopy">
+  <div class="cus-modal afterSaleCopy">
     <div class="afterSaleCopy-form">
       <OmsForm :form-config="formConfig"/>
     </div>

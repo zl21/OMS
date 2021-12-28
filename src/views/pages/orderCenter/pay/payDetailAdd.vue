@@ -16,7 +16,7 @@
       @on-page-change="pageChange"
       @on-page-size-change="pageSizeChange"
     />
-    <!-- <div class="buttons customized-modal-btn">
+    <!-- <div class="buttons cus-modal-btn">
       <OmsButton :btn-config="btnConfigMo" />
     </div> -->
   </div>

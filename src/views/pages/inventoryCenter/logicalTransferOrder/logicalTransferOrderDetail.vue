@@ -1,7 +1,7 @@
 <template>
   <div
     v-loading="fileImport"
-    class="ff-order-detail customized-modal"
+    class="ff-order-detail cus-modal"
   >
     <div class="ff-order-detail-search-box">
       <matrix-input

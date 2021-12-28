@@ -1,6 +1,6 @@
 <template>
   <!-- 商品异常处理 -->
-  <div class="productError customized-modal" v-loading="loading">
+  <div class="productError cus-modal" v-loading="loading">
     <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"

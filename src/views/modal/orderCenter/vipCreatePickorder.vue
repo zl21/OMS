@@ -7,7 +7,7 @@
  * @FilePath: /project-logic/views/modal/orderCenter/vipCreatePickorder.vue
 -->
 <template>
-  <div class="customized-modal" style="width: 430px; padding-right: 20px">
+  <div class="cus-modal" style="width: 430px; padding-right: 20px">
     <OmsForm :form-config="pickorderFromConfig" />
     <OmsButton class="modal-footer" :btn-config="pickorderBtnConfig" />
   </div>

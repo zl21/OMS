@@ -1,6 +1,6 @@
 <template>
   <!-- 订单管理 - 批量拆弹 - 指定商品拆单 -->
-  <div class="specifyGoods customized-modal" v-loading="loading">
+  <div class="specifyGoods cus-modal" v-loading="loading">
     <div class="i_head">
       <div style="float: left; margin-top: 7px">
         <RadioGroup v-model="radioValue" @on-change="radioChange">

@@ -1,10 +1,10 @@
 <template>
   <!-- HOLD单策略 - 调整策略时间 -->
-  <div v-loading="dialogLoad" class="time-dialog">
-    <div class="time-dialog-form">
-      <OmsForm :form-config="formConfig" />
+  <div v-loading="dialogLoad" class="cus-modal">
+    <OmsForm :form-config="formConfig" />
+    <div class="modal-footer">
+      <OmsButton :btn-config="btnConfig" />
     </div>
-    <OmsButton :btn-config="btnConfig" />
   </div>
 </template>
 

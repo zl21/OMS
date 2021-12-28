@@ -1,5 +1,5 @@
 <template>
-  <div class="customized-modal" style="width:400px;padding-right:15px">
+  <div class="cus-modal" style="width:400px;padding-right:15px">
     <OmsForm :form-config="formConfig" />
     <OmsButton class="modal-footer" :btn-config="buttonConfig" />
   </div>
