@@ -92,7 +92,7 @@ const DownLoad = {
         buttons: [
           {
             type: "", // 按钮类型
-            text: $i18n.t("common.cancel"), // 取消 按钮文本
+            text: $i18n.t("com.cancel"), // 取消 按钮文本
             icon: "", // 按钮图标
             size: "", // 按钮大小
             disabled: false, // 按钮禁用控制
@@ -176,13 +176,13 @@ const DownLoad = {
         id: this.taskId,
         type: "singleView", // 类型action
         name: "singleView",
-        label: $i18n.t("common.interface_download_taskTable_edit"), // 接口下载任务表编辑 tab中文名
+        label: $i18n.t("com.interface_download_taskTable_edit"), // 接口下载任务表编辑 tab中文名
         query: {
           id: this.taskId,
           pid: "24775",
-          ptitle: $i18n.t("common.interface_download_taskTable"), // 接口下载任务表
+          ptitle: $i18n.t("com.interface_download_taskTable"), // 接口下载任务表
           ptype: "table",
-          tabTitle: $i18n.t("common.interface_download_taskTable_edit"), // 接口下载任务表编辑
+          tabTitle: $i18n.t("com.interface_download_taskTable_edit"), // 接口下载任务表编辑
           tableName: "IP_T_CONSUMER_LOG",
         },
       });
