@@ -43,7 +43,7 @@ const BC = {
 	install,
 	Components,
 	Utils,
-	name: 'burgeon-business-components',
+	name: '@burgeon/business-components',
 	version: require('./package.json').version,
 }
  
