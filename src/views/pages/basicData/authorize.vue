@@ -37,7 +37,7 @@
       :mask="true"
       :title="shopTitle"
     >
-      <div class="customized-modal">
+      <div class="cus-modal">
         <!-- 步骤条 -->
         <div class="steps-style">
           <Steps :current="2" size="small">
@@ -79,7 +79,7 @@
       title
       :class-name="'ark-dialog'"
     >
-      <div class="customized-modal">
+      <div class="cus-modal">
         <p class="tips"><span class="iconfont"></span>{{$it('tip.hb') }}</p>
         <OmsButton class="modal-footer" :btn-config="authoriBtnConfig" />
       </div>
@@ -96,7 +96,7 @@ export default authorize
 <style lang="less" scoped>
 @import "~@/css/pages/basicData/authorize.less";
 @import "~omsTheme/public.less";
-.customized-modal {
+.cus-modal {
   .tips {
     padding-top: 10%;
     text-align: center;

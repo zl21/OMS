@@ -1,11 +1,11 @@
 <template>
   <div class="auto-check channelRatioStrategyAddOrEdit customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&& !isActive" :text="$it('com.voided')"/> <!--已作废-->
     <div class="operate left obj-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
     <div class="obj-main">
-      <Collapse v-model="collapse">
+      <WaterMark v-if="ID!=='-1'&& !isActive" :text="$it('com.voided')"/> <!--已作废-->
+      <Collapse v-model="collapse" class="obj-form">
         <Panel name="panel_baseInfo">
            {{$it('com.baseInformation')}}<!--基本信息-->
           <div slot="content">
@@ -35,7 +35,7 @@
                     }}
                   </Option>
                 </Select>
-                <el-input :placeholder="$it('tL.enter')" v-model="exclusiveStockFilterInputValue"
+                <el-input :placeholder="$it('pH.enter')" v-model="exclusiveStockFilterInputValue"
                           class="input-with-search-style font-size-12 mg-lf-10"
                           size="mini">
                   <el-button slot="prepend" class="font-size-12" @click="getExclusiveStockData()">

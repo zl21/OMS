@@ -23,18 +23,22 @@ export default {
   // 共享池库存梯度策略-单对象
   SYNCGRADIENTSTRATEGY: {
     component: () => import('allpages/inventoryCenter/syncGradientStrategy/syncGradientStrategy.vue'),
+    labelName: '共享池库存梯度策略'
   },
   // 配销仓库存梯度策略-单对象
   SYNCGRADIENTSTRATEGYSA: {
     component: () => import('allpages/inventoryCenter/syncGradientStrategySA/syncGradientStrategySA.vue'),
+    labelName: '配销仓库存梯度策略'
   },
   // 寻源策略表-单对象
   SOURCSTRATEGYDETAIL: {
     component: () => import('allpages/inventoryCenter/sourcstrategy/sourcstrategyAdd.vue'),
+    labelName: '寻源策略表'
   },
   // 特殊条码按比例同步策略-单对象
   CHANNELSKUSTRATEGY: {
     component: () => import('allpages/inventoryCenter/channelSkuStrategy.vue'),
+    labelName: '特殊条码按比例同步策略'
   },
   // 比例同步策略-单对象
   CHANNELRATIOSTRATEGY: {
@@ -44,14 +48,17 @@ export default {
   // 店仓评分 - 列表
   STORESCORESTRATEGY: {
     component: () => import('allpages/inventoryCenter/storeScoreStrategy/storeScoreStrategy.vue'),
+    labelName: '店仓评分设置表'
   },
   // 店仓评分 - 详情
   STORESCORESTRATEGYDETAIL: {
     component: () => import('allpages/inventoryCenter/storeScoreStrategy/storeScoreStrategyAdd.vue'),
+    labelName: '店仓评分设置表'
   },
   // 渠道库存管理
   CHANNELSTOCKCONTROL: {
     component: () => import('allpages/inventoryCenter/channelStockControl/channelStockControl.vue'),
+    labelName: '渠道库存管理'
   },
 // 配销仓调拨单 - 商品明细Tab
   SHARESATRANSFER: {
@@ -68,6 +75,7 @@ export default {
   // 逻辑解冻单 - 商品明细Tab
   STOUNFREEZE: {
     component: () => import('allpages/inventoryCenter/logicalTransferOrder/logicalTransferOrderDetail.vue'),
+    labelName: '逻辑解冻单'
   },
   // 库存调整单 - 商品明细Tab
   STOADJUST: {
@@ -91,7 +99,8 @@ export default {
   },
   // 寻源策略表 - 列表
   SOURCSTRATEGY: {
-    component: () => import('allpages/inventoryCenter/sourcstrategy/sourcstrategy')
+    component: () => import('allpages/inventoryCenter/sourcstrategy/sourcstrategy'),
+    labelName: '寻源策略表'
   },
 
 };

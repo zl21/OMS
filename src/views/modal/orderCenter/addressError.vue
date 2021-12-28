@@ -1,6 +1,6 @@
 <template>
   <!-- 地址异常处理 -->
-  <div class="addressError customized-modal" v-loading="loading">
+  <div class="addressError cus-modal" v-loading="loading">
     <OmsTable
       :jordan-table-config="tableConfig"
       @on-select="onSelect"

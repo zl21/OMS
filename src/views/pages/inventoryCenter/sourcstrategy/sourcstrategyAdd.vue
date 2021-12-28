@@ -1,8 +1,8 @@
 <!--寻源策略表-->
 <template>
   <div class="sourcstrategy pd-tp-20 relative pd-bt-50 customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
     <div class="pd-rt-100 obj-main">
+      <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-1">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
           <span class="iconfont icon-item icon-jibenxinxi font-size-24 color-primary"></span>
@@ -154,7 +154,7 @@
         </li>
       </ul>
     </div>
-    <div class="fixed bottom-0 right-0" ref="rightBox" style="z-index: 999">
+    <div class="fixed bottom-0 right-0 obj-btn" ref="rightBox" style="z-index: 999">
       <div class="flex flex-direction-row justify-content-end bg-base obj-btn">
         <OmsButton :btn-config="btnConfig" class="top-btns"/>
       </div>

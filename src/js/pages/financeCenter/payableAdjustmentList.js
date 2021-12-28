@@ -272,7 +272,7 @@ export default {
             width: '6'
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -303,7 +303,7 @@ export default {
             }
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -333,7 +333,7 @@ export default {
             }
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,

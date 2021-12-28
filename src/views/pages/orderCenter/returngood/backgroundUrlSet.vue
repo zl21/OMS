@@ -278,7 +278,6 @@ export default {
 }
 </script>
 <style lang="less" scoped type="text/less">
-@import url("~@/assets/css/css_1_3/page.less");
 @btn-color: #fd6442;
 .ff-pos-set-btn {
   padding: 10px 0;
@@ -345,6 +344,10 @@ export default {
 </style>
 <style lang="less">
 .backgroundUrlSet {
+  padding:0 15px;
+  .item-input .input-wrap .input-inner input {
+    width: calc(100%) !important;
+  }
   .item-input.isnotnull input {
     background: #fff;
   }

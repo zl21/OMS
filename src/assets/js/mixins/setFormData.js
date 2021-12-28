@@ -27,7 +27,7 @@ export const setFormDataFunMixin = {
         return {
           popInput: {
             colname: item.colname,
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: width,
             itemdata: {
               autoRequest: item.autoRequest || {},
@@ -85,7 +85,7 @@ export const setFormDataFunMixin = {
             value: item.colname, // 输入框的值
             width: width, // 所占的宽度 (宽度分为24份,数值代表所占份数的宽度)
             icon: '', // 输入框后带的图标,暂只有输入框支持
-            placeholder: item.placeholder || `${$it('tL.enter')}${item.name}`, // 占位文本，默认为请输入
+            placeholder: item.placeholder || `${$it('pH.enter')}${item.name}`, // 占位文本，默认为请输入
             ghost: false, // 是否关闭幽灵按钮，默认开启
             id: `${formName}${item.colname}`,
             disabled: item.readonly, // 禁用控制
@@ -162,7 +162,7 @@ export const setFormDataFunMixin = {
               this.isActive = item.valuedata ? item.valuedata !== 'N' : true
             }
             this[formConfigName].formValue[item.colname] = item.defval || item.valuedata || ''
-            this[formConfigName].ruleValidate[item.colname] = [{required: item.isnotnull, message: `${$it('tL.enter')}${item.name}`}]
+            this[formConfigName].ruleValidate[item.colname] = [{required: item.isnotnull, message: `${$it('pH.enter')}${item.name}`}]
             let type = 'input'
             if (item.isfk) {
               this[formConfigName].formValue[item.colname] = item.pid || item.defval || item.refobjid || ''

@@ -1,12 +1,12 @@
-.customized-modal .i_head {
+.cus-modal .i_head {
   height: 30px;
   margin-bottom: 10px;
 }
-.customized-modal .i_body {
+.cus-modal .i_body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.customized-modal .i_food {
+.cus-modal .i_food {
   display: flex;
   flex-direction: row-reverse;
 }

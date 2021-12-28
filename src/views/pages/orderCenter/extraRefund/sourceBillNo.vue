@@ -34,7 +34,7 @@
       class-name="ark-dialog"
       title="关联原单"
     >
-      <div class="customized-modal">
+      <div class="cus-modal">
         <div class="obj-table">
           <OmsTable
             :jordan-table-config="table"

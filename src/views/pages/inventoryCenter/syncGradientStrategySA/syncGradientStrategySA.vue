@@ -1,12 +1,12 @@
 <!--配销仓库存梯度策略 单对象-->
 <template>
   <div class="auto-check syncGradientStrategy customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
     <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" class="top-btns"/>
     </div>
     <div class="obj-main">
-      <Collapse v-model="collapse">
+      <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
+      <Collapse v-model="collapse" class="obj-form">
         <Panel name="panel_baseInfo">
           {{$it('com.baseInformation')}}<!--基本信息-->
           <div slot="content">
@@ -79,6 +79,7 @@ export default sgStorageChangeFtpQuery;
 </script>
 
 <style scoped lang="less">
+@import '~@/css/pages/inventoryCenter/index.less';
 .syncGradientStrategy {
   .bg-form {
     &.unFlodStyle {

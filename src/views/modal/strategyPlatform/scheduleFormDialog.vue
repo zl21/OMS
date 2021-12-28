@@ -6,7 +6,7 @@
  * @FilePath: \r3-web\src\views\modal\strategyPlatform\scheduleFormDialog.vue
 -->
 <template>
-  <div class="scheduleFormDialog customized-modal">
+  <div class="scheduleFormDialog cus-modal">
     <div class="subtablePart">
       <OmsForm
         v-if="dialogConfig.length == 1"

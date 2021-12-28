@@ -8,7 +8,7 @@
         alt
       >
     -->
-      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" :text="statusName"/>
     </div>
     <Tabs
       :value="tab"

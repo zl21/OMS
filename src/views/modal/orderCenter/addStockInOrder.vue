@@ -1,9 +1,9 @@
 <template>
-  <div class="addStockInOrder customized-modal">
+  <div class="addStockInOrder cus-modal">
     <div class="subtablePart">
       <OmsForm :form-config="formConfig" />
     </div>
-    <div class="buttons customized-modal-btn">
+    <div class="buttons cus-modal-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
   </div>

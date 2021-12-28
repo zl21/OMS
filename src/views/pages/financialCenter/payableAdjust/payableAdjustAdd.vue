@@ -4,8 +4,8 @@
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="obj-main">
-      <WaterMark v-if="showStatusFlag && statusName" class="omsWaterMark" :text="statusName"></WaterMark>
-      <Collapse v-model="spreadPanel">
+      <WaterMark v-if="showStatusFlag && statusName" :text="statusName"></WaterMark>
+      <Collapse v-model="spreadPanel" class="obj-form">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
           {{ $it("com.baseInformation") }}

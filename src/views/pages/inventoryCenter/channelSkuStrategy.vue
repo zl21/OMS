@@ -1,11 +1,11 @@
 <template>
   <div class="auto-check channelSkuStrategyAddOrEdit customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
     <div class="operate left obj-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
     <div class="obj-main">
-      <Collapse v-model="collapse">
+      <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
+      <Collapse v-model="collapse" class="obj-form">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
           {{ $it('com.baseInformation') }}
@@ -15,7 +15,7 @@
         </Panel>
         <Panel name="exclusive_stock">
           <!-- 独享库存 -->
-          {{ $it('pL.bg') }}
+          {{ $it('pL.bh') }}
           <div slot="content" class="obj-table">
             <OmsForm v-if="canEdit" ref="exclusiveStock" :form-config="formConfig2"/>
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
@@ -35,14 +35,14 @@
                 <a v-if="canEdit && ID !== '-1'" @click="importFun(tab1tableName,$it('fL.f7'),1)">【{{$it('btn.import')}}】</a> <!--导入-->
                 <a v-if="ID !== '-1'" @click="exportClick(tab1tableName,multipleSelection,table1Refcolid,$it('fL.f7'),isExport,1)">【{{$it('btn.export')}}】</a><!--导出-->
               </div>
-              <div class="flex flex-direction-row align-items-center ">
+              <div class="flex flex-direction-row align-items-center">
                 <Select v-model="exclusiveStockFilterValue" class="width-120" placeholder="查询条件" clearable>
                   <Option v-for="item in exclusiveStockFilterList" :value="item.value" :key="item.value">{{
                       item.label
                     }}
                   </Option>
                 </Select>
-                <el-input :placeholder="$it('tL.enter')" v-model="exclusiveStockFilterInputValue"
+                <el-input :placeholder="$it('pH.enter')" v-model="exclusiveStockFilterInputValue"
                           class="input-with-search-style font-size-12 mg-lf-10"
                           size="mini">
                   <el-button slot="prepend" class="font-size-12" @click="getExclusiveStockData(true)"> {{$it('btn.search')}} <!--搜索--></el-button>
@@ -88,7 +88,7 @@
                     }}
                   </Option>
                 </Select>
-                <el-input :placeholder="$it('tL.enter')" v-model="sharedInventoryFilterInputValue"
+                <el-input :placeholder="$it('pH.enter')" v-model="sharedInventoryFilterInputValue"
                           class="input-with-search-style font-size-12 mg-lf-10"
                           size="mini">
                   <el-button slot="prepend" class="font-size-12" @click="getSharedInventoryData()"> {{$it('btn.search')}} <!--搜索--></el-button>

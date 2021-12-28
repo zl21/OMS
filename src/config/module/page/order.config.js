@@ -188,5 +188,12 @@ export default {
       /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManageDetail/orderDetail/halfOrderDetail.vue'
     )
-  }
+  },
+
+  // pos背景图片设置
+  BACKGROUNDURLSET: {
+    component: () => import('allpages/orderCenter/returngood/backgroundUrlSet.vue'),
+    labelName: 'pos背景图片设置',
+  },
+
 };
