@@ -47,16 +47,23 @@
 </template>
 
 <script>
-
   import R3 from '@syman/burgeon-r3';
-
   const enableGateWay = false;
   const { network, urlSearchParams } = R3;
-  
   export default {
     name: 'Login',
+    beforeMount() {
+      this.redirectIam();
+    },
     methods: {
-      
+      redirectIam() {
+        network.get('/p/c/getIamConf').then(res => {
+          const { data } = res;
+          if (!data.code && data.data['iam.login.enable']) {
+            window.location.href = data.data['iam.login.url'];
+          }
+        })
+      },
       login() {
         let message = {};
         if (this.$refs.username.value === '') {
