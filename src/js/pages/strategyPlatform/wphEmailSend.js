@@ -4,7 +4,7 @@
 export default {
   name: 'WphEmailSend',
   components: {
-    editor:$R3_CPS.components.wang-editor
+    editor: $R3_CPS.components['wang-editor']
   },
   props: {
     objid: {
