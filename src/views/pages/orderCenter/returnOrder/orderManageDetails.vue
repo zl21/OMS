@@ -8,10 +8,10 @@
 -->
 <template>
   <div class="customized-detail orderManageDetails" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="Step-Box">
         <Steps class="steps-content">
           <Step
@@ -39,7 +39,7 @@
           @freshLoad="freshLoad"
         />
         <!-- 子表 -->
-        <div class="customized-detail-table">
+        <div class="obj-table">
           <OrderItem
             v-show="labelDefaultValue !== 'OC_B_ORDER_ITEM'"
             class="custom-table"
@@ -50,7 +50,6 @@
       <!--单据状态图片展示 -->
       <WaterMark
         v-if="statusName !== ''"
-        class="omsWaterMark"
         :text="statusName"
       />
     </div>

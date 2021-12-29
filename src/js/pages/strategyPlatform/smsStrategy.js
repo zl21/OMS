@@ -1,9 +1,9 @@
-import editor from 'framework/components/wang-editor/wang-editor';
+// import editor from 'framework/components/wang-editor/wang-editor';
 // import axios from 'axios';
 export default {
   name: 'SmsStrategy',
   components: {
-    editor,
+    editor: $R3_CPS.components.wang - editor,
   },
   props: {
     /* objid: {

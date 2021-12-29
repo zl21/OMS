@@ -47,7 +47,7 @@
       </span>
       <span v-else class="ff-matrix--clear" @click="empty">
         <i class="iconfont icon-qingkong" />
-        {{ chinese.EMPTY }}
+        {{$it('EMPTY')}}
       </span>
     </div>
     <div v-if="general && hasStock" class="ff-matrix--choose">
@@ -82,7 +82,7 @@
         @click="empty"
       >
         <i class="iconfont">&#xe648;</i>
-        {{ chinese.EMPTY }}
+        {{$it('EMPTY')}}
       </span>
     </div>
     <div v-if="general && hasStock && hasReceiving" class="ff-matrix--choose">
@@ -116,7 +116,7 @@
         @click="empty"
       >
         <i class="iconfont">&#xe648;</i>
-        {{ chinese.EMPTY }}
+        {{$it('EMPTY')}}
       </span>
     </div>
     <div v-if="reveal" class="ff-matrix--reveal-choose">
@@ -267,7 +267,7 @@
         :class="{ 'ff-btn-disabled': !isActive || isdisabled }"
         @click="matching"
       >
-        <span>{{ chinese.MATCH }}</span>
+        <span>{{$it('MATCH')}}</span>
       </button>
     </div>
     <div v-if="general" class="ff-matrix--footer">

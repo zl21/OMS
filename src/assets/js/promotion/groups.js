@@ -1,5 +1,5 @@
 // 数据约定 和 外键关联
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 import service from '@/service/index';
 
 const {

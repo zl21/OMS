@@ -8,7 +8,7 @@
 -->
 <template>
   <!-- 订单详情 - 订单明细 - 替换商品 -->
-  <div class="customized-modal">
+  <div class="cus-modal">
     <div class="i_head">
       <div>
         商品SKU:

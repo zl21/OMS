@@ -8,9 +8,9 @@
 -->
 <template>
   <div>
-    <Button size="small" @click="buttonClick"> 查找 </Button>
+    <Button type="error" size="small" @click="buttonClick"> 查找 </Button>
     <Button
-      type="primary"
+      type="defaule"
       size="small"
       @click="buttonClick('reset')"
     >
@@ -112,19 +112,6 @@ export default {
   .icon-xiadown {
     background: url('~assetsImg/arrowUp.png') right no-repeat;
     background-size: 100%;
-  }
-}
-.ListsForm-button {
-  bottom: 24px;
-  right: 43px;
-  button {
-    #bundle > .defalutBtn;
-    &:hover{
-      background: transparent;
-    }
-    &:first-child {
-      #bundle > .primaryBtn;
-    }
   }
 }
 </style>

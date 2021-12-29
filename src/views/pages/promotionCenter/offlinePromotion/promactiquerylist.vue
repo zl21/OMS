@@ -288,17 +288,30 @@
 </template>
 <script>
 import axios from "axios";
-import currentUserAccessDistrib from "framework/components/input/currentUserAccessDistrib.vue";
-import currentUserAccessFirstLevel from "framework/components/input/P_currentUserAccessfirstLevel.vue"; // 促销大类
-import currentUserAccessLastLevel from "framework/components/input/P_currentUserAccesslastLevel.vue"; // 促销中类
-import currentUserAccessStore from "framework/components/input/currentUserAccessStore.vue";
-import matrixInput from "framework/components/input/P_matrixInput.vue"; // 商品模糊查询
-import errorMessage from "framework/components/tablelist/error.vue";
-import Mydialog from "framework/components/dialog/mydialog.vue";
-import myInputLd from "framework/components/element/input.vue";
-import myInput from "framework/components/input/objinput_dz.vue";
-import customTable from "framework/components/table/P_customTable.vue";
+// import currentUserAccessDistrib from "framework/components/input/currentUserAccessDistrib.vue";
+// import currentUserAccessFirstLevel from "framework/components/input/P_currentUserAccessfirstLevel.vue"; // 促销大类
+// import currentUserAccessLastLevel from "framework/components/input/P_currentUserAccesslastLevel.vue"; // 促销中类
+// import currentUserAccessStore from "framework/components/input/currentUserAccessStore.vue";
+// import matrixInput from "framework/components/input/P_matrixInput.vue"; // 商品模糊查询
+// import errorMessage from "framework/components/tablelist/error.vue";
+// import Mydialog from "framework/components/dialog/mydialog.vue";
+// import myInputLd from "framework/components/element/input.vue";
+// import myInput from "framework/components/input/objinput_dz.vue";
+// import customTable from "framework/components/table/P_customTable.vue";
 import "@/assets/css/css_1_3/datepicker.less";
+
+const { 
+  P_customTable,
+  P_matrixInput,
+  P_currentUserAccessfirstLevel,
+  P_currentUserAccesslastLevel,
+  currentUserAccessStore,
+  currentUserAccessDistrib,
+  mydialog,
+  error,
+  input,
+  objinput_dz
+} = $R3_CPS.components;
 
 export default {
   // name: 'Promactiquerylist',
@@ -718,16 +731,16 @@ export default {
     }
   },
   components: {
-    customTable,
-    currentUserAccessFirstLevel,
-    currentUserAccessLastLevel,
-    currentUserAccessStore,
-    currentUserAccessDistrib,
-    matrixInput,
-    Mydialog,
-    errorMessage,
-    myInputLd,
-    myInput
+    customTable: P_customTable,
+    currentUserAccessFirstLevel: P_currentUserAccessfirstLevel,
+    currentUserAccessLastLevel: P_currentUserAccesslastLevel,
+    currentUserAccessStore: currentUserAccessStore,
+    currentUserAccessDistrib: currentUserAccessDistrib,
+    matrixInput: P_matrixInput,
+    Mydialog: mydialog,
+    errorMessage: error,
+    myInputLd: input,
+    myInput: objinput_dz
   },
   created() {
     const type = "mounted";

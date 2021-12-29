@@ -42,8 +42,8 @@
 
 
 <script>
-import myInput from "framework/components/element/input";
-import Mtable from "framework/components/input/objinput.vue";
+// import myInput from "framework/components/element/input";
+// import Mtable from "framework/components/input/objinput.vue";
 export default {
   model: {
     prop: "value",
@@ -262,8 +262,8 @@ export default {
     },
   },
   components: {
-    myInput,
-    Mtable,
+    myInput: $R3_CPS.components.input,
+    Mtable: $R3_CPS.components.objinput,
   },
 };
 </script>

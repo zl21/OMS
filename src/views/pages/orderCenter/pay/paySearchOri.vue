@@ -38,7 +38,7 @@
       <div class="dialog-footer" slot="footer">
         <OmsButton :btn-config="btnConfigMo" />
       </div>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsTable
           :jordan-table-config="table"
           @on-row-click="onRowClick"

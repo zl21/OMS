@@ -8,7 +8,7 @@
 -->
 <!--增加赠品-->
 <template>
-  <div class="customized-modal">
+  <div class="cus-modal">
     <!-- <EasyMatrix :component-data="matrixData" /> -->
     <!-- <OmsForm :form-config="formConfig"></OmsForm> -->
     <!-- businessButton -->
@@ -35,7 +35,7 @@
 </script>
 <style lang="less">
 @import '~omsTheme/public.less';
-.customized-modal{
+.cus-modal{
   .absolute{
     position:absolute;
     right: 0;
@@ -44,13 +44,6 @@
   .business-form-main{
     &.unFlodStyle{
       padding-right:0;
-    }
-    .businessForm_a{
-      .ark-row{
-        .ark-col{
-          // margin-top: 0;
-        }
-      }
     }
   }
 }

@@ -9,10 +9,10 @@
 <template>
   <!-- 审单策略 -->
   <div class="auditOrderStrategy customized-detail">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapseValue">
         <Panel name="1">
           <!-- 基础资料 -->
@@ -328,7 +328,7 @@
           </div>
         </Panel>
       </Collapse>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <div v-show="id != '-1'">
           <OmsLabel
             :label-list="label.labelList"

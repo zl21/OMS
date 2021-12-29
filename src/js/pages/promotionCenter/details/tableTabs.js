@@ -1,8 +1,8 @@
 import detailTable from 'allpages/promotionCenter/onlinePromotion/details/table.vue';
 import meetConditions from 'allpages/promotionCenter/onlinePromotion/details/meetConditions.vue';
 import tabList from 'allpages/promotionCenter/onlinePromotion/details/tabList.vue';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 
 export default {
   name: 'detailTabs',

@@ -11,10 +11,10 @@
     class="customized-detail"
     v-loading="loading"
   >
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
         
@@ -76,7 +76,7 @@
       </Collapse>
 
 
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

@@ -9,10 +9,10 @@
 <template>
   <!-- 组合商品编辑 -->
   <div class="modifyGroup customized-detail">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
@@ -45,7 +45,7 @@
         <p>切换类型会清空当前类型明细,是否继续?</p>
       </Modal>
       <!-- tab切换 -->
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsLabel
           :label-list="formConfig.formValue.group_type == '2' ? label.labelList : label.labelTagList"
           :label-default-value="label.labelValue"
@@ -95,6 +95,5 @@
 
 <style lang="less">
 // @import '~burgeonComponents/burgeon.publish/common/css/theme.less';
-@import url(https://cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/common/css/theme.less);
-
+@import url(https://unpkg.zhimg.com/@alanh/oms-ui@2.0.7/burgeon.publish/common/css/theme.less);
 </style>

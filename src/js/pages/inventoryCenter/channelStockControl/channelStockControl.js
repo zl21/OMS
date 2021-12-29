@@ -1,5 +1,5 @@
-import CustomTable from 'framework/components/table/customTable.vue';
-import pageNation from 'framework/components/page/pagenation.vue';
+// import CustomTable from 'framework/components/table/customTable.vue';
+// import pageNation from 'framework/components/page/pagenation.vue';
 import propSelect from '@/commonPages/AutoForm/propSelect';
 import actionForm from '@/commonPages/AutoForm/actionForm';
 import selectTag from '@/commonPages/AutoForm/selectTag'
@@ -7,15 +7,13 @@ import tableHeaderCustom from "allpages/inventoryCenter/channelStockControl/tabl
 
 import {setFormDataFunMixin} from "@/assets/js/mixins/setFormData";
 import {setActionFormMixin} from "@/assets/js/mixins/setActionFormData";
-
 export default {
   mixins: [setFormDataFunMixin, setActionFormMixin],
   components: {
     selectTag,
     propSelect,
     actionForm,
-    CustomTable,
-    pageNation
+    CustomTable: $R3_CPS.components.P_customTable,
   },
   data() {
     return {
@@ -979,7 +977,7 @@ export default {
     btnConfig2() {
       const buttons = [
         {
-          type: 'posdefault',
+          type: 'error',
           text: $it('btn.query'), // 查询
           btnclick: () => {
             this.throttleFun(() => {

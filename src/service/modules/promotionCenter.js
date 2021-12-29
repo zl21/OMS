@@ -1,6 +1,6 @@
 // 营销中心(促销中心)
 import qs from 'qs';
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 window.$network = R3.network;
 
 export default {

@@ -1,11 +1,11 @@
-import CustomTable from 'framework/components/table/customTable.vue';
-import DragDialog from 'framework/components/dialog/dragDialog.vue';
-import ErrorTips from 'framework/components/tablelist/error.vue';
-import pageNation from 'framework/components/page/pagenation.vue';
+// import CustomTable from 'framework/components/table/customTable.vue';
+// import DragDialog from 'framework/components/dialog/dragDialog.vue';
+// import ErrorTips from 'framework/components/tablelist/error.vue';
+// import pageNation from 'framework/components/page/pagenation.vue';
 import port from '@/config/config/orderDetailConnector.js';
-import matrixInput from './matrixInput';
+import matrixInput from '@/views/pages/inventoryCenter/logicalTransferOrder/matrixInput';
 import matrix from './matrix';
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 
 export default {
   props: {
@@ -811,12 +811,12 @@ export default {
     } // 匹配
   },
   components: {
-    CustomTable,
+    CustomTable: $R3_CPS.components.customTable,
     matrix,
-    DragDialog,
-    ErrorTips,
+    DragDialog: $R3_CPS.components.dragDialog,
+    ErrorTips: $R3_CPS.components.error,
     matrixInput,
-    pageNation
+    pageNation: $R3_CPS.components.pagenation
   },
   created() {
     window.addEventListener('customizeClick', this.bigSave);

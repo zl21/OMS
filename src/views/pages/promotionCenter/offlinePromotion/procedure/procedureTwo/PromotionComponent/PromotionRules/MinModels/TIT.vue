@@ -28,7 +28,7 @@
 
 
 <script>
-  import myInput from "framework/components/element/input.vue";
+  // import myInput from "framework/components/element/input.vue";
 
   export default {
     model: {
@@ -55,7 +55,7 @@
     },
     props: ["scheme_data", "rule", "index"],
     components: {
-      myInput
+      myInput: $R3_CPS.components.input
     },
     computed: {
       getName() {

@@ -2,8 +2,8 @@ import detailtable from 'allpages/promotionCenter/onlinePromotion/details/table.
 import detailtabs from 'allpages/promotionCenter/onlinePromotion/details/tableTabs.vue';
 import { tableCols } from '../promotion.config';
 import SetCommodity from 'allpages/promotionCenter/onlinePromotion/details/setCommodity.vue';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 
 export default {
   name: 'giftSet',

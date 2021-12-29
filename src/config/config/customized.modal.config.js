@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-17 14:48:57
- * @LastEditTime: 2021-11-04 15:20:42
+ * @LastEditTime: 2021-12-19 14:41:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-project-logic/config/config/customized.modal.config.js
@@ -18,8 +18,8 @@ import InterfaceConfig from '../module/modal/interface.config.js'; // ----------
 import ReportCenter from '../module/modal/report.config.js'; // ----------报表中心
 import basicDataConfig from '../module/modal/basicData.config'; // -----------基础数据
 
-import BC from 'burgeonComponents'
-const { Components } = BC
+// import BC from 'burgeonComponents'
+const { Components } = $BC;
 
 const common = {
   /** ---------------------- 下载：---------------------- */

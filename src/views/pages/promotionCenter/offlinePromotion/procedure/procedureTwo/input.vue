@@ -321,14 +321,14 @@
 <script>
   import axios from 'axios';
   // import SelectDialog from '../../components/dialog/selectDialog.vue'
-  import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
-  import advancedSearch from 'framework/components/views/custompage/crm/advancedSearch.vue';
-  import ImportDialog from 'framework/components/tablelist/importDialog.vue';
+  // import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
+  // import advancedSearch from 'framework/components/views/custompage/crm/advancedSearch.vue';
+  // import ImportDialog from 'framework/components/tablelist/importDialog.vue';
   // import mAutocomplete from './autocomplete.vue'
   /* import Vue from 'vue' */
   import fkdialog from './fkdialog.vue';
-  import FkTable from 'framework/components/tablelist/fktable.vue';
-  import SelectDialog from 'framework/components/dialog/popDialog.vue';
+  // import FkTable from 'framework/components/tablelist/fktable.vue';
+  // import SelectDialog from 'framework/components/dialog/popDialog.vue';
   // import $ from '../../assets/js/jquery3.5.1.min';
 
   /* Vue.component('my-item-zh', {
@@ -347,6 +347,13 @@
       item: {type: Object, required: true}
     }
   }); */
+  const {
+    ChineseDictionary,
+    advancedSearch,
+    importDialog,
+    fktable,
+    popDialog
+  } = $R3_CPS.components;
 
   export default {
     // '单对象属性表格中的文本输入框',
@@ -391,6 +398,13 @@
         type: Boolean,
         default: false
       } // 用于弹框多选蒙层全部放在body上
+    },
+    components: {
+      SelectDialog: popDialog,
+      FkTable: fktable,
+      fkdialog ,
+      ImportDialog: importDialog,
+      advancedSearch
     },
     data() {
       return {
@@ -523,13 +537,6 @@
         }
         return hasValue;
       }
-    },
-    components: {
-      SelectDialog,
-      FkTable,
-      fkdialog,
-      ImportDialog,
-      advancedSearch
     },
     watch: {
       itemdata: {

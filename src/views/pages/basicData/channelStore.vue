@@ -8,10 +8,10 @@
 -->
 <template>
   <div class="channelStore customized-detail">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基础信息 -->
@@ -22,7 +22,7 @@
         </Panel>
       </Collapse>
       <!-- tab切换 -->
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

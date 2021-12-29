@@ -94,6 +94,7 @@ export default {
       ] : []
       const btnConfig = {
         typeAll: 'default',
+        btnsite: 'right',
         buttons: [
           ...btns,
           ...invalid,

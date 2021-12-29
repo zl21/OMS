@@ -12,10 +12,10 @@
     :id="this.customizedModuleName"
     v-loading="loading"
   >
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
@@ -25,7 +25,7 @@
           </p>
         </Panel>
       </Collapse>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel
           v-show="showSubtablePart"
@@ -62,7 +62,7 @@ export default commodityCusPropertiesAddOrEdit;
 
 <style lang="less" scoped>
 // @import '~burgeonComponents/burgeon.publish/common/css/theme.less';
-@import url(https://cdn.jsdelivr.net/gh/zl21/OMS/burgeon.publish/common/css/theme.less);
+@import url(https://unpkg.zhimg.com/@alanh/oms-ui@2.0.7/burgeon.publish/common/css/theme.less);
 
 .commodityCusPropertiesAddOrEdit {
   position: relative;

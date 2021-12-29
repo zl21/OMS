@@ -1,5 +1,5 @@
 <template>
-  <div class="customized-modal" style="width:440px;">
+  <div class="cus-modal" style="width:440px;">
     <OmsForm :form-config="downLoadFormConfig" />
     <div class="timeBox">
       <!-- 修改时间 -->

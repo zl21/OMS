@@ -1,9 +1,9 @@
 <template>
-  <div class="order-add public-main custom-main">
+  <div class="order-add custom-main">
     <div class="orderButtons custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="obj-main">
       <Collapse v-model="value1">
         <Panel name="1">
           <!-- 基本信息 -->

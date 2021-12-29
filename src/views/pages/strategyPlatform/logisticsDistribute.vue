@@ -9,12 +9,12 @@
 <template>
   <div class="customized-detail logistics">
     <!-- 按钮 -->
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
 
     <!-- 内容 -->
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           {{ baseInformation }}
@@ -25,7 +25,7 @@
       </Collapse>
 
       <!-- ark 组件 -->
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel
           :label-list="labelList"
@@ -45,7 +45,7 @@
             </div>
 
             <div
-              class="logistics-foot-table customized-detail-table"
+              class="logistics-foot-table obj-table"
               v-if="tableshow"
             >
               <OmsTable

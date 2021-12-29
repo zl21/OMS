@@ -1,11 +1,11 @@
 <template>
-  <div class="auto-check channelRatioStrategyAddOrEdit public-main customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&& !isActive" :text="$it('com.voided')"/> <!--已作废-->
-    <div class="operate left customized-detail-btn">
+  <div class="auto-check channelRatioStrategyAddOrEdit customized-detail" v-loading="loading">
+    <div class="operate left obj-btn">
       <OmsButton :btn-config="btnConfig"/>
     </div>
-    <div class="public-content customized-detail-main">
-      <Collapse v-model="collapse">
+    <div class="obj-main">
+      <WaterMark v-if="ID!=='-1'&& !isActive" :text="$it('com.voided')"/> <!--已作废-->
+      <Collapse v-model="collapse" class="obj-form">
         <Panel name="panel_baseInfo">
            {{$it('com.baseInformation')}}<!--基本信息-->
           <div slot="content">
@@ -35,7 +35,7 @@
                     }}
                   </Option>
                 </Select>
-                <el-input :placeholder="$it('tL.enter')" v-model="exclusiveStockFilterInputValue"
+                <el-input :placeholder="$it('pH.enter')" v-model="exclusiveStockFilterInputValue"
                           class="input-with-search-style font-size-12 mg-lf-10"
                           size="mini">
                   <el-button slot="prepend" class="font-size-12" @click="getExclusiveStockData()">
@@ -46,7 +46,7 @@
                 </el-input>
               </div>
             </div>
-            <div class="customized-detail-table">
+            <div class="obj-table">
               <Table :height="exclusiveStockData.length>10?'500px':''" border ref="selection"
                      :columns="exclusiveStockColumns"
                      :data="exclusiveStockData" @on-selection-change="handleSelectionChange">
@@ -63,7 +63,7 @@
         </Panel>
         <Panel name="operation_log" v-if="ID!=='-1'">
           {{$it('pL.operationLog')}} <!--操作日志-->
-          <div slot="content customized-detail-table">
+          <div slot="content obj-table">
             <Table :height="shareBaseInfoData.length>10?'500px':''" border :columns="shareBaseInfoColumns"
                    :data="shareBaseInfoData"></Table>
           </div>
@@ -103,5 +103,6 @@ import channelRatioStrategy from '@/js/pages/inventoryCenter/channelRatioStrateg
 export default channelRatioStrategy;
 </script>
 <style lang="less">
+@import '~@/css/pages/inventoryCenter/index.less';
 @import '~@/css/pages/inventoryCenter/channelRatioStrategy.less';
 </style>

@@ -1,13 +1,13 @@
 <!-- 退货入库新增、详情 -->
 <template>
-  <div class="returnTreasurys public-main custom-main customized-detail" v-loading="loading">
+  <div class="returnTreasurys customized-detail" v-loading="loading">
     <!--按钮块-->
-    <div class="returnTreasurysBtn custom-btn customized-detail-btn">
+    <div class="returnTreasurysBtn obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="obj-main">
       <!-- form表单 -->
-      <div class="TreasuryDefault">
+      <div class="TreasuryDefault obj-form">
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
@@ -18,7 +18,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="salesTable custom-table customized-detail-table">
+      <div class="salesTable obj-table">
         <!-- tab切换 -->
         <OmsLabel
           class="businessLabel"
@@ -63,7 +63,7 @@
         </Modal>
       </div>
       <!-- 水印图片 -->
-      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" :text="statusName"/>
     </div>
   </div>
 </template>

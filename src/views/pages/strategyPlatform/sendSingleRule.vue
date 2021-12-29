@@ -1,12 +1,12 @@
 <template>
-  <div class="sendSingleRule public-main custom-main" v-loading="saveLoading">
+  <div class="sendSingleRule custom-main" v-loading="saveLoading">
     <div class="custom-btn">
       <OmsButton
       :btn-config="btnConfig"
     />
     </div>
-    <div class="public-content">
-      <Collapse v-model="openDefault">
+    <div class="obj-main">
+      <Collapse v-model="openDefault" class="obj-form">
         <Panel name="1">
           <!-- 基本信息 -->
           {{ $it("com.baseInformation") }}
@@ -252,7 +252,7 @@
         </div>
       </div>
       <!--单据状态图片展示 -->
-      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" :text="statusName"/>
     </div>
     <!-- 修改仓库-->
     <OmsDialog

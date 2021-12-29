@@ -1,4 +1,4 @@
-import R3 from '@syman/burgeon-r3';
+// import R3 from '@syman/burgeon-r3';
 
 const { getModuleName } = R3;
 export default {

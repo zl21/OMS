@@ -1,6 +1,6 @@
 import isFavoriteMixin from "@/assets/js/mixins/isFavorite";
 import R3 from "@syman/burgeon-r3";
-import BC from 'burgeonComponents'
+// import BC from 'burgeonComponents'
 
 export default {
   components: {},
@@ -19,7 +19,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: BC.Components.ImportTable,
+        url: $BC.Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {},
@@ -46,7 +46,7 @@ export default {
         formData: [
           {
             colname: 'CP_C_PHY_WAREHOUSE_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -80,12 +80,7 @@ export default {
           CP_C_PHY_WAREHOUSE_ID: [],
         }
       }, // 基本信息
-    };
-  },
-  watch: {},
-  computed: {
-    btnConfig() {
-      return {
+      btnConfig: {
         typeAll: 'default',
         buttons: [
           {
@@ -125,19 +120,23 @@ export default {
             },
           },
           {
-            icon: `iconfont ${this.isFavorite ? 'iconbj_alrcol' : 'iconbj_col'} font-size-12`, // 按钮图标
+            icon: 'iconfont iconbj_col', // 按钮图标
+            webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
             size: 'small', // 按钮大小
             name: $it('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.setFavorite2();
+              this.setFavorite();
             } // 按钮点击事件
           }
 
         ]
 
       }
-    }
+    };
+  },
+  watch: {},
+  computed: {
   },
   mounted() {
     // this.$next

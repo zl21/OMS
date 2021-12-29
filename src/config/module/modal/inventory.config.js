@@ -25,4 +25,18 @@ export default {
       '@/views/modal/inventoryCenter/outResultImport.vue'
     )
   },
+  // 逻辑调拨单批量导入 - 动作定义 （单对象的提交按钮）
+  TRANSFER_SUBMIT: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterModal' */
+      '@/views/modal/inventoryCenter/transferSubmit.vue'
+    )
+  },
+  // 配销仓调拨单批量导入 - 动作定义 （单对象的提交按钮）
+  SHARE_SA_BATCH_TRANSFER_SUBMIT: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterModal' */
+      '@/views/modal/inventoryCenter/shareSaBatchTransferSubmit.vue'
+    )
+  },
 };

@@ -1,11 +1,11 @@
 <template>
-  <div class="financialManageCenter public-main custom-main customized-detail" v-loading="loading">
-    <div class="buttons custom-btn customized-detail-btn">
+  <div class="financialManageCenter customized-detail" v-loading="loading">
+    <div class="buttons obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
-      <WaterMark v-if="showStatusFlag && statusName" class="omsWaterMark" :text="statusName"></WaterMark>
-      <Collapse v-model="spreadPanel">
+    <div class="obj-main">
+      <WaterMark v-if="showStatusFlag && statusName" :text="statusName"></WaterMark>
+      <Collapse v-model="spreadPanel" class="obj-form">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
           {{ $it("com.baseInformation") }}
@@ -52,7 +52,7 @@
           />
         </Modal>
       </Collapse>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel
             :label-list="labelList"

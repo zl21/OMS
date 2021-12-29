@@ -1,10 +1,10 @@
-import Fkdialog from 'framework/components/tablelist/fkdialog.vue';
+// import Fkdialog from 'framework/components/tablelist/fkdialog.vue';
 import { checkRuleFunMixin } from "@/assets/js/mixins/checkFormRule";
 
 
 export default {
   components: {
-    Fkdialog,
+    Fkdialog: $R3_CPS.components.fkdialog,
   },
   mixins: [checkRuleFunMixin],
   data() {
@@ -113,7 +113,7 @@ export default {
           },
           {
             colname: 'CP_C_PLATFORM_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '12',
             itemdata: {
               col: 1,
@@ -145,7 +145,7 @@ export default {
           },
           {
             colname: 'CP_C_SHOP_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '12',
             itemdata: {
               col: 1,
@@ -205,7 +205,7 @@ export default {
         formData: [
           {
             colname: 'SG_C_SHARE_SCORE_STRATEGY_ID',
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '12',
             itemdata: {
               col: 1,

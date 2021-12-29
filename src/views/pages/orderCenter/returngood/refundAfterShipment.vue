@@ -1,10 +1,10 @@
 <template>
   <!-- 发货后退款 -->
   <div id="cbx" class="refundAfterShipment customized-detail">
-    <div class="re_button customized-detail-btn">
+    <div class="re_button obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
+    <div class="obj-main">
       <div class="re_form">
         <Collapse v-model="value">
           <Panel name="1">
@@ -45,10 +45,14 @@
                   </RadioGroup>
                 </div>
                 <div slot="returnType" class="returnType">
-                  <OmsForm :form-config="returnTypeFormConfig" />
+                  <!-- 退款分类 -->
+                  <!-- <OmsForm :form-config="returnTypeFormConfig" /> -->
+                  <!-- <FkinputPlus></FkinputPlus> -->
+
                 </div>
                 <div slot="returnTypeItem" class="returnType">
-                  <OmsForm :form-config="returnTypeItemConfig" />
+                  <!-- 退款描述 -->
+                  <!-- <OmsForm :form-config="returnTypeItemConfig" /> -->
                 </div>
               </FormLayout>
             </p>
@@ -62,7 +66,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="tab-content customized-detail-table">
+      <div class="tab-content obj-table">
         <OmsLabel
           :label-list="labelList"
           :label-default-value="labelDefaultValue"

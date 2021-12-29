@@ -419,6 +419,7 @@ export default {
             col: 1, // 列宽
             colname: 'refundClass',
             item: {
+              required: true,
               label: $it('fL.refundClass'), // 退款分类
               soltName: 'returnType', // 组件类型
               props: {},
@@ -430,9 +431,14 @@ export default {
             col: 1, // 列宽
             colname: 'refundDescription',
             item: {
+              type: 'Select',
+              required: true,
               label: $it('fL.refundDescription'), // 退款描述
-              soltName: 'returnTypeItem', // 组件类型
-              props: {},
+              // soltName: 'returnTypeItem', // 组件类型
+              props: {
+                value: this.returnTypeItemConfig.formValue.OC_B_RETURN_TYPE_ITEM_ID,
+                options: this.returnTypeItemConfig.formData[0].options
+              },
               event: {}
             }
           },
@@ -932,7 +938,7 @@ export default {
       this.returnLogTableLoad = false;
       if (res.data.code === 0) {
         const resData = res.data.data;
-        const dateFormat = this.$comUtils.dateFormat;
+        const dateFormat = $utils.dateFormat;
         resData.forEach(val => {
           val.CREATIONDATE = dateFormat(new Date(val.CREATIONDATE || ''), 'yyyy-MM-dd hh:mm:ss');
         });
@@ -951,7 +957,7 @@ export default {
       //   this.returnLogTableLoad = false;
       //   if (res.data.code === 0) {
       //     const resData = res.data.data;
-      //     const dateFormat = this.$comUtils.dateFormat;
+      //     const dateFormat = $utils.dateFormat;
       //     resData.forEach(val => {
       //       val.CREATIONDATE = dateFormat(new Date(val.CREATIONDATE || ''), 'yyyy-MM-dd hh:mm:ss');
       //     });

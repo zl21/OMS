@@ -1,4 +1,4 @@
-import tree from 'framework/components/tree/tree2';
+// import tree from 'framework/components/tree/tree2';
 
 export default {
   data() {
@@ -215,7 +215,7 @@ export default {
     this.getCstoreorgload(); // 获取树节点
   },
   components: {
-    tree
+    tree:$R3_CPS.components.tree2,
   },
   methods: {
     async getPermission(item) {

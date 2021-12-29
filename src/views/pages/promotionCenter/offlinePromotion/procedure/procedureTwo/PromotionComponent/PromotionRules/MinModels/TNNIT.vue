@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import myInput from 'framework/components/element/input';
+// import myInput from 'framework/components/element/input';
 export default {
   model: {
     prop: "value",
@@ -95,7 +95,7 @@ export default {
     }
   },
   components: {
-    myInput
+    myInput: $R3_CPS.components.input
   }
 };
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div class="orderAddorCopy customized-detail" v-loading="loading">
-    <div class="orderButtons customized-detail-btn">
+    <div class="orderButtons obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="1">
           <!-- 基本信息 -->
@@ -28,7 +28,7 @@
         </Panel> -->
       </Collapse>
       <!-- tab切换 -->
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <OmsLabel
           class="jordanLabel"
           :label-default-value="labelDefaultValue"
@@ -110,8 +110,8 @@
 import BurgeonValidate from "burgeonConfig/config/validate.config";
 // import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import axios from "axios";
-import BC from 'burgeonComponents'
-const { Components } = BC
+// import BC from 'burgeonComponents'
+const { Components } = $BC
 
 const areaList = require("@/assets/js/address/area-list");
 const { parse, parseArea } = require("@/assets/js/address/address-parse");

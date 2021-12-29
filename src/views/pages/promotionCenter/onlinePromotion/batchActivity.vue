@@ -9,7 +9,7 @@
 <!-- 批量新增、编辑、复制促销活动-->
 <template>
   <div class="customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <!-- <button @click="close">
         {{ $it('com.cancel') }}
       </button>
@@ -21,7 +21,7 @@
       </button> -->
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="batchActivity">
         <div class="steps_content">
           <div ref="basicSteps" class="basicSteps">

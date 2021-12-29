@@ -8,7 +8,7 @@
 -->
 <template>
   <!-- 替换商品 -->
-  <div class="changeProduct customized-modal">
+  <div class="changeProduct cus-modal">
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->

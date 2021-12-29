@@ -55,7 +55,7 @@
         @click="empty"
       >
         <i class="iconfont icon-qingkong" />
-        {{ chinese.EMPTY }}
+        {{$it('EMPTY')}}
       </span>
     </div>
     <div
@@ -99,7 +99,7 @@
         @click="empty"
       >
         <i class="iconfont">&#xe648;</i>
-        {{ chinese.EMPTY }}
+       {{$it('EMPTY')}}
       </span>
     </div>
     <div
@@ -145,7 +145,7 @@
         @click="empty"
       >
         <i class="iconfont">&#xe648;</i>
-        {{ chinese.EMPTY }}
+       {{$it('EMPTY')}}
       </span>
     </div>
     <div
@@ -323,7 +323,7 @@
         :class="{'ff-btn-disabled': !isActive || isdisabled}"
         @click="matching"
       >
-        <span>{{ chinese.MATCH }}</span>
+        <span>{{$it('MATCH')}}</span>
       </button>
     </div>
     <div
@@ -344,7 +344,6 @@
         class="ff-matrix-btn ff-matrix-btn-cancel"
         @click="cancel"
       >
-        <span>{{ chinese.CANCEL }}</span>
       </button>
       <button
         ref="btnConfirm"
@@ -352,7 +351,6 @@
         @click="confirm"
         @keyup.enter="confirm"
       >
-        <span>{{ chinese.CONFIRM }}</span>
       </button> -->
     </div>
   </div>

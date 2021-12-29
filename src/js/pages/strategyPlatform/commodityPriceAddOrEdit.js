@@ -1,6 +1,6 @@
 import modifycurrentLabel from '../../../assets/js/mixins/modifycurrentLabel';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 Vue.component('myInput', Components.Fkinput)
 
 export default {

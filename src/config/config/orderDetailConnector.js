@@ -13,16 +13,13 @@ const port = {
     matchData: {},
     isDeleteBtn: true, // 是否有删除明细按钮
     hasStock: false, // 不获取库存接口
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 采购订单
-
   DL_B_PUR_REQ: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
@@ -34,13 +31,11 @@ const port = {
     matchData: {},
     isDeleteBtn: true, // 是否有删除明细按钮
     hasStock: false, // 不获取库存接口
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 采购需求
   DL_B_PUR_IN: {
@@ -55,13 +50,11 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     isDeleteBtn: true, // 是否有删除明细按钮
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 采购入库
   DL_B_TRAN_OUT_POS: {
@@ -74,12 +67,11 @@ const port = {
     special: 'DL_B_TRAN_OUT_V_ITEM_SKU', // 特殊情况
     secondTab: 'DL_B_TRAN_OUT_V_ITEM_SKU', // input为配置时单条码和矩阵的保存fixcolumn里面的表名key
     matchData: {
-      data: [
-        {
-          label: '发货店仓',
-          value: 'qty_stock_able',
-          port: 1, // 表示第一个接口
-        },
+      data: [{
+        label: '发货店仓',
+        value: 'qty_stock_able',
+        port: 1, // 表示第一个接口
+      },
         {
           label: '收货店仓',
           value: 'qty_stock_able',
@@ -91,13 +83,11 @@ const port = {
     hasStock: true, // 获取库存接口
     isStock: false, // 配置默认显示在库的还是可用的
     isDeleteBtn: true, // 是否有删除明细按钮
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // pos端调拨出库单
   DL_B_TRAN_OUT: {
@@ -110,12 +100,11 @@ const port = {
     special: 'DL_B_TRAN_OUT_V_ITEM_SKU', // 特殊情况
     secondTab: 'DL_B_TRAN_OUT_V_ITEM_SKU', // input为配置时单条码和矩阵的保存fixcolumn里面的表名key
     matchData: {
-      data: [
-        {
-          label: '发货店仓',
-          value: 'qty_stock_able',
-          port: 1, // 表示第一个接口
-        },
+      data: [{
+        label: '发货店仓',
+        value: 'qty_stock_able',
+        port: 1, // 表示第一个接口
+      },
         {
           label: '收货店仓',
           value: 'qty_stock_able',
@@ -128,13 +117,11 @@ const port = {
     hasReceiving: true, // 显示收货在库和可用
     isStock: false, // 配置默认显示在库的还是可用的
     isDeleteBtn: true, // 是否有删除明细按钮
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 调拨出库单(这个页面情况复杂)
   DL_B_TRAN_IN_CHANGE: {
@@ -148,13 +135,11 @@ const port = {
     isDeleteBtn: false, // 是否有删除明细按钮
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 调拨入库单改单
   DL_B_INV_ADJ: {
@@ -165,12 +150,11 @@ const port = {
     queryObjSave: 'DL_B_INV_ADJ_ITEM', // 左边列表保存字段名
     virtualName: 'DL_B_INV_ADJ_ITEM_PRO', // 虚表表名
     matchData: {
-      data: [
-        {
-          label: '在库库存',
-          value: 'qty_stock', // 字段名
-          port: 1, // 表示第一个接口
-        },
+      data: [{
+        label: '在库库存',
+        value: 'qty_stock', // 字段名
+        port: 1, // 表示第一个接口
+      },
         {
           label: '可用库存',
           value: 'qty_stock_able', // 字段名
@@ -182,13 +166,11 @@ const port = {
     isDeleteBtn: true, // 是否有删除明细按钮
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 库存调整单
   DL_B_PFT_LOS: {
@@ -202,13 +184,11 @@ const port = {
     isDeleteBtn: false, // 是否有删除明细按钮
     matchData: {},
     hasStock: false, // 获取库存接口
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   },
   /* 盈亏单 */
@@ -224,13 +204,11 @@ const port = {
     matchData: {},
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 商品出库单
   DL_B_INV_ADJ_WORK_PICK_POS: {
@@ -245,13 +223,11 @@ const port = {
     matchData: {},
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 门店工衣领用单
   DL_B_TRAN_OUT_CHANGE: {
@@ -266,13 +242,11 @@ const port = {
     isDeleteBtn: false, // 是否有删除明细按钮
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 出库单改单
   DL_B_TRAN_BOX_CHANGE: {
@@ -287,13 +261,11 @@ const port = {
     isDeleteBtn: false, // 是否有删除明细按钮
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 拣货装箱改单
   DL_B_PUR_RET: {
@@ -304,12 +276,11 @@ const port = {
     queryObjSave: 'DL_B_PUR_RET_ITEM', // 左边列表保存字段名
     virtualName: 'DL_B_PUR_RET_ITEM_MATRIX', // 虚表表名
     matchData: {
-      data: [
-        {
-          label: '退货店仓可用',
-          value: 'qty_stock_able',
-          port: 1, // 表示第一个接口
-        },
+      data: [{
+        label: '退货店仓可用',
+        value: 'qty_stock_able',
+        port: 1, // 表示第一个接口
+      },
         {
           label: '退货店仓在库',
           value: 'qty_stock',
@@ -321,13 +292,11 @@ const port = {
     hasStock: true, // 获取库存接口
     isStock: false, // 配置默认显示在库的还是可用的
     isDeleteBtn: true, // 是否有删除明细按钮
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 采购退货
   DL_B_RETAIL: {
@@ -343,15 +312,76 @@ const port = {
     matchData: {},
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 零售单
+  DL_B_USE_ORDER: {
+    getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'DL_B_USE_ORDER_ITEM', // 子表表名
+    queryObjSave: 'DL_B_USE_ORDER_ITEM', // 左边列表保存字段名
+    virtualName: 'DL_B_PUR_REQ_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    hasMatch: false, // 是否有匹配矩阵
+    deletePort: 'p/cs/retailitemdel', // 删除明细接口
+    isStoreId: false,
+    matchData: {},
+    hasStock: true, // 获取库存接口
+    isStock: true, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+  }, // 领用单
+  DL_B_RETURN_ORDER: {
+    getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'DL_B_RETURN_ORDER_ITEM', // 子表表名
+    queryObjSave: 'DL_B_RETURN_ORDER_ITEM', // 左边列表保存字段名
+    virtualName: 'DL_B_PUR_REQ_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    hasMatch: false, // 是否有匹配矩阵
+    deletePort: 'p/cs/retailitemdel', // 删除明细接口
+    isStoreId: false,
+    matchData: {},
+    hasStock: true, // 获取库存接口
+    isStock: true, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+  }, // 领用归还单
+  DL_B_OA_APPLICATION_FORM: {
+    getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'DL_B_OA_APPLICATION_FORM_ITEM', // 子表表名
+    queryObjSave: 'DL_B_OA_APPLICATION_FORM_ITEM', // 左边列表保存字段名
+    virtualName: '', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    hasMatch: false, // 是否有匹配矩阵
+    deletePort: 'p/cs/retailitemdel', // 删除明细接口
+    isStoreId: false,
+    matchData: {},
+    hasStock: true, // 获取库存接口
+    isStock: true, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+  }, // OA申请零售单
   DL_B_PAND: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
@@ -361,12 +391,11 @@ const port = {
     virtualName: 'DL_B_PAND_ITEM_PRO', // 实表表名
     hasMatch: true, // 是否有匹配矩阵
     matchData: {
-      data: [
-        {
-          label: '在库库存',
-          value: 'qty_stock', // 字段名
-          port: 1, // 表示第一个接口
-        },
+      data: [{
+        label: '在库库存',
+        value: 'qty_stock', // 字段名
+        port: 1, // 表示第一个接口
+      },
         {
           label: '可用库存',
           value: 'qty_stock_able', // 字段名
@@ -377,13 +406,11 @@ const port = {
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
     isDeleteBtn: true, // 是否有删除明细按钮
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 盘点单
   DL_B_TRAN_PLAN: {
@@ -398,13 +425,11 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 不获取库存接口
     isStock: false, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_EXEC_PLAN',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_EXEC_PLAN',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 调拨计划单新增
   DL_B_PUR_TMPIN: {
@@ -419,13 +444,11 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 货品暂收
   OC_B_RETURN_ORDER: {
@@ -440,13 +463,11 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY_BILL',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY_BILL',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
   }, // 退换货订单
   OC_B_SALE: {
@@ -463,18 +484,268 @@ const port = {
     noZeroShwoFlag: true,
     hasStock: false, // 获取库存接口
     isStock: false, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
     hasReceiving: true,
     hasQtyPrein: true,
-    hasRetail: true,
+    hasRetail: true
   }, // 销售单
+  SG_B_STO_ADJUST: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'SG_B_STO_ADJUST_ITEM', // 子表表名 -
+    queryObjSave: 'SG_B_STO_ADJUST_ITEM', // 左边列表保存字段名
+    virtualName: 'SG_B_STO_ADJUST_ITEM_PRO', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    noZeroShwoFlag: true,
+    hasStock: false, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: false,
+    hasQtyPrein: false,
+    hasRetail: false
+  }, // 库存调整单
+  SG_B_SHARE_ALLOCATION_RETURN: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'SG_B_SHARE_ALLOCATION_RETURN_ITEM', // 子表表名 -
+    queryObjSave: 'SG_B_SHARE_ALLOCATION_RETURN_ITEM', // 左边列表保存字段名
+    virtualName: 'SG_B_SHARE_ALLOCATION_RETURN_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    shippingWarehouse: 'SG_C_SA_STORE_ID', // 发货仓取值字段 (主表)
+    receivingWarehouse: 'SG_C_SHARE_STORE_ID', // 收货仓取值字段 (主表)
+    shippingStock: '/p/cs/sg/storage/queryShareStoreStorageByPro', // 查发货仓库存
+    receivingStock: '/p/cs/sg/storage/queryShareStorageByPro', // 查收货仓库存
+    paramsNoStore: true, // 接口报："店仓ID错误，找不到该店仓" 时,/p/cs/matrix 接口不传 CP_C_STORE_ID 这个入参
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    hideInStock: true, // 是否隐藏在库（发货在库、收货在库）
+    noZeroShwoFlag: true,
+    hasStock: true, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: true, // 是否显示收货在库和可用
+    hasQtyPrein: false, // 是否显示收货在途数量
+    hasRetail: false // 是否显示零售数量
+  }, // 分货退货单
+
+  SG_B_SHARE_ALLOCATION: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'SG_B_SHARE_ALLOCATION_ITEM', // 子表表名 -
+    queryObjSave: 'SG_B_SHARE_ALLOCATION_ITEM', // 左边列表保存字段名
+    virtualName: 'SG_B_SHARE_ALLOCATION_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    shippingWarehouse: 'SG_C_SHARE_STORE_ID', // 发货仓取值字段 (主表)
+    // receivingWarehouse: '', // 收货仓取值字段 (主表)
+    receivingWarehouseInDetailTable: 'SG_C_SA_STORE_ID', // 收货仓取值字段 (明细表) - 主表没有收货仓时，去左边表格取，如：分货单界面只有一个聚合仓（发货仓）
+    leftDataStoreId: 'SG_C_SA_STORE_ID', // 发货仓取值字段 - ID (左边列表)
+    leftDataStoreName: 'SG_C_SA_STORE_ENAME', // 发货仓取值字段 - name (左边列表)
+    shippingStock: '/p/cs/sg/storage/queryShareStorageByPro', // 查发货仓库存
+    receivingStock: '/p/cs/sg/storage/queryShareStoreStorageByPro', // 查收货仓库存
+    shareStoreidKey: 'takeStock', // shareStoreid 对应取值
+    shareidKey: 'distribId', // shareid 对应取值
+    paramsNoStore: true, // 接口报："店仓ID错误，找不到该店仓" 时,/p/cs/matrix 接口不传 CP_C_STORE_ID 这个入参
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hideCommodityInput: true, // 商品编码输入框是否隐藏  分货单的不要显示
+    hasMatch: false, // 是否有匹配矩阵
+    hideInStock: true, // 是否隐藏在库（发货在库、收货在库）
+    noZeroShwoFlag: true,
+    hasStock: true, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: true, // 是否显示收货在库和可用
+    hasQtyPrein: false, // 是否显示收货在途数量
+    hasRetail: false // 是否显示零售数量
+  }, // 分货单
+  SG_B_STO_TRANSFER: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'SG_B_STO_TRANSFER_ITEM', // 子表表名 -
+    queryObjSave: 'SG_B_STO_TRANSFER_ITEM_V', // 左边列表保存字段名
+    virtualName: 'SG_B_STO_TRANSFER_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    noZeroShwoFlag: true,
+    hasStock: true, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: true, // 是否显示收货在库和可用
+    hasQtyPrein: false, // 是否显示收货在途数量
+    hasRetail: false // 是否显示零售数量
+  }, // 逻辑调拨单
+  SG_B_STO_UNFREEZE: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'SG_B_STO_UNFREEZE_ITEM', // 子表表名 -
+    queryObjSave: 'SG_B_STO_UNFREEZE_ITEM_V', // 左边列表保存字段名
+    virtualName: 'SG_B_STO_UNFREEZE_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    noZeroShwoFlag: true,
+    hasStock: false, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: false,
+    hasQtyPrein: false,
+    hasRetail: false
+  }, // 逻辑解冻单
+  SG_B_SHARE_SA_TRANSFER: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'SG_B_SHARE_SA_TRANSFER_ITEM', // 子表表名 -
+    queryObjSave: 'SG_B_SHARE_SA_TRANSFER_ITEM', // 左边列表保存字段名
+    virtualName: 'SG_B_SHARE_SA_TRANSFER_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    shippingWarehouse: 'SENDER_SA_STORE_ID', // 发货仓取值字段 (主表)
+    receivingWarehouse: 'RECEIVER_SA_STORE_ID', // 收货仓取值字段 (主表)
+    // leftDataStoreId: 'SG_C_SA_STORE_ID', // 发货仓取值字段 - ID (左边列表)
+    // leftDataStoreName: 'SG_C_SA_STORE_ECODE', // 发货仓取值字段 - name (左边列表)
+    shippingStock: '/p/cs/sg/storage/queryShareStoreStorageByPro', // 查发货仓库存
+    receivingStock: '/p/cs/sg/storage/queryShareStoreStorageByPro', // 查收货仓库存    -- 配销仓调拨单   收货 发货 都是   p/cs/sg/storage/queryShareStoreStorageByPro 这个接口
+    paramsNoStore: true, // 接口报："店仓ID错误，找不到该店仓" 时,/p/cs/matrix 接口不传 CP_C_STORE_ID 这个入参
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    hideInStock: true, // 是否隐藏在库（发货在库、收货在库）
+    noZeroShwoFlag: true,
+    hasStock: true, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: true, // 是否显示收货在库和可用
+    hasQtyPrein: false, // 是否显示收货在途数量
+    hasRetail: false // 是否显示零售数量
+  }, // 配销仓调拨单
+  SG_B_STO_STORE_ADVANCE_SALE: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'SG_B_STO_STORE_ADVANCE_SALE_ITEM', // 子表表名 -
+    queryObjSave: 'SG_B_STO_STORE_ADVANCE_SALE_ITEM_V', // 左边列表保存字段名
+    virtualName: 'SG_B_STO_STORE_ADVANCE_SALE_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    noZeroShwoFlag: true,
+    hasStock: false, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: false,
+    hasQtyPrein: false,
+    hasRetail: false
+  }, // 门店预售活动
+  SG_B_SHARE_ADJUST: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'sg_b_share_adjust_item', // 子表表名 -
+    queryObjSave: 'SG_B_SHARE_ADJUST_ITEM_V', // 左边列表保存字段名
+    virtualName: 'SG_B_SHARE_ADJUST_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    noZeroShwoFlag: true,
+    hasStock: false, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: false,
+    hasQtyPrein: false,
+    hasRetail: false
+  }, // 共享调整单
+  SG_B_STO_FREEZE: {
+    getBody: '/p/cs/sg/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
+    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
+    singleCode: '/p/cs/barcodeSave', // 单条码数量保存
+    tableName: 'sg_b_sto_freeze_item', // 子表表名 -
+    queryObjSave: 'SG_B_STO_FREEZE_ITEM_V', // 左边列表保存字段名
+    virtualName: 'SG_B_STO_FREEZE_ITEM_V', // 虚表表名
+    isDeleteBtn: true, // 是否有删除明细按钮
+    delUrl: '/p/cs/sg/prodel', // 删除接口指定地址
+    isUpdateDiscountBtn: false, // 是否有修改折扣按钮
+    matchData: {},
+    hasMatch: false, // 是否有匹配矩阵
+    noZeroShwoFlag: true,
+    hasStock: false, // 获取库存接口
+    isStock: false, // 配置默认显示在库的还是可用的
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
+    matrixInput: false, // 是否显示数量框
+    hasReceiving: false,
+    hasQtyPrein: false,
+    hasRetail: false
+  }, // 逻辑冻结单
   OC_B_PURCHASE: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
@@ -487,15 +758,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 采购单
   SC_B_TRANSFER: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -510,20 +779,17 @@ const port = {
     hasStock: false, // 获取库存接口
     noZeroShwoFlag: true, // 不展示0
     isStock: false, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
     hasReceiving: true,
     hasQtyPrein: true,
-    hasRetail: true,
+    hasRetail: true
   }, // 调拨单
-  V_SC_B_TRANSFER_BETWEEN: {
-    // 仓间调拨
+  V_SC_B_TRANSFER_BETWEEN: { // 仓间调拨
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
     singleCode: '/p/cs/barcodeSave', // 单条码数量保存
@@ -536,20 +802,17 @@ const port = {
     hasStock: false, // 获取库存接口
     noZeroShwoFlag: true, // 不展示0
     isStock: false, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
     hasReceiving: true,
     hasQtyPrein: true,
-    hasRetail: true,
+    hasRetail: true
   },
-  V_SC_B_TRANSFER_WITHIN: {
-    // 仓内调拨
+  V_SC_B_TRANSFER_WITHIN: { // 仓内调拨
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
     singleCode: '/p/cs/barcodeSave', // 单条码数量保存
@@ -562,17 +825,15 @@ const port = {
     hasStock: false, // 获取库存接口
     noZeroShwoFlag: true, // 不展示0
     isStock: false, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
     hasReceiving: true,
     hasQtyPrein: true,
-    hasRetail: true,
+    hasRetail: true
   },
   OC_B_ORDER: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -586,15 +847,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   },
   SC_B_OUT: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -608,15 +867,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 出库单
   OC_B_SEND_OUT: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -630,15 +887,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 发货订单
 
   OC_B_REFUND_SALE: {
@@ -654,15 +909,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 销售退货单
   OC_B_REFUND_PURCHASE: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -676,15 +929,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 采购退货单
 
   SC_B_INVENTORY: {
@@ -699,16 +950,15 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 盘点单
+
 
   SC_B_STORAGE_ADJUST: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -722,15 +972,14 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
     hasReceiving: false,
+    shippingWarehouse: 'CP_C_STORE_ID', // 发货仓取值字段 (主表)
   }, // 库存调整单
   SG_B_PHY_ADJUST: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -744,15 +993,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: false, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 库存调整单
 
   OC_B_PURCHASE_ORDER: {
@@ -767,15 +1014,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 采购订单商品明细
   SG_B_PHY_IN_NOTICES_POS: {
     getBody: '/p/cs/posGetMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -789,15 +1034,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // POS入库单
   POS_SC_B_TRANSFER: {
     getBody: '/p/cs/posGetMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -811,15 +1054,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // POS出库单
   SG_B_PHY_OUT_NOTICES_POS: {
     getBody: '/p/cs/posGetMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -833,15 +1074,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 全渠道发货单
   OC_B_MULTI_STORE_DISTRIBUTION: {
     getBody: '/p/cs/oc/v1/sale/matrix', // 获取商品编码各个SKU数量（用于修改）
@@ -861,15 +1100,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 全渠道自提单
   OC_B_DIRECT: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -883,18 +1120,15 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 直发单
-  SC_B_TRANSFER_ENQUIRY: {
-    // 要货调拨单
+  SC_B_TRANSFER_ENQUIRY: { // 要货调拨单
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
     singleCode: '/p/cs/barcodeSave', // 单条码数量保存
@@ -906,18 +1140,15 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, // 要货调拨单
-  OC_B_STORE_ENQUIRY: {
-    //  门店要货单
+  OC_B_STORE_ENQUIRY: { //  门店要货单
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
     amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
     singleCode: '/p/cs/barcodeSave', // 单条码数量保存
@@ -929,15 +1160,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: true,
+    hasReceiving: true
   }, //  门店要货单
   OC_B_CUSTOMER_CARGO: {
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
@@ -951,15 +1180,13 @@ const port = {
     hasMatch: false, // 是否有匹配矩阵
     hasStock: true, // 获取库存接口
     isStock: true, // 配置默认显示在库的还是可用的
-    inputList: [
-      {
-        name: '数量',
-        colname: 'QTY',
-        defnum: 1,
-      },
-    ], // 配的数量字段名集合
+    inputList: [{
+      name: '数量',
+      colname: 'QTY',
+      defnum: 1
+    }], // 配的数量字段名集合
     matrixInput: false, // 是否显示数量框
-    hasReceiving: false,
+    hasReceiving: false
   }, //  经销商调货单
   SG_B_GROUP_MANIFEST: {
     tableName: 'SG_B_GROUP_MANIFEST_ITEM',
@@ -969,7 +1196,7 @@ const port = {
     isStoreId: true, // 是否传参 店仓/逻辑仓ID
     isMatchSize: 0,
     getBody: '/p/cs/getMatrixData', // 获取商品编码各个SKU数量（用于修改）
-    amendBody: '/p/cs/objectSave', // 保存修改的商品编码各个SKU数量
-  }, // 组货单
-}
-export default port
+    amendBody: '/p/cs/objectSave' // 保存修改的商品编码各个SKU数量
+  } // 组货单
+};
+export default port;

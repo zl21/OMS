@@ -9,10 +9,10 @@
 <!-- 新增 或者 编辑 或者 复制促销-->
 <template>
   <div class="customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="addOrEditActi">
         <div class="steps_content">
           <div ref="basicSteps" class="basicSteps">

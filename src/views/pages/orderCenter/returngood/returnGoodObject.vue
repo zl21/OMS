@@ -1,12 +1,12 @@
 <template>
   <!-- 退换货订单新增 -->
-  <div class="returngood public-main custom-main customized-detail" v-loading="loading">
+  <div class="returngood customized-detail" v-loading="loading">
     <!--按钮块-->
-    <div class="returnAddBtn custom-btn customized-detail-btn">
+    <div class="returnAddBtn obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content customized-detail-main">
-      <div class="returnAddColl">
+    <div class="obj-main">
+      <div class="obj-form">
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
@@ -101,7 +101,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="salesTable custom-table customized-detail-table">
+      <div class="salesTable obj-table">
         <!-- tab切换 -->
         <OmsLabel
           class="businessLabel"
@@ -170,7 +170,7 @@
         </Modal>
       </div>
       <!--单据状态图片展示 -->
-      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" :text="statusName"/>
     </div>
     <!-- 修改备注 11-->
     <OmsDialog

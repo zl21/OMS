@@ -1,9 +1,9 @@
 <template>
-  <div class="logisticsArea public-main custom-main" v-loading="loading">
+  <div class="logisticsArea custom-main" v-loading="loading">
     <div class="custom-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="public-content">
+    <div class="obj-main">
       <div class="tableTop">
         <Collapse v-model="openDefault">
           <Panel name="1">
@@ -114,7 +114,7 @@
         </div>
       </div>
       <!--单据状态图片展示 -->
-      <WaterMark v-if="statusName !== ''" class="omsWaterMark" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" :text="statusName"/>
     </div>
     <!-- 导入 -->
     <OmsDialog

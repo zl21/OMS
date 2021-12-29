@@ -1,7 +1,8 @@
 import customPagingMixins from '@/assets/js/mixins/customPaging.js';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
-import BC from 'burgeonComponents'
-const { Components } = BC
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
+import Vue from "vue";
+const { Components } = $BC
 Vue.component('tableInput', Components.TableInput)
 
 export default {
@@ -40,6 +41,7 @@ export default {
       imgIndex: 0,
       btnConfig: {
         typeAll: 'default',
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             webname: 'lookup_save', // 保存
@@ -262,7 +264,7 @@ export default {
             ]
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '8',
             itemdata: {
               col: 1,
@@ -303,7 +305,7 @@ export default {
             ]
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '8',
             itemdata: {
               col: 1,
@@ -407,7 +409,7 @@ export default {
             disabled: true
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '8',
             itemdata: {
               col: 1,
@@ -439,7 +441,7 @@ export default {
             }
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '8',
             itemdata: {
               col: 1,
@@ -632,7 +634,7 @@ export default {
             render: (h, params) => {
               if (this.unAutitFlag) {
                 const self = this;
-                return h(tableInput, {
+                return h('tableInput', {
                   style: {
                     width: '100%'
                   },
@@ -640,7 +642,7 @@ export default {
                     tableFormConfig: {
                       formData: [
                         {
-                          style: 'popInput',
+                          style: 'popInputPlus',
                           width: '24',
                           itemdata: {
                             col: 1,
@@ -674,7 +676,7 @@ export default {
                 });
               }
               const self = this;
-              return h(tableInput, {
+              return h('tableInput', {
                 style: {
                   width: '100%'
                 },
@@ -682,7 +684,7 @@ export default {
                   tableFormConfig: {
                     formData: [
                       {
-                        style: 'popInput',
+                        style: 'popInputPlus',
                         width: '24',
                         itemdata: {
                           col: 1,
@@ -1425,7 +1427,7 @@ export default {
       self.jordanTableConfig.isShowDeleteDetailBtn = false;
       // 主表数据设为只读
       self.formConfig.formData.forEach(formItem => {
-        if (formItem.style === 'popInput') {
+        if (formItem.style === 'popInputPlus') {
           formItem.itemdata.readonly = true;
         } else if (formItem.style === 'dimSearch') {
           formItem.style = 'input';

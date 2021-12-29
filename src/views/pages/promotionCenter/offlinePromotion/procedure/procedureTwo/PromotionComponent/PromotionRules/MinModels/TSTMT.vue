@@ -28,7 +28,7 @@
 
 
 <script>
-import myInput from "framework/components/element/input";
+// import myInput from "framework/components/element/input";
 export default {
   model: {
     prop: "value",
@@ -110,7 +110,7 @@ export default {
     }
     },
   components: {
-    myInput
+    myInput: $R3_CPS.components.input
   },
   mounted(){
     this.Mitemdata2.itemdata.valuedata=this.value?JSON.stringify(this.value):""

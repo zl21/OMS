@@ -8,10 +8,10 @@
 -->
 <template>
   <div class="holdStrategyAddOrEdit customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- 基础资料 -->
@@ -146,7 +146,7 @@
 
         </Panel>
       </Collapse>
-      <div v-if="ID !== '-1'" class="customized-detail-table">
+      <div v-if="ID !== '-1'" class="obj-table">
         <!-- tab切换 -->
         <OmsLabel :label-list="labelList" :label-default-value="labelDefaultValue" />
         <!-- 子表Part -->

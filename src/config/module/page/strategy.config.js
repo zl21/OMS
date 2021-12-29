@@ -78,6 +78,13 @@ export default {
     ),
     labelName: $it('menu.al') // 档期日程规划
   },
+  SCHEDULEADDOREDIT: {
+    component: () => import(
+      /* webpackChunkName: 'StrategyCenterPage' */
+      'allpages/strategyPlatform/scheduleAddOrEdit.vue'
+    ),
+    labelName: $it('menu.al') // 档期日程规划
+  },
   ST_C_WAREHOUSE_LOGISTICS_SET: {
     component: () => import(
       /* webpackChunkName: 'StrategyCenterPage' */

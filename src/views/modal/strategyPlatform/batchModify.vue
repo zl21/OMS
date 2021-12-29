@@ -1,5 +1,5 @@
 <template>
-  <div class="batchModify customized-modal">
+  <div class="batchModify cus-modal">
     <p>已选中批量修改记录数: {{ idArray.length }}条</p>
     <div class="body">
       <div class="title">

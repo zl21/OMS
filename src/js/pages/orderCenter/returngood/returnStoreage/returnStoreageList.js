@@ -3,8 +3,8 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
-import BC from 'burgeonComponents';
-const { Components } = BC
+// import BC from 'burgeonComponents';
+const { Components } = $BC
 
 const getCurrentTime = (() => {
   return $utils.Format(new Date(), 'yyyy-MM-dd 23:59:59');
@@ -51,11 +51,30 @@ export default {
       },
       btnConfig: BtnConfig.config(),
       formConfig: {
-        flodClickMsg: 'a',
+        btn: {
+          buttons: [
+            {
+              text: $it('btn.find'), // 查找
+              webname: 'lookup_tuihuanhuo',
+              type: 'error',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {} // 按钮点击事件
+            },
+            {
+              text: $it('btn.reset'), // 重置
+              webname: 'lookup_chongzhi',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {} // 按钮点击事件
+            },
+          ]
+        },
+        iconSite: 'bottomCenter',
+        // setColnum: 4, // 4列
+        // setRow: 3, // 3行
         formData: [],
         formValue: {},
         flodClick(v) {
-          strUtil.flodClick(v)
+          // strUtil.flodClick(v)
         }
       },
       agTableConfig: {

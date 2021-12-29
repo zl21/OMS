@@ -9,7 +9,7 @@
 <template>
   <!-- 修改仓库 -->
   <div
-    class="customized-modal"
+    class="cus-modal"
     style="width: 400px;"
   >
     <OmsForm :form-config="formConfig"></OmsForm>

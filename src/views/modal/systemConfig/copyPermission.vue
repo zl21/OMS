@@ -1,5 +1,5 @@
 <template>
-  <div class="customized-modal" v-loading="loading">
+  <div class="cus-modal" v-loading="loading">
     <div class="subtablePart">
       <div class="modalContent">
         <div class="itemContent">

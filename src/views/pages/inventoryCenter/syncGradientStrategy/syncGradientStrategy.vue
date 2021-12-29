@@ -1,10 +1,10 @@
 <template>
   <div class="auto-check syncGradientStrategy customized-detail" v-loading="loading">
     <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" class="top-btns"/>
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
@@ -22,7 +22,7 @@
         </Panel>
       </Collapse>
       <div class="flex flex-direction-row">
-        <div class="br-d3d3d3 mg-rt-5 flex-1 pd-tp-5 pd-rt-5 customized-detail-table">
+        <div class="br-d3d3d3 mg-rt-5 flex-1 pd-tp-5 pd-rt-5 obj-table">
           <OmsForm v-if="isActive" :form-config="formConfig2" class="bg-form pd-tp-0"/>
           <div class="pd-lf-5 pd-rt-5 pd-bt-5">
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
@@ -40,7 +40,7 @@
           </div>
 
         </div>
-        <div class="br-d3d3d3 mg-lf-5 flex-1 pd-tp-5  pd-rt-5 customized-detail-table">
+        <div class="br-d3d3d3 mg-lf-5 flex-1 pd-tp-5  pd-rt-5 obj-table">
           <OmsForm v-if="isActive"  :form-config="formConfig3" class="bg-form pd-tp-0"/>
           <div class="pd-lf-5 pd-rt-5 pd-bt-5">
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
@@ -78,6 +78,7 @@ export default sgStorageChangeFtpQuery;
 </script>
 
 <style scoped lang="less">
+@import '~@/css/pages/inventoryCenter/index.less';
 .syncGradientStrategy {
   .bg-form {
     &.unFlodStyle {

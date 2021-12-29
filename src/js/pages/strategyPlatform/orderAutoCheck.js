@@ -31,7 +31,8 @@ export default {
       s: [],
       providesList: [],
       btnConfig: {
-        typeAll: 'error', // 按钮统一风格样式
+        typeAll: 'default', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
             text: $it('btn.save'), // 保存
@@ -69,8 +70,20 @@ export default {
         beginEndTimeChange: false
       },
       result: {},
+      // tab切换配置
+      labelList: [
+        {
+          label: $it('pL.operationLog'), // 操作日志
+          value: 'ST_C_AUTOCHECK_LOG'
+        }
+      ],
+      subTableConfig: {
+        centerName: '',
+        tablename: '',
+        objid: '',
+      },
+      labelDefaultValue: 'ST_C_AUTOCHECK_LOG', // 设置tab默认值
       collapseShow: ['1', '2', '3', 'auditCondition'],
-      collapseLog: ['1'],
       info: {},
       data1: {},
       startindex: 0,

@@ -2,7 +2,7 @@
 <template>
   <div
     v-if="dialogVisible"
-    class="setGroup customized-modal"
+    class="setGroup cus-modal"
   >
     <el-dialog
       :visible.sync="dialogVisible"

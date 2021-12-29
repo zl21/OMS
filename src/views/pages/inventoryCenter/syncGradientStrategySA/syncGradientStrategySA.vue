@@ -1,12 +1,12 @@
 <!--配销仓库存梯度策略 单对象-->
 <template>
   <div class="auto-check syncGradientStrategy customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" class="top-btns"/>
     </div>
-    <div class="customized-detail-main">
-      <Collapse v-model="collapse">
+    <div class="obj-main">
+      <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
+      <Collapse v-model="collapse" class="obj-form">
         <Panel name="panel_baseInfo">
           {{$it('com.baseInformation')}}<!--基本信息-->
           <div slot="content">
@@ -21,14 +21,14 @@
         </Panel>
       </Collapse>
       <div class="flex flex-direction-row">
-        <div class="br-d3d3d3 mg-rt-5 flex-1 pd-tp-5 pd-rt-5 customized-detail-table">
+        <div class="br-d3d3d3 mg-rt-5 flex-1 pd-tp-5 pd-rt-5 obj-table">
           <OmsForm v-if="isActive" :form-config="formConfig2" class="bg-form pd-tp-0"/>
           <div class="pd-lf-5 pd-rt-5 pd-bt-5">
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
               <div v-if="isActive" class="flex flex-direction-row align-items-center">
                 <a
-                    @click="delFun2(multipleSelection1,tab1tableName,1)">【【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
-                <a  @click="saveFun(2)">【{{$it('btn.saveDraft')}}】</a> <!--保存-->
+                    @click="delFun2(multipleSelection1,tab1tableName,1)">【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
+                <a  @click="saveFun(2)">【{{$it('btn.save')}}】</a> <!--保存-->
               </div>
             </div>
             <Table ref="table1" border highlight-row
@@ -40,7 +40,7 @@
           </div>
 
         </div>
-        <div class="br-d3d3d3 mg-lf-5 flex-1 pd-tp-5 pd-rt-5 customized-detail-table">
+        <div class="br-d3d3d3 mg-lf-5 flex-1 pd-tp-5 pd-rt-5 obj-table">
           <OmsForm v-if="isActive" :form-config="formConfig3" class="bg-form pd-tp-0"/>
           <div class="pd-lf-5 pd-rt-5 pd-bt-5">
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
@@ -57,7 +57,7 @@
                 />
                 <a v-if="isActive"
                    @click="delFun2(multipleSelection2,tab2tableName,2)">【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
-                <a v-if="isActive"  @click="saveFun(3)">【{{$it('btn.saveDraft')}}】</a> <!--保存-->
+                <a v-if="isActive"  @click="saveFun(3)">【{{$it('btn.save')}}】</a> <!--保存-->
               </div>
             </div>
             <Table ref="table1" border
@@ -79,6 +79,7 @@ export default sgStorageChangeFtpQuery;
 </script>
 
 <style scoped lang="less">
+@import '~@/css/pages/inventoryCenter/index.less';
 .syncGradientStrategy {
   .bg-form {
     &.unFlodStyle {

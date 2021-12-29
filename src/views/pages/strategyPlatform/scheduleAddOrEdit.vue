@@ -1,10 +1,10 @@
 <template>
   <!-- 档期日程规划 -->
   <div class="customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           {{ $it('com.baseInformation') }}
@@ -43,8 +43,23 @@
         </div> -->
       </div>
 
-      <Modal v-model="dialog[curDialog]" :title="dialogInfo.title" footer-hide :width="dialogInfo.width" mask>
-        <scheduleFormDialog :forceReload="forceReload" ref="dialogForm" :dialog-config="dialogConfig" :detail="initDetail" :loading="dialogLoading" @getData="getDetail" @clearModify="initModify" />
+      <Modal
+        v-model="dialog[curDialog]"
+        :title="dialogInfo.title"
+        footer-hide
+        :width="dialogInfo.width"
+        mask
+        closable
+      >
+        <scheduleFormDialog
+          ref="dialogForm"
+          :forceReload="forceReload"
+          :dialog-config="dialogConfig"
+          :detail="initDetail"
+          :loading="dialogLoading"
+          @getData="getDetail"
+          @clearModify="initModify"
+        />
       </Modal>
     </div>
   </div>

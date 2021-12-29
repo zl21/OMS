@@ -1,10 +1,10 @@
 <!--  一商模拟仿真   -->
 <template>
   <div class="simulation customized-detail">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <div class="orderSet">
         <div class="header_title">
           <span class="header_name">

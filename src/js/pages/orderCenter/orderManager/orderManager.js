@@ -4,8 +4,6 @@ import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import labelListConfig from './publicConfig/labelList';
 import orderLogo from './publicConfig/orderLogo';
-import BC from 'burgeonComponents'
-const { Components } = BC
 
 export default {
   components: {},
@@ -260,7 +258,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: BC.Components.ImportTable,
+        url: $BC.Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
@@ -376,6 +374,26 @@ export default {
       },
       // 高级搜索表单
       formConfig: {
+        btn: {
+          typeAll: 'error', // 按钮统一风格样式
+          buttons: [
+            {
+              text: '查找', // 按钮文本
+              btnclick: () => {
+                // this.loadData();
+              } // 按钮点击事件
+            },
+            {
+              text: '重置', // 按钮文本
+              type: 'default',
+              btnclick: () => {} // 按钮点击事件
+            }
+          ]
+        },
+        iconSite: 'bottomCenter', // rightTop
+        flodClick: (v) => {},
+        // setColnum: 4, // 4列
+        // setRow: 3, // 3行
         formValue: {},
         formData: []
       },
@@ -1593,7 +1611,7 @@ export default {
             });
             return;
           }
-          res.data.data = JSON.parse(BC.Utils.unzip(res.data.data));
+          res.data.data = JSON.parse($BC.Utils.unzip(res.data.data));
           if (res.data.code === 0) {
             if (!res.data.data) {
               self.agTableConfig.pagenation.total = 0;

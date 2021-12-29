@@ -1,9 +1,9 @@
 <template>
   <div class="skuAddOrEdit customized-detail" :id="this.customizedModuleName" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="panelDefaultValue">
         <Panel name="panel_baseInfo">
           <!-- SKU基本信息 -->
@@ -115,7 +115,7 @@
           </div>
         </Panel>
       </Collapse>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel
           class="jordanLabel"

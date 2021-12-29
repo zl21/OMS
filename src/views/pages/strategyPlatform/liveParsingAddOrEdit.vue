@@ -1,9 +1,9 @@
 <template>
   <div class="customized-detail" v-loading="loading">
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
+    <div class="obj-main">
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
@@ -88,7 +88,7 @@
         </Panel>
       </Collapse>
 
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel
           v-show="ID != -1"

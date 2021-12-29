@@ -1,6 +1,7 @@
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import customPagingMixins from '@/assets/js/mixins/customPaging';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
+import publicMethodsUtil from '@/assets/js/public/publicMethods';
 
 export default {
   components: {},
@@ -64,7 +65,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: Components.ImportTable,
+        url: $BC.Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
@@ -129,13 +130,13 @@ export default {
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         buttons: [
-          {
-            webname: 'lookup_yingfukuantiaozhengdan', // 查找
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.find();
-            } // 按钮点击事件
-          },
+          // {
+          //   webname: 'lookup_yingfukuantiaozhengdan', // 查找
+          //   disabled: false, // 按钮禁用控制
+          //   btnclick: () => {
+          //     this.find();
+          //   } // 按钮点击事件
+          // },
           {
             webname: 'Newlyadded_yingfukuantiaozhengdan', // 新增
             disabled: false, // 按钮禁用控制
@@ -222,6 +223,29 @@ export default {
         ]
       }, // 按钮数据
       formConfig: {
+        btn: {
+          buttons: [
+            {
+              text: $it('btn.find'), // 查找
+              webname: 'lookup_tuihuanhuo',
+              type: 'error',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.find();
+              } // 按钮点击事件
+            },
+            {
+              text: $it('btn.reset'), // 重置
+              webname: 'lookup_chongzhi',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+              } // 按钮点击事件
+            },
+          ]
+        },
+        iconSite: 'bottomCenter',
+        // setColnum: 4, // 4列
+        // setRow: 3, // 3行
         formData: [
           {
             style: 'input', // 文本录入
@@ -271,7 +295,7 @@ export default {
             width: '6'
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -302,7 +326,7 @@ export default {
             }
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -332,7 +356,7 @@ export default {
             }
           },
           {
-            style: 'popInput', // 输入框弹框单多选
+            style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
               col: 1,
@@ -475,7 +499,6 @@ export default {
         ],
         formValue: {},
         flodClick(v) {
-          strUtil.flodClick(v)
         }
       }, // form表单
       labelList: [

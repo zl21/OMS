@@ -117,6 +117,9 @@ export default {
   // queryClassifyTree: params => network.post('/p/cs/ps/pro/classify/v1/queryClassifyTree', params), // 商品分类-列表-树结构
   // selectTree: params => network.post('/p/cs/cp/v1/region/v1/selectTree', params), // 国家省市区-列表-树结构
 
+  setColPosition: (params) => $network.post("/p/cs/setColPosition", params), //设置表格列的顺序
+  queryMenuPermission: params => $network.get(`/p/cs/queryMenuPermission?${qs.stringify(params)}`), //功能权限
+  objectVoid: params => $network.post('/p/cs/objectVoid', params), // 作废
   // 通用接口下载
   /**
    * 经销订单下载 分销商订单下载 /p/cs/orderDownload

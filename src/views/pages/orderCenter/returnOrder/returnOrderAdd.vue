@@ -2,11 +2,11 @@
   <!-- 退换货订单新增 -->
   <div class="customized-detail returnOrderAdd" v-loading="loading">
     <!--按钮块-->
-    <div class="customized-detail-btn">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <div class="customized-detail-main">
-      <div class="returnAddColl">
+    <div class="obj-main">
+      <div class="obj-form">
         <Collapse v-model="openDefault">
           <Panel name="1">
             <!-- 基本信息 -->
@@ -90,7 +90,7 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="customized-detail-table">
+      <div class="obj-table">
         <!-- tab切换 -->
         <OmsLabel class="jordanLabel" :label-list="labelList" :label-default-value="labelDefaultValue" @labelClick="labelClick"/>
         <div class="tableBox returnChangeOrderdetails">

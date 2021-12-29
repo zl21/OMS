@@ -188,5 +188,25 @@ export default {
       /* webpackChunkName: 'OrderCenterPage' */
       'allpages/orderCenter/orderManageDetail/orderDetail/halfOrderDetail.vue'
     )
-  }
+  },
+
+  // pos背景图片设置
+  BACKGROUNDURLSET: {
+    component: () => import('allpages/orderCenter/returngood/backgroundUrlSet.vue'),
+    labelName: 'pos背景图片设置',
+  },
+  // 营业指标明细(天)
+  targetDetailToSalers: {
+    component: () => import(
+      /* webpackChunkName: 'OrderCenterPage' */
+      'allpages/orderCenter/retail/targetDetailToSalers.vue'
+    ),
+  },
+  // 营业指标明细(店员)
+  targetDetailToDays: {
+    component: () => import(
+      /* webpackChunkName: 'OrderCenterPage' */
+      'allpages/orderCenter/retail/targetDetailToDays.vue'
+    ),
+  },
 };

@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-project-logic/src/views/modal/orderCenter/returngood/rturngoodModifyRemarks.vue
 -->
 <template>
-  <div class="modifyRemark customized-modal">
+  <div class="modifyRemark cus-modal">
     <Form :label-width="80" :model="bouncedData" :rules="ruleValidate">
       <FormItem label="单据备注"  prop="value">
         <Input

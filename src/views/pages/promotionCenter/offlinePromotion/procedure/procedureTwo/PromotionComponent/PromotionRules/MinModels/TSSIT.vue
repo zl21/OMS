@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import myInput from "framework/components/element/input";
+// import myInput from "framework/components/element/input";
 export default {
   props: ["rule","index", "scheme_data"],
   data() {
@@ -130,7 +130,7 @@ export default {
     },
   },
   components: {
-    myInput
+    myInput: $R3_CPS.components.input
   },
   mounted(){
     this.CompareNames = this.scheme_data.promotionType_code==='GA13'? [{value: "QTTY", label: "数量"}]:[{value: "QTTY", label: "数量"},
