@@ -195,7 +195,7 @@
           <span>{{ vmI18n.t("HASBEENSELECTED") }}</span
           ><span>(</span
           ><span
-            >{{ r_center_data.rightTotal }} {{ vmI18n.t("common.piece") }}</span
+            >{{ r_center_data.rightTotal }} {{ vmI18n.t("com.piece") }}</span
           ><span>)</span>
 
           <span>
@@ -273,7 +273,7 @@
           <div class="fk-body-bottom">
             <!-- 确定 -->
             <el-button @click="errorDialogClose">
-              {{ vmI18n.t("common.determine") }}
+              {{ vmI18n.t("com.determine") }}
             </el-button>
           </div>
         </div>

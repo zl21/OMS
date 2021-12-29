@@ -1,4 +1,4 @@
-import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
+// import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 
@@ -76,7 +76,7 @@ export default {
       dataEmpty: {
         flag: true,
         // message: '数据加载中……'
-        message: $i18n.t('modalTips.du')
+        message: $i18n.t('tip.du')
       }  //数据是否为空
     }
   },
@@ -307,7 +307,7 @@ export default {
       if (this.tabrow.length > 0) {
       } else {
         this.dataEmpty.flag = true
-        this.dataEmpty.message = $i18n.t('modalTips.du') // '数据加载中……'
+        this.dataEmpty.message = $i18n.t('tip.du') // '数据加载中……'
       }
       this.formObj.isdroplistsearch = true;
       this.formObj.startindex = (this.visible - 1) * this.range
@@ -336,7 +336,7 @@ export default {
 
           if (dataArr.row.length > 0) {
             _self.dataEmpty.flag = false
-            _self.dataEmpty.message = $i18n.t('modalTips.du') // '数据加载中……'
+            _self.dataEmpty.message = $i18n.t('tip.du') // '数据加载中……'
           } else {
             _self.dataEmpty.flag = true
             _self.dataEmpty.message = $i18n.t('other.noDataAvailable') // '暂无数据'
@@ -381,7 +381,7 @@ export default {
   },
   created() {
     let _self = this
-    _self.ChineseDictionary = ChineseDictionary
+    _self.ChineseDictionary = $R3_CPS.components.ChineseDictionary
     // 判断是否是外键关联
     if (_self.fkid) {
       _self.formObj.refcolid = _self.fkid

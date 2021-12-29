@@ -1,5 +1,5 @@
 // 兼容fktable1.4数据格式（云雀1.0）
-import SelectDialog from 'framework/components/dialog/selectDialog.vue';
+// import SelectDialog from 'framework/components/dialog/selectDialog.vue';
 import FkTable from 'burgeonComponents/view/Fktable.vue';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
@@ -160,7 +160,7 @@ export default {
     },
   },
   components: {
-    SelectDialog,
+    SelectDialog:$R3_CPS.components.selectDialog,
     FkTable
   },
   mounted() {
@@ -691,7 +691,7 @@ export default {
           }
         } else {
           self.$Message.warning({
-            content: `${$i18n.t('modalTips.hn')}${tipsname[key].name}`// 请先选择
+            content: `${$i18n.t('tip.hn')}${tipsname[key].name}`// 请先选择
           });
           setTimeout(() => {
             $(`.el-autocomplete.${itemdata.colname}`)

@@ -9,7 +9,7 @@
 <template>
   <div class="multipleBox">
     <Checkbox v-model="all" @click.prevent.native="handleCheckAll">
-      {{ vmI18n.t("common.all") }}
+      {{ vmI18n.t("com.all") }}
     </Checkbox>
 
     <CheckboxGroup v-model="names" @on-change="checkChange">

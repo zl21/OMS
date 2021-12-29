@@ -1,9 +1,86 @@
 @import '~omsTheme/public.less';
 
-.business-form-main{
-  padding-top: 16px;
+.business-form-main {
+  border: 1px solid #d3d3d3;
+
+  .tag-close {
+
+    &.bottomCenter {
+      &+.cusForm-content {
+        padding: 0 8px 14px;
+      }
+    }
+
+    &.rightTop {
+      &+.cusForm-content {
+        padding: 0 30px 8px 0;
+      }
+
+      &~.cusForm-button {
+        right: 30px !important;
+      }
+    }
+
+    &.bottomCenter {
+      top: auto;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      & {
+        border-radius: 6px 6px 0 0;
+        width: 60px;
+        height: 12px;
+        line-height: 12px;
+        background: #e9ecf4;
+        color: #b9b9c0;
+        font-size: 16px;
+        font-weight: 800;
+
+        & i {
+          font-weight: 600;
+          line-height: 12px;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .cusForm-content {
+
+    .long {
+      display: none;
+    }
+
+    .ark-form-item {
+      padding-top: 8px;
+      margin-bottom: 0;
+    }
+  }
+
+  .cusForm-button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    button {
+      margin: 0 8px 0 0;
+      padding: 0 8px;
+      height: 28px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+
+.business-form-main {
+  // padding-top: 16px;
   position: relative;
-  .flodBtn{
+
+  .flodBtn {
     width: 28px;
     height: 16px;
     line-height: 16px;
@@ -14,44 +91,53 @@
     right: 0;
     top: 0;
   }
-  .ark-form-item-label{
+
+  .ark-form-item-label {
     min-height: 33px;
-    #bundle > .points;
+    #bundle>.points;
   }
-  .ark-form-item{
+
+  .ark-form-item {
     margin-bottom: 10px;
+
     // popInput
-    &.popInput{
-      .ark-form-item-content{
-        .item-input{
+    &.popInput {
+      .ark-form-item-content {
+        .item-input {
           display: inline-block;
-          .fk-tooltip.ark-tooltip{
+
+          .fk-tooltip.ark-tooltip {
             position: inherit;
             top: auto;
             right: auto;
             display: inline-block;
           }
-          .popover-icon{
-            .iconfont{
+
+          .popover-icon {
+            .iconfont {
               width: 32px;
               text-align: center;
             }
           }
         }
+
         // .add-input
-        .add-input{
+        .add-input {
           width: 100%;
           margin: 0;
-          .el-input.is-disabled .el-input__inner{
+
+          .el-input.is-disabled .el-input__inner {
             background: #fff;
           }
         }
       }
     }
+
     /* 日期组件宽度调整 */
     .ark-date-picker {
       width: 100%;
     }
+
     /* 双数字输入框样式 */
     .bothNumInput {
       display: flex;
@@ -59,6 +145,7 @@
       width: 100%;
     }
   }
+
   /* 标注图标样式 */
   .help-circle.ark-tooltip {
     position: absolute;
@@ -71,9 +158,10 @@
     }
   }
 }
+
 // /* 插槽字段的必填标识 */
 .req-star .ark-form-item-label::before {
   color: red;
   position: relative;
-  content: '* '; 
+  content: '* ';
 }
