@@ -109,7 +109,7 @@ export default {
         // 是否存在序号列
         columnsData.unshift({
           // title: '序号',
-          title: $i18n.t('table_label.serialNo'),
+          title: $i18n.t('tL.serialNo'),
           key: 'index',
           align: 'left',
           fixed: 'left',

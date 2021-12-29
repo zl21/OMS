@@ -16,7 +16,7 @@ export const parameters = {
   options: {
     storySort: {
       order: [
-        'Introduction', ['Introduction', 'Install'],
+        'Introduction', ['Introduction', 'Install', 'I18n', '*'],
         'BASIC', ['ButtonFkDialog', 'DownLoad', '*'],
         'TABLE', ['OmsTable', '*'],
         'OTHER',

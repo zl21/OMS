@@ -29,8 +29,8 @@
       v-show="agTableConfig.pageShow && (agTableConfig.rowData || []).length !== 0"
     >
       <span style="paddingright: 8px"
-        >{{ vmI18n.t("common.total") }} {{ agTableConfig.pagenation.total }}
-        {{ vmI18n.t("common.piece") }}</span
+        >{{ vmI18n.t("com.total") }} {{ agTableConfig.pagenation.total }}
+        {{ vmI18n.t("com.piece") }}</span
       >
       <Page
         class="page-pages"

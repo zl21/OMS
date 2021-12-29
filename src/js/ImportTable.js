@@ -34,7 +34,7 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            text: $i18n.t('common.cancel'), // 按钮文本
+            text: $i18n.t('com.cancel'), // 按钮文本
             disabled: false,
             btnclick: () => {
               const _this = this;
@@ -131,7 +131,7 @@ export default {
       const _this = this;
       if (!_this.text) {
         // 请选择需要导入的文件！
-        return _this.$Message.error($i18n.t('modalTips.hj'));
+        return _this.$Message.error($i18n.t('tip.hj'));
       }
       _this.loading = true;
       const param = new FormData();
@@ -166,7 +166,7 @@ export default {
           _this.file = {};
           _this.text = '';
           // _this.errorMessage = '导入失败,详情见文件内容';
-          _this.errorMessage = $i18n.t('modalTips.hk');
+          _this.errorMessage = $i18n.t('tip.hk');
           _this.isError = true;
         } else if (res.data.code === -1) {
           // _this.isError = true;
@@ -174,7 +174,7 @@ export default {
           // _this.$Message.error(res.data.message || 'no message!');
           _this.file = {};
           _this.text = '';
-          _this.errorMessage = $i18n.t('modalTips.hk');
+          _this.errorMessage = $i18n.t('tip.hk');
           _this.isError = true;
         } else {
           console.warn("Please see : 'http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749656/1/2061'");
@@ -261,7 +261,7 @@ export default {
       if (size > 64) {
         this.isError = true;
         // this.errorMessage = '文件最大64M!';
-        this.errorMessage = $i18n.t('modalTips.zb');
+        this.errorMessage = $i18n.t('tip.zb');
         return true;
       }
     },

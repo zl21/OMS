@@ -25,7 +25,7 @@ class custUtils {
    */
   static tipShow(type, self, res, isTitle, renderFun) {
     self.$Modal[type]({
-      title: isTitle ?? $i18n.t('modalTitle.tips'), // 提示
+      title: isTitle ?? $i18n.t('mT.tips'), // 提示
       content: renderFun ?? res.data.message,
       cancelType: true,
       titleAlign: 'left',
@@ -260,7 +260,7 @@ class custUtils {
       id = selection[0].ID;
     }
     if ((selection.length != 1 && params.id !== '-1') || (selection.length != 1 && params.cloneReturnGoodId)) {
-      _self.$Message.warning($i18n.t('modalTips.zm'))
+      _self.$Message.warning($i18n.t('tip.zm'))
       return;
     }
     _self.$store.commit('customize/TabHref', {

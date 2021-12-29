@@ -41,8 +41,9 @@ module.exports = () => ({
     filename: 'businessComponents.min.js',
     path: path.join(__dirname, './burgeon.publish'),
     globalObject: 'this',
-    library: 'Burgeon',
+    library: '$BC',
     libraryTarget: 'umd',
+    libraryExport: 'default',
     umdNamedDefine: true,
     clean: true,
     publicPath: './'
@@ -67,6 +68,7 @@ module.exports = () => ({
       amd: 'vue-router',
       root: 'VueRouter'
     },
+
   },
   module: {
     exprContextCritical: false,
@@ -146,7 +148,7 @@ module.exports = () => ({
     },
     alias: {
       burgeonComponents: path.resolve(__dirname, './src/'),
-      framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
+      // framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
     }
   },

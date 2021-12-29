@@ -348,3 +348,4 @@
 | v2.0.4 | change version |
 | v2.0.5~6 | change version |
 | v2.0.7 | style：delete table.less |
+| v2.0.10 | i18n key 变更 |

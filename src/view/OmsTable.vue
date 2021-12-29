@@ -71,7 +71,7 @@
     <div class="page-box">
       <div class="page-box-left">
         <div class="page_content" v-show="pageShow">
-          <p class="page-allSizes">{{vmI18n.t('common.total')}} {{ total }} {{vmI18n.t('common.piece')}}</p>
+          <p class="page-allSizes">{{vmI18n.t('com.total')}} {{ total }} {{vmI18n.t('com.piece')}}</p>
           <Page 
             size='small' 
             class="page-pages" 
