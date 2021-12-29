@@ -4,6 +4,7 @@ import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import labelListConfig from './publicConfig/labelList';
 import orderLogo from './publicConfig/orderLogo';
+import unzipXv from '@/assets/js/dataToSmall';
 
 export default {
   components: {},
@@ -339,6 +340,967 @@ export default {
       },
       extendBtn: [
         {
+          text: '查找', // 查找
+          type: 'error',
+          webname: 'queryList',
+          btnclick: () => {
+            this.loadData();
+          } // 按钮点击事件
+        },
+        {
+          text: '重置', // 重置
+          webname: 'Reset',
+          btnclick: () => {
+            const _this = this;
+            _this.clearFromListValue = true;
+            _this.queryInfoData = [];
+            _this.labelData = [];
+            _this.highSearchData = [];
+            _this.getHeaderList();
+          } // 按钮点击事件
+        },
+        {
+          webname: 'BatchOrderUnDeliveryUrgent', //批量取消加急
+          btnclick: () => {
+            if (this.selection.length === 0) {
+              this.$Message.warning({
+                content: '请选择需要取消加急的记录！',
+                duration: 5,
+                top: 80
+              })
+              return
+            }
+            const dataId = {
+              ids: this.selection.map(item => item.ID)
+            };
+            this.$Modal.warning({
+              title: '提示',
+              content: '是否确定取消加急?',
+              showCancel: true,
+              mask: true,
+              onOk: () => {
+                this.btnConfig.loading = true;
+                this.service.orderCenter.orderUnDeliveryUrgent(dataId).then(res => {
+                  this.btnConfig.loading = false;
+                  if (res.data.code === 0) {
+                    this.$Message.success(res.data.message);
+                    this.getData();
+                    this.selection = [];
+                  } else {
+                    this.$Message.warning(res.data.message);
+                  }
+                })
+              },
+            })
+          }
+        },
+        {
+          webname: 'refund_price',
+          btnclick: () => {
+            if (this.selection.length === 0) {
+              this.$Message.warning('请选择需要额外退款的记录');
+            } else if (this.selection.length > 1) {
+              this.$Message.warning('只能选择一条记录进行退款');
+            } else {
+              if (this.selection[0].ORDER_STATUS === 6 || this.selection[0].ORDER_STATUS === 5) {
+                this.$store.commit('customize/TabOpen', {
+                  id: -1,
+                  type: 'action',
+                  name: 'EXTRAREFUND',
+                  label: $it('pL.extraRefundEdit'), // 额外退款编辑
+                  query: Object.assign({
+                    oid: this.selection[0].ID,
+                    tabTitle: $it('pL.extraRefundEdit'), // 额外退款编辑
+                    fromOrder: true,
+                    new: true
+                  })
+                });
+              } else {
+                this.$Message.warning('只有仓库发货或者平台发货的订单才能操作额外退款');
+              }
+            }
+          }
+        },
+        {
+          webname: 'batchModifyAddress',
+          webid: 41460540,
+          btnclick: () => {
+            this.importTable.componentData = { tableName: 'OC_B_ORDER-importOrderRemark' };
+            this.$children.find(item => item.name === 'importTable').openConfirm();
+          }
+        },
+        {
+          text: $it('btn.manualCreation') // 手工创建
+        },
+        {
+          webname: 'Newly added' // 新增
+        },
+        {
+          webname: 'orderDetentionRelease', // 卡单释放
+          btnclick: () => {
+            this.orderDetentionRelease();
+          }
+        },
+        {
+          webname: 'To examine', // 审核
+          btnclick: () => {
+            this.existMergableOrder('auditOrder');
+          } // 按钮点击事件
+        },
+        {
+          webname: 'Counter-audit', // 反审核
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length > 0) {
+              self.btnConfig.loading = true;
+              const ids = [];
+              self.selection.forEach((item, index) => {
+                ids[index] = item.ID;
+              });
+              self.service.orderCenter.auditOrderReserve({ ids, type: '1' }).then(res => {
+                if (res.data.code === 0) {
+                  self.$Message.success(res.data.message);
+                  self.getData();
+                  self.selection = [];
+                } else {
+                  self.$Modal.error({
+                    title: $it('mT.tips'), // 提示
+                    content: res.data.message,
+                    cancelType: true,
+                    titleAlign: 'left',
+                    mask: true,
+                    draggable: true,
+                    keyDown: event => {
+                      if (event.keyCode == 27 || event.keyCode == 13) {
+                        self.$Modal.remove();
+                      }
+                    }
+                  });
+                }
+                self.btnConfig.loading = false;
+              });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.a6'), // 请选择需要反审核的记录！
+                duration: 5,
+                top: 80
+              });
+            }
+          } // 按钮点击事件
+        },
+        {
+          webname: 'Revising Logistics' // 批量修改物流
+        },
+        {
+          webname: 'Drop-out copy' // 丢单复制
+        },
+        {
+          webname: 'BacthUpdateInsideRemark', // 修改内部备注
+        },
+        {
+          webname: 'holdOrder' // 批量Hold单
+        },
+        {
+          webname: 'cancelHoldOrder' // 批量取消Hold
+        },
+        {
+          webname: 'batchAgainOccupyStock', // 批量重新寻源
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length === 0) {
+              self.$Message.warning('请选择需要重新寻源的记录!')
+            } else {
+              const ids = self.selection.map(item => item.ID);
+              self.service.orderCenter.againOccupyStock({ ids }).then(res => {
+                if (res.data.code === 0) {
+                  self.$Message.success({
+                    content: res.data.message
+                  });
+                  this.getData();
+                }
+                this.getData();
+              })
+            }
+          }
+        },
+        {
+          text: $it('btn.invoice_otice'), // 开票通知
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length === 0) {
+              self.$Message.warning($it('tip.a7')); // 请选择需要开票的订单
+            } else if (self.selection.length > 0) {
+              self.btnConfig.loading = true;
+              const ids = self.sonList(self.selection, 'ID'); // 选中订单的单据号
+              const fromdata = new FormData();
+              fromdata.append('param', JSON.stringify({ IDS: ids }));
+              self.service.orderCenter
+                .checkAddOrderInvoicing(fromdata)
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', fromdata)
+                .then(res => {
+                  if (res.data.code === 0) {
+                    self.$store.commit('customize/TabOpen', {
+                      id: -1,
+                      type: 'action',
+                      name: 'invoiceNoticetAdd',
+                      label: '开票通知编辑',
+                      query: {
+                        highSearchData: JSON.stringify({
+                          type: 'Input',
+                          queryName: 'ID',
+                          value: res.data.data.join()
+                        }),
+                        isOrder: 'ture',
+                        id: -1
+                      }
+                    });
+                    // R3.store.commit('global/tabOpen', {
+                    //   type: 'C',
+                    //   label: $it('pL.billingNoticeEdit'),
+                    //   customizedModuleName: 'INVOICENOTICETADD',
+                    //   customizedModuleId: '-1',
+                    //   query: {
+                    //     highSearchData: JSON.stringify({
+                    //       type: 'Input',
+                    //       queryName: 'ID',
+                    //       value: res.data.data.join(),
+                    //     }),
+                    //     isOrder: 'ture',
+                    //     id: -1,
+                    //   },
+                    // });
+                  } else {
+                    self.$Message.warning(res.data.message);
+                  }
+                  self.btnConfig.loading = false;
+                });
+            }
+          } // 按钮点击事件
+        },
+        {
+          text: $it('btn.recordInvoice'), // 记录发票
+          webname: 'Record invoices',
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length === 1) {
+              self.btnConfig.loading = true;
+              const id = self.sonList(self.selection, 'ID').join(); // 选中订单的单据号
+              const fromdata = new FormData();
+              fromdata.append('param', JSON.stringify({ ID: id }));
+              self.service.orderCenter
+                .checkRecordInvoicing(fromdata)
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/checkRecordInvoicing', fromdata)
+                .then(res => {
+                  if (res.data.code === 0) {
+                    self.publicBouncedConfig = Object.assign(publicDialogConfig.makeOutInvoiceConfig, {
+                      componentData: res.data.data
+                    });
+                    setTimeout(() => {
+                      self.$children.find(item => item.name === 'makeOutInvoice').openConfirm();
+                    }, 100);
+                  } else {
+                    self.$Message.warning(res.data.message);
+                  }
+                  self.btnConfig.loading = false;
+                });
+            } else {
+              self.$Message.warning($it('tip.a8')); // 请选择一条订单
+            }
+          } // 按钮点击事件
+        },
+        {
+          webname: 'Modify warehouse' // 批量修改仓库
+        },
+        {
+          text: $it('btn.orderCancel'), // 订单取消
+          webname: 'Order Cancellation',
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length > 0) {
+              self.btnConfig.loading = true;
+              const ids = [];
+              self.selection.forEach((item, index) => {
+                ids[index] = item.ID;
+              });
+              this.$Modal.info({
+                title: $it('mT.tips'), // 提示
+                content: $it('tip.e0'), // 是否确定取消订单？
+                mask: true,
+                showCancel: true,
+                okText: $it('com.determine'), // 确定
+                cancelText: $it('com.cancel'), // 取消
+                onOk: () => {
+                  self.service.orderCenter
+                    .cancelOrder({ ids, type: '1' })
+                    // self.$network
+                    //   .post('/api/cs/oc/oms/v1/cancelOrder', { ids, type: '1' })
+                    .then(res => {
+                      if (res.data.code === 0) {
+                        self.$Message.success(res.data.message);
+                        self.getData();
+                        self.selection = [];
+                      } else {
+                        self.$Modal.error({
+                          title: $it('mT.tips'), // 提示
+                          content: res.data.message,
+                          cancelType: true,
+                          titleAlign: 'left',
+                          mask: true,
+                          draggable: true,
+                          keyDown: event => {
+                            if (event.keyCode == 27 || event.keyCode == 13) {
+                              self.$Modal.remove();
+                            }
+                          }
+                        });
+                      }
+                      self.btnConfig.loading = false;
+                    });
+                },
+                onCancel: () => {
+                  self.btnConfig.loading = false;
+                }
+              });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.a9'), // 请选择需要取消的订单！
+                duration: 5,
+                top: 80
+              });
+            }
+          } // 按钮点击事件
+        },
+        {
+          text: $it('btn.orderBlocking'), // 订单拦截
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length > 0) {
+              self.btnConfig.loading = true;
+              const ids = [];
+              self.selection.forEach((item, index) => {
+                ids[index] = item.ID;
+              });
+              const param = {
+                ids
+              };
+              self.service.orderCenter
+                .orderInterception(param)
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/orderInterception', param)
+                .then(res => {
+                  if (res.data.code === 0) {
+                    self.$Message.success(res.data.message);
+                    self.getData();
+                    self.selection = [];
+                  } else {
+                    self.$Modal.error({
+                      title: $it('mT.tips'), // 提示
+                      content: res.data.message,
+                      cancelType: true,
+                      titleAlign: 'left',
+                      mask: true,
+                      draggable: true,
+                      keyDown: event => {
+                        if (event.keyCode == 27 || event.keyCode == 13) {
+                          self.$Modal.remove();
+                        }
+                      }
+                    });
+                  }
+                  self.btnConfig.loading = false;
+                });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.b1'), // 请选择需要拦截的记录！
+                duration: 5,
+                top: 80
+              });
+            }
+          } // 按钮点击事件
+        },
+        {
+          webname: 'OrderDeliveryUrgent' // 加急发货
+        },
+        {
+          text: $it('btn.splitOrder'), // 拆分订单
+          webname: 'Split the order',
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length === 1) {
+              this.service.orderCenter.querySkuListAndStorageInfo({ orderId: self.selection[0].ID }).then(res => {
+                // 提前判断下该单据是否可拆单
+                if (res.data.code == 0) {
+                  if ((self.selection[0].PLATFORM === 4 && self.selection[0].PAY_TYPE === 2) || self.selection[0].PLATFORM === 7) {
+                    self.$Message.warning({
+                      content: $it('tip.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
+                      duration: 5,
+                      top: 80
+                    });
+                    return;
+                  }
+                  if (self.selection[0].IS_INRETURNING === 1 || self.selection[0].IS_INTERECEPT === 1) {
+                    self.$Message.warning({
+                      content: $it('tip.b2'), // 拦截、退款中的订单不允许拆单！
+                      duration: 5,
+                      top: 80
+                    });
+                    return;
+                  }
+                  if (self.selection[0].ORDER_STATUS === self.orderStatus.orderUnconfirmed || self.selection[0].ORDER_STATUS === self.orderStatus.orderOutofstock) {
+                    self.$store.commit('customize/TabHref', {
+                      id: self.selection[0].ID,
+                      type: 'action',
+                      name: 'splitOrder',
+                      label: $it('pL.orderSplit'), // 订单拆分
+                      query: {
+                        id: self.selection[0].ID,
+                        tabTitle: $it('pL.orderSplit') // 订单拆分
+                      }
+                    });
+                  } else {
+                    self.$Message.warning({
+                      content: $it('tip.b3'), // 只允许拆分待审核和缺货状态的订单！
+                      duration: 5,
+                      top: 80
+                    });
+                  }
+                } else {
+                  this.$Message.warning(res.data.message);
+                }
+              });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.b4'), // 一次只能对一个订单进行拆分！
+                duration: 5,
+                top: 80
+              });
+            }
+          } // 按钮点击事件
+        },
+        // {
+        //   text: "添加赠品", //按钮文本
+        //   btnclick: () => {
+        //     let self = this;
+        //     self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        //     if (self.selection.length > 0) {
+        //       self.btnConfig.loading = true;
+        //       let ids = [];
+        //       let isAddGit = true;
+        //       self.selection.forEach((item, index) => {
+        //         ids[index] = item.ID;
+        //         if (item.PLATFORM === 50) {
+        //           isAddGit = false;
+        //         }
+        //       });
+        //       if (!isAddGit) {
+        //         self.$Message.warning({
+        //           content: "选择的订单中存在JITX订单, 不允许添加赠品！",
+        //           duration: 5,
+        //           top: 80
+        //         });
+        //         return;
+        //       }
+        //       let param = {
+        //         ids: ids
+        //       };
+        //       axios({
+        //         url: "/api/cs/oc/oms/v1/checkGit",
+        //         method: "post",
+        //         cancelToken: true,
+        //         data: param
+        //       }).then(function (res) {
+        //         if (res.data.code === 0) {
+        //           self.publicBouncedConfig =
+        //             publicDialogConfig.addGiftsConfig;
+        //           self.publicBouncedConfig.componentData = {
+        //             objid: ids
+        //           };
+        //           setTimeout(() => {
+        //             self.$children
+        //               .find(item => item.name === "addGifts")
+        //               .openConfirm();
+        //           }, 100);
+        //         } else {
+        //           self.$Modal.error({
+        //             title: $it('mT.tips'),//提示,
+        //             content: res.data.message,
+        //             cancelType: true,
+        //             titleAlign: "left",
+        //             mask: true,
+        //             draggable: true,
+        //             keyDown: event => {
+        //               if (event.keyCode == 27 || event.keyCode == 13) {
+        //                 self.$Modal.remove();
+        //               }
+        //             }
+        //           });
+        //         }
+        //         self.btnConfig.loading = false;
+        //       });
+        //     } else {
+        //       self.$Message.warning({
+        //         content: "请选择需要添加赠品的记录！",
+        //         duration: 5,
+        //         top: 80
+        //       });
+        //     }
+        //   } //按钮点击事件
+        // },
+        {
+          text: $it('btn.new_chargeback'), // 新增退单
+          webname: 'New refund receipt',
+          // 新增退单跳转页面
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length === 0) {
+              self.$Message.warning({
+                content: $it('tip.b5'), // 请选择需要新增退单记录！
+                duration: 5,
+                top: 80
+              });
+              return;
+            }
+            if (self.selection.length > 1) {
+              self.$Message.warning({
+                content: $it('tip.b6'), // 请选择一条记录！
+                duration: 5,
+                top: 80
+              });
+              return;
+            }
+            // 已取消，系统作废
+            if (self.selection[0].ORDER_STATUS == 7 || self.selection[0].ORDER_STATUS == 8) {
+              self.$Message.warning({
+                content: `${self.selection[0].ID}${$it('tip.b7')}`, // 订单需要生成退换货单的订单状态不能已取消、系统作废！
+                duration: 5,
+                top: 80
+              });
+              return;
+            }
+            // “待分配”、“待审核”、“缺货”、“已审核”、“传WMS中”、“配货中
+            if (self.selection[0].ORDER_STATUS == 1 || self.selection[0].ORDER_STATUS == 2 || self.selection[0].ORDER_STATUS == 3 || self.selection[0].ORDER_STATUS == 4 || self.selection[0].ORDER_STATUS == 50 || self.selection[0].ORDER_STATUS == 21) {
+              self.$Message.warning({
+                content: `${self.selection[0].ID}${$it('tip.b8')}`, // 订单需要发货后才能新增退单!
+                duration: 5,
+                top: 80
+              });
+              return;
+            }
+            // self.$store.commit('customize/('TabOpen', {
+            //   id: -1,
+            //   type: 'action',
+            //   name: 'returngood',
+            //   label: '退换货单新增',
+            //   query: {
+            //     id: -1,
+            //     orderHrefReturnid: self.selection[0].ID,
+            //     isOrderHrefReturn: 'order',
+            //     tabTitle: '退换货单新增',
+            //   },
+            // })
+
+            self.$store.commit('customize/TabOpen', {
+              id: -1,
+              type: 'action',
+              name: 'returngood',
+              label: $it('pL.addReturnOrder'), // 退换货单新增
+              query: {
+                id: -1,
+                orderHrefReturnid: self.selection[0].ID,
+                isOrderHrefReturn: 'order',
+                tabTitle: $it('pL.addReturnOrder') // 退换货单新增
+              }
+            });
+            // self.selection = [];
+          } // 按钮点击事件
+        },
+        {
+          webname: 'Amendment Notes' // 批量修改备注
+        },
+        // {
+        //   text: "工单", //按钮文本
+        //   btnclick: () => {} //按钮点击事件
+        // },
+        {
+          text: $it('btn.beOut_of_stock'), // 缺货重新占单
+          webname: 'Out-of-stock reopening',
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length > 0) {
+              self.btnConfig.loading = true;
+              const ids = [];
+              self.selection.forEach((item, index) => {
+                ids[index] = item.ID;
+              });
+              self.service.orderCenter
+                .queryshortagSearchOrder({ ids })
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/queryshortagSearchOrder', { ids })
+                .then(res => {
+                  if (res.data.code === 0) {
+                    self.$Message.success(res.data.message);
+                    self.getData();
+                    self.selection = [];
+                  } else {
+                    self.$Modal.error({
+                      title: $it('mT.tips'), // 提示
+                      content: res.data.message,
+                      cancelType: true,
+                      titleAlign: 'left',
+                      mask: true,
+                      draggable: true,
+                      keyDown: event => {
+                        if (event.keyCode == 27 || event.keyCode == 13) {
+                          self.$Modal.remove();
+                        }
+                      }
+                    });
+                  }
+                  self.btnConfig.loading = false;
+                });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.b9'),
+                duration: 5,
+                top: 80
+              });
+            }
+          } // 按钮点击事件
+        },
+        {
+          text: $it('btn.fubaoOut_of_stock'), // 福袋缺货重新占单
+          webname: 'FortuneBag-Out-of-stock reopening',
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length > 0) {
+              self.btnConfig.loading = true;
+              const ids = [];
+              self.selection.forEach((item, index) => {
+                ids[index] = item.ID;
+              });
+              self.service.orderCenter
+                .queryFortuneBagShortage({ ids })
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/queryFortuneBagShortage', { ids })
+                .then(res => {
+                  if (res.data.code === 0) {
+                    self.$Message.success(res.data.message);
+                    self.getData();
+                    self.selection = [];
+                  } else {
+                    self.$Modal.error({
+                      title: $it('mT.tips'), // 提示
+                      content: res.data.message,
+                      cancelType: true,
+                      titleAlign: 'left',
+                      mask: true,
+                      draggable: true,
+                      keyDown: event => {
+                        if (event.keyCode == 27 || event.keyCode == 13) {
+                          self.$Modal.remove();
+                        }
+                      }
+                    });
+                  }
+                  self.btnConfig.loading = false;
+                });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.c0'), // 请选择需要福袋缺货重新占单的记录！
+                duration: 5,
+                top: 80
+              });
+            }
+          } // 按钮点击事件
+        },
+        // {
+        //   text: "复制订单", //按钮文本
+        //   btnclick: () => {
+        //     let self = this;
+        //     self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+        //     if (self.selection.length === 1) {
+        //       let query = {
+        //         copyOrder: true,
+        //         id: self.selection[0].ID
+        //       };
+        //       self.$store.commit("customize/TabHref", {
+        //         id: -1,
+        //         type: "action",
+        //         name: "orderManageAdd",
+        //         label: "零售发货单新增",
+        //         query: query
+        //       });
+        //     } else {
+        //       self.$Message.warning({
+        //         content: "请选择一条需要复制的订单！",
+        //         duration: 5,
+        //         top: 80
+        //       });
+        //     }
+        //   } //按钮点击事件
+        // },
+        /* {
+          text: $it('btn.copyOrder') // 复制订单
+        }, */
+        {
+          webname: 'OrderWrongCopy' // 错发复制
+        },
+        {
+          webname: 'OrderMissSendCopy' // 漏发复制
+        },
+        {
+          webname: 'OrderGiftsOutCopy' // 赠品出库复制
+        },
+        {
+          webname: 'oriInvalidCopy' // 原单无效复制
+        },
+        {
+          text: $it('btn.note_import'), // 备注导入
+          webname: 'beizhudaoru',
+          btnclick: () => {
+            const _this = this;
+            _this.importTable.componentData = {
+              tableName: 'OUT_OF_STOCK_MEMO'
+            };
+            _this.importTable.confirmTitle = $it('btn.note_import');
+            _this.$children.find(item => item.name === 'importTable').openConfirm();
+          } // 按钮点击事件
+        },
+        // {
+        //   text: "重新分配快递", //按钮文本
+        //   btnclick: () => {
+        //     this.distributeLogisticsModal = true;
+        //   } //按钮点击事件
+        // },
+        // {
+        //   text: "重新分配仓库", //按钮文本
+        //   btnclick: () => {
+        //     this.distributeWarehouseModal = true;
+        //   } //按钮点击事件
+        // },
+        {
+          text: $it('btn.changeTo_platformShipment'), // 更改为平台发货
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length > 0) {
+              self.btnConfig.loading = true;
+              const ids = [];
+              self.selection.forEach((item, index) => {
+                ids[index] = item.ID;
+              });
+              const param = {
+                ids
+              };
+              self.service.orderCenter
+                .doManualDeliveryOrder(param)
+                // self.$network
+                //   .post('/api/cs/oc/oms/v1/doManualDeliveryOrder', param)
+                .then(res => {
+                  if (res.data.code === 0) {
+                    self.$Message.success(res.data.message);
+                    self.getData();
+                    self.selection = [];
+                  } else {
+                    self.$Modal.error({
+                      title: $it('mT.tips'), // 提示,//提示
+                      content: res.data.message,
+                      cancelType: true,
+                      titleAlign: 'left',
+                      mask: true,
+                      draggable: true,
+                      keyDown: event => {
+                        if (event.keyCode === 27 || event.keyCode === 13) {
+                          self.$Modal.remove();
+                        }
+                      }
+                    });
+                  }
+                  self.btnConfig.loading = false;
+                });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.c1'), // 请选择需要更改为平台发货的记录!
+                duration: 5,
+                top: 80
+              });
+            }
+          }
+        },
+        /* {
+          text: $it('btn.batchModifyGoods') // 批量改商品
+        }, */
+        {
+          webname: 'order_gh' // 替换商品
+        },
+        {
+          webname: 'Adding gifts' // 添加赠品
+        },
+        {
+          webname: 'Delete_Merchandise' // 删除赠品
+        },
+        /* {
+          text: $it('btn.batchSplitOrder') // 批量拆单
+        }, */
+        {
+          webname: 'appointSplit' // 指定商品拆单
+        },
+        {
+          webname: 'shortageSplit' // 缺货拆单
+        },
+        {
+          // text: $it('btn.batch_chargeback'), // 批量退单
+          webname: 'batchReturnOrder',
+          btnclick: () => {
+            const self = this;
+            if (self.selection.length > 0) {
+              try {
+                self.checkBatchReturnOrder(self.selection);
+              } catch (err) {
+                self.$Message.error(err.message);
+                return;
+              }
+              self.batchReturnOrderModal = true;
+            } else {
+              self.$Message.warning({
+                content: $it('tip.c2'), // 请选择需要批量退单的记录！
+                duration: 5,
+                top: 80
+              });
+            }
+          }
+        },
+        {
+          text: $it('btn.release_inventory'), // 释放库存
+          btnclick: () => {
+            const self = this;
+            const ids = [];
+            let statusFlag = false;
+            if (self.selection.length > 0) {
+              self.selection.forEach((item, index) => {
+                ids[index] = item.ID;
+                if (item.ORDER_STATUS != 1) {
+                  statusFlag = true;
+                }
+              });
+              if (statusFlag) {
+                self.$Message.warning({
+                  content: $it('tip.c3'), // 选择的订单中存在非待审核订单, 不允许释放库存！
+                  duration: 5,
+                  top: 80
+                });
+                return;
+              }
+              self.btnConfig.loading = true;
+              this.$Modal.info({
+                title: $it('mT.tips'), // 提示,
+                content: $it('tip.c4'), // 是否确定将选择的订单占用的库存释放？
+                mask: true,
+                showCancel: true,
+                okText: $it('com.determine'), // 确定
+                cancelText: $it('com.cancel'), // 取消
+                onCancel: () => {
+                  self.service.orderCenter
+                    .releaseInventory({ ids })
+                    // self.$network
+                    //   .post('/p/cs/releaseInventory', { ids })
+                    .then(res => {
+                      if (res.data.code === 0) {
+                        self.$Message.success(res.data.message);
+                        self.getData();
+                        self.selection = [];
+                      } else {
+                        self.$Modal.error({
+                          title: $it('mT.tips'), // 提示,
+                          content: res.data.message,
+                          cancelType: true,
+                          titleAlign: 'left',
+                          mask: true,
+                          draggable: true,
+                          keyDown: event => {
+                            if (event.keyCode === 27 || event.keyCode === 13) {
+                              self.$Modal.remove();
+                            }
+                          }
+                        });
+                      }
+                      self.btnConfig.loading = false;
+                    });
+                },
+                onOk: () => {
+                  self.btnConfig.loading = false;
+                }
+              });
+            } else {
+              self.$Message.warning({
+                content: $it('tip.c'), // 请选择需要库存释放的订单！
+                duration: 5,
+                top: 80
+              });
+            }
+          } // 按钮点击事件
+        },
+        {
+          // text: $it('btn.mergeOrders'), // 合并订单
+          webname: 'mergeOrderOne',
+          btnclick: () => {
+            this.existMergableOrder('mergeOrder');
+          }
+        },
+        {
+          text: $it('btn.cancel_mergeOrders'), // 取消合并订单
+          webname: 'cancelMergeOrder',
+          btnclick: () => {
+            this.cancelMergeOrder();
+          }
+        },
+        {
+          webname: 'OcBOrderImportCmd', // 导入
+          webid: 3025
+        },
+        {
+          webname: 'OcBOrderExportCmd', // 导出
+          btnclick: () => {
+            this.exportClick();
+          } // 按钮点击事件
+        }, {
+          webname: 'createPayableAdjustment', // 生成赔付单
+          btnclick: () => {
+            this.generateToPaySingle();
+          } // 按钮点击事件
+        },
+        {
+          icon: 'iconfont iconbj_setup', // 按钮图标
+          btnclick: () => {
+            const self = this;
+            // if (self.iconDownIcon === 'ark-icon iconfont iconios-arrow-down') {
+            //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-up';
+            // } else {
+            //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
+            // }
+            self.isShowSeniorOrOrdinary = true;
+            publicDialogConfig.dropSortConfig.confirmTitle = '查询条件设置'
+            self.publicBouncedConfig = {
+              ...publicDialogConfig.dropSortConfig
+            };
+            self.publicBouncedConfig.componentData = {
+              typeName: 'OC_B_ORDER'
+            };
+            setTimeout(() => {
+              self.$children.find(item => item.name === 'setFormDrag').openConfirm();
+            }, 100);
+          } // 按钮点击事件
+        },
+        {
+          icon: 'iconfont iconbj_col', // 收藏图标
+          name: $it('btn.collection'),
+          btnclick: () => {
+            const self = this;
+            self.setFavorite();
+          } // 按钮点击事件
+        },
+        {
           label: '标签', // 标签字段名称
           column: 'tag', // 标签字段
           trigger: '', // 触发方式
@@ -380,13 +1342,20 @@ export default {
             {
               text: '查找', // 按钮文本
               btnclick: () => {
-                // this.loadData();
+                this.loadData();
               } // 按钮点击事件
             },
             {
               text: '重置', // 按钮文本
               type: 'default',
-              btnclick: () => {} // 按钮点击事件
+              btnclick: () => {
+                const _this = this;
+                _this.clearFromListValue = true;
+                _this.queryInfoData = [];
+                _this.labelData = [];
+                _this.highSearchData = [];
+                _this.getHeaderList();
+              } // 按钮点击事件
             }
           ]
         },
@@ -444,13 +1413,15 @@ export default {
     // this.getSearchData();
     // 获取from数据
     // this.getFromData();
-    debugger
     console.log('---btnConfig::', this.btnConfig);
     const _this = this;
+    // const buttons = _this.$OMS2.BtnConfig.config();
+    _this.btnConfig.buttons = [..._this.btnConfig.buttons, ..._this.extendBtn];
     _this.getHeaderList();
     _this.$nextTick(() => {
       _this.getPermissions('btnConfig', 'orderManager');
     });
+    console.log('---btnConfig22::', this.btnConfig);
     // 计算高度 通过设置节点 'totalHeight'
     $utils.setTableHeight(_this, 80);
 
@@ -1611,7 +2582,8 @@ export default {
             });
             return;
           }
-          res.data.data = JSON.parse($BC.Utils.unzip(res.data.data));
+          // res.data.data = JSON.parse($BC.Utils.unzip(res.data.data));
+          res.data.data = JSON.parse(unzipXv(res.data.data));
           if (res.data.code === 0) {
             if (!res.data.data) {
               self.agTableConfig.pagenation.total = 0;
