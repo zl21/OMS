@@ -80,12 +80,7 @@ export default {
           CP_C_PHY_WAREHOUSE_ID: [],
         }
       }, // 基本信息
-    };
-  },
-  watch: {},
-  computed: {
-    btnConfig() {
-      return {
+      btnConfig: {
         typeAll: 'default',
         buttons: [
           {
@@ -125,19 +120,23 @@ export default {
             },
           },
           {
-            icon: `iconfont ${this.isFavorite ? 'iconbj_alrcol' : 'iconbj_col'} font-size-12`, // 按钮图标
+            icon: 'iconfont iconbj_col', // 按钮图标
+            webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
             size: 'small', // 按钮大小
             name: $it('btn.collection'), // 收藏
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              this.setFavorite2();
+              this.setFavorite();
             } // 按钮点击事件
           }
 
         ]
 
       }
-    }
+    };
+  },
+  watch: {},
+  computed: {
   },
   mounted() {
     // this.$next
