@@ -130,13 +130,13 @@ export default {
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         buttons: [
-          {
-            webname: 'lookup_yingfukuantiaozhengdan', // 查找
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.find();
-            } // 按钮点击事件
-          },
+          // {
+          //   webname: 'lookup_yingfukuantiaozhengdan', // 查找
+          //   disabled: false, // 按钮禁用控制
+          //   btnclick: () => {
+          //     this.find();
+          //   } // 按钮点击事件
+          // },
           {
             webname: 'Newlyadded_yingfukuantiaozhengdan', // 新增
             disabled: false, // 按钮禁用控制
@@ -223,6 +223,29 @@ export default {
         ]
       }, // 按钮数据
       formConfig: {
+        btn: {
+          buttons: [
+            {
+              text: $it('btn.find'), // 查找
+              webname: 'lookup_tuihuanhuo',
+              type: 'error',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+                this.find();
+              } // 按钮点击事件
+            },
+            {
+              text: $it('btn.reset'), // 重置
+              webname: 'lookup_chongzhi',
+              disabled: false, // 按钮禁用控制
+              btnclick: () => {
+              } // 按钮点击事件
+            },
+          ]
+        },
+        iconSite: 'bottomCenter',
+        // setColnum: 4, // 4列
+        // setRow: 3, // 3行
         formData: [
           {
             style: 'input', // 文本录入
@@ -476,7 +499,6 @@ export default {
         ],
         formValue: {},
         flodClick(v) {
-          strUtil.flodClick(v)
         }
       }, // form表单
       labelList: [
