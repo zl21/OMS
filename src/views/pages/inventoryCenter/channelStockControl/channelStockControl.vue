@@ -100,33 +100,35 @@
               </div>
             </div>
             <!--库存来源配置区-->
-            <Collapse v-model="collapseShow" class="mg-tp-15">
-              <Panel name="1">
-                {{ $it('pL.b8') }}<!--配销仓-->
-                <div slot="content" class="">
-                  <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>
-                  <div class="pd-tp-10">
-                    <Page :total="page2.total" show-total
-                          :current="page2.current"
-                          :page-size="page2.pageSize"
-                          :page-size-opts="page2.pageSizeOpts"
-                          size="small"
-                          show-elevator show-sizer
-                          class-name=" flex flex-direction-row align-items-center justify-content-center"
-                          :transfer="true"
-                          @on-change="pageChange2"
-                          @on-page-size-change="pageSizeChange2"
-                    />
+            <div class="obj-main">
+              <Collapse v-model="collapseShow" class="mg-tp-15">
+                <Panel name="1">
+                  {{ $it('pL.b8') }}<!--配销仓-->
+                  <div slot="content" class="">
+                    <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>
+                    <div class="pd-tp-10">
+                      <Page :total="page2.total" show-total
+                            :current="page2.current"
+                            :page-size="page2.pageSize"
+                            :page-size-opts="page2.pageSizeOpts"
+                            size="small"
+                            show-elevator show-sizer
+                            class-name=" flex flex-direction-row align-items-center justify-content-center"
+                            :transfer="true"
+                            @on-change="pageChange2"
+                            @on-page-size-change="pageSizeChange2"
+                      />
+                    </div>
                   </div>
-                </div>
-              </Panel>
-              <Panel name="2">
-                {{ $it('pL.b9') }}<!--共享池-->
-                <div slot="content" class="">
-                  <Table border :columns="columns3" :data="data3"></Table>
-                </div>
-              </Panel>
-            </Collapse>
+                </Panel>
+                <Panel name="2">
+                  {{ $it('pL.b9') }}<!--共享池-->
+                  <div slot="content" class="">
+                    <Table border :columns="columns3" :data="data3"></Table>
+                  </div>
+                </Panel>
+              </Collapse>
+            </div>
             <!--<div class="br-d3d3d3 mg-tp-15 pd-10">
               <div>
                 <Table class="" border :columns="columns2" :data="data2" :loading="table2Loading"></Table>

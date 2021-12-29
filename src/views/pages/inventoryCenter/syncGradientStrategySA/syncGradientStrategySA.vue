@@ -27,8 +27,8 @@
             <div class="flex flex-direction-row justify-content-space-between align-items-center mg-tp-10 mg-bt-6">
               <div v-if="isActive" class="flex flex-direction-row align-items-center">
                 <a
-                    @click="delFun2(multipleSelection1,tab1tableName,1)">【【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
-                <a  @click="saveFun(2)">【{{$it('btn.saveDraft')}}】</a> <!--保存-->
+                    @click="delFun2(multipleSelection1,tab1tableName,1)">【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
+                <a  @click="saveFun(2)">【{{$it('btn.save')}}】</a> <!--保存-->
               </div>
             </div>
             <Table ref="table1" border highlight-row
@@ -57,7 +57,7 @@
                 />
                 <a v-if="isActive"
                    @click="delFun2(multipleSelection2,tab2tableName,2)">【{{$it('mT.deleteDetails')}}】</a> <!--删除明细-->
-                <a v-if="isActive"  @click="saveFun(3)">【{{$it('btn.saveDraft')}}】</a> <!--保存-->
+                <a v-if="isActive"  @click="saveFun(3)">【{{$it('btn.save')}}】</a> <!--保存-->
               </div>
             </div>
             <Table ref="table1" border

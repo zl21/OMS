@@ -95,6 +95,7 @@ export default {
       ] : []
       const btnConfig = {
         typeAll: 'default',
+        btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           ...btns,
           ...invalid,
@@ -346,7 +347,7 @@ export default {
         return
       }
       this.$confirm(
-        $it('tip.lk'), // 确认执行作废？
+        $it('tip.lv'), // 确认执行删除？
         $it('mT.warning'), {
         confirmButtonText:  $it('com.determine'), // 确定
         cancelButtonText: $it('com.cancel'), //取消
@@ -617,7 +618,7 @@ export default {
          label: '配销仓库存梯度策略', //  tab中文名
        });
        this.$destroy();*/
-      this.$comUtils.tabCloseAppoint(this);
+      $omsUtils.tabCloseAppoint(this);
       this.$destroy(true);
       this.$store.commit('global/tabOpen', {
         tableId: 249231069,
