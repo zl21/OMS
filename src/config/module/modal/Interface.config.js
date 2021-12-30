@@ -35,4 +35,12 @@ export default {
   AbnormalImportSku: {
     component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
   },
+  // 接口平台-京东接口-SKU异常导入
+  JngDongAbnormalImportSku: {
+    component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
+  },
+  // 接口平台-通用接口-SKU异常导入
+  GeneralAbnormalImportSku: {
+    component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
+  },
 };
