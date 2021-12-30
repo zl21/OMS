@@ -758,13 +758,13 @@ export default {
       // if (status) {
       //   _this.formConfig.formValue.RETURN_STATUS = [status];
       // }
-      const Obj = _this.formConfig.formValue;
-      let keyArr = ['INVENTED_STATUS', 'BILL_TYPE', 'RETURN_STATUS', 'IS_TOWMS', 'WMS_CANCEL_STATUS', 'IS_ADD',
-        'IS_TOAG', 'IS_BACK', 'STATUS_DEFECTIVE_TRANS', 'IS_RESERVED'];
-      keyArr.some((item) => {
-        Obj[item] = (Obj[item]?.[0] === 'bSelect-all') && '';
-        return true;
-      })
+      // const Obj = _this.formConfig.formValue;
+      // let keyArr = ['INVENTED_STATUS', 'BILL_TYPE', 'RETURN_STATUS', 'IS_TOWMS', 'WMS_CANCEL_STATUS', 'IS_ADD',
+      //   'IS_TOAG', 'IS_BACK', 'STATUS_DEFECTIVE_TRANS', 'IS_RESERVED'];
+      // keyArr.some((item) => {
+      //   Obj[item] = (Obj[item]?.[0] === 'bSelect-all') && '';
+      //   return true;
+      // })
       // const arr = document.getElementsByClassName('ark-input');
 
       // 防止多次连续多次点击回车，去除焦点
