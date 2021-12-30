@@ -945,7 +945,7 @@ export default {
     this.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
     const buttons = this.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...buttons.buttons, ...this.extendBtn];
-    $omsUtils.getPermissions('btnConfig', 'orderManager');
+    // this.getPermissions('btnConfig', 'orderManager');
     await this.getDetailsData();
   },
 };

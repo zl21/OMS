@@ -217,7 +217,7 @@ export default {
     replaceGoodsDetail() {
       if (this.checkSelection.length !== 1) {
         // 请选择一条需要替换的明细!
-        this.$Message.warning(this.vmI18n.t('tip.dv'));
+        this.$Message.warning($it('tip.dv'));
         return;
       }
       this.$emit('replaceGoodsDetail', this.checkSelection);

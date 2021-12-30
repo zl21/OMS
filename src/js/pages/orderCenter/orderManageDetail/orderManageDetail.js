@@ -943,19 +943,19 @@ export default {
       self.orderStatus = selectItem.ORDER_STATUS;
       if (selectItem.COPY_REASON) {
         // 订单只能是原单才能复制!
-        self.$Message.warning(this.vmI18n.t('tip.a2'));
+        self.$Message.warning($it('tip.a2'));
         return;
       }
       if (type === 'oriInvalidCopy') {
         // 已取消  系统作废
         if (self.orderStatus != 7 && self.orderStatus != 8) {
-          self.$Message.error(this.vmI18n.t('tip.a3'));
+          self.$Message.error($it('tip.a3'));
           return;
         }
         // 仓库发货&&平台发货
       } else if (self.orderStatus !== 6 && self.orderStatus !== 5) {
         // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
-        self.$Message.error(this.vmI18n.t('tip.a4'));
+        self.$Message.error($it('tip.a4'));
         return;
       }
       // 默认是丢单复制的query
@@ -1009,7 +1009,7 @@ export default {
           this.pageLoad = false;
           if (res.data && res.data.code === 0) {
             const resData = res.data.data;
-            resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null ? this.vmI18n.t('com.no') : this.vmI18n.t('com.yes');
+            resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null ? $it('com.no') : $it('com.yes');
             const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
             this.tab1.order = resData;
@@ -1024,7 +1024,7 @@ export default {
           } else {
             this.tab1 = this.tab1_default;
             // 订单详情获取失败
-            this.$message.error(this.vmI18n.t('tip.h3'));
+            this.$message.error($it('tip.h3'));
           }
         })
         .catch(() => {
