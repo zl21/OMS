@@ -158,7 +158,8 @@ export default {
       isActive: true, // 商品编码搜索框是否显示 true为显示,false隐藏
       value1: ['1', '2', '3'],
       btnConfig: {
-        typeAll: 'error',
+        typeAll: 'default',
+        btnsite: 'right',
         loading: false,
         buttons: [
           {

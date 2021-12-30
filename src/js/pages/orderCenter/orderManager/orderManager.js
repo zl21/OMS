@@ -340,26 +340,26 @@ export default {
         buttons: []
       },
       extendBtn: [
-        {
-          text: '查找', // 查找
-          type: 'error',
-          webname: 'queryList',
-          btnclick: () => {
-            this.loadData();
-          } // 按钮点击事件
-        },
-        {
-          text: '重置', // 重置
-          webname: 'Reset',
-          btnclick: () => {
-            const _this = this;
-            _this.clearFromListValue = true;
-            _this.queryInfoData = [];
-            _this.labelData = [];
-            _this.highSearchData = [];
-            _this.getHeaderList();
-          } // 按钮点击事件
-        },
+        // {
+        //   text: '查找', // 查找
+        //   type: 'error',
+        //   webname: 'queryList',
+        //   btnclick: () => {
+        //     this.loadData();
+        //   } // 按钮点击事件
+        // },
+        // {
+        //   text: '重置', // 重置
+        //   webname: 'Reset',
+        //   btnclick: () => {
+        //     const _this = this;
+        //     _this.clearFromListValue = true;
+        //     _this.queryInfoData = [];
+        //     _this.labelData = [];
+        //     _this.highSearchData = [];
+        //     _this.getHeaderList();
+        //   } // 按钮点击事件
+        // },
         {
           webname: 'BatchOrderUnDeliveryUrgent', //批量取消加急
           btnclick: () => {

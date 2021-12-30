@@ -7,12 +7,12 @@
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
 -->
 <template>
-  <div class="customized-detail orderManageDetails" v-loading="loading">
+  <div class="customized-detail orderManageDetails" v-loading="pageLoad">
     <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="obj-main">
-      <div class="Step-Box">
+      <!-- <div class="Step-Box">
         <Steps class="steps-content">
           <Step
             v-for="(item, index) in steps"
@@ -23,7 +23,7 @@
             :status="item.status"
           />
         </Steps>
-      </div>
+      </div> -->
       <div class="customized-detail-label">
         <OmsLabel
           :label-default-value="labelDefaultValue"
@@ -942,10 +942,10 @@ export default {
     BtnConfig.target = this;
     BtnConfig.singleType = 1;
 
-    self.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
-    const buttons = self.$OMS2.BtnConfig.config();
-    self.btnConfig.buttons = [...buttons.buttons, ...self.extendBtn];
-    $omsUtils.getPermissions(self, 'btnConfig');
+    this.btnConfig.buttons = []; // 清空按钮缓存,防止重复叠加按钮
+    const buttons = this.$OMS2.BtnConfig.config();
+    this.btnConfig.buttons = [...buttons.buttons, ...this.extendBtn];
+    $omsUtils.getPermissions('btnConfig', 'orderManager');
     await this.getDetailsData();
   },
 };

@@ -269,4 +269,7 @@ export default {  //
 
   queryAutoCheckLog: params =>
     $network.post('/p/cs/st/v1/queryAutoCheckLog', params),
+  // 订单自动审核策略-批量修改
+  batchUpdateAutoCheck: params => 
+    $network.post('/p/cs/st/v1/batchUpdateAutoCheck' , params)
 }

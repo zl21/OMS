@@ -1,267 +1,113 @@
 @import '~@burgeon/oms-theme/skin/public.less';
+// @import '~@/assets/css/css_1_3/common.less'; // 覆盖框架原主题
 
 .order-content-tab {
-  .order-content-top{
-    display: grid;
-    grid-template-columns: 35% 65%;
-  }
-  .ark-col{
-    // margin-top: 0;
-  }
   .order-tab-content {
-    border-radius: @base-radius;
+    margin-top: 10px;
     overflow: auto;
-    background: #fff;
-    padding:0  @base-mr;
-    &.order-tab-left{
-      position: relative;
-      &::before{
-        height: 90%;
-        content: '';
-        display: inline-block;
-        position: absolute;
-        right: 0;
-        top: 5%;
-        border-right: 1px dashed #DBDDE8;
-      }
-    }
     .order-tab-title {
       position: relative;
-      padding-left:  @base-mr - 2px;
-      height: 48px;
-      line-height:  48px;
+      padding-left: 20px;
+      height: 40px;
+      line-height: 40px;
       font-weight: 400;
       font-size: 14px;
-      color: #292F43;
-      .order-tab-title-span{
-        display: inline-block;
-        max-width: 150px;
-        vertical-align: middle;
-        #bundle > .points
-      }
-      &.border{
-        margin-top: 5px;
-        border-top: 1px solid #f2f2f2;
-      }
+      background: #f7f8fa;
       &:after{
         position: absolute;
         top: 50%;
-        left: 0;
+        left: 6px;
         transform: translateY(-50%);
         display: block;
         content: '';
-        width: 4px;
-        height: 16px;
-        border-radius: 3px;
+        width: 10px;
+        height: 3px;
         background: @base-color;
       }
-      .title-right{
-        display: grid;
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 48px;
-        line-height: 48px;
-        grid-template-columns: 60px 100px;
-        font-size: 12px;
-        color: @base-color;
-        grid-column-gap: 10px;
-        p{
-          #bundle > .points;
-          text-align: right;
-          cursor: pointer;
-          label{
-            cursor: pointer;
-          }
-        }
-      }
-      .title-sign{
-        display: inline-block;
-        height: 48px;
-        line-height: 48px;
-        margin-left: 10px;
-        vertical-align: middle;
-        span{
-          font-size: 12px;
-          display: inline-block;
-          vertical-align: middle;
-          text-align: center;
-          padding: 0 5px;
-          margin: 0 5px;
-          height: 24px;
-          border: 1px solid #aeadb0;
-          line-height: 22px;
-          border-radius: 5px;
-        }
-      }
-      .checkCombination{
-        position: absolute;
-        right: 12px;
-        top: 0;
-        font-size: 12px;
-        color: @base-color;
-        span{
-          cursor: pointer;
-        }
-      }
     }
-    .order-item{
-      padding: 0;
-      /deep/ .businessButtons-box{
-        .button-combina{
-          padding-top: 0;
-          /deep/ .button-group{
-            padding-left: 0;
-          }
-        }
-        padding-bottom: 6px;
-      }
-    }
-    .order-tab-detail{
-      position: relative;
-      min-height: 220px;
-      // padding: 0 16px;
-      .detail-ul {
-        .detail-li{
-          height: 38px;
-          line-height: 38px;
-          display: grid;
-          grid-template-columns:65px calc(100% - 65px);
-          margin-top: 0;
-          label{
-            // text-align: right;
-            color: #8D91A1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          p{
-            margin-left: 2px;
-            color: #292f43;
-            overflow: hidden;
-            text-overflow:ellipsis; 
-            white-space: nowrap;
-            &.SOURCE_CODE,&.CP_C_SHOP_TITLE{
-              color: @base-color;
-            }
-            .edit{
-              vertical-align: middle; 
-              cursor: pointer;
-              color: @base-color;
-            }
-          }
-        }
-      }
-    }
-    .order-money{
-      display: grid;
-      grid-template-columns: 24px calc(60% - 24px) 40%;
-      align-items: center;
-      position: absolute;
-      left: 0;
-      bottom: 12px;
-      width: calc(100% - 16px);
-      .order-money-title{
-        background: rgba(69,96,171,0.16);
-        line-height: 24px;
-        letter-spacing: 2px;
-        text-align: center;
-        writing-mode: vertical-lr;
-        height: 80px;
-        color: rgba(84,97,184,0.60);
-        font-weight: bold;
-        #bundle > .points
-      }
-      .totalAmount{
-        grid-template-columns: repeat(4,auto 20px);
-        background-color: #F0F2F9;
-        height: 80px;
-        align-content: center;
-        li.symbol{
-          color: #c3c6d2;
-          font-size: 32px;
-        }
-      }
-      .amountActually{
-        grid-template-columns: repeat(3, auto);
-        background-color: #F5F7FB;
-        height: 80px;
-        align-content: center;
-      }
-      .totalAmount,.amountActually{
-        display: grid;
-        li{
-          display: grid;
-          align-items: center;
-          text-align: center;
-          justify-content: center;
-          label{
-            height: 25px;
-            line-height: 25px;
-            color: #8D91A1;
-            max-width: 120px;
-            #bundle .points;
-            /deep/ .ark-tooltip-rel{
-              top: -2px;
-            }
-            .iconios-alert-outline{
-              vertical-align: middle;
-              &:before{
-                font-weight: bold;
-                color: @base-color;
-              }
-            }
-          }
-          p{
-            font-size: 16px;
-            height: 25px;
-            line-height: 25px;
-            color: #ff6951;
-          }
-          &.resulf-text{
-            label{
-              font-weight: bold;
-              color: #292f43;
-            }
-            p{
-              font-weight: bold;
-            }
-          }
-        }
-      }
-    }
-  }
 
-  // color:;
-  .color_90BB57{
-    color:#90BB57 !important;
-  }
-  .color_ffae34{
-    color:#ffae34 !important;
-  }
-  .color_5461B8{
-    color:#5461B8 !important;
-  }
-  .color_99c2f1{
-    color:#99c2f1 !important;
-  }
-  .color_a375c1{
-    color:#a375c1 !important;
-  }
-  .color_ffae34{
-    color:#ffae34 !important;
-  }
-  .color_ff6951{
-    color:#ff6951 !important;
-  }
-  .color_99c2f1{
-    color:#99c2f1 !important;
-  }
-  .color_a375c1{
-    color:#a375c1 !important;
-  }
-  .color_90BB57{
-    color:#90BB57 !important;
+    .order-tab-detail {
+      position: relative;
+      padding: 15px 0;
+      ul {
+        display: flex;
+        flex-direction: row;
+        flex-flow: wrap;
+        li {
+          padding: 5px 0px;
+          display: flex;
+          width: 25%;
+          label {
+            min-width: 100px;
+            text-align: right;
+            color: #aeadb0;
+          }
+          p {
+            margin-left: 10px;
+            color: #0f3365;
+          }
+        }
+
+        .colsTwo {
+          width: 50%;
+        }
+      }
+    }
+
+    .order-tab-detail2 {
+      position: relative;
+      padding: 15px 0;
+      ul {
+        display: flex;
+
+        li {
+          text-align: center;
+          margin: 10px;
+          height: 40px;
+          line-height: 20px;
+
+          .red {
+            color: #f52f2f;
+          }
+
+          .blue {
+            color: blue;
+          }
+
+          .strong {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .order-tab-detail3 {
+      position: relative;
+      padding: 15px 0;
+      ul {
+        li {
+          margin: 10px;
+          display: flex;
+        }
+      }
+    }
+
+    ul {
+      li {
+        i {
+          width: 8px;
+          display: inline-block;
+          position: relative;
+          top: 3px;
+          right: 4px;
+          color: #f52f2f;
+        }
+        i.tooltip {
+          top: -1px;
+          right: 6px;
+        }
+      }
+    }
   }
 }
 .text-ellipsis {
@@ -269,4 +115,8 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.wordBr {
+  word-break: break-all;
+  word-wrap: break-word;
 }

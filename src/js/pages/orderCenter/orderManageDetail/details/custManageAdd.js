@@ -165,7 +165,7 @@ export default {
       const itemId = this.checkSelection.map(row => row.ID);
       // const changeGoodsSKu = this.checkSelection.map(row => row.PS_C_PRO_ECODE);
       // 至少选择一条订单明细
-      if (itemId.length === 0) return self.$Message.error(self.vmI18n.t('tip.zk'));
+      if (itemId.length === 0) return self.$Message.error($it('tip.zk'));
       const param = {
         ids: [self.objid],
         itemId,
@@ -173,10 +173,10 @@ export default {
       };
       const { data: { code, message } } = await this.service.orderCenter.batchDeleteGoods(param);
       if (code === 0) {
-        self.$Message.success(message || self.vmI18n.t('tip.ay'));
+        self.$Message.success(message || $it('tip.ay'));
         self.$parent.$parent.autoRefresh();
       } else {
-        self.$Message.error(message || self.vmI18n.t('tip.z3'));
+        self.$Message.error(message || $it('tip.z3'));
       }
     },
     // 标记退款
@@ -185,7 +185,7 @@ export default {
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
         // 至少选择一条订单明细
-        self.$Message.error(self.vmI18n.t('tip.zk'));
+        self.$Message.error($it('tip.zk'));
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.markrefund({ id: this.$route.params.customizedModuleId, itemIds: ids, ISJITX: 50 });
@@ -193,7 +193,7 @@ export default {
         self.$parent.$parent.load();
         self.$Message.success(message);
       } else {
-        self.$Message.error(self.vmI18n.t('tip.z3'));
+        self.$Message.error($it('tip.z3'));
       }
     },
     // 标记取消退款
@@ -202,7 +202,7 @@ export default {
       const ids = this.checkSelection.map(row => row.ID);
       if (ids.length === 0) {
         // 至少选择一条订单明细
-        self.$Message.error(self.vmI18n.t('tip.z3'));
+        self.$Message.error($it('tip.z3'));
         return;
       }
       const { data: { data: { code, message } } } = await this.service.orderCenter.markRefundCancel({ itemIds: ids.join(','), orderId: this.$route.params.customizedModuleId });
@@ -228,19 +228,19 @@ export default {
       const rows = this.selection.map(row => ({ ID: row.ID, SKU_ID: row.PS_C_SKU_ID }));
       if (rows.length === 0) {
         // 请选择一条订单明细
-        self.$Message.error(self.vmI18n.t('tip.dw'));
+        self.$Message.error($it('tip.dw'));
         return;
       }
       if (rows.length > 1) {
         // 只能一条订单明细
-        self.$Message.error(self.vmI18n.t('tip.dz'));
+        self.$Message.error($it('tip.dz'));
         return;
       }
       const { data: { code, message } } = await this.service.orderCenter.modifygoodscheck({ ID: rows[0].ID });
       if (code === 0) {
         self.BtnClickEvent({ name: 'CHANGESKU', rows });
       } else {
-        self.$Message.error(message || self.vmI18n.t('tip.z3'));
+        self.$Message.error(message || $it('tip.z3'));
       }
     },
     // 选中某一项时触发
@@ -316,7 +316,7 @@ export default {
       } else {
         self.tableConfig.loading = false;
         // 数据加载失败
-        this.$Message.error(self.vmI18n.t('tip.dx'));
+        this.$Message.error($it('tip.dx'));
       }
     },
     async getColumns() {
@@ -927,7 +927,7 @@ export default {
       const self = this;
       const obj = data.STANDARDS_LIST.find(item => item.COLOR_ID === data.PS_C_CLR_ID && item.SIZE_ID === data.PS_C_SIZE_ID);
       // 此商品中不存在该颜色和尺寸
-      if (!obj) return this.$Message.warning(self.vmI18n.t('tip.dy'));
+      if (!obj) return this.$Message.warning($it('tip.dy'));
       const oc_b_order_item_id = data.ID || -1;
       let param = {
         oc_b_order_item_id, // 行ID
@@ -950,7 +950,7 @@ export default {
         self.$Message.success(message || '成功');
         self.$emit('freshLoadChild');
       } else {
-        self.$Message.error(message || self.vmI18n.t('tip.z3'));
+        self.$Message.error(message || $it('tip.z3'));
       }
     }
   },

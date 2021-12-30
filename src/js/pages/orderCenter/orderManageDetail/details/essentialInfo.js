@@ -129,6 +129,11 @@ export default {
         //   label: '传SAP状态:'
         // },
         {
+          flag: false, // 需要加*
+          column: 'ORDER_TYPE_NAME',
+          label: '单据类型:'
+        },
+        {
           flag: false,
           width: '12',
           column: 'BUYER_MESSAGE',
@@ -149,6 +154,11 @@ export default {
           flag: false, // 需要加*
           column: 'DELIVERY_STORE_CODE',
           label: '发货门店编码:'
+        },
+        {
+          flag: false, // 需要加*
+          column: 'SG_B_OUT_BILL_NO',
+          label: '出库通知单:'
         }
       ],
       detail: [

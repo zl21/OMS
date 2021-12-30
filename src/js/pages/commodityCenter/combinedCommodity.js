@@ -1398,7 +1398,7 @@ export default {
         this.$Message.warning($it('tip.x9'));
         return;
       }
-      const flag1 = this.formConfig1.formData.forEach(ele => {
+      const flag1 = this.formConfig1.formData.filter(ele => {
         if (ele.itemdata && ele.itemdata.fkdisplay === 'drp') {
           return ele.itemdata.pid === '';
         }
@@ -1427,7 +1427,7 @@ export default {
         return;
       }
 
-      const flag2 = this.formConfig1.formData.forEach(ele => {
+      const flag2 = this.formConfig1.formData.filter(ele => {
         if (ele.itemdata && ele.itemdata.fkdisplay === 'mrp') {
           return ele.itemdata.pid === '';
         }

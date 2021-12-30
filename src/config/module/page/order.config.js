@@ -23,6 +23,13 @@ export default {
     labelName: '订单详情',
     isList: false
   },
+  // 订单中心-详情
+  ORDERMANAGEDETAIL: {
+    component: () => import(
+      /* webpackChunkName: 'OrderCenterPage' */
+      'allpages/orderCenter/returnOrder/orderManageDetails.vue'
+    ),
+  },
   RETURNDETAILS: {
     component: () => import(
       /* webpackChunkName: 'OrderCenterPage' */
