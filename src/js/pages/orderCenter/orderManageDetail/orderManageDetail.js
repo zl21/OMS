@@ -211,12 +211,12 @@ export default {
                   });
                 } else if (res.data.code === -3) {
                   this.$Modal.info({
-                    title: self.vmI18n.t('mT.tips'), // 提示
+                    title: $it('mT.tips'), // 提示
                     content: res.data.message, // 零售发货单/JIT订单中间表存在可合并的订单还未参与合并，仍要继续次操作吗？
                     mask: true,
                     showCancel: true,
-                    okText: self.vmI18n.t('com.determine'), // 确定
-                    cancelText: self.vmI18n.t('com.cancel'), // 取消
+                    okText: $it('com.determine'), // 确定
+                    cancelText: $it('com.cancel'), // 取消
                     onOk: () => {
                       self.auditOrder();
                     },
@@ -240,12 +240,12 @@ export default {
               const ids = [];
               ids[0] = this.$route.params.customizedModuleId;
               this.$Modal.info({
-                title: self.vmI18n.t('mT.tips'), // 提示
+                title: $it('mT.tips'), // 提示
                 content: $it('tip.g7'), // 是否确定反审核订单？
                 mask: true,
                 showCancel: true,
-                okText: self.vmI18n.t('com.determine'), // 确定
-                cancelText: self.vmI18n.t('com.cancel'), // 取消
+                okText: $it('com.determine'), // 确定
+                cancelText: $it('com.cancel'), // 取消
                 onOk: () => {
                   this.service.orderCenter.auditOrderReserve({
                       ids,
@@ -257,7 +257,7 @@ export default {
                         self.load();
                       } else {
                         self.$Modal.error({
-                          title: self.vmI18n.t('mT.tips'), // 提示
+                          title: $it('mT.tips'), // 提示
                           content: res.data.message,
                           cancelType: true,
                           titleAlign: 'left',
@@ -303,12 +303,12 @@ export default {
                 ids,
               };
               this.$Modal.info({
-                title: self.vmI18n.t('mT.tips'), // 提示,
-                content: self.vmI18n.t('tip.e1'), // 是否确定取消Hold？
+                title: $it('mT.tips'), // 提示,
+                content: $it('tip.e1'), // 是否确定取消Hold？
                 mask: true,
                 showCancel: true,
-                okText: self.vmI18n.t('com.determine'), // 确定
-                cancelText: self.vmI18n.t('com.cancel'), // 取消
+                okText: $it('com.determine'), // 确定
+                cancelText: $it('com.cancel'), // 取消
                 onOk: () => {
                   self.btnConfig.loading = true;
                   self.service.orderCenter.manualUnHoldOrder(data)
@@ -317,7 +317,7 @@ export default {
                         self.$Message.success(res.data.message);
                         self.autoRefresh();
                       } else {
-                        self.$Message.warning(res.data.message || self.vmI18n.t('tip.d6')); // 服务器请求失败
+                        self.$Message.warning(res.data.message || $it('tip.d6')); // 服务器请求失败
                       }
                     });
                 },
@@ -361,7 +361,7 @@ export default {
                   const data = self.tab1.order;
               if ((data.PLATFORM === 4 && data.PAY_TYPE === 2) || data.PLATFORM === 7) {
                 self.$Message.warning({
-                  content: self.vmI18n.t('tip.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
+                  content: $it('tip.b1'), // 交易平台为当当，唯品会jitx，京东（货到付款）的订单不允许拆单
                   duration: 5,
                   top: 80
                 });
@@ -377,7 +377,7 @@ export default {
               }
               if (data.IS_INRETURNING === 1 || data.IS_INTERECEPT === 1) {
                 self.$Message.warning({
-                  content: self.vmI18n.t('tip.b2'), // 拦截、退款中的订单不允许拆单！
+                  content: $it('tip.b2'), // 拦截、退款中的订单不允许拆单！
                   duration: 5,
                   top: 80
                 });
@@ -388,15 +388,15 @@ export default {
                   id: self.$route.params.customizedModuleId,
                   type: 'action',
                   name: 'splitOrder',
-                  label: self.vmI18n.t('pL.orderSplit'), // 订单拆分
+                  label: $it('pL.orderSplit'), // 订单拆分
                   query: {
                     id: self.$route.params.customizedModuleId,
-                    tabTitle: self.vmI18n.t('pL.orderSplit') // 订单拆分
+                    tabTitle: $it('pL.orderSplit') // 订单拆分
                   }
                 });
               } else {
                 self.$Message.warning({
-                  content: self.vmI18n.t('tip.b3'), // 只允许拆分待审核和缺货状态的订单！
+                  content: $it('tip.b3'), // 只允许拆分待审核和缺货状态的订单！
                   duration: 5,
                   top: 80
                 });
@@ -438,7 +438,7 @@ export default {
                     }, 100);
                   } else {
                     self.$Modal.error({
-                      title: self.vmI18n.t('mT.tips'), // 提示,
+                      title: $it('mT.tips'), // 提示,
                       content: res.data.message,
                       cancelType: true,
                       titleAlign: 'left',
@@ -494,7 +494,7 @@ export default {
                     }, 100);
                   } else {
                     self.$Modal.error({
-                      title: self.vmI18n.t('mT.tips'), // 提示,
+                      title: $it('mT.tips'), // 提示,
                       content: res.data.message,
                       cancelType: true,
                       titleAlign: 'left',
@@ -749,12 +749,12 @@ export default {
               const id = self.$route.params.customizedModuleId; // 此id为订单编号
               ids.push(id);
               this.$Modal.info({
-                title: self.vmI18n.t('mT.tips'), // 提示
-                content: self.vmI18n.t('tip.e0'), // 是否确定取消订单？
+                title: $it('mT.tips'), // 提示
+                content: $it('tip.e0'), // 是否确定取消订单？
                 mask: true,
                 showCancel: true,
-                okText: self.vmI18n.t('com.determine'), // 确定
-                cancelText: self.vmI18n.t('com.cancel'), // 取消
+                okText: $it('com.determine'), // 确定
+                cancelText: $it('com.cancel'), // 取消
                 onOk: () => {
                   self.service.orderCenter
                     .cancelOrder({ ids, type: '1' })
@@ -764,7 +764,7 @@ export default {
                         this.load();
                       } else {
                         self.$Modal.error({
-                          title: self.vmI18n.t('mT.tips'), // 提示
+                          title: $it('mT.tips'), // 提示
                           content: res.data.message,
                           cancelType: true,
                           titleAlign: 'left',
@@ -896,7 +896,7 @@ export default {
       .then(res => {
         if (res.data.code === 0) {
           self.$Modal.success({
-            title: self.vmI18n.t('mT.tips'), // 提示
+            title: $it('mT.tips'), // 提示
             content: res.data.message,
             cancelType: true,
             titleAlign: 'left',
@@ -911,7 +911,7 @@ export default {
           self.load();
         } else {
           self.$Modal.error({
-            title: self.vmI18n.t('mT.tips'), // 提示
+            title: $it('mT.tips'), // 提示
             content: res.data.message,
             cancelType: true,
             titleAlign: 'left',

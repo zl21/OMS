@@ -1,5 +1,4 @@
-// import { OC_B_ORDER } from './config';
-// import config from './config';
+import { OC_B_ORDER } from '@/js/pages/orderCenter/returngood/config';
 export default {
   data() {
     return {
@@ -30,20 +29,58 @@ export default {
     componentData: {
       handler(newVal) {
         this.objid = newVal.objid;
-        this.getColumns(newVal);
-        this.getData(newVal);
+        // this.getColumns(newVal);
+        // this.getData(newVal);
+
+        this.request(newVal);
       },
 
     }
   },
   methods: {
+    async request(req) {
+      const self = this;
+      const data = JSON.parse(JSON.stringify(OC_B_ORDER[req.tablename]));
+      self.objid = req.objid || -1;
+      if (self.objid === -1) return;
+      // data.objid = self.objid ;
+      const searchdata = {};
+      searchdata.startindex = (this.tableConfig.current - 1) * this.tableConfig.pageSize;
+      searchdata.range = this.tableConfig.pageSize;
+      data.searchdata = JSON.stringify(Object.assign(data.searchdata, searchdata));
+      self.options = req.options || {};
+      const formdata = new FormData();
+      formdata.append('objid', self.objid);
+      formdata.append('table', data.table);
+      formdata.append('searchdata', data.searchdata);
+      formdata.append('refcolid', data.refcolid);
+
+      const res = await this.service.common.objectTableItem(formdata);
+      if (res.data.code === 0) {
+        self.showTable(res.data.datas);
+      } else {
+        console.log('数据加载失败');
+      }
+
+      // axios({
+      //   url: this.tableItemUrl,
+      //   method: 'post',
+      //   data: formdata
+      // }).then((res) => {
+      //   if (res.data.code === 0) {
+      //     self.showTable(res.data.datas);
+      //   } else {
+      //     console.log('数据加载失败');
+      //   }
+      // });
+    },
     pageChange(val) {
       this.tableConfig.current = val;
-      this.getData(this.componentData,{index:val,size:this.tableConfig.pageSize});
+      // this.getData(this.componentData,{index:val,size:this.tableConfig.pageSize});
     },
     pageSizeChange(val) {
       this.tableConfig.pageSize = val;
-      this.getData(this.componentData,{size:val});
+      // this.getData(this.componentData,{size:val});
     },
     // 获取表头
     async getColumns(req){
@@ -121,7 +158,8 @@ export default {
   },
   mounted() {
     if (this.componentData && this.componentData.tabValue) {
-      this.getData(this.componentData);
+      // this.getData(this.componentData);
+      this.request(this.componentData);
     }
   }
 };

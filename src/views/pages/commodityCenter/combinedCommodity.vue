@@ -1,12 +1,12 @@
 <!--组合商品编码新增和编辑页面-->
 <template>
-  <div class="jq-combined-commodity custom-main">
+  <div class="jq-combined-commodity customized-detail">
     <div
       v-if="objid == '-1'"
       class="jq-combined-commodity-new"
       style="height: 100%; display: flex; flex-direction: column"
     >
-      <div class="btn-operate custom-btn">
+      <div class="obj-btn">
         <OmsButton :btn-config="btnConfig" />
       </div>
       <div class="obj-main">

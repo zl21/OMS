@@ -170,7 +170,7 @@
         </Modal>
       </div>
       <!--单据状态图片展示 -->
-      <WaterMark v-if="statusName !== ''" :text="statusName"/>
+      <WaterMark v-if="statusName !== ''" :text="statusName" top="63px" left="23px" width="58px"/>
     </div>
     <!-- 修改备注 11-->
     <OmsDialog

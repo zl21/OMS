@@ -1,233 +1,236 @@
 <!--基本信息-->
 <template>
   <div class="order-content-tab">
-    <div class="order-content-top">
-      <!-- 收货信息 * 地址 And 备注 -->
-      <div class="order-tab-left order-tab-content">
-        <div class="order-tab-title">
-          <!-- 收货信息 -->
-          <span>{{ $it('tL.receivingInfo') }}</span>
-          <div class="title-right">
-            <p v-if="butArr[0]['isShow']"  @click="eyeClick">
-              <span>
-                <Icon
-                  style="fontSize:16px; margin-top:-3px"
-                  :type="!eyeStatus ? 'ios-eye' : 'ios-eye-off'"
-                />
-              </span>
-              <label :title="eyeText">
-                {{ eyeText }}
-              </label>
-            </p>
-            <p v-if="butArr[1]['isShow']"  @click="modifyAddress">
-              <span>
-                <span>
-                  <Icon
-                    style="fontSize:16px; margin-top:-3px"
-                    type="ios-create-outline"
-                  />
-                </span>
-                <label :title = "$it('mT.modify_shipping_address')">
-                  <!-- 修改收货地址 -->
-                  {{$it('mT.modify_shipping_address')}} 
-                </label>
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="order-tab-detail">
-          <Row class="detail-ul">
-            <Col
-              v-for="(list, index) of detail"
-              :key="index"
-              :span="list.width"
-              class="detail-li"
-            >
-              <label :title="list.label">
-                <i v-if="list.flag">*</i>
-                {{ list.label }}
-              </label>
-              <p v-if="list.column === 'CP_C_REGION_PROVINCE_ENAME'" :title="`${componentData.order['CP_C_REGION_PROVINCE_ENAME']}${componentData.order['CP_C_REGION_CITY_ENAME']}${componentData.order['CP_C_REGION_AREA_ENAME']}`">
-                {{ componentData.order['CP_C_REGION_PROVINCE_ENAME'] }}
-                {{ componentData.order['CP_C_REGION_CITY_ENAME'] }}
-                {{ componentData.order['CP_C_REGION_AREA_ENAME'] }}
-              </p>
-              <p :title="componentData.order[list.column]" v-else>{{ componentData.order[list.column] }}</p>
-            </Col>
-          </Row>
-        </div>
+    <div class="order-tab-content">
+      <div class="order-tab-title">
+        <!-- <i class="iconfont">&#xe653;</i> -->
+        <span>基础资料</span>
       </div>
-      <!-- 基础资料 -->
-      <div class="order-tab-right order-tab-content">
-        <div class="order-tab-title">
-          <!-- 基础资料 -->
-          <span class="order-tab-title-span"> {{ $it('pL.basicData')}} </span>
-          <div class="title-sign">
-            <span :title="item.text" v-for="(item,index) in componentData.order.ORDER_TAG" :key="index" :style="{ color: item.clr,borderColor: item.clr}">
-              {{item.text}}
-            </span>
-            <label :title="componentData.order.OC_B_LABEL_DESCRIPTION">
-              {{componentData.order.OC_B_LABEL_DESCRIPTION}}
+      <div class="order-tab-detail">
+        <ul>
+          <li
+            v-for="(list, index) of queryList"
+            :key="index"
+          >
+            <label>
+              <i v-if="list.flag">*</i>
+              {{ list.label }}
             </label>
-          </div>
-
-        </div>
-        <div class="order-tab-detail">
-          <Row class="detail-ul">
-            <Col
-              v-for="(list, index) of queryList"
-              :key="index"
-              :span="list.width"
-              class="detail-li"
+            <p v-if="list.label==='平台编号:'" class="text-ellipsis">
+                {{ componentData.order[list.column] }}
+            </p>
+            <p v-if="list.label ==='物流单号:'">
+              {{ componentData.order[list.column] }}
+              <span
+                v-if="componentData.order.RESERVE_BIGINT05 == 1"
+                style="color: red;"
+              >(多包裹)</span>
+            </p>
+            <p
+              v-if="list.label!=='平台编号:' && list.label !=='物流单号:'"
             >
-            <!-- {{orderTypeClass}}{{platformStatusClass}} -->
-              <label :title="list.label">
-                <i v-if="list.flag">*</i>
-                {{ list.label }}
-              </label>
-              <!-- 平台编号 -->
-              <p
-                v-if="list.column==='MERGE_SOURCE_CODE'"
-                class="text-ellipsis"
-                :title="componentData.order[list.column]"
-              >
-                {{ componentData.order[list.column] }}
-              </p>
-              <!-- 物流单号 -->
-              <p v-if="list.column ==='EXPRESSCODE'" :title="componentData.order[list.column]">
-                {{ componentData.order[list.column] }}
-                <span
-                  v-if="componentData.order.RESERVE_BIGINT05 == 1"
-                  style="color: red;"
-                > {{ $it('fL.an')}}</span>
-                <!-- (多包裹) -->
-              </p>
-              <p v-if="list.column === 'SELLER_MEMO'" :title="componentData.order[list.column]">
-                {{ componentData.order[list.column] }}
-                <span  v-if="butArr[2]['isShow']" @click="modifyRemark" class="edit iconfont icon-bianji"></span>
-              </p>
-              <!-- 其他 -->
-              <p v-else :title="componentData.order[list.column]" :class="[list.column==='ORDER_TYPE' ? `color_${orderTypeClass}` :'',list.column==='PLATFORM_STATUS' ? `color_${platformStatusClass}` :'',list.column]" >
-                {{ componentData.order[list.column] }}
-              </p>
-            </Col>
-          </Row>
-          <!-- 订单金额 -->
-          <div class="order-money">
-            <!-- 订单金额 -->
-            <span class="order-money-title" :title="$it('fL.ah')"> {{ $it('fL.ah')}}</span>
-            <ul class="totalAmount">
-              <li>
-                <label :title="$it('fL.ai')">
-                  <!-- 商品总金额  -->
-                  {{ $it('fL.ai')}}
-                    <Tooltip placement="top-start" max-width="800" theme="light">
-                      <Icon type="ios-alert-outline" />
-                      <div slot="content">
-                        <goodsTotalAmount :data="componentData" @retailPriceTotal="priceTotal"></goodsTotalAmount>
-                      </div>
-                  </Tooltip>
-                </label>
-                <p>{{retailPriceTotal}}</p>
-              </li>
-              <li class="symbol">+</li>
-              <li>
-                <!-- 运费 -->
-                <label :title="$it('fL.freight')">{{$it('fL.freight')}}</label>
-                <p>{{componentData.order.SHIP_AMT || '0.00'}}</p>
-              </li>
-              <li class="symbol">+</li>
-              <li>
-                <!-- 服务费 -->
-                <label :title="$it('fL.service_charge')">{{$it('fL.service_charge')}}</label>
-                <p>{{ componentData.order.SERVICE_AMT || '0.00' }}</p>
-              </li>
-              <li class="symbol">=</li>
-              <li class="resulf-text">
-                <!-- 订单总金额 -->
-                <label :title="$it('fL.aj')">{{$it('fL.aj') }}</label>
-                <p>{{orderPriceTotal}}</p>
-              </li>
-            </ul>
-            <ul class="amountActually">
-              <li>
-                <!-- 实付金额 -->
-                <label :title="$it('fL.ak')">{{$it('fL.ak') }}</label>
-                <p>{{ componentData.order.RECEIVED_AMT  || '0.00'}}</p>
-              </li>
-              <li>
-                <!-- 红包 -->
-                <label :title="$it('fL.al')">{{$it('fL.al') }}</label>
-                <p>{{ componentData.order.al || '0.00'}}</p>
-              </li>
-              <li>
-                <!-- 代收COD金额 -->
-                <label :title="$it('fL.am')">{{$it('fL.am') }}</label>
-                <p>{{ componentData.order.COLLECT_AMT || '0.00'}}</p>
-              </li>
-            </ul>
-          </div>
-        </div>
+              {{ componentData.order[list.column] }}
+            </p>
+          </li>
+        </ul>
       </div>
     </div>
-    <Row>
-      <!-- 订单明细 -->
-      <Col span="24" >
-        <div class="order-tab-content">
-          <div class="order-tab-title border">
-            <!-- 订单明细 -->
-            <span> {{$it('pL.order_detailed')}}</span>
-            <!-- 如果是组合商品不显示 -->
-            <div v-if="is_combination" class="checkCombination">
-              <span
-                v-if="isQh && isQhChild"
-                @click="checkCombination"
-              >
-                <Icon type="ios-repeat" />
-                <!-- 切换为sku商品显示 -->
-                {{$it('fL.b0')}}
-              </span>
-              <span
-                v-if="!isQh && isQhChild"
-                @click="checkCombination"
-              >
-                <Icon type="ios-repeat" />
-                <!-- 切换为平台商品明细 -->
-                {{$it('fL.b1')}}
-              </span>
-            </div>
-          </div>
-          <CusOrderItem
-            ref="cusOrderItem"
-            :component-data="tableConfig"
-            :is-qh="isQh"
-            @freshLoadChild="freshLoadChild"
-            @addGiftHandler="addGiftHandler"
-            @isQhMethod="isQhMethod"
-            @replaceGoodsDetail="replaceGoodsDetail"
-          />
-        </div>
-      </Col>
-    </Row>
-    <OmsDialog
-      :ref="dialogsConfig.name"
-      :url="dialogsConfig.url"
-      :title="dialogsConfig.title"
-      :name="dialogsConfig.name"
-      :keep-alive="dialogsConfig.keepAlive||true"
-      :width="dialogsConfig.width||''"
-      :exclude-string="dialogsConfig.excludeString"
-      :component-data="dialogsConfig.data"
-      :footer-hide="dialogsConfig.footerHide"
-      :quit="dialogsConfig.quit"
-      :mask-closable="dialogsConfig.maskClosable"
-      :confirm="dialogsConfig.confirm"
+    <div class="order-tab-content">
+      <div class="order-tab-title">
+        <!-- <i class="iconfont">&#xe653;</i> -->
+        <span>订单金额</span>
+      </div>
+      <div class="order-tab-detail2">
+        <ul>
+          <li>
+            <p>商品金额</p>
+            <p>{{ componentData.order.PRODUCT_AMT==null?componentData.order.PRODUCT_AMT:componentData.order.PRODUCT_AMT }}</p>
+          </li>
+          <li>+</li>
+          <li>
+            <p>配送费用</p>
+            <p>{{ componentData.order.SHIP_AMT }}</p>
+          </li>
+          <li>+</li>
+          <li>
+            <p>调整金额</p>
+            <p>{{ componentData.order.ADJUST_AMT==null || componentData.order.ADJUST_AMT== 0 ?componentData.order.ADJUST_AMT:componentData.order.ADJUST_AMT }}</p>
+          </li>
+          <li>+</li>
+          <li>
+            <p>服务费</p>
+            <p>{{ componentData.order.SERVICE_AMT==null || componentData.order.SERVICE_AMT== 0 ?componentData.order.SERVICE_AMT:componentData.order.SERVICE_AMT }}</p>
+          </li>
+          <li>-</li>
+          <li>
+            <p>订单优惠金额</p>
+            <p>{{ componentData.order.ORDER_DISCOUNT_AMT==null || componentData.order.ORDER_DISCOUNT_AMT == 0 ?componentData.order.ORDER_DISCOUNT_AMT:componentData.order.ORDER_DISCOUNT_AMT }}</p>
+          </li>
+          <li>-</li>
+          <li>
+            <p>商品优惠金额</p>
+            <p>{{ componentData.order.PRODUCT_DISCOUNT_AMT==null || componentData.order.PRODUCT_DISCOUNT_AMT == 0 ?componentData.order.PRODUCT_DISCOUNT_AMT:componentData.order.PRODUCT_DISCOUNT_AMT }}</p>
+          </li>
+          <li>=</li>
+          <li>
+            <p class="red strong">
+              总金额
+            </p>
+            <p>{{ componentData.order.ORDER_AMT==null || componentData.order.ORDER_AMT == 0 ?componentData.order.ORDER_AMT:componentData.order.ORDER_AMT }}</p>
+          </li>
+          <li>
+            <p class="blue strong">
+              已支付金额
+            </p>
+            <p>{{ componentData.order.RECEIVED_AMT==null || componentData.order.RECEIVED_AMT == 0 ?componentData.order.RECEIVED_AMT:componentData.order.RECEIVED_AMT }}</p>
+          </li>
+          <li>
+            <p class="blue strong">
+              代收(COD)金额
+            </p>
+            <p>{{ componentData.order.COD_AMT==null || componentData.order.COD_AMT == 0 ?componentData.order.COD_AMT:componentData.order.COD_AMT }}</p>
+          </li>
+          <!-- <li>
+            <p class="blue strong">结算金额</p>
+            <p>{{componentData.order.CONSIGN_AMT==null || componentData.order.CONSIGN_AMT == 0 ?componentData.order.CONSIGN_AMT:componentData.order.CONSIGN_AMT}}</p>
+          </li>-->
+          <!-- <li>
+            <p class="blue strong">
+              操作费
+            </p>
+            <p>{{ componentData.order.OPERATE_AMT==null || componentData.order.OPERATE_AMT == 0 ?componentData.order.OPERATE_AMT:componentData.order.OPERATE_AMT }}</p>
+          </li>
+          <li>
+            <p class="blue strong">
+              代销运费
+            </p>
+            <p>{{ componentData.order.CONSIGN_SHIP_AMT==null || componentData.order.CONSIGN_SHIP_AMT == 0 ?componentData.order.CONSIGN_SHIP_AMT:componentData.order.CONSIGN_SHIP_AMT }}</p>
+          </li>
+          <li>
+            <p class="blue strong">
+              <Tooltip placement="top" content="(总金额-配送费用-服务费) / 商品金额">
+                <Icon type="ios-alert-outline" color="red" class="tooltip" />
+              </Tooltip>
+              整单折扣
+            </p>
+            <p>{{ componentData.order.ORDER_DISCOUNT || '0.00' }}</p>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="order-tab-content">
+      <div class="order-tab-title">
+        <!-- <i class="iconfont">&#xe653;</i> -->
+        <span>订单收货地址</span>
+        <Icon
+          style="fontSize:24px;paddingBottom:2px;marginLeft:15px"
+          type="ios-eye"
+          @click="eyeClick"
+        />
+      </div>
+      <div class="order-tab-detail">
+        <ul>
+          <li
+            v-for="(list, index) of detail"
+            :key="index"
+            :class="colStretch(list)"
+          >
+            <label>
+              <i v-if="list.flag">*</i>
+              {{ list.label }}
+            </label>
+            <p>{{ componentData.order[list.column] }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="order-tab-content">
+      <div class="order-tab-title">
+        <!-- <i class="iconfont">&#xe653;</i> -->
+        <span>订单明细</span>
+        <span
+          v-if="isQh && isQhChild"
+          style="float: right;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
+          @click="checkCombination"
+        >
+          <Icon type="ios-repeat" />切换为sku商品显示
+        </span>
+        <span
+          v-if="!isQh && isQhChild"
+          style="float: right;fontSize:12px;color:red;fontWeight:300;marginRight:8px;cursor:pointer;"
+          @click="checkCombination"
+        >
+          <Icon type="ios-repeat" />切换为平台商品明细
+        </span>
+      </div>
+      <CusOrderItem
+        ref="cusOrderItem"
+        :component-data="tableConfig"
+        :is-qh="isQh"
+        @freshLoadChild="freshLoadChild"
+        @BtnClickEvent="BtnClickEvent"
+        @isQhMethod="isQhMethod"
+        @replaceGoodsDetail="replaceGoodsDetail"
+      />
+    </div>
+    <!-- freshLoad -->
+    <div class="order-tab-content">
+      <div class="order-tab-title">
+        <!-- <i class="iconfont">&#xe653;</i> -->
+        <span>备注</span>
+      </div>
+      <div class="order-tab-detail3">
+        <ul>
+          <li>买家备注: {{ componentData.order.BUYER_MESSAGE }}</li>
+          <li>卖家备注: {{ componentData.order.SELLER_MEMO }}</li>
+          <li>系统备注: {{ componentData.order.SYSREMARK }}</li>
+          <li>内部备注: {{ componentData.order.INSIDE_REMARK }}</li>
+        </ul>
+      </div>
+    </div>
+    
+
+    <!-- <businessDialog
+      v-for="(list, index) in dialogs"
+      :key="index"
+      :ref="list.name"
+      :url="list.url"
+      :title="list.title"
+      :name="list.name"
+      :keep-alive="list.keepAlive||true"
+      :width="list.width||''"
+      :exclude-string="list.excludeString"
+      :component-data="list.data"
+      :footer-hide="list.footerHide"
+      :quit="list.quit"
+      :confirm="list.confirm"
     />
+    -->
+    <OmsDialog
+      :title="publicBouncedConfig.confirmTitle"
+      :title-align="publicBouncedConfig.titleAlign"
+      :width="publicBouncedConfig.width"
+      :scrollable="publicBouncedConfig.scrollable"
+      :closable="publicBouncedConfig.closable"
+      :draggable="publicBouncedConfig.draggable"
+      :mask="publicBouncedConfig.mask"
+      :mask-closable="publicBouncedConfig.maskClosable"
+      :transfer="publicBouncedConfig.transfer"
+      :name="publicBouncedConfig.name"
+      :url="publicBouncedConfig.url"
+      :batch-closed="publicBouncedConfig.batchClosed"
+      :keep-alive="publicBouncedConfig.keepAlive"
+      :exclude-string="publicBouncedConfig.excludeString"
+      :component-data="publicBouncedConfig.componentData"
+      :quit="publicBouncedConfig.quit"
+    /> 
+
   </div>
 </template>
 
 <script>
   import essentialInfo from '@/js/pages/orderCenter/orderManageDetail/details/essentialInfo';
+
   export default essentialInfo;
 </script>
 

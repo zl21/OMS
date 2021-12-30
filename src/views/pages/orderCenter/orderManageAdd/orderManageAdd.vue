@@ -1,6 +1,6 @@
 <template>
-  <div class="order-add custom-main">
-    <div class="orderButtons custom-btn">
+  <div class="customized-detail">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="obj-main">
@@ -27,28 +27,28 @@
           </p>
         </Panel>
       </Collapse>
-    </div>
-    <!-- tab切换 -->
-    <div class="custom-label">
-      <OmsLabel
-        :label-default-value="labelDefaultValue"
-        :label-list="labelList"
-      />
-    </div>
-    <!-- 表格 -->
-    <div class="table custom-table">
-      <!-- 订单明细 -->
-      <div class="barcodeDetails">
-        <OmsTable
-          :jordan-table-config="jordanTableConfig"
-          @on-select="onSelect"
-          @on-select-all="onSelectAll"
-          @on-select-all-cancel="onSelectAllCancel"
-          @on-select-cancel="onSelectCancel"
-          @table-delete-detail="tableDeleteDetail"
+      
+      <!-- 表格 -->
+      <div class="obj-table">
+        <!-- tab切换 -->
+        <OmsLabel
+          :label-default-value="labelDefaultValue"
+          :label-list="labelList"
         />
+        <!-- 订单明细 -->
+        <div class="subtablePart">
+          <OmsTable
+            :jordan-table-config="jordanTableConfig"
+            @on-select="onSelect"
+            @on-select-all="onSelectAll"
+            @on-select-all-cancel="onSelectAllCancel"
+            @on-select-cancel="onSelectCancel"
+            @table-delete-detail="tableDeleteDetail"
+          />
+        </div>
       </div>
     </div>
+   
     <!-- 矩阵框-->
     <OmsDialog
       :closable="matrixBox.closable"
