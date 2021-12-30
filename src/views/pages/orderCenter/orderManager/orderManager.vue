@@ -1,6 +1,6 @@
 <template>
   <div v-loading="pageLoad" class="orderManager-box customized-list">
-    <div class="btn totalHeight">
+    <div class="btn totalHeight customized-list-btn">
       <OmsButton
         :btn-config="btnConfig"
         @dropDownClick="
@@ -8,7 +8,7 @@
         "
       />
     </div>
-    <div class="from totalHeight">
+    <div class="from totalHeight customized-list-form">
       <div v-show="isShowFromLoading" class="from_loading">
         <!-- <loading :loading="agTableConfig.agLoading" /> -->
       </div>
@@ -33,7 +33,7 @@
         <i :class="iconDownIcon" />
       </div> -->
     </div>
-    <div class="table">
+    <div class="table customized-list-table">
       <OmsLabel
         :label-default-value="labelDefaultValue"
         :label-list="labelList"
