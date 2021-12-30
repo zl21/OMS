@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      eventGather: BurgeonEvent,
       pageLoad: false,
       isActive: false,
       agTableConfig: {

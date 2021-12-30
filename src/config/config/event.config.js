@@ -65,7 +65,7 @@ class BurgeonEvent {
         // val !== '新增'
         if (val !== 'Newly added') {
             if(!self.vueAgTable){
-                self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
+                // self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
               }
         }
         DropDownConfig.target = BurgeonEvent.target;

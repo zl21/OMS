@@ -1,5 +1,6 @@
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
+import matrixBox from '@/views/modal/orderCenter/matrixBox';
 const areaList = require('@/assets/js/address/area-list');
 const {
   parse,
@@ -50,7 +51,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'matrixBox', // 组件名称
-        url: 'modal/orderCenter/matrixBox',
+        url: matrixBox,
         keepAlive: true,
         excludeString: 'matrixBox', // 将name传进去，确认不缓存
         componentData: {},
