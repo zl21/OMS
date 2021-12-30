@@ -134,6 +134,8 @@ export default {
           this.downloadUrlFile(itemObj[0].downloadUrl);
           break;
         case 'IP_B_TAOBAO_ORDER': // 淘宝订单接口-sku异常导入
+        case 'IP_B_STANDPLAT_ORDER': // 通用订单接口-sku异常导入
+        case 'IP_B_JINGDONG_ORDER':// 京东订单接口-sku异常导入
           this.downloadUrlFile(itemObj[0].downloadUrl);
           break;
         default:
@@ -256,7 +258,10 @@ export default {
           }
           break;
         case 'IP_B_TAOBAO_ORDER':
-          this.getImportDialog(itemObj[0].url);
+        case 'IP_B_STANDPLAT_ORDER':
+        case 'IP_B_JINGDONG_ORDER':
+          const newUrl = `${itemObj[0].url}?tableName=${this.componentData.tableName}`;
+          this.getImportDialog(newUrl);
           break;
         default:
           this.getImportDialog(itemObj[0].url);
@@ -397,7 +402,7 @@ export default {
       } else if (table === 'AC_F_LIVE_ORDER') {
         // 关闭导入弹框
         _this.$parent.$parent.$parent.showModal = false
-      } else if (table === 'AC_F_RECONCILIATION_SETTLE_STRATEGY' || table === 'PS_C_SAMECITY_DETRIMENT_REF' || table === 'IP_B_TAOBAO_ORDER') {
+      } else if (table === 'AC_F_RECONCILIATION_SETTLE_STRATEGY' || table === 'PS_C_SAMECITY_DETRIMENT_REF' || table === 'IP_B_TAOBAO_ORDER' || 'IP_B_STANDPLAT_ORDER' || 'IP_B_JINGDONG_ORDER') {
         // 关闭导入弹框
         _this.$parent.$parent.$parent.showModal = false
       }
