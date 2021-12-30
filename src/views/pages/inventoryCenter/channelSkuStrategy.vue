@@ -4,7 +4,7 @@
       <OmsButton :btn-config="btnConfig"/>
     </div>
     <div class="obj-main">
-      <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
+      <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]" top="62px" />
       <Collapse v-model="collapse" class="obj-form">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->

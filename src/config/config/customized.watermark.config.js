@@ -110,7 +110,7 @@ export default {
     text: '出库完成入库完成',
     color: '#e80000',
     width: '60px',
-    top: '38px',
+    top: '64px',
     left: '22px'
   },
   out: {

@@ -168,10 +168,10 @@ class BtnConfig {
         webname: 'daochu_tuihuanhuo,export_tuihuoruku',
         btnclick: () => this.btnMainHandler('tuihuoExportClick'),
       },
-      {
-        webname: 'lookup_chongzhi',
-        btnclick: () => BtnConfig.target.reset(),
-      },
+      // {
+      //   webname: 'lookup_chongzhi',
+      //   btnclick: () => BtnConfig.target.reset(),
+      // },
       {
         webname:
           'lookup_tuihuanhuo,lookup_kcjisuanhuancunchi,lookup_kucuntongbuduilie,lookup_qdkucunbiandongliushui,lookup_tuihuoruku',
