@@ -6,7 +6,7 @@ export default {
       drpdata: {},
       cpdata: [],
       btnConfig: {
-        typeAll: 'error',
+        typeAll: 'default',
         buttons: [
           {
             text: $it('btn.refresh'), // text: '刷新',

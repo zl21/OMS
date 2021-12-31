@@ -12,7 +12,7 @@ export default {
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
         businessButtonConfig: {
-          typeAll: 'error', // 按钮统一风格样式
+          typeAll: 'default', // 按钮统一风格样式
           btnsite: 'left', // 按钮位置 (right , center , left)
           buttons: [
             {

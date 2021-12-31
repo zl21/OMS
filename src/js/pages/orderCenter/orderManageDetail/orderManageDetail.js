@@ -159,7 +159,7 @@ export default {
         componentData: {}
       },
       btnConfig: {
-        typeAll: 'error',
+        typeAll: 'default',
         buttons: [
           {
             webname: 'orderDetentionRelease', // 卡单释放
