@@ -27,7 +27,7 @@
 
     <!-- businessForm_a -->
     <Form
-      class="businessForm cusForm-content"
+      :class="['businessForm', 'cusForm-content', formConfig.flodClick?'noFlod':'']"
       :label-width="95"
       style="width: 100%"
       ref="businessForm_a"

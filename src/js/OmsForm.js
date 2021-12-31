@@ -19,6 +19,7 @@ export default {
   },
   data() {
     return {
+      no: '',
       selectInputChangeVal: '',
       flodData: 'el-icon-arrow-down', //折叠箭头动态样式
       currentFlod: 'down' //存储当前选中的箭头状态
@@ -82,6 +83,12 @@ export default {
       } else {
         showNum = setColnum * setRow
       }
+      /* if ( setColnum * setRow > this.formConfig.formData.length ) {
+        // 不需要折叠icon的情况
+        this.no = 'noFlod'
+      } else {
+        this.no = ''
+      } */
       if (this.currentFlod == 'down') {
         this.formConfig.formData.forEach((it, n) => {
           if (n + 1 > showNum) {
