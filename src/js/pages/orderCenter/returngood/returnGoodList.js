@@ -110,7 +110,7 @@ export default {
         /* {
           text: $it('btn.find'), // 查找
           webname: 'lookup_tuihuanhuo',
-          type: 'error',
+          type: 'primary',
           disabled: false, // 按钮禁用控制
           btnclick: () => {
             this.find();
@@ -352,7 +352,7 @@ export default {
             {
               text: $it('btn.find'), // 查找
               webname: 'lookup_tuihuanhuo',
-              type: 'error',
+              type: 'primary',
               disabled: false, // 按钮禁用控制
               btnclick: () => {
                 this.find();

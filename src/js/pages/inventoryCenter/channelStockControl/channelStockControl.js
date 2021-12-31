@@ -977,7 +977,7 @@ export default {
     btnConfig2() {
       const buttons = [
         {
-          type: 'error',
+          type: 'primary',
           text: $it('btn.query'), // 查询
           btnclick: () => {
             this.throttleFun(() => {

@@ -63,7 +63,7 @@ export default {
                 'Button',
                 {
                   props: {
-                    type: 'error',
+                    type: 'primary',
                     size: 'small',
                     ghost: true
                   },
@@ -176,7 +176,7 @@ export default {
             }
           },
           {
-            type: 'error',
+            type: 'primary',
             text: $it('com.determine'), // 确定
             ghost: true,
             btnclick: () => {

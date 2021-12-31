@@ -342,7 +342,7 @@ export default {
       extendBtn: [
         // {
         //   text: '查找', // 查找
-        //   type: 'error',
+        //   type: 'primary',
         //   webname: 'queryList',
         //   btnclick: () => {
         //     this.loadData();
