@@ -536,7 +536,7 @@ export default {
       },
       btnConfig: {
         btnsite: 'right',
-        typeAll: 'error',
+        typeAll: 'default',
         buttons: [
           {
             text: $it('btn.save'), // 保存

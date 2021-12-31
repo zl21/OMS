@@ -63,7 +63,7 @@ export default {
             } // 按钮点击事件
           }, {
             text: $it('com.determine'), // 确定
-            type: 'error',
+            type: 'primary',
             btnclick: () => {
               this.confirmChange();
             }

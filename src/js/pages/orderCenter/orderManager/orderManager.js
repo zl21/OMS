@@ -342,7 +342,7 @@ export default {
       extendBtn: [
         // {
         //   text: '查找', // 查找
-        //   type: 'error',
+        //   type: 'primary',
         //   webname: 'queryList',
         //   btnclick: () => {
         //     this.loadData();
@@ -1338,17 +1338,17 @@ export default {
       // 高级搜索表单
       formConfig: {
         btn: {
-          typeAll: 'error', // 按钮统一风格样式
+          typeAll: 'default', // 按钮统一风格样式
           buttons: [
             {
               text: '查找', // 按钮文本
+              type: 'primary',
               btnclick: () => {
                 this.loadData();
               } // 按钮点击事件
             },
             {
               text: '重置', // 按钮文本
-              type: 'default',
               btnclick: () => {
                 const _this = this;
                 _this.clearFromListValue = true;

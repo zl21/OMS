@@ -43,6 +43,30 @@ export default {
       },
       selection: [],
       formConfig: {
+        iconSite: 'bottomCenter', // rightTop
+        flodClick: null,
+        // setColnum: 4, // 4列
+        // setRow: 3, // 3行
+        btn: {
+          typeAll: 'default', // 按钮统一风格样式
+          buttons: [
+            {
+              type: 'primary',
+              webname: 'lookup_dianchangpingfen',
+              // type: 'posdefault',
+              text: $it('btn.find'), // 查找
+              btnclick: () => {
+                this.queryByPhyWarehouseId();
+              }
+            },
+            {
+              text: '重置', // 按钮文本
+              btnclick: () => {
+                console.log('storeScoreStrategy::reset::');
+              } // 按钮点击事件
+            }
+          ]
+        },
         formData: [
           {
             colname: 'CP_C_PHY_WAREHOUSE_ID',
@@ -83,14 +107,6 @@ export default {
       btnConfig: {
         typeAll: 'default',
         buttons: [
-          {
-            webname: 'lookup_dianchangpingfen',
-            type: 'posdefault',
-            text: $it('btn.find'), // 查找
-            btnclick: () => {
-              this.queryByPhyWarehouseId();
-            }
-          },
           {
             webname: 'Newlyadded_dianchangpingfen',
             type: 'default',
