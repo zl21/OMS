@@ -44,19 +44,23 @@ export default {
     };
   },
   computed: {
-    // Foldnum:function () {
-    //   return this.$parent.searchFoldnum;
-    // }
+    Foldnum:function () {
+      return this.$parent.searchFoldnum;
+    }
   },
   watch: {
-    // Foldnum:{
-    //   handler(newName) {
-    //     let inputNum = this.$parent.formArray.length;
-    //     let isColumn = this.$parent.setdefaultColumn;
-    //     this.isShowSelectBut = (inputNum / isColumn) > newName ? true : false
-    // 　},
-    // 　immediate: true
-    // }
+    Foldnum:{
+      handler(newName) {
+        let inputNum = this.$parent.formArray.length;
+        let isColumn = this.$parent.setdefaultColumn;
+        this.isShowSelectBut = (inputNum / isColumn) > newName ? true : false
+        let rowCount = (inputNum / isColumn)
+        if (inputNum % isColumn == 0 && (!this.isShowSelectBut || rowCount == newName)) {
+          $('#listForm').attr('style', 'padding-bottom: 32px !important')
+        }
+    　},
+    　immediate: true
+    }
   },
   mounted() {},
   methods: {
