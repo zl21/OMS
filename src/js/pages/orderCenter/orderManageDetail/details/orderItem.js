@@ -1,4 +1,5 @@
 import { OC_B_ORDER } from '@/js/pages/orderCenter/returngood/config';
+
 export default {
   data() {
     return {
@@ -6,7 +7,7 @@ export default {
       tableConfig: {
         columns: [],
         data: [],
-        pageShow: false, // 控制分页是否显示
+        pageShow: true, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         indexColumn: true,
@@ -14,7 +15,7 @@ export default {
         height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30,50,100], // 每页条数切换的配置
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
         pageSize: 10, // 每页条数
         current: '', // 当前页
       },
@@ -27,17 +28,21 @@ export default {
   },
   watch: {
     componentData: {
-      handler(newVal) {
-        this.objid = newVal.objid;
-        // this.getColumns(newVal);
-        // this.getData(newVal);
-
+      handler(newVal, oldVal) {
         this.request(newVal);
       },
 
     }
   },
   methods: {
+    pageChange(val) {
+      this.tableConfig.current = val;
+      this.request(this.componentData);
+    },
+    pageSizeChange(val) {
+      this.tableConfig.pageSize = val;
+      this.request(this.componentData);
+    },
     async request(req) {
       const self = this;
       const data = JSON.parse(JSON.stringify(OC_B_ORDER[req.tablename]));
@@ -54,6 +59,7 @@ export default {
       formdata.append('table', data.table);
       formdata.append('searchdata', data.searchdata);
       formdata.append('refcolid', data.refcolid);
+      // objectTableItem
 
       const res = await this.service.common.objectTableItem(formdata);
       if (res.data.code === 0) {
@@ -61,66 +67,13 @@ export default {
       } else {
         console.log('数据加载失败');
       }
-
-      // axios({
-      //   url: this.tableItemUrl,
-      //   method: 'post',
-      //   data: formdata
-      // }).then((res) => {
-      //   if (res.data.code === 0) {
-      //     self.showTable(res.data.datas);
-      //   } else {
-      //     console.log('数据加载失败');
-      //   }
-      // });
-    },
-    pageChange(val) {
-      this.tableConfig.current = val;
-      // this.getData(this.componentData,{index:val,size:this.tableConfig.pageSize});
-    },
-    pageSizeChange(val) {
-      this.tableConfig.pageSize = val;
-      // this.getData(this.componentData,{size:val});
-    },
-    // 获取表头
-    async getColumns(req){
-      try {
-        const { data: {data} } = await this.service.orderCenter.initObject({"TABLE":req.tabValue});
-        let arr = [];
-        data.DATA.forEach(element => {
-          arr.push({title:`${element.headerName}`,key:`${element.field}`});
-        });
-        this.tableConfig.columns = arr;
-      } catch (error) {
-        new Error(error)
-      }
-    },
-    // 获取数据
-    async getData(req,obj) {
-      console.log(req,obj);
-      this.loading = true;
-      this.tableConfig.data = [];
-      this.tableConfig.pageShow = false;
-      let params = {
-        ID: this.objid, 
-        TABLE: 'OC_B_ORDER',
-        SUB_TABLE: req.tabValue,
-        REFRESH: false
-      };
-      if(obj){
-        params = Object.assign(params,obj)
-      }
-      try {
-        const { data: { data } } = await this.service.orderCenter.queryObject(params);
-        this.tableConfig.data = data.DATA.SUB_ITEM;
-        if(data.DATA.PAGE_INFO){
-          this.tableConfig.pageShow = true
-          this.tableConfig.total = data.DATA.PAGE_INFO.COUNT
-        }
-      } catch (error) {
-        new Error(error)
-      }
-        
+      // const { data: { code, datas } } = await this.service.orderCenter.batchAddGoods(param);
+      // if (code === 0) {
+      //   self.showTable(datas);
+      // } else {
+      //   // 数据加载失败
+      //   console.log(self.vmI18n.t('modalTips.z3'));
+      // }
     },
     showTable(obj) {
       const thead = obj.tabth.filter((element) => {
@@ -140,6 +93,7 @@ export default {
         }
         return obj;
       });
+      const tabname = obj.tabname;
       this.tableConfig = {
         columns: thead,
         data: tbody,
@@ -157,8 +111,7 @@ export default {
     }
   },
   mounted() {
-    if (this.componentData && this.componentData.tabValue) {
-      // this.getData(this.componentData);
+    if (this.componentData && this.componentData.tablename) {
       this.request(this.componentData);
     }
   }

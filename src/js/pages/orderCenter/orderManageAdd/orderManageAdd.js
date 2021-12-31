@@ -1385,7 +1385,7 @@ export default {
       self.jordanTableConfig.totalData = [];
       self.jordanTableConfig.data.forEach((item) => {
         qty += parseInt(item.QTY);
-        amt = $omsUtils.accAdd(
+        amt = $utils.accAdd(
           parseFloat(item.REAL_AMT).toFixed(2),
           amt
         );
@@ -1512,7 +1512,7 @@ export default {
             let amt = 0;
             let qty = 0;
             self.jordanTableConfig.data.forEach((item) => {
-              amt = $omsUtils.accAdd(
+              amt = $utils.accAdd(
                 parseFloat(item.REAL_AMT).toFixed(2),
                 amt
               );
@@ -1708,7 +1708,7 @@ export default {
       items.forEach((item) => {
         if (item.IS_GIFT == '0') {
           noGiftFlag = true;
-          realAmtTotal = $omsUtils.accAdd(
+          realAmtTotal = $utils.accAdd(
             parseFloat(item.REAL_AMT).toFixed(2),
             realAmtTotal
           );
@@ -1866,7 +1866,7 @@ export default {
                     let amt = 0;
                     let qty = 0;
                     self.jordanTableConfig.data.forEach((item) => {
-                      amt = $omsUtils.accAdd(
+                      amt = $utils.accAdd(
                         parseFloat(item.REAL_AMT).toFixed(2),
                         amt
                       );
@@ -2080,7 +2080,7 @@ export default {
             let amt = 0;
             let qty = 0;
             self.jordanTableConfig.data.forEach((item) => {
-              amt = $omsUtils.accAdd(
+              amt = $utils.accAdd(
                 parseFloat(item.REAL_AMT).toFixed(2),
                 amt
               );
@@ -2141,7 +2141,7 @@ export default {
                     let amt = 0;
                     let qty = 0;
                     self.jordanTableConfig.data.forEach((item) => {
-                      amt = $omsUtils.accAdd(
+                      amt = $utils.accAdd(
                         parseFloat(item.REAL_AMT).toFixed(2),
                         amt
                       );

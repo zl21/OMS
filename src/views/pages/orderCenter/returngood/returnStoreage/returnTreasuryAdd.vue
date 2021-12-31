@@ -74,6 +74,6 @@ import returnTreasuryAdd from "@/js/pages/orderCenter/returngood/returnStoreage/
 export default returnTreasuryAdd;
 </script>
 
-<style lang="less">
+<style lang="less" scope>
 @import "~@/css/pages/orderCenter/returngood/returnStoreage/returnTreasuryAdd.less";
 </style>

@@ -823,8 +823,8 @@ export default {
       if (!self.actionTableCon.data) return;
       self.actionTableCon.data.forEach((item) => {
         qty += Number(item[key1] || 0);
-        amt = $omsUtils.accAdd(Number(item[key2]), Number(amt));
-        realAmt = $omsUtils.accAdd(item.REAL_AMT || 0, realAmt)
+        amt = $utils.accAdd(Number(item[key2]), Number(amt));
+        realAmt = $utils.accAdd(item.REAL_AMT || 0, realAmt)
       });
       setTimeout(() => {
         if (self.returnProduct == "0") {
@@ -879,7 +879,7 @@ export default {
             const sumQ = item.QTY_REFUND + it.QTY_REFUND;
             if (Number(item.RETURNABLE_QTY) > sumQ) {
               item.QTY_REFUND += it.QTY_REFUND;
-              const sum = $omsUtils.accAdd(item.REFUND_FEE, it.REFUND_FEE)
+              const sum = $utils.accAdd(item.REFUND_FEE, it.REFUND_FEE)
               item.REFUND_FEE = $utils.floatNumber(sum);
             } else {
               item.QTY_REFUND = Number(it.RETURNABLE_QTY);

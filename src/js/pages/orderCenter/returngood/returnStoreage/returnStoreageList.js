@@ -3,8 +3,6 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
-// import BC from 'burgeonComponents';
-const { Components } = $BC
 
 const getCurrentTime = (() => {
   return $utils.Format(new Date(), 'yyyy-MM-dd 23:59:59');
@@ -44,7 +42,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: Components.ImportTable,
+        url: $BC.Components.ImportTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}

@@ -30,7 +30,8 @@ export default {
     $network.post('/p/cs/oc/b/oms/v1/ocborder/deleteOrderGoods', params), // 批量删除商品信息-删除按钮
   parseOrderList: (params) =>
     $network.post('/p/cs/oc/b/oms/v1/ocborder/parseOrderList', params), // 批量解析组合商品-确定解析
-  auditOrder: (params) => $network.post('/p/cs/oc/oms/v1/auditOrder', params), // 审核
+  // auditOrder: (params) => $network.post('/p/cs/oc/oms/v1/auditOrder', params), // 审核
+  auditOrder: params => $network.post('/api/cs/oc/oms/v1/auditOrder', params), // 审核
   getSeniorQueryCondition: (params) =>
     $network.post('/api/cs/oc/oms/v1/getSeniorQueryCondition', params), // 高级搜索项
   reallocateLogistics: (params) =>
@@ -43,13 +44,15 @@ export default {
     $network.post('/api/cs/oc/oms/v1/doBatchReturnOrder', params), // 批量退单
   exportOcBOrder: (params) =>
     $network.post('/api/cs/oc/oms/v1/exportOcBOrder', params), // 导出
-  auditOrderReserve: (params) =>
-    $network.post('/p/cs/oc/oms/v1/auditOrderReserve', params), // 反审核
+  // auditOrderReserve: (params) =>
+  //   $network.post('/p/cs/oc/oms/v1/auditOrderReserve', params), // 反审核
+  auditOrderReserve: params => $network.post('/api/cs/oc/oms/v1/auditOrderReserve', params), // 反审核
   checkAddOrderInvoicing: (params) =>
     $network.post('/api/cs/oc/oms/v1/checkAddOrderInvoicing', params),
   checkRecordInvoicing: (params) =>
     $network.post('/api/cs/oc/oms/v1/checkRecordInvoicing', params), // 开票通知
-  cancelOrder: (params) => $network.post('/p/cs/oc/oms/v1/cancelOrder', params), // 订单取消
+  // cancelOrder: (params) => $network.post('/p/cs/oc/oms/v1/cancelOrder', params), // 订单取消
+  cancelOrder: params => $network.post('/api/cs/oc/oms/v1/cancelOrder', params), // 订单取消
   orderInterception: (params) =>
     $network.post('/api/cs/oc/oms/v1/orderInterception', params), // 订单拦截
   queryshortagSearchOrder: (params) =>
@@ -59,19 +62,22 @@ export default {
   doManualDeliveryOrder: (params) =>
     $network.post('/api/cs/oc/oms/v1/doManualDeliveryOrder', params), // 更改为平台发货
   releaseInventory: (params) => $network.post('/p/cs/releaseInventory', params), // 释放库存
-  checkOrderBeforeLogistics: (params) =>
-    $network.post(
-      '/p/cs/oc/b/oms/v1/ocborder/checkOrderBeforeLogistics',
-      params
-    ), // 订单列表-修改物流前校验
-  checkOrderBeforeWarehouse: (params) =>
-    $network.post(
-      '/p/cs/oc/b/oms/v1/ocborder/checkOrderBeforeWarehouse',
-      params
-    ), // 订单列表-修改仓库前校验
+  // checkOrderBeforeLogistics: (params) =>
+  //   $network.post(
+  //     '/p/cs/oc/b/oms/v1/ocborder/checkOrderBeforeLogistics',
+  //     params
+  //   ), // 订单列表-修改物流前校验
+  checkOrderBeforeLogistics: params => $network.post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', params), // 修改物流
+  // checkOrderBeforeWarehouse: (params) =>
+  //   $network.post(
+  //     '/p/cs/oc/b/oms/v1/ocborder/checkOrderBeforeWarehouse',
+  //     params
+  //   ), // 订单列表-修改仓库前校验
+  checkOrderBeforeWarehouse: params => $network.post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', params), // 修改仓库
   splitOrder: (params) => $network.post('/api/cs/oc/oms/v1/splitOrder', params), // 缺货拆单
-  manualUnHoldOrder: (params) =>
-    $network.post('/p/cs/oc/oms/v2/order/batch/hold/cancel', params), // 零售发货单-取消HOLD单
+  // manualUnHoldOrder: (params) =>
+  //   $network.post('/p/cs/oc/oms/v2/order/batch/hold/cancel', params), // 零售发货单-取消HOLD单
+  manualUnHoldOrder: params => $network.post('/api/cs/oc/oms/v1/manualUnHoldOrder', params), // 审核
   mergeOrderOne: (params) =>
     $network.post('/p/cs/oc/oms/v1/mergeOrder', params), // 合并订单
   cancelMergeOrder: (params) =>
@@ -114,8 +120,10 @@ export default {
   markCancel: (params) => $network.post('/p/cs/oc/oms/v1/markCancel', params), // 订单详情 - 修改地址
   selectRegion: (params) => $network.post('/p/cs/oc/oms/v1/selectRegion', params), // 订单详情 - 修改地址
   getOrderDetailList: params => $network.post('/api/cs/oc/oms/v1/getOrderDetailList', params), // 获取订单详情
-
- 
+  orderUnDeliveryUrgent: params => $network.post('/api/cs/oc/oms/v1/orderUnDeliveryUrgent', params), // 零售发货单 - 批量取消加急
+  againOccupyStock: params => $network.post('/api/cs/oc/oms/v1/againOccupyStock', params), // 重新寻源
+  checkOtherMergeOrder: params => $network.post('/p/cs/jitx/checkOtherMergeOrder', params), // 是否存在可合并订单
+  orderDetentionRelease: params => $network.post('/api/cs/oc/oms/v1/orderDetentionRelease', params), // 卡单释放
   /**
    * 扫描入库
    */

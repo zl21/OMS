@@ -2,6 +2,7 @@ import quanXianTable from '@/views/pages/systemConfig/quanXian/quanXianTable.vue
 import copyModal from '@/views/pages/systemConfig/quanXian/copyModal.vue';
 import form from '@/assets/js/__utils__/form';
 import qxBtnData from './qxBtnData';
+import unzipXv from '@/assets/js/dataToSmall';
 // import R3 from '@syman/burgeon-r3';
 
 console.log('R3::', R3);
@@ -473,7 +474,7 @@ export default {
       let data = res.data.data;
       if (res.data.code === 0) {
         if (url == '/p/cs/permission/v1/selectDataPermission') {
-          data = JSON.parse($BC.Utils.unzip(data));
+          data = JSON.parse(unzipXv(data));
           console.log('解压数据：', data);
           console.log('总计：', data.rowSize);
         }

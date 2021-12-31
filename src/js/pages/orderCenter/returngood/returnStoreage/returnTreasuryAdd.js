@@ -562,6 +562,7 @@ export default {
         // 新增 或者退货转换货单状态
         let webnameArr = ['ManualMatching_save', 'Mismatchingmandatorymatching_return'];
         let buttonArr = []
+        this.btnConfig.btnsite = 'right'
         this.btnConfig.buttons.forEach((element) => {
           if (element.webname && webnameArr.includes(element.webname)) {
             buttonArr.push(element);
