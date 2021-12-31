@@ -101,7 +101,7 @@ const DownLoad = {
             }, // 按钮点击事件
           },
           {
-            type: "", // 按钮类型
+            type: "primary", // 按钮类型
             text: $i18n.t("btn.download"), // 下载 按钮文本
             icon: "", // 按钮图标
             size: "", // 按钮大小

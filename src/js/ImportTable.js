@@ -43,6 +43,7 @@ export default {
           },
           {
             text: $i18n.t('btn.import'), // 按钮文本
+            type: "primary", // 按钮类型
             disabled: false,
             btnclick: () => {
               this.importDialog();
