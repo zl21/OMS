@@ -15,8 +15,13 @@ export default {
         width: '24',
         version:'1.4',
         itemdata: {
-          colid: 168348,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
+          refcolval: {
+            fixcolumn: 'CP_C_PLATFORM_ID',
+            expre: 'equal',
+            srccol: 'CP_C_SHOP_ID'
+          },
           display: 'OBJ_FK', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
@@ -102,9 +107,11 @@ export default {
       end_time: downData.formValue.startEndTimes[1] ? $utils.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]) : undefined, // 结束时间
       table: _this.$route.params.tableName // 当前表名 必传
     };
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
     const {
       data: { code, message }
-    } = await _this.service.common.publicUrlParams('/p/cs/ip/v1/order/download/orderExchangeDownLoad', param);
+    } = await _this.service.interfacePlatform.exchangeDownload(fromdata);
     if (code === 0) {
       _this.$Message.success(message);
       _this.$emit('closeActionDialog', true);

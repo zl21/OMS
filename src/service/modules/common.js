@@ -111,6 +111,7 @@ export default {
   // 查询接口。共用于：financeCenter、orderCenter
   queryOrderList: (params) =>
     $network.post("/api/cs/oc/oms/v1/queryOrderList", params),
+  objectSubmit: params => $network.post('/p/cs/objectSubmit', params),
 
   // tree结构请求接口：
   cpCHrorgTree: (params) => $network.post("/p/c/cpCHrorgTree", params),

@@ -1,10 +1,7 @@
 <template>
   <!-- 发货后退款 -->
-  <div
-    id="cbx"
-    class="refundAfterShipment customized-detail"
-  >
-    <div class="obj-btn">
+  <div id="cbx" class="refundAfterShipment customized-detail">
+    <div class="re_button obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
     <div class="obj-main">
@@ -13,10 +10,7 @@
           <Panel name="1">
             <!-- 基础资料 -->
             {{ $it("pL.basicData") }}
-            <p
-              slot="content"
-              class="basic-message"
-            >
+            <p slot="content" class="basic-message">
               <ImageUpload
                 :dataitem="imageUploadConfig"
                 @deleteImg="deleteImg"
@@ -28,50 +22,42 @@
                 :defaultconfig="reForm.config"
                 class="basic-message-form"
               >
-                <div
-                  slot="CBX"
-                  class="cbx"
-                >
+                <div slot="CBX" class="cbx">
                   <i style="color: #ff9900; padding: 0 6px">*</i>
                   <!-- 退款类型 -->
                   {{ $it("fL.refundType") }}
                   :&nbsp;&nbsp;&nbsp;&nbsp;
-                  <RadioGroup
-                    v-model="BILL_TYPE"
-                    @on-change="billTypeChange"
-                  >
+                  <RadioGroup v-model="BILL_TYPE" @on-change="billTypeChange">
                     <!-- 仅退款 -->
                     <Radio label="1">
                       {{ $it("fL.refundOnly") }}
                     </Radio>
                     <!-- 退货退款 -->
                     <Radio
-                      v-if="$route.params.customizedModuleName === 'REFUNDAFTERSHIPMENT'"
+                      v-if="
+                        $route.params.customizedModuleName ===
+                        'REFUNDAFTERSHIPMENT'
+                      "
                       label="0"
                     >
                       {{ $it("fL.returnRefund") }}
                     </Radio>
                   </RadioGroup>
                 </div>
-                <div
-                  slot="returnType"
-                  class="returnType"
-                >
-                  <OmsForm :form-config="returnTypeFormConfig" />
+                <div slot="returnType" class="returnType">
+                  <!-- 退款分类 -->
+                  <!-- <OmsForm :form-config="returnTypeFormConfig" /> -->
+                  <!-- <FkinputPlus></FkinputPlus> -->
+
                 </div>
-                <div
-                  slot="returnTypeItem"
-                  class="returnType"
-                >
-                  <OmsForm :form-config="returnTypeItemConfig" />
+                <div slot="returnTypeItem" class="returnType">
+                  <!-- 退款描述 -->
+                  <!-- <OmsForm :form-config="returnTypeItemConfig" /> -->
                 </div>
               </FormLayout>
             </p>
           </Panel>
-          <Panel
-            v-if="!$route.query.new"
-            name="2"
-          >
+          <Panel v-if="!$route.query.new" name="2">
             <!-- 日志 -->
             {{ $it("pL.log") }}
             <div slot="content">
@@ -80,23 +66,26 @@
           </Panel>
         </Collapse>
       </div>
-      <div class="tab-content">
-        <div class="tab-content-navTab">
-          <p
-            :class="navStatus === 0 ? 'action' : ''"
-            @click="navStatus = 0"
-          >
-            <!-- 退款单详情 -->
+      <div class="tab-content obj-table">
+        <OmsLabel
+          :label-list="labelList"
+          :label-default-value="labelDefaultValue"
+          class="businessLabel totalHeight"
+          @labelClick="labelClick"
+        />
+        <!-- <div class="tab-content-navTab">
+          <p :class="navStatus === 0 ? 'action' : ''" @click="navStatus = 0">
             {{ $it("pL.refundSlipDetails") }}
           </p>
-          <p v-if="$route.query.customizedModuleId !== 'New'" :class="navStatus === 1 ? 'action' : ''" @click="navStatus = 1">
-            日志
+          <p
+            v-if="$route.query.customizedModuleId !== 'New'"
+            :class="navStatus === 1 ? 'action' : ''"
+            @click="navStatus = 1"
+          >
+            {{ $it('pL.log') }}
           </p>
-        </div>
-        <div
-          v-show="navStatus === 0"
-          class="re_table"
-        >
+        </div> -->
+        <div v-show="navStatus === '0'" class="re_table">
           <OmsTable
             :jordan-table-config="tableConfig"
             @on-page-change="tabllePageChange"
@@ -110,7 +99,7 @@
           />
         </div>
         <!-- 日志 -->
-        <div v-show="navStatus === 1" class="re_table">
+        <div v-show="navStatus === '1'" class="re_table">
           <OmsTable
             v-loading="returnLogTableLoad"
             :jordanTableConfig="returnLogTableConfig"
@@ -128,7 +117,7 @@
           @on-cancel="querycancel"
           @on-ok="queryorder"
         >
-          <div class="orderContent cus-modal">
+          <div class="orderContent">
             <OmsForm :form-config="order.orderform" />
             <OmsButton :btn-config="order.btn" />
           </div>
@@ -144,7 +133,7 @@
         <Modal
           v-model="addItem.modal"
           :mask="true"
-          :title="$it('modalTitle.originalChargebackDetails')"
+          :title="$it('mT.originalChargebackDetails')"
           :width="800"
           @on-cancel="addItemCancel"
           @on-ok="onAddItem"
@@ -157,22 +146,18 @@
             @on-select-cancel="onSelect"
           />
         </Modal>
-        <Modal
-          v-model="isModal"
-          title="提示"
-          @on-ok="deleteImgBySure"
-        >
+        <Modal v-model="isModal" title="提示" @on-ok="deleteImgBySure">
           <!-- 点击后将删除凭证,是否继续? -->
-          <p>{{ $it("mT.z5") }}</p>
+          <p>{{ $it("tip.z5") }}</p>
         </Modal>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import orderItem from '@/js/pages/orderCenter/returngood/refundAfterShipment';
+import orderItem from '@/js/pages/orderCenter/returngood/refundAfterShipment';
 
-  export default orderItem;
+export default orderItem;
 </script>
 
 <style lang='less' scoped>

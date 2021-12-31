@@ -14,8 +14,14 @@ export default {
         isdisabled: false,
         itemdata: {
           serviceId: 'r3-cp',
-          colid: 170287,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
+          datelimit: 'all',
+          refcolval: {
+            fixcolumn: 'CP_C_PLATFORM_ID',
+            expre: 'equal',
+            srccol: 'CP_C_SHOP_ID'
+          },
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
@@ -70,7 +76,9 @@ export default {
       start_time: start ? $utils.standardTimeConversiondateToStr(start) : '',
       end_time: end ? $utils.standardTimeConversiondateToStr(end) : ''
     };
-    const res = await self.service.interfacePlatform.tbGoodsDownload(param);
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
+    const res = await self.service.interfacePlatform.itemDownload(fromdata);
     if (res.data.code === 0) {
       self.$Message.success(res.data.message);
       // self.$emit('confirmImport');

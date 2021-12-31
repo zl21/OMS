@@ -54,8 +54,7 @@ export default {
         let inputNum = this.$parent.formArray.length;
         let isColumn = this.$parent.setdefaultColumn;
         this.isShowSelectBut = (inputNum / isColumn) > newName ? true : false
-        let rowCount = (inputNum / isColumn)
-        if (inputNum % isColumn == 0 && (!this.isShowSelectBut || rowCount == newName)) {
+        if (inputNum % isColumn == 0 && (!this.isShowSelectBut)) {
           $('#listForm').attr('style', 'padding-bottom: 32px !important')
         }
     　},

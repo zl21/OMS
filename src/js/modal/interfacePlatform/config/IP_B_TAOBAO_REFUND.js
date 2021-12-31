@@ -17,7 +17,7 @@ export default {
         itemdata: {
           serviceId:'r3-cp',
           col: 1,
-          colid: 168348,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
@@ -103,11 +103,11 @@ export default {
       status: self.downLoadFormConfig.formValue.status,
       table: 'IP_B_TAOBAO_REFUND'
     };
-    // const fromdata = new FormData();
-    // fromdata.append('param', JSON.stringify(params));
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(params));
 
     // 请求退单下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(params);
+    const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('closeActionDialog', true);

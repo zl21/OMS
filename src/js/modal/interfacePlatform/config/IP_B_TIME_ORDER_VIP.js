@@ -26,7 +26,7 @@ export default {
         ],
         itemdata: {
           col: 1,
-          colid: 168378,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           refcolval: {
@@ -96,11 +96,12 @@ export default {
       start_time: startTime,
       end_time: endTime
     };
-
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
     // 实效订单下载
     const {
       data: { code, message }
-    } = await self.service.interfacePlatform.orderDownload(param);
+    } = await self.service.interfacePlatform.downLoadVipTimeOrder(fromdata);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');

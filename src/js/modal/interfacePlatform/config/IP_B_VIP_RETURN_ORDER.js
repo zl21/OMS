@@ -18,7 +18,7 @@ export default {
         ],
         itemdata: {
           col: 1,
-          colid: 170109,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           refcolval: {
@@ -96,9 +96,11 @@ export default {
       params.start_time = $utils.standardTimeConversiondateToStr(formValue.query_date[0]);
       params.end_time = $utils.standardTimeConversiondateToStr(formValue.query_date[1]);
     }
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(params));
     try {
       // 唯品会退单下载
-      const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(params);
+      const { data: { code, message } } = await self.service.interfacePlatform.downLoadVipOrderRefund(fromdata);
       self.dialogLoad = false;
       if (code === 0) {
         self.$Message.success(message);

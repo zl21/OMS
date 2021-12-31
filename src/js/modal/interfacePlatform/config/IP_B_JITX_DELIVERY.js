@@ -18,7 +18,7 @@ export default {
         ],
         itemdata: {
           col: 1,
-          colid: 168770,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
           refcolval: {
@@ -119,8 +119,10 @@ export default {
       end_time: end ? $utils.standardTimeConversiondateToStr(end) : '',
       table: self.$route.params.tableName // 当前表名 必传
     };
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
     // 寻仓订单下载
-    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
     if (code === 0) {
       self.$Message.success(message);
       self.$emit('confirmImport');

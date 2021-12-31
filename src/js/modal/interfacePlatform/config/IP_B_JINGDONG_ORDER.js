@@ -16,8 +16,13 @@ export default {
         isdisabled: false,
         itemdata: {
           serviceId:'r3-cp',
-          colid: 169446,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
+          refcolval: {
+            fixcolumn: 'CP_C_PLATFORM_ID',
+            expre: 'equal',
+            srccol: 'CP_C_SHOP_ID'
+          },
           datelimit: 'all',
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
@@ -104,10 +109,10 @@ export default {
       status: formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
-  
-
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
     // 请求下载订单接口
-    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
     if (code === 0) {
       self.taskId = message.match(/\d+/)[0];
       self.downLoadModal = true;

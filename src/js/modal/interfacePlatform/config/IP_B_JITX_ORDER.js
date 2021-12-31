@@ -27,9 +27,14 @@ export default {
             srccol: 'CP_C_SHOP_ID'
           },
           col: 1,
-          colid: 168806,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
           datelimit: 'all',
+          refcolval: {
+            fixcolumn: 'CP_C_PLATFORM_ID',
+            expre: 'equal',
+            srccol: 'CP_C_SHOP_ID'
+          },
           display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
           fkdisplay: 'drp', // 外键关联类型
           fkdesc: $it('other.shop'), // 店铺
@@ -124,8 +129,9 @@ export default {
       status: formValue.orderStatus, // 状态 必传 给默认值
       table: self.$route.params.tableName // 当前表名 必传
     };
-
-    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(param);
+    const fromdata = new FormData();
+    fromdata.append('param', JSON.stringify(param));
+    const { data: { code, message } } = await self.service.interfacePlatform.orderDownload(fromdata);
     if (code === 0) {
       self.downLoadModal = true;
       const orderNum = self.downLoadFormConfig.formValue.orderNum;

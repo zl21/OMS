@@ -15,8 +15,13 @@ export default {
         isActive: true,
         isdisabled: false,
         itemdata: {
-          colid: 181965,
+          colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
+          refcolval: {
+            fixcolumn: 'CP_C_PLATFORM_ID',
+            expre: 'equal',
+            srccol: 'CP_C_SHOP_ID'
+          },
           fkdisplay: 'drp', // 外键关联类型
           isfk: true, // 是否有fk键
           isnotnull: true, // 是否必填
@@ -93,8 +98,10 @@ export default {
     };
     self.dialogLoad = true;
     try {
+      const fromdata = new FormData();
+      fromdata.append('param', JSON.stringify(param));
       // 请求退单下载订单接口
-      const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(param);
+      const { data: { code, message } } = await self.service.interfacePlatform.refundDownload(fromdata);
       if (code === 0) {
         self.dialogLoad = false;
         self.$Message.success(message);
