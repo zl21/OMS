@@ -1,6 +1,6 @@
 <!-- 开发文档：http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/914142/2/2061 -->
 <template>
-  <div class="customized-modal" style="width: 430px">
+  <div class="cus-modal" style="width: 430px">
     <Spin v-if="spinShow" size="large" fix />
     <OmsForm :form-config="downLoadFormConfig">
       <template #compile="{ rowData }">

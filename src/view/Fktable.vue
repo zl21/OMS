@@ -1,5 +1,5 @@
 <template>
-  <div class="fktable">
+  <div class="fktable ark-fktable">
     <!-- <input
       v-if="inputBox == true"
       type="text"
