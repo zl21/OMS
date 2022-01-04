@@ -1916,7 +1916,7 @@ export default {
                 if (data.PS_C_SKU_ECODE === d.PS_C_SKU_ECODE) {
                   d.QTY = parseInt(d.QTY) + parseInt(data.QTY);
 
-                  d.REAL_AMT = $omsUtils.accMul(d.PRICE_ACTUAL, d.QTY);
+                  d.REAL_AMT = $utils.accMul(d.PRICE_ACTUAL, d.QTY);
                 }
               });
             } else {
@@ -1965,7 +1965,7 @@ export default {
                   cloneArr.push({
                     RESERVE_DECIMAL02: item.tagPrice,
                     PRICE_ACTUAL: item.tagPrice,
-                    REAL_AMT: $omsUtils.accMul(item.tagPrice, 1),
+                    REAL_AMT: $utils.accMul(item.tagPrice, 1),
                     PS_C_CLR_ENAME: item.colorName,
                     PS_C_SIZE_ENAME: item.sizeName,
                     PS_C_SKU_ECODE: item.ECODE,
@@ -1990,7 +1990,7 @@ export default {
               );
               if (d) {
                 d.QTY += parseInt(cloneArr[0].QTY);
-                d.REAL_AMT = $omsUtils.accMul(d.PRICE_ACTUAL, d.QTY);
+                d.REAL_AMT = $utils.accMul(d.PRICE_ACTUAL, d.QTY);
                 _this.jordanTableConfig.data = [...x];
               } else {
                 _this.jordanTableConfig.data = _this.jordanTableConfig.data.concat(

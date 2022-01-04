@@ -1,9 +1,10 @@
+
 /**
  * 组合商品 - 老组件
  */
 // import BC from 'burgeonComponents';
+import comUtils from '@/assets/js/__utils__/common.js';
 const { Components } = $BC
-
 export default {
   components: {},
   data() {
@@ -463,7 +464,7 @@ export default {
                     _this.jordanTableConfig2SelectStatus = true;
                     this.selectData = Object.assign({}, arr[0]);
                     this.comodityDetailEvent();
-                    if ((res.data.code && res.data.code != 0) || (res.data.data.code && res.data.data.code != 0)) {
+                    if (res.data.code && res.data.code != 0 || res.data.data.code && res.data.data.code != 0) {
                       const message = res.data.message ? res.data.message : res.data.data.message;
                       this.$Message.warning(message);
                     }
@@ -635,7 +636,7 @@ export default {
       importTable: {
         refFuns: 'confirmFun',
         confirmTitle: $it('mT.import'), // 导入
-        titleAlign: 'left', // 设置标题是否居中 center left
+        titleAlign: 'center', // 设置标题是否居中 center left
         width: '600',
         scrollable: false, // 是否可以滚动
         closable: true, // 是否可以按esc关闭
@@ -644,7 +645,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: Components.ImportTable,
+        url: 'modal/publicDialog/importTable',
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {
@@ -658,11 +659,11 @@ export default {
                 // 1.处理返回数据组成两个table集合
                 const table1Arr = [];
                 let table2Arr = [];
-                returnData.forEach(item => {
+                returnData.forEach((item) => {
                   const skuGroupImportRequestsData = item.skuGroupImportRequests;
                   const skuImportRequest = item.skuImportRequest;
                   skuImportRequest.isActive = false;
-                  skuGroupImportRequestsData.forEach(groupItem => {
+                  skuGroupImportRequestsData.forEach((groupItem) => {
                     groupItem.isChecked = false;
                     // groupItem._index = index;
                   });
@@ -704,16 +705,18 @@ export default {
                 // 条数赋值
                 self.jordanTableConfig1.total = self.jordanTableConfig1.data.length;
                 self.jordanTableConfig2.total = self.jordanTableConfig2.data.length;
-              } else if (this.jordanTableConfig1.data.length > 0 && this.jordanTableConfig1.data[this.clickIndex].isActive) {
+              } else {
                 // 实际条码导入
-                if (returnData.length > 0) {
-                  returnData.forEach((item, index) => {
-                    item.isChecked = false;
-                    item._index = index;
-                  });
-                  this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList = this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.concat(returnData);
-                  this.jordanTableConfig2.data = this.jordanTableConfig2.data.concat(returnData);
-                  this.jordanTableConfig2.total = this.jordanTableConfig2.data.length;
+                if (this.jordanTableConfig1.data.length > 0 && this.jordanTableConfig1.data[this.clickIndex].isActive) {
+                  if (returnData.length > 0) {
+                    returnData.map((item, index) => {
+                      item.isChecked = false;
+                      item._index = index;
+                    });
+                    this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList = this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.concat(returnData);
+                    this.jordanTableConfig2.data = this.jordanTableConfig2.data.concat(returnData);
+                    this.jordanTableConfig2.total = this.jordanTableConfig2.data.length;
+                  }
                 }
               }
             }
@@ -721,7 +724,7 @@ export default {
         }
       },
       tab: {
-        activeName: $it('com.baseInformation') // 基本信息
+        activeName: $it('com.baseInformation'), // 基本信息
       },
       oprateLogTableConfig: {
         // 操作日志表格配置数据
@@ -824,13 +827,13 @@ export default {
           }
           this.$set(item, 'width', '12');
         });
-        if (Object.prototype.hasOwnProperty.call(this.jordanTableConfig1.businessFormConfig.formValue, 'GROUP_EXTRACT_NUM')) {
+        if (this.jordanTableConfig1.businessFormConfig.formValue.hasOwnProperty('GROUP_EXTRACT_NUM')) {
           // 删除每组抽取行数
           this.$delete(this.jordanTableConfig1.businessFormConfig.formValue, 'GROUP_EXTRACT_NUM');
           const table1Index = this.jordanTableConfig1.columns.length - 1;
           this.$delete(this.jordanTableConfig1.columns, table1Index);
         }
-        this.jordanTableConfig2.businessFormConfig.formData.forEach(item => {
+        this.jordanTableConfig2.businessFormConfig.formData.map(item => {
           if (item.label === $it('tL.grouping')) {
             this.$set(item, 'style', '');
             this.$delete(item, 'inputenter');
@@ -844,9 +847,8 @@ export default {
           }
           this.$set(item, 'width', '12');
         });
-
-        if (Object.prototype.hasOwnProperty.call(this.jordanTableConfig2.businessFormConfig.formValue, 'GROUPNUM')) {
-          this.$delete(this.jordanTableConfig2.businessFormConfig.formValue);
+        if (this.jordanTableConfig2.businessFormConfig.formValue.hasOwnProperty('GROUPNUM')) {
+          this.$delete(this.jordanTableConfig2.businessFormConfig.formValue, 'GROUPNUM');
           const table2Index = this.jordanTableConfig2.columns.length - 1;
           this.$delete(this.jordanTableConfig2.columns, table2Index);
         }
@@ -885,8 +887,8 @@ export default {
         }
         this.$set(this.jordanTableConfig1.businessFormConfig.formValue, 'GROUP_EXTRACT_NUM', '');
         // 表头也要加入该字段
-        const IS_GROUP_EXTRACT_NUM = this.jordanTableConfig1.columns.every(ele => ele.key !== 'GROUP_EXTRACT_NUM');
-        if (IS_GROUP_EXTRACT_NUM) {
+        const isGROUP_EXTRACT_NUM = this.jordanTableConfig1.columns.every(ele => ele.key !== 'GROUP_EXTRACT_NUM');
+        if (isGROUP_EXTRACT_NUM) {
           // 该数组中不存在是就添加
           const ciluIndex = this.jordanTableConfig1.columns.length;
           this.$set(this.jordanTableConfig1.columns, ciluIndex, {
@@ -960,7 +962,7 @@ export default {
               this.comodityDetailEvent();
             } // 表单回车事件
           });
-          this.jordanTableConfig2.businessFormConfig.formData.forEach(item => {
+          this.jordanTableConfig2.businessFormConfig.formData.map(item => {
             if (item.label === $it('fL.commodityCode')) {
               this.$set(item, 'width', '9');
             }
@@ -972,7 +974,7 @@ export default {
             }
           });
         } else {
-          this.jordanTableConfig2.businessFormConfig.formData.forEach(item => {
+          this.jordanTableConfig2.businessFormConfig.formData.map(item => {
             if (item.label === $it('fL.commodityCode')) {
               this.$set(item, 'width', '9');
             }
@@ -1101,13 +1103,12 @@ export default {
           {
             text: $it('btn.back'), // 返回
             btnclick: () => {
-              //$omsUtils.tabCloseAppoint(this);
+              comUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
                 tableName: 'PS_C_PRO_GROUP',
                 label: $it('pL.combinedCommodity'), // 组合商品档案
-                back: true,
               });
             }
           }
@@ -1130,7 +1131,7 @@ export default {
                 label: $it('pL.combinedCommodity_edit'), // 组合商品档案编辑
                 query: Object.assign({
                   id: -1,
-                  tabTitle: $it('pL.combinedCommodity_edit') // 组合商品档案编辑
+                  tabTitle: $it('pL.combinedCommodity_edit'), // 组合商品档案编辑
                 })
               });
             }
@@ -1178,13 +1179,13 @@ export default {
           {
             text: $it('btn.back'), // 返回
             btnclick: () => {
-              //$omsUtils.tabCloseAppoint(this);
+              // comUtils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 back: true,
                 tableId: 24525,
                 type: 'S',
                 tableName: 'PS_C_PRO_GROUP',
-                label: $it('pL.combinedCommodity') // 组合商品档案
+                label: $it('pL.combinedCommodity'), // 组合商品档案
               });
             }
           }
@@ -1279,8 +1280,13 @@ export default {
         return;
       }
       this.t_data.NUM = this.jordanTableConfig2.businessFormConfig.formValue.NUM;
-      // 判断是否是福袋类型
-      if (Object.prototype.hasOwnProperty.call(this.jordanTableConfig2.businessFormConfig.formValue, 'GROUPNUM')) {
+
+      if (
+        this.jordanTableConfig2.businessFormConfig.formValue.hasOwnProperty(
+          // 判断是否是福袋类型
+          'GROUPNUM'
+        )
+      ) {
         if (this.jordanTableConfig2.businessFormConfig.formValue.GROUPNUM === '') {
           // this.$Message.warning("分组不能为空！");
           this.$Message.warning($it('tip.v3'));
@@ -1336,31 +1342,29 @@ export default {
     },
     // 验证必填项不能为空
     IsCheck(type) {
-      let msg = '';
       switch (type) {
         case 'ECODE':
-          msg = $it('tL.productNo'); // 商品编码
+          return $it('tL.productNo'); // 商品编码
           break;
         case 'ENAME':
-          msg = $it('tL.productName'); // 商品名称
+          return $it('tL.productName'); // 商品名称
           break;
         case 'PS_C_BRAND_ID':
-          msg = $it('tL.brand'); // 品牌
+          return $it('tL.brand'); // 品牌
           break;
         case 'PRICELIST':
-          msg = $it('fL.price'); // 价格
+          return $it('fL.price'); // 价格
           break;
         case 'dimData':
-          msg = $it('other.product_related_info'); // 商品相关信息
+          return $it('other.product_related_info'); // 商品相关信息
           break;
         case 'NUM':
-          msg = $it('other.goods_quantit'); // 商品数量
+          return $it('other.goods_quantit'); // 商品数量
           break;
         case 'GROUPNUM':
-          msg = $it('tL.grouping'); // 分组
+          return $it('tL.grouping'); // 分组
           break;
       }
-      return msg;
     },
     // 数组对象的深拷贝
     deepCopy(obj) {
@@ -1370,7 +1374,7 @@ export default {
       const newObj = obj instanceof Array ? [] : {};
       for (const key in obj) {
         // 遍历obj,并且判断是obj的属性才拷贝
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (obj.hasOwnProperty(key)) {
           // 判断属性值的类型，如果是对象递归调用深拷贝
           newObj[key] = typeof obj[key] === 'object' ? this.deepCopy(obj[key]) : obj[key];
         }
@@ -1408,7 +1412,7 @@ export default {
         this.$Message.warning($it('tip.v8'));
         return;
       }
-      this.formConfig1.formData.forEach(ele => {
+      this.formConfig1.formData.map(ele => {
         if (ele.itemdata && ele.itemdata.fkdisplay === 'drp') {
           baseData.PS_C_BRAND_ID = ele.itemdata.pid;
         }
@@ -1437,7 +1441,7 @@ export default {
         this.$Message.warning($it('tip.u1'));
         return;
       }
-      this.formConfig1.formData.forEach(ele => {
+      this.formConfig1.formData.map(ele => {
         if (ele.itemdata && ele.itemdata.fkdisplay === 'mrp') {
           baseData.CP_C_STORE_IDS = ele.itemdata.pid;
         }
@@ -1462,8 +1466,8 @@ export default {
           if (item.GROUP_EXTRACT_NUM) {
             const groupDATA = {};
             if (item.psCSkugroupList) {
-              item.psCSkugroupList.forEach(inner => {
-                if (!Object.prototype.hasOwnProperty.call(groupDATA, inner.GROUPNUM)) {
+              item.psCSkugroupList.map(inner => {
+                if (!groupDATA.hasOwnProperty(inner.GROUPNUM)) {
                   groupDATA[inner.GROUPNUM] = [];
                   groupDATA[inner.GROUPNUM].push(inner);
                 } else {
@@ -1511,23 +1515,23 @@ export default {
       }
       this.SkuGroupRequestList = []; // 先清空 避免影响后面的
       this.SkuGroupRequestList = Array.from(this.deepCopy(this.jordanTableConfig1.data));
-      const TSkuGroupRequestList = [];
+      const t_SkuGroupRequestList = [];
       if (type === -1) {
         // 新增页面保存
-        this.SkuGroupRequestList.forEach(item => {
+        this.SkuGroupRequestList.map(item => {
           delete item.isActive;
           delete item.isChecked;
           delete item.BK;
-          const TPsCSkugroupList = item.psCSkugroupList;
-          TPsCSkugroupList.forEach(sub => {
+          const t_PsCSkugroupList = item.psCSkugroupList;
+          t_PsCSkugroupList.map(sub => {
             delete sub.isChecked;
             delete sub._index;
             delete sub.BK;
           });
           delete item.psCSkugroupList;
-          TSkuGroupRequestList.push({
+          t_SkuGroupRequestList.push({
             psCSku: item,
-            psCSkugroupList: TPsCSkugroupList
+            psCSkugroupList: t_PsCSkugroupList
           });
         });
       } else {
@@ -1538,25 +1542,24 @@ export default {
         // 编辑页面保存
         const psCSkukeys = []; // 左边表格列名
         const PsCSkugroupListkeys = []; // 右边表格列名
-        this.jordanTableConfig1.columns.forEach(item => {
+        this.jordanTableConfig1.columns.map(item => {
           psCSkukeys.push(item.key);
         });
         psCSkukeys.push('ID');
-        this.jordanTableConfig2.columns.forEach(item => {
+        this.jordanTableConfig2.columns.map(item => {
           PsCSkugroupListkeys.push(item.key);
         });
         PsCSkugroupListkeys.push('ID');
-        this.SkuGroupRequestList.forEach(item => {
+        this.SkuGroupRequestList.map(item => {
           const obj = {};
           obj.psCSku = {};
           obj.psCSkugroupList = [];
-          let TPsCSkugroupList = [];
+          let t_PsCSkugroupList = [];
           if (item.psCSkugroupList) {
-            TPsCSkugroupList = item.psCSkugroupList;
+            t_PsCSkugroupList = item.psCSkugroupList;
           }
           const procitem = Object.assign({}, item);
-
-          if (Object.prototype.hasOwnProperty.call(procitem, 'ID')) {
+          if (procitem.hasOwnProperty('ID')) {
             //
             for (const inner of psCSkukeys) {
               if (inner in procitem) {
@@ -1576,9 +1579,9 @@ export default {
             item.ID = -1;
             obj.psCSku = item;
           }
-          TPsCSkugroupList.forEach(sub => {
+          t_PsCSkugroupList.map(sub => {
             const Len = obj.psCSkugroupList.length;
-            if (Object.prototype.hasOwnProperty.call(sub, 'ID')) {
+            if (sub.hasOwnProperty('ID')) {
               const itemobj = {};
               for (const innerM of PsCSkugroupListkeys) {
                 if (innerM in sub) {
@@ -1599,14 +1602,14 @@ export default {
               obj.psCSkugroupList.push(sub);
             }
           });
-          TSkuGroupRequestList.push(obj);
+          t_SkuGroupRequestList.push(obj);
         });
       }
       data = {
         objid: type,
         CP_C_STORE_IDS: baseData.CP_C_STORE_IDS,
         psCPro: baseData,
-        SkuGroupRequestList: TSkuGroupRequestList
+        SkuGroupRequestList: t_SkuGroupRequestList
       };
       this.service.commodityCenter.skuGroupSave(data).then(res => {
         const data = res.data;
@@ -1616,10 +1619,9 @@ export default {
             R3.store.commit('global/tabOpen', {
               type: 'S',
               tableName: 'PS_C_PRO_GROUP',
-              tableId: '24525',
-              back: true,
+              tableId: '24525'
             });
-            //$omsUtils.tabCloseAppoint(this);
+            comUtils.tabCloseAppoint(this);
           } else {
             this.IniData();
           }
@@ -1630,7 +1632,7 @@ export default {
     },
     // 表格选中某一行执行的操作
     onSelect(selection, row) {
-      this.jordanTableConfig1.data.forEach(item => {
+      this.jordanTableConfig1.data.map(item => {
         if (row.ECODE === item.ECODE) {
           item.isChecked = true;
         }
@@ -1639,7 +1641,7 @@ export default {
     // 取消选择的事件
     onSelectCancel(selection, row) {
       const self = this;
-      self.jordanTableConfig1.data.forEach(item => {
+      self.jordanTableConfig1.data.map(item => {
         if (item.ECODE === row.ECODE) {
           item.isChecked = false;
         }
@@ -1647,21 +1649,21 @@ export default {
     },
     onSelectAllCancel() {
       const self = this;
-      self.jordanTableConfig1.data.forEach(item => {
+      self.jordanTableConfig1.data.map(item => {
         item.isChecked = false;
       });
     }, // 全选勾选事件
     onSelectAll() {
       const self = this;
-      self.jordanTableConfig1.data.forEach(item => {
+      self.jordanTableConfig1.data.map(item => {
         item.isChecked = true;
       });
     }, // 全选选中事件
     // 左边表格单击某一行
     onRowClick(row, index) {
       this.clickIndex = index;
-      const tLen = this.jordanTableConfig1.data.length;
-      if (tLen > 0) {
+      const t_len = this.jordanTableConfig1.data.length;
+      if (t_len > 0) {
         this.jordanTableConfig1.data.forEach(element => {
           if (element.isActive) {
             element.isActive = false;
@@ -1672,7 +1674,7 @@ export default {
       row.psCSkugroupList = this.jordanTableConfig1.data[index].psCSkugroupList;
       this.jordanTableConfig1.data[index] = Object.assign({}, row);
       if (this.jordanTableConfig1.data[index].isActive) {
-        if (Object.prototype.hasOwnProperty.call(row, 'ID')) {
+        if (row.hasOwnProperty('ID')) {
           // 编辑
           // 这个是编辑页面显示数据
           // 调用右边分页的事件 进行分页
@@ -1695,7 +1697,7 @@ export default {
 
     // 右边表格选中某一行执行的操作
     RightonSelect(selection, row) {
-      this.jordanTableConfig2.data.forEach(item => {
+      this.jordanTableConfig2.data.map(item => {
         if (row._index === item._index) {
           item.isChecked = true;
         }
@@ -1704,7 +1706,7 @@ export default {
     // 取消选择的事件
     onSelectCancelCommodity(selection, row) {
       const self = this;
-      self.jordanTableConfig2.data.forEach(item => {
+      self.jordanTableConfig2.data.map(item => {
         if (item._index === row._index) {
           item.isChecked = false;
         }
@@ -1713,13 +1715,13 @@ export default {
     // 全部取消
     onSelectAllCancelCommodity() {
       const self = this;
-      self.jordanTableConfig2.data.forEach(item => {
+      self.jordanTableConfig2.data.map(item => {
         item.isChecked = false;
       });
     }, // 全选勾选事件
     onSelectAllCommodity() {
       const self = this;
-      self.jordanTableConfig2.data.forEach(item => {
+      self.jordanTableConfig2.data.map(item => {
         item.isChecked = true;
       });
     }, // 全选选中事件
@@ -1734,7 +1736,7 @@ export default {
         }
         // 编辑页面的删除明细
         const Noselectdata = []; // 存放没有选中的
-        this.jordanTableConfig1.data.forEach(item => {
+        this.jordanTableConfig1.data.map(item => {
           if (item.isActive) {
             selectcuu.push(item);
             if (item.ID) {
@@ -1802,7 +1804,7 @@ export default {
         }
         // 编辑页面删除明细走接口
         const Noselectdata = []; // 存放没有选中的
-        this.jordanTableConfig2.data.forEach(item => {
+        this.jordanTableConfig2.data.map(item => {
           if (item.isChecked) {
             selectTableRow.push(item);
             if (item.ID) {
@@ -1816,7 +1818,7 @@ export default {
         const cuLen = parseInt(Noselectdata.length) + parseInt(selectdedidata.length);
         if (this.jordanTableConfig2.data.length > cuLen) {
           // 存在选中新增的
-          this.jordanTableConfig1.data.forEach(item => {
+          this.jordanTableConfig1.data.map(item => {
             if (item.isActive) {
               item.psCSkugroupList = Noselectdata;
             }
@@ -1844,13 +1846,13 @@ export default {
         }
       } else {
         const arrNo = [];
-        this.jordanTableConfig2.data.forEach(item => {
+        this.jordanTableConfig2.data.map((item, index) => {
           if (!item.isChecked) {
             // 没选中
             arrNo.push(item);
           }
         });
-        this.jordanTableConfig1.data.forEach(item => {
+        this.jordanTableConfig1.data.map(item => {
           if (item.isActive) {
             item.psCSkugroupList = arrNo;
           }
@@ -1901,7 +1903,7 @@ export default {
         if (data.code == 0) {
           this.jordanTableConfig1.total = data.data.totalCount;
           this.jordanTableConfig1.data = [];
-          data.data.data.forEach((item, index) => {
+          data.data.data.map((item, index) => {
             item.isChecked = false;
             item._index = index;
             item.psCSkugroupList = [];
@@ -1941,12 +1943,12 @@ export default {
         if (data.code === 0) {
           this.jordanTableConfig2.total = data.data.totalCount;
           this.jordanTableConfig2.data = [];
-          data.data.data.forEach((item, index) => {
+          data.data.data.map((item, index) => {
             item.isChecked = false;
             item._index = index;
             this.jordanTableConfig2.data.push(item);
           });
-          this.jordanTableConfig1.data.forEach(sub => {
+          this.jordanTableConfig1.data.map(sub => {
             if (sub.ID && sub.ID === this.selectId) {
               sub.psCSkugroupList = this.jordanTableConfig2.data;
             }
@@ -2025,7 +2027,7 @@ export default {
     changeReadStatus() {
       // if (status === "已作废") {
       // 已作废
-      this.formConfig1.formData.forEach(item => {
+      this.formConfig1.formData.map(item => {
         if ('disabled' in item) {
           item.disabled = true;
         }
@@ -2150,10 +2152,10 @@ export default {
       // tab被点击时触发
       console.log(name, '改变');
     },
-    operateLogPageChange() {
+    operateLogPageChange(val) {
       // 页码改变
     },
-    operateLogPageSizeChange() {
+    operateLogPageSizeChange(val) {
       // 每页显示数据条数改变
     },
     setTableHeight() {
