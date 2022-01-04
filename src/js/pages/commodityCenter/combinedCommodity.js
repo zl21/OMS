@@ -1303,10 +1303,8 @@ export default {
         } else {
           this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.push(this.t_data);
         }
-      } else {
-        this.$Message.warning($it('tip.v5'))
       }
-      if (this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.length < 1) {
+      if (this.jordanTableConfig1.data.length || (this.jordanTableConfig1.data && this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.length < 1)) {
         // this.$Message.warning("请选择点击要录入商品明细的条码信息");
         this.$Message.warning($it('tip.v5'));
         return;
