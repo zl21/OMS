@@ -22,6 +22,7 @@ import store from '@/config/store/store'; // 将老框架公共状态注册为cu
 import omsThemecConfig from '@burgeon/oms-theme/package.json';
 import internationalizationConfig from '@burgeon/internationalization/package.json';
 import proVersion from './package.json';
+import axios from "axios";
 
 let omsTheme = localStorage.getItem("VarTheme");
 if (!omsTheme) {
@@ -47,6 +48,7 @@ class InitAppConfig {
     }
     // Vue.prototype.$theme = customizedTheme; // 将主题方法挂载到原型上
     Vue.prototype.qs = qs;
+    Vue.prototype.axios = axios;
     Vue.prototype.$lodash = window._;
     Vue.prototype.service = service;
     Vue.prototype.vmI18n = i18n; // 暂时留着, for 组件库
