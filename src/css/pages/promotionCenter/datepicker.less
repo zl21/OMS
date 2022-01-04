@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+.el-picker-panel{
+  font-size: 12px;
+  width: 256px;
+  &.has-sidebar{
+    width: 366px;
+    &.el-date-range-picker, &.el-date-range-picker{
+      width: 623px;
+    }
+    .el-picker-panel__sidebar {
+      .el-picker-panel__shortcut {
+        padding: 0;
+        text-indent: 12px;
+      }
+    }
+  }
+  &.el-date-range-picker, &.el-date-range-picker{
+    width: 512px;
+  }
+  .el-date-picker__header {
+    margin-bottom: 0;
+    .el-date-picker__header-label {
+      font-size: 14px;
+    }
+  }
+  .el-picker-panel__body {
+    .el-date-picker__time-header {
+      .el-input {
+        input {
+          height: 24px;
+          line-height: 24px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .el-picker-panel__content {
+    margin: 0 0 16px 0;
+    width: 256px;
+    .el-date-table td{
+      padding: 0;
+    }
+  }
+}

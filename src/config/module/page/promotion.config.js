@@ -15,7 +15,7 @@ export default {
   PROMACTIQUERYLIST: {
     component: () => import(
       /* webpackChunkName: 'PromotionCenterPage' */
-      'allpages/promotionCenter/onlinePromotion/promotionlist.vue'
+      'allpages/promotionCenter/offlinePromotion/promactiquerylist.vue'
     ),
     // labelName: '促销活动',
     labelName: $it('menu.ad'),
