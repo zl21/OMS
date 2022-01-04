@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loadings" class="promactiquery">
+  <div v-loading="loadings" class="promactiquery customized-list">
     <div style="height: 140px;">
       <div class="head_botton">
         <!-- <button v-if="buttons.indexOf(3194) >=0" class="active" @click="Demand">查找</button>
@@ -291,14 +291,15 @@ import axios from "axios";
 // import currentUserAccessDistrib from "framework/components/input/currentUserAccessDistrib.vue";
 // import currentUserAccessFirstLevel from "framework/components/input/P_currentUserAccessfirstLevel.vue"; // 促销大类
 // import currentUserAccessLastLevel from "framework/components/input/P_currentUserAccesslastLevel.vue"; // 促销中类
-// import currentUserAccessStore from "framework/components/input/currentUserAccessStore.vue";
+// import currentUserAccessStore from "framework/components/input/currentUserAccessStore.vue";im
 // import matrixInput from "framework/components/input/P_matrixInput.vue"; // 商品模糊查询
 // import errorMessage from "framework/components/tablelist/error.vue";
 // import Mydialog from "framework/components/dialog/mydialog.vue";
 // import myInputLd from "framework/components/element/input.vue";
 // import myInput from "framework/components/input/objinput_dz.vue";
 // import customTable from "framework/components/table/P_customTable.vue";
-import "@/assets/css/css_1_3/datepicker.less";
+// import "@/assets/css/css_1_3/datepicker.less";
+import "@/css/pages/promotionCenter/datepicker.less"
 
 const { 
   P_customTable,
