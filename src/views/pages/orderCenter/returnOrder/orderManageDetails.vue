@@ -54,6 +54,7 @@
       <WaterMark
         v-if="statusName !== ''"
         :text="statusName"
+        top="62px"
       />
     </div>
     <!--错误弹框-->
@@ -1012,9 +1013,7 @@ export default {
         data.isShowPii = val;
       }
       this.pageLoad = true;
-      this.service.orderCenter
-        .getDetail(data)
-        .then(res => {
+      this.service.orderCenter.getDetail(data).then(res => {
           this.pageLoad = false;
           if (res.data && res.data.code === 0) {
             const resData = res.data.data;
@@ -1057,7 +1056,7 @@ export default {
     this.objId = id;
     // BtnConfig.target = this;
     // BtnConfig.singleType = 1;
- this.tab1 = {
+    this.tab1 = {
       order: {
         ADJUST_AMT: '',
         BILL_NO: '',

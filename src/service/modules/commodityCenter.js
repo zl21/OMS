@@ -23,8 +23,8 @@ export default {
   spuSave: (params) => $network.post('/p/cs/ps/pro/v1/save', params), // spu档案保存
   querySku: (params) =>
     $network.post('/p/cs/ps/pro/group/v1/skuGroupLikeSelect', params), // SKU编码查询
-  skuGroupSave: (params) =>
-    $network.post('/p/cs/ps/pro/group/v1/skuGroupSave', params), // 组合商品保存接口
+  // skuGroupSave: (params) =>
+  //   $network.post('/p/cs/ps/pro/group/v1/skuGroupSave', params), // 组合商品保存接口
   selectGroupById: (params) =>
     $network.post('/p/cs/ps/pro/group/v1/selectGroupById', params), // 组合商品查询
   skuGroupDelItem: (params) =>

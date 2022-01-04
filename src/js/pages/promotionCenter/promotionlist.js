@@ -430,56 +430,56 @@ export default {
       },
       extendBtn: [
         {
-          // text: $it('btn.add'), // 新增,
+          text: $it('btn.add'), // 新增,
           webname: 'xinzengcux_cuxiaohuodomg',
           btnclick: () => {
             this.promotionClick();
           }
         },
         {
-          // text: $it('btn.batch_add'), // 批量新增,
+          text: $it('btn.batch_add'), // 批量新增,
           webname: 'piliangxinzengcux_cuxiaohuodomg',
           btnclick: () => {
             this.promotionBlukClick();
           }
         },
         {
-          // text: $it('btn.publish'), // 发布,
+          text: $it('btn.publish'), // 发布,
           webname: 'fabucux_cuxiaohuodomg',
           btnclick: () => {
             this.publish();
           }
         },
         {
-          // text: $it('btn.offline'), // 下线,
+          text: $it('btn.offline'), // 下线,
           webname: 'xiaxiancux_cuxiaohuodomg',
           btnclick: () => {
             this.actOffline();
           }
         },
         {
-          // text: $it('com.copy'), // 复制,
+          text: $it('com.copy'), // 复制,
           webname: 'copy_cuxiaohuodomg',
           btnclick: () => {
             this.copy();
           }
         },
         {
-          // text: $it('btn.delete'), // 删除,
+          text: $it('btn.delete'), // 删除,
           webname: 'deletecux_cuxiaohuodomg',
           btnclick: () => {
             this.deleteActi();
           }
         },
         {
-          // text: $it('btn.set_groups'), // 设置分组,
+          text: $it('btn.set_groups'), // 设置分组,
           webname: 'shezhifenzucux_cuxiaohuodomg',
           btnclick: () => {
             this.setGroup();
           }
         },
         {
-          // text: $it('btn.simulation'), // 模拟仿真,
+          text: $it('btn.simulation'), // 模拟仿真,
           webname: 'fangzhencux_cuxiaohuodomg',
           btnclick: () => {
             this.simulation();
@@ -537,7 +537,8 @@ export default {
     // 检测屏幕变化 设置高度 重新渲染agTabe
     $omsUtils.onresizes(this, 650);
     const buttons = await self.$OMS2.BtnConfig.config();
-    this.btnConfig.buttons = [...buttons.buttons, ...this.extendBtn];
+    this.btnConfig.buttons = this.extendBtn;
+    // this.btnConfig.buttons = [...buttons.buttons, ...this.extendBtn];
     // $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST', serviceId: 'r3-oc-oms' });
   },
   methods: {

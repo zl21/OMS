@@ -10,7 +10,7 @@
   <div>
     <Button type="error" size="small" @click="buttonClick"> 查找 </Button>
     <Button
-      type="defaule"
+      type="default"
       size="small"
       @click="buttonClick('reset')"
     >

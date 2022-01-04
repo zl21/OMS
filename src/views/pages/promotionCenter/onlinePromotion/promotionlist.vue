@@ -1,14 +1,15 @@
 <template>
   <!-- promactiqueryList -->
   <div class="customized-list" v-loading="loading">
+        <!-- 按钮 head_botton-->
+    <div class="customized-list-btn">
+      <OmsButton :btn-config="btnConfig" />
+    </div>
     <div class="" :class="['customized-list-form','promotionForm',Number.isInteger(formConfig.formData.length / this.colRowNum) ? 'formBottomPd' : '']">
       <OmsForm :form-config="formConfig" />
       <OmsButton :btn-config="formBtn" class="formBtn" />
     </div>
-    <!-- 按钮 head_botton-->
-    <div class="customized-list-btn">
-      <OmsButton :btn-config="btnConfig" />
-    </div>
+
     <!-- 列表部分 -->
     <div class="customized-list-table">
       <Tabs v-model="activeName" :animated="false" type="card">
