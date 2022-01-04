@@ -237,22 +237,22 @@ export default {
           data: {},
           width: 650,
           keepAlive: true,
-          url: 'modal/orderCenter/resolveAddress',
+          url: require('@/views/modal/orderCenter/resolveAddress.vue').default,
           name: 'addressDialog',
           excludeString: 'addressDialog',
           footerHide: true,
           maskClosable: false
         },
-        blacklist: {
-          title: $it('mT.blacklist'), // 加入黑名单
-          titleAlign: 'center',
-          width: 400,
-          data: {},
-          keepAlive: true,
-          url: 'order/joinBlackList',
-          name: 'blackListDialog',
-          footerHide: true
-        }
+        // blacklist: {
+        //   title: $it('mT.blacklist'), // 加入黑名单
+        //   titleAlign: 'center',
+        //   width: 400,
+        //   data: {},
+        //   keepAlive: true,
+        //   url: 'order/joinBlackList',
+        //   name: 'blackListDialog',
+        //   footerHide: true
+        // }
       },
       changeInternalRemarksConfig: {
         refFuns: 'confirmFun',
@@ -266,7 +266,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'changeInternalRemarks', // 组件名称
-        url: 'modal/orderCenter/changeInternalRemarks',
+        url: require('@/views/modal/orderCenter/changeInternalRemarks').default,
         keepAlive: true,
         excludeString: 'changeInternalRemarks', // 将name传进去，确认不缓存
         componentData: {}
@@ -788,17 +788,17 @@ export default {
                 });
             } // 按钮点击事件
           },
-          {
-            text: $it('mT.blacklist'), // 加入黑名单
-            btnclick: () => {
-              this.dialogs.blacklist.data = {
-                ID: this.tab1.order.ID || -1
-              };
-              if (this.$refs.blackListDialog) {
-                this.$refs.blackListDialog[0].openConfirm();
-              }
-            } // 按钮点击事件
-          },
+          // {
+          //   text: $it('mT.blacklist'), // 加入黑名单
+          //   btnclick: () => {
+          //     this.dialogs.blacklist.data = {
+          //       ID: this.tab1.order.ID || -1
+          //     };
+          //     if (this.$refs.blackListDialog) {
+          //       this.$refs.blackListDialog[0].openConfirm();
+          //     }
+          //   } // 按钮点击事件
+          // },
           {
             text: $it('btn.new_workOrder'), // 新增工单
             btnclick: () => {} // 按钮点击事件
@@ -1079,19 +1079,19 @@ export default {
       self.orderStatus = selectItem.ORDER_STATUS;
       if (selectItem.COPY_REASON) {
         // 订单只能是原单才能复制!
-        self.$Message.warning(this.vmI18n.t('modalTips.a2'));
+        self.$Message.warning($it('tip.a2'));
         return;
       }
       if (type === 'oriInvalidCopy') {
         // 已取消  系统作废
         if (self.orderStatus != 7 && self.orderStatus != 8) {
-          self.$Message.error(this.vmI18n.t('modalTips.a3'));
+          self.$Message.error($it('tip.a3'));
           return;
         }
         // 仓库发货&&平台发货
       } else if (self.orderStatus !== 6 && self.orderStatus !== 5) {
         // 只能对【仓库发货，平台发货】订单状态的原单进行复制操作
-        self.$Message.error(this.vmI18n.t('modalTips.a4'));
+        self.$Message.error($it('tip.a4'));
         return;
       }
       // 默认是丢单复制的query
@@ -1145,7 +1145,7 @@ export default {
           this.pageLoad = false;
           if (res.data && res.data.code === 0) {
             const resData = res.data.data;
-            resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null ? this.vmI18n.t('common.no') : this.vmI18n.t('common.yes');
+            resData.TO_SETTLE_STATUS_TAG = data.RESERVE_BIGINT02 === null ? $it('common.no') : $it('common.yes');
             const TO_SETTLE_STATUS_NAME = (this.enumerationList.UPLOAD_SAP_STATUS.find(val => val.value === resData.TO_SAP_STATUS) || {}).label;
             resData.TO_SETTLE_STATUS_NAME = TO_SETTLE_STATUS_NAME || '';
             this.tab1.order = resData;
@@ -1160,7 +1160,7 @@ export default {
           } else {
             this.tab1 = this.tab1_default;
             // 订单详情获取失败
-            this.$message.error(this.vmI18n.t('modalTips.h3'));
+            this.$message.error($it('tip.h3'));
           }
         })
         .catch(() => {

@@ -865,10 +865,11 @@ export default {
         });
       }
       const param = { ID: this.$route.params.customizedModuleId, "sss": "1" };
-      await this.service.orderCenter.getDetail(param).then(res => {
-        const { data: { code, data: { PLATFORM } } } = res;
+      // await this.service.orderCenter.getDetail(param).then(res => {
+        // const { data: { code, data: { PLATFORM } } } = res;
         // 唯品会（19） +平台条码
-        if (code === 0 && PLATFORM !== 19) {
+        const PLATFORM = this.componentData.order.PLATFORM
+        if (PLATFORM !== 19) {
           const _index = _columns_.findIndex((item => item.key === "BARCODE"));
           _index >= 0 ? _columns_.splice(_index, 1) : ""
         }
@@ -877,7 +878,7 @@ export default {
           this.columns = this.setTablePermissions(_columns_, res);
           this.$set(this.tableConfig, 'columns', this.columns);
         });
-      })
+      // })
     },
 
     showTable(obj) {
