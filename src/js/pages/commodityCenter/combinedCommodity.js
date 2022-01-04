@@ -1282,7 +1282,7 @@ export default {
       this.t_data.isChecked = false; // 这个用来设置没有选中
       const _index = this.jordanTableConfig2.data.length;
       this.t_data._index = _index;
-      if (this.jordanTableConfig1.data[this.clickIndex].isActive) {
+      if (this.jordanTableConfig1.data.length && this.jordanTableConfig1.data[this.clickIndex].isActive) {
         if (this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.length > 0) {
           const flag = this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.findIndex(innerIntem => {
             let tem = innerIntem.PS_C_SKU_ECODE;
@@ -1303,6 +1303,8 @@ export default {
         } else {
           this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.push(this.t_data);
         }
+      } else {
+        this.$Message.warning($it('tip.v5'))
       }
       if (this.jordanTableConfig1.data[this.clickIndex].psCSkugroupList.length < 1) {
         // this.$Message.warning("请选择点击要录入商品明细的条码信息");
