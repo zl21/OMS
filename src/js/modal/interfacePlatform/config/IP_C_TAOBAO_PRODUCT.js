@@ -9,7 +9,11 @@ export default {
         version: '1.3',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
-        inputList: [],
+        inputList: [
+          {
+            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 4, valuedata: 2 }]
+          }
+        ],
         isActive: true,
         isdisabled: false,
         itemdata: {
