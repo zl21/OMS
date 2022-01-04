@@ -408,6 +408,7 @@ export default {
         loading: false, // 按钮加载
         buttons: [
           {
+            type: 'primary',
             text: $it('btn.find'), // 查找,
             webname: 'lookup_cuxiaohuodomg',
             btnclick: () => {
