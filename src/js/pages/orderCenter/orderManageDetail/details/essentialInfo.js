@@ -281,18 +281,22 @@ export default {
       }
     },
     // 详情按钮替换商品弹框
-    replaceGoodsDetail(itemData) {
-      this.dialogs.changeSku.data = {
-        orderList: [{
-          orderId: this.componentData.order.ID,
-          billNo: this.componentData.order.BILL_NO
-        }],
-        oldSuk: itemData[0].PS_C_SKU_ECODE,
-        spuIds: itemData.map(row => row.ID)
-      };
-      this.dialogsConfig = this.dialogs.changeSku;
+    replaceGoodsDetail(data) {
+      console.log(data);
+      const self = this;
+      self.publicBouncedConfig = Object.assign(
+        publicDialogConfig.replaceGoodsDetailConfig,
+        {
+          componentData: {
+            ids: [self.$route.params.customizedModuleId],
+            itemId: data[0].ID
+          }
+        }
+      );
       setTimeout(() => {
-        this.$children.find(item => item.name === 'changeSkuDialog').openConfirm();
+        self.$children
+          .find(item => item.name === 'replaceGoodsDetail')
+          .openConfirm();
       }, 100);
     },
     // 修改地址
