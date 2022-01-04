@@ -129,7 +129,7 @@ export default {
         formData: [
 
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'cpCShopTitle',
             style: 'popInput', // 输入框弹框单多选
             label: $it('tL.shopName'), // 店铺名称
@@ -332,7 +332,7 @@ export default {
       // formConfig1: {
       //   formData: [
       //     {
-      //       version: '1.4',
+      //       version: '1.3',
       //       colname: 'cpCPhyWarehouseEname',
       //       style: 'popInput', // 输入框弹框单多选
       //       width: '10',
@@ -366,7 +366,7 @@ export default {
       //       }
       //     },
       //     {
-      //       version: '1.4',
+      //       version: '1.3',
       //       colname: 'cpCPhyWarehouseEname',
       //       style: 'popInput', // 输入框弹框单多选
       //       width: '10',
@@ -410,7 +410,7 @@ export default {
       formConfig2: {
         formData: [
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_REGION_PROVINCE_ID',
             style: 'popInput', // 输入框弹框单多选
             width: '24',
@@ -444,7 +444,7 @@ export default {
             }
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_REGION_CITY',
             style: 'popInput', // 输入框弹框单多选
             width: '24',
@@ -621,7 +621,7 @@ export default {
         businessFormConfig: {
           formData: [
             {
-              version: '1.4',
+              version: '1.3',
               colname: 'cpCPhyWarehouseEname',
               style: 'popInput', // 输入框弹框单多选
               width: '10',
@@ -655,7 +655,7 @@ export default {
               }
             },
             {
-              version: '1.4',
+              version: '1.3',
               colname: 'cpCPhyWarehouseEname',
               style: 'popInput', // 输入框弹框单多选
               width: '10',

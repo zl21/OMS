@@ -901,14 +901,14 @@ export default {
           },
           formData: [
             {
-              // version: '1.4',
+              // version: '1.3',
               // style: "popInput",
               style: "popInputPlus",
               width: "6",
               colname: "PS_C_SKU",
               itemdata: {
                 serviceId: 'r3-cp',
-                version: '1.4',
+                version: '1.3',
                 colid: "171332",
                 colname: "PS_C_SKU",
                 name: "SKU编码",

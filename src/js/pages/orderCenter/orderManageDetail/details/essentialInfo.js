@@ -312,6 +312,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.componentData);
     this.tableConfig.objid = this.componentData.order.ID || -1;
     this.tableConfig.order = this.componentData.order || {};
   },

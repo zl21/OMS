@@ -74,7 +74,7 @@ export default {
             }
           },
           {
-            version: '1.4',
+            version: '1.3',
             style: 'popInput',
             width: '6',
             colname: 'my_input_sh',
@@ -538,7 +538,7 @@ export default {
     $omsUtils.onresizes(this, 650);
     const buttons = await self.$OMS2.BtnConfig.config();
     this.btnConfig.buttons = [...buttons.buttons, ...this.extendBtn];
-    $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST', serviceId: 'r3-oc-oms' });
+    // $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'LIST', serviceId: 'r3-oc-oms' });
   },
   methods: {
     getRowClass(params) {

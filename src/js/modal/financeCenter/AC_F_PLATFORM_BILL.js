@@ -13,7 +13,7 @@
           isActive: true,
           isdisabled: false,
           itemdata: {
-            version: '1.4',
+            version: '1.3',
             col: 1,
             colid: 182262,
             colname: 'AC_F_ALIPAY_ACCOUNTMANAGE_ID', // 当前字段的名称

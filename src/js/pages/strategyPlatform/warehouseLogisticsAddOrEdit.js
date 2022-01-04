@@ -46,7 +46,7 @@ export default {
       formConfig: {
         formData: [
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_PHY_WAREHOUSE_ID',
             style: 'popInput', // 输入框弹框单多选
             width: '6',
@@ -109,7 +109,7 @@ export default {
             ]
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_LOGISTICS_ID',
             style: '', // 输入框弹框单多选
             width: '6',

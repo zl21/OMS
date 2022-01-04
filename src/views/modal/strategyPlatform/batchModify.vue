@@ -41,7 +41,7 @@ export default {
           {
             colname: 'DEFAULT_SPARE_CP_C_STORE_ID',
             style: 'popInput',
-            version: '1.4',
+            version: '1.3',
             isActive: true,
             width: 8,
             itemdata: {
@@ -104,7 +104,7 @@ export default {
           {
             colname: 'CP_C_WAREHOUSE_DEF_ID',
             style: 'popInput',
-            version: '1.4',
+            version: '1.3',
             isActive: true,
             width: 8,
             itemdata: {
@@ -133,7 +133,7 @@ export default {
           {
             colname: 'CONSIGN_SELL_CP_C_STORE_ID',
             style: 'popInput',
-            version: '1.4',
+            version: '1.3',
             isActive: true,
             width: 8,
             itemdata: {

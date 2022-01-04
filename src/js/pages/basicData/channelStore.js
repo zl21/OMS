@@ -147,7 +147,7 @@ export default {
           gridBar: true, //开启栅格栏
           formData: [
             {
-              version: '1.4',
+              version: '1.3',
               colname: 'CP_C_STORE_ID',
               style: 'popInput', // 输入框弹框单多选
               width: '6',

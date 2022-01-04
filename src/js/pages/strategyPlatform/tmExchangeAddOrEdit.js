@@ -56,7 +56,7 @@ export default {
             }
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_SHOP_ID',
             style: 'popInput', // 输入框弹框单多选
             width: '6',

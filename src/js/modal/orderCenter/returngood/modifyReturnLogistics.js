@@ -25,7 +25,7 @@ export default {
         formData: [{
           style: 'popInput',
           width: '24',
-          version: '1.4',
+          version: '1.3',
           itemdata: {
             col: 1,
             colid: 179538,

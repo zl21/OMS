@@ -97,7 +97,7 @@ class commonUtils {
             break;
           case 'FK_TABLE':
             fD.push({
-              version: '1.4',
+              version: '1.3',
               colname: ele.NAME, // 控件key
               style: 'popInput', // 输入框弹框单多选
               width: '6',

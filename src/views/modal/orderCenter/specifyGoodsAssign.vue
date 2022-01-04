@@ -82,7 +82,7 @@ export default {
       searchValue: "",
       qty: "1",
       itemdata: {
-        version: '1.4',
+        version: '1.3',
         colid: "171332",
         colname: "PS_C_SKU",
         name: "SKU编码",

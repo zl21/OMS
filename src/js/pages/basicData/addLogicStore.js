@@ -53,7 +53,7 @@
               }
             },
             {
-              version: '1.4',
+              version: '1.3',
               colname: 'PS_C_BRAND_ID',
               style: 'popInput', // 输入框弹框单多选
               width: '6',

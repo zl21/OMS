@@ -79,7 +79,7 @@ export default {
           },
         },
         {
-          version: '1.4',
+          version: '1.3',
           colname: 'PARENT_ENAME',
           style: 'popInput', // 输入框弹框单多选
           width: '6',
@@ -187,12 +187,12 @@ export default {
             ],
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'PS_C_SPEC_GROUP_ENAME1',
             style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              version: '1.4',
+              version: '1.3',
               colid: 168758, // 当前字段的ID
               colname: 'PS_C_SPEC_GROUP_ID1', // 当前字段的名称
               fkdisplay: 'drp', // 外键关联类型
@@ -216,7 +216,7 @@ export default {
             style: 'popInputPlus', // 输入框弹框单多选
             width: '6',
             itemdata: {
-              version: '1.4',
+              version: '1.3',
               colid: 168757, // 当前字段的ID
               colname: 'PS_C_SPEC_GROUP_ID2', // 当前字段的名称
               fkdisplay: 'drp', // 外键关联类型
@@ -309,7 +309,7 @@ export default {
         ],
         businessFormConfig: {
           formData: [{
-            version: '1.4',
+            version: '1.3',
             colname: 'BS_C_EXTRA_ATTRIBUTE_DEF_ID',
             style: 'popInput', // 输入框弹框单多选
             width: '6',

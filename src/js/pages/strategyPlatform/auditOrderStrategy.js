@@ -25,7 +25,7 @@ export default {
         checkAll: false
       },
       DELIVERY_WAREHOUSE: {
-        version: '1.4',
+        version: '1.3',
         isActive: true,
         isDisabled: false,
         itemdata: {
@@ -53,7 +53,7 @@ export default {
         },
       },
       LOGISTICS_COMPANY: {
-        version: '1.4',
+        version: '1.3',
         isActive: true,
         isDisabled: false,
         itemdata: {
@@ -163,7 +163,7 @@ export default {
             }
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_SHOP_ID', // 控件key
             style: 'popInput', // 输入框弹框单多选
             width: '6',

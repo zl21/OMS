@@ -71,7 +71,7 @@ export default {
                     props: {
                       colname: 'OLD_BARCODE',
                       style: 'popInput',
-                      version: '1.4',
+                      version: '1.3',
                       isActive: true,
                       itemdata: this.itemdata_pro[params.index]
                       // {
@@ -141,7 +141,7 @@ export default {
                     props: {
                       colname: 'OLD_BARCODE',
                       style: 'popInput',
-                      version: '1.4',
+                      version: '1.3',
                       isActive: true,
                       itemdata: this.itemdata_city[params.index]
                       // {
@@ -212,7 +212,7 @@ export default {
           //           props: {
           //             colname: 'OLD_BARCODE',
           //             style: 'popInput',
-          //             version: '1.4',
+          //             version: '1.3',
           //             isActive: true,
           //             itemdata: {
           //               colid: 167091,

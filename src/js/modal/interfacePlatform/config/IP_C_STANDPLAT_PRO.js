@@ -18,7 +18,7 @@ export default {
     },
     formData: [
       {
-        version: '1.4',
+        // version: '1.3',
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         itemdata: {

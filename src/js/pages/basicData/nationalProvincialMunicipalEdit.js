@@ -141,7 +141,7 @@ export default {
             },
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_REGION_COUNTRY_ENAME',
             style: 'popInput', // 输入框弹框单多选
             width: '8',
@@ -169,7 +169,7 @@ export default {
             },
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_REGION_PROVINCE_ENAME',
             style: 'popInput', // 输入框弹框单多选
             width: '8',
@@ -197,7 +197,7 @@ export default {
             },
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_REGION_CITY_ENAME',
             style: 'popInput', // 输入框弹框单多选
             width: '8',

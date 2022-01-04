@@ -76,7 +76,7 @@ export default {
             }
           },
           {
-            version: '1.4',
+            version: '1.3',
             colname: 'CP_C_SHOP_ID',
             style: 'popInput', // 输入框弹框单多选
             width: '6',
@@ -233,7 +233,7 @@ export default {
                     props: {
                       colname: 'PS_C_SKU_ID',
                       style: 'popInput',
-                      version: '1.4',
+                      version: '1.3',
                       isActive: true,
                       itemdata: {
                         colid: 171666,
@@ -296,7 +296,7 @@ export default {
           gridBar: true,
           formData: [
             {
-              version: '1.4',
+              version: '1.3',
               colname: 'PS_C_SPU_ID',
               style: 'popInput', // 输入框弹框单多选
               width: '6',
@@ -329,7 +329,7 @@ export default {
               }
             },
             {
-              version: '1.4',
+              version: '1.3',
               colname: 'PS_C_SKU_ID',
               style: 'popInput', // 输入框弹框单多选
               width: '6',

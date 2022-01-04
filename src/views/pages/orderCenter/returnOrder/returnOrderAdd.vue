@@ -290,7 +290,7 @@ export default {
             }, // 点击icon图标事件
           },
           {
-            version: '1.4',
+            version: '1.3',
             style: 'popInput',
             width: '6',
             colname: 'CP_C_SHOP_ID',
@@ -531,7 +531,7 @@ export default {
             },
           },
           {
-            version: '1.4',
+            version: '1.3',
             style: 'popInput',
             width: '6',
             colname: 'CP_C_REGION_PROVINCE_ID',
@@ -571,7 +571,7 @@ export default {
             },
           },
           {
-            version: '1.4',
+            version: '1.3',
             style: 'popInput',
             width: '6',
             colname: 'CP_C_REGION_CITY_ID',
@@ -617,7 +617,7 @@ export default {
             },
           },
           {
-            version: '1.4',
+            version: '1.3',
             style: 'popInput',
             width: '6',
             colname: 'CP_C_REGION_AREA_ID',

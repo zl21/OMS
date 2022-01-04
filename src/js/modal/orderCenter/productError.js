@@ -80,7 +80,7 @@ export default {
                 h('drpInputPro', {
                   props: {
                     style: 'popInput',
-                    version: '1.4',
+                    version: '1.3',
                     isActive: true,
                     itemdata:
                       self.itemdata_list[params.index]

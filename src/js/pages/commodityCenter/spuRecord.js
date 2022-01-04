@@ -23,14 +23,14 @@ export default {
       imgIndex: 0,
       tableFormConfig: {
         formData: [{
-          version: '1.4',
+          version: '1.3',
           colname: 'cpCSupplierName',
           style: 'popInputPlus', // 输入框弹框单多选
           width: '6',
           itemdata: {
             col: 1,
             serviceId: 'r3-cp',
-            version: '1.4',
+            version: '1.3',
             colid: 169325, // 当前字段的ID
             colname: 'QUERY_SUPPLIER_ID', // 当前字段的名称
             datelimit: 'all',
@@ -362,7 +362,7 @@ export default {
           ]
         },
         {
-          version: '1.4',
+          version: '1.3',
           colname: 'PS_C_BRAND_ID',
           style: 'popInput', // 输入框弹框单多选
           width: '8',
@@ -396,7 +396,7 @@ export default {
           },
         },
         {
-          version: '1.4',
+          version: '1.3',
           colname: 'PS_C_PRO_CLASSIFY_ID',
           style: 'popInput', // 输入框弹框单多选
           width: '8',

@@ -21,6 +21,7 @@ import IP_B_TAOBAO_FX_ORDER from './IP_B_TAOBAO_FX_ORDER.js'
 import IP_B_STANDPLAT_REFUND from './IP_B_STANDPLAT_REFUND.js'
 import IP_B_TAOBAO_FX_REFUND from './IP_B_TAOBAO_FX_REFUND.js'
 import IP_C_STANDPLAT_PRO from './IP_C_STANDPLAT_PRO.js'
+import IP_C_VIP_PRO from './IP_C_VIP_PRO.js'
 
 /* 2.0: */
 import OC_B_VIPCOM_PO from './OC_B_VIPCOM_PO.js'
@@ -51,5 +52,6 @@ export default {
 	/* 2.0: */
 	OC_B_VIPCOM_PO,
 	PS_C_SKU,
-	AC_F_PLATFORM_BILL
+	AC_F_PLATFORM_BILL,
+	IP_C_VIP_PRO
 }

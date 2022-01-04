@@ -75,7 +75,7 @@ export default {
                 props: {
                   colname: 'NEW_PS_C_SKU_ECODE',
                   style: 'popInput',
-                  version: '1.4',
+                  version: '1.3',
                   isActive: true,
                   itemdata: this.itemdata,
                 },

@@ -17,7 +17,7 @@ export default {
       {
         style: 'popInput', // 输入框弹框单多选
         width: '24',
-        version: '1.4',
+        version: '1.3',
         inputList: [],
         isActive: true,
         isdisabled: false,

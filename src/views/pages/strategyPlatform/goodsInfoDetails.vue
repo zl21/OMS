@@ -94,7 +94,7 @@ export default {
               options: [],
             },
             {
-              version: '1.4',
+              version: '1.3',
               colname: null,
               style: 'popInputPlus', // 输入框弹框单多选
               width: '6',

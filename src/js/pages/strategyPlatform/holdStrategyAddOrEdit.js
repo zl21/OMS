@@ -147,7 +147,7 @@ export default {
             colname: 'CP_C_SHOP_IDS',
             style: 'popInput',
             width: '8',
-            version: '1.4',
+            version: '1.3',
             class: 'CP_C_SHOP_IDS',
             itemdata: {
               colid: '172070',
