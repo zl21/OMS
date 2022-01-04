@@ -372,8 +372,8 @@ export default {
     $network.post('/p/cs/cp/v1/region/v1/queryRegionByName', params, {
       serviceId: 'r3-cp',
     }), // 零售发货单-新增/复制-智能地址赋值-查询省市区
-  saveBill: (params) =>
-    $network.post('/p/cs/oc/b/oms/v1/ocborder/saveBill', params), // 零售发货单-新增/复制-保存
+  // saveBill: (params) => $network.post('/p/cs/oc/b/oms/v1/ocborder/saveBill', params), // 零售发货单-新增/复制-保存
+  saveBill: params => $network.post('/api/cs/oc/oms/v1/saveBill', params), // 保存
   backAudit: (params) => $network.post('/p/cs/oc/oms/v1/backAudit', params), // 零售发货单反审核
   audit: (params) => $network.post('/p/cs/oc/oms/v1/audit', params), // 零售发货单审核
   // queryPhyWareHouseList: params => $network.post('/p/cs/cp/v1/phyWarehouse/queryPhyWareHouseList', params), // 零售发货单-初始化发货仓库options

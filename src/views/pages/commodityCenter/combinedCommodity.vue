@@ -87,6 +87,7 @@
     <div
       v-else
       class="jq-combined-commodity-edit"
+      style="height: 100%; display: flex; flex-direction: column"
     >
       <!-- <Tabs
         :value="tab.activeName"
@@ -97,7 +98,7 @@
           :name="$it('com.baseInformation')"
           class="custom-label"
         > -->
-          <div class="btn-operate custom-btn">
+          <div class="obj-btn">
             <OmsButton :btn-config="btnConfig" />
           </div>
           <div class="obj-main">
