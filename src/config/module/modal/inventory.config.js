@@ -39,4 +39,11 @@ export default {
       '@/views/modal/inventoryCenter/shareSaBatchTransferSubmit.vue'
     )
   },
+  //平台店铺商品表>店铺商品绑定
+  CHANNEL_SKU_BAND: {
+    component: () => import(
+      /* webpackChunkName: 'InventoryCenterModal' */
+      '@/views/modal/inventoryCenter/channelSkuBand.vue'
+    )
+  },
 };
