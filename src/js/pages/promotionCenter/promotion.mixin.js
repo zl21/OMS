@@ -44,7 +44,7 @@ export default () => ({
             valuedata: '', // 这个是选择的值
             isObject: true,
             notForm: true,
-            version: '1.4'
+            version: '1.3'
           }
         }, // 多选店仓信息
         order_type: [], // 订单类型,选项1，2，3
@@ -58,7 +58,7 @@ export default () => ({
         order_note_content: '', // 备注内容
         except_provinces: {
           itemdata: {
-            colid: '180257',
+            colid: '168686',
             serviceId: "r3-cp",
             colname: 'CP_C_PROVINCE_IDS',
             fkdisplay: 'mrp',
@@ -68,7 +68,7 @@ export default () => ({
             readonly: false,
             valuedata: '',
             notForm: true,
-            version: '1.4'
+            version: '1.3'
           }
         }, // 排除省份
         buyer_limit_frequency: '0', // 单个买家参与活动次数  0-不限制 1-限制
@@ -157,7 +157,7 @@ export default () => ({
     await groups.load();
     const routeId = this.$route.query.id;
     if (routeId > 0) {
-      $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
+      // $omsUtils.getPermissions(this, 'btnConfig', { table: 'PM_C_PROM_ACTI', type: 'OBJ', serviceId: 'r3-oc-oms' }, true);
       this.objid = String(routeId);
       if (this.vueMark == 'addOrEditActi') {
         this.getData();

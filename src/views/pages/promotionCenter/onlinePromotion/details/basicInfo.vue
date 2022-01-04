@@ -43,7 +43,7 @@
       </div>
       <div class="row">
         <FkinputPlus
-          :version="'1.4'"
+          :version="'1.3'"
           :itemdata="basicData.stores.itemdata"
           :is-object="basicData.stores.itemdata.isObject"
           @getFkChooseItem="oneObj_shop"
@@ -165,6 +165,7 @@
       </div>
       <div class="row">
         <FkinputPlus
+          :version="'1.3'"
           :itemdata="basicData.except_provinces.itemdata"
           @getFkChooseItem="oneObj_province"
         />
