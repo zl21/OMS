@@ -42,7 +42,7 @@ export default {
           isActive: true,
           isdisabled: false,
           itemdata: {
-            colid: 180257,
+            colid: 167814,
             serviceId: "r3-cp",
             colname: 'RECEIVER_PROVINCE',
             fkdisplay: 'drp',
@@ -53,7 +53,7 @@ export default {
             readonly: false,
             valuedata: '',
             notForm: true,
-            version: '1.4'
+            version: '1.3'
           }
         }, // 收货省份
         stores: {
@@ -71,7 +71,7 @@ export default {
             refobjid: '',
             valuedata: '',
             notForm: true,
-            version: '1.4'
+            version: '1.3'
           }
         } // 店铺名称
       },
