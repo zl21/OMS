@@ -3,7 +3,6 @@
  * 组合商品 - 老组件
  */
 // import BC from 'burgeonComponents';
-import comUtils from '@/assets/js/__utils__/common.js';
 const { Components } = $BC
 export default {
   components: {},
@@ -645,7 +644,7 @@ export default {
         maskClosable: true, // 是否可以点击叉号关闭
         transfer: true, // 是否将弹层放在body内
         name: 'importTable', // 组件名称
-        url: 'modal/publicDialog/importTable',
+        url: Components.importTable,
         keepAlive: true,
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {
@@ -1103,7 +1102,7 @@ export default {
           {
             text: $it('btn.back'), // 返回
             btnclick: () => {
-              comUtils.tabCloseAppoint(this);
+              $utils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 tableId: 24525,
                 type: 'S',
@@ -1179,7 +1178,7 @@ export default {
           {
             text: $it('btn.back'), // 返回
             btnclick: () => {
-              // comUtils.tabCloseAppoint(this);
+              // $utils.tabCloseAppoint(this);
               this.$store.commit('global/tabOpen', {
                 back: true,
                 tableId: 24525,
@@ -1621,7 +1620,7 @@ export default {
               tableName: 'PS_C_PRO_GROUP',
               tableId: '24525'
             });
-            comUtils.tabCloseAppoint(this);
+            $utils.tabCloseAppoint(this);
           } else {
             this.IniData();
           }
