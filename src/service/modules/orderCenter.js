@@ -426,5 +426,5 @@ export default {
     retailBusinessTargetSalerQuery: (params) => $network.post('/p/cs/retailBusinessTargetSalerQuery', params), // 营业指标明细(店员)-查询
     retailBusinessTargetSave: (params) => $network.post('/p/cs/retailBusinessTargetDetailQuery', params), // 营业指标明细(天/店员)-保存
 
-    updateSendTime: params => network.post('/api/cs/vip/delivery/v1/updateSendTime', params), // 唯品会入库单-详情-修改发货时间
+    updateSendTime: params => $network.post('/api/cs/vip/delivery/v1/updateSendTime', params), // 唯品会入库单-详情-修改发货时间
 }
