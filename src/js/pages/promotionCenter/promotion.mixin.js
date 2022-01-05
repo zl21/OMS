@@ -228,7 +228,7 @@ export default () => ({
       const _self = this;
       $omsUtils.tabCloseAppoint(_self);
       this.$destroy(true);
-      $omsUtils.tabJump(0, 0, 'C', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'pL.promotionList' }, {}, 1, 1, 2895)
+      $omsUtils.tabJump(0, 0, 'C', 'ONLINEPROMOTION', { i8n: 0, tip: '线上促销活动' }, {}, 1, 1, 2895)
       // $omsUtils.tabJump(2, 31460113, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'pL.promotionList' }, {}, 0)
       // $omsUtils.tabJump(2, 2895, 'CUSTOMIZED', 'PROMACTIQUERYLIST', { i8n: 1, tip: 'pL.promotionList' }, {}, 1, 0)
     },

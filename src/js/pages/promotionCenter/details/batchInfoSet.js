@@ -208,13 +208,13 @@ export default {
         switch (val) {
           case '1':
           case '2':
-            setProColumns(cols);
+            this.setProColumns(cols);
             break;
           case '3':
-            setProColumns(colsxt);
+            this.setProColumns(colsxt);
             break;
           default:
-            setProColumns(colspt);
+            this.setProColumns(colspt);
             break;
         }
       },

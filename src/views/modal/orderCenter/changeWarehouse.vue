@@ -71,7 +71,7 @@ const changeWarehouse = {
       formConfig: {
         formData: [
           {
-            version: "1.4",
+            version: '1.3',
             style: "popInput",
             width: "24",
             colname: "CP_C_PHY_WAREHOUSE_ID",

@@ -249,7 +249,7 @@ export default {
         itemdata.isOneData = false;
         itemdata.fkdisplay = 'mop';
         itemdata.isObject = true;
-        itemdata.version = '1.4';
+        itemdata.version = '1.3';
         return itemdata;
       } catch (e) {
         throw new Error(e);

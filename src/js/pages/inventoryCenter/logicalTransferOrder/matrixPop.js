@@ -159,7 +159,7 @@ export default {
       }, // 内容
       stock: false, // 控制在库
       usable: false, // 控制可用
-      chinese: $R3_CPS.components.ChineseDictionary, // 字段集合
+      chinese: $ChineseDictionary, // 字段集合
       tally: 0, // 记录改变次数并且用来刷新数据的参数
       focusList: [], // 聚焦列表
       focusIndex: 0, // 聚焦的下标

@@ -76,15 +76,13 @@
 
     },
     mounted(){
-      this.axios({//第一页大类接口
-        method: 'post',
-        url: '/p/cs/cpromtypelistquery',
-        data: {
-          param:JSON.stringify({
-            "TYPE":2
-          })
-        }
-      }).then((res) => {
+      //第一页大类接口
+      const fromdata = new FormData();
+      const data = {
+        TYPE: 2
+      };
+      fromdata.append('param', JSON.stringify(data));
+      this.service.promotionCenter.cpromtypelistquery(fromdata).then(res => {
         this.dataOne = res.data.data;
         
         for(let m=0;m<this.dataOne.length;m++){
@@ -109,15 +107,13 @@
           }
         }
         let routerid = this.$route.query.id
-          this.axios({//第二页方案接口
-          method: 'post',
-          url: '/p/cs/cpromactiquery',
-          data: {
-            param:JSON.stringify({
-              "objid":-1,  "prom_type_id":this.dataOne[index].ITEMS[i].ID
-            })
-          }
-        }).then((res) => {
+        const fromdata = new FormData();
+        const data = {
+          objid: -1,
+          prom_type_id: this.dataOne[index].ITEMS[i].ID
+        };
+        fromdata.append('param', JSON.stringify(data));
+        this.service.promotionCenter.cpromtypelistquery(fromdata).then(res => {
           if(res.data.code===0){
           
              let dataTwo= res.data.data;

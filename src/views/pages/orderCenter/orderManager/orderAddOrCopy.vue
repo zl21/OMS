@@ -212,7 +212,7 @@ export default {
       formConfigBase: {
         formData: [
           {
-            version: "1.4",
+            version: '1.3',
             style: "popInput",
             width: "6",
             colname: "CP_C_SHOP_ID",
@@ -298,7 +298,7 @@ export default {
             ],
           }, */
           {
-            version: "1.4",
+            version: '1.3',
             style: "popInput",
             width: "6",
             colname: "CP_C_PHY_WAREHOUSE_ID",
@@ -358,7 +358,7 @@ export default {
             },
           },
           {
-            version: "1.4",
+            version: '1.3',
             style: "popInput",
             width: "6",
             colname: "CP_C_LOGISTICS_ID",
@@ -669,7 +669,7 @@ export default {
             },
           },
           {
-            version: "1.4",
+            version: '1.3',
             style: "popInput", // 省,Y
             width: "6",
             colname: "CP_C_REGION_PROVINCE_ID",
@@ -699,7 +699,7 @@ export default {
             }
           },
           {
-            version: "1.4",
+            version: '1.3',
             style: "popInput", // 市,Y
             width: "6",
             colname: "CP_C_REGION_CITY_ID",
@@ -737,7 +737,7 @@ export default {
             }
           },
           {
-            version: "1.4",
+            version: '1.3',
             style: "popInput", // 区,N
             width: "6",
             colname: "CP_C_REGION_AREA_ID",

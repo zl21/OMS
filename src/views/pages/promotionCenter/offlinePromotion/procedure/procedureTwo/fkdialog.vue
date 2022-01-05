@@ -1512,7 +1512,7 @@
     created() {
       const _self = this;
       this.t_dialog_show = this.fkshow;
-      _self.ChineseDictionary = $R3_CPS.components.ChineseDictionary;
+      _self.ChineseDictionary = $ChineseDictionary;
     }
   };
 </script>

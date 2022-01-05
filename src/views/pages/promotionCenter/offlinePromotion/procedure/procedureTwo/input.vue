@@ -348,7 +348,6 @@
     }
   }); */
   const {
-    ChineseDictionary,
     advancedSearch,
     importDialog,
     fktable,
@@ -461,7 +460,7 @@
         // 消息提示
         errorDialog: false, // 消息弹框
         errorDialogClass: 'success', // 弹框类型
-        errorDialogTitle: ChineseDictionary.PROMPT, // 弹框标题
+        errorDialogTitle: $ChineseDictionary.PROMPT, // 弹框标题
         errorData: [], // 弹框内容
         errorDialogBack: false, // 是否有返回按钮
 
@@ -471,7 +470,7 @@
     },
     created() {
       const self = this;
-
+      this.ChineseDictionary = $ChineseDictionary;
       if (!self.itemdata.valuedata) {
         self.itemdata.valuedata = self.itemdata.defval;
       }

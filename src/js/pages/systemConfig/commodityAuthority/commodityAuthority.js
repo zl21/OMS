@@ -74,7 +74,7 @@ export default {
   created() {
     this.axiosAction();
     this.Buttonmap = $R3_CPS.Buttonmap;
-    this.ChineseDictionary = $R3_CPS.ChineseDictionary;
+    this.ChineseDictionary = $ChineseDictionary;
   },
   watch: {
     userAuthorityList: {

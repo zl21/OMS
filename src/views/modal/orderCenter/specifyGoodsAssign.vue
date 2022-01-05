@@ -25,7 +25,7 @@
           @on-click="search"
         /> -->
         <FkinputPlus
-          version="1.4"
+          version="1.3"
           :itemdata="itemdata"
           @getFkChooseItem="oneObj"
           @inputBlur="inputBlur"

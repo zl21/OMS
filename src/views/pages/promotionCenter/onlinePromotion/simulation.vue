@@ -15,7 +15,7 @@
         <div class="formList">
           <div class="row storeName">
             <FkinputPlus
-            version='1.4'
+            version='1.3'
               :is-active="basicData.stores.isActive"
               :is-disabled="basicData.stores.isdisabled"
               :itemdata="basicData.stores.itemdata"
@@ -122,7 +122,7 @@
           </div>
           <div class="row storeName">
             <FkinputPlus
-            version="1.4"
+            version="1.3"
               :is-active="basicData.receiving_porvince.isActive"
               :is-disabled="basicData.receiving_porvince.isdisabled"
               :itemdata="basicData.receiving_porvince.itemdata"

@@ -88,7 +88,7 @@ export default {
       });
       const drpArr = requiredArr.filter(i => objKey.includes(i));
       const valueArr = requiredArr.filter(i => !drpArr.includes(i));
-      const msg = omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
+      const msg = $omsUtils.validatorNotEmpty(self.formConfig, valueArr, drpArr);
     
       if (msg !== 1) {
         self.$message.error(msg);

@@ -12,7 +12,7 @@ export default {
         style: 'popInput', // 输入框弹框单多选
         width: '24',
         value: 'dta',
-        // version:'1.4',
+        // verion: '1.3',
         inputList: [
           {
             childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 2, valuedata: 2 }]

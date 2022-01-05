@@ -613,7 +613,7 @@ export default {
                 statsize: -1,
                 type: item.tabth.type, // 这个是后台用的
                 pid: '',
-                verion: '1.4',
+                verion: '1.3',
                 valuedata: '' // 这个是选择的值
               },
               oneObj: e => {

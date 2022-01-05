@@ -4,7 +4,7 @@
 // import pageNation from 'framework/components/page/pagenation.vue';
 import port from '@/config/config/orderDetailConnector.js';
 import matrixInput from '@/views/pages/inventoryCenter/logicalTransferOrder/matrixInput';
-import matrix from './matrix';
+import matrix from '@/views/pages/inventoryCenter/logicalTransferOrder/matrix';
 // import R3 from '@syman/burgeon-r3';
 
 export default {

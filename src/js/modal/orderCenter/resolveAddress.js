@@ -23,7 +23,7 @@ export default {
         labelWidth: '80',
         formValue: {},
         formData: [{
-          version: "1.4",
+          version: '1.3',
           colname: "CP_C_REGION_PROVINCE_ID",
           style: "popInput", // 输入框弹框单多选
           width: "8",
@@ -73,7 +73,7 @@ export default {
           }
         },
         {
-          version: "1.4",
+          version: '1.3',
           colname: "CP_C_REGION_CITY_ID",
           style: "popInput", // 输入框弹框单多选
           width: "8",
@@ -127,7 +127,7 @@ export default {
           }
         },
         {
-          version: "1.4",
+          version: '1.3',
           colname: "CP_C_REGION_AREA_ID",
           style: "popInput", // 输入框弹框单多选
           width: "8",

@@ -223,7 +223,7 @@ export default {
                   scale: 0,
                   statsize: -1,
                   type: item.tabth.type, // 这个是后台用的
-                  verion: '1.4',
+                  verion: '1.3',
                   pid: '',
                   valuedata: '' // 这个是选择的值
                 },

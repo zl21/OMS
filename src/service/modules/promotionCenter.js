@@ -24,6 +24,7 @@ export default {
   getweekdate: params => $network.post('/p/cs/getweekdate', params),
   // 查询当前行的信息
   selectPm: params => $network.post('/p/cs/pm/v1/selectPm', params),
+  cpromtypelistquery: params => $network.post('/p/cs/cpromtypelistquery', params),
   /**
    * 促销编辑页面
    */

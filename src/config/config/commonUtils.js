@@ -401,7 +401,7 @@ class commonUtils {
     if (!global) {
       param = {
         id: id,
-        type: 1 ? 'action' : type, // 传1则'action'
+        type: type === 1 ? 'action' : type, // 传1则'action'
         name: tableName,
         label,
         back: Boolean(isback),
@@ -414,7 +414,7 @@ class commonUtils {
     } else {
       param = {
         id: id, // 该条数据ID
-        type: 1 ? 'S' : type, // 传1则'S'
+        type: type === 1 ? 'S' : type, // 传1则'S'
         tableName,
         tableId,
         back: Boolean(isback),
