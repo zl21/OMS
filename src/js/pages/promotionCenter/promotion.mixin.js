@@ -32,7 +32,7 @@ export default () => ({
         stores: {
           itemdata: {
             // colid: $store.state.forginkeys.columnIds.shop || '1700805184',
-            colid: '171929',
+            colid: '1700805184',
             serviceId: "r3-cp",
             colname: 'CP_C_SHOP_ID', // 当前字段的名称
             fkdisplay: 'drp', // 外键关联类型

@@ -60,7 +60,7 @@ export default {
           isActive: true,
           isdisabled: false,
           itemdata: {
-            colid: 171929,
+            colid: 1700805184,
             colname: 'CP_C_SHOP_ID',
             fkdisplay: 'drp',
             isfk: true,
