@@ -1183,7 +1183,7 @@ export default {
       const self = this;
       const flag = self.isNull();
       if (flag !== '') {
-        self.$Message.warning(`${flag},${$it('mT.y1')}`);
+        self.$Message.warning(`${flag},${$it('tip.y1')}`);
         return;
       }
       const data = {};
@@ -1379,7 +1379,7 @@ export default {
       for (let i = 0; i < this.reForm.config.length; i++) {
         if (self.reForm.config[i].item.label == '原始订单编号') {
           if (!self.reForm.config[i].item.props.value) {
-            self.$Message.warning($it('mT.j1')); // 原始订单编号不能为空!
+            self.$Message.warning($it('tip.j1')); // 原始订单编号不能为空!
             return;
           }
           requestData.highSearch[0].value = self.reForm.config[i].item.props.value;
@@ -1566,11 +1566,11 @@ export default {
       // 删除明细
       const self = this;
       if (self.delTableData.length == 0) {
-        self.$Message.warning($it('mT.j3')); // 请选择需要删除的明细!
+        self.$Message.warning($it('tip.j3')); // 请选择需要删除的明细!
         return;
       }
       if (self.delTableData.length == self.tableConfig.data.length) {
-        self.$Message.warning($it('mT.j4')); // 至少保留一条明细,不允许全部删除
+        self.$Message.warning($it('tip.j4')); // 至少保留一条明细,不允许全部删除
         return;
       }
       if (self.$route.params.customizedModuleId === 'New' || self.$route.query.cid || self.$route.query.oid) {
@@ -1594,8 +1594,8 @@ export default {
       } else {
         // 编辑状态,删除明细
         this.$Modal.fcError({
-          title: $it('modalTitle.deleteDetails'), // 删除明细
-          content: $it('mT.j5'), // 确定删除所选明细?
+          title: $it('mT.deleteDetails'), // 删除明细
+          content: $it('tip.j5'), // 确定删除所选明细?
           onOk: () => {
             const data = {};
             const arr = [];

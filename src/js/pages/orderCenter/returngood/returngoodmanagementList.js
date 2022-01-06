@@ -33,7 +33,7 @@ export default {
       // 弹框配置
       changeRemarkConfig: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.modify_sellerNotes'), // 修改备注/修改卖家备注
+        confirmTitle: $i18n.t('mT.modify_sellerNotes'), // 修改备注/修改卖家备注
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -51,7 +51,7 @@ export default {
       // 修改退回仓库
       modifyWarehouse: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.modify_returnWarehouse'), // 修改退货仓库
+        confirmTitle: $i18n.t('mT.modify_returnWarehouse'), // 修改退货仓库
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
@@ -68,7 +68,7 @@ export default {
       },
       modifyReturnOrderLogistics: {
         refFuns: 'confirmFun',
-        confirmTitle: $i18n.t('modalTitle.modify_logisticsCompany'), // 修改物流公司
+        confirmTitle: $i18n.t('mT.modify_logisticsCompany'), // 修改物流公司
         titleAlign: 'left', // 设置标题是否居中 center left
         width: '440',
         scrollable: false, // 是否可以滚动
