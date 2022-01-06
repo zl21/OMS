@@ -23,4 +23,6 @@ export default {
   modificationReturnWarehouse: params => network.post('/api/cs/oc/oms/v1/vipReturnOrderUpdateReceipt', params),
   // 锁单修改
   orderBatchModify: params => network.post('/api/cs/oc/oms/v1/batchModify', params),
+  // SKU异常明细导出
+  exportErrorSku: params => network.post('/p/cs/export/item/error/sku', params),
 };
