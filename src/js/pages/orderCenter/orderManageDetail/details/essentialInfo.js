@@ -13,34 +13,35 @@ export default {
   },
   data() {
     return {
+      collapse: ['panel_baseInfo', 'panel_amt', 'panel_address', 'panel_details', 'panel_remark'],
       dialogs: DialogConfig.config(),
       publicBouncedConfig: {},
       isQh: true,
       isQhChild: true,
-      dialogs: {
-        addGift: {
-          title: '添加赠品',
-          titleAlign: 'center',
-          data: {},
-          url: 'modal/orderCenter/addGiftItem',
-          name: 'addGiftDialog',
-          keepAlive: true,
-          width: 600,
-          excludeString: 'addGiftDialog',
-          footerHide: true,
-        },
-        changeSku: {
-          title: '替换商品',
-          titleAlign: 'center',
-          data: {},
-          url: 'order/changeProduct',
-          width: 800,
-          keepAlive: true,
-          name: 'changeSkuDialog',
-          excludeString: 'changeSkuDialog',
-          footerHide: true,
-        }
-      },
+      // dialogs: {
+      //   addGift: {
+      //     title: '添加赠品',
+      //     titleAlign: 'center',
+      //     data: {},
+      //     url: 'modal/orderCenter/addGiftItem',
+      //     name: 'addGiftDialog',
+      //     keepAlive: true,
+      //     width: 600,
+      //     excludeString: 'addGiftDialog',
+      //     footerHide: true,
+      //   },
+      //   changeSku: {
+      //     title: '替换商品',
+      //     titleAlign: 'center',
+      //     data: {},
+      //     url: 'order/changeProduct',
+      //     width: 800,
+      //     keepAlive: true,
+      //     name: 'changeSkuDialog',
+      //     excludeString: 'changeSkuDialog',
+      //     footerHide: true,
+      //   }
+      // },
       queryList: [
         {
           width: '6',
@@ -285,7 +286,7 @@ export default {
       console.log(data);
       const self = this;
       self.publicBouncedConfig = Object.assign(
-        publicDialogConfig.replaceGoodsDetailConfig,
+        this.dialogs.replaceGoodsDetailConfig,
         {
           componentData: {
             ids: [self.$route.params.customizedModuleId],

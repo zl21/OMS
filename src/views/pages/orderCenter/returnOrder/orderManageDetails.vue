@@ -9,8 +9,9 @@
  * @FilePath: /project-logic/views/pages/orderCenter/returnOrder/orderManageDetails.vue
 -->
 <template>
-<div
-    class="order customized-detail orderManageDetails" v-loading="pageLoad"
+  <div
+    class="order customized-detail orderManageDetails"
+    v-loading="pageLoad"
   >
     <!-- 弹框 -->
     <div class="obj-btn">
@@ -112,7 +113,6 @@
       :component-data="changeInternalRemarksConfig.componentData"
     />
   </div>
-  
 </template>
 <script>
 // import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
