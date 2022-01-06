@@ -765,12 +765,10 @@ export default {
       if (this.$route.query.id != -1) params.OcBRefundIn.ID = item.ID; // 修改时传主表ID
       _this.loading = true;
       // const {customizedModuleName}=this.$router.currentRoute.params;
-      // this.$R3loading.show(customizedModuleName);
       _this.service.orderCenter.ReturnStorageSave(params).then((res) => {
         if (res.data.code == 0) {
           _this.loading = false;
-          // this.$R3loading.hide(customizedModuleName);
-          this.$store.commit('customize/TabHref', {
+              this.$store.commit('customize/TabHref', {
             id: 2809,
             type: 'action',
             name: 'returnStoreageList',
@@ -786,8 +784,7 @@ export default {
           this.$Message.success(res.data.message);
         } else {
           _this.loading = false;
-          // this.$R3loading.hide(customizedModuleName);
-          this.$Message.error(res.data.message);
+              this.$Message.error(res.data.message);
         }
       });
     },

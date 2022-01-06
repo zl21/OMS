@@ -1049,7 +1049,6 @@ export default {
         const logData = data.acFPayableAdjustmentLogList;
         self.setPayableAdjustData(mainData, itemData, logData);
       }
-      // this.$R3loading.hide(customizedModuleName);
       this.loading = false;
     },
     // 分页change 事件
@@ -1537,7 +1536,6 @@ export default {
     async save() {
       const self = this;
       // const {customizedModuleName}=this.$router.currentRoute.params;
-      // this.$R3loading.show(customizedModuleName);
       this.loading = true;
       const fromdata = self.generateFromdata();
       const {
@@ -1550,7 +1548,6 @@ export default {
       } else {
         // self.$Message.error(message || $it('tip.y0'));
       }
-      // this.$R3loading.hide(customizedModuleName);
       this.loading = false
     }, // 保存方法
 

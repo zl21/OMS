@@ -373,7 +373,6 @@ export default {
       const _this = this;
       // const {customizedModuleName}=this.$router.currentRoute.params;
       _this.tableLoading = true;
-      // this.$R3loading.show(customizedModuleName);
       _this.listArr = [];
       const treeList = [];
       if (this.treeData) {
@@ -396,8 +395,7 @@ export default {
       } = await this.service.common.getLogisticsRankResultTable(params);
       if (oK) {
         _this.tableLoading = false;
-        // this.$R3loading.hide(customizedModuleName);
-        _this.cityThead = true;
+          _this.cityThead = true;
         console.log(data);
         if (!data || !data.length) return;
         _this.listArr = data;
@@ -411,7 +409,6 @@ export default {
       const _this = this;
       // const {customizedModuleName}=this.$router.currentRoute.params;
       _this.tableLoading = true;
-      // this.$R3loading.show(customizedModuleName);
       _this.listArr = [];
       const treeList = [];
       if (this.treeData) {
@@ -430,8 +427,7 @@ export default {
       // 接口
       this.service.common.getLogisticsRankResultTable(params).then(res => {
         _this.tableLoading = false;
-        // this.$R3loading.hide(customizedModuleName);
-        if (res.data.oK) {
+          if (res.data.oK) {
           _this.cityThead = false;
           _this.listArr = res.data.data !== undefined ? res.data.data : [];
           _this.listArr.forEach(item => {
@@ -476,7 +472,6 @@ export default {
       const { customizedModuleName } = this.$router.currentRoute.params;
       _this.listArr = [];
       _this.tableLoading = true;
-      // this.$R3loading.show(customizedModuleName);
       const params = { objid: _this.$route.params.customizedModuleId == 'New' ? '-1' : _this.$route.params.customizedModuleId, treeLikeKey: e };
       // 接口
       const {
@@ -484,7 +479,6 @@ export default {
       } = await this.service.strategyPlatform.getLogisticsLikeRankResultTable(params);
       console.log(oK, data);
       _this.tableLoading = false;
-      // this.$R3loading.hide(customizedModuleName);
       if (oK) {
         _this.cityThead = true;
         _this.listArr = data.warehouseLogisticsRanks !== undefined ? data.warehouseLogisticsRanks : [];
