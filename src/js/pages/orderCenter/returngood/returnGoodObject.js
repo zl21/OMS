@@ -3478,12 +3478,10 @@ export default {
       const _this = this;
       // const { customizedModuleName } = this.$router.currentRoute.params;
       _this.loading = true;
-      // this.$R3loading.show(customizedModuleName);
       _this.service.common.returnOrder(params).then((res) => {
         _this.availableStock = false;
         _this.isModalSave = false;
         _this.loading = false;
-        this.$R3loading.hide(customizedModuleName);
         if (res.data.code === 0) {
           _this.$Message.success(res.data.message);
           $omsUtils.tabCloseAppoint(_this);

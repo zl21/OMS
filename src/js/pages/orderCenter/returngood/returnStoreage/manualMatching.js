@@ -653,7 +653,6 @@ export default {
         } // 退货入库主表数据
       };
       this.loading = true;
-      // this.$R3loading.show(customizedModuleName);
       // let url = '';
       let query;
       if (this.$route.query.source == 2) {
@@ -666,8 +665,7 @@ export default {
       const { data } = await query(params);
       if (data.code == 0) {
         this.loading = false;
-        // this.$R3loading.hide(customizedModuleName);
-        this.$Message.success(data.message);
+          this.$Message.success(data.message);
         // this.getList();
         this.isSave = false;
         if (this.$route.query.form === 'list') {
@@ -697,8 +695,7 @@ export default {
         }
       } else {
         this.loading = false;
-        // this.$R3loading.hide(customizedModuleName);
-        // this.$Message.error(data.message);
+          // this.$Message.error(data.message);
         this.isSave = false;
       }
     },

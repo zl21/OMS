@@ -567,8 +567,7 @@ export default {
       this.service.orderCenter.querySalesReturn(Object.assign(param, _this.formConfig.formValue)).then(res => {
         // 当loading结束，页面滚动
         _this.agTableConfig.agLoading = false;
-        // this.$R3loading.hide(customizedModuleName);
-        _this.loadingActive = false;
+          _this.loadingActive = false;
         document.getElementById('content').style.overflow = 'auto';
         document.getElementById('content').style.position = 'relative';
         res.data.data = JSON.parse(unzipXv(res.data.data));

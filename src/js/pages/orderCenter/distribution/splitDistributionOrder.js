@@ -392,7 +392,6 @@ export default {
           }
         })
         .finally(() => {
-          // this.$R3loading.hide(this.customizedModuleName);
           this.loading = false
         });
     }

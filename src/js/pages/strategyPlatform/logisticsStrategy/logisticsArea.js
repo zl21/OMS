@@ -357,14 +357,12 @@ export default {
       _this.listArr = [];
       _this.tableLoading = true;
       // const {customizedModuleName}=this.$router.currentRoute.params;
-      // this.$R3loading.show(customizedModuleName);
       const param = { objid: _this._objid, treeLikeKey: e };
       const {
         // data: { code, message, data }
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaItemLikeTable(param);
       _this.tableLoading = false;
-      // this.$R3loading.hide(customizedModuleName);
       if (code === 0) {
         _this.cityThead = true;
         _this.dataArr = data.ST_C_EXPRESS_AREA_ITEM_RESULT !== undefined ? data.ST_C_EXPRESS_AREA_ITEM_RESULT : [];
@@ -398,7 +396,6 @@ export default {
       const _this = this;
       const { customizedModuleName } = this.$router.currentRoute.params;
       _this.tableLoading = true;
-      // this.$R3loading.show(customizedModuleName);
       _this.dataArr = [];
       const treeList = [];
       this.treeData2.forEach(item => {
@@ -434,7 +431,6 @@ export default {
         data: { code, data }
       } = await this.service.strategyPlatform.getExpressAreaItemTable(params);
       _this.tableLoading = false;
-      // this.$R3loading.hide(customizedModuleName);
       if (code === 0 && data !== null) {
         if (data.ST_C_EXPRESS_AREA_ITEM_RESULT.length) _this.dataArr = data.ST_C_EXPRESS_AREA_ITEM_RESULT;
         _this.tableSize = data.TABLE_SIZE;
