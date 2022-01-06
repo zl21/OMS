@@ -1064,7 +1064,10 @@ export default {
           btnclick: () => {
             const _this = this;
             _this.importTable.componentData = {
-              tableName: 'OUT_OF_STOCK_MEMO'
+              tableName: 'OUT_OF_STOCK_MEMO',
+              tempUrl: '/api/cs/oc/oms/v1/downloadUpdateRemarkTemp',
+              okApi: '/api/cs/oc/oms/v1/batchImport',
+              // okParm:
             };
             _this.importTable.confirmTitle = $it('btn.note_import');
             _this.$children.find(item => item.name === 'importTable').openConfirm();

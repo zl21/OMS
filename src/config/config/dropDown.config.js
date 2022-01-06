@@ -12,7 +12,444 @@ class DropDownConfig {
   static configHandler(val, singleType = 0, eventList = []) {
     let self = DropDownConfig.target
     this.singleType = singleType
+    let publicDialogConfig = _.cloneDeep(DialogConfig.config())
     switch (val) {
+      /** ------ skx零售列表下拉按钮-start ------ */
+      case 'Newly added': {
+        // 新增
+        R3.store.commit('global/tabOpen', {
+          type: 'C',
+          label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
+          customizedModuleName: 'orderManageAdd',
+          customizedModuleId: '-1'
+        });
+        break;
+      }
+      case 'Drop-out copy': {
+        // 丢单复制
+        self.copyRouteChange(val);
+        break;
+      }
+      case 'OcBOrderImportCmd': {
+        // 导入
+        self.importTable.componentData = { 
+          tableName: 'OC_B_ORDER',
+          okApi: '/api/cs/oc/oms/v1/importOcBOrder',
+          tempApi: '/api/cs/oc/oms/v1/downloadOrderTemp'
+        };
+        self.$children.find(item => item.name === 'importTable').openConfirm();
+        break;
+      }
+      case 'Revising Logistics': {
+        if (self.selection.length > 0) {
+          self.btnConfig.loading = true;
+          const ids = [];
+          const CP_C_PHY_WAREHOUSE_ID = [];
+          self.selection.forEach((item, index) => {
+            ids[index] = item.ID;
+            CP_C_PHY_WAREHOUSE_ID[index] = item.CP_C_PHY_WAREHOUSE_ID;
+          });
+          const fromdata = new FormData();
+          fromdata.append('ids', ids);
+          self.service.orderCenter
+            .checkOrderBeforeLogistics(fromdata)
+            // self.$network
+            //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
+            .then(res => {
+              if (res.data.code === 0) {
+                self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig;
+                self.publicBouncedConfig.componentData = {
+                  ids,
+                  cLogisticsId: 0,
+                  platform: self.selection[0].PLATFORM,
+                  CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0]
+                };
+                setTimeout(() => {
+                  self.$children.find(item => item.name === 'modifyLogistics').openConfirm();
+                }, 100);
+              } else {
+                self.$Modal.error({
+                  title: $it('mT.tips'), // 提示,
+                  content: res.data.message,
+                  cancelType: true,
+                  titleAlign: 'left',
+                  mask: true,
+                  draggable: true,
+                  keyDown: event => {
+                    if (event.keyCode == 27 || event.keyCode == 13) {
+                      self.$Modal.remove();
+                    }
+                  }
+                });
+              }
+              self.btnConfig.loading = false;
+            });
+        } else {
+          self.$Message.warning({
+            content: $it('tip.c6'), // 请选择需要修改物流记录！
+            duration: 5,
+            top: 80
+          });
+        }
+        break;
+      }
+      case 'Modify warehouse': {
+        if (self.selection.length > 0) {
+          self.btnConfig.loading = true;
+          const ids = [];
+          const CP_C_SHOP_ID = [];
+          self.selection.forEach((item, index) => {
+            ids[index] = item.ID;
+            CP_C_SHOP_ID[index] = item.CP_C_SHOP_ID;
+          });
+          const fromdata = new FormData();
+          fromdata.append('ids', ids);
+          self.service.orderCenter
+            .checkOrderBeforeWarehouse(fromdata)
+            // self.$network
+            //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
+            .then(res => {
+              if (res.data.code === 0) {
+                self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
+                self.publicBouncedConfig.componentData = {
+                  ids,
+                  CP_C_SHOP_ID: CP_C_SHOP_ID[0]
+                };
+                setTimeout(() => {
+                  self.$children.find(item => item.name === 'changeWarehouse').openConfirm();
+                }, 100);
+              } else {
+                self.$Modal.error({
+                  title: $it('mT.tips'), // 提示,
+                  content: res.data.message,
+                  cancelType: true,
+                  titleAlign: 'left',
+                  mask: true,
+                  draggable: true,
+                  keyDown: event => {
+                    if (event.keyCode == 27 || event.keyCode == 13) {
+                      self.$Modal.remove();
+                    }
+                  }
+                });
+              }
+              self.btnConfig.loading = false;
+            });
+        } else {
+          self.$Message.warning({
+            content: $it('tip.c7'), // 请选择需要修改发货仓库记录！
+            duration: 5,
+            top: 80
+          });
+        }
+        break;
+      }
+      case 'Amendment Notes': {
+        if (self.selection.length > 0) {
+          const ids = [];
+          const ORDER_STATUS = [];
+          self.selection.forEach((item, index) => {
+            ids[index] = item.ID;
+            ORDER_STATUS[index] = item.ORDER_STATUS;
+          });
+          self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
+          self.publicBouncedConfig.componentData = {
+            ids,
+            status: ORDER_STATUS
+          };
+          setTimeout(() => {
+            self.$children.find(item => item.name === 'changeRemark').openConfirm();
+          }, 100);
+        } else {
+          self.$Message.warning({
+            content: $it('tip.c8'), // 请选择需要修改备注的记录！
+            duration: 5,
+            top: 80
+          });
+        }
+        break;
+      }
+      case 'BacthUpdateInsideRemark': {
+        // 批量修改内部备注
+        if (self.selection.length === 0) {
+          self.$Message.warning('请选择需要修改内部备注的记录!');
+        } else {
+          const ids = [];
+          const ORDER_STATUS = [];
+          self.selection.forEach((item, index) => {
+            ids[index] = item.ID;
+            ORDER_STATUS[index] = item.ORDER_STATUS;
+          });
+          self.changeInternalRemarksConfig.componentData = {
+            ids,
+            status: ORDER_STATUS
+          };
+          self.$children.find(item => item.name === 'changeInternalRemarks').openConfirm();
+        }
+        break;
+      }
+      case 'OrderDeliveryFirst': {
+        // 定金预售提前发货
+        if (self.selection.length === 0) {
+          self.$Message.warning({
+            content: $it('tip.c9'), // 请选择需要定金预售提前发货的记录！
+            duration: 5,
+            top: 80
+          });
+          return;
+        }
+        const ids = self.selection.map(item => item.ID);
+        const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.depositPresaleConfig));
+        publicBouncedConfig.componentData = {
+          params: {
+            ids
+          },
+          pageType: 'deposit'
+        };
+        self.publicBouncedConfig = publicBouncedConfig;
+        self.$nextTick(() => {
+          self.$children.find(item => item.name === 'manualMarking').openConfirm();
+        });
+        break;
+      }
+      case 'OrderDeliveryUrgent': {
+        if (self.selection.length === 0) {
+          self.$Message.warning({
+            content: $it('tip.d0'), // 请选择需要加急发货的记录！
+            duration: 5,
+            top: 80
+          });
+          return;
+        }
+        const ids = self.selection.map(item => item.ID);
+        const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.vipSpeedDispatchConfig));
+        publicBouncedConfig.componentData = {
+          params: {
+            ids
+          },
+          pageType: 'vip'
+        };
+        self.publicBouncedConfig = publicBouncedConfig;
+        self.$nextTick(() => {
+          self.$children.find(item => item.name === 'manualMarking').openConfirm();
+        });
+        break;
+      }
+      case 'order_gh': {
+        if (self.selection.length === 0) {
+          self.$Message.warning({
+            content: $it('tip.dq'), // 请选择需要替换商品的记录！
+            duration: 5,
+            top: 80
+          });
+          return;
+        }
+        self.publicBouncedConfig = publicDialogConfig.replaceConfig;
+        // 表单筛选条件
+        const param = {};
+        param.page = {};
+        param.page.pageSize = self.agTableConfig.pagenation.pageSize;
+        param.page.pageNum = self.agTableConfig.pagenation.current;
+        param.label = self.labelData; // 标签
+        param.queryInfo = self.queryInfoData; // 普通搜索
+        param.status = self.statusData;
+        param.highSearch = self.highSearchData;
+        // 列表勾选数据
+        const ids = [];
+        self.selection.forEach((item, index) => {
+          ids[index] = item.ID;
+        });
+
+        self.publicBouncedConfig.componentData.a_1 = param;
+        self.publicBouncedConfig.componentData.a_2 = ids;
+        setTimeout(() => {
+          self.$children.find(item => item.name === 'replaceTheGoods').openConfirm();
+        }, 100);
+        break;
+      }
+      case 'Adding gifts': {
+        if (self.selection.length === 0) {
+          self.$Message.warning({
+            content: $it('tip.d2'), // 请选择需要添加赠品的记录！
+            duration: 5,
+            top: 80
+          });
+          return;
+        }
+        self.publicBouncedConfig = publicDialogConfig.addGiftsConfig;
+        // 列表勾选数据
+        const ids = [];
+        self.selection.forEach((item, index) => {
+          ids[index] = item.ID;
+        });
+        self.publicBouncedConfig.componentData = {
+          objid: ids
+        };
+        setTimeout(() => {
+          self.$children.find(item => item.name === 'addGifts').openConfirm();
+        }, 100);
+        break;
+      }
+      case 'Delete_Merchandise': {
+        if (self.selection.length === 0) {
+          self.$Message.warning({
+            content: $it('tip.d3'), // 请选择需要删除赠品的记录！
+            duration: 5,
+            top: 80
+          });
+          return;
+        }
+        self.publicBouncedConfig = publicDialogConfig.itemDeleteConfig;
+        // 表单筛选条件
+        const param = {
+          page: {
+            pageSize: self.agTableConfig.pagenation.pageSize,
+            pageNum: self.agTableConfig.pagenation.current
+          },
+          label: self.labelData, // 标签
+          queryInfo: self.queryInfoData, // 普通搜索
+          status: self.statusData,
+          highSearch: self.highSearchData
+        };
+
+        // 列表勾选数据
+        const ids = [];
+        self.selection.forEach((item, index) => {
+          ids[index] = item.ID;
+        });
+        self.publicBouncedConfig.componentData = {
+          a_1: param,
+          a_2: ids
+        };
+        setTimeout(() => {
+          self.$children.find(item => item.name === 'itemDelete').openConfirm();
+        }, 100);
+        break;
+      }
+      case 'appointSplit': {
+        self.sgto();
+        break;
+      }
+      case 'shortageSplit': {
+        if (self.selection.length > 0) {
+          // self.btnConfig.loading = true;
+          const ids = [];
+          let noSplit = false;
+          self.pageLoad = true;
+          self.selection.forEach((item, index) => {
+            ids[index] = item.ID;
+            if (item.PLATFORM === 19) {
+              noSplit = true;
+            }
+          });
+          if (noSplit) {
+            self.$Message.warning({
+              content: 'JITX的订单不允许拆分！',
+              duration: 5,
+              top: 80
+            });
+            self.pageLoad = false;
+            return;
+          }
+          self.service.orderCenter.splitOrder({ ids }).then(res => {
+            self.pageLoad = false;
+            if (res.data.code == 0) {
+              self.$Message.success(res.data.message);
+              self.selection = [];
+              self.getData();
+            } else {
+              self.$Message.error(res.data.message);
+            }
+          });
+        } else {
+          self.pageLoad = false;
+          self.$Message.warning({
+            content: $it('tip.d4'), // 请选择需要拆单的记录！
+            duration: 5,
+            top: 80
+          });
+        }
+        break;
+      }
+      case 'OrderWrongCopy': {
+        self.copyRouteChange(val);
+        break;
+      }
+      case 'OrderMissSendCopy': {
+        self.copyRouteChange(val);
+        break;
+      }
+      case 'OrderGiftsOutCopy': {
+        self.copyRouteChange(val);
+        break;
+      }
+      case 'oriInvalidCopy': {
+        self.copyRouteChange(val);
+        break;
+      }
+      case 'holdOrder': {
+        if (self.selection.length === 0) {
+          self.$Message.warning({
+            content: $it('tip.e2'), // 请选择需要Hold单的记录！
+            duration: 5,
+            top: 80
+          });
+          return;
+        }
+        const ids = self.selection.map(item => item.ID);
+        const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.holdOrderConfig));
+        publicBouncedConfig.componentData = {
+          ids
+        };
+        self.publicBouncedConfig = publicBouncedConfig;
+        self.$nextTick(() => {
+          self.$children.find(item => item.name === 'holdOrderDialog').openConfirm();
+        });
+        break;
+      }
+      case 'cancelHoldOrder': {
+        if (self.selection.length === 0) {
+          self.$Message.warning({
+            content: $it('tip.d5'), // 请选择需要取消Hold单的记录！
+            duration: 5,
+            top: 80
+          });
+          return;
+        }
+        const data = {
+          ids: self.selection.map(item => item.ID)
+        };
+        self.$Modal.info({
+          title: $it('mT.tips'), // 提示,
+          content: $it('tip.e1'), // 是否确定取消Hold？
+          mask: true,
+          showCancel: true,
+          okText: $it('com.determine'), // 确定
+          cancelText: $it('com.cancel'), // 取消
+          onOk: () => {
+            self.btnConfig.loading = true;
+            self.service.orderCenter
+              .manualUnHoldOrder(data)
+              .then(res => {
+                self.btnConfig.loading = false;
+                if (res.data.code === 0) {
+                  self.$Message.success(res.data.message);
+                  self.getData();
+                  self.selection = [];
+                } else {
+                  self.$Message.warning(res.data.message);
+                }
+              })
+              .catch(() => {
+                self.$Message.error($it('tip.d6')); // 服务器请求失败
+                self.btnConfig.loading = false;
+              });
+          }
+        });
+        break;
+      }
+      /** ------ skx零售列表下拉按钮-end ------ */
+
       case 'OC_ORDER_SEND_TIME': { // 修改预计发货时间
         this.dropDownMainHandler('OC_ORDER_SEND_TIME')
         break

@@ -73,7 +73,7 @@
       :name="publicBouncedConfig.name"
       :quit="publicBouncedConfig.quit"
       :scrollable="publicBouncedConfig.scrollable"
-      :title="publicBouncedConfig.confirmTitle"
+      :title="publicBouncedConfig.title"
       :title-align="publicBouncedConfig.titleAlign"
       :transfer="publicBouncedConfig.transfer"
       :url="publicBouncedConfig.url"
@@ -81,7 +81,7 @@
     />
     <!-- 修改内部备注-->
     <OmsDialog
-      :title="changeInternalRemarksConfig.confirmTitle"
+      :title="changeInternalRemarksConfig.title"
       :title-align="changeInternalRemarksConfig.titleAlign"
       :width="changeInternalRemarksConfig.width"
       :scrollable="changeInternalRemarksConfig.scrollable"
