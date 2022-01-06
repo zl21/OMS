@@ -10,7 +10,7 @@
   <!-- 订单管理/订单详情 - 批量Hold单/Hold单 -->
   <div class="hold-dialog cus-modal" v-loading="loading">
     <div class="hold-form">
-      <re-form :form-config="formConfig">
+      <OmsForm :form-config="formConfig">
         <template #formCompile="{ rowData }">
           <div class="form-compile">
             <Select
@@ -45,7 +45,7 @@
             </Select>
           </div>
         </template>
-      </re-form>
+      </OmsForm>
     </div>
     <OmsButton
       :class="['modal-footer', holdBtnClass]"

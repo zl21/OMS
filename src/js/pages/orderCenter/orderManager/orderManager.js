@@ -1,4 +1,5 @@
 import BurgeonEvent from 'burgeonConfig/config/event.config';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';

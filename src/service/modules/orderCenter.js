@@ -124,6 +124,8 @@ export default {
   againOccupyStock: params => $network.post('/api/cs/oc/oms/v1/againOccupyStock', params), // 重新寻源
   checkOtherMergeOrder: params => $network.post('/p/cs/jitx/checkOtherMergeOrder', params), // 是否存在可合并订单
   orderDetentionRelease: params => $network.post('/api/cs/oc/oms/v1/orderDetentionRelease', params), // 卡单释放
+  lockStockAndReOccupyStock: params => $network.post('/p/cs/stock/lockStockAndReOccupy', params), // 冻结并重新寻源
+  jitxOrderResetShip: params => $network.post('/p/cs/vop/resetShip', params), // JITX重置发货
   /**
    * 扫描入库
    */
@@ -214,8 +216,9 @@ export default {
     ), // 根据配货单id查询配货单明细
   distributionChangeTag: (params) =>
     $network.post('/api/cs/vip/distribution/v1/changeTag', params), // 配货单换吊牌的保存
-  managementOrderHold: (params) =>
-    $network.post('/p/cs/oc/oms/v2/order/batch/hold', params), // 零售发货单-HOLD单
+  // managementOrderHold: (params) => $network.post('/p/cs/oc/oms/v2/order/batch/hold', params), // 零售发货单-HOLD单
+  managementOrderHold: (params) => $network.post('/api/cs/oc/oms/v1/holdOrder', params), // 零售发货单-HOLD单
+  bacthUpdateInsideRemark: (params) => $network.post('/api/cs/oc/oms/v1/BacthUpdateInsideRemark', params), // 零售发货单-修改内部备注
   // returnTypeItemquery: (params) =>
   //   $network.post('/p/cs/objectTableItem', params), // 退款分类-退款分类描述
   extraReturnTableLogQuery: (params) =>
@@ -330,8 +333,9 @@ export default {
   downloadPO: (params) => $network.post('/p/cs/vip/v2/po/download', params), // PO单-下载PO单
 
   /* 2.0: */
+  // remarkUpdate: (params) => $network.post('/p/cs/oc/b/oms/v1/ocborder/remarkUpdate', params), // 零售发货单 - 修改备注
   remarkUpdate: (params) =>
-    $network.post('/p/cs/oc/b/oms/v1/ocborder/remarkUpdate', params), // 零售发货单 - 修改备注
+    $network.post('/api/cs/oc/oms/v1/remarkUpdate', params), // 零售发货单 - 修改备注
   initList: (params) => $network.post('/p/cs/oc/oms/v1/initList', params), // 零售发货单初始化列表接口
   changeTagQuery: (params) =>
     $network.post('/p/cs/vip/v2/distribution/item/query', params), // 换吊牌-初始化

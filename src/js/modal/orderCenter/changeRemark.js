@@ -120,10 +120,10 @@ export default {
       }
       const fromdata = new FormData();
       const param = {
-        IDS: self.componentData.ids,
-        SELLER_MEMO: self.formItem.textarea,
-        ORDER_FLAG: self.formItem.flag,
-        COVER: self.formItem.cover,
+        ids: self.componentData.ids,
+        remark: self.formItem.textarea,
+        order_flag: self.formItem.flag,
+        cover: self.formItem.cover,
       };
       fromdata.append('param', JSON.stringify(param));
       const { data: { code, message } } = await this.service.orderCenter.remarkUpdate(param);
