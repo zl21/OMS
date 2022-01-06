@@ -1127,17 +1127,14 @@ export default {
         let PROM_TYPE_NAME = _this.PROM_TYPE_NAME; //二类名称
         let PROM_TYPE_BRIEF = _this.PROM_TYPE_BRIEF; //二类描述
         let STATUS = _this.STATUS;
-        this.axios({
-          method: "post",
-          url: "/p/cs/cpromactiquery",
-          data: {
-            param: JSON.stringify({
-              objid: ACTI_ID,
-              prom_type_id: typeId,
-              copy: true // 复制传true，详情传false
-            })
-          }
-        }).then(res => {
+        const fromdata = new FormData();
+        const data = {
+          objid: ACTI_ID,
+          prom_type_id: typeId,
+          copy: true // 复制传true，详情传false
+        };
+        fromdata.append('param', JSON.stringify(data));
+        this.service.promotionCenter.cpromactiquery(fromdata).then(res => {
           if (res.data.code === 0) {
             this.$store.state.customize.dataTwo = res.data.data;
             //sq存储一套作为清空操作的初始数据
@@ -1226,37 +1223,32 @@ export default {
       }
 
       this.loadings = true;
-
-      this.axios({
-        url: "/p/cs/cpromactiquerylist",
-        method: "POST",
-        data: {
-          param: JSON.stringify({
-            DISTRIB_ID: distribIds || [], // 配销中心ID
-            // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
-            STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
-            // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
-            ACTI_PRO: this.inputList[0].valuedata, // 款号0
-            ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
-            ACTI_NAME: this.acti_name, // 活动名称
-            PROM_SCOPE:
-              this.query.firstLevel.length > 0
-                ? this.query.firstLevel[0].ID
-                : "", // 促销大类0
-            PROM_TYPE:
-              this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
-            RELEASE_NAME: this.release_name, // 发布人0
-            PAGE: {
-              CURRENT_PAGE: currentPage, // 当前页码
-              PAGE_SIZE: pageSize // 分页单位
-            },
-            ACTISTATUS: Array.isArray(this.STATUS)
-              ? this.STATUS.join(",").replace("bSelect-all", 0)
-              : `${this.STATUS}`
-          })
-        }
-      })
-        .then(res => {
+      const fromdata = new FormData();
+      const data = {
+        DISTRIB_ID: distribIds || [], // 配销中心ID
+        // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
+        STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
+        // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
+        ACTI_PRO: this.inputList[0].valuedata, // 款号0
+        ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
+        ACTI_NAME: this.acti_name, // 活动名称
+        PROM_SCOPE:
+          this.query.firstLevel.length > 0
+            ? this.query.firstLevel[0].ID
+            : "", // 促销大类0
+        PROM_TYPE:
+          this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
+        RELEASE_NAME: this.release_name, // 发布人0
+        PAGE: {
+          CURRENT_PAGE: currentPage, // 当前页码
+          PAGE_SIZE: pageSize // 分页单位
+        },
+        ACTISTATUS: Array.isArray(this.STATUS)
+          ? this.STATUS.join(",").replace("bSelect-all", 0)
+          : `${this.STATUS}`
+      };
+      fromdata.append('param', JSON.stringify(data));
+      this.service.promotionCenter.cpromactiquerylist(fromdata).then(res => {
           this.loadings = false;
           if (res.data.code === 0) {
             this.tableActive = true;
@@ -1398,33 +1390,30 @@ export default {
           distribIds.push(e.ID);
         });
       }
-      this.axios({
-        url: "/p/cs/cpromactiquerylist",
-        method: "POST",
-        data: {
-          param: JSON.stringify({
-            DISTRIB_ID: distribIds || [], // 配销中心ID
-            // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
-            STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
-            // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
-            ACTI_PRO: this.inputList[0].valuedata, // 款号0
-            ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
-            ACTI_NAME: this.acti_name, // 活动名称
-            PROM_SCOPE:
-              this.query.firstLevel.length > 0
-                ? this.query.firstLevel[0].ID
-                : "", // 促销大类0
-            PROM_TYPE:
-              this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
-            RELEASE_NAME: this.release_name, // 发布人0
-            STATUS: 2, // 1.草稿，2.已发布，3.下线  （首次进入不传状态）
-            PAGE: {
-              CURRENT_PAGE: currentPage, // 当前页码
-              PAGE_SIZE: pageSize // 分页单位
-            }
-          })
+      const fromdata = new FormData();
+      const data = {
+        DISTRIB_ID: distribIds || [], // 配销中心ID
+        // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
+        STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
+        // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
+        ACTI_PRO: this.inputList[0].valuedata, // 款号0
+        ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
+        ACTI_NAME: this.acti_name, // 活动名称
+        PROM_SCOPE:
+          this.query.firstLevel.length > 0
+            ? this.query.firstLevel[0].ID
+            : "", // 促销大类0
+        PROM_TYPE:
+          this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
+        RELEASE_NAME: this.release_name, // 发布人0
+        STATUS: 2, // 1.草稿，2.已发布，3.下线  （首次进入不传状态）
+        PAGE: {
+          CURRENT_PAGE: currentPage, // 当前页码
+          PAGE_SIZE: pageSize // 分页单位
         }
-      }).then(res => {
+      };
+      fromdata.append('param', JSON.stringify(data));
+      this.service.promotionCenter.cpromactiquerylist(fromdata).then(res => {
         this.loading = false;
         if (res.data.code === 0) {
           this.tableActive = true;
@@ -1472,33 +1461,31 @@ export default {
           distribIds.push(e.ID);
         });
       }
-      this.axios({
-        url: "/p/cs/cpromactiquerylist",
-        method: "POST",
-        data: {
-          param: JSON.stringify({
-            DISTRIB_ID: distribIds || [], // 配销中心ID
-            // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
-            STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
-            // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
-            ACTI_PRO: this.inputList[0].valuedata, // 款号0
-            ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
-            ACTI_NAME: this.acti_name, // 活动名称
-            PROM_SCOPE:
-              this.query.firstLevel.length > 0
-                ? this.query.firstLevel[0].ID
-                : "", // 促销大类0
-            PROM_TYPE:
-              this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
-            RELEASE_NAME: this.release_name, // 发布人0
-            STATUS: 1, // 1.草稿，2.已发布，3.下线  （首次进入不传状态）
-            PAGE: {
-              CURRENT_PAGE: currentPage, // 当前页码
-              PAGE_SIZE: pageSize // 分页单位
-            }
-          })
+
+      const fromdata = new FormData();
+      const data = {
+        DISTRIB_ID: distribIds || [], // 配销中心ID
+        // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
+        STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
+        // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
+        ACTI_PRO: this.inputList[0].valuedata, // 款号0
+        ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
+        ACTI_NAME: this.acti_name, // 活动名称
+        PROM_SCOPE:
+          this.query.firstLevel.length > 0
+            ? this.query.firstLevel[0].ID
+            : "", // 促销大类0
+        PROM_TYPE:
+          this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
+        RELEASE_NAME: this.release_name, // 发布人0
+        STATUS: 1, // 1.草稿，2.已发布，3.下线  （首次进入不传状态）
+        PAGE: {
+          CURRENT_PAGE: currentPage, // 当前页码
+          PAGE_SIZE: pageSize // 分页单位
         }
-      }).then(res => {
+      };
+      fromdata.append('param', JSON.stringify(data));
+      this.service.promotionCenter.cpromactiquerylist(fromdata).then(res => {
         this.loading = false;
         if (res.data.code === 0) {
           this.tableActive = true;
@@ -1543,33 +1530,31 @@ export default {
           distribIds.push(e.ID);
         });
       }
-      this.axios({
-        url: "/p/cs/cpromactiquerylist",
-        method: "POST",
-        data: {
-          param: JSON.stringify({
-            DISTRIB_ID: distribIds || [], // 配销中心ID
-            // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
-            STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
-            // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
-            ACTI_PRO: this.inputList[0].valuedata, // 款号0
-            ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
-            ACTI_NAME: this.acti_name, // 活动名称
-            PROM_SCOPE:
-              this.query.firstLevel.length > 0
-                ? this.query.firstLevel[0].ID
-                : "", // 促销大类0
-            PROM_TYPE:
-              this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
-            RELEASE_NAME: this.release_name, // 发布人0
-            STATUS: 3, // 1.草稿，2.已发布，3.下线  （首次进入不传状态）
-            PAGE: {
-              CURRENT_PAGE: currentPage, // 当前页码
-              PAGE_SIZE: pageSize // 分页单位
-            }
-          })
+
+      const fromdata = new FormData();
+      const data = {
+        DISTRIB_ID: distribIds || [], // 配销中心ID
+        // "STORE_ID":this.query.store.length > 0 && this.query.store[0].ID?this.query.store[0].ID: "",		   //门店ID（1010修改，前端传单个门店）0
+        STORE_IDS: this.my_input_st.itemdata.pid, // 参与收货仓
+        // SHOP_IDS: this.my_input_sh.itemdata.pid, // 线上店铺ID（1010修改，前端传单个门店）0
+        ACTI_PRO: this.inputList[0].valuedata, // 款号0
+        ACTI_DATE: this.acti_date ? this.acti_date.join("-") : "", // 活动日期0
+        ACTI_NAME: this.acti_name, // 活动名称
+        PROM_SCOPE:
+          this.query.firstLevel.length > 0
+            ? this.query.firstLevel[0].ID
+            : "", // 促销大类0
+        PROM_TYPE:
+          this.query.lastLevel.length > 0 ? this.query.lastLevel[0].ID : "", // 促销中类
+        RELEASE_NAME: this.release_name, // 发布人0
+        STATUS: 3, // 1.草稿，2.已发布，3.下线  （首次进入不传状态）
+        PAGE: {
+          CURRENT_PAGE: currentPage, // 当前页码
+          PAGE_SIZE: pageSize // 分页单位
         }
-      }).then(res => {
+      };
+      fromdata.append('param', JSON.stringify(data));
+      this.service.promotionCenter.cpromactiquerylist(fromdata).then(res => {
         this.loading = false;
         if (res.data.data && res.data.data.ACTI_OVER_INFO) {
           // this.activeName = '4' // 下线过期
@@ -1608,17 +1593,14 @@ export default {
       const PROM_TYPE_NAME = _this.PROM_TYPE_NAME; // 二类名称
       const PROM_TYPE_BRIEF = _this.PROM_TYPE_BRIEF; // 二类描述
       const STATUS = _this.STATUS;
-      this.axios({
-        method: "post",
-        url: "/p/cs/cpromactiquery",
-        data: {
-          param: JSON.stringify({
-            objid: ACTI_ID,
-            prom_type_id: typeId,
-            copy: false // 复制传true，详情传false
-          })
-        }
-      }).then(res => {
+      const fromdata = new FormData();
+      const data = {
+        objid: ACTI_ID,
+        prom_type_id: typeId,
+        copy: false // 复制传true，详情传false
+      };
+      fromdata.append('param', JSON.stringify(data));
+      this.service.promotionCenter.cpromactiquery(fromdata).then(res => {
         if (res.data.code === 0) {
           // this.$store.state.customize.dataTwo = res.data.data;
            this.$store.commit("customize/setdataTwo",res.data.data);

@@ -1,9 +1,17 @@
 <template>
   <div class="procedureOne">
-    <div class="CommonStyle" :class="index===0?'proced_left':'proced_right'" v-for="(item,index) of dataOne">
+    <div class="CommonStyle"
+      :class="index===0?'proced_left':'proced_right'"
+      v-for="(item,index) of dataOne"
+      :key="`index-${item.ENAME}`"
+    >
       <h1>{{item.ENAME}}</h1>
       <ul>
-        <li :class="{'active':list.active}" v-for="(list,i) of item.ITEMS" @click="Active_M_Highlight(item,index,list,i)">
+        <li 
+          :class="{'active':list.active}"
+          v-for="(list,i) of item.ITEMS"
+          :key="i.ENAME"
+          @click="Active_M_Highlight(item,index,list,i)">
           <div>
             <h3>{{list.ENAME}}</h3>
             <p>{{list.BRIEF}}</p>
@@ -113,7 +121,7 @@
           prom_type_id: this.dataOne[index].ITEMS[i].ID
         };
         fromdata.append('param', JSON.stringify(data));
-        this.service.promotionCenter.cpromtypelistquery(fromdata).then(res => {
+        this.service.promotionCenter.cpromactiquery(fromdata).then(res => {
           if(res.data.code===0){
           
              let dataTwo= res.data.data;

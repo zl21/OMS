@@ -95,6 +95,7 @@ export const globalStore = {
         }
       ]
     },
+    shisuanid: "",
     // 促销二类名称和描述
     prom_type: {
       prom_type_name: '',
@@ -132,6 +133,9 @@ export const globalStore = {
     VarTheme:'oms'
   },
   mutations: {
+    setshisuanid(state, n) {
+      state.shisuanid = n
+    },
     VarTheme(state, x){
       console.log('state, x:',state, x);
       state.VarTheme = x;

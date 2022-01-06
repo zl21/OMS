@@ -25,6 +25,8 @@ export default {
   // 查询当前行的信息
   selectPm: params => $network.post('/p/cs/pm/v1/selectPm', params),
   cpromtypelistquery: params => $network.post('/p/cs/cpromtypelistquery', params),
+  cpromactiquerylist: params => $network.post('/p/cs/cpromactiquerylist', params),
+  cpromactiquery: params => $network.post('/p/cs/cpromactiquery', params),
   /**
    * 促销编辑页面
    */

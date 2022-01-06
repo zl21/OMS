@@ -380,7 +380,7 @@
 <script>
 import myData from "../../date/date";
 // import select from "framework/components/select/Mselect.vue";
-import myInput from "./input";
+// import myInput from "./input";
 import CombineModel from "./PromotionComponent/PromotionRules/CombineModel";
   export default {
     data() {
@@ -744,7 +744,7 @@ import CombineModel from "./PromotionComponent/PromotionRules/CombineModel";
     },
     components: {
       'v-select': $R3_CPS.components.Mselect,
-      myInput,
+      myInput: $R3_CPS.components.input,
       myData,
       // FullReduction,
       CombineModel
@@ -791,6 +791,7 @@ import CombineModel from "./PromotionComponent/PromotionRules/CombineModel";
       },
       'mutating':{
         handler(val, old) {
+          console.log(val);
           if(val){
             this.save()
             this.$emit('SaveDrafts',this.Objid);
@@ -1038,15 +1039,13 @@ import CombineModel from "./PromotionComponent/PromotionRules/CombineModel";
           let self = this;
           let ACTI_ID = this.$route.query.id;
           let typeId = this.$route.query.typeId;
-          this.axios({
-            method: 'post',
-            url: '/p/cs/cpromactiquery',
-            data: {
-              param:JSON.stringify({
-                "objid":ACTI_ID,  "prom_type_id":typeId
-              })
-            }
-          }).then((res) => {
+          const fromdata = new FormData();
+          const data = {
+            objid: ACTI_ID,
+            prom_type_id: typeId
+          };
+          fromdata.append('param', JSON.stringify(data));
+          this.service.promotionCenter.cpromactiquery(fromdata).then(res => {
             if(res.data.code===0){
               self.schemeOne = res.data.data;
               self.tSaveNoEdit();
@@ -1061,15 +1060,13 @@ import CombineModel from "./PromotionComponent/PromotionRules/CombineModel";
               if (!typeId) {
                 return
               }
-              this.axios({
-                method: 'post',
-                url: '/p/cs/cpromactiquery',
-                data: {
-                  param:JSON.stringify({
-                    "objid":ACTI_ID,  "prom_type_id":typeId
-                  })
-                }
-              }).then((res) => {
+              const fromdata = new FormData();
+              const data = {
+                objid: ACTI_ID,
+                prom_type_id: typeId
+              };
+              fromdata.append('param', JSON.stringify(data));
+              this.service.promotionCenter.cpromactiquery(fromdata).then(res => {
                 if(res.data.code===0){
                
                   // this.$store.state.customize.dataTwo=res.data.data

@@ -201,6 +201,7 @@ export default {
       this.mutating = true;
     },
     SaveDrafts(val) {
+      console.log(val);
       this.caoGaoId = val.Objid;
       //保存草稿时，活动方案抛上来后，mutating变成false
       this.mutating = false;
@@ -364,7 +365,7 @@ export default {
 </script>
 <style lang="less">
 .promotion {
-  padding-top: 16px;
+  padding: 16px 16px 0 16px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
