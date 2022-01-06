@@ -43,5 +43,6 @@ export default {
   generateVipSalesOrder: params => network.get('/p/cs/ac/v1/generateVipSalesOrder', params),
   // 支付宝账单原始数据
   triggerAlipayBill: params => network.post('/p/cs/ip/v1/order/download/alipayBillDownload', params, { serviceId: "r3-ipcs" }),
-
+  // 支付宝账单下载
+  alipayBillDownload: params => network.post('/p/cs/alipayBillDownload', params),
 };

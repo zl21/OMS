@@ -7,32 +7,50 @@ export default {
       searchValue: '',
       tableConfig: {
         indexColumn: true,
-        columns: [{
-          key: 'skuEcode',
-          title: $it('tL.code_SKU'), // SKU编码
-        },
-        {
-          key: 'spuEcode',
-          title: $it('tL.itemNo01'), // SPU编码
-        },
-        {
-          key: 'spuEname',
-          title: $it("tL.itemNo02"), // SPU名称
-        },
-        {
-          key: 'skuEname',
-          title: $it('fL.skuName'), // SKU名称
-        },
-        {
-          key: 'brandEname',
-          title: '品牌',
-        },
-        {
-          key: 'classifyEname',
-          title: '商品分类',
-        }],
+        columns: [
+          {
+            title: '商品SKU',
+            key: 'ECODE'
+          },
+          {
+            title: '商品名称',
+            key: 'PS_C_PRO_ENAME'
+          },
+          {
+            title: '规格',
+            key: 'SPEC'
+          },
+          {
+            title: '是否为赠品',
+            key: 'IS_GIFT'
+          }
+          // {
+          //   key: 'skuEcode',
+          //   title: $it('tL.code_SKU'), // SKU编码
+          // },
+          // {
+          //   key: 'spuEcode',
+          //   title: $it('tL.itemNo01'), // SPU编码
+          // },
+          // {
+          //   key: 'spuEname',
+          //   title: $it("tL.itemNo02"), // SPU名称
+          // },
+          // {
+          //   key: 'skuEname',
+          //   title: $it('fL.skuName'), // SKU名称
+          // },
+          // {
+          //   key: 'brandEname',
+          //   title: '品牌',
+          // },
+          // {
+          //   key: 'classifyEname',
+          //   title: '商品分类',
+          // }
+        ],
         data: [],
-        pageShow: true, // 控制分页是否显示
+        pageShow: false, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
@@ -112,19 +130,38 @@ export default {
     search() {
       // sku查询
       const self = this;
-      let data = {
-        skuEcode: self.searchValue,
-        size: this.tableConfig.pageSize || 10,
-        current: this.tableConfig.current || 1,
-      }
-      axios({
-        method: 'post',
-        url: '/r3-ps/p/cs/ps/pro/v1/selectSkuProBySkuEcodeList',
-        data,
-      }).then((res) => {
-        self.tableConfig.data = res.data.data.records;
-        self.tableConfig.total = res.data.data.total
-      })
+      // let data = {
+      //   skuEcode: self.searchValue,
+      //   size: this.tableConfig.pageSize || 10,
+      //   current: this.tableConfig.current || 1,
+      // }
+      // axios({
+      //   method: 'post',
+      //   url: '/r3-ps/p/cs/ps/pro/v1/selectSkuProBySkuEcodeList',
+      //   data,
+      // }).then((res) => {
+      //   self.tableConfig.data = res.data.data.records;
+      //   self.tableConfig.total = res.data.data.total
+      // })
+
+      const data = { 
+        isBlur: 'N',
+        psCSku: { ECODE: self.searchValue },
+      };
+      self.service.common.skuQuery(data).then(res => {
+        if (res.data.code == 0) {
+          if (JSON.stringify(res.data.data) == '{}') {
+            // 查询数据为空!
+            this.$Message.warning($it('tip.r8'));
+            return;
+          }
+          res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
+          self.tableConfig.data = res.data.data.data;
+        } else {
+          // sku查询失败!
+          this.$Message.warning($it('tip.zt'));
+        }
+      });
     },
     // 替换
     async confirm() {
@@ -135,37 +172,77 @@ export default {
         self.$Message.warning($it('tip.cg'));
         return;
       }
-      if (!this.currentSkuEcode) {
-        // 请选中一条单据!
-        self.$Message.warning($it('tip.d8'));
-        return;
+      const param = {
+        ids: self.componentData.ids,
+        sku_code: self.tableConfig.data[0].ECODE,
+        itemId: self.componentData.itemId,
+        type: 1
+      };
+     
+      // self.loading = true;
+      try {
+        const { data: { code, message, data } } = await this.service.orderCenter.bathChangeGoods(param);
+        if (code == 0) {
+          self.$Message.success(message);
+          if (self.componentData.list) {
+            self.$parent.$parent.$parent.getData();
+          } else {
+            if (self.$parent.$parent.$parent.reloadCus) self.$parent.$parent.$parent.reloadCus();
+            if (self.$parent.$parent.$parent.$parent.autoRefresh) self.$parent.$parent.$parent.$parent.autoRefresh();
+          }
+          self.$parent.$parent.closeConfirm();
+        } else {
+          self.$parent.$parent.closeConfirm();
+          self.$Modal.confirm({
+            title: message,
+            width: 500,
+            render: h => h('Table', {
+                props: {
+                  columns: [
+                    {
+                      title: '提示信息',
+                      key: 'message'
+                    }
+                  ],
+                  data
+                }
+              })
+          });
+        }
+      } catch (error) {
+        self.loading = false;
       }
-      console.log(this.componentData);
-      let params = {
-        orderList: this.componentData.orderList,
-        skuEcodes: [this.componentData.oldSuk, this.currentSkuEcode],
-        spuIds: this.componentData.spuIds
-      }
-      this.btnConfig.buttons[1].disabled = true;
-      const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);
-      setTimeout(() => {
-        this.btnConfig.buttons[1].disabled = false;
-      }, 5000);
-      console.log(code, message, data);
-      if (code === 0) {
-        self.$Message.success(message);
-        self.$parent.$parent.closeConfirm();
-        self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
-      } else if (code === -1) {
-        this.$Modal.confirm({
-          title: "message",
-          width: 500,
-          className: 'ark-dialog',
-          mask: true,
-          render: h => h('div', {
-          }, data[0].message)
-        });
-      }
+      // if (!this.currentSkuEcode) {
+      //   // 请选中一条单据!
+      //   self.$Message.warning($it('tip.d8'));
+      //   return;
+      // }
+      // console.log(this.componentData);
+      // let params = {
+      //   orderList: this.componentData.orderList,
+      //   skuEcodes: [this.componentData.oldSuk, this.currentSkuEcode],
+      //   spuIds: this.componentData.spuIds
+      // }
+      // this.btnConfig.buttons[1].disabled = true;
+      // const { data: { code, message, data } } = await this.service.orderCenter.replaceOrderByPro(params);
+      // setTimeout(() => {
+      //   this.btnConfig.buttons[1].disabled = false;
+      // }, 5000);
+      // console.log(code, message, data);
+      // if (code === 0) {
+      //   self.$Message.success(message);
+      //   self.$parent.$parent.closeConfirm();
+      //   self.$parent.$parent.$parent.$parent.$parent.getDetailsData();
+      // } else if (code === -1) {
+      //   this.$Modal.confirm({
+      //     title: "message",
+      //     width: 500,
+      //     className: 'ark-dialog',
+      //     mask: true,
+      //     render: h => h('div', {
+      //     }, data[0].message)
+      //   });
+      // }
     }
   }
 };
