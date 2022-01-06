@@ -38,10 +38,12 @@ export default {
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              console.log('---', this.$store.state)
               const route = this.$route.params;
               console.log('route', route, this.$store.state)
-              const params = this.$store.state[`S.${route.tableName}.${route.tableId}`].formItems.data;
+              const formConfig = this.$store.state[`S.${route.tableName}.${route.tableId}`].formItems.data;
+              const params = Object.assign(formConfig, {
+                tableName: route.tableName,
+              })
               console.log('params', params);
               this.service.interfacePlatform.exportErrorSku(params);
             } // 按钮点击事件
