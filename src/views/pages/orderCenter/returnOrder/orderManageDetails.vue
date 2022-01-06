@@ -60,22 +60,6 @@
       <p>error_tip</p>
     </Modal>
 
-    <OmsDialog
-      v-for="(list, index) in dialogs"
-      :key="index"
-      :ref="list.name"
-      :component-data="list.data"
-      :confirm="list.confirm"
-      :exclude-string="list.excludeString"
-      :footer-hide="list.footerHide"
-      :keep-alive="list.keepAlive || true"
-      :mask-closable="list.maskClosable === false ? false : true"
-      :name="list.name"
-      :quit="list.quit"
-      :title="list.title"
-      :url="list.url"
-      :width="list.width || ''"
-    />
     <!-- 公共弹框 -->
     <OmsDialog
       :batch-closed="publicBouncedConfig.batchClosed"
@@ -89,28 +73,11 @@
       :name="publicBouncedConfig.name"
       :quit="publicBouncedConfig.quit"
       :scrollable="publicBouncedConfig.scrollable"
-      :title="publicBouncedConfig.confirmTitle"
+      :title="publicBouncedConfig.title"
       :title-align="publicBouncedConfig.titleAlign"
       :transfer="publicBouncedConfig.transfer"
       :url="publicBouncedConfig.url"
       :width="publicBouncedConfig.width"
-    />
-    <!-- 修改内部备注-->
-    <OmsDialog
-      :title="changeInternalRemarksConfig.confirmTitle"
-      :title-align="changeInternalRemarksConfig.titleAlign"
-      :width="changeInternalRemarksConfig.width"
-      :scrollable="changeInternalRemarksConfig.scrollable"
-      :closable="changeInternalRemarksConfig.closable"
-      :draggable="changeInternalRemarksConfig.draggable"
-      :mask="changeInternalRemarksConfig.mask"
-      :mask-closable="changeInternalRemarksConfig.maskClosable"
-      :transfer="changeInternalRemarksConfig.transfer"
-      :name="changeInternalRemarksConfig.name"
-      :url="changeInternalRemarksConfig.url"
-      :keep-alive="changeInternalRemarksConfig.keepAlive"
-      :exclude-string="changeInternalRemarksConfig.excludeString"
-      :component-data="changeInternalRemarksConfig.componentData"
     />
   </div>
 </template>
@@ -123,7 +90,7 @@ import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import BurgeonEvent from 'burgeonConfig/config/event.config';
 
 // import publicDialogConfig from 'professionalComponents/common/js/publicDialog';
-import publicDialogConfig from 'burgeonConfig/config/dialogs.config';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
 import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import EssentialInfo from 'allpages/orderCenter/orderManageDetail/details/essentialInfo.vue';
 import OrderItem from 'allpages/orderCenter/orderManageDetail/details/orderItem.vue';
@@ -230,47 +197,48 @@ export default {
       modal: false, // 模态框
       error_type: '', // 错误类型【审核错误】
       error_tip: '', // 错误提示
-      dialogs: {
-        address: {
-          title: $it('mT.modify_shipping_address'), // 修改收货地址
-          titleAlign: 'center',
-          data: {},
-          width: 650,
-          keepAlive: true,
-          url: require('@/views/modal/orderCenter/resolveAddress.vue').default,
-          name: 'addressDialog',
-          excludeString: 'addressDialog',
-          footerHide: true,
-          maskClosable: false
-        },
-        // blacklist: {
-        //   title: $it('mT.blacklist'), // 加入黑名单
-        //   titleAlign: 'center',
-        //   width: 400,
-        //   data: {},
-        //   keepAlive: true,
-        //   url: 'order/joinBlackList',
-        //   name: 'blackListDialog',
-        //   footerHide: true
-        // }
-      },
-      changeInternalRemarksConfig: {
-        refFuns: 'confirmFun',
-        confirmTitle: '修改内部备注', // 修改内部备注
-        titleAlign: 'center', // 设置标题是否居中 center left
-        width: '440',
-        scrollable: false, // 是否可以滚动
-        closable: true, // 是否可以按esc关闭
-        draggable: true, // 是否可以拖动
-        mask: true, // 是否显示遮罩层
-        maskClosable: true, // 是否可以点击叉号关闭
-        transfer: true, // 是否将弹层放在body内
-        name: 'changeInternalRemarks', // 组件名称
-        url: require('@/views/modal/orderCenter/changeInternalRemarks').default,
-        keepAlive: true,
-        excludeString: 'changeInternalRemarks', // 将name传进去，确认不缓存
-        componentData: {}
-      },
+      dialogs: DialogConfig.config(),
+      // dialogs: {
+      //   address: {
+      //     title: $it('mT.modify_shipping_address'), // 修改收货地址
+      //     titleAlign: 'center',
+      //     data: {},
+      //     width: 650,
+      //     keepAlive: true,
+      //     url: require('@/views/modal/orderCenter/resolveAddress.vue').default,
+      //     name: 'addressDialog',
+      //     excludeString: 'addressDialog',
+      //     footerHide: true,
+      //     maskClosable: false
+      //   },
+      //   // blacklist: {
+      //   //   title: $it('mT.blacklist'), // 加入黑名单
+      //   //   titleAlign: 'center',
+      //   //   width: 400,
+      //   //   data: {},
+      //   //   keepAlive: true,
+      //   //   url: 'order/joinBlackList',
+      //   //   name: 'blackListDialog',
+      //   //   footerHide: true
+      //   // }
+      // },
+      // changeInternalRemarksConfig: {
+      //   refFuns: 'confirmFun',
+      //   confirmTitle: '修改内部备注', // 修改内部备注
+      //   titleAlign: 'center', // 设置标题是否居中 center left
+      //   width: '440',
+      //   scrollable: false, // 是否可以滚动
+      //   closable: true, // 是否可以按esc关闭
+      //   draggable: true, // 是否可以拖动
+      //   mask: true, // 是否显示遮罩层
+      //   maskClosable: true, // 是否可以点击叉号关闭
+      //   transfer: true, // 是否将弹层放在body内
+      //   name: 'changeInternalRemarks', // 组件名称
+      //   url: require('@/views/modal/orderCenter/changeInternalRemarks').default,
+      //   keepAlive: true,
+      //   excludeString: 'changeInternalRemarks', // 将name传进去，确认不缓存
+      //   componentData: {}
+      // },
       btnConfig: {
         typeAll: 'default',
         btnsite: 'right',
@@ -397,11 +365,10 @@ export default {
             btnclick: () => {
               const self = this;
               const ids = self.$route.params.customizedModuleId;
-              const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.holdOrderConfig));
-              publicBouncedConfig.componentData = {
+              self.publicBouncedConfig = this.dialogs.holdOrderConfig;
+              self.publicBouncedConfig.componentData = {
                 ids
               };
-              self.publicBouncedConfig = publicBouncedConfig;
               this.$nextTick(() => {
                 self.$children.find(item => item.name === 'holdOrderDialog').openConfirm();
               });
@@ -562,7 +529,7 @@ export default {
                 //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
                 .then(res => {
                   if (res.data.code === 0) {
-                    self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig;
+                    self.publicBouncedConfig = this.dialogs.modifyLogisticsConfig;
                     self.publicBouncedConfig.componentData = {
                       ids,
                       cLogisticsId: 0,
@@ -596,11 +563,14 @@ export default {
             btnclick: () => {
               const ids = this.$route.params.customizedModuleId;
               const ORDER_STATUS = this.tab1.order.ORDER_STATUS;
-              this.changeInternalRemarksConfig.componentData = {
+              this.publicBouncedConfig = this.dialogs.changeInternalRemarksConfig;
+              this.publicBouncedConfig.componentData = {
                 ids,
                 status: ORDER_STATUS
               };
-              this.$children.find(item => item.name === 'changeInternalRemarks').openConfirm();
+              setTimeout(() => {
+                this.$children.find(item => item.name === 'changeInternalRemarks').openConfirm();
+              }, 100);
             }
           },
           {
@@ -618,7 +588,7 @@ export default {
                 .then(res => {
                   if (res.data.code === 0) {
                     const { shopId, skuIds } = res.data.data;
-                    self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
+                    self.publicBouncedConfig = this.dialogs.changeWarehouseConfig;
                     self.publicBouncedConfig.componentData = {
                       ids,
                       CP_C_SHOP_ID: CP_C_SHOP_ID[0],
@@ -651,12 +621,10 @@ export default {
             webname: 'updateremark', // 修改备注
             btnclick: () => {
               const self = this;
-              const ids = [];
-              ids[0] = self.$route.params.customizedModuleId;
+              const ids = self.$route.params.customizedModuleId;
               const ORDER_STATUS = [];
               ORDER_STATUS[0] = self.tab1.order.ORDER_STATUS;
-              self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
-              self.publicBouncedConfig.confirmTitle = self.btnConfig.buttons.find(item => item.webname === 'updateremark').text;
+              self.publicBouncedConfig = this.dialogs.changeRemarkConfig;
               self.publicBouncedConfig.componentData = {
                 ids,
                 status: ORDER_STATUS

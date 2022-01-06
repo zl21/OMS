@@ -61,13 +61,21 @@ class DialogConfig {
       name: 'changeSkuDialog',
       excludeString: 'changeSkuDialog',
     },
-    modifyRemark: {
-      title: $it('btn.modifyRemarks'), // 修改备注
-      width: 480,
+    // modifyRemark: {
+    //   title: $it('btn.modifyRemarks'), // 修改备注
+    //   width: 480,
+    //   // url: 'modal/orderCenter/changeRemark',
+    //   url: require('@/views/modal/orderCenter/changeRemark.vue').default,
+    //   name: 'modifyRemarkDialog',
+    //   excludeString: 'modifyRemarkDialog',
+    // },
+    changeRemarkConfig: {
+      title: $it('btn.modify_sellerNotes'), // 修改卖家备注
+      width: '480',
+      name: 'changeRemark',
       // url: 'modal/orderCenter/changeRemark',
       url: require('@/views/modal/orderCenter/changeRemark.vue').default,
-      name: 'modifyRemarkDialog',
-      excludeString: 'modifyRemarkDialog',
+      excludeString: 'changeRemark',
     },
     modifyLogisticsConfig: {
       title: $it('btn.batchModify_logistics'), // 批量修改物流
@@ -93,15 +101,6 @@ class DialogConfig {
       url: require('@/views/modal/orderCenter/addGifts.vue').default,
       excludeString: 'addGifts',
     },
-    changeRemarkConfig: {
-      title: $it('btn.modify_sellerNotes'), // 修改卖家备注
-      width: '480',
-      name: 'changeRemark',
-      // url: 'modal/orderCenter/changeRemark',
-      url: require('@/views/modal/orderCenter/changeRemark.vue').default,
-      excludeString: 'changeRemark',
-    },
-
     // 弹框配置 拖拽排序
     dropSortConfig: {
       title: $it('btn.sortForm'), // 排序表单
@@ -208,6 +207,13 @@ class DialogConfig {
       // url: 'modal/orderCenter/manualMarking',
       url: require('@/views/modal/orderCenter/manualMarking.vue').default,
       excludeString: 'manualMarking'
+    },
+    changeInternalRemarksConfig: {
+      title: '修改内部备注', // 修改内部备注
+      width: '440',
+      name: 'changeInternalRemarks', // 组件名称
+      url: require('@/views/modal/orderCenter/changeInternalRemarks').default,
+      excludeString: 'changeInternalRemarks', // 将name传进去，确认不缓存
     },
   }
   static config() {

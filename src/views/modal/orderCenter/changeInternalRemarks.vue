@@ -26,7 +26,7 @@ export default {
         remark: '', // 修改内部备注
       },
       btnConfig: {
-        typeAll: 'error', // 按钮统一风格样式
+        typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
@@ -78,7 +78,7 @@ export default {
           };
           fromdata.append('param', JSON.stringify(param));
           this.spinShow = true;
-          this.$network.post('/api/cs/oc/oms/v1/BacthUpdateInsideRemark', param).then(res => {
+          this.service.orderCenter.bacthUpdateInsideRemark(param).then(res => {
             this.spinShow = false;
             this.$parent.$parent.closeConfirm();
             if (res.data.code === 0) {

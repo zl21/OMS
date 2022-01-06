@@ -239,8 +239,7 @@ export default {
       params.HOLD_ORDER_REASON = formValue.HOLD_ORDER_REASON;
       // 判断是否有勾选自动释放
       if (formValue.IS_AUTO_RELEASE) {
-        // params.IS_AUTO_RELEASE = 'Y';
-        params.IS_AUTO_RELEASE = true;
+        params.IS_AUTO_RELEASE = 'Y';
         params.RELEASE_TIME_TYPE = formValue.RELEASE_TIME_TYPE;
         // 判断释放时点
         if (formValue.RELEASE_TIME_TYPE === '1') {
@@ -254,13 +253,20 @@ export default {
           params.RELEASE_TIME = $utils.dateFormat(formValue.RELEASE_TIME, 'yyyy-MM-dd hh:mm:ss');
         } else if (formValue.RELEASE_TIME_TYPE === '2') {
           // 判断固定时长后释放的相应参数
-          if (formValue.DAY_TYPE && formValue.FIXED_DURATION && formValue.TIME_UNIT) {
+          if (
+            formValue.DAY_TYPE
+            && formValue.FIXED_DURATION
+            && formValue.TIME_UNIT
+          ) {
             if (formValue.FIXED_DURATION.toString().indexOf('.') >= 0) {
               return { message: $it('tip.zq') }; // 固定时长后释放的固定时长只能是整数
             }
-            params.RELEASE_DAY_TYPE = +formValue.DAY_TYPE;
+            // params.RELEASE_DAY_TYPE = +formValue.DAY_TYPE;
+            // params.FIXED_DURATION = formValue.FIXED_DURATION;
+            // params.TIME_UNIT = +formValue.TIME_UNIT;
+            params.DAY_TYPE = formValue.DAY_TYPE;
             params.FIXED_DURATION = formValue.FIXED_DURATION;
-            params.TIME_UNIT = +formValue.TIME_UNIT;
+            params.TIME_UNIT = formValue.TIME_UNIT;
           } else {
             return { message: $it('tip.zr') }; // 固定时长后释放的相关数据不能为空
           }
@@ -268,7 +274,7 @@ export default {
           return { message: $it('tip.zs') }; // 释放时点不能为空
         }
       } else {
-        params.IS_AUTO_RELEASE = false;
+        params.IS_AUTO_RELEASE = 'N';
       }
       return {
         params
@@ -281,15 +287,19 @@ export default {
         this.$Message.error(requestData.message);
         return
       }
-      let rows = this.componentData.ids;
-      let list = [];
-      list = rows.map(it => ({ ID: it.ID, BILL_NO: it.BILL_NO }));
       const params = {
-        ID_AND_BILL_NO_LIST: list,
-        ...requestData.params
+        IDS: this.componentData.ids,
+        ...requestData.params,
       };
-      params.HOLD_ORDER_REASON *= 1;
-      params.RELEASE_TIME_TYPE *= 1;
+      // let rows = this.componentData.ids;
+      // let list = [];
+      // list = rows.map(it => ({ ID: it.ID, BILL_NO: it.BILL_NO }));
+      // const params = {
+      //   ID_AND_BILL_NO_LIST: list,
+      //   ...requestData.params
+      // };
+      // params.HOLD_ORDER_REASON *= 1;
+      // params.RELEASE_TIME_TYPE *= 1;
       this.confirmInfo(params);
     }
   }
