@@ -27,8 +27,20 @@ export default {
   JDSKUEXCEPTIONHANDLING: {
     component: () => import('@/views/modal/orderCenter/changeProduct.vue')
   },
+  // 接口平台-通用订单接口-SKU异常处理
+  CURRENCYSKUEXCEPTIONHANDLING: {
+    component: () => import('@/views/modal/orderCenter/changeProduct.vue')
+  },
   // 接口平台-淘宝接口-SKU异常导入
   AbnormalImportSku: {
+    component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
+  },
+  // 接口平台-京东接口-SKU异常导入
+  JngDongAbnormalImportSku: {
+    component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
+  },
+  // 接口平台-通用接口-SKU异常导入
+  GeneralAbnormalImportSku: {
     component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
   },
 };
