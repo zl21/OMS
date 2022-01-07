@@ -162,9 +162,12 @@ class DialogConfig {
       title: $it('btn.appointGoods_splitOrder'), // 指定商品拆单
       width: '700',
       name: 'specifyGoodsAssign',
-      // url: 'modal/orderCenter/specifyGoodsAssign',
       url: require('@/views/modal/orderCenter/specifyGoodsAssign.vue').default,
       excludeString: 'specifyGoodsAssign',
+      componentData: {},
+      quit: function () {
+        this.closeConfirm()
+      },
     },
     //弹框配置 零售发货单详情界面替换商品弹框
     replaceGoodsDetailConfig: {
