@@ -55,7 +55,32 @@
   <!-- <script src="/static/R3/r3.min.js"></script> -->
 
   <!-- <script src="https://unpkg.zhimg.com/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.js.map"></script> -->
-
+  <script>
+    window.ProjectConfig = {
+      customizeMixins: {
+        setPanel:{
+          mounted() {
+            this.clickSignout = ()=>{
+              console.log('退出点击');
+              this.signout();
+            };
+          },
+          destroyed() {
+            // 判断是否是生产环境
+            var isProd = window.location.host.indexOf('r3.ecsemir.com');
+            var backUrl = encodeURI(window.location.href);
+            var isLogin = window.localStorage.getItem('loginStatus');
+            if (isProd !== -1) {
+              window.location.href = 'http://iam.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+            } else {
+              var url = 'http://iamtest.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+              window.location.href = url;
+            }
+          },
+        }, 
+      }
+    }
+  </script>
 </body>
 
 </html>
