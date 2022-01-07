@@ -143,6 +143,9 @@ export default {
           param.append(key, paramsObj[key]);
         }
       }
+      if (this.currentConfig.importNotes) {
+        param.append('cover', this.importNotes);
+      }
       param.append('file', _this.files, _this.text);
 
       if (_this.currentConfig.buttonPermission) {
