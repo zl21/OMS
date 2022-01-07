@@ -338,6 +338,7 @@ export default {
           icon: 'iconfont iconbj_col', // 按钮图标
           size: 'small', // 按钮大小
           name: $it('btn.collection'), // 收藏
+          webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
           disabled: false, // 按钮禁用控制
           btnclick: () => {
             const _this = this;

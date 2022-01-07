@@ -15,23 +15,14 @@
         </RadioGroup>
       </div>
       <!-- 商品SKU -->
-      <div style="float: right" class="searchForm">
-        <!-- {{ $it("tL.commoditySKU") }}: -->
-        <!-- <Input
-          v-model="searchValue"
-          icon="ios-search"
-          style="width: 150px"
-          @on-enter="search"
-          @on-click="search"
-        /> -->
-        <FkinputPlus
-          version="1.3"
-          :itemdata="itemdata"
-          @getFkChooseItem="oneObj"
-          @inputBlur="inputBlur"
-          @inputChange="inputChange"
-          @inputEnter="inputEnter"
-          @inputClear="inputClear"
+      <div style="float:right">
+        {{ $it('tL.commoditySKU') }}:
+        <Input
+            v-model="searchValue"
+            icon="ios-search"
+            style="width: 150px;"
+            @on-enter="search"
+            @on-click="search"
         />
         <!-- 数量:
         <Input v-model="qty" style="width: 80px" />-->
@@ -82,62 +73,20 @@ export default {
       radioValue: "2",
       searchValue: "",
       qty: "1",
-      itemdata: {
-        version: '1.3',
-        colid: "171332",
-        colname: "PS_C_SKU",
-        name: "SKU编码",
-        valuedata: "",
-        pid: "",
-        fkdisplay: "drp",
-        isfk: true,
-        isnotnull: false,
-        readonly: false,
-        columnsKey: ['ECODE'],
-      },
       loading: false,
       data: [],
       columns: [
         {
-          title: "序号",
-          key: "INDEX",
-          type: "index",
+          title: $it('tL.commoditySKU'), // 商品SKU
+          key: 'ECODE'
         },
         {
-          title: "SKU编码", // SKU编码
-          key: "ecode",
+          title: $it('tL.productName'), // 商品名称
+          key: 'PS_C_PRO_ENAME'
         },
         {
-          title: $it('fL.skuName'), // SKU名称
-          key: "ename",
-        },
-        {
-          title: $it("tL.productName"), // 商品名称
-          key: "psCProEname",
-        },
-        {
-          title: "操作",
-          key: "OPARATE_BUTTON",
-          render: (h, params) =>
-            h(
-              "a",
-              {
-                on: {
-                  click: () => {
-                    console.log(params.row);
-                    // this.querySgStorage(params.row);
-                    this.data.splice(params.row._index, 1)
-                    /* const rowA = [params.row];
-                    this.data = this.$OMS2.omsUtils.getDifferentArr(
-                      this.data,
-                      rowA,
-                      "id"
-                    ); */
-                  },
-                },
-              },
-              "删除"
-            ),
+          title: $it('tL.productSKUname'), // 商品SKU名称
+          key: 'SPEC'
         },
       ],
     };
@@ -155,27 +104,6 @@ export default {
       console.log(row);
       this.clickRow = row;
     },
-    oneObj(val) {
-      if (!val.valuedata) return // clear的情况
-      this.search();
-    },
-    inputBlur(val) {
-      console.log("inputBlur:", val);
-    },
-    inputChange(val) {
-      this.searchValue = val;
-      this.itemdata.valuedata = val;
-    },
-    inputEnter(val) {
-      if (!val.pid && !val.valuedata) {
-        this.search();
-      }
-    },
-    inputClear() {
-      this.searchValue = '';
-      this.itemdata.valuedata = '';
-    },
-
     radioChange(value) {
       console.log(value);
     },
@@ -203,20 +131,22 @@ export default {
     }, */
     search: _.debounce(async function () {
       const self = this;
-      if (!self.itemdata.valuedata && !self.searchValue) {
+      if (!self.searchValue) {
         self.$Message.warning($it("pH.z4")); // 请输入商品SKU
         return;
       }
-      const res = await self.service.common.selSku({ ECODE: self.itemdata.valuedata });
+      const query = { isBlur: 'N', psCSku: { ECODE: self.searchValue } };
+      const res = await self.service.common.skuQuery(query);
       console.log(res);
       if (res.data.code == 0) {
         if (res.data.data.length == 0 || res.data.data[0] == null) {
           self.$Message.warning($it("tip.r8")); // 查询数据为空!
           return;
         }
-        self.data.push(res.data.data[0]);
+        res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
+        self.data = res.data.data.data;
       } else {
-        // this.$Message.warning($it("tip.zt")); // sku查询失败!
+        this.$Message.warning($it("tip.zt")); // sku查询失败!
       }
     }, 100),
     confirm() {
@@ -226,19 +156,19 @@ export default {
         return;
       }
       let result = {};
-      result.orderIds = self.componentData.a_2;
-      result.skuList = self.data.map(item => item.ecode);
-      // if (self.radioValue == "1") {
-      //   result.QueryList = self.componentData.data;
-      //   // self.componentData.data['qty'] = self.qty;
-      // } else if (self.radioValue == "2") {
-      //   if (self.componentData.a_2.length == 0) {
-      //     self.$Message.warning($it("tip.zu")); // 请勾选订单数据!
-      //     // return;
-      //   }
-      //   result.IDS = self.componentData.a_2;
-      //   // result['qty'] = self.qty;
-      // }
+      if (self.radioValue == '1') {
+        self.componentData.a_1.appiontSplitSkuCode = self.searchValue;
+        // self.componentData.a_1['qty'] = self.qty;
+        result = self.componentData.a_1;
+      } else if (self.radioValue == '2') {
+        if (self.componentData.a_2.length == 0) {
+          self.$Message.warning(this.vmI18n.t('tip.zu'));// 请勾选订单数据!
+          return;
+        }
+        result.ids = self.componentData.a_2;
+        result.appiontSplitSkuCode = self.searchValue;
+        // result['qty'] = self.qty;
+      }
       this.loading = true;
       this.service.orderCenter
         .saveAppointSplitOrderInfo(result)
@@ -249,40 +179,8 @@ export default {
             self.$parent.$parent.$parent.query();
             self.$parent.$parent.closeConfirm();
           } else {
-            this.$Modal.confirm({
-              title: res.data.message,
-              width: 400,
-              className: 'ark-dialog',
-              mask: true,
-              render: (h) => {
-                if (res.data.data) {
-                  res.data.data.forEach((item, index) => {
-                    item['index'] = index + 1;
-                  })
-                  return h('Table', {
-                    props: {
-                      columns: [
-                        {
-                          title: $it('tL.serialNo'), // 序号
-                          key: 'index'
-                        },
-                        {
-                          title: $it('fL.billNo'), // 单据编号
-                          key: 'bollNo',
-                        },
-                        {
-                          title: $it('fL.e0'), // 失败原因
-                          key: 'message'
-                        }
-                      ],
-                      data: res.data.data,
-                    },
-                  })
-                } else {
-                  return h('p', {}, res.data.message)
-                }
-              },
-            })
+            self.$Message.error(res.data.message);
+            this.$parent.$parent.closeConfirm();
           }
           // if (res.data.code == 0) {
           //   self.$Message.success(res.data.message);
