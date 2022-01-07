@@ -70,14 +70,12 @@
             var isProd = window.location.host.indexOf('r3.ecsemir.com');
             var backUrl = encodeURI(window.location.href);
             var isLogin = window.localStorage.getItem('loginStatus');
-            if (!isLogin) {
-              // 确认是否是登出状态，如果是登出则跳转至iam
-              if (isProd !== -1) {
-                window.location.href = 'http://iam.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
-              } else {
-                var url = 'http://iamtest.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
-                window.location.href = url;
-              }
+            // 确认是否是登出状态，如果是登出则跳转至iam
+            if (isProd !== -1) {
+              window.location.href = 'http://iam.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+            } else {
+              var url = 'http://iamtest.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+              window.location.href = url;
             }
           },
         }, 
