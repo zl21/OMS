@@ -1302,6 +1302,7 @@ export default {
         {
           icon: 'iconfont iconbj_col', // 收藏图标
           name: $it('btn.collection'),
+          webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
           btnclick: () => {
             const self = this;
             self.setFavorite();
@@ -1479,7 +1480,7 @@ export default {
           // 新增
           R3.store.commit('global/tabOpen', {
             type: 'C',
-            label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
+            label: $it('pL.add_retail_shipping_order'), // 零售发货单新增
             customizedModuleName: 'orderManageAdd',
             customizedModuleId: '-1'
           });
@@ -1524,7 +1525,7 @@ export default {
                   }, 100);
                 } else {
                   self.$Modal.error({
-                    title: self.vmI18n.t('modalTitle.tips'), // 提示,
+                    title: $it('mT.tips'), // 提示,
                     content: res.data.message,
                     cancelType: true,
                     titleAlign: 'left',
@@ -1541,7 +1542,7 @@ export default {
               });
           } else {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.c6'), // 请选择需要修改物流记录！
+              content: $it('mT.c6'), // 请选择需要修改物流记录！
               duration: 5,
               top: 80
             });
@@ -1575,7 +1576,7 @@ export default {
                   }, 100);
                 } else {
                   self.$Modal.error({
-                    title: self.vmI18n.t('modalTitle.tips'), // 提示,
+                    title: $it('mT.tips'), // 提示,
                     content: res.data.message,
                     cancelType: true,
                     titleAlign: 'left',
@@ -1592,7 +1593,7 @@ export default {
               });
           } else {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.c7'), // 请选择需要修改发货仓库记录！
+              content: $it('mT.c7'), // 请选择需要修改发货仓库记录！
               duration: 5,
               top: 80
             });
@@ -1617,7 +1618,7 @@ export default {
             }, 100);
           } else {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.c8'), // 请选择需要修改备注的记录！
+              content: $it('mT.c8'), // 请选择需要修改备注的记录！
               duration: 5,
               top: 80
             });
@@ -1647,7 +1648,7 @@ export default {
           // 定金预售提前发货
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.c9'), // 请选择需要定金预售提前发货的记录！
+              content: $it('mT.c9'), // 请选择需要定金预售提前发货的记录！
               duration: 5,
               top: 80
             });
@@ -1670,7 +1671,7 @@ export default {
         case 'OrderDeliveryUrgent': {
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.d0'), // 请选择需要加急发货的记录！
+              content: $it('mT.d0'), // 请选择需要加急发货的记录！
               duration: 5,
               top: 80
             });
@@ -1693,7 +1694,7 @@ export default {
         case 'order_gh': {
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.dq'), // 请选择需要替换商品的记录！
+              content: $it('mT.dq'), // 请选择需要替换商品的记录！
               duration: 5,
               top: 80
             });
@@ -1725,7 +1726,7 @@ export default {
         case 'Adding gifts': {
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.d2'), // 请选择需要添加赠品的记录！
+              content: $it('mT.d2'), // 请选择需要添加赠品的记录！
               duration: 5,
               top: 80
             });
@@ -1748,7 +1749,7 @@ export default {
         case 'Delete_Merchandise': {
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.d3'), // 请选择需要删除赠品的记录！
+              content: $it('mT.d3'), // 请选择需要删除赠品的记录！
               duration: 5,
               top: 80
             });
@@ -1819,7 +1820,7 @@ export default {
           } else {
             this.pageLoad = false;
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.d4'), // 请选择需要拆单的记录！
+              content: $it('mT.d4'), // 请选择需要拆单的记录！
               duration: 5,
               top: 80
             });
@@ -1845,7 +1846,7 @@ export default {
         case 'holdOrder': {
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.e2'), // 请选择需要Hold单的记录！
+              content: $it('mT.e2'), // 请选择需要Hold单的记录！
               duration: 5,
               top: 80
             });
@@ -1865,7 +1866,7 @@ export default {
         case 'cancelHoldOrder': {
           if (self.selection.length === 0) {
             self.$Message.warning({
-              content: self.vmI18n.t('modalTips.d5'), // 请选择需要取消Hold单的记录！
+              content: $it('mT.d5'), // 请选择需要取消Hold单的记录！
               duration: 5,
               top: 80
             });
@@ -1874,13 +1875,14 @@ export default {
           const data = {
             ids: self.selection.map(item => item.ID)
           };
+          debugger
           this.$Modal.info({
-            title: self.vmI18n.t('modalTitle.tips'), // 提示,
-            content: self.vmI18n.t('modalTips.e1'), // 是否确定取消Hold？
+            title: $it('mT.tips'), // 提示,
+            content: $it('mT.e1'), // 是否确定取消Hold？
             mask: true,
             showCancel: true,
-            okText: self.vmI18n.t('common.determine'), // 确定
-            cancelText: self.vmI18n.t('common.cancel'), // 取消
+            okText: $it('com.determine'), // 确定
+            cancelText: $it('com.cancel'), // 取消
             onOk: () => {
               self.btnConfig.loading = true;
               self.service.orderCenter
@@ -1896,7 +1898,7 @@ export default {
                   }
                 })
                 .catch(() => {
-                  self.$Message.error(self.vmI18n.t('modalTips.d6')); // 服务器请求失败
+                  self.$Message.error($it('mT.d6')); // 服务器请求失败
                   self.btnConfig.loading = false;
                 });
             }
