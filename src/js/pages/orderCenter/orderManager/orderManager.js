@@ -1065,8 +1065,9 @@ export default {
             const _this = this;
             _this.importTable.componentData = {
               tableName: 'OUT_OF_STOCK_MEMO',
-              tempUrl: '/api/cs/oc/oms/v1/downloadUpdateRemarkTemp',
+              tempApi: '/api/cs/oc/oms/v1/downloadUpdateRemarkTemp',
               okApi: '/api/cs/oc/oms/v1/batchImport',
+              importNotes: true,
               // okParm:
             };
             _this.importTable.confirmTitle = $it('btn.note_import');
