@@ -156,7 +156,7 @@ class DropDownConfig {
           });
           self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
           self.publicBouncedConfig.componentData = {
-            ids,
+            ids: ids.join(),
             status: ORDER_STATUS
           };
           setTimeout(() => {

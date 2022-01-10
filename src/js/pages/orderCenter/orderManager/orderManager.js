@@ -527,7 +527,7 @@ export default {
                   self.$Message.success({
                     content: res.data.message
                   });
-                  this.getData();
+                  // this.getData();
                 }
                 this.getData();
               })
@@ -1616,31 +1616,7 @@ export default {
           }
           break;
         }
-        case 'Amendment Notes': {
-          if (self.selection.length > 0) {
-            const ids = [];
-            const ORDER_STATUS = [];
-            self.selection.forEach((item, index) => {
-              ids[index] = item.ID;
-              ORDER_STATUS[index] = item.ORDER_STATUS;
-            });
-            self.publicBouncedConfig = this.dialogs.changeRemarkConfig;
-            self.publicBouncedConfig.componentData = {
-              ids,
-              status: ORDER_STATUS
-            };
-            setTimeout(() => {
-              self.$children.find(item => item.name === 'changeRemark').openConfirm();
-            }, 100);
-          } else {
-            self.$Message.warning({
-              content: $it('mT.c8'), // 请选择需要修改备注的记录！
-              duration: 5,
-              top: 80
-            });
-          }
-          break;
-        }
+        
         case 'BacthUpdateInsideRemark': {
           // 批量修改内部备注
           if (this.selection.length === 0) {

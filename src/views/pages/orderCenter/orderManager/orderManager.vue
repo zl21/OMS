@@ -150,6 +150,7 @@
       :mask="true"
       :title="$it('com.warning')"
       width="420"
+      class-name="cus-modal"
       @on-cancel="onBatchReturnOrderCancel"
       @on-ok="doBatchReturnOrder"
     >

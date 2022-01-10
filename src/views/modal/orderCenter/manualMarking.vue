@@ -1,5 +1,5 @@
 <template>
-  <div class="marking">
+  <div class="marking cus-modal">
     <!-- 会员加急发货 -->
     <div
       v-if="componentData.pageType === 'vip'"
@@ -15,7 +15,7 @@
     >
       <OmsTable :jordan-table-config="depositConfig" />
     </div>
-    <OmsButton :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 

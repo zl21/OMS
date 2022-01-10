@@ -1,5 +1,5 @@
 <template>
-  <div class="jordanModal">
+  <div class="jordanModal cus-modal">
     <!-- 开票 -->
     <div class="invoice-header">
       <!-- <span>开票状态:</span> -->
@@ -67,7 +67,7 @@
       <OmsForm :form-config="formConfig2" />
     </div>
     <OmsButton
-      class="modalBth"
+      class="modal-footer"
       :btn-config="btnConfig"
     />
   </div>
