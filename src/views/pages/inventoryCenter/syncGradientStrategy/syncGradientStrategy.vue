@@ -1,10 +1,10 @@
 <template>
   <div class="auto-check syncGradientStrategy customized-detail" v-loading="loading">
-    <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
     <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" class="top-btns"/>
     </div>
     <div class="obj-main">
+      <WaterMark v-if="ID!=='-1'&& !isActive" :text="'已作废'"/>
       <Collapse v-model="collapse">
         <Panel name="panel_baseInfo">
           <!-- 基本信息 -->
