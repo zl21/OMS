@@ -1,8 +1,35 @@
 <template>
   <div class="jordanModal cus-modal" v-loading="loading">
     <!-- 修改物流 -->
-    <div class="Modal-Form">
-      <OmsForm :form-config="formConfig" />
+    <!-- <OmsForm :form-config="formConfig" /> -->
+    <div class="jordanModal_box">
+      <!-- <label for>物流公司:</label> -->
+      <label for>{{ vmI18n.t("fL.logisticsCompany") }}:</label>
+      <DropDownSelectFilter
+        style="width: 285px"
+        :single="true"
+        :data="foreignKeyLink"
+        :z-index="zIndex"
+        :total-row-count="totalRowCount"
+        :page-size="pageSize"
+        :show-colname-key="'show'"
+        :data-empty-message="dataEmptyMessage"
+        :columns="columns"
+        :auto-data="AutoData"
+        :disabled="logisticsFlag"
+        @on-page-change="changePage"
+        @on-fkrp-selected="onFkrpSelected"
+        @on-input-value-change="onValueChange"
+      />
+    </div>
+    <div v-if="type == 'EXPRESSCODE'" class="jordanModal_box">
+      <!-- <label for>物流单号:</label> -->
+      <label for>{{ vmI18n.t("fL.logisticsOrder_No") }}:</label>
+      <Input
+        v-model="expressCode"
+        style="width: 285px"
+        :disabled="expressCodeFlag"
+      />
     </div>
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
@@ -19,76 +46,21 @@ export default {
   },
   data() {
     return {
-      formConfig: {
-        formData: [
-          {
-            version: '1.3',
-            style: "popInput",
-            width: "24",
-            colname: "CP_C_LOGISTICS_ID",
-            inputList: [
-              {
-                childs: [
-                  {
-                    colname: "CP_C_LOGISTICS_ID",
-                    refobjid: "",
-                    valuedata: "",
-                    name: "发货仓库",
-                  },
-                ],
-              },
-            ],
-            itemdata: {
-              serviceId: 'r3-cp',
-              refcolval: {
-                fixcolumn: "CP_C_PHY_WAREHOUSE_ID",
-                expre: "equal",
-                srccol: "CP_C_LOGISTICS_ID",
-              },
-              colid: 171280,
-              colname: "CP_C_LOGISTICS_ID",
-              fkdisplay: "drp",
-              isfk: true, // 是否有fk键
-              isnotnull: true, // 是否必填
-              isuppercase: false, // 是否转大写
-              name: "物流公司",
-              readonly: false, // 是否可编辑，对应input   readonly属性
-              valuedata: "",
-            },
-            oneObj: (val) => {
-              const _this = this;
-              // if (!val.pid) return;
-              _this.formConfig.formValue.CP_C_LOGISTICS_ID = val.pid;
-              _this.formConfig.formValue.CP_C_LOGISTICS_ENAME = val.valuedata;
-            },
-          },
-        ],
-        formValue: {
-          CP_C_LOGISTICS_ID: "", // 物流公司，drp
-          CP_C_LOGISTICS_ENAME: "",
-          CP_C_PHY_WAREHOUSE_ID: "", // 发货仓库，Y
-          CP_C_PHY_WAREHOUSE_ENAME: "",
-        },
-      },
-      jordanTableConfig: {
-        columns: [
-          {
-            key: "ENAME",
-            title: $it("fL.logisticsCompany"), // '物流公司'
-          },
-          {
-            key: "ECODE",
-            title: $it("fL.logisticsNo"), // '物流编号'
-          },
-        ],
-        data: [], // 数据配置
-        pageShow: false, // 控制分页是否显示
-        loading: false,
-        height: 338, // 表格高度
-        indexColumn: true, // 是否显示序号
-        isShowSelection: true, // 是否显示checkedbox
-        border: true, // 是否显示纵向边框
-      },
+      isClice: false, // 防抖标识
+      zIndex: 2500,
+      totalRowCount: 0,
+      pageSize: 10,
+      logisticsFlag: false,
+      expressCodeFlag: true,
+      expressCode: '',
+      type: 'LOGISTICCOMPANY',
+      pageNum: 1,
+      // dataEmptyMessage: "数据加载中...", // 无数据的提示
+      dataEmptyMessage: $it('tip.du'), // 无数据的提示
+      columns: ['ename'], // 展现的组
+      AutoData: [],
+      foreignKeyLink: {},
+      pid: '',
       loading: false,
       btnConfig: {
         typeAll: "default", // 按钮统一风格样式
@@ -106,234 +78,234 @@ export default {
             type: 'primary',
             disabled: false, // 按钮禁用控制
             btnclick: () => {
-              const _this = this;
-              _this.determine();
+              this.debounce(this.determine, 500);
             }, // 按钮点击事件
           },
         ],
       }, // 确定取消按钮
-      selectData: [],
-      selectAllList: [],
-      total: 0,
-      cancelModel: false,
-      name: "",
-      delId: "",
-      removeLoading: false,
     };
   },
   mounted() {
-    // this.getLogistics();
-    const _this = this;
-    if (!_this.componentData.CP_C_PHY_WAREHOUSE_ID) {
-      _this.$Message.warning("no CP_C_PHY_WAREHOUSE_ID ！(无仓库ID！)");
-      _this.querItem("CP_C_LOGISTICS_ID").itemdata.readonly = true;
-      _this.btnConfig.buttons[1].disabled = true;
-      return;
-    }
-    _this.querItem("CP_C_LOGISTICS_ID").inputList = [
-      {
-        childs: [
-          {
-            colname: "CP_C_LOGISTICS_ID",
-            refobjid: _this.componentData.CP_C_PHY_WAREHOUSE_ID || "",
-            valuedata: _this.componentData.CP_C_PHY_WAREHOUSE_ENAME || "_",
-          },
-        ],
-      },
-    ];
+    this.zIndex = Number(
+      document.getElementsByClassName('ark-modal-wrap')[0].style.zIndex
+    ) + 50;
+    this.setupByDeliver();
   },
   methods: {
-    querItem(key, type) {
-      return this[type ? type : "formConfig"].formData.find(
-        (item) => item.colname == key
-      );
-    },
-    // 获取物流公司数据
-    async getLogistics(name, index = "") {
-      const _this = this;
-      _this.removeLoading = true;
-      const param = {
-        objid: _this.componentData.id,
-        logisticsInfo: name === undefined ? "" : name,
-      };
-      const res = await _this.service.common.getWarehouseLogisticsInfo(param);
-      _this.removeLoading = false;
-      if (res.data.code === 0) {
-        _this.jordanTableConfig.data = res.data.data.cpLogisticsList;
-        if (!index) {
-          _this.selectData = res.data.data.warehouseLogisticsItems;
-          _this.total = _this.selectData.length;
-        }
+    onKeyDown(e) {
+      if (e.keyCode === 27) {
+        this.$parent.$parent.closeConfirm();
+        this.$parent.$parent.$parent.publicBouncedIndex = {
+          name: 'testModal',
+        };
+      }
+      if (e.keyCode === 13) {
+        this.debounce(this.determine, 500);
       }
     },
-    // 确定
-    async determine() {
-      const _this = this;
-      if (!_this.formConfig.formValue.CP_C_LOGISTICS_ID) {
-        _this.$Message.warning("请选择物流公司！");
+    setupByDeliver() {
+      const platform = this.componentData.platform;
+      if (platform === 19) {
+        this.logisticsFlag = true;
+        this.expressCodeFlag = false;
+        this.type = 'EXPRESSCODE';
+      } else {
+        this.getListData();
+      }
+    },
+    // 防抖
+    debounce(fun, time) {
+      if (this.isClice) {
         return false;
       }
-      _this.loading = true;
-      let param = JSON.parse(JSON.stringify(_this.componentData));
-      param.CP_C_LOGISTICS_ID = +_this.formConfig.formValue.CP_C_LOGISTICS_ID;
-      // const res = await this.service.orderCenter.updateLogistics(param);
-      const {
-        data: { data, code, message },
-      } = await _this.service.orderCenter.updateLogistics(param);
-      if (code === 0) {
-        _this.$parent.$parent.closeConfirm();
-        _this.$Message.success(message);
-        _this.$parent.$parent.$parent.query();
-      } else if (code == 1 && data) {
-        _this.$parent.$parent.closeConfirm();
-        let tabData = data.map((row, index) => {
-          row.INDEX = ++index;
-          row.BILL_NO = row.objno;
-          row.RESULT_MSG = row.message;
-          return row;
-        });
-        $utils.tipShow(
-          "confirm",
-          _this,
-          data,
-          message,
-          function (h) {
-            return h("Table", {
-              props: {
-                columns: [
-                  {
-                    title: "序号",
-                    key: "INDEX",
-                  },
-                  {
-                    title: "ID",
-                    key: "objid",
-                  },
-                  {
-                    title: "单据编号",
-                    key: "BILL_NO",
-                  },
-                  {
-                    title: $it('fL.e0'), // 失败原因
-                    key: "RESULT_MSG",
-                  },
-                ],
-                data: tabData,
-              },
-            });
-          }
-        );
-      } else if (code == 1 && !data) {
-        _this.$parent.$parent.closeConfirm();
-        _this.$Message.error(message);
-      } else {
-        // 走框架报错
-      }
-      _this.loading = false;
+      this.isClice = true;
+      setTimeout(() => {
+        fun();
+        this.isClice = false;
+      }, time);
     },
-    // 同步查询
-    synchronous() {
-      const arr = [];
-      if (this.selectAllList.length) {
-        this.selectAllList.forEach((item) => {
-          arr.push({
-            CP_C_LOGISTICS_ID: item.ID,
-            CP_C_LOGISTICS_ECODE: item.ECODE,
-            CP_C_LOGISTICS_ENAME: item.ENAME,
-            ID: -1,
+    determine() {
+      const self = this;
+      if (self.type === 'EXPRESSCODE') {
+        if (!self.expressCode) {
+          self.$Message.warning({
+            // content: "请选择物流单号",
+            content: $it('tip.yd'),
+            duration: 5,
+            top: 80,
           });
-        });
-      }
-      if (!this.selectData.length) this.selectData = arr;
-      else if (arr.length) {
-        arr.forEach((item) => {
-          if (
-            !this.selectData.some(
-              (e) => e.CP_C_LOGISTICS_ECODE === item.CP_C_LOGISTICS_ECODE
-            )
-          )
-            this.selectData.push(item);
-        });
-      }
-      this.total = this.selectData.length;
-    },
-    // 删除
-    DeleteSelect(ecode, id) {
-      if (id !== -1) {
-        this.cancelModel = true;
-        this.delId = id;
-      } else {
-        for (let i = 0, list = this.selectData.length; i < list; i++) {
-          if (this.selectData[i].CP_C_LOGISTICS_ECODE === ecode) {
-            this.selectData.splice(i, 1);
-            this.total = this.selectData.length;
-            this.$Message.success($it("tip.ay"));
-            break;
-          }
+          return false;
         }
+      } else if (!self.pid) {
+        self.$Message.warning({
+          // content: "请选择物流公司",
+          content: $it('tip.ye'),
+          duration: 5,
+          top: 80,
+        });
+        return false;
       }
-    },
-    DeleteAll() {
-      if (!this.selectData.length) return;
-      this.delId = "";
-      this.cancelModel = true;
-    },
-    // 删除确认
-    async okClick() {
-      this.removeLoading = true;
-      const ids = [];
-      if (this.delId) {
-        ids[0] = this.delId;
-      } else {
-        this.selectData.forEach((item) => ids.push(item.ID));
-      }
+      this.loading = true;
       const fromdata = new FormData();
-      const param = {
-        objid: this.componentData.id,
-        tabitem: {
-          ST_C_WAREHOUSE_LOGISTICS_ITEM: ids,
-        },
+      fromdata.append('ids', self.componentData.ids);
+      fromdata.append('cLogisticsId', self.pid);
+      fromdata.append('expressCode', self.expressCode);
+      fromdata.append('type', self.type);
+      this.btnConfig.buttons[1].disabled = true;
+      this.service.orderCenter.updateLogistics(fromdata)
+        .then((res) => {
+          if (res.data.code === 0) {
+            this.btnConfig.buttons[1].disabled = false;
+            if (self.$route.params.customizedModuleId == 2627) {
+              self.$parent.$parent.$parent.getData();
+              if (!res.data.data) {
+                self.$Message.success(res.data.message);
+                self.$parent.$parent.closeConfirm();
+                self.$parent.$parent.$parent.selection = [];
+              } else {
+                self.$Modal.error({
+                  // title: "提示",
+                  title: $it('mT.tips'),
+                  render: h => h('div', {}, [
+                    h(
+                      'p',
+                      {
+                        style: {
+                          padding: '10px 15px 10px 0px',
+                        },
+                      },
+                      res.data.message
+                    ),
+                    h('Table', {
+                      props: {
+                        'disabled-hover': true,
+                        'highlight-row': false,
+                        // "no-data-text": "暂无数据",
+                        'no-data-text': $it('other.noDataAvailable'),
+                        columns: res.data.data.columns,
+                        data: res.data.data.prompt_data,
+                      },
+                    }),
+                  ]),
+                  cancelType: true,
+                  titleAlign: 'left',
+                  mask: true,
+                  width: 500,
+                  draggable: true,
+                  onOk: () => {
+                    self.$parent.$parent.closeConfirm();
+                  },
+                  keyDown: (event) => {
+                    if (event.keyCode === 27) {
+                      self.$parent.$parent.closeConfirm();
+                    } else if (event.keyCode === 13) {
+                      self.$parent.$parent.closeConfirm();
+                    }
+                  },
+                });
+              }
+            } else {
+              // 订单管理详情的刷新方法load()
+              self.$parent.$parent.$parent.load();
+              self.$Message.success(res.data.message);
+              self.$parent.$parent.closeConfirm();
+            }
+          } else {
+            self.$Message.warning({
+              content: res.data.message,
+              duration: 5,
+              top: 80,
+            });
+            this.btnConfig.buttons[1].disabled = false;
+          }
+        }).finally(e => this.loading = false);
+    },
+    getListData() {
+      const self = this;
+      const data = {
+        flag: 1,
+        id: self.componentData.CP_C_PHY_WAREHOUSE_ID,
+        num: self.pageNum,
+        size: self.pageSize,
+        inputValue: '',
       };
-      fromdata.append("param", JSON.stringify(param));
-      const res = await this.service.common.delWarehouseLogistics(fromdata);
-      if (res.data.data.code === 0) {
-        const ess = res.data.data.message || $it("tip.ay");
-        this.getLogistics();
-        this.$parent.$parent.$parent.refresh();
-        this.$Message.success(ess);
-      } else {
-        const err = res.data.data.message || $it("tip.z3");
-        this.$Message.error(err);
+      if (this.$route.params.customizedModuleName === 'ORDERMANAGER') {
+        data.ids = self.componentData.ids.toString();
+      } else if (this.$route.params.customizedModuleName === 'ORDERMANAGEDETAIL') {
+        data.ids = this.$route.params.customizedModuleId.toString();
       }
-      this.total = this.selectData.length;
+      self.service.orderCenter.getQueryList(data).then((res) => {
+        res.data.data.forEach((element) => {
+          element.ecode = {
+            val: element.ecode,
+          };
+          element.ename = {
+            val: element.ename,
+          };
+          element.shortName = {
+            val: element.shortName,
+          };
+          element.ID = {
+            val: element.id,
+          };
+        });
+        console.log(res.data);
+        self.foreignKeyLink = {
+          start: 0,
+          tabth: [
+            {
+              colname: 'ID',
+              name: 'ID',
+              show: false,
+            },
+            {
+              colname: 'ename',
+              // name: "快递名称",
+              name: $it('tL.expressName'),
+              show: true,
+            },
+            {
+              colname: 'ecode',
+              // name: "快递编码",
+              name: $it('tL.expressCode'),
+              show: false,
+            },
+            {
+              colname: 'shortName',
+              // name: "简称",
+              name: $it('tL.abbreviation'),
+              show: false,
+            },
+          ],
+          row: res.data.data,
+        };
+        console.log(res.data.data);
+        console.log(self.foreignKeyLink);
+        self.totalRowCount = res.data.count;
+      });
     },
-    cancalModal() {
-      this.cancelModel = false;
+    // 分页请求数据
+    changePage(value) {
+      this.pageNum = 1;
     },
-    // 双击
-    onRowDblclick(row) {
-      const arr = {
-        CP_C_LOGISTICS_ID: row.ID,
-        CP_C_LOGISTICS_ECODE: row.ECODE,
-        CP_C_LOGISTICS_ENAME: row.ENAME,
-        ID: -1,
+    onFkrpSelected(val) {
+      console.log(val);
+      this.pid = val[0].ID;
+    },
+    onValueChange(val) {
+      let params = {
+        ak: val,
+        colid: 167630,
+        fixedcolumns: {}
       };
-      if (!this.selectData.some((e) => e.CP_C_LOGISTICS_ECODE === row.ECODE))
-        this.selectData.push(arr);
-      this.total = this.selectData.length;
-    },
-    OnSelect(e) {
-      this.selectAllList = e;
-    },
-    Cancel(e) {
-      this.selectAllList = e;
-    },
-    SelectAll(e) {
-      this.selectAllList = e;
-    },
-    SelectAllCancel(e) {
-      this.selectAllList = e;
-    },
+      fkFuzzyquerybyak(params).then(res => {
+        console.log(res)
+        if (res.data.code === 0) {
+          let resData = res.data.data;
+          this.AutoData = resData;
+        }
+      })
+    }
   },
 };
 </script>

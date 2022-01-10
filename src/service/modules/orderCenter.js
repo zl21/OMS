@@ -206,7 +206,7 @@ export default {
     queryManualSplit: (params) =>
     $network.post('/p/cs/oc/oms/v1/queryManualSplit' , params), //手工拆单商品查询
   updateLogistics: (params) =>
-    $network.post('/p/cs/oc/b/oms/v1/ocborder/updateLogistics', params), // 零售发货单列表-改物流
+    $network.post('/api/cs/oc/oms/v1/updateLogistics', params), // 零售发货单列表-改物流
   manualMatchingList: (params) =>
     $network.post('/api/cs/oc/oms/v1/manualMatchingList', params), // 获取退货批次数据
   distributionFindBydistributionId: (params) =>
