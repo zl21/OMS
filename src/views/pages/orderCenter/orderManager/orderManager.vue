@@ -150,7 +150,6 @@
       :mask="true"
       :title="$it('com.warning')"
       width="420"
-      class="customizedModal"
       @on-cancel="onBatchReturnOrderCancel"
       @on-ok="doBatchReturnOrder"
     >
