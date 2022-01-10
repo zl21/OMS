@@ -19,7 +19,7 @@ export default {
       // selectData: [],
       // list: [],
       btnConfig: {
-        typeAll: 'error', // 按钮统一风格样式
+        typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [{
           type: '', // 按钮类型
@@ -198,7 +198,7 @@ export default {
           // this.defaultSelected = [{ ID: def.ID, Label: def.ENAME }];
           // this.selectData = this.defaultSelected;
           this.btnConfig.buttons.push({
-            type: '', // 按钮类型
+            type: 'primary', // 按钮类型
             text: $it('com.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小

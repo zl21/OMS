@@ -201,6 +201,7 @@ export default {
           },
           {
             text: $it('com.determine'), // 确定
+            type: 'primary',
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
