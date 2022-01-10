@@ -185,6 +185,10 @@ class DialogConfig {
       // url: 'modal/orderCenter/holdOrderDialog',
       url: require('@/views/modal/orderCenter/holdOrderDialog.vue').default,
       excludeString: 'holdOrderDialog',
+      componentData: {},
+      quit: function () {
+        this.closeConfirm()
+      },
     },
     scheduleFormConfig: {
       title: '入库单', // 入库单、拣货单
