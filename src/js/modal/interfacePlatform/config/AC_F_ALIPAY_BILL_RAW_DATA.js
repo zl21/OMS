@@ -15,7 +15,7 @@
           itemdata: {
             version: '1.3',
             col: 1,
-            colid: 182262,
+            colid: 1700818734,
             colname: 'ALIPAY_ACCOUNT_ID', // 当前字段的名称
             datelimit: 'all',
             display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能
@@ -115,13 +115,14 @@
         start_time: startTime,
         isDate: formValue.isDate == 'true',
       };
-      self.service.financeCenter.alipayBillDownload(param).then(res => {
-        if (res.data.code === 0) {
-          self.$Message.success(res.data.message);
-          self.$emit('confirmImport');
-          self.$emit('closeActionDialog');
-        }
-      }); 
+      const { data: { data }} = await self.service.financeCenter.alipayBillDownload(param)
+      if (data.code === 0) {
+        self.$Message.success(data.message);
+        self.$emit('confirmImport');
+        self.$emit('closeActionDialog');
+      } else {
+        self.$Message.error(data.message);
+      }
     }
   };
   
