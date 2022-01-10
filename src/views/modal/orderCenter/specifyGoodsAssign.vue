@@ -139,12 +139,13 @@ export default {
       const res = await self.service.common.skuQuery(query);
       console.log(res);
       if (res.data.code == 0) {
-        if (res.data.data.length == 0 || res.data.data[0] == null) {
+        const data = res.data.data.data || []
+        if (data.length == 0 || data[0] == null) {
           self.$Message.warning($it("tip.r8")); // 查询数据为空!
           return;
         }
-        res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
-        self.data = res.data.data.data;
+        data[0].IS_GIFT = data[0].IS_GIFT == '0' ? '否' : '是';
+        self.data = data;
       } else {
         this.$Message.warning($it("tip.zt")); // sku查询失败!
       }
