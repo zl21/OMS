@@ -148,7 +148,7 @@
         <!-- 查询原始订单编号 -->
         <Modal
           v-model="order.modal"
-          class="queryorder"
+          class-name="queryorder cus-modal"
           width="900"
           :closable="true" 
           :mask="true"
