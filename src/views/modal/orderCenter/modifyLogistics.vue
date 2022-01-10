@@ -164,6 +164,7 @@ export default {
                 self.$parent.$parent.$parent.selection = [];
               } else {
                 self.$Modal.error({
+                  className: 'ark-dialog',
                   // title: "提示",
                   title: $it('mT.tips'),
                   render: h => h('div', {}, [
