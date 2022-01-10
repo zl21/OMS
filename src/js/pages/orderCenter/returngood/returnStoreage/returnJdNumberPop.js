@@ -210,7 +210,17 @@ export default {
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
+            text: $it('com.cancel'), // 取消 按钮文本
+            size: 'small', // 按钮大小
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              // this.$refs.changeLogistics.close();
+              this.$parent.$parent.closeConfirm();
+            } // 按钮点击事件
+          },
+          {
             text: $it('com.determine'), // 确定 按钮文本
+            type: 'primary', // 按钮类型
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {
@@ -220,15 +230,6 @@ export default {
               else if (_this.componentData.type == 3) _this.okClick2();
             } // 按钮点击事件
           },
-          {
-            text: $it('com.cancel'), // 取消 按钮文本
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              // this.$refs.changeLogistics.close();
-              this.$parent.$parent.closeConfirm();
-            } // 按钮点击事件
-          }
         ]
       }, // 确定取消按钮
       selectData: [], // 选中的数据

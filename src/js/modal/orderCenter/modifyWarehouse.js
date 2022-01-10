@@ -66,7 +66,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            type: '', // 按钮类
+            type: 'primary', // 按钮类型
             // text: "", //按钮文本
             text: $it('com.determine'), // 确定
             icon: '', // 按钮图标

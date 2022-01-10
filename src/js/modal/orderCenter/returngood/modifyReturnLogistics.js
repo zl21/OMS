@@ -73,8 +73,8 @@ export default {
             } // 按钮点击事件
           },
           {
-            type: '', // 按钮类
             // text: "", //按钮文本
+            type: 'primary', // 按钮类型
             text: $it('com.determine'), // 确定
             icon: '', // 按钮图标
             size: 'small', // 按钮大小

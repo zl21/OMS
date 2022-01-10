@@ -35,7 +35,7 @@ export default {
         buttons: [
           {
             text: $it('com.determine'), // 确定
-            type: 'default',
+            type: 'primary',
             btnclick: () => {
               this.save()
             },

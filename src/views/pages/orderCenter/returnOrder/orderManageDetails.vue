@@ -339,6 +339,7 @@ export default {
                         self.load();
                       } else {
                         self.$Modal.error({
+                          className: 'ark-dialog',
                           title: $it('mT.tips'), // 提示
                           content: res.data.message,
                           cancelType: true,
@@ -541,6 +542,7 @@ export default {
                     }, 100);
                   } else {
                     self.$Modal.error({
+                      className: 'ark-dialog',
                       title: $it('mT.tips'), // 提示,
                       content: res.data.message,
                       cancelType: true,
@@ -600,6 +602,7 @@ export default {
                     }, 100);
                   } else {
                     self.$Modal.error({
+                      className: 'ark-dialog',
                       title: $it('mT.tips'), // 提示,
                       content: res.data.message,
                       cancelType: true,
@@ -868,6 +871,7 @@ export default {
                         this.load();
                       } else {
                         self.$Modal.error({
+                          className: 'ark-dialog',
                           title: $it('mT.tips'), // 提示
                           content: res.data.message,
                           cancelType: true,
@@ -926,6 +930,7 @@ export default {
                         this.load();
                       } else {
                         this.$Modal.error({
+                          className: 'ark-dialog',
                           title: '提示', // 提示
                           content: res.data.message,
                           cancelType: true,
@@ -1015,6 +1020,7 @@ export default {
           self.load();
         } else {
           self.$Modal.error({
+            className: 'ark-dialog',
             title: $it('mT.tips'), // 提示
             content: res.data.message,
             cancelType: true,
@@ -1161,6 +1167,7 @@ export default {
           self.selection = [];
         } else {
           self.$Modal.error({
+            className: 'ark-dialog',
             title: $it('mT.tips'), // 提示
             content: res.data.message,
             cancelType: true,

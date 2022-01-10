@@ -69,6 +69,7 @@ class DropDownConfig {
                 }, 100);
               } else {
                 self.$Modal.error({
+                  className: 'ark-dialog',
                   title: $it('mT.tips'), // 提示,
                   content: res.data.message,
                   cancelType: true,
@@ -120,6 +121,7 @@ class DropDownConfig {
                 }, 100);
               } else {
                 self.$Modal.error({
+                  className: 'ark-dialog',
                   title: $it('mT.tips'), // 提示,
                   content: res.data.message,
                   cancelType: true,

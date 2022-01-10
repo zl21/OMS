@@ -40,8 +40,8 @@ export default {
           },
           {
             text: $it('com.determine'), // 确定
+            type: 'primary',
             btnclick: () => {
-
               this.determine()
             }, // 按钮点击事件
           },

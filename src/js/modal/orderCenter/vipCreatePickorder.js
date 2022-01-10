@@ -13,6 +13,7 @@ export default {
             }, // 按钮点击事件
           },
           {
+            type: 'primary', // 按钮类型
             text: $it('com.determine'), // 确定
             disabled: false, // 按钮禁用控制
             btnclick: () => {
