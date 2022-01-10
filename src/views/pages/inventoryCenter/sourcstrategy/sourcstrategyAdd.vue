@@ -1,7 +1,7 @@
 <!--寻源策略表-->
 <template>
   <div class="sourcstrategy pd-tp-20 relative pd-bt-50 customized-detail" v-loading="loading">
-    <div class="pd-rt-100 obj-main">
+    <div class="pd-rt-100 pd-lf-16 obj-main">
       <WaterMark v-if="ID!=='-1'&&status && statusObj[status]" :text="statusObj[status]"/>
       <div class="br-d3d3d3  pd-20 mg-bt-20" id="box-1">
         <div class="flex flex-direction-row align-items-center pd-bt-15">
@@ -60,7 +60,7 @@
         <div :class="{'pd-tp-15':!canEdit}">
           <div v-if="canEdit" class="flex flex-direction-row justify-content-end pd-bt-5">
             <Button :loading="addLineLoading" type="fcdefault" @click="addRowFun" size="small"
-                    class="pd-tp-3 pd-bt-3">{{$it('btn.af')}}<!--新增行-->
+                    class="pd-tp-0 pd-bt-3">{{$it('btn.af')}}<!--新增行-->
             </Button>
           </div>
           <Table border size="small" :columns="columns2" :data="tableData2ForFrontEndPage"
@@ -80,7 +80,7 @@
             </template>
             <template slot-scope="{ row, index }" slot="action">
               <Button :disabled="!canEdit" type="fcdefault" @click="delRowFun(index,row)" size="small"
-                      class="pd-tp-3 pd-bt-3">{{$it('btn.ag')}}<!--删除行-->
+                      class="pd-tp-0 pd-bt-3">{{$it('btn.ag')}}<!--删除行-->
               </Button>
             </template>
 
