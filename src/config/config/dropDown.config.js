@@ -156,7 +156,7 @@ class DropDownConfig {
           });
           self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
           self.publicBouncedConfig.componentData = {
-            ids,
+            ids: ids.join(),
             status: ORDER_STATUS
           };
           setTimeout(() => {
@@ -201,7 +201,7 @@ class DropDownConfig {
           return;
         }
         const ids = self.selection.map(item => item.ID);
-        const publicBouncedConfig = _.cloneDeep(publicDialogConfig.depositPresaleConfig));
+        const publicBouncedConfig = _.cloneDeep(publicDialogConfig.depositPresaleConfig);
         publicBouncedConfig.componentData = {
           params: {
             ids
@@ -224,7 +224,7 @@ class DropDownConfig {
           return;
         }
         const ids = self.selection.map(item => item.ID);
-        const publicBouncedConfig = _.cloneDeep(publicDialogConfig.vipSpeedDispatchConfig));
+        const publicBouncedConfig = _.cloneDeep(publicDialogConfig.vipSpeedDispatchConfig);
         publicBouncedConfig.componentData = {
           params: {
             ids

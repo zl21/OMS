@@ -69,7 +69,7 @@ export default {
         } // 按钮点击事件
       },
       {
-        type: '', // 按钮类型
+        type: 'primary', // 按钮类型
         text: $it('btn.save'), // 保存 按钮文本
         icon: '', // 按钮图标
         size: 'small', // 按钮大小

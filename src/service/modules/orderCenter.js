@@ -105,6 +105,8 @@ export default {
     $network.post('/p/cs/oc/oms/v1/saveSplitOrderInfo', params),
   getSingleObjectPermission: (params) =>
     $network.post('/api/cs/oc/oms/v1/getSingleObjectPermission', params),
+  querySkuListAndStorageInfo: params =>
+    $network.post('/api/cs/oc/oms/v1/querySkuListAndStorageInfo', params), // 提前判断下该单据是否可拆单
   /**
    * 零售发货单 - 详情
    */

@@ -4,6 +4,7 @@ export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
+      onRowData: '', // 选中数据
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
         indexColumn: true,
@@ -54,6 +55,9 @@ export default {
                   click: () => {
                     const index = params.index;
                     this.tableConfig.data.splice(index, 1);
+                    if (this.onRowData.ECODE == params.row.ECODE) {
+                      this.onRowData = '';
+                    }
                   }
                 }
               },
@@ -116,7 +120,9 @@ export default {
     // 点击取消全选时触发
     onSelectAllCancel() { },
     // 单击某一行时触发
-    onRowClick() { },
+    onRowClick(row) { 
+      this.onRowData = row;
+    },
     // 单击某二行时触发
     onRowDblclick() { },
     // 分页change 事件
@@ -128,27 +134,35 @@ export default {
       if (d) {
         d.QTY = parseInt(d.QTY) + parseInt(obj.QTY);
         this.tableConfig.data = [...data];
+        this.onRowData = this.tableConfig.data[0];
       } else {
         this.tableConfig.data.push(obj);
+        this.onRowData = this.tableConfig.data[0];
       }
     },
     async submit() {
       const self = this;
       console.log(self.objid);
-      const rows = this.tableConfig.data.map(item => ({
-        PS_C_SKU_ECODE: item.ECODE,
-        QTY: item.QTY,
-        IS_GIFT: item.IS_GIFT
-      }));
-      if (rows.length === 0) {
+      // const rows = this.tableConfig.data.map(item => ({
+      //   PS_C_SKU_ECODE: item.ECODE,
+      //   QTY: item.QTY,
+      //   IS_GIFT: item.IS_GIFT
+      // }));
+      if (!self.onRowData) {
         self.$Message.error($it('tip.eg')); // '无赠品可添加！'
         return;
       }
-
+      const ids = self.objid;
       const param = {
-        OcBorderDto: { id: self.componentData.objid },
-        OcBorderItemDto: rows
+        ids: self.componentData.objid,
+        changeGoodsSku: self.onRowData.ECODE,
+        gift_type: 1,
+        qty: self.onRowData.QTY
       };
+      // const param = {
+      //   OcBorderDto: { id: self.componentData.objid },
+      //   OcBorderItemDto: rows
+      // };
       const { data: { code, message } } = await this.service.orderCenter.batchAddGoods(param);
       if (code === 0) {
         self.$Message.success(message);
@@ -157,8 +171,32 @@ export default {
         self.$parent.$parent.$parent.selection = [];
       } else {
         // let mes = message || "失败";
-        const mes = message || $it('tip.z3');
-        self.$Message.error(mes);
+        // const mes = message || $it('tip.z3');
+        // self.$Message.error(mes);
+        if (code === -1) {
+          self.$Modal.confirm({
+            title: message,
+            width: 500,
+            mask: true,
+            className: 'ark-dialog',
+            render: h => {
+              if (data) {
+                return h('Table', {
+                  props: {
+                    columns: [
+                      {
+                        title: $it('mT.a6'), // '提示信息',
+                        key: 'message'
+                      }
+                    ],
+                    data
+                  }
+                });
+              }
+              return false;
+            }
+          });
+        }
       }
     },
     request(req) {

@@ -153,7 +153,7 @@ export default {
           },
         ],
         data: [],
-        pageShow: true, // 控制分页是否显示
+        pageShow: false, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
@@ -293,7 +293,7 @@ export default {
           },
         ],
         data: [],
-        pageShow: true, // 控制分页是否显示
+        pageShow: false, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
@@ -527,13 +527,13 @@ export default {
             item.IS_GIFT = item.IS_GIFT == '0' ? '否' : '是'
           })
           if (value == 'one') {
-            self.data = res.data.data.data
-            self.onRowClickData = self.data[0]
-            self.onRowClickText = self.data[0].ECODE
+            self.tableConfig.data = res.data.data.data
+            self.onRowClickData =  self.tableConfig.data[0]
+            self.onRowClickText =  self.tableConfig.data[0].ECODE
           } else {
-            self.replace_data = res.data.data.data
-            self.onRowClickReplaceData = self.replace_data[0]
-            self.onRowClickReplaceText = self.replace_data[0].ECODE
+            self.tableConfig2.data = res.data.data.data
+            self.onRowClickReplaceData = self.tableConfig2.data[0]
+            self.onRowClickReplaceText = self.tableConfig2.data[0].ECODE
           }
         } else {
           // this.$Message.warning("sku查询失败!");
