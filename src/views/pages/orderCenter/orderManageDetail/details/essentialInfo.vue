@@ -204,7 +204,7 @@
     />
     -->
     <OmsDialog
-      :title="publicBouncedConfig.confirmTitle"
+      :title="publicBouncedConfig.title"
       :title-align="publicBouncedConfig.titleAlign"
       :width="publicBouncedConfig.width"
       :scrollable="publicBouncedConfig.scrollable"

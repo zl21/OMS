@@ -1,550 +1,269 @@
-import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown'
+import listeningToKeydownMixin from '@/assets/js/mixins/listeningToKeydown';
 
 export default {
   mixins: [listeningToKeydownMixin],
   data() {
     return {
-      objid: '',
-      url: '',
-      loading: false,
       onRowData: '', // 选中数据
+      tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
       tableConfig: {
-        businessFormConfig: {
-          formValue: {
-            SKU_CODE: '',
-            SPU_CODE: '',
-            SPU_NAE: '',
-            number: 1,
-          },
-          formData: [
-            {
-              label: $it('tL.code_SKU'), // SKU编码
-              style: 'dimSearch',
-              width: '8',
-              value: 'SKU_CODE',
-              columns: ['value'],
-              AuotData: [], //匹配的选项
-              dimChange: (search) => {
-                //模糊查询的方法
-                // this.fuzzyquerybyak(search)
-              },
-              dimEnter: (val) => {
-                this.searchGift()
-              },
-              dimSelect: (obj) => { },
-              dimblur: () => { },
-            },
-            {
-              label: $it('tL.itemNo01'), // SPU编码
-              style: 'dimSearch',
-              width: '8',
-              value: 'SPU_CODE',
-              columns: ['ECODE'],
-              AuotData: [], //匹配的选项
-              dimChange: (search) => { },
-              dimEnter: (val) => {
-                this.searchGift()
-              },
-              dimSelect: (obj) => { },
-              dimblur: () => { },
-            },
-            {
-              style: 'dimSearch', //输入框类型
-              label: $it("tL.itemNo02"), // SPU名称 输入框前文字
-              value: 'SPU_NAE', //输入框的值
-              columns: ['ENAME'],
-              width: '8',
-              AuotData: [], //匹配的选项
-              dimChange: (search) => { },
-              dimEnter: (val) => {
-                this.searchGift()
-              },
-              dimSelect: (obj) => { },
-              dimblur: () => { },
-            },
-
-          ],
-        },
-        // searchBtn
-        businessButtonConfig: {
-          typeAll: 'default', // 按钮统一风格样式
-          btnsite: 'right', // 按钮位置 (right , center , left)
-          buttons: [
-            {
-              text: '搜索',
-              type: "primary",
-              btnclick: () => {
-                this.tableConfig.current = 1
-                this.skuEcodes = ""
-                this.onRowData = ""
-                this.searchGift()
-              }, // 按钮点击事件
-            },
-          ],
-        },
         indexColumn: true,
-        isShowSelection: true,
+        isShowSelection: false,
         columns: [
           {
-            key: 'skuEcode',
-            title: $it('tL.code_SKU'), // SKU编码
+            key: 'ECODE',
+            title: $it('tL.commoditySKU'), // '商品SKU'
           },
           {
-            key: 'spuEcode',
-            title: $it('tL.itemNo01'), // SPU编码
+            key: 'sizeName',
+            title: $it('other.size'), // '尺码'
           },
           {
-            key: 'spuEname',
-            title: $it("tL.itemNo02"), // SPU名称
+            key: 'colorName',
+            title: $it('other.color'), // '颜色'
           },
           {
-            key: 'skuEname',
-            title: $it('fL.skuName'), // SKU名称
+            key: 'QTY',
+            title: $it('tL.quantities'), // '数量'
           },
           {
-            key: 'brandEname',
-            title: '品牌',
+            key: 'PS_C_PRO_ENAME',
+            title: $it('tL.productName'), // '商品名称'
           },
           {
-            key: 'classifyEname',
-            title: '商品分类',
+            key: 'GBCODE',
+            title: $it('tL.internationalCode'), // '国际码'
           },
+          {
+            key: 'IS_GIFT',
+            title: $it('tL.whetherGift'), // '是否赠品',
+            render: (h, params) => {
+              const IS_GIFT = params.row.IS_GIFT == 1 ? '是' : '否';
+              return h('span', {}, IS_GIFT);
+            }
+          },
+          {
+            key: 'IS_DELETE',
+            title: $it('tL.operation'), // '操作',
+            render: (h, params) => h(
+                'a',
+                {
+                  on: {
+                    click: () => {
+                      const index = params.index;
+                      this.tableConfig.data.splice(index, 1);
+                      if (this.onRowData.ECODE == params.row.ECODE) {
+                        this.onRowData = '';
+                      }
+                    }
+                  }
+                },
+                '删除'
+              )
+          }
         ],
         data: [],
-        pageShow: true, // 控制分页是否显示
+        pageShow: false, // 控制分页是否显示
         btnsShow: true, // 控制操作按钮是否显示
         searchInputShow: false, // 控制搜索框是否显示
         width: '', // 表格宽度
-        height: '300', // 表格高度
+        height: '', // 表格高度
         border: true, // 是否显示纵向边框
         total: 0, // 设置总条数
-        pageSizeOpts: [10, 20, 30, 50, 100], // 每页条数切换的配置
-        pageSize: 10, // 每页条数
-        highlightRow: true,
-        multiple: false
+        pageSizeOpts: [10, 20, 30], // 每页条数切换的配置
+        pageSize: 10 // 每页条数
       },
+      matrixData: {
+        // 商品SKU  数量  回调函数
+        fun: obj => {
+          const self = this;
+          self.add(obj);
+        }
+      },
+      objid: '',
+      options: {}, // 自定义属性（选填）
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
         buttons: [
           {
-            disabled: false,
             text: $it('com.cancel'),
             btnclick: () => {
               this.$parent.$parent.closeConfirm();
-            }, // 按钮点击事件
+            } // 按钮点击事件
           },
           {
-            type: 'primary', // 按钮类型
+            type: 'primary',
             text: $it('com.determine'),
-            disabled: false,
+            loading: false,
             btnclick: () => {
-              if (!this.skuEcodes) {
-                this.$Message.warning("请选中操作的数据")
-                return
-              }
-              this.btnConfig.buttons[1].disabled = true;
-              if (this.type == 'add') {
-                this.saveOrderByPro() // 添加订单商品信息-确定添加
-              } else if (this.type == 'del') {
-                this.deleteOrderGoods()
-              } else if (this.type == 'replace') {
-                this.parseOrderList() //确认解析
-              } else {
-                this.submit()
-              }
-            },
-          },
-        ],
+              this.submit();
+            }
+          }
+        ]
+      }
+    };
+  },
+  props: {
+    componentData: {}
+  },
+  watch: {
+    componentData: {
+      handler(newVal) {
+        this.request(newVal);
       },
-      skuEcodes: '',
-      type: '', //组件传过来的类型，区分那里过来的
+      deep: true
     }
   },
-  components: {},
-  props: {
-    componentData: {
-      type: Object,
-    },
-  },
-
   methods: {
-    saveOrderByPro() {
-      let orderList = []
-      this.componentData.data.forEach((em) => {
-        let obj = {
-          orderId: em.ID, //订单id
-          billNo: em.BILL_NO, //单据编号
-        }
-        orderList.push(obj)
-      })
-
-      let data = {
-        skuEcodes: [this.skuEcodes],
-        orderList,
-        initNumber: this.tableConfig.businessFormConfig.formValue.number,
-      }
-      this.service.orderCenter.saveOrderByPro(data).then((res) => {
-        setTimeout(() => {
-          this.btnConfig.buttons[1].disabled = false;
-        }, 5000);
-        setTimeout(() => {
-          this.$parent.$parent.closeConfirm();
-        }, 1000)
-        if (res.data.code == 0) {
-          this.$Message.success(res.data.message)
-          this.$parent.$parent.$parent.$parent.getDetailsData()
-        } else if (res.data.code === -1) {
-          this.$Modal.confirm({
-            title: "message",
-            width: 500,
-            className: 'ark-dialog',
-            mask: true,
-            render: h => h('div', {
-            }, res.data.data[0].message)
-          });
-        }
-
-
-      })
-    },
-    deleteOrderGoods() {
-      let orderList = []
-      this.componentData.data.forEach((em) => {
-        let obj = {
-          orderId: em.ID, //订单id
-          billNo: em.BILL_NO, //单据编号
-        }
-        orderList.push(obj)
-      })
-
-      let data = {
-        skuEcodes: [this.skuEcodes],
-        orderList,
-      }
-      this.service.orderCenter.deleteOrderGoods(data).then((res) => {
-        setTimeout(() => {
-          this.btnConfig.buttons[1].disabled = false;
-        }, 5000);
-
-        if (res.data.code == 0) {
-          this.$Message.success(res.data.message)
-
-        } else {
-          if (!res.data.data) {
-            $utils.tipShow('error', self, res.data.message)
-            return
-          }
-          this.$Modal.confirm({
-            title: res.data.message,
-            width: 500,
-            mask: true,
-            className: 'ark-dialog',
-            render: (h) => {
-              if (res.data.data) {
-                return h('Table', {
-                  props: {
-                    columns: [
-                      {
-                        title: "单据编号", // '提示信息',
-                        key: 'billNo',
-                      },
-                      {
-                        title: $it('mT.a6'), // '提示信息',
-                        key: 'message',
-                      },
-                    ],
-                    data: res.data.data,
-                  },
-                })
-              }
-              return false
-            },
-          })
-        }
-        this.$parent.$parent.closeConfirm()
-      })
-    },
-    parseOrderList() {
-      let orderList = []
-      this.componentData.data.forEach((em) => {
-        let obj = {
-          orderId: em.ID, //订单id
-          billNo: em.BILL_NO, //单据编号
-        }
-        orderList.push(obj)
-      })
-
-      let data = {
-        skuEcodes: [this.skuEcodes],
-        orderList,
-      }
-      this.service.orderCenter.parseOrderList(data).then((res) => {
-        setTimeout(() => {
-          this.btnConfig.buttons[1].disabled = false;
-        }, 5000);
-
-        if (res.data.code == 0) {
-          this.$Message.success(res.data.message)
-
-        } else {
-          if (!res.data.data) {
-            $utils.tipShow('error', self, res.data.message)
-            return
-          }
-          this.$Modal.confirm({
-            title: res.data.message,
-            width: 500,
-            mask: true,
-            className: 'ark-dialog',
-            render: (h) => {
-              if (res.data.data) {
-                return h('Table', {
-                  props: {
-                    columns: [
-                      {
-                        title: "单据编号", // '提示信息',
-                        key: 'billNo',
-                      },
-                      {
-                        title: $it('mT.a6'), // '提示信息',
-                        key: 'message',
-                      },
-                    ],
-                    data: res.data.data,
-                  },
-                })
-              }
-              return false
-            },
-          })
-        }
-        this.$parent.$parent.closeConfirm()
-      })
-    },
     // 选中某一项时触发
-    onSelect(v) {
-      //  this.skuEcodes = v[0].skuEcode
-      console.log(v)
-    },
+    onSelect() {},
     // 取消选中某一项时触发
-    onSelectCancel() { },
+    onSelectCancel() {},
     // 点击全选时触发
-    onSelectAll() { },
+    onSelectAll() {},
     // 点击取消全选时触发
-    onSelectAllCancel() { },
+    onSelectAllCancel() {},
     // 单击某一行时触发
     onRowClick(row) {
-      console.log(row)
-      this.skuEcodes = row.skuEcode
-      this.onRowData = row
+      this.onRowData = row;
     },
     // 单击某二行时触发
-    onRowDblclick() { },
+    onRowDblclick() {},
     // 分页change 事件
     pageChange(val) {
-      console.log(val);
-      this.tableConfig.current = val
-      this.searchGift()
+      this.tableConfig.current = val;
+      this.request(this.componentData);
     },
     // 切换分页条数
     pageSizeChange(val) {
-      console.log(val);
-      this.tableConfig.pageSize = val
-      this.searchGift()
+      this.tableConfig.pageSize = val;
+      this.request(this.componentData);
     },
-    tableDeleteDetail() { },
-    // 模糊搜索
-    async fuzzyquerybyak(search) {
-      if (this.url == '') {
-        let fixedcolumns = {}
-        const formData = new FormData()
-        formData.append('ak', search)
-        formData.append('colid', 171332)
-        formData.append('fixedcolumns', JSON.stringify(fixedcolumns))
-        const {
-          data: { data },
-        } = await this.service.common.fuzzyquerybyak(formData)
-        this.tableConfig.businessFormConfig.formData[0].AuotData = data
-      }
-    },
+    tableDeleteDetail() {},
     // 添加赠品
     add(obj) {
       // 判断是否是要加一行明细  还是更新数量
-      const data = this.tableConfig.data
-      const d = data.find((item) => item.ECODE === obj.ECODE)
+      const data = this.tableConfig.data;
+      const d = data.find(item => item.ECODE === obj.ECODE);
       if (d) {
         // d.QTY = parseInt(d.QTY) + parseInt(obj.QTY);
-        d.QTY = parseInt(obj.QTY) // 计算逻辑与列表页添加赠品同步
-        this.tableConfig.data = [...data]
-        this.onRowData = this.tableConfig.data[0]
+        d.QTY = parseInt(obj.QTY); // 计算逻辑与列表页添加赠品同步
+        this.tableConfig.data = [...data];
+        this.onRowData = this.tableConfig.data[0];
       } else {
         // this.tableConfig.data.push(obj);
-        this.tableConfig.data = [obj]
-        this.onRowData = this.tableConfig.data[0]
+        this.tableConfig.data = [obj];
+        this.onRowData = this.tableConfig.data[0];
       }
     },
-    // 搜索赠品
-    searchGift() {
-
-      this.selectSkuProBySkuEcodeList()
-    },
-    // 提交
     async submit() {
       const self = this;
       if (!self.onRowData) {
-        self.$Message.error($it('tip.eg')) // '无赠品可添加！'
-        return
+        self.$Message.error($it('tip.eg')); // '无赠品可添加！'
+        return;
       }
-      const ids = []
-      ids.push(self.objid)
-      $omsUtils.setLoading(true)
+      const ids = self.objid;
+      self.loading = true;
       const param = {
         ids,
-      }
-      this.btnConfig.buttons[0].loading = true
-      const {
-        data: { code, data, message },
-      } = await this.service.orderCenter.batchAddGoods(param)
+        changeGoodsSku: self.onRowData.ECODE,
+        gift_type: 1,
+        qty: self.onRowData.QTY
+      };
+      this.btnConfig.buttons[0].loading = true;
+      const { data: { code, data, message } } = await this.service.orderCenter.batchAddGoods(param);
       if (code === 0) {
         self.$Message.success(message);
         self.$parent.$parent.$parent.$parent.autoRefresh();
-        self.$parent.$parent.closeConfirm()
+        self.$parent.$parent.closeConfirm();
         this.btnConfig.buttons[0].loading = false;
+        self.loading = false;
       } else {
         this.btnConfig.buttons[0].loading = false;
+        self.loading = false;
         if (code === -1) {
           self.$Modal.confirm({
             title: message,
             width: 500,
             mask: true,
-            render: (h) => {
+            render: h => {
               if (data) {
                 return h('Table', {
                   props: {
                     columns: [
                       {
-                        title: "单据编号", // '提示信息',
-                        key: 'billNo',
-                      },
-                      {
                         title: $it('mT.a6'), // '提示信息',
-                        key: 'message',
-                      },
+                        key: 'message'
+                      }
                     ],
-                    data,
-                  },
-                })
+                    data
+                  }
+                });
               }
-              return false
-            },
-          })
+              return false;
+            }
+          });
         }
       }
-      setTimeout(() => {
-        this.btnConfig.buttons[1].disabled = false;
-      }, 5000);
-      $omsUtils.setLoading()
     },
-    // 回车
+    request(req) {
+      const self = this;
+      // console.log('addGift', req);
+      self.objid = req.objid;
+    },
+    getColumns() {
+      const cols = [
+        {
+          key: 'ECODE',
+          title: $it('tL.commoditySKU'), // '商品SKU'
+        },
+        {
+          key: 'QTY',
+          title: $it('tL.quantities'), // '数量'
+        },
+        {
+          key: 'PS_C_PRO_ENAME',
+          title: $it('tL.productName'), // '商品名称'
+        },
+        {
+          key: 'GBCODE',
+          title: $it('tL.internationalCode'), // '国际码'
+        },
+        {
+          key: 'IS_GIFT',
+          title: $it('tL.whetherGift'), // '是否赠品',
+        }
+      ];
+      this.columns = cols;
+    },
+    showTable(obj) {
+      const tbody = obj;
+      this.tableConfig = Object.assign(this.tableConfig, {
+        columns: this.columns,
+        indexColumn: true, // 是否展示需要
+        data: tbody,
+        pageShow: true, // 控制分页是否显示
+        btnsShow: true, // 控制操作按钮是否显示
+        searchInputShow: true, // 控制搜索框是否显示
+        width: '', // 表格宽度
+        height: '', // 表格高度
+        border: true, // 是否显示纵向边框
+        total: obj.totalRowCount, // 设置总条数
+        pageSizeOpts: obj.selectRange, // 每页条数切换的配置
+        pageSize: obj.defaultrange // 每页条数
+      });
+    },
     onKeyDown(e) {
       if (e.keyCode == 27) {
-        this.$parent.$parent.closeConfirm()
+        this.$parent.$parent.closeConfirm();
       }
-    },
-    selectSkuProBySkuEcodeList() {
-      let data = {
-        skuEcode: this.tableConfig.businessFormConfig.formValue.SKU_CODE,
-        spuEcode: this.tableConfig.businessFormConfig.formValue.SPU_CODE,
-        spuEname: this.tableConfig.businessFormConfig.formValue.SPU_NAE,
-        size: this.tableConfig.pageSize,
-        current: this.tableConfig.current,
-      }
-
-      if (this.type == 'replace') {
-        data.isGroup = 'Y'
-        data.groupType = 2
-      }
-
-      this.service.commodityCenter.selectSkuProBySkuEcodeList(data).then((res) => {
-        this.tableConfig.total = res.data.data.total
-        this.tableConfig.height = '458';
-        this.tableConfig.columns = [
-          // {
-          //   title: '操作',
-          //   key: 'isok',
-          //   render: (h, params) => {
-          //     return h('el-radio', {
-          //       props: {
-          //         value: params.row.index,
-          //         label: params.row.index,
-          //       },
-          //       on: {
-          //         change: (v) => {
-          //           console.log(v)
-          //         },
-          //       },
-          //     })
-          //   },
-          // },
-          {
-            key: 'skuEcode',
-            title: $it('tL.code_SKU'), // SKU编码
-          },
-          {
-            key: 'spuEcode',
-            title: $it('tL.itemNo01'), // SPU编码
-          },
-          {
-            key: 'spuEname',
-            title: $it("tL.itemNo02"), // SPU名称
-          },
-          {
-            key: 'skuEname',
-            title: $it('fL.skuName'), // SKU名称
-          },
-          {
-            key: 'brandEname',
-            title: '品牌',
-          },
-          {
-            key: 'classifyEname',
-            title: '商品分类',
-          },
-        ]
-        this.tableConfig.data = res.data.data.records.map((em, index) => {
-          em.index = index + 1
-          em.isok = false
-          return em
-        })
-      })
-    },
+    }
   },
   mounted() {
-    const self = this
-    console.log(this.componentData)
-    this.type = this.componentData.type
-    if (this.type == "add") {
-      let obj = {
-        style: 'input', //输入框类型
-        label: '数量', //输入框前文字
-        value: 'number', //输入框的值
-        regx: /^[1-9]\d*(\.\d+)?$/,
-        maxlength: 8,
-        columns: ['number'],
-        width: '8',
-        AuotData: [], //匹配的选项
-        dimChange: (search) => { },
-        dimEnter: (val) => { },
-        dimSelect: (obj) => { },
-        dimblur: () => { },
-      }
-      self.tableConfig.businessFormConfig.formData.push(obj)
+    this.getColumns();
+    if (this.componentData && this.componentData.objid) {
+      this.request(this.componentData);
     }
-
-
-    if (this.componentData && this.componentData.ID) {
-      self.objid = this.componentData.ID
-    }
-  },
-}
+  }
+};

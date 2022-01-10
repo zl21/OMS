@@ -35,14 +35,14 @@ export default {
           },
           formData: [
             {
-              label: $it('tL.code_SKU'), // '商品SKU',
+              label: $it('tL.commoditySKU'), // '商品SKU',
               style: 'dimSearch',
               width: '12',
               value: 'searchValue',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-
+                this.handleDimChange('tableConfig', 'searchValue', val)
               },
               dimEnter: () => {
                 this.search('one')
@@ -52,14 +52,14 @@ export default {
               },
             },
             {
-              label: $it('tL.itemNo01'), // '商品款号',
+              label: $it('tL.itemNo'), // '商品款号',
               style: 'dimSearch',
               width: '12',
               value: 'psCProEcode',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-
+                this.handleDimChange('tableConfig', 'psCProEcode', val)
               },
               dimEnter: () => {
                 this.tableConfig.current = 1
@@ -112,29 +112,44 @@ export default {
           //   key: 'index',
           //   title: '序号',
           // },
+          // {
+          //   key: 'skuEcode',
+          //   title: $it('tL.code_SKU'), // SKU编码
+          // },
+          // {
+          //   key: 'spuEcode',
+          //   title: $it('tL.itemNo01'), // SPU编码
+          // },
+          // {
+          //   key: 'spuEname',
+          //   title: $it("tL.itemNo02"), // SPU名称
+          // },
+          // {
+          //   key: 'skuEname',
+          //   title: $it('fL.skuName'), // SKU名称
+          // },
+          // {
+          //   key: 'brandEname',
+          //   title: '品牌',
+          // },
+          // {
+          //   key: 'classifyEname',
+          //   title: '商品分类',
+          // },
           {
-            key: 'skuEcode',
-            title: $it('tL.code_SKU'), // SKU编码
+            // title: "商品SKU",
+            title: $it('tL.commoditySKU'),
+            key: 'ECODE',
           },
           {
-            key: 'spuEcode',
-            title: $it('tL.itemNo01'), // SPU编码
+            // title: "商品名称",
+            title: $it('tL.productName'),
+            key: 'PS_C_PRO_ENAME',
           },
           {
-            key: 'spuEname',
-            title: $it("tL.itemNo02"), // SPU名称
-          },
-          {
-            key: 'skuEname',
-            title: $it('fL.skuName'), // SKU名称
-          },
-          {
-            key: 'brandEname',
-            title: '品牌',
-          },
-          {
-            key: 'classifyEname',
-            title: '商品分类',
+            // title: "商品SKU名称",
+            title: $it('tL.productSKUname'),
+            key: 'SPEC',
           },
         ],
         data: [],
@@ -159,17 +174,17 @@ export default {
           },
           formData: [
             {
-              label: $it('tL.code_SKU'), // '商品SKU',
+              label: $it('tL.commoditySKU'), // '商品SKU',
               style: 'dimSearch',
               width: '12',
               value: 'searchValue',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-
+                this.handleDimChange('tableConfig2', 'searchValue', val)
               },
               dimEnter: () => {
-                this.tableConfig.current2 = 1
+                this.tableConfig2.current2 = 1
                 this.search('two')
               },
               dimSelect: (val) => {
@@ -177,14 +192,14 @@ export default {
               },
             },
             {
-              label: $it('tL.itemNo01'), // '商品款号',
+              label: $it('tL.itemNo'), // '商品款号',
               style: 'dimSearch',
               width: '12',
               value: 'psCProEcode',
               columns: ['ECODE'],
               AuotData: [], // 匹配的选项
               dimChange: async (val) => {
-
+                this.handleDimChange('tableConfig2', 'psCProEcode', val)
               },
               dimEnter: () => {
                 this.search('two')
@@ -206,7 +221,7 @@ export default {
               },
               dimEnter: () => {
                 this.tableConfig.current = 1
-                this.search('one')
+                this.search('two')
               },
               dimSelect: (val) => {
                 this.tableConfig.businessFormConfig.formValue.proName = val.label
@@ -237,29 +252,44 @@ export default {
           //   key: 'index',
           //   title: '序号',
           // },
+          // {
+          //   key: 'skuEcode',
+          //   title: $it('tL.code_SKU'), // SKU编码
+          // },
+          // {
+          //   key: 'spuEcode',
+          //   title: $it('tL.itemNo01'), // SPU编码
+          // },
+          // {
+          //   key: 'spuEname',
+          //   title: $it("tL.itemNo02"), // SPU名称
+          // },
+          // {
+          //   key: 'skuEname',
+          //   title: $it('fL.skuName'), // SKU名称
+          // },
+          // {
+          //   key: 'brandEname',
+          //   title: '品牌',
+          // },
+          // {
+          //   key: 'classifyEname',
+          //   title: '商品分类',
+          // },
           {
-            key: 'skuEcode',
-            title: $it('tL.code_SKU'), // SKU编码
+            // title: "商品SKU",
+            title: $it('tL.commoditySKU'),
+            key: 'ECODE',
           },
           {
-            key: 'spuEcode',
-            title: $it('tL.itemNo01'), // SPU编码
+            // title: "商品名称",
+            title: $it('tL.productName'),
+            key: 'PS_C_PRO_ENAME',
           },
           {
-            key: 'spuEname',
-            title: $it("tL.itemNo02"), // SPU名称
-          },
-          {
-            key: 'skuEname',
-            title: $it('fL.skuName'), // SKU名称
-          },
-          {
-            key: 'brandEname',
-            title: '品牌',
-          },
-          {
-            key: 'classifyEname',
-            title: '商品分类',
+            // title: "商品SKU名称",
+            title: $it('tL.productSKUname'),
+            key: 'SPEC',
           },
         ],
         data: [],
@@ -359,6 +389,74 @@ export default {
     radioChange(value) {
       console.log(value)
     },
+    // 模糊查询的方法
+    async handleDimChange (formName, fieldName, val) {
+      const _this = this;
+      switch (fieldName) {
+        case 'searchValue':
+          _this[formName].businessFormConfig.formValue[fieldName] = val.trim();
+          const query = {
+            isBlur: 'Y', // N为精确匹配
+            psCSku: {
+              ECODE: val.trim(),
+            },
+          };
+          let res = await _this.service.common.skuQuery(query);
+          if (res.status === 200) {
+            const data = res.data.data.data;
+            let dimList = _this[formName].businessFormConfig.formData;
+            let arr;
+            data.map((item) => {
+              // 删除不需要展示的模糊搜索项
+              delete item.GBCODE;
+              delete item.IS_GIFT;
+              delete item.IS_GROUP;
+              delete item.PRICELIST;
+              // delete item.PS_C_PRO_ECODE;
+              delete item.PS_C_PRO_ID;
+              delete item.colorId;
+              delete item.colorName;
+              delete item.sizeId;
+              delete item.sizeName;
+              delete item.skuId;
+            });
+            dimList.map((item) => {
+              // '商品SKU'
+              if (item.label === $it('tL.commoditySKU')) {
+                item.AuotData = data;
+                // 调用查询提取方法,传给条码,默认数量为一,调用状态为0的保存接口
+              }
+            });
+          }
+          break;
+        case 'psCProEcode':
+          _this[formName].businessFormConfig.formValue[fieldName] = val.trim();
+          const fromdata = new FormData();
+          const params = {
+            GLOBAL: val.trim(),
+            PAGENUM: 1,
+            PAGESIZE: 10,
+            CONDITION: {},
+            TABLENAME: 'PS_C_PRO',
+          };
+          fromdata.append('param', JSON.stringify(params));
+          const { data: { code, data }} = await this.service.common.screenresult(fromdata);
+          if (code === 0) {
+            let arrs = _this[formName].businessFormConfig.formData;
+
+            arrs.map((item) => {
+              // '商品款号'
+              if (item.label === $it('tL.itemNo')) {
+                item.AuotData = data.list;
+              }
+            });
+          }
+          break;
+      
+        default:
+          break;
+      }
+    },
     fnsearch(val) {
       if (val == 'one') {
         this.tableConfig.current = 1
@@ -374,137 +472,137 @@ export default {
       this.search(val)
     },
     async search(value) {
-      const self = this
-      let data = {}
-      if (value == 'one') {
-        data.skuEcode = self.tableConfig.businessFormConfig.formValue.searchValue.trim()
-        data.spuEcode = self.tableConfig.businessFormConfig.formValue.psCProEcode.trim()
-        data.spuEname = self.tableConfig.businessFormConfig.formValue.proName.trim()
-        data.size = this.tableConfig.pageSize
-        data.current = this.tableConfig.current
-      } else {
-        data.skuEcode = self.tableConfig2.businessFormConfig.formValue.searchValue.trim()
-        data.spuEcode = self.tableConfig2.businessFormConfig.formValue.psCProEcode.trim()
-        data.spuEname = self.tableConfig2.businessFormConfig.formValue.proName.trim()
-        data.size = this.tableConfig2.pageSize
-        data.current = this.tableConfig2.current
-      }
+      // const self = this
+      // let data = {}
+      // if (value == 'one') {
+      //   data.skuEcode = self.tableConfig.businessFormConfig.formValue.searchValue.trim()
+      //   data.spuEcode = self.tableConfig.businessFormConfig.formValue.psCProEcode.trim()
+      //   data.spuEname = self.tableConfig.businessFormConfig.formValue.proName.trim()
+      //   data.size = this.tableConfig.pageSize
+      //   data.current = this.tableConfig.current
+      // } else {
+      //   data.skuEcode = self.tableConfig2.businessFormConfig.formValue.searchValue.trim()
+      //   data.spuEcode = self.tableConfig2.businessFormConfig.formValue.psCProEcode.trim()
+      //   data.spuEname = self.tableConfig2.businessFormConfig.formValue.proName.trim()
+      //   data.size = this.tableConfig2.pageSize
+      //   data.current = this.tableConfig2.current
+      // }
 
-      this.service.commodityCenter.selectSkuProBySkuEcodeList(data).then((res) => {
-        if (value == 'one') { //current
-          this.tableConfig.current = res.data.data.current
-          this.tableConfig.total = res.data.data.total
-          this.tableConfig.data = res.data.data.records
-        } else {
-          this.tableConfig2.current = res.data.data.current
-          this.tableConfig2.total = res.data.data.total
-          this.tableConfig2.data = res.data.data.records
-        }
-      })
+      // this.service.commodityCenter.selectSkuProBySkuEcodeList(data).then((res) => {
+      //   if (value == 'one') { //current
+      //     this.tableConfig.current = res.data.data.current
+      //     this.tableConfig.total = res.data.data.total
+      //     this.tableConfig.data = res.data.data.records
+      //   } else {
+      //     this.tableConfig2.current = res.data.data.current
+      //     this.tableConfig2.total = res.data.data.total
+      //     this.tableConfig2.data = res.data.data.records
+      //   }
+      // })
 
       //console.log(self.replaceFormConfig.formValue.searchValue.trim())
       // sku查询
-      // const self = this
-      // const loadName = value === 'one' ? 'tableLoad' : 'replaceTableLoad'
-      // this[loadName] = true
-      // const query = {
-      //   isBlur: 'N',
-      //   psCSku: {
-      //     ECODE:
-      //       value == 'one'
-      //         ? self.formConfig.formValue.searchValue.trim()
-      //         : self.replaceFormConfig.formValue.searchValue.trim(),
-      //     psCProEcode:
-      //       value == 'one'
-      //         ? self.formConfig.formValue.psCProEcode.trim()
-      //         : self.replaceFormConfig.formValue.psCProEcode.trim(),
-      //     psCProEname:
-      //       value == 'one' ? self.proName.trim() : self.replace_proName.trim(),
-      //   },
-      // }
-      // try {
-      //   const res = await self.service.common.skuQuery(query)
-      //   if (res.data.code == 0) {
-      //     res.data.data.data.forEach((item) => {
-      //       item.IS_GIFT = item.IS_GIFT == '0' ? '否' : '是'
-      //     })
-      //     if (value == 'one') {
-      //       self.data = res.data.data.data
-      //       self.onRowClickData = self.data[0]
-      //       self.onRowClickText = self.data[0].ECODE
-      //     } else {
-      //       self.replace_data = res.data.data.data
-      //       self.onRowClickReplaceData = self.replace_data[0]
-      //       self.onRowClickReplaceText = self.replace_data[0].ECODE
-      //     }
-      //   } else {
-      //     // this.$Message.warning("sku查询失败!");
-      //     this.$Message.warning($it('tip.zt'))
-      //   }
-      //   this[loadName] = false
-      // } catch (e) {
-      //   this[loadName] = false
-      // }
-    },
-    confirm() {
-      let orderList = []
-      let skuEcodes = []
-      this.componentData.a_2.forEach((em) => {
-        let obj = {
-          orderId: em.ID, //订单id
-          billNo: em.BILL_NO, //单据编号
-        }
-        orderList.push(obj)
-      })
-      if (!this.onRowData || !this.onRowData2) {
-        this.$Message.warning($it('tip.d8'))
-        return
+      const self = this
+      const loadName = value === 'one' ? 'tableLoad' : 'replaceTableLoad'
+      this[loadName] = true
+      const query = {
+        isBlur: 'N',
+        psCSku: {
+          ECODE:
+            value == 'one'
+              ? self.tableConfig.businessFormConfig.formValue.searchValue.trim()
+              : self.tableConfig2.businessFormConfig.formValue.searchValue.trim(),
+          psCProEcode:
+            value == 'one'
+              ? self.tableConfig.businessFormConfig.formValue.psCProEcode.trim()
+              : self.tableConfig2.businessFormConfig.formValue.psCProEcode.trim(),
+          psCProEname:
+            value == 'one' ? self.proName.trim() : self.replace_proName.trim(),
+        },
       }
-      skuEcodes.push(this.onRowData.skuEcode)
-      skuEcodes.push(this.onRowData2.skuEcode)
-      let data = {
-        skuEcodes,
-        orderList,
-      }
-
-      this.service.orderCenter.replaceOrderByPro(data).then((res) => {
+      try {
+        const res = await self.service.common.skuQuery(query)
         if (res.data.code == 0) {
-          this.$Message.success(res.data.message)
-        } else {
-          if (!res.data.data) {
-            $utils.tipShow('error', self, res.data.message)
-            return
-          }
-          this.$Modal.confirm({
-            title: res.data.message,
-            width: 500,
-            mask: true,
-            className: 'ark-dialog',
-            render: (h) => {
-              if (res.data.data) {
-                return h('Table', {
-                  props: {
-                    columns: [
-                      {
-                        title: "单据编号", // '提示信息',
-                        key: 'billNo',
-                      },
-                      {
-                        title: $it('mT.a6'), // '提示信息',
-                        key: 'message',
-                      },
-                    ],
-                    data: res.data.data,
-                  },
-                })
-              }
-              return false
-            },
+          res.data.data.data.forEach((item) => {
+            item.IS_GIFT = item.IS_GIFT == '0' ? '否' : '是'
           })
+          if (value == 'one') {
+            self.data = res.data.data.data
+            self.onRowClickData = self.data[0]
+            self.onRowClickText = self.data[0].ECODE
+          } else {
+            self.replace_data = res.data.data.data
+            self.onRowClickReplaceData = self.replace_data[0]
+            self.onRowClickReplaceText = self.replace_data[0].ECODE
+          }
+        } else {
+          // this.$Message.warning("sku查询失败!");
+          this.$Message.warning($it('tip.zt'))
         }
-        this.$parent.$parent.closeConfirm()
-      })
-      /* const self = this
+        this[loadName] = false
+      } catch (e) {
+        this[loadName] = false
+      }
+    },
+    async confirm() {
+      // let orderList = []
+      // let skuEcodes = []
+      // this.componentData.a_2.forEach((em) => {
+      //   let obj = {
+      //     orderId: em.ID, //订单id
+      //     billNo: em.BILL_NO, //单据编号
+      //   }
+      //   orderList.push(obj)
+      // })
+      // if (!this.onRowData || !this.onRowData2) {
+      //   this.$Message.warning($it('tip.d8'))
+      //   return
+      // }
+      // skuEcodes.push(this.onRowData.skuEcode)
+      // skuEcodes.push(this.onRowData2.skuEcode)
+      // let data = {
+      //   skuEcodes,
+      //   orderList,
+      // }
+
+      // this.service.orderCenter.replaceOrderByPro(data).then((res) => {
+      //   if (res.data.code == 0) {
+      //     this.$Message.success(res.data.message)
+      //   } else {
+      //     if (!res.data.data) {
+      //       $utils.tipShow('error', self, res.data.message)
+      //       return
+      //     }
+      //     this.$Modal.confirm({
+      //       title: res.data.message,
+      //       width: 500,
+      //       mask: true,
+      //       className: 'ark-dialog',
+      //       render: (h) => {
+      //         if (res.data.data) {
+      //           return h('Table', {
+      //             props: {
+      //               columns: [
+      //                 {
+      //                   title: "单据编号", // '提示信息',
+      //                   key: 'billNo',
+      //                 },
+      //                 {
+      //                   title: $it('mT.a6'), // '提示信息',
+      //                   key: 'message',
+      //                 },
+      //               ],
+      //               data: res.data.data,
+      //             },
+      //           })
+      //         }
+      //         return false
+      //       },
+      //     })
+      //   }
+      //   this.$parent.$parent.closeConfirm()
+      // })
+      const self = this
       if (JSON.stringify(self.onRowClickData) == '{}') {
         // self.$Message.warning("替换前商品sku不能为空!");
         self.$Message.warning($it('tip.yf'))
@@ -571,7 +669,6 @@ export default {
             }),
         })
       }
-      */
     },
     onRowClickReplace(row) {
       this.onRowClickReplaceData = row

@@ -1501,7 +1501,7 @@ export default {
             }
             const fromdata = new FormData();
             fromdata.append('param', JSON.stringify({ SkuEcodeList: search, shopId: this.shopId, isQuery: 'Y' }));
-            const resData = await self.service.common.skuListQuery(fromdata);
+            const resData = await self.service.orderCenter.skuListQuery(fromdata);
             resData.data.data.forEach((item, index) => {
               res.data.data.records[index].AVAILABLE_QTY = item.AVAILABLE_QTY;
             })
