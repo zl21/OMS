@@ -259,7 +259,7 @@ class DropDownConfig {
         self.selection.forEach((item, index) => {
           ids[index] = item.ID;
         });
-
+        self.publicBouncedConfig.componentData = {};
         self.publicBouncedConfig.componentData.a_1 = param;
         self.publicBouncedConfig.componentData.a_2 = ids;
         setTimeout(() => {

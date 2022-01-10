@@ -42,7 +42,7 @@
             console.log(e);
             const { rowItem } = e
             let accountCode = rowItem 
-            ? typeof rowItem.ALIPAY_ACCOUNT == 'object' ? rowItem.ALIPAY_ACCOUNT.val : rowItem.value
+            ? typeof rowItem.ID == 'object' ? rowItem.ID.val : rowItem.value
             : ''
             window.custSelf.downLoadFormConfig.formValue.accountCode = accountCode
           }

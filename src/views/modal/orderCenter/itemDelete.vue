@@ -1,6 +1,6 @@
 <template>
   <!-- 删除商品 -->
-  <div class="itemDelete">
+  <div class="itemDelete cus-modal">
     <div class="i_head">
       <!-- <div style="float:left;marginTop:8px;">
         <RadioGroup v-model="radioValue" @on-change="radioChange">

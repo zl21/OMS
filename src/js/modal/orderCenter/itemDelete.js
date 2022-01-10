@@ -17,6 +17,7 @@ export default {
             }, // 按钮点击事件
           },
           {
+            type: 'primary',
             text: $it('com.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制

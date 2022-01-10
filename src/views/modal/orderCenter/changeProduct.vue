@@ -12,7 +12,7 @@
     <div class="i_head">
       <div class="i_body">
         <!-- <p>被替换商品SKU</p> -->
-        <p>{{ $it("mT.th1") }}</p>
+        <p>{{ $it("mT.a1") }}</p>
         <!-- <div class="search">
           <div class="skuBox">
             <re-form :form-config="formConfig" />
@@ -24,6 +24,7 @@
           </div>
         </div> -->
         <OmsTable
+          v-loading="tableLoad"
           :jordan-table-config="tableConfig"
           @on-select="onSelect1"
           @on-select-cancel="onSelectCancel1"
@@ -44,9 +45,9 @@
           @on-row-click="onRowClick"
         />-->
       </div>
-      <div class="i_body1">
+      <div class="i_body">
         <!-- <p>替换后商品SKU</p> -->
-        <p>{{ $it("mT.th2") }}</p>
+        <p>{{ $it("mT.a4") }}</p>
         <!-- <div class="search">
           <div class="skuBox">
             <re-form :form-config="replaceFormConfig" />
@@ -58,6 +59,7 @@
           </div>
         </div> -->
         <OmsTable
+          v-loading="replaceTableLoad"
           :jordan-table-config="tableConfig2"
           @on-select="onSelect2"
           @on-select-cancel="onSelectCancel2"

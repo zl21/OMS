@@ -7,7 +7,7 @@ import labelListConfig from './publicConfig/labelList';
 import orderLogo from './publicConfig/orderLogo';
 import unzipXv from '@/assets/js/dataToSmall';
 
-let publicDialogConfig = _.cloneDeep(DialogConfig.config())
+// let publicDialogConfig = _.cloneDeep(DialogConfig.config())
 export default {
   components: {},
   mixins: [isFavoriteMixin, buttonPermissionsMixin, dataAccessMixin],
@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      dialogs: DialogConfig.config(),
       eventGather: BurgeonEvent,
       pageLoad: false,
       isActive: false,
@@ -379,6 +380,7 @@ export default {
             this.$Modal.warning({
               title: '提示',
               content: '是否确定取消加急?',
+              className: 'ark-dialog',
               showCancel: true,
               mask: true,
               onOk: () => {
@@ -428,7 +430,12 @@ export default {
           webname: 'batchModifyAddress',
           webid: 41460540,
           btnclick: () => {
-            this.importTable.componentData = { tableName: 'OC_B_ORDER-importOrderRemark' };
+            this.importTable.componentData = {
+              tableName: 'OC_B_ORDER-importOrderRemark',
+              tempApi: '/api/cs/oc/oms/v1/downloadOrderRemarkTemp',
+              okApi: '/api/cs/oc/oms/v1/importOrderRemark'
+            };
+            this.importTable.confirmTitle = '批量修改地址';
             this.$children.find(item => item.name === 'importTable').openConfirm();
           }
         },
@@ -597,7 +604,7 @@ export default {
                 //   .post('/api/cs/oc/oms/v1/checkRecordInvoicing', fromdata)
                 .then(res => {
                   if (res.data.code === 0) {
-                    self.publicBouncedConfig = Object.assign(publicDialogConfig.makeOutInvoiceConfig, {
+                    self.publicBouncedConfig = Object.assign(this.dialogs.makeOutInvoiceConfig, {
                       componentData: res.data.data
                     });
                     setTimeout(() => {
@@ -816,7 +823,7 @@ export default {
         //       }).then(function (res) {
         //         if (res.data.code === 0) {
         //           self.publicBouncedConfig =
-        //             publicDialogConfig.addGiftsConfig;
+        //             this.dialogs.addGiftsConfig;
         //           self.publicBouncedConfig.componentData = {
         //             objid: ids
         //           };
@@ -1287,9 +1294,9 @@ export default {
             //   self.iconDownIcon = 'ark-icon iconfont iconios-arrow-down';
             // }
             self.isShowSeniorOrOrdinary = true;
-            publicDialogConfig.dropSortConfig.confirmTitle = '查询条件设置'
+            this.dialogs.dropSortConfig.confirmTitle = '查询条件设置'
             self.publicBouncedConfig = {
-              ...publicDialogConfig.dropSortConfig
+              ...this.dialogs.dropSortConfig
             };
             self.publicBouncedConfig.componentData = {
               typeName: 'OC_B_ORDER'
@@ -1513,7 +1520,7 @@ export default {
               //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
               .then(res => {
                 if (res.data.code === 0) {
-                  self.publicBouncedConfig = publicDialogConfig.modifyLogisticsConfig;
+                  self.publicBouncedConfig = this.dialogs.modifyLogisticsConfig;
                   self.publicBouncedConfig.componentData = {
                     ids,
                     cLogisticsId: 0,
@@ -1566,7 +1573,7 @@ export default {
               //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
               .then(res => {
                 if (res.data.code === 0) {
-                  self.publicBouncedConfig = publicDialogConfig.changeWarehouseConfig;
+                  self.publicBouncedConfig = this.dialogs.changeWarehouseConfig;
                   self.publicBouncedConfig.componentData = {
                     ids,
                     CP_C_SHOP_ID: CP_C_SHOP_ID[0]
@@ -1608,7 +1615,7 @@ export default {
               ids[index] = item.ID;
               ORDER_STATUS[index] = item.ORDER_STATUS;
             });
-            self.publicBouncedConfig = publicDialogConfig.changeRemarkConfig;
+            self.publicBouncedConfig = this.dialogs.changeRemarkConfig;
             self.publicBouncedConfig.componentData = {
               ids,
               status: ORDER_STATUS
@@ -1655,7 +1662,7 @@ export default {
             return;
           }
           const ids = self.selection.map(item => item.ID);
-          const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.depositPresaleConfig));
+          const publicBouncedConfig = JSON.parse(JSON.stringify(this.dialogs.depositPresaleConfig));
           publicBouncedConfig.componentData = {
             params: {
               ids
@@ -1678,7 +1685,7 @@ export default {
             return;
           }
           const ids = self.selection.map(item => item.ID);
-          const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.vipSpeedDispatchConfig));
+          const publicBouncedConfig = JSON.parse(JSON.stringify(this.dialogs.vipSpeedDispatchConfig));
           publicBouncedConfig.componentData = {
             params: {
               ids
@@ -1700,7 +1707,7 @@ export default {
             });
             return;
           }
-          self.publicBouncedConfig = publicDialogConfig.replaceConfig;
+          self.publicBouncedConfig = this.dialogs.replaceConfig;
           // 表单筛选条件
           const param = {};
           param.page = {};
@@ -1732,7 +1739,7 @@ export default {
             });
             return;
           }
-          self.publicBouncedConfig = publicDialogConfig.addGiftsConfig;
+          self.publicBouncedConfig = this.dialogs.addGift;
           // 列表勾选数据
           const ids = [];
           self.selection.forEach((item, index) => {
@@ -1742,7 +1749,7 @@ export default {
             objid: ids
           };
           setTimeout(() => {
-            self.$children.find(item => item.name === 'addGifts').openConfirm();
+            self.$children.find(item => item.name === 'addGiftItem').openConfirm();
           }, 100);
           break;
         }
@@ -1755,7 +1762,7 @@ export default {
             });
             return;
           }
-          self.publicBouncedConfig = publicDialogConfig.itemDeleteConfig;
+          self.publicBouncedConfig = this.dialogs.itemDeleteConfig;
           // 表单筛选条件
           const param = {
             page: {
@@ -1853,7 +1860,7 @@ export default {
             return;
           }
           const ids = self.selection.map(item => item.ID);
-          const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.holdOrderConfig));
+          const publicBouncedConfig = JSON.parse(JSON.stringify(this.dialogs.holdOrderConfig));
           publicBouncedConfig.componentData = {
             ids
           };
@@ -1990,7 +1997,7 @@ export default {
       //   a_1: param,
       //   a_2: ids
       // };
-      self.publicBouncedConfig = publicDialogConfig.specifyGoodsAssignConfig;
+      self.publicBouncedConfig = this.dialogs.specifyGoodsAssignConfig;
       self.publicBouncedConfig.componentData.a_1 = param;
       self.publicBouncedConfig.componentData.a_2 = ids;
       // self.publicBouncedConfig.componentData = {

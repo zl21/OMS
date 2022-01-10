@@ -9,7 +9,7 @@
 <!--增加赠品-->
 <template>
   <div class="cus-modal">
-    <!-- <EasyMatrix :component-data="matrixData" /> -->
+    <EasyMatrix :component-data="matrixData" />
     <!-- <OmsForm :form-config="formConfig"></OmsForm> -->
     <!-- businessButton -->
     <!-- <OmsButton class="absolute" :btn-config="searchBtn"></OmsButton> -->

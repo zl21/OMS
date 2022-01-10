@@ -263,12 +263,24 @@ export default {
     },
     // 子组件点击按钮事件通知
     BtnClickEvent(obj) {
+      const self = this;
       const name = obj.name || '';
       const rows = obj.rows || [];
       switch (name) {
         case 'ADDGIFT':
-          this.dialogs.addGift.data = { objid: this.componentData.order.ID || -1 };
-          this.$refs.addGiftDialog[0].openConfirm();
+          self.publicBouncedConfig = Object.assign(
+            this.dialogs.addGift,
+            {
+              componentData: {
+                objid: [self.componentData.order.ID || -1]
+              }
+            }
+          );
+          setTimeout(() => {
+            this.$children
+              .find(item => item.name === 'addGiftDialog')
+              .openConfirm();
+          }, 100);
           break;
         case 'CHANGESKU':
           // 判断是否有选中明细
@@ -276,8 +288,21 @@ export default {
           if (rows.length > 1) return this.$Message.error('只能选择一条商品记录！');
           const itemobjid = rows[0].ID;
           const itemskuid = rows[0].SKU_ID;
-          this.dialogs.changeSku.data = { itemobjid, itemskuid, objid: this.componentData.order.ID || -1 };
-          this.$refs.changeSkuDialog[0].openConfirm();
+          self.publicBouncedConfig = Object.assign(
+            self.dialogs.changeSku,
+            {
+              componentData: {
+                itemobjid,
+                itemskuid,
+                objid: self.componentData.order.ID || -1
+              }
+            }
+          );
+          setTimeout(() => {
+            self.$children
+              .find(item => item.name === 'changeSkuDialog')
+              .openConfirm();
+          }, 100);
           break;
       }
     },

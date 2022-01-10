@@ -78,8 +78,8 @@ export default {
   // manualUnHoldOrder: (params) =>
   //   $network.post('/p/cs/oc/oms/v2/order/batch/hold/cancel', params), // 零售发货单-取消HOLD单
   manualUnHoldOrder: params => $network.post('/api/cs/oc/oms/v1/manualUnHoldOrder', params), // 审核
-  mergeOrderOne: (params) =>
-    $network.post('/p/cs/oc/oms/v1/mergeOrder', params), // 合并订单
+  // mergeOrderOne: (params) => $network.post('/p/cs/oc/oms/v1/mergeOrder', params), // 合并订单
+  mergeOrderOne: (params) => $network.post('/api/cs/oc/oms/v1/mergeOrderOne', params), // 合并订单
   cancelMergeOrder: (params) =>
     $network.post('/p/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
   batchAddGoods: (params) =>
@@ -424,6 +424,7 @@ export default {
     payQueryProList: (params) => $network.post('/p/cs/oc/b/oms/v1/ocBCompensateOrder/queryProList', params), // 赔付单-子表-新增明细
     paySaveApi: (params) => $network.post('/p/cs/oc/b/oms/v1/ocBCompensateOrder/save', params), // 赔付单-保存
     extraSaveApi: (params) => $network.post('/p/cs/oc/oms/v1/refundExtra/save', params), // 赔付单-保存
+    payableAdjustmentCreate: params => $network.post('/p/cs/payableAdjustmentCreate', params), // 生成赔付单
 
 
     retailBusinessTargetDetailQuery: (params) => $network.post('/p/cs/retailBusinessTargetDetailQuery', params), // 营业指标明细(天)-查询

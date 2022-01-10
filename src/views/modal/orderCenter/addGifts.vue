@@ -1,6 +1,6 @@
 <!--增加赠品-->
 <template>
-  <div>
+  <div class="cus-modal">
     <EasyMatrix :component-data="matrixData" />
     <OmsTable
       :jordan-table-config="tableConfig"
