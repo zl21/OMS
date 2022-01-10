@@ -54,6 +54,7 @@ export default {
           },
           {
             text: $it('com.determine'), // 确定
+            type: 'primary', // 按钮类型
             size: '',
             btnclick: () => {
               const self = this;

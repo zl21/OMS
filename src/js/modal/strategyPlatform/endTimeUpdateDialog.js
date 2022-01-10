@@ -38,7 +38,7 @@ export default {
         ]
       },
       btnConfig: {
-        typeAll: 'error',
+        typeAll: 'default',
         btnsite: 'right',
         buttons: [
           {
@@ -47,6 +47,7 @@ export default {
               this.$emit('closeActionDialog');
             } // 按钮点击事件
           }, {
+            type: 'primary', // 按钮类型
             text: $it('com.determine'), // 确定
             btnclick: () => {
               this.confirmChange();

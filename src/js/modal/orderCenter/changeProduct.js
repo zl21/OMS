@@ -16,7 +16,7 @@ export default {
             }, // 按钮点击事件
           },
           {
-            type: 'primary',
+            type: 'primary', // 按钮类型
             text: $it('com.determine'), // 确定
             btnclick: () => {
               this.confirm()

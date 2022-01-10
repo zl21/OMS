@@ -33,6 +33,7 @@ export default {
           },
           {
             text: $it('com.determine'), // 确定
+            type: 'primary', // 按钮类型
             size: '', // 按钮大小
             disabled: false, // 按钮禁用控制
             btnclick: () => {

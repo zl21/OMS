@@ -145,6 +145,7 @@ export default {
             }
           },
           {
+            type: 'primary', // 按钮类型
             text: $it('com.determine'), // 确定
             btnclick: () => {
               this.confirmChange();

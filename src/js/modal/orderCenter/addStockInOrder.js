@@ -19,6 +19,7 @@ export default {
             },
           },
           {
+            type: 'primary', // 按钮类型
             text: $it('com.determine'), // 确定
             size: '', // 按钮大小
             btnclick: () => {

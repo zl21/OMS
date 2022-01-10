@@ -100,6 +100,7 @@
           },
           {
             text: $it('com.determine'), // 确定
+            type: 'primary',
             webname: 'test_aaa', // 退货换单 - 新增
             btnclick: () => {
               this.save();

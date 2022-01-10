@@ -206,7 +206,7 @@ export default {
     queryManualSplit: (params) =>
     $network.post('/p/cs/oc/oms/v1/queryManualSplit' , params), //手工拆单商品查询
   updateLogistics: (params) =>
-    $network.post('/p/cs/oc/b/oms/v1/ocborder/updateLogistics', params), // 零售发货单列表-改物流
+    $network.post('/api/cs/oc/oms/v1/updateLogistics', params), // 零售发货单列表-改物流
   manualMatchingList: (params) =>
     $network.post('/api/cs/oc/oms/v1/manualMatchingList', params), // 获取退货批次数据
   distributionFindBydistributionId: (params) =>
@@ -258,7 +258,7 @@ export default {
     $network.post('/api/cs/vip/pick/v1/export', params),
   // 半定制弹框
   updateWarehouse: (params) =>
-    $network.post('/p/cs/oc/b/oms/v1/ocborder/updateWarehouse', params), // 订单管理列表-改仓库
+    $network.post('/api/cs/oc/oms/v1/updateWarehouse', params), // 订单管理列表-改仓库
   getQueryList: (params) =>
     $network.post('/api/cs/oc/oms/v1/getQueryList', params),
   reRemarkUpdate: (params) =>
@@ -431,5 +431,8 @@ export default {
     retailBusinessTargetSalerQuery: (params) => $network.post('/p/cs/retailBusinessTargetSalerQuery', params), // 营业指标明细(店员)-查询
     retailBusinessTargetSave: (params) => $network.post('/p/cs/retailBusinessTargetDetailQuery', params), // 营业指标明细(天/店员)-保存
 
+    payableAdjustmentCreate: params => $network.post('/p/cs/payableAdjustmentCreate', params),
+    queryOmsShopStorage: params => $network.post('/api/cs/oc/oms/v1/queryOmsShopStorage', params), // 查询聚合仓及其关联的实体仓
     updateSendTime: params => $network.post('/api/cs/vip/delivery/v1/updateSendTime', params), // 唯品会入库单-详情-修改发货时间
+
 }

@@ -44,6 +44,7 @@ export default {
             }
           },
           {
+            type: 'primary', // 按钮类型
             text: $it('com.determine'),
             btnclick: () => {
               const _this = this;

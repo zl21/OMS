@@ -1,6 +1,57 @@
 <template>
   <div class="cus-modal" v-loading="loading">
-    <OmsForm :form-config="formConfig" />
+    <!-- <OmsForm :form-config="formConfig" /> -->
+    <div class="Modal-Form">
+      <div class="Modal-Form-Item">
+        <!-- 修改聚合仓-->
+        <label for>修改聚合仓:</label>
+        <DropDownSelectFilter
+          :single="true"
+          isBackRowItem
+          :data="ShareStores.data"
+          :z-index="zIndex"
+          :total-row-count="ShareStores.totalRowCount"
+          :page-size="pageSize"
+          :show-colname-key="'show'"
+          :data-empty-message="dataEmptyMessage"
+          :columns="columns"
+          :hidecolumns="hidecolumns"
+          @on-page-change="(val) => changePage('ShareStores', val)"
+          @on-fkrp-selected="(val) => onFkrpSelected('ShareStores', val)"
+        />
+      </div>
+      <div class="Modal-Form-Item">
+        <!-- 修改仓库-->
+        <label for>{{ vmI18n.t("btn.modifyWarehouse") }}:</label>
+        <DropDownSelectFilter
+          :single="true"
+          isBackRowItem
+          :data="PhyWarehouseStores.data"
+          :z-index="zIndex"
+          :total-row-count="PhyWarehouseStores.totalRowCount"
+          :page-size="pageSize"
+          :show-colname-key="'show'"
+          :data-empty-message="dataEmptyMessage"
+          :columns="columns"
+          :hidecolumns="hidecolumns"
+          @on-page-change="(val) => changePage('PhyWarehouseStores', val)"
+          @on-fkrp-selected="(val) => onFkrpSelected('PhyWarehouseStores', val)"
+        />
+      </div>
+      <div class="Modal-Form-Item">
+        <!-- 修改仓库-->
+        <label for>{{ vmI18n.t("fL.changeWarehouse_reasons") }}:</label>
+        <Select v-model="updateRemark">
+          <Option
+            v-for="item in updateRemarkOptions"
+            :key="item.value"
+            :value="item.value"
+          >
+            {{ item.label }}
+          </Option>
+        </Select>
+      </div>
+    </div>
     <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
@@ -20,7 +71,7 @@ const changeWarehouse = {
   computed: {},
   data() {
     return {
-      isShowFromLoading: false, // 加载
+      loading: false,
       zIndex: 2500,
       totalRowCount: 0,
       pageSize: 10,
@@ -30,7 +81,14 @@ const changeWarehouse = {
       AutoData: [],
       hidecolumns: ["id"],
       foreignKeyLink: {},
-      //
+      ShareStores: {
+        data: {},
+        totalRowCount: 0
+      },
+      PhyWarehouseStores: {
+        data: {},
+        totalRowCount: 0
+      },
       pid: "",
       updateRemark: "",
       updateRemarkOptions: [
@@ -68,7 +126,12 @@ const changeWarehouse = {
           },
         ],
       },
-      loading: false,
+      formValue: {
+        shareStoresId: '', // 逻辑仓
+        shareStoresEcode: '',
+        warehouseId: '', // 实体仓
+        warehouseEcode: ''
+      },
       formConfig: {
         formData: [
           {
@@ -121,7 +184,7 @@ const changeWarehouse = {
     document.removeEventListener("keydown", this.onKeyDown);
   },
   mounted() {
-    this.$nextTick(() => {
+    /* this.$nextTick(() => {
       const _this = this;
       console.log("this.componentData::", _this.componentData);
       if (!_this.componentData.CP_C_SHOP_ID) {
@@ -138,19 +201,19 @@ const changeWarehouse = {
           ],
         },
       ];
-    });
+    }); */
+    this.zIndex = Number(
+      document.getElementsByClassName('ark-modal-wrap')[0].style.zIndex
+    ) + 50;
+    document.addEventListener('keydown', this.onKeyDown);
+    this.getWarehouseList('ShareStores')
   },
   methods: {
-    querItem(key, type) {
-      return this[type ? type : "formConfig"].formData.find(
-        (item) => item.colname == key
-      );
-    },
     onKeyDown(e) {
       if (e.keyCode == 27) {
         this.$parent.$parent.closeConfirm();
         this.$parent.$parent.$parent.publicBouncedIndex = {
-          name: "testModal",
+          name: 'testModal',
         };
       }
       if (e.keyCode == 13) {
@@ -159,183 +222,219 @@ const changeWarehouse = {
     },
     async determine(isOutOfStockFlag) {
       const self = this;
-      if (!self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID) {
+      if (!self.formValue.warehouseId) {
         self.$Message.warning({
-          content: $it("tip.zi"), // 请选择仓库
+          content: $it('tip.zi'), // 请选择仓库
           duration: 5,
           top: 80,
         });
         return false;
       }
-      self.loading = true;
-      let param = JSON.parse(JSON.stringify(self.componentData));
-      param.CP_C_PHY_WAREHOUSE_ID = +self.formConfig.formValue.CP_C_PHY_WAREHOUSE_ID;
-      const {
-        data: { data, code, message },
-      } = await self.service.orderCenter.updateWarehouse(param);
+      self.isShowFromLoading = true;
+      const { shareStoresId, shareStoresEcode, warehouseId, warehouseEcode } = self.formValue
+      const fromdata = new FormData();
+      fromdata.append('ids', self.componentData.ids);
+      fromdata.append('shareStoresId', shareStoresId);
+      fromdata.append('shareStoresEcode', shareStoresEcode);
+      fromdata.append('warehouseId', warehouseId);
+      fromdata.append('warehouseEcode', warehouseEcode);
+      fromdata.append('isOutOfStockFlag ', isOutOfStockFlag);
+      fromdata.append('updateRemark', self.updateRemark);
+      const { data: { data, code, message } } = await self.service.orderCenter.updateWarehouse(fromdata);
       self.isShowFromLoading = false;
       if (code === 0) {
-        if (self.$route.params.customizedModuleId == 2307) {
-          self.$Message.success(message);
-          self.$parent.$parent.closeConfirm();
-          self.$parent.$parent.$parent.selection = [];
-          self.$parent.$parent.$parent.query();
+        if (self.$route.params.customizedModuleId == 2627) {
+          self.$parent.$parent.$parent.getData();
+          if (!data) {
+            self.$Message.success(message);
+            self.$parent.$parent.closeConfirm();
+            self.$parent.$parent.$parent.selection = [];
+          } else {
+            const isOutOfStockFlag = false; // 由于830不上，所以默认为false，暂注释上面的处理逻辑，之后要加，打开注释即可。
+            if (isOutOfStockFlag) {
+              self.$Modal.confirm({
+                title: $it('mT.tips'), // 提示
+                render: h => h('div', {}, [
+                  h(
+                    'p',
+                    {
+                      style: {
+                        padding: '10px 15px 10px 0px',
+                      },
+                    },
+                    message
+                  ),
+                  h('Table', {
+                    props: {
+                      'disabled-hover': true,
+                      'highlight-row': false,
+                      'no-data-text': $it('other.noDataAvailable'), // 暂无数据
+                      columns: data.columns,
+                      data: data.prompt_data,
+                    },
+                  }),
+                ]),
+                cancelType: true,
+                showCancel: true,
+                titleAlign: 'left',
+                mask: true,
+                width: 500,
+                draggable: true,
+                onOk: () => {
+                  self.determine(true);
+                },
+                onCancel: () => {
+                  self.$parent.$parent.closeConfirm();
+                },
+              });
+            } else {
+              self.$Modal.error({
+                className: 'ark-dialog',
+                title: $it('mT.tips'), // 提示
+                render: h => h('div', {}, [
+                  h(
+                    'p',
+                    {
+                      style: {
+                        padding: '10px 15px 10px 0px',
+                      },
+                    },
+                    message
+                  ),
+                  h('Table', {
+                    props: {
+                      'disabled-hover': true,
+                      'highlight-row': false,
+                      'no-data-text': $it('other.noDataAvailable'), // 暂无数据
+                      columns: data.columns,
+                      data: data.prompt_data,
+                    },
+                  }),
+                ]),
+                cancelType: true,
+                titleAlign: 'left',
+                mask: true,
+                width: 500,
+                draggable: true,
+                onOk: () => {
+                  self.$parent.$parent.closeConfirm();
+                },
+                keyDown: (event) => {
+                  if (event.keyCode == 27) {
+                    self.$parent.$parent.closeConfirm();
+                  } else if (event.keyCode == 13) {
+                    self.$parent.$parent.closeConfirm();
+                  }
+                },
+              });
+            }
+          }
         } else {
+          // self.$parent.$parent.$parent.load();
           self.$Message.success(message);
           self.$parent.$parent.closeConfirm();
           self.$parent.$parent.$parent.load();
         }
-      } else if (code == 1 && data) {
-        self.$parent.$parent.closeConfirm();
-        let tabData = data.map((row, index) => {
-          row.INDEX = ++index;
-          row.BILL_NO = row.objno;
-          row.RESULT_MSG = row.message;
-          return row;
-        });
-        $utils.tipShow(
-          "confirm",
-          self,
-          data,
-          message,
-          function (h) {
-            return h("Table", {
-              props: {
-                columns: [
-                  {
-                    title: "序号",
-                    key: "INDEX",
-                  },
-                  {
-                    title: "ID",
-                    key: "objid",
-                  },
-                  {
-                    title: "单据编号",
-                    key: "BILL_NO",
-                  },
-                  {
-                    title: $it('fL.e0'), // 失败原因
-                    key: "RESULT_MSG",
-                  },
-                ],
-                data: tabData,
+      } else if (code === -1 && !data) {
+        self.$Message.error(message);
+      } else {
+        self.$Modal.error({
+          className: 'ark-dialog',
+          title: $it('mT.tips'), // 提示
+          render: h => h('div', {}, [
+            h(
+              'p',
+              {
+                style: {
+                  padding: '10px 15px 10px 0px',
+                },
               },
-            });
-          }
-        );
-      } else {
-        self.$parent.$parent.closeConfirm();
-        // 走框架的报错
-      }
-      self.loading = false;
-    },
-    async getListData() {
-      const self = this;
-      const fromdata = {
-        flag: 2,
-        id: self.componentData.CP_C_SHOP_ID,
-        num: self.pageNum,
-        size: 10,
-        inputValue: "",
-      };
-      const {
-        data: { data, count },
-      } = await self.service.orderCenter.getQueryList(fromdata);
-      if (data) {
-        data.forEach((element) => {
-          element.ecode = {
-            val: element.ecode,
-          };
-          element.ename = {
-            val: element.ename,
-          };
-          element.ID = {
-            val: element.id,
-          };
+              message
+            ),
+            h('Table', {
+              props: {
+                'disabled-hover': true,
+                'highlight-row': false,
+                // "no-data-text": "暂无数据",
+                'no-data-text': $it('other.noDataAvailable'),
+                columns: data.columns,
+                data: data.prompt_data,
+              },
+            }),
+          ]),
+          cancelType: true,
+          titleAlign: 'left',
+          mask: true,
+          width: 500,
+          draggable: true,
         });
-        self.foreignKeyLink = {
-          start: 0,
-          tabth: [
-            {
-              colname: "ID",
-              name: "ID",
-              show: false,
-            },
-            {
-              colname: "ename",
-              // name: "发货仓库名称",
-              name: $it("tL.deliveryWarehouse_name"),
-              show: true,
-            },
-            {
-              colname: "ecode",
-              // name: "发货仓库编码",
-              name: $it("tL.deliveryWarehouse_code"),
-              show: false,
-            },
-          ],
-          row: data,
-        };
-        self.totalRowCount = count;
       }
     },
-    // 输入框改变产生的
-    async inputValueChange(value) {
+    /**
+     * 查询聚合仓、实体仓
+     * @param {*} storeKey 仓库
+     * @param {*} keyword 模糊搜索关键字
+     */
+    async getWarehouseList(storeKey, keyword) {
       const self = this;
-      const fromdata = {
-        flag: 2,
-        id: self.componentData.CP_C_SHOP_ID,
-        num: self.pageNum,
-        size: 10,
-        inputValue: value,
+      const params = {
+        shopId: self.componentData.shopId,
+        skuIdList: self.componentData.skuIdList,
+        sgCShareStoreId: self.formValue.shareStoresId, // 聚合仓查询聚合仓不需要传，查询实体仓时要有值
+        includePhyStorage: storeKey == 'PhyWarehouseStores', // false 查询聚合仓 true 查询实体仓
+        pageNum: self.pageNum,
+        pageSize: 10
       };
-      const {
-        data: { data, code, count },
-      } = await self.service.orderCenter.getQueryList(fromdata);
-      if (code === 0) {
-        self.AutoData = data.map((element) => ({
-          value: element.ename,
-          id: element.id,
-        }));
-        self.totalRowCount = count;
-      } else {
-        self.AutoData = [];
-        self.shopStore.totalRowCount = 0;
-      }
-      self.foreignKeyLink = {
+      const { data: { code, data } } = await self.service.orderCenter.queryOmsShopStorage(params);
+      if (code != 0 || !(storeKey in data)) return
+      let result = data[storeKey].map(i => {
+        return {
+          ecode: { val: i.ecode },
+          ename: { val: i.ename },
+          ID: { val: i.id }
+        }
+      });
+      this[storeKey].data = {
         start: 0,
         tabth: [
           {
-            colname: "ID",
-            name: "ID",
+            colname: 'ID',
+            name: 'ID',
             show: false,
           },
           {
-            colname: "ename",
-            // name: "发货仓库名称",
-            name: $it("tL.deliveryWarehouse_name"),
+            colname: 'ename',
+            name: $it('tL.deliveryWarehouse_name'), // 发货仓库名称
             show: true,
           },
           {
-            colname: "ecode",
-            // name: "发货仓库编码",
-            name: $it("tL.deliveryWarehouse_code"),
+            colname: 'ecode',
+            name: $it('tL.deliveryWarehouse_code'), // 发货仓库编码
             show: false,
           },
         ],
-        row: data,
-      };
-      self.pageNum = 1;
+        row: result,
+      }
+      this[storeKey].totalRowCount = data.count
     },
     // 分页请求数据
-    changePage(value) {
+    changePage(storeKey, value) {
       this.pageNum = value;
-      this.getListData();
+      this.getWarehouseList(storeKey)
     },
-    onFkrpSelected(val) {
-      console.log(val);
-      this.pid = val[0].ID;
+    onFkrpSelected(storeKey, val) {
+      const { ID, ecode } = val[0].rowItem
+      if (storeKey == 'ShareStores') {
+        this.formValue.shareStoresId = ID.val
+        this.formValue.shareStoresEcode = ecode.val
+        document.getElementsByClassName('ark-input')[3].value = ""; //当修改聚合仓重新修改，需要清除修改仓库的值
+        this.formValue.warehouseId = '';
+        this.formValue.warehouseEcode = '';
+        this.getWarehouseList('PhyWarehouseStores')
+      } else {
+        this.formValue.warehouseId = ID.val
+        this.formValue.warehouseEcode = ecode.val
+      }
     },
   },
 };

@@ -474,6 +474,7 @@ export default {
                   self.selection = [];
                 } else {
                   self.$Modal.error({
+                    className: 'ark-dialog',
                     title: $it('mT.tips'), // 提示
                     content: res.data.message,
                     cancelType: true,
@@ -653,6 +654,7 @@ export default {
                         self.selection = [];
                       } else {
                         self.$Modal.error({
+                          className: 'ark-dialog',
                           title: $it('mT.tips'), // 提示
                           content: res.data.message,
                           cancelType: true,
@@ -706,6 +708,7 @@ export default {
                     self.selection = [];
                   } else {
                     self.$Modal.error({
+                      className: 'ark-dialog',
                       title: $it('mT.tips'), // 提示
                       content: res.data.message,
                       cancelType: true,
@@ -955,6 +958,7 @@ export default {
                     self.selection = [];
                   } else {
                     self.$Modal.error({
+                      className: 'ark-dialog',
                       title: $it('mT.tips'), // 提示
                       content: res.data.message,
                       cancelType: true,
@@ -1001,6 +1005,7 @@ export default {
                     self.selection = [];
                   } else {
                     self.$Modal.error({
+                      className: 'ark-dialog',
                       title: $it('mT.tips'), // 提示
                       content: res.data.message,
                       cancelType: true,
@@ -1118,6 +1123,7 @@ export default {
                     self.selection = [];
                   } else {
                     self.$Modal.error({
+                      className: 'ark-dialog',
                       title: $it('mT.tips'), // 提示,//提示
                       content: res.data.message,
                       cancelType: true,
@@ -1226,6 +1232,7 @@ export default {
                         self.selection = [];
                       } else {
                         self.$Modal.error({
+                          className: 'ark-dialog',
                           title: $it('mT.tips'), // 提示,
                           content: res.data.message,
                           cancelType: true,
@@ -1532,6 +1539,7 @@ export default {
                   }, 100);
                 } else {
                   self.$Modal.error({
+                    className: 'ark-dialog',
                     title: $it('mT.tips'), // 提示,
                     content: res.data.message,
                     cancelType: true,
@@ -1583,6 +1591,7 @@ export default {
                   }, 100);
                 } else {
                   self.$Modal.error({
+                    className: 'ark-dialog',
                     title: $it('mT.tips'), // 提示,
                     content: res.data.message,
                     cancelType: true,
@@ -2078,6 +2087,7 @@ export default {
               self.getData();
             } else {
               self.$Modal.error({
+                className: 'ark-dialog',
                 title: $it('mT.tips'), // 提示
                 content: res.data.message,
                 cancelType: true,
@@ -3200,6 +3210,7 @@ export default {
           });
         } else {
           self.$Modal.error({
+            className: 'ark-dialog',
             title: $it('mT.tips'), // 提示
             content: res.data.message,
             cancelType: true,

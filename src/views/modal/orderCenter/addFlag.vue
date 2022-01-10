@@ -113,6 +113,7 @@ export default {
           },
           {
             text: $it('com.determine'), // 确定
+            type: 'primary',
             btnclick: () => {
               this.determine()
             }
@@ -131,6 +132,7 @@ export default {
           },
           {
             text: $it('com.determine'), // 确定
+            type: 'primary',
             btnclick: () => {
               this.asyncOK()
             }

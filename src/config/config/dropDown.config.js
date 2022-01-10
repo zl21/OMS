@@ -69,6 +69,7 @@ class DropDownConfig {
                 }, 100);
               } else {
                 self.$Modal.error({
+                  className: 'ark-dialog',
                   title: $it('mT.tips'), // 提示,
                   content: res.data.message,
                   cancelType: true,
@@ -120,6 +121,7 @@ class DropDownConfig {
                 }, 100);
               } else {
                 self.$Modal.error({
+                  className: 'ark-dialog',
                   title: $it('mT.tips'), // 提示,
                   content: res.data.message,
                   cancelType: true,
@@ -199,7 +201,7 @@ class DropDownConfig {
           return;
         }
         const ids = self.selection.map(item => item.ID);
-        const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.depositPresaleConfig));
+        const publicBouncedConfig = _.cloneDeep(publicDialogConfig.depositPresaleConfig));
         publicBouncedConfig.componentData = {
           params: {
             ids
@@ -222,7 +224,7 @@ class DropDownConfig {
           return;
         }
         const ids = self.selection.map(item => item.ID);
-        const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.vipSpeedDispatchConfig));
+        const publicBouncedConfig = _.cloneDeep(publicDialogConfig.vipSpeedDispatchConfig));
         publicBouncedConfig.componentData = {
           params: {
             ids
@@ -397,7 +399,7 @@ class DropDownConfig {
           return;
         }
         const ids = self.selection.map(item => item.ID);
-        const publicBouncedConfig = JSON.parse(JSON.stringify(publicDialogConfig.holdOrderConfig));
+        const publicBouncedConfig = _.cloneDeep(publicDialogConfig.holdOrderConfig);
         publicBouncedConfig.componentData = {
           ids
         };

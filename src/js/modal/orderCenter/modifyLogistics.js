@@ -42,7 +42,7 @@ export default {
           }, // 按钮点击事件
         },
         {
-          type: '', // 按钮类型
+          type: 'primary', // 按钮类型
           text: $it('com.determine'), // 确定
           icon: '', // 按钮图标
           size: 'small', // 按钮大小
@@ -136,6 +136,7 @@ export default {
                 self.$parent.$parent.$parent.selection = [];
               } else {
                 self.$Modal.error({
+                  className: 'ark-dialog',
                   // title: "提示",
                   title: $it('mT.tips'),
                   render: h => h('div', {}, [
