@@ -103,250 +103,256 @@ export default {
       },
       warningModal: false, // 警告弹框
       virtualWarehouseModal: false, // 手工入库弹框
-      btnConfig: BtnConfig.config(), // 按钮数据
-      // btnConfig: {
-      //   typeAll: 'default', // 按钮统一风格样式
-      extendBtn: [
-        /* {
-          text: $it('btn.find'), // 查找
-          webname: 'lookup_tuihuanhuo',
-          type: 'primary',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.find();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.reset'), // 重置
-          webname: 'lookup_chongzhi',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.reset();
-          } // 按钮点击事件
-        }, */
-        {
-          text: $it('btn.add'), // 新增
-          webname: 'new_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.$store.commit('customize/TabHref', {
-              id: -1, // id
-              type: 'action', // 类型action
-              name: 'returngood', // 文件名
-              label: $it('pL.addReturnOrder'), // 退换货订单新增 tab中文名
-              query: Object.assign({
+      // btnConfig: BtnConfig.config(), // 按钮数据
+      btnConfig: {
+        typeAll: 'default', // 按钮统一风格样式
+        buttons: [
+          /* {
+            text: $it('btn.find'), // 查找
+            webname: 'lookup_tuihuanhuo',
+            type: 'error',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.find();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.reset'), // 重置
+            webname: 'lookup_chongzhi',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.reset();
+            } // 按钮点击事件
+          }, */
+          {
+            text: $it('btn.add'), // 新增
+            webname: 'new_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.$store.commit('customize/TabHref', {
                 id: -1, // id
-                tabTitle: $it('pL.addReturnOrder') // 退换货订单新增 tab中文名
-              }) // 带的参数
-            });
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.modify'), // 修改
-          webname: 'modify_yuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.modify();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('pL.scannAndWarehous'), // 扫描入库
-          webname: 'in_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.scanIncoming();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.afterSalesAudit'), // 售后审核
-          webname: 'shenhe_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.afterAudit();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('com.cancel'), // 取消
-          webname: 'quxiao_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.cancelBtn();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.virtualWarehous'), // 虚拟入库
-          webname: 'xuniruku_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.virtualLibrary();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('mT.manualWarehous'), // 手动入库
-          webname: 'VirtualWarehouseStorageCmd',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.virtualWarehouseLibraryWarn();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.cancel_automaticRefund'), // 取消自动退款
-          webname: 'quxiaozidongtuikuan_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.cancelRefund();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.modifyRemarks'), // 修改备注
-          webname: 'beizhu_tuihuanh',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.changeRemarkConfig.confirmTitle = '修改备注';
-            this.bounced();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('mT.modify_sellerNotes'), // 修改卖家备注
-          webname: 'modifyReturnSellerRemark',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.changeRemarkConfig.confirmTitle = '修改卖家备注';
-            this.bounced2();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.modify_returnWarehouse'), // 修改退回仓库
-          webname: 'tuihuicangku_tuihuanhuo',
-          btnclick: () => {
-            this.Warehouse();
-          }
-        },
-        /* {
-          text: $it('mT.modify_logisticsCompany'), // 修改物流公司
-          webname: '',
-          btnclick: () => {
-            this.OrderLogistics();
-          }
-        }, */
-        {
-          text: $it('btn.batchOriginalReturn'), // 批量原退
-          webname: 'oc_b_return_order_batch',
-          btnclick: () => {
-            this.batchOriginalBack();
-          }
-        },
-        {
-          text: "换货转退货",
-          webname: 'exchange_to_refund',
-          btnclick: () => {
-            this.batchHZT();
-          }
-        },
-        // {
-        //   text: "从WMS撤回", //按钮文本
-        //   disabled: false, //按钮禁用控制
-        //   btnclick: () => {
-        //     this.withdrawWMS();
-        //   } //按钮点击事件
-        // },
-        {
-          text: $it('btn.retransmission_WMS'), // 重传WMS  //按钮文本
-          webname: 'chuanwms_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.againWMS();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.mandatoryCompletion'), // 强制完成  //按钮文本
-          webname: 'qiaozhiwancheng_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.forcedCompletion();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.returnCopy'), // 退换货复制
-          webname: 'OcChangingOrRefundingDetailCmd',
-          disabled: false,
-          btnclick: () => {
-            this.cloneRenturnGood();
-          }
-        },
-        {
-          webname: 'refund_to_exchange', // 退货转换货
-          disabled: false,
-          btnclick: () => {
-            this.refund2ExchangeValidate();
-          }
-        },
-        {
-          type: '', // 按钮类型
-          // text: $it('btn.sellerNotesImport'),
-          webname: 'oc_b_return_order_import_seller_remark', // 卖家备注导入
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            const _this = this;
-            _this.importTable.componentData = {
-              tableName: 'OC_B_RETURN_ORDER_remark',
-              objid: '1'
-            };
-            _this.importTable.confirmTitle = _$it('btn.sellerNotesImport'); // 卖家备注导入
-            _this.$children.find(item => item.name === 'importTable').openConfirm();
-          } // 按钮点击事件
-        },
-        {
-          type: '', // 按钮类型
-          text: $it('btn.import'), // 导入
-          webname: 'daoru_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            const _this = this;
-            _this.importTable.componentData = {
-              tableName: 'OC_B_RETURN_ORDER'
-            };
-            _this.$children.find(item => item.name === 'importTable').openConfirm();
-          } // 按钮点击事件
-        },
-        {
-          text: $it('btn.export'), // 导出
-          webname: 'daochu_tuihuanhuo',
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            this.exportClick();
-          } // 按钮点击事件
-        },
-        {
-          icon: 'iconfont iconbj_setup', // 按钮图标
-          btnclick: () => {
-            const self = this;
-            self.isShowSeniorOrOrdinary = true;
-            DialogConfig.dropSortConfig.confirmTitle = '查询条件设置'
-            self.publicBouncedConfig = {
-              ...DialogConfig.dropSortConfig
-            };
-            self.publicBouncedConfig.componentData = {
-              typeName: 'OC_B_RETURN_ORDER'
-            };
-            setTimeout(() => {
-              self.$children.find(item => item.name === 'setFormDrag').openConfirm();
-            }, 100);
-          } // 按钮点击事件
-        },
-        {
-          icon: 'iconfont iconbj_col', // 按钮图标
-          size: 'small', // 按钮大小
-          name: $it('btn.collection'), // 收藏
-          webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
-          disabled: false, // 按钮禁用控制
-          btnclick: () => {
-            const _this = this;
-            _this.setFavorite();
-          } // 按钮点击事件
-        }
-      ],
-      // }, // 按钮数据
+                type: 'action', // 类型action
+                name: 'returngood', // 文件名
+                label: $it('pL.addReturnOrder'), // 退换货订单新增 tab中文名
+                query: Object.assign({
+                  id: -1, // id
+                  tabTitle: $it('pL.addReturnOrder') // 退换货订单新增 tab中文名
+                }) // 带的参数
+              });
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.modify'), // 修改
+            webname: 'modify_yuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.modify();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('pL.scannAndWarehous'), // 扫描入库
+            webname: 'in_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.scanIncoming();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.afterSalesAudit'), // 售后审核
+            webname: 'shenhe_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.afterAudit();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('com.cancel'), // 取消
+            webname: 'quxiao_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.cancelBtn();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.virtualWarehous'), // 虚拟入库
+            webname: 'xuniruku_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.virtualLibrary();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('mT.manualWarehous'), // 手动入库
+            webname: 'VirtualWarehouseStorageCmd',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.virtualWarehouseLibraryWarn();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.cancel_automaticRefund'), // 取消自动退款
+            webname: 'quxiaozidongtuikuan_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.cancelRefund();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.modifyRemarks'), // 修改备注
+            webname: 'beizhu_tuihuanh',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.changeRemarkConfig.confirmTitle = '修改备注';
+              this.bounced();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('mT.modify_sellerNotes'), // 修改卖家备注
+            webname: 'modifyReturnSellerRemark',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.changeRemarkConfig.confirmTitle = '修改卖家备注';
+              this.bounced2();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.modify_returnWarehouse'), // 修改退回仓库
+            webname: 'tuihuicangku_tuihuanhuo',
+            btnclick: () => {
+              this.Warehouse();
+            }
+          },
+          /* {
+            text: $it('mT.modify_logisticsCompany'), // 修改物流公司
+            webname: '',
+            btnclick: () => {
+              this.OrderLogistics();
+            }
+          }, */
+          {
+            text: $it('btn.batchOriginalReturn'), // 批量原退
+            webname: 'oc_b_return_order_batch',
+            btnclick: () => {
+              this.batchOriginalBack();
+            }
+          },
+          {
+            text: "换货转退货",
+            webname: 'exchange_to_refund',
+            btnclick: () => {
+              this.batchHZT();
+            }
+          },
+          // {
+          //   text: "从WMS撤回", //按钮文本
+          //   disabled: false, //按钮禁用控制
+          //   btnclick: () => {
+          //     this.withdrawWMS();
+          //   } //按钮点击事件
+          // },
+          {
+            text: $it('btn.retransmission_WMS'), // 重传WMS  //按钮文本
+            webname: 'chuanwms_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.againWMS();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.mandatoryCompletion'), // 强制完成  //按钮文本
+            webname: 'qiaozhiwancheng_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.forcedCompletion();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.returnCopy'), // 退换货复制
+            webname: 'OcChangingOrRefundingDetailCmd',
+            disabled: false,
+            btnclick: () => {
+              this.cloneRenturnGood();
+            }
+          },
+          {
+            webname: 'refund_to_exchange', // 退货转换货
+            disabled: false,
+            btnclick: () => {
+              this.refund2ExchangeValidate();
+            }
+          },
+          {
+            type: '', // 按钮类型
+            // text: $it('btn.sellerNotesImport'),
+            webname: 'oc_b_return_order_import_seller_remark', // 卖家备注导入
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              const _this = this;
+              _this.importTable.componentData = {
+                tableName: 'OC_B_RETURN_ORDER_remark',
+                objid: '1'
+              };
+              _this.importTable.confirmTitle = $it('btn.sellerNotesImport'); // 卖家备注导入
+              _this.$children.find(item => item.name === 'importTable').openConfirm();
+            } // 按钮点击事件
+          },
+          {
+            type: '', // 按钮类型
+            text: $it('btn.import'), // 导入
+            webname: 'daoru_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              const _this = this;
+              _this.importTable.componentData = {
+                tableName: 'OC_B_RETURN_ORDER'
+              };
+              _this.$children.find(item => item.name === 'importTable').openConfirm();
+            } // 按钮点击事件
+          },
+          {
+            text: $it('btn.export'), // 导出
+            webname: 'daochu_tuihuanhuo',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              this.exportClick();
+            } // 按钮点击事件
+          },
+          {
+            icon: 'iconfont iconbj_setup', // 按钮图标
+            btnclick: () => {
+              const self = this;
+              self.isShowSeniorOrOrdinary = true;
+              publicDialogConfig.dropSortConfig.confirmTitle = '查询条件设置'
+              self.publicBouncedConfig = {
+                ...publicDialogConfig.dropSortConfig
+              };
+              self.publicBouncedConfig.componentData = {
+                typeName: 'OC_B_RETURN_ORDER'
+              };
+              setTimeout(() => {
+                self.$children.find(item => item.name === 'setFormDrag').openConfirm();
+              }, 100);
+            } // 按钮点击事件
+          },
+          {
+            icon: 'iconfont iconbj_col', // 按钮图标
+            size: 'small', // 按钮大小
+            name: $it('btn.collection'), // 收藏
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              const _this = this;
+              _this.setFavorite();
+            } // 按钮点击事件
+          },
+          {
+            webname: 'fill_logistics', // 申请修改物流信息
+            disabled: false,
+            btnclick: () => {
+              this.returnFillLogisticsFun()
+            }
+          },
+        ],
+      }, // 按钮数据
       formConfig: {
         btn: {
           buttons: [
@@ -1233,7 +1239,7 @@ export default {
         onOk: () => {
           _this.service.common.chargebackcheck({ ID: ids.join(',') }).then(res => {
             if (res.data.code == 0) {
-              const mes = res.data.message || _$it('tip.k8'); // 售后审核成功！
+              const mes = res.data.message || $it('tip.k8'); // 售后审核成功！
               _this.$Message.success(mes);
               _this.getList(_this.statusTab);
             } else {
@@ -1252,7 +1258,7 @@ export default {
                   }
                 })
               });
-              // const err = res.data.message || _$it('tip.k9'); // 售后审核失败！
+              // const err = res.data.message || $it('tip.k9'); // 售后审核失败！
               // _this.$Message.error(err);
             }
           });
@@ -1382,8 +1388,8 @@ export default {
                 this.getList(this.statusTab);
               }, 500);
             } else {
-              const err = res.data.message || $it('tip.l5'); // 虚拟入库失败！
-              this.$Message.info(err);
+              // const err = res.data.message || $it('tip.l5'); // 虚拟入库失败！
+              // this.$Message.info(err);
             }
           });
         }
@@ -1548,14 +1554,14 @@ export default {
           this.service.orderCenter.updateReturnBOrder({ ids }).then(res => {
             if (res.data.code === 0) {
               this.getList(this.statusTab);
-              this.$Message.success(res.data.message);
+              // this.$Message.success(res.data.message);
               if (res.data.data.length) {
                 this.errModal = true;
                 this.errdataList = res.data.data;
               }
             } else {
-              const err = res.data.message || $it('tip.m4'); // 批量原退失败！
-              this.$Message.info(err);
+              // const err = res.data.message || $it('tip.m4'); // 批量原退失败！
+              // this.$Message.info(err);
             }
           });
         }
@@ -1588,8 +1594,8 @@ export default {
                 this.errdataList = res.data.data;
               }
             } else {
-              const err = res.data.message || "批量换货转退货失败！"; // 批量原退失败！
-              this.$Message.info(err);
+              // const err = res.data.message || "批量换货转退货失败！"; // 批量原退失败！
+              // this.$Message.info(err);
             }
           });
         }
@@ -1639,8 +1645,8 @@ export default {
           this.getList(this.statusTab);
           this.$Message.success(res.data.message);
         } else {
-          const err = res.data.message || $it('tip.m7'); // 重WMS失败！
-          this.$Message.info(err);
+          // const err = res.data.message || $it('tip.m7'); // 重WMS失败！
+          // this.$Message.info(err);
         }
       });
     },
@@ -1678,6 +1684,35 @@ export default {
         }
       });
     },
+    // 申请修改物流信息
+    returnFillLogisticsFun() {
+      if (!this.selection.length) {
+        this.$message.error(this.vmI18n.t('tip.l0')); // 请至少选中一项!
+        return;
+      }
+      this.$Modal.info({
+        title: this.vmI18n.t('mT.tips'), // 提示
+        content: "是否确定批量申请补充物流信息",
+        mask: true,
+        showCancel: true,
+        okText: this.vmI18n.t('com.determine'), // 确定
+        cancelText: this.vmI18n.t('com.cancel'), // 取消
+        onOk: () => {
+          const ids = [];
+          for (let i = 0; i < this.selection.length; i++) {
+            ids.push(this.selection[i].ID);
+          }
+          this.service.orderCenter.returnFillLogistics({ ids }).then(res => {
+            if (res.data.code === 0) {
+              this.getList(this.statusTab);
+              this.$message.success(res.data.message);
+            } else {
+              this.$message.info(res.data.message);
+            }
+          });
+        }
+      });
+    },
     // 复制退单
     cloneRenturnGood() {
       const _this = this;
@@ -1689,11 +1724,11 @@ export default {
         id: -1,
         type: 'action',
         name: 'returngood',
-        label: _$it('pL.addReturnOrder'), // 退换货订单新增
+        label: $it('pL.addReturnOrder'), // 退换货订单新增
         query: {
           id: -1,
           cloneReturnGoodId: this.selection[0].ID,
-          tabTitle: _$it('pL.addReturnOrder') // 退换货订单新增
+          tabTitle: $it('pL.addReturnOrder') // 退换货订单新增
         }
       });
     },
@@ -1727,8 +1762,8 @@ export default {
           }) // 带的参数
         });
       } else {
-        const err = res.data.message || '转换失败'; // 售后审核失败！
-        _this.$Message.error(err);
+        // const err = res.data.message || '转换失败'; // 售后审核失败！
+        // _this.$Message.error(err);
       }
     },
     // 退货转换货
@@ -1765,7 +1800,7 @@ export default {
       const _this = this;
       if (this.selection.length) {
         if (this.isExport) {
-          this.$Message.error(_$it('tip.f8')); // 有一项导出正在进行中
+          this.$Message.error($it('tip.f8')); // 有一项导出正在进行中
           return;
         }
         this.isExport = true;
@@ -1777,17 +1812,17 @@ export default {
         this.service.orderCenter.exportReturnOrder(idList).then(res => {
           _this.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
-            const mes = res.data.message || _$it('tip.z2'); // 导出成功！
+            const mes = res.data.message || $it('tip.z2'); // 导出成功！
             _this.$Message.success(mes);
-            $omsUtils.downloadUrlFile(res.data.data);
+            $utils.downloadUrlFile(res.data.data);
           } else {
-            const err = res.data.message || _$it('tip.z3'); // 失败！
-            _this.$Message.error(err);
+            // const err = res.data.message || $it('tip.z3'); // 失败！
+            // _this.$Message.error(err);
           }
         });
       } else {
         if (_this.agTableConfig.rowData.length === 0) {
-          _this.$Message.error(_$it('tip.z4'));
+          _this.$Message.error($it('tip.z4'));
           return;
         } // 列表没有数据,无法导出!
         if (_this.statusTab == '') {
@@ -1802,7 +1837,7 @@ export default {
     warningOk() {
       const _this = this;
       if (this.isExport) {
-        this.$Message.error(_$it('tip.f8')); // 有一项导出正在进行中
+        this.$Message.error($it('tip.f8')); // 有一项导出正在进行中
         return;
       }
       this.isExport = true;

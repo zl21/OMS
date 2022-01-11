@@ -56,34 +56,58 @@ export default {
     },
     async okClick() {
       const self = this;
-      if (this.bouncedData.value.length > 200) {
-        self.$Message.error("最大只能输入200个字符！");
-        return
+      if (!self.bouncedData.value) return;
+      let cover = '';
+      if (self.bouncedData.animal === '覆盖原备注') {
+        cover = 'true';
+      } else {
+        cover = 'false';
       }
-      if (!this.bouncedData.value.length) {
-        self.$Message.error("备注内容不能为空！");
-        return
+      // let fromdata = new FormData();
+      let param = {};
+      // let url = '';
+      let res;
+      if (self.componentData.type == 1) {
+        param = {
+          ids: self.componentData.ids,
+          remark: self.bouncedData.value,
+          cover
+        };
+        // url = '/api/cs/oc/oms/v1/reRemarkUpdate';
+        res = await this.service.orderCenter.reRemarkUpdate(param);
+      } else if (self.componentData.type == 2) {
+        param = {
+          IDS: self.componentData.ids,
+          BACK_MESSAGE: self.bouncedData.value,
+          COVER: cover
+        };
+        // url = '/api/cs/oc/oms/v1/modifyReturnSellerRemark';
+        res = await this.service.orderCenter.modifyReturnSellerRemark(param);
       }
-
-      let ids = self.componentData.ids.map(em => {
-        return em.ID
-      })
-
-      let param = {
-        ids,
-        cover: this.bouncedData.animal == "覆盖原备注" ? true : false,//true:覆盖 false 追加
-        remark: this.bouncedData.value, //备注
-      }
-
-      const res = await this.service.orderCenter.updateReturnOrderRemark(param)
       if (res.data.code === 0) {
         self.$Message.success(res.data.message);
-        //query
-        self.$parent.$parent.$parent.query();
+        console.log(self);
+        self.$parent.$parent.$parent.getList(self.componentData.status);
         self.$parent.$parent.closeConfirm();
       } else {
         self.$Message.error(res.data.message);
       }
+      // fromdata.append("param", JSON.stringify(param));
+
+      // axios({
+      //   url,
+      //   method: 'post',
+      //   data: param
+      // }).then(res => {
+      //   if (res.data.code === 0) {
+      //     self.$Message.success(res.data.message);
+      //     console.log(self);
+      //     self.$parent.$parent.$parent.getList(self.componentData.status);
+      //     self.$parent.$parent.closeConfirm();
+      //   } else {
+      //     self.$Message.error(res.data.message);
+      //   }
+      // });
     }
   },
   mounted() {
