@@ -182,11 +182,14 @@ class DropDownConfig {
             ids[index] = item.ID;
             ORDER_STATUS[index] = item.ORDER_STATUS;
           });
-          self.changeInternalRemarksConfig.componentData = {
+          self.publicBouncedConfig = publicDialogConfig.changeInternalRemarksConfig;
+          self.publicBouncedConfig.componentData = {
             ids,
             status: ORDER_STATUS
           };
-          self.$children.find(item => item.name === 'changeInternalRemarks').openConfirm();
+          setTimeout(() => {
+            self.$children.find(item => item.name === 'changeInternalRemarks').openConfirm();
+          }, 100)
         }
         break;
       }

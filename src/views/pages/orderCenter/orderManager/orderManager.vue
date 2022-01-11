@@ -80,7 +80,7 @@
       :width="publicBouncedConfig.width"
     />
     <!-- 修改内部备注-->
-    <OmsDialog
+    <!-- <OmsDialog
       :title="changeInternalRemarksConfig.title"
       :title-align="changeInternalRemarksConfig.titleAlign"
       :width="changeInternalRemarksConfig.width"
@@ -95,7 +95,7 @@
       :keep-alive="changeInternalRemarksConfig.keepAlive"
       :exclude-string="changeInternalRemarksConfig.excludeString"
       :component-data="changeInternalRemarksConfig.componentData"
-    />
+    /> -->
     <!-- 导入 -->
     <OmsDialog
       :closable="importTable.closable"

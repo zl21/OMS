@@ -80,8 +80,8 @@ export default {
   manualUnHoldOrder: params => $network.post('/api/cs/oc/oms/v1/manualUnHoldOrder', params), // 审核
   // mergeOrderOne: (params) => $network.post('/p/cs/oc/oms/v1/mergeOrder', params), // 合并订单
   mergeOrderOne: (params) => $network.post('/api/cs/oc/oms/v1/mergeOrderOne', params), // 合并订单
-  cancelMergeOrder: (params) =>
-    $network.post('/p/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
+  // cancelMergeOrder: (params) => $network.post('/p/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
+  cancelMergeOrder: (params) => $network.post('/api/cs/oc/oms/v1/cancelMergeOrder', params), // 取消合并订单
   batchAddGoods: (params) =>
     $network.post('/api/cs/oc/oms/v1/batchAddGoods', params), // 零售发货单详情 - 添加赠品
   addGit: (params) => $network.post('/api/cs/oc/oms/v1/addGit', params),
@@ -99,8 +99,9 @@ export default {
     $network.post('/api/cs/oc/oms/v1/saveStandards', params),
   updateIsLackstock: (params) =>
     $network.post('/api/cs/oc/oms/v1/updateIsLackstock', params),
+  // saveAppointSplitOrderInfo: (params) => $network.post('/p/cs/oc/oms/v1/specifySplitOrderInfo', params),
   saveAppointSplitOrderInfo: (params) =>
-    $network.post('/p/cs/oc/oms/v1/specifySplitOrderInfo', params),
+    $network.post('/api/cs/oc/oms/v1/saveAppointSplitOrderInfo', params),
   saveSplitOrderInfo: (params) =>
     $network.post('/p/cs/oc/oms/v1/saveSplitOrderInfo', params),
   getSingleObjectPermission: (params) =>
@@ -413,7 +414,8 @@ export default {
     updateDeliveryTime:(params) => $network.post('/p/cs/oc/b/oms/v1/ocborder/updateDeliveryTime' , params), // 零售列表-修改预计发货时间
 
     querySgStorage: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/querySgStorage', params), // 列表-商品详情-查库存
-    orderDeliveryUrgent: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/orderDeliveryUrgent', params), // 加急发货接口
+    // orderDeliveryUrgent: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/orderDeliveryUrgent', params), // 加急发货接口
+    orderDeliveryUrgent: params => $network.post('/api/cs/oc/oms/v1/orderDeliveryUrgent', params), // 加急发货接口
     checkOrderDeliveryUrgent: params => $network.post('/p/cs/oc/b/oms/v1/ocborder/checkOrderDeliveryUrgent', params), // 加急发货检查接口
     returnSaveBill: params => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/returnSaveBill', params, { serviceId: 'r3-oc-oms' }), // 退换货单Add-save
     getReturnItemBySourceCode: params => $network.post('/p/cs/oc/b/oms/v1/ocbreturnorder/getReturnItemBySourceCode', params, { serviceId: 'r3-oc-oms' }), // 退换货单-原始订单编号-查找明细
