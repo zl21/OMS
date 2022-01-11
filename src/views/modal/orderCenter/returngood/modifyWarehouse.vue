@@ -1,7 +1,7 @@
 <template>
-  <div class="modifyWarehouse">
+  <div class="modifyWarehouse cus-modal">
     <OmsForm :form-config="formConfig" />
-    <OmsButton :btn-config="btnConfig" />
+    <OmsButton :btn-config="btnConfig" class="modal-footer" />
   </div>
 </template>
 

@@ -250,6 +250,8 @@ export default {
     $network.get(`/api/cs/vip/delivery/v1/list?${qs.stringify(params)}`),
   refund2Exchange: (params) =>
     $network.post('/api/cs/oc/oms/v1/refund2Exchange', params), // 退货转换货
+  exchange2Refund: params => $network.post('/api/cs/oc/oms/v1/exchange2Refund', params), // 批量原退
+  returnFillLogistics: params => $network.post('/api/cs/oc/oms/v1/returnFillLogistics', params), // 申请补充物流信息
   refund2ExchangeValidate: (params) =>
     $network.post('/api/cs/oc/oms/v1/refund2Exchange/before/validate', params), // 退货转换货校验
   getOrderId: (params) => $network.post('/api/cs/oc/oms/v1/getOrderId', params), // 根据平台单号,查询零售发货单id
