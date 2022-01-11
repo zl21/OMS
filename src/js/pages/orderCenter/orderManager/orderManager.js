@@ -4,7 +4,6 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import dataAccessMixin from '@/assets/js/mixins/dataAccess';
 import labelListConfig from './publicConfig/labelList';
-import orderLogo from './publicConfig/orderLogo';
 import unzipXv from '@/assets/js/dataToSmall';
 
 // let publicDialogConfig = _.cloneDeep(DialogConfig.config())
@@ -51,7 +50,6 @@ export default {
                   }, params.row.EXPRESSCODE)
                 }
               }
-              break;
             case 'ORDER_TAG':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -73,7 +71,6 @@ export default {
                   )
                 }
               }
-              break;
             case 'PAY_TIME':
             case 'AUDIT_TIME':
             case 'DISTRIBUTION_TIME':
@@ -91,7 +88,6 @@ export default {
                   })
                 }
               }
-              break;
             case 'SG_B_OUT_BILL_NO':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -116,7 +112,6 @@ export default {
                   }, params.row.SG_B_OUT_BILL_NO)
                 }
               }
-              break;
             case 'BILL_NO':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -161,7 +156,6 @@ export default {
                   }, params.row.BILL_NO)
                 }
               }
-              break;
             case 'SUGGEST_PRESINK_STATUS':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -176,7 +170,6 @@ export default {
                   return h('div', {}, value)
                 }
               }
-              break;
             case 'ACTUAL_PRESINK_STATUS':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -196,7 +189,6 @@ export default {
                   return h('div', {}, value)
                 }
               }
-              break;
             case 'THIRD_PARTY_FAIL_STATUS':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -214,7 +206,6 @@ export default {
                   return h('div', {}, value)
                 }
               }
-              break;
             case 'STATUS_PAY_STEP':
               return {
                 renderContainer: 'CellRenderByFunction',
@@ -228,7 +219,6 @@ export default {
                   return h('div', {}, val || '');
                 }
               }
-              break;
             default:
               break;
           }
@@ -268,24 +258,24 @@ export default {
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
       },
-      changeInternalRemarksConfig: {
-        refFuns: 'confirmFun',
-        confirmTitle: '修改内部备注', // 修改内部备注
-        titleAlign: 'center', // 设置标题是否居中 center left
-        width: '440',
-        scrollable: false, // 是否可以滚动
-        closable: true, // 是否可以按esc关闭
-        draggable: true, // 是否可以拖动
-        mask: true, // 是否显示遮罩层
-        maskClosable: true, // 是否可以点击叉号关闭
-        transfer: true, // 是否将弹层放在body内
-        name: 'changeInternalRemarks', // 组件名称
-        // url: 'modal/orderCenter/changeInternalRemarks',
-        url: require('@/views/modal/orderCenter/changeInternalRemarks').default,
-        keepAlive: true,
-        excludeString: 'changeInternalRemarks', // 将name传进去，确认不缓存
-        componentData: {}
-      },
+      // changeInternalRemarksConfig: {
+      //   refFuns: 'confirmFun',
+      //   confirmTitle: '修改内部备注', // 修改内部备注
+      //   titleAlign: 'center', // 设置标题是否居中 center left
+      //   width: '440',
+      //   scrollable: false, // 是否可以滚动
+      //   closable: true, // 是否可以按esc关闭
+      //   draggable: true, // 是否可以拖动
+      //   mask: true, // 是否显示遮罩层
+      //   maskClosable: true, // 是否可以点击叉号关闭
+      //   transfer: true, // 是否将弹层放在body内
+      //   name: 'changeInternalRemarks', // 组件名称
+      //   // url: 'modal/orderCenter/changeInternalRemarks',
+      //   url: require('@/views/modal/orderCenter/changeInternalRemarks').default,
+      //   keepAlive: true,
+      //   excludeString: 'changeInternalRemarks', // 将name传进去，确认不缓存
+      //   componentData: {}
+      // },
       warningModal: false, // 警告弹框
       distributeLogisticsModal: false, // 警告弹框
       distributeWarehouseModal: false, // 警告弹框
@@ -1510,132 +1500,132 @@ export default {
           self.$children.find(item => item.name === 'importTable').openConfirm();
           break;
         }
-        case 'Revising Logistics': {
-          if (self.selection.length > 0) {
-            self.btnConfig.loading = true;
-            const ids = [];
-            const CP_C_PHY_WAREHOUSE_ID = [];
-            self.selection.forEach((item, index) => {
-              ids[index] = item.ID;
-              CP_C_PHY_WAREHOUSE_ID[index] = item.CP_C_PHY_WAREHOUSE_ID;
-            });
-            const fromdata = new FormData();
-            fromdata.append('ids', ids);
-            self.service.orderCenter
-              .checkOrderBeforeLogistics(fromdata)
-              // self.$network
-              //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
-              .then(res => {
-                if (res.data.code === 0) {
-                  self.publicBouncedConfig = this.dialogs.modifyLogisticsConfig;
-                  self.publicBouncedConfig.componentData = {
-                    ids,
-                    cLogisticsId: 0,
-                    platform: self.selection[0].PLATFORM,
-                    CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0]
-                  };
-                  setTimeout(() => {
-                    self.$children.find(item => item.name === 'modifyLogistics').openConfirm();
-                  }, 100);
-                } else {
-                  self.$Modal.error({
-                    className: 'ark-dialog',
-                    title: $it('mT.tips'), // 提示,
-                    content: res.data.message,
-                    cancelType: true,
-                    titleAlign: 'left',
-                    mask: true,
-                    draggable: true,
-                    keyDown: event => {
-                      if (event.keyCode == 27 || event.keyCode == 13) {
-                        self.$Modal.remove();
-                      }
-                    }
-                  });
-                }
-                self.btnConfig.loading = false;
-              });
-          } else {
-            self.$Message.warning({
-              content: $it('mT.c6'), // 请选择需要修改物流记录！
-              duration: 5,
-              top: 80
-            });
-          }
-          break;
-        }
-        case 'Modify warehouse': {
-          if (self.selection.length > 0) {
-            self.btnConfig.loading = true;
-            const ids = [];
-            const CP_C_SHOP_ID = [];
-            self.selection.forEach((item, index) => {
-              ids[index] = item.ID;
-              CP_C_SHOP_ID[index] = item.CP_C_SHOP_ID;
-            });
-            const fromdata = new FormData();
-            fromdata.append('ids', ids);
-            self.service.orderCenter
-              .checkOrderBeforeWarehouse(fromdata)
-              // self.$network
-              //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
-              .then(res => {
-                if (res.data.code === 0) {
-                  self.publicBouncedConfig = this.dialogs.changeWarehouseConfig;
-                  self.publicBouncedConfig.componentData = {
-                    ids,
-                    CP_C_SHOP_ID: CP_C_SHOP_ID[0]
-                  };
-                  setTimeout(() => {
-                    self.$children.find(item => item.name === 'changeWarehouse').openConfirm();
-                  }, 100);
-                } else {
-                  self.$Modal.error({
-                    className: 'ark-dialog',
-                    title: $it('mT.tips'), // 提示,
-                    content: res.data.message,
-                    cancelType: true,
-                    titleAlign: 'left',
-                    mask: true,
-                    draggable: true,
-                    keyDown: event => {
-                      if (event.keyCode == 27 || event.keyCode == 13) {
-                        self.$Modal.remove();
-                      }
-                    }
-                  });
-                }
-                self.btnConfig.loading = false;
-              });
-          } else {
-            self.$Message.warning({
-              content: $it('mT.c7'), // 请选择需要修改发货仓库记录！
-              duration: 5,
-              top: 80
-            });
-          }
-          break;
-        }
+        // case 'Revising Logistics': {
+        //   if (self.selection.length > 0) {
+        //     self.btnConfig.loading = true;
+        //     const ids = [];
+        //     const CP_C_PHY_WAREHOUSE_ID = [];
+        //     self.selection.forEach((item, index) => {
+        //       ids[index] = item.ID;
+        //       CP_C_PHY_WAREHOUSE_ID[index] = item.CP_C_PHY_WAREHOUSE_ID;
+        //     });
+        //     const fromdata = new FormData();
+        //     fromdata.append('ids', ids);
+        //     self.service.orderCenter
+        //       .checkOrderBeforeLogistics(fromdata)
+        //       // self.$network
+        //       //   .post('/api/cs/oc/oms/v1/checkOrderBeforeLogistics', fromdata)
+        //       .then(res => {
+        //         if (res.data.code === 0) {
+        //           self.publicBouncedConfig = this.dialogs.modifyLogisticsConfig;
+        //           self.publicBouncedConfig.componentData = {
+        //             ids,
+        //             cLogisticsId: 0,
+        //             platform: self.selection[0].PLATFORM,
+        //             CP_C_PHY_WAREHOUSE_ID: CP_C_PHY_WAREHOUSE_ID[0]
+        //           };
+        //           setTimeout(() => {
+        //             self.$children.find(item => item.name === 'modifyLogistics').openConfirm();
+        //           }, 100);
+        //         } else {
+        //           self.$Modal.error({
+        //             className: 'ark-dialog',
+        //             title: $it('mT.tips'), // 提示,
+        //             content: res.data.message,
+        //             cancelType: true,
+        //             titleAlign: 'left',
+        //             mask: true,
+        //             draggable: true,
+        //             keyDown: event => {
+        //               if (event.keyCode == 27 || event.keyCode == 13) {
+        //                 self.$Modal.remove();
+        //               }
+        //             }
+        //           });
+        //         }
+        //         self.btnConfig.loading = false;
+        //       });
+        //   } else {
+        //     self.$Message.warning({
+        //       content: $it('mT.c6'), // 请选择需要修改物流记录！
+        //       duration: 5,
+        //       top: 80
+        //     });
+        //   }
+        //   break;
+        // }
+        // case 'Modify warehouse': {
+        //   if (self.selection.length > 0) {
+        //     self.btnConfig.loading = true;
+        //     const ids = [];
+        //     const CP_C_SHOP_ID = [];
+        //     self.selection.forEach((item, index) => {
+        //       ids[index] = item.ID;
+        //       CP_C_SHOP_ID[index] = item.CP_C_SHOP_ID;
+        //     });
+        //     const fromdata = new FormData();
+        //     fromdata.append('ids', ids);
+        //     self.service.orderCenter
+        //       .checkOrderBeforeWarehouse(fromdata)
+        //       // self.$network
+        //       //   .post('/api/cs/oc/oms/v1/checkOrderBeforeWarehouse', fromdata)
+        //       .then(res => {
+        //         if (res.data.code === 0) {
+        //           self.publicBouncedConfig = this.dialogs.changeWarehouseConfig;
+        //           self.publicBouncedConfig.componentData = {
+        //             ids,
+        //             CP_C_SHOP_ID: CP_C_SHOP_ID[0]
+        //           };
+        //           setTimeout(() => {
+        //             self.$children.find(item => item.name === 'changeWarehouse').openConfirm();
+        //           }, 100);
+        //         } else {
+        //           self.$Modal.error({
+        //             className: 'ark-dialog',
+        //             title: $it('mT.tips'), // 提示,
+        //             content: res.data.message,
+        //             cancelType: true,
+        //             titleAlign: 'left',
+        //             mask: true,
+        //             draggable: true,
+        //             keyDown: event => {
+        //               if (event.keyCode == 27 || event.keyCode == 13) {
+        //                 self.$Modal.remove();
+        //               }
+        //             }
+        //           });
+        //         }
+        //         self.btnConfig.loading = false;
+        //       });
+        //   } else {
+        //     self.$Message.warning({
+        //       content: $it('mT.c7'), // 请选择需要修改发货仓库记录！
+        //       duration: 5,
+        //       top: 80
+        //     });
+        //   }
+        //   break;
+        // }
         
-        case 'BacthUpdateInsideRemark': {
-          // 批量修改内部备注
-          if (this.selection.length === 0) {
-            this.$Message.warning('请选择需要修改内部备注的记录!');
-          } else {
-            const ids = [];
-            const ORDER_STATUS = [];
-            this.selection.forEach((item, index) => {
-              ids[index] = item.ID;
-              ORDER_STATUS[index] = item.ORDER_STATUS;
-            });
-            this.changeInternalRemarksConfig.componentData = {
-              ids,
-              status: ORDER_STATUS
-            };
-            this.$children.find(item => item.name === 'changeInternalRemarks').openConfirm();
-          }
-          break;
-        }
+        // case 'BacthUpdateInsideRemark': {
+        //   // 批量修改内部备注
+        //   if (this.selection.length === 0) {
+        //     this.$Message.warning('请选择需要修改内部备注的记录!');
+        //   } else {
+        //     const ids = [];
+        //     const ORDER_STATUS = [];
+        //     this.selection.forEach((item, index) => {
+        //       ids[index] = item.ID;
+        //       ORDER_STATUS[index] = item.ORDER_STATUS;
+        //     });
+        //     this.changeInternalRemarksConfig.componentData = {
+        //       ids,
+        //       status: ORDER_STATUS
+        //     };
+        //     this.$children.find(item => item.name === 'changeInternalRemarks').openConfirm();
+        //   }
+        //   break;
+        // }
         case 'OrderDeliveryFirst': {
           // 定金预售提前发货
           if (self.selection.length === 0) {
@@ -3468,7 +3458,7 @@ export default {
         selection.forEach(item => {
           ids.push(item.ID)
         })
-        this.$network.post('/api/cs/oc/oms/v1/orderDetentionRelease', { ids }).then(res => {
+        this.service.orderCenter.orderDetentionRelease({ ids }).then(res => {
           let resData = res.data;
           if (resData.code === 0) {
             this.$Modal.fcSuccess({
