@@ -38,5 +38,7 @@ export default {
   qgsettleAccountExport: params => network.post('/p/cs/ac/v1/qgSettleAccountExport', params),
   // 支付宝账单原始数据
   triggerAlipayBill: params => network.post(' /p/cs/ac/v1/triggerAlipayBill', params),
+  // 批量修改截止时间
+  batchUpdateEndTime: params => network.post('/p/cs/ac/v1/batchUpdateEndTime', params),
 
 };
