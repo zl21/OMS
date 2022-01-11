@@ -151,11 +151,17 @@ export default {
       };
       self.service.common.skuQuery(data).then(res => {
         if (res.data.code == 0) {
-          if (JSON.stringify(res.data.data) == '{}') {
+          // if (JSON.stringify(res.data.data) == '{}') {
+          //   // 查询数据为空!
+          //   this.$Message.warning($it('tip.r8'));
+          //   return;
+          // }
+          if (res.data.data.data.length == 0) {
             // 查询数据为空!
             this.$Message.warning($it('tip.r8'));
             return;
           }
+
           res.data.data.data[0].IS_GIFT = res.data.data.data[0].IS_GIFT == '0' ? '否' : '是';
           self.tableConfig.data = res.data.data.data;
         } else {
