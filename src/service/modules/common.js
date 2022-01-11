@@ -85,8 +85,8 @@ export default {
     $network.post("/api/cs/oc/oms/v1/chargebackcheck", params),
   OcCancelChangingOrRefund: (params) =>
     $network.post("/api/cs/oc/oms/v1/OcCancelChangingOrRefund", params), // 取消退单
-  updateVirtualLibrary: (params) =>
-    $network.post("/p/cs/oc/b/oms/v1/ocbreturnorder/updateOrderVirtual", params),
+  // updateVirtualLibrary: (params) => $network.post("/p/cs/oc/b/oms/v1/ocbreturnorder/updateOrderVirtual", params),
+  updateVirtualLibrary: params => $network.post('/api/cs/oc/oms/v1/updateVirtualLibrary', params), // 虚拟入库
   SelectLog: (params) => $network.post("/p/cs/selectlog", params),
   getOrderList: (params) => $network.post("/p/cs/getOrderList", params),
   extInfoQuery: (params) => $network.post("/p/cs/extInfoQuery", params),
