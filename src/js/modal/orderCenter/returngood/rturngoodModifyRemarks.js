@@ -55,13 +55,12 @@ export default {
     },
     async okClick() {
       const self = this;
-      if (this.bouncedData.value.length > 200) {
-        self.$Message.error("最大只能输入200个字符！");
-        return
-      }
-      if (!this.bouncedData.value.length) {
-        self.$Message.error("备注内容不能为空！");
-        return
+      if (!self.bouncedData.value) return;
+      let cover = '';
+      if (self.bouncedData.animal === '覆盖原备注') {
+        cover = 'true';
+      } else {
+        cover = 'false';
       }
       let cover = self.bouncedData.animal === '覆盖原备注' ? 'true' : 'false';
       // let fromdata = new FormData();
@@ -94,6 +93,22 @@ export default {
       } else {
         self.$Message.error(res.data.message);
       }
+      // fromdata.append("param", JSON.stringify(param));
+
+      // axios({
+      //   url,
+      //   method: 'post',
+      //   data: param
+      // }).then(res => {
+      //   if (res.data.code === 0) {
+      //     self.$Message.success(res.data.message);
+      //     console.log(self);
+      //     self.$parent.$parent.$parent.getList(self.componentData.status);
+      //     self.$parent.$parent.closeConfirm();
+      //   } else {
+      //     self.$Message.error(res.data.message);
+      //   }
+      // });
     }
   },
   mounted() {
