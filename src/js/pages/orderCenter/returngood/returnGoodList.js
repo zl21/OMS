@@ -1687,16 +1687,16 @@ export default {
     // 申请修改物流信息
     returnFillLogisticsFun() {
       if (!this.selection.length) {
-        this.$message.error(this.vmI18n.t('tip.l0')); // 请至少选中一项!
+        this.$message.error($it('tip.l0')); // 请至少选中一项!
         return;
       }
       this.$Modal.info({
-        title: this.vmI18n.t('mT.tips'), // 提示
+        title: $it('mT.tips'), // 提示
         content: "是否确定批量申请补充物流信息",
         mask: true,
         showCancel: true,
-        okText: this.vmI18n.t('com.determine'), // 确定
-        cancelText: this.vmI18n.t('com.cancel'), // 取消
+        okText: $it('com.determine'), // 确定
+        cancelText: $it('com.cancel'), // 取消
         onOk: () => {
           const ids = [];
           for (let i = 0; i < this.selection.length; i++) {
@@ -1707,7 +1707,7 @@ export default {
               this.getList(this.statusTab);
               this.$message.success(res.data.message);
             } else {
-              this.$message.info(res.data.message);
+              // this.$message.info(res.data.message);
             }
           });
         }
