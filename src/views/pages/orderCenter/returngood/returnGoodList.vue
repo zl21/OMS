@@ -14,7 +14,15 @@
       <!-- 列表组件 -->
       <div class="tableBox">
         <div v-loading="agTableConfig.agLoading" :class="{ loadingActive: loadingActive }" />
-        <OmsAgTable ref="agGridChild" :options="options" :ag-table-config="agTableConfig" @on-page-change="pageChange" @on-page-size-change="pageSizeChange" @on-row-dblclick="onRowDblclick" @on-selection-change="onSelectionChange" />
+        <OmsAgTable
+          ref="agGridChild"
+          :options="options"
+          :ag-table-config="agTableConfig"
+          @on-page-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+          @on-row-dblclick="onRowDblclick"
+          @on-selection-change="onSelectionChange"
+        />
       </div>
     </div>
     <!-- 修改备注-->

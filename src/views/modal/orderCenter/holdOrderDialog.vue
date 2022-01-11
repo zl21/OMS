@@ -62,5 +62,5 @@ export default holdOrderDialog;
 </script>
 
 <style lang="less" scoped>
-
+  @import "~@/css/modal/orderCenter/holdOrderDialog.less";
 </style>
