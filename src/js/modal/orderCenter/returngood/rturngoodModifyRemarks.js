@@ -56,8 +56,7 @@ export default {
     async okClick() {
       const self = this;
       if (!self.bouncedData.value) return;
-      let cover = '';
-      cover = self.bouncedData.animal === '覆盖原备注' ? 'true' : 'false';
+      let cover = self.bouncedData.animal === '覆盖原备注' ? 'true' : 'false';
       // let fromdata = new FormData();
       let param = {};
       // let url = '';

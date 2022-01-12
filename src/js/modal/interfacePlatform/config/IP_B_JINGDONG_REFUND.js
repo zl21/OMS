@@ -14,6 +14,11 @@ export default {
         inputList: [],
         isActive: true,
         isdisabled: false,
+        inputList: [
+          {
+            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 4, valuedata: 2 }]
+          }
+        ],
         itemdata: {
           colid: 167606,
           colname: 'CP_C_SHOP_ID', // 当前字段的名称
