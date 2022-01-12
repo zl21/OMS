@@ -18,6 +18,26 @@ export default {
     businessForm,
     businessButton,
   },
+  props: {
+    objList: {
+      type: Array,
+      defalut: () => [],
+    },
+    idArray: {
+      type: Array,
+      defalut: () => [],
+    },
+    webid: {
+      type: Number,
+    },
+    tablename: {
+      type: String,
+    },
+    selectRowData: {
+      type: Array,
+      defalut: () => [],
+    },
+  },
   data() {
     const self = this;
     return {
@@ -64,15 +84,20 @@ export default {
                 return;
               };
               this.btnConfig.loading = true;
-              console.log('===', self);
-              const ids = this.$parent.$parent.$parent.$refs.agTableElement.selectRow;
-              
+              const ids = this.idArray;
               const res = await this.service.financeCenter.batchUpdateEndTime({
                 ids,
                 end_time: this.formatDate(end_time),
               });
-              if (res.data.code === 0) {
+              if (res.data.data.code === 0) {
                 this.closeConfirm();
+              } else {
+                const message = res.data.data.message || '变更失败';
+                this.$message({
+                  message,
+                  type: 'error',
+                  duration: 5000,
+                });
               }
               this.btnConfig.loading = false;
             } // 按钮点击事件
