@@ -56,12 +56,6 @@ export default {
     async okClick() {
       const self = this;
       if (!self.bouncedData.value) return;
-      let cover = '';
-      if (self.bouncedData.animal === '覆盖原备注') {
-        cover = 'true';
-      } else {
-        cover = 'false';
-      }
       let cover = self.bouncedData.animal === '覆盖原备注' ? 'true' : 'false';
       // let fromdata = new FormData();
       let param = {};
@@ -91,7 +85,7 @@ export default {
         self.$parent.$parent.$parent.getList(self.componentData.status);
         self.$parent.$parent.closeConfirm();
       } else {
-        self.$Message.error(res.data.message);
+        // self.$Message.error(res.data.message);
       }
       // fromdata.append("param", JSON.stringify(param));
 

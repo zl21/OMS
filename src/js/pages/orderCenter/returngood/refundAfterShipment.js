@@ -1859,7 +1859,7 @@ export default {
       // 卖家备注数据补偿
       this.sellerRemarkCompensation();
       this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${$it('mT.j7')}${sellerRemarkData.SOURCE_CODE}${$it('mT.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${$it(
-        'modalTips.j9'
+        'tip.j9'
       )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${$it('mT.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${$it('mT.k1')}`;
       // 亲，您好！您的订单号
       // 因为
@@ -1925,7 +1925,7 @@ export default {
       // 卖家备注数据补偿
       this.sellerRemarkCompensation();
       this.reForm.config[index].item.props.value = `${sellerRemarkData.USER_NICK}-${sellerRemarkData.VIP_PHONE}${$it('mT.j7')}${sellerRemarkData.SOURCE_CODE}${$it('mT.j8')}${sellerRemarkData.OC_B_RETURN_TYPE_ENAME}${$it(
-        'modalTips.j9'
+        'tip.j9'
       )}${sellerRemarkData.AMT_RETURN_APPLY || 0}${$it('mT.k0')}${sellerRemarkData.PAY_MODE}${sellerRemarkData.BUYER_ALIPAY_NO}${$it('mT.k1')}`;
       // 亲，您好！您的订单号
       // 因为

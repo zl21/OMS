@@ -14,6 +14,11 @@ export default {
         verion: '1.3',
         isActive: true,
         isdisabled: false,
+        inputList: [
+          {
+            childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 4, valuedata: 2 }]
+          }
+        ],
         itemdata: {
           serviceId:'r3-cp',
           colid: 167606,
