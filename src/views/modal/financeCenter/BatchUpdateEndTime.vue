@@ -39,7 +39,6 @@ export default {
     },
   },
   data() {
-    const self = this;
     return {
       formConfig: {
         colSpan: 20,
