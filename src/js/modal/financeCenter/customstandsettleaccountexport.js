@@ -52,11 +52,11 @@
                 const self = this;
                 const param = {
                   id: self.$route.params.itemId,
+                  ids: this.idArray,
                 };
                 const formdata = new FormData();
                 formdata.append('param', JSON.stringify(param));
                 formdata.append('menu', 'o2o结算对账汇总主表');
-                formdata.append('ids', this.idArray);
                 const res = await self.service.financeCenter.settleAccountExport(
                   formdata,
                 );
