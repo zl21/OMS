@@ -39,14 +39,19 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: async () => {
               const route = this.$route.params;
-              console.log('route', route, this.$store.state)
               this.btnConfig.loading = true;
               const formConfig = this.$store.state[`S.${route.tableName}.${route.tableId}`].formItems.data;
-              // console.log('params', params);
-              
               const res = await this.service.financeCenter.batchAuditByQueryConditions(formConfig);
-              if (res.data.code === 0) {
+              if (res.data.data.code === 0) {
                 this.closeConfirm();
+                this.$Message.success('查询成功');
+              } else {
+                const message = res.data.data.message || '查询失败';
+                this.$message({
+                  message,
+                  type: 'error',
+                  duration: 5000,
+                });
               }
               this.btnConfig.loading = false;
             } // 按钮点击事件
@@ -67,7 +72,7 @@ export default {
 
 <style scoped>
   .custom-modal-confirm-body{
-    padding: 16px;
+    width: 350px;
   }
   .custom-modal-confirm-header{
     padding: 10px 20px 0;
