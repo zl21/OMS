@@ -51,7 +51,7 @@ class custUtils {
    */
   static msgTips(self, type, tips, tipsType = 1) {
     self.$Message[type]({
-      content: tipsType == 1 ? $i18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+      content: tipsType == 1 ? $i18n.t(`tip.${tips}`) : tips, // 请选择需要新增退单记录！
       duration: 5,
       top: 80,
     })

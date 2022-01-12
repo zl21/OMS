@@ -69,7 +69,7 @@ export default {
       errorDialogClass: "error", // 弹框类型
       warnDialogClass: "warning",
       // errorDialogTitle: '错误', // 弹框标题
-      errorDialogTitle: $i18n.t("modalTitle.error"), // 弹框标题
+      errorDialogTitle: $i18n.t("mT.error"), // 弹框标题
       errorData: [{ message: "" }], // 弹框内容
       errorDialogBack: false, // 是否有返回按钮
       /* 弹框部分 */
@@ -476,7 +476,7 @@ export default {
             }); // 把筛选的值放入数组
           } else {
             // 找到弹出提示已存在
-            this.$Message.warning($i18n.t("modalTips.go")); // message: '该记录已在已选中列表中'
+            this.$Message.warning($i18n.t("tip.go")); // message: '该记录已在已选中列表中'
           }
         }
         this.$refs.screen_ck.val_arr = []; // 清空选中的
@@ -498,7 +498,7 @@ export default {
           }); // 把筛选的值放入数组
         } else {
           // 找到提示已存在
-          this.$Message.warning($i18n.t("modalTips.go"));
+          this.$Message.warning($i18n.t("tip.go"));
           // this.$message({
           //   // message: '该记录已在已选中列表中',
           //   message: $i18n.t('tip.go'),
@@ -682,7 +682,7 @@ export default {
         this.errorData = [
           {
             // message: '模板名称不能为空'
-            message: $i18n.t("modalTips.gp"),
+            message: $i18n.t("tip.gp"),
           },
         ];
         this.errorDialog = true;
@@ -710,7 +710,7 @@ export default {
         }
         this.$message({
           // message: '保存成功',
-          message: $i18n.t("modalTips.z9"),
+          message: $i18n.t("tip.z9"),
           center: true,
           type: "success",
         });
@@ -733,7 +733,7 @@ export default {
       // 判断是否只能选中一条数据
       if (this.isOneData && this.r_result.length > 1) {
         // this.$message.warning('只能选取一条数据!');
-        this.$Message.warning($i18n.t("modalTips.q2"));
+        this.$Message.warning($i18n.t("tip.q2"));
         return;
       }
       if (true) {
@@ -748,7 +748,7 @@ export default {
             return;
           }
           if (response.ids.length > 8000) {
-            return this.$Message.warning($i18n.t("modalTips.q2"));
+            return this.$Message.warning($i18n.t("tip.q2"));
             // this.$message({
             //   // message: '查询数量已超过上限，请修改查询条件!',
             //   message: $i18n.t('tip.gq'),

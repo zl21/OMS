@@ -254,7 +254,7 @@
       <div class="fk-error-dialog-box">
         <div class="fk-error-dialog-title">
           <!-- 警告 -->
-          {{ vmI18n.t("modalTitle.warning") }}
+          {{ vmI18n.t("mT.warning") }}
           <span class="fk-error-icon">
             <i class="iconfont icon-cha1" @click="errorDialog = false" />
           </span>
