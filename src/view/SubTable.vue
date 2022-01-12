@@ -102,7 +102,7 @@ const SubTable = {
         self.showTable(res.data.datas ? res.data.datas : res.data.data);
       } else {
         // 数据加载失败
-        // console.log(self.vmI18n.t("modalTips.z3"));
+        // console.log(self.vmI18n.t("tip.z3"));
       }
     },
     showTable(obj) {

@@ -9,6 +9,7 @@
 <template>
   <div class="agTable">
     <arkCommonTableByAgGrid
+      v-if="agTableConfig.columnDefs.length"
       ref="agGrid"
       :rowHeight="agTableConfig.rowHeight"
       :height="agTableConfig.tableHeight"

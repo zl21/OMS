@@ -23,10 +23,10 @@
     >
       <p>
         <!-- 订单下载任务已经发送，任务ID： -->
-        {{ vmI18n.t("modalTips.bn") }}
+        {{ vmI18n.t("tip.bn") }}
         <span class="taskID" @click="taskIDClick">{{ taskId }}</span>
         <!-- ，请前往接口下载任务表查看下载进度！ -->
-        {{ vmI18n.t("modalTips.bo") }}
+        {{ vmI18n.t("tip.bo") }}
       </p>
     </Modal>
 
@@ -135,7 +135,7 @@ const DownLoad = {
     modalTitle() {
       let title = this.modalConfig[this.tableName].modalTitle
         ? this.modalConfig[this.tableName].modalTitle
-        : $i18n.t("modalTitle.orderDownload");
+        : $i18n.t("mT.orderDownload");
       return title;
     },
   },
