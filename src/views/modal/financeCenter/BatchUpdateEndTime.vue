@@ -78,6 +78,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: async () => {
               const { end_time } = this.formConfig.formValue;
+              console.log('this', this);
               if (!end_time) {
                 this.$Message.warning('请选择一个截止时间');
                 return;
@@ -90,6 +91,8 @@ export default {
               });
               if (res.data.data.code === 0) {
                 this.closeConfirm();
+                this.$Message.success('修改成功');
+                this.$parent.$parent.$parent.getQueryList();
               } else {
                 const message = res.data.data.message || '变更失败';
                 this.$message({

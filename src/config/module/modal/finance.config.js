@@ -24,7 +24,7 @@ export default {
   CUSTOMSETTLESTRATEGYIMPORT: {
     component: () => import('@/views/modal/financeCenter/customsettlestrategyimport.vue'),
   },
-  // O2O对账结算策略
+  // 批量修改截止时间
   BatchUpdateEndTime: {
     component: () => import('@/views/modal/financeCenter/BatchUpdateEndTime.vue'),
   },
