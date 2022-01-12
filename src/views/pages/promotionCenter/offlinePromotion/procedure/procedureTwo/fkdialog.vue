@@ -347,6 +347,7 @@
   // import ShowTableData from 'framework/components/views/custompage/ShowTableData.vue';
   // ../../views/custompage/ShowTableData.vue
   // import errorMessage from 'framework/components/tablelist/error.vue';
+  import request from './request'
 
   export default {
     props: {
@@ -582,7 +583,7 @@
       }, // 左边列表勾选变化时
       screen_request() {
         this.l_screenLoading = true;
-        $R3_CPS.utils.axios({
+        this.axios({
           url: '/p/cs/screenresult',
           method: 'post',
           data: {
@@ -614,7 +615,7 @@
       }, // 左边列表勾选变化获取数据
       screen_request_initialize() {
         this.l_screenLoading = true;
-        return $R3_CPS.utils.axios({
+        return this.axios({
           url: '/p/cs/screenresult',
           method: 'post',
           data: {
@@ -745,7 +746,7 @@
           return obj;
         });// 清空选中的
         this.l_screenLoading = true;
-        $R3_CPS.utils.axios({
+        this.axios({
           url: '/p/cs/screenresult',
           method: 'post',
           data: {
@@ -1014,7 +1015,7 @@
       }, // 右边列表的数据处理
       request_total() {
         this.request_param.GLOBAL = '';
-        $R3_CPS.utils.axios({
+        this.axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
           data: {
@@ -1034,7 +1035,7 @@
       right_dispose_request() {
         this.confirmLoading = true;
         this.r_screenLoading = true;
-        $R3_CPS.utils.axios({
+        this.axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
           data: {
@@ -1108,7 +1109,7 @@
         this.r_center_data.r_currentPage = 1;// 初始化当前页
         this.right_dispose();// 只有每次点击second时在处理数据
         this.r_screenLoading = true;
-        $R3_CPS.utils.axios({
+        this.axios({
           url: '/p/cs/screenresultcheck',
           method: 'post',
           data: {
@@ -1217,7 +1218,7 @@
           /!*condition: this.r_send_result//条件集合*!/
         })
       })); */
-        $R3_CPS.utils.axios({
+        this.axios({
           method: 'post',
           url: '/p/cs/setMultiQuery',
           data: {
@@ -1281,7 +1282,7 @@
         }
         if (true) {
           this.confirmLoading = true;
-          $R3_CPS.utils.axios({
+          this.axios({
             url: '/p/cs/screenresultcheck',
             method: 'post',
             data: {
@@ -1359,7 +1360,7 @@
         /* this.r_result_checked = this.rightList.map((obj) => {
         if(obj.checked)return obj.ID
       });//勾选选中的 */
-        $R3_CPS.utils.axios({
+        this.axios({
           url: '/p/cs/screen',
           method: 'post',
           data: {
@@ -1387,7 +1388,7 @@
         /* this.$nextTick(()=> {
           this.nodeCLose();//默认收拢
         }) */
-        });
+        }).finally(e => this.tree_loading = false);
         this.screen_request_initialize().then(() => {
           if (this.r_result.length !== 0) { // 先拿到配置的名字
             this.right_dispose();
@@ -1511,6 +1512,7 @@
     },
     created() {
       const _self = this;
+      _self.axios = request;
       this.t_dialog_show = this.fkshow;
       _self.ChineseDictionary = $ChineseDictionary;
     }

@@ -401,7 +401,7 @@
     components: {
       SelectDialog: popDialog,
       FkTable: fktable,
-      fkdialog ,
+      fkdialog,
       ImportDialog: importDialog,
       advancedSearch
     },
