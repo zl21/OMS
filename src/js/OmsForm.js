@@ -76,6 +76,9 @@ export default {
   },
   methods: {
     initRenderForm() {
+      if (!this.formConfig.flodClick) {
+        return
+      }
       const { setColnum = 4, setRow = 3 } = this.formConfig
       let showNum;
       if (this.formConfig.btn) {
