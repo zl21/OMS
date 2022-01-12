@@ -130,13 +130,15 @@
               if(i===0){
                 this.$set(dataTwo.scheme_arr[i],'checked',true)
                 //存储种类id保存草稿时需要
-                this.$store.state.customize.sch_type_id = dataTwo.basic_info.sch_type_id
+                // this.$store.state.customize.sch_type_id = dataTwo.basic_info.sch_type_id
+                this.$store.commit("customize/fnsch_type_id",dataTwo.basic_info.sch_type_id);
              
                 //end
                 if(routerid>0){
                   this.$store.state.customize.scheme_data=dataTwo.scheme_arr[i].scheme_struct
                 }else{//执行行得这个
-                  this.$store.state.customize.scheme_dataNew=dataTwo.scheme_arr[i].scheme_struct
+                  this.$store.commit("customize/setscheme_dataNew", dataTwo.scheme_arr[i].scheme_struct);
+                  // this.$store.state.customize.scheme_dataNew=dataTwo.scheme_arr[i].scheme_struct
                 }
             
               }
@@ -153,11 +155,9 @@
             this.$store.commit('customize/scheme_dataRecover' , JSON.parse(scheme_dataInit));
           
             //end
-            if(routerid>0){
-              this.$store.state.customize.dataTwo=dataTwo;
-            }else{
-              this.$store.state.customize.dataTwoNew=dataTwo
-            }
+            dataTwo.id = routerid
+            // this.$store.state.customize.dataTwoNew=dataTwo
+            this.$store.commit('customize/fndataTwo' , dataTwo);
            
             this.$emit('Mchange',{dataOne:this.dataOne,M_index:this.M_index})
 

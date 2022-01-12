@@ -452,7 +452,7 @@
           importDialogTitle: ''
         },
         modelList: [], // 模版列表
-        ChineseDictionary,
+        // ChineseDictionary,
         selectConfigChanged: {},
 
         mopDefaultValue: '',
