@@ -174,20 +174,20 @@
     </div>
     <!-- 修改备注 11-->
     <OmsDialog
-      :title="changeRemarkConfig.confirmTitle"
-      :title-align="changeRemarkConfig.titleAlign"
-      :width="changeRemarkConfig.width"
-      :scrollable="changeRemarkConfig.scrollable"
-      :closable="changeRemarkConfig.closable"
-      :draggable="changeRemarkConfig.draggable"
-      :mask="changeRemarkConfig.mask"
-      :mask-closable="changeRemarkConfig.maskClosable"
-      :transfer="changeRemarkConfig.transfer"
-      :name="changeRemarkConfig.name"
-      :url="changeRemarkConfig.url"
-      :keep-alive="changeRemarkConfig.keepAlive"
-      :exclude-string="changeRemarkConfig.excludeString"
-      :component-data="changeRemarkConfig.componentData"
+      :title="publicBouncedConfig.confirmTitle"
+      :title-align="publicBouncedConfig.titleAlign"
+      :width="publicBouncedConfig.width"
+      :scrollable="publicBouncedConfig.scrollable"
+      :closable="publicBouncedConfig.closable"
+      :draggable="publicBouncedConfig.draggable"
+      :mask="publicBouncedConfig.mask"
+      :mask-closable="publicBouncedConfig.maskClosable"
+      :transfer="publicBouncedConfig.transfer"
+      :name="publicBouncedConfig.name"
+      :url="publicBouncedConfig.url"
+      :keep-alive="publicBouncedConfig.keepAlive"
+      :exclude-string="publicBouncedConfig.excludeString"
+      :component-data="publicBouncedConfig.componentData"
     />
     <!-- 提示 -->
     <Modal
