@@ -45,6 +45,6 @@ export default {
   },
   // 接口平台-淘宝接口-SKU异常明细导出
   AbnormalSkuFilter: {
-    component: () => import('@/component/WarningModal/index.vue'),
+    component: () => import('@/views/modal/commodityCenter/AbnormalSkuFilter.vue'),
   },
 };

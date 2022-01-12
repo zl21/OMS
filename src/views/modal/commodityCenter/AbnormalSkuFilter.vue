@@ -1,8 +1,8 @@
 <template>
-  <div class="custom-modal-confirm-body">
+  <div class="custom-modal-confirm-wrapper">
     <div class="custom-modal-confirm-header">
       <i class="iconfont custom-modal-confirm-icon iconbj_doubt fcWarning "></i>
-      <div class="" style="border: none; resize: none; max-height: 200px; overflow: auto; width: 100%; color: rgb(102, 102, 102);">
+      <div class="custom-modal-confirm-body">
         当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？
       </div>
     </div>
@@ -37,15 +37,19 @@ export default {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             size: 'small', // 按钮大小
             disabled: false, // 按钮禁用控制
-            btnclick: () => {
+            btnclick: async () => {
               const route = this.$route.params;
-              console.log('route', route, this.$store.state)
               const formConfig = this.$store.state[`S.${route.tableName}.${route.tableId}`].formItems.data;
               const params = Object.assign(formConfig, {
                 tableName: route.tableName,
-              })
+              });
               console.log('params', params);
-              this.service.interfacePlatform.exportErrorSku(params);
+              const res = await this.service.interfacePlatform.exportErrorSku(params);
+              console.log('res', res);
+              if (res.data.code === 0) {
+                // this.$message.success('导出成功');
+                this.closeConfirm();
+              }
             } // 按钮点击事件
           }
         ]
@@ -57,21 +61,14 @@ export default {
       const _this = this;
       // 元数据配置窗口特殊处理
       _this.$parent.$parent.closeActionDialog();
-      // if (_this.configTableName.includes(_this.componentData.tableName)) {
-      //   _this.$parent.$emit('closeActionDialog');
-      // } else if (_this.$parent.$parent.closeConfirm) {
-      //   _this.$parent.$parent.closeConfirm();
-      // } else {
-      //   _this.$parent.$emit('closeActionDialog');
-      // }
     }
   },
 }
 </script>
 
 <style scoped>
-  .custom-modal-confirm-body{
-    padding: 16px;
+  .custom-modal-confirm-wrapper{
+    width: 350px;
   }
   .custom-modal-confirm-header{
     padding: 10px 20px 0;
@@ -83,5 +80,14 @@ export default {
     font-size: 28px;
     margin-right: 10px;
     display: inline-block;
+  }
+  .custom-modal-confirm-body {
+    border: none;
+    resize: none;
+    max-height: 200px;
+    overflow: auto;
+    width: 100%;
+    color: rgb(102, 102, 102);
+    line-height: 150%;
   }
 </style>
