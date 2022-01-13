@@ -12,6 +12,8 @@
 
 <script>
 import businessButton from 'professionalComponents/businessButton';
+import moment from 'moment';
+
 export default {
   components: {
     businessButton,
@@ -41,7 +43,16 @@ export default {
               const route = this.$route.params;
               this.btnConfig.loading = true;
               const formConfig = this.$store.state[`S.${route.tableName}.${route.tableId}`].formItems.data;
-              const res = await this.service.financeCenter.batchAuditByQueryConditions(formConfig);
+              console.log('formConfig', formConfig);
+              const startTime = formConfig.LAUNCH_DATE[0];
+              const endTime = formConfig.LAUNCH_DATE[1];
+              const params = {...formConfig};
+              if(startTime && endTime) {
+                Object.assign(params, {
+                  LAUNCH_DATE: [moment(startTime).format('YYYY-MM-DD'), moment(endTime).format('YYYY-MM-DD')]
+                })
+              };
+              const res = await this.service.financeCenter.batchAuditByQueryConditions(params);
               if (res.data.data.code === 0) {
                 this.closeConfirm();
                 this.$Message.success('查询成功');
