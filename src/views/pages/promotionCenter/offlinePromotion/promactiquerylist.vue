@@ -1607,7 +1607,7 @@ export default {
           // sq存储一套作为清空操作的初始数据
           const scheme_dataInit = JSON.stringify(res.data.data.scheme_arr);
           this.$store.commit(
-            "customize/jordanStore/scheme_dataRecover",
+            "customize/omsStore/scheme_dataRecover",
             JSON.parse(scheme_dataInit)
           );
           // 存储种类id保存草稿时需要

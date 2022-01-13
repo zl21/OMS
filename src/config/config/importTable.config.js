@@ -93,6 +93,16 @@ const importConfig = {
     downErrorInfo: true,
     isErr1Succ1: true
   },
+  OC_B_RETURN_AF_SEND_MANUAL__导入打款结果: {
+    // 额外退款单-导入打款结果
+    isAction: true,
+    tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
+    webname: '导入打款结果',
+    tempApi: '/api/cs/oc/oms/v1/downloadUpdateOcBReturnAfSendTemp',
+    okApi: '/api/cs/oc/oms/v1/batchUpdateOcBReturnAfSend',
+    downErrorInfo: true,
+    isErr1Succ1: true
+  },
   OC_B_REFUND_ORDER_EXTRA__EXTRA_IMPORT: {
     // 额外退款单-导入
     isAction: true,

@@ -1,5 +1,5 @@
 
-export const jordanStore = {
+export const omsStore = {
   namespaced: true,
   state: {
     platformStyle: '3',
@@ -14,4 +14,4 @@ export const jordanStore = {
     }
   },
 };
-export default jordanStore;
+export default omsStore;
