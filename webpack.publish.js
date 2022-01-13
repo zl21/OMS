@@ -70,6 +70,7 @@ module.exports = () => ({
       amd: 'vue-router',
       root: 'VueRouter'
     },
+    'element-ui': 'ELEMENT',
   },
   module: {
     exprContextCritical: false,
@@ -152,7 +153,8 @@ module.exports = () => ({
       burgeonConfig: path.resolve(__dirname, './src/config'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
       '@': path.resolve(__dirname, './src'),
-      assetsImg: path.resolve(__dirname, './src/assets/img')
+      assetsImg: path.resolve(__dirname, './src/assets/img'),
+      framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
     }
   },
   optimization: {

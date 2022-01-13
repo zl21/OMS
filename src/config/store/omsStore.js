@@ -3,7 +3,6 @@ export const omsStore = {
   namespaced: true,
   state: {
     platformStyle: '3',
-    sch_type_id: '',
     scheme_dataInit: [],
   },
   mutations: {

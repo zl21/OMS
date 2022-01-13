@@ -345,7 +345,7 @@ export default {
             } // 按钮点击事件
           },
           {
-            webname: 'fill_logistics', // 申请修改物流信息
+            // webname: 'fill_logistics', // 申请修改物流信息
             disabled: false,
             btnclick: () => {
               this.returnFillLogisticsFun()
