@@ -1,5 +1,5 @@
 // import R3 from '@syman/burgeon-r3';
-import jordanStore from './jordanStore'
+import omsStore from './omsStore'
 
 
 const { store, router, getKeepAliveModuleName } = R3;
@@ -371,7 +371,7 @@ export const globalStore = {
     }
   },
   modules: {
-    jordanStore
+    omsStore
   }
 };
 export default globalStore;

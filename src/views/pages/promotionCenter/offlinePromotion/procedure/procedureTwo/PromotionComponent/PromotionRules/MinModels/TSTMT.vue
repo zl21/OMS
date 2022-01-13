@@ -114,10 +114,10 @@ export default {
   },
   mounted(){
     this.Mitemdata2.itemdata.valuedata=this.value?JSON.stringify(this.value):""
-    this.$store.state.jordanStore.platformStyle = this.rule.proType?this.rule.proType:this.$store.state.jordanStore.platformStyle;
-    if(this.$store.state.jordanStore.platformStyle === '1'){
+    this.$store.state.omsStore.platformStyle = this.rule.proType?this.rule.proType:this.$store.state.omsStore.platformStyle;
+    if(this.$store.state.omsStore.platformStyle === '1'){
           this.Mitemdata2.itemdata.reftable = 'PS_C_PRO'
-        }else if(this.$store.state.jordanStore.platformStyle === '2'){
+        }else if(this.$store.state.omsStore.platformStyle === '2'){
           this.Mitemdata2.itemdata.reftable = 'PS_C_SKU'
         }else {
           this.Mitemdata2.itemdata.reftable = 'SG_B_CHANNEL_PRODUCT'
@@ -125,7 +125,7 @@ export default {
   },
   computed: {
     selectVal_store(){
-      return  this.$store.state.jordanStore.platformStyle
+      return  this.$store.state.omsStore.platformStyle
       
     }
   },
