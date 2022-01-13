@@ -401,7 +401,7 @@
     components: {
       SelectDialog: popDialog,
       FkTable: fktable,
-      fkdialog ,
+      fkdialog,
       ImportDialog: importDialog,
       advancedSearch
     },
@@ -452,7 +452,7 @@
           importDialogTitle: ''
         },
         modelList: [], // 模版列表
-        ChineseDictionary,
+        // ChineseDictionary,
         selectConfigChanged: {},
 
         mopDefaultValue: '',

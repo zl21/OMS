@@ -8,6 +8,8 @@ export const globalStore = {
   namespaced: true,
   state: {
     language: 'zh', // 国际化
+    platformStyle: "3",
+    sch_type_id: '',
     mainContentLoading: false,
     pwTips: false,
     activeTabAddr: [],
@@ -20,6 +22,10 @@ export const globalStore = {
       hiddenButton: true
     },
     excludedComponents: [], // 针对性缓存相应的组件
+    // 促销策略数据
+    dataTwoNew: {
+      scheme_arr: [],
+    },
     scheme_dataNew: {
       // 大类方案 商品活动(GA)，全场活动 (PA)
       program_code: 'GA',
@@ -95,6 +101,7 @@ export const globalStore = {
         }
       ]
     },
+    scheme_dataInit: [],
     shisuanid: "",
     // 促销二类名称和描述
     prom_type: {
@@ -133,9 +140,6 @@ export const globalStore = {
     VarTheme:'oms'
   },
   mutations: {
-    setshisuanid(state, n) {
-      state.shisuanid = n
-    },
     VarTheme(state, x){
       console.log('state, x:',state, x);
       state.VarTheme = x;
@@ -155,9 +159,47 @@ export const globalStore = {
     forginkeys(state, data) {
       state.forginkeys[data.key] = data.value;
     },
+    setshisuanid(state, n) {
+      state.shisuanid = n
+    },
+    scheme_Index(state, index) {
+      state.scheme_dataInit[index] = false;
+    },
+    setscheme_dataNew(state, n) {
+        state.scheme_dataNew = n
+    },
+    setscheme_data(state, n) {
+        state.scheme_data = n
+    },
+    setdataTwo(state, n) {
+        state.dataTwo = n
+    },
+    fnsch_type_id(state, n) {
+        state.sch_type_id = n;
+    },
+    scheme_dataRecover(state, n) {
+        state.scheme_dataInit = n;
+    },
+    fndataTwo(state, data) {
+      if (data.id > 0) {
+          state.dataTwo = data;
+      } else {
+          state.dataTwoNew = data;
+      }
+    },
+    fndataTwoNew2(state, data) {
+        state.dataTwoNew.basic_info.freq_value = data;
+    },
+    fndataTwo2(state, data) {
+        state.dataTwo.basic_info.freq_type = data;
+    },
     stateChange(state, data) {
       state = Object.assign(state, data);
     },
+    // 清空赋值dataTWO
+    clearType(state, n) {
+      state.dataTwoNew.scheme_arr = n;
+  },
     // 接收切换促销策略的值
     switchDetail(state, switchTo) {
       // 促销模块

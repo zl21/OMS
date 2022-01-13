@@ -380,7 +380,7 @@
 <script>
 import myData from "../../date/date";
 // import select from "framework/components/select/Mselect.vue";
-// import myInput from "./input";
+import myInput from "./input";
 import CombineModel from "./PromotionComponent/PromotionRules/CombineModel";
   export default {
     data() {
@@ -743,8 +743,9 @@ import CombineModel from "./PromotionComponent/PromotionRules/CombineModel";
       },
     },
     components: {
+      myInput,
       'v-select': $R3_CPS.components.Mselect,
-      myInput: $R3_CPS.components.input,
+      // myInput: $R3_CPS.components.input,
       myData,
       // FullReduction,
       CombineModel
