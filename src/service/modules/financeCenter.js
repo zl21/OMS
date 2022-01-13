@@ -40,4 +40,7 @@ export default {
   triggerAlipayBill: params => network.post(' /p/cs/ac/v1/triggerAlipayBill', params),
   // O2O轻供-店铺扣款登记表
   batchAuditByQueryConditions: params => network.post('/p/cs/ac/v1/batchAuditByQueryConditions', params),
+  // 批量修改截止时间
+  batchUpdateEndTime: params => network.post('/p/cs/ac/v1/batchUpdateEndTime', params),
+
 };

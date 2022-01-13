@@ -28,4 +28,8 @@ export default {
   BatchAuditByQueryConditions: {
     component: () => import('@/views/modal/financeCenter/BatchAuditByQueryConditions.vue'),
   },
+  // 批量修改截止时间
+  BatchUpdateEndTime: {
+    component: () => import('@/views/modal/financeCenter/BatchUpdateEndTime.vue'),
+  },
 };
