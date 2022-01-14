@@ -1304,6 +1304,7 @@ export default {
           } // 按钮点击事件
         },
         {
+          webname: 'isFavorite',
           icon: 'iconfont iconbj_col', // 收藏图标
           name: $it('btn.collection'),
           webname: 'isFavorite', // 必须写，用于匹配框架的收藏功能（作为key替换掉之前的中文判断）
