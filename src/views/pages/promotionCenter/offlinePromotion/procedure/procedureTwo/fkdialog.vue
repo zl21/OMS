@@ -41,6 +41,7 @@
           <tree
             v-loading.lock="tree_loading"
             :tree_lists="tree_lists"
+            :list="tree_lists"
             class="left-tree"
             @tree_change="tree_change"
           />
