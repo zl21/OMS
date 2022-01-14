@@ -40,7 +40,7 @@ export default {
       icon: "ios-arrow-down",
       hiddenButtons: ["reset", "search"], // 隐藏按钮的key
       hiddenIcon: false, // 是否隐藏收拉icon
-      isShowSelectBut: false,
+      isShowBtns: false, // 是否显示按钮组（查询、重置）
     };
   },
   computed: {
@@ -53,8 +53,8 @@ export default {
       handler(newName) {
         let inputNum = this.$parent.formArray.length;
         let isColumn = this.$parent.setdefaultColumn;
-        this.isShowSelectBut = (inputNum / isColumn) > newName ? true : false
-        if (inputNum % isColumn == 0 && (!this.isShowSelectBut)) {
+        this.isShowBtns = (inputNum / isColumn) > newName ? true : false
+        if (inputNum % isColumn == 0 && (!this.isShowBtns)) {
           $('#listForm').attr('style', 'padding-bottom: 32px !important')
         }
     　},

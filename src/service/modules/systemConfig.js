@@ -81,5 +81,6 @@ export default {
   // 保存 /p/cs/objectSave /p/cs/permission/v1/saveDataPermission
   objectSave: (url, params) => $network.post(url, params),
   // 复制权限 /p/cs/copyShopPermission
-  copyShopPermission: params => $network.post('/p/cs/copyShopPermission', params)
+  copyShopPermission: params => $network.post('/p/cs/copyShopPermission', params),
+  handleException: params => $network.post('/p/cs/handleException', params)
 };

@@ -89,6 +89,7 @@ export default {
   updateVirtualLibrary: params => $network.post('/api/cs/oc/oms/v1/updateVirtualLibrary', params), // 虚拟入库
   SelectLog: (params) => $network.post("/p/cs/selectlog", params),
   getOrderList: (params) => $network.post("/p/cs/getOrderList", params),
+  queryColorAndSize: (params) => $network.post("/p/cs/queryColorAndSize", params),
   extInfoQuery: (params) => $network.post("/p/cs/extInfoQuery", params),
   manualJdMatchingConfirmationButton: (params) =>
     $network.post("/p/cs/manualJdMatchingConfirmationButton", params),

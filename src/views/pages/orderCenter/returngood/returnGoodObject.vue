@@ -142,6 +142,11 @@
             v-show="labelDefaultValue === 4"
             :jordan-table-config="jordanTableConfig4"
           />
+          <!-- 物流轨迹 -->
+          <OrderItem
+            v-show="labelDefaultValue === 5"
+            :component-data="tab5"
+          />
         </div>
       </div>
       <div class="queryorderB">

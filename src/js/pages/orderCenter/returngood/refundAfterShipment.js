@@ -988,7 +988,7 @@ export default {
         ID:objid,
         isShowPii:true,
       }
-      let decryptData = await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata)
+      let decryptData = await this.service.orderCenter.getDetail(searchdata)
       if(decryptData.data.code === 0){
         _this.onSelectData.VIP_PHONE = decryptData.data.data.RECEIVER_MOBILE;
       }

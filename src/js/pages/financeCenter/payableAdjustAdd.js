@@ -1145,7 +1145,7 @@ export default {
           ID: dataByBillNo[0].ID,
           isShowPii: true,
         }
-        await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata).then(res => {
+        await this.service.orderCenter.getDetail(searchdata).then(res => {
           if (res.data.code === 0) {
             let resData = res.data.data;
             dataByBillNo[0].RECEIVER_NAME = resData.RECEIVER_NAME;
