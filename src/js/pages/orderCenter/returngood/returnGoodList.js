@@ -322,6 +322,7 @@ export default {
             btnclick: () => {
               const self = this;
               self.isShowSeniorOrOrdinary = true;
+              let publicDialogConfig = _.cloneDeep(DialogConfig.config())
               publicDialogConfig.dropSortConfig.confirmTitle = '查询条件设置'
               self.publicBouncedConfig = {
                 ...publicDialogConfig.dropSortConfig
@@ -335,6 +336,7 @@ export default {
             } // 按钮点击事件
           },
           {
+            webname: 'isFavorite',
             icon: 'iconfont iconbj_col', // 按钮图标
             size: 'small', // 按钮大小
             name: $it('btn.collection'), // 收藏
