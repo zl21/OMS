@@ -3,6 +3,7 @@ import buttonPermissionsMixin from '@/assets/js/mixins/buttonPermissions';
 import isFavoriteMixin from '@/assets/js/mixins/isFavorite';
 import BtnConfig from 'burgeonConfig/config/funBtn.config';
 import commonUtils from 'burgeonConfig/config/commonUtils';
+import DialogConfig from 'burgeonConfig/config/dialogs.config';
 
 const getCurrentTime = (() => {
   return $utils.Format(new Date(), 'yyyy-MM-dd 23:59:59');
@@ -47,7 +48,209 @@ export default {
         excludeString: 'importTable', // 将name传进去，确认不缓存
         componentData: {}
       },
-      btnConfig: BtnConfig.config(),
+      // btnConfig: BtnConfig.config(),
+      btnConfig: {
+        typeAll: 'default',
+        buttons: [
+          /* {
+            // text: "查找",
+            text: $it('btn.find'), // 按钮文本
+            webname: 'lookup_tuihuoruku',
+            btnclick: () => {
+              this.requestBefore();
+            }
+          }, */
+          {
+            // text: "新增",
+            text: $it('btn.add'), // 按钮文本
+            webname: 'Newlyadded_tuihuoruku',
+            btnclick: () => {
+              this.$store.commit('customize/TabHref', {
+                id: -1, // id
+                type: 'action', // 类型action
+                name: 'returnTreasuryAdd', // 文件名
+                // label: "退货入库新增", //tab中文名
+                label: $it('pL.returnTreasuryAdd'),
+                query: Object.assign({
+                  id: -1, // id
+                  // tabTitle: "退货入库新增", //tab中文名
+                  tabTitle: $it('pL.returnTreasuryAdd')
+                }) // 带的参数
+              });
+            }
+          },
+          {
+            // text: "手工匹配",
+            text: $it('btn.manual_matching'), // 按钮文本
+            webname: 'ManualMatching_tuihuoruku',
+            disabled: false,
+            btnclick: () => {
+              const self = this;
+              const ids = this.selection.map(item => item.ID);
+              if (ids.length === 0) {
+                // return this.$Message.error("请选择一条明细手工匹配");
+                this.$Message.error($it('tip.p4'));
+                return;
+              }
+              if (ids.length > 1) {
+                // return this.$Message.error("只能选择一条明细手工匹配");
+                this.$Message.error($it('tip.p5'));
+                return;
+              }
+              if (this.selection[0].IS_OFF_MATCH == 1) {
+                // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
+                this.$Message.error($it('tip.q6'));
+                return;
+              }
+              const id = ids[0];
+              // 需要验证是否能够进入手工匹配界面
+              this.service.orderCenter.manualMatchingCheck({id}).then(res => {
+                if (res.data.code === 0) {
+                  self.$store.commit('customize/TabHref', {
+                    id, // id
+                    type: 'action', // 类型action
+                    name: 'manualMatching', // 文件名
+                    // label: "退货入库-手工匹配", //tab中文名
+                    label: $it('pL.return_warehousing_manual_matching'),
+                    query: Object.assign({
+                      id, // id
+                      // tabTitle: "退货入库-手工匹配", //tab中文名
+                      tabTitle: $it('pL.return_warehousing_manual_matching'),
+                      source: 2,
+                      form: 'list'
+                    }) // 带的参数
+                  });
+                } else {
+                  // let mes = res.data.message || "状态不匹配不能进入手动匹配";
+                  // const mes = res.data.message || $it('tip.p6');
+                  // self.$Message.error(mes);
+                }
+              });
+            }
+          },
+          {
+            // text: "错发强制匹配",
+            text: $it('btn.wrong_sending_forced_matching'), // 按钮文本
+            webname: 'Mismatchingmandatorymatching_cuofa',
+            disabled: false,
+            btnclick: () => {
+              const self = this;
+              const ids = this.selection.map(item => item.ID);
+              if (ids.length === 0) {
+                // return this.$Message.error("请选择一条明细错发强制匹配");
+
+                this.$Message.error($it('tip.p7'));
+                return;
+              }
+              if (ids.length > 1) {
+                // return this.$Message.error("只能选择一条明细错发强制匹配");
+                this.$Message.error($it('tip.p8'));
+                return;
+              }
+              if (this.selection[0].IS_OFF_MATCH == 1) {
+                // return this.$Message.error("此退货入库单已经关闭匹配，不允许选择");
+                this.$Message.error($it('tip.q6'));
+                return;
+              }
+              const id = ids[0];
+              // 需要验证是否能够进入错发强制匹配界面
+              this.service.orderCenter.manualMatchingCheck({id}).then(res => {
+                if (res.data.code === 0) {
+                  self.$store.commit('customize/TabHref', {
+                    id, // id
+                    type: 'action', // 类型action
+                    name: 'WARNSENDMATCHING', // 文件名
+                    // label: "退货入库-错发强制匹配", //tab中文名
+                    label: $it('pL.return_warehousing_wrong_delivery_forced_matching'),
+                    query: Object.assign({
+                      id, //
+                      // tabTitle: "退货入库-错发强制匹配", //tab中文名
+                      tabTitle: $it('pL.return_warehousing_wrong_delivery_forced_matching'),
+                      source: 3,
+                      form: 'list'
+                    }) // 带的参数
+                  });
+                } else {
+                  // const mes = res.data.message || $it('tip.p9');
+                  // self.$Message.error(mes);
+                }
+              });
+            }
+          },
+          {
+            // =======================================================暂时影藏
+            // text: "作废",
+            text: $it('btn.void'), // 按钮文本
+            webname: '',
+            isShow: false,
+            btnclick: () => {
+              const ids = this.selection.map(item => item.ID);
+              if (ids.length === 0) {
+                // return this.$Message.error("未选择退货入库单,请选择一条数据后再操作！");
+                this.$Message.error($it('tip.o0'));
+                return;
+              }
+              this.service.orderCenter.returnCancel({ids}).then(res => {
+                if (res.data.code === 0) {
+                  const mes = res.data.message || $it('tip.q9');
+                  this.$Message.success(mes);
+                } else {
+                  // const mes = res.data.message || $it('tip.p0');
+                  // this.$Message.error(mes);
+                }
+              });
+            }
+          },
+          {
+            type: '', // 按钮类型
+            // text: "导入", //按钮文本
+            text: $it('btn.import'), // 按钮文本
+            webname: 'refundInImport',
+            disabled: false, // 按钮禁用控制
+            btnclick: () => {
+              const _this = this;
+              _this.importTable.componentData = {tableName: 'OC_B_REFUND_IN'};
+              _this.$children.find(item => item.name === 'importTable').openConfirm();
+            } // 按钮点击事件
+          },
+          {
+            // text: "导出", //按钮文本
+            text: $it('btn.export'), // 按钮文本
+            webname: 'export_tuihuoruku',
+            btnclick: () => {
+              this.exportClick();
+            } // 按钮点击事件
+          },
+          {
+            icon: 'iconfont iconbj_setup', // 按钮图标
+            btnclick: () => {
+              const self = this;
+              self.isShowSeniorOrOrdinary = true;
+              let publicDialogConfig = _.cloneDeep(DialogConfig.config())
+              publicDialogConfig.dropSortConfig.confirmTitle = '查询条件设置'
+              self.publicBouncedConfig = {
+                ...publicDialogConfig.dropSortConfig
+              };
+              self.publicBouncedConfig.componentData = {
+                typeName: 'OC_B_REFUND_IN'
+              };
+              setTimeout(() => {
+                self.$children.find(item => item.name === 'setFormDrag').openConfirm();
+              }, 100);
+            } // 按钮点击事件
+          },
+          {
+          webname: 'isFavorite',
+          icon: 'iconfont iconbj_col', // 按钮图标
+            // name: "收藏",
+            name: $it('btn.collection'), // 按钮文本
+            btnclick: () => {
+              const self = this;
+              self.setFavorite();
+            } // 按钮点击事件
+          }
+        ]
+      },
       formConfig: {
         btn: {
           buttons: [
@@ -56,7 +259,9 @@ export default {
               webname: 'lookup_tuihuanhuo',
               type: 'primary',
               disabled: false, // 按钮禁用控制
-              btnclick: () => {} // 按钮点击事件
+              btnclick: () => {
+                this.requestBefore();
+              } // 按钮点击事件
             },
             {
               text: $it('btn.reset'), // 重置
@@ -117,7 +322,7 @@ export default {
                               label: $it('pL.retailInvoice_details')
                             });
                           } else {
-                            this.$Message.warning(res.data.message);
+                            // this.$Message.warning(res.data.message);
                           }
                         });
                       }
@@ -189,18 +394,17 @@ export default {
                 transfer: true,
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.getList();
+                  _this.request();
                 }, // 表单回车事件
-                iconclick: () => { }, // 点击icon图标事件
+                iconclick: () => {
+                }, // 点击icon图标事件
                 clearable: true
               };
-              // item.tabth.name === '创建时间'
-              _this.formConfig.formValue[item.tabth.colname] = item.tabth.colname === "CREATETIME" ? [addSevenDay, getCurrentTime] : [];
+              _this.formConfig.formValue[item.tabth.colname] = item.tabth.name === '创建时间' ? [addSevenDay, getCurrentTime] : [];
               break;
             case 'propInput':
               formData[index] = {
                 style: 'popInputPlus', // 输入框弹框单多选
-                // style: item.tabth.isfilter ? 'popInput' : '', // 输入框弹框单多选
                 width: '6',
                 itemdata: {
                   col: 1,
@@ -223,8 +427,8 @@ export default {
                   scale: 0,
                   statsize: -1,
                   type: item.tabth.type, // 这个是后台用的
-                  verion: '1.3',
                   pid: '',
+                  verion: '1.4',
                   valuedata: '' // 这个是选择的值
                 },
                 oneObj: e => {
@@ -248,9 +452,10 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.getList();
+                  _this.request();
                 }, // 表单回车事件
-                iconclick: () => { } // 点击icon图标事件
+                iconclick: () => {
+                } // 点击icon图标事件
               };
               _this.formConfig.formValue[item.tabth.colname] = '';
               break;
@@ -266,9 +471,10 @@ export default {
                 placeholder: '', // 占位文本，默认为请输入
                 ghost: false, // 是否关闭幽灵按钮，默认开启
                 inputenter: () => {
-                  _this.getList();
+                  _this.request();
                 }, // 表单回车事件
-                iconclick: () => { } // 点击icon图标事件
+                iconclick: () => {
+                } // 点击icon图标事件
               };
               _this.formConfig.formValue[item.tabth.colname] = '';
               break;
@@ -280,14 +486,28 @@ export default {
                 clearable: true, // 是否显示下来清空按钮
                 value: item.tabth.colname, // 输入框的值
                 multiple: true, // 布尔值,下拉框是否开启多选,默认为不开启
-                selectChange: () => { }, // 选中事件，默认返回选中的值
+                selectChange: () => {
+                }, // 选中事件，默认返回选中的值
                 clearSelect: e => {
-                  let funArr = ['RETURN_STATUS', 'IS_ADD', 'IS_TOAG', 'IS_TOWMS', 'BILL_TYPE', 'IS_EXAMINE', 'IS_TODRP', 'IS_TRANSFER'];
-                  if (funArr.includes(e)) {
-                    _this.formConfig.formValue[e] = '';
+                  if (e == 'RETURN_STATUS') {
+                    _this.formConfig.formValue.RETURN_STATUS = '';
+                  } else if (e == 'IS_ADD') {
+                    _this.formConfig.formValue.IS_ADD = '';
+                  } else if (e == 'IS_TOAG') {
+                    _this.formConfig.formValue.IS_TOAG = '';
+                  } else if (e == 'IS_TOWMS') {
+                    _this.formConfig.formValue.IS_TOWMS = '';
+                  } else if (e == 'BILL_TYPE') {
+                    _this.formConfig.formValue.BILL_TYPE = '';
+                  } else if (e == 'IS_EXAMINE') {
+                    _this.formConfig.formValue.IS_EXAMINE = '';
+                  } else if (e == 'IS_TODRP') {
+                    _this.formConfig.formValue.IS_TODRP = '';
+                  } else if (e == 'IS_TRANSFER') {
+                    _this.formConfig.formValue.IS_TRANSFER = '';
                   }
                 }, // 点击清空按钮回调
-                options: commonUtils.converSelect(item.tabth.combobox)
+                options: _this.converSelect(item.tabth.combobox)
               };
               _this.formConfig.formValue[item.tabth.colname] = [];
               break;
@@ -302,10 +522,25 @@ export default {
           delete item.key;
           delete item.title;
         });
-        _this.agTableConfig.columnDefs = res.data.data.columns;
+        const columns = res.data.data.columns || []
+        const columnDefs = [
+          /* {
+            headerName: "序号",
+            width: 90,
+            field: "index",
+            checkboxSelection: true,
+            pinned: 'left',
+            headerClass: '',
+            thAlign: 'left',
+            tdAlign: 'left',
+            cellStyle: {color: 'rgb(15, 142, 233)'},
+          }, */
+          ...columns
+        ]
+        _this.agTableConfig.columnDefs = columnDefs;
         _this.isShowFromLoading = false;
         setTimeout(() => {
-          _this.getList();
+          _this.request();
         }, 100);
       });
     },
@@ -327,12 +562,20 @@ export default {
         }
       });
     },
+    // 字段选项组转换
+    converSelect(val) {
+      const list = [];
+      val.forEach(item => {
+        list.push({label: item.limitdesc, value: item.limitval});
+      });
+      return list;
+    },
     parentClass() {
       return '';
     },
-    find() {
+    requestBefore() {
       this.agTableConfig.pagenation.current = 1;
-      this.getList();
+      this.request();
     },
     requestParams() {
       const params = {
@@ -358,19 +601,17 @@ export default {
       });
       const CREATETIME = this.formConfig.formValue.CREATETIME;
       if (CREATETIME && CREATETIME !== []) {
-        console.log(CREATETIME[0]);
         if (CREATETIME[0] !== '') {
-          params.beginDate = CREATETIME[0] ? $utils.Format(CREATETIME[0], 'yyyy-MM-dd hh:mm:ss') : '';
+          params.beginDate = CREATETIME[0] ? $utils.Format(new Date(CREATETIME[0]), 'yyyy-MM-dd hh:mm:ss') : '';
         }
         if (CREATETIME[1] !== '') {
-          params.endDate = CREATETIME[1] ? $utils.Format(CREATETIME[1], 'yyyy-MM-dd hh:mm:ss') : '';
+          params.endDate = CREATETIME[1] ? $utils.Format(new Date(CREATETIME[1]), 'yyyy-MM-dd hh:mm:ss') : '';
         }
       }
       return params;
     },
-    getList() {
+    request() {
       const self = this;
-      // const {customizedModuleName}=this.$router.currentRoute.params;
       self.selection = [];
       self.agTableConfig.agLoading = true;
       const params = this.requestParams();
@@ -383,6 +624,9 @@ export default {
         // self.$refs.agGridChild.agGridTable(self.agTableConfig.columnDefs, self.agTableConfig.rowData);
         // }
       });
+    },
+    onSelectionChange(e) {
+      this.selection = e;
     },
     // 单击某二行时触发
     onRowDblclick(row) {
@@ -403,19 +647,15 @@ export default {
     // 分页change 事件
     pageChange(val) {
       this.agTableConfig.pagenation.current = val;
-      this.getList();
+      this.request();
     },
     // 切换分页条数
     pageSizeChange(val) {
       this.agTableConfig.pagenation.pageSize = val;
-      this.getList();
+      this.request();
     },
     exportClick() {
       const self = this;
-      if (!self.vueAgTable) {
-        self.selection = self.$refs.agGridChild.AGTABLE.getSelect();
-      }
-      console.log(self.selection);
       if (self.selection.length) {
         // if (this.isExport) return this.$Message.error("有一项导出正在进行中");
         if (this.isExport) {
@@ -428,21 +668,21 @@ export default {
           ids.push(self.selection[i].ID);
         }
         const fromdata = new FormData();
-        const idList = { idList: ids };
+        const idList = {idList: ids};
         fromdata.append('param', JSON.stringify(idList));
         this.service.orderCenter.exportOcBRefundIn(idList).then(res => {
           self.isExport = false;
           if (res.data.code == 0 && res.data.data !== null) {
             const mes = res.data.message || $it('tip.z2');
             self.$Message.success(mes);
-            $utils.downloadUrlFile(res.data.data);
+            publicMethodsUtil.downloadUrlFile(res.data.data);
           } else {
             const err = res.data.message || $it('tip.z3');
             self.$Message.error(err);
           }
         });
       } else {
-        if (self.agTableConfig.rowData.length === 0) {
+        if (self.tableConfig.data.length === 0) {
           self.$Message.error($it('tip.z4'));
           return;
         }
@@ -468,13 +708,13 @@ export default {
           const mes = res.data.message || $it('tip.z2');
           self.$Message.success(mes);
           // return (window.location = res.data.data);
-          $utils.downloadUrlFile(res.data.data);
+          publicMethodsUtil.downloadUrlFile(res.data.data);
         } else {
           // let err = res.data.message || "失败！";
-          const err = res.data.message || $it('tip.z3');
-          self.$Message.error(err);
+          // const err = res.data.message || $it('tip.z3');
+          // self.$Message.error(err);
         }
       });
-    }
+    },
   }
 };

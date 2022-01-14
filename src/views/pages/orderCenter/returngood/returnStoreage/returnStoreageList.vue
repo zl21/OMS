@@ -16,6 +16,7 @@
         @on-page-change="pageChange"
         @on-page-size-change="pageSizeChange"
         @on-row-dblclick="onRowDblclick"
+        @on-selection-change="onSelectionChange"
       />
     </div>
     <!-- 修改from表单 -->
