@@ -1012,7 +1012,7 @@ export default {
         ID: objid,
         isShowPii: true,
       }
-      let decryptData = await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata)
+      let decryptData = await this.service.orderCenter.getDetail(searchdata)
       if (decryptData.data.code === 0) {
         _this.onSelectData.VIP_PHONE = decryptData.data.data.RECEIVER_MOBILE;
       }
@@ -1477,7 +1477,7 @@ export default {
             isShowPii: true,
           }
           let decryptData = {};
-          await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata).then(res => {
+          await this.service.orderCenter.getDetail(searchdata).then(res => {
             if (res.data.code === 0) {
               let resData = res.data.data;
               decryptData.RECEIVER_MOBILE = resData.RECEIVER_MOBILE;

@@ -1013,6 +1013,11 @@ export default {
           value: '4',
           isShow: true,
         },
+        {
+          label: '物流轨迹', // 物流轨迹
+          value: '5',
+          isShow: true
+        }
       ],
       jordanTableConfig: {
         businessFormConfig: {}, // 表单配置
@@ -1094,6 +1099,10 @@ export default {
       tab2: {
         tablename: '',
         objid: '',
+      },
+      tab5: {
+        tablename: '',
+        objid: ''
       },
       loading: false, // 控制多次调用事件
       warehouseId: '', // 发货仓库id暂存
@@ -3117,6 +3126,13 @@ export default {
         this.getDataAccess('OC_B_RETURN_ORDER', res => {
           this.jordanTableConfig4.columns = this.setTablePermissions(this.jordanTableConfig4.columns, res);
         });
+      } else if (index === 4) {
+        _this.labelDefaultValue = 5;
+        _this.tab5 = {
+          tablename: 'ORDER_LOGISTICS_TRAJECTORY_RETURN',
+          objid: this.$route.query.id
+        };
+        // _this.returnSelectData = [];
       }
     },
     // 保存
@@ -4052,7 +4068,7 @@ export default {
         isShowPii: true,
       }
       let decryptData = {};
-      await this.$network.post('/api/cs/oc/oms/v1/getDetail', searchdata).then(res => {
+      await this.service.orderCenter.getDetail(searchdata).then(res => {
         if (res.data.code === 0) {
           let resData = res.data.data;
           this.shopId = resData.CP_C_SHOP_ID;
@@ -4463,10 +4479,10 @@ export default {
           sizeId
         };
       }
-      let url = (sizeId && clrId) ? '/p/cs/extInfoQuery' : '/p/cs/queryColorAndSize';
+      let type = (sizeId && clrId) ? 'extInfoQuery' : 'queryColorAndSize'
       const formdata = new FormData();
       formdata.append('param', JSON.stringify(param));
-      await this.$network.post(url, formdata).then(res => {
+      await this.service.common[type](formdata).then(res => {
         let resData = res.data.data;
         if (dataType === 1) {
           if (this.labelDefaultValue === 1) {

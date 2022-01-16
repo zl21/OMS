@@ -112,6 +112,15 @@ const importConfig = {
     okApi: '/p/cs/oc/oms/v1/refundExtra/import',
     downErrorInfo: true,
   },
+  OC_B_RETURN_AF_SEND_MANUAL__自定义导入: {
+    // 额外退款单-导入
+    isAction: true,
+    tableName: 'OC_B_RETURN_AF_SEND_MANUAL',
+    webname: '自定义导入',
+    tempApi: '/api/cs/oc/oms/v1/downloadReturnAfSendTemp',
+    okApi: '/api/cs/oc/oms/v1/importReturnAfSend',
+    downErrorInfo: true,
+  },
   CP_C_PHY_WAREHOUSE__warehouseImport: {
     isAction: true,
     tableName: 'CP_C_PHY_WAREHOUSE',

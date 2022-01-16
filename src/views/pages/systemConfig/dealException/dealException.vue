@@ -125,7 +125,7 @@ export default {
       const params = this.$urlSearchParams({
         param: data
       })
-      this.$network.post('/p/cs/handleException', params).then(res => {
+      this.service.systemConfig.handleException(params).then(res => {
         if(res.data.code === 0){
             this.$message({
               type: "success",

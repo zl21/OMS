@@ -188,20 +188,21 @@ export default {  //
     ), // 分仓策略-启用停用 详情页单对象
 
   querySchedule: (params) =>
-    $network.post('/p/cs/st/v1/ListStCVipcomProjectAndItems', params), // 档期日程规划-查询
+    $network.post('/p/cs/ListStCVipcomProjectAndItems', params), // 档期日程规划-查询
   wphScheduleSave: (params) =>
-    $network.post('/p/cs/st/v1/saveOrUpdateStCVipcomProject', params), // 档期日程规划-主表保存
-  pickSave: (params) =>
-    $network.post('/p/cs/st/v1/saveOrUpdateStCVipcomProjectPickItem', params), // 拣货单-保存
-  pickDelete: (params) =>
-    $network.post('/p/cs/st/v1/deleteStCVipcomProjectPickItem', params), // 拣货单-删除
-  warehouseInSave: (params) =>
-    $network.post(
-      '/p/cs/st/v1/saveOrUpdateStCVipcomProjectStockInItem',
-      params
-    ), // 入库单-保存
+    $network.post('/p/cs/saveOrUpdateStCVipcomProject', params), // 档期日程规划-主表保存
+  // pickSave: (params) => $network.post('/p/cs/st/v1/saveOrUpdateStCVipcomProjectPickItem', params), // 拣货单-保存
+  pickSave: (params) => 
+    $network.post('/p/cs/saveOrUpdateProjectPickorderItem', params), // 拣货单-保存
+  // pickDelete: (params) => $network.post('/p/cs/st/v1/deleteStCVipcomProjectPickItem', params), // 拣货单-删除
+  pickDelete: (params) => 
+    $network.post('/p/cs/delProjectPickorderItem', params), // 拣货单-删除
+  // warehouseInSave: (params) => $network.post('/p/cs/st/v1/saveOrUpdateStCVipcomProjectStockInItem', params), // 入库单-保存
+  warehouseInSave: (params) => 
+    $network.post( '/p/cs/saveOrUpdateProjectWarehouseEntryItem', params), // 入库单-保存
+  // warehouseInDelete: (params) => $network.post('/p/cs/st/v1/deleteStCVipcomProjectStockInItem', params), // 入库单-删除
   warehouseInDelete: (params) =>
-    $network.post('/p/cs/st/v1/deleteStCVipcomProjectStockInItem', params), // 入库单-删除
+    $network.post('/p/cs/delProjectWarehouseEntryItem', params), // 入库单-删除
   carrierDropList: (params) =>
     $network.post('/p/cs/st/v1/carrierDropList', params), // 承运商
   getScheduleTree: (params) =>

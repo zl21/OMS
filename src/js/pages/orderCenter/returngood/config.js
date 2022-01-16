@@ -22,6 +22,18 @@ export const OC_B_ORDER = {
       startindex: 0
     }
   },
+  ORDER_LOGISTICS_TRAJECTORY_RETURN: { // 物流轨迹
+    table: 'ORDER_LOGISTICS_TRAJECTORY_RETURN',
+    objid: 850869, // 表id
+    refcolid: 1700836170,
+    searchdata: {
+      column_include_uicontroller: true,
+      orderby: [{ column: 'ORDER_LOGISTICS_TRAJECTORY_RETURN.ID', asc: false }],
+      range: 10,
+      fixedcolumns: {},
+      startindex: 0
+    }
+  },
   OC_B_REFUND_IN: { // 退货入库日志
     table: 'OC_B_REFUND_IN_LOG',
     objid: 11192, // 表id
