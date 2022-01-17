@@ -1,7 +1,7 @@
 <template>
-  <div style="width:400px;padding-right:20px">
+  <div class="cus-modal" style="width:400px;">
     <OmsForm :form-config="pickorderFromConfig" />
-    <OmsButton :btn-config="pickorderBtnConfig" />
+    <OmsButton class="modal-footer" :btn-config="pickorderBtnConfig" />
   </div>
 </template>
 
