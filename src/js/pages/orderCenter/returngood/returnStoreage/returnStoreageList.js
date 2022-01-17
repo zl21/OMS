@@ -209,7 +209,7 @@ export default {
             disabled: false, // 按钮禁用控制
             btnclick: () => {
               const _this = this;
-              _this.importTable.componentData = {tableName: 'OC_B_REFUND_IN'};
+              _this.importTable.componentData = {tableName: 'OC_B_REFUND_IN', webname: 'refundInImport'};
               _this.$children.find(item => item.name === 'importTable').openConfirm();
             } // 按钮点击事件
           },
@@ -682,7 +682,7 @@ export default {
           }
         });
       } else {
-        if (self.tableConfig.data.length === 0) {
+        if (self.agTableConfig.rowData.length === 0) {
           self.$Message.error($it('tip.z4'));
           return;
         }

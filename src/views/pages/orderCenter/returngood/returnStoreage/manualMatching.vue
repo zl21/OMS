@@ -1,70 +1,72 @@
 <!-- 退货入库手工匹配 && 错发强制匹配 -->
 <template>
-  <div class="returnTreasury" v-loading="loading">
-    <!--按钮块-->
-    <div style="margin-top: 8px;">
+  <div class="returnTreasury customized-detail" v-loading="loading">
+    <div class="obj-btn">
       <OmsButton :btn-config="btnConfig" />
     </div>
-    <!-- form表单 -->
-    <div class="TreasuryDefault">
-      <Collapse v-model="openDefault">
-        <Panel name="1">
-          <!-- 基本信息 -->
-          {{ $it("com.baseInformation") }}
-          <p slot="content">
-            <OmsForm
-              :form-config="information"
-              @oneObjs="oneObjs"
-            />
-          </p>
-        </Panel>
-      </Collapse>
-    </div>
-    <div class="salesTable">
-      <!-- tab切换 -->
-      <OmsLabel
-        class="businessLabel"
-        :label-list="labelList"
-        :label-default-value="DefaultValue"
-        @labelClick="labelClick"
-      />
-      <!-- 列表组件 -->
-      <div class="tableBox">
-        <OmsTable
-          v-if="labelDefaultValue"
-          :jordan-table-config="jordanTableConfig"
-          @on-select="returnOnSelect"
-          @on-select-cancel="returnCancel"
-          @on-select-all="onSelectAll"
-          @on-select-all-cancel="onSelectAllCancel"
+    <div class="obj-main">
+
+      <!-- form表单 -->
+      <div class="TreasuryDefault">
+        <Collapse v-model="openDefault">
+          <Panel name="1">
+            <!-- 基本信息 -->
+            {{ $it("com.baseInformation") }}
+            <p slot="content">
+              <OmsForm
+                :form-config="information"
+                @oneObjs="oneObjs"
+              />
+            </p>
+          </Panel>
+        </Collapse>
+      </div>
+      <div class="obj-table">
+        <!-- tab切换 -->
+        <OmsLabel
+          :label-list="labelList"
+          :label-default-value="DefaultValue"
+          @labelClick="labelClick"
         />
-        <OrderItem
-          v-if="!labelDefaultValue"
-          :component-data="tab2"
-        />
+        <!-- 列表组件 -->
+        <div class="subtablePart">
+          <OmsTable
+            v-if="labelDefaultValue"
+            :jordan-table-config="jordanTableConfig"
+            @on-select="returnOnSelect"
+            @on-select-cancel="returnCancel"
+            @on-select-all="onSelectAll"
+            @on-select-all-cancel="onSelectAllCancel"
+          />
+          <OrderItem
+            v-if="!labelDefaultValue"
+            :component-data="tab2"
+          />
+        </div>
+      </div>
+      <div class="queryorder">
+        <Modal
+          v-model="order.modal"
+          class="queryorder"
+          :title="'退换货订单明细'"
+          @on-ok="queryorder"
+          @on-cancel="querycancel"
+        >
+          <div class="orderContent">
+            <OmsForm :form-config="order.orderform" />
+            <OmsButton :btn-config="order.btn" />
+          </div>
+          <OmsTable
+            :jordan-table-config="order.table"
+            @on-select="onquerySelect"
+            @on-select-cancel="onqueryCancel"
+            @on-select-all="onqueryAll"
+            @on-select-all-cancel="onqueryAllCancel"
+          />
+        </Modal>
       </div>
     </div>
-    <div class="queryorder">
-      <Modal
-        v-model="order.modal"
-        class="queryorder"
-        :title="'退换货订单明细'"
-        @on-ok="queryorder"
-        @on-cancel="querycancel"
-      >
-        <div class="orderContent">
-          <OmsForm :form-config="order.orderform" />
-          <OmsButton :btn-config="order.btn" />
-        </div>
-        <OmsTable
-          :jordan-table-config="order.table"
-          @on-select="onquerySelect"
-          @on-select-cancel="onqueryCancel"
-          @on-select-all="onqueryAll"
-          @on-select-all-cancel="onqueryAllCancel"
-        />
-      </Modal>
-    </div>
+
     <!-- 退单编号-->
     <OmsDialog
       :title="returnNumber.confirmTitle"

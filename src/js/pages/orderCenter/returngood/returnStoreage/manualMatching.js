@@ -137,6 +137,7 @@ export default {
       onSelectData: [], // 选中的原始订单编号
       btnConfig: {
         typeAll: 'default', // 按钮统一风格样式
+        btnsite: 'right',
         buttons: [
           {
             text: $it('btn.save'), // 保存 按钮文本
