@@ -8,20 +8,23 @@
     },
     props: {
       objList: {
-        type: Array
+        type: Array,
+        defalut: () => [],
       },
-      idArr: {
-        type: Array
+      idArray: {
+        type: Array,
+        defalut: () => [],
       },
       webid: {
-        type: Number
+        type: Number,
       },
       tablename: {
-        type: String
+        type: String,
       },
-      rowData: {
-        type: Array
-      }
+      selectRowData: {
+        type: Array,
+        defalut: () => [],
+      },
     },
     data() {
       return {
@@ -49,10 +52,11 @@
                 const self = this;
                 const param = {
                   id: self.$route.params.itemId,
+                  ids: this.idArray,
                 };
                 const formdata = new FormData();
                 formdata.append('param', JSON.stringify(param));
-                formdata.append('menu', 'o2o结算对账汇总主表',);
+                formdata.append('menu', 'o2o结算对账汇总主表');
                 const res = await self.service.financeCenter.settleAccountExport(
                   formdata,
                 );
