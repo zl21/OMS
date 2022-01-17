@@ -1,6 +1,6 @@
 <template>
   <div
-    class="semiCustomModal"
+    class="semiCustomModal cus-modal"
     style="width: 400px;"
   >
     <!-- <div class="Modal-Form">
@@ -28,7 +28,7 @@
       </div>
     </div> -->
     <OmsForm :form-config="formConfig" />
-    <OmsButton :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 <script>

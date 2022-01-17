@@ -290,7 +290,8 @@ export default {
     $network.post('/api/cs/oc/oms/v1/saveQueryListConfig', params),
   queryListConfig: (params) =>
     $network.post('/api/cs/oc/oms/v1/queryListConfig', params),
-  downloadPick: (params) => $network.post('/p/cs/vip/v2/pick/download', params), // JIT拣货单 (创建拣货单)
+  // downloadPick: (params) => $network.post('/p/cs/vip/v2/pick/download', params), // JIT拣货单 (创建拣货单)
+  downloadPick: params => $network.post('/api/cs/vip/pick/v1/downloadPick', params), // JIT拣货单 (创建拣货单)
   // JIT配货单(手工占单)
   distributionOccupy: (params) =>
     $network.post('/api/cs/vip/distribution/v1/distributionOccupy', params),

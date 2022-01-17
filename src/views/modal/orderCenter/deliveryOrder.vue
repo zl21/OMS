@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="semiCustomModal" 
+    class="semiCustomModal cus-modal" 
     style="width: 400px;"
   >
     <!-- 唯品会入库单 -->
@@ -25,7 +25,7 @@
       </div>
     </div>
     
-    <OmsButton :btn-config="btnConfig" />
+    <OmsButton class="modal-footer" :btn-config="btnConfig" />
   </div>
 </template>
 
