@@ -48,7 +48,7 @@ export default {
             ],
           },
           {
-            version: '1.3',
+            // version: '1.3',
             style: 'popInput', // 输入框弹框单多选
             width: '24',
             inputList: [{
@@ -60,7 +60,7 @@ export default {
             }, ],
             itemdata: {
               col: 1,
-              colid: 168567,
+              colid: 169640,
               colname: 'CP_C_SHOP_ID', // 当前字段的名称
               /* refcolval: {
                 fixcolumn: 'CP_C_PLATFORM_ID',
@@ -181,13 +181,13 @@ export default {
       };
       fromdata.append('param', JSON.stringify(param));
       this.service.orderCenter.downloadPick(fromdata).then(res => {
-        if (res.data.code === 0) {
+        if (res.data.data.code === 0) {
           self.$Message.success(res.data.message);
           self.$emit('confirmImport');
           self.$emit('closeActionDialog');
         } else {
-          self.$Message.error(res.data.message);
-          self.$emit('uploadError', res.data.data);
+          self.$Message.error(res.data.data.message);
+          self.$emit('uploadError', res.data.data.data);
           self.$emit('closeActionDialog');
         }
       });

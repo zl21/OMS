@@ -153,6 +153,7 @@ export default {
         // }
       },
       checkRes: {},
+      IS_OUTWAREHOUSE_ALONE: null,
     }
   },
   mounted() {
@@ -169,7 +170,8 @@ export default {
       Object.assign(obj1, this.checkRes);
       const obj = {
         ids: this.idArray,
-        ST_C_VIPCOM_PROJECT_WAREHOUSE_ENTRY_ITEM: obj1
+        ST_C_VIPCOM_PROJECT_WAREHOUSE_ENTRY_ITEM: obj1,
+        IS_OUTWAREHOUSE_ALONE: this.IS_OUTWAREHOUSE_ALONE
       };
       formdata.append('param', JSON.stringify(obj));
       this.service.orderCenter.distributionCreateDelivery(formdata)
@@ -197,31 +199,45 @@ export default {
           // this.transportStyle.value = def.DELIVERY_METHOD;
           // this.defaultSelected = [{ ID: def.ID, Label: def.ENAME }];
           // this.selectData = this.defaultSelected;
-          this.btnConfig.buttons.push({
-            type: 'primary', // 按钮类型
-            text: $it('com.determine'), // 确定
-            icon: '', // 按钮图标
-            size: 'small', // 按钮大小
-            disabled: false, // 按钮禁用控制
-            btnclick: () => {
-              this.determine();
-            }, // 按钮点击事件
-          });
-          // this.list = JSON.parse(JSON.stringify(res.data.data));
-          // this.datas.row = this.getData(res.data.data);
-          let data = JSON.parse(JSON.stringify(res.data.data));
-          this.checkRes = data;
-          // let data = result.ST_C_VIPCOM_PROJECT_WAREHOUSE_ENTRY_ITEM[0]
-          this.intersectFormValue(this.formConfig.formValue, data);
-          this.formConfig.formValue.IS_AIR_EMBARGO = data.IS_AIR_EMBARGO
-          this.formConfig.formValue.IS_AIR_EMBARGO_TEXT = data.IS_AIR_EMBARGO != 0 ? '是' : '否'
-          this.formConfig.formData[0].itemdata.pid = data.CP_C_PHY_WAREHOUSE_ID
-          this.formConfig.formData[0].itemdata.valuedata = data.CP_C_PHY_WAREHOUSE_ENAME
+          this.setResult(res);
+        } else if (res.data.code === -2) {
+          this.$Modal.warning({
+            title: '提示',
+            titleAlign: 'center',
+            content: res.data.message,
+            showCancel: true,
+            mask: true,
+            onOk: () => this.setResult(res),
+            onCancel: () => this.$emit('closeActionDialog')
+          })
         } else {
-          // this.isError = true;
-          // this.$Message.error(res.data.message);
-        }
+          this.$emit('closeActionDialog')
+        };
       });
+    },
+    setResult(res) {
+      this.btnConfig.buttons.push({
+        type: 'primary', // 按钮类型
+        text: $it('com.determine'), // 确定
+        icon: '', // 按钮图标
+        size: 'small', // 按钮大小
+        disabled: false, // 按钮禁用控制
+        btnclick: () => {
+          this.determine();
+        }, // 按钮点击事件
+      });
+      // this.list = JSON.parse(JSON.stringify(res.data.data));
+      // this.datas.row = this.getData(res.data.data);
+      const { ST_C_VIPCOM_PROJECT_WAREHOUSE_ENTRY_ITEM, IS_OUTWAREHOUSE_ALONE } = res.data.data;
+      let data = JSON.parse(JSON.stringify(ST_C_VIPCOM_PROJECT_WAREHOUSE_ENTRY_ITEM));
+      this.checkRes = data;
+      this.IS_OUTWAREHOUSE_ALONE = IS_OUTWAREHOUSE_ALONE
+      // let data = result.ST_C_VIPCOM_PROJECT_WAREHOUSE_ENTRY_ITEM[0]
+      this.intersectFormValue(this.formConfig.formValue, data);
+      this.formConfig.formValue.IS_AIR_EMBARGO = data.IS_AIR_EMBARGO
+      this.formConfig.formValue.IS_AIR_EMBARGO_TEXT = data.IS_AIR_EMBARGO != 0 ? '是' : '否'
+      this.formConfig.formData[0].itemdata.pid = data.CP_C_PHY_WAREHOUSE_ID
+      this.formConfig.formData[0].itemdata.valuedata = data.CP_C_PHY_WAREHOUSE_ENAME
     },
   }
 };
