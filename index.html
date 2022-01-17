@@ -66,15 +66,15 @@
           },
           destroyed() {
             // 判断是否是生产环境
-            var isProd = window.location.host.indexOf('r3.ecsemir.com');
-            var backUrl = encodeURI(window.location.href);
+            // var isProd = window.location.host.indexOf('r3.ecsemir.com');
+            // var backUrl = encodeURI(window.location.href);
             var isLogin = window.localStorage.getItem('loginStatus');
             // 此方法用于判断是否需要将登录页面重定向至iam系统
             axios.get('/p/c/getIamConf').then(res => {
               console.log('res', res);
               var data = res.data;
               if (!data.code && data.data['iam.login.enable']) {
-                window.location.href = data.data['iam.login.url'];
+                window.location.href = data.data['iam.logout.url'];
               }
             });
             // 确认是否是登出状态，如果是登出则跳转至iam，此方法为前端自己控制backUrl的地址。方便本地调试
