@@ -4,6 +4,13 @@
  */
 
 const importConfig = {
+  OC_B_REFUND_IN__refundInImport: {
+    tableName: 'OC_B_REFUND_IN',
+    webname: 'PURCHASE_IMPORT',
+    okApi: '/api/cs/oc/oms/v1/refundInImport',
+    tempApi: '/api/cs/oc/oms/v1/downloadRdfundInRemarkTemp',
+    downErrorInfo: true
+  }, // 退货入库-导入
   OC_B_PURCHASE__PURCHASE_IMPORT: {
     // 采购单-导入
     isAction: true,
