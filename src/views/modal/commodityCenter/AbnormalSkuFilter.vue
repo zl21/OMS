@@ -43,8 +43,10 @@ export default {
               const params = Object.assign(formConfig, {
                 tableName: route.tableName,
               });
+              const query = new FormData();
+              query.append('param', JSON.stringify(params));
               console.log('params', params);
-              const res = await this.service.interfacePlatform.exportErrorSku({param: params});
+              const res = await this.service.interfacePlatform.exportErrorSku(query);
               console.log('res', res);
               if (res.data.code === 0) {
                 // this.$message.success('导出成功');
