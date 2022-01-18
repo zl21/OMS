@@ -243,13 +243,14 @@ export default {
               this.batchHZT();
             }
           },
-          // {
-          //   text: "从WMS撤回", //按钮文本
-          //   disabled: false, //按钮禁用控制
-          //   btnclick: () => {
-          //     this.withdrawWMS();
-          //   } //按钮点击事件
-          // },
+          {
+            webname: 'rollbackwms2_tuihuanhuo',
+            text: "从WMS撤回", //按钮文本
+            disabled: false, //按钮禁用控制
+            btnclick: () => {
+              this.withdrawWMS();
+            } //按钮点击事件
+          },
           {
             text: $it('btn.retransmission_WMS'), // 重传WMS  //按钮文本
             webname: 'chuanwms_tuihuanhuo',
@@ -1627,8 +1628,8 @@ export default {
           this.getList(this.statusTab);
           this.$Message.success(res.data.message);
         } else {
-          const err = res.data.message || $it('tip.m6'); // 从wms撤回失败！
-          this.$Message.info(err);
+          // const err = res.data.message || $it('tip.m6'); // 从wms撤回失败！
+          // this.$Message.info(err);
         }
       });
     },

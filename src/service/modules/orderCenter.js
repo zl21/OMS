@@ -169,7 +169,7 @@ export default {
   updateReturnBOrder: (params) =>
     $network.post('/api/cs/oc/oms/v1/updateReturnBOrder', params), // 批量原退
   orderReturnRecallFromWms: (params) =>
-    $network.post('/p/cs/orderReturnRecallFromWms', params), // 从wms撤回
+    $network.post('/api/cs/oc/oms/v1/orderReturnRecallFromWms', params), // 从wms撤回
   retransmissionWms: (params) =>
     $network.post('/api/cs/oc/oms/v1/retransmissionWms', params), // 重传wms
   forcedCompletion: (params) =>
