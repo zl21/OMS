@@ -44,7 +44,7 @@ export default {
                 tableName: route.tableName,
               });
               console.log('params', params);
-              const res = await this.service.interfacePlatform.exportErrorSku(params);
+              const res = await this.service.interfacePlatform.exportErrorSku({param: params});
               console.log('res', res);
               if (res.data.code === 0) {
                 // this.$message.success('导出成功');
