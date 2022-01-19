@@ -28,9 +28,9 @@ export default {
     objList: {
       type: Array
     },
-    version: {
-      type: String
-    }
+    // version: {
+    //   type: String
+    // }
   },
   data() {
     return {

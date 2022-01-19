@@ -13,9 +13,9 @@ export default {
       type: String,
       default: "r3-cp",
     },
-    version: {
-      type: String,
-    }, // 兼容老接口返回的数据结构（eg.斯凯奇
+    // version: {
+    //   type: String,
+    // }, // 兼容老接口返回的数据结构（eg.斯凯奇
     tablename: {
       type: String,
     }, // 表名
@@ -53,6 +53,7 @@ export default {
   },
   data() {
     return {
+      version: window.ProjectConfig.Version,
       // $i18n: i18n,
       // vmI18n: i18n,
       confirmLoading: false, // 页面loading
