@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-11-01 15:32:39
- * @LastEditTime: 2021-12-15 09:25:09
+ * @LastEditTime: 2022-01-20 19:18:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /burgeon-business-components/src/index.js
@@ -25,22 +25,22 @@ const Components = Utils.CM.exportModules(context);
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/);
 const Directives = Utils.CM.exportModules(directiveFiles)
 
-const install = function (Vue, opts = {}) {
-	context.keys().forEach((key) => {
-		const component = context(key).default;
-		Vue.component(component.name, component)
-	});
+// const install = function (Vue, opts = {}) {
+// 	context.keys().forEach((key) => {
+// 		const component = context(key).default;
+// 		Vue.component(component.name, component)
+// 	});
 
-	Object.keys(Directives).forEach(key => {
-		Vue.directive(key, Directives[key])
-	})
+// 	Object.keys(Directives).forEach(key => {
+// 		Vue.directive(key, Directives[key])
+// 	})
 
-	window.$utils = Utils.CM;
-	Vue.prototype.$utils = Utils.CM;
-}
+// 	window.$utils = Utils.CM;
+// 	Vue.prototype.$utils = Utils.CM;
+// }
 
 const BC = {
-	install,
+	// install,
 	Components,
 	Utils,
 	name: '@burgeon/business-components',
@@ -48,8 +48,8 @@ const BC = {
 }
  
 // auto install
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
-}
+// if (typeof window !== 'undefined' && window.Vue) {
+//   install(window.Vue);
+// }
 
 export default BC;
