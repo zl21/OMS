@@ -128,7 +128,7 @@
           </el-tab-pane>
         </el-tabs>
         <div v-if="activeName === 'first'" class="center_bottom">
-          <el-input
+          <!-- <el-input
             ref="searchWord"
             v-model="searchWord"
             @keyup.enter.native="keyupWord"
@@ -138,11 +138,18 @@
               slot="suffix"
               class="el-icon-search el-input__icon"
               @click="onIconClick"
-            />
+            /> -->
+          <Input
+            ref="searchWord"
+            v-model="searchWord"
+            @on-enter="keyupWord"
+            @on-change="filterKeyword('searchWordChange')"
+          >
+            <Icon type="ios-search" slot="suffix" @click="onIconClick" />
             <template slot="prepend">
               {{ vmI18n.t("GLOBALSEARCH") }}
             </template>
-          </el-input>
+          </Input>
           <div class="center-exclude">
             <label for="exclude">
               <input
@@ -158,7 +165,7 @@
           </div>
         </div>
         <div v-if="activeName !== 'first'" class="center_bottom center-b-t">
-          <el-input
+          <!-- <el-input
             ref="searchResult"
             v-model="searchResult"
             @keyup.enter.native="keyupSearch"
@@ -168,12 +175,19 @@
               slot="suffix"
               class="el-icon-search el-input__icon"
               @click="onSearchResult"
-            />
+            />-->
+          <Input 
+            ref="searchResult"
+            v-model="searchResult"
+            @on-enter="keyupSearch"
+            @on-change="filterKeyword('searchResultChange')"
+          >
+            <Icon type="ios-search" slot="suffix" @click="onSearchResult" />
             <!-- 查询结果 -->
             <template slot="prepend">
               {{ vmI18n.t("other.queryResults") }}
             </template>
-          </el-input>
+          </Input>
         </div>
       </div>
       <div v-if="activeName === 'first'" class="dialog-operation">
@@ -211,13 +225,13 @@
             </li>
           </ul>
         </div>
-        <div class="right_bottom">
-          <el-button @click="dialogClose">
+        <div class="ark-modal-footer" style="padding-right: 0">
+          <Button @click="dialogClose">
             {{ vmI18n.t("CANCEL") }}
-          </el-button>
-          <el-button @click="dialogConfirm">
+          </Button>
+          <Button type="primary" @click="dialogConfirm">
             {{ vmI18n.t("CONFIRM") }}
-          </el-button>
+          </Button>
         </div>
       </div>
       <div v-if="showOrHidden" class="modalDiv">
@@ -272,9 +286,9 @@
           </div>
           <div class="fk-body-bottom">
             <!-- 确定 -->
-            <el-button @click="errorDialogClose">
+            <Button @click="errorDialogClose">
               {{ vmI18n.t("com.determine") }}
-            </el-button>
+            </Button>
           </div>
         </div>
       </div>
@@ -290,9 +304,9 @@
 <style lang="less" type="text/less">
 @import "~omsTheme/public.less";
 // 框架有样式 -- 覆盖修改
-.detailtable .form_button .buttonFk button {
-  background-color: transparent;
-  border: none;
+.detailtable .form_button .buttonFk .el-dialog__headerbtn {
+  background-color: transparent !important;
+  border: none !important;
 }
 .ark-dialog {
   .fkdialog {
@@ -360,12 +374,17 @@
         }
       }
       .center_bottom {
-        .el-input {
-          input {
-            border-radius: 0;
-            height: @base-color;
-            line-height: @base-color;
-          }
+        // .el-input {
+        //   input {
+        //     border-radius: 0;
+        //     height: @base-color;
+        //     line-height: @base-color;
+        //   }
+        // }
+        display: flex;
+        align-items: center;
+        .ark-input-group {
+          width: 50%;
         }
         .center-exclude label {
           input,
