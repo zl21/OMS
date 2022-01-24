@@ -25,9 +25,9 @@ export default {
     rowId: {},
     item: {},
     itemdata: {},
-    version: {
-      type: String
-    }
+    // version: {
+    //   type: String
+    // }
 
   },
   watch: {
@@ -46,6 +46,7 @@ export default {
   computed: {},
   data() {
     return {
+      version: window.ProjectConfig.Version,
       fkDimVal: '',
       ChineseDictionary: '',
       formObj: {
