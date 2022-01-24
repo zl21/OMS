@@ -423,6 +423,10 @@ export default {
     keyupWord() {
       this.onIconClick();
     }, // enter快捷
+    filterKeyword: _.debounce(function(method) {
+      console.log(this.searchWord);
+      this[method](this.searchWord.trim())
+    }, 3000),
     /* 以上筛选结果的相关事件 */
     searchWordChange(a) {
       let str = "";
