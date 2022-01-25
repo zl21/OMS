@@ -28,6 +28,7 @@ import axios from 'axios';
 import reForm from 'professionalComponents/businessForm';
 import businessButton from 'professionalComponents/businessButton';
 import Import from '@/views/modal/publicDialog/importTable.vue'
+import date from '@/assets/js/__utils__/date';
 
 export default {
   components: {
@@ -78,22 +79,28 @@ export default {
         ]
       },
       formConfig: {
+        ruleValidate: {
+          CP_C_PLATFORM_ENAME: [{ required: true, message: ' ', trigger: 'blur' }],
+          START_TIME: [{ required: true }],
+          END_TIME: [{ required: true }],
+          IMPORT_TYPE: [{ required: true }],
+          BILL_TYPE: [{ required: true }],
+        },
         formValue: {
-          billImportNo: '自动生成（XPTZDDR—年+月+日+0001）',
-          creatTime: '自动生成',
+          BILLIMPORT_NO: '自动生成（XPTZDDR—年+月+日+0001）',
+          GENERATE_TIME: '自动生成',
+          CP_C_SHOP_ID: '',
           CP_C_PLATFORM_ENAME: '',
-          CP_C_SHOP_ID: '',
-          start_date: '',
-          end_date: '',
-          importType: '',
-          billType: '',
-          CP_C_SHOP_ID: '',
+          START_TIME: '',
+          END_TIME: '',
+          IMPORT_TYPE: '',
+          BILL_TYPE: '',
         },
         formData: [
           {
             style: 'input',
             label: '平台订单导入编码',
-            value: 'billImportNo',
+            value: 'BILLIMPORT_NO',
             width: '12',
             disabled: true,
             inputenter: () => { },
@@ -102,7 +109,7 @@ export default {
           {
             style: 'input',
             label: '创建时间',
-            value: 'creatTime',
+            value: 'GENERATE_TIME',
             width: '12',
             disabled: true,
             inputenter: () => { },
@@ -158,7 +165,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
-            value: 'start_date',
+            value: 'START_TIME',
             label: '账单起始日期',
             width: '12',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -167,7 +174,7 @@ export default {
           {
             style: 'date',
             type: 'datetimerange',
-            value: 'end_date',
+            value: 'END_TIME',
             label: '账单截止日期',
             width: '12',
             format: 'yyyy-MM-dd HH:mm:ss',
@@ -177,7 +184,7 @@ export default {
             style: 'select',
             label: '导入类型',
             width: '12',
-            value: 'importType',
+            value: 'IMPORT_TYPE',
             setRequired: 'required',
             options: [
               {
@@ -194,7 +201,7 @@ export default {
             style: 'select',
             label: '账单类型',
             width: '12',
-            value: 'billType',
+            value: 'BILL_TYPE',
             setRequired: 'required',
             options: [
               {
@@ -258,17 +265,28 @@ export default {
     },
     confirm() {
       const _this = this;
-      if (!_this.text) {
-        _this.$Message.error('请选择需要导入的文件！');
-        return;
-      }
+
       this.importSmallPlat()
     },
     importSmallPlat() {
       const _this = this;
       _this.loading = true;
       const param = new FormData();
-      param.append('data', JSON.stringify(this.formConfig.formValue));
+      console.log('fv::', this.formConfig.formValue);
+      const data = JSON.parse(JSON.stringify(this.formConfig.formValue))
+      if (!data.START_TIME[0]) {
+        _this.loading = false;
+        return _this.$Message.error('请选择账单起始日期！');
+      } else if (!data.END_TIME[0]) {
+        _this.loading = false;
+        return _this.$Message.error('请选择账单截止日期！');
+      } else if (!_this.text) {
+        _this.loading = false;
+        return _this.$Message.error('请选择需要导入的文件！');
+      }
+      data.START_TIME = `${date.getFormatDate(new Date(data.START_TIME[0]), 'yyyy-MM-dd HH:mm:ss')}~${date.getFormatDate(new Date(data.START_TIME[1]), 'yyyy-MM-dd HH:mm:ss')}`
+      data.END_TIME = `${date.getFormatDate(new Date(data.END_TIME[0]), 'yyyy-MM-dd HH:mm:ss')}~${date.getFormatDate(new Date(data.END_TIME[1]), 'yyyy-MM-dd HH:mm:ss')}`
+      param.append('data', JSON.stringify(data));
       param.append('table', this.pageName);
       param.append('file', _this.files, _this.text);
       axios({
