@@ -1,5 +1,9 @@
 // 财务中心
 export default {
+  // 【小平台对账】- 导入
+  SMALLPLATFORMBILLIMPORT: {
+    component: () => import('@/views/modal/financeCenter/SMALLPLATFORMBILLIMPORT.vue'),
+  },
   // 唯品会进度账单 唯品会月结账单列表 (下载账单)
   DOWNLOADVIPBILL: {
     component: () => import('@/views/modal/financeCenter/downLoadVipBill.vue'),

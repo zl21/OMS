@@ -1,0 +1,381 @@
+<template>
+  <div class="smallPlatTmport" v-loading="loading">
+    <div class="i_body">
+      <re-form :form-config="formConfig" class="formBox" />
+      <div class="linkBox">
+        <a @click="downloadUrlFile">下载模板</a>
+        <!-- <a @click="upLoad">上传文件</a> -->
+        <div class="upload">
+          <label class="ui_button" for="xFile">{{ text ? '更新文件' : '上传文件' }}</label>
+          <form>
+            <input id="xFile" type="file" style="position: absolute; clip: rect(0 0 0 0)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" @change="handleFiles($event)" />
+          </form>
+          <p class="xlsx">
+            <Icon v-if="text" class="icon" type="ios-document-outline" />
+            <span>{{ text ? text : '未选择任何文件' }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="i_food">
+      <businessButton :btn-config="btnConfig" />
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import reForm from 'professionalComponents/businessForm';
+import businessButton from 'professionalComponents/businessButton';
+import Import from '@/views/modal/publicDialog/importTable.vue'
+
+export default {
+  components: {
+    Import,
+    reForm,
+    businessButton
+  },
+  props: {
+    objList: {
+      type: Array
+    },
+    idArray: {
+      type: Array
+    },
+    webid: {
+      type: Number
+    },
+    tablename: {
+      type: String
+    },
+    selectRowData: {
+      type: Array
+    }
+  },
+  data() {
+    return {
+      text: '',
+      pageName: this.$route.params.tableName,
+      vmI18n: window.vmI18n,
+      loading: false,
+      btnConfig: {
+        typeAll: 'error', // 按钮统一风格样式
+        btnsite: 'right', // 按钮位置 (right , center , left)
+        buttons: [
+          {
+            text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
+            btnclick: () => {
+              this.$parent.cancel();
+              this.$forceUpdate();
+            } // 按钮点击事件
+          },
+          {
+            text: window.vmI18n.t('common.determine'), // 确定 按钮文本
+            btnclick: () => {
+              this.confirm();
+            }
+          }
+        ]
+      },
+      formConfig: {
+        formValue: {
+          billImportNo: '自动生成（XPTZDDR—年+月+日+0001）',
+          creatTime: '自动生成',
+          CP_C_PLATFORM_ENAME: '',
+          CP_C_SHOP_ID: '',
+          start_date: '',
+          end_date: '',
+          importType: '',
+          billType: '',
+          CP_C_SHOP_ID: '',
+        },
+        formData: [
+          {
+            style: 'input',
+            label: '平台订单导入编码',
+            value: 'billImportNo',
+            width: '12',
+            disabled: true,
+            inputenter: () => { },
+            iconclick: () => { }
+          },
+          {
+            style: 'input',
+            label: '创建时间',
+            value: 'creatTime',
+            width: '12',
+            disabled: true,
+            inputenter: () => { },
+            iconclick: () => { }
+          },
+          {
+            style: 'popInputPlus', // 输入框弹框单多选
+            width: '12',
+            isActive: true,
+            isdisabled: false,
+            /* inputList: [
+              {
+                childs: [{ colname: 'CP_C_SHOP_ID', refobjid: 4, valuedata: 2 }]
+              }
+            ], */
+            itemdata: {
+              isBackRowItem: true,
+              colid: 1700825619,
+              colname: 'CP_C_SHOP_ID', // 当前字段的名称
+              /* refcolval: {
+                fixcolumn: 'CP_C_PLATFORM_ID',
+                expre: 'equal',
+                srccol: 'CP_C_SHOP_ID'
+              }, */
+              display: 'text', // 显示什么类型，例如xml表示弹窗多选加导入功能，mrp表示下拉多选
+              fkdisplay: 'drp', // 外键关联类型
+              inputname: 'CP_C_SHOP_ID', // 这个是做中文类型的模糊查询字段，例如ENAME
+              isfk: true, // 是否有fk键
+              isnotnull: true, // 是否必填
+              name: '所属店铺', // 店铺 input前面显示的lable值
+              readonly: false, // 是否可编辑，对应input   readonly属性
+              valuedata: '' // 这个是选择的值
+            },
+            oneObj: (obj) => {
+              console.log(obj);
+              if (Object.keys(obj).length) {
+                this.formConfig.formValue.CP_C_SHOP_ID = obj.ID
+                this.formConfig.formValue.CP_C_PLATFORM_ENAME = obj.rowItem.CP_C_PLATFORM_ENAME.val
+              } else {
+                this.formConfig.formValue.CP_C_PLATFORM_ENAME = ''
+              }
+            }
+          },
+          {
+            style: 'input',
+            label: '所属平台',
+            value: 'CP_C_PLATFORM_ENAME',
+            width: '12',
+            disabled: true,
+            inputenter: () => { },
+            iconclick: () => { }
+          },
+          {
+            style: 'date',
+            type: 'datetimerange', // 日期组件类型,默认为data  (daterange)为双日期区间选择
+            value: 'start_date',
+            label: '账单起始日期',
+            width: '12',
+            format: 'yyyy-MM-dd HH:mm:ss',
+            placeholder: ''
+          },
+          {
+            style: 'date',
+            type: 'datetimerange',
+            value: 'end_date',
+            label: '账单截止日期',
+            width: '12',
+            format: 'yyyy-MM-dd HH:mm:ss',
+            placeholder: ''
+          },
+          {
+            style: 'select',
+            label: '导入类型',
+            width: '12',
+            value: 'importType',
+            setRequired: 'required',
+            options: [
+              {
+                value: '1',
+                label: '正常账单导入',
+              },
+              {
+                value: '2',
+                label: '异常订单导入',
+              },
+            ],
+          },
+          {
+            style: 'select',
+            label: '账单类型',
+            width: '12',
+            value: 'billType',
+            setRequired: 'required',
+            options: [
+              {
+                value: '1',
+                label: '整单',
+              },
+              {
+                value: '2',
+                label: '明细',
+              },
+            ],
+          },
+        ],
+      },
+    };
+  },
+  created() {
+  },
+  mounted() {
+  },
+  methods: {
+    handleFiles(e) {
+      // 选择文件
+      console.log(e.path);
+      this.isError = false;
+      if (e.path[0].files[0].name) {
+        this.text = e.path[0].files[0].name;
+        this.files = e.path[0].files[0];
+      }
+    },
+    downloadUrlFile(url) {
+      // 下载模板
+      const self = this;
+      const domFrame = window.parent.document.getElementById('downLoadListFrame');
+      if (domFrame != null) {
+        window.parent.document.body.removeChild(domFrame);
+      }
+      const downloadFile = {};
+      if (typeof downloadFile.iframe === 'undefined') {
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('id', 'downLoadListFrame');
+        self.addEvent('load', iframe, () => {
+          self.iframeLoad(iframe);
+        });
+        iframe.src = url;
+        iframe.style.display = 'none';
+        downloadFile.iframe = iframe;
+        document.body.appendChild(downloadFile.iframe);
+        setTimeout(() => {
+          iframe.src = '';
+        }, 1000);
+      }
+    },
+    iframeLoad(iframe) {
+      // 判断iframe的src
+      const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
+      console.log('src::', src);
+    },
+    upLoad() {
+      this.showImport = true
+    },
+    confirm() {
+      const _this = this;
+      if (!_this.text) {
+        _this.$Message.error('请选择需要导入的文件！');
+        return;
+      }
+      this.importSmallPlat()
+    },
+    importSmallPlat() {
+      const _this = this;
+      _this.loading = true;
+      const param = new FormData();
+      param.append('data', JSON.stringify(this.formConfig.formValue));
+      param.append('table', this.pageName);
+      param.append('file', _this.files, _this.text);
+      axios({
+        url: '/api/cs/ac/v1/import/smallPlatform/bill',
+        method: 'post',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        data: param
+      })
+        .then(res => {
+          if (res.data.code === 0) {
+            // 导入成功
+            _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
+          } else if (res.data.code === -1) {
+            // 导入失败
+            const err = res.data.message || this.vmI18n.t('modalTips.zd');
+            _this.isError = true;
+            _this.errorMessage = err;
+            // 清空已上传文件
+            const xFile = document.getElementById('xFile');
+            xFile.value = '';
+            this.text = '';
+            this.files = {};
+            this.file = {};
+          } else if (res.data.data) {
+            _this.loading = false;
+            _this.isError = true;
+            // 清空已上传文件
+            const xFile = document.getElementById('xFile');
+            xFile.value = '';
+            this.text = '';
+            this.files = {};
+            this.file = {};
+            _this.errorMessage = res.data.message;
+            this.downloadUrlFile(res.data.data);
+          }
+        })
+        .finally(() => {
+          _this.loading = false;
+        });
+    },
+  },
+};
+
+</script>
+
+<style lang="less" scoped>
+.smallPlatTmport {
+  width: 900px;
+  .formBox {
+    border: 1px solid #a5a5a5;
+    padding: 16px 10px 16px 0;
+
+    /deep/.ark-form-item.popInput {
+      .ark-fkrp-select div {
+        &:first-child {
+          height: 32px;
+        }
+        &.ark-fkrp-select-icon {
+          right: 10px;
+          top: 0;
+        }
+        .ark-icon-ios-close-circle {
+          margin-right: 28px;
+        }
+      }
+    }
+  }
+  .linkBox {
+    border: 1px solid #a5a5a5;
+    padding: 20px;
+    border-top: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 13px;
+    a {
+      text-decoration-line: underline;
+      letter-spacing: 1px;
+    }
+    .upload {
+      line-height: 50px;
+      form {
+        display: inline-block;
+      }
+      .xlsx {
+        display: inline-block;
+        .icon,
+        .icon + span {
+          color: #2d8cf0;
+        }
+      }
+      .ui_button {
+        color: #fd6442;
+        border: 1px solid #dcdee2;
+        padding: 2px 8px;
+        border-radius: 3px;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+  .i_body {
+    margin-top: 9px;
+  }
+  .i_food {
+    padding-top: 11px;
+  }
+}
+</style>
