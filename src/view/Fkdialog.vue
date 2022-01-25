@@ -41,12 +41,12 @@
         class="dialog_center"
         :class="{ 'second-width': activeName === 'second' }"
       >
-        <el-tabs v-model="activeName">
+        <!-- <el-tabs v-model="activeName">
           <el-tab-pane
             :label="vmI18n.t('SELECTEDRESULTS')"
             name="first"
             class="el-tab-auto"
-          >
+          > -->
             <!-- <el-pagination
               :current-page="l_center_data.l_currentPage"
               :page-sizes="[10, 20, 50, 100]"
@@ -56,6 +56,11 @@
               @size-change="l_handleSizeChange"
               @current-change="l_handleCurrentChange"
             /> -->
+        <Tabs :value="activeName">
+          <TabPane 
+            :label="vmI18n.t('SELECTEDRESULTS')"
+            name="first"
+          >
             <Page
               class-name="dfkialogPage"
               :show-total="true"
@@ -84,12 +89,12 @@
               @center_change="center_change"
               @single="single"
             />
-          </el-tab-pane>
-          <el-tab-pane
+          </TabPane>
+          <!-- <el-tab-pane
             :label="vmI18n.t('VIEWTHESELECTEDRESULTS')"
             name="second"
             class="el-tab-auto"
-          >
+          > -->
             <!-- <el-pagination
               :current-page="r_center_data.r_currentPage"
               :page-sizes="[10, 20, 50, 100]"
@@ -99,6 +104,10 @@
               @size-change="r_handleSizeChange"
               @current-change="r_handleCurrentChange"
             /> -->
+          <TabPane 
+            :label="vmI18n.t('VIEWTHESELECTEDRESULTS')"
+            name="second"
+          >
             <Page
               class-name="dfkialogPage"
               :show-total="true"
@@ -125,8 +134,8 @@
               id_name="second"
               @center_change="center_change"
             />
-          </el-tab-pane>
-        </el-tabs>
+          </TabPane>
+        </Tabs>
         <div v-if="activeName === 'first'" class="center_bottom">
           <!-- <el-input
             ref="searchWord"
