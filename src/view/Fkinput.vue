@@ -85,7 +85,7 @@
           <use xlink:href="#icon-danchuangdanxuan" />
         </svg>
         <!-- 弹出框，下拉多选的弹出框 -->
-        <el-popover
+        <!-- <el-popover
           v-if="
             itemdata.isfk &&
             (itemdata.fkdisplay == 'drp' || itemdata.fkdisplay == 'mrp')
@@ -96,25 +96,33 @@
           placement="bottom"
           title
           trigger="manual"
+        > -->
+        <Poptip
+          v-if="
+            itemdata.isfk &&
+            (itemdata.fkdisplay == 'drp' || itemdata.fkdisplay == 'mrp')
+          "
+          v-model="popoverShow[itemdata.colname]"
+          placement="bottom"
+          class="popover-icon"
+          trigger="click"
         >
           <i
             v-if="itemdata.fkdisplay === 'drp'"
-            slot="reference"
             class="iconfont"
             @click.stop="filterInputName(itemdata)"
             >&#xe621;</i
           >
           <i
             v-if="itemdata.fkdisplay === 'mrp'"
-            slot="reference"
             class="iconfont"
             @click.stop="filterInputName(itemdata)"
             >&#xe6b9;</i
           >
           <fk-table
+            slot="content"
             v-if="popoverShow[itemdata.colname]"
             class="view-fktable"
-            :version="version"
             :input-box="itemdata.fkdisplay == 'mrp' ? true : false"
             :fkid="itemdata.colid"
             :single="itemdata.fkdisplay === 'drp' ? true : false"
@@ -124,7 +132,8 @@
             :itemdata="itemdata"
             @pop="fktableShow"
           />
-        </el-popover>
+        <!-- </el-popover> -->
+        </Poptip>
       </div>
     </Tooltip>
 
