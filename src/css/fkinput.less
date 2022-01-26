@@ -65,17 +65,30 @@
     background-color: #fff;
   }
   .popover-icon{
-    .iconfont{
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
+    position: absolute;
+    right: 9px;
+    .iconfont {
+      // position: absolute;
+      // top: 50%;
+      // right: 0;
+      // transform: translateY(-50%);
+      // position: relative;
+      // left: -20px;
       height: 26px;
       line-height: 26px;
       font-size: 12px;
       color: #808695;
       cursor: pointer;
       z-index: 0;
+    }
+    /deep/ .ark-poptip-inner {
+      background-color: transparent;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      .ark-poptip-body {
+        padding: 0;
+      }
     }
   }
   .name {
