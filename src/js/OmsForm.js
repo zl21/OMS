@@ -54,6 +54,16 @@ export default {
     //     this.$refs[this.currentFlod].style.overflow = "hidden";
     //   }
     // }
+    "formConfig.formData": {
+      handler(n,o) {
+        console.log('watch');
+        if (n.length) {
+          this.initRenderForm();
+        }
+      },
+      immediate: true,
+      deep: true,
+    }
   },
   created() {
   },
@@ -65,14 +75,24 @@ export default {
     //   // this.$refs[this.formConfig.flodClick].style.maxHeight = "96px";
     //   this.$refs[this.formConfig.flodClick].style.overflow = "hidden";
     // }
+    const _this = this;
+    window.addEventListener('keydown', e => {
+      if (e.keyCode == 13) {
+        if (_this.formConfig.btn && _this.formConfig.btn.buttons.length) {
+          _this.formConfig.btn.buttons.find(it => it.webname == 'search').btnclick()
+        }
+      }
+    });
     setTimeout(() => {
-      this.initRenderForm();
       let nodes = this.$refs.popLabel;
       nodes && nodes.forEach(e => {
         let oldNodeStr = e.$el.firstElementChild.innerHTML;
         if (oldNodeStr.includes('*')) e.$el.firstElementChild.innerHTML = `<i style="color:#ed4014">*</i> ${oldNodeStr.slice(1)}`;
       });
     }, 500);
+  },
+  destroyed() {
+    window.removeEventListener('keydown', this, false);
   },
   methods: {
     initRenderForm() {
@@ -95,7 +115,6 @@ export default {
       if (this.currentFlod == 'down') {
         this.formConfig.formData.forEach((it, n) => {
           if (n + 1 > showNum) {
-            console.log(n, showNum, it);
             it.class = `${it.class ? it.class : ''} long`
           }
         });
@@ -104,7 +123,7 @@ export default {
           it.class = it.class ? it.class.replace('long', '') : '';
         });
       }
-      this.$forceUpdate()
+      // this.$forceUpdate()
     },
     selectInputChange(x) {
       this.selectInputChangeVal = x;

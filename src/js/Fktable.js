@@ -25,9 +25,9 @@ export default {
     rowId: {},
     item: {},
     itemdata: {},
-    version: {
-      type: String
-    }
+    // version: {
+    //   type: String
+    // }
 
   },
   watch: {
@@ -46,6 +46,7 @@ export default {
   computed: {},
   data() {
     return {
+      version: window.ProjectConfig.Version,
       fkDimVal: '',
       ChineseDictionary: '',
       formObj: {
@@ -381,7 +382,7 @@ export default {
   },
   created() {
     let _self = this
-    _self.ChineseDictionary = $R3_CPS.components.ChineseDictionary
+    _self.ChineseDictionary = $ChineseDictionary
     // 判断是否是外键关联
     if (_self.fkid) {
       _self.formObj.refcolid = _self.fkid

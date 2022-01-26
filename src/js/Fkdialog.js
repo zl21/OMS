@@ -13,9 +13,9 @@ export default {
       type: String,
       default: "r3-cp",
     },
-    version: {
-      type: String,
-    }, // 兼容老接口返回的数据结构（eg.斯凯奇
+    // version: {
+    //   type: String,
+    // }, // 兼容老接口返回的数据结构（eg.斯凯奇
     tablename: {
       type: String,
     }, // 表名
@@ -53,6 +53,7 @@ export default {
   },
   data() {
     return {
+      version: window.ProjectConfig.Version,
       // $i18n: i18n,
       // vmI18n: i18n,
       confirmLoading: false, // 页面loading
@@ -422,6 +423,10 @@ export default {
     keyupWord() {
       this.onIconClick();
     }, // enter快捷
+    filterKeyword: _.debounce(function(method) {
+      console.log(this.searchWord);
+      this[method](this.searchWord.trim())
+    }, 3000),
     /* 以上筛选结果的相关事件 */
     searchWordChange(a) {
       let str = "";
