@@ -87,7 +87,7 @@ export default {
           BILL_TYPE: [{ required: true }],
         },
         formValue: {
-          BILLIMPORT_NO: '自动生成（XPTZDDR—年+月+日+0001）',
+          BILL_IMPORT_NO: '自动生成（XPTZDDR—年+月+日+0001）',
           GENERATE_TIME: '自动生成',
           CP_C_SHOP_ID: '',
           CP_C_PLATFORM_ENAME: '',
@@ -100,7 +100,7 @@ export default {
           {
             style: 'input',
             label: '平台订单导入编码',
-            value: 'BILLIMPORT_NO',
+            value: 'BILL_IMPORT_NO',
             width: '12',
             disabled: true,
             inputenter: () => { },
