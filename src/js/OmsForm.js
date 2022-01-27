@@ -57,7 +57,7 @@ export default {
     "formConfig.formData": {
       handler(n,o) {
         console.log('watch');
-        if (n.length) {
+        if (n && n.length) {
           this.initRenderForm();
         }
       },
