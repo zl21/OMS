@@ -88,6 +88,7 @@ export default {
     })
       .then((res) => {
         self.dialogLoad = false;
+        const { message } = res.data;
         if (res.data.code === 0) {
           self.$message.success(res.data.message);
           self.$emit('confirmImport');
