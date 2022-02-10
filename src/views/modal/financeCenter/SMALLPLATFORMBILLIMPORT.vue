@@ -1,17 +1,26 @@
 <template>
-  <div class="smallPlatTmport" v-loading="loading">
+  <div class="smallPlatTmport"
+       v-loading="loading">
     <div class="i_body">
-      <re-form :form-config="formConfig" class="formBox" />
+      <re-form :form-config="formConfig"
+               class="formBox" />
       <div class="linkBox">
         <a @click="downloadUrlFile">下载模板</a>
         <!-- <a @click="upLoad">上传文件</a> -->
         <div class="upload">
-          <label class="ui_button" for="xFile">{{ text ? '更新文件' : '上传文件' }}</label>
+          <label class="ui_button"
+                 for="xFile">{{ text ? '更新文件' : '上传文件' }}</label>
           <form>
-            <input id="xFile" type="file" style="position: absolute; clip: rect(0 0 0 0)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" @change="handleFiles($event)" />
+            <input id="xFile"
+                   type="file"
+                   style="position: absolute; clip: rect(0 0 0 0)"
+                   accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                   @change="handleFiles($event)" />
           </form>
           <p class="xlsx">
-            <Icon v-if="text" class="icon" type="ios-document-outline" />
+            <Icon v-if="text"
+                  class="icon"
+                  type="ios-document-outline" />
             <span>{{ text ? text : '未选择任何文件' }}</span>
           </p>
         </div>
@@ -147,6 +156,7 @@ export default {
               console.log(obj);
               if (Object.keys(obj).length) {
                 this.formConfig.formValue.CP_C_SHOP_ID = obj.ID
+                this.formConfig.formValue.shop_ecode = obj.rowItem.ECODE.val
                 this.formConfig.formValue.CP_C_PLATFORM_ENAME = obj.rowItem.CP_C_PLATFORM_ENAME.val
               } else {
                 this.formConfig.formValue.CP_C_PLATFORM_ENAME = ''
