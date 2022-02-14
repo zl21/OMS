@@ -17,12 +17,20 @@
                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                    @change="handleFiles($event)" />
           </form>
-          <p class="xlsx">
+          <p class="xlsx"
+             v-if="!isError">
             <Icon v-if="text"
                   class="icon"
                   type="ios-document-outline" />
             <span>{{ text ? text : '未选择任何文件' }}</span>
           </p>
+          <div v-if="isError"
+               class="error-message xlsx">
+            <Icon type="md-information-circle"
+                  size="24"
+                  style="color: red" />
+            <span v-html="errorMessage"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -67,7 +75,10 @@ export default {
       text: '',
       pageName: this.$route.params.tableName,
       vmI18n: window.vmI18n,
+      files: {}, // 选择的文件
       loading: false,
+      isError: false, // 是否导入失败
+      errorMessage: '', // 导入失败原因
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -320,9 +331,15 @@ export default {
           if (res.data.code === 0) {
             // 导入成功
             _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
-          } else if (res.data.code === -1) {
+            _this.$parent.close();
+            _this.$parent.$parent.$parent.getQueryList();
+          } else if (res.data.code === -1 && !res.data.data) {
             // 导入失败
-            const err = res.data.message || this.vmI18n.t('modalTips.zd');
+            const err = res.data.message
+            //  || this.vmI18n.t('modalTips.zd');
+            if (!err.includes('文件')) {
+              return
+            }
             _this.isError = true;
             _this.errorMessage = err;
             // 清空已上传文件
