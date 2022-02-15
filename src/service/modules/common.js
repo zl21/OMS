@@ -275,7 +275,7 @@ export default {
       { 
         tableName: 'SG_B_CHANNEL_PRODUCT_import',
         url: '/p/cs/product/productItemImport',
-        downloadUrl: 'https://sm-r3-upload-test.oss-cn-shanghai.aliyuncs.com/SG_TMALL_NEW/%E5%A4%A9%E7%8C%AB%E6%96%B0%E5%93%81%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx?Expires=1644483090&OSSAccessKeyId=TMP.3KddpcPpqHc4nq75qZbt6LpgRLHb6Wj5sT6ueuQHN9G7oLuQ8qTygWzTGRg5mXEUJJkkmTs3r1rEDuQdJa2G9Gg3NBgdvP&Signature=8pISL7%2Bd3dXWf9F9NGIOyKVWbls%3D&versionId=CAEQOhiBgIDJxuCI9xciIDBkODI0YTgyZmMyNTQxODQ5YWFmMjU1NDU1MmZjYzMx'
+        downloadUrl: 'https://sm-r3-upload-test.oss-cn-shanghai.aliyuncs.com/SG_TMALL_NEW/%E5%A4%A9%E7%8C%AB%E6%96%B0%E5%93%81%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF20210903.xlsx?Expires=1644892954&OSSAccessKeyId=TMP.3KkJseSfBLSboR6GEdmXVWWWF3jYep524Ro22t7P5MHR2qAUJxhsJfJCLnGVpvdFG6bRcoEHzmL4WB9z1GzCB7CRujPGpZ&Signature=6DdPMN0y13H4s8Xv8TDhjZwLO9Q%3D&versionId=CAEQOhiBgIDqu52K9xciIGVjZGE2OTlhM2MwZTQzYzA5M2NjNDFkYjBmMWY0YzI2'
       }, // 平台店铺商品表 - 导入
       { 
         tableName: 'IP_B_TAOBAO_ORDER',
