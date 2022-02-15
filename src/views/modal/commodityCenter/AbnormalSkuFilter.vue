@@ -40,14 +40,18 @@ export default {
             btnclick: async () => {
               const route = this.$route.params;
               const formConfig = this.$store.state[`S.${route.tableName}.${route.tableId}`].formItems.data;
-              const params = Object.assign(formConfig, {
-                tableName: route.tableName,
+              const params = Object.assign({}, {
+                table: route.tableName,
+                fixedcolumns: formConfig,
               });
+              const tableLabel = this.getTableLabel(route.tableName);
               const query = new FormData();
-              query.append('param', JSON.stringify(params));
-              console.log('params', params);
+              query.append('searchdata', JSON.stringify(params));
+              query.append('filename', tableLabel);
+              query.append('filetype', '.xlsx');
+              query.append('showColumnName', true);
+              query.append('menu', tableLabel);
               const res = await this.service.interfacePlatform.exportErrorSku(query);
-              console.log('res', res);
               if (res.data.code === 0) {
                 // this.$message.success('导出成功');
                 this.closeConfirm();
@@ -55,7 +59,7 @@ export default {
             } // 按钮点击事件
           }
         ]
-      }
+      },
     }
   },
   methods: {
@@ -63,7 +67,19 @@ export default {
       const _this = this;
       // 元数据配置窗口特殊处理
       _this.$parent.$parent.closeActionDialog();
-    }
+    },
+    getTableLabel(table) {
+      switch(table) {
+        case 'IP_B_TAOBAO_ORDER':
+          return '淘宝订单接口';
+        case 'IP_B_STANDPLAT_ORDER':
+          return '通用订单接口';
+        case 'IP_B_JINGDONG_ORDER':
+          return '京东订单接口';
+        default:
+          return '';
+      }
+    },
   },
 }
 </script>
