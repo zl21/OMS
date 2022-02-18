@@ -43,6 +43,6 @@ import OmsDialog from 'burgeonComponents/js/OmsDialog.js';
 export default OmsDialog;
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import "burgeonComponents/css/OmsDialog.less";
 </style>

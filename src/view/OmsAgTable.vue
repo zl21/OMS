@@ -26,7 +26,7 @@
     ></arkCommonTableByAgGrid>
 
     <div
-      class="page"
+      class="page page-wrap"
       v-show="agTableConfig.pageShow && (agTableConfig.rowData || []).length !== 0"
     >
       <span style="paddingright: 8px"

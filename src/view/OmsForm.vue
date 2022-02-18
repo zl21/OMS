@@ -638,7 +638,7 @@ import OmsForm from 'burgeonComponents/js/OmsForm.js';
 export default OmsForm;
 </script>
 
-<style lang='less'>
+<style lang="less" scoped>
 @import "burgeonComponents/css/OmsForm.less";
 </style>
 

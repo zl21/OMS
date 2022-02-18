@@ -216,7 +216,7 @@ const DownLoad = {
 export default DownLoad;
 </script>
 
-<style >
+<style lang="less" scoped>
 .downLoadTaobaoOrder .ark-radio-group {
   display: flex !important;
 }

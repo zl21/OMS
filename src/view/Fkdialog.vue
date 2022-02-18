@@ -310,7 +310,7 @@
   export default Fkdialog;
 </script>
 
-<style lang="less" type="text/less">
+<style lang="less" type="text/less" scoped>
 @import "~omsTheme/public.less";
 // 框架有样式 -- 覆盖修改
 .detailtable .form_button .buttonFk .el-dialog__headerbtn {
