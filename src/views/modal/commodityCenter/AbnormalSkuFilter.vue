@@ -71,11 +71,11 @@ export default {
     getTableLabel(table) {
       switch(table) {
         case 'IP_B_TAOBAO_ORDER':
-          return '淘宝订单接口';
+          return '淘宝SKU异常明细导出';
         case 'IP_B_STANDPLAT_ORDER':
-          return '通用订单接口';
+          return '通用SKU异常明细导出';
         case 'IP_B_JINGDONG_ORDER':
-          return '京东订单接口';
+          return '京东SKU异常明细导出';
         default:
           return '';
       }
