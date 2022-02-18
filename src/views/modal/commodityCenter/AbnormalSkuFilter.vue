@@ -1,10 +1,15 @@
 <template>
   <div class="custom-modal-confirm-wrapper">
-    <div class="custom-modal-confirm-header">
+    <!-- <div class="custom-modal-confirm-header">
       <i class="iconfont custom-modal-confirm-icon iconbj_doubt fcWarning "></i>
       <div class="custom-modal-confirm-body">
         当前的操作会执行全量导出，导出时间可能会比较慢！是否继续导出？
       </div>
+    </div> -->
+    <div style="width:400px">
+      <p class="custom-dialog-body-p">本次操作将提交至后台处理，是否确认提交？</p>
+      <p class="custom-dialog-body-p">提交后可通过<a href="/SYSTEM/TABLE/CP_C_TASK/24386">[我的任务]</a>进行查看</p>
+      <jordanBtn :btnConfig="exportBtnConfig"></jordanBtn>
     </div>
     <businessButton :btn-config="btnConfig" />
   </div>
@@ -47,9 +52,9 @@ export default {
               const tableLabel = this.getTableLabel(route.tableName);
               const query = new FormData();
               query.append('searchdata', JSON.stringify(params));
-              query.append('filename', tableLabel);
-              query.append('filetype', '.xlsx');
-              query.append('showColumnName', true);
+              // query.append('filename', tableLabel);
+              // query.append('filetype', '.xlsx');
+              // query.append('showColumnName', true);
               query.append('menu', tableLabel);
               const res = await this.service.interfacePlatform.exportErrorSku(query);
               if (res.data.code === 0) {
@@ -107,5 +112,8 @@ export default {
     width: 100%;
     color: rgb(102, 102, 102);
     line-height: 150%;
+  }
+  .custom-dialog-body-p{
+    padding: 5px 0;
   }
 </style>
