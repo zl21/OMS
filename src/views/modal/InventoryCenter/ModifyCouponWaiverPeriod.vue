@@ -119,7 +119,7 @@ export default {
       const { data: { data, code } } = await this.service.inventoryCenter.periodtimeQuery();
       if (code === 0) {
         const options = data.map(item => ({
-            value: item.ID,
+            value: item.coupon_time,
             label: item.coupon_time,
             origin: item,
           }));
