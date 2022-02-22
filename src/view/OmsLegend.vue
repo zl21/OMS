@@ -3,7 +3,7 @@
     <div class="legend">
       <!-- 图例 -->
       <span style="font-weight: bold;">{{ vmI18n.t("other.legend") }}:</span>
-      <p v-for="(item) in legends" :key="item.label">
+      <p v-for="(item) in legendsList" :key="item.label">
         <span>{{ item.label }}:&nbsp;</span>
         <button
           :class="item.className"
@@ -22,31 +22,38 @@ export default {
   props: {
     legends: {
       type: Array,
-      default: []
+      default: () => []
+    }
+  },
+  data() {
+    return {
+      legendsList: []
     }
   },
   created() {
-    this.legends = [
-      {
-        label: $i18n.t("other.submission_status"), // 提交状态
-        btns: [
-          { className: 'color-blue', btnText: $i18n.t("btn.published") } // 已发布
+    this.legendsList = this.legends.length 
+      ? this.legends 
+      : [
+          {
+            label: $i18n.t("other.submission_status"), // 提交状态
+            btns: [
+              { className: 'color-blue', btnText: $i18n.t("btn.published") } // 已发布
+            ]
+          },
+          {
+            label: $i18n.t("other.draft_status"), // 草稿状态
+            btns: [
+              { className: 'color-italic-black', btnText: $i18n.t("btn.draft") } // 草稿
+              ]
+            },
+          {
+            label: $i18n.t("other.offline_expired_status"), // 下线/过期状态
+            btns: [
+              { className: 'color-italic-grey', btnText: $i18n.t("btn.offline") }, // 下线
+              { className: 'color-italic-grey', btnText: $i18n.t("btn.overdue") }, // 过期
+            ] 
+          }
         ]
-      },
-      {
-        label: $i18n.t("other.draft_status"), // 草稿状态
-        btns: [
-          { className: 'color-italic-black', btnText: $i18n.t("btn.draft") } // 草稿
-          ]
-        },
-      {
-        label: $i18n.t("other.offline_expired_status"), // 下线/过期状态
-        btns: [
-          { className: 'color-italic-grey', btnText: $i18n.t("btn.offline") }, // 下线
-          { className: 'color-italic-grey', btnText: $i18n.t("btn.overdue") }, // 过期
-        ] 
-      }
-    ]
   }
 };
 </script>
