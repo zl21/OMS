@@ -43,7 +43,7 @@ export default {
   GeneralAbnormalImportSku: {
     component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
   },
-  // 接口平台-淘宝接口-SKU异常明细导出
+  // 接口平台-淘宝/通用/京东订单接口-SKU异常明细导出
   AbnormalSkuFilter: {
     component: () => import('@/views/modal/commodityCenter/AbnormalSkuFilter.vue'),
   },
