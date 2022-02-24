@@ -27,5 +27,9 @@ export default {
   // 平台店铺商品表-导入
   CUSTOMSTANDPRODUCTITEMIMPORT: {
     component: () => import('@/views/modal/InventoryCenter/customGoodsImport.vue')
+  },
+  // 平台店铺商品表-修改优惠券免除时间
+  ModifyCouponWaiverPeriod: {
+    component: () => import('@/views/modal/InventoryCenter/ModifyCouponWaiverPeriod.vue')
   }
 };

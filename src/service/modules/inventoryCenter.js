@@ -15,5 +15,8 @@ export default {
     getChannelStorageFtpQuery: params => network.post('/p/cs/getChannelStorageFtpQuery', params), // 获取列表数据
     // 仓间调拨-审核
     transferAudit: params => network.post('/p/cs/transfer/audit', params),
-
+    // 平台店铺商品表-查询优惠券时间
+    periodtimeQuery: params => network.post('/p/cs/product/item/periodtimeQuery', params),
+    // 平台店铺商品表-批量修改优惠券时间
+    periodtimeAdd: params => network.post('/p/cs/product/item/periodtimeAdd', params),
 };
