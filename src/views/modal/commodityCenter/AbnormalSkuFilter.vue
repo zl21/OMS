@@ -23,7 +23,6 @@ export default {
   },
   data() {
     return {
-      configTableName: ['ST_C_PRODUCT_STRATEGY', 'AC_F_RECEIVABLES_ADJUSTMENT', 'SG_B_PHY_OUT_RESULT', 'SC_B_TRANSFER', 'OC_B_MULTI_STORE_DISTRIBUTION', 'OC_B_SEND_OUT', 'OC_B_JD_RETURN_ORDER'],
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
         btnsite: 'right', // 按钮位置 (right , center , left)
@@ -52,9 +51,6 @@ export default {
               const tableLabel = this.getTableLabel(route.tableName);
               const query = new FormData();
               query.append('searchdata', JSON.stringify(params));
-              // query.append('filename', tableLabel);
-              // query.append('filetype', '.xlsx');
-              // query.append('showColumnName', true);
               query.append('menu', tableLabel);
               const res = await this.service.interfacePlatform.exportErrorSku(query);
               if (res.data.code === 0) {
