@@ -802,6 +802,12 @@ export default {
           )
         },
         {
+          key: 'PT_ANCHOR_ID',
+          title: '平台主播ID',
+          dataAcessKey: 'PT_ANCHOR_ID',
+          width: 100
+        },
+        {
           key: 'ANCHOR_ID',
           title: '主播ID',
           dataAcessKey: 'ANCHOR_ID',
