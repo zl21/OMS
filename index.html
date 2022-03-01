@@ -40,8 +40,47 @@
 </head>
 
 <body>
-  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-  <!-- <script src="/src/assets/js/jquery.min.js"></script> -->
+  <script>
+    window.ProjectConfig = {
+      customizeMixins: {
+        setPanel: {
+          mounted() {
+            this.clickSignout = () => {
+              this.signout();
+              axios.get('/p/c/getIamConf').then(res => {
+                var data = res.data;
+                if (!data.code && data.data['iam.login.enable']) {
+                  window.location.href = data.data['iam.logout.url'];
+                }
+              });
+            };
+          },
+          destroyed() {
+            // 判断是否是生产环境
+            // var isProd = window.location.host.indexOf('r3.ecsemir.com');
+            // var backUrl = encodeURI(window.location.href);
+            // var isLogin = window.localStorage.getItem('loginStatus');
+            // 此方法用于判断是否需要将登录页面重定向至iam系统
+            // 确认是否是登出状态，如果是登出则跳转至iam，此方法为前端自己控制backUrl的地址。方便本地调试
+            // if (isProd !== -1) {
+            //   window.location.href = 'http://iam.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+            // } else {
+            //   var url = 'http://iamtest.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+            //   window.location.href = url;
+            // }
+          },
+        },
+      }
+    }
+    var protocol = window.location.protocol;
+    var host = window.location.host;
+    var pathname = window.location.pathname;
+    // 判断是非为非本地环境且访问协议为http
+    var isPass = protocol.indexOf('http:') == 0 && host.indexOf('localhost') == -1;
+    if (isPass) {
+      window.location.href = 'https://' + window.location.host + window.location.pathname;
+    }
+  </script>
   <script src="https://qiniu.ecsemir.com/oms-front/jquery.ztree.core.min.js"></script>
   <script src="https://qiniu.ecsemir.com/oms-front/jquery.ztree.excheck.min.js"></script>
   <script src="https://qiniu.ecsemir.com/oms-front/jquery.ztree.exhide.min.js"></script>
@@ -55,16 +94,6 @@
   <!-- <script src="https://unpkg.zhimg.com/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.js"></script> -->
   <!-- <script src="/static/R3/r3.min.js"></script> -->
   <!-- <script src="https://unpkg.zhimg.com/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.js.map"></script> -->
-  <script>
-    var protocol = window.location.protocol;
-    var host = window.location.host;
-    var pathname = window.location.pathname;
-    // 判断是非为非本地环境且访问协议为http
-    var isPass = protocol.indexOf('http:') == 0 && host.indexOf('localhost') == -1;
-    if (isPass) {
-      window.location.href = 'https://' + window.location.host + window.location.pathname;
-    }
-  </script>
 </body>
 
 </html>
