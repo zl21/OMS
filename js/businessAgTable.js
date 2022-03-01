@@ -82,7 +82,7 @@ export default {
 		},
 	},
 	methods: {
-		gridReady() {
+		gridReady(e) {
 			// this.tabth = [];
 			// this.row = [];
 			const self = this;
@@ -91,6 +91,7 @@ export default {
         let th = self.setColumn(this.columnState, self.agTableConfig.columnDefs)
         this.agTableConfig.columnDefs = th;
       }
+			this.$emit('grid-ready', e);
 		},
 		tableRowDbclick(data) {
 			this.$emit('on-row-dblclick', data.data);
