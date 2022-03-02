@@ -70,8 +70,9 @@
     var protocol = window.location.protocol;
     var host = window.location.host;
     var pathname = window.location.pathname;
-    // 判断是非为非本地环境且访问协议为http
-    var isPass = protocol.indexOf('http:') == 0 && host.indexOf('localhost') == -1;
+    var href = window.location.href;
+    // 判断协议是否是https，且为非本地环境
+    var isPass = protocol.indexOf('http:') == 0 && host.indexOf('localhost') == -1 && href.indexOf('47.103.6.45:27777') == -1;;
     if (isPass) {
       window.location.href = 'https://' + window.location.host + window.location.pathname;
     }
