@@ -1,14 +1,9 @@
 <template>
-  <div class="loginBG">
-    <div
+  <div class="mask">
+    <!-- <div
       ref="container"
       class="container"
     >
-      <!-- <img
-        src="../assets/image/logo.1.png"
-        alt="logo"
-        class="logo"
-      > -->
       <span class="titleTOP">用户登录</span>
       <div class="divAccount">
         <img
@@ -42,7 +37,7 @@
         class="btn"
         @click="login"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -100,6 +95,11 @@
 </script>
 
 <style lang="less" scoped>
+  .mask{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
   .loginBG {
     background: url(../assets/image/loginBg.jpg) no-repeat;
     background-size: cover;
