@@ -22,7 +22,25 @@ export default {
       no: '',
       selectInputChangeVal: '',
       flodData: 'el-icon-arrow-down', //折叠箭头动态样式
-      currentFlod: 'down' //存储当前选中的箭头状态
+      currentFlod: 'down', //存储当前选中的箭头状态
+      url: {
+        autoUrl: '/p/cs/fuzzyquerybyak',
+        tableUrl: '/p/cs/QueryList',
+        tableSearchUrl:'/p/cs/newQueryList'
+      },
+      network: R3.network,
+      eventFun: {
+        'on-input-value-change': () => {
+          console.log('on-input-value-change');
+        },
+        'on-fkrp-selected': () => {
+          // item.oneObj(item.itemdata.isBackRowItem ? row : item.itemdata)
+          console.log('on-fkrp-selected');
+        },
+        'on-page-change': () => {
+          console.log('on-page-change');
+        }
+      }
     }
   },
   props: {
@@ -85,9 +103,11 @@ export default {
     });
     setTimeout(() => {
       let nodes = this.$refs.popLabel;
-      nodes && nodes.forEach(e => {
+      let nodes2 = this.$refs.dropSelect;
+      let allNodes = [nodes, nodes2].filter(i => Array.isArray(i)).flat()
+      allNodes.forEach(e => {
         let oldNodeStr = e.$el.firstElementChild.innerHTML;
-        if (oldNodeStr.includes('*')) e.$el.firstElementChild.innerHTML = `<i style="color:#ed4014">*</i> ${oldNodeStr.slice(1)}`;
+        if (oldNodeStr.includes('*')) e.$el.firstElementChild.innerHTML = `<i style="color:#ed4014;">*</i> ${oldNodeStr.slice(1)}`;
       });
     }, 500);
   },
@@ -178,6 +198,116 @@ export default {
         val(this.currentFlod);
       }
       this.initRenderForm()
+    },
+    // 接口入参- 模糊传参
+    sendAutoMessage(item) {
+      const { colid, fixedcolumns } = item.itemdata
+      return {
+        colid,
+        fixedcolumns
+      }
+    },
+    // 接口入参- 表格模糊传参
+    sendTableMessage(item) {
+      const { isdroplistsearch, colid } = item.itemdata
+      return {
+        isdroplistsearch: isdroplistsearch || true,
+        refcolid: colid,
+      }
+    },
+
+    propsData(item) {
+      const { single, fkdisplay, pid, valuedata } = item.itemdata;
+      const defaultSelectedDrp = item.style == 'dropSelect'
+        && fkdisplay == 'drp'
+        && [{ ID: pid, Label: valuedata }]
+
+      return {
+        single: fkdisplay == 'mrp' ? false : fkdisplay == 'drp' ? true : !!single, // 是否单选
+        placeholder: item.itemdata.placeholder || 'y请输入',
+        enterType: false,
+        serviceId: item.itemdata.serviceId || '',
+        // totalRowCount: item.itemdata.totalRowCount || 0,
+        pageSize: item.itemdata.pageSize || 10,
+        isBackRowItem: item.itemdata.isBackRowItem || false,
+        dataEmptyMessage: item.itemdata.dataEmptyMessage || '数据加载中...',
+        columns: item.itemdata.columns || [],
+        columnsKey: item.itemdata.columnsKey || [],
+        showColnameKey: item.itemdata.showColnameKey || 'isak',
+        hidecolumns: item.itemdata.hidecolumns || [],
+        defaultSelected: item.itemdata.defaultSelectedMrp || defaultSelectedDrp || [],
+        className: item.itemdata.className || ''
+      };
+    },
+    valueChange(val, item) {
+      let arg
+      val = val || []
+      const { fkdisplay, isBackRowItem } = item.itemdata
+      if (fkdisplay == 'drp') {
+        item.itemdata.pid = val[0].ID;
+        item.itemdata.valuedata = val[0].Label;
+        item.itemdata.defaultSelectedMrp = val;
+        arg = isBackRowItem ? val[0] : item.itemdata
+      } else {
+        item.itemdata.pid = '';
+        item.itemdata.valuedata = '';
+        val.forEach((it) => {
+          item.itemdata.pid += `${it.ID},`;
+          item.itemdata.valuedata += `${it.Label},`;
+        })
+        item.itemdata.pid = item.itemdata.pid.replace(/,$/, '');
+        item.itemdata.valuedata = item.itemdata.valuedata.replace(/,$/, '');
+        item.itemdata.defaultSelectedMrp = val;
+        arg = isBackRowItem ? val : item.itemdata
+      }
+      if (typeof item.oneObj == 'function') {
+        this.runMethods(item.oneObj(arg))
+      }
+    },
+    blur(val, itemdata) {
+      // 失焦：模糊搜索的选中、clear都会先走失焦
+      // if (this.isFuzzy && !this.isHandleSelect) {
+      //   console.warn('fuzzy blur，模糊搜索失去焦点了，自行处理！');
+      //   setTimeout(() => {
+      //     if (this.itemdata.pid && this.itemdata.valuedata) { // 假装已经走了选中事件
+      //       return
+      //     } else {
+      //       if (this.AutoData.length) {
+      //         const val = this.AutoData;
+              itemdata.pid = val.map(i => i.ID).join();
+              itemdata.valuedata = val.map(i => i.Label).join();
+      //         if (this.isBackRowItem) {
+      //           this.$emit('inputBlur', val[0]);
+      //         } else {
+                this.$emit('inputBlur', itemdata);
+      //         }
+      //       } else {
+      //         console.warn('模糊搜索未查询到数据！');
+      //         this.itemdata.pid = '';
+      //         this.itemdata.valuedata = '';
+      //         if (this.isBackRowItem) {
+      //           this.$emit('inputBlur', {});
+      //         } else {
+      //           this.$emit('inputBlur', this.itemdata);
+      //         }
+      //       }
+      //     }
+      //     this.isHandleSelect = false;
+      //   }, 3000);
+      // } else {
+      //   console.warn('not fuzzy blur');
+      // }
+    },
+    clear(val, itemdata) {
+      console.log(itemdata);
+      itemdata.pid = '';
+      itemdata.valuedata = '';
+      this.$emit('inputClear', itemdata);
+      // if (this.isBackRowItem) {
+      //   this.$emit('getFkChooseItem', {});
+      // } else {
+      //   this.$emit('getFkChooseItem', this.itemdata);
+      // }
     },
   }
 }
