@@ -26,7 +26,7 @@ export default {
       url: {
         autoUrl: '/p/cs/fuzzyquerybyak',
         tableUrl: '/p/cs/QueryList',
-        tableSearchUrl:'/p/cs/newQueryList'
+        tableSearchUrl: '/p/cs/newQueryList'
       },
       network: R3.network,
       eventFun: {
@@ -210,6 +210,12 @@ export default {
     // 接口入参- 表格模糊传参
     sendTableMessage(item) {
       const { isdroplistsearch, colid } = item.itemdata
+      // 定制查询接口
+      if (typeof item.popBefore == 'function') {
+        this.url.tableSearchUrl = item.itemdata.url
+        this.runMethods(item.popBefore(item.itemdata))
+        return item.itemdata.params
+      }
       return {
         isdroplistsearch: isdroplistsearch || true,
         refcolid: colid,
