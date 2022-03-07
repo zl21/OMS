@@ -139,7 +139,7 @@ export default {
 // export default OmsButton;
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 @import "burgeonComponents/css/OmsButton.less";
 </style>
 

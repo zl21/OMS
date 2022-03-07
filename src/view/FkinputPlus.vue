@@ -98,12 +98,13 @@ const FkinputPlus = {
     objList: {
       type: Array
     },
-    version: {
-      type: String
-    }
+    // version: {
+    //   type: String
+    // }
   },
   data() {
     return {
+      version: window.ProjectConfig.Version,
       inputVal: '',
       isFuzzy: false,
       fuzzyQueryList: [],
@@ -238,10 +239,10 @@ const FkinputPlus = {
       }
       const query = this.handelParam();
       const { serviceId } = this.itemdata
-      const version = this.version || this.itemdata.version || '1.3'; // 默认1.3,兼容斯凯奇
+      // const version = this.version || this.itemdata.version || '1.3'; // 默认1.3,兼容斯凯奇
       const result = await this.service.common.QueryList(query, serviceId ? { serviceId } : 0);
       if (result.data.code == 0) {
-        const { row, tabth, totalRowCount } = version == '1.4' ? result.data.data : result.data.datas
+        const { row, tabth, totalRowCount } = this.version == '1.4' ? result.data.data : result.data.datas
         tabth.map(it => it.isak && (it.show = true));
         this.data = {
           "start": 0,
@@ -306,7 +307,7 @@ const FkinputPlus = {
         return
       }
       const query = this.handelFuzzyParam(val);
-      const { version, serviceId } = this.itemdata
+      const { serviceId } = this.itemdata
       const {
         data: { code, data, message },
       } = await this.service.common.fuzzyquerybyak(query, serviceId ? { serviceId } : 0);

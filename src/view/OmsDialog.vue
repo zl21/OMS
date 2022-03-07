@@ -8,7 +8,7 @@
 -->
 <!--引入曼卡龙的弹框组件-->
 <template>
-  <div v-if="showModal">
+  <div v-if="showModal" class="omsDialog ark-dialog">
     <Modal v-model="modal"
            :title="title"
            :titleAlign="titleAlign"
@@ -43,6 +43,6 @@ import OmsDialog from 'burgeonComponents/js/OmsDialog.js';
 export default OmsDialog;
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import "burgeonComponents/css/OmsDialog.less";
 </style>

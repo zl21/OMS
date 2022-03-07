@@ -51,7 +51,7 @@ class custUtils {
    */
   static msgTips(self, type, tips, tipsType = 1) {
     self.$Message[type]({
-      content: tipsType == 1 ? $i18n.t(`modalTips.${tips}`) : tips, // 请选择需要新增退单记录！
+      content: tipsType == 1 ? $i18n.t(`tip.${tips}`) : tips, // 请选择需要新增退单记录！
       duration: 5,
       top: 80,
     })
@@ -343,7 +343,7 @@ class custUtils {
             // 复杂类型--方法绑定、formDataItem的itemdata子对象赋值
             // fDitem.itemdata = item;
             fDitem.serviceId = fDitem.serviceId || 'r3-cp' // 不配置则框架根据路由上的表名默认拼接该中心的网关
-            fDitem.version = fDitem.version || '1.4' // // 必须
+            // fDitem.version = fDitem.version || '1.4' // // 必须
             fDitem.itemdata.display = item.colid || 'No-colid' // 必须，用于查询表数据
             fDitem.itemdata.display = item.colname || 'No-colname' // 必须
             fDitem.itemdata.display = item.display || 'No-text' // 非必须，展示什么类型(eg.text、xml等)，非特殊类型不用写

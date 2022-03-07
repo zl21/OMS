@@ -1,6 +1,6 @@
 <!-- 开发文档：http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/914142/2/2061 -->
 <template>
-  <div class="customized-modal" style="width: 430px">
+  <div class="cus-modal" style="width: 430px">
     <Spin v-if="spinShow" size="large" fix />
     <OmsForm :form-config="downLoadFormConfig">
       <template #compile="{ rowData }">
@@ -23,10 +23,10 @@
     >
       <p>
         <!-- 订单下载任务已经发送，任务ID： -->
-        {{ vmI18n.t("modalTips.bn") }}
+        {{ vmI18n.t("tip.bn") }}
         <span class="taskID" @click="taskIDClick">{{ taskId }}</span>
         <!-- ，请前往接口下载任务表查看下载进度！ -->
-        {{ vmI18n.t("modalTips.bo") }}
+        {{ vmI18n.t("tip.bo") }}
       </p>
     </Modal>
 
@@ -101,7 +101,7 @@ const DownLoad = {
             }, // 按钮点击事件
           },
           {
-            type: "", // 按钮类型
+            type: "primary", // 按钮类型
             text: $i18n.t("btn.download"), // 下载 按钮文本
             icon: "", // 按钮图标
             size: "", // 按钮大小
@@ -135,7 +135,7 @@ const DownLoad = {
     modalTitle() {
       let title = this.modalConfig[this.tableName].modalTitle
         ? this.modalConfig[this.tableName].modalTitle
-        : $i18n.t("modalTitle.orderDownload");
+        : $i18n.t("mT.orderDownload");
       return title;
     },
   },
@@ -216,7 +216,7 @@ const DownLoad = {
 export default DownLoad;
 </script>
 
-<style >
+<style lang="less" scoped>
 .downLoadTaobaoOrder .ark-radio-group {
   display: flex !important;
 }

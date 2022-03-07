@@ -118,6 +118,6 @@ import OmsTable from 'burgeonComponents/js/OmsTable';
 export default OmsTable;
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import 'burgeonComponents/css/OmsTable.less';
 </style>

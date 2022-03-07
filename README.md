@@ -349,3 +349,9 @@
 | v2.0.5~6 | change version |
 | v2.0.7 | style：delete table.less |
 | v2.0.10 | i18n key 变更 |
+| v2.0.11 | 下载组件样式调整、fktable引用ark的样式 |
+| v2.0.12 | 弹窗组件footer-btn |
+| v2.0.13 | form noFlod |
+| v2.0.15 | ag index及老ag列移动的处理 |
+| v2.0.20 | form flodClick |
+| v2.0.21 | version: window.ProjectConfig.Version |

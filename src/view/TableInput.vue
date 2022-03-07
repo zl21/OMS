@@ -142,7 +142,7 @@ export default {
 // export default TableInput;
 </script>
 
-<style lang='less'>
+<style lang="less" scoped>
 @import "burgeonComponents/css/TableInput.less";
 </style>
 

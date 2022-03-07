@@ -15,7 +15,7 @@
     </button>
     <fkdialog
       v-if="fkDialog.dialog && itemdata.reftable !== 'VP_C_VIP_ACC'"
-      :title="多选"
+      :title="'多选'"
       :tablename="itemdata.reftable"
       :tableid="itemdata.reftableid"
       :right-list="fkDialog.lists"
