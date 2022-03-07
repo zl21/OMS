@@ -212,10 +212,11 @@ export default {
       const { isdroplistsearch, colid } = item.itemdata
       // 定制查询接口
       if (typeof item.popBefore == 'function') {
-        this.url.tableSearchUrl = item.itemdata.url
+        this.url.tableSearchUrl = item.itemdata.api
         this.runMethods(item.popBefore(item.itemdata))
         return item.itemdata.params
       }
+      this.url.tableSearchUrl = '/p/cs/newQueryList'
       return {
         isdroplistsearch: isdroplistsearch || true,
         refcolid: colid,
