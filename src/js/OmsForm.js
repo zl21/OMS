@@ -135,12 +135,12 @@ export default {
       if (this.currentFlod == 'down') {
         this.formConfig.formData.forEach((it, n) => {
           if (n + 1 > showNum) {
-            it.class = `${it.class ? it.class : ''} long`
+            it.class = it.class ? `${it.class} long` : 'long'
           }
         });
       } else {
         this.formConfig.formData.forEach((it, n) => {
-          it.class = it.class ? it.class.replace('long', '') : '';
+          it.class = it.class ? it.class.replace(/long/g, '').trim() : '';
         });
       }
       // this.$forceUpdate()
@@ -192,7 +192,7 @@ export default {
       //   this.flodData = 'el-icon-arrow-up';
       //   // this.currentFlod = val;
       // }
-      this.flodData === 'el-icon-arrow-down' ? this.flodData = 'el-icon-arrow-up' : this.flodData = 'el-icon-arrow-down';
+      this.flodData = this.flodData === 'el-icon-arrow-down' ? 'el-icon-arrow-up' : 'el-icon-arrow-down';
       this.currentFlod = this.flodData == 'el-icon-arrow-down' ? 'down' : 'up'
       if (typeof val == 'function') {
         val(this.currentFlod);
