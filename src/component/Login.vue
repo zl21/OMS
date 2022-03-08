@@ -1,5 +1,5 @@
 <template>
-  <div class="loginBG">
+  <div class="loginBG" v-if="renderOmsLogin">
     <div
       ref="container"
       class="container"
@@ -47,6 +47,11 @@
   const { network, urlSearchParams } = R3;
   export default {
     name: 'Login',
+    data() {
+      return {
+        renderOmsLogin: false,
+      }
+    },
     beforeMount() {
       this.redirectIam();
     },
@@ -56,6 +61,8 @@
           const { data } = res;
           if (!data.code && data.data['iam.login.enable']) {
             window.location.href = data.data['iam.login.url'];
+          } else {
+            this.renderOmsLogin = true;
           }
         })
       },
