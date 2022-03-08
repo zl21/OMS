@@ -1,6 +1,6 @@
 <template>
-  <div class="mask">
-    <!-- <div
+  <div class="loginBG">
+    <div
       ref="container"
       class="container"
     >
@@ -37,7 +37,7 @@
         class="btn"
         @click="login"
       />
-    </div> -->
+    </div>
   </div>
 </template>
 
