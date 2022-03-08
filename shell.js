@@ -6,7 +6,8 @@ const filepath1 = path.resolve(__dirname, 'package.json')
 const filepath2 = path.resolve(__dirname, '.npmrc')
 var content = '',
   text = '',
-  title = ''
+  title = '',
+  pack = null
 // fs.copyFileSync('./package.json', './package.copy.json') */
 fs.readFile(filepath, (err, data) => {
   if (err) return
@@ -15,7 +16,7 @@ fs.readFile(filepath, (err, data) => {
 fs.readFile(filepath1, (err, data) => {
   if (err) return
   pack = JSON.parse(data.toString())
-  title = `@bojun/oms-ui@${pack.version} 发版啦！`
+  title = `@bojun/oms-ui@${pack.version} 发版啦！点击链接查看cdn。`
 })
 
 /* fs.readFile(filepath2, (err, data) => {
@@ -62,7 +63,8 @@ setTimeout(e => {
       text,
       title,
       picUrl: 'https://image.dbbqb.com/202203031702/563c99e7874db554e7b6e35b2199a2ef/O33Xo',
-      messageUrl: 'http://8.142.133.189:28880/'
+      // messageUrl: 'http://8.142.133.189:28880/'
+      messageUrl: `https://cdn.jsdelivr.net/npm/@bojun/oms-ui@${pack.version}/burgeon.publish/businessComponents.min.css`
     }
   }
   var postData = JSON.stringify(body)

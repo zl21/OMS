@@ -355,3 +355,4 @@
 | v2.0.15 | ag index及老ag列移动的处理 |
 | v2.0.20 | form flodClick |
 | v2.0.21 | version: window.ProjectConfig.Version |
+| v2.0.23 | 23版本 |
