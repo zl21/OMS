@@ -20,7 +20,7 @@ fs.readFile(filepath1, (err, data) => {
 
 fs.readFile(filepath2, (err, data) => {
   if (err) return
-  const content2 = `registry=https://registry.npmjs.org/`
+  const content2 = "registry=https://registry.npmjs.org/:_authToken=${NPM_TOKEN}"
   fs.writeFile(filepath2, content2, { flag: 'w' }, err => {
     if (err) {
       return
