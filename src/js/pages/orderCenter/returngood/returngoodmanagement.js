@@ -820,6 +820,7 @@ export default {
           receiver_province_name: '', // 收货人省份
           receiver_city_name: '', // 收货人市
           receiver_area_name: '', // 收货人县
+          STREET: '', // 收货人乡镇
           SHIP_AMT: '', // 换货邮费
           RECEIVE_ADDRESS: '' // 收货人地址
         },
@@ -959,6 +960,14 @@ export default {
             oneObj: e => {
               this.twoObjs(e);
             }
+          },
+          {
+            style: 'input',
+            label: '收货人乡镇', // 收货人乡镇
+            dataAcessKey: 'STREET',
+            disabled: false, // 按钮禁用控制
+            value: 'STREET',
+            width: '6'
           },
           {
             style: 'input',
@@ -1874,6 +1883,7 @@ export default {
       replace.receiver_area_name = data.RECEIVER_AREA_NAME ? data.RECEIVER_AREA_NAME : ''; // 收货人县
       replace.SHIP_AMT = data.SHIP_AMT ? data.SHIP_AMT : ''; // 换货邮费
       replace.RECEIVE_ADDRESS = data.RECEIVE_ADDRESS ? data.RECEIVE_ADDRESS : ''; // 收货人地址
+      replace.STREET = data.STREET ? data.STREET : ''; // 收货人乡镇
       this.replacement.formData[5].itemdata.valuedata = data.RECEIVER_PROVINCE_NAME ? data.RECEIVER_PROVINCE_NAME : '';
       this.replacement.formData[6].itemdata.valuedata = data.RECEIVER_CITY_NAME ? data.RECEIVER_CITY_NAME : '';
       this.replacement.formData[7].itemdata.valuedata = data.RECEIVER_AREA_NAME ? data.RECEIVER_AREA_NAME : '';

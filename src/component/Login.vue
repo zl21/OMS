@@ -1,5 +1,5 @@
 <template>
-  <div class="loginBG">
+  <div class="loginBG" v-if="renderOmsLogin">
     <div
       ref="container"
       class="container"
@@ -52,8 +52,20 @@
   const { network, urlSearchParams } = R3;
   export default {
     name: 'Login',
+    data() {
+      return {
+        renderOmsLogin: false,
+      }
+    },
     beforeMount() {
-      this.redirectIam();
+      const { host } = window.location;
+      const isLocal = host.indexOf('localhost') !== -1;
+      if (isLocal) {
+        this.renderOmsLogin = true;
+      } else {
+        this.redirectIam();
+      }
+      
     },
     methods: {
       redirectIam() {

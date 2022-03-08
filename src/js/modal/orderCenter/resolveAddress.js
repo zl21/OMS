@@ -54,6 +54,7 @@ export default {
         receiver_phone: '',
         receiver_zip: '',
         ship_amt: '',
+        street: '', // 乡镇
       }, // 需要提交的数据
       btnConfig: {
         typeAll: 'error', // 按钮统一风格样式
