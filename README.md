@@ -195,3 +195,4 @@ console.log($i18n.t(common.all));
 | v1.2.1 | add 20211206 |
 | v1.2.2 | add 20211207 |
 | v1.2.3 | add 20211208 |
+| v1.2.4 | rename @bojun/i18n |
