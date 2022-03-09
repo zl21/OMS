@@ -1,6 +1,6 @@
 {
   "name": "@bojun/oms-ui",
-  "version": "2.0.24",
+  "version": "2.0.26",
   "description": "burgeon company's business-components lib for private npm",
   "main": "burgeon.publish/businessComponents.min.js",
   "files": [
@@ -11,7 +11,7 @@
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js",
     "report": "npm run build --report",
     "push": "npm run build && yalc push",
-    "pub": "npm run build && npm publish && node shell.js",
+    "pub": "npm run build && npm publish && node ding.js",
     "watch": "nodemon --ignore burgeon.publish/ --ignore node_modules/ -C -e js,vue,less,scss --debug -x 'npm run push'"
   },
   "scriptsComments": {

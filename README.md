@@ -357,3 +357,4 @@
 | v2.0.21 | version: window.ProjectConfig.Version |
 | v2.0.23 | 23版本 |
 | v2.0.24 | add script: <npm run pub> |
+| v2.0.26 | script test |
