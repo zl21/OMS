@@ -359,3 +359,4 @@
 | v2.0.24 | add script: <npm run pub> |
 | v2.0.26 | script test |
 | v2.0.27 | jk test |
+| v2.0.28 | TableSku 自定义展示数据 |
