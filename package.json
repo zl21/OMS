@@ -1,6 +1,6 @@
 {
   "name": "@bojun/oms-ui",
-  "version": "2.0.26-t1",
+  "version": "2.0.27",
   "description": "burgeon company's business-components lib for private npm",
   "main": "burgeon.publish/businessComponents.min.js",
   "files": [
@@ -61,7 +61,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@burgeon/internationalization": "^1.1.1",
+    "@bojun/i18n": "^1.2.4",
     "awe-dnd": "^0.3.4",
     "compressing": "^1.5.1",
     "cross-env": "^7.0.3",
