@@ -147,7 +147,7 @@ export default {
             ], */
             itemdata: {
               isBackRowItem: true,
-              colid: 1700825619,
+              colid: 1700826095,
               colname: 'CP_C_SHOP_ID', // 当前字段的名称
               /* refcolval: {
                 fixcolumn: 'CP_C_PLATFORM_ID',
