@@ -697,6 +697,13 @@ export default {
           // },
           {
             style: 'input',
+            label: '收货人乡镇',
+            value: 'STREET',
+            dataAcessKey: 'STREET',
+            width: '6',
+          },
+          {
+            style: 'input',
             label: window.vmI18n.t('form_label.aconsignee_address'), // 收货人地址
             value: 'RECEIVER_ADDRESS',
             dataAcessKey: 'RECEIVER_ADDRESS',
