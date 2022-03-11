@@ -361,3 +361,4 @@
 | v2.0.27 | jk test |
 | v2.0.28 | TableSku 自定义展示数据 |
 | v2.0.29 | style：OmsTable冗余button样式处理 |
+| v2.0.30 | style：图例删除冗余样式 |

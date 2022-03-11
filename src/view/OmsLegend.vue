@@ -1,5 +1,5 @@
 <template>
-  <div class="legend-wrap">
+  <div class="queryDesc">
     <div class="legend">
       <!-- 图例 -->
       <span style="font-weight: bold;">{{ vmI18n.t("other.legend") }}:</span>
@@ -57,7 +57,3 @@ export default {
   }
 };
 </script>
-
-<style lang="less" scoped>
-@import "burgeonComponents/css/OmsLegend.less";
-</style>
