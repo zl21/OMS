@@ -4013,6 +4013,7 @@ export default {
       replace.receiver_city_name = this.onSelectData[0].CP_C_REGION_CITY_ENAME; // 收货人市
       replace.receiver_area_id = this.onSelectData[0].CP_C_REGION_AREA_ID; // 收货人县id
       replace.receiver_area_name = this.onSelectData[0].CP_C_REGION_AREA_ENAME; // 收货人县
+      replace.STREET = this.onSelectData[0].STREET; // 收货人乡镇
       // 展示
       this.information.formData[5].itemdata.valuedata = this.onSelectData[0].CP_C_SHOP_TITLE; // 店铺名称
       this.replacement.formData[5].itemdata.valuedata = this.onSelectData[0].CP_C_REGION_PROVINCE_ENAME; // 省
