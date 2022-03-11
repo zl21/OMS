@@ -2343,6 +2343,7 @@ export default {
       self.formConfig1.formValue.RESERVE_BIGINT11 = data.RESERVE_BIGINT11; // 是否传仓
       self.formConfig1.formValue.RESERVE_BIGINT12 = data.RESERVE_BIGINT12; // 同城标识
       self.formConfig1.formValue.IS_SELF_TAKE = data.IS_SELF_TAKE; // 是否自提
+      self.formConfig1.formValue.STREET = data.STREET; // 是否自提
       self.getWarehouse(data.CP_C_SHOP_ID, data.CP_C_PHY_WAREHOUSE_ID);
       setTimeout(() => {
         self.canChange = true;

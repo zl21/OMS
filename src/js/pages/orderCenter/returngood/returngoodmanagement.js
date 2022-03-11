@@ -1308,6 +1308,7 @@ export default {
               replace.receiver_city_name = res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 收货人市
               replace.receiver_area_id = res.data.data.receivingGoods.CP_C_REGION_AREA_ID; // 收货人县id
               replace.receiver_area_name = res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 收货人县
+              replace.STREET = res.data.data.receivingGoods.STREET; // 收货人乡镇
               // 展示
 
               _this.information.formData[5].itemdata.valuedata = item.CP_C_SHOP_TITLE ? item.CP_C_SHOP_TITLE : '';
