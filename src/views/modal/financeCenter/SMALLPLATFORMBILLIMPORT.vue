@@ -169,7 +169,7 @@ export default {
                 this.formConfig.formValue.CP_C_SHOP_ID = obj.ID
                 const { ECODE, CP_C_PLATFORM_ENAME } = obj.rowItem
                 this.formConfig.formValue.shop_ecode = typeof ECODE == 'string' ? ECODE : ECODE.val
-                this.formConfig.formValue.CP_C_PLATFORM_ENAME = typeof CP_C_PLATFORM_ENAME == 'string' ? CP_C_PLATFORM_ENAME : CP_C_PLATFORM_ENAME.val
+                CP_C_PLATFORM_ENAME && this.formConfig.formValue.CP_C_PLATFORM_ENAME = CP_C_PLATFORM_ENAME.val
               } else {
                 this.formConfig.formValue.CP_C_PLATFORM_ENAME = ''
               }
