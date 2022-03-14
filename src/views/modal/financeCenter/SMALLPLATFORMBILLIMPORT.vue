@@ -167,8 +167,9 @@ export default {
               console.log(obj);
               if (Object.keys(obj).length) {
                 this.formConfig.formValue.CP_C_SHOP_ID = obj.ID
-                this.formConfig.formValue.shop_ecode = obj.rowItem.ECODE.val
-                this.formConfig.formValue.CP_C_PLATFORM_ENAME = obj.rowItem.CP_C_PLATFORM_ENAME.val
+                const { ECODE, CP_C_PLATFORM_ENAME } = obj.rowItem
+                this.formConfig.formValue.shop_ecode = typeof ECODE == 'string' ? ECODE : ECODE.val
+                this.formConfig.formValue.CP_C_PLATFORM_ENAME = typeof CP_C_PLATFORM_ENAME == 'string' ? CP_C_PLATFORM_ENAME : CP_C_PLATFORM_ENAME.val
               } else {
                 this.formConfig.formValue.CP_C_PLATFORM_ENAME = ''
               }
@@ -253,34 +254,46 @@ export default {
         this.files = e.path[0].files[0];
       }
     },
-    downloadUrlFile(url) {
-      // 下载模板
-      const self = this;
-      const domFrame = window.parent.document.getElementById('downLoadListFrame');
-      if (domFrame != null) {
-        window.parent.document.body.removeChild(domFrame);
-      }
-      const downloadFile = {};
-      if (typeof downloadFile.iframe === 'undefined') {
+    downloadUrlFile() {
+      let src = 'https://semir-r3-upload-prod.oss-cn-zhangjiakou.aliyuncs.com/OSS-Bucket/IMPORT/%E9%80%9A%E7%94%A8%E5%B9%B3%E5%8F%B0%E5%8E%9F%E5%A7%8B%E8%B4%A6%E5%8D%95%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xls'
+
+      const download_file = {};
+      if (typeof download_file.iframe === 'undefined') {
         const iframe = document.createElement('iframe');
-        iframe.setAttribute('id', 'downLoadListFrame');
-        self.addEvent('load', iframe, () => {
-          self.iframeLoad(iframe);
-        });
-        iframe.src = url;
-        iframe.style.display = 'none';
-        downloadFile.iframe = iframe;
-        document.body.appendChild(downloadFile.iframe);
-        setTimeout(() => {
-          iframe.src = '';
-        }, 1000);
+        download_file.iframe = iframe;
+        document.body.appendChild(download_file.iframe);
       }
+      download_file.iframe.src = src;
+      download_file.iframe.style.display = 'none';
     },
-    iframeLoad(iframe) {
-      // 判断iframe的src
-      const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
-      console.log('src::', src);
-    },
+    // downloadUrlFile(url) {
+    //   // 下载模板
+    //   const self = this;
+    //   const domFrame = window.parent.document.getElementById('downLoadListFrame');
+    //   if (domFrame != null) {
+    //     window.parent.document.body.removeChild(domFrame);
+    //   }
+    //   const downloadFile = {};
+    //   if (typeof downloadFile.iframe === 'undefined') {
+    //     const iframe = document.createElement('iframe');
+    //     iframe.setAttribute('id', 'downLoadListFrame');
+    //     self.addEvent('load', iframe, () => {
+    //       self.iframeLoad(iframe);
+    //     });
+    //     iframe.src = url;
+    //     iframe.style.display = 'none';
+    //     downloadFile.iframe = iframe;
+    //     document.body.appendChild(downloadFile.iframe);
+    //     setTimeout(() => {
+    //       iframe.src = '';
+    //     }, 1000);
+    //   }
+    // },
+    // iframeLoad(iframe) {
+    //   // 判断iframe的src
+    //   const src = iframe.src ? iframe.src : iframe.contentWindow.locatiion.href;
+    //   console.log('src::', src);
+    // },
     upLoad() {
       this.showImport = true
     },
