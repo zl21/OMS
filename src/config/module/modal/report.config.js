@@ -25,7 +25,7 @@ export default {
     component: () => import('@/views/modal/reportCenter/rcOrderReportExport.vue'),
   },
   // 订单报表导出
-  CUSTOMSTANDQGSETTLEACCOUNTEXPORT: {
+  OrderReportExport: {
     component: () => import('@/views/modal/commodityCenter/exportDialog.vue'),
   },
 };
