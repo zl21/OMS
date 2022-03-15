@@ -23,9 +23,14 @@ export default {
   },
   data() {
     return {
-      componentData: {
-        tableName: 'IP_C_STANDPLAT_PRO_mcdr'
-      }
+      page: this.$route.params.tableName,
     };
+  },
+  computed: {
+    componentData() {
+      let obj = {}
+      obj.tableName = this.page == "PS_C_SKU" ? "PS_SKU_WAREHOUSE_TAG_IMPORT" : this.page
+      return obj
+    }
   }
 };
