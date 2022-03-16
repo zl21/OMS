@@ -340,13 +340,16 @@ export default {
             _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
             _this.$emit('returnData', res.data.data);
             _this.customizeInvoke(_this.componentData.tableName, res.data.data);
-            _this.loading = false;
           } else if (res.data.code === -1) {
             // 导入失败
-            const err = res.data.message || this.vmI18n.t('modalTips.zd');
-            _this.isError = true;
-            _this.errorMessage = err;
-            _this.loading = false;
+            const errDa = res.data.data
+            if (errDa.includes("http://") || errDa.includes("https://")) {
+              this.downloadUrlFile(errDa);
+            } else {
+              const err = res.data.message || this.vmI18n.t('modalTips.zd');
+              _this.isError = true;
+              _this.errorMessage = err;
+            }
             // 清空已上传文件
             const xFile = document.getElementById('xFile');
             xFile.value = '';
@@ -354,7 +357,6 @@ export default {
             this.files = {};
             this.file = {};
           } else if (res.data.data) {
-            _this.loading = false;
             _this.isError = true;
             // 清空已上传文件
             const xFile = document.getElementById('xFile');
@@ -364,10 +366,9 @@ export default {
             this.file = {};
             _this.errorMessage = res.data.message;
             this.downloadUrlFile(res.data.data);
-            _this.loading = false;
           }
         })
-        .catch(() => {
+        .finally(() => {
           _this.loading = false;
         });
     },
@@ -389,7 +390,8 @@ export default {
       } else if (table === 'ST_C_SEND_RULE') {
         _this.$parent.$parent.$parent.refresh();
       } else if (table === 'PS_SKU_WAREHOUSE_TAG_IMPORT') {
-        _this.$parent.$parent.$parent.refresh();
+        $('.ark-btn-posdefault').trigger("click")
+        _this.$parent.$parent.$parent.closeActionDialog();
       } else if (table === 'ST_C_SEND_RULE_RATE') {
         _this.$parent.$parent.$parent.refresh();
       } else if (table === 'ST_C_PRODUCT_STRATEGY') {
