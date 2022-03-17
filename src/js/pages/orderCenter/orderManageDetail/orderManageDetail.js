@@ -173,7 +173,8 @@ export default {
           MERGE_SOURCE_CODE: '',
           USER_NICK: '',
           WEIGHT: '',
-          CP_C_PHY_WAREHOUSE_ENAME: ''
+          CP_C_PHY_WAREHOUSE_ENAME: '',
+          STREET: '', // 乡镇
         }
       },
       tab2: {

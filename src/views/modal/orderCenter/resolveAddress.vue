@@ -20,7 +20,7 @@
           placeholder
           @on-blur="parseAddress"
           @on-enter="parseAddress"
-        /></Input>
+        />
       </FormItem>
       <!-- <FormItem label="新地址"> -->
       <FormItem :label="vmI18n.t('table_label.new_address')">
@@ -85,12 +85,18 @@
           <span class="fenge">{{ vmI18n.t("common.region") }}</span>
         </div>
       </FormItem>
+      <FormItem label="乡镇">
+        <Input
+          v-model="data.street"
+          placeholder
+        />
+      </FormItem>
       <!-- <FormItem label="新详细地址"> -->
       <FormItem :label="vmI18n.t('table_label.new_detailed_address')">
         <Input
           v-model="data.receiver_address"
           placeholder
-        /></Input>
+        />
       </FormItem>
       <!-- <FormItem label="收货人"> -->
       <FormItem :label="vmI18n.t('form_label.consignee')">
@@ -98,28 +104,28 @@
           v-model="data.receiver_name"
           placeholder
           :regx="regx.name"
-        /></Input>
+        />
       </FormItem>
       <!-- <FormItem label="收货人手机"> -->
       <FormItem :label="vmI18n.t('form_label.consignee_phone')">
         <Input
           v-model="data.receiver_mobile"
           placeholder
-        /></Input>
+        />
       </FormItem>
       <!-- <FormItem label="收货人电话"> -->
       <FormItem :label="vmI18n.t('form_label.consignee_tel')">
         <Input
           v-model="data.receiver_phone"
           placeholder
-        /></Input>
+        />
       </FormItem>
       <!-- <FormItem label="收货人邮编"> -->
       <FormItem :label="vmI18n.t('form_label.consignee_postcode')">
         <Input
           v-model="data.receiver_zip"
           placeholder
-        /></Input>
+        />
       </FormItem>
       <!-- <FormItem label="收货人邮费">
         <Input v-model="data.ship_amt" placeholder :regx="regx.shipamt"></Input>
