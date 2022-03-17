@@ -4,11 +4,6 @@
       ref="container"
       class="container"
     >
-      <!-- <img
-        src="../assets/image/logo.1.png"
-        alt="logo"
-        class="logo"
-      > -->
       <span class="titleTOP">用户登录</span>
       <div class="divAccount">
         <img
@@ -73,6 +68,8 @@
           const { data } = res;
           if (!data.code && data.data['iam.login.enable']) {
             window.location.href = data.data['iam.login.url'];
+          } else {
+            this.renderOmsLogin = true;
           }
         })
       },
@@ -112,6 +109,11 @@
 </script>
 
 <style lang="less" scoped>
+  .mask{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
   .loginBG {
     background: url(../assets/image/loginBg.jpg) no-repeat;
     background-size: cover;
