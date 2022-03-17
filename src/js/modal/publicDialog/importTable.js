@@ -124,15 +124,12 @@ export default {
             this.downloadUrlFile(itemObj[0].downloadUrl);
           }
           break;
+        case 'PS_SKU_WAREHOUSE_TAG_IMPORT': //
+          this.getDownloadTemp(itemObj[0].downloadUrl, null, true);
+          break;
         case 'IP_C_STANDPLAT_PRO': // 通用商品下载
-          this.downloadUrlFile(itemObj[0].downloadUrl);
-          break;
         case 'IP_C_STANDPLAT_PRO_mcdr': // 通用商品-猫超商品导入
-          this.downloadUrlFile(itemObj[0].downloadUrl);
-          break;
         case 'SG_B_CHANNEL_PRODUCT_import': // 平台店铺商品表-导入
-          this.downloadUrlFile(itemObj[0].downloadUrl);
-          break;
         case 'IP_B_TAOBAO_ORDER': // 淘宝订单接口-sku异常导入
         case 'IP_B_STANDPLAT_ORDER': // 通用订单接口-sku异常导入
         case 'IP_B_JINGDONG_ORDER':// 京东订单接口-sku异常导入
@@ -145,12 +142,12 @@ export default {
     },
 
     // 定制下载模板
-    getDownloadTemp(url, param) {
+    getDownloadTemp(url, param, get) {
       if (param) {
         this.loading = true;
         axios({
           url,
-          method: 'post',
+          method: get ? 'get' : 'post',
           data: param
         }).then(res => {
           this.loading = false;
@@ -162,7 +159,7 @@ export default {
         this.loading = true;
         axios({
           url,
-          method: 'post'
+          method: get ? 'get' : 'post',
         }).then(res => {
           this.loading = false;
           if (res.data.code === 0) {
@@ -343,13 +340,16 @@ export default {
             _this.$Message.success(res.data.message || this.vmI18n.t('modalTips.ze'));
             _this.$emit('returnData', res.data.data);
             _this.customizeInvoke(_this.componentData.tableName, res.data.data);
-            _this.loading = false;
           } else if (res.data.code === -1) {
             // 导入失败
-            const err = res.data.message || this.vmI18n.t('modalTips.zd');
-            _this.isError = true;
-            _this.errorMessage = err;
-            _this.loading = false;
+            const errDa = res.data.data
+            if (errDa.includes("http://") || errDa.includes("https://")) {
+              this.downloadUrlFile(errDa);
+            } else {
+              const err = res.data.message || this.vmI18n.t('modalTips.zd');
+              _this.isError = true;
+              _this.errorMessage = err;
+            }
             // 清空已上传文件
             const xFile = document.getElementById('xFile');
             xFile.value = '';
@@ -357,7 +357,6 @@ export default {
             this.files = {};
             this.file = {};
           } else if (res.data.data) {
-            _this.loading = false;
             _this.isError = true;
             // 清空已上传文件
             const xFile = document.getElementById('xFile');
@@ -367,10 +366,9 @@ export default {
             this.file = {};
             _this.errorMessage = res.data.message;
             this.downloadUrlFile(res.data.data);
-            _this.loading = false;
           }
         })
-        .catch(() => {
+        .finally(() => {
           _this.loading = false;
         });
     },
@@ -391,6 +389,9 @@ export default {
         _this.$parent.$parent.$parent.find();
       } else if (table === 'ST_C_SEND_RULE') {
         _this.$parent.$parent.$parent.refresh();
+      } else if (table === 'PS_SKU_WAREHOUSE_TAG_IMPORT') {
+        $('.ark-btn-posdefault').trigger("click")
+        _this.$parent.$parent.$parent.closeActionDialog();
       } else if (table === 'ST_C_SEND_RULE_RATE') {
         _this.$parent.$parent.$parent.refresh();
       } else if (table === 'ST_C_PRODUCT_STRATEGY') {
