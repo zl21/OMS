@@ -250,7 +250,7 @@ export default {
       let arg
       val = val || []
       const { fkdisplay, isBackRowItem } = item.itemdata
-      if (fkdisplay == 'drp') {
+      if (fkdisplay == 'drp' && val.length) {
         item.itemdata.pid = val[0].ID;
         item.itemdata.valuedata = val[0].Label;
         item.itemdata.defaultSelectedMrp = val;
