@@ -166,10 +166,17 @@ export default {
             oneObj: (obj) => {
               console.log(obj);
               if (Object.keys(obj).length) {
-                this.formConfig.formValue.CP_C_SHOP_ID = obj.ID
-                const { ECODE, CP_C_PLATFORM_ENAME } = obj.rowItem
-                this.formConfig.formValue.shop_ecode = typeof ECODE == 'string' ? ECODE : ECODE.val
-                CP_C_PLATFORM_ENAME && (this.formConfig.formValue.CP_C_PLATFORM_ENAME = CP_C_PLATFORM_ENAME.val)
+                if (obj.rowItem.ID && obj.rowItem.ID.val) { // 下拉选中
+                  this.formConfig.formValue.CP_C_SHOP_ID = obj.ID
+                  const { ECODE, CP_C_PLATFORM_ENAME } = obj.rowItem
+                  this.formConfig.formValue.shop_ecode = typeof ECODE == 'string' ? ECODE : ECODE.val
+                  CP_C_PLATFORM_ENAME && (this.formConfig.formValue.CP_C_PLATFORM_ENAME = CP_C_PLATFORM_ENAME.val)
+                } else { // 模糊搜索
+                  this.formConfig.formValue.CP_C_SHOP_ID = obj.ID
+                  const { ECODE, CP_C_PLATFORM_ENAME } = obj.rowItem
+                  this.formConfig.formValue.shop_ecode = ECODE
+                  CP_C_PLATFORM_ENAME && (this.formConfig.formValue.CP_C_PLATFORM_ENAME = CP_C_PLATFORM_ENAME)
+                }
               } else {
                 this.formConfig.formValue.CP_C_PLATFORM_ENAME = ''
                 this.formConfig.formValue.shop_ecode = ''
