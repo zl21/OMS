@@ -10,5 +10,8 @@ export default {
   CUSTOMSTANDPLATFORMGOODSIDIMPORT: {
     component: () => import('@/views/modal/commodityCenter/customstandplatformgoodsidimport.vue'),
   },
-
+  // 猫超商家仓修改
+  AscpWarehouseCodeUpdate: {
+    component: () => import('@/views/modal/commodityCenter/AscpWarehouseCodeUpdate.vue'),
+  },
 };
