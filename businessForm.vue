@@ -152,6 +152,43 @@
             
           </FormItem>
 
+          <FormItem
+            v-if="item.style === 'dropSelect'"
+            ref="dropSelect"
+            :label="
+              `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
+              ':'
+            "
+            :class="item.class ? `${item.class} popInput ${item.itemdata.readonly ? 'disabled' : ''}` : `popInput ${item.itemdata.readonly ? 'disabled' : ''}`"
+          >
+            <arkDropMultiSelectFilter
+              :PropsData="propsData(item)"
+              :Url="item.itemdata.url || url"
+              v-model="item.itemdata.dropValue"
+              :http="network"
+              :filterMode="item.itemdata.filterMode == undefined ? true : item.itemdata.filterMode"
+              :AutoRequest="sendAutoMessage(item)"
+              :TableRequest="sendTableMessage(item)"
+              @on-change="(row) => valueChange(row, item)"
+              @on-keyup=" 
+                (row) =>
+                  runMethods(
+                    item.inputEnter(
+                      item.itemdata.isBackRowItem ? row : item.itemdata
+                    ),
+                    true
+                  )
+              "
+              @on-keydown="(row) => runMethods(typeof item.keydownFun == 'function' &&item.keydownFun(item.itemdata))"
+              @on-blur="(row) => blur(row, item.itemdata)"
+              @on-clear="(row) => clear(row, item.itemdata)"
+              @pop-show-before="
+                (backData) => runMethods(item.popBefore(backData), true)
+              "
+              :EventFun="eventFun"
+            />
+          </FormItem>
+
           <!-- 输入框弹框单多选-arkUi -->
           <FormItem v-if="item.style === 'popInputPlus'"
             ref="popLabel"
