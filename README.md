@@ -342,4 +342,5 @@
 | v1.3.6-skx | 列排序信息-同框架-不取交集 |
 | v1.3.7-skx | 列排序信息-同框架-不取交集-补丁 |
 | v1.3.8-skx | ag-gridReady回调 |
-| v1.3.9-skx | businessForm 拓展dropSelect下拉多选 |
+| v1.3.9-skx | ag-去除console |
+| v1.4.0-skx | businessForm 拓展dropSelect下拉多选 |
