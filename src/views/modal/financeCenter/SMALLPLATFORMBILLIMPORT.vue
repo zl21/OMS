@@ -115,6 +115,7 @@ export default {
           END_TIME: '',
           IMPORT_TYPE: '',
           BILL_TYPE: '',
+          REMARKS: '',
         },
         formData: [
           {
@@ -243,6 +244,13 @@ export default {
                 label: '明细',
               },
             ],
+          },
+          {
+            style: 'textarea',
+            label: '备注',
+            value: 'REMARKS',
+            width: '24',
+            disabled: false,
           },
         ],
       },
