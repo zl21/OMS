@@ -115,7 +115,7 @@ export default {
           END_TIME: '',
           IMPORT_TYPE: '',
           BILL_TYPE: '',
-          REMARKS: '',
+          remarks: '',
         },
         formData: [
           {
@@ -249,7 +249,7 @@ export default {
             class: 'REMARKS_DOM',
             style: 'textarea',
             label: '备注',
-            value: 'REMARKS',
+            value: 'remarks',
             width: '24',
             disabled: false,
           },
@@ -340,7 +340,7 @@ export default {
       } else if (!data.BILL_TYPE) {
         _this.loading = false;
         return _this.$Message.error('请选择账单类型！');
-      } else if (data.REMARKS.length > 200) {
+      } else if (data.remarks.length > 200) {
         _this.loading = false;
         return _this.$Message.error('备注长度不能大于200字符！');
       } else if (!_this.text) {
