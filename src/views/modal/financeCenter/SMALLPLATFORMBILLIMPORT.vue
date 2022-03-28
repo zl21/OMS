@@ -415,6 +415,9 @@ export default {
         &:last-child {
           margin-top: 6px;
         }
+        textarea {
+          line-height: 1.5;
+        }
       }
     }
 
