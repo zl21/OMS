@@ -224,7 +224,7 @@ export default {
               },
               {
                 value: '2',
-                label: '异常订单补录',
+                label: '异常账单补录',
               },
             ],
           },
