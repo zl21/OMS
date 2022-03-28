@@ -246,6 +246,7 @@ export default {
             ],
           },
           {
+            class: 'REMARKS_DOM',
             style: 'textarea',
             label: '备注',
             value: 'REMARKS',
@@ -339,6 +340,9 @@ export default {
       } else if (!data.BILL_TYPE) {
         _this.loading = false;
         return _this.$Message.error('请选择账单类型！');
+      } else if (data.REMARKS.length > 200) {
+        _this.loading = false;
+        return _this.$Message.error('备注长度不能大于200字符！');
       } else if (!_this.text) {
         _this.loading = false;
         return _this.$Message.error('请选择需要导入的文件！');
@@ -405,6 +409,14 @@ export default {
   .formBox {
     border: 1px solid #a5a5a5;
     padding: 16px 10px 16px 0;
+
+    /deep/.ark-row {
+      .ark-col.ark-col-span-24 {
+        &:last-child {
+          margin-top: 6px;
+        }
+      }
+    }
 
     /deep/.ark-form-item.popInput {
       .ark-fkrp-select div {
