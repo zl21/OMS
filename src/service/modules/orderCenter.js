@@ -8,10 +8,12 @@ export default {
   /**
    * 零售发货单
    */
+  batchBillCopy: params => network.post('/api/cs/oc/oms/v1/batch/billCopy', params), // 零售-批量复制
   pullBackSearchOrder: params => network.post('/api/cs/oc/oms/v1/pullBackSearchOrder', params), // 零售-撤回重新分仓
   checkWmsWithdrawSplit: params => network.post('/api/cs/oc/oms/v1/checkWmsWithdrawSplit', params), // 零售-撤回单拆单-校验
   saveWmsWithdrawSplit: params => network.post('/api/cs/oc/oms/v1/saveWmsWithdrawSplit', params), // 零售-撤回单拆单-确定
   cancelOversoldMarking: params => network.post('/api/cs/oc/oms/v1/cancelOversoldMarking', params), // 零售-取消'超'标
+  handleReleaseTag: params => network.post('/api/cs/oc/oms/v1/handleReleaseTag', params), // 零售-释放库存标
   openOversoldMarking: params => network.post('/api/cs/oc/oms/v1/openOversoldMarking', params), // 零售-'超'标
   refundInLogisticsUpdate: params => network.post('/api/cs/oc/oms/v1/refundInLogisticsUpdate', params), // 退换-修改Pos管控仓
   auditOrder: params => network.post('/api/cs/oc/oms/v1/auditOrder', params), // 审核

@@ -365,7 +365,23 @@ export default {
               this.formConfig.formValue.CP_C_SHOP_ID = val.pid;
               this.formConfig.formValue.CP_C_SHOP_NAME = val.valuedata;
             },
-          }
+          },
+          {
+            style: 'select', // 下拉框类型
+            label: '赔付原因', // 赔付原因
+            width: '6', // 所占宽度宽度
+            value: 'AC_F_COMPENSATION_REASON', // 输入框的值
+            multiple: true,
+            options: []
+          },
+          {
+            style: 'select', // 下拉框类型
+            label: '赔付类型', // 赔付原因
+            width: '6', // 所占宽度宽度
+            value: 'AC_F_COMPENSATION_TYPE', // 输入框的值
+            multiple: true,
+            options: []
+          },
         ],
         formValue: {},
         flodClick() {
@@ -544,6 +560,7 @@ export default {
   created() {
     const self = this;
     self.getSelectData();
+    self.getCompensationReason();
   },
   mounted() {
     this.$nextTick(() => {
@@ -618,6 +635,50 @@ export default {
         }
         resolve(optionData);
       });
+    },
+    // 获取下拉数据
+    async getCompensationReason() {
+      // 赔付类型
+      const arrCompensationType = await this.handleQueryList({
+        refcolid: 1700816190, // 
+        isdroplistsearch: true,
+        startindex: 0, 
+        range: 999, // 页数
+      }, 'ENAME', 'ID');
+      // 赔付原因
+      const arrCompensationReason = await this.handleQueryList({
+        refcolid: 1700815423, // 
+        isdroplistsearch: true,
+        startindex: 0, 
+        range: 999, // 页数
+      }, 'AC_F_COMPENSATION_TYPE_ENAME', 'ID');
+      this.formConfig.formData.forEach(item => {
+        if (item.value === 'AC_F_COMPENSATION_TYPE') {
+          item.options = arrCompensationType;
+        } else if (item.value === 'AC_F_COMPENSATION_REASON') {
+          item.options = arrCompensationReason;
+        }
+      });
+    },
+    // 查询接口
+    async handleQueryList (params, labelName, valueName) {
+      return new Promise(async resolve => {
+        const query = new FormData();
+        query.append('searchdata', JSON.stringify({...params}));
+        const res = await this.service.common.QueryList(query);
+        let optionData = [];
+        console.log('data', res);
+        if (res.data.datas) {
+          const { row } = res.data.datas;
+          optionData = (row || []).map(item => {
+            return {
+              label: item[labelName].val,
+              value: item[valueName].val,
+            }
+          })
+        };
+        resolve(optionData);
+      })
     },
     // 查找
     find() {
@@ -752,7 +813,9 @@ export default {
         BILL_STATUS: mainData.BILL_STATUS,
         ORDER_NO: mainData.ORDER_NO,
         RESERVE_BIGINT01: mainData.RESERVE_BIGINT01,
-        CP_C_SHOP_ID: mainData.CP_C_SHOP_ID
+        CP_C_SHOP_ID: mainData.CP_C_SHOP_ID,
+        AC_F_COMPENSATION_REASON: mainData.AC_F_COMPENSATION_REASON,
+        AC_F_COMPENSATION_TYPE: mainData.AC_F_COMPENSATION_TYPE,
       };
 
       const param = {

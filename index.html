@@ -3,17 +3,24 @@
 
 <head>
   <meta charset="UTF-8">
+  <script>
+    var href = window.location.href;
+    if(href.indexOf('47.103.6.45:27777') == -1) {
+      var meta = document.createElement('meta');
+      meta.content = "upgrade-insecure-requests";
+      meta['httpEquiv'] = "Content-Security-Policy";
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    }
+  </script>
   <title></title>
   <script src="/static/utils/jquery.min.js"></script>
   <script src="/static/wangeditor/wangEditor.js"></script>
   <link href="/static/ark.iconfont/iconfont.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/@syman/ark-ui@1.1.40/dist/styles/ark-ui.css" rel="stylesheet" />
+  <link href="https://unpkg.zhimg.com/@syman/ark-ui@1.1.40/dist/styles/ark-ui.css" rel="stylesheet" />
   <!--暂时使用本地资源文件,等待arkUI发版后恢复cdn引入方式-->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.css" rel="stylesheet"> -->
+  <!-- <link href="https://unpkg.zhimg.com/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.css" rel="stylesheet"> -->
   <!-- <link href="/static/R3/r3.min.css" rel="stylesheet"/> -->
-  <!-- <link href="https://cdn.bootcdn.net/ajax/libs/zTree.v3/3.5.40/css/zTreeStyle/zTreeStyle.css" rel="stylesheet"> -->
-  <link href="http://kb-r3-upload-prod.oss-cn-shanghai.aliyuncs.com/CDN-Static/css/zTreeStyle-V3.5.40.css"
-    rel="stylesheet">
+  <link href="https://qiniu.ecsemir.com/oms-front/zTreeStyle-V3.5.40.css" rel="stylesheet">
   <style>
     html,
     body {
@@ -35,37 +42,67 @@
       margin: 0;
       list-style: none;
     }
+
   </style>
 
 </head>
 
 <body>
-  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-  <!-- <script src="/src/assets/js/jquery.min.js"></script> -->
-
-  <script
-    src="http://kb-r3-upload-prod.oss-cn-shanghai.aliyuncs.com/CDN-Static/js/jquery.ztree.core-V3.5.40.min.js"></script>
-  <script
-    src="http://kb-r3-upload-prod.oss-cn-shanghai.aliyuncs.com/CDN-Static/js/jquery.ztree.exhide-V3.5.40.min.js"></script>
-  <script
-    src="http://kb-r3-upload-prod.oss-cn-shanghai.aliyuncs.com/CDN-Static/js/jquery.ztree.excheck-V3.5.40.js"></script>
-
-  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/zTree.v3/3.5.24/js/jquery.ztree.core.min.js"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/zTree.v3/3.5.40/js/jquery.ztree.excheck.js"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/zTree.v3/3.5.40/js/jquery.ztree.exhide.min.js"></script> -->
+  <script>
+    window.ProjectConfig = {
+      customizeMixins: {
+        setPanel: {
+          mounted() {
+            this.clickSignout = () => {
+              this.signout();
+              axios.get('/p/c/getIamConf').then(res => {
+                var data = res.data;
+                if (!data.code && data.data['iam.login.enable']) {
+                  window.location.href = data.data['iam.logout.url'];
+                }
+              });
+            };
+          },
+          destroyed() {
+            // 判断是否是生产环境
+            // var isProd = window.location.host.indexOf('r3.ecsemir.com');
+            // var backUrl = encodeURI(window.location.href);
+            // var isLogin = window.localStorage.getItem('loginStatus');
+            // 此方法用于判断是否需要将登录页面重定向至iam系统
+            // 确认是否是登出状态，如果是登出则跳转至iam，此方法为前端自己控制backUrl的地址。方便本地调试
+            // if (isProd !== -1) {
+            //   window.location.href = 'http://iam.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+            // } else {
+            //   var url = 'http://iamtest.ecsemir.com/esc-sso/logout?redirectBack=true&redirectUrl='+backUrl+'';
+            //   window.location.href = url;
+            // }
+          },
+        },
+      }
+    }
+    var protocol = window.location.protocol;
+    var host = window.location.host;
+    var pathname = window.location.pathname;
+    var href = window.location.href;
+    // 判断协议是否是https，且为非本地环境
+    var isPass = protocol.indexOf('http:') == 0 && host.indexOf('localhost') == -1 && href.indexOf('47.103.6.45:27777') == -1;
+    if (isPass) {
+      window.location.href = 'https://' + window.location.host + window.location.pathname;
+    }
+  </script>
+  <script src="https://qiniu.ecsemir.com/oms-front/jquery.ztree.core.min.js"></script>
+  <script src="https://qiniu.ecsemir.com/oms-front/jquery.ztree.excheck.min.js"></script>
+  <script src="https://qiniu.ecsemir.com/oms-front/jquery.ztree.exhide.min.js"></script>
   <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
   <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
   <script src="https://unpkg.com/vue-router@3.1.3/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@syman/ark-ui@1.1.40/dist/ark.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-
+  <script src="https://unpkg.zhimg.com/@syman/ark-ui@1.1.40/dist/ark.min.js"></script>
+  <script src="https://qiniu.ecsemir.com/oms-front/lodash.min.js"></script>
   <!--暂时使用本地资源文件,等待arkUI发版后恢复cdn引入方式-->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.js"></script> -->
+  <!-- <script src="https://unpkg.zhimg.com/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.js"></script> -->
   <!-- <script src="/static/R3/r3.min.js"></script> -->
-
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.js.map"></script> -->
-
+  <!-- <script src="https://unpkg.zhimg.com/@syman/burgeon-r3@1.0.21/r3.publish/r3.min.js.map"></script> -->
 </body>
 
 </html>

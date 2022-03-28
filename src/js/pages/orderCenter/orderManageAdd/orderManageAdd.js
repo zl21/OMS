@@ -697,6 +697,13 @@ export default {
           // },
           {
             style: 'input',
+            label: '收货人乡镇',
+            value: 'STREET',
+            dataAcessKey: 'STREET',
+            width: '6',
+          },
+          {
+            style: 'input',
             label: window.vmI18n.t('form_label.aconsignee_address'), // 收货人地址
             value: 'RECEIVER_ADDRESS',
             dataAcessKey: 'RECEIVER_ADDRESS',
@@ -2336,6 +2343,7 @@ export default {
       self.formConfig1.formValue.RESERVE_BIGINT11 = data.RESERVE_BIGINT11; // 是否传仓
       self.formConfig1.formValue.RESERVE_BIGINT12 = data.RESERVE_BIGINT12; // 同城标识
       self.formConfig1.formValue.IS_SELF_TAKE = data.IS_SELF_TAKE; // 是否自提
+      self.formConfig1.formValue.STREET = data.STREET; // 是否自提
       self.getWarehouse(data.CP_C_SHOP_ID, data.CP_C_PHY_WAREHOUSE_ID);
       setTimeout(() => {
         self.canChange = true;

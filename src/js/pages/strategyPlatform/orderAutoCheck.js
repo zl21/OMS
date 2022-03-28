@@ -490,6 +490,9 @@ export default {
               this.QueryList();
               return;
             }
+            if (data.data.code == -1) {
+              this.$Message.error(data.data.message);
+            }
             if (data.data.message) {
               // this.$Message.error(data.data.message);
             } else {

@@ -75,11 +75,15 @@ export default {
             return resultElement;
           },
           PAY_TIME: params => {
-            if(params.data.PAY_TIME === undefined) return; 
+            if(params.data.PAY_TIME === undefined) return;
             return params.data.PAY_TIME ? formatData.standardTimeConversiondateToStr(params.data.PAY_TIME) : ''
            }, // 付款时间
          AUDIT_TIME: params => { if(params.data.AUDIT_TIME === undefined) return; return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''}, // 审核时间
-         DISTRIBUTION_TIME: params => {if(params.data.DISTRIBUTION_TIME === undefined) return; return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''}, // 配货时间
+         DISTRIBUTION_TIME: params => {
+          //  if(params.data.DISTRIBUTION_TIME === undefined) return; 
+          //  return params.data.AUDIT_TIME ? formatData.standardTimeConversiondateToStr(params.data.AUDIT_TIME) : ''
+            return !!params.data.DISTRIBUTION_TIME ? formatData.standardTimeConversiondateToStr(params.data.DISTRIBUTION_TIME) : '';
+          }, // 配货时间
          CREATIONDATE: params => { if(params.data.CREATIONDATE === undefined) return; return params.data.CREATIONDATE ? formatData.standardTimeConversiondateToStr(params.data.CREATIONDATE) : ''}, // 创建时间
          HOLD_RELEASE_TIME: params => { if(params.data.HOLD_RELEASE_TIME === undefined) return; return params.data.HOLD_RELEASE_TIME ? formatData.standardTimeConversiondateToStr(params.data.HOLD_RELEASE_TIME) : ''}, // HOLD单释放时间
          SCAN_TIME: params => {if(params.data.SCAN_TIME === undefined) return; return params.data.SCAN_TIME ? formatData.standardTimeConversiondateToStr(params.data.SCAN_TIME) : ''}, // 出库时间
@@ -415,6 +419,29 @@ export default {
           {
             webname: 'Revising Logistics' // 批量修改物流
           },
+          /** -------- 批量复制-start: -------- */
+          {
+            webname: 'Batch-Drop-out copy' // 快递丢件
+          },
+          {
+            webname: 'BatchoriInvalidCopy' // 原单无效复制
+          },
+          {
+            webname: 'BatchWarehouse-Copy' // 仓库丢件
+          },
+          {
+            webname: 'BatchOther-Copy' // 其他
+          },
+          {
+            webname: 'BatchOrderWrongCopy' // 错发复制
+          },
+          {
+            webname: 'BatchOrderMissSendCopy' // 漏发复制
+          },
+          {
+            webname: 'BatchOrderGiftsOutCopy' // 赠品出库复制
+          },
+          /** -------- 批量复制-end: -------- */
           {
             webname: 'Drop-out copy' // 丢单复制
           },
@@ -681,6 +708,12 @@ export default {
           },
           {
             webname: 'OversoldMarkingOpen', // 超卖打标
+          },
+          {
+            webname: 'ReleaseMakingTag', // 手工打标 - 释放库存标
+          },
+          {
+            webname: 'ReleaseTagCancel', // 取消打标 - 释放库存标
           },
           {
             webname: 'OversoldMarkingCancel', // 取消打标-超卖打标
@@ -1555,6 +1588,44 @@ export default {
           });
           break;
         }
+        case 'ReleaseTagCancel':
+        case 'ReleaseMakingTag': {
+          if (self.selection.length === 0) {
+            self.$Message.warning({
+              content: '请选择需要释放库存标的记录！',
+              duration: 5,
+              top: 80
+            });
+            return;
+          }
+          this.pageLoad = true;
+          const ids = self.selection.map(item => item.ID);
+          const type = val == 'ReleaseTagCancel' ? 0 : 1;
+          this.service.orderCenter.handleReleaseTag({ ids, type}).then(res => {
+            this.pageLoad = false;
+            if (res.data.code == 0) {
+              self.$Message.success(res.data.message);
+              self.selection = [];
+              self.getData();
+            } else {
+              const err = res.data.message || '错误信息'
+              const columns = res.data.data.columns || '表头未返回'
+              let renderInfo = {
+                props: {
+                  columns: columns,
+                  data: res.data.data.prompt_data,
+                },
+              }
+              this.$Modal.confirm({
+                width: 500,
+                title: err,
+                mask: true,
+                render: (h) => h('Table', renderInfo),
+              })
+            }
+          });
+          break;
+        }
         case 'Newly added': {
           // 新增
           R3.store.commit('global/tabOpen', {
@@ -1562,6 +1633,67 @@ export default {
             label: window.vmI18n.t('panel_label.add_retail_shipping_order'), // 零售发货单新增
             customizedModuleName: 'orderManageAdd',
             customizedModuleId: '-1'
+          });
+          break;
+        }
+        case 'Batch-Drop-out copy':
+        case 'BatchoriInvalidCopy':
+        case 'BatchWarehouse-Copy':
+        case 'BatchOther-Copy':
+        case 'BatchOrderWrongCopy':
+        case 'BatchOrderMissSendCopy':
+        case 'BatchOrderGiftsOutCopy': {
+          // 批量复制
+          if (self.selection.length === 0) {
+            self.$Message.warning({
+              content: '请选择需要批量复制的记录！',
+              duration: 5,
+              top: 80
+            });
+            return;
+          }
+          const ids = self.selection.map(item => item.ID)
+          this.$Modal.info({
+            title: self.vmI18n.t('modalTitle.tips'), // 提示,
+            content: `当前选中 ${ids.length} 条订单，是否确认执行批量复制？`,
+            mask: true,
+            showCancel: true,
+            okText: self.vmI18n.t('common.determine'), // 确定
+            cancelText: self.vmI18n.t('common.cancel'), // 取消
+            onOk: () => {
+              self.btnConfig.loading = true;
+              // type: 快递丢件:1,原单无效复制:2,错发复制:3,漏发复制:4,赠品出库复制:5,仓库丢件:6,其他:7 ;
+              const tpArr = ['','Batch-Drop-out copy','BatchoriInvalidCopy','BatchOrderWrongCopy','BatchOrderMissSendCopy','BatchOrderGiftsOutCopy','BatchWarehouse-Copy','BatchOther-Copy']
+              const type = tpArr.indexOf(val)
+              self.service.orderCenter.batchBillCopy({type, ids}).then(res => {
+                self.btnConfig.loading = false;
+                if (res.data.code === 0) {
+                  self.$Message.success(res.data.message);
+                  self.getData();
+                  self.selection = [];
+                } else {
+                  // self.$Message.warning(res.data.message);
+                  const err = res.data.message || '错误信息' // 虚拟仓库入库失败！
+                  const columns = res.data.data.columns || '表头未返回'
+                  let renderInfo = {
+                    props: {
+                      columns: columns,
+                      data: res.data.data.prompt_data,
+                    },
+                  }
+                  this.$Modal.confirm({
+                    width: 500,
+                    title: err,
+                    mask: true,
+                    render: (h) => h('Table', renderInfo),
+                  })
+                }
+              })
+              .catch(() => {
+                self.$Message.error(self.vmI18n.t('modalTips.d6')); // 服务器请求失败
+                self.btnConfig.loading = false;
+              });
+            }
           });
           break;
         }
@@ -3092,7 +3224,7 @@ export default {
       this.batchAntiAuditModal = false;
     },
     doBatchAntiAudit() {
-      // 
+      //
       const _this = this;
       if (_this.batchAntiAuditFlag) return _this.$Message.error('有一项任务正在进行中!');
       _this.batchAntiAuditFlag = true;

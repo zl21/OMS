@@ -1,14 +1,9 @@
 <template>
-  <div class="loginBG">
+  <div class="loginBG" v-if="renderOmsLogin">
     <div
       ref="container"
       class="container"
     >
-      <!-- <img
-        src="../assets/image/logo.1.png"
-        alt="logo"
-        class="logo"
-      > -->
       <span class="titleTOP">用户登录</span>
       <div class="divAccount">
         <img
@@ -47,16 +42,37 @@
 </template>
 
 <script>
-
   import R3 from '@syman/burgeon-r3';
-
   const enableGateWay = false;
   const { network, urlSearchParams } = R3;
-  
   export default {
     name: 'Login',
-    methods: {
+    data() {
+      return {
+        renderOmsLogin: false,
+      }
+    },
+    beforeMount() {
+      const { host } = window.location;
+      const isLocal = host.indexOf('localhost') !== -1;
+      if (isLocal) {
+        this.renderOmsLogin = true;
+      } else {
+        this.redirectIam();
+      }
       
+    },
+    methods: {
+      redirectIam() {
+        network.get('/p/c/getIamConf').then(res => {
+          const { data } = res;
+          if (!data.code && data.data['iam.login.enable']) {
+            window.location.href = data.data['iam.login.url'];
+          } else {
+            this.renderOmsLogin = true;
+          }
+        })
+      },
       login() {
         let message = {};
         if (this.$refs.username.value === '') {
@@ -93,6 +109,11 @@
 </script>
 
 <style lang="less" scoped>
+  .mask{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
   .loginBG {
     background: url(../assets/image/loginBg.jpg) no-repeat;
     background-size: cover;

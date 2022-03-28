@@ -820,6 +820,7 @@ export default {
           receiver_province_name: '', // 收货人省份
           receiver_city_name: '', // 收货人市
           receiver_area_name: '', // 收货人县
+          STREET: '', // 收货人乡镇
           SHIP_AMT: '', // 换货邮费
           RECEIVE_ADDRESS: '' // 收货人地址
         },
@@ -959,6 +960,14 @@ export default {
             oneObj: e => {
               this.twoObjs(e);
             }
+          },
+          {
+            style: 'input',
+            label: '收货人乡镇', // 收货人乡镇
+            dataAcessKey: 'STREET',
+            disabled: false, // 按钮禁用控制
+            value: 'STREET',
+            width: '6'
           },
           {
             style: 'input',
@@ -1299,6 +1308,7 @@ export default {
               replace.receiver_city_name = res.data.data.receivingGoods.CP_C_REGION_CITY_ENAME; // 收货人市
               replace.receiver_area_id = res.data.data.receivingGoods.CP_C_REGION_AREA_ID; // 收货人县id
               replace.receiver_area_name = res.data.data.receivingGoods.CP_C_REGION_AREA_ENAME; // 收货人县
+              replace.STREET = res.data.data.receivingGoods.STREET; // 收货人乡镇
               // 展示
 
               _this.information.formData[5].itemdata.valuedata = item.CP_C_SHOP_TITLE ? item.CP_C_SHOP_TITLE : '';
@@ -1874,6 +1884,7 @@ export default {
       replace.receiver_area_name = data.RECEIVER_AREA_NAME ? data.RECEIVER_AREA_NAME : ''; // 收货人县
       replace.SHIP_AMT = data.SHIP_AMT ? data.SHIP_AMT : ''; // 换货邮费
       replace.RECEIVE_ADDRESS = data.RECEIVE_ADDRESS ? data.RECEIVE_ADDRESS : ''; // 收货人地址
+      replace.STREET = data.STREET ? data.STREET : ''; // 收货人乡镇
       this.replacement.formData[5].itemdata.valuedata = data.RECEIVER_PROVINCE_NAME ? data.RECEIVER_PROVINCE_NAME : '';
       this.replacement.formData[6].itemdata.valuedata = data.RECEIVER_CITY_NAME ? data.RECEIVER_CITY_NAME : '';
       this.replacement.formData[7].itemdata.valuedata = data.RECEIVER_AREA_NAME ? data.RECEIVER_AREA_NAME : '';
@@ -4002,6 +4013,7 @@ export default {
       replace.receiver_city_name = this.onSelectData[0].CP_C_REGION_CITY_ENAME; // 收货人市
       replace.receiver_area_id = this.onSelectData[0].CP_C_REGION_AREA_ID; // 收货人县id
       replace.receiver_area_name = this.onSelectData[0].CP_C_REGION_AREA_ENAME; // 收货人县
+      replace.STREET = this.onSelectData[0].STREET; // 收货人乡镇
       // 展示
       this.information.formData[5].itemdata.valuedata = this.onSelectData[0].CP_C_SHOP_TITLE; // 店铺名称
       this.replacement.formData[5].itemdata.valuedata = this.onSelectData[0].CP_C_REGION_PROVINCE_ENAME; // 省

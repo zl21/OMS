@@ -214,6 +214,11 @@ export default {
         },
         {
           flag: false,
+          column: 'STREET',
+          label: '乡镇:'
+        },
+        {
+          flag: false,
           column: 'SHIP_AMT',
           label: '邮费:'
         },

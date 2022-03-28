@@ -86,7 +86,7 @@ const baseColumnDefs = [
   {
     headerName: '修改人',
     // headerName: vmI18n.t("table_label.reviser"),
-    field: 'OWNERENAME'
+    field: 'MODIFIERENAME',
   },
   {
     headerName: '修改时间',
