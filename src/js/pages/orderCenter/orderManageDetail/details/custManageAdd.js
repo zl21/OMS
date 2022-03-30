@@ -576,6 +576,11 @@ export default {
           dataAcessKey: 'PS_C_SKU_ECODE'
         },
         {
+          key: 'ORIGIN_SKU_CODE',
+          title: '原始商品SKU',
+          dataAcessKey: 'ORIGIN_SKU_CODE'
+        },
+        {
           key: 'PS_C_PRO_ENAME',
           title: '商品名称',
           dataAcessKey: 'PS_C_PRO_ENAME',
