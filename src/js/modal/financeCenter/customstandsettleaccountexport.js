@@ -75,7 +75,7 @@
         switch(table) {
           case 'AC_F_LIGHTSUPPLY_SETTLE_ACCOUNTS':
             formdata.append('menu', '轻供结算对账汇总表');
-            return self.service.financeCenter.settleAccountExport(formdata);
+            return self.service.financeCenter.qgsettleAccountExport(formdata);
           case 'AC_F_O2O_SETTLE_ACCOUNT':
             formdata.append('menu', 'o2o结算对账汇总主表');
             return self.service.financeCenter.settleAccountExport(formdata);
