@@ -50,18 +50,9 @@
               disabled: false, // 按钮禁用控制
               btnclick: async () => {
                 const self = this;
-                const param = {
-                  id: self.$route.params.itemId,
-                  ids: this.idArray,
-                };
-                const formdata = new FormData();
-                formdata.append('param', JSON.stringify(param));
-                formdata.append('menu', 'o2o结算对账汇总主表');
-                const res = await self.service.financeCenter.settleAccountExport(
-                  formdata,
-                );
+                const { tableName } = self.$route.params;
+                const res = await self.handleSubmit(tableName);
                 if (res.data.code === 0) {
-                  publicMethodsUtil.downloadUrlFile(res.data.data);
                   self.$emit('closeActionDialog', true);
                 } else {
                   self.$message.error(res.data.message);
@@ -71,5 +62,26 @@
           ]
         }
       };
-    }
+    },
+    methods: {
+      handleSubmit(table) {
+        const self = this;
+        const param = {
+          id: self.$route.params.itemId,
+          ids: self.idArray,
+        };
+        const formdata = new FormData();
+        formdata.append('param', JSON.stringify(param));
+        switch(table) {
+          case 'AC_F_LIGHTSUPPLY_SETTLE_ACCOUNTS':
+            formdata.append('menu', '轻供结算对账汇总表');
+            return self.service.financeCenter.qgsettleAccountExport(formdata);
+          case 'AC_F_O2O_SETTLE_ACCOUNT':
+            formdata.append('menu', 'o2o结算对账汇总主表');
+            return self.service.financeCenter.settleAccountExport(formdata);
+          default:
+            return {};
+        }
+      }
+    },
   };
