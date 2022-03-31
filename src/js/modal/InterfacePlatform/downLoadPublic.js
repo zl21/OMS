@@ -412,6 +412,9 @@ export default {
       } else if (this.$route.params.tableName === 'IP_B_STANDPLAT_REFUND') {
         // console.log('通用退单接口-下载退单');
         this.downloadRenterOrder(this.pulicUrl);
+      } else if (this.$parent.title === '抖音商品下载') {
+        // console.log('通用退单接口-下载退单');
+        this.downloadRenterOrder(this.pulicUrl);
       }
     },
     // 淘宝分销、淘宝经销、通用订单
