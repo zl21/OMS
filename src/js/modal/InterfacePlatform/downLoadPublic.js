@@ -124,6 +124,10 @@ export default {
       this.pulicUrl = '/p/cs/refundDownload';
       this.downLoadPublicFormConfig.formData[1].style = '';
       this.downLoadPublicFormConfig.formData[3].label = this.vmI18n.t('other.refundNumber'); // 退单号
+    } else if (this.$parent.title === '抖音商品下载') {
+      // 抖音商品下载
+      this.downLoadPublicFormConfig = this.pulicdownLoadConfig;
+      this.pulicUrl = '/p/cs/stdp/item/get';
     }
   },
   data() {
