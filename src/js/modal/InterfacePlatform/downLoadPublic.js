@@ -417,8 +417,7 @@ export default {
         // console.log('通用退单接口-下载退单');
         this.downloadRenterOrder(this.pulicUrl);
       } else if (this.$parent.title === '抖音商品下载') {
-        // console.log('通用退单接口-下载退单');
-        this.downloadRenterOrder(this.pulicUrl);
+        this.downloadDouyin(this.pulicUrl);
       }
     },
     // 淘宝分销、淘宝经销、通用订单
@@ -558,6 +557,38 @@ export default {
         _this.$emit('closeActionDialog', true);
       } else {
         // _this.$Message.error(message);
+      }
+    },
+    async downloadDouyin(url) {
+      // 抖音商品下载方法
+      const _this = this;
+      const downData = _this.pulicdownLoadConfig;
+      if (!downData.formData[0].itemdata.pid) {
+        // 请选择需要下载的店铺
+        _this.$Message.warning(this.vmI18n.t('modalTips.be'));
+        return;
+      }
+      if (downData.formValue.startEndTimes[0] === '' && !downData.formValue.sp_ids && !downData.formValue.orderNum) {
+        _this.$Message.warning(this.vmI18n.t('modalTips.bp')); // 请选择输入日期或输入订单编号
+        return;
+      }
+      const param = {
+        shop_id: downData.formData[0].itemdata.pid,
+        sp_ids: downData.formValue.sp_ids ? downData.formValue.sp_ids : downData.formValue.orderNum, // 订单编号
+        start_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[0]), // 开始时间
+        end_time: formatData.standardTimeConversiondateToStr(downData.formValue.startEndTimes[1]), // 结束时间
+        status: downData.formValue.orderStatus || '', // 状态 必传 给默认值
+        table: _this.$route.params.tableName // 当前表名 必传
+      };
+      const fromdata = new FormData();
+      fromdata.append('param', JSON.stringify(param));
+      // 抖音下载方法
+      const {
+        data: { code, message }
+      } = await _this.service.common.publicOrderDownload(url, fromdata);
+      if (code === 0) {
+        _this.$Message.success(message);
+        _this.$emit('closeActionDialog', true);
       }
     },
     // 打开导入弹窗
