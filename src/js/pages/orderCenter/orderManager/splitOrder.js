@@ -48,7 +48,7 @@ export default {
           },
           {
             text: window.vmI18n.t('btn.confirm_splitOrder'), // 确认拆单
-            btnclick: this.confirm,
+            btnclick: _.debounce(this.confirm, 4000),
             // icon: 'ios-photos-outline',
           },
         ],
