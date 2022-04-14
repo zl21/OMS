@@ -8,6 +8,10 @@ export default {
   CUSTOMSTANDSETTLEACCOUNTEXPORT: {
     component: () => import('@/views/modal/financeCenter/customstandsettleaccountexport.vue'),
   },
+  // O2O对账结算汇总 对账单导出（新老品）
+  CUSTOMSTANDSETTLEACCOUNTEXPORTPRODUCT: {
+    component: () => import('@/views/modal/financeCenter/customstandsettleaccountexportProduct.vue'),
+  },
   // 轻供结算 对账单导出
   CUSTOMSTANDQGSETTLEACCOUNTEXPORT: {
     component: () => import('@/views/modal/financeCenter/customstandsettleaccountexport.vue'),

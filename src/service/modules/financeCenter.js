@@ -42,5 +42,7 @@ export default {
   batchAuditByQueryConditions: params => network.post('/p/cs/ac/v1/batchAuditByQueryConditions', params),
   // 批量修改截止时间
   batchUpdateEndTime: params => network.post('/p/cs/ac/v1/batchUpdateEndTime', params),
+  // 对账单导出(新老品)
+  settleAccountNewProExport: params => network.post('/p/cs/ac/v1/settleAccountNewProExport', params),
 
 };
