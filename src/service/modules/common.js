@@ -297,6 +297,11 @@ export default {
         url: '/api/cs/oc/oms/v1/import/change/sku',
         downloadUrl: 'https://semir-r3-upload-prod-read-only.oss-cn-zhangjiakou.aliyuncs.com/OSS-Bucket/taobao/item/Sku-Error-Handle.xlsx'
       }, // SKU异常导入-通用
+      {
+        tableName: 'IP_B_DOUYIN_ORDER',
+        url: '/api/cs/oc/oms/v1/import/change/sku',
+        downloadUrl: 'https://semir-r3-upload-prod-read-only.oss-cn-zhangjiakou.aliyuncs.com/OSS-Bucket/taobao/item/Sku-Error-Handle.xlsx'
+      }, // SKU异常导入-抖音
     ];
     return arr;
   },

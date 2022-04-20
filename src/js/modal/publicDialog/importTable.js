@@ -72,6 +72,7 @@ export default {
         case 'SG_B_CHANNEL_PRODUCT':
         case 'PS_C_PRO':
         case 'IP_C_TAOBAO_PRODUCT':
+        case 'IP_B_DOUYIN_ORDER':
           // eslint-disable-next-line no-case-declarations
           const searchParam = new URLSearchParams();
           searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
@@ -257,6 +258,7 @@ export default {
         case 'IP_B_TAOBAO_ORDER':
         case 'IP_B_STANDPLAT_ORDER':
         case 'IP_B_JINGDONG_ORDER':
+        case 'IP_B_DOUYIN_ORDER':
           const newUrl = `${itemObj[0].url}?tableName=${this.componentData.tableName}`;
           this.getImportDialog(newUrl);
           break;
