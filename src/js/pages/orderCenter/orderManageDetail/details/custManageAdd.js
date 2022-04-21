@@ -917,6 +917,16 @@ export default {
           title: '最晚发货时间',
           dataAcessKey: 'ESTIMATE_CON_TIME',
         },
+        {
+          key: 'NUM_IID',
+          title: '平台商品ID',
+          dataAcessKey: 'NUM_IID',
+        },
+        {
+          key: 'SKU_NUMIID',
+          title: '平台SKUID',
+          dataAcessKey: 'SKU_NUMIID',
+        },
         // {
         //   key: "SKU_SPEC",
         //   title: "规格",
