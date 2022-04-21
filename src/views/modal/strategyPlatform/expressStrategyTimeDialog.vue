@@ -37,7 +37,7 @@ export default {
         formData: [
           {
             style: 'input',
-            label: '订单时间',
+            label: '日期类型',
             width: '24',
             value: 'DAY_TYPE',
             clearable: false,
@@ -87,27 +87,45 @@ export default {
     };
   },
   beforeMount() {
-    console.log('this::', this);
+    // console.log('this::', this);
   },
   mounted() {
-    console.log(this.selectRowData);
     const select = this.selectRowData
     let item = null
-    if (false) { // 详情
-      // item =
+    if (this.$route.meta.routePrefix.includes('/SYSTEM/TABLE_DETAIL/')) { // 详情
+      const options1 = this.objList[0].childs.find(it => it.colname == 'DAY_TYPE').combobox
+      const val1 = this.objList[0].childs.find(it => it.colname == 'DAY_TYPE').valuedata
+      item = {
+        DAY_TYPE: {
+          val: options1.find(it => it.limitval == val1).limitdesc
+        },
+        BEGIN_TIME: {
+          val: this.objList[0].childs.find(it => it.colname == 'BEGIN_TIME').valuedata
+        },
+        END_TIME: {
+          val: this.objList[0].childs.find(it => it.colname == 'END_TIME').valuedata
+        },
+        BILL_STATUS: {
+          val: this.objList[0].childs.find(it => it.colname == 'BILL_STATUS').valuedata
+        },
+        ID: {
+          val: this.$route.params.itemId
+        },
+      }
     } else {
       item = select[0]
+      if (select.length >= 2) {
+        this.$Modal.fcWarning({
+          title: '警告',
+          content: '不能选择多条方案进行延期！',
+        });
+        this.$emit('closeActionDialog');
+        return
+      }
     }
-    if (select.length >= 2) {
-      this.$Modal.fcWarning({
-        title: '警告',
-        content: '不能选择多条方案进行延期！',
-      });
-      this.$emit('closeActionDialog');
-      return
-    }
+    console.log('item::', item);
     // 若方案状态不是“已审核”，则提示：“方案状态不是已审核，不允许延期！”
-    if (item.BILL_STATUS.val != '已审核') {
+    if (!['已审核', '2'].includes(item.BILL_STATUS.val)) {
       this.$Modal.fcWarning({
         title: '警告',
         content: '方案状态不是已审核，不允许延期！',
@@ -116,7 +134,6 @@ export default {
       return
     }
     // 如果当前时间晚于原来的结束时间（即方案已经不生效），则提示“方案的结束时间已过，确定仍要延期方案吗？”
-    console.log(new Date(item.END_TIME.val), +new Date(item.END_TIME.val));
     if (+new Date() > +new Date(item.END_TIME.val)) {
       this.$parent.$el.style.display = "none"
       this.$Modal.info({
@@ -138,29 +155,6 @@ export default {
     this.formConfig.formValue.DAY_TYPE = item.DAY_TYPE.val;
     this.formConfig.formValue.BEGIN_TIME = item.BEGIN_TIME.val;
     this.formConfig.formValue.END_TIME = item.END_TIME.val;
-
-    /* console.log(format.standardTimeConversion);
-    const tableInfo = this.$store.state[getModuleName()];
-    console.log(tableInfo);
-    this.infoParams = {
-      // objid: this.idArr[0],
-      // table: this.tablename
-      objid: tableInfo.buttons.selectIdArr[0],
-      table: this.$route.params.tableName
-    }; */
-    // let timeType = '1'
-
-    /* const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === '订单时间');
-    this.formConfig.formData[0].options = item.combobox.map(val => {
-      if (tableInfo.buttons.selectArr[0].DAY_TYPE.val === val.limitdesc) this.formConfig.formValue.DAY_TYPE = val.limitval;
-      return {
-        label: val.limitdesc,
-        value: val.limitval
-      };
-    });
-    this.formConfig.formValue.BEGIN_TIME = tableInfo.buttons.selectArr[0].BEGIN_TIME.val;
-    this.formConfig.formValue.END_TIME = tableInfo.buttons.selectArr[0].END_TIME.val;
-     */
   },
   methods: {
     async confirmChange() {
