@@ -34,7 +34,7 @@ export default {
    * @property {Array} rowData 表格的所有数据
    * @property {Array} rowArr 选中的数据
    */
-  props: ['idArray', 'objList', 'tablename', 'rowArr'],
+  props: ['idArray', 'objList', 'tablename', 'selectRowData'],
   data() {
     return {
       dialogLoad: false,
@@ -46,7 +46,7 @@ export default {
         },
         formData: [
           {
-            style: 'select',
+            style: 'input',
             label: '订单时间',
             width: '24',
             value: 'DAY_TYPE',
@@ -97,6 +97,39 @@ export default {
     };
   },
   mounted() {
+    console.log(this.selectRowData);
+    const select = this.selectRowData
+    let item = null
+    if (false) { // 详情
+      // item =
+    } else {
+      item = select[0]
+    }
+    if (select.length >= 2) {
+      this.$Modal.fcWarning({
+        title: '警告',
+        content: '不能选择多条方案进行延期！',
+      });
+      this.$emit('closeActionDialog');
+      return
+    }
+    // 若方案状态不是“已审核”，则提示：“方案状态不是已审核，不允许延期！”
+    if (item.BILL_STATUS.val != '已审核') {
+      this.$Modal.fcWarning({
+        title: '警告',
+        content: '方案状态不是已审核，不允许延期！',
+      });
+      this.$emit('closeActionDialog');
+      return
+    }
+    this.infoParams = {
+      objid: item.ID.val,
+      table: this.$route.params.tableName
+    }
+    this.formConfig.formValue.DAY_TYPE = item.DAY_TYPE.val;
+    this.formConfig.formValue.BEGIN_TIME = item.BEGIN_TIME.val;
+    this.formConfig.formValue.END_TIME = item.END_TIME.val;
+
     /* console.log(format.standardTimeConversion);
     const tableInfo = this.$store.state[getModuleName()];
     console.log(tableInfo);
@@ -107,8 +140,8 @@ export default {
       table: this.$route.params.tableName
     }; */
     // let timeType = '1'
-    return
-    const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === '订单时间');
+
+    /* const item = tableInfo.formItems.defaultFormItemsLists.find(item => item.coldesc === '订单时间');
     this.formConfig.formData[0].options = item.combobox.map(val => {
       if (tableInfo.buttons.selectArr[0].DAY_TYPE.val === val.limitdesc) this.formConfig.formValue.DAY_TYPE = val.limitval;
       return {
@@ -118,6 +151,7 @@ export default {
     });
     this.formConfig.formValue.BEGIN_TIME = tableInfo.buttons.selectArr[0].BEGIN_TIME.val;
     this.formConfig.formValue.END_TIME = tableInfo.buttons.selectArr[0].END_TIME.val;
+     */
   },
   methods: {
     async confirmChange() {
@@ -129,12 +163,18 @@ export default {
       fromdata.append('END_TIME', format.getFormatDate(formValue.END_TIME, 'yyyy-MM-dd HH:mm:ss'));
       this.dialogLoad = true;
       try {
-        const res = await this.service.strategyPlatform.holdOrderUpdateStrategyEndTime(fromdata);
+        const res = await this.service.strategyPlatform.extEntTime(fromdata);
         this.dialogLoad = false;
         if (res.data.data.code === 0) {
-          this.$Message.success('调整策略时间成功');
+          this.$Message.success(res.data.data.message);
           this.$emit('confirmImport');
           this.$emit('closeActionDialog');
+        } else {
+          // this.$Message.error(res.data.data.message);
+          this.$Modal.fcError({
+            title: '错误',
+            content: res.data.data.message,
+          });
         }
       } catch (error) {
         this.dialogLoad = false;
