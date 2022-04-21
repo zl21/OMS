@@ -1,21 +1,11 @@
 <template>
-  <div
-    v-loading="dialogLoad"
-    class="time-dialog"
-  >
-    <div class="time-dialog-form">
-      <businessForm
-        :form-config="formConfig"
-      />
-    </div>
-    <businessButton
-      :btn-config="btnConfig"
-    />
+  <div v-loading="dialogLoad" class="time-dialog">
+    <businessForm :form-config="formConfig" />
+    <businessButton :btn-config="btnConfig" />
   </div>
 </template>
 
 <script>
-  // import httpServer from '@/utils/request';
 import businessButton from 'professionalComponents/businessButton';
 import businessForm from 'professionalComponents/businessForm';
 import format from '@/assets/js/__utils__/date';
@@ -96,6 +86,9 @@ export default {
       }
     };
   },
+  beforeMount() {
+    console.log('this::', this);
+  },
   mounted() {
     console.log(this.selectRowData);
     const select = this.selectRowData
@@ -121,6 +114,22 @@ export default {
       });
       this.$emit('closeActionDialog');
       return
+    }
+    // 如果当前时间晚于原来的结束时间（即方案已经不生效），则提示“方案的结束时间已过，确定仍要延期方案吗？”
+    console.log(new Date(item.END_TIME.val), +new Date(item.END_TIME.val));
+    if (+new Date() > +new Date(item.END_TIME.val)) {
+      this.$parent.$el.style.display = "none"
+      this.$Modal.info({
+        title: '警告',
+        content: '方案的结束时间已过，确定仍要延期方案吗？',
+        mask: true,
+        showCancel: true,
+        onOk: () => {
+          this.$parent.$el.style.display = "block"
+          // this.$parent.$parent.showModal = true
+          // this.$parent.value = true
+        }
+      });
     }
     this.infoParams = {
       objid: item.ID.val,
@@ -185,14 +194,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .time-dialog {
+.time-dialog {
   display: flex;
   width: 400px;
   flex-direction: column;
-  .time-dialog-form {
-    display: inline-flex;
-    width: 100%;
-    justify-content: center;
+  .orderManageEdit {
+    margin-left: -10px;
+    padding-top: 8px;
+  }
+  .one_button {
+    margin-top: 10px;
   }
 }
 </style>
