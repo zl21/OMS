@@ -68,7 +68,7 @@ R3.launchApplication({
         template: '<h1>Here is my customized component.</h1>'
       }
     }
-    ...
+    ......
   }
 });
 ```
