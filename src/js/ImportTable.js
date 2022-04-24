@@ -58,7 +58,7 @@ export default {
   computed: {
     isAsync() {
       return this.componentData.isAsync === false ? false : true; // 默认true，即异步
-    }
+    },
     webname() {
       const { objTabActionDialogConfig, dialogComponentName } = this.$parent?.$parent || this.$parent?.$parent?.$parent
       if (objTabActionDialogConfig) {
