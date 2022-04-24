@@ -72,11 +72,13 @@ export default {
         case 'SG_B_CHANNEL_PRODUCT':
         case 'PS_C_PRO':
         case 'IP_C_TAOBAO_PRODUCT':
-        case 'IP_B_DOUYIN_ORDER':
           // eslint-disable-next-line no-case-declarations
           const searchParam = new URLSearchParams();
           searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
           this.getDownloadTemp(itemObj[0].downloadUrl, searchParam);
+          break;
+        case 'IP_B_DOUYIN_ORDER':
+          this.downloadUrlFile(itemObj[0].downloadUrl);
           break;
         case 'PS_C_SKUGROUP':
           if (this.componentData.operationType === 'baseInfo') {
