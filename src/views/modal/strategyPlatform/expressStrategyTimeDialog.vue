@@ -145,6 +145,10 @@ export default {
           this.$parent.$el.style.display = "block"
           // this.$parent.$parent.showModal = true
           // this.$parent.value = true
+        },
+        onCancel: () => {
+          this.$parent.$el.style.display = "block"
+          this.$emit('closeActionDialog');
         }
       });
     }
