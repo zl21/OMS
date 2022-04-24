@@ -88,15 +88,17 @@ export default {
         ruleValidate: {
           refuseReasonId: [{ required: true, message: ' ', trigger: 'blur' }]
         }
-      }
+      },
+      tableName: '',
     };
   },
   mounted() {
+    this.tableName = this.$route.params.tableName;
     const formData = new FormData();
     formData.append('param', '{}');
     this.pageLoad = true;
     axios({
-      url: '/p/cs/exchangeRefuseReason',
+      url: this.tableName == 'IP_B_TAOBAO_EXCHANGE' ? '/p/cs/exchangeRefuseReason' : '/p/cs/douyin/exchangeRefuseReason',
       method: 'post',
       data: formData
     }).then(res => {
@@ -135,7 +137,7 @@ export default {
       fromdata.append('param', JSON.stringify(param));
       this.pageLoad = true;
       axios({
-        url: '/p/cs/exchangeRefuse',
+        url: this.tableName == 'IP_B_TAOBAO_EXCHANGE' ? '/p/cs/exchangeRefuse': '/p/cs/douyin/exchangeRefuse',
         method: 'post',
         data: fromdata
       }).then(res => {
