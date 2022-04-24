@@ -56,6 +56,9 @@ export default {
     };
   },
   computed: {
+    isAsync() {
+      return this.componentData.isAsync === false ? false : true; // 默认true，即异步
+    }
     webname() {
       const { objTabActionDialogConfig, dialogComponentName } = this.$parent?.$parent || this.$parent?.$parent?.$parent
       if (objTabActionDialogConfig) {
@@ -152,6 +155,15 @@ export default {
       }
       $network.post(url, param).then((res) => {
         document.getElementById("xFile").value = ""
+        if (this.isAsync) {
+        /** 异步导入优化（同框架保持交互效果一致）：
+         * 1. 点击'确定'直接关闭弹窗，后续操作都到异步任务里去做
+         * 2. 有些特殊的页面还是要走同步导入的需要单独处理
+         */
+          _this.loading = false;
+          this.closeConfirm();
+          return
+        }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
           if (res.data.message) _this.$Message.success(res.data.message);
           _this.$emit('returnData', res.data.data);
