@@ -11,6 +11,8 @@ export default {
   stdpOrderGet: params => network.post('/p/cs/stdp/order/get', params),
   // 淘宝换货单接口
   exchangeDownload: params => network.post('/p/cs/exchangeDownload', params),
+  // 抖音换货单接口
+  douyinExchangeDownload: params => network.post('/p/cs/douyin/exchangeDownload', params),
   // 寻仓订单下载
   downLoadVipDelivery: params => network.post('/p/cs/downLoadVipDelivery', params),
   // 唯品会退供单
