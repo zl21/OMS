@@ -129,7 +129,7 @@ export default {
       }
       const param = {
         ids: this.idArray,
-        menu: '淘宝换货单接口',
+        menu: this.tableName == 'IP_B_TAOBAO_EXCHANGE' ? '淘宝换货单接口' : '抖音换货单接口',
         refuseReasonId: formValue.refuseReasonId,
         outRefuseCopywriting: formValue.outRefuseCopywriting
       };
