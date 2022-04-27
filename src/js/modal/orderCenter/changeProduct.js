@@ -115,7 +115,7 @@ export default {
               // 新增逻辑: 当页面为“淘宝订单接口”页面，使用新接口查询sku信息
               let res = {};
               console.log('val', val)
-              if (this.pageName === 'IP_B_TAOBAO_ORDER' || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
+              if (this.pageName === 'IP_B_TAOBAO_ORDER' || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_DOUYIN_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
                 const params = {
                   isBlur: 'Y',
                   psCSku: {
@@ -440,6 +440,9 @@ export default {
         // 京东订单接口
         case 'IP_B_JINGDONG_ORDER':
           return this.service.common.queryJingdongExceptionSkus(params);
+        // 抖音订单接口
+        case 'IP_B_DOUYIN_ORDER':
+          return this.service.common.queryDouYinExceptionSkus(params);
         // 通用订单接口
         case 'IP_B_STANDPLAT_ORDER':
           return this.service.common.queryStandPlatExceptionSkus(params);
@@ -516,7 +519,7 @@ export default {
           return '/api/cs/oc/oms/v1/bathChangeStandPlatExceptionSkus';
         // 抖音订单接口
         case 'IP_B_DOUYIN_ORDER':
-          return ' /api/cs/oc/oms/v1/bathChangeDouYinExceptionSkus';
+          return '/api/cs/oc/oms/v1/bathChangeDouYinExceptionSkus';
         // 淘宝订单接口
         default:
           return '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus';
