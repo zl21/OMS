@@ -3,11 +3,12 @@ import R3 from '@syman/burgeon-r3';
 
 const { network } = R3;
 export default {
-  
+
    // 直播解析策略 - 修改结束时间
    liveCastStrategyUpdateEndTime: params => network.post('/p/cs/st/liveCastStrategy/v1/updateEndTime', params),
    // 订单HOLD单策略 - 调整策略时间
    holdOrderUpdateStrategyEndTime: params => network.post('/p/cs/st/holdOrderUpdateStrategyEndTime', params),
+   extEntTime: params => network.post('/p/cs/st/express/weight/extEntTime', params),
   /**
    * 物流区域设置 新增
    * */
@@ -40,7 +41,7 @@ export default {
 
   // 保存
   saveCompensate: params => network.post('/p/cs/saveCompensate', params),
-  // 删除明细 
+  // 删除明细
   delCompenstate: params => network.post('/p/cs/delCompenstate', params),
   // 查询方法
   selectCompenstateLogistic: params => network.post('/p/cs/selectCompenstateLogistic', params),
