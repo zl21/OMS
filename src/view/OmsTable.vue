@@ -7,7 +7,7 @@
     2.判断是否启用gridBar（栅格栏），如果启用判断formData的长度是否可以被colRowNum（当前枪）整除，是则添加FormPadding；（公式：Number.isInteger(formData.length / colRowNum)）
     -->
     <div :class="[
-      businessFormConfig !== undefined ? 'fromBtn' :'',
+      businessButtonConfig && businessFormConfig !== undefined ? 'fromBtn' :'',
       gridBar && Number.isInteger(formDataLength / colRowNum) ? 'FormPadding' : '',
       noGridBar ? 'FormPadding' : ''
       ]">
