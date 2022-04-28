@@ -1,5 +1,8 @@
 // 策略平台
 export default {
+  EXPRESSSTRATEGYTIMEDIALOG: {
+    component: () => import('@/views/modal/strategyPlatform/expressStrategyTimeDialog.vue'), // 延长结案时间
+  },
   DELAYSET: {
     component: () => import('@/views/modal/strategyPlatform/delaySet.vue'), // 延期
   },
