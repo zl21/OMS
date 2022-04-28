@@ -121,7 +121,7 @@ export default {
       // this.tabth = [];
       // this.row = [];
       const self = this;
-      console.log('--::', this.columnState);
+      // console.log('--::', this.columnState);
       if (self.columnState != '') {
         let th = self.setColumn(this.columnState, self.agTableConfig.columnDefs)
         this.agTableConfig.columnDefs = th;
