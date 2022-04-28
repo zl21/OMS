@@ -2429,6 +2429,16 @@ export default {
             dataAcessKey: 'AMT_SETTLE_TOT',
             title: _this.vmI18n.t('table_label.settlementAmount') // 结算金额
           },
+          {
+            key: 'NUM_IID',
+            dataAcessKey: 'NUM_IID',
+            title: '平台商品ID' // 平台商品ID
+          },
+          {
+            key: 'SKU_NUMIID',
+            dataAcessKey: 'SKU_NUMIID',
+            title: '平台SKUID' // 平台SKUID
+          },
         ]; // 表头
         this.getDataAccess('OC_B_RETURN_ORDER', res => {
           this.jordanTableConfig.columns = this.setTablePermissions(this.jordanTableConfig.columns, res);
