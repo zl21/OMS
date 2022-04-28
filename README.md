@@ -364,3 +364,4 @@
 | v2.0.30 | style：图例删除冗余样式 |
 | v2.0.31 | feat: importTable 支持 isAsync |
 | v2.0.32 | fix: OmsTable无button时样式调整 |
+| v2.0.33 | fkinput-fktable: 恢复ele-popover,解决点击下一页fktable消失的问题 |
