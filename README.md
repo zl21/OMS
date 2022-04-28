@@ -363,3 +363,4 @@
 | v2.0.29 | style：OmsTable冗余button样式处理 |
 | v2.0.30 | style：图例删除冗余样式 |
 | v2.0.31 | feat: importTable 支持 isAsync |
+| v2.0.32 | fix: OmsTable无button时样式调整 |
