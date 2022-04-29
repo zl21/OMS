@@ -91,6 +91,7 @@ export default {
       const tempUrl = self.currentConfig.tempUrl;
       const tempApi = self.currentConfig.tempApi;
       const tempParm = self.currentConfig.tempParm;
+      const type = self.currentConfig.tempMethod;
       let param = new FormData();
       if (tempParm) { // 下载模板参数处理
         /* for (const key in tempParm) {
@@ -103,19 +104,19 @@ export default {
         this.downloadUrlFile(self.currentConfig.tempUrl);
       } else {
         // 通过请求Api接口下载模板
-        this.getDownloadTemp(tempApi, param);
+        this.getDownloadTemp(tempApi, param, type);
       }
     },
     // 通过Api下载模板-Handel
-    getDownloadTemp(url, param = null) {
+    getDownloadTemp(url, param = null, type = 'post') {
       if (param) {
-        $network.post(url, param).then((res) => {
+        $network[type](url, param).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
         });
       } else {
-        $network.post(url).then((res) => {
+        $network[type](url).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
@@ -299,17 +300,16 @@ export default {
     if (this.prefix == 'CUSTOM' && !this.componentData?.isAction) {
       // 纯定制导入
       this.key = this.componentData.tableName + '__' + this.componentData.webname;
-      if (_this.$OMS2.cusImport[this.key]) {
-        // 配置文件中存在配置，则使用配置文件中的配置
-        this.currentConfig = _this.$OMS2.cusImport[this.key];
-      } else {
-        // 反之使用父组件传过来的配置
-        this.currentConfig = this.componentData;
-      }
     } else if (this.prefix == 'SYSTEM') {
       // 标准动作定义
       this.key = this.tableName + '__' + this.webname;
+    }
+    if (_this.$OMS2.cusImport[this.key]) {
+      // 配置文件中存在配置，则使用配置文件中的配置
       this.currentConfig = _this.$OMS2.cusImport[this.key];
+    } else {
+      // 反之使用父组件传过来的配置
+      this.currentConfig = this.componentData;
     }
     this.dontShowDownloadA = this.currentConfig.dontShowDownloadA || false;
     this.importNotes = this.currentConfig.importNotes || false;
