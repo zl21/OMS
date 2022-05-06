@@ -85,7 +85,7 @@
           </td>
         </tr>
       </table>
-      <h6 class="stockTitle">当前商品单剩余可退金额=商品单实际支付总金额-汇总售后申请金额 <i>当前剩余可退金额</i> <i>{{realAMT}}</i></h6>
+      <h6 class="stockTitle">当前商品单剩余可退金额=商品单实际支付总金额-汇总售后申请金额 <span>当前剩余可退金额</span> <span>{{realAMT}}</span></h6>
     </Modal>
   </div>
 </template>

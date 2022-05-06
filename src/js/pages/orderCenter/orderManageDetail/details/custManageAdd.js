@@ -247,7 +247,9 @@ export default {
           let count = 0;
           data.map(item => {
             item.created = formatData.standardTimeConversiondateToStr(item.created);
-            count += item.refund_fee
+            if(item.return_status != 5 && item.return_status != 1) {
+              count += item.refund_fee
+            }
           })
           this.realAMT = this.realAMT - count;
           this.chargebackData = data;
