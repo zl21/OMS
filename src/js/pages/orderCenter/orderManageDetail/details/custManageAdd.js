@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       flag: false,
+      amount: 0,//记录用
       realAMT: 0,
       chargebackData: [],
       chargebackModal: false,
@@ -238,9 +239,8 @@ export default {
     async getChargeback( params ) {
       if (this.flag) return
       this.flag = true;
-      this.realAMT = params.REAL_AMT
+      this.realAMT = this.amount;
       const res = await axios.post('/api/cs/oc/oms/v1/getOrderRefundDetailList', { id: this.componentData.order.ID, order_no: params.TID, sub_order_id: params.OOID});
-      // if (res.data.code != 0 || !res.data.data) return this.$Message.warning('当前记录已不存在！');
       if (res.data.code == 0){
         const data = res.data.data;
         if (data.length == 0) {
@@ -254,7 +254,7 @@ export default {
               count += item.refund_fee
             }
           })
-          this.realAMT = (this.realAMT - count).toFixed(2);
+          this.realAMT = (this.realAMT - Number(count)).toFixed(2);
           this.chargebackData = data;
           this.chargebackModal = true;
           this.flag = false;
@@ -467,7 +467,9 @@ export default {
         if (res.data.code === 0) {
           const lists = res.data.data.records || [];
           self.tableConfig.loading = false;
+          let count = 0;
           lists.forEach((item) => {
+            count += Number(item.REAL_AMT)
             if (item.PRO_TYPE == 1 || item.PRO_TYPE == 2) {
               self.$emit('isQhMethod', true);
             }
@@ -482,6 +484,8 @@ export default {
               item.isOutOfStock = false;
             }
           });
+          self.realAMT = count;
+          self.amount = count;//记录数据
           const { total } = res.data.data;
           self.showTable(lists, total);
 
@@ -993,6 +997,8 @@ export default {
               on: {
                 click: () => {
                   this.getChargeback(params.row);
+                  console.log(this.componentData.order.ID)
+                  console.log(params.row)
                 }
               }
             },
