@@ -11,6 +11,7 @@ import qs from 'qs';
 export default {
   data() {
     return {
+      flag: false,
       realAMT: 0,
       chargebackData: [],
       chargebackModal: false,
@@ -235,6 +236,8 @@ export default {
     },
     //查看退单关联任务
     async getChargeback( params ) {
+      if (this.flag) return
+      this.flag = true;
       this.realAMT = params.REAL_AMT
       const res = await axios.post('/api/cs/oc/oms/v1/getOrderRefundDetailList', { id: this.componentData.order.ID, order_no: params.TID, sub_order_id: params.OOID});
       // if (res.data.code != 0 || !res.data.data) return this.$Message.warning('当前记录已不存在！');
@@ -251,9 +254,10 @@ export default {
               count += item.refund_fee
             }
           })
-          this.realAMT = this.realAMT - count;
+          this.realAMT = (this.realAMT - count).toFixed(2);
           this.chargebackData = data;
           this.chargebackModal = true;
+          this.flag = false;
         }
       } else {
         this.$Message.error(res.data.message);
@@ -988,8 +992,6 @@ export default {
             {
               on: {
                 click: () => {
-                  console.log(params);
-                  // this.chargebackModal = true;
                   this.getChargeback(params.row);
                 }
               }
