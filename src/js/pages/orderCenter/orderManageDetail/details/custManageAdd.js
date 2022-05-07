@@ -254,7 +254,7 @@ export default {
               count += item.refund_fee
             }
           })
-          this.realAMT = (this.realAMT - Number(count)).toFixed(2);
+          this.realAMT = ((this.realAMT - count)*100/100).toFixed(2);
           this.chargebackData = data;
           this.chargebackModal = true;
           this.flag = false;
@@ -301,7 +301,6 @@ export default {
           value: res.data.data.PS_C_SKU_ECODE || ""
         }
       ]
-      console.log('data:',data);
       this.modalTable.data = data || [];
       this.modal = true;
     },
