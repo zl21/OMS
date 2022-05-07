@@ -100,6 +100,10 @@ export default {
             cellStyle: { color: 'rgb(15, 142, 233)' },
           })
         }
+        // 是否开启字段处理回调
+        if (this.agTableConfig.isAmtCb) {
+          this.$emit('on-reset-column')
+        } 
       },
       deep: true
     },
@@ -112,6 +116,10 @@ export default {
             item.ag_index = (currentPage - 1) * pageSize + i + 1;
           });
         }
+        // 是否开启字段处理回调
+        if (this.agTableConfig.isAmtCb) {
+          this.$emit('on-reset-row')
+        } 
       },
       deep: true
     },
