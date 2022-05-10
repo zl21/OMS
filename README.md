@@ -367,4 +367,3 @@
 | v2.0.33 | fkinput-fktable: 恢复ele-popover,解决点击下一页fktable消失的问题 |
 | v2.0.34 | feat: importTable 支持 tempMethod |
 | v2.0.35 | feat: OmsAgTable 拓展 isAmtCb属性，对表头及数据操作 |
-| v2.0.36 | fix: 修复OmsTable单选模式下，选中后闪烁问题 |
