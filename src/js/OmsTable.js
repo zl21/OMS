@@ -343,24 +343,30 @@ export default {
       // console.log(columns.length)
       this.$emit('on-drag-drop', columns)
     },
-    // 选中某一项时触发
+    // 在多选模式下有效，选中某一项时触发
     onSelect(selection, row) {
-      // console.log(selection,row)
+      if (!this.multiple) return
+      console.log('BC-onSelect', selection,row)
       this.$emit('on-select', selection, row)
     },
-    // 取消选中某一项时触发
+    // 在多选模式下有效，取消选中某一项时触发
     onSelectCancel(selection, row) {
       this.$emit('on-select-cancel', selection, row)
     },
-    // 点击全选时触发
+    // 在多选模式下有效，点击全选时触发
     onSelectAll(selection) {
       this.$emit('on-select-all', selection)
     },
-    // 点击取消全选时触发
+    // 在多选模式下有效，点击取消全选时触发
     onSelectAllCancel(selection) {
       this.$emit('on-select-all-cancel', selection)
     },
-
+    // 在多选模式下有效，只要选中项发生变化时就会触发
+    onSelectChange(selection) {
+      if (!this.multiple) return
+      console.log('BC-onSelectChange', selection)
+      this.$emit('on-select-change', selection)
+    },
     // 单击某一行时触发
     onRowClick(row, index) {
       if (
@@ -377,13 +383,11 @@ export default {
     onRowDblclick(row, index) {
       this.$emit('on-row-dblclick', row, index)
     },
-    // 单选某一行
+    // 开启 highlight-row 后有效，当表格的当前行发生变化的时候会触发
     onCurrentChange(currentRow, oldCurrentRow) {
+      // if (!this.multiple) return
+      console.log('BC-onCurrentChange', currentRow, oldCurrentRow)
       this.$emit('on-current-change', currentRow, oldCurrentRow)
-    },
-    // 在多选模式下有效，只要选中项发生变化时就会触发
-    onSelectChange(selection) {
-      this.$emit('on-select-change', selection)
     },
     // 刷新按钮
     tableRefreshDetail() {
