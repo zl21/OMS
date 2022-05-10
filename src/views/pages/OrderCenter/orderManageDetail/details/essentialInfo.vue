@@ -165,6 +165,7 @@
       <CusOrderItem
         ref="cusOrderItem"
         :component-data="tableConfig"
+        :orderATM="componentData.order.ORDER_AMT"
         :is-qh="isQh"
         @freshLoadChild="freshLoadChild"
         @BtnClickEvent="BtnClickEvent"

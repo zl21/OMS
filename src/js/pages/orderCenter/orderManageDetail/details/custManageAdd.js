@@ -12,7 +12,6 @@ export default {
   data() {
     return {
       flag: false,
-      amount: 0,//记录用
       realAMT: 0,
       chargebackData: [],
       chargebackModal: false,
@@ -187,7 +186,8 @@ export default {
     componentData: {},
     isQh: {
       type: Boolean
-    }
+    },
+    orderATM: [String,Number,null]
   },
   watch: {
     componentData: {
@@ -239,7 +239,8 @@ export default {
     async getChargeback( params ) {
       if (this.flag) return
       this.flag = true;
-      this.realAMT = this.amount;
+      this.realAMT = this.orderATM;
+      console.log(this.realAMT)
       const res = await axios.post('/api/cs/oc/oms/v1/getOrderRefundDetailList', { id: this.componentData.order.ID, order_no: params.TID, sub_order_id: params.OOID});
       if (res.data.code == 0){
         const data = res.data.data;
@@ -252,9 +253,11 @@ export default {
             item.created = formatData.standardTimeConversiondateToStr(item.created);
             if(item.return_status != 5 && item.return_status != 1) {
               count += item.refund_fee
+              console.log(count)
             }
           })
           this.realAMT = ((this.realAMT - count)*100/100).toFixed(2);
+          console.log(this.realAMT)
           this.chargebackData = data;
           this.chargebackModal = true;
           this.flag = false;
@@ -466,9 +469,7 @@ export default {
         if (res.data.code === 0) {
           const lists = res.data.data.records || [];
           self.tableConfig.loading = false;
-          let count = 0;
           lists.forEach((item) => {
-            count += Number(item.REAL_AMT)
             if (item.PRO_TYPE == 1 || item.PRO_TYPE == 2) {
               self.$emit('isQhMethod', true);
             }
@@ -483,8 +484,6 @@ export default {
               item.isOutOfStock = false;
             }
           });
-          self.realAMT = count;
-          self.amount = count;//记录数据
           const { total } = res.data.data;
           self.showTable(lists, total);
 
