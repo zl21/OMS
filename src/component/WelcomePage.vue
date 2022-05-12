@@ -1,31 +1,11 @@
 <template>
   <div class="welcomepage">
-    <!--     
-    <div class="container">
-      <Dropdown>
-        <a href="javascript:void(0)">
-          中/En
-          <Icon type="ios-arrow-down"></Icon>
-        </a>
-        <DropdownMenu slot="list">
-          <DropdownItem
-            v-for="item in langConfig"
-            :key="item.type"
-            @click.native="toggleLang(item.type)"
-            :disabled="vmI18n.locale == item.type"
-            >{{ item.text }}</DropdownItem
-          >
-        </DropdownMenu>
-      </Dropdown>
-      <br />
-      <button>{{ vmI18n.t("btn.text") }}</button>
-      <span>{{ vmI18n.t("message.hello") }}</span>
-    </div> 
-    -->
+    <NotifyMsg :notifyProps="notifyProps" baseUrl="//10.10.153.42:8099" />
   </div>
 </template>
 
 <script>
+  import NotifyMsg from '@/component/NotifyMsg.vue';
   const langConfig = [
     {
       type: 'zh',
@@ -43,6 +23,9 @@
 
   export default {
     name: 'WelcomePage',
+    components: {
+      NotifyMsg,
+    },
     data() {
       return {
         vmI18n: window.vmI18n,
@@ -63,11 +46,20 @@
     mounted() {
       const domContent = document.getElementById('content');
       domContent.style.padding = '0 0';
+      console.log('this', this)
     },
     destroyed() {
       const domContent = document.getElementById('content');
       domContent.style.padding = '0 15px';
-    }
+    },
+    computed: {
+      notifyProps() {
+        return {
+          username: this.$store.state.global.userInfo.name,
+          appId: 'r3',
+        };
+      }
+    },
   };
 </script>
 

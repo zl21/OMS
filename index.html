@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <script>
-    var href = window.location.href;
-    if(href.indexOf('47.103.6.45:27777') == -1) {
+    var host = window.location.host;
+    if(host.indexOf('47.103.6.45:27777') == -1 && host.indexOf('r3-test.ecsemir.com') == -1 && host.indexOf('localhost:') == -1) {
       var meta = document.createElement('meta');
       meta.content = "upgrade-insecure-requests";
       meta['httpEquiv'] = "Content-Security-Policy";
