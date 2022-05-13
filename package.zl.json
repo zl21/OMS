@@ -1,6 +1,6 @@
 {
-  "name": "@bojun/oms-ui",
-  "version": "2.0.34",
+  "name": "@alanh/oms-ui",
+  "version": "1.0.0",
   "description": "burgeon company's business-components lib for private npm",
   "main": "burgeon.publish/businessComponents.min.js",
   "files": [
@@ -10,14 +10,18 @@
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.publish.js",
     "report": "npm run build --report",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitee.com:product_centerfront_end/burgeon-private-npm.git"
+    "url": "git+https://github.com/zl21/BC_StoryBook.git"
   },
-  "author": "flybird <duan.ry@burgeon.cn>",
+  "bugs": {
+    "url": "https://github.com/zl21/BC_StoryBook/issues"
+  },
+  "homepage": "https://github.com/zl21/BC_StoryBook#readme",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -58,14 +62,16 @@
     "vue-loader": "^15.9.8",
     "vue-style-loader": "^3.1.2",
     "vue-template-compiler": "^2.6.14",
-    "webpack": "^4.46.0",
+    "webpack": "^5.65.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0",
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@bojun/i18n": "^1.2.4",
+    "@burgeon/internationalization": "^1.1.1",
+    "@syman/ark-ui": "1.2.5",
+    "@syman/burgeon-r3-components": "2.1.2",
     "awe-dnd": "^0.3.4",
     "compressing": "^1.5.1",
     "cross-env": "^7.0.3",

@@ -1,0 +1,80 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="BASIC/MultipleBox" />
+
+<style>{`
+	.subheading {
+		font-weight: 900;
+		font-size: 13px;
+		line-height: 24px;
+		margin: 40px 0 12px 0;
+	}
+`}</style>
+
+<!-- # 安装
+
+<div className="subheading">NPM 安装</div> -->
+
+## MultipleBox
+
+### 一、组件说明
+
+#### 1. 概述
+
+多选框组件，当所有`options`都选中，`全部`也会被勾选，且与选项在同一行。
+
+#### 2. 应用场景
+
+用于一组可选项多项选择，或者单独用于标记切换某种状态。
+
+### 二、使用说明
+
+> 应用
+
+```js
+<MultipleBox
+  :values="values"
+  :options="options"
+  @changeOptions="checkOrderTypeChange"
+/>
+```
+
+```js
+export default {
+  data() {
+    return {
+      options: [
+        { title: '正常', value: '1' },
+        { title: '换货', value: '2' },
+        { title: '补发', value: '4' },
+        { title: '虚拟', value: '8' },
+        { title: '预售', value: '32' },
+        { title: '天猫', value: '602' },
+      ],
+      values: ['1', '2', '4', '8', '32', '602'],
+    };
+  },
+  methods: {
+    checkOrderTypeChange(vals) {
+      console.log(vals);
+    },
+  },
+};
+```
+
+![mutilpleBox.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c491140b4344776b87b002df7fcebfc~tplv-k3u1fbpfcp-watermark.image?)
+
+### 三、API
+
+#### multipleBox Props
+
+| 属性    | 说明             | 类型  | 默认值 |
+| ------- | ---------------- | ----- | ------ |
+| values  | 选中项目的真实值 | Array | -      |
+| options | 可选项           | Array | -      |
+
+#### multipleBox events
+
+| 事件          | 说明                                                                         | 返回值 |
+| ------------- | ---------------------------------------------------------------------------- | ------ |
+| changeOptions | 在选项状态发生改变时触发，返回已选中的数组。通过修改外部的数据改变时不会触发 | values |

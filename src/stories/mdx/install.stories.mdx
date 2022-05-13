@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Introduction/Install" />
+
+<style>{`
+	.subheading {
+		font-weight: 900;
+		font-size: 14px;
+		line-height: 24px;
+		margin: 40px 0 12px 0;
+	}
+`}</style>
+
+# 安装
+
+<div className="subheading">NPM 安装</div>
+
+```js
+$ npm install @burgeon/business-components
+```
+
+<div className="subheading">CDN 引入</div>
+
+```js
+// 样式
+  <link href="https://cdn.jsdelivr.net/npm/@alanh/oms-ui@1.0.0/burgeon.publish/businessComponents.min.css" rel="stylesheet">
+```
+
+```js
+<script src="https://cdn.jsdelivr.net/npm/@alanh/oms-ui@1.0.0/burgeon.publish/businessComponents.min.js"></script>
+```
+
+```js
+// webpack.config.js
+externals: {
+  burgeonComponents: 'Burgeon',
+}
+```
