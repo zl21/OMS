@@ -355,3 +355,15 @@
 | v2.0.15 | ag index及老ag列移动的处理 |
 | v2.0.20 | form flodClick |
 | v2.0.21 | version: window.ProjectConfig.Version |
+| v2.0.23 | 23版本 |
+| v2.0.24 | add script: <npm run pub> |
+| v2.0.26 | script test |
+| v2.0.27 | jk test |
+| v2.0.28 | TableSku 自定义展示数据 |
+| v2.0.29 | style：OmsTable冗余button样式处理 |
+| v2.0.30 | style：图例删除冗余样式 |
+| v2.0.31 | feat: importTable 支持 isAsync |
+| v2.0.32 | fix: OmsTable无button时样式调整 |
+| v2.0.33 | fkinput-fktable: 恢复ele-popover,解决点击下一页fktable消失的问题 |
+| v2.0.34 | feat: importTable 支持 tempMethod |
+| v2.0.35 | feat: OmsAgTable 拓展 isAmtCb属性，对表头及数据操作 |

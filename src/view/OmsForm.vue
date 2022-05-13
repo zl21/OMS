@@ -48,7 +48,7 @@
         >
           <template v-if="item.style !== ''">
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'input'"
               :prop="item.value || item.colname"
@@ -83,7 +83,7 @@
             </FormItem>
             <!-- 文本框 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'textarea'"
               :class="item.class || ''"
@@ -107,7 +107,7 @@
             </FormItem>
             <!-- select 下拉框 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'select'"
               :class="
@@ -165,7 +165,7 @@
 
             <!-- 日期组件-年月日 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'date'"
               :prop="item.value || item.colname"
@@ -188,7 +188,7 @@
 
             <!-- 时间组件-时分秒 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'time'"
               :prop="item.value || item.colname"
@@ -266,7 +266,7 @@
                 `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
                 ':'
               "
-              :class="item.class ? `${item.class} popInput ${item.itemdata.readonly ? 'disabled' : ''}` : `popInput ${item.itemdata.readonly ? 'disabled' : ''}`"
+              :class="[item.class ? item.class : '', 'popInput', item.itemdata.readonly ? 'disabled' : '']"
             >
               <arkDropMultiSelectFilter
                 :PropsData="propsData(item)"
@@ -377,7 +377,7 @@
 
             <!-- radio 单选 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'radio'"
               :prop="item.value || item.colname"
@@ -399,7 +399,7 @@
 
             <!-- checkbox 单/多选 - 勾选框 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'checkbox'"
               :prop="item.value || item.colname"
@@ -463,7 +463,7 @@
 
             <!-- 模糊查询组件 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'dimSearch'"
               :class="item.class || ''"
@@ -484,7 +484,7 @@
             </FormItem>
             <!-- 数字框 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               v-if="item.style === 'inputNumber'"
               :class="item.class || ''"
@@ -504,7 +504,7 @@
 
             <!-- 双数字框 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               :class="item.class || ''"
               v-if="item.style === 'bothNumber'"
@@ -540,7 +540,7 @@
             </FormItem>
             <!-- 双input框 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               :class="item.class || ''"
               v-if="item.style === 'bothInput'"
@@ -582,7 +582,7 @@
 
             <!-- switch开关 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               :class="item.class || ''"
               v-if="item.style === 'switch'"
@@ -605,7 +605,7 @@
 
             <!-- 插槽 -->
             <FormItem
-              :label="`${item.label}` + ':'"
+              :label="item.label ? `${item.label}:` : ''"
               :title="item.label"
               :class="[item.class, { 'req-star': item.reqStar }]"
               v-else-if="item.style === 'formCompile'"

@@ -99,6 +99,13 @@
     min-height: 33px;
     #bundle>.points;
   }
+  // 覆盖框架弹窗多选组件
+  /deep/ .ark-form-item-content .item-input {
+    label.title {
+      min-height: 33px;
+      #bundle>.points;
+    }
+  }
 
   .ark-form-item {
     margin-bottom: 10px;
@@ -115,7 +122,7 @@
             right: auto;
             display: inline-block;
           }
-
+          
           .popover-icon {
             .iconfont {
               width: 32px;
@@ -160,6 +167,11 @@
       color: #ed4014;
     }
   }
+}
+
+// 弹窗表单去掉左右内边距
+.cus-modal .cusForm-content.noFlod {
+  padding: 0 0 14px;
 }
 
 // /* 插槽字段的必填标识 */

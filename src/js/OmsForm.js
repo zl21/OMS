@@ -26,7 +26,7 @@ export default {
       url: {
         autoUrl: '/p/cs/fuzzyquerybyak',
         tableUrl: '/p/cs/QueryList',
-        tableSearchUrl:'/p/cs/newQueryList'
+        tableSearchUrl: '/p/cs/newQueryList'
       },
       network: R3.network,
       eventFun: {
@@ -135,12 +135,12 @@ export default {
       if (this.currentFlod == 'down') {
         this.formConfig.formData.forEach((it, n) => {
           if (n + 1 > showNum) {
-            it.class = `${it.class ? it.class : ''} long`
+            it.class = it.class ? `${it.class} long` : 'long'
           }
         });
       } else {
         this.formConfig.formData.forEach((it, n) => {
-          it.class = it.class ? it.class.replace('long', '') : '';
+          it.class = it.class ? it.class.replace(/long/g, '').trim() : '';
         });
       }
       // this.$forceUpdate()
@@ -192,7 +192,7 @@ export default {
       //   this.flodData = 'el-icon-arrow-up';
       //   // this.currentFlod = val;
       // }
-      this.flodData === 'el-icon-arrow-down' ? this.flodData = 'el-icon-arrow-up' : this.flodData = 'el-icon-arrow-down';
+      this.flodData = this.flodData === 'el-icon-arrow-down' ? 'el-icon-arrow-up' : 'el-icon-arrow-down';
       this.currentFlod = this.flodData == 'el-icon-arrow-down' ? 'down' : 'up'
       if (typeof val == 'function') {
         val(this.currentFlod);
@@ -210,6 +210,13 @@ export default {
     // 接口入参- 表格模糊传参
     sendTableMessage(item) {
       const { isdroplistsearch, colid } = item.itemdata
+      // 定制查询接口
+      if (typeof item.popBefore == 'function') {
+        this.url.tableSearchUrl = item.itemdata.api
+        this.runMethods(item.popBefore(item.itemdata))
+        return item.itemdata.params
+      }
+      this.url.tableSearchUrl = '/p/cs/newQueryList'
       return {
         isdroplistsearch: isdroplistsearch || true,
         refcolid: colid,
@@ -224,7 +231,7 @@ export default {
 
       return {
         single: fkdisplay == 'mrp' ? false : fkdisplay == 'drp' ? true : !!single, // 是否单选
-        placeholder: item.itemdata.placeholder || 'y请输入',
+        placeholder: item.itemdata.placeholder || '请输入',
         enterType: false,
         serviceId: item.itemdata.serviceId || '',
         // totalRowCount: item.itemdata.totalRowCount || 0,
@@ -243,7 +250,7 @@ export default {
       let arg
       val = val || []
       const { fkdisplay, isBackRowItem } = item.itemdata
-      if (fkdisplay == 'drp') {
+      if (fkdisplay == 'drp' && val.length) {
         item.itemdata.pid = val[0].ID;
         item.itemdata.valuedata = val[0].Label;
         item.itemdata.defaultSelectedMrp = val;

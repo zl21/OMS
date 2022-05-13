@@ -56,6 +56,9 @@ export default {
     };
   },
   computed: {
+    isAsync() {
+      return this.componentData.isAsync === false ? false : true; // 默认true，即异步
+    },
     webname() {
       const { objTabActionDialogConfig, dialogComponentName } = this.$parent?.$parent || this.$parent?.$parent?.$parent
       if (objTabActionDialogConfig) {
@@ -88,6 +91,7 @@ export default {
       const tempUrl = self.currentConfig.tempUrl;
       const tempApi = self.currentConfig.tempApi;
       const tempParm = self.currentConfig.tempParm;
+      const type = self.currentConfig.tempMethod;
       let param = new FormData();
       if (tempParm) { // 下载模板参数处理
         /* for (const key in tempParm) {
@@ -100,19 +104,19 @@ export default {
         this.downloadUrlFile(self.currentConfig.tempUrl);
       } else {
         // 通过请求Api接口下载模板
-        this.getDownloadTemp(tempApi, param);
+        this.getDownloadTemp(tempApi, param, type);
       }
     },
     // 通过Api下载模板-Handel
-    getDownloadTemp(url, param = null) {
+    getDownloadTemp(url, param = null, type = 'post') {
       if (param) {
-        $network.post(url, param).then((res) => {
+        $network[type](url, param).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
         });
       } else {
-        $network.post(url).then((res) => {
+        $network[type](url).then((res) => {
           if (res.data.code === 0) {
             this.downloadUrlFile(res.data.data);
           }
@@ -152,6 +156,15 @@ export default {
       }
       $network.post(url, param).then((res) => {
         document.getElementById("xFile").value = ""
+        if (this.isAsync) {
+        /** 异步导入优化（同框架保持交互效果一致）：
+         * 1. 点击'确定'直接关闭弹窗，后续操作都到异步任务里去做
+         * 2. 有些特殊的页面还是要走同步导入的需要单独处理
+         */
+          _this.loading = false;
+          this.closeConfirm();
+          return
+        }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
           if (res.data.message) _this.$Message.success(res.data.message);
           _this.$emit('returnData', res.data.data);
@@ -287,17 +300,16 @@ export default {
     if (this.prefix == 'CUSTOM' && !this.componentData?.isAction) {
       // 纯定制导入
       this.key = this.componentData.tableName + '__' + this.componentData.webname;
-      if (_this.$OMS2.cusImport[this.key]) {
-        // 配置文件中存在配置，则使用配置文件中的配置
-        this.currentConfig = _this.$OMS2.cusImport[this.key];
-      } else {
-        // 反之使用父组件传过来的配置
-        this.currentConfig = this.componentData;
-      }
     } else if (this.prefix == 'SYSTEM') {
       // 标准动作定义
       this.key = this.tableName + '__' + this.webname;
+    }
+    if (_this.$OMS2.cusImport[this.key]) {
+      // 配置文件中存在配置，则使用配置文件中的配置
       this.currentConfig = _this.$OMS2.cusImport[this.key];
+    } else {
+      // 反之使用父组件传过来的配置
+      this.currentConfig = this.componentData;
     }
     this.dontShowDownloadA = this.currentConfig.dontShowDownloadA || false;
     this.importNotes = this.currentConfig.importNotes || false;

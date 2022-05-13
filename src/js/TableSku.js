@@ -158,7 +158,8 @@ export default {
     初始化
      */
     init() {
-      this.value = this.row.ECODE;
+      const showCol = this.itemdata.showCol || 'ECODE'
+      this.value = this.row[showCol];
     }
   },
   mounted() {
