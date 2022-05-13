@@ -12,7 +12,7 @@ const burgeonPlugins = [
     patterns: [
       {
         from: path.resolve(__dirname, "./src/langs/zh_CN"),
-        to: path.resolve(__dirname, "./burgeon.publish/langs/zh_CN")
+        to: path.resolve(__dirname, "./dist/langs/zh_CN")
       },
     ],
   })
@@ -27,7 +27,7 @@ module.exports = () => ({
   output: {
     filename: 'index.min.js',
     chunkFilename: 'i18n/[name].min.js',
-    path: path.join(__dirname, './burgeon.publish'),
+    path: path.join(__dirname, './dist'),
     // globalObject: 'this',
     libraryExport: 'default',
     library: '$i18n',
