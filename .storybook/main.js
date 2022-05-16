@@ -72,6 +72,7 @@ module.exports = {
       jquery: '$',
       VueI18n: 'VueI18n',
       'element-ui': 'ELEMENT',
+      $R3_CPS: '$R3_CPS',
       lodash: {
         commonjs: 'lodash',
         commonjs2: 'lodash',

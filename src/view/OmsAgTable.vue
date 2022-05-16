@@ -268,7 +268,7 @@ export default {
     },
   },
   mounted() {
-    this.getUserConfig();
+    // this.getUserConfig();
     // 初始化options
     if (this.options.oldAg || this.options.oldMoved) {
       Object.assign(this.options, {
