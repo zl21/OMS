@@ -8,8 +8,8 @@ export default {
   DOWNLOADPUBLIC: {
     component: () => import('@/views/modal/InterfacePlatform/downLoadPublic.vue')
   },
-  // 抖音订单接口
-  DOWNLOADORDERDOUYIN: {
+  // 抖音订单接口 通用退单接口 (抖音订单下载)
+  DOUYINDOWNLOADORDER: {
     component: () => import('@/views/modal/InterfacePlatform/downLoadAll.vue')
   },
   // 淘宝换货单接口-拒绝换货
