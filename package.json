@@ -1,0 +1,29 @@
+{
+  "name": "oms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "oms": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zl21/OMS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zl21/OMS/issues"
+  },
+  "homepage": "https://github.com/zl21/OMS#readme",
+  "devDependencies": {
+    "commander": "^9.2.0",
+    "git-clone": "^0.2.0",
+    "open": "^8.4.0",
+    "shelljs": "^0.8.5"
+  }
+}
