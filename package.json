@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "oms": "./index.js"
+    "oms": "./index.js",
+    "oms-cli": "./omsCli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,6 +24,7 @@
   "devDependencies": {
     "commander": "^9.2.0",
     "git-clone": "^0.2.0",
+    "inquirer": "^8.2.4",
     "open": "^8.4.0",
     "shelljs": "^0.8.5"
   }
