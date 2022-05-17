@@ -54,6 +54,39 @@
         </tr>
       </table>
     </Modal>
+    <Modal v-model="chargebackModal" title="退单详情" draggable mask  :mask-closable="false" width="900">
+      <table class="chargebackTable" border="1">
+        <tr>
+          <th>申请时间</th>
+          <th>售后单编号</th>
+          <th>售后类型</th>
+          <th>售后原因</th>
+          <th>售后申请金额</th>
+          <th>售后申请状态</th>
+        </tr>
+        <tr v-for="(item, index) in chargebackData" :key="index">
+          <td>
+            {{ item.created }}
+          </td>
+          <td>
+            {{ item.return_no }}
+          </td>
+          <td>
+            {{ item.refund_type_name }}
+          </td>
+          <td>
+            {{ item.return_reason }}
+          </td>
+          <td>
+            {{ item.refund_fee }}
+          </td>
+          <td>
+            {{ item.return_status_name }}
+          </td>
+        </tr>
+      </table>
+      <h6 class="stockTitle">当前商品单剩余可退金额=商品单实际支付总金额-汇总售后申请金额 <span>当前剩余可退金额</span> <span>{{realAMT}}</span></h6>
+    </Modal>
   </div>
 </template>
 
