@@ -229,18 +229,11 @@ export default {
     });
   },
   methods: {
-    // 标准时间转化为yyyy-mm-dd
-    standardTimeConversion(val) {
-      const d = new Date(val);
-      const datetime = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} `;
-      return datetime;
-    },
     //查看退单关联任务
     async getChargeback( params ) {
       if (this.flag) return
       this.flag = true;
       this.realAMT = this.orderATM;
-      console.log(this.realAMT)
       const res = await axios.post('/api/cs/oc/oms/v1/getOrderRefundDetailList', { id: this.componentData.order.ID, order_no: params.TID, sub_order_id: params.OOID});
       if (res.data.code == 0){
         const data = res.data.data;
@@ -253,11 +246,9 @@ export default {
             item.created = formatData.standardTimeConversiondateToStr(item.created);
             if(item.return_status != 5 && item.return_status != 1) {
               count += item.refund_fee
-              console.log(count)
             }
           })
           this.realAMT = ((this.realAMT - count)*100/100).toFixed(2);
-          console.log(this.realAMT)
           this.chargebackData = data;
           this.chargebackModal = true;
           this.flag = false;
@@ -278,7 +269,6 @@ export default {
       //     value: res.data.data.PS_C_SKU_ECODE || ""
       //   }
       // ]
-      // console.log('data:',data);
       // this.modalTable.data = data || [];
       
     },
@@ -707,7 +697,6 @@ export default {
             {
               on: {
                 click: () => {
-                  console.log(params.row.PRO_TYPE);
                   if(params.row.PRO_TYPE == 4){
                     this.$Message.warning('当前商品为组合品，请解析下挂商品后查看库存!')
                   }else{
@@ -995,8 +984,6 @@ export default {
               on: {
                 click: () => {
                   this.getChargeback(params.row);
-                  console.log(this.componentData.order.ID)
-                  console.log(params.row)
                 }
               }
             },
