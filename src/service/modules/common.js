@@ -27,6 +27,7 @@ export default {
   skuQuery: params => network.post('/p/cs/skuQuery', params),
   queryTaobaoExceptionSkus: params => network.post('/api/cs/oc/oms/v1/queryTaobaoExceptionSkus', params),
   queryJingdongExceptionSkus: params => network.post('/api/cs/oc/oms/v1/queryJingdongExceptionSkus', params),
+  queryDouYinExceptionSkus:  params => network.post('/api/cs/oc/oms/v1/queryDouYinExceptionSkus', params),
   queryStandPlatExceptionSkus: params => network.post('/api/cs/oc/oms/v1/queryStandPlatExceptionSkus', params),
   fetchActionsInCustomizePage: params => network.get(`/p/cs/v2/fetchActionsInCustomizePage?${qs.stringify(params)}`),
   manualJdMatchingCheck: params => network.post('/p/cs/manualJdMatchingCheck', params),
@@ -297,6 +298,11 @@ export default {
         url: '/api/cs/oc/oms/v1/import/change/sku',
         downloadUrl: 'https://semir-r3-upload-prod-read-only.oss-cn-zhangjiakou.aliyuncs.com/OSS-Bucket/taobao/item/Sku-Error-Handle.xlsx'
       }, // SKU异常导入-通用
+      {
+        tableName: 'IP_B_DOUYIN_ORDER',
+        url: '/api/cs/oc/oms/v1/import/change/sku',
+        downloadUrl: 'https://semir-r3-upload-prod-read-only.oss-cn-zhangjiakou.aliyuncs.com/OSS-Bucket/taobao/item/Sku-Error-Handle.xlsx'
+      }, // SKU异常导入-抖音
     ];
     return arr;
   },
