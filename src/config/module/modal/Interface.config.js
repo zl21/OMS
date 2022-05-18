@@ -8,6 +8,10 @@ export default {
   DOWNLOADPUBLIC: {
     component: () => import('@/views/modal/InterfacePlatform/downLoadPublic.vue')
   },
+  // 抖音退单下载接口
+  REFUNDDOUYINDOWNLOADORDER: {
+    component: () => import('@/views/modal/InterfacePlatform/downLoadAll.vue')
+  },
   // 抖音订单接口 通用退单接口 (抖音订单下载)
   DOUYINDOWNLOADORDER: {
     component: () => import('@/views/modal/InterfacePlatform/downLoadAll.vue')

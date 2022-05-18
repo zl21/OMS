@@ -187,7 +187,6 @@ export default {
     isQh: {
       type: Boolean
     },
-    orderATM: [String,Number,null]
   },
   watch: {
     componentData: {
@@ -231,12 +230,14 @@ export default {
   methods: {
     //查看退单关联任务
     async getChargeback( params ) {
+      console.log(params)
       if (this.flag) return
       this.flag = true;
-      this.realAMT = this.orderATM;
+      this.realAMT = params.REAL_AMT;
       const res = await axios.post('/api/cs/oc/oms/v1/getOrderRefundDetailList', { id: this.componentData.order.ID, order_no: params.TID, sub_order_id: params.OOID});
       if (res.data.code == 0){
         const data = res.data.data;
+        this.flag = false;
         if (data.length == 0) {
           this.$Message.warning('暂无数据~');
           return
@@ -248,10 +249,9 @@ export default {
               count += item.refund_fee
             }
           })
-          this.realAMT = ((this.realAMT - count)*100/100).toFixed(2);
+          this.realAMT = ((this.realAMT - count)*100/100).toFixed(2) > 0 ? ((this.realAMT - count)*100/100).toFixed(2) : '0.00';
           this.chargebackData = data;
           this.chargebackModal = true;
-          this.flag = false;
         }
       } else {
         this.$Message.error(res.data.message);
