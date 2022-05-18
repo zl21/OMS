@@ -143,7 +143,7 @@ async function installDependencies(params) {
   ])
   if (ok) {
     // shell.exec('npm install')
-    const runPro = spawn('npm', ['i', 'install'])
+    const runPro = spawn('npm', ['install'])
     runPro.on('close', status => {
       if (status == 0) {
         shell.exec('npm start')
