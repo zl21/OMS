@@ -20,6 +20,7 @@ comJS.keys().forEach(key => {
 // Utils.unZip = require('./src/common/js/zip/index').default
 
 const context = require.context('burgeonComponents/view/', false, /\.vue$/)
+const contextR3Cps = require.context('burgeonComponents/r3.components/src/components/', true, /\.vue$/)
 const Components = Utils.CM.exportModules(context)
 
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/)
@@ -38,9 +39,26 @@ const install = function (Vue, opts = {}) {
   window.$utils = Utils.CM
   Vue.prototype.$utils = Utils.CM
 }
+const install2 = function (Vue, opts = {}) {
+  console.log(999,contextR3Cps);
+  contextR3Cps.keys().forEach(key => {
+    const cname = 'R3'+ context(key).default.name
+    context(key).default.name = cname
+    const component = context(key).default
+    Vue.component(cname, component)
+  })
+
+  Object.keys(Directives).forEach(key => {
+    Vue.directive(key, Directives[key])
+  })
+
+  window.$utils = Utils.CM
+  Vue.prototype.$utils = Utils.CM
+}
 
 const BC = {
   install,
+  install2,
   Components,
   Utils,
   name: '@burgeon/business-components',
@@ -50,6 +68,7 @@ const BC = {
 // auto install
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
+  install2(window.Vue)
 }
 
 export default BC
