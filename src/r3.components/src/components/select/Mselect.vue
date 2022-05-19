@@ -26,6 +26,7 @@
 <script>
 import i18n from '../../assets/js/i18n'
   export default {
+    name: 'Mselect',
     props: {
       itemdata: {
         type: Object

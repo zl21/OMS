@@ -69,6 +69,7 @@
   import ChineseDictionary from '../../assets/js/ChineseDictionary';
 
   export default {
+    name: 'error',
     props: {
       errorMessage: {},
       dialogClass: {},

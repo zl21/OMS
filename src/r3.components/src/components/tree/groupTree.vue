@@ -17,6 +17,7 @@
   import myTree from './tree';
 
   export default {
+    name: 'groupTree',
     props: {
       collapseImg:{
         type:String,

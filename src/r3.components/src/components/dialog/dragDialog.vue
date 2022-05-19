@@ -18,7 +18,7 @@
   import MyDialog from './mydialog.vue'
 
   export default {
-
+    name: 'dragDialog',
     data() {
       return {
         showFlag: true,
