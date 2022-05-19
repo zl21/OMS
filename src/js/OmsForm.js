@@ -101,20 +101,24 @@ export default {
         }
       }
     });
-    setTimeout(() => {
-      let nodes = this.$refs.popLabel;
-      let nodes2 = this.$refs.dropSelect;
-      let allNodes = [nodes, nodes2].filter(i => Array.isArray(i)).flat()
-      allNodes.forEach(e => {
-        let oldNodeStr = e.$el.firstElementChild.innerHTML;
-        if (oldNodeStr.includes('*')) e.$el.firstElementChild.innerHTML = `<i style="color:#ed4014;">*</i> ${oldNodeStr.slice(1)}`;
-      });
-    }, 500);
+    this.asteriskColor()
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);
   },
   methods: {
+    // 必填星号(*)颜色
+    asteriskColor(ms = 500) {
+      setTimeout(() => {
+        let nodes = this.$refs.popLabel;
+        let nodes2 = this.$refs.dropSelect;
+        let allNodes = [nodes, nodes2].filter(i => Array.isArray(i)).flat()
+        allNodes.forEach(e => {
+          let oldNodeStr = e.$el.firstElementChild.innerHTML;
+          if (oldNodeStr.includes('*')) e.$el.firstElementChild.innerHTML = `<i style="color:#ed4014;">*</i> ${oldNodeStr.slice(1)}`;
+        });
+      }, ms);
+    },
     initRenderForm() {
       if (!this.formConfig.flodClick) {
         return
