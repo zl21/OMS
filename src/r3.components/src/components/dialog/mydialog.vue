@@ -44,8 +44,10 @@
 
 <script>
 
-  import emitter from 'element-ui/src/mixins/emitter';
-  import Popup from 'element-ui/src/utils/popup';
+  // import emitter from 'element-ui/src/mixins/emitter';
+  // import Popup from 'element-ui/src/utils/popup';
+
+  const { emitter, Popup } = ELEMENT
 
   export default {
     name: 'mydialog',

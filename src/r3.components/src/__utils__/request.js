@@ -1,11 +1,12 @@
 import axios from 'axios';
 import qs from 'qs';
-import { Message} from 'element-ui';
+// import { Message} from 'element-ui';
 // import store from '../../__config__/store.config';// customize-1.3
 // const R3 = window.R3.default;
 // import R3 from '@syman/burgeon-r3';
 
 // const { store } = R3;
+const { Message } = ELEMENT
 
 // 请求失败
 function errorState(error) {
