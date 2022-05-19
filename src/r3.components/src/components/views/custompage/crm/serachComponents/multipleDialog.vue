@@ -88,6 +88,7 @@
   import i18n from '../../../../../assets/js/i18n'
 
   export default {
+    name: 'multipleDialog',
     props: {
       initData: {}, // 初始值
       verify: {

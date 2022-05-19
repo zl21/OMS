@@ -647,6 +647,7 @@
   import i18n from '../../../../assets/js/i18n'
 
   export default {
+    name: 'advancedSearch',
     props: {
       tablename: {
         type: String,

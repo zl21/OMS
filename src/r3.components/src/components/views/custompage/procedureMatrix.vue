@@ -643,6 +643,7 @@
 let port =window.connector ;
 
   export default {
+    name: 'procedureMatrix',
     props: {
       encode: {
         type: String,

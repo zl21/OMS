@@ -20,8 +20,10 @@ comJS.keys().forEach(key => {
 // Utils.unZip = require('./src/common/js/zip/index').default
 
 const context = require.context('burgeonComponents/view/', false, /\.vue$/)
-const contextR3Cps = require.context('burgeonComponents/r3.components/src/components/', true, /\.vue$/)
 const Components = Utils.CM.exportModules(context)
+
+const contextR3Cps = require.context('burgeonComponents/r3.components/src/components/', true, /\.vue$/)
+const R3Components = Utils.CM.exportModules(contextR3Cps)
 
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/)
 const Directives = Utils.CM.exportModules(directiveFiles)
@@ -42,9 +44,9 @@ const install = function (Vue, opts = {}) {
 const install2 = function (Vue, opts = {}) {
   console.log(999,contextR3Cps);
   contextR3Cps.keys().forEach(key => {
-    const cname = 'R3'+ context(key).default.name
-    context(key).default.name = cname
-    const component = context(key).default
+    const cname = 'R3'+ contextR3Cps(key).default.name
+    contextR3Cps(key).default.name = cname
+    const component = contextR3Cps(key).default
     Vue.component(cname, component)
   })
 
@@ -60,6 +62,7 @@ const BC = {
   install,
   install2,
   Components,
+  R3Components,
   Utils,
   name: '@burgeon/business-components',
   version: require('./package.json').version

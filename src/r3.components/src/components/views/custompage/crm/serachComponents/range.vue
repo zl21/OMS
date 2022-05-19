@@ -83,6 +83,7 @@
   import i18n from '../../../../../assets/js/i18n'
 
   export default {
+    name: 'range',
     props: {
       initData: {}, // 初始值
       type: {

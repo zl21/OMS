@@ -1333,6 +1333,9 @@ class custUtils {
           return index === 0 ? i : i.charAt(0).toUpperCase() + i.slice(1)
         }).join('')
       }
+      if (moduleName.includes('/')) {
+        moduleName = `R3${ moduleName.split('/').slice(-1) }`
+      }
       exportModules[moduleName] = requireFiles(modulePath).default || requireFiles(modulePath)
       return exportModules
     }, {})

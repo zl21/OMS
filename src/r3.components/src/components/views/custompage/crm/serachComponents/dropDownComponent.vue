@@ -80,6 +80,7 @@
   import ChineseDictionary from '../../../../../assets/js/ChineseDictionary';
 
   export default {
+    name: 'dropDownComponent',
     props: {
       initData: {}, // 初始值
       search: {}, // 弹框多选和单选的参数

@@ -730,6 +730,7 @@ let port =window.connector ;
 
 
   export default {
+    name: 'matrix',
     props: {
       proEcodeFlag: { // 矩阵框商品新增时,接受父组件组件matrixInput传输标记,itemInputEnter方法需要用的标记
         type: Object,

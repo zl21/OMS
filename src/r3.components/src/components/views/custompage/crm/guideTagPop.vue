@@ -327,6 +327,7 @@
   // const { store } = R3;
 
   export default {
+    name: 'guideTagPop',
     props: {
       /* tagList: Array,//已选标签组数据 */
       rowArr: {
