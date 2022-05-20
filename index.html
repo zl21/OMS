@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <script>
-    // var host = window.location.host;
-    // if(host.indexOf('r3.ecsemir.com') !== -1) {
-    //   var meta = document.createElement('meta');
-    //   meta.content = "upgrade-insecure-requests";
-    //   meta['httpEquiv'] = "Content-Security-Policy";
-    //   document.getElementsByTagName('head')[0].appendChild(meta);
-    // }
+    var host = window.location.host;
+    if(host.indexOf('r3.ecsemir.com') !== -1) {
+      var meta = document.createElement('meta');
+      meta.content = "upgrade-insecure-requests";
+      meta['httpEquiv'] = "Content-Security-Policy";
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    }
   </script>
   <title></title>
   <script src="/static/utils/jquery.min.js"></script>

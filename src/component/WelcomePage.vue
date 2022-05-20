@@ -1,6 +1,6 @@
 <template>
   <div class="welcomepage">
-    <NotifyMsg :notifyProps="notifyProps" baseUrl="http://10.10.153.42:8099" />
+    <NotifyMsg :notifyProps="notifyProps" />
   </div>
 </template>
 
