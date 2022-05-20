@@ -24,7 +24,7 @@ export default {
           {
             text: window.vmI18n.t('common.cancel'), // 取消 按钮文本
             btnclick: () => {
-              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
+              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER' || this.pageName === 'IP_B_DOUYIN_ORDER') {
                 this.$emit('closeActionDialog');
               } else {
                 this.$parent.$parent.closeConfirm();
@@ -34,7 +34,7 @@ export default {
           {
             text: window.vmI18n.t('common.determine'), // 确定 按钮文本
             btnclick: () => {
-              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER' ) {
+              if (this.isTBsku || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER' || this.pageName === 'IP_B_DOUYIN_ORDER') {
                 this.save();
               } else {
                 this.confirm();
@@ -115,7 +115,7 @@ export default {
               // 新增逻辑: 当页面为“淘宝订单接口”页面，使用新接口查询sku信息
               let res = {};
               console.log('val', val)
-              if (this.pageName === 'IP_B_TAOBAO_ORDER' || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
+              if (this.pageName === 'IP_B_TAOBAO_ORDER' || this.pageName === 'IP_B_JINGDONG_ORDER' || this.pageName === 'IP_B_DOUYIN_ORDER' || this.pageName === 'IP_B_STANDPLAT_ORDER') {
                 const params = {
                   isBlur: 'Y',
                   psCSku: {
@@ -440,6 +440,9 @@ export default {
         // 京东订单接口
         case 'IP_B_JINGDONG_ORDER':
           return this.service.common.queryJingdongExceptionSkus(params);
+        // 抖音订单接口
+        case 'IP_B_DOUYIN_ORDER':
+          return this.service.common.queryDouYinExceptionSkus(params);
         // 通用订单接口
         case 'IP_B_STANDPLAT_ORDER':
           return this.service.common.queryStandPlatExceptionSkus(params);
@@ -514,6 +517,9 @@ export default {
         // 通用订单接口
         case 'IP_B_STANDPLAT_ORDER':
           return '/api/cs/oc/oms/v1/bathChangeStandPlatExceptionSkus';
+        // 抖音订单接口
+        case 'IP_B_DOUYIN_ORDER':
+          return '/api/cs/oc/oms/v1/bathChangeDouYinExceptionSkus';
         // 淘宝订单接口
         default:
           return '/api/cs/oc/oms/v1/bathChangeTaobaoExceptionSkus';
@@ -555,7 +561,6 @@ export default {
       result.changeGoodsSku = self.onRowClickData.ECODE;
       result.sku_code = needParam.SKU_ECODE;
       result.type = 1;
-      console.log(this.componentData.a_1, result);
       this.loading = true;
       axios({
         url: '/api/cs/oc/oms/v1/bathChangeGoods',
@@ -563,7 +568,6 @@ export default {
         data: result,
       }).then((res) => {
         this.loading = false;
-        console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
           this.$parent.$parent.closeConfirm();
@@ -607,7 +611,6 @@ export default {
         data: result,
       }).then((res) => {
         this.loading = false;
-        console.log(res);
         if (res.data.code == 0) {
           self.$Message.success(res.data.message);
           this.$emit('closeActionDialog');

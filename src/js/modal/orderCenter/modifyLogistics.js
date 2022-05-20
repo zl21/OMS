@@ -268,7 +268,8 @@ export default {
     },
     // 分页请求数据
     changePage(value) {
-      this.pageNum = 1;
+      this.pageNum = value;
+      this.getListData();
     },
     onFkrpSelected(val) {
       console.log(val);

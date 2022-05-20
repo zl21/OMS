@@ -77,6 +77,9 @@ export default {
           searchParam.append('param', JSON.stringify({ mode: this.componentData.mode }));
           this.getDownloadTemp(itemObj[0].downloadUrl, searchParam);
           break;
+        case 'IP_B_DOUYIN_ORDER':
+          this.downloadUrlFile(itemObj[0].downloadUrl);
+          break;
         case 'PS_C_SKUGROUP':
           if (this.componentData.operationType === 'baseInfo') {
             // 组合商品明细表与虚拟明细
@@ -257,6 +260,7 @@ export default {
         case 'IP_B_TAOBAO_ORDER':
         case 'IP_B_STANDPLAT_ORDER':
         case 'IP_B_JINGDONG_ORDER':
+        case 'IP_B_DOUYIN_ORDER':
           const newUrl = `${itemObj[0].url}?tableName=${this.componentData.tableName}`;
           this.getImportDialog(newUrl);
           break;
