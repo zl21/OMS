@@ -55,7 +55,6 @@
 import i18n from '../../assets/js/i18n'
 
 export default {
-  name: 'selectTable',
 	props: {
 		thead: {
 			type: Array

@@ -57,7 +57,6 @@ import DialogInput from '../input/dialogInput.vue'
 
 
 export default {
-  name: 'configItems',
 	data() {
 		return {
 			selectParams: ''

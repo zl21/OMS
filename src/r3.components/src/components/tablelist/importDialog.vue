@@ -147,7 +147,6 @@
   import i18n from '../../../assets/js/i18n'
 
   export default {
-    name: 'importDialog',
     props: {
       visible: {// 显示
         type: Boolean,

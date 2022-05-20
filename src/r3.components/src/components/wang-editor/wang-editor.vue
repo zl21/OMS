@@ -12,7 +12,6 @@
   import i18n from '../../assets/js/i18n'
 
   export default {
-    name: 'wang-editor',
     data() {
       return {
         editor: {},

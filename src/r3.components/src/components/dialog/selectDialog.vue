@@ -91,7 +91,7 @@
   import i18n from '../../assets/js/i18n'
 
   export default {
-    name: 'selectDialog',
+    name: 'FcDialog',
     mixins: [Popup, emitter],
     props: {
       title: {

@@ -48,7 +48,7 @@
   import Popup from 'element-ui/src/utils/popup';
 
   export default {
-    name: 'mydialog',
+    name: 'FcDialog',
     mixins: [Popup, emitter],
     props: {
       hasWidth: {

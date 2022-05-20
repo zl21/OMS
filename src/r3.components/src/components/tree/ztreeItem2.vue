@@ -69,7 +69,7 @@ import treeCollapseImage from '../../../static/img/tree2.png'
 import treeExpandImage from '../../../static/img/tree1.png'
   export default {
 
-    name: 'ztreeItem2',
+    name: 'ZtreeItem',
     data() {
       return {
         aa: {},

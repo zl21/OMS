@@ -803,7 +803,6 @@
 
   // const _import_custom = file => require(`@/components/views/${file}.vue`).default;
   export default {
-    name: 'customTable',
     props: {
       tHead: {
         type: Array,

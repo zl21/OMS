@@ -350,7 +350,6 @@
   }); */
 
   export default {
-    name: 'input',
     // 单对象属性表格中的文本输入框,
     props: {
       defaultSelectedIds: {

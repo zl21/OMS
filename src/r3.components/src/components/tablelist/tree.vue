@@ -27,7 +27,6 @@
 <script>/*type="ecmascript-6"*/
 import axios from 'axios'
     export default {
-      name: 'tree',
       props: {
         tree_lists: Array
       },

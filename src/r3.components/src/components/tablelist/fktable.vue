@@ -77,7 +77,6 @@ import ChineseDictionary from '../../../assets/js/ChineseDictionary';
 import i18n from '../../../assets/js/i18n'
 
 export default {
-  name: 'fktable',
   props: {
     inputBox: true,
     defaultSelectedIds: {

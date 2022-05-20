@@ -345,7 +345,6 @@
   import i18n from '../../assets/js/i18n'
 
   export default {
-    name: 'fkdialog',
     props: {
       tablename: {
         type: String
