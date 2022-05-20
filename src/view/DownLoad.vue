@@ -188,19 +188,19 @@ const DownLoad = {
       });
     },
     // 打开导入弹窗
-    importBoxOpen() {
+    importBoxOpen(item) {
       const _this = this;
       // 导入
       this.dialogConfig = {
         title: $i18n.t("btn.import"),
-        componentData: {
+        componentData: Object.assign({
           // 导入：key存在则在配置中找(tableName_webname)
           tableName: "IP_C_STANDPLAT_PRO",
           webname: "",
           returnData(data) {
             this.downLoadFormConfig.formValue.sp_ids = data;
           },
-        },
+        },item.componentData),
         name: "importTable",
         url: require('./ImportTable.vue').default,
         width: 450,
