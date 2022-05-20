@@ -311,7 +311,6 @@
 </script>
 
 <style lang="less" type="text/less" scoped>
-@import "~omsTheme/public.less";
 // 框架有样式 -- 覆盖修改
 .detailtable .form_button .buttonFk .el-dialog__headerbtn {
   background-color: transparent !important;
@@ -363,7 +362,7 @@
       }
       .left_top {
         span i {
-          color: @base-color;
+          color: var(--b1-color);
         }
       }
       .left_center {
@@ -375,7 +374,7 @@
       // width: auto;
       box-shadow: none;
       .el-tabs .el-tabs__header .el-tabs__nav .el-tabs__active-bar {
-        background-color: @base-color;
+        background-color: var(--b1-color);
       }
       .el-pagination {
         .el-pagination__jump {
@@ -386,8 +385,8 @@
         // .el-input {
         //   input {
         //     border-radius: 0;
-        //     height: @base-color;
-        //     line-height: @base-color;
+        //     height: var(--b1-color);
+        //     line-height: var(--b1-color);
         //   }
         // }
         display: flex;
@@ -412,7 +411,7 @@
       // width: auto;
       border-color: #f3f3f3;
       .operation-icon {
-        color: @base-color;
+        color: var(--b1-color);
         font-size: 14px;
         line-height: 19px;
         border-radius: 3px;
@@ -422,15 +421,15 @@
       // flex: 1;
       // width: auto;
       .right_top {
-        color: @base-color;
+        color: var(--b1-color);
         span {
           &:nth-child(3),
           :last-child,
           &:last-child {
             i {
-              color: @base-color;
+              color: var(--b1-color);
             }
-            color: @base-color;
+            color: var(--b1-color);
           }
         }
       }
@@ -438,12 +437,24 @@
         padding: 0;
         height: auto;
         & > button {
-          #bundle > .basicBtn;
-          color: @base-color;
+          // #bundle > .basicBtn;
+          font-size: 12px;
+          height: 32px;
+          line-height: 1;
+          padding: 0 16px;
+          border-radius: 3px;
+          border: 1px solid var(--b1-color);
+
+          & * {
+            font-size: 12px;
+            width: 100%;
+          }
+
+          color: var(--b1-color);
           &:last-child {
             color: #fff;
-            background: @base-color;
-            border: 1px solid @base-color;
+            background: var(--b1-color);
+            border: 1px solid var(--b1-color);
             margin-right: 0;
           }
         }
@@ -467,7 +478,13 @@
         input{
           font-size: 12px;
           width: calc(100% - 120px);
-          #bundle > .defalutInput;
+          // #bundle > .defalutInput;
+          height: 32px;
+          line-height: 30px;
+          color: #292F43;
+          border: 1px solid #dbdde8;
+          border-radius: 3px;
+          padding-right: 32px;
         }
       }
       .modalBtn{
@@ -476,12 +493,32 @@
         right: 0;
         margin-top: 10px;
         button{
-          #bundle > .defalutBtn;
+          // #bundle > .defalutBtn;
           span{
             color: inherit;
           }
-          &.result_save{
-            #bundle > .defalutBtn;
+          &, &.result_save {
+            // #bundle > .defalutBtn;
+            font-size: 12px;
+            height: 32px;
+            line-height: 1;
+            padding: 0 16px;
+            border-radius: 3px;
+            border: 1px solid var(--b1-color);
+
+            & * {
+              font-size: 12px;
+              width: 100%;
+            }
+            color: var(--b2-color);
+            border-color: var(--b2-color);
+            background-color: #fff;
+
+            &:hover {
+              // color: var(--b1-color);
+              // border-color: var(--b1-color);
+              opacity: .6;
+            }
           }
         }
       }
