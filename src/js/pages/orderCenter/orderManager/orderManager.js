@@ -1314,10 +1314,9 @@ export default {
                 okText: self.vmI18n.t('common.determine'), // 确定
                 cancelText: self.vmI18n.t('common.cancel'), // 取消
                 onCancel: () => {},
-                onOk: () => {
-                  this.exportClick();
-                }
+                onOk: () => {}
               });
+              this.exportClick();
             } // 按钮点击事件
           },
           {
@@ -1331,10 +1330,9 @@ export default {
                 okText: self.vmI18n.t('common.determine'), // 确定
                 cancelText: self.vmI18n.t('common.cancel'), // 取消
                 onCancel: () => {},
-                onOk: () => {
-                  this.exportClick(true);
-                }
+                onOk: () => {}
               });
+              this.exportClick(true);
             } // 按钮点击事件
           },
           {
