@@ -283,6 +283,7 @@
 
   export default {
     // 列表查询条件的各种类型的输入框,
+    name: 'tableobj',
     data() {
       return {
         // 弹框多选

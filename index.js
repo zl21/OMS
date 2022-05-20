@@ -23,7 +23,7 @@ const context = require.context('burgeonComponents/view/', false, /\.vue$/)
 const Components = Utils.CM.exportModules(context)
 
 const contextR3Cps = require.context('burgeonComponents/r3.components/src/components/', true, /\.vue$/)
-const R3Components = Utils.CM.exportModules(contextR3Cps)
+const R3Components = Utils.CM.exportModules(contextR3Cps, true)
 
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/)
 const Directives = Utils.CM.exportModules(directiveFiles)
@@ -35,7 +35,9 @@ const install = function (Vue, opts = {}) {
   })
 
   contextR3Cps.keys().forEach(key => {
-    const cname = 'R3'+ contextR3Cps(key).default.name
+    console.log(contextR3Cps(key).default.name)
+    // 组件名形如：P_matrixInput，最终转为: R3PmatrixInput（原因：R3P_matrixInput 不符合组件命名规范）
+    const cname = 'R3'+ contextR3Cps(key).default.name.replace(/(_|-)/g, '')
     contextR3Cps(key).default.name = cname
     const component = contextR3Cps(key).default
     Vue.component(cname, component)

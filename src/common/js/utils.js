@@ -1324,17 +1324,20 @@ class custUtils {
   /* ============================================== 【DOM】END ============================================== */
   /* ============================================== 【FILE】START ============================================== */
   // 
-  static exportModules(requireFiles, handleModuleName) {
+  static exportModules(requireFiles, useSubdirectories) {
     return requireFiles.keys().reduce((exportModules, modulePath) => {
       let moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-      if (handleModuleName) {
-        // 文件名转驼峰
+      // 文件名转驼峰
+      if (moduleName.includes('.')) {
         moduleName = moduleName.split('.').map((i,index) => {
           return index === 0 ? i : i.charAt(0).toUpperCase() + i.slice(1)
         }).join('')
       }
-      if (moduleName.includes('/')) {
-        moduleName = `R3${ moduleName.split('/').slice(-1) }`
+
+      // 处理检索子文件夹
+      if (useSubdirectories && moduleName.includes('/')) {
+        let filename = moduleName.split('/').slice(-1)
+        moduleName = `R3${ filename.length ? filename[0].replace(/(_|-)/g, '') : filename }`
       }
       exportModules[moduleName] = requireFiles(modulePath).default || requireFiles(modulePath)
       return exportModules
