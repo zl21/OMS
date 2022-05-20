@@ -36,7 +36,7 @@
       :component-data="dialogConfig.componentData"
       :name="dialogConfig.name"
       :url="dialogConfig.url"
-      :width="540"
+      :width="565"
     />
   </div>
 </template>
@@ -198,7 +198,7 @@ const DownLoad = {
           tableName: "IP_C_STANDPLAT_PRO",
           webname: "",
           returnData(data) {
-            this.downLoadFormConfig.formValue.sp_ids = data;
+            _this.downLoadFormConfig.formValue.sp_ids = data;
           },
         },item.componentData),
         name: "importTable",
@@ -230,7 +230,6 @@ export default DownLoad;
   font-size: 14px;
   text-align: right;
   color: #0f8ee9;
-  line-height: 32px;
   cursor: pointer;
   margin-top: 10px;
 }

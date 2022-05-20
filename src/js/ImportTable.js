@@ -128,7 +128,7 @@ export default {
     importDialog: _.throttle(function () {
       if (this.handleBefore(this.files)) return;
       const okApi = this.currentConfig.okApi;
-      const okParm = this.currentConfig.okParm;
+      const okParm = this.currentConfig.okParm || {};
       this.getImportDialog(okApi, okParm);
     }, 3000, { 'trailing': false }),
     // 导入请求
