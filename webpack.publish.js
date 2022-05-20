@@ -148,7 +148,7 @@ module.exports = () => ({
     },
     alias: {
       burgeonComponents: path.resolve(__dirname, './src/'),
-      r3cps: path.resolve(__dirname, './r3.components'),
+      r3cps: path.resolve(__dirname, './src/r3.components/'),
       // framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
       omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
     }

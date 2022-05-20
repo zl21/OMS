@@ -49,13 +49,6 @@ const install2 = function (Vue, opts = {}) {
     const component = contextR3Cps(key).default
     Vue.component(cname, component)
   })
-
-  Object.keys(Directives).forEach(key => {
-    Vue.directive(key, Directives[key])
-  })
-
-  window.$utils = Utils.CM
-  Vue.prototype.$utils = Utils.CM
 }
 
 const BC = {
