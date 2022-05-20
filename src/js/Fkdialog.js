@@ -5,6 +5,10 @@
 // import tree from "framework/components/tablelist/tree.vue";
 // import ShowTableData from "framework/components/views/custompage/ShowTableData.vue";
 // window.$i18n = i18n;
+import MyDialog from "r3cps/components/dialog/mydialog.vue";
+import DragDialog from "r3cps/components/dialog/mydialog.vue";
+import tree from "r3cps/components/tablelist/tree.vue";
+import ShowTableData from "r3cps/components/views/custompage/ShowTableData.vue";
 
 export default {
   name: 'Fkdialog',
@@ -161,11 +165,11 @@ export default {
     };
   },
   components: {
-    tree: $R3_CPS.components.tree,
-    ShowTableData:$R3_CPS.components.ShowTableData,
-    MyDialog: $R3_CPS.components.mydialog,
+    tree,
+    ShowTableData,
+    MyDialog,
     // errorMessage,
-    DragDialog:$R3_CPS.components.mydialog,
+    DragDialog,
   },
   methods: {
     MyDialogClose() {

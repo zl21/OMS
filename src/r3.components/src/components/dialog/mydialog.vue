@@ -46,8 +46,8 @@
 
   // import emitter from 'element-ui/src/mixins/emitter';
   // import Popup from 'element-ui/src/utils/popup';
-  import emitter from 'r3cps/src/__utils__/emitter';
-  import Popup from 'r3cps/src/__utils__/popup';
+  import emitter from 'r3cps/__utils__/emitter';
+  import Popup from 'r3cps/__utils__/popup';
   export default {
     name: 'mydialog',
     mixins: [Popup, emitter],

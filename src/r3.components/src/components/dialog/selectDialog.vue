@@ -86,8 +86,8 @@
 
   // import Popup from 'element-ui/src/utils/popup';
   // import emitter from 'element-ui/src/mixins/emitter';
-  import emitter from 'r3cps/src/__utils__/emitter';
-  import Popup from 'r3cps/src/__utils__/popup';
+  import emitter from 'r3cps/__utils__/emitter';
+  import Popup from 'r3cps/__utils__/popup';
   import SelectionTable from '../element/selectTable.vue';
   import ConfigItems from '../element/configItems.vue';
   import i18n from '../../assets/js/i18n'

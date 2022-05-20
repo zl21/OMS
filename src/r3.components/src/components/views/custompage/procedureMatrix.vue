@@ -375,7 +375,7 @@
           vertical-align: middle;
         }
         .ff-matrix-th-head {
-          background: url("r3cps/static/img/matrix.jpg") no-repeat;
+          background: url("../../../../static/img/matrix.jpg") no-repeat;
           background-size: 100% 100%;
           .ff-matrix-th-head-box {
             display: flex;

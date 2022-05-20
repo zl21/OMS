@@ -18,13 +18,13 @@ comJS.keys().forEach(key => {
   }
 })
 
-Utils.ChineseDictionary = require('r3cps/src/assets/js/ChineseDictionary').default
+Utils.ChineseDictionary = require('r3cps/assets/js/ChineseDictionary').default
 // Utils.unZip = require('./src/common/js/zip/index').default
 
 const context = require.context('burgeonComponents/view/', false, /\.vue$/)
 const Components = Utils.CM.exportModules(context)
 
-const contextR3Cps = require.context('r3cps/src/components/', true, /\.vue$/)
+const contextR3Cps = require.context('r3cps/components/', true, /\.vue$/)
 const R3Components = Utils.CM.exportModules(contextR3Cps, true)
 
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/)
@@ -37,7 +37,6 @@ const install = function (Vue, opts = {}) {
   })
 
   contextR3Cps.keys().forEach(key => {
-    console.log(contextR3Cps(key).default.name)
     // 组件名形如：P_matrixInput，最终转为: R3PmatrixInput（原因：R3P_matrixInput 不符合组件命名规范）
     const cname = 'R3'+ contextR3Cps(key).default.name.replace(/(_|-)/g, '')
     contextR3Cps(key).default.name = cname

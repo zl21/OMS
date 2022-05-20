@@ -104,10 +104,11 @@
 
 <script>
 // import myInput from "framework/components/input/objinput_dz.vue";
+import myInput from "r3cps/components/input/objinput_dz.vue";
 export default {
   name: 'TableInput',
   components: {
-    myInput:$R3_CPS.components.objinput_dz
+    myInput
   },
   data() {
     return {};
