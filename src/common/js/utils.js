@@ -10,10 +10,14 @@
  * 【DOM】
  * 【File】
  */
+import { httpFormdata } from 'r3cps/src/__utils__/request';
 class custUtils {
   constructor() { }
 
   //--------------工具方法区--------------------------
+  static httpFormdata(data) {
+    return httpFormdata(data)
+  }
 
   /**
    *
@@ -1326,6 +1330,7 @@ class custUtils {
   // 
   static exportModules(requireFiles, useSubdirectories) {
     return requireFiles.keys().reduce((exportModules, modulePath) => {
+      let file = requireFiles(modulePath)
       let moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
       // 文件名转驼峰
       if (moduleName.includes('.')) {
@@ -1335,11 +1340,10 @@ class custUtils {
       }
 
       // 处理检索子文件夹
-      if (useSubdirectories && moduleName.includes('/')) {
-        let filename = moduleName.split('/').slice(-1)
-        moduleName = `R3${ filename.length ? filename[0].replace(/(_|-)/g, '') : filename }`
+      if (useSubdirectories) {
+        moduleName = `R3${ file.default.name.replace(/(_|-)/g, '') }`
       }
-      exportModules[moduleName] = requireFiles(modulePath).default || requireFiles(modulePath)
+      exportModules[moduleName] = file.default || file
       return exportModules
     }, {})
   };

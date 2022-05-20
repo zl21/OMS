@@ -38,7 +38,7 @@
   import ztreeItem from './ztreeItem';
 
   export default {
-    name: 'tree',
+    name: 'ztree',
     data() {
       return {
         treeDataSource: [],

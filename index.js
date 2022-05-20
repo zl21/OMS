@@ -17,12 +17,14 @@ comJS.keys().forEach(key => {
     Object.assign(Utils, obj)
   }
 })
+
+Utils.ChineseDictionary = require('r3cps/src/assets/js/ChineseDictionary').default
 // Utils.unZip = require('./src/common/js/zip/index').default
 
 const context = require.context('burgeonComponents/view/', false, /\.vue$/)
 const Components = Utils.CM.exportModules(context)
 
-const contextR3Cps = require.context('burgeonComponents/r3.components/src/components/', true, /\.vue$/)
+const contextR3Cps = require.context('r3cps/src/components/', true, /\.vue$/)
 const R3Components = Utils.CM.exportModules(contextR3Cps, true)
 
 let directiveFiles = require.context('burgeonComponents/directive/', false, /\.js$/)
