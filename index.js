@@ -34,6 +34,13 @@ const install = function (Vue, opts = {}) {
     Vue.component(component.name, component)
   })
 
+  contextR3Cps.keys().forEach(key => {
+    const cname = 'R3'+ contextR3Cps(key).default.name
+    contextR3Cps(key).default.name = cname
+    const component = contextR3Cps(key).default
+    Vue.component(cname, component)
+  })
+
   Object.keys(Directives).forEach(key => {
     Vue.directive(key, Directives[key])
   })
@@ -41,19 +48,9 @@ const install = function (Vue, opts = {}) {
   window.$utils = Utils.CM
   Vue.prototype.$utils = Utils.CM
 }
-const install2 = function (Vue, opts = {}) {
-  console.log(999,contextR3Cps);
-  contextR3Cps.keys().forEach(key => {
-    const cname = 'R3'+ contextR3Cps(key).default.name
-    contextR3Cps(key).default.name = cname
-    const component = contextR3Cps(key).default
-    Vue.component(cname, component)
-  })
-}
 
 const BC = {
   install,
-  install2,
   Components,
   R3Components,
   Utils,
@@ -64,7 +61,6 @@ const BC = {
 // auto install
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
-  install2(window.Vue)
 }
 
 export default BC
