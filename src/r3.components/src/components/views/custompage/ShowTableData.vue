@@ -355,7 +355,9 @@
       let systemOs = this.validataOS();
       this.$el.addEventListener('scroll', () => {
         let scrolltop = _this.$el.scrollTop;
-        _this.$el.children[1].scrollTop = scrolltop;
+        if (_this.$el.children.length > 1) {
+          _this.$el.children[1].scrollTop = scrolltop;
+        }
       })
       if (systemOs === 1) {
         window.addEventListener('keydown', function (event) {
