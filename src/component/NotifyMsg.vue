@@ -18,8 +18,8 @@
         {{ notifyData.version }}
       </div>
       <div class="notify-dialog-body-title-content">
-        <span>版本号：</span>
-        {{ notifyData.version }}
+        <span>发布日期：</span>
+        {{ notifyData.created_at }}
       </div>
     </div>
     <div v-html="notifyData.content" class="notify-dialog-body-content" />
