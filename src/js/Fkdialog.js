@@ -54,6 +54,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    customClass: {
+      type: String,
+      default: ''
+    }, // 自定义样式
   },
   data() {
     return {
