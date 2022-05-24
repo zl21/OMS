@@ -26,20 +26,9 @@
     components: {
       NotifyMsg,
     },
-    // data() {
-    //   return {
-    //     notifyProps: {
-    //       username: this.$store.state.global.userInfo.name,
-    //       appId: 'r3',
-    //     }
-    //   }
-    // },
     mounted() {
       console.log('loading');
       this.notifyProps.username = this.$store.state.global.userInfo.name;
-    },
-    watch:{
-
     },
     computed: {
       notifyProps() {
