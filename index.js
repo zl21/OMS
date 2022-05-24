@@ -3,14 +3,18 @@ import VueI18n from 'vue-i18n'
 import zh from '@/langs/zh_CN/zh'
 import en from '@/langs/en_US/en'
 import ja from '@/langs/ja-JP/ja'
+import r3zh from '@/langs/zh_CN/r3zh'
+import r3en from '@/langs/en_US/r3en'
 // import ja from './langs/ja'
-import ChineseDictionary from '@/langs/ChineseDictionary'
+// import ChineseDictionary from '@/langs/ChineseDictionary'
 
 Vue.use(VueI18n)
 
+window.ChineseDictionary = require('@/langs/ChineseDictionary').default
+
 const messages = {
-  en: Object.assign(en, ChineseDictionary),
-  zh: Object.assign(zh, ChineseDictionary),
+  en: Object.assign(en, r3en, ChineseDictionary),
+  zh: Object.assign(zh, r3zh, ChineseDictionary),
   ja: Object.assign(ja, ChineseDictionary),
 }
 
