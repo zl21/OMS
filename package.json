@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "push": "npm run build && yalc push",
     "build": "cross-env BUILD_ENV=publish webpack --color --progress --config webpack.config.js"
   },
   "repository": {
