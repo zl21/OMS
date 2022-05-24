@@ -55,25 +55,35 @@ export default {
       count: 10,
       show: true,
       timer: null,
+      appId: 'r3',
+      username: '',
     }
   },
   mounted() {
-    // this.open();
+    this.getNotifyInfo();
   },
   methods: {
+    getNotifyInfo() {
+      axios.get('/p/cs/hello').then((res) => {
+        console.log('res', res);
+        if (res.data.code === 0) {
+          this.username = res.data.name;
+          this.open();
+        }
+      });
+    },
     open() {
       const notiDom = document.querySelector('.notify-msg-wrap');
-      console.log('notiDom', notiDom);
       // 如果消息已经存在，侧不继续弹出
       if(notiDom) return;
       const _self = this;
       const url = this.baseUrl ? this.baseUrl : '//tool.ecsemir.com';
-      if (this.notifyProps.appId && this.notifyProps.username) {
+      if (this.appId && this.username) {
         axios
           .get(`${url}/api/system/get_version`, {
             params: {
-              system_code: this.notifyProps.appId,
-              username: this.notifyProps.username,
+              system_code: this.appId,
+              username: this.username,
             },
           })
           .then((res) => {
@@ -115,22 +125,14 @@ export default {
       if(!this.show) {
         const url = this.baseUrl ? this.baseUrl : '//tool.ecsemir.com';
         axios.post(`${url}/api/system/version_read`, {
-          system_code: this.notifyProps.appId,
-          username: this.notifyProps.username,
+          system_code: this.appId,
+          username: this.username,
           version: this.notifyData.version,
         });
         this.dialogVisible = false;
       }
     }
   },
-  watch: {
-    notifyProps: {
-      deep: true,
-      handler: function(val) {
-        this.open();
-      }
-    }
-  }
 };
 </script>
 

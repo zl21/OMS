@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NotifyMsg :notifyProps="notifyProps" />
     <div v-if="loading">
       <Spin fix>
           <div class="loader">
@@ -15,27 +14,11 @@
 <style lang="less" scoped>
 </style>
 <script>
-  import NotifyMsg from '@/component/NotifyMsg.vue';
   export default {
     props: {
       loading: {
         type: Boolean,
         required: true
-      }
-    },
-    components: {
-      NotifyMsg,
-    },
-    mounted() {
-      this.notifyProps.username = this.$store.state.global.userInfo.name;
-      console.log('loading', this.notifyProps.username);
-    },
-    computed: {
-      notifyProps() {
-        return {
-          username: this.$store.state.global.userInfo.name,
-          appId: 'r3',
-        };
       }
     },
   };
