@@ -92,7 +92,7 @@
   import $http from '../../../../../__utils__/request';
   import MyDialog from '../../../../dialog/mydialog.vue';
   import guideTagPop from '../guideTagPop.vue';
-  import i18n from '../../../../../assets/js/i18n'
+  // import i18n from '../../../../../assets/js/i18n'
 
   export default {
     name: 'tagComponent',
@@ -113,7 +113,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
     
     mounted() {

@@ -18,7 +18,7 @@ comJS.keys().forEach(key => {
   }
 })
 
-Utils.ChineseDictionary = require('r3cps/assets/js/ChineseDictionary').default
+// Utils.ChineseDictionary = require('r3cps/assets/js/ChineseDictionary').default
 Utils.request = require('r3cps/__utils__/request').default
 // Utils.unZip = require('./src/common/js/zip/index').default
 

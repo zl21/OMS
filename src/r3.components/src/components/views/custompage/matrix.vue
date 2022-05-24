@@ -722,8 +722,8 @@
   import axios from '../../../__utils__/request';
   // import port from '../../../assets/js/connector';
   // import store from '@/__config__/store.config.js';
-  import chineseDiction from '../../../assets/js/ChineseDictionary';
-  import i18n from '../../../assets/js/i18n'
+  // import chineseDiction from '../../../assets/js/ChineseDictionary';
+  // import i18n from '../../../assets/js/i18n'
 
   // const { store } = R3;
 let port =window.connector ;
@@ -1857,7 +1857,7 @@ let port =window.connector ;
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
 
     created() {

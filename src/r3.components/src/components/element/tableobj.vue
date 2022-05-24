@@ -279,7 +279,7 @@
   import { post } from '../../__utils__/request';
   import fkdialog from '../tablelist/fkdialog.vue';
   import fktable from '../tablelist/fktable.vue';
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     // 列表查询条件的各种类型的输入框,
@@ -334,7 +334,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+      // this.$t = i18n.t.bind(i18n)
     },
     
     created() {

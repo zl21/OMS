@@ -66,7 +66,7 @@
 </template>
 
 <script>
-  import ChineseDictionary from '../../assets/js/ChineseDictionary';
+  // import ChineseDictionary from '../../assets/js/ChineseDictionary';
 
   export default {
     name: 'error',

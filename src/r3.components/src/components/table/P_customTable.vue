@@ -846,7 +846,7 @@
   */
   import TipsDialog from '../dialog/mydialog.vue';
   import MyText from '../element/input.vue';
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   // const _import_custom = file => require(`@/components/views/${file}.vue`).default;
   export default {
@@ -1113,7 +1113,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
 
     created() {

@@ -142,9 +142,9 @@
 
 <script>
   import axios from '../../__utils__/request';
-  import ChineseDictionary from '../../assets/js/ChineseDictionary';
+  // import ChineseDictionary from '../../assets/js/ChineseDictionary';
   import MyDialog from '../dialog/mydialog.vue';
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     name: 'importDialog',
@@ -216,7 +216,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
     
     created() {

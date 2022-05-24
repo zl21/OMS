@@ -64,7 +64,7 @@
   import SelectionTable from '../element/selectTable.vue';
   import ConfigItems from '../element/configItems.vue';
   import MyDialog from './mydialog.vue';
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     name: 'popDialog',
@@ -130,7 +130,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+      // this.$t = i18n.t.bind(i18n)
     },
 
     created() {

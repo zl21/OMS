@@ -198,7 +198,7 @@
   import matrix from '../views/custompage/procedureMatrix.vue';
   import DragDialog from '../dialog/dragDialog.vue';
   import axios from '../../__utils__/request';
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
   // import port from '../../assets/js/connector';
   // import store from '@/__config__/store.config.js';
 
@@ -684,7 +684,7 @@ let port =window.connector ;
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
     created(){
       port =window.connector|| window.R3.connector;

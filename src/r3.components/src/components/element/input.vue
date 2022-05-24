@@ -321,7 +321,7 @@
 <script>
   import axios from 'axios';
   // import SelectDialog from '../../components/dialog/selectDialog.vue'
-  import ChineseDictionary from '../../assets/js/ChineseDictionary';
+  // import ChineseDictionary from '../../assets/js/ChineseDictionary';
   import advancedSearch from '../views/custompage/crm/advancedSearch.vue';
   import ImportDialog from '../tablelist/importDialog.vue';
   // import mAutocomplete from './autocomplete.vue'
@@ -329,7 +329,7 @@
   import fkdialog from '../tablelist/fkdialog.vue';
   import FkTable from '../tablelist/fktable.vue';
   import SelectDialog from '../dialog/popDialog.vue';
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
   // import $ from '../../assets/js/jquery3.5.1.min';
 
   /* Vue.component('my-item-zh', {
@@ -459,7 +459,7 @@
     },
     
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+      // this.$t = i18n.t.bind(i18n)
     },
 
     created() {

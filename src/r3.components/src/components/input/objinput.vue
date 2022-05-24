@@ -101,7 +101,7 @@
   import axios from 'axios'
   import SelectDialog from '../../components/dialog/selectDialog.vue'
   import FkTable from '../../components/tablelist/fktable.vue'
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
   /*import Vue from 'vue'*/
 
   export default {
@@ -243,7 +243,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+      // this.$t = i18n.t.bind(i18n)
     },
 
     mounted() {

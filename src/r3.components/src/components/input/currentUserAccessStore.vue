@@ -245,8 +245,8 @@
   /* import Vue from 'vue' */
   import FkDialog from '../tablelist/fkdialog.vue';
   import { post } from '../../__utils__/request';
-  import ChineseDictionary from '../../assets/js/ChineseDictionary';
-  import i18n from '../../assets/js/i18n'
+  // import ChineseDictionary from '../../assets/js/ChineseDictionary';
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     name: 'currentUserAccessStore',
@@ -441,7 +441,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+      // this.$t = i18n.t.bind(i18n)
     },
 
     created() {
