@@ -27,8 +27,8 @@
       NotifyMsg,
     },
     mounted() {
-      console.log('loading');
       this.notifyProps.username = this.$store.state.global.userInfo.name;
+      console.log('loading', this.notifyProps.username);
     },
     computed: {
       notifyProps() {

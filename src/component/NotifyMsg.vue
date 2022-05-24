@@ -57,6 +57,9 @@ export default {
       timer: null,
     }
   },
+  mounted() {
+    this.open();
+  },
   methods: {
     open() {
       const notiDom = document.querySelector('.notify-msg-wrap');
