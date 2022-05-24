@@ -25,7 +25,7 @@ if (process.env.npm_config_report) {
 module.exports = () => ({
   entry: './index.js',
   output: {
-    filename: 'index.min.js',
+    filename: 'i18n.min.js',
     chunkFilename: 'i18n/[name].min.js',
     path: path.join(__dirname, './dist'),
     // globalObject: 'this',
