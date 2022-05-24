@@ -1337,6 +1337,24 @@ class custUtils {
       return exportModules
     }, {})
   };
+
+
+  /**
+   * 数组去重 (根据数组里对象中某个key去重)
+   * @param data
+   * @param key
+   * @returns {*|[]}
+   */
+  static uniqueFun(data,key) {
+    const  obj = {};
+    let  arr = [];
+    arr = data.reduce(function (item, next) {
+      obj[next[key]] ? '' : obj[next[key]] = true && item.push(next);
+      return item;
+    }, []);
+    return arr
+  }
+
   /* ============================================== 【FILE】END ============================================== */
 }
 
