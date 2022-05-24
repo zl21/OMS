@@ -1,11 +1,9 @@
 <template>
   <div class="welcomepage">
-    <NotifyMsg :notifyProps="notifyProps" />
   </div>
 </template>
 
 <script>
-  import NotifyMsg from '@/component/NotifyMsg.vue';
   const langConfig = [
     {
       type: 'zh',
@@ -23,9 +21,6 @@
 
   export default {
     name: 'WelcomePage',
-    components: {
-      NotifyMsg,
-    },
     data() {
       return {
         vmI18n: window.vmI18n,
@@ -46,19 +41,10 @@
     mounted() {
       const domContent = document.getElementById('content');
       domContent.style.padding = '0 0';
-      console.log('this', this)
     },
     destroyed() {
       const domContent = document.getElementById('content');
       domContent.style.padding = '0 15px';
-    },
-    computed: {
-      notifyProps() {
-        return {
-          username: this.$store.state.global.userInfo.name,
-          appId: 'r3',
-        };
-      }
     },
   };
 </script>

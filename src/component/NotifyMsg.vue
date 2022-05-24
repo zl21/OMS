@@ -59,6 +59,9 @@ export default {
   },
   methods: {
     open() {
+      const notiDom = document.querySelector('.notify-msg-wrap');
+      // 如果消息已经存在，侧不继续弹出
+      if(notiDom) return;
       const _self = this;
       const url = this.baseUrl ? this.baseUrl : '//tool.ecsemir.com';
       if (this.notifyProps.appId && this.notifyProps.username) {
