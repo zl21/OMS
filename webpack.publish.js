@@ -56,19 +56,6 @@ module.exports = () => ({
       amd: 'vue',
       root: 'Vue'
     },
-    vuex: {
-      commonjs: 'vuex',
-      commonjs2: 'vuex',
-      amd: 'vuex',
-      root: 'Vuex'
-    },
-    'vue-router': {
-      commonjs: 'vue-router',
-      commonjs2: 'vue-router',
-      amd: 'vue-router',
-      root: 'VueRouter'
-    },
-
   },
   module: {
     exprContextCritical: false,
