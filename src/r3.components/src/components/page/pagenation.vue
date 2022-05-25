@@ -72,6 +72,7 @@
   import i18n from '../../assets/js/i18n'
 
   export default {
+    name: 'pagenation',
     props: {
       currentPage: {},//当前页
       pageSize: {},//页面数量
