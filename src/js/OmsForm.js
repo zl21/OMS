@@ -7,6 +7,7 @@
  * @FilePath: /burgeon-business-components/js/OmsForm.js
  */
 // import myInputLd from 'framework/components/element/input.vue' //为多选+导入组件专属引入
+import myInputLd from 'r3cps/components/element/input.vue' 
 // 兼容fktable1.4数据格式（云雀1.0）
 import myInput from "burgeonComponents/view/Fkinput.vue";
 import fkinputPlus from "burgeonComponents/view/FkinputPlus.vue";
@@ -15,7 +16,7 @@ export default {
   components: {
     fkinputPlus,
     myInput,
-    myInputLd:$R3_CPS.components.input
+    myInputLd
   },
   data() {
     return {

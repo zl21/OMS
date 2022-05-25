@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import i18n from '../../assets/js/i18n'
+// import i18n from '../../assets/js/i18n'
 
 export default {
   name: 'querySelect',
@@ -63,7 +63,7 @@ export default {
   },
 
   beforeCreate() {
-    this.$t = i18n.t.bind(i18n)
+  // this.$t = i18n.t.bind(i18n)
   },
 
   mounted() {

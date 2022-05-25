@@ -69,7 +69,7 @@
   }
 </style>
 <script>
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     name: 'pagenation',
@@ -105,7 +105,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
   }
 </script>

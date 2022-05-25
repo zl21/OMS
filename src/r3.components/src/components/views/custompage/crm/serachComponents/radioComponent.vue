@@ -35,6 +35,7 @@
   import $http from '../../../../../__utils__/request';
 
   export default {
+    name: 'radioComponent',
     props: {
       initData: {}, // 初始值
       lists: {

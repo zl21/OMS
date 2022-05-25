@@ -77,9 +77,10 @@
 <script>
   import $http from '../../../../../__utils__/request';
   import tableObj from '../../../../element/tableobj.vue';
-  import ChineseDictionary from '../../../../../assets/js/ChineseDictionary';
+  // import ChineseDictionary from '../../../../../assets/js/ChineseDictionary';
 
   export default {
+    name: 'dropDownComponent',
     props: {
       initData: {}, // 初始值
       search: {}, // 弹框多选和单选的参数

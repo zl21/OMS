@@ -1,5 +1,8 @@
 <template>
-  <div class="ff-custom--table">
+  <div
+    class="ff-query--table"
+    :style="contentStyleObj"
+  >
     <div
       class="ff-custom--table-lower-box"
       :style="{'min-width': width,'padding-right': HasPadding? '17px': 0}"
@@ -19,7 +22,6 @@
             </th>
             <th
               v-for="(list, index) of tHead"
-              :key="index"
               :class="{'ff-custom--align': list.type === 'NUMBER'}"
             >
               <span class="ff-custom--table-label">{{ list.label }}</span>
@@ -39,12 +41,15 @@
                 />
               </span>
             </th>
+            <!-- 操作列 -->
+            <th v-if="operation">
+              {{$t('tips.operation')}}
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr
             v-for="(list, index) of tBody"
-            :key="index"
             :class="{'ff-custom--table-active': sub === index && !isCheckActive,
                      'ff-custom--table-checked-active' : isCheckActive && list.checked,
                      'ff-custom--table-hover' : isCheckActive,'ff-custom--table-red':list.red,'ff-custom--table-blue':list.blue,'ff-custom--table-grey':list.grey,'ff-custom--table-black':list.black}"
@@ -65,12 +70,13 @@
               v-for="(label, sub) of tHead"
               :key="sub"
               :class="{'ff-custom--align': label.type === 'NUMBER'}"
+              title="111"
             >
               <el-popover
                 v-if="label.name === 'IMG'"
                 placement="right"
                 trigger="hover"
-                content=""
+                content=""                
               >
                 <img
                   :src="list[label.name]"
@@ -108,10 +114,18 @@
               <span
                 v-else
                 :class="{'ff-custom--proname': label.colname === 'PS_C_PRO_ECODE'}"
-                @click="rowDialog(label, list)"
+                @click="rowDialog(label, list)" 
               >
                 {{ label.position === 'fixed'?(list[label.name]?list[label.name].toFixed(2) : '') : list[label.name] }}
               </span>
+            </td>
+            <!-- 操作列 -->
+            <td
+              v-if="operation"
+              style="text-decoration:underline;"
+              @click="viewLog(list)"
+            >
+              {{$t('table.viewLog')}}
             </td>
           </tr>
         </tbody>
@@ -141,7 +155,6 @@
             </th>
             <th
               v-for="(list, index) of tHead"
-              :key="index"
               :class="{'ff-custom--align': list.type === 'NUMBER'}"
             >
               <span class="ff-custom--table-label">{{ list.label }}</span>
@@ -161,19 +174,25 @@
                 />
               </span>
             </th>
+            <!-- 操作列 -->
+            <th v-if="operation">
+              {{$t('tips.operation')}}
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr
             v-for="(list, index) of tBody"
-            :key="index"
             :class="{'ff-custom--table-active': sub === index && !isCheckActive,
                      'ff-custom--table-checked-active' : isCheckActive && list.checked,
                      'ff-custom--table-hover' : isCheckActive,'ff-custom--table-red':list.red,'ff-custom--table-blue':list.blue,'ff-custom--table-grey':list.grey,'ff-custom--table-black':list.black}"
             @click="active($event,index)"
             @dblclick="handDblClick($event, index)"
           >
-            <td class="ff-custom--table-tdbox">
+            <td
+              class="ff-custom--table-tdbox"
+              title="111"
+            >
               <input
                 v-if="hasChecked"
                 type="checkbox"
@@ -182,33 +201,12 @@
                 @change.stop="tdCheckChange(index)"
               >
               <!-- <span class="ff-custom--table-label">{{hasNation? list.start : index + 1}}</span> -->
-              <span class="ff-custom--table-label">
-                {{ hasNation? list.start : index + 1 }}
-                <!-- <i class="iconfont ag-syman-hover" v-if="list.flag" style="color: red;" :title="list.title"></i>  -->
-                <!-- 增加生成失败图标，鼠标划入显示错误信息 -->
-                <span v-if="list.flag">
-                  <el-tooltip
-                    :content="list.title"
-                    placement="right"
-                  >
-                    <el-button> <i
-                      class="iconfont ag-syman-hover"
-                      style="color: red;"
-                    ></i> </el-button>
-                  </el-tooltip>
-                  <!-- <el-popover placement="right-start" visible-arrow='false' popper-class='index' title="" width="200" trigger="hover" effect="light" :content="list.title">
-                        <el-button slot="reference" >
-                          <div slot="content">{{list.title}}</div>
-                          <i class="iconfont ag-syman-hover"  style="color: red;"></i>
-                        </el-button>
-                      </el-popover> -->
-                </span>
-              </span>
+              <span class="ff-custom--table-label">{{ hasNation? list.start : index + 1 }}</span>
             </td>
             <td
               v-for="(label, sub) of tHead"
-              :key="sub"
               :class="{'ff-custom--align': label.type === 'NUMBER'}"
+              :title="list[label.name]"
             >
               <el-popover
                 v-if="label.name === 'IMG'"
@@ -258,6 +256,14 @@
               >
                 {{ label.position === 'fixed'?(list[label.name]?list[label.name].toFixed(2) : '') : list[label.name] }}
               </span>
+            </td>
+            <!-- 操作列 -->
+            <td
+              v-if="operation"
+              style="text-decoration:underline;"
+              @click="viewLog(list)"
+            >
+              {{$t('table.viewLog')}}
             </td>
           </tr>
         </tbody>
@@ -343,6 +349,7 @@
             </td>
             <td
               v-for="(label, sub) of tHead"
+              :key="sub"
               :class="{'ff-custom--align': label.type === 'NUMBER'}"
             >
               <el-popover
@@ -522,7 +529,6 @@
         </tbody>
       </table>
     </div>
-
     <!-- 列表指定弹框 -->
     <tips-dialog
       v-if="customDialog.show"
@@ -544,16 +550,16 @@
   </div>
 </template>
 <style lang="less" scoped type="text/less">
-  .ff-custom--table {
+  .ff-query--table {
     /*  margin-right: 10px;*/
     overflow-y: hidden;
     overflow-x: auto;
-    min-height: 305px;
     flex: 1;
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    // height: 100%;
+  //  height: 400px;
     font-size: 12px;
     .ff-custom--order-icon {
       display: inline-block;
@@ -654,10 +660,6 @@
       display: inline-block;
       vertical-align: middle;
       font-size: 12px;
-       .el-button{
-         border:none !important;
-         padding:0 !important;
-       }
     }
     .ff-custom--table-checkbox {
       vertical-align: middle;
@@ -673,10 +675,47 @@
         padding-left: 18px;
         padding-right: 4px;
         text-align: left;
+        span:not(:first-child) {
+          display: inline;
+        }
         &:last-child {
           padding-right: 20px;
         }
       }
+     th:nth-child(1){
+        width: 100px;
+     }
+     th:nth-child(6){
+        width: 10%;
+     }
+     th:nth-child(4){
+        width: 100px;
+     }
+     th:nth-child(2),th:nth-child(3),th:nth-child(5){
+         width: 200px;
+      }
+      td:nth-child(2),td:nth-child(3),td:nth-child(5){
+         width: 250px;
+      }
+      td:nth-child(1) {
+        width:100px;
+      }
+      td:nth-child(4) {
+        width: 100px;
+      }
+      td:nth-child(6) {
+        width: 10%;
+      }
+      td:nth-child(2) , td:nth-child(3), td:nth-child(5) {
+        span{
+          width:250px;
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+   
       .ff-custom--table-thbox {
         min-width: 60px;
         .ff-custom--table-checkbox {
@@ -707,7 +746,6 @@
         border: 1px solid #E6E6E6;
         font-size: 12px;
         padding: 0 2px;
-        background-color: #fff;
         box-sizing: border-box;
         border-radius: 2px;
         &:focus {
@@ -757,6 +795,9 @@
         color: #000;
       }
     }
+    .ff-custom--table-content{
+
+    }
     .ff-custom--table-lower {
       height: 24px;
     }
@@ -779,6 +820,12 @@
       min-height: 30px;
     }
   }
+
+  .M_table {
+    .ff-custom--table {
+      height: 218px !important
+    }
+  }
 </style>
 <style lang="less" type="text/less">
   .ff-custom-select {
@@ -797,13 +844,13 @@
     type: input 表示是输入框
     genre: NUMBER 表示输入框的输入类型
   */
-  import MyText from '../element/input.vue';
   import TipsDialog from '../dialog/mydialog.vue';
+  import MyText from '../element/input.vue';
   // import i18n from '../../assets/js/i18n'
 
   // const _import_custom = file => require(`@/components/views/${file}.vue`).default;
   export default {
-    name: 'customTable',
+    name: 'P_customTable',
     props: {
       tHead: {
         type: Array,
@@ -837,11 +884,10 @@
       objList: {}, // 查询配销中心
       activeSub: Boolean, // 用来判断刷新数据时高亮是否变第一个(true为不变)
       isCheckActive: Boolean, // 判断选中后是否要高亮的
-      flag: {
+      operation: {
         type: Boolean,
         default: false
-      }, // 判断图标是否显示
-      titleMessages: String// 图标title错误信息
+      } // 是否显示操作列
     },
     components: {
       TipsDialog,
@@ -849,7 +895,7 @@
     },
     data() {
       return {
-        // visible: false,//判断title框是否显示
+        contentStyleObj: { height: '' }, // 表格高度
         isNOData: false, // 是否有数据(true表示没有数据)
         sub: 0, // 高亮下标
         sortSub: -1, // 排序下标
@@ -869,9 +915,13 @@
       };
     },
     methods: {
-      clickalert() {
-        alert(1111);
+      // 查看日志方法
+      viewLog(e) {
+        this.$emit('viewLog', e);
       },
+      getHeight() {
+        this.contentStyleObj.height = `${window.innerHeight - 381}px`;
+      }, // 表格高度自适应
       popup(index) {
         this.sub = index;
         this.$emit('popup', index);
@@ -898,10 +948,9 @@
           if (obj.checked) total += 1;
         });
         this.checked = total === this.tBody.length;
-        this.$emit('change');
+        this.$emit('change', index);
       }, // 单个选中
       active(event, index) {
-        console.log(event);
         /* if(this.sub === index) return; */
         /* this.$listeners.loadChange(); */
         const obj = {
@@ -1031,6 +1080,9 @@
       }
     },
     watch: {
+      changeMainSize() {
+        this.height.height = `${window.offsetHeight - 140 - 20 - 200}px`;
+      },
       tBody(val) {
         this.oldDate = JSON.parse(JSON.stringify(val));
         if (val.length === 0) {
@@ -1048,14 +1100,28 @@
           this.width = `${this.$refs.customTable.clientWidth}px`;
           this.HasPadding = this.$refs.customTable.clientHeight - 24 > this.$refs.customTableBox.clientHeight;
         });
-      }
+      },
+    },
+    mounted() {
+      this.oldDate = JSON.parse(JSON.stringify(this.tBody));
+      this.$nextTick(() => {
+        try {
+          this.width = `${this.$refs.customTable.clientWidth}px`;
+          this.HasPadding = this.$refs.customTable.clientHeight - 24 > this.$refs.customTableBox.clientHeight;
+        } catch (e) {}
+      });
     },
 
     beforeCreate() {
     // this.$t = i18n.t.bind(i18n)
     },
-    mounted() {
-      this.oldDate = JSON.parse(JSON.stringify(this.tBody));
+
+    created() {
+      window.addEventListener('resize', this.getHeight);
+      this.getHeight();
+    },
+    destroyed() {
+      window.removeEventListener('resize', this.getHeight);
     },
     activated() {
       this.checked = false;

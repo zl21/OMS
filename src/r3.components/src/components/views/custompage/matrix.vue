@@ -413,7 +413,7 @@
         }
 
         .ff-matrix-th-head {
-          background: url("/static/img/matrix.jpg") no-repeat;
+          background: url("../../../../static/img/matrix.jpg") no-repeat;
           background-size: 100% 100%;
 
           .ff-matrix-th-head-box {
@@ -722,14 +722,15 @@
   import axios from '../../../__utils__/request';
   // import port from '../../../assets/js/connector';
   // import store from '@/__config__/store.config.js';
-  import chineseDiction from '../../../assets/js/ChineseDictionary';
-  import i18n from '../../../assets/js/i18n'
+  // import chineseDiction from '../../../assets/js/ChineseDictionary';
+  // import i18n from '../../../assets/js/i18n'
 
   // const { store } = R3;
 let port =window.connector ;
 
 
   export default {
+    name: 'matrix',
     props: {
       proEcodeFlag: { // 矩阵框商品新增时,接受父组件组件matrixInput传输标记,itemInputEnter方法需要用的标记
         type: Object,
@@ -1856,7 +1857,7 @@ let port =window.connector ;
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
 
     created() {

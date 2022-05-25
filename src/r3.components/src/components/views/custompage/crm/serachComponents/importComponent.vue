@@ -48,9 +48,10 @@
 <script>
   import $http from '../../../../../__utils__/request';
   import ImportDialog from '../../../../tablelist/importDialog.vue';
-  import i18n from '../../../../../assets/js/i18n'
+  // import i18n from '../../../../../assets/js/i18n'
 
   export default {
+    name: 'importComponent',
     props: {
       initData: {}, // 初始值
       label: {
@@ -73,7 +74,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
 
     mounted() {

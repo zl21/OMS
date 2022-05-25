@@ -35,9 +35,10 @@
 <script>
   import $http from '../../../../../__utils__/request';
   import dropSelect from './dropSelect.vue';
-  import i18n from '../../../../../assets/js/i18n'
+  // import i18n from '../../../../../assets/js/i18n'
 
   export default {
+    name: 'complexSelect',
     props: {
       initData: {}, // 初始值
       verify: {
@@ -56,7 +57,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
     
     mounted() {

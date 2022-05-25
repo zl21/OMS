@@ -9,7 +9,7 @@
 <script type="text/javascript">
   //	import wangEditor from "wangEditor"
   import axios from 'axios'
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     name: 'wang-editor',
@@ -47,7 +47,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
 
     mounted() {

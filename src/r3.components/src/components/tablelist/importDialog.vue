@@ -141,10 +141,10 @@
 </template>
 
 <script>
-  import axios from '../../../__utils__/request';
-  import ChineseDictionary from '../../../assets/js/ChineseDictionary';
+  import axios from '../../__utils__/request';
+  // import ChineseDictionary from '../../assets/js/ChineseDictionary';
   import MyDialog from '../dialog/mydialog.vue';
-  import i18n from '../../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     name: 'importDialog',
@@ -216,9 +216,9 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
-
+    
     created() {
       const _self = this;
       _self.ChineseDictionary = ChineseDictionary;
@@ -237,12 +237,12 @@
         if (this.isMobil) {
           return {
             param: JSON.stringify({})
-          };
+          }; 
         }
         if (this.isCard) {
           return {
             param: JSON.stringify({})
-          };
+          }; 
         }
         if (this.tablename == 'OC_B_ASSIGN_ITEM_ACTIVE') {
           return {
@@ -262,7 +262,7 @@
             mainId: this.objId2, // 子表id
             menu: this.title
           };
-        }
+        } 
         return {
           table: this.tablename,
           mainTable: this.mainTable,
@@ -387,7 +387,7 @@
       },
       // 上传文件前判断文件大小
       handleBefore(file) {
-        const sizes = ['B', 'K', 'M', 'G', 'T']; let
+        const sizes = ['B', 'K', 'M', 'G', 'T']; let 
           p;
         const unit = this.fileSize.substr(this.fileSize.length - 1);
         const number = this.fileSize.substr(0, this.fileSize.length - 1);
@@ -395,7 +395,7 @@
           if (unit === sizes[i]) {
             p = i;
             break;
-          }
+          } 
         }
         if (file.size > parseInt(number) * Math.pow(1024, p)) {
           this.$message(`${$t('messages.fileSizeTip')}${this.fileSize}`);
@@ -432,10 +432,10 @@
           if (_self.tablename == 'OC_B_ORDER' && response.code === 10001) {
             const url = `http://bj-oms-upload.oss-cn-shanghai.aliyuncs.com/${response.data}`;
             return window.location = url;
-          }
+          } 
           if (undefined === response.path) _self.errorMsg.errorUrl = '';
           else _self.errorMsg.errorUrl = `/p/cs/download?filename=${response.path}`;
-
+        
           if (_self.tablename == 'OC_B_ASSIGN_ITEM_ACTIVE') {
             _self.errorMsg.message = response.message;
             _self.errorMsg.errorList = [{ rowIndex: 0, message: '' }];

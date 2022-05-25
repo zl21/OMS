@@ -1,5 +1,6 @@
 // 兼容fktable1.4数据格式（云雀1.0）
 // import SelectDialog from 'framework/components/dialog/selectDialog.vue';
+import SelectDialog from 'r3cps/components/dialog/selectDialog.vue';
 import FkTable from 'burgeonComponents/view/Fktable.vue';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
@@ -160,7 +161,7 @@ export default {
     },
   },
   components: {
-    SelectDialog:$R3_CPS.components.selectDialog,
+    SelectDialog,
     FkTable
   },
   mounted() {

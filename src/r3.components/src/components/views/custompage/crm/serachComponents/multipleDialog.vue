@@ -83,11 +83,12 @@
 </style>
 <script>
   import tableObj from '../../../../element/tableobj.vue';
-  import ChineseDictionary from '../../../../../assets/js/ChineseDictionary';
+  // import ChineseDictionary from '../../../../../assets/js/ChineseDictionary';
   import $http from '../../../../../__utils__/request';
-  import i18n from '../../../../../assets/js/i18n'
+  // import i18n from '../../../../../assets/js/i18n'
 
   export default {
+    name: 'multipleDialog',
     props: {
       initData: {}, // 初始值
       verify: {
@@ -120,7 +121,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
 
     mounted() {

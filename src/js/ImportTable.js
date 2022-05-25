@@ -1,5 +1,5 @@
 import OmsButton from 'burgeonComponents/view/OmsButton';
-import loading from 'burgeonComponents/view/Loading';
+// import loading from 'burgeonComponents/view/Loading';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 
@@ -7,7 +7,7 @@ export default {
   name: 'ImportTable',
   components: {
     OmsButton,
-    loading,
+    // loading,
   },
   props: {
     // 若存在自定义的父组件，即 非动作定义类型的导入按钮
@@ -162,7 +162,14 @@ export default {
          * 2. 有些特殊的页面还是要走同步导入的需要单独处理
          */
           _this.loading = false;
-          this.closeConfirm();
+          this.closeModal();
+          if ([0, 1, -1].includes(res.data.code) && res.data.data) {
+            window.dispatchEvent(new CustomEvent('addTask',{
+              detail: {
+                type: 'notice',
+              },
+            }))
+          }
           return
         }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {

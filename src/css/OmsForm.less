@@ -1,5 +1,3 @@
-@import '~omsTheme/public.less';
-
 .business-form-main {
   border: 1px solid #d3d3d3;
 
@@ -89,7 +87,7 @@
     line-height: 16px;
     text-align: center;
     color: #fff;
-    background: @base-color;
+    background: var(--b1-color);
     position: absolute;
     right: 0;
     top: 0;
@@ -97,13 +95,21 @@
 
   /deep/ .ark-form-item-label {
     min-height: 33px;
-    #bundle>.points;
+    // #bundle>.points;
+    // 超出点点点
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   // 覆盖框架弹窗多选组件
   /deep/ .ark-form-item-content .item-input {
     label.title {
       min-height: 33px;
-      #bundle>.points;
+      // #bundle>.points;
+      // 超出点点点
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 

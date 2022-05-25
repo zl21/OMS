@@ -334,7 +334,7 @@
 </template>
 
 <script> /* type="ecmascript-6" */
-  import ChineseDictionary from '../../assets/js/ChineseDictionary';
+  // import ChineseDictionary from '../../assets/js/ChineseDictionary';
   import MyDialog from '../dialog/mydialog.vue';
   import DragDialog from '../dialog/mydialog.vue';
   import tree from './tree.vue';
@@ -342,7 +342,7 @@
   import ShowTableData from '../views/custompage/ShowTableData.vue';
   // ../../views/custompage/ShowTableData.vue
   import errorMessage from './error.vue';
-  import i18n from '../../assets/js/i18n'
+  // import i18n from '../../assets/js/i18n'
 
   export default {
     name: 'fkdialog',
@@ -1484,7 +1484,7 @@
     },
 
     beforeCreate() {
-      this.$t = i18n.t.bind(i18n)
+    // this.$t = i18n.t.bind(i18n)
     },
 
     created() {
