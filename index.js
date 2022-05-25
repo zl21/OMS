@@ -20,6 +20,7 @@ import WelcomePage from '@/component/WelcomePage';
 import Login from '@/component/Login';
 import enterpriseBanner from '@/assets/image/banner.png';
 import enterpriseLogo from '@/assets/image/logo.png';
+import App from './src/App.vue'
 // ----------动态加载主题库皮肤包;
 
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
@@ -37,6 +38,11 @@ import '@/assets/css/css_1_3/reset.less';
 // 老框架引入的 自定义界面内需要的js资源
 // 促销需要
 import connector from '@/js/pages/common/orderDetail/connector';
+import Vue from 'vue';
+
+new Vue({
+  render: h => h(App),
+}).$mount('#custRoot')
 
 // 根据接口调整title
 const appTitle = '森马电商';

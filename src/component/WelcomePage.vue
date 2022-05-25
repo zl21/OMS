@@ -1,27 +1,5 @@
 <template>
   <div class="welcomepage">
-    <!--     
-    <div class="container">
-      <Dropdown>
-        <a href="javascript:void(0)">
-          中/En
-          <Icon type="ios-arrow-down"></Icon>
-        </a>
-        <DropdownMenu slot="list">
-          <DropdownItem
-            v-for="item in langConfig"
-            :key="item.type"
-            @click.native="toggleLang(item.type)"
-            :disabled="vmI18n.locale == item.type"
-            >{{ item.text }}</DropdownItem
-          >
-        </DropdownMenu>
-      </Dropdown>
-      <br />
-      <button>{{ vmI18n.t("btn.text") }}</button>
-      <span>{{ vmI18n.t("message.hello") }}</span>
-    </div> 
-    -->
   </div>
 </template>
 
@@ -67,7 +45,7 @@
     destroyed() {
       const domContent = document.getElementById('content');
       domContent.style.padding = '0 15px';
-    }
+    },
   };
 </script>
 
