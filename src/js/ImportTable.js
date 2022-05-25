@@ -163,6 +163,13 @@ export default {
          */
           _this.loading = false;
           this.closeModal();
+          if ([0, 1, -1].includes(res.data.code) && res.data.data) {
+            window.dispatchEvent(new CustomEvent('addTask',{
+              detail: {
+                type: 'notice',
+              },
+            }))
+          }
           return
         }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
