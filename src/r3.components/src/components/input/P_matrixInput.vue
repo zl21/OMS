@@ -716,7 +716,7 @@ let port =window.connector ;
     },
 
     beforeCreate() {
-    // this.$t = i18n.t.bind(i18n)
+    this.$t = $i18n.t.bind($i18n)
     },
     created(){
       port =window.connector|| window.R3.connector;

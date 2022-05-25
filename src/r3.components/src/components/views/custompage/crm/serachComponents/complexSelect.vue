@@ -57,7 +57,7 @@
     },
 
     beforeCreate() {
-    // this.$t = i18n.t.bind(i18n)
+    this.$t = $i18n.t.bind($i18n)
     },
     
     mounted() {
