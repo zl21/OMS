@@ -13,9 +13,9 @@ Vue.use(VueI18n)
 window.ChineseDictionary = require('@/langs/ChineseDictionary').default
 
 const messages = {
-  en: Object.assign(en, r3en, ChineseDictionary),
-  zh: Object.assign(zh, r3zh, ChineseDictionary),
-  ja: Object.assign(ja, ChineseDictionary),
+  en: Object.assign(en, r3en),
+  zh: Object.assign(zh, r3zh),
+  ja: Object.assign(ja),
 }
 
 if (!localStorage.getItem('locale')) {

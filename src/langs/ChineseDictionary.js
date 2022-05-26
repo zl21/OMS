@@ -72,16 +72,14 @@ const ChineseDictionary = {
 };
  
 // 为了保证切换语言包后拿到正确值，此处直接通过劫持属性获取函数返回值。避免再去引用文件中修改变量的使用方法
-// const ChineseDictionaryProxy = {};
-// Object.keys(ChineseDictionary).forEach((key) => {
-//   ChineseDictionaryProxy[key] = '';
-//   Object.defineProperty(ChineseDictionaryProxy, key, {
-//     get() {
-//       return ChineseDictionary[key]();
-//     },
-//   });
-// });
+const ChineseDictionaryProxy = {};
+Object.keys(ChineseDictionary).forEach((key) => {
+  ChineseDictionaryProxy[key] = '';
+  Object.defineProperty(ChineseDictionaryProxy, key, {
+    get() {
+      return ChineseDictionary[key]();
+    },
+  });
+});
  
-// export default ChineseDictionaryProxy;
-
-export default ChineseDictionary;
+export default ChineseDictionaryProxy;
