@@ -900,6 +900,6 @@ export default {
   created() {
     const _self = this;
     this.t_dialog_show = this.fkshow;
-    // _self.ChineseDictionary = ChineseDictionary;
+    _self.ChineseDictionary = ChineseDictionary;
   },
 };

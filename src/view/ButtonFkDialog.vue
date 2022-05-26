@@ -71,7 +71,7 @@ export default {
         self.itemdata.pid = item;
         self.mopDefaultValue = item;
         // 已选中 n 条数据
-        self.itemdata.valuedata = `${$i18n.t('HASBEENSELECTED')} ${ITEM.total} ${$i18n.t('com.piece')}`;
+        self.itemdata.valuedata = `${ChineseDictionary.HASBEENSELECTED} ${ITEM.total} ${$i18n.t('com.piece')}`;
         self.fkDialog.lists = item;
       } else {
         self.fkDialog.lists = {};

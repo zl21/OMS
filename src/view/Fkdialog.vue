@@ -18,7 +18,7 @@
     <div v-loading.lock="confirmLoading" class="fkdialog">
       <div class="dialog_left">
         <div class="left_top">
-          <span>{{ vmI18n.t("SCREENCONDITION") }}</span>
+          <span>{{ ChineseDictionary.SCREENCONDITION }}</span>
           <span>
             <i v-if="!open_close_icon" class="iconfont" @click="nodeOpen"
               >&#xe61a;</i
@@ -44,7 +44,7 @@
       >
         <!-- <el-tabs v-model="activeName">
           <el-tab-pane
-            :label="vmI18n.t('SELECTEDRESULTS')"
+            :label="ChineseDictionary.SELECTEDRESULTS"
             name="first"
             class="el-tab-auto"
           > -->
@@ -59,7 +59,7 @@
             /> -->
         <Tabs :value="activeName">
           <TabPane 
-            :label="vmI18n.t('SELECTEDRESULTS')"
+            :label="ChineseDictionary.SELECTEDRESULTS"
             name="first"
           >
             <Page
@@ -92,7 +92,7 @@
             />
           </TabPane>
           <!-- <el-tab-pane
-            :label="vmI18n.t('VIEWTHESELECTEDRESULTS')"
+            :label="ChineseDictionary.VIEWTHESELECTEDRESULTS"
             name="second"
             class="el-tab-auto"
           > -->
@@ -106,7 +106,7 @@
               @current-change="r_handleCurrentChange"
             /> -->
           <TabPane 
-            :label="vmI18n.t('VIEWTHESELECTEDRESULTS')"
+            :label="ChineseDictionary.VIEWTHESELECTEDRESULTS"
             name="second"
           >
             <Page
@@ -157,7 +157,7 @@
           >
             <Icon type="ios-search" slot="suffix" @click="onIconClick" />
             <template slot="prepend">
-              {{ vmI18n.t("GLOBALSEARCH") }}
+              {{ ChineseDictionary.GLOBALSEARCH }}
             </template>
           </Input>
           <div class="center-exclude">
@@ -170,7 +170,7 @@
                 value=""
               />
               <span class="checked-box" />
-              <span> {{ vmI18n.t("EXCLUDE") }}</span>
+              <span> {{ ChineseDictionary.EXCLUDE }}</span>
             </label>
           </div>
         </div>
@@ -216,7 +216,7 @@
       </div>
       <div class="dialog_right">
         <div class="right_top">
-          <span>{{ vmI18n.t("HASBEENSELECTED") }}</span
+          <span>{{ ChineseDictionary.HASBEENSELECTED }}</span
           ><span>(</span
           ><span
             >{{ r_center_data.rightTotal }} {{ vmI18n.t("com.piece") }}</span
@@ -237,17 +237,17 @@
         </div>
         <div class="ark-modal-footer" style="padding-right: 0">
           <Button @click="dialogClose">
-            {{ vmI18n.t("CANCEL") }}
+            {{ ChineseDictionary.CANCEL }}
           </Button>
           <Button type="primary" @click="dialogConfirm">
-            {{ vmI18n.t("CONFIRM") }}
+            {{ ChineseDictionary.CONFIRM }}
           </Button>
         </div>
       </div>
       <div v-if="showOrHidden" class="modalDiv">
         <div class="modalCenter">
           <div class="modalTitle">
-            <span class="modalText">{{ vmI18n.t("POTX") }}</span>
+            <span class="modalText">{{ ChineseDictionary.POTX }}</span>
             <i
               class="iconfont icon-cha1"
               @click="showOrHidden = !showOrHidden"
@@ -256,7 +256,7 @@
           <div class="modalContent">
             <i class="iconfont muBan">&#xe637;</i>
             <div class="textCenter">
-              <label>{{ vmI18n.t("PAGENAME") }}：</label>
+              <label>{{ ChineseDictionary.PAGENAME }}：</label>
               <input
                 v-model="module_name"
                 type="text"
@@ -264,10 +264,10 @@
             </div>
             <div class="modalBtn">
               <button class="btn result_save" @click="result_save">
-                <span>{{ vmI18n.t("ENSURE") }}</span>
+                <span>{{ ChineseDictionary.ENSURE }}</span>
               </button>
               <button class="btn" @click="showOrHidden = !showOrHidden">
-                <span>{{ vmI18n.t("CANCEL") }}</span>
+                <span>{{ ChineseDictionary.CANCEL }}</span>
               </button>
             </div>
           </div>

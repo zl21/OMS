@@ -39,7 +39,7 @@
         class="ff-matrix--clear"
         @click="empty"
       >
-        <i class="iconfont icon-qingkong" />{{ chinese.EMPTY }}
+        <i class="iconfont icon-qingkong" />{{ ChineseDictionary.EMPTY }}
       </span>
     </div>
     <div
@@ -85,7 +85,7 @@
         @click="empty"
       >
         <i class="iconfont">&#xe648;</i>
-        {{ chinese.EMPTY }}
+        {{ ChineseDictionary.EMPTY }}
       </span>
     </div>
     <div
@@ -239,7 +239,7 @@
         :class="{'ff-btn-disabled': !isActive || isdisabled}"
         @click="matching"
       >
-        <span>{{ chinese.MATCH }}</span>
+        <span>{{ ChineseDictionary.MATCH }}</span>
       </button>
     </div>
     <div
@@ -261,13 +261,13 @@
         @click="confirm"
         @keyup.enter="confirm"
       >
-        <span>{{ chinese.CONFIRM }}</span>
+        <span>{{ ChineseDictionary.CONFIRM }}</span>
       </button>
       <button
         class="ff-matrix-btn ff-matrix-btn-cancel"
         @click="cancel"
       >
-        <span>{{ chinese.CANCEL }}</span>
+        <span>{{ ChineseDictionary.CANCEL }}</span>
       </button>
     </div>
   </div>
@@ -700,7 +700,7 @@ let port =window.connector ;
         }, // 内容
         stock: false, // 控制在库
         usable: false, // 控制可用
-        chinese: chineseDiction, // 字段集合
+        ChineseDictionary: {}, // 字段集合
         tally: 0, // 记录改变次数并且用来刷新数据的参数
         focusList: [], // 聚焦列表
         focusIndex: 0, // 聚焦的下标
@@ -1475,6 +1475,7 @@ let port =window.connector ;
     },
 
     created() {
+      this.ChineseDictionary = ChineseDictionary;
       port =window.connector|| window.R3.connector;
       if (port[this.tablename]) {
         this.matchData = port[this.tablename].matchData;// 矩阵匹配数据
