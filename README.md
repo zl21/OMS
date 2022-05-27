@@ -368,3 +368,4 @@
 | v2.0.34 | feat: importTable 支持 tempMethod |
 | v2.0.35 | feat: OmsAgTable 拓展 isAmtCb属性，对表头及数据操作 |
 | v2.0.36 | fix: Fkinput isBackRowItem时clear清空修复 |
+| v2.0.37 | deps: omsui.min |

@@ -54,7 +54,7 @@ setTimeout(e => {
       title,
       picUrl: 'https://image.dbbqb.com/202203031702/563c99e7874db554e7b6e35b2199a2ef/O33Xo',
       // messageUrl: 'http://8.142.133.189:28880/'
-      messageUrl: `https://cdn.jsdelivr.net/npm/@bojun/oms-ui@${pack.version}/burgeon.publish/businessComponents.min.js`
+      messageUrl: `https://cdn.jsdelivr.net/npm/@bojun/oms-ui@${pack.version}/dist/omsui.min.js`
     }
   }
   var postData = JSON.stringify(body)

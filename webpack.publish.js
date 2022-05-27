@@ -14,7 +14,7 @@ const burgeonPlugins = [
   new ESBuildPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new MiniCssExtractPlugin({
-    filename: 'businessComponents.min.css',
+    filename: 'omsui.min.css',
   }),
 
   new VueLoaderPlugin(),
@@ -38,8 +38,8 @@ module.exports = () => ({
     index: './index.js'
   },
   output: {
-    filename: 'businessComponents.min.js',
-    path: path.join(__dirname, './burgeon.publish'),
+    filename: 'omsui.min.js',
+    path: path.join(__dirname, './dist'),
     globalObject: 'this',
     library: '$BC',
     libraryTarget: 'umd',

@@ -1,10 +1,10 @@
 {
   "name": "@bojun/oms-ui",
-  "version": "2.0.36",
+  "version": "2.0.37",
   "description": "burgeon company's business-components lib for private npm",
-  "main": "burgeon.publish/businessComponents.min.js",
+  "main": "dist/omsui.min.js",
   "files": [
-    "burgeon.publish"
+    "dist"
   ],
   "scripts": {
     "dev": "webpack serve --progress --color --progress --config webpack.publish.js --mode development ",
@@ -12,7 +12,7 @@
     "report": "npm run build --report",
     "push": "npm run build && yalc push",
     "pub": "npm run build && npm publish && node ding.js",
-    "watch": "nodemon --ignore burgeon.publish/ --ignore node_modules/ -C -e js,vue,less,scss --debug -x 'npm run push'"
+    "watch": "nodemon --ignore dist/ --ignore node_modules/ -C -e js,vue,less,scss --debug -x 'npm run push'"
   },
   "scriptsComments": {
     "push": "本地调试组件库包体并执行自动化",
