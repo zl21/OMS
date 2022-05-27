@@ -236,7 +236,7 @@ export default {
 
       return {
         single: fkdisplay == 'mrp' ? false : fkdisplay == 'drp' ? true : !!single, // 是否单选
-        placeholder: item.itemdata.placeholder || '请输入',
+        placeholder: item.itemdata.placeholder || $i18n.t('form.selectPlaceholder'),
         enterType: false,
         serviceId: item.itemdata.serviceId || '',
         // totalRowCount: item.itemdata.totalRowCount || 0,

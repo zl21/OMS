@@ -43,8 +43,7 @@ export default {
     }, // 判断是否是单对象
     title: {
       type: String,
-      default: "弹框多选",
-      // default: $i18n.t('mT.a7')
+      default: $i18n.t('mT.aq') // 弹框多选
     }, // 标题
     canChinese: {
       type: Boolean,
