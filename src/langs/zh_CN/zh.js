@@ -183,6 +183,13 @@ export default {
     defectiveProductsNotAllocated: '次品未调拨',
     platForm: '平台',
     warehousingLogicalWarehouse: '入库逻辑仓库',
+    accountsReceivablePrice: '应收价',
+    amountReceivable: '应收金额',
+    thePromotion: '执行促销',
+    sendGoodsShopWarehouse: '发货店仓',
+    receiveGoodsShopWarehouse: '收货仓库',
+    dropTheAmount: '吊牌金额',
+    retailAmount: '零售金额'
   },
 
   btn: {
@@ -1437,9 +1444,9 @@ export default {
     at: '',
     as: '',
     ar: '',
-    aq: '',
-    ap: '',
-    ao: '',
+    aq: '弹框多选',
+    ap: '修改单据备注',
+    ao: '会员加急发货打标',
     an: '中台系统当前店铺的库存',
     am: '店仓评分设置表',
     al: '成功',
