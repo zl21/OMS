@@ -7,7 +7,7 @@
  * @FilePath: /burgeon-business-components/js/OmsForm.js
  */
 // import myInputLd from 'framework/components/element/input.vue' //为多选+导入组件专属引入
-import myInputLd from 'r3cps/components/element/input.vue' 
+import myInputLd from 'r3cps/components/element/input.vue'
 // 兼容fktable1.4数据格式（云雀1.0）
 import myInput from "burgeonComponents/view/Fkinput.vue";
 import fkinputPlus from "burgeonComponents/view/FkinputPlus.vue";
@@ -62,9 +62,16 @@ export default {
     // }
     formFields() {
       return this.formConfig.formData.filter(i => i.style)
+    },
+    // 查询条件默认显示行数
+    queryDisNumber(v) {
+      return $store.state.global.changeSearchFoldnum.queryDisNumber || 3
     }
   },
   watch: {
+    queryDisNumber(v) {
+      this.initRenderForm();
+    },
     // flodData() {
     //   if (this.flodData === 'el-icon-arrow-up') {
     //     this.$refs[this.currentFlod].style.maxHeight = "";
@@ -124,7 +131,7 @@ export default {
       if (!this.formConfig.flodClick) {
         return
       }
-      const { setColnum = 4, setRow = 3 } = this.formConfig
+      const { setColnum = 4, setRow = this.queryDisNumber } = this.formConfig
       let showNum;
       if (this.formConfig.btn) {
         showNum = setColnum * setRow - 1
@@ -141,6 +148,8 @@ export default {
         this.formConfig.formData.forEach((it, n) => {
           if (n + 1 > showNum) {
             it.class = it.class ? `${it.class} long` : 'long'
+          } else {
+            it.class = it.class ? it.class.replace(/long/g, '').trim() : '';
           }
         });
       } else {
@@ -148,7 +157,7 @@ export default {
           it.class = it.class ? it.class.replace(/long/g, '').trim() : '';
         });
       }
-      // this.$forceUpdate()
+      this.$forceUpdate()
     },
     selectInputChange(x) {
       this.selectInputChangeVal = x;
