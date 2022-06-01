@@ -48,7 +48,8 @@ export default {
         md: 8,
         lg: 6,
         span: 6
-      }
+      },
+      curGridColnum: 4
     }
   },
   props: {
@@ -124,12 +125,14 @@ export default {
         }
       }
     });
-    window.addEventListener('resize', this.curGridColnum)
     this.asteriskColor()
+    // 响应式栅格
+    window.addEventListener('resize', () => this.getGridColnum(), false)
+    this.getGridColnum()
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);
-    window.addEventListener('resize', this.curGridColnum)
+    window.removeEventListener('resize', () => this.getGridColnum(), false)
   },
   methods: {
     // 必填星号(*)颜色
@@ -185,7 +188,7 @@ export default {
       } else {
         gridSize.span = item.width || this.formConfig.colSpan || this.defaultGrid.span
       }
-      console.log(item.width, item.label, gridSize)
+      // console.log(item.width, item.label, gridSize)
       return gridSize
     },
     getMost(arr) {
@@ -202,19 +205,23 @@ export default {
       return { max, num }   
     },
     // 当前栅格列数
-    curGridColnum() {
+    getGridColnum() {
+      if (!this.formConfig.isGrid) return
       let clientWidth = document.body.clientWidth
       if (clientWidth >= 1200) {
-        return 24 / this.defaultGrid.lg
+        this.curGridColnum = 24 / this.defaultGrid.lg
+        return
       }
       if (clientWidth >= 992) {
-        return 24 / this.defaultGrid.md
+        this.curGridColnum = 24 / this.defaultGrid.md
+        return
       }
       if (clientWidth >= 768) {
-        return 24 / this.defaultGrid.sm
+        this.curGridColnum = 24 / this.defaultGrid.sm
+        return
       }
       if (clientWidth < 768) {
-        return 24 / this.defaultGrid.xs
+        this.curGridColnum = 24 / this.defaultGrid.xs
       }
     },
     initRenderForm() {
@@ -222,7 +229,7 @@ export default {
         return
       }
       
-      const { setColnum = this.curGridColnum(), setRow = this.queryDisNumber } = this.formConfig
+      const { setColnum = this.curGridColnum, setRow = this.queryDisNumber } = this.formConfig
       let showNum;
 
       if (this.formConfig.btn) { // 场景：表单中含搜索按钮（预留按钮占位）
