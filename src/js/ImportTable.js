@@ -147,6 +147,9 @@ export default {
           param.append(key, paramsObj[key]);
         }
       }
+      if (this.importNotes) {
+        param.append('cover', this.cover);
+      }
       param.append('file', _this.files, _this.text);
 
       if (_this.currentConfig.buttonPermission) {
@@ -169,7 +172,7 @@ export default {
                 type: 'notice',
               },
             }))
-          }
+        }
           return
         }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
