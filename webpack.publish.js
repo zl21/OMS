@@ -22,7 +22,7 @@ const burgeonPlugins = [
     patterns: [
       {
         from: path.resolve(__dirname, "./src/common/css"),
-        to: path.resolve(__dirname, "./burgeon.publish/common/css")
+        to: path.resolve(__dirname, "./dist/common/css")
       },
     ],
   })
