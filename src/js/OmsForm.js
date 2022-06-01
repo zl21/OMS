@@ -251,7 +251,7 @@ export default {
         this.no = ''
       } */
       if (this.currentFlod == 'down') {
-        this.formConfig.formData.forEach((it, n) => {
+        this.formFields.forEach((it, n) => {
           if (n + 1 > showNum) {
             it.class = it.class ? `${it.class} long` : 'long'
           } else {
