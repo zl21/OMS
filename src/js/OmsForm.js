@@ -49,7 +49,8 @@ export default {
         lg: 6,
         span: 6
       },
-      curGridColnum: 4
+      curGridColnum: 4,
+      showNum: '' // 初始显示条数
     }
   },
   props: {
@@ -80,8 +81,13 @@ export default {
     isGrid() {
       return this.formConfig.hasOwnProperty('isGrid') ? this.formConfig.isGrid : false
     },
+    // 判断是否显示折叠按钮（判断查询条件是否 大于 查询条件默认显示行数*一行显示条数，大于才显示折叠按钮 ）
+    searchInputLenMoreThanShowNum() {
+      return this.formConfig.formData.length > this.showNum
+    }
   },
   watch: {
+     // 根据 查询条件默认显示行数 显示多少行
     queryDisNumber(v) {
       this.initRenderForm();
     },
@@ -237,6 +243,7 @@ export default {
       } else {
         showNum = setColnum * setRow
       }
+      this.showNum = showNum
       /* if ( setColnum * setRow > this.formConfig.formData.length ) {
         // 不需要折叠icon的情况
         this.no = 'noFlod'

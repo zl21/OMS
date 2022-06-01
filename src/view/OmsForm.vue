@@ -4,7 +4,7 @@
   <div class="business-form-main" :ref="formConfig.flodClick">
     <!-- 右上角/下中 小箭头 -->
     <div
-      v-if="formConfig.flodClick"
+      v-if="formConfig.flodClick && searchInputLenMoreThanShowNum"
       :class="['tag-close', formConfig.iconSite || '']"
     >
       <i
