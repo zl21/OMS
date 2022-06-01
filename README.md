@@ -369,3 +369,4 @@
 | v2.0.35 | feat: OmsAgTable 拓展 isAmtCb属性，对表头及数据操作 |
 | v2.0.36 | fix: Fkinput isBackRowItem时clear清空修复 |
 | v2.0.37 | deps: omsui.min |
+| v2.0.38 | feat: OmsForm 拓展isGrid属性，开启响应式栅格 |

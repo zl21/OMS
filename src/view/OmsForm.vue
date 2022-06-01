@@ -39,11 +39,7 @@
         <Col
           v-for="(item, index) in formConfig.formData"
           :key="index"
-          :xs="formConfig.gridBar ? 8 : formConfig.colSpan"
-          :sm="formConfig.gridBar ? 8 : formConfig.colSpan"
-          :md="formConfig.gridBar ? 6 : formConfig.colSpan"
-          :lg="formConfig.gridBar ? 6 : formConfig.colSpan"
-          :span="item.width || formConfig.colSpan || '6'"
+          v-bind="gridSize(item)"
           v-if="item.style"
         >
           <template v-if="item.style !== ''">
