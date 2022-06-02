@@ -10,10 +10,14 @@
  * 【DOM】
  * 【File】
  */
+import { httpFormdata } from 'r3cps/__utils__/request';
 class custUtils {
   constructor() { }
 
   //--------------工具方法区--------------------------
+  static httpFormdata(data) {
+    return httpFormdata(data)
+  }
 
   /**
    *
@@ -1324,19 +1328,43 @@ class custUtils {
   /* ============================================== 【DOM】END ============================================== */
   /* ============================================== 【FILE】START ============================================== */
   // 
-  static exportModules(requireFiles, handleModuleName) {
+  static exportModules(requireFiles, useSubdirectories) {
     return requireFiles.keys().reduce((exportModules, modulePath) => {
+      let file = requireFiles(modulePath)
       let moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-      if (handleModuleName) {
-        // 文件名转驼峰
+      // 文件名转驼峰
+      if (moduleName.includes('.')) {
         moduleName = moduleName.split('.').map((i,index) => {
           return index === 0 ? i : i.charAt(0).toUpperCase() + i.slice(1)
         }).join('')
       }
-      exportModules[moduleName] = requireFiles(modulePath).default || requireFiles(modulePath)
+
+      // 处理检索子文件夹
+      if (useSubdirectories) {
+        moduleName = `R3${ file.default.name.replace(/(_|-)/g, '') }`
+      }
+      exportModules[moduleName] = file.default || file
       return exportModules
     }, {})
   };
+
+
+  /**
+   * 数组去重 (根据数组里对象中某个key去重)
+   * @param data
+   * @param key
+   * @returns {*|[]}
+   */
+  static uniqueFun(data,key) {
+    const  obj = {};
+    let  arr = [];
+    arr = data.reduce(function (item, next) {
+      obj[next[key]] ? '' : obj[next[key]] = true && item.push(next);
+      return item;
+    }, []);
+    return arr
+  }
+
   /* ============================================== 【FILE】END ============================================== */
 }
 

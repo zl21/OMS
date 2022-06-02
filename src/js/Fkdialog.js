@@ -5,6 +5,10 @@
 // import tree from "framework/components/tablelist/tree.vue";
 // import ShowTableData from "framework/components/views/custompage/ShowTableData.vue";
 // window.$i18n = i18n;
+import MyDialog from "r3cps/components/dialog/mydialog.vue";
+import DragDialog from "r3cps/components/dialog/mydialog.vue";
+import tree from "r3cps/components/tablelist/tree.vue";
+import ShowTableData from "r3cps/components/views/custompage/ShowTableData.vue";
 
 export default {
   name: 'Fkdialog',
@@ -39,8 +43,7 @@ export default {
     }, // 判断是否是单对象
     title: {
       type: String,
-      default: "弹框多选",
-      // default: $i18n.t('mT.a7')
+      default: $i18n.t('mT.aq') // 弹框多选
     }, // 标题
     canChinese: {
       type: Boolean,
@@ -50,6 +53,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    customClass: {
+      type: String,
+      default: ''
+    }, // 自定义样式
   },
   data() {
     return {
@@ -161,11 +168,11 @@ export default {
     };
   },
   components: {
-    tree: $R3_CPS.components.tree,
-    ShowTableData:$R3_CPS.components.ShowTableData,
-    MyDialog: $R3_CPS.components.mydialog,
+    tree,
+    ShowTableData,
+    MyDialog,
     // errorMessage,
-    DragDialog:$R3_CPS.components.mydialog,
+    DragDialog,
   },
   methods: {
     MyDialogClose() {
@@ -892,6 +899,6 @@ export default {
   created() {
     const _self = this;
     this.t_dialog_show = this.fkshow;
-    // _self.ChineseDictionary = ChineseDictionary;
+    _self.ChineseDictionary = ChineseDictionary;
   },
 };

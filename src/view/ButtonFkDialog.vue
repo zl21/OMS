@@ -15,7 +15,7 @@
     </button>
     <fkdialog
       v-if="fkDialog.dialog && itemdata.reftable !== 'VP_C_VIP_ACC'"
-      :title="'多选'"
+      :title="itemdata.fkTitle"
       :tablename="itemdata.reftable"
       :tableid="itemdata.reftableid"
       :right-list="fkDialog.lists"
@@ -26,6 +26,7 @@
       @easyData="getFkdialog"
       :version="itemdata.version || '1.3'"
       :serviceId="itemdata.serviceId || 'r3-cp'"
+      :custom-class="itemdata.customClass"
     />
   </div>
 </template>
@@ -70,7 +71,7 @@ export default {
         self.itemdata.pid = item;
         self.mopDefaultValue = item;
         // 已选中 n 条数据
-        self.itemdata.valuedata = `${$i18n.t('HASBEENSELECTED')} ${ITEM.total} ${$i18n.t('com.piece')}`;
+        self.itemdata.valuedata = `${ChineseDictionary.HASBEENSELECTED} ${ITEM.total} ${$i18n.t('com.piece')}`;
         self.fkDialog.lists = item;
       } else {
         self.fkDialog.lists = {};

@@ -4,7 +4,7 @@
   <div class="business-form-main" :ref="formConfig.flodClick">
     <!-- 右上角/下中 小箭头 -->
     <div
-      v-if="formConfig.flodClick"
+      v-if="formConfig.flodClick && searchInputLenMoreThanShowNum"
       :class="['tag-close', formConfig.iconSite || '']"
     >
       <i
@@ -39,11 +39,7 @@
         <Col
           v-for="(item, index) in formConfig.formData"
           :key="index"
-          :xs="formConfig.gridBar ? 8 : formConfig.colSpan"
-          :sm="formConfig.gridBar ? 8 : formConfig.colSpan"
-          :md="formConfig.gridBar ? 6 : formConfig.colSpan"
-          :lg="formConfig.gridBar ? 6 : formConfig.colSpan"
-          :span="item.width || formConfig.colSpan || '6'"
+          v-bind="gridSize(item)"
           v-if="item.style"
         >
           <template v-if="item.style !== ''">

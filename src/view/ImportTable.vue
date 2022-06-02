@@ -8,8 +8,7 @@
 -->
 <!-- 开发文档：http://knowledge.ark.burgeononline.com/repository#/entryComponents/2/749656/1/2061 -->
 <template>
-  <div class="importContent cus-modal" style="width:540px">
-    <loading :loading="loading" />
+  <div class="importContent cus-modal" style="width:540px" v-loading="loading">
     <div class="iconclass">
       <Icon type="md-cloud-upload" />
     </div>

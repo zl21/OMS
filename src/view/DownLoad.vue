@@ -36,7 +36,7 @@
       :component-data="dialogConfig.componentData"
       :name="dialogConfig.name"
       :url="dialogConfig.url"
-      :width="540"
+      :width="565"
     />
   </div>
 </template>
@@ -188,19 +188,19 @@ const DownLoad = {
       });
     },
     // 打开导入弹窗
-    importBoxOpen() {
+    importBoxOpen(item) {
       const _this = this;
       // 导入
       this.dialogConfig = {
         title: $i18n.t("btn.import"),
-        componentData: {
+        componentData: Object.assign({
           // 导入：key存在则在配置中找(tableName_webname)
           tableName: "IP_C_STANDPLAT_PRO",
           webname: "",
           returnData(data) {
-            this.downLoadFormConfig.formValue.sp_ids = data;
+            _this.downLoadFormConfig.formValue.sp_ids = data;
           },
-        },
+        },item.componentData),
         name: "importTable",
         url: require('./ImportTable.vue').default,
         width: 450,
@@ -230,7 +230,6 @@ export default DownLoad;
   font-size: 14px;
   text-align: right;
   color: #0f8ee9;
-  line-height: 32px;
   cursor: pointer;
   margin-top: 10px;
 }

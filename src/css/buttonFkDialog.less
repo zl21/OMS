@@ -1,15 +1,13 @@
 
-@import '~omsTheme/public.less';
-
 .buttonFk {
   button {
       height: 24px;
       line-height: 24px;
       padding: 0 8px;
-      border: 1px solid @base-color;
+      border: 1px solid var(--b1-color);
       font-size: 12px;
       background: transparent;
-      color: @base-color;
+      color: var(--b1-color);
       border-radius: 2px;
       margin-right: 5px;
       border: 1px solid #dbdde8 !important;
@@ -59,7 +57,14 @@
       }
       // 图标替换
       [class*=" el-icon-"], [class^=el-icon-]{
-        #bundle > .beforeIconf(@color:#999,@uncode:"\e638",@size:14px);
+        font-family: "iconfont" !important;
+        content: "\e638";
+        color: #999;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       .el-icon-close:before {
         content: "\e638";

@@ -14,7 +14,7 @@ const burgeonPlugins = [
   new ESBuildPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new MiniCssExtractPlugin({
-    filename: 'businessComponents.min.css',
+    filename: 'omsui.min.css',
   }),
 
   new VueLoaderPlugin(),
@@ -22,7 +22,7 @@ const burgeonPlugins = [
     patterns: [
       {
         from: path.resolve(__dirname, "./src/common/css"),
-        to: path.resolve(__dirname, "./burgeon.publish/common/css")
+        to: path.resolve(__dirname, "./dist/common/css")
       },
     ],
   })
@@ -38,8 +38,8 @@ module.exports = () => ({
     index: './index.js'
   },
   output: {
-    filename: 'businessComponents.min.js',
-    path: path.join(__dirname, './burgeon.publish'),
+    filename: 'omsui.min.js',
+    path: path.join(__dirname, './dist'),
     globalObject: 'this',
     library: '$BC',
     libraryTarget: 'umd',
@@ -56,19 +56,6 @@ module.exports = () => ({
       amd: 'vue',
       root: 'Vue'
     },
-    vuex: {
-      commonjs: 'vuex',
-      commonjs2: 'vuex',
-      amd: 'vuex',
-      root: 'Vuex'
-    },
-    'vue-router': {
-      commonjs: 'vue-router',
-      commonjs2: 'vue-router',
-      amd: 'vue-router',
-      root: 'VueRouter'
-    },
-
   },
   module: {
     exprContextCritical: false,
@@ -148,18 +135,19 @@ module.exports = () => ({
     },
     alias: {
       burgeonComponents: path.resolve(__dirname, './src/'),
+      r3cps: path.resolve(__dirname, './src/r3.components/src'),
       // framework: path.resolve(__dirname, 'node_modules/@syman/burgeon-r3-components/r3.publish/src'),
-      omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
+      // omsTheme: path.resolve(__dirname, 'node_modules/@burgeon/oms-theme/skin'),
     }
   },
-  optimization: {
-    minimizer: [new TerserJSPlugin({
-      parallel: true,
-      terserOptions: {
-        compress: {
-          // pure_funcs: ['console.log']
-        }
-      }
-    }), new CssMinimizerPlugin()],
-  },
+  // optimization: {
+  //   minimizer: [new TerserJSPlugin({
+  //     parallel: true,
+  //     terserOptions: {
+  //       compress: {
+  //         // pure_funcs: ['console.log']
+  //       }
+  //     }
+  //   }), new CssMinimizerPlugin()],
+  // },
 });

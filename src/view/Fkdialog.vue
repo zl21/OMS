@@ -8,6 +8,7 @@
     :append-to-body="appendToBody"
     :modal-append-to-body="modalAppendToBody"
     class="ark-dialog"
+    :custom-class="customClass"
     @MyDialogClose="dialogClose"
   >
     <template #title>
@@ -17,7 +18,7 @@
     <div v-loading.lock="confirmLoading" class="fkdialog">
       <div class="dialog_left">
         <div class="left_top">
-          <span>{{ vmI18n.t("SCREENCONDITION") }}</span>
+          <span>{{ ChineseDictionary.SCREENCONDITION }}</span>
           <span>
             <i v-if="!open_close_icon" class="iconfont" @click="nodeOpen"
               >&#xe61a;</i
@@ -43,7 +44,7 @@
       >
         <!-- <el-tabs v-model="activeName">
           <el-tab-pane
-            :label="vmI18n.t('SELECTEDRESULTS')"
+            :label="ChineseDictionary.SELECTEDRESULTS"
             name="first"
             class="el-tab-auto"
           > -->
@@ -58,7 +59,7 @@
             /> -->
         <Tabs :value="activeName">
           <TabPane 
-            :label="vmI18n.t('SELECTEDRESULTS')"
+            :label="ChineseDictionary.SELECTEDRESULTS"
             name="first"
           >
             <Page
@@ -68,9 +69,9 @@
               :total="l_center_data.total"
               :page-size="l_center_data.l_page_size"
               :page-size-opts="[10, 20, 50, 100]"
+              :pager-count="5"
               @on-change="l_handleCurrentChange"
               @on-page-size-change="l_handleSizeChange"
-              pager-count="5"
               size="small"
               show-elevator
               show-sizer
@@ -91,7 +92,7 @@
             />
           </TabPane>
           <!-- <el-tab-pane
-            :label="vmI18n.t('VIEWTHESELECTEDRESULTS')"
+            :label="ChineseDictionary.VIEWTHESELECTEDRESULTS"
             name="second"
             class="el-tab-auto"
           > -->
@@ -105,7 +106,7 @@
               @current-change="r_handleCurrentChange"
             /> -->
           <TabPane 
-            :label="vmI18n.t('VIEWTHESELECTEDRESULTS')"
+            :label="ChineseDictionary.VIEWTHESELECTEDRESULTS"
             name="second"
           >
             <Page
@@ -115,9 +116,9 @@
               :total="r_center_data.total"
               :page-size="r_center_data.r_page_size"
               :page-size-opts="[10, 20, 50, 100]"
+              :pager-count="5"
               @on-change="l_handleCurrentChange"
               @on-page-size-change="l_handleSizeChange"
-              pager-count="5"
               size="small"
               show-elevator
               show-sizer
@@ -156,7 +157,7 @@
           >
             <Icon type="ios-search" slot="suffix" @click="onIconClick" />
             <template slot="prepend">
-              {{ vmI18n.t("GLOBALSEARCH") }}
+              {{ ChineseDictionary.GLOBALSEARCH }}
             </template>
           </Input>
           <div class="center-exclude">
@@ -169,7 +170,7 @@
                 value=""
               />
               <span class="checked-box" />
-              <span> {{ vmI18n.t("EXCLUDE") }}</span>
+              <span> {{ ChineseDictionary.EXCLUDE }}</span>
             </label>
           </div>
         </div>
@@ -215,7 +216,7 @@
       </div>
       <div class="dialog_right">
         <div class="right_top">
-          <span>{{ vmI18n.t("HASBEENSELECTED") }}</span
+          <span>{{ ChineseDictionary.HASBEENSELECTED }}</span
           ><span>(</span
           ><span
             >{{ r_center_data.rightTotal }} {{ vmI18n.t("com.piece") }}</span
@@ -236,17 +237,17 @@
         </div>
         <div class="ark-modal-footer" style="padding-right: 0">
           <Button @click="dialogClose">
-            {{ vmI18n.t("CANCEL") }}
+            {{ ChineseDictionary.CANCEL }}
           </Button>
           <Button type="primary" @click="dialogConfirm">
-            {{ vmI18n.t("CONFIRM") }}
+            {{ ChineseDictionary.CONFIRM }}
           </Button>
         </div>
       </div>
       <div v-if="showOrHidden" class="modalDiv">
         <div class="modalCenter">
           <div class="modalTitle">
-            <span class="modalText">{{ vmI18n.t("POTX") }}</span>
+            <span class="modalText">{{ ChineseDictionary.POTX }}</span>
             <i
               class="iconfont icon-cha1"
               @click="showOrHidden = !showOrHidden"
@@ -255,7 +256,7 @@
           <div class="modalContent">
             <i class="iconfont muBan">&#xe637;</i>
             <div class="textCenter">
-              <label>{{ vmI18n.t("PAGENAME") }}：</label>
+              <label>{{ ChineseDictionary.PAGENAME }}：</label>
               <input
                 v-model="module_name"
                 type="text"
@@ -263,10 +264,10 @@
             </div>
             <div class="modalBtn">
               <button class="btn result_save" @click="result_save">
-                <span>{{ vmI18n.t("ENSURE") }}</span>
+                <span>{{ ChineseDictionary.ENSURE }}</span>
               </button>
               <button class="btn" @click="showOrHidden = !showOrHidden">
-                <span>{{ vmI18n.t("CANCEL") }}</span>
+                <span>{{ ChineseDictionary.CANCEL }}</span>
               </button>
             </div>
           </div>
@@ -311,7 +312,6 @@
 </script>
 
 <style lang="less" type="text/less" scoped>
-@import "~omsTheme/public.less";
 // 框架有样式 -- 覆盖修改
 .detailtable .form_button .buttonFk .el-dialog__headerbtn {
   background-color: transparent !important;
@@ -322,7 +322,7 @@
     .dialog_left {
       // flex: 1;
       width: 200px;
-      box-shadow: none;
+      // box-shadow: none;
       .dislogtree {
         .title {
           i,
@@ -363,7 +363,7 @@
       }
       .left_top {
         span i {
-          color: @base-color;
+          color: var(--b2-color);
         }
       }
       .left_center {
@@ -373,9 +373,9 @@
     .dialog_center {
       flex: 3;
       // width: auto;
-      box-shadow: none;
+      // box-shadow: none;
       .el-tabs .el-tabs__header .el-tabs__nav .el-tabs__active-bar {
-        background-color: @base-color;
+        background-color: var(--b2-color);
       }
       .el-pagination {
         .el-pagination__jump {
@@ -386,8 +386,8 @@
         // .el-input {
         //   input {
         //     border-radius: 0;
-        //     height: @base-color;
-        //     line-height: @base-color;
+        //     height: var(--b2-color);
+        //     line-height: var(--b2-color);
         //   }
         // }
         display: flex;
@@ -412,7 +412,7 @@
       // width: auto;
       border-color: #f3f3f3;
       .operation-icon {
-        color: @base-color;
+        color: var(--b2-color);
         font-size: 14px;
         line-height: 19px;
         border-radius: 3px;
@@ -422,15 +422,15 @@
       // flex: 1;
       // width: auto;
       .right_top {
-        color: @base-color;
+        color: var(--b2-color);
         span {
           &:nth-child(3),
           :last-child,
           &:last-child {
             i {
-              color: @base-color;
+              color: var(--b2-color);
             }
-            color: @base-color;
+            color: var(--b2-color);
           }
         }
       }
@@ -438,12 +438,24 @@
         padding: 0;
         height: auto;
         & > button {
-          #bundle > .basicBtn;
-          color: @base-color;
+          // #bundle > .basicBtn;
+          font-size: 12px;
+          height: 32px;
+          line-height: 1;
+          padding: 0 16px;
+          border-radius: 3px;
+          border: 1px solid var(--b2-color);
+
+          & * {
+            font-size: 12px;
+            width: 100%;
+          }
+
+          color: var(--b2-color);
           &:last-child {
             color: #fff;
-            background: @base-color;
-            border: 1px solid @base-color;
+            background: var(--b2-color);
+            border: 1px solid var(--b2-color);
             margin-right: 0;
           }
         }
@@ -467,7 +479,13 @@
         input{
           font-size: 12px;
           width: calc(100% - 120px);
-          #bundle > .defalutInput;
+          // #bundle > .defalutInput;
+          height: 32px;
+          line-height: 30px;
+          color: #292F43;
+          border: 1px solid #dbdde8;
+          border-radius: 3px;
+          padding-right: 32px;
         }
       }
       .modalBtn{
@@ -476,12 +494,32 @@
         right: 0;
         margin-top: 10px;
         button{
-          #bundle > .defalutBtn;
+          // #bundle > .defalutBtn;
           span{
             color: inherit;
           }
-          &.result_save{
-            #bundle > .defalutBtn;
+          &, &.result_save {
+            // #bundle > .defalutBtn;
+            font-size: 12px;
+            height: 32px;
+            line-height: 1;
+            padding: 0 16px;
+            border-radius: 3px;
+            border: 1px solid var(--b2-color);
+
+            & * {
+              font-size: 12px;
+              width: 100%;
+            }
+            color: var(--b2-color);
+            border-color: var(--b2-color);
+            background-color: #fff;
+
+            &:hover {
+              // color: var(--b2-color);
+              // border-color: var(--b2-color);
+              opacity: .6;
+            }
           }
         }
       }

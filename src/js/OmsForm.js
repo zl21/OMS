@@ -7,6 +7,7 @@
  * @FilePath: /burgeon-business-components/js/OmsForm.js
  */
 // import myInputLd from 'framework/components/element/input.vue' //为多选+导入组件专属引入
+import myInputLd from 'r3cps/components/element/input.vue'
 // 兼容fktable1.4数据格式（云雀1.0）
 import myInput from "burgeonComponents/view/Fkinput.vue";
 import fkinputPlus from "burgeonComponents/view/FkinputPlus.vue";
@@ -15,7 +16,7 @@ export default {
   components: {
     fkinputPlus,
     myInput,
-    myInputLd:$R3_CPS.components.input
+    myInputLd
   },
   data() {
     return {
@@ -40,7 +41,16 @@ export default {
         'on-page-change': () => {
           console.log('on-page-change');
         }
-      }
+      },
+      defaultGrid: { // 默认响应式栅格占位格数
+        xs: 12,
+        sm: 8,
+        md: 8,
+        lg: 6,
+        span: 6
+      },
+      curGridColnum: 4,
+      showNum: '' // 初始显示条数
     }
   },
   props: {
@@ -50,6 +60,7 @@ export default {
      * flodClick: 折叠回调
      * setColnum: 4, // 默认4列
      * setRow: 3, // 默认3行
+     * isGrid: true, // 默认不启用栅格
      */
     formConfig: {
       type: Object
@@ -61,9 +72,28 @@ export default {
     // }
     formFields() {
       return this.formConfig.formData.filter(i => i.style)
+    },
+    // 查询条件默认显示行数
+    queryDisNumber(v) {
+      return $store.state.global.changeSearchFoldnum.queryDisNumber || 3
+    },
+    // 是否启用栅格（默认不启用）
+    isGrid() {
+      return this.formConfig.hasOwnProperty('isGrid') ? this.formConfig.isGrid : false
+    },
+    // 判断是否显示折叠按钮（判断查询条件是否 大于 查询条件默认显示行数*一行显示条数，大于才显示折叠按钮 ）
+    searchInputLenMoreThanShowNum() {
+      return this.formConfig.formData.length > this.showNum
     }
   },
   watch: {
+     // 根据 查询条件默认显示行数 显示多少行
+    queryDisNumber(v) {
+      this.initRenderForm();
+    },
+    curGridColnum() {
+      this.initRenderForm()
+    },
     // flodData() {
     //   if (this.flodData === 'el-icon-arrow-up') {
     //     this.$refs[this.currentFlod].style.maxHeight = "";
@@ -101,31 +131,119 @@ export default {
         }
       }
     });
-    setTimeout(() => {
-      let nodes = this.$refs.popLabel;
-      let nodes2 = this.$refs.dropSelect;
-      let allNodes = [nodes, nodes2].filter(i => Array.isArray(i)).flat()
-      allNodes.forEach(e => {
-        let oldNodeStr = e.$el.firstElementChild.innerHTML;
-        if (oldNodeStr.includes('*')) e.$el.firstElementChild.innerHTML = `<i style="color:#ed4014;">*</i> ${oldNodeStr.slice(1)}`;
-      });
-    }, 500);
+    this.asteriskColor()
+    // 响应式栅格
+    window.addEventListener('resize', () => this.getGridColnum(), false)
+    this.getGridColnum()
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);
+    window.removeEventListener('resize', () => this.getGridColnum(), false)
   },
   methods: {
+    // 必填星号(*)颜色
+    asteriskColor(ms = 500) {
+      setTimeout(() => {
+        let nodes = this.$refs.popLabel;
+        let nodes2 = this.$refs.dropSelect;
+        let allNodes = [nodes, nodes2].filter(i => Array.isArray(i)).flat()
+        allNodes.forEach(e => {
+          let oldNodeStr = e.$el.firstElementChild.innerHTML;
+          if (oldNodeStr.includes('*')) e.$el.firstElementChild.innerHTML = `<i style="color:#ed4014;">*</i> ${oldNodeStr.slice(1)}`;
+        });
+      }, ms);
+    },
+    /**
+     * 常规栅格：即表单中都是span: 6
+     * 特殊栅格：即表单中不都是span: 6
+     */
+    gridSize(item) {
+      let oldSpan = Number(item.width)
+      let mainSpan = this.getMost(this.formConfig.formData.map(i => i.width)).max
+      let gridSize = {}
+      if (this.isGrid) { // 开启响应式栅格
+        Object.keys(this.defaultGrid).forEach(key => {
+          switch (key) {
+            case 'span':
+              gridSize[key] = item.width || this.formConfig.colSpan || this.defaultGrid[key]
+              break;
+            case 'xs':
+            case 'sm':
+            case 'md':
+            case 'lg':
+              switch (oldSpan) {
+                case 8:
+                  gridSize[key] = mainSpan == 8 && key == 'lg' ? oldSpan : this.defaultGrid[key]
+                  break;
+                case 12:
+                case 16:
+                  gridSize[key] = ['sm', 'md'].includes(key) ? 16 : key == 'lg' ? oldSpan : 24
+                  break;
+                case 24:
+                  gridSize[key] = oldSpan
+                  break;
+                default:
+                  gridSize[key] = this.defaultGrid[key] 
+                  break;
+              }
+              break;
+            default:
+              break;
+          }
+        })
+      } else {
+        gridSize.span = item.width || this.formConfig.colSpan || this.defaultGrid.span
+      }
+      // console.log(item.width, item.label, gridSize)
+      return gridSize
+    },
+    getMost(arr) {
+      let max = null; // 出现次数最多的元素
+      let num = 1; // 该元素出现次数
+      arr.reduce((p, k)=>{   
+        p[k]? p[k]++ : p[k]=1;  
+        if(p[k] > num){
+            num = p[k]
+            max = k  
+        }
+        return p
+      },{})
+      return { max, num }   
+    },
+    // 当前栅格列数
+    getGridColnum() {
+      if (!this.formConfig.isGrid) return
+      let clientWidth = document.body.clientWidth
+      if (clientWidth >= 1200) {
+        this.curGridColnum = 24 / this.defaultGrid.lg
+        return
+      }
+      if (clientWidth >= 992) {
+        this.curGridColnum = 24 / this.defaultGrid.md
+        return
+      }
+      if (clientWidth >= 768) {
+        this.curGridColnum = 24 / this.defaultGrid.sm
+        return
+      }
+      if (clientWidth < 768) {
+        this.curGridColnum = 24 / this.defaultGrid.xs
+      }
+    },
     initRenderForm() {
       if (!this.formConfig.flodClick) {
         return
       }
-      const { setColnum = 4, setRow = 3 } = this.formConfig
+      
+      const { setColnum = this.curGridColnum, setRow = this.queryDisNumber } = this.formConfig
       let showNum;
-      if (this.formConfig.btn) {
+
+      if (this.formConfig.btn) { // 场景：表单中含搜索按钮（预留按钮占位）
         showNum = setColnum * setRow - 1
       } else {
         showNum = setColnum * setRow
       }
+      this.showNum = showNum
       /* if ( setColnum * setRow > this.formConfig.formData.length ) {
         // 不需要折叠icon的情况
         this.no = 'noFlod'
@@ -133,9 +251,11 @@ export default {
         this.no = ''
       } */
       if (this.currentFlod == 'down') {
-        this.formConfig.formData.forEach((it, n) => {
+        this.formFields.forEach((it, n) => {
           if (n + 1 > showNum) {
             it.class = it.class ? `${it.class} long` : 'long'
+          } else {
+            it.class = it.class ? it.class.replace(/long/g, '').trim() : '';
           }
         });
       } else {
@@ -143,7 +263,7 @@ export default {
           it.class = it.class ? it.class.replace(/long/g, '').trim() : '';
         });
       }
-      // this.$forceUpdate()
+      this.$forceUpdate()
     },
     selectInputChange(x) {
       this.selectInputChangeVal = x;
@@ -231,7 +351,7 @@ export default {
 
       return {
         single: fkdisplay == 'mrp' ? false : fkdisplay == 'drp' ? true : !!single, // 是否单选
-        placeholder: item.itemdata.placeholder || '请输入',
+        placeholder: item.itemdata.placeholder || $i18n.t('form.selectPlaceholder'),
         enterType: false,
         serviceId: item.itemdata.serviceId || '',
         // totalRowCount: item.itemdata.totalRowCount || 0,

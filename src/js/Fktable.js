@@ -382,7 +382,7 @@ export default {
   },
   created() {
     let _self = this
-    _self.ChineseDictionary = $ChineseDictionary
+    _self.ChineseDictionary = ChineseDictionary
     // 判断是否是外键关联
     if (_self.fkid) {
       _self.formObj.refcolid = _self.fkid
