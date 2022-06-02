@@ -38,6 +38,7 @@ export default {
     }
   },
   unbind(el) {
+    if (!el.loadingElement) return
     if (el.loadingElement.parentNode === el) {
       el.removeChild(el.loadingElement);
     }
