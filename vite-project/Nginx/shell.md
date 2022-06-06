@@ -11,4 +11,4 @@ FinalShell:
 docker pull registry.cn-hangzhou.aliyuncs.com/zl980712/vue3:v1.0
 docker kill vue3Web
 docker rm vue3Web
-docker run -p 20003:80 -d --name vue3Web registry.cn-hangzhou.aliyuncs.com/zl980712/vue3:v1.0 
+docker run -p 20002:80 -d --name vue3Web registry.cn-hangzhou.aliyuncs.com/zl980712/vue3:v1.0 
