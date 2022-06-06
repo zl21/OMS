@@ -35,7 +35,7 @@ const info = reactive([
   {
     en: "OMS UI",
     zh: "OMS组件库",
-    url: "http://101.132.182.36:20002/",
+    url: "http://101.132.182.36:20003/",
   },
   {
     en: "THEME",
