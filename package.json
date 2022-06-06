@@ -1,6 +1,6 @@
 {
   "name": "@bojun/i18n",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "burgeon company's internationalization lib for private npm",
   "files": [
     "dist"

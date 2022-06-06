@@ -198,3 +198,4 @@ console.log($i18n.t(common.all));
 | v1.2.4 | rename @bojun/i18n |
 | v1.2.5 | add 20220527 |
 | v1.2.6 | add 20220601-库存中心 |
+| v1.2.7 | add 20220602-促销中心 |
