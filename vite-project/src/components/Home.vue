@@ -1,23 +1,23 @@
 
 <template>
-  <div class="home">
-    <div class="header">
+  <div className="home">
+    <div className="header">
       <img src="../assets/logo1.png" alt="">
     </div>
-    <div class="body">
-      <div class="body-left">
+    <div className="body">
+      <div className="body-left">
         <div :key="index" v-for="(it,index) in info">
-          <span class="title" @click="titleClick(it)">{{it.en}}</span>
-          <span class="subTitle" @click="titleClick(it)"> - {{it.zh}}</span>
+          <span className="title" @click="titleClick(it)">{{it.en}}</span>
+          <span className="subTitle" @click="titleClick(it)"> - {{it.zh}}</span>
         </div>
       </div>
-      <div class=" body-right">
+      <div className="body-right">
         <!-- <img src="../assets/img1.png" alt=""> -->
       </div>
     </div>
-    <div class="footer">
-      <span class="copyright">©2021-2022 Burgeon Software Co.,Ltd. All rights reserved.</span>
-      <span class="author">BY OMS</span>
+    <div className="footer">
+      <span className="copyright">©2021-2022 Burgeon Software Co.,Ltd. All rights reserved.</span>
+      <span className="author">BY OMS</span>
     </div>
   </div>
 </template>
@@ -25,11 +25,10 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 
-defineProps<{ msg: string }>();
+// defineProps<{ msg: string }>();
 
-const titleClick = (it) => {
+const titleClick = (it: any) => {
   window.open(it.url);
-  console.log("00000");
 };
 const count = ref(0);
 const info = reactive([
@@ -78,8 +77,10 @@ const info = reactive([
       span {
         display: block;
         line-height: 1;
+        width: fit-content;
         &:hover {
           color: rgb(191, 191, 217);
+          cursor: pointer;
         }
       }
       .title {
