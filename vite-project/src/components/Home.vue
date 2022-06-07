@@ -45,7 +45,7 @@ const info = reactive([
   {
     en: "THEME",
     zh: "主题",
-    url: "http://101.132.182.36:20002/?path=/story/other-theme--page",
+    url: "http://101.132.182.36:20020/web/#/6/24",
   },
   {
     en: "I18N", // INTERNATIONALNATION
