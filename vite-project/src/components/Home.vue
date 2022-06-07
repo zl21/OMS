@@ -13,6 +13,11 @@
       </div>
       <div className="body-right">
         <!-- <img src="../assets/img1.png" alt=""> -->
+        <el-carousel indicator-position="outside" trigger="click" :interval="5000">
+          <el-carousel-item v-for="item in imgs" :key="item.id">
+            <img :src="item.url" alt="">
+          </el-carousel-item>
+        </el-carousel>
       </div>
     </div>
     <div className="footer">
@@ -48,6 +53,25 @@ const info = reactive([
     url: "http://101.132.182.36:20000/",
   },
 ]);
+const imgs = [
+  {
+    id: 1,
+    // url: '../assets/img1.png'
+    url: "https://skx-r3-upload-dev.oss-cn-shenzhen.aliyuncs.com/web/img/vue3/img1.png",
+  },
+  {
+    id: 2,
+    url: "https://skx-r3-upload-dev.oss-cn-shenzhen.aliyuncs.com/web/img/vue3/img2.png",
+  },
+  {
+    id: 3,
+    url: "https://skx-r3-upload-dev.oss-cn-shenzhen.aliyuncs.com/web/img/vue3/img3.jpeg",
+  },
+  {
+    id: 4,
+    url: "https://skx-r3-upload-dev.oss-cn-shenzhen.aliyuncs.com/web/img/vue3/img4.jpeg",
+  },
+];
 </script>
 
 <style lang="less" scoped>
@@ -71,8 +95,11 @@ const info = reactive([
 
     &-left {
       flex: 0.4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
       div {
-        margin: 32px 0;
+        // margin: 32px 0;
       }
       span {
         display: block;
@@ -98,9 +125,21 @@ const info = reactive([
     }
     &-right {
       flex: 0.6;
-      width: 100%;
-      height: 100%;
-      background: url("../assets/img1.png") center / cover no-repeat;
+      // width: 100%;
+      // height: 100%;
+      // background: url("../assets/img1.png") center / cover no-repeat;
+      /deep/.el-carousel {
+        .el-carousel__container {
+          height: 450px;
+          width: 900px;
+          .el-carousel__item {
+            img {
+              height: 100%;
+              width: 100%;
+            }
+          }
+        }
+      }
     }
   }
   .footer {
