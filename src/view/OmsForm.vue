@@ -32,7 +32,7 @@
       style="width: 100%"
       ref="businessForm_a"
       :model="formConfig.formValue"
-      :rules="formConfig.ruleValidate"
+      :rules="ruleValidate"
       onsubmit="return false;"
     >
       <Row>
@@ -49,7 +49,9 @@
               v-if="item.style === 'input'"
               :prop="item.value || item.colname"
               :class="item.class || ''"
+              :rules="item.rules ? item.rules : ruleValidate[item.colname] ? ruleValidate[item.colname][0] : {}"
             >
+            <!-- {{ ruleValidate[item.colname] }} -->
               <!-- 输入框 -->
               <!-- <Input @on-click="iconclick(item.iconclick)" @on-enter="keyDown(item.inputenter)" :icon="item.icon" v-model="item.value || item.colname" :placeholder="item.placeholder ? item.placeholder : ''"></Input> -->
               <Input
