@@ -370,3 +370,4 @@
 | v2.0.36 | fix: Fkinput isBackRowItem时clear清空修复 |
 | v2.0.37 | deps: omsui.min |
 | v2.0.38 | feat: OmsForm 拓展isGrid属性，开启响应式栅格 |
+| v2.0.39 | feat: OmsForm 必填item动态设置require生效，给formData的item添加一个val记录此item的值 |

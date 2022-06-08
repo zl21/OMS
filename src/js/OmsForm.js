@@ -70,7 +70,10 @@ export default {
     // flodClickClass(){
     //   return this.formConfig.flodClick ? '' : 'unFlodStyle';
     // }
-    formFields() {
+    ruleValidate() {
+      return this.formConfig.ruleValidate || {}
+    },
+     formFields() {
       return this.formConfig.formData.filter(i => i.style)
     },
     // 查询条件默认显示行数
@@ -102,10 +105,26 @@ export default {
     //     this.$refs[this.currentFlod].style.overflow = "hidden";
     //   }
     // }
+    "formConfig.formValue": {
+      handler(n,o) {
+        const f = this.formConfig.formData
+        for (const key in n) {
+          f.forEach(it => {
+            if (it.colname == key) {
+              it.val = n[key] // 给formData的item添加一个val记录此item的值，便于校验提示等
+            }
+          })
+        }
+      },
+      immediate: true, // 初始化即执行
+      deep: true,
+    },
     "formConfig.formData": {
       handler(n,o) {
-        console.log('watch');
         if (n && n.length) {
+          n.forEach(i => {
+            i.colname = i.colname ? i.colname : i.value ? i.value : i.dataAcessKey ? i.dataAcessKey : ''
+          })
           this.initRenderForm();
         }
       },
