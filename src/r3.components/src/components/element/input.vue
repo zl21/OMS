@@ -2171,6 +2171,7 @@
       },
       filterInputName(item) {
         const self = this;
+        $('.el-popover.el-popper').attr('style', 'display: none;')
         $('#ContentDisplayArea').trigger('click');
         if (item.refcolval || item.refcolprem) {
           if (item.fkdisplay == 'drp' || item.fkdisplay == 'mrp') {

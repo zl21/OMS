@@ -400,6 +400,9 @@
     }
   }
 }
+.el-dialog__wrapper.fc-dialog-root.dialog-div {
+  display: flex !important;
+}
 .el-dialog__wrapper.messageDialog {
   .el-dialog {
     width: 380px;
