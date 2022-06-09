@@ -25,7 +25,7 @@
             :disabled="item.disabled ? item.disabled : false"
             :ghost="item.ghost ? true : false"
             :shape="item.shape ? item.shape : undefined"
-            :class="item.class"
+            :class="[item.class, item.webname || '']"
             >{{ item.text }}</Button
           >
           <!-- 下拉菜单按钮 -->
@@ -51,6 +51,7 @@
                 v-for="(menu_item, index) in item.menus"
                 :key="index"
                 :name="menu_item.webname"
+                :class="[menu_item.class, menu_item.webname || '']"
               >
                 <span v-if="!menu_item.dropDown">{{ menu_item.text }}</span>
                 <!-- 三级按钮 -->
@@ -77,6 +78,7 @@
                       v-for="(three_item, index) in menu_item.menus"
                       :key="index"
                       :name="three_item.webname"
+                      :class="[three_item.webname || '']"
                     >
                       {{ three_item.text }}
                     </DropdownItem>
@@ -105,7 +107,7 @@
           :ghost="item.ghost ? true : false"
           :shape="item.shape ? item.shape : undefined"
           :key="index"
-          :class="item.class"
+          :class="[item.class, item.webname || '']"
           >{{ item.text }}</Button
         >
       </div>
