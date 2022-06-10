@@ -19,6 +19,8 @@ export default {
   data() {
     return {
       // vmI18n: i18n,
+      inpNum: '2', // 有效起始行
+      singleValue: '', // 更新记录
       key: '',
       text: '', // 选择的导入文件名
       files: {}, // 选择的文件
@@ -56,6 +58,9 @@ export default {
     };
   },
   computed: {
+    rowControl() {
+      return this.componentData.rowControl || false; // 默认false，即不展示控制从多少行开始导入
+    },
     isAsync() {
       return this.componentData.isAsync === false ? false : true; // 默认true，即异步
     },
@@ -85,6 +90,15 @@ export default {
     },
   },
   methods: {
+    handleInput() {
+      const val = event.target.value.trim();
+      // 只能是正整数或空,可根据需求修改正则
+      if (/^[1-9]\d*$|^$/.test(val)) {
+        this.inputValue = val;
+      } else {
+        event.target.value = this.inputValue;
+      }
+    },
     // 下载模板-配置
     downloadTemplate() {
       const self = this;
@@ -150,14 +164,29 @@ export default {
       if (this.importNotes) {
         param.append('cover', this.cover);
       }
+      if (this.rowControl) {
+        param.append('isUpdate', this.singleValue ? 'Y' : 'N');
+        param.append('startRow', this.inpNum);
+      }
       param.append('file', _this.files, _this.text);
+
+      const curParam = {
+        ...paramsObj,
+        text: _this.text,
+        cover: this.cover,
+        isUpdate: this.singleValue,
+        inpNum: this.inpNum, 
+        file: _this.files
+      }
+      this.$emit('changeParam', curParam) // 自定义入参
+      const incom = this.componentData.incom // 入参回传导入组件
 
       if (_this.currentConfig.buttonPermission) {
         _this.btnConfig.buttons.map((btn) => {
           btn.disabled = true;
         });
       }
-      $network.post(url, param).then((res) => {
+      $network.post(url, incom ? incom : param).then((res) => {
         document.getElementById("xFile").value = ""
         if (this.isAsync) {
         /** 异步导入优化（同框架保持交互效果一致）：
@@ -220,9 +249,11 @@ export default {
     closeModal() {
       const _this = this;
       if (_this.currentConfig.isAction) {
-        _this.$emit('closeActionDialog', false);
+        _this.$emit('closeActionDialog', false); // 关闭标准弹窗
+        // 动作定义没有直接传组件库的ImportTable给框架，套了一层父组件
+        _this.$parent.$parent.close();
       } else {
-        _this.$parent.$parent.closeConfirm();
+        _this.$parent.$parent.closeConfirm(); // 关闭 OmsDialog
       }
     },
     // 导入成功后的操作 - 刷新页面
