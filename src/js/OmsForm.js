@@ -253,6 +253,9 @@ export default {
       if (!this.formConfig.flodClick) {
         return
       }
+      setTimeout(() => {
+        OMS.cssHandleUtils.refreshAgTableHeight() // 渲染定制列表页面ag表格
+      }, 100)
       
       const { setColnum = this.curGridColnum, setRow = this.queryDisNumber } = this.formConfig
       let showNum;
