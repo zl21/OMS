@@ -764,6 +764,7 @@ export default {
     orderSplit: '订单拆分', //订单拆分
     payableAdjust_details: '赔付单明细', //赔付单明细
     payableAdjustmentList: '赔付单', //赔付单
+    payableAdjustmentList2: '丢件单', //丢件单
     promotionList: '促销活动',
     refundSlipDetails: '退款单详情',
     retailInvoice_details: '零售发货单详情', //零售发货单详情
