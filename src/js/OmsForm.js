@@ -124,6 +124,7 @@ export default {
         if (n && n.length) {
           n.forEach(i => {
             i.colname = i.colname ? i.colname : i.value ? i.value : i.dataAcessKey ? i.dataAcessKey : ''
+            i.rules = typeof(i.rules) == 'boolean' ? {} : i.rules // 处理老代码中给rules赋值boolean的历史问题
           })
           this.initRenderForm();
         }
