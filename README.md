@@ -373,3 +373,4 @@
 | v2.0.39 | feat: OmsForm 必填item动态设置require生效，给formData的item添加一个val记录此item的值 |
 | v2.0.40 | feat: OmsForm 折叠按钮、查询条件默认显示行数 - 触发ag表格高度渲染 |
 | v2.0.41 | feat: 导入: 支持slot、支持自定义入参 |
+| v2.0.42 | feat: OmsLabel由换行调整为滚动 |
