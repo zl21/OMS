@@ -1567,6 +1567,7 @@ export default {
     platform_barcode_ID: '平台条码ID',
     platform_model_ID: '平台款号ID',
     platform_orderNo: '平台单号', //平台单号
+    platform_orderID: '平台订单号', //平台订单号
     platformInfo: '平台信息', //平台信息
     platform_store_title: '平台店铺标题',
     preferential_amount: '优惠金额', //优惠金额
