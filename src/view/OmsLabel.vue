@@ -67,6 +67,14 @@ export default {
     $('.labelWrap').scroll(_.throttle(function() {
       self.showIconHandel()
     },300))
+    $('.tag .iconfont.iconbj-fold').click(function() { // 折叠icon触发
+      setTimeout(() => {
+        self.showIconHandel()
+      }, 100)
+    })
+    $(window).resize(_.throttle(function() { // 屏幕尺寸变更触发
+      self.showIconHandel()
+    },300))
   },
   watch: {
     labelDefaultValue(val) {
@@ -103,6 +111,9 @@ export default {
           this.left = 'left'
           this.right = 'right'
         }
+      } else {
+        this.showIcon = false
+        dom.style.marginRight = '0'
       }
     },
     // 单选
