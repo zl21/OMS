@@ -3,6 +3,7 @@ import businessActionTable from 'professionalComponents/businessActionTable';
 import publicMethodsUtil from '@/assets/js/public/publicMethods';
 import { buttonPermissionsMixin } from '@/assets/js/mixins/buttonPermissions';
 import { dataAccessMixin } from '@/assets/js/mixins/dataAccess';
+import formatData from '@/assets/js/__utils__/date';
 // import config from "./config";
 import axios from 'axios';
 import qs from 'qs';
@@ -10,6 +11,10 @@ import qs from 'qs';
 export default {
   data() {
     return {
+      flag: false,
+      realAMT: 0,
+      chargebackData: [],
+      chargebackModal: false,
       modal: false,
       isCombination: 1, // 1:组合商品 2:组合商品下挂商品
       tableItemUrl: '/api/cs/oc/oms/v1/getOrderDetailList',
@@ -181,7 +186,7 @@ export default {
     componentData: {},
     isQh: {
       type: Boolean
-    }
+    },
   },
   watch: {
     componentData: {
@@ -223,6 +228,50 @@ export default {
     });
   },
   methods: {
+    //查看退单关联任务
+    async getChargeback( params ) {
+      console.log(params)
+      if (this.flag) return
+      this.flag = true;
+      this.realAMT = params.REAL_AMT;
+      const res = await axios.post('/api/cs/oc/oms/v1/getOrderRefundDetailList', { id: this.componentData.order.ID, order_no: params.TID, sub_order_id: params.OOID});
+      if (res.data.code == 0){
+        const data = res.data.data;
+        this.flag = false;
+        if (data.length == 0) {
+          this.$Message.warning('暂无数据~');
+          return
+        } else {
+          let count = 0;
+          data.map(item => {
+            item.created = formatData.standardTimeConversiondateToStr(item.created);
+            if(item.return_status != 5 && item.return_status != 1) {
+              count += item.refund_fee
+            }
+          })
+          this.realAMT = ((this.realAMT - count)*100/100).toFixed(2) > 0 ? ((this.realAMT - count)*100/100).toFixed(2) : '0.00';
+          this.chargebackData = data;
+          this.chargebackModal = true;
+        }
+      } else {
+        this.$Message.error(res.data.message);
+      }
+      // const data = res.data.data.WAREHOUSE_SEARCH_ITEM_RESULT_LIST || [];
+      // this.modalTable.stockInfo = [
+      //   {
+      //     label: '店铺',
+      //     value: res.data.data.CP_C_SHOP_TITLE || ""
+      //   }, {
+      //     label: '商品名称',
+      //     value: res.data.data.PS_C_PRO_ENAME || ""
+      //   }, {
+      //     label: '商品Sku',
+      //     value: res.data.data.PS_C_SKU_ECODE || ""
+      //   }
+      // ]
+      // this.modalTable.data = data || [];
+      
+    },
 
     /**
      * 获取可用库存
@@ -245,7 +294,6 @@ export default {
           value: res.data.data.PS_C_SKU_ECODE || ""
         }
       ]
-      console.log('data:',data);
       this.modalTable.data = data || [];
       this.modal = true;
     },
@@ -649,7 +697,6 @@ export default {
             {
               on: {
                 click: () => {
-                  console.log(params.row.PRO_TYPE);
                   if(params.row.PRO_TYPE == 4){
                     this.$Message.warning('当前商品为组合品，请解析下挂商品后查看库存!')
                   }else{
@@ -916,6 +963,32 @@ export default {
           key: 'ESTIMATE_CON_TIME',
           title: '最晚发货时间',
           dataAcessKey: 'ESTIMATE_CON_TIME',
+        },
+        {
+          key: 'NUM_IID',
+          title: '平台商品ID',
+          dataAcessKey: 'NUM_IID',
+        },
+        {
+          key: 'SKU_NUMIID',
+          title: '平台SKUID',
+          dataAcessKey: 'SKU_NUMIID',
+        },
+        {
+          key: 'CHARGEBACK',
+          title: '查看退单关联任务',
+          dataAcessKey: 'CHARGEBACK',
+          render: (h, params) => h(
+            'a',
+            {
+              on: {
+                click: () => {
+                  this.getChargeback(params.row);
+                }
+              }
+            },
+            '查看退单关联任务'
+          )
         },
         // {
         //   key: "SKU_SPEC",

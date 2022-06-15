@@ -1,16 +1,15 @@
 <template>
-  <div class="root">
-    <h1>
-      This is an application based on vue.js.
-    </h1>
+  <div>
+    <NotifyMsg />
   </div>
 </template>
 
 <script>
+  import NotifyMsg from '@/component/NotifyMsg.vue';
   export default {
     name: 'RootApp',
-    mounted() {
-      console.log('mounted');
+    components: {
+      NotifyMsg,
     },
   };
 </script>

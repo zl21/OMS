@@ -174,7 +174,12 @@ export default {
           flag: false, // 需要加*
           column: 'PREDICT_SEND_TIME',
           label: '预计发货时间:'
-        }
+        },
+        {
+          flag: false, // 需要加*
+          column: 'SOURCE_PLATFORM_CODE',
+          label: '第三方订单来源:'
+        },
       ],
       detail: [
         {

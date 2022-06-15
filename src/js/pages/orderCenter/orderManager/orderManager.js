@@ -1306,12 +1306,32 @@ export default {
           {
             webname: 'OcBOrderExportCmd', // 导出
             btnclick: () => {
+              this.$Modal.info({
+                title: self.vmI18n.t('modalTitle.tips'), // 提示,
+                content: self.vmI18n.t('已创建异步任务，在我的任务里查看'),
+                mask: true,
+                showCancel: true,
+                okText: self.vmI18n.t('common.determine'), // 确定
+                cancelText: self.vmI18n.t('common.cancel'), // 取消
+                onCancel: () => {},
+                onOk: () => {}
+              });
               this.exportClick();
             } // 按钮点击事件
           },
           {
             webname: 'OcBOrderExportFilterCmd', // 导出（不含手机号）
             btnclick: () => {
+              this.$Modal.info({
+                title: self.vmI18n.t('modalTitle.tips'), // 提示,
+                content: self.vmI18n.t('已创建异步任务，在我的任务里查看'),
+                mask: true,
+                showCancel: true,
+                okText: self.vmI18n.t('common.determine'), // 确定
+                cancelText: self.vmI18n.t('common.cancel'), // 取消
+                onCancel: () => {},
+                onOk: () => {}
+              });
               this.exportClick(true);
             } // 按钮点击事件
           },
@@ -3500,6 +3520,7 @@ export default {
         const ids = list.map(item => item.ID);
         const idList = { idList: ids };
         fromdata.append('param', JSON.stringify(idList));
+        fromdata.append('menu', '零售发货单');
       }else {
         const param = {
           page: {
@@ -3521,6 +3542,7 @@ export default {
           param.status = { label: '缺货', value: '2' , isShow: true};
         }
         fromdata.append('param', JSON.stringify(param));
+        fromdata.append('menu', '零售发货单');
       }
       if (isNoPhone) {
         this.service.orderCenter.exportOcBOrderFilter(fromdata).then(res => {
@@ -3569,6 +3591,7 @@ export default {
       };
       const fromdata = new FormData();
       fromdata.append('param', JSON.stringify(param));
+      fromdata.append('menu', '零售发货单');
       _this.service.orderCenter.exportOcBOrder(fromdata).then(res => {
         this.isExport = false;
         if (res.data.code == 0 && res.data.data !== null) {
