@@ -1302,6 +1302,7 @@ export default {
     returnNo: '退供单号',
     returnNotes: '退换货备注', //退换货备注
     returnOrder_no: '退换货单号', //退换货单号
+    returnOrder_no2: '退货单号',
     returnOrderLog: '退货单日志',
     returnQuantity: '退货数量', //退货数量
     returnRefund: '退货退款',
