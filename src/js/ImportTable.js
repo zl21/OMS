@@ -59,10 +59,10 @@ export default {
   },
   computed: {
     rowControl() {
-      return this.componentData.rowControl || false; // 默认false，即不展示控制从多少行开始导入
+      return this.currentConfig.rowControl || false; // 默认false，即不展示控制从多少行开始导入
     },
     isAsync() {
-      return this.componentData.isAsync === false ? false : true; // 默认true，即异步
+      return this.currentConfig.isAsync === false ? false : true; // 默认true，即异步
     },
     webname() {
       const { objTabActionDialogConfig, dialogComponentName } = this.$parent?.$parent || this.$parent?.$parent?.$parent
@@ -179,7 +179,7 @@ export default {
         file: _this.files
       }
       this.$emit('changeParam', curParam) // 自定义入参
-      const incom = this.componentData.incom // 入参回传导入组件
+      const incom = this.currentConfig.incom // 入参回传导入组件
 
       if (_this.currentConfig.buttonPermission) {
         _this.btnConfig.buttons.map((btn) => {
@@ -347,6 +347,9 @@ export default {
     }
     if (_this.$OMS2.cusImport[this.key]) {
       // 配置文件中存在配置，则使用配置文件中的配置
+      if (!_this.$OMS2.cusImport[this.key]) {
+        throw new Error('Please set the importTable config, see: http://101.132.182.36:20003/?path=/story/basic-importtable--page ')
+      }
       this.currentConfig = _this.$OMS2.cusImport[this.key];
     } else {
       // 反之使用父组件传过来的配置
