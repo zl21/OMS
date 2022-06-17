@@ -67,9 +67,6 @@
             font-size: 12px;
             padding-left: 8px;
           }
-          .el-select-dropdown__item.selected {
-            color: var(--b2-color);
-          }
         }
       }
     }
@@ -91,6 +88,14 @@
   }
 }
 
+.el-select-dropdown.el-popper {
+  .el-select-dropdown__item {
+    font-size: 12px;
+    &.selected {
+      color: var(--b2-color);
+    }
+  }
+}
 
 .business-form-main {
   // padding-top: 16px;
