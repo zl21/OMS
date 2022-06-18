@@ -77,7 +77,7 @@ export default {
       // 如果消息已经存在，侧不继续弹出
       if(notiDom) return;
       const _self = this;
-      const url = this.baseUrl ? this.baseUrl : '//tool.ecsemir.com';
+      const url = this.baseUrl ? this.baseUrl : '//tools.ecsemir.com';
       if (this.appId && this.username) {
         axios
           .get(`${url}/api/system/get_version`, {
@@ -123,7 +123,7 @@ export default {
     },
     handleClose() {
       if(!this.show) {
-        const url = this.baseUrl ? this.baseUrl : '//tool.ecsemir.com';
+        const url = this.baseUrl ? this.baseUrl : '//tools.ecsemir.com';
         axios.post(`${url}/api/system/version_read`, {
           system_code: this.appId,
           username: this.username,
