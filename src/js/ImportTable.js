@@ -102,10 +102,7 @@ export default {
     // 下载模板-配置
     downloadTemplate() {
       const self = this;
-      const tempUrl = self.currentConfig.tempUrl;
-      const tempApi = self.currentConfig.tempApi;
-      const tempParm = self.currentConfig.tempParm;
-      const type = self.currentConfig.tempMethod;
+      const { tempUrl, tempApi, tempParm, tempMethod: type = 'post' } = self.currentConfig
       let param = new FormData();
       if (tempParm) { // 下载模板参数处理
         /* for (const key in tempParm) {
@@ -122,7 +119,7 @@ export default {
       }
     },
     // 通过Api下载模板-Handel
-    getDownloadTemp(url, param = null, type = 'post') {
+    getDownloadTemp(url, param = null, type) {
       if (param) {
         $network[type](url, param).then((res) => {
           if (res.data.code === 0) {
@@ -141,8 +138,11 @@ export default {
     // 确认导入的操作
     importDialog: _.throttle(function () {
       if (this.handleBefore(this.files)) return;
-      const okApi = this.currentConfig.okApi;
-      const okParm = this.currentConfig.okParm || {};
+      const { okApi, okParm = {} } = this.currentConfig
+      if (!okApi) {
+        const tip2 = 'Please config okApi, see: http://101.132.182.36:20003/?path=/story/basic-importtable--page'
+        throw new Error(tip2)
+      }
       this.getImportDialog(okApi, okParm);
     }, 3000, { 'trailing': false }),
     // 导入请求
@@ -334,22 +334,23 @@ export default {
   },
   created() {
     const _this = this;
-    // console.log('$OMS2.cusImport::', _this.$OMS2.cusImport);
-    // console.log('webname::', _this.webname);
-    // console.log('tableName::', this.tableName);
-    // console.log('prefix::', this.prefix);
+    const tip1 = 'Please set the importTable config, see: http://101.132.182.36:20003/?path=/story/basic-importtable--page'
     if (this.prefix == 'CUSTOM' && !this.componentData?.isAction) {
       // 纯定制导入
-      this.key = this.componentData.tableName + '__' + this.componentData.webname;
+      if (!Object.keys(_this.componentData).length) {
+        throw new Error(tip1)
+      }
+      const { tableName, webname } = _this.componentData
+      this.key = webname ? `${tableName}__${webname}` : tableName;
     } else if (this.prefix == 'SYSTEM') {
       // 标准动作定义
       this.key = this.tableName + '__' + this.webname;
+      if (!_this.$OMS2.cusImport[this.key]) {
+        throw new Error(tip1)
+      }
     }
     if (_this.$OMS2.cusImport[this.key]) {
       // 配置文件中存在配置，则使用配置文件中的配置
-      if (!_this.$OMS2.cusImport[this.key]) {
-        throw new Error('Please set the importTable config, see: http://101.132.182.36:20003/?path=/story/basic-importtable--page ')
-      }
       this.currentConfig = _this.$OMS2.cusImport[this.key];
     } else {
       // 反之使用父组件传过来的配置
