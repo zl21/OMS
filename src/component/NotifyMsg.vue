@@ -8,10 +8,10 @@
     :close-on-press-escape="false"
   >
     <div slot="title" class="notify-dialog-header-wrap">
-      <div class="notify-dialog-text">新版本功能</div>
-      <div class="notify-dialog-badge">New</div>
+      <!-- <div class="notify-dialog-text">新版本功能</div>
+      <div class="notify-dialog-badge">New</div> -->
+      <div class="notify-dialog-body-title">{{ notifyData.title }}</div>
     </div>
-    <div class="notify-dialog-body-title">{{ notifyData.title }}</div>
     <div class="notify-dialog-body-sub-title">
       <div class="notify-dialog-body-title-content">
         <span>版本号：</span>
@@ -146,7 +146,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .notify-dialog-text {
