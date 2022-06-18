@@ -248,12 +248,13 @@ export default {
     // 导入成功后的操作 - 关闭弹窗
     closeModal() {
       const _this = this;
-      if (_this.currentConfig.isAction) {
-        _this.$emit('closeActionDialog', false); // 关闭标准弹窗
-        // 动作定义没有直接传组件库的ImportTable给框架，套了一层父组件
+      const { close, closeConfirm } = _this.$parent.$parent
+      if (close) {
+        // 标准页面
         _this.$parent.$parent.close();
-      } else {
-        _this.$parent.$parent.closeConfirm(); // 关闭 OmsDialog
+      } else if (closeConfirm) {
+        // 定制页面
+        _this.$parent.$parent.closeConfirm();
       }
     },
     // 导入成功后的操作 - 刷新页面
