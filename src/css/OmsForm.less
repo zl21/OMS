@@ -57,6 +57,21 @@
     .ark-form-item {
       padding-top: 8px;
       margin-bottom: 0;
+
+      &.ele-select {
+        /deep/.el-select {
+          width: 100%;
+          .el-input--suffix .el-input__inner {
+            height: 28px;
+            line-height: 28px;
+            font-size: 12px;
+            padding-left: 8px;
+          }
+          .el-select-dropdown__item.selected {
+            color: var(--b2-color);
+          }
+        }
+      }
     }
   }
 

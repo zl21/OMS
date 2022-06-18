@@ -161,6 +161,41 @@
               </Select>
             </FormItem>
 
+            <!-- element select 下拉框 -->
+            <FormItem
+              :label="item.label ? `${item.label}:` : ''"
+              :title="item.label"
+              v-if="item.style === 'el-select'"
+              :class="
+                item.class ? `${item.class}` + ' ' + 'ele-select' : 'ele-select'
+              "
+              :prop="item.value || item.colname"
+            >
+              <el-select 
+                @change="(val) =>runMethods(item.selectChange ? item.selectChange(val) : '')"
+                @on-open-change="(val) =>runMethods(item.onOpenChange ? item.onOpenChange(val) : '')"
+                label-in-value
+                v-model="formConfig.formValue[`${item.value || item.colname}`]"
+                :multiple="item.multiple ? item.multiple : false"
+                :disabled="item.disabled"
+                :filterable="item.filterable ? item.filterable : true"
+                :transfer="item.transfer ? item.transfer : true"
+                :placeholder="item.placeholder ? item.placeholder : '请选择'"
+                :clearable="item.clearable"
+                @on-query-change="selectInputChange"
+                @keyup.native="runMethods(item.filterable? selectEnter(item,formConfig.formValue[`${item.value || item.colname}`],$event): '')"
+                @clear="runMethods(item.clearSelect? item.clearSelect(item.value || item.colname): false,true)"
+              >
+                <el-option
+                  v-for="(option, index) in item.options"
+                  :key="option.value+new Date()"
+                  :value="option.value"
+                  :disabled="typeof(option.disabled) == 'boolean' ? option.disabled : false"
+                  :label="option.label">
+                </el-option>
+              </el-select>
+            </FormItem>
+
             <!-- 日期组件-年月日 -->
             <FormItem
               :label="item.label ? `${item.label}:` : ''"
