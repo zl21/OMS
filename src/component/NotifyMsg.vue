@@ -30,6 +30,8 @@
 </template>
 <script>
 import { Notification } from 'element-ui';
+const isProd = window.location.host.indexOf('r3.ecsemir.com') !== -1;
+console.log('isProd', isProd);
 
 export default {
   props: {
@@ -55,7 +57,7 @@ export default {
       count: 10,
       show: true,
       timer: null,
-      appId: 'r3',
+      appId: isProd ? 'r3': 'r3-test',
       username: '',
     }
   },
