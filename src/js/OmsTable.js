@@ -320,7 +320,7 @@ export default {
     rowClassName(row, index) {
       if (row.isGray) {
         // 订单中心详情-订单明细行背景置灰
-        return 'table-yellow-row'
+        return 'table-gray-row'
       }else if (row.isColorGray) {
         // 订单中心列表-已取消/系统作废行的字体颜色置灰
         return 'color-gray-row'
