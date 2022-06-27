@@ -1,5 +1,5 @@
 <template>
-  <div class="queryDesc">
+  <div class="queryDesc legend-wrap">
     <div class="legend">
       <!-- 图例 -->
       <span style="font-weight: bold;">{{ vmI18n.t("other.legend") }}:</span>
@@ -57,3 +57,10 @@ export default {
   }
 };
 </script>
+<style lang="less" scoped>
+  .queryDesc.legend-wrap {
+    height: 40px;
+    line-height: 40px;
+    margin: 0; // 避免动态渲染ag高度时10px误差
+  }
+</style>
