@@ -23,6 +23,7 @@
       @on-column-moved="colMoved"
       @on-column-pinned="colPinned"
       @on-sort-change="colSortChange"
+      @sortChanged="colSortChange"
     ></arkCommonTableByAgGrid>
 
     <div
