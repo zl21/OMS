@@ -8,10 +8,10 @@
     :close-on-press-escape="false"
   >
     <div slot="title" class="notify-dialog-header-wrap">
-      <div class="notify-dialog-text">新版本功能</div>
-      <div class="notify-dialog-badge">New</div>
+      <!-- <div class="notify-dialog-text">新版本功能</div>
+      <div class="notify-dialog-badge">New</div> -->
+      <div class="notify-dialog-body-title">{{ notifyData.title }}</div>
     </div>
-    <div class="notify-dialog-body-title">{{ notifyData.title }}</div>
     <div class="notify-dialog-body-sub-title">
       <div class="notify-dialog-body-title-content">
         <span>版本号：</span>
@@ -30,6 +30,8 @@
 </template>
 <script>
 import { Notification } from 'element-ui';
+const isProd = window.location.host.indexOf('r3.ecsemir.com') !== -1;
+console.log('isProd', isProd);
 
 export default {
   props: {
@@ -55,7 +57,7 @@ export default {
       count: 10,
       show: true,
       timer: null,
-      appId: 'r3',
+      appId: isProd ? 'r3': 'r3-test',
       username: '',
     }
   },
@@ -77,7 +79,7 @@ export default {
       // 如果消息已经存在，侧不继续弹出
       if(notiDom) return;
       const _self = this;
-      const url = this.baseUrl ? this.baseUrl : '//tool.ecsemir.com';
+      const url = this.baseUrl ? this.baseUrl : '//tools.ecsemir.com';
       if (this.appId && this.username) {
         axios
           .get(`${url}/api/system/get_version`, {
@@ -123,7 +125,7 @@ export default {
     },
     handleClose() {
       if(!this.show) {
-        const url = this.baseUrl ? this.baseUrl : '//tool.ecsemir.com';
+        const url = this.baseUrl ? this.baseUrl : '//tools.ecsemir.com';
         axios.post(`${url}/api/system/version_read`, {
           system_code: this.appId,
           username: this.username,
@@ -146,7 +148,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .notify-dialog-text {

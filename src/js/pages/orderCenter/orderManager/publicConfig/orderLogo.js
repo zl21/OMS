@@ -41,7 +41,8 @@ const orderLogo =  {
   PRESELL_TYPE:'店铺预售', //店预
   IS_HANG:'挂',//挂
   IS_HOT_SINK:'预包',//预包
-  IS_RECALL___1:'溢',//溢
+  IS_RECALL___1:'溢',//溢,
+  INTERNAL_MEMO:'团购'//团
   
 
 };
