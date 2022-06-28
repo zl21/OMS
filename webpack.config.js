@@ -57,6 +57,7 @@ module.exports = () => ({
     index: './index.js'
   },
   externals: {
+    '@syman/burgeon-r3': 'R3',
     vue: 'Vue',
     vuex: 'Vuex',
     'vue-router': 'VueRouter',

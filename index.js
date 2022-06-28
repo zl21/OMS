@@ -26,7 +26,7 @@ import App from './src/App.vue'
 import '@burgeon/oms-theme/theme/custom.less'; // 主题文件
 
 import externalTreeDatasConfig from '@/config/externalTreeDatas.config'; // 树结构配置
-import '@syman/burgeon-r3/r3.publish/r3.min.css';
+// import '@syman/burgeon-r3/r3.publish/r3.min.css';
 
 // 老框架引入的 自定义界面内需要的css资源
 import './static/iconfont/iconfont.css'; // customize-1.3自定义界面icon,下拉单选,此样式会影响框架样式，
@@ -93,7 +93,7 @@ R3.launchApplication({
     Login,
     WelcomePage
   },
-  setComponentsProps: (type, props) => {  
+  setComponentsProps: (type, props) => {
   // 下拉多选 添加模糊查询多选功能
     if (type === 'OBJ_FK') {
       if(props.PropsData !== undefined && props.PropsData.fkobj.searchmodel ==='mrp'){

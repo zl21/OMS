@@ -3,10 +3,12 @@ node_modules
 .idea
 .history
 .vscode
+.yalc
 # files
 __test_script__/
 dist/
 *.tgz
 __ignore__/
 project.config.js
-
+yalc.lock
+package-lock.json
