@@ -92,6 +92,7 @@ export default {
     },
     showIconHandel() {
       const dom = $('.labelWrap')[0]
+      if (!dom) return
       const { scrollWidth, clientWidth, scrollLeft } = dom
       if (scrollWidth > clientWidth) {
         this.showIcon = true
