@@ -392,7 +392,8 @@ export default {
         showColnameKey: item.itemdata.showColnameKey || 'isak',
         hidecolumns: item.itemdata.hidecolumns || [],
         defaultSelected: item.itemdata.defaultSelectedMrp || defaultSelectedDrp || [],
-        className: item.itemdata.className || ''
+        className: item.itemdata.className || '',
+        item: {} // 这个属性为了解决DropMultiSelectFilter报错问题，无需传值
       };
     },
     valueChange(val, item) {
