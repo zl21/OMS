@@ -102,14 +102,16 @@ export default {
     // 下载模板-配置
     downloadTemplate() {
       const self = this;
-      const { tempUrl, tempApi, tempParm, tempMethod: type = 'post' } = self.currentConfig
-      let param = new FormData();
+      const { tempUrl, tempApi, tempParm, cusTempParam, tempMethod: type = 'post' } = self.currentConfig
+      let param;
       if (tempParm) { // 下载模板参数处理
+        param = new FormData();
         /* for (const key in tempParm) {
           param.append(key, tempParm[key]);
         } */
         param.append('param', JSON.stringify(tempParm));
       }
+      cusTempParam && (param = cusTempParam) // 自定义模板参数
       if (tempUrl) {
         // 提供了模板Url，通过Url链接直接下载模板
         this.downloadUrlFile(self.currentConfig.tempUrl);
@@ -123,7 +125,11 @@ export default {
       if (param) {
         $network[type](url, param).then((res) => {
           if (res.data.code === 0) {
-            this.downloadUrlFile(res.data.data);
+            let url = res.data.data
+            if (!/https|http/.test(url) && this.currentConfig.cusTempParam) {
+              url = `${location.origin}/p/cs/download?filename=${url}`
+            }
+            this.downloadUrlFile(url);
           }
         });
       } else {
