@@ -353,7 +353,7 @@ export default {
       // 标准动作定义
       this.key = this.tableName + '__' + this.webname;
       if (!_this.$OMS2.cusImport[this.key]) {
-        throw new Error(tip1)
+        console.warn(tip1)
       }
     }
     if (_this.$OMS2.cusImport[this.key]) {
