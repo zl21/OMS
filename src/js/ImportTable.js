@@ -1,3 +1,32 @@
+/** 
+ * @相关属性
+ * 下载模板
+ * @param {String} tempUrl 模板url地址
+ * @param {String} tempApi 接口路径
+ * @param {Object} tempParm 接口入参 - formdata格式
+ * @param {Object} cusTempParam 自定义接口入参，包括入参格式
+ * @param {String} tempMethod 接口请求方式，默认post
+ * 导入
+ * @param {String} okApi 接口路径
+ * @param {Object} okParm 接口入参
+ * @param {Boolean} isAsync 是否开启异步导入，默认true
+ * @param {Boolean} isErr1Succ1 是否开启部分成功部分失败：下载文件
+ * @param {Boolean} dontRefreshTable 是否开启导入成功后刷新页面
+ * @param {Boolean} downErrorInfo 是否下载导入失败的文件
+ * @param {Boolean} showErrorInfo 是否在弹框内显示错误信息
+ * @param {Function} returnData 导入的回调
+ * @param {Function} freshPage 导入成功后，定制页面刷新的回调
+ * 其他
+ * @param {String} tableName 表名
+ * @param {String} webname
+ * @param {String} prefix 路由前缀，可选值有SYSTEM，CUSTOM
+ * @param {Boolean} isAction 是否为动作定义类型的
+ * @param {Boolean} dontShowDownloadA 是否显示下载模板，默认false
+ * @param {Boolean} importNotes 是否显示覆盖原备注/追加到原备注，默认false - 备注导入专用
+ * @param {Boolean} buttonPermission 
+ * @param {Boolean} cusDiscretion
+ * @param {Boolean} isStandardSingleObject 是否标准单对象
+ */
 import OmsButton from 'burgeonComponents/view/OmsButton';
 // import loading from 'burgeonComponents/view/Loading';
 // import i18n from "@burgeon/internationalization/i18n";
@@ -207,7 +236,7 @@ export default {
                 type: 'notice',
               },
             }))
-        }
+          }
           return
         }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
