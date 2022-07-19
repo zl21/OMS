@@ -377,7 +377,17 @@ export default {
           })
         }
       });
-
+    },
+    resetFkTableZIndex() {
+      let modalNode = document.querySelector('.ark-modal-wrap')
+      if (modalNode) {
+        let fkNode = document.querySelector('.fktable.ark-fktable.view-fktable').parentElement
+        if (fkNode) {
+          let fkZIndex = fkNode.style.zIndex
+          let modalZIndex = modalNode.style.zIndex
+          fkNode.style.zIndex = fkZIndex > modalZIndex ? fkZIndex : Number(modalZIndex) + 10
+        }
+      }
     }
   },
   created() {
@@ -436,6 +446,11 @@ export default {
         this.fkobj.idArr.push(id);
       }
     });
+    
+    this.$nextTick(() => {
+      this.resetFkTableZIndex() // 动态覆盖fktable层级，解决遮罩层遮挡问题
+    })
+
     let _self = this
     String.prototype.format = function () {  //占位符
       if (arguments.length == 0) return this;
