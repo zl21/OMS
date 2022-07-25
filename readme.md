@@ -13,7 +13,8 @@
 
 - 该文件中判断了是否已经安装必要的依赖包等操作，如果安装完成，则往下走`runCli(cli)`，该方法中`require`了一个文件，即`node_modules/webpack-cli/lib/webpack-cli.js`，总结如下：
 ```js
-// node_modules/webpack/bin/webpack.js
+/* node_modules/webpack/bin/webpack.js */
+
 runCli(cli) {
   require ('node_modules/webpack-cli/lib/webpack-cli.js')
 }
@@ -21,18 +22,28 @@ runCli(cli) {
 
 - 接着：
 ```js
-// webpack-cli/lib/webpack-cli.js
+/* webpack-cli/lib/webpack-cli.js */
+
 const runCLI = require("../lib/bootstrap");
 runCLI(process.argv);
 
-// ../lib/bootstrap.js
+
+/* ../lib/bootstrap.js */
+
 const WebpackCLI = require("./webpack-cli.js");
 const cli = new WebpackCLI();
 cli.run(args)
 
-// ./webpack-cli.js
+
+/* ./webpack-cli.js */
+
 // 定义了一个 WebpackCLI 类，类里有 run 方法
+class WebpackCLI {
+  constructor() {}
+  async run(args, parseOptions) {}
+}
 ```
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae2c82d746464df2b7822595db1cc06a~tplv-k3u1fbpfcp-watermark.image?)
 
 - WebpackCLI 类
 program = 引入了处理命令行参数的工具 commander，执行 new WebpackCLI() 时，触发program.action() 回调，action 中执行了：
@@ -115,9 +126,11 @@ cond(no)->op
 
 ## 语法
 - path.dirname:
- path.dirname('/foo/bar/baz/asdf/quux') // '/foo/bar/baz/asdf'
+ `path.dirname('/foo/bar/baz/asdf/quux') // '/foo/bar/baz/asdf'`
 - [path.resolve](https://wenku.baidu.com/view/505c0ce3b84cf7ec4afe04a1b0717fd5360cb2c6.html):
   相当于各个参数依次cd
+- __dirname:
+  指的是当前文件所在文件夹的绝对路径。
 - require.resolve:
   查询某个模块文件的带有完整绝对路径的文件名，即绝对路径
 
