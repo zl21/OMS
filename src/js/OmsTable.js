@@ -327,6 +327,9 @@ export default {
       }else if (row.isOutOfStock) {
         // 订单中心详情-订单明细行缺货字体置红
         return 'color-red-row'
+      }else if (row.isYellow) {
+        // 订单中心详情-订单明细行背景黄色
+        return 'table-yellow-row'
       }
       return ''
     },
