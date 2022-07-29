@@ -12,17 +12,17 @@
 - 当我们执行`npm install webpack webpack-cli`的时候，node 会在项目所在目录的`node_modules/.bin`目录下生成脚手架指定的指令对应的软链接
 - 执行 `npm run build`，找到软连接 `node_modules/.bin/webpack` 即（node_modules/webpack/bin/webpack.js）
 
-- 该文件中判断了是否已经安装必要的依赖包等操作，如果安装完成，则往下走`runCli(cli)`，该方法中`require`了一个文件，即`node_modules/webpack-cli/lib/webpack-cli.js`，总结如下：
+- 该文件中判断了是否已经安装必要的依赖包等操作，如果安装完成，则往下走`runCli(cli)`，该方法中`require`了一个文件，即`node_modules/webpack-cli/bin/cli.js`， 大致如下：
 ```js
 /* node_modules/webpack/bin/webpack.js */
 
 runCli(cli) {
-  require ('node_modules/webpack-cli/lib/webpack-cli.js')
+  require ('node_modules/webpack-cli/bin/cli.js') 
 }
 ```
 #### ==. 接着：==
 ```js
-/* webpack-cli/lib/webpack-cli.js */
+/* node_modules/webpack-cli/bin/cli.js */
 
 const runCLI = require("../lib/bootstrap");
 runCLI(process.argv);
