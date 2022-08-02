@@ -126,7 +126,7 @@
                 v-model="formConfig.formValue[`${item.value || item.colname}`]"
                 :multiple="item.multiple ? item.multiple : false"
                 :disabled="item.disabled"
-                :filterable="item.filterable ? item.filterable : true"
+                :filterable="item.filterable ? item.filterable : false"
                 :transfer="item.transfer ? item.transfer : true"
                 :placeholder="item.placeholder ? item.placeholder : ''"
                 :clearable="item.clearable"
