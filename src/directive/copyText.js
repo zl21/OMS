@@ -1,6 +1,8 @@
 /**
-* v-copyText 复制文本内容
-*/
+ * v-copyText 复制文本内容
+ * 
+ * <p v-copyText="copy" v-copyText:callback="copyTextSuccess">复制内容</p>
+ */
 
 export default {
   mounted(el, { value, arg }) { // vue3
@@ -8,20 +10,58 @@ export default {
   },
 
   bind(el, { value, arg }) { // vue2
-    if (arg === "callback") {
-      el.$copyCallback = value;
-    } else {
-      el.$copyValue = value;
-      const handler = () => {
-        copyTextToClipboard(el.$copyValue);
-        if (el.$copyCallback) {
-          el.$copyCallback(el.$copyValue);
-        }
-      };
-      el.addEventListener("click", handler);
-      el.$destroyCopy = () => el.removeEventListener("click", handler);
+    var node = document.createElement("i");
+    node.className = 'copy-clipboard ark-icon iconfont iconmd-clipboard iconfont'
+    node.setAttribute('style', 'display: none; color: #f52f2f;');
+    el.copyElement = node
+
+    if (value) {
+      if (arg === "callback") {
+        el.$copyCallback = value;
+      } else {
+        const handler = () => {
+          copyTextToClipboard(value);
+          if (el.$copyCallback) {
+            el.$copyCallback(value);
+          }
+        };
+        el.copyElement.addEventListener("click", handler);
+        
+        el.parentNode.appendChild(node)
+        el.parentNode.addEventListener("mouseover", function(){  
+          el.copyElement.style.display = 'block';
+        })
+        el.parentNode.addEventListener("mouseleave", function(){  
+          el.copyElement.style.display = 'none';
+        })
+      }
     }
-  }
+  },
+  update(el, binding) {
+    let parentNode = el.copyElement.parentNode
+    if (binding.value) {
+      if (binding.arg === "callback") {
+        el.$copyCallback = binding.value;
+      } else {
+        const handler = () => {
+          copyTextToClipboard(binding.value);
+          if (el.$copyCallback) {
+            el.$copyCallback(binding.value);
+          }
+        };
+        el.copyElement.addEventListener("click", handler);
+        el.parentNode.addEventListener("mouseover", function(){  
+          el.copyElement.style.display = 'block';
+        })
+        el.parentNode.addEventListener("mouseleave", function(){  
+          el.copyElement.style.display = 'none';
+        })
+        parentNode === null && el.parentNode.appendChild(el.copyElement);
+      }
+    } else {
+      el === parentNode && el.removeChild(el.copyElement);
+    }
+  },
 }
 
 function copyTextToClipboard(input, { target = document.body } = {}) {
@@ -51,6 +91,7 @@ function copyTextToClipboard(input, { target = document.body } = {}) {
   let isSuccess = false;
   try {
     isSuccess = document.execCommand('copy');
+    vm.$Message.success("复制成功！");
   } catch { }
 
   element.remove();
