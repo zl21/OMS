@@ -65,7 +65,15 @@ export default {
 }
 
 function copyTextToClipboard(input, { target = document.body } = {}) {
-  const element = document.createElement('textarea');
+  const element = document.createElement("input"); // 创建input对象
+  element.value = input; // 设置复制内容
+  target.appendChild(element); // 添加临时实例
+  element.select(); // 选择实例内容
+  document.execCommand("Copy"); // 执行复制
+  target.removeChild(element); // 删除临时实例
+  vm.$Message.success("复制成功！");
+
+  /* const element = document.createElement('textarea');
   const previouslyFocusedElement = document.activeElement;
 
   element.value = input;
@@ -106,5 +114,5 @@ function copyTextToClipboard(input, { target = document.body } = {}) {
     previouslyFocusedElement.focus();
   }
 
-  return isSuccess;
+  return isSuccess; */
 }
