@@ -396,6 +396,7 @@
     },
     data() {
       return {
+        observer: '', // 观察器,监听DOM变化
         getSetTime: false, // 保存定时器的
         /* autocompleteIputData: '', */
         showData: '',
@@ -457,11 +458,9 @@
         dynamicforcomputeObj: {}
       };
     },
-    
     beforeCreate() {
       this.$t = $i18n.t.bind($i18n)
     },
-
     created() {
       const self = this;
 
@@ -507,6 +506,7 @@
           self.popoverShow[item] = false;
         });
       });
+      this.resetElScrollBarZIndex() // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
     },
     computed: {
       /* autoval: {
@@ -647,6 +647,27 @@
       }
     },
     methods: {
+      resetElScrollBarZIndex() {
+        let modalNode = document.querySelector('.ark-modal-wrap')
+        let popNode = document.querySelector('.el-autocomplete-suggestion.el-popper')
+        if (modalNode) {
+          let observerOptions = {
+            childList: true, // 观察目标子节点的变化，添加或删除
+            attributes: false, // 观察属性变动
+            subtree: true //默认是false，设置为true后可观察后代节点
+          }
+          const callback = () => {
+            this.$nextTick(() => {
+              let modalZIndex = modalNode.style.zIndex
+              let zIndex = popNode.style.zIndex
+              console.log('callback~~~~', modalZIndex, zIndex)
+              popNode.style.zIndex = zIndex > modalZIndex ? zIndex : Number(modalZIndex) + 10
+            })
+          }
+          this.observer = new MutationObserver(callback);
+          this.observer.observe(popNode, observerOptions);
+        }
+      },
       /* 高级搜索关闭弹框 */
       dialogClose() {
         this.fkDialog.dialog = false;
@@ -2337,6 +2358,9 @@
 
         self.$emit('getFkChooseItem', val);
       }
+    },
+    destroyed(){
+      this.observer && this.observer.disconnect() // 停止观察
     }
   };
 </script>
