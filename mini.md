@@ -27,3 +27,11 @@ compiler.hooks.run.tap('runPlugin',()=> {})
 // 订阅
 this.hooks.run.call()
 ```
+
+webpack 中 loader 是什么时候开始工作的？
+  打包开始之前。
+  在webpack中。loader就是一个函数，函数参数为被打包模块的源代码。
+  return 处理完之后的内容，处理成浏览器可以识别的代码。less -> css，ts -> js，vue -> xxx，等等。
+
+在webpack内部，有一个context上下文，默认为process.cwd()
+
