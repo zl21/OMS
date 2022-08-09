@@ -559,8 +559,9 @@ class custUtils {
    * @param {Object} origin 源对象
    */
   static intersectFormValue(target, origin) {
+    const originKeys = Object.keys(origin)
     Object.keys(target).forEach((key) => {
-      if (origin[key]) {
+      if (originKeys.includes(key)) {
         if (typeof origin[key] == 'object') {
           target[key] = JSON.parse(JSON.stringify(origin[key]))
         } else {
