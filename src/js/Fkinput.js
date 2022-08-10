@@ -306,14 +306,18 @@ export default {
     },
     // 外键下拉模糊查询
     querySearchAsync(queryString, cb) {
+      const empty = [{ tip: '无数据' }]
       var regx = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/;
       if (regx.test(queryString)) {// 如果包含特殊字符
         queryString = queryString.replace(regx,'')
       }
       const self = this;
       self.itemdata.valuedata = queryString;
-      cb([]);
-      if (!queryString) return
+      if (!queryString) {
+        cb([]);
+        return
+      }
+
       self.autocomplete = false;
       self.isHandleSelect = false;
       let flag = true;
@@ -321,7 +325,7 @@ export default {
       for (const i in obj) {
         if (!obj[i].valuedata) {
           flag = false;
-          cb([]);
+          cb(empty);
           self.$set(self.itemdata, 'valuedata', null);
           self.$set(self.itemdata, 'pid', null);
           return;
@@ -332,10 +336,11 @@ export default {
         if (flag) {
           self.getQueryList(queryString, self.itemdata.colid, (list) => {
             const queryList = list;
-            cb(queryList);
+            const result = queryList.length ? queryList : empty
+            cb(result);
           });
         } else {
-          cb([]);
+          cb(empty);
         }
       });
     },
