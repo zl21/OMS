@@ -87,11 +87,6 @@ export default {
     // 判断是否显示折叠按钮（判断查询条件是否 大于 查询条件默认显示行数*一行显示条数，大于才显示折叠按钮 ）
     searchInputLenMoreThanShowNum() {
       const hasMore = this.formConfig.formData.length > this.showNum
-      if (!hasMore) {
-        $('.fold-btn').addClass('hide-top-fold-btn');
-      } else {
-        $('.fold-btn').removeClass('hide-top-fold-btn');
-      }
       return hasMore
     }
   },
