@@ -25,7 +25,7 @@ export default {
             el.$copyCallback(value);
           }
         };
-        el.copyElement.addEventListener("click", handler);
+        el.copyElement.addEventListener("click", _.debounce(handler, 300));
         
         el.parentNode.appendChild(node)
         el.parentNode.addEventListener("mouseover", function(){  
@@ -49,7 +49,7 @@ export default {
             el.$copyCallback(binding.value);
           }
         };
-        el.copyElement.addEventListener("click", handler);
+        el.copyElement.addEventListener("click", _.debounce(handler, 300));
         el.parentNode.addEventListener("mouseover", function(){  
           el.copyElement.style.display = 'block';
         })
