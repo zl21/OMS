@@ -25,7 +25,7 @@
             :disabled="item.disabled ? item.disabled : false"
             :ghost="item.ghost ? true : false"
             :shape="item.shape ? item.shape : undefined"
-            :class="[item.class, item.webname || '']"
+            :class="[item.class, item.webname || '', !item.text && item.icon ? 'just-icon-btn' : '']"
             >{{ item.text }}</Button
           >
           <!-- 下拉菜单按钮 -->
