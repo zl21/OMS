@@ -95,10 +95,9 @@ export default {
               ? ''
               : oldVal.valuedata.substr(0, oldVal.valuedata.length - 1);
           } else if (val.scale === 0) {
-            val.valuedata = val.valuedata.substring(
-              0,
-              val.valuedata.length - 1
-            );
+            val.valuedata = val.valuedata 
+              ? val.valuedata.substring(0, val.valuedata.length - 1)
+              : '';
           } else {
             val.valuedata = val.valuedata.indexOf('.') === -1
               ? val.valuedata.substring(0, val.valuedata.length - 1)
