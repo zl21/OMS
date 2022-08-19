@@ -51,7 +51,7 @@
       :loading="loading"
       :highlight-row="highlightRow"
       :multiple="multiple"
-      :row-class-name="[columns, rowClassName]"
+      :row-class-name="rowClassName"
       :no-data-text="noDataText"
       :show-header="showHeader"
       @on-current-change="onCurrentChange"
