@@ -1,7 +1,9 @@
 /**
  * v-copyText 复制文本内容
  * 
- * <p v-copyText="copy" v-copyText:callback="copyTextSuccess">复制内容</p>
+ * <p v-copyText v-copyText:callback="copyTextSuccess">复制内容</p>
+ * 
+ * 暂不支持回调 callback
  */
 
 export default {
@@ -9,60 +11,46 @@ export default {
     console.log('mounted::', value);
   },
 
-  bind(el, { value, arg }) { // vue2
+  inserted(el, { value, arg }) {
     var node = document.createElement("i");
     node.className = 'copy-clipboard ark-icon iconfont iconmd-clipboard iconfont'
     node.setAttribute('style', 'display: none; color: #f52f2f;');
     el.copyElement = node
 
-    if (value) {
-      if (arg === "callback") {
-        el.$copyCallback = value;
-      } else {
-        const handler = () => {
-          copyTextToClipboard(value);
-          if (el.$copyCallback) {
-            el.$copyCallback(value);
-          }
-        };
-        el.copyElement.addEventListener("click", _.debounce(handler, 300));
-        
-        el.parentNode.appendChild(node)
-        el.parentNode.addEventListener("mouseover", function(){  
-          el.copyElement.style.display = 'block';
-        })
-        el.parentNode.addEventListener("mouseleave", function(){  
-          el.copyElement.style.display = 'none';
-        })
-      }
-    }
+    // if (arg === "callback") {
+    //   el.$copyCallback = value;
+    // } else {
+      el.copyElement.addEventListener("click", handler);
+      el.parentNode.appendChild(node) // 将节点（icon图标）插入到当前节点的父节点之后
+      el.parentNode.addEventListener('mouseover', mouseover)
+      el.parentNode.addEventListener('mouseleave', mouseleave)
+    // }
   },
-  update(el, binding) {
-    let parentNode = el.copyElement.parentNode
-    if (binding.value) {
-      if (binding.arg === "callback") {
-        el.$copyCallback = binding.value;
-      } else {
-        const handler = () => {
-          copyTextToClipboard(binding.value);
-          if (el.$copyCallback) {
-            el.$copyCallback(binding.value);
-          }
-        };
-        el.copyElement.addEventListener("click", _.debounce(handler, 300));
-        el.parentNode.addEventListener("mouseover", function(){  
-          el.copyElement.style.display = 'block';
-        })
-        el.parentNode.addEventListener("mouseleave", function(){  
-          el.copyElement.style.display = 'none';
-        })
-        parentNode === null && el.parentNode.appendChild(el.copyElement);
-      }
-    } else {
-      el === parentNode && el.removeChild(el.copyElement);
-    }
-  },
+  unbind(el) {
+    el.copyElement.removeEventListener('click', handler)
+    el.parentNode.removeChild(el.copyElement);
+    el.parentNode.removeEventListener('mouseover', mouseover)
+    el.parentNode.removeEventListener('mouseleave', mouseleave)
+  }
 }
+
+const mouseover = () => mouseEvent('mouseover')
+const mouseleave = () => mouseEvent('mouseleave')
+const mouseEvent = (type) => {
+  const len = event.target.children.length 
+  const bindNode = event.target.children[len - 2]
+  const iconNode = event.target.children[len - 1]
+  len
+  && bindNode.innerText != ''
+  && (iconNode.style.display = type == 'mouseover' ? 'block' : 'none');
+}
+const handler = _.debounce((event) => {
+  const value = event.target.previousSibling.innerText // 获取节点（icon图标）的上一个兄弟节点，即绑定指令的节点
+  copyTextToClipboard(value);
+  // if (el.$copyCallback) {
+  //   el.$copyCallback(value);
+  // }
+}, 300);
 
 function copyTextToClipboard(input, { target = document.body } = {}) {
   const element = document.createElement("input"); // 创建input对象
