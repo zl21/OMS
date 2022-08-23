@@ -79,6 +79,8 @@ export default {
     return {
       // vmI18n: i18n,
       columnState: '',
+      timer: null,
+      timerCount: 10
     }
   },
   watch: {
@@ -104,7 +106,7 @@ export default {
         // 是否开启字段处理回调
         if (this.agTableConfig.isAmtCb) {
           this.$emit('on-reset-column')
-        } 
+        }
       },
       deep: true
     },
@@ -121,11 +123,35 @@ export default {
         if (this.agTableConfig.isAmtCb) {
           this.$emit('on-reset-row')
         } 
+        this.handleTotalData()
       },
       deep: true
     },
+    timerCount(val) {
+      val <= 0 && clearInterval(this.timer)
+    }
   },
   methods: {
+    // 序号列显示合计、总计 
+    handleTotalData() {
+      this.timer = setInterval(() => {
+        const agGridTable = this.$refs.agGrid && this.$refs.agGrid.$refs.agGridTable
+        const { fullRangeSubTotalRowData } = agGridTable || {}
+        if (agGridTable && fullRangeSubTotalRowData) {
+          if (fullRangeSubTotalRowData.ID.val != '') {
+            agGridTable.fullRangeSubTotalRowData.ID.val = ''
+            agGridTable.fullRangeSubTotalRowData.ag_index.val = '总计'
+            agGridTable.subtotalRowData.ID.val = ''
+            agGridTable.subtotalRowData.ag_index.val = '合计'
+            this.timerCount -= 1
+          } else if (fullRangeSubTotalRowData.ID.val == '') {
+            this.timerCount = 0
+          }
+        } else {
+          this.timerCount -= 1
+        }
+      }, 100)
+    },
     gridReady() {
       // this.tabth = [];
       // this.row = [];
