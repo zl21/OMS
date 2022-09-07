@@ -2,6 +2,7 @@
 // import SelectDialog from 'framework/components/dialog/selectDialog.vue';
 import SelectDialog from 'r3cps/components/dialog/selectDialog.vue';
 import FkTable from 'burgeonComponents/view/Fktable.vue';
+import { resetElScrollBarZIndex } from 'burgeonComponents/common/js/cssHandler'
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 
@@ -35,6 +36,7 @@ export default {
   },
   data() {
     return {
+      observer: '', // 观察器,监听DOM变化
       inputVal: '',
       SingleSelect: {
         show: false
@@ -170,6 +172,9 @@ export default {
         self.popoverShow[item] = false;
       });
     });
+    const { popNode, observerOptions, callback } = resetElScrollBarZIndex() // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
+    this.observer = new MutationObserver(callback);
+    this.observer.observe(popNode, observerOptions);
   },
   updated() { },
   methods: {
@@ -718,6 +723,9 @@ export default {
       const self = this;
       self.getSelectData('query');
     }
+  },
+  destroyed(){
+    this.observer && this.observer.disconnect() // 停止观察
   }
 };
 

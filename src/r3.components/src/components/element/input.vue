@@ -329,6 +329,7 @@
   import fkdialog from '../tablelist/fkdialog.vue';
   import FkTable from '../tablelist/fktable.vue';
   import SelectDialog from '../dialog/popDialog.vue';
+  import { resetElScrollBarZIndex, resetElPopoverZIndex } from 'burgeonComponents/common/js/cssHandler'
   // import i18n from '../../assets/js/i18n'
   // import $ from '../../assets/js/jquery3.5.1.min';
 
@@ -506,7 +507,9 @@
           self.popoverShow[item] = false;
         });
       });
-      this.resetElScrollBarZIndex() // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
+      const { popNode, observerOptions, callback } = resetElScrollBarZIndex() // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
+      this.observer = new MutationObserver(callback);
+      this.observer.observe(popNode, observerOptions);
     },
     computed: {
       /* autoval: {
@@ -647,38 +650,6 @@
       }
     },
     methods: {
-      resetElScrollBarZIndex() {
-        let modalNode = document.querySelector('.ark-modal-wrap')
-        let popNode = document.querySelector('.el-autocomplete-suggestion.el-popper')
-        if (modalNode) {
-          let observerOptions = {
-            childList: true, // 观察目标子节点的变化，添加或删除
-            attributes: false, // 观察属性变动
-            subtree: true //默认是false，设置为true后可观察后代节点
-          }
-          const callback = () => {
-            this.$nextTick(() => {
-              let modalZIndex = modalNode.style.zIndex
-              let zIndex = popNode.style.zIndex
-              console.log('callback~~~~', modalZIndex, zIndex)
-              popNode.style.zIndex = zIndex > modalZIndex ? zIndex : Number(modalZIndex) + 10
-            })
-          }
-          this.observer = new MutationObserver(callback);
-          this.observer.observe(popNode, observerOptions);
-        }
-      },
-      resetElPopoverZIndex(){
-        let modalNode = document.querySelector('.ark-modal-wrap')
-        if (modalNode) {
-          let fkNode = document.querySelector('.el-popover.el-popper .fkMore').parentElement
-          if (fkNode) {
-            let fkZIndex = fkNode.style.zIndex
-            let modalZIndex = modalNode.style.zIndex
-            fkNode.style.zIndex = fkZIndex > modalZIndex ? fkZIndex : Number(modalZIndex) + 10
-          }
-        }
-      },
       /* 高级搜索关闭弹框 */
       dialogClose() {
         this.fkDialog.dialog = false;
@@ -2083,7 +2054,7 @@
       },
       showFkMore() {
         this.$nextTick(() => {
-          this.resetElPopoverZIndex() // 层级覆盖
+          resetElPopoverZIndex('.el-popover.el-popper .fkMore') // 层级覆盖
         })
         // 获取弹框多选模版
         const self = this;
