@@ -668,6 +668,17 @@
           this.observer.observe(popNode, observerOptions);
         }
       },
+      resetElPopoverZIndex(){
+        let modalNode = document.querySelector('.ark-modal-wrap')
+        if (modalNode) {
+          let fkNode = document.querySelector('.el-popover.el-popper .fkMore').parentElement
+          if (fkNode) {
+            let fkZIndex = fkNode.style.zIndex
+            let modalZIndex = modalNode.style.zIndex
+            fkNode.style.zIndex = fkZIndex > modalZIndex ? fkZIndex : Number(modalZIndex) + 10
+          }
+        }
+      },
       /* 高级搜索关闭弹框 */
       dialogClose() {
         this.fkDialog.dialog = false;
@@ -2071,6 +2082,9 @@
         this.$emit('itemInputEnter', event);
       },
       showFkMore() {
+        this.$nextTick(() => {
+          this.resetElPopoverZIndex() // 层级覆盖
+        })
         // 获取弹框多选模版
         const self = this;
         const obj = {
