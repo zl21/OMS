@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToState = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     changeMsgFn() {
       console.log('???');
@@ -29,4 +29,4 @@ const mapDispatchToState = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToState)(App1) // 高阶函数
+export default connect(mapStateToProps,mapDispatchToProps)(App1) // 高阶函数

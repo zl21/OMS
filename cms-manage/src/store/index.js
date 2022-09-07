@@ -7,6 +7,7 @@ const defaultState = {
   msg: 'hi'
 }
 
+// reducer 是一个纯函数
 const reducer = (state = defaultState, action) => {
   const newState = JSON.parse(JSON.stringify(state)) 
   // 1. 直接修改 state,不会报错,不会抛异常,但就是不能成功修改 state, 所以要深拷贝.（待深究
