@@ -1,7 +1,7 @@
 // import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
-import { resetFkTableZIndex } from 'burgeonComponents/common/js/cssHandler'
+import { resetElPopoverZIndex } from 'burgeonComponents/common/js/cssHandler'
 
 export default {
   name: 'Fktable',
@@ -438,7 +438,7 @@ export default {
     });
     
     this.$nextTick(() => {
-      resetFkTableZIndex('.fktable.ark-fktable.view-fktable') // 动态覆盖fktable层级，解决遮罩层遮挡问题
+      resetElPopoverZIndex('.fktable.ark-fktable.view-fktable') // 动态覆盖fktable层级，解决遮罩层遮挡问题
     })
 
     let _self = this
