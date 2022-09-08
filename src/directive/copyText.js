@@ -13,8 +13,8 @@ export default {
 
   inserted(el, { value, arg }) {
     var node = document.createElement("i");
-    node.className = 'copy-clipboard ark-icon iconfont iconmd-clipboard iconfont'
-    node.setAttribute('style', 'display: none; color: #f52f2f;');
+    node.className = 'copy-clipboard ark-icon iconfont iconios-copy-outline iconfont'
+    node.setAttribute('style', 'display: none; color: #303133;');
     el.copyElement = node
 
     // if (arg === "callback") {
