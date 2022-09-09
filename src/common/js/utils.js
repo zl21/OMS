@@ -980,8 +980,9 @@ class custUtils {
   
   // 加法函数
   static accAdd(arg1, arg2) {
-    let r1; let r2; let m; let
-      c;
+    let r1; let r2; let m; let c;
+    arg1 = arg1 || 0;
+    arg2 = arg2 || 0;
     try {
       r1 = arg1.toString().split('.')[1].length;
     } catch (e) {
@@ -1013,6 +1014,8 @@ class custUtils {
   // 減法函數
   static accSub(arg1, arg2) {
     let r1; let r2;
+    arg1 = arg1 || 0;
+    arg2 = arg2 || 0;
     try {
       r1 = arg1.toString().split('.')[1].length;
     } catch (e) {
@@ -1030,7 +1033,10 @@ class custUtils {
 
   // 乘法
   static accMul(arg1, arg2) {
-    let m = 0; const s1 = arg1.toString();
+    let m = 0;
+    arg1 = arg1 || 0;
+    arg2 = arg2 || 0;
+    const s1 = arg1.toString();
     const s2 = arg2.toString();
     try {
       m += s1.split('.')[1].length;
