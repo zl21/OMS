@@ -5,6 +5,7 @@
 export const resetElScrollBarZIndex = function () {
   let modalNode = document.querySelector('.ark-modal-wrap')
   let popNode = document.querySelector('.el-autocomplete-suggestion.el-popper')
+  let config = {}
   if (modalNode) {
     let observerOptions = {
       childList: true, // 观察目标子节点的变化，添加或删除
@@ -19,8 +20,9 @@ export const resetElScrollBarZIndex = function () {
         popNode.style.zIndex = zIndex > modalZIndex ? zIndex : Number(modalZIndex) + 10
       })
     }
-    return { popNode, observerOptions, callback }
+    config = { popNode, observerOptions, callback }
   }
+  return config
 }
 
 /**

@@ -508,8 +508,10 @@
         });
       });
       const { popNode, observerOptions, callback } = resetElScrollBarZIndex() // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
-      this.observer = new MutationObserver(callback);
-      this.observer.observe(popNode, observerOptions);
+      if (popNode) {
+        this.observer = new MutationObserver(callback);
+        this.observer.observe(popNode, observerOptions);
+      }
     },
     computed: {
       /* autoval: {
