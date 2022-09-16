@@ -227,6 +227,11 @@ export default {
       const colData = columnApi.getAllGridColumns()
       this.$emit('on-column-moved', colData);
     }, 1000),
+    onColumnVisibleChanged (hideCols,callback) {
+      // 显示 or 隐藏 列
+      console.log('zheonColumnVisibleChangednshi::', hideCols);
+      // this.setColVisible(hideCols,callback)
+    },
 
     /** ---------------------- 老ag方法： ---------------------- **/
     onColumnMoved: _.debounce((agSelf, self) => {
@@ -335,6 +340,7 @@ export default {
     if (this.options.oldAg || this.options.oldMoved) {
       Object.assign(this.options, {
         'getMainMenuItems': ag => this.getMainMenuItems(ag, this),
+        'agColumnVisibleChanged': (...params) => this.onColumnVisibleChanged(...params),
       })
     }
   }
