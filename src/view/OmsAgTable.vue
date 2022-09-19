@@ -306,7 +306,7 @@ export default {
       // 注意: 会触发列移动的回调'on-column-moved'
       // let self = this
       return [
-        // 'pinSubMenu',
+        'pinSubMenu', // 固定列
         'separator',
         'autoSizeThis',
         'autoSizeAll',
