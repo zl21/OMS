@@ -330,6 +330,7 @@
   import FkTable from '../tablelist/fktable.vue';
   import SelectDialog from '../dialog/popDialog.vue';
   import { resetElScrollBarZIndex, resetElPopoverZIndex } from 'burgeonComponents/common/js/cssHandler'
+  import { urlSearchParams } from '../../__utils__/utils'
   // import i18n from '../../assets/js/i18n'
   // import $ from '../../assets/js/jquery3.5.1.min';
 
@@ -1260,7 +1261,7 @@
                 webaction: self.itemdata.dynamicforcompute.refact,
                 param: JSON.stringify(self.dynamicforcomputeObj)
               };
-              self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+              R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                 if (res.code == 0) {
                   value = res.data;
                 } else {
@@ -1406,7 +1407,7 @@
                 webaction: self.itemdata.dynamicforcompute.refact,
                 param: JSON.stringify(self.dynamicforcomputeObj)
               };
-              self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+              R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                 if (res.code == 0) {
                   value = res.data;
                 } else {
@@ -1555,7 +1556,7 @@
                     webaction: self.itemdata.dynamicforcompute.refact,
                     param: JSON.stringify(self.dynamicforcomputeObj)
                   };
-                  self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+                  R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                     if (res.code == 0) {
                       value = res.data;
                     } else {
@@ -1651,7 +1652,7 @@
                     webaction: self.itemdata.dynamicforcompute.refact,
                     param: JSON.stringify(self.dynamicforcomputeObj)
                   };
-                  self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+                  R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                     if (res.code == 0) {
                       value = res.data;
                     } else {
@@ -1744,7 +1745,7 @@
                     webaction: self.itemdata.dynamicforcompute.refact,
                     param: JSON.stringify(self.dynamicforcomputeObj)
                   };
-                  self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+                  R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                     if (res.code == 0) {
                       value = res.data;
                     } else {
@@ -1990,7 +1991,7 @@
                       webaction: self.itemdata.dynamicforcompute.refact,
                       param: JSON.stringify(self.dynamicforcomputeObj)
                     };
-                    self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (
+                    R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((
                       res
                     ) => {
                       if (res.code == 0) {
@@ -2063,7 +2064,7 @@
         const obj = {
           tableid: self.itemdata.reftableid
         };
-        self.$ajax.dataAjax('/p/cs/getMultiQuery', obj, (res) => {
+        R3.network.post('/p/cs/getMultiQuery', urlSearchParams(obj)).then((res) => {
           if (res.code == 0) {
             self.modelList = res.data;
           }
@@ -2149,7 +2150,7 @@
           modelname: item.key
         };
 
-        self.$ajax.dataAjax('/p/cs/delMultiQuery', obj, (res) => {
+        R3.network.post('/p/cs/delMultiQuery', urlSearchParams(obj)).then((res) => {
           if (res.code == 0) {
             self.showFkMore();
           }

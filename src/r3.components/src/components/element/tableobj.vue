@@ -279,6 +279,7 @@
   import { post } from '../../__utils__/request';
   import fkdialog from '../tablelist/fkdialog.vue';
   import fktable from '../tablelist/fktable.vue';
+  import { urlSearchParams } from '../../__utils__/utils'
   // import i18n from '../../assets/js/i18n'
 
   export default {
@@ -456,7 +457,7 @@
             obj.fixedcolumns.precolnameslist = JSON.stringify(_self.search.precolnameslist);
           }
           obj.fixedcolumns = JSON.stringify(obj.fixedcolumns);
-          _self.$ajax.dataAjax('/p/cs/fuzzyquerybyak', obj, (res) => {
+          R3.network.post('/p/cs/fuzzyquerybyak', urlSearchParams(obj)).then((res) => {
             if (res.code == 0) {
               _self.allSuggest = res.data;
               cb(res.data);
