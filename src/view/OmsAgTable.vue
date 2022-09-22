@@ -226,7 +226,7 @@ export default {
       const { api, columnApi } = self.$refs.agGrid;
       const colData = columnApi.getAllGridColumns()
       this.$emit('on-column-moved', colData);
-    }, 1000),
+    }, 900),
     onColumnVisibleChanged (hideCols,callback) {
       // 显示 or 隐藏 列
       console.log('zheonColumnVisibleChangednshi::', hideCols);
@@ -260,7 +260,7 @@ export default {
             // self.AGTABLE.setCols(col)
           }
         })
-    }, 1000),
+    }, 100),
     setColumn(val, th) {
       let arr = val.split(',')
       let thArr = [], eXArr = []
@@ -299,6 +299,14 @@ export default {
           // console.log(res);
           if (res.data.code == 0) {
             self.columnState = res.data.data.colPosition
+            /* if (self.agTableConfig.columnDefs.length) {
+              // 便于以后在组件中可以只接调用这个方法来修复 重置按钮 导致的列顺序复原 - 待测
+              let col = self.setColumn(
+                self.columnState,
+                self.agTableConfig.columnDefs
+              )
+              self.agTableConfig.columnDefs = col;
+            } */
           }
         })
     },
