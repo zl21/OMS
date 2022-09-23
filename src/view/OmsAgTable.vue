@@ -212,6 +212,7 @@ export default {
       this.$emit('on-selection-change', data);
     },
     colPinned(data) {
+      this.onColumnPinned()
       this.$emit('on-column-pinned', data);
     },
     colSortChange(data) {
@@ -261,6 +262,40 @@ export default {
           }
         })
     }, 100),
+    // 固定列
+    onColumnPinned() {
+      const { columnApi } = this.$refs.agGrid
+      const pinnedLeft = columnApi.getDisplayedLeftColumns().map(d => d.colId);
+      const pinnedRight = columnApi.getDisplayedRightColumns().map(d => d.colId);
+      //  将固定列保存到数据库
+      const pinnedPosition = pinnedLeft.join(',')+"|"+pinnedRight.join(',');
+      let formdata = new FormData()
+      formdata.append('tableid', this.$route.params.customizedModuleId)
+      formdata.append('fixedcolumn', pinnedPosition)
+      R3.network.post('/p/cs/setFixedColumn', formdata)
+      .then((res) => {
+        if (res.data.code == 0) {
+          this.agTableConfig.columnDefs = this.setColumnPinned(res.data.data)
+        }
+      })
+    },
+    setColumnPinned(fixedcolumn) {
+      const [pinnedLeft, pinnedRight] = fixedcolumn.indexOf('|') > -1 ? fixedcolumn.split('|') : ['', '']
+      const curPinnedLeft = pinnedLeft.split(',')
+      const curPinnedRight = pinnedRight.split(',')
+      return this.agTableConfig.columnDefs
+      .map(column => {
+        if (curPinnedLeft.indexOf(column.key) > -1) {
+          column.pinned = 'left';
+        } else if (curPinnedRight.indexOf(column.key) > -1) {
+          column.pinned = 'right';
+        } else {
+          column.pinned = null;
+        }
+        if (column.field == 'ag_index') column.pinned = 'left';
+        return column
+      })
+    },
     setColumn(val, th) {
       let arr = val.split(',')
       let thArr = [], eXArr = []
@@ -299,14 +334,14 @@ export default {
           // console.log(res);
           if (res.data.code == 0) {
             self.columnState = res.data.data.colPosition
-            /* if (self.agTableConfig.columnDefs.length) {
+            if (self.agTableConfig.columnDefs.length) {
               // 便于以后在组件中可以只接调用这个方法来修复 重置按钮 导致的列顺序复原 - 待测
               let col = self.setColumn(
                 self.columnState,
-                self.agTableConfig.columnDefs
+                self.setColumnPinned(res.data.data.fixedColumn)
               )
               self.agTableConfig.columnDefs = col;
-            } */
+            }
           }
         })
     },
@@ -343,7 +378,9 @@ export default {
     },
   },
   mounted() {
-    this.getUserConfig();
+    setTimeout(() => {
+      this.getUserConfig();
+    }, 1000)
     // 初始化options
     if (this.options.oldAg || this.options.oldMoved) {
       Object.assign(this.options, {
