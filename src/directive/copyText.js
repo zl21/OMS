@@ -22,8 +22,8 @@ export default {
     // } else {
       el.copyElement.addEventListener("click", handler);
       el.parentNode.appendChild(node) // 将节点（icon图标）插入到当前节点的父节点之后
-      el.parentNode.addEventListener('mouseover', mouseover)
-      el.parentNode.addEventListener('mouseleave', mouseleave)
+      el.parentNode.addEventListener('mouseover', mouseover, true)
+      el.parentNode.addEventListener('mouseleave', mouseleave, true)
     // }
   },
   unbind(el) {
