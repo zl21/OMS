@@ -81,6 +81,7 @@ export default {
   data() {
     return {
       // vmI18n: i18n,
+      RangeSelectionModule: RangeSelectionModule,
       columnState: '',
       timer: null,
       timerCount: 10
@@ -381,7 +382,7 @@ export default {
     },
   },
   mounted() {
-    this.RangeSelectionModule = RangeSelectionModule // ag表格多选行
+    // this.RangeSelectionModule = RangeSelectionModule // ag表格多选行
     setTimeout(() => {
       this.getUserConfig();
     }, 1000)
