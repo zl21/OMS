@@ -16,8 +16,10 @@
       :options="options"
       :data="agTableConfig.rowData"
       :columns="agTableConfig.columnDefs"
-      @grid-ready="gridReady"
       :renderParams="agTableConfig.renderParams"
+      :enableRangeSelection="true"
+      :externalModules="[RangeSelectionModule]"
+      @grid-ready="gridReady"
       @on-row-dblclick="tableRowDbclick"
       @on-selection-change="tableSelectedChange"
       @on-column-moved="colMoved"
@@ -52,6 +54,7 @@
 </template>
 
 <script>
+import { RangeSelectionModule } from '@ag-grid-enterprise/range-selection'
 // import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid'; // npm
 // import i18n from "@burgeon/internationalization/i18n";
 
@@ -378,6 +381,7 @@ export default {
     },
   },
   mounted() {
+    this.RangeSelectionModule = RangeSelectionModule // ag表格多选行
     setTimeout(() => {
       this.getUserConfig();
     }, 1000)

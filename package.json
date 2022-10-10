@@ -60,6 +60,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@ag-grid-enterprise/range-selection": "^26.2.0",
     "awe-dnd": "^0.3.4",
     "axios": "^0.27.2",
     "compressing": "^1.5.1",
