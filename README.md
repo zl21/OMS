@@ -346,3 +346,4 @@
 | v1.3.10-skx | businessForm 拓展dropSelect下拉多选 |
 | v1.3.11-skx | dropSelect文案 |
 | v1.3.12-skx | fkinput模糊搜素支持特殊字符 '-' |
+| v1.3.13-skx | fkinput模糊搜素支持特殊字符 '-' |

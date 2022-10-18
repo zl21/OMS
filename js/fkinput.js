@@ -307,7 +307,7 @@ export default {
     },
     // 外键下拉模糊查询
     querySearchAsync(queryString, cb) {
-      var regx = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/; 
+      var regx = /[`~!@#$%^&*()_\+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\+={}|《》？：“”【】、；‘'，。、]/; 
       if (regx.test(queryString)) {// 如果包含特殊字符
         queryString = queryString.replace(regx,'')
       }
