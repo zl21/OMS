@@ -11,8 +11,8 @@
       gridBar && Number.isInteger(formDataLength / colRowNum) ? 'FormPadding' : '',
       noGridBar ? 'FormPadding' : ''
       ]">
-      <div class="businessForm-box" 
-        v-if="businessFormConfig !== undefined">
+      <div class="businessForm-box"
+        v-if="businessFormConfig !== undefined && Object.keys(businessFormConfig).length">
         <OmsForm :formConfig="businessFormConfig">
         </OmsForm>
       </div>

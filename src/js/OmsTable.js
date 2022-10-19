@@ -105,7 +105,7 @@ export default {
     // 表头显示数据
     columns() {
       let columnsData = [...this.jordanTableConfig.columns || []]
-      if (this.jordanTableConfig.indexColumn) {
+      if (this.jordanTableConfig.indexColumn && (this.jordanTableConfig.columns && this.jordanTableConfig.columns.length)) {
         // 是否存在序号列
         columnsData.unshift({
           // title: '序号',
