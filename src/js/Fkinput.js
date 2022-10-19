@@ -172,10 +172,13 @@ export default {
         self.popoverShow[item] = false;
       });
     });
-    const { popNode, observerOptions, callback } = resetElScrollBarZIndex() // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
-    if (popNode) {
-      this.observer = new MutationObserver(callback);
-      this.observer.observe(popNode, observerOptions);
+    const elObj = resetElScrollBarZIndex()
+    if (elObj) {
+      const { popNode, observerOptions, callback } = elObj // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
+      if (popNode) {
+        this.observer = new MutationObserver(callback);
+        this.observer.observe(popNode, observerOptions);
+      }
     }
   },
   updated() { },
