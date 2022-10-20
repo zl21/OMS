@@ -571,6 +571,14 @@ class custUtils {
     })
   }
 
+  /**
+   * 获取表单字段的配置 
+   * @param {Object} formConfig 表单配置
+   * @param {String} field 字段名称
+   */
+  static queryForm(formConfig, field) {
+    return formConfig.formData.find((item) => item.colname == field || item.value == field || item.itemdata && item.itemdata.colname == field);
+  }
   /* ============================================== 【Object】 END ============================================== */
 
   /* ============================================== 【Date】日期 START ============================================== */

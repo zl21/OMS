@@ -11,6 +11,8 @@ import myInputLd from 'r3cps/components/element/input.vue'
 // 兼容fktable1.4数据格式（云雀1.0）
 import myInput from "burgeonComponents/view/Fkinput.vue";
 import fkinputPlus from "burgeonComponents/view/FkinputPlus.vue";
+const utils = require("../common/js/utils").default;
+
 export default {
   name: 'OmsForm',
   components: {
@@ -50,7 +52,12 @@ export default {
         span: 6
       },
       curGridColnum: 4,
-      showNum: '' // 初始显示条数
+      showNum: '', // 初始显示条数
+      linkage: {
+        arr: [], // 记录对应的联动字段
+        assign: new Map(), // 记录联动字段关系映射 - 赋值
+        clear: new Map() // 记录联动字段关系映射 - 清空
+      }
     }
   },
   props: {
@@ -128,6 +135,7 @@ export default {
             i.rules = typeof(i.rules) == 'boolean' ? {} : i.rules // 处理老代码中给rules赋值boolean的历史问题
           })
           this.initRenderForm();
+          this.linkageFields()
         }
       },
       immediate: true,
@@ -353,7 +361,7 @@ export default {
     },
     // 接口入参- 表格模糊传参
     sendTableMessage(item) {
-      const { isdroplistsearch, colid } = item.itemdata
+      const { isdroplistsearch, colid, colname, refcolval } = item.itemdata
       // 定制查询接口
       if (typeof item.popBefore == 'function') {
         this.url.tableSearchUrl = item.itemdata.api
@@ -361,12 +369,65 @@ export default {
         return item.itemdata.params
       }
       this.url.tableSearchUrl = '/p/cs/newQueryList'
-      return {
+
+      let params = {
         isdroplistsearch: isdroplistsearch || true,
         refcolid: colid,
       }
+      // 联动-过滤条件
+      if (refcolval && colname) {
+        const mapKeys = [...this.linkage.assign.keys()]
+        const needLinkage = mapKeys.includes(colname)
+        if (needLinkage) {
+          const { fixcolumn, expre } = refcolval // 过滤配置
+          const fieldObj = utils.queryForm(this.formConfig, this.linkage.assign.get(colname)) // 查找上一级字段
+          if (fieldObj && fieldObj.itemdata && fieldObj.itemdata.pid) { // 过滤条件值不能为空，会导致弹窗报错提示（clear清空后，也会调一次接口）
+            const pid = fieldObj.itemdata.pid
+            const arithmetic = expre == 'equal' ? '=' : '' // 运算符
+            params.fixedcolumns = { [fixcolumn]: `${arithmetic}${pid}` }
+          }
+        }
+      }
+      return params
     },
-
+    // 记录联动字段 - 便于更新联动字段的接口入参
+    linkageFields() {
+      /**
+       * 联动字段相关（eg: A-B-C）
+       * fields 记录对应联动字段 [['A', 'B', 'C'], ...]
+       * assignMap 联动-赋值 Map(2) {'B' => 'A', 'C' => 'B', ...}
+       * clearMap  联动-清空 Map(2) {'A' => 'B', 'B' => 'C', ...}
+       */
+      let fields = []
+      let assignMap = new Map()
+      let clearMap = new Map()
+      this.formConfig.formData.forEach(item => {
+        if (item.style == 'dropSelect') {
+          if (item.itemdata && item.itemdata.refcolval) {
+            const { srccol } = item.itemdata.refcolval
+            assignMap.set(item.itemdata.colname, srccol)
+            clearMap.set(srccol, item.itemdata.colname)
+            if (!fields.length) {
+              fields.push([srccol, item.itemdata.colname]) // * 取item.itemdata.colname 记录字段名，后续也根据它查找字段
+            } else {
+              let isAdd = false
+              fields.forEach(i => {
+                if (i.slice(-1)[0] == srccol) {
+                  i.push(item.itemdata.colname)
+                  isAdd = true
+                }
+              })
+              !isAdd && fields.push([srccol, item.itemdata.colname])
+            }
+          }
+        }
+      })
+      this.linkage = {
+        arr: fields,
+        assign: assignMap,
+        clear: clearMap
+      }
+    },
     propsData(item) {
       const { single, fkdisplay, pid, valuedata } = item.itemdata;
       const defaultSelectedDrp = item.style == 'dropSelect'
@@ -394,7 +455,7 @@ export default {
     valueChange(val, item) {
       let arg
       val = val || []
-      const { fkdisplay, isBackRowItem } = item.itemdata
+      const { fkdisplay, isBackRowItem, colname } = item.itemdata
       if (fkdisplay == 'drp' && val.length) {
         item.itemdata.pid = val[0].ID;
         item.itemdata.valuedata = val[0].Label;
@@ -414,6 +475,28 @@ export default {
       }
       if (typeof item.oneObj == 'function') {
         this.runMethods(item.oneObj(arg))
+        // 联动-清空赋值（不论是选中值是否改变，或清空）
+        if (fkdisplay == 'drp' && this.linkage.arr.length) {
+          this.linkageClear(colname)
+        }
+      }
+    },
+    // 联动-清空赋值
+    linkageClear(colname) {
+      if (colname) {
+        const mapKeys = [...this.linkage.clear.keys()]
+        const needLinkage = mapKeys.includes(colname)
+        if (needLinkage) {
+          const field = this.linkage.clear.get(colname)
+          const fieldObj = utils.queryForm(this.formConfig, field) // 查找下一级字段
+          if (fieldObj && fieldObj.itemdata) {
+            fieldObj.itemdata.pid = ''
+            fieldObj.itemdata.valuedata = ''
+            fieldObj.itemdata.dropValue = []
+            fieldObj.itemdata.defaultSelectedMrp = []
+          }
+          if (mapKeys.includes(field)) this.linkageClear(field)
+        }
       }
     },
     blur(val, itemdata) {
