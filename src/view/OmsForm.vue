@@ -295,25 +295,32 @@
             <FormItem
               v-if="item.style === 'dropSelect'"
               ref="dropSelect"
-              :label="
-                `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
-                ':'
-              "
-              :class="[item.class ? item.class : '', 'popInput', item.itemdata.readonly ? 'disabled' : '']"
+              :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}:`"
+              :class="['popInput', { [item.class]: item.class }]"
             >
-              <arkDropMultiSelectFilter
-                :PropsData="propsData(item)"
-                :Url="item.itemdata.url || url"
-                v-model="item.itemdata.dropValue"
-                :http="network"
-                :filterMode="item.itemdata.filterMode == undefined ? true : item.itemdata.filterMode"
-                :AutoRequest="sendAutoMessage(item)"
-                :TableRequest="sendTableMessage(item)"
-                :EventFun="eventFun"
-                @on-change="(row) => valueChange(row, item)"
-                @on-keydown="(row) => runMethods(typeof item.keydownFun == 'function' &&item.keydownFun(item.itemdata))"
-                @on-clear="(row) => clear(row, item.itemdata)"
-              />
+              <template v-if="!item.itemdata.readonly">
+                <arkDropMultiSelectFilter
+                  :PropsData="propsData(item)"
+                  :Url="item.itemdata.url || url"
+                  v-model="item.itemdata.dropValue"
+                  :http="network"
+                  :filterMode="item.itemdata.filterMode == undefined ? true : item.itemdata.filterMode"
+                  :AutoRequest="sendAutoMessage(item)"
+                  :TableRequest="sendTableMessage(item)"
+                  :EventFun="eventFun"
+                  @on-change="(row) => valueChange(row, item)"
+                  @on-keydown="(row) => runMethods(typeof item.keydownFun == 'function' &&item.keydownFun(item.itemdata))"
+                  @on-clear="(row) => clear(row, item.itemdata)"
+                />
+              </template>
+              <template v-else>
+                <Input
+                  v-model="item.itemdata.valuedata"
+                  type="text"
+                  :disabled="item.itemdata.readonly"
+                  :placeholder="propsData(item).placeholder"
+                />
+              </template>
             </FormItem>
                
 
