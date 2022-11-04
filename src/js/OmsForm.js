@@ -164,6 +164,22 @@ export default {
     // 响应式栅格
     window.addEventListener('resize', () => this.getGridColnum(), false)
     this.getGridColnum()
+
+    // 拦截框架接口入参（由于刷新页面会出现过滤条件被重置问题，故特此处理）
+    if (this.$refs.dropSelect && this.linkage.arr.length) {
+      this.$refs.dropSelect.forEach(el => {
+        el.$children[0].postTableData = function postTableData(url, message) {
+          // 此处this指向下拉组件arkDropMultiSelectFilter
+          return new Promise((resolve) => {
+            this.post(url, utils.urlSearchParams({
+              searchdata: this.searchdata
+            }), (response) => {
+              resolve(response);
+            });
+          });
+        }
+      })
+    }
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);
@@ -353,11 +369,7 @@ export default {
     },
     // 接口入参- 模糊传参
     sendAutoMessage(item) {
-      const { colid, fixedcolumns } = item.itemdata
-      return {
-        colid,
-        fixedcolumns
-      }
+      return { colid: item.itemdata.colid }
     },
     // 接口入参- 表格模糊传参
     sendTableMessage(item) {
@@ -381,10 +393,29 @@ export default {
         if (needLinkage) {
           const { fixcolumn, expre } = refcolval // 过滤配置
           const fieldObj = utils.queryForm(this.formConfig, this.linkage.assign.get(colname)) // 查找上一级字段
-          if (fieldObj && fieldObj.itemdata && fieldObj.itemdata.pid) { // 过滤条件值不能为空，会导致弹窗报错提示（clear清空后，也会调一次接口）
+          const arithmetic = expre == 'equal' ? '=' : '' // 运算符
+          // 1、联动-过滤条件（无inputList)，比如省市区
+          if (fieldObj && fieldObj.itemdata && fieldObj.itemdata.pid) { 
+            // 过滤条件值不能为空，会导致弹窗报错提示（clear清空后，也会调一次接口）
             const pid = fieldObj.itemdata.pid
-            const arithmetic = expre == 'equal' ? '=' : '' // 运算符
             params.fixedcolumns = { [fixcolumn]: `${arithmetic}${pid}` }
+            delete item.itemdata.isShowPopTip
+          }
+          // 2、过滤条件（写死的inputList），比如指定平台的店铺
+          if (colname == this.linkage.assign.get(colname) && item.inputList) {
+            item.inputList.forEach(i => {
+              if (i.childs) {
+                i.childs.forEach(i => {
+                  if (i.colname == colname) {
+                    if (params.fixedcolumns) {
+                      params.fixedcolumns[fixcolumn] = `${arithmetic}${i.refobjid}`
+                    } else {
+                      params.fixedcolumns = { [fixcolumn]: `${arithmetic}${i.refobjid}` }
+                    }
+                  }
+                })
+              }
+            })
           }
         }
       }
@@ -433,6 +464,9 @@ export default {
       const defaultSelectedDrp = item.style == 'dropSelect'
         && fkdisplay == 'drp'
         && [{ ID: pid, Label: valuedata }]
+      const isShowPopTip = typeof item.itemdata.isShowPopTip == 'function' 
+        ? item.itemdata.isShowPopTip 
+        : function () { return true }
 
       return {
         single: fkdisplay == 'mrp' ? false : fkdisplay == 'drp' ? true : !!single, // 是否单选
@@ -449,13 +483,14 @@ export default {
         hidecolumns: item.itemdata.hidecolumns || [],
         defaultSelected: item.itemdata.defaultSelectedMrp || defaultSelectedDrp || [],
         className: item.itemdata.className || '',
-        item: {} // 这个属性为了解决DropMultiSelectFilter报错问题，无需传值
+        item: {}, // 这个属性为了解决DropMultiSelectFilter报错问题，无需传值
+        isShowPopTip, // 点击icon的时候是否显示下拉框
       };
     },
     valueChange(val, item) {
       let arg
       val = val || []
-      const { fkdisplay, isBackRowItem, colname } = item.itemdata
+      const { fkdisplay, isBackRowItem } = item.itemdata
       if (fkdisplay == 'drp' && val.length) {
         item.itemdata.pid = val[0].ID;
         item.itemdata.valuedata = val[0].Label;
@@ -477,12 +512,13 @@ export default {
         this.runMethods(item.oneObj(arg))
         // 联动-清空赋值（不论是选中值是否改变，或清空）
         if (fkdisplay == 'drp' && this.linkage.arr.length) {
-          this.linkageClear(colname)
+          this.linkageClear(item)
         }
       }
     },
     // 联动-清空赋值
-    linkageClear(colname) {
+    linkageClear(item) {
+      const { colname } = item.itemdata
       if (colname) {
         const mapKeys = [...this.linkage.clear.keys()]
         const needLinkage = mapKeys.includes(colname)
@@ -494,8 +530,15 @@ export default {
             fieldObj.itemdata.valuedata = ''
             fieldObj.itemdata.dropValue = []
             fieldObj.itemdata.defaultSelectedMrp = []
+            fieldObj.itemdata.isShowPopTip = () => {
+              if (item.itemdata.pid && item.itemdata.valuedata) {
+                return true
+              }
+              this.$Message.error(`请先选择${item.itemdata.name}！`)
+              return false
+            }
           }
-          if (mapKeys.includes(field)) this.linkageClear(field)
+          if (mapKeys.includes(field)) this.linkageClear(fieldObj)
         }
       }
     },

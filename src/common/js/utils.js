@@ -579,6 +579,19 @@ class custUtils {
   static queryForm(formConfig, field) {
     return formConfig.formData.find((item) => item.colname == field || item.value == field || item.itemdata && item.itemdata.colname == field);
   }
+
+  // 当post请求content-Type: application/x-www-form-urlencoded时，需要将JSON参赛转换成如下函数输入的形式。
+  static urlSearchParams(data){
+    const params = new URLSearchParams();
+    Object.keys(data).forEach((key) => {
+      const dataType = Object.prototype.toString.call(data[key]);
+      if (dataType === '[object Object]' || dataType === '[object Array]') {
+        data[key] = JSON.stringify(typeof data[key] === 'string' ? data[key].trim() : data[key]);
+      }
+      params.append(key, data[key]);
+    });
+    return params;
+  }
   /* ============================================== 【Object】 END ============================================== */
 
   /* ============================================== 【Date】日期 START ============================================== */
