@@ -242,17 +242,14 @@
             </FormItem>
 
             <!-- 输入框弹框单多选 -->
-            <!-- :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}`+ ':'" -->
             <FormItem
               v-if="item.style === 'popInput'"
               ref="popLabel"
-              :label="
-                `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
-                ':'
-              "
+              :label="`${item.itemdata.name}:`"
               :class="
                 item.class ? `${item.class}` + ' ' + 'popInput' : 'popInput'
               "
+              :prop="getColname(item)"
             >
               <my-input
                 :version="item.version"
@@ -295,8 +292,9 @@
             <FormItem
               v-if="item.style === 'dropSelect'"
               ref="dropSelect"
-              :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}:`"
+              :label="`${item.itemdata.name}:`"
               :class="['popInput', { [item.class]: item.class }]"
+              :prop="getColname(item)"
             >
               <template v-if="!item.itemdata.readonly">
                 <arkDropMultiSelectFilter
@@ -328,13 +326,11 @@
             <FormItem
               v-if="item.style === 'popInputPlus'"
               ref="popLabel"
-              :label="
-                `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
-                ':'
-              "
+              :label="`${item.itemdata.name}:`"
               :class="
                 item.class ? `${item.class}` + ' ' + 'popInput' : 'popInput'
               "
+              :prop="getColname(item)"
             >
               <fkinputPlus
                 :isActive="true"
@@ -358,6 +354,7 @@
                 @getFkChooseItem="
                   (row) =>
                     runMethods(
+                      typeof item.oneObj == 'function' &&
                       item.oneObj(
                         item.itemdata.isBackRowItem ? row : item.itemdata
                       )
@@ -366,6 +363,7 @@
                 @inputEnter="
                   (row) =>
                     runMethods(
+                      typeof item.oneObj == 'inputEnter' &&
                       item.inputEnter(
                         item.itemdata.isBackRowItem ? row : item.itemdata
                       ),

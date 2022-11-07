@@ -131,8 +131,18 @@ export default {
       handler(n,o) {
         if (n && n.length) {
           n.forEach(i => {
-            i.colname = i.colname ? i.colname : i.value ? i.value : i.dataAcessKey ? i.dataAcessKey : ''
+            // i.colname = i.colname ? i.colname : i.value ? i.value : i.dataAcessKey ? i.dataAcessKey : ''
+            i.colname = this.getColname(i)
             i.rules = typeof(i.rules) == 'boolean' ? {} : i.rules // 处理老代码中给rules赋值boolean的历史问题
+            
+            // 设置表单验证规则-必填：兼容drp、mrp类型组件(popInput、popInputPlus、dropSelect)
+            if (i.itemdata) {
+              const rules = this.formConfig.ruleValidate || {}
+              this.formConfig.ruleValidate = Object.assign(rules, { 
+                [i.colname]: [{ required: i.itemdata.isnotnull || false, message: ' ', trigger: 'blur' }] 
+              })
+            }
+            this.toggleValidClass(i) 
           })
           this.initRenderForm();
           this.linkageFields()
@@ -160,7 +170,7 @@ export default {
         }
       }
     });
-    this.asteriskColor()
+    // this.asteriskColor()
     // 响应式栅格
     window.addEventListener('resize', () => this.getGridColnum(), false)
     this.getGridColnum()
@@ -188,6 +198,28 @@ export default {
     window.removeEventListener('resize', () => this.getGridColnum(), false)
   },
   methods: {
+    getColname(item) {
+      const { value, colname, itemdata, dataAcessKey } = item
+      let result = colname ? colname : value ? value : dataAcessKey ? dataAcessKey : ''
+      if (!result && itemdata && itemdata.colname) {
+        result = itemdata.colname
+      }
+      return result
+    },
+    // 必填样式处理
+    toggleValidClass(item) {
+      if (['popInput', 'popInputPlus', 'dropSelect'].includes(item.style)) {
+        let ref = item.style == 'dropSelect' ? 'dropSelect' : 'popLabel'
+        this.$refs[ref] && this.$refs[ref].forEach(el => {
+          if (el.isRequired) {
+            let notEmpty = item.itemdata.pid
+              && item.itemdata.valuedata 
+              && el.$options.propsData.prop == this.getColname(item) 
+            el.validateState = !!notEmpty ? 'success' : 'error'
+          }
+        })
+      }
+    },
     // 必填星号(*)颜色
     asteriskColor(ms = 500) {
       setTimeout(() => {

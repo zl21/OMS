@@ -577,7 +577,9 @@ class custUtils {
    * @param {String} field 字段名称
    */
   static queryForm(formConfig, field) {
-    return formConfig.formData.find((item) => item.colname == field || item.value == field || item.itemdata && item.itemdata.colname == field);
+    return formConfig.formData.find((item) => [
+      item.colname, item.value, item.itemdata && item.itemdata.colname
+    ].includes(field));
   }
 
   // 当post请求content-Type: application/x-www-form-urlencoded时，需要将JSON参赛转换成如下函数输入的形式。
