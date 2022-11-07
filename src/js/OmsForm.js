@@ -165,21 +165,23 @@ export default {
     window.addEventListener('resize', () => this.getGridColnum(), false)
     this.getGridColnum()
 
-    // 拦截框架接口入参（由于刷新页面会出现过滤条件被重置问题，故特此处理）
-    if (this.$refs.dropSelect && this.linkage.arr.length) {
-      this.$refs.dropSelect.forEach(el => {
-        el.$children[0].postTableData = function postTableData(url, message) {
-          // 此处this指向下拉组件arkDropMultiSelectFilter
-          return new Promise((resolve) => {
-            this.post(url, utils.urlSearchParams({
-              searchdata: this.searchdata
-            }), (response) => {
-              resolve(response);
+    this.$nextTick(() => {
+      // 拦截框架接口入参（由于刷新页面会出现过滤条件被重置问题，故特此处理）
+      if (this.$refs.dropSelect && this.linkage.arr.length) {
+        this.$refs.dropSelect.forEach(el => {
+          el.$children[0].postTableData = function postTableData(url, message) {
+            // 此处this指向下拉组件arkDropMultiSelectFilter
+            return new Promise((resolve) => {
+              this.post(url, utils.urlSearchParams({
+                searchdata: this.searchdata
+              }), (response) => {
+                resolve(response);
+              });
             });
-          });
-        }
-      })
-    }
+          }
+        })
+      }
+    })
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);
@@ -391,31 +393,37 @@ export default {
         const mapKeys = [...this.linkage.assign.keys()]
         const needLinkage = mapKeys.includes(colname)
         if (needLinkage) {
-          const { fixcolumn, expre } = refcolval // 过滤配置
-          const fieldObj = utils.queryForm(this.formConfig, this.linkage.assign.get(colname)) // 查找上一级字段
-          const arithmetic = expre == 'equal' ? '=' : '' // 运算符
-          // 1、联动-过滤条件（无inputList)，比如省市区
-          if (fieldObj && fieldObj.itemdata && fieldObj.itemdata.pid) { 
-            // 过滤条件值不能为空，会导致弹窗报错提示（clear清空后，也会调一次接口）
-            const pid = fieldObj.itemdata.pid
-            params.fixedcolumns = { [fixcolumn]: `${arithmetic}${pid}` }
-            delete item.itemdata.isShowPopTip
-          }
-          // 2、过滤条件（写死的inputList），比如指定平台的店铺
-          if (colname == this.linkage.assign.get(colname) && item.inputList) {
-            item.inputList.forEach(i => {
-              if (i.childs) {
-                i.childs.forEach(i => {
-                  if (i.colname == colname) {
-                    if (params.fixedcolumns) {
-                      params.fixedcolumns[fixcolumn] = `${arithmetic}${i.refobjid}`
-                    } else {
-                      params.fixedcolumns = { [fixcolumn]: `${arithmetic}${i.refobjid}` }
-                    }
-                  }
-                })
+          const isMultiLevelLinkage = colname != this.linkage.assign.get(colname) // 多级联动
+          const isSingleLevelLinkage = colname == this.linkage.assign.get(colname) && item.inputList // 一级联动
+          if (isMultiLevelLinkage || isSingleLevelLinkage) {
+            const { fixcolumn, expre } = refcolval // 过滤配置
+            const arithmetic = expre == 'equal' ? '=' : '' // 运算符
+            // 1、多级联动-过滤条件（无inputList)，比如省市区
+            if (isMultiLevelLinkage) { 
+              const fieldObj = utils.queryForm(this.formConfig, this.linkage.assign.get(colname)) // 查找上一级字段
+              if (fieldObj && fieldObj.itemdata && fieldObj.itemdata.pid) {
+                // 过滤条件值不能为空，会导致弹窗报错提示（clear清空后，也会调一次接口）
+                const pid = fieldObj.itemdata.pid
+                params.fixedcolumns = { [fixcolumn]: `${arithmetic}${pid}` }
+                delete item.itemdata.isShowPopTip
               }
-            })
+            }
+            // 2、一级联动-过滤条件（写死的inputList），比如指定平台的店铺
+            if (isSingleLevelLinkage) {
+              item.inputList.forEach(i => {
+                if (i.childs) {
+                  i.childs.forEach(i => {
+                    if (i.colname == colname) {
+                      if (params.fixedcolumns) {
+                        params.fixedcolumns[fixcolumn] = `${arithmetic}${i.refobjid}`
+                      } else {
+                        params.fixedcolumns = { [fixcolumn]: `${arithmetic}${i.refobjid}` }
+                      }
+                    }
+                  })
+                }
+              })
+            }
           }
         }
       }
@@ -459,6 +467,10 @@ export default {
         clear: clearMap
       }
     },
+    /**
+     * dropSelect 属性集合
+     * @param {*} item 
+     */
     propsData(item) {
       const { single, fkdisplay, pid, valuedata } = item.itemdata;
       const defaultSelectedDrp = item.style == 'dropSelect'
@@ -487,6 +499,11 @@ export default {
         isShowPopTip, // 点击icon的时候是否显示下拉框
       };
     },
+    /**
+     * dropSelect 当值改变时触发
+     * @param {*} val
+     * @param {*} item 
+     */
     valueChange(val, item) {
       let arg
       val = val || []
@@ -510,19 +527,19 @@ export default {
       }
       if (typeof item.oneObj == 'function') {
         this.runMethods(item.oneObj(arg))
-        // 联动-清空赋值（不论是选中值是否改变，或清空）
+        // 联动-清空赋值
         if (fkdisplay == 'drp' && this.linkage.arr.length) {
           this.linkageClear(item)
         }
       }
     },
-    // 联动-清空赋值
+    // 多级联动-清空赋值
     linkageClear(item) {
       const { colname } = item.itemdata
       if (colname) {
         const mapKeys = [...this.linkage.clear.keys()]
         const needLinkage = mapKeys.includes(colname)
-        if (needLinkage) {
+        if (needLinkage && mapKeys != colname) {
           const field = this.linkage.clear.get(colname)
           const fieldObj = utils.queryForm(this.formConfig, field) // 查找下一级字段
           if (fieldObj && fieldObj.itemdata) {
