@@ -235,7 +235,7 @@ export default {
     onColumnVisibleChanged (hideCols,callback) {
       // 显示 or 隐藏 列
       console.log('zheonColumnVisibleChangednshi::', hideCols);
-      // this.setColVisible(hideCols,callback)
+      this.setHideColumn(hideCols)
     },
 
     /** ---------------------- 老ag方法： ---------------------- **/
@@ -300,9 +300,17 @@ export default {
         return column
       })
     },
-    setColumn(val, th) {
+    setHideColumn(val) {
+      let formdata = new FormData()
+      formdata.append('tableid', this.$route.params.customizedModuleId)
+      formdata.append('hidecolumns', val)
+      R3.network.post('/p/cs/setHideColumn', formdata).then((res) => {
+      })
+    },
+    setColumn(val, th, hideColumn) {
       let arr = val.split(',')
       let thArr = [], eXArr = []
+      let hideArr = hideColumn.split(',')
       /* arr.forEach((item) => {
         let head = th.find((i) => {
           return i.field == item
@@ -324,7 +332,13 @@ export default {
           eXArr.push(i)
         }
       })
-      return thArr.concat(eXArr)
+      let resultArr = thArr.concat(eXArr)
+      resultArr.forEach(i => {
+        if (hideArr.includes(i.field)) {
+          i.hide = true
+        }
+      })
+      return resultArr
     },
     getUserConfig() {
       //请求用户表头排列顺序
@@ -337,12 +351,14 @@ export default {
         .then((res) => {
           // console.log(res);
           if (res.data.code == 0) {
-            self.columnState = res.data.data.colPosition
+            const { colPosition, fixedColumn, hideColumn } = res.data.data
+            self.columnState = colPosition
             if (self.agTableConfig.columnDefs.length) {
               // 便于以后在组件中可以只接调用这个方法来修复 重置按钮 导致的列顺序复原 - 待测
               let col = self.setColumn(
-                self.columnState,
-                self.setColumnPinned(res.data.data.fixedColumn)
+                colPosition,
+                self.setColumnPinned(fixedColumn),
+                hideColumn
               )
               self.agTableConfig.columnDefs = col;
             }
@@ -358,6 +374,15 @@ export default {
         'autoSizeThis',
         'autoSizeAll',
         'separator',
+        {
+          name: '隐藏当前列',
+          action: () => {
+            let colName = params.column.colId
+            self.setHideColumn(colName)
+            let th = self.setColumn(self.columnState, self.agTableConfig.columnDefs, colName)
+            self.agTableConfig.columnDefs = th;
+          },
+        },
         {
           name: '重置所有列位置信息',
           action: () => {
