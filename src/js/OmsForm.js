@@ -206,16 +206,14 @@ export default {
       }
       return result
     },
-    // 必填样式处理
+    // 必填警告红框样式处理
     toggleValidClass(item) {
       if (['popInput', 'popInputPlus', 'dropSelect'].includes(item.style)) {
         let ref = item.style == 'dropSelect' ? 'dropSelect' : 'popLabel'
         this.$refs[ref] && this.$refs[ref].forEach(el => {
-          if (el.isRequired) {
-            let notEmpty = item.itemdata.pid
-              && item.itemdata.valuedata 
-              && el.$options.propsData.prop == this.getColname(item) 
-            el.validateState = !!notEmpty ? 'success' : 'error'
+          if (el.isRequired && el.$options.propsData.prop == this.getColname(item)) {
+            let notEmpty = item.itemdata.pid || item.itemdata.valuedata 
+            el.validateState = notEmpty ? 'success' : 'error'
           }
         })
       }
