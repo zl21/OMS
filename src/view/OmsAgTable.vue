@@ -83,6 +83,8 @@ export default {
       // vmI18n: i18n,
       RangeSelectionModule: RangeSelectionModule,
       columnState: '',
+      fixedColumn: '',
+      hideColumn: '',
       timer: null,
       timerCount: 10
     }
@@ -197,7 +199,7 @@ export default {
       const self = this;
       // console.log('--::', this.columnState);
       if (self.columnState != '') {
-        let th = self.setColumn(this.columnState, self.agTableConfig.columnDefs)
+        let th = self.setColumn(this.columnState, self.setColumnPinned(self.fixedColumn), this.hideColumn)
         this.agTableConfig.columnDefs = th;
       }
     },
@@ -235,6 +237,7 @@ export default {
     onColumnVisibleChanged (hideCols,callback) {
       // 显示 or 隐藏 列
       console.log('zheonColumnVisibleChangednshi::', hideCols);
+      this.hideColumn = hideCols
       this.setHideColumn(hideCols)
     },
 
@@ -279,6 +282,7 @@ export default {
       R3.network.post('/p/cs/setFixedColumn', formdata)
       .then((res) => {
         if (res.data.code == 0) {
+          this.fixedColumn = res.data.data
           this.agTableConfig.columnDefs = this.setColumnPinned(res.data.data)
         }
       })
@@ -301,16 +305,17 @@ export default {
       })
     },
     setHideColumn(val) {
+      let self = this
       let formdata = new FormData()
       formdata.append('tableid', this.$route.params.customizedModuleId)
       formdata.append('hidecolumns', val)
       R3.network.post('/p/cs/setHideColumn', formdata).then((res) => {
+        self.setColumn(self.columnState, self.agTableConfig.columnDefs, val)
       })
     },
     setColumn(val, th, hideColumn) {
       let arr = val.split(',')
       let thArr = [], eXArr = []
-      let hideArr = hideColumn.split(',')
       /* arr.forEach((item) => {
         let head = th.find((i) => {
           return i.field == item
@@ -328,16 +333,20 @@ export default {
         })
       })
       th.forEach((i) => {
+        i.hide = false
         if (!arr.includes(i.field)) {
           eXArr.push(i)
         }
       })
       let resultArr = thArr.concat(eXArr)
-      resultArr.forEach(i => {
-        if (hideArr.includes(i.field)) {
-          i.hide = true
-        }
-      })
+      if (hideColumn != undefined) {
+        let hideArr = hideColumn.split(',')
+        resultArr.forEach(i => {
+          if (hideArr.includes(i.field)) {
+            i.hide = true
+          }
+        })
+      }
       return resultArr
     },
     getUserConfig() {
@@ -353,6 +362,8 @@ export default {
           if (res.data.code == 0) {
             const { colPosition, fixedColumn, hideColumn } = res.data.data
             self.columnState = colPosition
+            self.fixedColumn = fixedColumn
+            self.hideColumn = hideColumn
             if (self.agTableConfig.columnDefs.length) {
               // 便于以后在组件中可以只接调用这个方法来修复 重置按钮 导致的列顺序复原 - 待测
               let col = self.setColumn(
@@ -378,8 +389,8 @@ export default {
           name: '隐藏当前列',
           action: () => {
             let colName = params.column.colId
-            self.setHideColumn(colName)
-            let th = self.setColumn(self.columnState, self.agTableConfig.columnDefs, colName)
+            self.hideColumn = [...self.hideColumn.split(','), colName].join()
+            let th = self.setColumn(self.columnState, self.agTableConfig.columnDefs, self.hideColumn)
             self.agTableConfig.columnDefs = th;
           },
         },
