@@ -28,6 +28,7 @@
  * @param {Boolean} isStandardSingleObject 是否标准单对象
  */
 import OmsButton from 'burgeonComponents/view/OmsButton';
+import axios from 'axios';
 // import loading from 'burgeonComponents/view/Loading';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
@@ -132,8 +133,8 @@ export default {
     downloadTemplate() {
       const self = this;
       const { tempUrl, tempApi, tempParm, cusTempParam, tempMethod: type = 'post' } = self.currentConfig
-      let param;
-      if (tempParm) { // 下载模板参数处理
+      let param = tempParm;
+      if (tempParm && type == 'post') { // 下载模板参数处理
         param = new FormData();
         /* for (const key in tempParm) {
           param.append(key, tempParm[key]);
@@ -152,15 +153,29 @@ export default {
     // 通过Api下载模板-Handel
     getDownloadTemp(url, param = null, type) {
       if (param) {
-        $network[type](url, param).then((res) => {
-          if (res.data.code === 0) {
-            let url = res.data.data
-            if (!/https|http/.test(url) && this.currentConfig.cusTempParam) {
-              url = `${location.origin}/p/cs/download?filename=${url}`
+        // 兼容框架标准下载模板
+        if (url == '/p/cs/downloadImportTemplate') {
+          axios({
+            url: '/p/cs/downloadImportTemplate',
+            method: type,
+            params: param
+          }).then((res) => {
+            if (res.data.code == 0) {
+              const url = `${location.origin}/p/cs/download?filename=${res.data.data}`;
+              this.downloadUrlFile(url);
             }
-            this.downloadUrlFile(url);
-          }
-        });
+          })
+        } else {
+          $network[type](url, param).then((res) => {
+            if (res.data.code === 0) {
+              let url = res.data.data
+              if (!/https|http/.test(url) && this.currentConfig.cusTempParam) {
+                url = `${location.origin}/p/cs/download?filename=${url}`
+              }
+              this.downloadUrlFile(url);
+            }
+          });
+        }
       } else {
         $network[type](url).then((res) => {
           if (res.data.code === 0) {
