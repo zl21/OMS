@@ -255,7 +255,13 @@ export default {
           return
         }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
-          if (res.data.message) _this.$Message.success(res.data.message);
+          if (res.data.message) {
+            if (/失败/.test(res.data.message) && !_this.currentConfig.downErrorInfo) {
+              $fcError(res.data.message.replace(/\n/g, '<br/>'))
+            } else {
+              _this.$Message.success(res.data.message)
+            }
+          }
           _this.$emit('returnData', res.data.data);
           _this.closeModal();
           _this.customizeInvoke(); // 刷新列表
