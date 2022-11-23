@@ -333,7 +333,7 @@ export default {
         })
       })
       th.forEach((i) => {
-        i.hide = false
+        i.hide = i.hasOwnProperty('custHide') ? i.custHide : false
         if (!arr.includes(i.field)) {
           eXArr.push(i)
         }
