@@ -125,11 +125,13 @@
                 label-in-value
                 v-model="formConfig.formValue[`${item.value || item.colname}`]"
                 :multiple="item.multiple ? item.multiple : false"
+                multipleType
                 :disabled="item.disabled"
                 :filterable="item.filterable ? item.filterable : false"
                 :transfer="item.transfer ? item.transfer : true"
                 :placeholder="item.placeholder ? item.placeholder : ''"
                 :clearable="item.clearable"
+                :chooseAll="item.hasOwnProperty('chooseAll') ? item.chooseAll : true"
                 @on-query-change="selectInputChange"
                 @keyup.native="
                   runMethods(
