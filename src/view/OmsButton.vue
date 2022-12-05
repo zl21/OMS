@@ -16,7 +16,7 @@
           <!-- icon 设置按钮的图标类型 custom-icon 设置按钮的自定义图标 -->
           <Button
             v-if="!item.dropDown"
-            @click.native="item.btnclick"
+            @click.native="cb(item)"
             :ref="item.ref"
             :type="item.type ? item.type : btnConfig.typeAll"
             :size="item.size ? item.size : 'small'"
@@ -96,7 +96,7 @@
         :key="index"
       >
         <Button
-          @click.native="item.btnclick"
+          @click.native="cb(item)"
           v-if="item.isShow === false || item.isShow ? item.isShow : true"
           :ref="item.ref"
           :type="item.type ? item.type : btnConfig.typeAll"
@@ -129,6 +129,14 @@ export default {
   },
 
   methods: {
+    // 兼容后端调整按钮类型后的事件处理（eg: 下拉按钮 => 基础按钮）
+    cb(item) {
+      if (item.hasOwnProperty('btnclick')) {
+        item.btnclick()
+      } else {
+        this.dropDownClick(item.webname, [])
+      }
+    },
     dropDownClick(name, ...eventlist) {
       this.$emit('dropDownClick', name, eventlist)
     },
