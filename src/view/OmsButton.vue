@@ -129,12 +129,12 @@ export default {
   },
 
   methods: {
-    // 兼容后端调整按钮类型后的事件处理（eg: 下拉按钮 => 基础按钮）
     cb(item) {
       if (item.hasOwnProperty('btnclick')) {
         item.btnclick()
       } else {
-        this.dropDownClick(item.webname, [])
+        // 兼容后端调整按钮类型后的事件处理（eg: 下拉按钮 => 基础按钮）
+        this.$listeners.dropDownClick && this.dropDownClick(item.webname, [])
       }
     },
     dropDownClick(name, ...eventlist) {
