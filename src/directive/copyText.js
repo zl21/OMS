@@ -37,7 +37,8 @@ export default {
 const mouseover = () => mouseEvent('mouseover')
 const mouseleave = () => mouseEvent('mouseleave')
 const mouseEvent = (type) => {
-  const len = event.target.children.length 
+  const len = event.target.children.length
+  if (len < 2) return
   const bindNode = event.target.children[len - 2]
   const iconNode = event.target.children[len - 1]
   len
