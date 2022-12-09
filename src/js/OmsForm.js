@@ -138,9 +138,12 @@ export default {
             // 设置表单验证规则-必填：兼容drp、mrp类型组件(popInput、popInputPlus、dropSelect)
             if (i.itemdata) {
               const rules = this.formConfig.ruleValidate || {}
-              this.formConfig.ruleValidate = Object.assign(rules, { 
-                [i.colname]: [{ required: i.itemdata.isnotnull || false, message: ' ', trigger: 'blur' }] 
-              })
+              // 存在验证规则，则不处理（比如isnotnull与规则中的required不一致）
+              if (!rules[i.colname]) {
+                this.formConfig.ruleValidate = Object.assign(rules, { 
+                  [i.colname]: [{ required: i.itemdata.isnotnull || false, message: ' ', trigger: 'blur' }]
+                })
+              }
             }
             this.toggleValidClass(i) 
           })
