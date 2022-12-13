@@ -262,7 +262,8 @@ export default {
             //更新表头
             let col = self.setColumn(
               res.data.data,
-              self.agTableConfig.columnDefs
+              self.agTableConfig.columnDefs,
+              self.hideColumn
             )
             self.agTableConfig.columnDefs = col;
             // self.AGTABLE.setCols(col)
