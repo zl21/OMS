@@ -69,6 +69,7 @@
         <p>{{ errorMessage }}</p>
       </div>
     </div>
+    <slot name="bottom_slot"/>
     <OmsButton class="modal-footer" :btn-config="btnConfig" style="margin-top: 10px" />
   </div>
 </template>
