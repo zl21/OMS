@@ -366,6 +366,7 @@ export default {
         this.text = e.path[0].files[0].name;
         this.files = e.path[0].files[0];
       }
+      this.$emit('change', {fileEvent: e, files: e.path[0].files[0]})
     },
     // 上传文件前判断文件大小
     handleBefore(file) {
