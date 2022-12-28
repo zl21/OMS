@@ -2,6 +2,7 @@
 // import SelectDialog from 'framework/components/dialog/selectDialog.vue';
 import SelectDialog from 'r3cps/components/dialog/selectDialog.vue';
 import FkTable from 'burgeonComponents/view/Fktable.vue';
+import { resetElScrollBarZIndex } from 'burgeonComponents/common/js/cssHandler'
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
 
@@ -35,6 +36,7 @@ export default {
   },
   data() {
     return {
+      observer: '', // 观察器,监听DOM变化
       inputVal: '',
       SingleSelect: {
         show: false
@@ -95,10 +97,9 @@ export default {
               ? ''
               : oldVal.valuedata.substr(0, oldVal.valuedata.length - 1);
           } else if (val.scale === 0) {
-            val.valuedata = val.valuedata.substring(
-              0,
-              val.valuedata.length - 1
-            );
+            val.valuedata = val.valuedata 
+              ? val.valuedata.substring(0, val.valuedata.length - 1)
+              : '';
           } else {
             val.valuedata = val.valuedata.indexOf('.') === -1
               ? val.valuedata.substring(0, val.valuedata.length - 1)
@@ -171,6 +172,14 @@ export default {
         self.popoverShow[item] = false;
       });
     });
+    const elObj = resetElScrollBarZIndex()
+    if (elObj) {
+      const { popNode, observerOptions, callback } = elObj // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
+      if (popNode) {
+        this.observer = new MutationObserver(callback);
+        this.observer.observe(popNode, observerOptions);
+      }
+    }
   },
   updated() { },
   methods: {
@@ -306,14 +315,18 @@ export default {
     },
     // 外键下拉模糊查询
     querySearchAsync(queryString, cb) {
+      const empty = [{ tip: '无数据' }]
       var regx = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/;
       if (regx.test(queryString)) {// 如果包含特殊字符
         queryString = queryString.replace(regx,'')
       }
       const self = this;
       self.itemdata.valuedata = queryString;
-      cb([]);
-      if (!queryString) return
+      if (!queryString) {
+        cb([]);
+        return
+      }
+
       self.autocomplete = false;
       self.isHandleSelect = false;
       let flag = true;
@@ -321,7 +334,7 @@ export default {
       for (const i in obj) {
         if (!obj[i].valuedata) {
           flag = false;
-          cb([]);
+          cb(empty);
           self.$set(self.itemdata, 'valuedata', null);
           self.$set(self.itemdata, 'pid', null);
           return;
@@ -332,10 +345,11 @@ export default {
         if (flag) {
           self.getQueryList(queryString, self.itemdata.colid, (list) => {
             const queryList = list;
-            cb(queryList);
+            const result = queryList.length ? queryList : empty
+            cb(result);
           });
         } else {
-          cb([]);
+          cb(empty);
         }
       });
     },
@@ -714,6 +728,9 @@ export default {
       const self = this;
       self.getSelectData('query');
     }
+  },
+  destroyed(){
+    this.observer && this.observer.disconnect() // 停止观察
   }
 };
 

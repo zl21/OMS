@@ -11,7 +11,7 @@
     <RadioGroup v-model="name" @on-change="checkChange">
       <Radio
         v-for="(item, index) in options"
-        :key="index"
+        :key="item.title"
         circle
         :label="item.title"
       >

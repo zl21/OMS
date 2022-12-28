@@ -2,14 +2,14 @@
   border: 1px solid #d3d3d3;
 
   .cusForm-content.noFlod {
-    padding: 0 8px 14px;
+    padding: 0 8px 10px;
   }
 
   .tag-close {
 
     &.bottomCenter {
       &+.cusForm-content {
-        padding: 0 8px 14px;
+        padding: 0 8px 10px;
       }
     }
 
@@ -57,6 +57,18 @@
     .ark-form-item {
       padding-top: 8px;
       margin-bottom: 0;
+
+      &.ele-select {
+        /deep/.el-select {
+          width: 100%;
+          .el-input--suffix .el-input__inner {
+            height: 28px;
+            line-height: 28px;
+            font-size: 12px;
+            padding-left: 8px;
+          }
+        }
+      }
     }
   }
 
@@ -76,6 +88,14 @@
   }
 }
 
+.el-select-dropdown.el-popper {
+  .el-select-dropdown__item {
+    font-size: 12px;
+    &.selected {
+      color: var(--b2-color);
+    }
+  }
+}
 
 .business-form-main {
   // padding-top: 16px;
@@ -113,7 +133,7 @@
     }
   }
 
-  .ark-form-item {
+  /deep/ .ark-form-item {
     margin-bottom: 10px;
 
     // popInput

@@ -1,6 +1,7 @@
 // import ChineseDictionary from 'framework/assets/js/ChineseDictionary';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
+import { resetElPopoverZIndex } from 'burgeonComponents/common/js/cssHandler'
 
 export default {
   name: 'Fktable',
@@ -377,8 +378,7 @@ export default {
           })
         }
       });
-
-    }
+    },
   },
   created() {
     let _self = this
@@ -436,6 +436,11 @@ export default {
         this.fkobj.idArr.push(id);
       }
     });
+    
+    this.$nextTick(() => {
+      resetElPopoverZIndex('.fktable.ark-fktable.view-fktable') // 动态覆盖fktable层级，解决遮罩层遮挡问题
+    })
+
     let _self = this
     String.prototype.format = function () {  //占位符
       if (arguments.length == 0) return this;

@@ -11,6 +11,8 @@ import myInputLd from 'r3cps/components/element/input.vue'
 // 兼容fktable1.4数据格式（云雀1.0）
 import myInput from "burgeonComponents/view/Fkinput.vue";
 import fkinputPlus from "burgeonComponents/view/FkinputPlus.vue";
+const utils = require("../common/js/utils").default;
+
 export default {
   name: 'OmsForm',
   components: {
@@ -50,7 +52,12 @@ export default {
         span: 6
       },
       curGridColnum: 4,
-      showNum: '' // 初始显示条数
+      showNum: '', // 初始显示条数
+      linkage: {
+        arr: [], // 记录对应的联动字段
+        assign: new Map(), // 记录联动字段关系映射 - 赋值
+        clear: new Map() // 记录联动字段关系映射 - 清空
+      }
     }
   },
   props: {
@@ -86,7 +93,8 @@ export default {
     },
     // 判断是否显示折叠按钮（判断查询条件是否 大于 查询条件默认显示行数*一行显示条数，大于才显示折叠按钮 ）
     searchInputLenMoreThanShowNum() {
-      return this.formConfig.formData.length > this.showNum
+      const hasMore = this.formConfig.formData.length > this.showNum
+      return hasMore
     }
   },
   watch: {
@@ -123,9 +131,24 @@ export default {
       handler(n,o) {
         if (n && n.length) {
           n.forEach(i => {
-            i.colname = i.colname ? i.colname : i.value ? i.value : i.dataAcessKey ? i.dataAcessKey : ''
+            // i.colname = i.colname ? i.colname : i.value ? i.value : i.dataAcessKey ? i.dataAcessKey : ''
+            i.colname = this.getColname(i)
+            i.rules = typeof(i.rules) == 'boolean' ? {} : i.rules // 处理老代码中给rules赋值boolean的历史问题
+            
+            // 设置表单验证规则-必填：兼容drp、mrp类型组件(popInput、popInputPlus、dropSelect)
+            if (i.itemdata) {
+              const rules = this.formConfig.ruleValidate || {}
+              // 存在验证规则，则不处理（比如isnotnull与规则中的required不一致）
+              if (!rules[i.colname]) {
+                this.formConfig.ruleValidate = Object.assign(rules, { 
+                  [i.colname]: [{ required: i.itemdata.isnotnull || false, message: ' ', trigger: 'blur' }]
+                })
+              }
+            }
+            this.toggleValidClass(i) 
           })
           this.initRenderForm();
+          this.linkageFields()
         }
       },
       immediate: true,
@@ -150,16 +173,54 @@ export default {
         }
       }
     });
-    this.asteriskColor()
+    // this.asteriskColor()
     // 响应式栅格
     window.addEventListener('resize', () => this.getGridColnum(), false)
     this.getGridColnum()
+
+    this.$nextTick(() => {
+      // 拦截框架接口入参（由于刷新页面会出现过滤条件被重置问题，故特此处理）
+      if (this.$refs.dropSelect && this.linkage.arr.length) {
+        this.$refs.dropSelect.forEach(el => {
+          el.$children[0].postTableData = function postTableData(url, message) {
+            // 此处this指向下拉组件arkDropMultiSelectFilter
+            return new Promise((resolve) => {
+              this.post(url, utils.urlSearchParams({
+                searchdata: this.searchdata
+              }), (response) => {
+                resolve(response);
+              });
+            });
+          }
+        })
+      }
+    })
   },
   destroyed() {
     window.removeEventListener('keydown', this, false);
     window.removeEventListener('resize', () => this.getGridColnum(), false)
   },
   methods: {
+    getColname(item) {
+      const { value, colname, itemdata, dataAcessKey } = item
+      let result = colname ? colname : value ? value : dataAcessKey ? dataAcessKey : ''
+      if (!result && itemdata && itemdata.colname) {
+        result = itemdata.colname
+      }
+      return result
+    },
+    // 必填警告红框样式处理
+    toggleValidClass(item) {
+      if (['popInput', 'popInputPlus', 'dropSelect'].includes(item.style)) {
+        let ref = item.style == 'dropSelect' ? 'dropSelect' : 'popLabel'
+        this.$refs[ref] && this.$refs[ref].forEach(el => {
+          if (el.isRequired && el.$options.propsData.prop == this.getColname(item)) {
+            let notEmpty = item.itemdata.pid || item.itemdata.valuedata 
+            el.validateState = notEmpty ? 'success' : 'error'
+          }
+        })
+      }
+    },
     // 必填星号(*)颜色
     asteriskColor(ms = 500) {
       setTimeout(() => {
@@ -253,6 +314,9 @@ export default {
       if (!this.formConfig.flodClick) {
         return
       }
+      setTimeout(() => {
+        OMS.cssHandleUtils.refreshAgTableHeight() // 渲染定制列表页面ag表格
+      }, 100)
       
       const { setColnum = this.curGridColnum, setRow = this.queryDisNumber } = this.formConfig
       let showNum;
@@ -340,15 +404,11 @@ export default {
     },
     // 接口入参- 模糊传参
     sendAutoMessage(item) {
-      const { colid, fixedcolumns } = item.itemdata
-      return {
-        colid,
-        fixedcolumns
-      }
+      return { colid: item.itemdata.colid }
     },
     // 接口入参- 表格模糊传参
     sendTableMessage(item) {
-      const { isdroplistsearch, colid } = item.itemdata
+      const { isdroplistsearch, colid, colname, refcolval } = item.itemdata
       // 定制查询接口
       if (typeof item.popBefore == 'function') {
         this.url.tableSearchUrl = item.itemdata.api
@@ -356,17 +416,102 @@ export default {
         return item.itemdata.params
       }
       this.url.tableSearchUrl = '/p/cs/newQueryList'
-      return {
+
+      let params = {
         isdroplistsearch: isdroplistsearch || true,
         refcolid: colid,
       }
+      // 联动-过滤条件
+      if (refcolval && colname) {
+        const mapKeys = [...this.linkage.assign.keys()]
+        const needLinkage = mapKeys.includes(colname)
+        if (needLinkage) {
+          const isMultiLevelLinkage = colname != this.linkage.assign.get(colname) // 多级联动
+          const isSingleLevelLinkage = colname == this.linkage.assign.get(colname) && item.inputList // 一级联动
+          if (isMultiLevelLinkage || isSingleLevelLinkage) {
+            const { fixcolumn, expre } = refcolval // 过滤配置
+            const arithmetic = expre == 'equal' ? '=' : '' // 运算符
+            // 1、多级联动-过滤条件（无inputList)，比如省市区
+            if (isMultiLevelLinkage) { 
+              const fieldObj = utils.queryForm(this.formConfig, this.linkage.assign.get(colname)) // 查找上一级字段
+              if (fieldObj && fieldObj.itemdata && fieldObj.itemdata.pid) {
+                // 过滤条件值不能为空，会导致弹窗报错提示（clear清空后，也会调一次接口）
+                const pid = fieldObj.itemdata.pid
+                params.fixedcolumns = { [fixcolumn]: `${arithmetic}${pid}` }
+                delete item.itemdata.isShowPopTip
+              }
+            }
+            // 2、一级联动-过滤条件（写死的inputList），比如指定平台的店铺
+            if (isSingleLevelLinkage) {
+              item.inputList.forEach(i => {
+                if (i.childs) {
+                  i.childs.forEach(i => {
+                    if (i.colname == colname) {
+                      if (params.fixedcolumns) {
+                        params.fixedcolumns[fixcolumn] = `${arithmetic}${i.refobjid}`
+                      } else {
+                        params.fixedcolumns = { [fixcolumn]: `${arithmetic}${i.refobjid}` }
+                      }
+                    }
+                  })
+                }
+              })
+            }
+          }
+        }
+      }
+      return params
     },
-
+    // 记录联动字段 - 便于更新联动字段的接口入参
+    linkageFields() {
+      /**
+       * 联动字段相关（eg: A-B-C）
+       * fields 记录对应联动字段 [['A', 'B', 'C'], ...]
+       * assignMap 联动-赋值 Map(2) {'B' => 'A', 'C' => 'B', ...}
+       * clearMap  联动-清空 Map(2) {'A' => 'B', 'B' => 'C', ...}
+       */
+      let fields = []
+      let assignMap = new Map()
+      let clearMap = new Map()
+      this.formConfig.formData.forEach(item => {
+        if (item.style == 'dropSelect') {
+          if (item.itemdata && item.itemdata.refcolval) {
+            const { srccol } = item.itemdata.refcolval
+            assignMap.set(item.itemdata.colname, srccol)
+            clearMap.set(srccol, item.itemdata.colname)
+            if (!fields.length) {
+              fields.push([srccol, item.itemdata.colname]) // * 取item.itemdata.colname 记录字段名，后续也根据它查找字段
+            } else {
+              let isAdd = false
+              fields.forEach(i => {
+                if (i.slice(-1)[0] == srccol) {
+                  i.push(item.itemdata.colname)
+                  isAdd = true
+                }
+              })
+              !isAdd && fields.push([srccol, item.itemdata.colname])
+            }
+          }
+        }
+      })
+      this.linkage = {
+        arr: fields,
+        assign: assignMap,
+        clear: clearMap
+      }
+    },
+    /**
+     * dropSelect 属性集合
+     * @param {*} item 
+     */
     propsData(item) {
       const { single, fkdisplay, pid, valuedata } = item.itemdata;
       const defaultSelectedDrp = item.style == 'dropSelect'
         && fkdisplay == 'drp'
         && [{ ID: pid, Label: valuedata }]
+      const isShowPopTip = typeof item.itemdata.isShowPopTip == 'function' 
+        ? item.itemdata.isShowPopTip 
+        : function () { return true }
 
       return {
         single: fkdisplay == 'mrp' ? false : fkdisplay == 'drp' ? true : !!single, // 是否单选
@@ -382,9 +527,16 @@ export default {
         showColnameKey: item.itemdata.showColnameKey || 'isak',
         hidecolumns: item.itemdata.hidecolumns || [],
         defaultSelected: item.itemdata.defaultSelectedMrp || defaultSelectedDrp || [],
-        className: item.itemdata.className || ''
+        className: item.itemdata.className || '',
+        item: {}, // 这个属性为了解决DropMultiSelectFilter报错问题，无需传值
+        isShowPopTip, // 点击icon的时候是否显示下拉框
       };
     },
+    /**
+     * dropSelect 当值改变时触发
+     * @param {*} val
+     * @param {*} item 
+     */
     valueChange(val, item) {
       let arg
       val = val || []
@@ -408,6 +560,36 @@ export default {
       }
       if (typeof item.oneObj == 'function') {
         this.runMethods(item.oneObj(arg))
+        // 联动-清空赋值
+        if (fkdisplay == 'drp' && this.linkage.arr.length) {
+          this.linkageClear(item)
+        }
+      }
+    },
+    // 多级联动-清空赋值
+    linkageClear(item) {
+      const { colname } = item.itemdata
+      if (colname) {
+        const mapKeys = [...this.linkage.clear.keys()]
+        const needLinkage = mapKeys.includes(colname)
+        if (needLinkage && mapKeys != colname) {
+          const field = this.linkage.clear.get(colname)
+          const fieldObj = utils.queryForm(this.formConfig, field) // 查找下一级字段
+          if (fieldObj && fieldObj.itemdata) {
+            fieldObj.itemdata.pid = ''
+            fieldObj.itemdata.valuedata = ''
+            fieldObj.itemdata.dropValue = []
+            fieldObj.itemdata.defaultSelectedMrp = []
+            fieldObj.itemdata.isShowPopTip = () => {
+              if (item.itemdata.pid && item.itemdata.valuedata) {
+                return true
+              }
+              this.$Message.error(`请先选择${item.itemdata.name}！`)
+              return false
+            }
+          }
+          if (mapKeys.includes(field)) this.linkageClear(fieldObj)
+        }
       }
     },
     blur(val, itemdata) {

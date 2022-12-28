@@ -105,7 +105,7 @@ export default {
     // 表头显示数据
     columns() {
       let columnsData = [...this.jordanTableConfig.columns || []]
-      if (this.jordanTableConfig.indexColumn) {
+      if (this.jordanTableConfig.indexColumn && (this.jordanTableConfig.columns && this.jordanTableConfig.columns.length)) {
         // 是否存在序号列
         columnsData.unshift({
           // title: '序号',
@@ -320,13 +320,16 @@ export default {
     rowClassName(row, index) {
       if (row.isGray) {
         // 订单中心详情-订单明细行背景置灰
-        return 'table-yellow-row'
+        return 'table-gray-row'
       }else if (row.isColorGray) {
         // 订单中心列表-已取消/系统作废行的字体颜色置灰
         return 'color-gray-row'
       }else if (row.isOutOfStock) {
         // 订单中心详情-订单明细行缺货字体置红
         return 'color-red-row'
+      }else if (row.isYellow) {
+        // 订单中心详情-订单明细行背景黄色
+        return 'table-yellow-row'
       }
       return ''
     },

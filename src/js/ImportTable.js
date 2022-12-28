@@ -1,4 +1,34 @@
+/** 
+ * @相关属性
+ * 下载模板
+ * @param {String} tempUrl 模板url地址
+ * @param {String} tempApi 接口路径
+ * @param {Object} tempParm 接口入参 - formdata格式
+ * @param {Object} cusTempParam 自定义接口入参，包括入参格式
+ * @param {String} tempMethod 接口请求方式，默认post
+ * 导入
+ * @param {String} okApi 接口路径
+ * @param {Object} okParm 接口入参
+ * @param {Boolean} isAsync 是否开启异步导入，默认true
+ * @param {Boolean} isErr1Succ1 是否开启部分成功部分失败：下载文件
+ * @param {Boolean} dontRefreshTable 是否开启导入成功后刷新页面
+ * @param {Boolean} downErrorInfo 是否下载导入失败的文件
+ * @param {Boolean} showErrorInfo 是否在弹框内显示错误信息
+ * @param {Function} returnData 导入的回调
+ * @param {Function} freshPage 导入成功后，定制页面刷新的回调
+ * 其他
+ * @param {String} tableName 表名
+ * @param {String} webname
+ * @param {String} prefix 路由前缀，可选值有SYSTEM，CUSTOM
+ * @param {Boolean} isAction 是否为动作定义类型的
+ * @param {Boolean} dontShowDownloadA 是否显示下载模板，默认false
+ * @param {Boolean} importNotes 是否显示覆盖原备注/追加到原备注，默认false - 备注导入专用
+ * @param {Boolean} buttonPermission 
+ * @param {Boolean} cusDiscretion
+ * @param {Boolean} isStandardSingleObject 是否标准单对象
+ */
 import OmsButton from 'burgeonComponents/view/OmsButton';
+import axios from 'axios';
 // import loading from 'burgeonComponents/view/Loading';
 // import i18n from "@burgeon/internationalization/i18n";
 // window.$i18n = i18n
@@ -19,6 +49,8 @@ export default {
   data() {
     return {
       // vmI18n: i18n,
+      inpNum: '2', // 有效起始行
+      singleValue: '', // 更新记录
       key: '',
       text: '', // 选择的导入文件名
       files: {}, // 选择的文件
@@ -56,8 +88,11 @@ export default {
     };
   },
   computed: {
+    rowControl() {
+      return this.currentConfig.rowControl || false; // 默认false，即不展示控制从多少行开始导入
+    },
     isAsync() {
-      return this.componentData.isAsync === false ? false : true; // 默认true，即异步
+      return this.currentConfig.isAsync === false ? false : true; // 默认true，即异步
     },
     webname() {
       const { objTabActionDialogConfig, dialogComponentName } = this.$parent?.$parent || this.$parent?.$parent?.$parent
@@ -85,20 +120,28 @@ export default {
     },
   },
   methods: {
+    handleInput() {
+      const val = event.target.value.trim();
+      // 只能是正整数或空,可根据需求修改正则
+      if (/^[1-9]\d*$|^$/.test(val)) {
+        this.inputValue = val;
+      } else {
+        event.target.value = this.inputValue;
+      }
+    },
     // 下载模板-配置
     downloadTemplate() {
       const self = this;
-      const tempUrl = self.currentConfig.tempUrl;
-      const tempApi = self.currentConfig.tempApi;
-      const tempParm = self.currentConfig.tempParm;
-      const type = self.currentConfig.tempMethod;
-      let param = new FormData();
-      if (tempParm) { // 下载模板参数处理
+      const { tempUrl, tempApi, tempParm, cusTempParam, tempMethod: type = 'post' } = self.currentConfig
+      let param = tempParm;
+      if (tempParm && type == 'post') { // 下载模板参数处理
+        param = new FormData();
         /* for (const key in tempParm) {
           param.append(key, tempParm[key]);
         } */
         param.append('param', JSON.stringify(tempParm));
       }
+      cusTempParam && (param = cusTempParam) // 自定义模板参数
       if (tempUrl) {
         // 提供了模板Url，通过Url链接直接下载模板
         this.downloadUrlFile(self.currentConfig.tempUrl);
@@ -108,13 +151,31 @@ export default {
       }
     },
     // 通过Api下载模板-Handel
-    getDownloadTemp(url, param = null, type = 'post') {
+    getDownloadTemp(url, param = null, type) {
       if (param) {
-        $network[type](url, param).then((res) => {
-          if (res.data.code === 0) {
-            this.downloadUrlFile(res.data.data);
-          }
-        });
+        // 兼容框架标准下载模板
+        if (url == '/p/cs/downloadImportTemplate') {
+          axios({
+            url: '/p/cs/downloadImportTemplate',
+            method: type,
+            params: param
+          }).then((res) => {
+            if (res.data.code == 0) {
+              const url = `${location.origin}/p/cs/download?filename=${res.data.data}`;
+              this.downloadUrlFile(url);
+            }
+          })
+        } else {
+          $network[type](url, param).then((res) => {
+            if (res.data.code === 0) {
+              let url = res.data.data
+              if (!/https|http/.test(url) && this.currentConfig.cusTempParam) {
+                url = `${location.origin}/p/cs/download?filename=${url}`
+              }
+              this.downloadUrlFile(url);
+            }
+          });
+        }
       } else {
         $network[type](url).then((res) => {
           if (res.data.code === 0) {
@@ -127,8 +188,11 @@ export default {
     // 确认导入的操作
     importDialog: _.throttle(function () {
       if (this.handleBefore(this.files)) return;
-      const okApi = this.currentConfig.okApi;
-      const okParm = this.currentConfig.okParm || {};
+      const { okApi, okParm = {} } = this.currentConfig
+      if (!okApi) {
+        const tip2 = 'Please config okApi, see: http://101.132.182.36:20003/?path=/story/basic-importtable--page'
+        throw new Error(tip2)
+      }
       this.getImportDialog(okApi, okParm);
     }, 3000, { 'trailing': false }),
     // 导入请求
@@ -150,14 +214,29 @@ export default {
       if (this.importNotes) {
         param.append('cover', this.cover);
       }
+      if (this.rowControl) {
+        param.append('isUpdate', this.singleValue ? 'Y' : 'N');
+        param.append('startRow', this.inpNum);
+      }
       param.append('file', _this.files, _this.text);
+
+      const curParam = {
+        ...paramsObj,
+        text: _this.text,
+        cover: this.cover,
+        isUpdate: this.singleValue,
+        inpNum: this.inpNum, 
+        file: _this.files
+      }
+      this.$emit('changeParam', curParam) // 自定义入参
+      const incom = this.currentConfig.incom // 入参回传导入组件
 
       if (_this.currentConfig.buttonPermission) {
         _this.btnConfig.buttons.map((btn) => {
           btn.disabled = true;
         });
       }
-      $network.post(url, param).then((res) => {
+      $network.post(url, incom ? incom : param).then((res) => {
         document.getElementById("xFile").value = ""
         if (this.isAsync) {
         /** 异步导入优化（同框架保持交互效果一致）：
@@ -172,11 +251,17 @@ export default {
                 type: 'notice',
               },
             }))
-        }
+          }
           return
         }
         if ([0, 1].includes(res.data.code) && !_this.currentConfig.cusDiscretion) {
-          if (res.data.message) _this.$Message.success(res.data.message);
+          if (res.data.message) {
+            if (/失败/.test(res.data.message) && !_this.currentConfig.downErrorInfo) {
+              $fcError(res.data.message.replace(/\n/g, '<br/>'))
+            } else {
+              _this.$Message.success(res.data.message)
+            }
+          }
           _this.$emit('returnData', res.data.data);
           _this.closeModal();
           _this.customizeInvoke(); // 刷新列表
@@ -219,9 +304,12 @@ export default {
     // 导入成功后的操作 - 关闭弹窗
     closeModal() {
       const _this = this;
-      if (_this.currentConfig.isAction) {
-        _this.$emit('closeActionDialog', false);
-      } else {
+      const { close, closeConfirm } = _this.$parent.$parent
+      if (close) {
+        // 标准页面
+        _this.$parent.$parent.close();
+      } else if (closeConfirm) {
+        // 定制页面
         _this.$parent.$parent.closeConfirm();
       }
     },
@@ -278,6 +366,7 @@ export default {
         this.text = e.path[0].files[0].name;
         this.files = e.path[0].files[0];
       }
+      this.$emit('change', {fileEvent: e, files: e.path[0].files[0]})
     },
     // 上传文件前判断文件大小
     handleBefore(file) {
@@ -303,16 +392,20 @@ export default {
   },
   created() {
     const _this = this;
-    // console.log('$OMS2.cusImport::', _this.$OMS2.cusImport);
-    // console.log('webname::', _this.webname);
-    // console.log('tableName::', this.tableName);
-    // console.log('prefix::', this.prefix);
+    const tip1 = 'Please set the importTable config, see: http://101.132.182.36:20003/?path=/story/basic-importtable--page'
     if (this.prefix == 'CUSTOM' && !this.componentData?.isAction) {
       // 纯定制导入
-      this.key = this.componentData.tableName + '__' + this.componentData.webname;
+      if (!Object.keys(_this.componentData).length) {
+        throw new Error(tip1)
+      }
+      const { tableName, webname } = _this.componentData
+      this.key = webname ? `${tableName}__${webname}` : tableName;
     } else if (this.prefix == 'SYSTEM') {
       // 标准动作定义
       this.key = this.tableName + '__' + this.webname;
+      if (!_this.$OMS2.cusImport[this.key]) {
+        console.warn(tip1)
+      }
     }
     if (_this.$OMS2.cusImport[this.key]) {
       // 配置文件中存在配置，则使用配置文件中的配置

@@ -16,13 +16,16 @@
       :options="options"
       :data="agTableConfig.rowData"
       :columns="agTableConfig.columnDefs"
-      @grid-ready="gridReady"
       :renderParams="agTableConfig.renderParams"
+      :enableRangeSelection="true"
+      :externalModules="[RangeSelectionModule]"
+      @grid-ready="gridReady"
       @on-row-dblclick="tableRowDbclick"
       @on-selection-change="tableSelectedChange"
       @on-column-moved="colMoved"
       @on-column-pinned="colPinned"
       @on-sort-change="colSortChange"
+      @sortChanged="colSortChange"
     ></arkCommonTableByAgGrid>
 
     <div
@@ -51,6 +54,7 @@
 </template>
 
 <script>
+import { RangeSelectionModule } from '@ag-grid-enterprise/range-selection'
 // import commonTableByAgGrid from 'libs/@syman/ark-ui-bcl/src/components/common-table-by-ag-grid/CommonTableByAgGrid'; // npm
 // import i18n from "@burgeon/internationalization/i18n";
 
@@ -77,7 +81,12 @@ export default {
   data() {
     return {
       // vmI18n: i18n,
+      RangeSelectionModule: RangeSelectionModule,
       columnState: '',
+      fixedColumn: '',
+      hideColumn: '',
+      timer: null,
+      timerCount: 10
     }
   },
   watch: {
@@ -103,7 +112,7 @@ export default {
         // 是否开启字段处理回调
         if (this.agTableConfig.isAmtCb) {
           this.$emit('on-reset-column')
-        } 
+        }
       },
       deep: true
     },
@@ -119,19 +128,78 @@ export default {
         // 是否开启字段处理回调
         if (this.agTableConfig.isAmtCb) {
           this.$emit('on-reset-row')
-        } 
+        }
+        this.handleTotalData()
       },
       deep: true
     },
+    timerCount(val) {
+      val <= 0 && clearInterval(this.timer) 
+    }
   },
   methods: {
+    // 序号列显示合计、总计 
+    handleTotalData() {
+      const { isSubTotalEnabled, isFullRangeSubTotalEnabled } = this.options.datas
+      if (!isSubTotalEnabled && !isFullRangeSubTotalEnabled) {
+        this.timerCount = 0
+        return
+      }
+      this.timer = setInterval(() => {
+        const agGridTable = this.$refs.agGrid && this.$refs.agGrid.$refs.agGridTable
+        const { subtotalRowData, fullRangeSubTotalRowData } = agGridTable || {}
+        if (agGridTable) {
+          const handler = (rowData) => {
+            if (agGridTable[rowData].hasOwnProperty('ID') && agGridTable[rowData].ID.val != '') {
+              agGridTable[rowData].ID.val = ''
+              agGridTable[rowData].ag_index.val = rowData == 'subtotalRowData' ? $it('other.total') : $it('tL.total') // 合计 | 总计
+            }
+          }
+          // 仅显示合计
+          if (isSubTotalEnabled && !isFullRangeSubTotalEnabled) {
+            if (subtotalRowData) {
+              if (subtotalRowData.ID.val == '') {
+                this.timerCount = 0
+                return
+              }
+              handler('subtotalRowData')
+              this.timerCount -= 1
+            }
+          }
+          // 仅显示总计
+          if (!isSubTotalEnabled && isFullRangeSubTotalEnabled) {
+            if (fullRangeSubTotalRowData) {
+              if (fullRangeSubTotalRowData.ID.val == '') {
+                this.timerCount = 0
+                return
+              }
+              handler('fullRangeSubTotalRowData')
+              this.timerCount -= 1
+            }
+          }
+          // 显示合计总计
+          if (isSubTotalEnabled && isFullRangeSubTotalEnabled) {
+            if (fullRangeSubTotalRowData && subtotalRowData) {
+              if (subtotalRowData.ID.val == '' && fullRangeSubTotalRowData.ID.val == '') {
+                this.timerCount = 0
+                return
+              }
+              handler('subtotalRowData')
+              handler('fullRangeSubTotalRowData')
+              this.timerCount -= 1
+            }
+          }
+          // console.log(this.timerCount, subtotalRowData, fullRangeSubTotalRowData)
+        }
+      }, 100)
+    },
     gridReady() {
       // this.tabth = [];
       // this.row = [];
       const self = this;
       // console.log('--::', this.columnState);
       if (self.columnState != '') {
-        let th = self.setColumn(this.columnState, self.agTableConfig.columnDefs)
+        let th = self.setColumn(this.columnState, self.setColumnPinned(self.fixedColumn), this.hideColumn)
         this.agTableConfig.columnDefs = th;
       }
     },
@@ -150,6 +218,7 @@ export default {
       this.$emit('on-selection-change', data);
     },
     colPinned(data) {
+      this.onColumnPinned()
       this.$emit('on-column-pinned', data);
     },
     colSortChange(data) {
@@ -164,7 +233,13 @@ export default {
       const { api, columnApi } = self.$refs.agGrid;
       const colData = columnApi.getAllGridColumns()
       this.$emit('on-column-moved', colData);
-    }, 1000),
+    }, 900),
+    onColumnVisibleChanged (hideCols,callback) {
+      // 显示 or 隐藏 列
+      console.log('zheonColumnVisibleChangednshi::', hideCols);
+      this.hideColumn = hideCols
+      this.setHideColumn(hideCols)
+    },
 
     /** ---------------------- 老ag方法： ---------------------- **/
     onColumnMoved: _.debounce((agSelf, self) => {
@@ -187,14 +262,59 @@ export default {
             //更新表头
             let col = self.setColumn(
               res.data.data,
-              self.agTableConfig.columnDefs
+              self.agTableConfig.columnDefs,
+              self.hideColumn
             )
             self.agTableConfig.columnDefs = col;
             // self.AGTABLE.setCols(col)
           }
         })
-    }, 1000),
-    setColumn(val, th) {
+    }, 100),
+    // 固定列
+    onColumnPinned() {
+      const { columnApi } = this.$refs.agGrid
+      const pinnedLeft = columnApi.getDisplayedLeftColumns().map(d => d.colId);
+      const pinnedRight = columnApi.getDisplayedRightColumns().map(d => d.colId);
+      //  将固定列保存到数据库
+      const pinnedPosition = pinnedLeft.join(',')+"|"+pinnedRight.join(',');
+      let formdata = new FormData()
+      formdata.append('tableid', this.$route.params.customizedModuleId)
+      formdata.append('fixedcolumn', pinnedPosition)
+      R3.network.post('/p/cs/setFixedColumn', formdata)
+      .then((res) => {
+        if (res.data.code == 0) {
+          this.fixedColumn = res.data.data
+          this.agTableConfig.columnDefs = this.setColumnPinned(res.data.data)
+        }
+      })
+    },
+    setColumnPinned(fixedcolumn) {
+      const [pinnedLeft, pinnedRight] = fixedcolumn.indexOf('|') > -1 ? fixedcolumn.split('|') : ['', '']
+      const curPinnedLeft = pinnedLeft.split(',')
+      const curPinnedRight = pinnedRight.split(',')
+      return this.agTableConfig.columnDefs
+      .map(column => {
+        if (curPinnedLeft.indexOf(column.key) > -1) {
+          column.pinned = 'left';
+        } else if (curPinnedRight.indexOf(column.key) > -1) {
+          column.pinned = 'right';
+        } else {
+          column.pinned = null;
+        }
+        if (column.field == 'ag_index') column.pinned = 'left';
+        return column
+      })
+    },
+    setHideColumn(val) {
+      let self = this
+      let formdata = new FormData()
+      formdata.append('tableid', this.$route.params.customizedModuleId)
+      formdata.append('hidecolumns', val)
+      R3.network.post('/p/cs/setHideColumn', formdata).then((res) => {
+        self.setColumn(self.columnState, self.agTableConfig.columnDefs, val)
+      })
+    },
+    setColumn(val, th, hideColumn) {
       let arr = val.split(',')
       let thArr = [], eXArr = []
       /* arr.forEach((item) => {
@@ -214,11 +334,21 @@ export default {
         })
       })
       th.forEach((i) => {
+        i.hide = i.hasOwnProperty('custHide') ? i.custHide : false
         if (!arr.includes(i.field)) {
           eXArr.push(i)
         }
       })
-      return thArr.concat(eXArr)
+      let resultArr = thArr.concat(eXArr)
+      if (hideColumn != undefined) {
+        let hideArr = hideColumn.split(',')
+        resultArr.forEach(i => {
+          if (hideArr.includes(i.field)) {
+            i.hide = true
+          }
+        })
+      }
+      return resultArr
     },
     getUserConfig() {
       //请求用户表头排列顺序
@@ -231,7 +361,19 @@ export default {
         .then((res) => {
           // console.log(res);
           if (res.data.code == 0) {
-            self.columnState = res.data.data.colPosition
+            const { colPosition, fixedColumn, hideColumn } = res.data.data
+            self.columnState = colPosition
+            self.fixedColumn = fixedColumn
+            self.hideColumn = hideColumn
+            if (self.agTableConfig.columnDefs.length) {
+              // 便于以后在组件中可以只接调用这个方法来修复 重置按钮 导致的列顺序复原 - 待测
+              let col = self.setColumn(
+                colPosition,
+                self.setColumnPinned(fixedColumn),
+                hideColumn
+              )
+              self.agTableConfig.columnDefs = col;
+            }
           }
         })
     },
@@ -239,11 +381,20 @@ export default {
       // 注意: 会触发列移动的回调'on-column-moved'
       // let self = this
       return [
-        // 'pinSubMenu',
+        'pinSubMenu', // 固定列
         'separator',
         'autoSizeThis',
         'autoSizeAll',
         'separator',
+        {
+          name: '隐藏当前列',
+          action: () => {
+            let colName = params.column.colId
+            self.hideColumn = [...self.hideColumn.split(','), colName].join()
+            let th = self.setColumn(self.columnState, self.agTableConfig.columnDefs, self.hideColumn)
+            self.agTableConfig.columnDefs = th;
+          },
+        },
         {
           name: '重置所有列位置信息',
           action: () => {
@@ -268,11 +419,15 @@ export default {
     },
   },
   mounted() {
-    this.getUserConfig();
+    // this.RangeSelectionModule = RangeSelectionModule // ag表格多选行
+    setTimeout(() => {
+      this.getUserConfig();
+    }, 1000)
     // 初始化options
     if (this.options.oldAg || this.options.oldMoved) {
       Object.assign(this.options, {
         'getMainMenuItems': ag => this.getMainMenuItems(ag, this),
+        'agColumnVisibleChanged': (...params) => this.onColumnVisibleChanged(...params),
       })
     }
   }

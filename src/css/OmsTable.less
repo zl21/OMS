@@ -100,17 +100,21 @@
       }
     }
   }
-  .table-gray-row td {
-    background: #f1f1f1 !important;
-  }
-  .color-gray-row td {
-    color: #c5c5c5 !important;
-  }
-  .color-red-row td {
-    color: #fd6442 !important;
-  }
-  .table-yellow-row td {
-    background: #ffff99 !important;
+  /deep/ .ark-table-body {
+    .table-gray-row td {
+      background: #f1f1f1 !important;
+    }
+    .color-gray-row td {
+      color: #c5c5c5 !important;
+    }
+    .color-red-row td {
+      // color: #fd6442 !important;
+      color: #000 !important;
+      background: #fd6442 !important;
+    }
+    .table-yellow-row td {
+      background: #ffff99 !important;
+    }
   }
   .businessButtons-box.prosition{
     position: absolute;

@@ -9,7 +9,7 @@
 <!--简单矩阵，模糊匹配商品SKU-->
 <template>
   <div v-loading="pageLoad">
-    <OmsForm :formConfig="formConfig"></OmsForm>
+    <OmsForm :formConfig="formConfig" ref="matrixForm"></OmsForm>
   </div>
 </template>
 

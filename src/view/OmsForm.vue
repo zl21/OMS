@@ -125,11 +125,13 @@
                 label-in-value
                 v-model="formConfig.formValue[`${item.value || item.colname}`]"
                 :multiple="item.multiple ? item.multiple : false"
+                multipleType
                 :disabled="item.disabled"
-                :filterable="item.filterable ? item.filterable : true"
+                :filterable="item.filterable ? item.filterable : false"
                 :transfer="item.transfer ? item.transfer : true"
                 :placeholder="item.placeholder ? item.placeholder : ''"
                 :clearable="item.clearable"
+                :chooseAll="item.hasOwnProperty('chooseAll') ? item.chooseAll : true"
                 @on-query-change="selectInputChange"
                 @keyup.native="
                   runMethods(
@@ -159,6 +161,41 @@
                   >{{ option.label }}</Option
                 >
               </Select>
+            </FormItem>
+
+            <!-- element select 下拉框 -->
+            <FormItem
+              :label="item.label ? `${item.label}:` : ''"
+              :title="item.label"
+              v-if="item.style === 'el-select'"
+              :class="
+                item.class ? `${item.class}` + ' ' + 'ele-select' : 'ele-select'
+              "
+              :prop="item.value || item.colname"
+            >
+              <el-select 
+                @change="(val) =>runMethods(item.selectChange ? item.selectChange(val) : '')"
+                @on-open-change="(val) =>runMethods(item.onOpenChange ? item.onOpenChange(val) : '')"
+                label-in-value
+                v-model="formConfig.formValue[`${item.value || item.colname}`]"
+                :multiple="item.multiple ? item.multiple : false"
+                :disabled="item.disabled"
+                :filterable="item.filterable ? item.filterable : true"
+                :transfer="item.transfer ? item.transfer : true"
+                :placeholder="item.placeholder ? item.placeholder : '请选择'"
+                :clearable="item.clearable"
+                @on-query-change="selectInputChange"
+                @keyup.native="runMethods(item.filterable? selectEnter(item,formConfig.formValue[`${item.value || item.colname}`],$event): '')"
+                @clear="runMethods(item.clearSelect? item.clearSelect(item.value || item.colname): false,true)"
+              >
+                <el-option
+                  v-for="(option, index) in item.options"
+                  :key="option.value+new Date()"
+                  :value="option.value"
+                  :disabled="typeof(option.disabled) == 'boolean' ? option.disabled : false"
+                  :label="option.label">
+                </el-option>
+              </el-select>
             </FormItem>
 
             <!-- 日期组件-年月日 -->
@@ -207,17 +244,14 @@
             </FormItem>
 
             <!-- 输入框弹框单多选 -->
-            <!-- :label="`${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}`+ ':'" -->
             <FormItem
               v-if="item.style === 'popInput'"
               ref="popLabel"
-              :label="
-                `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
-                ':'
-              "
+              :label="`${item.itemdata.name}:`"
               :class="
                 item.class ? `${item.class}` + ' ' + 'popInput' : 'popInput'
               "
+              :prop="getColname(item)"
             >
               <my-input
                 :version="item.version"
@@ -260,38 +294,33 @@
             <FormItem
               v-if="item.style === 'dropSelect'"
               ref="dropSelect"
-              :label="
-                `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
-                ':'
-              "
-              :class="[item.class ? item.class : '', 'popInput', item.itemdata.readonly ? 'disabled' : '']"
+              :label="`${item.itemdata.name}:`"
+              :class="['popInput', { [item.class]: item.class }]"
+              :prop="getColname(item)"
             >
-              <arkDropMultiSelectFilter
-                :PropsData="propsData(item)"
-                :Url="item.itemdata.url || url"
-                v-model="item.itemdata.dropValue"
-                :http="network"
-                :filterMode="item.itemdata.filterMode == undefined ? true : item.itemdata.filterMode"
-                :AutoRequest="sendAutoMessage(item)"
-                :TableRequest="sendTableMessage(item)"
-                @on-change="(row) => valueChange(row, item)"
-                @on-keyup=" 
-                  (row) =>
-                    runMethods(
-                      item.inputEnter(
-                        item.itemdata.isBackRowItem ? row : item.itemdata
-                      ),
-                      true
-                    )
-                "
-                @on-keydown="(row) => runMethods(typeof item.keydownFun == 'function' &&item.keydownFun(item.itemdata))"
-                @on-blur="(row) => blur(row, item.itemdata)"
-                @on-clear="(row) => clear(row, item.itemdata)"
-                @pop-show-before="
-                  (backData) => runMethods(item.popBefore(backData), true)
-                "
-                :EventFun="eventFun"
-              />
+              <template v-if="!item.itemdata.readonly">
+                <arkDropMultiSelectFilter
+                  :PropsData="propsData(item)"
+                  :Url="item.itemdata.url || url"
+                  v-model="item.itemdata.dropValue"
+                  :http="network"
+                  :filterMode="item.itemdata.filterMode == undefined ? true : item.itemdata.filterMode"
+                  :AutoRequest="sendAutoMessage(item)"
+                  :TableRequest="sendTableMessage(item)"
+                  :EventFun="eventFun"
+                  @on-change="(row) => valueChange(row, item)"
+                  @on-keydown="(row) => runMethods(typeof item.keydownFun == 'function' &&item.keydownFun(item.itemdata))"
+                  @on-clear="(row) => clear(row, item.itemdata)"
+                />
+              </template>
+              <template v-else>
+                <Input
+                  v-model="item.itemdata.valuedata"
+                  type="text"
+                  :disabled="item.itemdata.readonly"
+                  :placeholder="propsData(item).placeholder"
+                />
+              </template>
             </FormItem>
                
 
@@ -299,13 +328,11 @@
             <FormItem
               v-if="item.style === 'popInputPlus'"
               ref="popLabel"
-              :label="
-                `${item.itemdata.isnotnull ? '*' : ''}${item.itemdata.name}` +
-                ':'
-              "
+              :label="`${item.itemdata.name}:`"
               :class="
                 item.class ? `${item.class}` + ' ' + 'popInput' : 'popInput'
               "
+              :prop="getColname(item)"
             >
               <fkinputPlus
                 :isActive="true"
@@ -329,6 +356,7 @@
                 @getFkChooseItem="
                   (row) =>
                     runMethods(
+                      typeof item.oneObj == 'function' &&
                       item.oneObj(
                         item.itemdata.isBackRowItem ? row : item.itemdata
                       )
@@ -337,6 +365,7 @@
                 @inputEnter="
                   (row) =>
                     runMethods(
+                      typeof item.oneObj == 'inputEnter' &&
                       item.inputEnter(
                         item.itemdata.isBackRowItem ? row : item.itemdata
                       ),

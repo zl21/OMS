@@ -1,6 +1,6 @@
 {
   "name": "@bojun/oms-ui",
-  "version": "2.0.39",
+  "version": "2.0.42",
   "description": "burgeon company's business-components lib for private npm",
   "main": "dist/omsui.min.js",
   "files": [
@@ -60,6 +60,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@ag-grid-enterprise/range-selection": "26.1.0",
     "awe-dnd": "^0.3.4",
     "axios": "^0.27.2",
     "compressing": "^1.5.1",

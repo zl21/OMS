@@ -1628,6 +1628,7 @@
       box-shadow: 2px -2px 9px #ececec;
       display: flex;
       flex-direction: column;
+      height: 484px;
       .left_top {
         height: 30px;
         line-height: 30px;

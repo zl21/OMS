@@ -151,7 +151,12 @@ const httpServer = (opts, data) => {
 
   // 创建axios实例
   const promise = new Promise(((resolve, reject) => {
-    axios(httpDefaultOpts).then(
+    const formdata = new FormData();
+    const params = opts.data.param;
+    formdata.append('param', params);
+    R3.network.axios[opts.method](opts.url, formdata)
+    // axios(httpDefaultOpts).then(
+    .then(
       (res) => {
         successState(res);
         resolve(res);

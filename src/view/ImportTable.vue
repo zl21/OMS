@@ -12,6 +12,22 @@
     <div class="iconclass">
       <Icon type="md-cloud-upload" />
     </div>
+    <slot name="top_slot"/>
+    <div class="oms_upload__tip" v-if="rowControl">
+      有效数据起始行:<input
+        :value="inpNum"
+        class="inputValue"
+        type="text"
+        :placeholder="'只能输入正整数'"
+        @input="handleInput"
+        @change="handleInput"
+      >;
+      <Checkbox
+        v-model="singleValue"
+        class="singleValue"
+      />
+      AK重复是否更新已有记录;
+    </div>
     <div class="text">
       <!-- <span>注意：上传文件中，不要放置宏或图标，不要更改列的顺序，数据中不要使用公式。</span> -->
       <span>{{ vmI18n.t('tip.za') }}</span>
@@ -53,6 +69,7 @@
         <p>{{ errorMessage }}</p>
       </div>
     </div>
+    <slot name="bottom_slot"/>
     <OmsButton class="modal-footer" :btn-config="btnConfig" style="margin-top: 10px" />
   </div>
 </template>

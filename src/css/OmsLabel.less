@@ -2,6 +2,38 @@
   display: flex;
   flex-wrap: wrap;
 
+  &.OmsLabel {
+    flex-wrap: nowrap;
+    position: relative;
+    .labelWrap {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      &::-webkit-scrollbar {
+        height: 0;
+      }
+    }
+    .moveIcons {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+      font-size: 0;
+      .iconfont {
+        color: #ccc;
+        font-weight: 600;
+        font-size: 18px;
+      }
+      .left, .right {
+        color: var(--b2-color);
+      }
+    }
+    span.jordan-label-name {
+      width: max-content;
+    }
+  }
+
   .jordan-label {
     border-bottom: 1px solid #f4f5f9;
     font-size: 14px;

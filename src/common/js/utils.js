@@ -559,8 +559,9 @@ class custUtils {
    * @param {Object} origin 源对象
    */
   static intersectFormValue(target, origin) {
+    const originKeys = Object.keys(origin)
     Object.keys(target).forEach((key) => {
-      if (origin[key]) {
+      if (originKeys.includes(key)) {
         if (typeof origin[key] == 'object') {
           target[key] = JSON.parse(JSON.stringify(origin[key]))
         } else {
@@ -570,6 +571,29 @@ class custUtils {
     })
   }
 
+  /**
+   * 获取表单字段的配置 
+   * @param {Object} formConfig 表单配置
+   * @param {String} field 字段名称
+   */
+  static queryForm(formConfig, field) {
+    return formConfig.formData.find((item) => [
+      item.colname, item.value, item.itemdata && item.itemdata.colname
+    ].includes(field));
+  }
+
+  // 当post请求content-Type: application/x-www-form-urlencoded时，需要将JSON参赛转换成如下函数输入的形式。
+  static urlSearchParams(data){
+    const params = new URLSearchParams();
+    Object.keys(data).forEach((key) => {
+      const dataType = Object.prototype.toString.call(data[key]);
+      if (dataType === '[object Object]' || dataType === '[object Array]') {
+        data[key] = JSON.stringify(typeof data[key] === 'string' ? data[key].trim() : data[key]);
+      }
+      params.append(key, data[key]);
+    });
+    return params;
+  }
   /* ============================================== 【Object】 END ============================================== */
 
   /* ============================================== 【Date】日期 START ============================================== */
@@ -979,8 +1003,9 @@ class custUtils {
   
   // 加法函数
   static accAdd(arg1, arg2) {
-    let r1; let r2; let m; let
-      c;
+    let r1; let r2; let m; let c;
+    arg1 = arg1 || 0;
+    arg2 = arg2 || 0;
     try {
       r1 = arg1.toString().split('.')[1].length;
     } catch (e) {
@@ -1012,6 +1037,8 @@ class custUtils {
   // 減法函數
   static accSub(arg1, arg2) {
     let r1; let r2;
+    arg1 = arg1 || 0;
+    arg2 = arg2 || 0;
     try {
       r1 = arg1.toString().split('.')[1].length;
     } catch (e) {
@@ -1029,7 +1056,10 @@ class custUtils {
 
   // 乘法
   static accMul(arg1, arg2) {
-    let m = 0; const s1 = arg1.toString();
+    let m = 0;
+    arg1 = arg1 || 0;
+    arg2 = arg2 || 0;
+    const s1 = arg1.toString();
     const s2 = arg2.toString();
     try {
       m += s1.split('.')[1].length;

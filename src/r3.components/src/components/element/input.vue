@@ -329,6 +329,8 @@
   import fkdialog from '../tablelist/fkdialog.vue';
   import FkTable from '../tablelist/fktable.vue';
   import SelectDialog from '../dialog/popDialog.vue';
+  import { resetElScrollBarZIndex, resetElPopoverZIndex } from 'burgeonComponents/common/js/cssHandler'
+  import { urlSearchParams } from '../../__utils__/utils'
   // import i18n from '../../assets/js/i18n'
   // import $ from '../../assets/js/jquery3.5.1.min';
 
@@ -396,6 +398,7 @@
     },
     data() {
       return {
+        observer: '', // 观察器,监听DOM变化
         getSetTime: false, // 保存定时器的
         /* autocompleteIputData: '', */
         showData: '',
@@ -457,11 +460,9 @@
         dynamicforcomputeObj: {}
       };
     },
-    
     beforeCreate() {
       this.$t = $i18n.t.bind($i18n)
     },
-
     created() {
       const self = this;
 
@@ -507,6 +508,14 @@
           self.popoverShow[item] = false;
         });
       });
+      const elObj = resetElScrollBarZIndex()
+      if (elObj) {
+        const { popNode, observerOptions, callback } = elObj // 动态覆盖el-autocomplete pop层级，解决模糊搜索遮罩层遮挡问题
+        if (popNode) {
+          this.observer = new MutationObserver(callback);
+          this.observer.observe(popNode, observerOptions);
+        }
+      }
     },
     computed: {
       /* autoval: {
@@ -1255,7 +1264,7 @@
                 webaction: self.itemdata.dynamicforcompute.refact,
                 param: JSON.stringify(self.dynamicforcomputeObj)
               };
-              self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+              R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                 if (res.code == 0) {
                   value = res.data;
                 } else {
@@ -1401,7 +1410,7 @@
                 webaction: self.itemdata.dynamicforcompute.refact,
                 param: JSON.stringify(self.dynamicforcomputeObj)
               };
-              self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+              R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                 if (res.code == 0) {
                   value = res.data;
                 } else {
@@ -1550,7 +1559,7 @@
                     webaction: self.itemdata.dynamicforcompute.refact,
                     param: JSON.stringify(self.dynamicforcomputeObj)
                   };
-                  self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+                  R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                     if (res.code == 0) {
                       value = res.data;
                     } else {
@@ -1646,7 +1655,7 @@
                     webaction: self.itemdata.dynamicforcompute.refact,
                     param: JSON.stringify(self.dynamicforcomputeObj)
                   };
-                  self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+                  R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                     if (res.code == 0) {
                       value = res.data;
                     } else {
@@ -1739,7 +1748,7 @@
                     webaction: self.itemdata.dynamicforcompute.refact,
                     param: JSON.stringify(self.dynamicforcomputeObj)
                   };
-                  self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (res) => {
+                  R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((res) => {
                     if (res.code == 0) {
                       value = res.data;
                     } else {
@@ -1985,7 +1994,7 @@
                       webaction: self.itemdata.dynamicforcompute.refact,
                       param: JSON.stringify(self.dynamicforcomputeObj)
                     };
-                    self.$ajax.dataAjax('/p/cs/exeAction', paramobj, (
+                    R3.network.post('/p/cs/exeAction', urlSearchParams(paramobj)).then((
                       res
                     ) => {
                       if (res.code == 0) {
@@ -2050,12 +2059,15 @@
         this.$emit('itemInputEnter', event);
       },
       showFkMore() {
+        this.$nextTick(() => {
+          resetElPopoverZIndex('.el-popover.el-popper .fkMore') // 层级覆盖
+        })
         // 获取弹框多选模版
         const self = this;
         const obj = {
           tableid: self.itemdata.reftableid
         };
-        self.$ajax.dataAjax('/p/cs/getMultiQuery', obj, (res) => {
+        R3.network.post('/p/cs/getMultiQuery', urlSearchParams(obj)).then((res) => {
           if (res.code == 0) {
             self.modelList = res.data;
           }
@@ -2141,7 +2153,7 @@
           modelname: item.key
         };
 
-        self.$ajax.dataAjax('/p/cs/delMultiQuery', obj, (res) => {
+        R3.network.post('/p/cs/delMultiQuery', urlSearchParams(obj)).then((res) => {
           if (res.code == 0) {
             self.showFkMore();
           }
@@ -2171,6 +2183,7 @@
       },
       filterInputName(item) {
         const self = this;
+        $('.el-popover.el-popper').attr('style', 'display: none;')
         $('#ContentDisplayArea').trigger('click');
         if (item.refcolval || item.refcolprem) {
           if (item.fkdisplay == 'drp' || item.fkdisplay == 'mrp') {
@@ -2336,6 +2349,9 @@
 
         self.$emit('getFkChooseItem', val);
       }
+    },
+    destroyed(){
+      this.observer && this.observer.disconnect() // 停止观察
     }
   };
 </script>
