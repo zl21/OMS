@@ -108,7 +108,7 @@ let route = registerRoute(navConfig);
 const generateMiscRoutes = function(lang) {
   let guideRoute = {
     path: `/${ lang }/guide`, // 指南
-    redirect: `/${ lang }/guide/design`,
+    redirect: `/${ lang }/guide/introduce`,
     component: load(lang, 'guide'),
     children: [{
       path: 'design', // 设计原则
@@ -120,6 +120,11 @@ const generateMiscRoutes = function(lang) {
       name: 'guide-nav' + lang,
       meta: { lang },
       component: load(lang, 'nav')
+    }, {
+      path: 'introduce', // 介绍
+      name: 'guide-introduce' + lang,
+      meta: { lang },
+      component: load(lang, 'introduce')
     }]
   };
 

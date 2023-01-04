@@ -77,13 +77,17 @@
         lang: this.$route.meta.lang,
         navsData: [
           {
+            path: '/introduce',
+            name: '介绍'
+          }
+          /* {
             path: '/design',
             name: '<%= 1 >'
           },
           {
             path: '/nav',
             name: '<%= 2 >'
-          }
+          } */
         ]
       };
     }

@@ -9,7 +9,7 @@ import MainFooter from './components/footer';
 import MainHeader from './components/header';
 import SideNav from './components/side-nav';
 import FooterNav from './components/footer-nav';
-import title from './i18n/title';
+// import title from './i18n/title';
 
 import 'packages/theme-chalk/src/index.scss';
 import './demo-styles/index.scss';
@@ -52,14 +52,14 @@ router.afterEach(route => {
     const blocks = document.querySelectorAll('pre code:not(.hljs)');
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);
   });
-  const data = title[route.meta.lang];
+  /* const data = title[route.meta.lang];
   for (let val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {
       document.title = data[val];
       return;
     }
   }
-  document.title = 'Element';
+  document.title = 'Element'; */
   ga('send', 'event', 'PageView', route.name);
 });
 
