@@ -9,3 +9,9 @@ coverage
 *.scss
 *.woff
 *.ttf
+src/css
+src/js
+src/directive
+src/r3.components
+src/view
+src/common
