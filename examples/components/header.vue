@@ -312,15 +312,15 @@
 
         <!-- nav -->
         <ul class="nav">
-          <li class="nav-item nav-algolia-search" v-show="isComponentPage">
+          <!-- <li class="nav-item nav-algolia-search" v-show="isComponentPage">
             <algolia-search></algolia-search>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <router-link
               active-class="active"
               :to="`/${ lang }/guide`">{{ langConfig.guide }}
             </router-link>
-          </li>
+          </li> -->
           <li class="nav-item">
             <router-link
               active-class="active"
@@ -420,10 +420,10 @@
         verDropdownVisible: true,
         langDropdownVisible: true,
         langs: {
-          'zh-CN': '中文',
-          'en-US': 'English',
-          'es': 'Español',
-          'fr-FR': 'Français'
+          'zh-CN': '中文'
+          // 'en-US': 'English',
+          // 'es': 'Español',
+          // 'fr-FR': 'Français'
         }
       };
     },

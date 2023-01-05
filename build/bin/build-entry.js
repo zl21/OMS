@@ -1,9 +1,9 @@
 var Components = require('../../components.json');
 var fs = require('fs');
-var render = require('json-templater/string');
+var render = require('json-templater/string'); // 字符串模板生成器：https://www.npmjs.com/package/json-templater
 var uppercamelcase = require('uppercamelcase');
 var path = require('path');
-var endOfLine = require('os').EOL;
+var endOfLine = require('os').EOL; // '\n'
 
 var OUTPUT_PATH = path.join(__dirname, '../../src/index.js');
 var IMPORT_TEMPLATE = 'import {{name}} from \'../packages/{{package}}/index.js\';';
@@ -72,12 +72,14 @@ var listTemplate = [];
 ComponentNames.forEach(name => {
   var componentName = uppercamelcase(name);
 
+  // IMPORT_TEMPLATE = 'import {{name}} from \'../packages/{{package}}/index.js\';'
   includeComponentTemplate.push(render(IMPORT_TEMPLATE, {
     name: componentName,
     package: name
   }));
 
   if (['Loading', 'MessageBox', 'Notification', 'Message', 'InfiniteScroll'].indexOf(componentName) === -1) {
+    // INSTALL_COMPONENT_TEMPLATE = '  {{name}}'
     installTemplate.push(render(INSTALL_COMPONENT_TEMPLATE, {
       name: componentName,
       component: name
@@ -88,10 +90,10 @@ ComponentNames.forEach(name => {
 });
 
 var template = render(MAIN_TEMPLATE, {
-  include: includeComponentTemplate.join(endOfLine),
-  install: installTemplate.join(',' + endOfLine),
+  include: includeComponentTemplate.join(endOfLine), // 组件import
+  install: installTemplate.join(',' + endOfLine), // 组件注册
   version: process.env.VERSION || require('../../package.json').version,
-  list: listTemplate.join(',' + endOfLine)
+  list: listTemplate.join(',' + endOfLine) // 组件暴露
 });
 
 fs.writeFileSync(OUTPUT_PATH, template);

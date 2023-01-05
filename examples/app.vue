@@ -5,7 +5,7 @@
     <div class="main-cnt">
       <router-view></router-view>
     </div>
-    <main-footer v-if="lang !== 'play' && !isComponent"></main-footer>
+    <!-- <main-footer v-if="lang !== 'play' && !isComponent"></main-footer> -->
   </div>
 </template>
 
@@ -49,7 +49,7 @@
     watch: {
       lang(val) {
         if (val === 'zh-CN') {
-          this.suggestJump();
+          // this.suggestJump();
         }
         localize(val);
       }
@@ -79,7 +79,7 @@
     mounted() {
       localize(this.lang);
       if (this.lang === 'zh-CN') {
-        this.suggestJump();
+        // this.suggestJump();
       }
     }
   };

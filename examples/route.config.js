@@ -157,7 +157,7 @@ const generateMiscRoutes = function(lang) {
     path: `/${ lang }`, // 首页
     meta: { lang },
     name: 'home' + lang,
-    component: load(lang, 'index')
+    component: load(lang, 'introduce')
   };
 
   return [guideRoute, resourceRoute, themeRoute, indexRoute];
