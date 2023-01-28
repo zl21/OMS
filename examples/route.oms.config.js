@@ -6,8 +6,44 @@
 const LOAD01 = function (path) {
   return r => require.ensure([], () => r(require(`./pages/zh-CN/${path}.vue`)));
 };
+const LOAD02 = function (path) {
+  return r => require.ensure([], () => r(require(`../src/docs${path}.md`)));
+};
 
 const config = [
+  {
+    name: "更新日志",
+    path: "/zh-CN/docs-dom",
+    component: LOAD01('component'),
+    redirect: '/zh-CN/docs-dom/update',
+    children: [
+      {
+        path: '',
+        component: LOAD02('/docs-dom/update')
+      }
+    ]
+  },
+  /* {
+    "name": "开发指南",
+    "children": [
+      {
+        "path": "/installation",
+        "name": "安装"
+      },
+      {
+        "path": "/quickstart",
+        "name": "快速上手"
+      },
+      {
+        "path": "/i18n",
+        "name": "国际化"
+      },
+      {
+        "path": "/custom-theme",
+        "name": "自定义主题"
+      }
+    ]
+  }, */
   {
     path: '/zh-CN/docs-dom',
     name: '组件',

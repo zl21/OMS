@@ -1,0 +1,329 @@
+## 更新日志
+
+| Version    | Description                                                                                                                 |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| v1.0.1     | 重构组件库项目架构                                                                                                          |
+| v1.0.2     | 添加使用说明                                                                                                                |
+| v1.0.3     | 解决 input 框重叠问题                                                                                                       |
+| v1.0.6     | 标品项目架构调整优化弹窗引用问题                                                                                            |
+| v1.0.7     | 加入定制弹窗                                                                                                                |
+| v1.0.8     | 修改定制页面弹窗配置                                                                                                        |
+| v1.0.9     | 修改 1.4 框架 agGridTable 获取 ID 的方式                                                                                    |
+| v1.0.10    | 修改组件 businessLabel 样式                                                                                                 |
+| v1.0.11    | 修改组件 businessForm 样式                                                                                                  |
+| v1.0.12    | 修改 agTable 序号宽度/businessForm 箭头样式/form 的高度                                                                     |
+| v1.0.13    | 修改 ActionTable 表格样式和 businessLabel 样式                                                                              |
+| v1.0.14    | 修改 input 样式                                                                                                             |
+| v1.0.15    | form 表单搜索收起状态下去掉固定高度添加最大高度，解决一行搜索条件留白过多问题                                               |
+| v1.0.16    | LogTable.js 报错修复                                                                                                        |
+| v1.0.17    | OmsTable 组件新增功能,控制列表单击当前行当前行 checkbox 是否勾选 rowClickNoSelected:(不传参默认为勾选,传参为 true 为不勾选) |
+| v1.0.18    | agTable 翻页组件修改 size 属性                                                                                              |
+| v1.0.19    | OmsTable 单击表格行功能                                                                                                     |
+| v1.0.20    | OmsTable 修改单元格高度                                                                                                     |
+| v1.0.21    | OmsTable 修改布局                                                                                                           |
+| v1.0.22    | OmsTable 修改布局 patch                                                                                                     |
+| v1.0.23    | 表格组件新增行颜色                                                                                                          |
+| v1.0.24    | 修改 agTable 序号宽度                                                                                                       |
+| v1.0.25    | 优化 agTable 的重置所有列信息功能                                                                                           |
+| v1.0.26    | 优化组件样式引用空文件及修改 businessDialog 组件引用名                                                                      |
+| v1.0.27    | 优化按钮组件(businessButton)的匹配方式 (btn.text -> btn.webname)                                                            |
+| v1.0.28    | 修改 businessForm - input disabled 样式                                                                                     |
+| v1.0.29    | 修改 businessDialog z-index 层级修改                                                                                        |
+| v1.0.30    | businessForm 组件中 AttachFilter 添加 on-clear 事件                                                                         |
+| v1.0.31    | fix:businessForm 组件中 AttachFilter 组件报 warn:Invalid handler for event "on-xxx": got undefined                          |
+| v1.0.32    | fix:businessForm 组件中 AttachFilter 组件报未获取到输入值                                                                   |
+| v1.0.33    | fix:publicDialog 组件中 dropSortConfig 中 setFormDrag 命名                                                                  |
+| v1.0.34    | easyMatrix 组件模糊搜索点击选中值后赋值给 value                                                                             |
+| v1.0.35    | 增加待审核水印图片                                                                                                          |
+| v1.0.36    | 弹窗组件增加动态 base 路径传参 basePathName                                                                                 |
+| v1.0.37    | OmsTable 修改样式（添加最后一行下边线）                                                                                     |
+| v1.0.38    | 添加促销组件                                                                                                                |
+| v1.0.39    | agGrid 依赖文件迁移至私仓                                                                                                   |
+| v1.0.40    | agGrid 路径错误补丁                                                                                                         |
+| v1.0.41    | publicDialog.js 路径修改（首字母大写改小写）                                                                                |
+| v1.0.42    | 私仓 import.js 和项目 import.js 合并                                                                                        |
+| v1.0.43    | 将水印配置文件迁移至私仓                                                                                                    |
+| v1.0.44    | businessForm 样式微调                                                                                                       |
+| v1.0.45    | businessForm 样式调整(全局)                                                                                                 |
+| v1.0.46    | importTable 替换 loading                                                                                                    |
+| v1.0.47    | 设置弹窗局部 loading                                                                                                        |
+| v1.0.48    | 修改 businessform 引入的 fktable 组件兼容 1.4 的数据格式（云雀）                                                            |
+| v1.0.49    | 修改 businessform 引入的 fktable 组件修改组件传值                                                                           |
+| v1.0.50    | 修复版本号问题;                                                                                                             |
+| v1.0.51    | 修复 commonPage 的兼容性问题;                                                                                               |
+| v1.0.52    | 修复 importTable 的接口问题;                                                                                                |
+| v1.0.53    | 添加 loading 组件;                                                                                                          |
+| v1.0.54    | businessForm 修改;                                                                                                          |
+| v1.0.55    | businessForm add Tooltip;                                                                                                   |
+| v1.0.56    | importTable 兼容优化(sku/spu);                                                                                              |
+| v1.0.57    | 增加 textarea 组件操作事件(enter change blur)                                                                               |
+| v1.0.58    | 1.Tooltip 拓展配置；2.FormItem 拓展动态 class                                                                               |
+| v1.0.59    | 修复 FormItem 拓展动态 class-bug                                                                                            |
+| v1.0.61    | businessform 样式修改                                                                                                       |
+| v1.0.62    | businessform 添加:maxlength="item.maxlength"控制                                                                            |
+| v1.0.63    | 新增通用子表组件 subTable.vue                                                                                               |
+| v1.0.64    | businessTable 优化-无 data 时不展示 thead                                                                                   |
+| v1.0.65    | 修改 businessButton -- 按钮透明属性 guost 取值错误                                                                          |
+| v1.0.66    | 修改导入更新组件 class content 为 importContent                                                                             |
+| v1.0.67    | businessButton Alltype 值为 default                                                                                         |
+| v1.0.68    | 组件内部的请求前缀固定                                                                                                      |
+| v1.0.69    | businessform 新增时分秒组件 TimePicker                                                                                      |
+| v1.0.70    | importTable 配置优化封装                                                                                                    |
+| v1.0.71    | 时分秒组件添加 placement 属性                                                                                               |
+| v1.0.72    | importTable 配置文件迁移                                                                                                    |
+| v1.0.73    | importTable 组件的 loading 及导入成功后刷新页面                                                                             |
+| v1.0.74    | businessForm 组件内 bothInput/bothNumber 参数格式调整                                                                       |
+| v1.0.75    | businessForm 组件内 select 添加模糊搜索                                                                                     |
+| v1.0.76    | importTable 组件修改                                                                                                        |
+| v1.0.77    | 修复 fktable 样式问题                                                                                                       |
+| v1.0.78    | fktable 判断接口是否需要添加网关前缀（修复 key 重复问题报错 ）                                                              |
+| v1.0.79    | businessForm input 样式问题                                                                                                 |
+| v1.0.80    | businessButton 文字隐藏修改（input - padding 修改 ）                                                                        |
+| v1.0.81    | businessButton 组件优化（businessForm - 默认高度修改 ）                                                                     |
+| v1.0.82    | 三级按钮 html 结构改造                                                                                                      |
+| v1.0.83    | businessForm 组件优化、drp 类型支持 clear                                                                                   |
+| v1.0.84    | businessLable 样式修改                                                                                                      |
+| v1.0.85    | axios->network(agGrid)                                                                                                      |
+| v1.0.86    | objinput_dz->fkinput                                                                                                        |
+| v1.0.87    | 标准接口动态匹配网关                                                                                                        |
+| v1.0.88    | importTable computed 优化                                                                                                   |
+| v1.0.89    | fkTable-queryList 接口暂时写死                                                                                              |
+| v1.0.90    | importTable 修复                                                                                                            |
+| v1.0.91    | businessForm-select-拓展 on-open-change 方法                                                                                |
+| v1.0.92    | button 三级按钮点击多次触发问题修改                                                                                         |
+| v1.0.93    | businessForm-select-拓展-选中返回选中对象                                                                                   |
+| v1.0.94    | agtable 修改配置行高（ 修改 importTable 样式 ）                                                                             |
+| v1.0.95    | importTable catch、参数更改、回调刷新                                                                                       |
+| v1.0.96    | businessForm 拓展自定义 class                                                                                               |
+| v1.0.97    | importTable 优化导入失败的处理、businessActionTable 展示表头                                                                |
+| v1.0.98    | "@burgeon/project-logic": "^1.1.56"                                                                                         |
+| v1.0.99    | businessForm 拓展 checkbox 多选、fkinput 支持返回 rowdata                                                                   |
+| v1.1.00    | subTable 配置项 Api 封装                                                                                                    |
+| v1.1.01    | 解决 businessForm 无 key 导致的 warning                                                                                     |
+| v1.1.02    | businessForm/importTable 优化                                                                                               |
+| v1.1.03    | businessForm-checkbox 修复                                                                                                  |
+| v1.1.4     | 迁移库加入静态资源;                                                                                                         |
+| v1.1.5     | 补齐遗漏的组件资源;                                                                                                         |
+| v1.1.6     | businessForm 插槽必填标识                                                                                                   |
+| v1.1.7     | 组件内部通信添加自动拼网关方式                                                                                              |
+| v1.1.8     | 网关参数                                                                                                                    |
+| v1.1.9     | fkinput                                                                                                                     |
+| v1.1.10    | fktable-mrp 模糊搜索                                                                                                        |
+| v1.1.11    | fktable 解决 key 重复问题                                                                                                   |
+| v1.1.12    | fktable 添加模糊搜索                                                                                                        |
+| v1.1.13    | fkinput inputEnter 处理                                                                                                     |
+| v1.1.14    | 零售发货单弹窗组件调整                                                                                                      |
+| v1.1.15    | downLoad                                                                                                                    |
+| v1.1.16    | checkbox 扩展属性 onlyBox                                                                                                   |
+| v1.1.17    | importTable 报错修复                                                                                                        |
+| v1.1.18    | \$i18n                                                                                                                      |
+| v1.1.19    | 网关                                                                                                                        |
+| v1.1.20    | fkinput 样式调整                                                                                                            |
+| v1.1.21    | 网关                                                                                                                        |
+| v1.1.22    | 样式调整                                                                                                                    |
+| v1.1.23    | isbackrow clear                                                                                                             |
+| v1.1.24    | 重置所有列信息,换接口                                                                                                       |
+| v1.1.25    | fkinput bug                                                                                                                 |
+| v1.1.26    | drp 模糊搜获的失焦和选中二次\$emit 导致的 bug(临时方案)                                                                     |
+| v1.1.27    | fkinputPlus(fkinput 重构 v1.0)                                                                                              |
+| v1.1.28    | fkinput 模糊搜索数据为空，清空输入框（省市区 bug）                                                                          |
+| v1.1.29    | fkinputPlus(fkinput 重构 v1.1)                                                                                              |
+| v1.1.30    | fkinputPlus(fkinput 重构 v1.2)                                                                                              |
+| v1.1.31    | 增加 switchList 组件                                                                                                        |
+| v1.1.32    | subTable 删除 objid-1 过滤                                                                                                  |
+| v1.1.33    | ag 重置所有列接口参数调整                                                                                                   |
+| v1.1.34    | businessForm 增加自定义过滤入参                                                                                             |
+| v1.1.35    | fkinputPlus 模糊搜索入参                                                                                                    |
+| v1.1.36    | fkinputPlus 样式调整                                                                                                        |
+| v1.1.37    | fkinput 失去焦点不清空 pid（联动参数修改）                                                                                  |
+| v1.1.38    | fkinput 模糊搜索待选处理/fkinputPlus inputEnter                                                                             |
+| v1.1.39    | fkinputPlus-模糊搜索修复                                                                                                    |
+| v1.1.40    | fkinputPlus-默认初始值                                                                                                      |
+| v1.1.41    | 表格高度                                                                                                                    |
+| v1.1.42    | businessButton--修改                                                                                                        |
+| v1.1.43    | businessForm fkinput oneObj 未定义过滤                                                                                      |
+| v1.1.44~46 | fkinputPlus mrp 初始化赋值                                                                                                  |
+| v1.1.47    | fkinputPlus 模糊搜索失焦处理                                                                                                |
+| v1.1.48    | fkinputPlus 监听修改数据,赋值操作                                                                                           |
+| v1.1.49    | 外键关联,其他途径修改参数,会弹出前一次模糊搜索结果                                                                          |
+| v1.1.50    | businessActionTable 拓展                                                                                                    |
+| v1.1.51    | importTable 拓展 cusDiscretion                                                                                              |
+| v1.1.52    | 解决 fkinput 失焦选中第一个和选中事件冲突                                                                                   |
+| v1.1.53    | fkinput/fkinputPlus 拓展                                                                                                    |
+| v1.1.55    | fkinput/fkinputPlus 拓展 istooltip                                                                                          |
+| v1.1.56    | 促销-fkdialog 网关/报错处理                                                                                                 |
+| v1.1.57    | 促销-fkdialog screenresultcheck 接口返回 data 层级报错处理                                                                  |
+| v1.1.58    | fkinputPlus 样式修改                                                                                                        |
+| v1.1.59    | fkinputPlus 模糊搜索失焦处理                                                                                                |
+| v1.1.60    | importTable 成功处理                                                                                                        |
+| v1.1.61    | importTable 部分成功部分失败处理                                                                                            |
+| v1.1.62    | ag 表格初始表头排列取消                                                                                                     |
+| v1.1.63    | 样式-问号小图标                                                                                                             |
+| v1.1.64    | 样式-dialog-fk                                                                                                              |
+| v1.1.65    | 去掉多余分号                                                                                                                |
+| v1.1.66    | 引入主题变量修改                                                                                                            |
+| v1.1.67    | 促销修改 - fkdialog 修改                                                                                                    |
+| v1.1.68    | 促销修改 - fkdialog 样式修改                                                                                                |
+| v1.1.69    | 多选控件清空方法判空操作                                                                                                    |
+| v1.1.70    | businessForm ckeckbox 拓展'全选'                                                                                            |
+| v1.1.71    | subTable 分页统一                                                                                                           |
+| v1.1.72    | 调整 switch 组件 size                                                                                                       |
+| v1.1.73    | 优化 importTable 组件再次导入同名文件报错                                                                                   |
+| v1.1.74    | 与标准外键关联组件 clear icon 统一                                                                                          |
+| v1.1.75    | fkdialog 样式调整                                                                                                           |
+| v1.1.76    | businessForm-fkinput 失焦                                                                                                   |
+| v1.1.77    | tableSku 查询接口-1 处理                                                                                                    |
+| v1.1.78    | 问号小图标                                                                                                                  |
+| v1.1.79    | 新增 vue-ag-table                                                                                                           |
+| v1.1.80    | businessForm-ckeckbox-onlyBox 取值修复                                                                                      |
+| v1.1.81    | 配置优化                                                                                                                    |
+| v1.1.82    | 调整 switchList 组件样式（vueAb 样式调整 ）                                                                                 |
+| v1.1.83    | OmsTable form+button 样式修改                                                                                               |
+| v1.1.84    | 表格优化                                                                                                                    |
+| v1.1.85    | OmsTable form+button 优化                                                                                                   |
+| v1.1.86    | OmsTable form+button 优化 1                                                                                                 |
+| v1.1.87    | OmsTable form+button 优化 2                                                                                                 |
+| v1.1.88    | fkinputPlus 动态接口网关(兼容 SKX)                                                                                          |
+| v1.1.89    | OmsTable 回滚                                                                                                               |
+| v1.1.90    | 默认显示表头                                                                                                                |
+| v1.1.91    | businessButton 样式修改                                                                                                     |
+| v1.1.93    | fkinputPlus 模糊搜索修复                                                                                                    |
+| v1.1.94    | fkinput 模糊搜索-特殊字符控制                                                                                               |
+| v1.1.96    | fkinputPlus-mrp-选中值展示问题修复                                                                                          |
+| v1.1.97    | fkinputPlus-version 取值问题修复                                                                                            |
+| v1.1.98    | fkinputPlus deepClone                                                                                                       |
+| v1.1.99    | 修复 fkinputPlus 默认值                                                                                                     |
+| v1.2.1     | 导入失败后清空失败文件                                                                                                      |
+| v1.2.2     | fkdialog-兼容斯凯奇接口返回格式                                                                                             |
+| v1.2.3     | download 优化                                                                                                               |
+| v1.2.4     | switch 组件 showText                                                                                                        |
+| v1.2.5     | download 优化                                                                                                               |
+| v1.2.6     | businessForm 组件 textarea 优化                                                                                             |
+| v1.2.7     | businessAgTable 组件添加 ag 表格原生配置                                                                                    |
+| v1.2.8     | businessForm 组件修改默认高度                                                                                               |
+| v1.2.9     | 导入组件-部分成功部分失败处理 isErr1Succ1                                                                                   |
+| v1.2.10    | fkinputPlus-事件处理                                                                                                        |
+| v1.2.11    | aG 列表列移动监听                                                                                                           |
+| v1.2.12    | drp 外键接口网关问题(兼容斯凯奇)                                                                                            |
+| v1.2.13    | fktable 接口网关问题(兼容斯凯奇)                                                                                            |
+| v1.2.14    | fkinput-inputEnter(skx                                                                                                      |
+| v1.2.15    | select-Enter 事件(skx                                                                                                       |
+| v1.2.16    | bug：42845                                                                                                                  |
+| v1.2.17    | ag-支持设置 rowHeight                                                                                                       |
+| v1.2.18    | fkinput-inputEnter 调整(skx                                                                                                 |
+| v1.2.19    | fkinput-失焦                                                                                                                |
+| v1.2.20    | 外键关联-网关处理                                                                                                           |
+| v1.2.23    | download 重置表单                                                                                                           |
+| v1.2.24    | Page 组件国际化                                                                                                             |
+| v1.2.25    | Page 组件国际化-'共 n 条'空格                                                                                               |
+| v1.2.26    | download 优化-初始化默认值                                                                                                  |
+| v1.2.27    | 国际化                                                                                                                      |
+| v1.2.28    | 国际化补充                                                                                                                  |
+| v1.2.29    | download 移除 cancel 回调                                                                                                   |
+| v1.2.30    | businessform - 添加 title                                                                                                   |
+| v1.2.31    | businessform - 添加 title                                                                                                   |
+| v1.2.32    | businessform - 移除 flodClickClass                                                                                          |
+| v1.2.33    | easyMatrix-接口修复                                                                                                         |
+| v1.2.34    | 扩展 businessForm 组件                                                                                                      |
+| v1.2.33    | easyMatrix-接口修复                                                                                                         |
+| v1.2.36    | fkdialog 支持网关                                                                                                           |
+| v1.2.37    | fkdialog 接口异常关闭 loading                                                                                               |
+| v1.2.38    | OmsTable 表格单选                                                                                                           |
+| v1.2.39    | 导入组件-弹窗样式调整                                                                                                       |
+| v1.2.40    | fkdialog 样式修改                                                                                                           |
+| v1.2.41    | form 栅格修改                                                                                                               |
+| v1.2.43    | form 栅格修改兼容修改                                                                                                       |
+| v1.2.44    | 导入/下载组件 确认-节流优化                                                                                                 |
+| v1.2.45    | businessForm-label 调整宽度和框架保持一致                                                                                   |
+| v1.2.46    | businessForm-下拉多选，下拉多选 iconfont 和布局调整                                                                         |
+| v1.2.47    | fk 高度修改                                                                                                                 |
+| v1.2.48    | fktablePlus 样式修改                                                                                                        |
+| v1.2.49    | 导入/下载组件 确认-节流优化调整                                                                                             |
+| v1.2.50    | businessForm-fkInputPlus 必填布局调整                                                                                       |
+| v1.2.51    | businessForm-fktable 样式修改                                                                                               |
+| v1.2.52    | businessForm-fktable-checkbox 修改                                                                                          |
+| v1.2.53    | fkinputPlus 赋值修复                                                                                                        |
+| v1.2.54    | fkinput 单独使用时 label 展示问题修复                                                                                       |
+| v1.2.55    | businessActionTable 修复                                                                                                    |
+| v1.2.56    | businessForm 兼容处理                                                                                                       |
+| v1.2.57    | 还原 businessForm 兼容处理                                                                                                  |
+| v1.2.58    | businessForm 兼容处理                                                                                                       |
+| v1.2.59    | fktable-模糊搜索框添加 focus 焦点                                                                                           |
+| v1.2.60    | OmsTable-添加是否单选（引用回滚修复）                                                                                       |
+| v1.2.62    | importTable 兼容处理                                                                                                        |
+| v1.2.63    | businessActionTable 修复                                                                                                    |
+| v1.2.64    | OmsTable-兼容 modal 样式                                                                                                    |
+| v1.2.65    | fkinput 支持 queryList/fuzzyquerybyak 接口自定义入参 for skc                                                                |
+| v1.2.66    | fktable 支持 queryList/fuzzyquerybyak 接口自定义入参 for skc                                                                |
+| v1.2.67    | importTable-标准单对象导入拓展                                                                                              |
+| v1.2.68    | 扩展 agtable 入参定制接口                                                                                                   |
+| v1.2.69    | fktable 兼容无搜索框                                                                                                        |
+| v1.2.70    | 扩展 agtable 老定入参                                                                                                       |
+| v1.2.71    | importTableb 扩展-标准单对象成功后刷新                                                                                      |
+| v1.2.72    | ag-grid-enterprise 引用包体修正                                                                                             |
+| v1.2.73    | fktable - 提示框 element 换成 ark ui （businessForm fk-input 的 labele ）                                                   |
+| v1.2.74    | fktable - businessForm 样式修改                                                                                             |
+| v1.2.75    | businessForm 样式重写                                                                                                       |
+| v1.2.76    | 修复 switchList 组件的样式                                                                                                  |
+| v1.2.77    | fkinput-mrp 行选中优化处理                                                                                                  |
+| v1.2.78    | 样式修改                                                                                                                    |
+| v1.2.79    | 样式修改                                                                                                                    |
+| v1.2.80    | element - page 组件 换成 ark ui - page                                                                                      |
+| v1.2.83    | business-form 样式修改                                                                                                      |
+| v1.2.84    | fktable-仅一个处于激活状态（促销活动新增- 批量新增修改 ）                                                                   |
+| v1.2.85    | businessForm 修改                                                                                                           |
+| v1.2.86    | bcl 调整为 cdn 引入(\*注意调整斯凯奇项目)                                                                                   |
+| v1.2.87    | 添加异常图标                                                                                                                |
+| v1.2.88    | fkinput 始终展示分页                                                                                                        |
+| v1.2.89    | businessForm input 拓展聚焦事件                                                                                             |
+| v1.2.90    | fktable --- 样式修改                                                                                                        |
+| v1.2.91    | jordan -> business                                                                                                          |
+| v1.2.92    | table - onSelectChange                                                                                                      |
+| v1.2.93    | fkdialog-接口网关调整                                                                                                       |
+| v1.2.94    | fkinputPlus-支持自定义接口                                                                                                  |
+| v1.2.95    | fkinputPlus-支持自定义接口.v1                                                                                               |
+| v1.2.98    | cdn 引入 elementUi（注：skx 更新到该版本要使用 CDN 引入 elementUi）                                                         |
+| v1.2.99    | fkinputPlus-支持自定义接口.v2                                                                                               |
+| v1.3.1     | 老 agGrid 替换引入方式，如有用到请使用 CDN 方式，详情看（组件库：custom-ag-grid-table.js 头部备注）                         |
+| v1.3.2     | 商业版 --- agGrid 替换 CDN                                                                                                  |
+| v1.3.3     | 修改 custom-ag-grid-table 引入方式                                                                                          |
+| v1.3.31    | '森马专用'-为森马(1.0.36)单独发版                                                                                           |
+| v1.3.32    | '森马专用'-引入 fkPlus 组件-解决选中不能返回行的问题                                                                        |
+| v1.3.4     | 恢复主版本使用                                                                                                              |
+| v1.3.41    | remove ag                                                                                                                   |
+| v1.3.42    | businessForm、fktable 优化                                                                                                  |
+| v1.3.43    | fktable 优化                                                                                                                |
+| v1.3.44    | 修改版本号                                                                                                                  |
+| v2.0.0     | 重构后第一版-修改版本号                                                                                                     |
+| v2.0.1     | 暴露包版本信息                                                                                                              |
+| v2.0.2     | fix warning 'There are multiple modules with names that only differ in casing.'                                             |
+| v2.0.3     | unZip 方法                                                                                                                  |
+| v2.0.4     | change version                                                                                                              |
+| v2.0.5~6   | change version                                                                                                              |
+| v2.0.7     | style：delete table.less                                                                                                    |
+| v2.0.10    | i18n key 变更                                                                                                               |
+| v2.0.11    | 下载组件样式调整、fktable 引用 ark 的样式                                                                                   |
+| v2.0.12    | 弹窗组件 footer-btn                                                                                                         |
+| v2.0.13    | form noFlod                                                                                                                 |
+| v2.0.15    | ag index 及老 ag 列移动的处理                                                                                               |
+| v2.0.20    | form flodClick                                                                                                              |
+| v2.0.21    | version: window.ProjectConfig.Version                                                                                       |
+| v2.0.23    | 23 版本                                                                                                                     |
+| v2.0.24    | add script: npm run pub                                                                                                     |
+| v2.0.26    | script test                                                                                                                 |
+| v2.0.27    | jk test                                                                                                                     |
+| v2.0.28    | TableSku 自定义展示数据                                                                                                     |
+| v2.0.29    | style：OmsTable 冗余 button 样式处理                                                                                        |
+| v2.0.30    | style：图例删除冗余样式                                                                                                     |
+| v2.0.31    | feat: importTable 支持 isAsync                                                                                              |
+| v2.0.32    | fix: OmsTable 无 button 时样式调整                                                                                          |
+| v2.0.33    | fkinput-fktable: 恢复 ele-popover,解决点击下一页 fktable 消失的问题                                                         |
+| v2.0.34    | feat: importTable 支持 tempMethod                                                                                           |
+| v2.0.35    | feat: OmsAgTable 拓展 isAmtCb 属性，对表头及数据操作                                                                        |
+| v2.0.36    | fix: Fkinput isBackRowItem 时 clear 清空修复                                                                                |
+| v2.0.37    | deps: omsui.min                                                                                                             |
+| v2.0.38    | feat: OmsForm 拓展 isGrid 属性，开启响应式栅格                                                                              |
+| v2.0.39    | feat: OmsForm 必填 item 动态设置 require 生效，给 formData 的 item 添加一个 val 记录此 item 的值                            |
+| v2.0.40    | feat: OmsForm 折叠按钮、查询条件默认显示行数 - 触发 ag 表格高度渲染                                                         |
+| v2.0.41    | feat: 导入: 支持 slot、支持自定义入参                                                                                       |
+| v2.0.42    | feat: OmsLabel 由换行调整为滚动                                                                                             |
