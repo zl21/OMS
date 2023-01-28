@@ -1,5 +1,6 @@
 import navConfig from './nav.config';
 import langs from './i18n/route';
+import omsRoute from './route.oms.config';
 
 const LOAD_MAP = {
   'zh-CN': name => {
@@ -105,6 +106,34 @@ const registerRoute = (navConfig) => {
 
 let route = registerRoute(navConfig);
 
+/* const LOAD1 = function (path) {
+  return r => require.ensure([], () => r(require(`./${path}.vue`)));
+};
+const test111 = [
+  {
+    name: 'Test二下',
+    path: '/zh-CN/docs-dom',
+    // category: 'docs-dom',
+    redirect: '/zh-CN/docs-dom/test',
+    // component: LOAD1(),
+    component: load('zh-CN', 'component'),
+    children: [
+      {
+        name: 'test',
+        path: 'test',
+        meta: { lang: 'zh-CN' },
+        component: LOAD1('test')
+      }, {
+        name: 'test1',
+        path: 'test1',
+        meta: { lang: 'zh-CN' },
+        component: LOAD1('test1')
+      }
+    ]
+  }
+] */
+route = route.concat(omsRoute);
+
 const generateMiscRoutes = function(lang) {
   let guideRoute = {
     path: `/${ lang }/guide`, // 指南
@@ -190,5 +219,8 @@ route = route.concat([{
   path: '*',
   redirect: defaultPath
 }]);
+
+// eslint-disable-next-line
+console.log('allroute::', route);
 
 export default route;

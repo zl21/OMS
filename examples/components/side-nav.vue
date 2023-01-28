@@ -131,7 +131,7 @@
         <router-link
           v-if="item.path"
           active-class="active"
-          :to="base + item.path"
+          :to="item.path"
           exact
           v-text="item.title || item.name">
         </router-link>
@@ -140,10 +140,12 @@
             class="nav-item"
             v-for="(navItem, key) in item.children"
             :key="key">
+              <!-- {{base}}
+              {{navItem.path}} -->
             <router-link
               class=""
               active-class="active"
-              :to="base + navItem.path"
+              :to="`${item.path}/${navItem.path}`"
               exact
               v-text="navItem.title || navItem.name">
             </router-link>

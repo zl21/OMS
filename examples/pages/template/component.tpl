@@ -1,10 +1,12 @@
 <style>
   .page-component__scroll {
     height: calc(100% - 80px);
-    margin-top: 80px;
+    // margin-top: 80px;
 
     > .el-scrollbar__wrap {
       overflow-x: auto;
+      height: 88vh;
+      overflow-y: auto;
     }
   }
 
@@ -53,6 +55,10 @@
 
     .content {
       padding-top: 50px;
+
+      p img {
+        width: 50vw;
+      }
 
       > {
         h3 {
@@ -133,7 +139,7 @@
   <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
   <div class="page-container page-component">
     <el-scrollbar class="page-component__nav">
-      <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
+      <side-nav :data="navsData" :base="`/zh-CN`"></side-nav>
     </el-scrollbar>
     <div class="page-component__content">
       <router-view class="content"></router-view>
@@ -150,14 +156,15 @@
 </template>
 <script>
   import bus from '../../bus';
-  import navsData from '../../nav.config.json';
+  // import navs from '../../nav.config.json';
+  import cus from '../../route.oms.config';
   import throttle from 'throttle-debounce/throttle';
 
   export default {
     data() {
       return {
         lang: this.$route.meta.lang,
-        navsData,
+        navsData: cus,
         scrollTop: 0,
         showHeader: true,
         componentScrollBar: null,

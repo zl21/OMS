@@ -437,7 +437,8 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1] || 'zh-CN';
+        // return this.$route.path.split('/')[1] || 'zh-CN';
+        return 'zh-CN';
       },
       displayedLang() {
         return this.langs[this.lang] || '中文';
