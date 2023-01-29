@@ -135,7 +135,7 @@
           exact
           v-text="item.title || item.name">
         </router-link>
-        <ul class="pure-menu-list sub-nav" v-if="item.children">
+        <ul class="pure-menu-list sub-nav" v-if="item.children.length > 1">
           <li
             class="nav-item"
             v-for="(navItem, key) in item.children"

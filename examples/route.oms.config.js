@@ -23,27 +23,29 @@ const config = [
       }
     ]
   },
-  /* {
-    "name": "开发指南",
-    "children": [
+  {
+    name: "开发指南",
+    path: "/zh-CN/docs-dom",
+    component: LOAD01('component'),
+    redirect: '/zh-CN/docs-dom/installation',
+    children: [
       {
-        "path": "/installation",
-        "name": "安装"
+        "path": "introduce",
+        "name": "介绍",
+        component: LOAD02('/docs-dom/introduce')
       },
       {
-        "path": "/quickstart",
-        "name": "快速上手"
+        "path": "installation",
+        "name": "安装",
+        component: LOAD02('/docs-dom/installation')
       },
       {
-        "path": "/i18n",
-        "name": "国际化"
-      },
-      {
-        "path": "/custom-theme",
-        "name": "自定义主题"
+        "path": "i18n",
+        "name": "国际化",
+        component: LOAD02('/docs-dom/i18n')
       }
     ]
-  }, */
+  },
   {
     path: '/zh-CN/docs-dom',
     name: '组件',
@@ -71,7 +73,6 @@ const config = [
   const LOAD_DOCS = function (path) {
     return r => require.ensure([], () => r(require(`../src/docs${path}.md`)));
     // return r => require.ensure([], () => r(require(`./docs/zh-CN/alert.md`)));
-    // /Users/zhoulan/project/OMS/examples/docs/zh-CN/alert.md
   };
 
   const dir = require.context('../src/docs/', true, /\.md$/); // require.context() 不接收变量，即参数必须是既定的 ()
@@ -89,6 +90,10 @@ const config = [
         let path = '', componentName = '', obj = null;
         componentName = x.slice(x.lastIndexOf('/') + 1, x.length - 3); // ButtonFkDialog
         // componentName = x.slice("./docs-dom/ButtonFkDialog.md".lastIndexOf('/')+1,"./docs-dom/ButtonFkDialog.md".length-3)
+        const exArr = ['update', 'introduce', 'installation', 'i18n']
+        if (exArr.includes(componentName)) {
+          return
+        }
         // path = `/${title}`; // /docs-dom/ButtonFkDialog.md
         path = x.slice(1, x.length - 3); // /docs-dom/ButtonFkDialog
         obj = {

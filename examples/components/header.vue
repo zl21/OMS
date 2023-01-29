@@ -324,7 +324,7 @@
           <li class="nav-item">
             <router-link
               active-class="active"
-              :to="`/${ lang }/component`">{{ langConfig.components }}
+              :to="`/${ lang }/docs-dom/installation`">{{ langConfig.components }}
             </router-link>
           </li>
           <li 
@@ -349,7 +349,7 @@
           </li>
 
           <!-- 版本选择器 -->
-          <li class="nav-item nav-versions" v-show="isComponentPage">
+          <li class="nav-item nav-versions" v-show="false">
             <el-dropdown
               trigger="click"
               class="nav-dropdown"
