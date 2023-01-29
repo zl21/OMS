@@ -338,8 +338,8 @@
           <li class="nav-item">
             <router-link
               active-class="active"
-              :to="`/${ lang }/resource`"
-              exact>{{ langConfig.resource }}
+              :to="`/${ lang }/docs-others/index`"
+              exact>相关文档
             </router-link>
           </li>
 

@@ -89,6 +89,19 @@ const config = [
       }
     ]
   },
+  {
+    name: "资源",
+    path: "/zh-CN/docs-others",
+    component: LOAD01('resource_oms'),
+    redirect: '/zh-CN/docs-others/index',
+    children: [
+      {
+        "path": "index",
+        "name": "相关文档",
+        component: LOAD02('/docs-others/index')
+      }
+    ]
+  },
 ];
 
 
@@ -108,7 +121,7 @@ const config = [
       default:
         break;
     } */
-    if (it.children.length > 1) {
+    if (it.children.length > 0) {
       it.children.forEach(element => {
         element.meta = {
           lang: 'zh-CN'
