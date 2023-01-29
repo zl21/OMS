@@ -221,8 +221,8 @@
     },
     computed: {
       navsData() {
-        const config = cus.slice(0, 3);
-        return config;
+        const config = cus.find(i => i.path === '/zh-CN/docs-theme');
+        return [ config ];
       },
       showBackToTop() {
         return !this.$route.path.match(/backtop/);

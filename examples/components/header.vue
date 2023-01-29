@@ -332,7 +332,7 @@
           >
             <router-link
               active-class="active"
-              :to="`/${ lang }/theme`">{{ langConfig.theme }}
+              :to="`/${ lang }/docs-theme`">{{ langConfig.theme }}
             </router-link>
           </li>
           <li class="nav-item">

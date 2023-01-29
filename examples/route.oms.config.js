@@ -65,7 +65,30 @@ const config = [
         // component: LOAD('test1')
       } */
     ]
-  }
+  },
+  {
+    name: "主题",
+    path: "/zh-CN/docs-theme",
+    component: LOAD01('theme_oms'),
+    redirect: '/zh-CN/docs-theme/introduce',
+    children: [
+      {
+        "path": "introduce",
+        "name": "介绍",
+        component: LOAD02('/docs-theme/introduce')
+      },
+      {
+        "path": "cusTheme",
+        "name": "布局规范",
+        component: LOAD02('/docs-theme/cusTheme')
+      },
+      {
+        "path": "var",
+        "name": "主题变量",
+        component: LOAD02('/docs-theme/var')
+      }
+    ]
+  },
 ];
 
 
@@ -85,6 +108,14 @@ const config = [
       default:
         break;
     } */
+    if (it.children.length > 1) {
+      it.children.forEach(element => {
+        element.meta = {
+          lang: 'zh-CN'
+        }
+      });
+      return
+    }
     dir.keys().forEach((x, y) => {
       if (x.includes(it.category)) {
         let path = '', componentName = '', obj = null;
