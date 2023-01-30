@@ -273,9 +273,11 @@ export default {
     // 选择文件
     handleFiles(e) {
       this.isError = false;
-      if (e.path[0].files[0].name) {
-        this.text = e.path[0].files[0].name;
-        this.files = e.path[0].files[0];
+      // 浏览器版本兼容，Chrome >= 109版本后不再提供 path属性
+      const _event = e.path ? e.path[0] : e.target
+      if (_event.files[0].name) {
+        this.text = _event.files[0].name;
+        this.files = _event.files[0];
       }
     },
     // 上传文件前判断文件大小
