@@ -1,0 +1,15 @@
+.home-footer {
+    position: relative;
+    padding: 20px 80px;
+    line-height: 40px;
+    background-color: #ddd;
+  
+    span {
+      font-size: 12px;
+      position: absolute;
+      bottom: 0;
+      &:last-child {
+        right: 80px;
+      }
+    }
+  }

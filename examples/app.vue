@@ -6,6 +6,10 @@
       <router-view></router-view>
     </div>
     <!-- <main-footer v-if="lang !== 'play' && !isComponent"></main-footer> -->
+    <div v-if="lang !== 'play' && !isComponent" class="home-footer">
+      <span>©2021-2023 Burgeon Software Co.,Ltd. All rights reserved.</span>
+      <span>BY OMS</span>
+    </div>
   </div>
 </template>
 
