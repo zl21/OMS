@@ -54,7 +54,7 @@
     }
 
     .page-resource_oms__content {
-      padding-left: 100px;
+      padding-left: 100px !important;
       padding-right: 100px;
     }
 

@@ -221,6 +221,6 @@ route = route.concat([{
 }]);
 
 // eslint-disable-next-line
-console.log('allroute::', route);
+// console.log('allroute::', route);
 
 export default route;
