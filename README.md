@@ -1,7 +1,7 @@
-#  @burgeon/internationalization
+#  @bojun/i18n
 
 ### 介绍
-@burgeon/internationalization  
+@bojun/i18n  
 
 是上海伯俊中台事业部产品中心项目架构私有依赖包仓库中针对于后期的海外用户有国际化需求开发的语言包功能模块；
 
@@ -11,7 +11,7 @@
 
 一. 简易化安装依赖: 
 
-   1. 命令行: npm install @burgeon/internationalization --registry http://47.102.123.140:4873;
+   1. 命令行: npm install @bojun/i18n --registry http://47.102.123.140:4873;
 
    2. 优缺点:
 
@@ -29,7 +29,7 @@
 
          nrm use XXX;  
 
-         npm install @burgeon/internationalization;  
+         npm install @bojun/i18n;  
 
    2. 优缺点:
    
@@ -46,7 +46,7 @@
 
 * editI18n( )
 ```
-import i18n from '@burgeon/internationalization/i18n';
+import i18n from '@bojun/i18n/i18n';
 const obj = {
     common: {
         all: '所有',
@@ -61,7 +61,7 @@ console.log($i18n.t(common.all));
 
 >1. 全局(index.js)引入并挂载
 ```
-  import i18n from '@burgeon/internationalization/i18n';
+  import i18n from '@bojun/i18n/i18n';
   window.$i18n = i18n;
 ```
 
