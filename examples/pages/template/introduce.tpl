@@ -30,18 +30,24 @@
 </style>
 <template>
   <div class="page-introduce">
-    <h3>OMS-UI</h3>
+    <h3>
+      <router-link active-class="active" :to="`/zh-CN/docs-dom/installation`">OMS-UI</router-link>
+    </h3>
     <ul>
       <li><strong>是上海伯俊中台事业部产品中心项目架构私有依赖包仓库中复合型业务组件库；</strong></li>
       <li><strong>秉承前端项目工程化的思想, 将中台项目中公用的业务组件库抽离, 独立模块依赖包便于后期迭代维护。</strong></li>
     </ul>
-    <h3>OMS-Theme</h3>
+    <h3>
+      <router-link active-class="active" :to="`/zh-CN/docs-theme/introduce`">OMS-Theme</router-link>
+    </h3>
     <ul>
       <li><strong>是上海伯俊中台事业部产品中心项目架构私有依赖包仓库中主题样式库；</strong></li>
       <li><strong>满足后期更多客户定制化样式主题的需求及更好的适配产品化项目；</strong></li>
       <li><strong>秉承前端项目工程化的思想, 将中台项目中主题样式库抽离, 独立模块依赖包便于后期迭代维护。</strong></li>
     </ul>
-    <h3>OMS-I18n</h3>
+    <h3>
+      <router-link active-class="active" :to="`/zh-CN/docs-dom/i18n`">OMS-I18n</router-link>
+    </h3>
     <ul>
       <li><strong>是上海伯俊中台事业部产品中心项目架构私有依赖包仓库中针对于后期的海外用户有国际化需求开发的语言包功能模块。</strong></li>
     </ul>
