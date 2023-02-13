@@ -12,11 +12,11 @@ $ npm install @bojun/oms-ui
 
 ```js
 // 样式
-  <link href="https://cdn.jsdelivr.net/npm/@bojun/oms-ui@1.0.0/burgeon.publish/businessComponents.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@bojun/oms-ui@2.0.43/dist/omsui.min.css">
 ```
 
 ```js
-<script src="https://cdn.jsdelivr.net/npm/@bojun/oms-ui@1.0.0/burgeon.publish/businessComponents.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@bojun/oms-ui@2.0.43/dist/omsui.min.js"></script>
 ```
 
 ```js
